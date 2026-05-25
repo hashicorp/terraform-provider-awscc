@@ -173,6 +173,57 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A complex type that contains zero or more ``Tag`` elements.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A complex type that contains ``Tag`` key and ``Tag`` value.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "A string that contains ``Tag`` key.\n The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "A string that contains an optional ``Tag`` value.\n The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A string that contains ``Tag`` key.\n The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A string that contains an optional ``Tag`` value.\n The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A complex type that contains zero or more ``Tag`` elements.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -196,11 +247,14 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"function_code":                "FunctionCode",
 		"function_config":              "FunctionConfig",
 		"function_metadata":            "FunctionMetadata",
+		"key":                          "Key",
 		"key_value_store_arn":          "KeyValueStoreARN",
 		"key_value_store_associations": "KeyValueStoreAssociations",
 		"name":                         "Name",
 		"runtime":                      "Runtime",
 		"stage":                        "Stage",
+		"tags":                         "Tags",
+		"value":                        "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

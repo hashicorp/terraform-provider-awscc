@@ -175,6 +175,8 @@ resource "awscc_elasticache_replication_group" "example" {
 - `preferred_maintenance_window` (String) Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period.
 - `primary_cluster_id` (String) The identifier of the cluster that serves as the primary for this replication group. This cluster must already exist and have a status of available.
 - `replicas_per_node_group` (Number) An optional parameter that specifies the number of replica nodes in each node group (shard). Valid values are 0 to 5.
+
+**Note:** Using ReplicasPerNodeGroup with NodeGroupConfiguration results in resource replacement. For online scaling, use ReplicasPerNodeGroup alone.
 - `replication_group_id` (String) The replication group identifier. This parameter is stored as a lowercase string.
 - `security_group_ids` (List of String) One or more Amazon VPC security groups associated with this replication group.
 - `snapshot_arns` (List of String) A list of Amazon Resource Names (ARN) that uniquely identify the Redis RDB snapshot files stored in Amazon S3.

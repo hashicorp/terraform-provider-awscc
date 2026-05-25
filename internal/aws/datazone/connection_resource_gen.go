@@ -123,6 +123,78 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// AwsLocation is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: Configurations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The configurations of the connection.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A configuration of the connection.",
+		//	    "properties": {
+		//	      "Classification": {
+		//	        "description": "The classification of the connection configuration.",
+		//	        "maxLength": 64,
+		//	        "pattern": "^[\\w][\\w\\.\\-\\_]*$",
+		//	        "type": "string"
+		//	      },
+		//	      "Properties": {
+		//	        "additionalProperties": false,
+		//	        "description": "Property Map",
+		//	        "patternProperties": {
+		//	          "": {
+		//	            "maxLength": 2048,
+		//	            "minLength": 1,
+		//	            "pattern": "",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Classification
+					"classification": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The classification of the connection configuration.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthAtMost(64),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[\\w][\\w\\.\\-\\_]*$"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Properties
+					"properties":        // Pattern: ""
+					schema.MapAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "Property Map",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+							mapplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The configurations of the connection.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// Configurations is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: ConnectionId
 		// CloudFormation resource type schema:
 		//
@@ -678,6 +750,17 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "type": "object"
 		//	    },
+		//	    "LakehouseProperties": {
+		//	      "additionalProperties": false,
+		//	      "description": "Lakehouse Properties Input",
+		//	      "properties": {
+		//	        "GlueLineageSyncEnabled": {
+		//	          "description": "Specifies whether Glue lineage sync is enabled for the lakehouse connection.",
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "MlflowProperties": {
 		//	      "additionalProperties": false,
 		//	      "description": "MLflow Properties Input",
@@ -786,6 +869,10 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		//	      "additionalProperties": false,
 		//	      "description": "S3 Properties Input",
 		//	      "properties": {
+		//	        "RegisterS3AccessGrantLocation": {
+		//	          "description": "Specifies whether to register the S3 Access Grant location.",
+		//	          "type": "boolean"
+		//	        },
 		//	        "S3AccessGrantLocationId": {
 		//	          "description": "The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties of a connection.",
 		//	          "maxLength": 64,
@@ -1507,6 +1594,26 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: LakehouseProperties
+				"lakehouse_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: GlueLineageSyncEnabled
+						"glue_lineage_sync_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies whether Glue lineage sync is enabled for the lakehouse connection.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Lakehouse Properties Input",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: MlflowProperties
 				"mlflow_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1710,6 +1817,15 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 				// Property: S3Properties
 				"s3_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: RegisterS3AccessGrantLocation
+						"register_s3_access_grant_location": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies whether to register the S3 Access Grant location.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: S3AccessGrantLocationId
 						"s3_access_grant_location_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties of a connection.",
@@ -2096,8 +2212,10 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		"aws_managed_client_application_reference": "AWSManagedClientApplicationReference",
 		"aws_region":                               "AwsRegion",
 		"basic_authentication_credentials":         "BasicAuthenticationCredentials",
+		"classification":                           "Classification",
 		"cluster_name":                             "ClusterName",
 		"compute_arn":                              "ComputeArn",
+		"configurations":                           "Configurations",
 		"connection":                               "Connection",
 		"connection_id":                            "ConnectionId",
 		"connection_properties":                    "ConnectionProperties",
@@ -2129,6 +2247,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		"java_virtual_env":                         "JavaVirtualEnv",
 		"jwt_token":                                "JwtToken",
 		"kms_key_arn":                              "KmsKeyArn",
+		"lakehouse_properties":                     "LakehouseProperties",
 		"lineage_sync":                             "LineageSync",
 		"log_uri":                                  "LogUri",
 		"managed_endpoint_arn":                     "ManagedEndpointArn",
@@ -2147,12 +2266,14 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 		"profile_arn":                              "ProfileArn",
 		"project_id":                               "ProjectId",
 		"project_identifier":                       "ProjectIdentifier",
+		"properties":                               "Properties",
 		"props":                                    "Props",
 		"python_properties":                        "PythonProperties",
 		"python_virtual_env":                       "PythonVirtualEnv",
 		"redirect_uri":                             "RedirectUri",
 		"redshift_properties":                      "RedshiftProperties",
 		"refresh_token":                            "RefreshToken",
+		"register_s3_access_grant_location":        "RegisterS3AccessGrantLocation",
 		"runtime_role":                             "RuntimeRole",
 		"s3_access_grant_location_id":              "S3AccessGrantLocationId",
 		"s3_properties":                            "S3Properties",
@@ -2187,6 +2308,7 @@ func connectionResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/AwsLocation",
+		"/properties/Configurations",
 		"/properties/DomainIdentifier",
 		"/properties/EnableTrustedIdentityPropagation",
 		"/properties/EnvironmentIdentifier",

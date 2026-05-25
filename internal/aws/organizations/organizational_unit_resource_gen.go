@@ -99,6 +99,21 @@ func organizationalUnitResource(ctx context.Context) (resource.Resource, error) 
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Path
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The path in the organization where this OU exists.",
+		//	  "pattern": "^(o-[a-z0-9]{10,32}/r-[0-9a-z]{4,32}(/ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})*(/\\d{12})*)/",
+		//	  "type": "string"
+		//	}
+		"path": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The path in the organization where this OU exists.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -204,6 +219,7 @@ func organizationalUnitResource(ctx context.Context) (resource.Resource, error) 
 		"name":                   "Name",
 		"organizational_unit_id": "Id",
 		"parent_id":              "ParentId",
+		"path":                   "Path",
 		"tags":                   "Tags",
 		"value":                  "Value",
 	})

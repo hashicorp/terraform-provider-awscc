@@ -181,7 +181,7 @@
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": false,
+    "cloudFormationSystemTags": true,
     "tagProperty": "/properties/Tags",
     "permissions": [
       "ec2:CreateTags",
@@ -195,10 +195,6 @@
     "/properties/UpdatedDate"
   ],
   "createOnlyProperties": [
-    "/properties/MatchPaths",
-    "/properties/ExcludePaths"
-  ],
-  "writeOnlyProperties": [
     "/properties/MatchPaths",
     "/properties/ExcludePaths"
   ],

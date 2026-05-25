@@ -150,7 +150,7 @@ func limitResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Definition of AWS::Deadline::Limit Resource Type",
+		Description: "Resource Type definition for AWS::Deadline::Limit",
 		Version:     1,
 		Attributes:  attributes,
 	}

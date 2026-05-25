@@ -285,6 +285,19 @@
             "WorkflowsServerlessProperties"
           ],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "LakehouseProperties",
+          "properties": {
+            "LakehouseProperties": {
+              "$ref": "#/definitions/LakehousePropertiesInput"
+            }
+          },
+          "required": [
+            "LakehouseProperties"
+          ],
+          "additionalProperties": false
         }
       ]
     },
@@ -848,11 +861,26 @@
           "maxLength": 64,
           "minLength": 0,
           "pattern": "[a-zA-Z0-9\\-]+"
+        },
+        "RegisterS3AccessGrantLocation": {
+          "type": "boolean",
+          "description": "Specifies whether to register the S3 Access Grant location."
         }
       },
       "required": [
         "S3Uri"
       ],
+      "additionalProperties": false
+    },
+    "LakehousePropertiesInput": {
+      "type": "object",
+      "description": "Lakehouse Properties Input",
+      "properties": {
+        "GlueLineageSyncEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether Glue lineage sync is enabled for the lakehouse connection."
+        }
+      },
       "additionalProperties": false
     },
     "MlflowPropertiesInput": {
@@ -881,11 +909,35 @@
       "type": "object",
       "description": "Workflows Serverless Properties Input",
       "additionalProperties": false
+    },
+    "ConnectionConfiguration": {
+      "type": "object",
+      "description": "A configuration of the connection.",
+      "properties": {
+        "Classification": {
+          "type": "string",
+          "description": "The classification of the connection configuration.",
+          "maxLength": 64,
+          "pattern": "^[\\w][\\w\\.\\-\\_]*$"
+        },
+        "Properties": {
+          "$ref": "#/definitions/PropertyMap"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "properties": {
     "AwsLocation": {
       "$ref": "#/definitions/AwsLocation"
+    },
+    "Configurations": {
+      "type": "array",
+      "description": "The configurations of the connection.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/ConnectionConfiguration"
+      }
     },
     "ConnectionId": {
       "type": "string",
@@ -978,6 +1030,7 @@
   ],
   "writeOnlyProperties": [
     "/properties/AwsLocation",
+    "/properties/Configurations",
     "/properties/DomainIdentifier",
     "/properties/EnableTrustedIdentityPropagation",
     "/properties/EnvironmentIdentifier",

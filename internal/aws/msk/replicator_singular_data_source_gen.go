@@ -58,7 +58,7 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "properties": {
 		//	      "AmazonMskCluster": {
 		//	        "additionalProperties": false,
-		//	        "description": "Details of an Amazon MSK cluster. Exactly one of AmazonMskCluster is required.",
+		//	        "description": "Details of an Amazon MSK cluster.",
 		//	        "properties": {
 		//	          "MskClusterArn": {
 		//	            "description": "The ARN of an Amazon MSK cluster.",
@@ -68,6 +68,79 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        },
 		//	        "required": [
 		//	          "MskClusterArn"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "ApacheKafkaCluster": {
+		//	        "additionalProperties": false,
+		//	        "description": "Details of an Apache Kafka cluster.",
+		//	        "properties": {
+		//	          "ApacheKafkaClusterId": {
+		//	            "description": "The ID of the Apache Kafka cluster.",
+		//	            "type": "string"
+		//	          },
+		//	          "BootstrapBrokerString": {
+		//	            "description": "The bootstrap broker string of the Apache Kafka cluster.",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "ApacheKafkaClusterId",
+		//	          "BootstrapBrokerString"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "ClientAuthentication": {
+		//	        "additionalProperties": false,
+		//	        "description": "Details of the client authentication used by the Apache Kafka cluster.",
+		//	        "properties": {
+		//	          "SaslScram": {
+		//	            "additionalProperties": false,
+		//	            "description": "Details for SASL/SCRAM client authentication.",
+		//	            "properties": {
+		//	              "Mechanism": {
+		//	                "description": "The SASL/SCRAM authentication mechanism.",
+		//	                "enum": [
+		//	                  "SHA256",
+		//	                  "SHA512"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "SecretArn": {
+		//	                "description": "The Amazon Resource Name (ARN) of the Secrets Manager secret.",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Mechanism",
+		//	              "SecretArn"
+		//	            ],
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "SaslScram"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "EncryptionInTransit": {
+		//	        "additionalProperties": false,
+		//	        "description": "Details of encryption in transit to the Apache Kafka cluster.",
+		//	        "properties": {
+		//	          "EncryptionType": {
+		//	            "description": "The type of encryption in transit to the Apache Kafka cluster.",
+		//	            "enum": [
+		//	              "TLS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "RootCaCertificate": {
+		//	            "description": "The root CA certificate.",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "EncryptionType"
 		//	        ],
 		//	        "type": "object"
 		//	      },
@@ -104,10 +177,6 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "object"
 		//	      }
 		//	    },
-		//	    "required": [
-		//	      "AmazonMskCluster",
-		//	      "VpcConfig"
-		//	    ],
 		//	    "type": "object"
 		//	  },
 		//	  "maxItems": 2,
@@ -127,7 +196,65 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "Details of an Amazon MSK cluster. Exactly one of AmazonMskCluster is required.",
+						Description: "Details of an Amazon MSK cluster.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ApacheKafkaCluster
+					"apache_kafka_cluster": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ApacheKafkaClusterId
+							"apache_kafka_cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The ID of the Apache Kafka cluster.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: BootstrapBrokerString
+							"bootstrap_broker_string": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The bootstrap broker string of the Apache Kafka cluster.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Details of an Apache Kafka cluster.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ClientAuthentication
+					"client_authentication": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: SaslScram
+							"sasl_scram": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Mechanism
+									"mechanism": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The SASL/SCRAM authentication mechanism.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: SecretArn
+									"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The Amazon Resource Name (ARN) of the Secrets Manager secret.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Details for SASL/SCRAM client authentication.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Details of the client authentication used by the Apache Kafka cluster.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: EncryptionInTransit
+					"encryption_in_transit": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: EncryptionType
+							"encryption_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The type of encryption in transit to the Apache Kafka cluster.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: RootCaCertificate
+							"root_ca_certificate": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The root CA certificate.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Details of encryption in transit to the Apache Kafka cluster.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: VpcConfig
@@ -154,6 +281,150 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Specifies a list of Kafka clusters which are targets of the replicator.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: LogDelivery
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration for log delivery for the replicator.",
+		//	  "properties": {
+		//	    "ReplicatorLogDelivery": {
+		//	      "additionalProperties": false,
+		//	      "description": "The replicator logs configuration.",
+		//	      "properties": {
+		//	        "CloudWatchLogs": {
+		//	          "additionalProperties": false,
+		//	          "description": "Details of the CloudWatch Logs destination for replicator logs.",
+		//	          "properties": {
+		//	            "Enabled": {
+		//	              "description": "Whether log delivery to CloudWatch Logs is enabled.",
+		//	              "type": "boolean"
+		//	            },
+		//	            "LogGroup": {
+		//	              "description": "The CloudWatch log group that is the destination for log delivery.",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Enabled"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Firehose": {
+		//	          "additionalProperties": false,
+		//	          "description": "Details of the Kinesis Data Firehose delivery stream that is the destination for replicator logs.",
+		//	          "properties": {
+		//	            "DeliveryStream": {
+		//	              "description": "The Firehose delivery stream that is the destination for log delivery.",
+		//	              "type": "string"
+		//	            },
+		//	            "Enabled": {
+		//	              "description": "Whether log delivery to Firehose is enabled.",
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Enabled"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "S3": {
+		//	          "additionalProperties": false,
+		//	          "description": "Details of the Amazon S3 destination for replicator logs.",
+		//	          "properties": {
+		//	            "Bucket": {
+		//	              "description": "The S3 bucket that is the destination for log delivery.",
+		//	              "type": "string"
+		//	            },
+		//	            "Enabled": {
+		//	              "description": "Whether log delivery to S3 is enabled.",
+		//	              "type": "boolean"
+		//	            },
+		//	            "Prefix": {
+		//	              "description": "The S3 prefix that is the destination for log delivery.",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Enabled"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"log_delivery": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ReplicatorLogDelivery
+				"replicator_log_delivery": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CloudWatchLogs
+						"cloudwatch_logs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Enabled
+								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Whether log delivery to CloudWatch Logs is enabled.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LogGroup
+								"log_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The CloudWatch log group that is the destination for log delivery.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Details of the CloudWatch Logs destination for replicator logs.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Firehose
+						"firehose": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DeliveryStream
+								"delivery_stream": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Firehose delivery stream that is the destination for log delivery.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Enabled
+								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Whether log delivery to Firehose is enabled.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Details of the Kinesis Data Firehose delivery stream that is the destination for replicator logs.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: S3
+						"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Bucket
+								"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The S3 bucket that is the destination for log delivery.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Enabled
+								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Whether log delivery to S3 is enabled.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Prefix
+								"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The S3 prefix that is the destination for log delivery.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Details of the Amazon S3 destination for replicator logs.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The replicator logs configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for log delivery for the replicator.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ReplicationInfoList
 		// CloudFormation resource type schema:
 		//
@@ -168,6 +439,14 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "additionalProperties": false,
 		//	        "description": "Configuration relating to consumer group replication.",
 		//	        "properties": {
+		//	          "ConsumerGroupOffsetSyncMode": {
+		//	            "description": "The consumer group offset synchronization mode.",
+		//	            "enum": [
+		//	              "LEGACY",
+		//	              "ENHANCED"
+		//	            ],
+		//	            "type": "string"
+		//	          },
 		//	          "ConsumerGroupsToExclude": {
 		//	            "description": "List of regular expression patterns indicating the consumer groups that should not be replicated.",
 		//	            "insertionOrder": false,
@@ -211,6 +490,10 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "pattern": "arn:(aws|aws-us-gov|aws-cn):kafka:.*",
 		//	        "type": "string"
 		//	      },
+		//	      "SourceKafkaClusterId": {
+		//	        "description": "The ID of the source Kafka cluster.",
+		//	        "type": "string"
+		//	      },
 		//	      "TargetCompressionType": {
 		//	        "description": "The type of compression to use writing records to target Kafka cluster.",
 		//	        "enum": [
@@ -225,6 +508,10 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "TargetKafkaClusterArn": {
 		//	        "description": "Amazon Resource Name of the target Kafka cluster.",
 		//	        "pattern": "arn:(aws|aws-us-gov|aws-cn):kafka:.*",
+		//	        "type": "string"
+		//	      },
+		//	      "TargetKafkaClusterId": {
+		//	        "description": "The ID of the target Kafka cluster.",
 		//	        "type": "string"
 		//	      },
 		//	      "TopicReplication": {
@@ -305,8 +592,6 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "SourceKafkaClusterArn",
-		//	      "TargetKafkaClusterArn",
 		//	      "TopicReplication",
 		//	      "ConsumerGroupReplication",
 		//	      "TargetCompressionType"
@@ -324,6 +609,11 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 					// Property: ConsumerGroupReplication
 					"consumer_group_replication": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ConsumerGroupOffsetSyncMode
+							"consumer_group_offset_sync_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The consumer group offset synchronization mode.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
 							// Property: ConsumerGroupsToExclude
 							"consumer_groups_to_exclude": schema.SetAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
@@ -355,6 +645,11 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Description: "Amazon Resource Name of the source Kafka cluster.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
+					// Property: SourceKafkaClusterId
+					"source_kafka_cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The ID of the source Kafka cluster.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: TargetCompressionType
 					"target_compression_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The type of compression to use writing records to target Kafka cluster.",
@@ -363,6 +658,11 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 					// Property: TargetKafkaClusterArn
 					"target_kafka_cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Amazon Resource Name of the target Kafka cluster.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: TargetKafkaClusterId
+					"target_kafka_cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The ID of the target Kafka cluster.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: TopicReplication
@@ -528,30 +828,53 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"amazon_msk_cluster":                   "AmazonMskCluster",
+		"apache_kafka_cluster":                 "ApacheKafkaCluster",
+		"apache_kafka_cluster_id":              "ApacheKafkaClusterId",
+		"bootstrap_broker_string":              "BootstrapBrokerString",
+		"bucket":                               "Bucket",
+		"client_authentication":                "ClientAuthentication",
+		"cloudwatch_logs":                      "CloudWatchLogs",
+		"consumer_group_offset_sync_mode":      "ConsumerGroupOffsetSyncMode",
 		"consumer_group_replication":           "ConsumerGroupReplication",
 		"consumer_groups_to_exclude":           "ConsumerGroupsToExclude",
 		"consumer_groups_to_replicate":         "ConsumerGroupsToReplicate",
 		"copy_access_control_lists_for_topics": "CopyAccessControlListsForTopics",
 		"copy_topic_configurations":            "CopyTopicConfigurations",
 		"current_version":                      "CurrentVersion",
+		"delivery_stream":                      "DeliveryStream",
 		"description":                          "Description",
 		"detect_and_copy_new_consumer_groups":  "DetectAndCopyNewConsumerGroups",
 		"detect_and_copy_new_topics":           "DetectAndCopyNewTopics",
+		"enabled":                              "Enabled",
+		"encryption_in_transit":                "EncryptionInTransit",
+		"encryption_type":                      "EncryptionType",
+		"firehose":                             "Firehose",
 		"kafka_clusters":                       "KafkaClusters",
 		"key":                                  "Key",
+		"log_delivery":                         "LogDelivery",
+		"log_group":                            "LogGroup",
+		"mechanism":                            "Mechanism",
 		"msk_cluster_arn":                      "MskClusterArn",
+		"prefix":                               "Prefix",
 		"replication_info_list":                "ReplicationInfoList",
 		"replicator_arn":                       "ReplicatorArn",
+		"replicator_log_delivery":              "ReplicatorLogDelivery",
 		"replicator_name":                      "ReplicatorName",
+		"root_ca_certificate":                  "RootCaCertificate",
+		"s3":                                   "S3",
+		"sasl_scram":                           "SaslScram",
+		"secret_arn":                           "SecretArn",
 		"security_group_ids":                   "SecurityGroupIds",
 		"service_execution_role_arn":           "ServiceExecutionRoleArn",
 		"source_kafka_cluster_arn":             "SourceKafkaClusterArn",
+		"source_kafka_cluster_id":              "SourceKafkaClusterId",
 		"starting_position":                    "StartingPosition",
 		"subnet_ids":                           "SubnetIds",
 		"synchronise_consumer_group_offsets":   "SynchroniseConsumerGroupOffsets",
 		"tags":                                 "Tags",
 		"target_compression_type":              "TargetCompressionType",
 		"target_kafka_cluster_arn":             "TargetKafkaClusterArn",
+		"target_kafka_cluster_id":              "TargetKafkaClusterId",
 		"topic_name_configuration":             "TopicNameConfiguration",
 		"topic_replication":                    "TopicReplication",
 		"topics_to_exclude":                    "TopicsToExclude",

@@ -124,11 +124,13 @@ Read-Only:
 Read-Only:
 
 - `alarms` (Attributes) Information about the CloudWatch alarms. (see [below for nested schema](#nestedatt--deployment_configuration--alarms))
-- `bake_time_in_minutes` (Number) The duration when both blue and green service revisions are running simultaneously after the production traffic has shifted.
+- `bake_time_in_minutes` (Number) The duration waiting before terminating the previous service revision and marking a deployment complete.
  The following rules apply when you don't specify a value:
-  +  For rolling deployments, the value is set to 3 hours (180 minutes).
-  +  When you use an external deployment controller (``EXTERNAL``), or the ACD blue/green deployment controller (``CODE_DEPLOY``), the value is set to 3 hours (180 minutes).
-  +  For all other cases, the value is set to 36 hours (2160 minutes).
+  +  For blue/green, linear, and canary deployments, the value is set to 15 minutes.
+  +  For rolling deployments, there is no bake time set by default.
+  +  The external deployment controller (``EXTERNAL``) and the ACD blue/green deployment controller (``CODE_DEPLOY``) do not support the ``BakeTimeInMinutes`` parameter.
+  
+  If you provide a bake time for a rolling deployment, the CloudFormation handler timeout is increased to the maximum of 36 hours, matching the timeout for blue/green, linear, and canary deployments.
 - `canary_configuration` (Attributes) Configuration for canary deployment strategy. Only valid when the deployment strategy is ``CANARY``. This configuration enables shifting a fixed percentage of traffic for testing, followed by shifting the remaining traffic after a bake period. (see [below for nested schema](#nestedatt--deployment_configuration--canary_configuration))
 - `deployment_circuit_breaker` (Attributes) The deployment circuit breaker can only be used for services using the rolling update (``ECS``) deployment type.
   The *deployment circuit breaker* determines whether a service deployment will fail if the service can't reach a steady state. If you use the deployment circuit breaker, a service deployment will transition to a failed state and stop launching new tasks. If you use the rollback option, when a service deployment fails, the service is rolled back to the last deployment that completed successfully. For more information, see [Rolling update](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html) in the *Amazon Elastic Container Service Developer Guide* (see [below for nested schema](#nestedatt--deployment_configuration--deployment_circuit_breaker))
@@ -224,6 +226,17 @@ Read-Only:
  You must provide this parameter when configuring a deployment lifecycle hook.
 - `role_arn` (String) The Amazon Resource Name (ARN) of the IAM role that grants Amazon ECS permission to call Lambda functions on your behalf.
  For more information, see [Permissions required for Lambda functions in Amazon ECS blue/green deployments](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/blue-green-permissions.html) in the *Amazon Elastic Container Service Developer Guide*.
+- `target_type` (String)
+- `timeout_configuration` (Attributes) (see [below for nested schema](#nestedatt--deployment_configuration--lifecycle_hooks--timeout_configuration))
+
+<a id="nestedatt--deployment_configuration--lifecycle_hooks--timeout_configuration"></a>
+### Nested Schema for `deployment_configuration.lifecycle_hooks.timeout_configuration`
+
+Read-Only:
+
+- `action` (String)
+- `timeout_in_minutes` (Number)
+
 
 
 <a id="nestedatt--deployment_configuration--linear_configuration"></a>
@@ -548,7 +561,7 @@ Read-Only:
 
 - `encrypted` (Boolean) Indicates whether the volume should be encrypted. If you turn on Region-level Amazon EBS encryption by default but set this value as ``false``, the setting is overridden and the volume is encrypted with the KMS key specified for Amazon EBS encryption by default. This parameter maps 1:1 with the ``Encrypted`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*.
 - `filesystem_type` (String) The filesystem type for the volume. For volumes created from a snapshot, you must specify the same filesystem type that the volume was using when the snapshot was created. If there is a filesystem type mismatch, the tasks will fail to start.
- The available Linux filesystem types are  ``ext3``, ``ext4``, and ``xfs``. If no value is specified, the ``xfs`` filesystem type is used by default.
+ The available Linux filesystem types are ``ext3``, ``ext4``, and ``xfs``. If no value is specified, the ``xfs`` filesystem type is used by default.
  The available Windows filesystem types are ``NTFS``.
 - `iops` (Number) The number of I/O operations per second (IOPS). For ``gp3``, ``io1``, and ``io2`` volumes, this represents the number of IOPS that are provisioned for the volume. For ``gp2`` volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting.
  The following are the supported values for each volume type.
@@ -586,7 +599,7 @@ Read-Only:
 
 Read-Only:
 
-- `propagate_tags` (String) Determines whether to propagate the tags from the task definition to  the Amazon EBS volume. Tags can only propagate to a ``SERVICE`` specified in  ``ServiceVolumeConfiguration``. If no value is specified, the tags aren't  propagated.
+- `propagate_tags` (String) Determines whether to propagate the tags from the task definition to the Amazon EBS volume. Tags can only propagate to a ``SERVICE`` specified in ``ServiceVolumeConfiguration``. If no value is specified, the tags aren't propagated.
 - `resource_type` (String) The type of volume resource.
 - `tags` (Attributes List) The tags applied to this Amazon EBS volume. ``AmazonECSCreated`` and ``AmazonECSManaged`` are reserved tags that can't be used. (see [below for nested schema](#nestedatt--volume_configurations--managed_ebs_volume--tag_specifications--tags))
 
@@ -608,5 +621,5 @@ Read-Only:
 Read-Only:
 
 - `port_name` (String) The name of the port mapping to register in the VPC Lattice target group. This is the name of the ``portMapping`` you defined in your task definition.
-- `role_arn` (String) The ARN of the IAM role to associate with this VPC Lattice configuration. This is the Amazon ECS  infrastructure IAM role that is used to manage your VPC Lattice infrastructure.
+- `role_arn` (String) The ARN of the IAM role to associate with this VPC Lattice configuration. This is the Amazon ECS infrastructure IAM role that is used to manage your VPC Lattice infrastructure.
 - `target_group_arn` (String) The full Amazon Resource Name (ARN) of the target group or groups associated with the VPC Lattice configuration that the Amazon ECS tasks will be registered to.

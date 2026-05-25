@@ -231,8 +231,7 @@
     },
     {
         "resource": "awscc_apigatewayv2_stage",
-        "generateListResource": true,
-        "identifier": ["ApiId","StageName"]
+        "identifier": ["Id"]
     },
     {
         "resource": "awscc_apigatewayv2_vpc_link",
@@ -740,6 +739,11 @@
         "identifier": ["CredentialProviderArn"]
     },
     {
+        "resource": "awscc_bedrockagentcore_payment_credential_provider",
+        "generateListResource": true,
+        "identifier": ["CredentialProviderArn"]
+    },
+    {
         "resource": "awscc_bedrockagentcore_policy",
         "identifier": ["PolicyArn"]
     },
@@ -886,6 +890,16 @@
         "resource": "awscc_chatbot_slack_channel_configuration",
         "generateListResource": true,
         "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_chime_app_instance",
+        "generateListResource": true,
+        "identifier": ["AppInstanceArn"]
+    },
+    {
+        "resource": "awscc_chime_app_instance_bot",
+        "generateListResource": true,
+        "identifier": ["AppInstanceBotArn"]
     },
     {
         "resource": "awscc_cleanrooms_analysis_template",
@@ -1143,6 +1157,11 @@
         "resource": "awscc_cloudwatch_metric_stream",
         "generateListResource": true,
         "identifier": ["Name"]
+    },
+    {
+        "resource": "awscc_cloudwatch_otel_enrichment",
+        "generateListResource": true,
+        "identifier": ["AccountId"]
     },
     {
         "resource": "awscc_codeartifact_domain",
@@ -1795,6 +1814,11 @@
     {
         "resource": "awscc_devopsagent_association",
         "identifier": ["AgentSpaceId","AssociationId"]
+    },
+    {
+        "resource": "awscc_devopsagent_private_connection",
+        "generateListResource": true,
+        "identifier": ["Name"]
     },
     {
         "resource": "awscc_devopsguru_log_anomaly_detection_integration",
@@ -2528,6 +2552,11 @@
         "resource": "awscc_emrserverless_application",
         "generateListResource": true,
         "identifier": ["ApplicationId"]
+    },
+    {
+        "resource": "awscc_elasticache_cache_cluster",
+        "generateListResource": true,
+        "identifier": ["ClusterName"]
     },
     {
         "resource": "awscc_elasticache_global_replication_group",
@@ -4082,7 +4111,6 @@
     },
     {
         "resource": "awscc_mediaconnect_flow_vpc_interface",
-        "generateListResource": true,
         "identifier": ["FlowArn","Name"]
     },
     {
@@ -4290,6 +4318,11 @@
         "resource": "awscc_neptunegraph_graph",
         "generateListResource": true,
         "identifier": ["GraphId"]
+    },
+    {
+        "resource": "awscc_neptunegraph_graph_snapshot",
+        "generateListResource": true,
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_neptunegraph_private_graph_endpoint",
@@ -6361,6 +6394,7 @@
     },
     {
         "resource": "awscc_workspaces_connection_alias",
+        "generateListResource": true,
         "identifier": ["AliasId"]
     },
     {

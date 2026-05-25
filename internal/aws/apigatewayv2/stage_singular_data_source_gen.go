@@ -28,7 +28,6 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "Settings for logging access in this stage.",
 		//	  "properties": {
 		//	    "DestinationArn": {
 		//	      "type": "string"
@@ -50,48 +49,40 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Settings for logging access in this stage.",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: ApiId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The API identifier.",
 		//	  "type": "string"
 		//	}
 		"api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The API identifier.",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: AutoDeploy
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Specifies whether updates to an API automatically trigger a new deployment. The default value is false.",
 		//	  "type": "boolean"
 		//	}
 		"auto_deploy": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether updates to an API automatically trigger a new deployment. The default value is false.",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: ClientCertificateId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The identifier of a client certificate for a Stage. Supported only for WebSocket APIs.",
 		//	  "type": "string"
 		//	}
 		"client_certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of a client certificate for a Stage. Supported only for WebSocket APIs.",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: DefaultRouteSettings
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The default route settings for the stage.",
 		//	  "properties": {
 		//	    "DataTraceEnabled": {
 		//	      "type": "boolean"
@@ -134,77 +125,73 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The default route settings for the stage.",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: DeploymentId
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The deployment identifier for the API stage. Can't be updated if autoDeploy is enabled.",
 		//	  "type": "string"
 		//	}
 		"deployment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The deployment identifier for the API stage. Can't be updated if autoDeploy is enabled.",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The description for the API stage.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description for the API stage.",
-			Computed:    true,
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"stage_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: RouteSettings
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Route settings for the stage.",
 		//	  "type": "object"
 		//	}
 		"route_settings": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "Route settings for the stage.",
-			Computed:    true,
+			CustomType: jsontypes.NormalizedType{},
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: StageName
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The stage name. Stage names can contain only alphanumeric characters, hyphens, and underscores, or be $default. Maximum length is 128 characters.",
 		//	  "type": "string"
 		//	}
 		"stage_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The stage name. Stage names can contain only alphanumeric characters, hyphens, and underscores, or be $default. Maximum length is 128 characters.",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: StageVariables
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A map that defines the stage variables for a Stage. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#\u0026=,]+.",
 		//	  "type": "object"
 		//	}
 		"stage_variables": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "A map that defines the stage variables for a Stage. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&=,]+.",
-			Computed:    true,
+			CustomType: jsontypes.NormalizedType{},
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The collection of tags. Each tag element is associated with a given resource.",
 		//	  "type": "object"
 		//	}
 		"tags": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "The collection of tags. Each tag element is associated with a given resource.",
-			Computed:    true,
+			CustomType: jsontypes.NormalizedType{},
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -236,6 +223,7 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"format":                   "Format",
 		"logging_level":            "LoggingLevel",
 		"route_settings":           "RouteSettings",
+		"stage_id":                 "Id",
 		"stage_name":               "StageName",
 		"stage_variables":          "StageVariables",
 		"tags":                     "Tags",

@@ -67,6 +67,7 @@ Optional:
 
 Optional:
 
+- `batch_image_status` (String)
 - `image_id_override` (String)
 - `image_kubernetes_version` (String)
 - `image_type` (String)

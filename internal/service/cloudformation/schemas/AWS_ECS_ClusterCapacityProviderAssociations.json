@@ -111,6 +111,10 @@
       ]
     }
   },
+  "required": [
+    "Cluster",
+    "DefaultCapacityProviderStrategy"
+  ],
   "properties": {
     "DefaultCapacityProviderStrategy": {
       "$ref": "#/definitions/DefaultCapacityProviderStrategy"
@@ -121,9 +125,5 @@
     "Cluster": {
       "$ref": "#/definitions/Cluster"
     }
-  },
-  "required": [
-    "Cluster",
-    "DefaultCapacityProviderStrategy"
-  ]
+  }
 }

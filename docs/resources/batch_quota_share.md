@@ -3,12 +3,12 @@
 page_title: "awscc_batch_quota_share Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::Batch::QuotaShare
+  Creates an AWS Batch quota share. Each quota share operates as a virtual queue with a configured compute capacity, resource sharing strategy, and borrow limits.
 ---
 
 # awscc_batch_quota_share (Resource)
 
-Resource Type definition for AWS::Batch::QuotaShare
+Creates an AWS Batch quota share. Each quota share operates as a virtual queue with a configured compute capacity, resource sharing strategy, and borrow limits.
 
 
 
@@ -17,16 +17,16 @@ Resource Type definition for AWS::Batch::QuotaShare
 
 ### Required
 
-- `capacity_limits` (Attributes List) The capacity limits for the quota share. (see [below for nested schema](#nestedatt--capacity_limits))
-- `job_queue` (String) The Amazon Resource Name (ARN) or name of the job queue.
-- `preemption_configuration` (Attributes) The preemption configuration for the quota share. (see [below for nested schema](#nestedatt--preemption_configuration))
-- `quota_share_name` (String) The name of the quota share.
-- `resource_sharing_configuration` (Attributes) The resource sharing configuration for the quota share. (see [below for nested schema](#nestedatt--resource_sharing_configuration))
+- `capacity_limits` (Attributes List) A list that specifies the quantity and type of compute capacity allocated to the quota share. (see [below for nested schema](#nestedatt--capacity_limits))
+- `job_queue` (String) The AWS Batch job queue associated with the quota share. This can be the job queue name or ARN. A job queue must be in the `VALID` state before you can associate it with a quota share.
+- `preemption_configuration` (Attributes) Specifies the preemption behavior for jobs in a quota share. (see [below for nested schema](#nestedatt--preemption_configuration))
+- `quota_share_name` (String) The name of the quota share. It can be up to 128 characters long. It can contain uppercase and lowercase letters, numbers, hyphens (-), and underscores (_).
+- `resource_sharing_configuration` (Attributes) Specifies whether a quota share reserves, lends, or both lends and borrows idle compute capacity. (see [below for nested schema](#nestedatt--resource_sharing_configuration))
 
 ### Optional
 
-- `state` (String) The state of the quota share.
-- `tags` (Map of String) A key-value pair to associate with a resource.
+- `state` (String) The state of the quota share. If the quota share is `ENABLED`, it is able to accept jobs. If the quota share is `DISABLED`, new jobs won't be accepted but jobs already submitted can finish. The default state is `ENABLED`.
+- `tags` (Map of String) The tags that you apply to the quota share to help you categorize and organize your resources. Each tag consists of a key and an optional value.
 
 ### Read-Only
 
@@ -38,8 +38,8 @@ Resource Type definition for AWS::Batch::QuotaShare
 
 Required:
 
-- `capacity_unit` (String) The unit of compute capacity for the capacityLimit.
-- `max_capacity` (Number) The maximum capacity available for the quota share. This value represents the maximum amount of resources that can be allocated to jobs in the quota share without borrowing
+- `capacity_unit` (String) The unit of compute capacity for the capacityLimit. For example, `ml.m5.large`.
+- `max_capacity` (Number) The maximum capacity available for the quota share. This value represents the maximum quantity of a resource that can be allocated to jobs in the quota share without borrowing.
 
 
 <a id="nestedatt--preemption_configuration"></a>
@@ -47,7 +47,7 @@ Required:
 
 Required:
 
-- `in_share_preemption` (String) Whether preemption is enabled within the quota share.
+- `in_share_preemption` (String) Specifies whether jobs within a quota share can be preempted by another, higher priority job in the same quota share.
 
 
 <a id="nestedatt--resource_sharing_configuration"></a>
@@ -55,11 +55,11 @@ Required:
 
 Required:
 
-- `strategy` (String) The resource sharing strategy.
+- `strategy` (String) The resource sharing strategy for the quota share. The `RESERVE` strategy allows a quota share to reserve idle capacity for itself. `LEND` configures the share to lend its idle capacity to another share in need of capacity. The `LEND_AND_BORROW` strategy configures the share to borrow idle capacity from an underutilized share, as well as lend to another share.
 
 Optional:
 
-- `borrow_limit` (Number) The maximum amount of compute capacity that can be borrowed. Use -1 for unlimited borrowing.
+- `borrow_limit` (Number) The maximum percentage of additional capacity that the quota share can borrow from other shares. `BorrowLimit` can only be applied to quota shares with a strategy of `LEND_AND_BORROW`. This value is expressed as a percentage of the quota share's configured CapacityLimits. The `BorrowLimit` is applied uniformly across all capacity units. For example, if the `BorrowLimit` is 200, the quota share can borrow up to 200% of its configured `maxCapacity` for each capacity unit. The default `BorrowLimit` is -1, which indicates unlimited borrowing.
 
 ## Import
 

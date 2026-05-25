@@ -145,7 +145,7 @@ func queueEnvironmentResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Definition of AWS::Deadline::QueueEnvironment Resource Type",
+		Description: "Resource Type definition for AWS::Deadline::QueueEnvironment",
 		Version:     1,
 		Attributes:  attributes,
 	}

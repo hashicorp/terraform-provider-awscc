@@ -28,8 +28,7 @@
     "/properties/StaticRoutesOnly",
     "/properties/TransportTransitGatewayAttachmentId",
     "/properties/TunnelInsideIpVersion",
-    "/properties/PreSharedKeyStorage",
-    "/properties/TunnelBandwidth"
+    "/properties/PreSharedKeyStorage"
   ],
   "primaryIdentifier": [
     "/properties/VpnConnectionId"

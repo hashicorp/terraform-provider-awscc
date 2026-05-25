@@ -55,6 +55,11 @@ func TestCloudFormationPropertyToTerraformAttribute(t *testing.T) {
 			Value:         "CNAMEs",
 			ExpectedValue: "cnames",
 		},
+		{
+			TestName:      "including OTel",
+			Value:         "OTelEnrichment",
+			ExpectedValue: "otel_enrichment",
+		},
 	}
 
 	for _, testCase := range testCases {

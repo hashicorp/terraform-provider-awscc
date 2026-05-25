@@ -178,10 +178,7 @@ func processingJobResource(ctx context.Context) (resource.Resource, error) {
 		//	  "patternProperties": {
 		//	    "": {
 		//	      "maxLength": 256,
-		//	      "type": "string"
-		//	    },
-		//	    "[\\S\\s]*": {
-		//	      "maxLength": 256,
+		//	      "pattern": "[\\S\\s]*",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -190,7 +187,6 @@ func processingJobResource(ctx context.Context) (resource.Resource, error) {
 		"environment":       // Pattern: ""
 		schema.MapAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			// Pattern "[\\S\\s]*" ignored.
 			Description: "Sets the environment variables in the Docker container",
 			Optional:    true,
 			Computed:    true,

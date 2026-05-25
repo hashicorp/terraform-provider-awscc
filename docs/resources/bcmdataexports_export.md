@@ -75,6 +75,10 @@ Required:
 - `s3_prefix` (String)
 - `s3_region` (String)
 
+Optional:
+
+- `s3_bucket_owner` (String)
+
 <a id="nestedatt--export--destination_configurations--s3_destination--s3_output_configurations"></a>
 ### Nested Schema for `export.destination_configurations.s3_destination.s3_output_configurations`
 

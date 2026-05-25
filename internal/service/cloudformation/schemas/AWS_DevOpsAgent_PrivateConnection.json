@@ -1,0 +1,280 @@
+{
+  "typeName": "AWS::DevOpsAgent::PrivateConnection",
+  "description": "Resource Type definition for AWS::DevOpsAgent::PrivateConnection",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    },
+    "ServiceManagedMode": {
+      "description": "Configuration for a service-managed Private Connection.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "HostAddress": {
+          "description": "IP address or DNS name of the target resource.",
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 255,
+          "pattern": "^[a-zA-Z0-9.:\\-]+$"
+        },
+        "VpcId": {
+          "description": "VPC to create the service-managed Resource Gateway in.",
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 50,
+          "pattern": "^vpc-(([0-9a-z]{8})|([0-9a-z]{17}))$"
+        },
+        "SubnetIds": {
+          "description": "Subnets that the service-managed Resource Gateway will span.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 15,
+            "maxLength": 24,
+            "pattern": "^subnet-(([0-9a-z]{8})|([0-9a-z]{17}))$"
+          },
+          "minItems": 1,
+          "maxItems": 20
+        },
+        "SecurityGroupIds": {
+          "description": "Security groups to attach to the service-managed Resource Gateway.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 11,
+            "maxLength": 20,
+            "pattern": "^sg-(([0-9a-z]{8})|([0-9a-z]{17}))$"
+          },
+          "minItems": 1,
+          "maxItems": 5
+        },
+        "IpAddressType": {
+          "description": "IP address type of the service-managed Resource Gateway.",
+          "type": "string",
+          "enum": [
+            "IPV4",
+            "IPV6",
+            "DUAL_STACK"
+          ]
+        },
+        "Ipv4AddressesPerEni": {
+          "description": "Number of IPv4 addresses in each ENI for the service-managed Resource Gateway.",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 62
+        },
+        "PortRanges": {
+          "description": "TCP port ranges that a consumer can use to access the resource.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^((\\d{1,5}\\-\\d{1,5})|(\\d+))$"
+          },
+          "minItems": 1,
+          "maxItems": 11
+        }
+      },
+      "required": [
+        "HostAddress",
+        "VpcId"
+      ]
+    },
+    "SelfManagedMode": {
+      "description": "Configuration for a self-managed Private Connection.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ResourceConfigurationId": {
+          "description": "The ARN of the Resource Configuration.",
+          "type": "string",
+          "minLength": 20,
+          "maxLength": 2048,
+          "pattern": "^arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceconfiguration/rcfg-[0-9a-z]{17}$"
+        }
+      },
+      "required": [
+        "ResourceConfigurationId"
+      ]
+    },
+    "ConnectionConfiguration": {
+      "description": "The connection configuration, either SelfManaged or ServiceManaged.",
+      "type": "object",
+      "oneOf": [
+        {
+          "title": "SelfManaged",
+          "properties": {
+            "SelfManaged": {
+              "$ref": "#/definitions/SelfManagedMode"
+            }
+          },
+          "required": [
+            "SelfManaged"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "title": "ServiceManaged",
+          "properties": {
+            "ServiceManaged": {
+              "$ref": "#/definitions/ServiceManagedMode"
+            }
+          },
+          "required": [
+            "ServiceManaged"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "properties": {
+    "Name": {
+      "description": "Unique name for this Private Connection within the account.",
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 30,
+      "pattern": "^[a-z0-9]([a-z0-9-]*[a-z0-9])?$"
+    },
+    "ConnectionConfiguration": {
+      "description": "The connection configuration for the Private Connection.",
+      "$ref": "#/definitions/ConnectionConfiguration"
+    },
+    "Status": {
+      "description": "The status of the Private Connection.",
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "CREATE_IN_PROGRESS",
+        "CREATE_FAILED",
+        "DELETE_IN_PROGRESS",
+        "DELETE_FAILED"
+      ]
+    },
+    "CertificateExpiryTime": {
+      "description": "The expiry time of the certificate associated with the Private Connection.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "Arn": {
+      "description": "The Amazon Resource Name (ARN) of the Private Connection.",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to this resource.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "Certificate": {
+      "description": "Certificate for the Private Connection.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 32768
+    }
+  },
+  "additionalProperties": false,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "aidevops:TagResource",
+      "aidevops:UntagResource",
+      "aidevops:ListTagsForResource"
+    ]
+  },
+  "required": [
+    "Name",
+    "ConnectionConfiguration"
+  ],
+  "readOnlyProperties": [
+    "/properties/Status",
+    "/properties/CertificateExpiryTime",
+    "/properties/Arn"
+  ],
+  "writeOnlyProperties": [
+    "/properties/Certificate",
+    "/properties/ConnectionConfiguration/ServiceManaged/SubnetIds",
+    "/properties/ConnectionConfiguration/ServiceManaged/SecurityGroupIds",
+    "/properties/ConnectionConfiguration/ServiceManaged/IpAddressType",
+    "/properties/ConnectionConfiguration/ServiceManaged/Ipv4AddressesPerEni",
+    "/properties/ConnectionConfiguration/ServiceManaged/PortRanges"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/ConnectionConfiguration"
+  ],
+  "primaryIdentifier": [
+    "/properties/Name"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "aidevops:CreatePrivateConnection",
+        "aidevops:DescribePrivateConnection",
+        "aidevops:TagResource",
+        "aidevops:ListTagsForResource",
+        "ec2:DescribeVpcs",
+        "iam:CreateServiceLinkedRole",
+        "vpc-lattice:AssociateViaService",
+        "vpc-lattice:AssociateViaAWSService",
+        "vpc-lattice:GetResourceConfiguration",
+        "vpc-lattice:CreateServiceNetworkResourceAssociation"
+      ],
+      "timeoutInMinutes": 15
+    },
+    "read": {
+      "permissions": [
+        "aidevops:DescribePrivateConnection",
+        "aidevops:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "aidevops:UpdatePrivateConnectionCertificate",
+        "aidevops:DescribePrivateConnection",
+        "aidevops:TagResource",
+        "aidevops:UntagResource",
+        "aidevops:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "aidevops:DeletePrivateConnection",
+        "aidevops:DescribePrivateConnection"
+      ],
+      "timeoutInMinutes": 15
+    },
+    "list": {
+      "permissions": [
+        "aidevops:ListPrivateConnections"
+      ]
+    }
+  }
+}

@@ -1,6 +1,6 @@
 {
   "typeName": "AWS::Deadline::LicenseEndpoint",
-  "description": "Definition of AWS::Deadline::LicenseEndpoint Resource Type",
+  "description": "Resource Type definition for AWS::Deadline::LicenseEndpoint",
   "definitions": {
     "LicenseEndpointStatus": {
       "type": "string",

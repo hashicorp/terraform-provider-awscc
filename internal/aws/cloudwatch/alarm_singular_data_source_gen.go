@@ -117,11 +117,11 @@ func alarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "description": "Dimension is an embedded property of the ``AWS::CloudWatch::Alarm`` type. Dimensions are name/value pairs that can be associated with a CW metric. You can specify a maximum of 30 dimensions for a given metric.",
 		//	    "properties": {
 		//	      "Name": {
-		//	        "description": "The name of the dimension, from 1–255 characters in length. This dimension name must have been included when the metric was published.",
+		//	        "description": "The name of the dimension, from 1?255 characters in length. This dimension name must have been included when the metric was published.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "The value for the dimension, from 1–255 characters in length.",
+		//	        "description": "The value for the dimension, from 1?255 characters in length.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -139,12 +139,12 @@ func alarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the dimension, from 1–255 characters in length. This dimension name must have been included when the metric was published.",
+						Description: "The name of the dimension, from 1?255 characters in length. This dimension name must have been included when the metric was published.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the dimension, from 1–255 characters in length.",
+						Description: "The value for the dimension, from 1?255 characters in length.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -161,6 +161,74 @@ func alarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"evaluate_low_sample_count_percentile": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Used only for alarms based on percentiles. If ``ignore``, the alarm state does not change during periods with too few data points to be statistically significant. If ``evaluate`` or this parameter is not used, the alarm is always evaluated and possibly changes state no matter how many data points are available.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: EvaluationCriteria
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "",
+		//	  "properties": {
+		//	    "PromQLCriteria": {
+		//	      "additionalProperties": false,
+		//	      "description": "",
+		//	      "properties": {
+		//	        "PendingPeriod": {
+		//	          "description": "The pending period for the alarm.",
+		//	          "type": "integer"
+		//	        },
+		//	        "Query": {
+		//	          "description": "The PromQL query string.",
+		//	          "type": "string"
+		//	        },
+		//	        "RecoveryPeriod": {
+		//	          "description": "The recovery period for the alarm.",
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"evaluation_criteria": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PromQLCriteria
+				"prom_ql_criteria": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PendingPeriod
+						"pending_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The pending period for the alarm.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Query
+						"query": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The PromQL query string.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RecoveryPeriod
+						"recovery_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The recovery period for the alarm.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: EvaluationInterval
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "integer"
+		//	}
+		"evaluation_interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EvaluationPeriods
@@ -253,11 +321,11 @@ func alarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                  "description": "Dimension is an embedded property of the ``AWS::CloudWatch::Alarm`` type. Dimensions are name/value pairs that can be associated with a CW metric. You can specify a maximum of 30 dimensions for a given metric.",
 		//	                  "properties": {
 		//	                    "Name": {
-		//	                      "description": "The name of the dimension, from 1–255 characters in length. This dimension name must have been included when the metric was published.",
+		//	                      "description": "The name of the dimension, from 1?255 characters in length. This dimension name must have been included when the metric was published.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Value": {
-		//	                      "description": "The value for the dimension, from 1–255 characters in length.",
+		//	                      "description": "The value for the dimension, from 1?255 characters in length.",
 		//	                      "type": "string"
 		//	                    }
 		//	                  },
@@ -353,12 +421,12 @@ func alarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: Name
 												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The name of the dimension, from 1–255 characters in length. This dimension name must have been included when the metric was published.",
+													Description: "The name of the dimension, from 1?255 characters in length. This dimension name must have been included when the metric was published.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Value
 												"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The value for the dimension, from 1–255 characters in length.",
+													Description: "The value for the dimension, from 1?255 characters in length.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
@@ -584,6 +652,8 @@ func alarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"datapoints_to_alarm":                  "DatapointsToAlarm",
 		"dimensions":                           "Dimensions",
 		"evaluate_low_sample_count_percentile": "EvaluateLowSampleCountPercentile",
+		"evaluation_criteria":                  "EvaluationCriteria",
+		"evaluation_interval":                  "EvaluationInterval",
 		"evaluation_periods":                   "EvaluationPeriods",
 		"expression":                           "Expression",
 		"extended_statistic":                   "ExtendedStatistic",
@@ -598,7 +668,11 @@ func alarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name":                                 "Name",
 		"namespace":                            "Namespace",
 		"ok_actions":                           "OKActions",
+		"pending_period":                       "PendingPeriod",
 		"period":                               "Period",
+		"prom_ql_criteria":                     "PromQLCriteria",
+		"query":                                "Query",
+		"recovery_period":                      "RecoveryPeriod",
 		"return_data":                          "ReturnData",
 		"stat":                                 "Stat",
 		"statistic":                            "Statistic",

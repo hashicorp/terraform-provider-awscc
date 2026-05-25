@@ -92,6 +92,12 @@ func exportResource(ctx context.Context) (resource.Resource, error) {
 		//	              "pattern": "^[\\S\\s]*$",
 		//	              "type": "string"
 		//	            },
+		//	            "S3BucketOwner": {
+		//	              "maxLength": 12,
+		//	              "minLength": 12,
+		//	              "pattern": "^[0-9]{12}$",
+		//	              "type": "string"
+		//	            },
 		//	            "S3OutputConfigurations": {
 		//	              "additionalProperties": false,
 		//	              "properties": {
@@ -111,7 +117,9 @@ func exportResource(ctx context.Context) (resource.Resource, error) {
 		//	                },
 		//	                "OutputType": {
 		//	                  "enum": [
-		//	                    "CUSTOM"
+		//	                    "CUSTOM",
+		//	                    "ATHENA",
+		//	                    "REDSHIFT"
 		//	                  ],
 		//	                  "type": "string"
 		//	                },
@@ -215,7 +223,6 @@ func exportResource(ctx context.Context) (resource.Resource, error) {
 							Computed:    true,
 							PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
 								mapplanmodifier.UseStateForUnknown(),
-								mapplanmodifier.RequiresReplaceIfConfigured(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -247,6 +254,18 @@ func exportResource(ctx context.Context) (resource.Resource, error) {
 										stringvalidator.RegexMatches(regexp.MustCompile("^[\\S\\s]*$"), ""),
 									}, /*END VALIDATORS*/
 								}, /*END ATTRIBUTE*/
+								// Property: S3BucketOwner
+								"s3_bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(12, 12),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]{12}$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
 								// Property: S3OutputConfigurations
 								"s3_output_configurations": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -276,6 +295,8 @@ func exportResource(ctx context.Context) (resource.Resource, error) {
 											Validators: []validator.String{ /*START VALIDATORS*/
 												stringvalidator.OneOf(
 													"CUSTOM",
+													"ATHENA",
+													"REDSHIFT",
 												),
 											}, /*END VALIDATORS*/
 										}, /*END ATTRIBUTE*/
@@ -478,6 +499,7 @@ func exportResource(ctx context.Context) (resource.Resource, error) {
 		"query_statement":            "QueryStatement",
 		"refresh_cadence":            "RefreshCadence",
 		"s3_bucket":                  "S3Bucket",
+		"s3_bucket_owner":            "S3BucketOwner",
 		"s3_destination":             "S3Destination",
 		"s3_output_configurations":   "S3OutputConfigurations",
 		"s3_prefix":                  "S3Prefix",

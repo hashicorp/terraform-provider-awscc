@@ -232,6 +232,7 @@ Read-Only:
 - `efs_volume_configuration` (Attributes) (see [below for nested schema](#nestedatt--container_properties--volumes--efs_volume_configuration))
 - `host` (Attributes) (see [below for nested schema](#nestedatt--container_properties--volumes--host))
 - `name` (String)
+- `s3_files_volume_configuration` (Attributes) (see [below for nested schema](#nestedatt--container_properties--volumes--s3_files_volume_configuration))
 
 <a id="nestedatt--container_properties--volumes--efs_volume_configuration"></a>
 ### Nested Schema for `container_properties.volumes.efs_volume_configuration`
@@ -260,6 +261,17 @@ Read-Only:
 Read-Only:
 
 - `source_path` (String)
+
+
+<a id="nestedatt--container_properties--volumes--s3_files_volume_configuration"></a>
+### Nested Schema for `container_properties.volumes.s3_files_volume_configuration`
+
+Read-Only:
+
+- `access_point_arn` (String)
+- `file_system_arn` (String)
+- `root_directory` (String)
+- `transit_encryption_port` (Number)
 
 
 
@@ -308,6 +320,8 @@ Read-Only:
 - `repository_credentials` (Attributes) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--containers--repository_credentials))
 - `resource_requirements` (Attributes List) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--containers--resource_requirements))
 - `secrets` (Attributes List) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--containers--secrets))
+- `start_timeout` (Number)
+- `stop_timeout` (Number)
 - `ulimits` (Attributes List) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--containers--ulimits))
 - `user` (String)
 
@@ -470,6 +484,7 @@ Read-Only:
 - `efs_volume_configuration` (Attributes) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--volumes--efs_volume_configuration))
 - `host` (Attributes) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--volumes--host))
 - `name` (String)
+- `s3_files_volume_configuration` (Attributes) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--volumes--s3_files_volume_configuration))
 
 <a id="nestedatt--ecs_properties--task_properties--volumes--efs_volume_configuration"></a>
 ### Nested Schema for `ecs_properties.task_properties.volumes.efs_volume_configuration`
@@ -498,6 +513,17 @@ Read-Only:
 Read-Only:
 
 - `source_path` (String)
+
+
+<a id="nestedatt--ecs_properties--task_properties--volumes--s3_files_volume_configuration"></a>
+### Nested Schema for `ecs_properties.task_properties.volumes.s3_files_volume_configuration`
+
+Read-Only:
+
+- `access_point_arn` (String)
+- `file_system_arn` (String)
+- `root_directory` (String)
+- `transit_encryption_port` (Number)
 
 
 
@@ -906,6 +932,7 @@ Read-Only:
 - `efs_volume_configuration` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--container--volumes--efs_volume_configuration))
 - `host` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--container--volumes--host))
 - `name` (String)
+- `s3_files_volume_configuration` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--container--volumes--s3_files_volume_configuration))
 
 <a id="nestedatt--node_properties--node_range_properties--container--volumes--efs_volume_configuration"></a>
 ### Nested Schema for `node_properties.node_range_properties.container.volumes.efs_volume_configuration`
@@ -934,6 +961,17 @@ Read-Only:
 Read-Only:
 
 - `source_path` (String)
+
+
+<a id="nestedatt--node_properties--node_range_properties--container--volumes--s3_files_volume_configuration"></a>
+### Nested Schema for `node_properties.node_range_properties.container.volumes.s3_files_volume_configuration`
+
+Read-Only:
+
+- `access_point_arn` (String)
+- `file_system_arn` (String)
+- `root_directory` (String)
+- `transit_encryption_port` (Number)
 
 
 
@@ -978,6 +1016,8 @@ Read-Only:
 - `repository_credentials` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--repository_credentials))
 - `resource_requirements` (Attributes List) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--resource_requirements))
 - `secrets` (Attributes List) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--secrets))
+- `start_timeout` (Number)
+- `stop_timeout` (Number)
 - `ulimits` (Attributes List) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--containers--ulimits))
 - `user` (String)
 
@@ -1115,6 +1155,7 @@ Read-Only:
 - `efs_volume_configuration` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--volumes--efs_volume_configuration))
 - `host` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--volumes--host))
 - `name` (String)
+- `s3_files_volume_configuration` (Attributes) (see [below for nested schema](#nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--volumes--s3_files_volume_configuration))
 
 <a id="nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--volumes--efs_volume_configuration"></a>
 ### Nested Schema for `node_properties.node_range_properties.ecs_properties.task_properties.volumes.efs_volume_configuration`
@@ -1143,6 +1184,17 @@ Read-Only:
 Read-Only:
 
 - `source_path` (String)
+
+
+<a id="nestedatt--node_properties--node_range_properties--ecs_properties--task_properties--volumes--s3_files_volume_configuration"></a>
+### Nested Schema for `node_properties.node_range_properties.ecs_properties.task_properties.volumes.s3_files_volume_configuration`
+
+Read-Only:
+
+- `access_point_arn` (String)
+- `file_system_arn` (String)
+- `root_directory` (String)
+- `transit_encryption_port` (Number)
 
 
 

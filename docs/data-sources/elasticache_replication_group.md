@@ -52,6 +52,8 @@ Data Source schema for AWS::ElastiCache::ReplicationGroup
 - `read_end_point` (Attributes) (see [below for nested schema](#nestedatt--read_end_point))
 - `reader_end_point` (Attributes) The endpoint of the reader node in the replication group. (see [below for nested schema](#nestedatt--reader_end_point))
 - `replicas_per_node_group` (Number) An optional parameter that specifies the number of replica nodes in each node group (shard). Valid values are 0 to 5.
+
+**Note:** Using ReplicasPerNodeGroup with NodeGroupConfiguration results in resource replacement. For online scaling, use ReplicasPerNodeGroup alone.
 - `replication_group_description` (String) A user-created description for the replication group.
 - `replication_group_id` (String) The replication group identifier. This parameter is stored as a lowercase string.
 - `security_group_ids` (List of String) One or more Amazon VPC security groups associated with this replication group.

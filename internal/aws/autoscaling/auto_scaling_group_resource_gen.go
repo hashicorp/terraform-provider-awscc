@@ -115,7 +115,7 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The Availability Zone IDs where the Auto Scaling group can launch instances.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
@@ -125,7 +125,7 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"availability_zone_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Description: "",
+			Description: "The Availability Zone IDs where the Auto Scaling group can launch instances.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/

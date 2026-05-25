@@ -94,6 +94,7 @@ func repositoryAssociationResource(ctx context.Context) (resource.Resource, erro
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
+			// ConnectionArn is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
@@ -138,6 +139,7 @@ func repositoryAssociationResource(ctx context.Context) (resource.Resource, erro
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
+			// Owner is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
@@ -281,6 +283,10 @@ func repositoryAssociationResource(ctx context.Context) (resource.Resource, erro
 		"value":           "Value",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/Owner",
+		"/properties/ConnectionArn",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

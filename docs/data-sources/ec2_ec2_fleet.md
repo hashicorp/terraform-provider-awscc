@@ -51,6 +51,7 @@ Read-Only:
 
 - `launch_template_id` (String)
 - `launch_template_name` (String)
+- `launch_template_specification_user_data` (String)
 - `version` (String)
 
 
@@ -62,9 +63,13 @@ Read-Only:
 - `availability_zone` (String)
 - `availability_zone_id` (String)
 - `block_device_mappings` (Attributes List) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--block_device_mappings))
+- `iam_instance_profile` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--iam_instance_profile))
 - `instance_requirements` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--instance_requirements))
 - `instance_type` (String)
+- `key_name` (String)
 - `max_price` (String)
+- `metadata_options` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--metadata_options))
+- `network_interfaces` (Attributes List) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--network_interfaces))
 - `placement` (Attributes) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--placement))
 - `priority` (Number)
 - `subnet_id` (String)
@@ -93,6 +98,15 @@ Read-Only:
 - `volume_size` (Number)
 - `volume_type` (String)
 
+
+
+<a id="nestedatt--launch_template_configs--overrides--iam_instance_profile"></a>
+### Nested Schema for `launch_template_configs.overrides.iam_instance_profile`
+
+Read-Only:
+
+- `arn` (String)
+- `name` (String)
 
 
 <a id="nestedatt--launch_template_configs--overrides--instance_requirements"></a>
@@ -230,6 +244,54 @@ Read-Only:
 
 - `max` (Number)
 - `min` (Number)
+
+
+
+<a id="nestedatt--launch_template_configs--overrides--metadata_options"></a>
+### Nested Schema for `launch_template_configs.overrides.metadata_options`
+
+Read-Only:
+
+- `http_endpoint` (String)
+- `http_put_response_hop_limit` (Number)
+- `http_tokens` (String)
+
+
+<a id="nestedatt--launch_template_configs--overrides--network_interfaces"></a>
+### Nested Schema for `launch_template_configs.overrides.network_interfaces`
+
+Read-Only:
+
+- `associate_public_ip_address` (Boolean)
+- `delete_on_termination` (Boolean)
+- `description` (String)
+- `device_index` (Number)
+- `groups` (List of String)
+- `interface_type` (String)
+- `ipv_6_address_count` (Number)
+- `ipv_6_addresses` (Attributes List) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--network_interfaces--ipv_6_addresses))
+- `network_card_index` (Number)
+- `network_interface_id` (String)
+- `private_ip_address` (String)
+- `private_ip_addresses` (Attributes List) (see [below for nested schema](#nestedatt--launch_template_configs--overrides--network_interfaces--private_ip_addresses))
+- `secondary_private_ip_address_count` (Number)
+- `subnet_id` (String)
+
+<a id="nestedatt--launch_template_configs--overrides--network_interfaces--ipv_6_addresses"></a>
+### Nested Schema for `launch_template_configs.overrides.network_interfaces.ipv_6_addresses`
+
+Read-Only:
+
+- `ipv_6_address` (String)
+
+
+<a id="nestedatt--launch_template_configs--overrides--network_interfaces--private_ip_addresses"></a>
+### Nested Schema for `launch_template_configs.overrides.network_interfaces.private_ip_addresses`
+
+Read-Only:
+
+- `primary` (Boolean)
+- `private_ip_address` (String)
 
 
 

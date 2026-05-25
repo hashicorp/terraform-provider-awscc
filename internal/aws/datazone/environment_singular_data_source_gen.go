@@ -223,7 +223,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "type": "string"
 		//	  },
 		//	  "maxItems": 20,
-		//	  "minItems": 1,
+		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
 		"glossary_terms": schema.ListAttribute{ /*START ATTRIBUTE*/

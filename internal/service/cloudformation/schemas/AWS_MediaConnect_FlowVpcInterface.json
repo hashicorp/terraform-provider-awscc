@@ -2,6 +2,24 @@
   "typeName": "AWS::MediaConnect::FlowVpcInterface",
   "description": "Resource schema for AWS::MediaConnect::FlowVpcInterface",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-mediaconnect.git",
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
   "properties": {
     "FlowArn": {
       "type": "string",
@@ -34,6 +52,15 @@
       "items": {
         "type": "string"
       }
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Key-value pairs that can be used to tag and organize this VPC network interface.",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
     }
   },
   "additionalProperties": false,
@@ -60,19 +87,26 @@
       "permissions": [
         "iam:PassRole",
         "mediaconnect:DescribeFlow",
-        "mediaconnect:AddFlowVpcInterfaces"
+        "mediaconnect:AddFlowVpcInterfaces",
+        "mediaconnect:TagResource",
+        "mediaconnect:ListTagsForResource"
       ]
     },
     "read": {
       "permissions": [
-        "mediaconnect:DescribeFlow"
+        "mediaconnect:DescribeFlow",
+        "mediaconnect:ListTagsForResource"
       ]
     },
     "update": {
       "permissions": [
+        "iam:PassRole",
         "mediaconnect:DescribeFlow",
         "mediaconnect:AddFlowVpcInterfaces",
-        "mediaconnect:RemoveFlowVpcInterface"
+        "mediaconnect:RemoveFlowVpcInterface",
+        "mediaconnect:TagResource",
+        "mediaconnect:UntagResource",
+        "mediaconnect:ListTagsForResource"
       ]
     },
     "delete": {
@@ -84,7 +118,29 @@
     "list": {
       "permissions": [
         "mediaconnect:DescribeFlow"
-      ]
+      ],
+      "handlerSchema": {
+        "properties": {
+          "FlowArn": {
+            "$ref": "resource-schema.json#/properties/FlowArn"
+          }
+        },
+        "required": [
+          "FlowArn"
+        ]
+      }
     }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "mediaconnect:TagResource",
+      "mediaconnect:UntagResource",
+      "mediaconnect:ListTagsForResource"
+    ]
   }
 }

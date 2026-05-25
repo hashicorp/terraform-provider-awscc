@@ -87,7 +87,7 @@ func billingGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "properties": {
 		//	    "PricingPlanArn": {
 		//	      "description": "ARN of the attached pricing plan",
-		//	      "pattern": "arn:aws(-cn)?:billingconductor::(aws|[0-9]{12}):pricingplan/(BasicPricingPlan|[a-zA-Z0-9]{10})",
+		//	      "pattern": "arn:aws(-cn)?:billingconductor::(aws|[0-9]{12}):pricingplan/(BasicPricingPlan|Passthrough|[a-zA-Z0-9]{10})",
 		//	      "type": "string"
 		//	    }
 		//	  },

@@ -448,7 +448,9 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "ml.r6id.12xlarge",
 		//	                "ml.r6id.16xlarge",
 		//	                "ml.r6id.24xlarge",
-		//	                "ml.r6id.32xlarge"
+		//	                "ml.r6id.32xlarge",
+		//	                "ml.p5.4xlarge",
+		//	                "ml.p6-b200.48xlarge"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -661,7 +663,9 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "ml.r6id.12xlarge",
 		//	                "ml.r6id.16xlarge",
 		//	                "ml.r6id.24xlarge",
-		//	                "ml.r6id.32xlarge"
+		//	                "ml.r6id.32xlarge",
+		//	                "ml.p5.4xlarge",
+		//	                "ml.p6-b200.48xlarge"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -911,7 +915,9 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "ml.r6id.12xlarge",
 		//	                "ml.r6id.16xlarge",
 		//	                "ml.r6id.24xlarge",
-		//	                "ml.r6id.32xlarge"
+		//	                "ml.r6id.32xlarge",
+		//	                "ml.p5.4xlarge",
+		//	                "ml.p6-b200.48xlarge"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -1593,7 +1599,9 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "ml.r6id.12xlarge",
 		//	                "ml.r6id.16xlarge",
 		//	                "ml.r6id.24xlarge",
-		//	                "ml.r6id.32xlarge"
+		//	                "ml.r6id.32xlarge",
+		//	                "ml.p5.4xlarge",
+		//	                "ml.p6-b200.48xlarge"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -2011,7 +2019,9 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "ml.r6id.12xlarge",
 		//	                "ml.r6id.16xlarge",
 		//	                "ml.r6id.24xlarge",
-		//	                "ml.r6id.32xlarge"
+		//	                "ml.r6id.32xlarge",
+		//	                "ml.p5.4xlarge",
+		//	                "ml.p6-b200.48xlarge"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -2224,7 +2234,9 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "ml.r6id.12xlarge",
 		//	                "ml.r6id.16xlarge",
 		//	                "ml.r6id.24xlarge",
-		//	                "ml.r6id.32xlarge"
+		//	                "ml.r6id.32xlarge",
+		//	                "ml.p5.4xlarge",
+		//	                "ml.p6-b200.48xlarge"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -2474,7 +2486,9 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "ml.r6id.12xlarge",
 		//	                "ml.r6id.16xlarge",
 		//	                "ml.r6id.24xlarge",
-		//	                "ml.r6id.32xlarge"
+		//	                "ml.r6id.32xlarge",
+		//	                "ml.p5.4xlarge",
+		//	                "ml.p6-b200.48xlarge"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -2723,7 +2737,9 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "ml.r6id.12xlarge",
 		//	                "ml.r6id.16xlarge",
 		//	                "ml.r6id.24xlarge",
-		//	                "ml.r6id.32xlarge"
+		//	                "ml.r6id.32xlarge",
+		//	                "ml.p5.4xlarge",
+		//	                "ml.p6-b200.48xlarge"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -3043,7 +3059,9 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "ml.r6id.12xlarge",
 		//	              "ml.r6id.16xlarge",
 		//	              "ml.r6id.24xlarge",
-		//	              "ml.r6id.32xlarge"
+		//	              "ml.r6id.32xlarge",
+		//	              "ml.p5.4xlarge",
+		//	              "ml.p6-b200.48xlarge"
 		//	            ],
 		//	            "type": "string"
 		//	          },
@@ -3967,7 +3985,9 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "ml.r6id.12xlarge",
 		//	                "ml.r6id.16xlarge",
 		//	                "ml.r6id.24xlarge",
-		//	                "ml.r6id.32xlarge"
+		//	                "ml.r6id.32xlarge",
+		//	                "ml.p5.4xlarge",
+		//	                "ml.p6-b200.48xlarge"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -4024,7 +4044,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "maxItems": 3,
-		//	      "minItems": 1,
+		//	      "minItems": 0,
 		//	      "type": "array",
 		//	      "uniqueItems": false
 		//	    },

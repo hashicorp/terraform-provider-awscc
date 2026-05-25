@@ -120,6 +120,22 @@ func accountDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "List of parent nodes for the member account. Currently only one parent at a time is supported. Default is root.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Paths
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The paths in the organization where the account exists.",
+		//	  "items": {
+		//	    "pattern": "^(o-[a-z0-9]{10,32}/r-[0-9a-z]{4,32}(/ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})*(/\\d{12})*)/",
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"paths": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The paths in the organization where the account exists.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RoleName
 		// CloudFormation resource type schema:
 		//
@@ -246,6 +262,7 @@ func accountDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"joined_timestamp": "JoinedTimestamp",
 		"key":              "Key",
 		"parent_ids":       "ParentIds",
+		"paths":            "Paths",
 		"role_name":        "RoleName",
 		"state":            "State",
 		"status":           "Status",

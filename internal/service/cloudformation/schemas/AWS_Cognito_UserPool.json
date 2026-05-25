@@ -6,7 +6,7 @@
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": false,
+    "cloudFormationSystemTags": true,
     "tagProperty": "/properties/UserPoolTags",
     "permissions": [
       "cognito-idp:ListTagsForResource",
@@ -484,6 +484,13 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 9
+    },
+    "WebAuthnFactorConfiguration": {
+      "type": "string",
+      "enum": [
+        "SINGLE_FACTOR",
+        "MULTI_FACTOR_WITH_USER_VERIFICATION"
+      ]
     },
     "Schema": {
       "type": "array",

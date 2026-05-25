@@ -254,14 +254,34 @@ Optional:
 
 Optional:
 
+- `efs_access_point` (Attributes) Configuration for EFS access point filesystem (see [below for nested schema](#nestedatt--filesystem_configurations--efs_access_point))
+- `s3_files_access_point` (Attributes) Configuration for S3 Files access point filesystem (see [below for nested schema](#nestedatt--filesystem_configurations--s3_files_access_point))
 - `session_storage` (Attributes) Configuration for session storage (see [below for nested schema](#nestedatt--filesystem_configurations--session_storage))
+
+<a id="nestedatt--filesystem_configurations--efs_access_point"></a>
+### Nested Schema for `filesystem_configurations.efs_access_point`
+
+Optional:
+
+- `access_point_arn` (String) ARN of the EFS access point
+- `mount_path` (String) Mount path for filesystem configuration
+
+
+<a id="nestedatt--filesystem_configurations--s3_files_access_point"></a>
+### Nested Schema for `filesystem_configurations.s3_files_access_point`
+
+Optional:
+
+- `access_point_arn` (String) ARN of the S3 Files access point
+- `mount_path` (String) Mount path for filesystem configuration
+
 
 <a id="nestedatt--filesystem_configurations--session_storage"></a>
 ### Nested Schema for `filesystem_configurations.session_storage`
 
 Optional:
 
-- `mount_path` (String) Mount path for session storage
+- `mount_path` (String) Mount path for filesystem configuration
 
 
 

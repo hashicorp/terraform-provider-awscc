@@ -17,24 +17,25 @@ Resource Type definition for AWS::ApiGatewayV2::Stage
 
 ### Required
 
-- `api_id` (String) The API identifier.
-- `stage_name` (String) The stage name. Stage names can contain only alphanumeric characters, hyphens, and underscores, or be $default. Maximum length is 128 characters.
+- `api_id` (String)
+- `stage_name` (String)
 
 ### Optional
 
-- `access_log_settings` (Attributes) Settings for logging access in this stage. (see [below for nested schema](#nestedatt--access_log_settings))
-- `auto_deploy` (Boolean) Specifies whether updates to an API automatically trigger a new deployment. The default value is false.
-- `client_certificate_id` (String) The identifier of a client certificate for a Stage. Supported only for WebSocket APIs.
-- `default_route_settings` (Attributes) The default route settings for the stage. (see [below for nested schema](#nestedatt--default_route_settings))
-- `deployment_id` (String) The deployment identifier for the API stage. Can't be updated if autoDeploy is enabled.
-- `description` (String) The description for the API stage.
-- `route_settings` (String) Route settings for the stage.
-- `stage_variables` (String) A map that defines the stage variables for a Stage. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&=,]+.
-- `tags` (String) The collection of tags. Each tag element is associated with a given resource.
+- `access_log_settings` (Attributes) (see [below for nested schema](#nestedatt--access_log_settings))
+- `auto_deploy` (Boolean)
+- `client_certificate_id` (String)
+- `default_route_settings` (Attributes) (see [below for nested schema](#nestedatt--default_route_settings))
+- `deployment_id` (String)
+- `description` (String)
+- `route_settings` (String)
+- `stage_variables` (String)
+- `tags` (String)
 
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+- `stage_id` (String)
 
 <a id="nestedatt--access_log_settings"></a>
 ### Nested Schema for `access_log_settings`
@@ -66,8 +67,7 @@ In Terraform v1.12.0 and later, the [`import` block](https://developer.hashicorp
 import {
   to = awscc_apigatewayv2_stage.example
   identity = {
-    api_id     = "api_id"
-    stage_name = "stage_name"
+    id = "id"
   }
 }
 ```
@@ -77,8 +77,7 @@ import {
 
 #### Required
 
-- `api_id` (String) The API identifier
-- `stage_name` (String) The stage name
+- `id` (String)
 
 #### Optional
 
@@ -90,12 +89,12 @@ In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.
 ```terraform
 import {
   to = awscc_apigatewayv2_stage.example
-  id = "api_id|stage_name"
+  id = "id"
 }
 ```
 
 The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
-$ terraform import awscc_apigatewayv2_stage.example "api_id|stage_name"
+$ terraform import awscc_apigatewayv2_stage.example "id"
 ```

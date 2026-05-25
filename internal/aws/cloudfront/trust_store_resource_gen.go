@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -322,6 +323,21 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: UseClientCertificateOCSPEndpoint
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A boolean. When true, performs real-time certificate revocation checks by querying the OCSP endpoint specified within the client certificate.",
+		//	  "type": "boolean"
+		//	}
+		"use_client_certificate_ocsp_endpoint": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A boolean. When true, performs real-time certificate revocation checks by querying the OCSP endpoint specified within the client certificate.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -351,21 +367,22 @@ func trustStoreResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.IsGlobalResourceType(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                                "Arn",
-		"bucket":                             "Bucket",
-		"ca_certificates_bundle_s3_location": "CaCertificatesBundleS3Location",
-		"ca_certificates_bundle_source":      "CaCertificatesBundleSource",
-		"e_tag":                              "ETag",
-		"key":                                "Key",
-		"last_modified_time":                 "LastModifiedTime",
-		"name":                               "Name",
-		"number_of_ca_certificates":          "NumberOfCaCertificates",
-		"region":                             "Region",
-		"status":                             "Status",
-		"tags":                               "Tags",
-		"trust_store_id":                     "Id",
-		"value":                              "Value",
-		"version":                            "Version",
+		"arn":                                  "Arn",
+		"bucket":                               "Bucket",
+		"ca_certificates_bundle_s3_location":   "CaCertificatesBundleS3Location",
+		"ca_certificates_bundle_source":        "CaCertificatesBundleSource",
+		"e_tag":                                "ETag",
+		"key":                                  "Key",
+		"last_modified_time":                   "LastModifiedTime",
+		"name":                                 "Name",
+		"number_of_ca_certificates":            "NumberOfCaCertificates",
+		"region":                               "Region",
+		"status":                               "Status",
+		"tags":                                 "Tags",
+		"trust_store_id":                       "Id",
+		"use_client_certificate_ocsp_endpoint": "UseClientCertificateOCSPEndpoint",
+		"value":                                "Value",
+		"version":                              "Version",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

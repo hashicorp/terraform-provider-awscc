@@ -306,12 +306,55 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 		//	            }
 		//	          },
 		//	          "type": "object"
+		//	        },
+		//	        "OnBehalfOfTokenExchangeConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration for on-behalf-of token exchange",
+		//	          "properties": {
+		//	            "GrantType": {
+		//	              "description": "The grant type for on-behalf-of token exchange",
+		//	              "enum": [
+		//	                "TOKEN_EXCHANGE",
+		//	                "JWT_AUTHORIZATION_GRANT"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "TokenExchangeGrantTypeConfig": {
+		//	              "additionalProperties": false,
+		//	              "description": "Configuration for RFC 8693 Token Exchange",
+		//	              "properties": {
+		//	                "ActorTokenContent": {
+		//	                  "description": "The actor token content type",
+		//	                  "enum": [
+		//	                    "NONE",
+		//	                    "M2M",
+		//	                    "AWS_IAM_ID_TOKEN_JWT"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "ActorTokenScopes": {
+		//	                  "description": "The actor token scopes. Only valid when ActorTokenContent is M2M.",
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "ActorTokenContent"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "GrantType"
+		//	          ],
+		//	          "type": "object"
 		//	        }
 		//	      },
 		//	      "required": [
-		//	        "OauthDiscovery",
-		//	        "ClientId",
-		//	        "ClientSecret"
+		//	        "OauthDiscovery"
 		//	      ],
 		//	      "type": "object"
 		//	    },
@@ -530,7 +573,6 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 256),
-								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -543,7 +585,6 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 2048),
-								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -629,6 +670,72 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 							Validators: []validator.Object{ /*START VALIDATORS*/
 								fwvalidators.NotNullObject(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: OnBehalfOfTokenExchangeConfig
+						"on_behalf_of_token_exchange_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: GrantType
+								"grant_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The grant type for on-behalf-of token exchange",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"TOKEN_EXCHANGE",
+											"JWT_AUTHORIZATION_GRANT",
+										),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: TokenExchangeGrantTypeConfig
+								"token_exchange_grant_type_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ActorTokenContent
+										"actor_token_content": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The actor token content type",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"NONE",
+													"M2M",
+													"AWS_IAM_ID_TOKEN_JWT",
+												),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: ActorTokenScopes
+										"actor_token_scopes": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "The actor token scopes. Only valid when ActorTokenContent is M2M.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												generic.Multiset(),
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Configuration for RFC 8693 Token Exchange",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for on-behalf-of token exchange",
+							Optional:    true,
+							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
@@ -989,6 +1096,51 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 		//	        }
 		//	      },
 		//	      "type": "object"
+		//	    },
+		//	    "OnBehalfOfTokenExchangeConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration for on-behalf-of token exchange",
+		//	      "properties": {
+		//	        "GrantType": {
+		//	          "description": "The grant type for on-behalf-of token exchange",
+		//	          "enum": [
+		//	            "TOKEN_EXCHANGE",
+		//	            "JWT_AUTHORIZATION_GRANT"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "TokenExchangeGrantTypeConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration for RFC 8693 Token Exchange",
+		//	          "properties": {
+		//	            "ActorTokenContent": {
+		//	              "description": "The actor token content type",
+		//	              "enum": [
+		//	                "NONE",
+		//	                "M2M",
+		//	                "AWS_IAM_ID_TOKEN_JWT"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "ActorTokenScopes": {
+		//	              "description": "The actor token scopes. Only valid when ActorTokenContent is M2M.",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ActorTokenContent"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "GrantType"
+		//	      ],
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -1040,6 +1192,39 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Discovery information for an OAuth2 provider",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: OnBehalfOfTokenExchangeConfig
+				"on_behalf_of_token_exchange_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: GrantType
+						"grant_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The grant type for on-behalf-of token exchange",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TokenExchangeGrantTypeConfig
+						"token_exchange_grant_type_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ActorTokenContent
+								"actor_token_content": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The actor token content type",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ActorTokenScopes
+								"actor_token_scopes": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "The actor token scopes. Only valid when ActorTokenContent is M2M.",
+									Computed:    true,
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										generic.Multiset(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for RFC 8693 Token Exchange",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for on-behalf-of token exchange",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -1151,6 +1336,8 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"actor_token_content":                "ActorTokenContent",
+		"actor_token_scopes":                 "ActorTokenScopes",
 		"atlassian_oauth_2_provider_config":  "AtlassianOauth2ProviderConfig",
 		"authorization_endpoint":             "AuthorizationEndpoint",
 		"authorization_server_metadata":      "AuthorizationServerMetadata",
@@ -1165,6 +1352,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 		"discovery_url":                      "DiscoveryUrl",
 		"github_oauth_2_provider_config":     "GithubOauth2ProviderConfig",
 		"google_oauth_2_provider_config":     "GoogleOauth2ProviderConfig",
+		"grant_type":                         "GrantType",
 		"included_oauth_2_provider_config":   "IncludedOauth2ProviderConfig",
 		"issuer":                             "Issuer",
 		"key":                                "Key",
@@ -1175,6 +1363,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 		"oauth_2_provider_config_input":      "Oauth2ProviderConfigInput",
 		"oauth_2_provider_config_output":     "Oauth2ProviderConfigOutput",
 		"oauth_discovery":                    "OauthDiscovery",
+		"on_behalf_of_token_exchange_config": "OnBehalfOfTokenExchangeConfig",
 		"response_types":                     "ResponseTypes",
 		"salesforce_oauth_2_provider_config": "SalesforceOauth2ProviderConfig",
 		"secret_arn":                         "SecretArn",
@@ -1182,6 +1371,7 @@ func oAuth2CredentialProviderResource(ctx context.Context) (resource.Resource, e
 		"tags":                               "Tags",
 		"tenant_id":                          "TenantId",
 		"token_endpoint":                     "TokenEndpoint",
+		"token_exchange_grant_type_config":   "TokenExchangeGrantTypeConfig",
 		"value":                              "Value",
 	})
 

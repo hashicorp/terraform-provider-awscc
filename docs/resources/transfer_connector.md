@@ -108,6 +108,7 @@ resource "awscc_transfer_connector" "example" {
 - `as_2_config` (Attributes) Configuration for an AS2 connector. (see [below for nested schema](#nestedatt--as_2_config))
 - `egress_config` (Attributes) Egress configuration for the connector. (see [below for nested schema](#nestedatt--egress_config))
 - `egress_type` (String) Specifies the egress type for the connector.
+- `ip_address_type` (String) IP address type for Connector
 - `logging_role` (String) Specifies the logging role for the connector.
 - `security_policy_name` (String) Security policy for SFTP Connector
 - `sftp_config` (Attributes) Configuration for an SFTP connector. (see [below for nested schema](#nestedatt--sftp_config))

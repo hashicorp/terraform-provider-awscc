@@ -1,6 +1,6 @@
 {
   "typeName": "AWS::Deadline::QueueEnvironment",
-  "description": "Definition of AWS::Deadline::QueueEnvironment Resource Type",
+  "description": "Resource Type definition for AWS::Deadline::QueueEnvironment",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-deadline",
   "definitions": {
     "EnvironmentTemplateType": {

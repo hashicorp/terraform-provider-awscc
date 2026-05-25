@@ -138,8 +138,8 @@
   "tagging": {
     "taggable": true,
     "tagOnCreate": true,
-    "tagUpdatable": false,
-    "cloudFormationSystemTags": false,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
     "tagProperty": "/properties/Tags",
     "permissions": [
       "Batch:TagResource",
@@ -165,7 +165,6 @@
     "/properties/JobQueueArn"
   ],
   "createOnlyProperties": [
-    "/properties/Tags",
     "/properties/JobQueueName",
     "/properties/JobQueueType"
   ],
@@ -190,7 +189,7 @@
         "Batch:DescribeJobQueues",
         "Batch:UpdateJobQueue",
         "Batch:TagResource",
-        "Batch:UnTagResource"
+        "Batch:UntagResource"
       ]
     },
     "delete": {

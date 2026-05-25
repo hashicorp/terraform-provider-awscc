@@ -35,14 +35,18 @@ Data Source schema for AWS::DevOpsAgent::Association
 Read-Only:
 
 - `aws` (Attributes) AWS association for 'monitor' account (see [below for nested schema](#nestedatt--configuration--aws))
+- `azure` (Attributes) Azure subscription integration configuration (see [below for nested schema](#nestedatt--configuration--azure))
 - `dynatrace` (Attributes) Dynatrace monitoring configuration (see [below for nested schema](#nestedatt--configuration--dynatrace))
 - `event_channel` (Attributes) EventChannelconfiguration (see [below for nested schema](#nestedatt--configuration--event_channel))
 - `git_hub` (Attributes) GitHub repository integration configuration (see [below for nested schema](#nestedatt--configuration--git_hub))
 - `git_lab` (Attributes) GitLab project integration configuration (see [below for nested schema](#nestedatt--configuration--git_lab))
 - `mcp_server` (Attributes) MCP server configuration (see [below for nested schema](#nestedatt--configuration--mcp_server))
 - `mcp_server_datadog` (Attributes) Datadog MCP server configuration (see [below for nested schema](#nestedatt--configuration--mcp_server_datadog))
+- `mcp_server_grafana` (Attributes) Grafana MCP server configuration (see [below for nested schema](#nestedatt--configuration--mcp_server_grafana))
 - `mcp_server_new_relic` (Attributes) NewRelic MCP server configuration (see [below for nested schema](#nestedatt--configuration--mcp_server_new_relic))
+- `mcp_server_sig_v4` (Attributes) SigV4-authenticated MCP server configuration (see [below for nested schema](#nestedatt--configuration--mcp_server_sig_v4))
 - `mcp_server_splunk` (Attributes) Splunk MCP server configuration (see [below for nested schema](#nestedatt--configuration--mcp_server_splunk))
+- `pager_duty` (Attributes) PagerDuty integration configuration (see [below for nested schema](#nestedatt--configuration--pager_duty))
 - `service_now` (Attributes) ServiceNow integration configuration (see [below for nested schema](#nestedatt--configuration--service_now))
 - `slack` (Attributes) Slack workspace integration configuration (see [below for nested schema](#nestedatt--configuration--slack))
 - `source_aws` (Attributes) AWS association for 'source' account (see [below for nested schema](#nestedatt--configuration--source_aws))
@@ -76,6 +80,14 @@ Read-Only:
 - `key` (String)
 - `value` (String)
 
+
+
+<a id="nestedatt--configuration--azure"></a>
+### Nested Schema for `configuration.azure`
+
+Read-Only:
+
+- `subscription_id` (String) Azure subscription ID corresponding to provided resources
 
 
 <a id="nestedatt--configuration--dynatrace"></a>
@@ -141,6 +153,16 @@ Read-Only:
 - `name` (String) The name of the MCP server
 
 
+<a id="nestedatt--configuration--mcp_server_grafana"></a>
+### Nested Schema for `configuration.mcp_server_grafana`
+
+Read-Only:
+
+- `enable_webhook_updates` (Boolean) When set to true, enables the Agent Space to create and update webhooks for receiving notifications and events from the service
+- `endpoint` (String) MCP server endpoint URL
+- `tools` (List of String) List of tool categories to enable for the Grafana MCP server
+
+
 <a id="nestedatt--configuration--mcp_server_new_relic"></a>
 ### Nested Schema for `configuration.mcp_server_new_relic`
 
@@ -148,6 +170,14 @@ Read-Only:
 
 - `account_id` (String) New Relic Account ID
 - `endpoint` (String) MCP server endpoint URL (e.g., https://mcp.newrelic.com/mcp/)
+
+
+<a id="nestedatt--configuration--mcp_server_sig_v4"></a>
+### Nested Schema for `configuration.mcp_server_sig_v4`
+
+Read-Only:
+
+- `tools` (List of String) List of MCP tools available for the association
 
 
 <a id="nestedatt--configuration--mcp_server_splunk"></a>
@@ -159,6 +189,16 @@ Read-Only:
 - `enable_webhook_updates` (Boolean) When set to true, enables the Agent Space to create and update webhooks for receiving notifications and events from the service
 - `endpoint` (String) MCP server endpoint URL
 - `name` (String) The name of the MCP server
+
+
+<a id="nestedatt--configuration--pager_duty"></a>
+### Nested Schema for `configuration.pager_duty`
+
+Read-Only:
+
+- `customer_email` (String) Email to be used in PagerDuty API header
+- `enable_webhook_updates` (Boolean) When set to true, enables the Agent Space to create and update webhooks for receiving notifications and events from the service
+- `services` (List of String) List of PagerDuty service IDs available for the association
 
 
 <a id="nestedatt--configuration--service_now"></a>

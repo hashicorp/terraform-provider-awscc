@@ -50,8 +50,8 @@ func authPolicyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "enum": [
-		//	    "ACTIVE",
-		//	    "INACTIVE"
+		//	    "Active",
+		//	    "Inactive"
 		//	  ],
 		//	  "type": "string"
 		//	}

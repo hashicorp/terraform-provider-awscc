@@ -72,11 +72,13 @@
         "iam:PassRole",
         "iam:CreateServiceLinkedRole",
         "imagebuilder:GetImageRecipe",
+        "imagebuilder:GetContainerRecipe",
         "imagebuilder:GetInfrastructureConfiguration",
         "imagebuilder:GetDistributionConfiguration",
         "imagebuilder:GetWorkflow",
         "imagebuilder:GetImage",
         "imagebuilder:CreateImage",
+        "imagebuilder:StartImagePipelineExecution",
         "imagebuilder:TagResource",
         "inspector2:BatchGetAccountStatus"
       ],

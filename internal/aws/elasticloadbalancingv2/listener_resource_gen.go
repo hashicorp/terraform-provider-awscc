@@ -1049,7 +1049,7 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "boolean"
 		//	    },
 		//	    "Mode": {
-		//	      "description": "The client certificate handling method. Options are ``off``, ``passthrough`` or ``verify``. The default value is ``off``.",
+		//	      "description": "The client certificate handling method. Options are ``off``, ``passthrough`` or ``verify``. The default value on initial resource creation is ``off``. After mutual authentication is turned on, you must explicitly set the ``Mode`` to ``off`` to turn it off; removing the property from your template will not turn it off.",
 		//	      "type": "string"
 		//	    },
 		//	    "TrustStoreArn": {
@@ -1081,7 +1081,7 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Mode
 				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The client certificate handling method. Options are ``off``, ``passthrough`` or ``verify``. The default value is ``off``.",
+					Description: "The client certificate handling method. Options are ``off``, ``passthrough`` or ``verify``. The default value on initial resource creation is ``off``. After mutual authentication is turned on, you must explicitly set the ``Mode`` to ``off`` to turn it off; removing the property from your template will not turn it off.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

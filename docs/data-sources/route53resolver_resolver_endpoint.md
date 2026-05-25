@@ -26,9 +26,11 @@ Data Source schema for AWS::Route53Resolver::ResolverEndpoint
 - INBOUND: allows DNS queries to your VPC from your network 
 - OUTBOUND: allows DNS queries from your VPC to your network 
 - INBOUND_DELEGATION: allows DNS queries to your VPC from your network with authoritative answers from private hosted zones
+- `dns_64_enabled` (Boolean) Specifies whether DNS64 is enabled for the Inbound Resolver Endpoint. When set to true, if a DNS AAAA query is made for a domain that has only an A (IPv4) record, the resolver automatically synthesizes an AAAA (IPv6) response by embedding the IPv4 address into the well-known prefix 64:ff9b::/96. Default is false.
 - `host_vpc_id` (String) The ID of the VPC that you want to create the resolver endpoint in.
 - `ip_address_count` (String) The number of IP addresses that the resolver endpoint can use for DNS queries.
 - `ip_addresses` (Attributes List) The subnets and IP addresses in your VPC that DNS queries originate from (for outbound endpoints) or that you forward DNS queries to (for inbound endpoints). The subnet ID uniquely identifies a VPC. (see [below for nested schema](#nestedatt--ip_addresses))
+- `ipv_6_internet_access_enabled` (Boolean) Specifies whether IPv6 Internet Gateway access is enabled through the Outbound Resolver Endpoint. When set to true, this property allows your Endpoint ENIs to reach public IPv6 target nameservers through an internet gateway. Default is false.
 - `name` (String) A friendly name that lets you easily find a configuration in the Resolver dashboard in the Route 53 console.
 - `outpost_arn` (String) The ARN (Amazon Resource Name) for the Outpost.
 - `preferred_instance_type` (String) The Amazon EC2 instance type.

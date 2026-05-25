@@ -134,7 +134,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "BakeTimeInMinutes": {
-		//	      "description": "The duration when both blue and green service revisions are running simultaneously after the production traffic has shifted.\n The following rules apply when you don't specify a value:\n  +  For rolling deployments, the value is set to 3 hours (180 minutes).\n  +  When you use an external deployment controller (``EXTERNAL``), or the ACD blue/green deployment controller (``CODE_DEPLOY``), the value is set to 3 hours (180 minutes).\n  +  For all other cases, the value is set to 36 hours (2160 minutes).",
+		//	      "description": "The duration waiting before terminating the previous service revision and marking a deployment complete.\n The following rules apply when you don't specify a value:\n  +  For blue/green, linear, and canary deployments, the value is set to 15 minutes.\n  +  For rolling deployments, there is no bake time set by default.\n  +  The external deployment controller (``EXTERNAL``) and the ACD blue/green deployment controller (``CODE_DEPLOY``) do not support the ``BakeTimeInMinutes`` parameter.\n  \n  If you provide a bake time for a rolling deployment, the CloudFormation handler timeout is increased to the maximum of 36 hours, matching the timeout for blue/green, linear, and canary deployments.",
 		//	      "maximum": 1440,
 		//	      "minimum": 0,
 		//	      "type": "integer"
@@ -200,6 +200,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "POST_SCALE_UP",
 		//	                "TEST_TRAFFIC_SHIFT",
 		//	                "POST_TEST_TRAFFIC_SHIFT",
+		//	                "PRE_PRODUCTION_TRAFFIC_SHIFT",
 		//	                "PRODUCTION_TRAFFIC_SHIFT",
 		//	                "POST_PRODUCTION_TRAFFIC_SHIFT"
 		//	              ],
@@ -211,11 +212,36 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "RoleArn": {
 		//	            "description": "The Amazon Resource Name (ARN) of the IAM role that grants Amazon ECS permission to call Lambda functions on your behalf.\n For more information, see [Permissions required for Lambda functions in Amazon ECS blue/green deployments](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/blue-green-permissions.html) in the *Amazon Elastic Container Service Developer Guide*.",
 		//	            "type": "string"
+		//	          },
+		//	          "TargetType": {
+		//	            "description": "",
+		//	            "enum": [
+		//	              "AWS_LAMBDA",
+		//	              "PAUSE"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "TimeoutConfiguration": {
+		//	            "additionalProperties": false,
+		//	            "description": "",
+		//	            "properties": {
+		//	              "Action": {
+		//	                "enum": [
+		//	                  "ROLLBACK",
+		//	                  "CONTINUE"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "TimeoutInMinutes": {
+		//	                "maximum": 20160,
+		//	                "minimum": 1,
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "type": "object"
 		//	          }
 		//	        },
 		//	        "required": [
-		//	          "HookTargetArn",
-		//	          "RoleArn",
 		//	          "LifecycleStages"
 		//	        ],
 		//	        "type": "object"
@@ -289,7 +315,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: BakeTimeInMinutes
 				"bake_time_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The duration when both blue and green service revisions are running simultaneously after the production traffic has shifted.\n The following rules apply when you don't specify a value:\n  +  For rolling deployments, the value is set to 3 hours (180 minutes).\n  +  When you use an external deployment controller (``EXTERNAL``), or the ACD blue/green deployment controller (``CODE_DEPLOY``), the value is set to 3 hours (180 minutes).\n  +  For all other cases, the value is set to 36 hours (2160 minutes).",
+					Description: "The duration waiting before terminating the previous service revision and marking a deployment complete.\n The following rules apply when you don't specify a value:\n  +  For blue/green, linear, and canary deployments, the value is set to 15 minutes.\n  +  For rolling deployments, there is no bake time set by default.\n  +  The external deployment controller (``EXTERNAL``) and the ACD blue/green deployment controller (``CODE_DEPLOY``) do not support the ``BakeTimeInMinutes`` parameter.\n  \n  If you provide a bake time for a rolling deployment, the CloudFormation handler timeout is increased to the maximum of 36 hours, matching the timeout for blue/green, linear, and canary deployments.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: CanaryConfiguration
@@ -349,6 +375,26 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 							// Property: RoleArn
 							"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The Amazon Resource Name (ARN) of the IAM role that grants Amazon ECS permission to call Lambda functions on your behalf.\n For more information, see [Permissions required for Lambda functions in Amazon ECS blue/green deployments](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/blue-green-permissions.html) in the *Amazon Elastic Container Service Developer Guide*.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: TargetType
+							"target_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: TimeoutConfiguration
+							"timeout_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Action
+									"action": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: TimeoutInMinutes
+									"timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -1425,7 +1471,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "type": "boolean"
 		//	          },
 		//	          "FilesystemType": {
-		//	            "description": "The filesystem type for the volume. For volumes created from a snapshot, you must specify the same filesystem type that the volume was using when the snapshot was created. If there is a filesystem type mismatch, the tasks will fail to start.\n The available Linux filesystem types are\u2028 ``ext3``, ``ext4``, and ``xfs``. If no value is specified, the ``xfs`` filesystem type is used by default.\n The available Windows filesystem types are ``NTFS``.",
+		//	            "description": "The filesystem type for the volume. For volumes created from a snapshot, you must specify the same filesystem type that the volume was using when the snapshot was created. If there is a filesystem type mismatch, the tasks will fail to start.\n The available Linux filesystem types are ``ext3``, ``ext4``, and ``xfs``. If no value is specified, the ``xfs`` filesystem type is used by default.\n The available Windows filesystem types are ``NTFS``.",
 		//	            "type": "string"
 		//	          },
 		//	          "Iops": {
@@ -1455,7 +1501,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "description": "The tag specifications of an Amazon EBS volume.",
 		//	              "properties": {
 		//	                "PropagateTags": {
-		//	                  "description": "Determines whether to propagate the tags from the task definition to \u2028the Amazon EBS volume. Tags can only propagate to a ``SERVICE`` specified in \u2028``ServiceVolumeConfiguration``. If no value is specified, the tags aren't \u2028propagated.",
+		//	                  "description": "Determines whether to propagate the tags from the task definition to the Amazon EBS volume. Tags can only propagate to a ``SERVICE`` specified in ``ServiceVolumeConfiguration``. If no value is specified, the tags aren't propagated.",
 		//	                  "enum": [
 		//	                    "SERVICE",
 		//	                    "TASK_DEFINITION"
@@ -1536,7 +1582,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: FilesystemType
 							"filesystem_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The filesystem type for the volume. For volumes created from a snapshot, you must specify the same filesystem type that the volume was using when the snapshot was created. If there is a filesystem type mismatch, the tasks will fail to start.\n The available Linux filesystem types are\u2028 ``ext3``, ``ext4``, and ``xfs``. If no value is specified, the ``xfs`` filesystem type is used by default.\n The available Windows filesystem types are ``NTFS``.",
+								Description: "The filesystem type for the volume. For volumes created from a snapshot, you must specify the same filesystem type that the volume was using when the snapshot was created. If there is a filesystem type mismatch, the tasks will fail to start.\n The available Linux filesystem types are ``ext3``, ``ext4``, and ``xfs``. If no value is specified, the ``xfs`` filesystem type is used by default.\n The available Windows filesystem types are ``NTFS``.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Iops
@@ -1570,7 +1616,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: PropagateTags
 										"propagate_tags": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Determines whether to propagate the tags from the task definition to \u2028the Amazon EBS volume. Tags can only propagate to a ``SERVICE`` specified in \u2028``ServiceVolumeConfiguration``. If no value is specified, the tags aren't \u2028propagated.",
+											Description: "Determines whether to propagate the tags from the task definition to the Amazon EBS volume. Tags can only propagate to a ``SERVICE`` specified in ``ServiceVolumeConfiguration``. If no value is specified, the tags aren't propagated.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 										// Property: ResourceType
@@ -1645,7 +1691,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "RoleArn": {
-		//	        "description": "The ARN of the IAM role to associate with this VPC Lattice configuration. This is the Amazon ECS\u2028 infrastructure IAM role that is used to manage your VPC Lattice infrastructure.",
+		//	        "description": "The ARN of the IAM role to associate with this VPC Lattice configuration. This is the Amazon ECS infrastructure IAM role that is used to manage your VPC Lattice infrastructure.",
 		//	        "type": "string"
 		//	      },
 		//	      "TargetGroupArn": {
@@ -1672,7 +1718,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: RoleArn
 					"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The ARN of the IAM role to associate with this VPC Lattice configuration. This is the Amazon ECS\u2028 infrastructure IAM role that is used to manage your VPC Lattice infrastructure.",
+						Description: "The ARN of the IAM role to associate with this VPC Lattice configuration. This is the Amazon ECS infrastructure IAM role that is used to manage your VPC Lattice infrastructure.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: TargetGroupArn
@@ -1703,6 +1749,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_log_configuration":          "AccessLogConfiguration",
+		"action":                            "Action",
 		"advanced_configuration":            "AdvancedConfiguration",
 		"alarm_names":                       "AlarmNames",
 		"alarms":                            "Alarms",
@@ -1798,11 +1845,14 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tag_specifications":                "TagSpecifications",
 		"tags":                              "Tags",
 		"target_group_arn":                  "TargetGroupArn",
+		"target_type":                       "TargetType",
 		"task_definition":                   "TaskDefinition",
 		"test_listener_rule":                "TestListenerRule",
 		"test_traffic_rules":                "TestTrafficRules",
 		"throughput":                        "Throughput",
 		"timeout":                           "Timeout",
+		"timeout_configuration":             "TimeoutConfiguration",
+		"timeout_in_minutes":                "TimeoutInMinutes",
 		"tls":                               "Tls",
 		"type":                              "Type",
 		"value":                             "Value",

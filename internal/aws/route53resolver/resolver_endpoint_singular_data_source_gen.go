@@ -45,6 +45,17 @@ func resolverEndpointDataSource(ctx context.Context) (datasource.DataSource, err
 			Description: "Indicates whether the Resolver endpoint allows inbound or outbound DNS queries:\n- INBOUND: allows DNS queries to your VPC from your network \n- OUTBOUND: allows DNS queries from your VPC to your network \n- INBOUND_DELEGATION: allows DNS queries to your VPC from your network with authoritative answers from private hosted zones",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Dns64Enabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies whether DNS64 is enabled for the Inbound Resolver Endpoint. When set to true, if a DNS AAAA query is made for a domain that has only an A (IPv4) record, the resolver automatically synthesizes an AAAA (IPv6) response by embedding the IPv4 address into the well-known prefix 64:ff9b::/96. Default is false.",
+		//	  "type": "boolean"
+		//	}
+		"dns_64_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether DNS64 is enabled for the Inbound Resolver Endpoint. When set to true, if a DNS AAAA query is made for a domain that has only an A (IPv4) record, the resolver automatically synthesizes an AAAA (IPv6) response by embedding the IPv4 address into the well-known prefix 64:ff9b::/96. Default is false.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HostVPCId
 		// CloudFormation resource type schema:
 		//
@@ -118,6 +129,17 @@ func resolverEndpointDataSource(ctx context.Context) (datasource.DataSource, err
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "The subnets and IP addresses in your VPC that DNS queries originate from (for outbound endpoints) or that you forward DNS queries to (for inbound endpoints). The subnet ID uniquely identifies a VPC.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Ipv6InternetAccessEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies whether IPv6 Internet Gateway access is enabled through the Outbound Resolver Endpoint. When set to true, this property allows your Endpoint ENIs to reach public IPv6 target nameservers through an internet gateway. Default is false.",
+		//	  "type": "boolean"
+		//	}
+		"ipv_6_internet_access_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Specifies whether IPv6 Internet Gateway access is enabled through the Outbound Resolver Endpoint. When set to true, this property allows your Endpoint ENIs to reach public IPv6 target nameservers through an internet gateway. Default is false.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -300,11 +322,13 @@ func resolverEndpointDataSource(ctx context.Context) (datasource.DataSource, err
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                                "Arn",
 		"direction":                          "Direction",
+		"dns_64_enabled":                     "Dns64Enabled",
 		"host_vpc_id":                        "HostVPCId",
 		"ip":                                 "Ip",
 		"ip_address_count":                   "IpAddressCount",
 		"ip_addresses":                       "IpAddresses",
 		"ipv_6":                              "Ipv6",
+		"ipv_6_internet_access_enabled":      "Ipv6InternetAccessEnabled",
 		"key":                                "Key",
 		"name":                               "Name",
 		"outpost_arn":                        "OutpostArn",

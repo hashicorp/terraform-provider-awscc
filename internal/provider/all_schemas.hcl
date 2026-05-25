@@ -284,7 +284,8 @@ resource_schema "aws_apigatewayv2_route_response" {
 }
 
 resource_schema "aws_apigatewayv2_stage" {
-  cloudformation_type_name = "AWS::ApiGatewayV2::Stage"
+  cloudformation_type_name               = "AWS::ApiGatewayV2::Stage"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_apigatewayv2_vpc_link" {
@@ -751,6 +752,10 @@ resource_schema "aws_bedrockagentcore_o_auth_2_credential_provider" {
   cloudformation_type_name = "AWS::BedrockAgentCore::OAuth2CredentialProvider"
 }
 
+resource_schema "aws_bedrockagentcore_payment_credential_provider" {
+  cloudformation_type_name = "AWS::BedrockAgentCore::PaymentCredentialProvider"
+}
+
 resource_schema "aws_bedrockagentcore_policy" {
   cloudformation_type_name               = "AWS::BedrockAgentCore::Policy"
   suppress_plural_data_source_generation = true
@@ -890,6 +895,14 @@ resource_schema "aws_chatbot_microsoft_teams_channel_configuration" {
 
 resource_schema "aws_chatbot_slack_channel_configuration" {
   cloudformation_type_name = "AWS::Chatbot::SlackChannelConfiguration"
+}
+
+resource_schema "aws_chime_app_instance" {
+  cloudformation_type_name = "AWS::Chime::AppInstance"
+}
+
+resource_schema "aws_chime_app_instance_bot" {
+  cloudformation_type_name = "AWS::Chime::AppInstanceBot"
 }
 
 resource_schema "aws_cleanrooms_analysis_template" {
@@ -1120,6 +1133,10 @@ resource_schema "aws_cloudwatch_dashboard" {
 
 resource_schema "aws_cloudwatch_metric_stream" {
   cloudformation_type_name = "AWS::CloudWatch::MetricStream"
+}
+
+resource_schema "aws_cloudwatch_otel_enrichment" {
+  cloudformation_type_name = "AWS::CloudWatch::OTelEnrichment"
 }
 
 resource_schema "aws_codeartifact_domain" {
@@ -1845,6 +1862,10 @@ resource_schema "aws_devopsagent_association" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_devopsagent_private_connection" {
+  cloudformation_type_name = "AWS::DevOpsAgent::PrivateConnection"
+}
+
 resource_schema "aws_devopsagent_service" {
   cloudformation_type_name = "AWS::DevOpsAgent::Service"
 
@@ -2519,6 +2540,10 @@ resource_schema "aws_emrserverless_application" {
   # git checkout internal/service/cloudformation/schemas/AWS_EC2_NetworkInsightsAnalysis.json
   # Suppression Reason:
   # Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95
+}
+
+resource_schema "aws_elasticache_cache_cluster" {
+  cloudformation_type_name = "AWS::ElastiCache::CacheCluster"
 }
 
 resource_schema "aws_elasticache_global_replication_group" {
@@ -3925,7 +3950,8 @@ resource_schema "aws_mediaconnect_flow_source" {
 }
 
 resource_schema "aws_mediaconnect_flow_vpc_interface" {
-  cloudformation_type_name = "AWS::MediaConnect::FlowVpcInterface"
+  cloudformation_type_name               = "AWS::MediaConnect::FlowVpcInterface"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_mediaconnect_gateway" {
@@ -4117,6 +4143,10 @@ resource_schema "aws_neptune_event_subscription" {
 
 resource_schema "aws_neptunegraph_graph" {
   cloudformation_type_name = "AWS::NeptuneGraph::Graph"
+}
+
+resource_schema "aws_neptunegraph_graph_snapshot" {
+  cloudformation_type_name = "AWS::NeptuneGraph::GraphSnapshot"
 }
 
 resource_schema "aws_neptunegraph_private_graph_endpoint" {
@@ -6149,8 +6179,7 @@ resource_schema "aws_wisdom_quick_response" {
 }
 
 resource_schema "aws_workspaces_connection_alias" {
-  cloudformation_type_name               = "AWS::WorkSpaces::ConnectionAlias"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::WorkSpaces::ConnectionAlias"
 }
 
 resource_schema "aws_workspaces_workspace" {

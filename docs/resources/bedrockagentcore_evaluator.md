@@ -24,6 +24,7 @@ Resource Type definition for AWS::BedrockAgentCore::Evaluator - Creates a custom
 ### Optional
 
 - `description` (String) The description of the evaluator.
+- `kms_key_arn` (String) The ARN of the KMS key used to encrypt evaluator data.
 - `tags` (Attributes List) A list of tags to assign to the evaluator. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

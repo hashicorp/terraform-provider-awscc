@@ -44,9 +44,11 @@ Read-Only:
 
 - `add_header` (Attributes) (see [below for nested schema](#nestedatt--rules--actions--add_header))
 - `archive` (Attributes) (see [below for nested schema](#nestedatt--rules--actions--archive))
+- `bounce` (Attributes) (see [below for nested schema](#nestedatt--rules--actions--bounce))
 - `deliver_to_mailbox` (Attributes) (see [below for nested schema](#nestedatt--rules--actions--deliver_to_mailbox))
 - `deliver_to_q_business` (Attributes) (see [below for nested schema](#nestedatt--rules--actions--deliver_to_q_business))
 - `drop` (String)
+- `invoke_lambda` (Attributes) (see [below for nested schema](#nestedatt--rules--actions--invoke_lambda))
 - `publish_to_sns` (Attributes) (see [below for nested schema](#nestedatt--rules--actions--publish_to_sns))
 - `relay` (Attributes) (see [below for nested schema](#nestedatt--rules--actions--relay))
 - `replace_recipient` (Attributes) (see [below for nested schema](#nestedatt--rules--actions--replace_recipient))
@@ -71,6 +73,20 @@ Read-Only:
 - `target_archive` (String)
 
 
+<a id="nestedatt--rules--actions--bounce"></a>
+### Nested Schema for `rules.actions.bounce`
+
+Read-Only:
+
+- `action_failure_policy` (String)
+- `diagnostic_message` (String)
+- `message` (String)
+- `role_arn` (String)
+- `sender` (String)
+- `smtp_reply_code` (String)
+- `status_code` (String)
+
+
 <a id="nestedatt--rules--actions--deliver_to_mailbox"></a>
 ### Nested Schema for `rules.actions.deliver_to_mailbox`
 
@@ -89,6 +105,18 @@ Read-Only:
 - `action_failure_policy` (String)
 - `application_id` (String)
 - `index_id` (String)
+- `role_arn` (String)
+
+
+<a id="nestedatt--rules--actions--invoke_lambda"></a>
+### Nested Schema for `rules.actions.invoke_lambda`
+
+Read-Only:
+
+- `action_failure_policy` (String)
+- `function_arn` (String)
+- `invocation_type` (String)
+- `retry_time_minutes` (Number)
 - `role_arn` (String)
 
 
@@ -254,6 +282,7 @@ Read-Only:
 
 - `analysis` (Attributes) (see [below for nested schema](#nestedatt--rules--conditions--string_expression--evaluate--analysis))
 - `attribute` (String)
+- `client_certificate_attribute` (String)
 - `mime_header_attribute` (String)
 
 <a id="nestedatt--rules--conditions--string_expression--evaluate--analysis"></a>
@@ -406,6 +435,7 @@ Read-Only:
 
 - `analysis` (Attributes) (see [below for nested schema](#nestedatt--rules--unless--string_expression--evaluate--analysis))
 - `attribute` (String)
+- `client_certificate_attribute` (String)
 - `mime_header_attribute` (String)
 
 <a id="nestedatt--rules--unless--string_expression--evaluate--analysis"></a>

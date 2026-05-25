@@ -90,6 +90,60 @@ func responderGatewayDataSource(ctx context.Context) (datasource.DataSource, err
 		//	          "type": "array",
 		//	          "uniqueItems": true
 		//	        },
+		//	        "HealthCheckConfig": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "HealthyThresholdCount": {
+		//	              "maximum": 10,
+		//	              "minimum": 2,
+		//	              "type": "integer"
+		//	            },
+		//	            "IntervalSeconds": {
+		//	              "maximum": 60,
+		//	              "minimum": 5,
+		//	              "type": "integer"
+		//	            },
+		//	            "Path": {
+		//	              "maxLength": 128,
+		//	              "minLength": 1,
+		//	              "pattern": "^/.*$",
+		//	              "type": "string"
+		//	            },
+		//	            "Port": {
+		//	              "maximum": 65535,
+		//	              "minimum": 80,
+		//	              "type": "integer"
+		//	            },
+		//	            "Protocol": {
+		//	              "enum": [
+		//	                "HTTP",
+		//	                "HTTPS"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "StatusCodeMatcher": {
+		//	              "maxLength": 2000,
+		//	              "minLength": 3,
+		//	              "pattern": "^[0-9,\\-]+$",
+		//	              "type": "string"
+		//	            },
+		//	            "TimeoutMs": {
+		//	              "maximum": 5000,
+		//	              "minimum": 100,
+		//	              "type": "integer"
+		//	            },
+		//	            "UnhealthyThresholdCount": {
+		//	              "maximum": 10,
+		//	              "minimum": 2,
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Port",
+		//	            "Path"
+		//	          ],
+		//	          "type": "object"
+		//	        },
 		//	        "RoleArn": {
 		//	          "type": "string"
 		//	        }
@@ -152,6 +206,44 @@ func responderGatewayDataSource(ctx context.Context) (datasource.DataSource, err
 						"auto_scaling_group_name_list": schema.SetAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
 							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: HealthCheckConfig
+						"health_check_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: HealthyThresholdCount
+								"healthy_threshold_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: IntervalSeconds
+								"interval_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Path
+								"path": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Port
+								"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Protocol
+								"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: StatusCodeMatcher
+								"status_code_matcher": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: TimeoutMs
+								"timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: UnhealthyThresholdCount
+								"unhealthy_threshold_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
 						}, /*END ATTRIBUTE*/
 						// Property: RoleArn
 						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -295,6 +387,7 @@ func responderGatewayDataSource(ctx context.Context) (datasource.DataSource, err
 		//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
+		//	        "pattern": "^(resourceArn|internalId|[a-zA-Z0-9+\\-=._:/@]+)$",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
@@ -421,16 +514,23 @@ func responderGatewayDataSource(ctx context.Context) (datasource.DataSource, err
 		"endpoints_resource_name":                 "EndpointsResourceName",
 		"endpoints_resource_namespace":            "EndpointsResourceNamespace",
 		"gateway_id":                              "GatewayId",
+		"health_check_config":                     "HealthCheckConfig",
+		"healthy_threshold_count":                 "HealthyThresholdCount",
+		"interval_seconds":                        "IntervalSeconds",
 		"key":                                     "Key",
 		"managed_endpoint_configuration":          "ManagedEndpointConfiguration",
+		"path":                                    "Path",
 		"port":                                    "Port",
 		"protocol":                                "Protocol",
 		"responder_gateway_status":                "ResponderGatewayStatus",
 		"role_arn":                                "RoleArn",
 		"security_group_ids":                      "SecurityGroupIds",
+		"status_code_matcher":                     "StatusCodeMatcher",
 		"subnet_ids":                              "SubnetIds",
 		"tags":                                    "Tags",
+		"timeout_ms":                              "TimeoutMs",
 		"trust_store_configuration":               "TrustStoreConfiguration",
+		"unhealthy_threshold_count":               "UnhealthyThresholdCount",
 		"updated_timestamp":                       "UpdatedTimestamp",
 		"value":                                   "Value",
 		"vpc_id":                                  "VpcId",

@@ -49,7 +49,8 @@
           "type": "string",
           "enum": [
             "AGENT",
-            "AUTOMATED"
+            "AUTOMATED",
+            "CUSTOMER"
           ]
         }
       },
@@ -71,7 +72,10 @@
             "es-ES",
             "fr-FR",
             "it-IT",
-            "pt-BR"
+            "pt-BR",
+            "ja-JP",
+            "ko-KR",
+            "zh-CN"
           ]
         }
       }
@@ -519,10 +523,7 @@
           "description": "Automation answer source.",
           "$ref": "#/definitions/EvaluationFormQuestionAutomationAnswerSource"
         }
-      },
-      "required": [
-        "Options"
-      ]
+      }
     },
     "EvaluationFormSingleSelectQuestionOption": {
       "description": "Information about the automation configuration in single select questions.",
@@ -696,10 +697,7 @@
           "description": "",
           "$ref": "#/definitions/EvaluationFormQuestionAutomationAnswerSource"
         }
-      },
-      "required": [
-        "Options"
-      ]
+      }
     },
     "EvaluationFormMultiSelectQuestionOption": {
       "description": "An option for a multi-select question in an evaluation form.",

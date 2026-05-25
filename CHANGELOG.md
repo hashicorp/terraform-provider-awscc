@@ -1,4 +1,73 @@
-## 1.80.0 (Unreleased)
+## 1.86.0 (Unreleased)
+
+## 1.85.0 (May 20, 2026)
+
+BUG FIXES:
+
+* provider: Fix diff showing after upgrade for resources whose list-type attributes (e.g. `tags`, `vpc_config.subnet_ids`, `load_balancer_attributes`) were stored in a different order than CloudFormation returns them. ([#3059](https://github.com/hashicorp/terraform-provider-awscc/issues/3059))
+
+FEATURES:
+
+* **New Data Source:** `awscc_bedrockagentcore_payment_credential_provider`
+* **New Data Source:** `awscc_bedrockagentcore_payment_credential_providers`
+* **New List Resource:** `awscc_bedrockagentcore_payment_credential_provider`
+* **New Resource:** `awscc_bedrockagentcore_payment_credential_provider`
+
+## 1.84.0 (May 13, 2026)
+
+FEATURES:
+
+* No new data sources, list resources, or resources.
+* Updated schemas.
+
+## 1.83.0 (May 6, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_chime_app_instance_bot`
+* **New Data Source:** `awscc_chime_app_instance_bots`
+* **New Data Source:** `awscc_elasticache_cache_cluster`
+* **New Data Source:** `awscc_elasticache_cache_clusters`
+* **New List Resource:** `awscc_chime_app_instance_bot`
+* **New List Resource:** `awscc_elasticache_cache_cluster`
+* **New Resource:** `awscc_chime_app_instance_bot`
+* **New Resource:** `awscc_elasticache_cache_cluster`
+
+## 1.82.0 (April 29, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_chime_app_instance`
+* **New Data Source:** `awscc_chime_app_instances`
+* **New Data Source:** `awscc_cloudwatch_otel_enrichment`
+* **New Data Source:** `awscc_cloudwatch_otel_enrichments`
+* **New Data Source:** `awscc_devopsagent_private_connection`
+* **New Data Source:** `awscc_devopsagent_private_connections`
+* **New Data Source:** `awscc_workspaces_connection_aliases`
+* **New List Resource:** `awscc_chime_app_instance`
+* **New List Resource:** `awscc_cloudwatch_otel_enrichment`
+* **New List Resource:** `awscc_devopsagent_private_connection`
+* **New List Resource:** `awscc_mediaconnect_flow_vpc_interface`
+* **New List Resource:** `awscc_workspaces_connection_alias`
+* **New Resource:** `awscc_chime_app_instance`
+* **New Resource:** `awscc_cloudwatch_otel_enrichment`
+* **New Resource:** `awscc_devopsagent_private_connection`
+
+## 1.81.0 (April 22, 2026)
+
+FEATURES:
+
+* No new data sources, list resources, or resources.
+* Updated schemas.
+
+## 1.80.0 (April 15, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_neptunegraph_graph_snapshot`
+* **New Data Source:** `awscc_neptunegraph_graph_snapshots`
+* **New List Resource:** `awscc_neptunegraph_graph_snapshot`
+* **New Resource:** `awscc_neptunegraph_graph_snapshot`
 
 ## 1.79.0 (April 8, 2026)
 

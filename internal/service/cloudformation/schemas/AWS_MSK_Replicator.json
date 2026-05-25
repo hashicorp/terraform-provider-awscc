@@ -72,6 +72,10 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "LogDelivery": {
+      "description": "Configuration for log delivery for the replicator.",
+      "$ref": "#/definitions/LogDelivery"
     }
   },
   "definitions": {
@@ -221,10 +225,22 @@
         "DetectAndCopyNewConsumerGroups": {
           "description": "Whether to periodically check for new consumer groups.",
           "type": "boolean"
+        },
+        "ConsumerGroupOffsetSyncMode": {
+          "description": "The consumer group offset synchronization mode.",
+          "$ref": "#/definitions/ConsumerGroupOffsetSyncMode"
         }
       },
       "required": [
         "ConsumerGroupsToReplicate"
+      ]
+    },
+    "ConsumerGroupOffsetSyncMode": {
+      "description": "The consumer group offset synchronization mode.",
+      "type": "string",
+      "enum": [
+        "LEGACY",
+        "ENHANCED"
       ]
     },
     "ReplicationInfo": {
@@ -237,10 +253,18 @@
           "type": "string",
           "pattern": "arn:(aws|aws-us-gov|aws-cn):kafka:.*"
         },
+        "SourceKafkaClusterId": {
+          "description": "The ID of the source Kafka cluster.",
+          "type": "string"
+        },
         "TargetKafkaClusterArn": {
           "description": "Amazon Resource Name of the target Kafka cluster.",
           "type": "string",
           "pattern": "arn:(aws|aws-us-gov|aws-cn):kafka:.*"
+        },
+        "TargetKafkaClusterId": {
+          "description": "The ID of the target Kafka cluster.",
+          "type": "string"
         },
         "TargetCompressionType": {
           "description": "The type of compression to use writing records to target Kafka cluster.",
@@ -263,8 +287,6 @@
         }
       },
       "required": [
-        "SourceKafkaClusterArn",
-        "TargetKafkaClusterArn",
         "TopicReplication",
         "ConsumerGroupReplication",
         "TargetCompressionType"
@@ -323,17 +345,201 @@
       "additionalProperties": false,
       "properties": {
         "AmazonMskCluster": {
-          "description": "Details of an Amazon MSK cluster. Exactly one of AmazonMskCluster is required.",
+          "description": "Details of an Amazon MSK cluster.",
           "$ref": "#/definitions/AmazonMskCluster"
+        },
+        "ApacheKafkaCluster": {
+          "description": "Details of an Apache Kafka cluster.",
+          "$ref": "#/definitions/ApacheKafkaCluster"
         },
         "VpcConfig": {
           "description": "Details of an Amazon VPC which has network connectivity to the Apache Kafka cluster.",
           "$ref": "#/definitions/KafkaClusterClientVpcConfig"
+        },
+        "ClientAuthentication": {
+          "description": "Details of the client authentication used by the Apache Kafka cluster.",
+          "$ref": "#/definitions/KafkaClusterClientAuthentication"
+        },
+        "EncryptionInTransit": {
+          "description": "Details of encryption in transit to the Apache Kafka cluster.",
+          "$ref": "#/definitions/KafkaClusterEncryptionInTransit"
+        }
+      },
+      "required": []
+    },
+    "ApacheKafkaCluster": {
+      "description": "Details of an Apache Kafka cluster.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ApacheKafkaClusterId": {
+          "description": "The ID of the Apache Kafka cluster.",
+          "type": "string"
+        },
+        "BootstrapBrokerString": {
+          "description": "The bootstrap broker string of the Apache Kafka cluster.",
+          "type": "string"
         }
       },
       "required": [
-        "AmazonMskCluster",
-        "VpcConfig"
+        "ApacheKafkaClusterId",
+        "BootstrapBrokerString"
+      ]
+    },
+    "KafkaClusterClientAuthentication": {
+      "description": "Details of the client authentication used by the Apache Kafka cluster.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "SaslScram": {
+          "description": "Details for SASL/SCRAM client authentication.",
+          "$ref": "#/definitions/KafkaClusterSaslScramAuthentication"
+        }
+      },
+      "required": [
+        "SaslScram"
+      ]
+    },
+    "KafkaClusterSaslScramAuthentication": {
+      "description": "Details for SASL/SCRAM client authentication.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Mechanism": {
+          "description": "The SASL/SCRAM authentication mechanism.",
+          "$ref": "#/definitions/KafkaClusterSaslScramMechanism"
+        },
+        "SecretArn": {
+          "description": "The Amazon Resource Name (ARN) of the Secrets Manager secret.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Mechanism",
+        "SecretArn"
+      ]
+    },
+    "KafkaClusterSaslScramMechanism": {
+      "description": "The SASL/SCRAM authentication mechanism.",
+      "type": "string",
+      "enum": [
+        "SHA256",
+        "SHA512"
+      ]
+    },
+    "KafkaClusterEncryptionInTransit": {
+      "description": "Details of encryption in transit to the Apache Kafka cluster.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "EncryptionType": {
+          "description": "The type of encryption in transit to the Apache Kafka cluster.",
+          "$ref": "#/definitions/KafkaClusterEncryptionInTransitType"
+        },
+        "RootCaCertificate": {
+          "description": "The root CA certificate.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "EncryptionType"
+      ]
+    },
+    "KafkaClusterEncryptionInTransitType": {
+      "description": "The type of encryption in transit to the Apache Kafka cluster.",
+      "type": "string",
+      "enum": [
+        "TLS"
+      ]
+    },
+    "LogDelivery": {
+      "description": "Configuration for log delivery for the replicator.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ReplicatorLogDelivery": {
+          "description": "The replicator logs configuration.",
+          "$ref": "#/definitions/ReplicatorLogDelivery"
+        }
+      },
+      "required": []
+    },
+    "ReplicatorLogDelivery": {
+      "description": "Details of the log delivery for the replicator.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "CloudWatchLogs": {
+          "description": "Details of the CloudWatch Logs destination for replicator logs.",
+          "$ref": "#/definitions/CloudWatchLogs"
+        },
+        "Firehose": {
+          "description": "Details of the Kinesis Data Firehose delivery stream that is the destination for replicator logs.",
+          "$ref": "#/definitions/Firehose"
+        },
+        "S3": {
+          "description": "Details of the Amazon S3 destination for replicator logs.",
+          "$ref": "#/definitions/S3"
+        }
+      },
+      "required": []
+    },
+    "CloudWatchLogs": {
+      "description": "Details about delivering logs to CloudWatch Logs.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Enabled": {
+          "description": "Whether log delivery to CloudWatch Logs is enabled.",
+          "type": "boolean"
+        },
+        "LogGroup": {
+          "description": "The CloudWatch log group that is the destination for log delivery.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Enabled"
+      ]
+    },
+    "Firehose": {
+      "description": "Details about delivering logs to Firehose.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Enabled": {
+          "description": "Whether log delivery to Firehose is enabled.",
+          "type": "boolean"
+        },
+        "DeliveryStream": {
+          "description": "The Firehose delivery stream that is the destination for log delivery.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Enabled"
+      ]
+    },
+    "S3": {
+      "description": "Details about delivering logs to S3.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Enabled": {
+          "description": "Whether log delivery to S3 is enabled.",
+          "type": "boolean"
+        },
+        "Bucket": {
+          "description": "The S3 bucket that is the destination for log delivery.",
+          "type": "string"
+        },
+        "Prefix": {
+          "description": "The S3 prefix that is the destination for log delivery.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Enabled"
       ]
     }
   },
@@ -361,8 +567,11 @@
     "/properties/KafkaClusters",
     "/properties/ServiceExecutionRoleArn",
     "/properties/ReplicationInfoList/*/SourceKafkaClusterArn",
+    "/properties/ReplicationInfoList/*/SourceKafkaClusterId",
     "/properties/ReplicationInfoList/*/TargetKafkaClusterArn",
+    "/properties/ReplicationInfoList/*/TargetKafkaClusterId",
     "/properties/ReplicationInfoList/*/TargetCompressionType",
+    "/properties/ReplicationInfoList/*/ConsumerGroupReplication/ConsumerGroupOffsetSyncMode",
     "/properties/ReplicationInfoList/*/TopicReplication/StartingPosition",
     "/properties/ReplicationInfoList/*/TopicReplication/TopicNameConfiguration"
   ],

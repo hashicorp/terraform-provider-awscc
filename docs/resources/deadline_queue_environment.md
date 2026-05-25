@@ -2,12 +2,12 @@
 page_title: "awscc_deadline_queue_environment Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Definition of AWS::Deadline::QueueEnvironment Resource Type
+  Resource Type definition for AWS::Deadline::QueueEnvironment
 ---
 
 # awscc_deadline_queue_environment (Resource)
 
-Definition of AWS::Deadline::QueueEnvironment Resource Type
+Resource Type definition for AWS::Deadline::QueueEnvironment
 
 ## Example Usage
 

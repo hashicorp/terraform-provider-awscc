@@ -76,7 +76,6 @@ func stateMachineVersionResource(ctx context.Context) (resource.Resource, error)
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
-			// StateMachineArn is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: StateMachineRevisionId
 		// CloudFormation resource type schema:
@@ -133,9 +132,6 @@ func stateMachineVersionResource(ctx context.Context) (resource.Resource, error)
 
 	opts = opts.IsImmutableType(true)
 
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/StateMachineArn",
-	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	v, err := generic.NewResource(ctx, opts...)

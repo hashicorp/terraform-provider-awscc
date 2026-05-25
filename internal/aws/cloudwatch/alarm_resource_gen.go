@@ -160,11 +160,11 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		//	    "description": "Dimension is an embedded property of the ``AWS::CloudWatch::Alarm`` type. Dimensions are name/value pairs that can be associated with a CW metric. You can specify a maximum of 30 dimensions for a given metric.",
 		//	    "properties": {
 		//	      "Name": {
-		//	        "description": "The name of the dimension, from 1–255 characters in length. This dimension name must have been included when the metric was published.",
+		//	        "description": "The name of the dimension, from 1?255 characters in length. This dimension name must have been included when the metric was published.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "The value for the dimension, from 1–255 characters in length.",
+		//	        "description": "The value for the dimension, from 1?255 characters in length.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -182,7 +182,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the dimension, from 1–255 characters in length. This dimension name must have been included when the metric was published.",
+						Description: "The name of the dimension, from 1?255 characters in length. This dimension name must have been included when the metric was published.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -194,7 +194,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the dimension, from 1–255 characters in length.",
+						Description: "The value for the dimension, from 1?255 characters in length.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -227,6 +227,98 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EvaluationCriteria
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "",
+		//	  "properties": {
+		//	    "PromQLCriteria": {
+		//	      "additionalProperties": false,
+		//	      "description": "",
+		//	      "properties": {
+		//	        "PendingPeriod": {
+		//	          "description": "The pending period for the alarm.",
+		//	          "type": "integer"
+		//	        },
+		//	        "Query": {
+		//	          "description": "The PromQL query string.",
+		//	          "type": "string"
+		//	        },
+		//	        "RecoveryPeriod": {
+		//	          "description": "The recovery period for the alarm.",
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"evaluation_criteria": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PromQLCriteria
+				"prom_ql_criteria": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PendingPeriod
+						"pending_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The pending period for the alarm.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Query
+						"query": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The PromQL query string.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: RecoveryPeriod
+						"recovery_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The recovery period for the alarm.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EvaluationInterval
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "integer"
+		//	}
+		"evaluation_interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: EvaluationPeriods
@@ -335,11 +427,11 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "description": "Dimension is an embedded property of the ``AWS::CloudWatch::Alarm`` type. Dimensions are name/value pairs that can be associated with a CW metric. You can specify a maximum of 30 dimensions for a given metric.",
 		//	                  "properties": {
 		//	                    "Name": {
-		//	                      "description": "The name of the dimension, from 1–255 characters in length. This dimension name must have been included when the metric was published.",
+		//	                      "description": "The name of the dimension, from 1?255 characters in length. This dimension name must have been included when the metric was published.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Value": {
-		//	                      "description": "The value for the dimension, from 1–255 characters in length.",
+		//	                      "description": "The value for the dimension, from 1?255 characters in length.",
 		//	                      "type": "string"
 		//	                    }
 		//	                  },
@@ -454,7 +546,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: Name
 												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The name of the dimension, from 1–255 characters in length. This dimension name must have been included when the metric was published.",
+													Description: "The name of the dimension, from 1?255 characters in length. This dimension name must have been included when the metric was published.",
 													Optional:    true,
 													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
@@ -466,7 +558,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END ATTRIBUTE*/
 												// Property: Value
 												"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The value for the dimension, from 1–255 characters in length.",
+													Description: "The value for the dimension, from 1?255 characters in length.",
 													Optional:    true,
 													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
@@ -824,6 +916,8 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		"datapoints_to_alarm":                  "DatapointsToAlarm",
 		"dimensions":                           "Dimensions",
 		"evaluate_low_sample_count_percentile": "EvaluateLowSampleCountPercentile",
+		"evaluation_criteria":                  "EvaluationCriteria",
+		"evaluation_interval":                  "EvaluationInterval",
 		"evaluation_periods":                   "EvaluationPeriods",
 		"expression":                           "Expression",
 		"extended_statistic":                   "ExtendedStatistic",
@@ -838,7 +932,11 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		"name":                                 "Name",
 		"namespace":                            "Namespace",
 		"ok_actions":                           "OKActions",
+		"pending_period":                       "PendingPeriod",
 		"period":                               "Period",
+		"prom_ql_criteria":                     "PromQLCriteria",
+		"query":                                "Query",
+		"recovery_period":                      "RecoveryPeriod",
 		"return_data":                          "ReturnData",
 		"stat":                                 "Stat",
 		"statistic":                            "Statistic",

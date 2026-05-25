@@ -400,6 +400,9 @@
         },
         "MaxBatchSizeBytes": {
           "type": "integer"
+        },
+        "BatchAcrossTopics": {
+          "type": "boolean"
         }
       }
     },
@@ -989,6 +992,10 @@
   ],
   "readOnlyProperties": [
     "/properties/Arn"
+  ],
+  "deprecatedProperties": [
+    "/properties/TopicRulePayload/ErrorAction/IotAnalytics",
+    "/properties/TopicRulePayload/Actions/*/IotAnalytics"
   ],
   "handlers": {
     "create": {

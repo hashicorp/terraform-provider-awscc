@@ -59,6 +59,7 @@ Read-Only:
 Read-Only:
 
 - `s3_bucket` (String)
+- `s3_bucket_owner` (String)
 - `s3_output_configurations` (Attributes) (see [below for nested schema](#nestedatt--export--destination_configurations--s3_destination--s3_output_configurations))
 - `s3_prefix` (String)
 - `s3_region` (String)

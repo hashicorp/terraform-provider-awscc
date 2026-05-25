@@ -839,6 +839,27 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "A key-value pair to associate with a resource.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ZookeeperAccess
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Enabled": {
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"zookeeper_access": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -911,6 +932,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"volume_size":                    "VolumeSize",
 		"volume_throughput":              "VolumeThroughput",
 		"vpc_connectivity":               "VpcConnectivity",
+		"zookeeper_access":               "ZookeeperAccess",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

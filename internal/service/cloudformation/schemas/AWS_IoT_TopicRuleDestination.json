@@ -73,7 +73,7 @@
     "taggable": false,
     "tagOnCreate": false,
     "tagUpdatable": false,
-    "cloudFormationSystemTags": true
+    "cloudFormationSystemTags": false
   },
   "additionalProperties": false,
   "readOnlyProperties": [

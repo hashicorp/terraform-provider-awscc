@@ -426,7 +426,8 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                          "t4",
 		//	                          "a10g",
 		//	                          "l4",
-		//	                          "l40s"
+		//	                          "l40s",
+		//	                          "rtx-pro-server-6000"
 		//	                        ],
 		//	                        "type": "string"
 		//	                      },

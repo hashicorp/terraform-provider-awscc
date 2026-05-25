@@ -2380,6 +2380,69 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: EntryLimitsConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Entry limits config for a campaign",
+		//	  "properties": {
+		//	    "MaxEntryCount": {
+		//	      "description": "Maximum number of entries per participant. 0 indicates unlimited entries.",
+		//	      "minimum": 0,
+		//	      "type": "integer"
+		//	    },
+		//	    "MinEntryInterval": {
+		//	      "description": "Minimum time interval between entries for the same participant in ISO 8601 duration format",
+		//	      "maxLength": 50,
+		//	      "minLength": 0,
+		//	      "pattern": "^[a-zA-Z0-9.]*$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "MaxEntryCount",
+		//	    "MinEntryInterval"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"entry_limits_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxEntryCount
+				"max_entry_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Maximum number of entries per participant. 0 indicates unlimited entries.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.AtLeast(0),
+						fwvalidators.NotNullInt64(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MinEntryInterval
+				"min_entry_interval": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Minimum time interval between entries for the same participant in ISO 8601 duration format",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(0, 50),
+						stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9.]*$"), ""),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Entry limits config for a campaign",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -2716,6 +2779,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		"enable_answer_machine_detection":   "EnableAnswerMachineDetection",
 		"end_date":                          "EndDate",
 		"end_time":                          "EndTime",
+		"entry_limits_config":               "EntryLimitsConfig",
 		"event_trigger":                     "EventTrigger",
 		"frequency":                         "Frequency",
 		"instance_limits_handling":          "InstanceLimitsHandling",
@@ -2723,6 +2787,8 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		"local_time_zone_config":            "LocalTimeZoneConfig",
 		"local_time_zone_detection":         "LocalTimeZoneDetection",
 		"max_count_per_recipient":           "MaxCountPerRecipient",
+		"max_entry_count":                   "MaxEntryCount",
+		"min_entry_interval":                "MinEntryInterval",
 		"name":                              "Name",
 		"open_hours":                        "OpenHours",
 		"outbound_mode":                     "OutboundMode",

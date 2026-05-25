@@ -84,6 +84,9 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 		//	      "items": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
+		//	          "BatchImageStatus": {
+		//	            "type": "string"
+		//	          },
 		//	          "ImageIdOverride": {
 		//	            "type": "string"
 		//	          },
@@ -268,6 +271,14 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 				"ec_2_configuration": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: BatchImageStatus
+							"batch_image_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: ImageIdOverride
 							"image_id_override": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Optional: true,
@@ -790,6 +801,7 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"allocation_strategy":            "AllocationStrategy",
+		"batch_image_status":             "BatchImageStatus",
 		"bid_percentage":                 "BidPercentage",
 		"compute_environment_arn":        "ComputeEnvironmentArn",
 		"compute_environment_name":       "ComputeEnvironmentName",

@@ -220,7 +220,7 @@ func farmResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Definition of AWS::Deadline::Farm Resource Type",
+		Description: "Resource Type definition for AWS::Deadline::Farm",
 		Version:     1,
 		Attributes:  attributes,
 	}

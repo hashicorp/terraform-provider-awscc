@@ -88,24 +88,12 @@
       "additionalProperties": false
     }
   },
-  "oneOf": [
-    {
-      "required": [
-        "FairsharePolicy"
-      ]
-    },
-    {
-      "required": [
-        "QuotaSharePolicy"
-      ]
-    }
-  ],
   "additionalProperties": false,
   "tagging": {
     "taggable": true,
     "tagOnCreate": true,
-    "tagUpdatable": false,
-    "cloudFormationSystemTags": false,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
     "tagProperty": "/properties/Tags",
     "permissions": [
       "Batch:TagResource",
@@ -116,8 +104,7 @@
     "/properties/Arn"
   ],
   "createOnlyProperties": [
-    "/properties/Name",
-    "/properties/Tags"
+    "/properties/Name"
   ],
   "readOnlyProperties": [
     "/properties/Arn"
@@ -138,7 +125,7 @@
       "permissions": [
         "Batch:UpdateSchedulingPolicy",
         "Batch:TagResource",
-        "Batch:UnTagResource"
+        "Batch:UntagResource"
       ]
     },
     "delete": {

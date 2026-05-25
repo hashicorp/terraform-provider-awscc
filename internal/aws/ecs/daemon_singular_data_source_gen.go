@@ -28,6 +28,7 @@ func daemonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The Amazon Resource Names (ARNs) of the capacity providers associated with the daemon.",
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
@@ -36,45 +37,54 @@ func daemonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"capacity_provider_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			Description: "The Amazon Resource Names (ARNs) of the capacity providers associated with the daemon.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ClusterArn
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the cluster that the daemon is running in.",
 		//	  "type": "string"
 		//	}
 		"cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The Amazon Resource Name (ARN) of the cluster that the daemon is running in.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DaemonArn
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"daemon_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DaemonName
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"daemon_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DaemonStatus
 		// CloudFormation resource type schema:
@@ -93,47 +103,57 @@ func daemonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the daemon task definition used by this revision.",
 		//	  "type": "string"
 		//	}
 		"daemon_task_definition_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The Amazon Resource Name (ARN) of the daemon task definition used by this revision.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DeploymentArn
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"deployment_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DeploymentConfiguration
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "The deployment configuration used for this daemon deployment.",
 		//	  "properties": {
 		//	    "Alarms": {
 		//	      "additionalProperties": false,
+		//	      "description": "The CloudWatch alarm configuration for the daemon deployment. When alarms are triggered during a deployment, the deployment can be automatically rolled back.",
 		//	      "properties": {
 		//	        "AlarmNames": {
+		//	          "description": "The CloudWatch alarm names to monitor during a daemon deployment.",
 		//	          "items": {
 		//	            "type": "string"
 		//	          },
 		//	          "type": "array"
 		//	        },
 		//	        "Enable": {
+		//	          "description": "Determines whether to use the CloudWatch alarm option in the daemon deployment process. The default value is ``false``.",
 		//	          "type": "boolean"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "BakeTimeInMinutes": {
+		//	      "description": "The amount of time (in minutes) to wait after a successful deployment step before proceeding. This allows time to monitor for issues before continuing. The default value is 0.",
 		//	      "maximum": 1440,
 		//	      "minimum": 0,
 		//	      "type": "integer"
 		//	    },
 		//	    "DrainPercent": {
+		//	      "description": "The percentage of container instances to drain simultaneously during a daemon deployment. Valid values are between 0.0 and 100.0.",
 		//	      "maximum": 100,
 		//	      "minimum": 0,
 		//	      "type": "number"
@@ -149,48 +169,59 @@ func daemonDataSource(ctx context.Context) (datasource.DataSource, error) {
 						// Property: AlarmNames
 						"alarm_names": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
+							Description: "The CloudWatch alarm names to monitor during a daemon deployment.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Enable
 						"enable": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
+							Description: "Determines whether to use the CloudWatch alarm option in the daemon deployment process. The default value is ``false``.",
+							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Computed: true,
+					Description: "The CloudWatch alarm configuration for the daemon deployment. When alarms are triggered during a deployment, the deployment can be automatically rolled back.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: BakeTimeInMinutes
 				"bake_time_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The amount of time (in minutes) to wait after a successful deployment step before proceeding. This allows time to monitor for issues before continuing. The default value is 0.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: DrainPercent
 				"drain_percent": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The percentage of container instances to drain simultaneously during a daemon deployment. Valid values are between 0.0 and 100.0.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Computed: true,
+			Description: "The deployment configuration used for this daemon deployment.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnableECSManagedTags
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "Specifies whether Amazon ECS managed tags are turned on for the daemon tasks.",
 		//	  "type": "boolean"
 		//	}
 		"enable_ecs_managed_tags": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "Specifies whether Amazon ECS managed tags are turned on for the daemon tasks.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EnableExecuteCommand
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "Specifies whether the execute command functionality is turned on for the daemon tasks.",
 		//	  "type": "boolean"
 		//	}
 		"enable_execute_command": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "Specifies whether the execute command functionality is turned on for the daemon tasks.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PropagateTags
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "Specifies whether tags are propagated from the daemon to the daemon tasks.",
 		//	  "enum": [
 		//	    "DAEMON",
 		//	    "NONE"
@@ -198,20 +229,25 @@ func daemonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "string"
 		//	}
 		"propagate_tags": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "Specifies whether tags are propagated from the daemon to the daemon tasks.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
+		//	    "description": "The metadata that you apply to a resource to help you categorize and organize them. Each tag consists of a key and an optional value. You define them.\n The following basic restrictions apply to tags:\n  +  Maximum number of tags per resource - 50\n  +  For each resource, each tag key must be unique, and each tag key can have only one value.\n  +  Maximum key length - 128 Unicode characters in UTF-8\n  +  Maximum value length - 256 Unicode characters in UTF-8\n  +  If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.\n  +  Tag keys and values are case-sensitive.\n  +  Do not use ``aws:``, ``AWS:``, or any upper or lowercase combination of such as a prefix for either keys or values as it is reserved for AWS use. You cannot edit or delete tag keys or values with this prefix. Tags with this prefix do not count against your tags per resource limit.",
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "One part of a key-value pair that make up a tag. A ``key`` is a general label that acts like a category for more specific tag values.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "The optional part of a key-value pair that make up a tag. A ``value`` acts as a descriptor within a tag category (key).",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -227,26 +263,31 @@ func daemonDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "One part of a key-value pair that make up a tag. A ``key`` is a general label that acts like a category for more specific tag values.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "The optional part of a key-value pair that make up a tag. A ``value`` acts as a descriptor within a tag category (key).",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Computed: true,
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "",
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 

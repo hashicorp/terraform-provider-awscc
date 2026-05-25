@@ -72,6 +72,21 @@ func groupProfileDataSource(ctx context.Context) (datasource.DataSource, error) 
 			Description: "The group-name of the Group Profile.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: GroupType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The type of the group.",
+		//	  "enum": [
+		//	    "DATAZONE_SSO_GROUP",
+		//	    "IAM_ROLE_SESSION_GROUP"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"group_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of the group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -82,6 +97,28 @@ func groupProfileDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	}
 		"group_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the Amazon DataZone group profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: RolePrincipalArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the role principal for the group profile.",
+		//	  "type": "string"
+		//	}
+		"role_principal_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the role principal for the group profile.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: RolePrincipalId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the role principal for the group profile.",
+		//	  "type": "string"
+		//	}
+		"role_principal_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the role principal for the group profile.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Status
@@ -116,12 +153,15 @@ func groupProfileDataSource(ctx context.Context) (datasource.DataSource, error) 
 	opts = opts.WithCloudFormationTypeName("AWS::DataZone::GroupProfile").WithTerraformTypeName("awscc_datazone_group_profile")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"domain_id":         "DomainId",
-		"domain_identifier": "DomainIdentifier",
-		"group_identifier":  "GroupIdentifier",
-		"group_name":        "GroupName",
-		"group_profile_id":  "Id",
-		"status":            "Status",
+		"domain_id":          "DomainId",
+		"domain_identifier":  "DomainIdentifier",
+		"group_identifier":   "GroupIdentifier",
+		"group_name":         "GroupName",
+		"group_profile_id":   "Id",
+		"group_type":         "GroupType",
+		"role_principal_arn": "RolePrincipalArn",
+		"role_principal_id":  "RolePrincipalId",
+		"status":             "Status",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

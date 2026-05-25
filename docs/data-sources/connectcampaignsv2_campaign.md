@@ -27,6 +27,7 @@ Data Source schema for AWS::ConnectCampaignsV2::Campaign
 - `communication_time_config` (Attributes) Campaign communication time config (see [below for nested schema](#nestedatt--communication_time_config))
 - `connect_campaign_flow_arn` (String) Arn
 - `connect_instance_id` (String) Amazon Connect Instance Id
+- `entry_limits_config` (Attributes) Entry limits config for a campaign (see [below for nested schema](#nestedatt--entry_limits_config))
 - `name` (String) Campaign name
 - `schedule` (Attributes) Campaign schedule (see [below for nested schema](#nestedatt--schedule))
 - `source` (Attributes) The possible source of the campaign (see [below for nested schema](#nestedatt--source))
@@ -460,6 +461,15 @@ Read-Only:
 
 
 
+
+
+<a id="nestedatt--entry_limits_config"></a>
+### Nested Schema for `entry_limits_config`
+
+Read-Only:
+
+- `max_entry_count` (Number) Maximum number of entries per participant. 0 indicates unlimited entries.
+- `min_entry_interval` (String) Minimum time interval between entries for the same participant in ISO 8601 duration format
 
 
 <a id="nestedatt--schedule"></a>

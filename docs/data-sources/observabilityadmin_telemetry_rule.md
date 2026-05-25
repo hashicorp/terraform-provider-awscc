@@ -21,17 +21,31 @@ Data Source schema for AWS::ObservabilityAdmin::TelemetryRule
 
 ### Read-Only
 
+- `region_statuses` (Attributes List) Per-region replication status of the rule (see [below for nested schema](#nestedatt--region_statuses))
 - `rule` (Attributes) The telemetry rule (see [below for nested schema](#nestedatt--rule))
 - `rule_arn` (String) The arn of the telemetry rule
 - `rule_name` (String) The name of the telemetry rule
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--region_statuses"></a>
+### Nested Schema for `region_statuses`
+
+Read-Only:
+
+- `region` (String) The AWS region code
+- `rule_arn` (String) The ARN of the rule in this region
+- `status` (String) The replication status of the rule in this region
+
 
 <a id="nestedatt--rule"></a>
 ### Nested Schema for `rule`
 
 Read-Only:
 
+- `all_regions` (Boolean) When true, the rule is replicated to all supported regions
+- `allow_field_updates` (Boolean) When true, configuration drift in managed telemetry resources will be detected and remediated for resource-level fields.
 - `destination_configuration` (Attributes) The destination configuration for telemetry data (see [below for nested schema](#nestedatt--rule--destination_configuration))
+- `regions` (Set of String) List of AWS region codes where the rule should be replicated
 - `resource_type` (String) Resource Type associated with the Telemetry Rule
 - `selection_criteria` (String) Selection Criteria on resource level for rule application
 - `telemetry_source_types` (Set of String) The telemetry source types for a telemetry rule.

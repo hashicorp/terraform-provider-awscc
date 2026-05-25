@@ -305,6 +305,9 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "BatchConfig": {
 		//	                "additionalProperties": false,
 		//	                "properties": {
+		//	                  "BatchAcrossTopics": {
+		//	                    "type": "boolean"
+		//	                  },
 		//	                  "MaxBatchOpenMs": {
 		//	                    "type": "integer"
 		//	                  },
@@ -1085,6 +1088,9 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "BatchConfig": {
 		//	              "additionalProperties": false,
 		//	              "properties": {
+		//	                "BatchAcrossTopics": {
+		//	                  "type": "boolean"
+		//	                },
 		//	                "MaxBatchOpenMs": {
 		//	                  "type": "integer"
 		//	                },
@@ -1867,6 +1873,10 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 									// Property: BatchConfig
 									"batch_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: BatchAcrossTopics
+											"batch_across_topics": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
 											// Property: MaxBatchOpenMs
 											"max_batch_open_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
 												Computed: true,
@@ -2582,6 +2592,10 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 								// Property: BatchConfig
 								"batch_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: BatchAcrossTopics
+										"batch_across_topics": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
 										// Property: MaxBatchOpenMs
 										"max_batch_open_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
 											Computed: true,
@@ -3109,6 +3123,7 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"asset_id":                         "AssetId",
 		"auth":                             "Auth",
 		"aws_iot_sql_version":              "AwsIotSqlVersion",
+		"batch_across_topics":              "BatchAcrossTopics",
 		"batch_config":                     "BatchConfig",
 		"batch_mode":                       "BatchMode",
 		"boolean_value":                    "BooleanValue",

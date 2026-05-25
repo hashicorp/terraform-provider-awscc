@@ -9,6 +9,7 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -163,21 +164,6 @@ func guardHookResource(ctx context.Context) (resource.Resource, error) {
 		//	  "additionalProperties": false,
 		//	  "properties": {
 		//	    "InputParams": {
-		//	      "additionalProperties": false,
-		//	      "description": "S3 Source Location for the Guard files.",
-		//	      "properties": {
-		//	        "Uri": {
-		//	          "description": "S3 uri of Guard files.",
-		//	          "type": "string"
-		//	        },
-		//	        "VersionId": {
-		//	          "description": "S3 object version",
-		//	          "type": "string"
-		//	        }
-		//	      },
-		//	      "required": [
-		//	        "Uri"
-		//	      ],
 		//	      "type": "object"
 		//	    }
 		//	  }
@@ -185,35 +171,12 @@ func guardHookResource(ctx context.Context) (resource.Resource, error) {
 		"options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: InputParams
-				"input_params": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Uri
-						"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "S3 uri of Guard files.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								fwvalidators.NotNullString(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: VersionId
-						"version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "S3 object version",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "S3 Source Location for the Guard files.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
+				"input_params": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType: jsontypes.NormalizedType{},
+					Optional:   true,
+					Computed:   true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/

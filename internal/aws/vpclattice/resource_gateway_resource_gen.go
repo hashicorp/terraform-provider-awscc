@@ -122,6 +122,30 @@ func resourceGatewayResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ResourceConfigDnsResolution
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "IN_VPC",
+		//	    "PUBLIC"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"resource_config_dns_resolution": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"IN_VPC",
+					"PUBLIC",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -283,17 +307,18 @@ func resourceGatewayResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                     "Arn",
-		"ip_address_type":         "IpAddressType",
-		"ipv_4_addresses_per_eni": "Ipv4AddressesPerEni",
-		"key":                     "Key",
-		"name":                    "Name",
-		"resource_gateway_id":     "Id",
-		"security_group_ids":      "SecurityGroupIds",
-		"subnet_ids":              "SubnetIds",
-		"tags":                    "Tags",
-		"value":                   "Value",
-		"vpc_identifier":          "VpcIdentifier",
+		"arn":                            "Arn",
+		"ip_address_type":                "IpAddressType",
+		"ipv_4_addresses_per_eni":        "Ipv4AddressesPerEni",
+		"key":                            "Key",
+		"name":                           "Name",
+		"resource_config_dns_resolution": "ResourceConfigDnsResolution",
+		"resource_gateway_id":            "Id",
+		"security_group_ids":             "SecurityGroupIds",
+		"subnet_ids":                     "SubnetIds",
+		"tags":                           "Tags",
+		"value":                          "Value",
+		"vpc_identifier":                 "VpcIdentifier",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

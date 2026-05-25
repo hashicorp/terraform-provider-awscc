@@ -127,15 +127,15 @@ func routerInputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                    "properties": {
 		//	                      "EncryptionKey": {
 		//	                        "additionalProperties": false,
-		//	                        "description": "The configuration settings for transit encryption using AWS Secrets Manager, including the secret ARN and role ARN.",
+		//	                        "description": "The configuration settings for transit encryption using Secrets Manager, including the secret ARN and role ARN.",
 		//	                        "properties": {
 		//	                          "RoleArn": {
-		//	                            "description": "The ARN of the IAM role assumed by MediaConnect to access the AWS Secrets Manager secret.",
+		//	                            "description": "The ARN of the IAM role assumed by MediaConnect to access the Secrets Manager secret.",
 		//	                            "pattern": "^arn:(aws[a-zA-Z-]*):iam::[0-9]{12}:role/[a-zA-Z0-9_+=,.@-]+$",
 		//	                            "type": "string"
 		//	                          },
 		//	                          "SecretArn": {
-		//	                            "description": "The ARN of the AWS Secrets Manager secret used for transit encryption.",
+		//	                            "description": "The ARN of the Secrets Manager secret used for transit encryption.",
 		//	                            "pattern": "^arn:(aws[a-zA-Z-]*):secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+$",
 		//	                            "type": "string"
 		//	                          }
@@ -165,7 +165,7 @@ func routerInputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                  "SourcePort": {
 		//	                    "description": "The source port number for the SRT protocol in caller mode.",
 		//	                    "maximum": 65535,
-		//	                    "minimum": 0,
+		//	                    "minimum": 1024,
 		//	                    "type": "integer"
 		//	                  },
 		//	                  "StreamId": {
@@ -190,15 +190,15 @@ func routerInputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                    "properties": {
 		//	                      "EncryptionKey": {
 		//	                        "additionalProperties": false,
-		//	                        "description": "The configuration settings for transit encryption using AWS Secrets Manager, including the secret ARN and role ARN.",
+		//	                        "description": "The configuration settings for transit encryption using Secrets Manager, including the secret ARN and role ARN.",
 		//	                        "properties": {
 		//	                          "RoleArn": {
-		//	                            "description": "The ARN of the IAM role assumed by MediaConnect to access the AWS Secrets Manager secret.",
+		//	                            "description": "The ARN of the IAM role assumed by MediaConnect to access the Secrets Manager secret.",
 		//	                            "pattern": "^arn:(aws[a-zA-Z-]*):iam::[0-9]{12}:role/[a-zA-Z0-9_+=,.@-]+$",
 		//	                            "type": "string"
 		//	                          },
 		//	                          "SecretArn": {
-		//	                            "description": "The ARN of the AWS Secrets Manager secret used for transit encryption.",
+		//	                            "description": "The ARN of the Secrets Manager secret used for transit encryption.",
 		//	                            "pattern": "^arn:(aws[a-zA-Z-]*):secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+$",
 		//	                            "type": "string"
 		//	                          }
@@ -282,15 +282,90 @@ func routerInputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                },
 		//	                "SecretsManager": {
 		//	                  "additionalProperties": false,
-		//	                  "description": "The configuration settings for transit encryption using AWS Secrets Manager, including the secret ARN and role ARN.",
+		//	                  "description": "The configuration settings for transit encryption using Secrets Manager, including the secret ARN and role ARN.",
 		//	                  "properties": {
 		//	                    "RoleArn": {
-		//	                      "description": "The ARN of the IAM role assumed by MediaConnect to access the AWS Secrets Manager secret.",
+		//	                      "description": "The ARN of the IAM role assumed by MediaConnect to access the Secrets Manager secret.",
 		//	                      "pattern": "^arn:(aws[a-zA-Z-]*):iam::[0-9]{12}:role/[a-zA-Z0-9_+=,.@-]+$",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "SecretArn": {
-		//	                      "description": "The ARN of the AWS Secrets Manager secret used for transit encryption.",
+		//	                      "description": "The ARN of the Secrets Manager secret used for transit encryption.",
+		//	                      "pattern": "^arn:(aws[a-zA-Z-]*):secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+$",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "RoleArn",
+		//	                    "SecretArn"
+		//	                  ],
+		//	                  "type": "object"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "EncryptionKeyType": {
+		//	              "enum": [
+		//	                "SECRETS_MANAGER",
+		//	                "AUTOMATIC"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "EncryptionKeyConfiguration"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "SourceTransitDecryption"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "MediaLiveChannel": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration settings for connecting a router input to a MediaLive channel output.",
+		//	      "properties": {
+		//	        "MediaLiveChannelArn": {
+		//	          "description": "The ARN of the MediaLive channel to connect to this router input.",
+		//	          "pattern": "^arn:(aws[a-zA-Z-]*):medialive:[a-z0-9-]+:[0-9]{12}:channel:[a-zA-Z0-9]+$",
+		//	          "type": "string"
+		//	        },
+		//	        "MediaLiveChannelOutputName": {
+		//	          "description": "The name of the MediaLive channel output to connect to this router input.",
+		//	          "type": "string"
+		//	        },
+		//	        "MediaLivePipelineId": {
+		//	          "enum": [
+		//	            "PIPELINE_0",
+		//	            "PIPELINE_1"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "SourceTransitDecryption": {
+		//	          "additionalProperties": false,
+		//	          "description": "The encryption configuration that defines how content is encrypted during transit between MediaConnect Router and MediaLive. This configuration determines whether encryption keys are automatically managed by the service or manually managed through Secrets Manager.",
+		//	          "properties": {
+		//	            "EncryptionKeyConfiguration": {
+		//	              "description": "Configuration settings for the MediaLive transit encryption key.",
+		//	              "properties": {
+		//	                "Automatic": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "Configuration settings for automatic encryption key management, where MediaConnect handles key creation and rotation.",
+		//	                  "type": "object"
+		//	                },
+		//	                "SecretsManager": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "The configuration settings for transit encryption using Secrets Manager, including the secret ARN and role ARN.",
+		//	                  "properties": {
+		//	                    "RoleArn": {
+		//	                      "description": "The ARN of the IAM role assumed by MediaConnect to access the Secrets Manager secret.",
+		//	                      "pattern": "^arn:(aws[a-zA-Z-]*):iam::[0-9]{12}:role/[a-zA-Z0-9_+=,.@-]+$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "SecretArn": {
+		//	                      "description": "The ARN of the Secrets Manager secret used for transit encryption.",
 		//	                      "pattern": "^arn:(aws[a-zA-Z-]*):secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+$",
 		//	                      "type": "string"
 		//	                    }
@@ -477,15 +552,15 @@ func routerInputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                  "properties": {
 		//	                    "EncryptionKey": {
 		//	                      "additionalProperties": false,
-		//	                      "description": "The configuration settings for transit encryption using AWS Secrets Manager, including the secret ARN and role ARN.",
+		//	                      "description": "The configuration settings for transit encryption using Secrets Manager, including the secret ARN and role ARN.",
 		//	                      "properties": {
 		//	                        "RoleArn": {
-		//	                          "description": "The ARN of the IAM role assumed by MediaConnect to access the AWS Secrets Manager secret.",
+		//	                          "description": "The ARN of the IAM role assumed by MediaConnect to access the Secrets Manager secret.",
 		//	                          "pattern": "^arn:(aws[a-zA-Z-]*):iam::[0-9]{12}:role/[a-zA-Z0-9_+=,.@-]+$",
 		//	                          "type": "string"
 		//	                        },
 		//	                        "SecretArn": {
-		//	                          "description": "The ARN of the AWS Secrets Manager secret used for transit encryption.",
+		//	                          "description": "The ARN of the Secrets Manager secret used for transit encryption.",
 		//	                          "pattern": "^arn:(aws[a-zA-Z-]*):secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+$",
 		//	                          "type": "string"
 		//	                        }
@@ -515,7 +590,7 @@ func routerInputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "SourcePort": {
 		//	                  "description": "The source port number for the SRT protocol in caller mode.",
 		//	                  "maximum": 65535,
-		//	                  "minimum": 0,
+		//	                  "minimum": 1024,
 		//	                  "type": "integer"
 		//	                },
 		//	                "StreamId": {
@@ -540,15 +615,15 @@ func routerInputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                  "properties": {
 		//	                    "EncryptionKey": {
 		//	                      "additionalProperties": false,
-		//	                      "description": "The configuration settings for transit encryption using AWS Secrets Manager, including the secret ARN and role ARN.",
+		//	                      "description": "The configuration settings for transit encryption using Secrets Manager, including the secret ARN and role ARN.",
 		//	                      "properties": {
 		//	                        "RoleArn": {
-		//	                          "description": "The ARN of the IAM role assumed by MediaConnect to access the AWS Secrets Manager secret.",
+		//	                          "description": "The ARN of the IAM role assumed by MediaConnect to access the Secrets Manager secret.",
 		//	                          "pattern": "^arn:(aws[a-zA-Z-]*):iam::[0-9]{12}:role/[a-zA-Z0-9_+=,.@-]+$",
 		//	                          "type": "string"
 		//	                        },
 		//	                        "SecretArn": {
-		//	                          "description": "The ARN of the AWS Secrets Manager secret used for transit encryption.",
+		//	                          "description": "The ARN of the Secrets Manager secret used for transit encryption.",
 		//	                          "pattern": "^arn:(aws[a-zA-Z-]*):secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+$",
 		//	                          "type": "string"
 		//	                        }
@@ -660,16 +735,16 @@ func routerInputDataSource(ctx context.Context) (datasource.DataSource, error) {
 														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 															// Property: RoleArn
 															"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The ARN of the IAM role assumed by MediaConnect to access the AWS Secrets Manager secret.",
+																Description: "The ARN of the IAM role assumed by MediaConnect to access the Secrets Manager secret.",
 																Computed:    true,
 															}, /*END ATTRIBUTE*/
 															// Property: SecretArn
 															"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The ARN of the AWS Secrets Manager secret used for transit encryption.",
+																Description: "The ARN of the Secrets Manager secret used for transit encryption.",
 																Computed:    true,
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
-														Description: "The configuration settings for transit encryption using AWS Secrets Manager, including the secret ARN and role ARN.",
+														Description: "The configuration settings for transit encryption using Secrets Manager, including the secret ARN and role ARN.",
 														Computed:    true,
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
@@ -711,16 +786,16 @@ func routerInputDataSource(ctx context.Context) (datasource.DataSource, error) {
 														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 															// Property: RoleArn
 															"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The ARN of the IAM role assumed by MediaConnect to access the AWS Secrets Manager secret.",
+																Description: "The ARN of the IAM role assumed by MediaConnect to access the Secrets Manager secret.",
 																Computed:    true,
 															}, /*END ATTRIBUTE*/
 															// Property: SecretArn
 															"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The ARN of the AWS Secrets Manager secret used for transit encryption.",
+																Description: "The ARN of the Secrets Manager secret used for transit encryption.",
 																Computed:    true,
 															}, /*END ATTRIBUTE*/
 														}, /*END SCHEMA*/
-														Description: "The configuration settings for transit encryption using AWS Secrets Manager, including the secret ARN and role ARN.",
+														Description: "The configuration settings for transit encryption using Secrets Manager, including the secret ARN and role ARN.",
 														Computed:    true,
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
@@ -784,16 +859,16 @@ func routerInputDataSource(ctx context.Context) (datasource.DataSource, error) {
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: RoleArn
 												"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The ARN of the IAM role assumed by MediaConnect to access the AWS Secrets Manager secret.",
+													Description: "The ARN of the IAM role assumed by MediaConnect to access the Secrets Manager secret.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: SecretArn
 												"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The ARN of the AWS Secrets Manager secret used for transit encryption.",
+													Description: "The ARN of the Secrets Manager secret used for transit encryption.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
-											Description: "The configuration settings for transit encryption using AWS Secrets Manager, including the secret ARN and role ARN.",
+											Description: "The configuration settings for transit encryption using Secrets Manager, including the secret ARN and role ARN.",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
@@ -810,6 +885,68 @@ func routerInputDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Configuration settings for connecting a router input to a flow output.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MediaLiveChannel
+				"media_live_channel": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MediaLiveChannelArn
+						"media_live_channel_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the MediaLive channel to connect to this router input.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MediaLiveChannelOutputName
+						"media_live_channel_output_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the MediaLive channel output to connect to this router input.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MediaLivePipelineId
+						"media_live_pipeline_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SourceTransitDecryption
+						"source_transit_decryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: EncryptionKeyConfiguration
+								"encryption_key_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Automatic
+										"automatic": schema.StringAttribute{ /*START ATTRIBUTE*/
+											CustomType:  jsontypes.NormalizedType{},
+											Description: "Configuration settings for automatic encryption key management, where MediaConnect handles key creation and rotation.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: SecretsManager
+										"secrets_manager": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: RoleArn
+												"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The ARN of the IAM role assumed by MediaConnect to access the Secrets Manager secret.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: SecretArn
+												"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The ARN of the Secrets Manager secret used for transit encryption.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "The configuration settings for transit encryption using Secrets Manager, including the secret ARN and role ARN.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Configuration settings for the MediaLive transit encryption key.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: EncryptionKeyType
+								"encryption_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The encryption configuration that defines how content is encrypted during transit between MediaConnect Router and MediaLive. This configuration determines whether encryption keys are automatically managed by the service or manually managed through Secrets Manager.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration settings for connecting a router input to a MediaLive channel output.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Merge
@@ -930,16 +1067,16 @@ func routerInputDataSource(ctx context.Context) (datasource.DataSource, error) {
 													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 														// Property: RoleArn
 														"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The ARN of the IAM role assumed by MediaConnect to access the AWS Secrets Manager secret.",
+															Description: "The ARN of the IAM role assumed by MediaConnect to access the Secrets Manager secret.",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 														// Property: SecretArn
 														"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The ARN of the AWS Secrets Manager secret used for transit encryption.",
+															Description: "The ARN of the Secrets Manager secret used for transit encryption.",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
-													Description: "The configuration settings for transit encryption using AWS Secrets Manager, including the secret ARN and role ARN.",
+													Description: "The configuration settings for transit encryption using Secrets Manager, including the secret ARN and role ARN.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
@@ -981,16 +1118,16 @@ func routerInputDataSource(ctx context.Context) (datasource.DataSource, error) {
 													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 														// Property: RoleArn
 														"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The ARN of the IAM role assumed by MediaConnect to access the AWS Secrets Manager secret.",
+															Description: "The ARN of the IAM role assumed by MediaConnect to access the Secrets Manager secret.",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 														// Property: SecretArn
 														"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The ARN of the AWS Secrets Manager secret used for transit encryption.",
+															Description: "The ARN of the Secrets Manager secret used for transit encryption.",
 															Computed:    true,
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
-													Description: "The configuration settings for transit encryption using AWS Secrets Manager, including the secret ARN and role ARN.",
+													Description: "The configuration settings for transit encryption using Secrets Manager, including the secret ARN and role ARN.",
 													Computed:    true,
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
@@ -1055,7 +1192,8 @@ func routerInputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "STANDARD",
 		//	    "FAILOVER",
 		//	    "MERGE",
-		//	    "MEDIACONNECT_FLOW"
+		//	    "MEDIACONNECT_FLOW",
+		//	    "MEDIALIVE_CHANNEL"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -1183,11 +1321,11 @@ func routerInputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The AWS Region for the router input. Defaults to the current region if not specified.",
+		//	  "description": "The Amazon Web Services Region for the router input. Defaults to the current region if not specified.",
 		//	  "type": "string"
 		//	}
 		"region_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS Region for the router input. Defaults to the current region if not specified.",
+			Description: "The Amazon Web Services Region for the router input. Defaults to the current region if not specified.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RoutedOutputs
@@ -1306,15 +1444,15 @@ func routerInputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        },
 		//	        "SecretsManager": {
 		//	          "additionalProperties": false,
-		//	          "description": "The configuration settings for transit encryption using AWS Secrets Manager, including the secret ARN and role ARN.",
+		//	          "description": "The configuration settings for transit encryption using Secrets Manager, including the secret ARN and role ARN.",
 		//	          "properties": {
 		//	            "RoleArn": {
-		//	              "description": "The ARN of the IAM role assumed by MediaConnect to access the AWS Secrets Manager secret.",
+		//	              "description": "The ARN of the IAM role assumed by MediaConnect to access the Secrets Manager secret.",
 		//	              "pattern": "^arn:(aws[a-zA-Z-]*):iam::[0-9]{12}:role/[a-zA-Z0-9_+=,.@-]+$",
 		//	              "type": "string"
 		//	            },
 		//	            "SecretArn": {
-		//	              "description": "The ARN of the AWS Secrets Manager secret used for transit encryption.",
+		//	              "description": "The ARN of the Secrets Manager secret used for transit encryption.",
 		//	              "pattern": "^arn:(aws[a-zA-Z-]*):secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:[a-zA-Z0-9/_+=.@-]+$",
 		//	              "type": "string"
 		//	            }
@@ -1357,16 +1495,16 @@ func routerInputDataSource(ctx context.Context) (datasource.DataSource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: RoleArn
 								"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The ARN of the IAM role assumed by MediaConnect to access the AWS Secrets Manager secret.",
+									Description: "The ARN of the IAM role assumed by MediaConnect to access the Secrets Manager secret.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: SecretArn
 								"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The ARN of the AWS Secrets Manager secret used for transit encryption.",
+									Description: "The ARN of the Secrets Manager secret used for transit encryption.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "The configuration settings for transit encryption using AWS Secrets Manager, including the secret ARN and role ARN.",
+							Description: "The configuration settings for transit encryption using Secrets Manager, including the secret ARN and role ARN.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -1433,6 +1571,10 @@ func routerInputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"maintenance_type":                   "MaintenanceType",
 		"maximum_bitrate":                    "MaximumBitrate",
 		"media_connect_flow":                 "MediaConnectFlow",
+		"media_live_channel":                 "MediaLiveChannel",
+		"media_live_channel_arn":             "MediaLiveChannelArn",
+		"media_live_channel_output_name":     "MediaLiveChannelOutputName",
+		"media_live_pipeline_id":             "MediaLivePipelineId",
 		"merge":                              "Merge",
 		"merge_recovery_window_milliseconds": "MergeRecoveryWindowMilliseconds",
 		"minimum_latency_milliseconds":       "MinimumLatencyMilliseconds",

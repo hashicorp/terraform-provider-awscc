@@ -38,16 +38,7 @@ Data Source schema for AWS::CloudFormation::GuardHook
 
 Read-Only:
 
-- `input_params` (Attributes) S3 Source Location for the Guard files. (see [below for nested schema](#nestedatt--options--input_params))
-
-<a id="nestedatt--options--input_params"></a>
-### Nested Schema for `options.input_params`
-
-Read-Only:
-
-- `uri` (String) S3 uri of Guard files.
-- `version_id` (String) S3 object version
-
+- `input_params` (String)
 
 
 <a id="nestedatt--rule_location"></a>

@@ -27,7 +27,9 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "insertionOrder": false,
 		//	  "items": {
+		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "ImpairedSince": {
 		//	        "type": "string"
@@ -82,8 +84,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "additionalProperties": false,
 		//	  "properties": {
 		//	    "PrivateRouteServerPeerings": {
+		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "maxLength": 21,
 		//	        "minLength": 3,
@@ -122,7 +126,9 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "insertionOrder": false,
 		//	  "items": {
+		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "SecretArn": {
 		//	        "type": "string"
@@ -149,7 +155,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "maxLength": 1011,
 		//	  "minLength": 1,
-		//	  "pattern": "^arn:aws:evs:[a-z]{2}-[a-z]+-[0-9]:[0-9]{12}:environment/[a-zA-Z0-9_-]+$",
+		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov):evs:[a-z]{2}-[a-z]+-[0-9]:[0-9]{12}:environment/[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
 		"environment_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -200,6 +206,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The initial hosts for environment only required upon creation. Modification after creation will have no effect",
 		//	  "insertionOrder": true,
 		//	  "items": {
+		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "DedicatedHostId": {
 		//	        "maxLength": 25,
@@ -213,7 +220,8 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "InstanceType": {
 		//	        "enum": [
-		//	          "i4i.metal"
+		//	          "i4i.metal",
+		//	          "i7i.metal-24xl"
 		//	        ],
 		//	        "type": "string"
 		//	      },
@@ -273,9 +281,11 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "additionalProperties": false,
 		//	  "description": "The initial Vlan configuration only required upon creation. Modification after creation will have no effect",
 		//	  "properties": {
 		//	    "EdgeVTep": {
+		//	      "additionalProperties": false,
 		//	      "properties": {
 		//	        "Cidr": {
 		//	          "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/(3[0-2]|[1-2][0-9]|[0-9])$",
@@ -288,6 +298,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "ExpansionVlan1": {
+		//	      "additionalProperties": false,
 		//	      "properties": {
 		//	        "Cidr": {
 		//	          "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/(3[0-2]|[1-2][0-9]|[0-9])$",
@@ -300,6 +311,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "ExpansionVlan2": {
+		//	      "additionalProperties": false,
 		//	      "properties": {
 		//	        "Cidr": {
 		//	          "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/(3[0-2]|[1-2][0-9]|[0-9])$",
@@ -312,6 +324,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "Hcx": {
+		//	      "additionalProperties": false,
 		//	      "properties": {
 		//	        "Cidr": {
 		//	          "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/(3[0-2]|[1-2][0-9]|[0-9])$",
@@ -331,6 +344,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "boolean"
 		//	    },
 		//	    "NsxUpLink": {
+		//	      "additionalProperties": false,
 		//	      "properties": {
 		//	        "Cidr": {
 		//	          "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/(3[0-2]|[1-2][0-9]|[0-9])$",
@@ -343,6 +357,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "VMotion": {
+		//	      "additionalProperties": false,
 		//	      "properties": {
 		//	        "Cidr": {
 		//	          "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/(3[0-2]|[1-2][0-9]|[0-9])$",
@@ -355,6 +370,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "VSan": {
+		//	      "additionalProperties": false,
 		//	      "properties": {
 		//	        "Cidr": {
 		//	          "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/(3[0-2]|[1-2][0-9]|[0-9])$",
@@ -367,6 +383,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "VTep": {
+		//	      "additionalProperties": false,
 		//	      "properties": {
 		//	        "Cidr": {
 		//	          "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/(3[0-2]|[1-2][0-9]|[0-9])$",
@@ -379,6 +396,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "VmManagement": {
+		//	      "additionalProperties": false,
 		//	      "properties": {
 		//	        "Cidr": {
 		//	          "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/(3[0-2]|[1-2][0-9]|[0-9])$",
@@ -391,6 +409,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "VmkManagement": {
+		//	      "additionalProperties": false,
 		//	      "properties": {
 		//	        "Cidr": {
 		//	          "pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/(3[0-2]|[1-2][0-9]|[0-9])$",
@@ -589,8 +608,10 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "additionalProperties": false,
 		//	  "properties": {
 		//	    "SecurityGroups": {
+		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "maxLength": 25,
 		//	        "minLength": 3,
@@ -705,6 +726,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "additionalProperties": false,
 		//	  "properties": {
 		//	    "CloudBuilder": {
 		//	      "pattern": "^([a-zA-Z0-9\\-]*)$",

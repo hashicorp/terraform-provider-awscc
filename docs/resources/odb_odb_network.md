@@ -37,6 +37,7 @@ The AWS::ODB::OdbNetwork resource creates an ODB Network
 
 ### Read-Only
 
+- `ec_2_placement_group_ids` (List of String) The list of EC2 placement group IDs associated with your ODB network.
 - `id` (String) Uniquely identifies the resource.
 - `managed_services` (Attributes) The managed services configuration for the ODB network. (see [below for nested schema](#nestedatt--managed_services))
 - `oci_network_anchor_id` (String) The unique identifier of the OCI network anchor for the ODB network.

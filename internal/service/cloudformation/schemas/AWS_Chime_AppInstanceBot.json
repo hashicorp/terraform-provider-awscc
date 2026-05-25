@@ -1,0 +1,224 @@
+{
+  "typeName": "AWS::Chime::AppInstanceBot",
+  "description": "Resource Type definition for AWS::Chime::AppInstanceBot",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {
+    "Tag": {
+      "description": "A tag object containing a key-value pair.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "description": "The key in a tag.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "description": "The value in a tag.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "InvokedBy": {
+      "description": "Specifies the type of message that triggers a bot.",
+      "type": "object",
+      "properties": {
+        "StandardMessages": {
+          "description": "Sets standard messages as the bot trigger.",
+          "type": "string",
+          "enum": [
+            "AUTO",
+            "ALL",
+            "MENTIONS",
+            "NONE"
+          ]
+        },
+        "TargetedMessages": {
+          "description": "Sets targeted messages as the bot trigger.",
+          "type": "string",
+          "enum": [
+            "ALL",
+            "NONE"
+          ]
+        }
+      },
+      "required": [
+        "StandardMessages",
+        "TargetedMessages"
+      ],
+      "additionalProperties": false
+    },
+    "LexConfiguration": {
+      "description": "The configuration for an Amazon Lex V2 bot.",
+      "type": "object",
+      "properties": {
+        "RespondsTo": {
+          "description": "Determines whether the Amazon Lex V2 bot responds to all standard messages. Control messages are not supported.",
+          "type": "string",
+          "enum": [
+            "STANDARD_MESSAGES"
+          ]
+        },
+        "InvokedBy": {
+          "$ref": "#/definitions/InvokedBy"
+        },
+        "LexBotAliasArn": {
+          "description": "The ARN of the Amazon Lex V2 bot's alias.",
+          "type": "string",
+          "minLength": 15,
+          "maxLength": 2048,
+          "pattern": "^arn:aws:lex:[a-z]{2}-[a-z]+-\\d{1}:\\d{12}:bot-alias/[A-Z0-9]{10}/[A-Z0-9]{10}$"
+        },
+        "LocaleId": {
+          "description": "Identifies the Amazon Lex V2 bot's language and locale.",
+          "type": "string"
+        },
+        "WelcomeIntent": {
+          "description": "The name of the welcome intent configured in the Amazon Lex V2 bot.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^([A-Za-z]_?)+$"
+        }
+      },
+      "required": [
+        "LexBotAliasArn",
+        "LocaleId"
+      ],
+      "additionalProperties": false
+    },
+    "Configuration": {
+      "description": "A structure that contains configuration data.",
+      "type": "object",
+      "properties": {
+        "Lex": {
+          "$ref": "#/definitions/LexConfiguration"
+        }
+      },
+      "required": [
+        "Lex"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "AppInstanceArn": {
+      "description": "The ARN of the AppInstance.",
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 1600,
+      "pattern": ""
+    },
+    "AppInstanceBotArn": {
+      "description": "The ARN of the AppInstanceBot.",
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 1600,
+      "pattern": ""
+    },
+    "Name": {
+      "description": "The name of the AppInstanceBot.",
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 256,
+      "pattern": ""
+    },
+    "Metadata": {
+      "description": "The metadata of the AppInstanceBot.",
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 1024,
+      "pattern": ".*"
+    },
+    "Configuration": {
+      "$ref": "#/definitions/Configuration"
+    },
+    "CreatedTimestamp": {
+      "description": "The time at which the AppInstanceBot was created. In epoch milliseconds.",
+      "type": "number"
+    },
+    "LastUpdatedTimestamp": {
+      "description": "The time at which the AppInstanceBot was last updated. In epoch milliseconds.",
+      "type": "number"
+    },
+    "Tags": {
+      "description": "The tags assigned to the AppInstanceBot.",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "AppInstanceArn",
+    "Configuration"
+  ],
+  "readOnlyProperties": [
+    "/properties/AppInstanceBotArn",
+    "/properties/CreatedTimestamp",
+    "/properties/LastUpdatedTimestamp"
+  ],
+  "createOnlyProperties": [
+    "/properties/AppInstanceArn"
+  ],
+  "primaryIdentifier": [
+    "/properties/AppInstanceBotArn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "chime:CreateAppInstanceBot",
+        "chime:DescribeAppInstanceBot",
+        "chime:TagResource",
+        "chime:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "chime:DescribeAppInstanceBot",
+        "chime:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "chime:UpdateAppInstanceBot",
+        "chime:DescribeAppInstanceBot",
+        "chime:TagResource",
+        "chime:UntagResource",
+        "chime:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "chime:DeleteAppInstanceBot",
+        "chime:DescribeAppInstanceBot"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "chime:ListAppInstanceBots"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "chime:TagResource",
+      "chime:UntagResource",
+      "chime:ListTagsForResource"
+    ]
+  }
+}

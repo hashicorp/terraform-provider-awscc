@@ -87,6 +87,29 @@ func monitorResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: IdentityCenterRegion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS region where IAM Identity Center is enabled. Required when Identity Center is in a different region than the monitor.",
+		//	  "maxLength": 25,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-z0-9-]+$",
+		//	  "type": "string"
+		//	}
+		"identity_center_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS region where IAM Identity Center is enabled. Required when Identity Center is in a different region than the monitor.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 25),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9-]+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: MonitorId
 		// CloudFormation resource type schema:
 		//
@@ -224,7 +247,7 @@ func monitorResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Definition of AWS::Deadline::Monitor Resource Type",
+		Description: "Resource Type definition for AWS::Deadline::Monitor",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -244,6 +267,7 @@ func monitorResource(ctx context.Context) (resource.Resource, error) {
 		"display_name":                    "DisplayName",
 		"identity_center_application_arn": "IdentityCenterApplicationArn",
 		"identity_center_instance_arn":    "IdentityCenterInstanceArn",
+		"identity_center_region":          "IdentityCenterRegion",
 		"key":                             "Key",
 		"monitor_id":                      "MonitorId",
 		"role_arn":                        "RoleArn",

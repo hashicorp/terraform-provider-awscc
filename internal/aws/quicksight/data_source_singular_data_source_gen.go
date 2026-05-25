@@ -4313,7 +4313,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "items": {
 		//	          "type": "string"
 		//	        },
-		//	        "maxItems": 20,
+		//	        "maxItems": 30,
 		//	        "minItems": 1,
 		//	        "type": "array"
 		//	      },
@@ -4472,6 +4472,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "DB2_AS400",
 		//	    "EXASOL",
 		//	    "FILE",
+		//	    "FULLY_MANAGED_KNOWLEDGE_BASE",
 		//	    "GITHUB",
 		//	    "INTERNATIONAL_DATA_CORPORATION",
 		//	    "JIRA",
@@ -4509,7 +4510,8 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "SHAREPOINT",
 		//	    "ONE_DRIVE",
 		//	    "WEB_CRAWLER",
-		//	    "BOX"
+		//	    "BOX",
+		//	    "GOOGLESHEETS"
 		//	  ],
 		//	  "type": "string"
 		//	}

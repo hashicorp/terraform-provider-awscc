@@ -104,6 +104,10 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		//	            "pattern": "[a-zA-Z0-9\\(\\)\\.\\-/_]+",
 		//	            "type": "string"
 		//	          },
+		//	          "LaunchTemplateSpecificationUserData": {
+		//	            "format": "password",
+		//	            "type": "string"
+		//	          },
 		//	          "Version": {
 		//	            "type": "string"
 		//	          }
@@ -177,6 +181,18 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		//	              },
 		//	              "type": "array",
 		//	              "uniqueItems": true
+		//	            },
+		//	            "IamInstanceProfile": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Arn": {
+		//	                  "type": "string"
+		//	                },
+		//	                "Name": {
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
 		//	            },
 		//	            "InstanceRequirements": {
 		//	              "additionalProperties": false,
@@ -469,8 +485,113 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		//	            "InstanceType": {
 		//	              "type": "string"
 		//	            },
+		//	            "KeyName": {
+		//	              "type": "string"
+		//	            },
 		//	            "MaxPrice": {
 		//	              "type": "string"
+		//	            },
+		//	            "MetadataOptions": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "HttpEndpoint": {
+		//	                  "enum": [
+		//	                    "disabled",
+		//	                    "enabled"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "HttpPutResponseHopLimit": {
+		//	                  "type": "integer"
+		//	                },
+		//	                "HttpTokens": {
+		//	                  "enum": [
+		//	                    "optional",
+		//	                    "required"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "NetworkInterfaces": {
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "AssociatePublicIpAddress": {
+		//	                    "type": "boolean"
+		//	                  },
+		//	                  "DeleteOnTermination": {
+		//	                    "type": "boolean"
+		//	                  },
+		//	                  "Description": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "DeviceIndex": {
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "Groups": {
+		//	                    "items": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "type": "array",
+		//	                    "uniqueItems": false
+		//	                  },
+		//	                  "InterfaceType": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Ipv6AddressCount": {
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "Ipv6Addresses": {
+		//	                    "items": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "Ipv6Address": {
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    },
+		//	                    "type": "array",
+		//	                    "uniqueItems": false
+		//	                  },
+		//	                  "NetworkCardIndex": {
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "NetworkInterfaceId": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "PrivateIpAddress": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "PrivateIpAddresses": {
+		//	                    "items": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "Primary": {
+		//	                          "type": "boolean"
+		//	                        },
+		//	                        "PrivateIpAddress": {
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    },
+		//	                    "type": "array",
+		//	                    "uniqueItems": false
+		//	                  },
+		//	                  "SecondaryPrivateIpAddressCount": {
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "SubnetId": {
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": false
 		//	            },
 		//	            "Placement": {
 		//	              "additionalProperties": false,
@@ -546,6 +667,14 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 									stringvalidator.LengthBetween(3, 128),
 									stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9\\(\\)\\.\\-/_]+"), ""),
 								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: LaunchTemplateSpecificationUserData
+							"launch_template_specification_user_data": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
@@ -702,6 +831,32 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: IamInstanceProfile
+								"iam_instance_profile": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Arn
+										"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: InstanceRequirements
@@ -1237,12 +1392,223 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
+								// Property: KeyName
+								"key_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
 								// Property: MaxPrice
 								"max_price": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: MetadataOptions
+								"metadata_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: HttpEndpoint
+										"http_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"disabled",
+													"enabled",
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: HttpPutResponseHopLimit
+										"http_put_response_hop_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: HttpTokens
+										"http_tokens": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"optional",
+													"required",
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: NetworkInterfaces
+								"network_interfaces": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: AssociatePublicIpAddress
+											"associate_public_ip_address": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+													boolplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: DeleteOnTermination
+											"delete_on_termination": schema.BoolAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+													boolplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Description
+											"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: DeviceIndex
+											"device_index": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Groups
+											"groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													listplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: InterfaceType
+											"interface_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Ipv6AddressCount
+											"ipv_6_address_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Ipv6Addresses
+											"ipv_6_addresses": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Ipv6Address
+														"ipv_6_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Optional: true,
+															Computed: true,
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													listplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: NetworkCardIndex
+											"network_card_index": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: NetworkInterfaceId
+											"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: PrivateIpAddress
+											"private_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: PrivateIpAddresses
+											"private_ip_addresses": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Primary
+														"primary": schema.BoolAttribute{ /*START ATTRIBUTE*/
+															Optional: true,
+															Computed: true,
+															PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+																boolplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: PrivateIpAddress
+														"private_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Optional: true,
+															Computed: true,
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													listplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: SecondaryPrivateIpAddressCount
+											"secondary_private_ip_address_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: SubnetId
+											"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Placement
@@ -1925,6 +2291,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		//	      "enum": [
 		//	        "on-demand",
 		//	        "spot",
+		//	        "capacity-block",
 		//	        "reserved-capacity"
 		//	      ],
 		//	      "type": "string"
@@ -1962,6 +2329,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 						stringvalidator.OneOf(
 							"on-demand",
 							"spot",
+							"capacity-block",
 							"reserved-capacity",
 						),
 					}, /*END VALIDATORS*/
@@ -2105,63 +2473,83 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"accelerator_count":                  "AcceleratorCount",
-		"accelerator_manufacturers":          "AcceleratorManufacturers",
-		"accelerator_names":                  "AcceleratorNames",
-		"accelerator_total_memory_mi_b":      "AcceleratorTotalMemoryMiB",
-		"accelerator_types":                  "AcceleratorTypes",
-		"affinity":                           "Affinity",
-		"allocation_strategy":                "AllocationStrategy",
-		"allowed_instance_types":             "AllowedInstanceTypes",
-		"availability_zone":                  "AvailabilityZone",
-		"availability_zone_id":               "AvailabilityZoneId",
-		"bare_metal":                         "BareMetal",
-		"baseline_ebs_bandwidth_mbps":        "BaselineEbsBandwidthMbps",
-		"baseline_performance_factors":       "BaselinePerformanceFactors",
-		"block_device_mappings":              "BlockDeviceMappings",
-		"burstable_performance":              "BurstablePerformance",
-		"capacity_rebalance":                 "CapacityRebalance",
-		"capacity_reservation_options":       "CapacityReservationOptions",
-		"context":                            "Context",
-		"cpu":                                "Cpu",
-		"cpu_manufacturers":                  "CpuManufacturers",
-		"default_target_capacity_type":       "DefaultTargetCapacityType",
-		"delete_on_termination":              "DeleteOnTermination",
-		"device_name":                        "DeviceName",
-		"ebs":                                "Ebs",
-		"encrypted":                          "Encrypted",
-		"excess_capacity_termination_policy": "ExcessCapacityTerminationPolicy",
-		"excluded_instance_types":            "ExcludedInstanceTypes",
-		"fleet_id":                           "FleetId",
-		"group_name":                         "GroupName",
-		"host_id":                            "HostId",
-		"host_resource_group_arn":            "HostResourceGroupArn",
-		"instance_family":                    "InstanceFamily",
-		"instance_generations":               "InstanceGenerations",
-		"instance_interruption_behavior":     "InstanceInterruptionBehavior",
-		"instance_pools_to_use_count":        "InstancePoolsToUseCount",
-		"instance_requirements":              "InstanceRequirements",
-		"instance_type":                      "InstanceType",
-		"iops":                               "Iops",
-		"key":                                "Key",
-		"kms_key_id":                         "KmsKeyId",
-		"launch_template_configs":            "LaunchTemplateConfigs",
-		"launch_template_id":                 "LaunchTemplateId",
-		"launch_template_name":               "LaunchTemplateName",
-		"launch_template_specification":      "LaunchTemplateSpecification",
-		"local_storage":                      "LocalStorage",
-		"local_storage_types":                "LocalStorageTypes",
-		"maintenance_strategies":             "MaintenanceStrategies",
-		"max":                                "Max",
-		"max_price":                          "MaxPrice",
+		"accelerator_count":                       "AcceleratorCount",
+		"accelerator_manufacturers":               "AcceleratorManufacturers",
+		"accelerator_names":                       "AcceleratorNames",
+		"accelerator_total_memory_mi_b":           "AcceleratorTotalMemoryMiB",
+		"accelerator_types":                       "AcceleratorTypes",
+		"affinity":                                "Affinity",
+		"allocation_strategy":                     "AllocationStrategy",
+		"allowed_instance_types":                  "AllowedInstanceTypes",
+		"arn":                                     "Arn",
+		"associate_public_ip_address":             "AssociatePublicIpAddress",
+		"availability_zone":                       "AvailabilityZone",
+		"availability_zone_id":                    "AvailabilityZoneId",
+		"bare_metal":                              "BareMetal",
+		"baseline_ebs_bandwidth_mbps":             "BaselineEbsBandwidthMbps",
+		"baseline_performance_factors":            "BaselinePerformanceFactors",
+		"block_device_mappings":                   "BlockDeviceMappings",
+		"burstable_performance":                   "BurstablePerformance",
+		"capacity_rebalance":                      "CapacityRebalance",
+		"capacity_reservation_options":            "CapacityReservationOptions",
+		"context":                                 "Context",
+		"cpu":                                     "Cpu",
+		"cpu_manufacturers":                       "CpuManufacturers",
+		"default_target_capacity_type":            "DefaultTargetCapacityType",
+		"delete_on_termination":                   "DeleteOnTermination",
+		"description":                             "Description",
+		"device_index":                            "DeviceIndex",
+		"device_name":                             "DeviceName",
+		"ebs":                                     "Ebs",
+		"encrypted":                               "Encrypted",
+		"excess_capacity_termination_policy":      "ExcessCapacityTerminationPolicy",
+		"excluded_instance_types":                 "ExcludedInstanceTypes",
+		"fleet_id":                                "FleetId",
+		"group_name":                              "GroupName",
+		"groups":                                  "Groups",
+		"host_id":                                 "HostId",
+		"host_resource_group_arn":                 "HostResourceGroupArn",
+		"http_endpoint":                           "HttpEndpoint",
+		"http_put_response_hop_limit":             "HttpPutResponseHopLimit",
+		"http_tokens":                             "HttpTokens",
+		"iam_instance_profile":                    "IamInstanceProfile",
+		"instance_family":                         "InstanceFamily",
+		"instance_generations":                    "InstanceGenerations",
+		"instance_interruption_behavior":          "InstanceInterruptionBehavior",
+		"instance_pools_to_use_count":             "InstancePoolsToUseCount",
+		"instance_requirements":                   "InstanceRequirements",
+		"instance_type":                           "InstanceType",
+		"interface_type":                          "InterfaceType",
+		"iops":                                    "Iops",
+		"ipv_6_address":                           "Ipv6Address",
+		"ipv_6_address_count":                     "Ipv6AddressCount",
+		"ipv_6_addresses":                         "Ipv6Addresses",
+		"key":                                     "Key",
+		"key_name":                                "KeyName",
+		"kms_key_id":                              "KmsKeyId",
+		"launch_template_configs":                 "LaunchTemplateConfigs",
+		"launch_template_id":                      "LaunchTemplateId",
+		"launch_template_name":                    "LaunchTemplateName",
+		"launch_template_specification":           "LaunchTemplateSpecification",
+		"launch_template_specification_user_data": "LaunchTemplateSpecificationUserData",
+		"local_storage":                           "LocalStorage",
+		"local_storage_types":                     "LocalStorageTypes",
+		"maintenance_strategies":                  "MaintenanceStrategies",
+		"max":                                     "Max",
+		"max_price":                               "MaxPrice",
 		"max_spot_price_as_percentage_of_optimal_on_demand_price": "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice",
 		"max_total_price":         "MaxTotalPrice",
 		"memory_gi_b_per_v_cpu":   "MemoryGiBPerVCpu",
 		"memory_mi_b":             "MemoryMiB",
+		"metadata_options":        "MetadataOptions",
 		"min":                     "Min",
 		"min_target_capacity":     "MinTargetCapacity",
+		"name":                    "Name",
 		"network_bandwidth_gbps":  "NetworkBandwidthGbps",
+		"network_card_index":      "NetworkCardIndex",
 		"network_interface_count": "NetworkInterfaceCount",
+		"network_interface_id":    "NetworkInterfaceId",
+		"network_interfaces":      "NetworkInterfaces",
 		"no_device":               "NoDevice",
 		"on_demand_max_price_percentage_over_lowest_price": "OnDemandMaxPricePercentageOverLowestPrice",
 		"on_demand_options":                           "OnDemandOptions",
@@ -2169,7 +2557,10 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		"overrides":                                   "Overrides",
 		"partition_number":                            "PartitionNumber",
 		"placement":                                   "Placement",
+		"primary":                                     "Primary",
 		"priority":                                    "Priority",
+		"private_ip_address":                          "PrivateIpAddress",
+		"private_ip_addresses":                        "PrivateIpAddresses",
 		"references":                                  "References",
 		"replace_unhealthy_instances":                 "ReplaceUnhealthyInstances",
 		"replacement_strategy":                        "ReplacementStrategy",
@@ -2178,6 +2569,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		"reservation_types":                           "ReservationTypes",
 		"reserved_capacity_options":                   "ReservedCapacityOptions",
 		"resource_type":                               "ResourceType",
+		"secondary_private_ip_address_count":          "SecondaryPrivateIpAddressCount",
 		"single_availability_zone":                    "SingleAvailabilityZone",
 		"single_instance_type":                        "SingleInstanceType",
 		"snapshot_id":                                 "SnapshotId",

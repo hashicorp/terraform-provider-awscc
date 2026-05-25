@@ -3,12 +3,12 @@
 page_title: "awscc_deadline_license_endpoint Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Definition of AWS::Deadline::LicenseEndpoint Resource Type
+  Resource Type definition for AWS::Deadline::LicenseEndpoint
 ---
 
 # awscc_deadline_license_endpoint (Resource)
 
-Definition of AWS::Deadline::LicenseEndpoint Resource Type
+Resource Type definition for AWS::Deadline::LicenseEndpoint
 
 ## Example Usage
 

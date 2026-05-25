@@ -25,6 +25,7 @@ Data Source schema for AWS::Deadline::Monitor
 - `display_name` (String)
 - `identity_center_application_arn` (String)
 - `identity_center_instance_arn` (String)
+- `identity_center_region` (String) The AWS region where IAM Identity Center is enabled. Required when Identity Center is in a different region than the monitor.
 - `monitor_id` (String)
 - `role_arn` (String)
 - `subdomain` (String)

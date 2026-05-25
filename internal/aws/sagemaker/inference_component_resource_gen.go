@@ -975,7 +975,7 @@ func inferenceComponentResource(ctx context.Context) (resource.Resource, error) 
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	opts = opts.WithUpdateTimeoutInMinutes(0)
+	opts = opts.WithUpdateTimeoutInMinutes(490)
 
 	v, err := generic.NewResource(ctx, opts...)
 

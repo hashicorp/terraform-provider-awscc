@@ -8,6 +8,7 @@ package cloudformation
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -110,21 +111,6 @@ func guardHookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "additionalProperties": false,
 		//	  "properties": {
 		//	    "InputParams": {
-		//	      "additionalProperties": false,
-		//	      "description": "S3 Source Location for the Guard files.",
-		//	      "properties": {
-		//	        "Uri": {
-		//	          "description": "S3 uri of Guard files.",
-		//	          "type": "string"
-		//	        },
-		//	        "VersionId": {
-		//	          "description": "S3 object version",
-		//	          "type": "string"
-		//	        }
-		//	      },
-		//	      "required": [
-		//	        "Uri"
-		//	      ],
 		//	      "type": "object"
 		//	    }
 		//	  }
@@ -132,21 +118,9 @@ func guardHookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: InputParams
-				"input_params": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Uri
-						"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "S3 uri of Guard files.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: VersionId
-						"version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "S3 object version",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "S3 Source Location for the Guard files.",
-					Computed:    true,
+				"input_params": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType: jsontypes.NormalizedType{},
+					Computed:   true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Computed: true,

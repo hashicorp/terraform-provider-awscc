@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
@@ -125,6 +126,60 @@ func responderGatewayResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "array",
 		//	          "uniqueItems": true
 		//	        },
+		//	        "HealthCheckConfig": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "HealthyThresholdCount": {
+		//	              "maximum": 10,
+		//	              "minimum": 2,
+		//	              "type": "integer"
+		//	            },
+		//	            "IntervalSeconds": {
+		//	              "maximum": 60,
+		//	              "minimum": 5,
+		//	              "type": "integer"
+		//	            },
+		//	            "Path": {
+		//	              "maxLength": 128,
+		//	              "minLength": 1,
+		//	              "pattern": "^/.*$",
+		//	              "type": "string"
+		//	            },
+		//	            "Port": {
+		//	              "maximum": 65535,
+		//	              "minimum": 80,
+		//	              "type": "integer"
+		//	            },
+		//	            "Protocol": {
+		//	              "enum": [
+		//	                "HTTP",
+		//	                "HTTPS"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "StatusCodeMatcher": {
+		//	              "maxLength": 2000,
+		//	              "minLength": 3,
+		//	              "pattern": "^[0-9,\\-]+$",
+		//	              "type": "string"
+		//	            },
+		//	            "TimeoutMs": {
+		//	              "maximum": 5000,
+		//	              "minimum": 100,
+		//	              "type": "integer"
+		//	            },
+		//	            "UnhealthyThresholdCount": {
+		//	              "maximum": 10,
+		//	              "minimum": 2,
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Port",
+		//	            "Path"
+		//	          ],
+		//	          "type": "object"
+		//	        },
 		//	        "RoleArn": {
 		//	          "type": "string"
 		//	        }
@@ -193,6 +248,111 @@ func responderGatewayResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 								setplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: HealthCheckConfig
+						"health_check_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: HealthyThresholdCount
+								"healthy_threshold_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										int64validator.Between(2, 10),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: IntervalSeconds
+								"interval_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										int64validator.Between(5, 60),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Path
+								"path": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 128),
+										stringvalidator.RegexMatches(regexp.MustCompile("^/.*$"), ""),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Port
+								"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										int64validator.Between(80, 65535),
+										fwvalidators.NotNullInt64(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Protocol
+								"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"HTTP",
+											"HTTPS",
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: StatusCodeMatcher
+								"status_code_matcher": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(3, 2000),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[0-9,\\-]+$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: TimeoutMs
+								"timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										int64validator.Between(100, 5000),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: UnhealthyThresholdCount
+								"unhealthy_threshold_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										int64validator.Between(2, 10),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: RoleArn
@@ -422,6 +582,7 @@ func responderGatewayResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 		//	        "maxLength": 128,
 		//	        "minLength": 1,
+		//	        "pattern": "^(resourceArn|internalId|[a-zA-Z0-9+\\-=._:/@]+)$",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
@@ -451,6 +612,7 @@ func responderGatewayResource(ctx context.Context) (resource.Resource, error) {
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.RegexMatches(regexp.MustCompile("^(resourceArn|internalId|[a-zA-Z0-9+\\-=._:/@]+)$"), ""),
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -602,16 +764,23 @@ func responderGatewayResource(ctx context.Context) (resource.Resource, error) {
 		"endpoints_resource_name":                 "EndpointsResourceName",
 		"endpoints_resource_namespace":            "EndpointsResourceNamespace",
 		"gateway_id":                              "GatewayId",
+		"health_check_config":                     "HealthCheckConfig",
+		"healthy_threshold_count":                 "HealthyThresholdCount",
+		"interval_seconds":                        "IntervalSeconds",
 		"key":                                     "Key",
 		"managed_endpoint_configuration":          "ManagedEndpointConfiguration",
+		"path":                                    "Path",
 		"port":                                    "Port",
 		"protocol":                                "Protocol",
 		"responder_gateway_status":                "ResponderGatewayStatus",
 		"role_arn":                                "RoleArn",
 		"security_group_ids":                      "SecurityGroupIds",
+		"status_code_matcher":                     "StatusCodeMatcher",
 		"subnet_ids":                              "SubnetIds",
 		"tags":                                    "Tags",
+		"timeout_ms":                              "TimeoutMs",
 		"trust_store_configuration":               "TrustStoreConfiguration",
+		"unhealthy_threshold_count":               "UnhealthyThresholdCount",
 		"updated_timestamp":                       "UpdatedTimestamp",
 		"value":                                   "Value",
 		"vpc_id":                                  "VpcId",

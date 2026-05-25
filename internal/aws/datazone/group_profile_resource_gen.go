@@ -72,12 +72,14 @@ func groupProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"group_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the group.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.RegexMatches(regexp.MustCompile("(^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$|[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\t\\n\\r  ]+)"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// GroupIdentifier is a write-only property.
 		}, /*END ATTRIBUTE*/
@@ -98,6 +100,32 @@ func groupProfileResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: GroupType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The type of the group.",
+		//	  "enum": [
+		//	    "DATAZONE_SSO_GROUP",
+		//	    "IAM_ROLE_SESSION_GROUP"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"group_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of the group.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"DATAZONE_SSO_GROUP",
+					"IAM_ROLE_SESSION_GROUP",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// GroupType is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -108,6 +136,37 @@ func groupProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"group_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the Amazon DataZone group profile.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RolePrincipalArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the role principal for the group profile.",
+		//	  "type": "string"
+		//	}
+		"role_principal_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the role principal for the group profile.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// RolePrincipalArn is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: RolePrincipalId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the role principal for the group profile.",
+		//	  "type": "string"
+		//	}
+		"role_principal_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the role principal for the group profile.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -172,17 +231,22 @@ func groupProfileResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"domain_id":         "DomainId",
-		"domain_identifier": "DomainIdentifier",
-		"group_identifier":  "GroupIdentifier",
-		"group_name":        "GroupName",
-		"group_profile_id":  "Id",
-		"status":            "Status",
+		"domain_id":          "DomainId",
+		"domain_identifier":  "DomainIdentifier",
+		"group_identifier":   "GroupIdentifier",
+		"group_name":         "GroupName",
+		"group_profile_id":   "Id",
+		"group_type":         "GroupType",
+		"role_principal_arn": "RolePrincipalArn",
+		"role_principal_id":  "RolePrincipalId",
+		"status":             "Status",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/DomainIdentifier",
 		"/properties/GroupIdentifier",
+		"/properties/RolePrincipalArn",
+		"/properties/GroupType",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

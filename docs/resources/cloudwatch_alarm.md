@@ -61,6 +61,8 @@ resource "awscc_cloudwatch_alarm" "lambda_invocations_alarm" {
  If you omit this parameter, CW uses the same value here that you set for ``EvaluationPeriods``, and the alarm goes to alarm state if that many consecutive periods are breaching.
 - `dimensions` (Attributes List) The dimensions for the metric associated with the alarm. For an alarm based on a math expression, you can't specify ``Dimensions``. Instead, you use ``Metrics``. (see [below for nested schema](#nestedatt--dimensions))
 - `evaluate_low_sample_count_percentile` (String) Used only for alarms based on percentiles. If ``ignore``, the alarm state does not change during periods with too few data points to be statistically significant. If ``evaluate`` or this parameter is not used, the alarm is always evaluated and possibly changes state no matter how many data points are available.
+- `evaluation_criteria` (Attributes) (see [below for nested schema](#nestedatt--evaluation_criteria))
+- `evaluation_interval` (Number)
 - `evaluation_periods` (Number) The number of periods over which data is compared to the specified threshold. If you are setting an alarm that requires that a number of consecutive data points be breaching to trigger the alarm, this value specifies that number. If you are setting an "M out of N" alarm, this value is the N, and ``DatapointsToAlarm`` is the M.
  For more information, see [Evaluating an Alarm](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation) in the *User Guide*.
 - `extended_statistic` (String) The percentile statistic for the metric associated with the alarm. Specify a value between p0.0 and p100.
@@ -98,8 +100,26 @@ resource "awscc_cloudwatch_alarm" "lambda_invocations_alarm" {
 
 Optional:
 
-- `name` (String) The name of the dimension, from 1–255 characters in length. This dimension name must have been included when the metric was published.
-- `value` (String) The value for the dimension, from 1–255 characters in length.
+- `name` (String) The name of the dimension, from 1?255 characters in length. This dimension name must have been included when the metric was published.
+- `value` (String) The value for the dimension, from 1?255 characters in length.
+
+
+<a id="nestedatt--evaluation_criteria"></a>
+### Nested Schema for `evaluation_criteria`
+
+Optional:
+
+- `prom_ql_criteria` (Attributes) (see [below for nested schema](#nestedatt--evaluation_criteria--prom_ql_criteria))
+
+<a id="nestedatt--evaluation_criteria--prom_ql_criteria"></a>
+### Nested Schema for `evaluation_criteria.prom_ql_criteria`
+
+Optional:
+
+- `pending_period` (Number) The pending period for the alarm.
+- `query` (String) The PromQL query string.
+- `recovery_period` (Number) The recovery period for the alarm.
+
 
 
 <a id="nestedatt--metrics"></a>
@@ -148,8 +168,8 @@ Optional:
 
 Optional:
 
-- `name` (String) The name of the dimension, from 1–255 characters in length. This dimension name must have been included when the metric was published.
-- `value` (String) The value for the dimension, from 1–255 characters in length.
+- `name` (String) The name of the dimension, from 1?255 characters in length. This dimension name must have been included when the metric was published.
+- `value` (String) The value for the dimension, from 1?255 characters in length.
 
 
 

@@ -37,6 +37,85 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::BedrockAgentCore::CodeInterpreterCustom resource.
 func codeInterpreterCustomResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Certificates
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "List of root CA certificates in PEM format.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A root CA certificate configuration.",
+		//	    "properties": {
+		//	      "CertificateLocation": {
+		//	        "additionalProperties": false,
+		//	        "description": "Certificate location in Secrets Manager.",
+		//	        "properties": {
+		//	          "SecretArn": {
+		//	            "description": "Secrets Manager secret ARN.",
+		//	            "pattern": "^arn:(aws(?:-cn|-us-gov|-iso(?:-[bef])?)?):secretsmanager:[a-z0-9-]+:\\d{12}:secret:[a-zA-Z0-9/_+=.@-]+$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "SecretArn"
+		//	        ],
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "CertificateLocation"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 10,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"certificates": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CertificateLocation
+					"certificate_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: SecretArn
+							"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Secrets Manager secret ARN.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws(?:-cn|-us-gov|-iso(?:-[bef])?)?):secretsmanager:[a-z0-9-]+:\\d{12}:secret:[a-zA-Z0-9/_+=.@-]+$"), ""),
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Certificate location in Secrets Manager.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Object{ /*START VALIDATORS*/
+							fwvalidators.NotNullObject(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of root CA certificates in PEM format.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(0, 10),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CodeInterpreterArn
 		// CloudFormation resource type schema:
 		//
@@ -372,6 +451,8 @@ func codeInterpreterCustomResource(ctx context.Context) (resource.Resource, erro
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"certificate_location":  "CertificateLocation",
+		"certificates":          "Certificates",
 		"code_interpreter_arn":  "CodeInterpreterArn",
 		"code_interpreter_id":   "CodeInterpreterId",
 		"created_at":            "CreatedAt",
@@ -382,6 +463,7 @@ func codeInterpreterCustomResource(ctx context.Context) (resource.Resource, erro
 		"name":                  "Name",
 		"network_configuration": "NetworkConfiguration",
 		"network_mode":          "NetworkMode",
+		"secret_arn":            "SecretArn",
 		"security_groups":       "SecurityGroups",
 		"status":                "Status",
 		"subnets":               "Subnets",

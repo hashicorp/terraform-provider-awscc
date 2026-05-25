@@ -21,18 +21,18 @@ Data Source schema for AWS::ECS::Daemon
 
 ### Read-Only
 
-- `capacity_provider_arns` (List of String)
-- `cluster_arn` (String)
+- `capacity_provider_arns` (List of String) The Amazon Resource Names (ARNs) of the capacity providers associated with the daemon.
+- `cluster_arn` (String) The Amazon Resource Name (ARN) of the cluster that the daemon is running in.
 - `created_at` (String)
 - `daemon_arn` (String)
 - `daemon_name` (String)
 - `daemon_status` (String)
-- `daemon_task_definition_arn` (String)
+- `daemon_task_definition_arn` (String) The Amazon Resource Name (ARN) of the daemon task definition used by this revision.
 - `deployment_arn` (String)
-- `deployment_configuration` (Attributes) (see [below for nested schema](#nestedatt--deployment_configuration))
-- `enable_ecs_managed_tags` (Boolean)
-- `enable_execute_command` (Boolean)
-- `propagate_tags` (String)
+- `deployment_configuration` (Attributes) The deployment configuration used for this daemon deployment. (see [below for nested schema](#nestedatt--deployment_configuration))
+- `enable_ecs_managed_tags` (Boolean) Specifies whether Amazon ECS managed tags are turned on for the daemon tasks.
+- `enable_execute_command` (Boolean) Specifies whether the execute command functionality is turned on for the daemon tasks.
+- `propagate_tags` (String) Specifies whether tags are propagated from the daemon to the daemon tasks.
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `updated_at` (String)
 
@@ -41,17 +41,17 @@ Data Source schema for AWS::ECS::Daemon
 
 Read-Only:
 
-- `alarms` (Attributes) (see [below for nested schema](#nestedatt--deployment_configuration--alarms))
-- `bake_time_in_minutes` (Number)
-- `drain_percent` (Number)
+- `alarms` (Attributes) The CloudWatch alarm configuration for the daemon deployment. When alarms are triggered during a deployment, the deployment can be automatically rolled back. (see [below for nested schema](#nestedatt--deployment_configuration--alarms))
+- `bake_time_in_minutes` (Number) The amount of time (in minutes) to wait after a successful deployment step before proceeding. This allows time to monitor for issues before continuing. The default value is 0.
+- `drain_percent` (Number) The percentage of container instances to drain simultaneously during a daemon deployment. Valid values are between 0.0 and 100.0.
 
 <a id="nestedatt--deployment_configuration--alarms"></a>
 ### Nested Schema for `deployment_configuration.alarms`
 
 Read-Only:
 
-- `alarm_names` (List of String)
-- `enable` (Boolean)
+- `alarm_names` (List of String) The CloudWatch alarm names to monitor during a daemon deployment.
+- `enable` (Boolean) Determines whether to use the CloudWatch alarm option in the daemon deployment process. The default value is ``false``.
 
 
 
@@ -60,5 +60,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) One part of a key-value pair that make up a tag. A ``key`` is a general label that acts like a category for more specific tag values.
+- `value` (String) The optional part of a key-value pair that make up a tag. A ``value`` acts as a descriptor within a tag category (key).

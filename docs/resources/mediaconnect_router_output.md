@@ -129,7 +129,7 @@ resource "awscc_mediaconnect_router_output" "example" {
 
 - `availability_zone` (String) The Availability Zone where you want to create the router output. This must be a valid Availability Zone for the region specified by regionName, or the current region if no regionName is provided.
 - `maintenance_configuration` (Attributes) The configuration settings for maintenance operations, including preferred maintenance windows and schedules. (see [below for nested schema](#nestedatt--maintenance_configuration))
-- `region_name` (String) The AWS Region for the router output. Defaults to the current region if not specified.
+- `region_name` (String) The Amazon Web Services Region for the router output. Defaults to the current region if not specified.
 - `tags` (Attributes List) Key-value pairs that can be used to tag this router output. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -177,15 +177,15 @@ Optional:
 Optional:
 
 - `automatic` (String) Configuration settings for automatic encryption key management, where MediaConnect handles key creation and rotation.
-- `secrets_manager` (Attributes) The configuration settings for transit encryption using AWS Secrets Manager, including the secret ARN and role ARN. (see [below for nested schema](#nestedatt--configuration--media_connect_flow--destination_transit_encryption--encryption_key_configuration--secrets_manager))
+- `secrets_manager` (Attributes) The configuration settings for transit encryption using Secrets Manager, including the secret ARN and role ARN. (see [below for nested schema](#nestedatt--configuration--media_connect_flow--destination_transit_encryption--encryption_key_configuration--secrets_manager))
 
 <a id="nestedatt--configuration--media_connect_flow--destination_transit_encryption--encryption_key_configuration--secrets_manager"></a>
 ### Nested Schema for `configuration.media_connect_flow.destination_transit_encryption.encryption_key_configuration.secrets_manager`
 
 Optional:
 
-- `role_arn` (String) The ARN of the IAM role assumed by MediaConnect to access the AWS Secrets Manager secret.
-- `secret_arn` (String) The ARN of the AWS Secrets Manager secret used for transit encryption.
+- `role_arn` (String) The ARN of the IAM role assumed by MediaConnect to access the Secrets Manager secret.
+- `secret_arn` (String) The ARN of the Secrets Manager secret used for transit encryption.
 
 
 
@@ -196,7 +196,7 @@ Optional:
 
 Optional:
 
-- `destination_transit_encryption` (Attributes) The encryption configuration that defines how content is encrypted during transit between MediaConnect Router and MediaLive. This configuration determines whether encryption keys are automatically managed by the service or manually managed through AWS Secrets Manager. (see [below for nested schema](#nestedatt--configuration--media_live_input--destination_transit_encryption))
+- `destination_transit_encryption` (Attributes) The encryption configuration that defines how content is encrypted during transit between MediaConnect Router and MediaLive. This configuration determines whether encryption keys are automatically managed by the service or manually managed through Secrets Manager. (see [below for nested schema](#nestedatt--configuration--media_live_input--destination_transit_encryption))
 - `media_live_input_arn` (String) The ARN of the MediaLive input to connect to this router output.
 - `media_live_pipeline_id` (String)
 
@@ -214,15 +214,15 @@ Optional:
 Optional:
 
 - `automatic` (String) Configuration settings for automatic encryption key management, where MediaConnect handles key creation and rotation.
-- `secrets_manager` (Attributes) The configuration settings for transit encryption using AWS Secrets Manager, including the secret ARN and role ARN. (see [below for nested schema](#nestedatt--configuration--media_live_input--destination_transit_encryption--encryption_key_configuration--secrets_manager))
+- `secrets_manager` (Attributes) The configuration settings for transit encryption using Secrets Manager, including the secret ARN and role ARN. (see [below for nested schema](#nestedatt--configuration--media_live_input--destination_transit_encryption--encryption_key_configuration--secrets_manager))
 
 <a id="nestedatt--configuration--media_live_input--destination_transit_encryption--encryption_key_configuration--secrets_manager"></a>
 ### Nested Schema for `configuration.media_live_input.destination_transit_encryption.encryption_key_configuration.secrets_manager`
 
 Optional:
 
-- `role_arn` (String) The ARN of the IAM role assumed by MediaConnect to access the AWS Secrets Manager secret.
-- `secret_arn` (String) The ARN of the AWS Secrets Manager secret used for transit encryption.
+- `role_arn` (String) The ARN of the IAM role assumed by MediaConnect to access the Secrets Manager secret.
+- `secret_arn` (String) The ARN of the Secrets Manager secret used for transit encryption.
 
 
 
@@ -282,15 +282,15 @@ Optional:
 
 Optional:
 
-- `encryption_key` (Attributes) The configuration settings for transit encryption using AWS Secrets Manager, including the secret ARN and role ARN. (see [below for nested schema](#nestedatt--configuration--standard--protocol_configuration--srt_caller--encryption_configuration--encryption_key))
+- `encryption_key` (Attributes) The configuration settings for transit encryption using Secrets Manager, including the secret ARN and role ARN. (see [below for nested schema](#nestedatt--configuration--standard--protocol_configuration--srt_caller--encryption_configuration--encryption_key))
 
 <a id="nestedatt--configuration--standard--protocol_configuration--srt_caller--encryption_configuration--encryption_key"></a>
 ### Nested Schema for `configuration.standard.protocol_configuration.srt_caller.encryption_configuration.encryption_key`
 
 Optional:
 
-- `role_arn` (String) The ARN of the IAM role assumed by MediaConnect to access the AWS Secrets Manager secret.
-- `secret_arn` (String) The ARN of the AWS Secrets Manager secret used for transit encryption.
+- `role_arn` (String) The ARN of the IAM role assumed by MediaConnect to access the Secrets Manager secret.
+- `secret_arn` (String) The ARN of the Secrets Manager secret used for transit encryption.
 
 
 
@@ -309,15 +309,15 @@ Optional:
 
 Optional:
 
-- `encryption_key` (Attributes) The configuration settings for transit encryption using AWS Secrets Manager, including the secret ARN and role ARN. (see [below for nested schema](#nestedatt--configuration--standard--protocol_configuration--srt_listener--encryption_configuration--encryption_key))
+- `encryption_key` (Attributes) The configuration settings for transit encryption using Secrets Manager, including the secret ARN and role ARN. (see [below for nested schema](#nestedatt--configuration--standard--protocol_configuration--srt_listener--encryption_configuration--encryption_key))
 
 <a id="nestedatt--configuration--standard--protocol_configuration--srt_listener--encryption_configuration--encryption_key"></a>
 ### Nested Schema for `configuration.standard.protocol_configuration.srt_listener.encryption_configuration.encryption_key`
 
 Optional:
 
-- `role_arn` (String) The ARN of the IAM role assumed by MediaConnect to access the AWS Secrets Manager secret.
-- `secret_arn` (String) The ARN of the AWS Secrets Manager secret used for transit encryption.
+- `role_arn` (String) The ARN of the IAM role assumed by MediaConnect to access the Secrets Manager secret.
+- `secret_arn` (String) The ARN of the Secrets Manager secret used for transit encryption.
 
 
 

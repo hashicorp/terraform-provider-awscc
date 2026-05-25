@@ -40,9 +40,6 @@
     "/properties/StateMachineRevisionId",
     "/properties/Description"
   ],
-  "writeOnlyProperties": [
-    "/properties/StateMachineArn"
-  ],
   "primaryIdentifier": [
     "/properties/Arn"
   ],

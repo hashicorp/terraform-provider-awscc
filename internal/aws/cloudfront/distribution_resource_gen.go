@@ -295,6 +295,20 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "array",
 		//	      "uniqueItems": false
 		//	    },
+		//	    "CacheTagConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration for cache tag extraction from origin responses. When specified, CloudFront reads the header named in ``HeaderName`` from origin responses and stores the comma-separated values as cache tags on the object.\n Distributions without ``CacheTagConfig`` do not extract tags. When ``CacheTagConfig`` is removed from a distribution via ``UpdateDistribution``, CloudFront stops extracting tags from origin responses.\n  Changing the ``HeaderName`` on an existing distribution does not retroactively affect previously cached objects. Tag-based invalidations will not apply to objects already cached using a previous header. To ensure tag invalidations function after updating the header name, use path-based invalidations to recache all objects that use cache tags.",
+		//	      "properties": {
+		//	        "HeaderName": {
+		//	          "description": "The name of the HTTP header that your origin includes in responses. CloudFront uses this header to extract cache tags. The header value must contain comma-separated tag values (for example, ``product:electronics, category:tv, brand:example``).",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "HeaderName"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "Comment": {
 		//	      "default": "",
 		//	      "description": "A comment to describe the distribution. The comment cannot be longer than 128 characters.",
@@ -1018,7 +1032,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "OriginAccessIdentity": {
 		//	          "default": "",
-		//	          "description": "The CF origin access identity to associate with the distribution. Use an origin access identity to configure the distribution so that end users can only access objects in an S3 through CF.\n  This property is legacy. We recommend that you use [OriginAccessControl](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-originaccesscontrol.html) instead.",
+		//	          "description": "The CF origin access identity to associate with the distribution. Use an origin access identity to configure the distribution so that end users can only access objects in an S3 through CF.\n  This property is legacy. We recommend that you use [OriginAccessControl](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-cloudfront-originaccesscontrol.html) instead.",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -1120,7 +1134,8 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		//	          "description": "The viewer mTLS mode.",
 		//	          "enum": [
 		//	            "required",
-		//	            "optional"
+		//	            "optional",
+		//	            "passthrough"
 		//	          ],
 		//	          "type": "string"
 		//	        },
@@ -1556,6 +1571,29 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CacheTagConfig
+				"cache_tag_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: HeaderName
+						"header_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the HTTP header that your origin includes in responses. CloudFront uses this header to extract cache tags. The header value must contain comma-separated tag values (for example, ``product:electronics, category:tv, brand:example``).",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for cache tag extraction from origin responses. When specified, CloudFront reads the header named in ``HeaderName`` from origin responses and stores the comma-separated values as cache tags on the object.\n Distributions without ``CacheTagConfig`` do not extract tags. When ``CacheTagConfig`` is removed from a distribution via ``UpdateDistribution``, CloudFront stops extracting tags from origin responses.\n  Changing the ``HeaderName`` on an existing distribution does not retroactively affect previously cached objects. Tag-based invalidations will not apply to objects already cached using a previous header. To ensure tag invalidations function after updating the header name, use path-based invalidations to recache all objects that use cache tags.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Comment
@@ -2746,7 +2784,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: OriginAccessIdentity
 						"origin_access_identity": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The CF origin access identity to associate with the distribution. Use an origin access identity to configure the distribution so that end users can only access objects in an S3 through CF.\n  This property is legacy. We recommend that you use [OriginAccessControl](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cloudfront-originaccesscontrol.html) instead.",
+							Description: "The CF origin access identity to associate with the distribution. Use an origin access identity to configure the distribution so that end users can only access objects in an S3 through CF.\n  This property is legacy. We recommend that you use [OriginAccessControl](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-cloudfront-originaccesscontrol.html) instead.",
 							Optional:    true,
 							Computed:    true,
 							Default:     stringdefault.StaticString(""),
@@ -2929,6 +2967,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 								stringvalidator.OneOf(
 									"required",
 									"optional",
+									"passthrough",
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3126,6 +3165,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		"bucket":                          "Bucket",
 		"cache_behaviors":                 "CacheBehaviors",
 		"cache_policy_id":                 "CachePolicyId",
+		"cache_tag_config":                "CacheTagConfig",
 		"cached_methods":                  "CachedMethods",
 		"client_certificate_arn":          "ClientCertificateArn",
 		"cloudfront_default_certificate":  "CloudFrontDefaultCertificate",
