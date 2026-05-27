@@ -243,15 +243,17 @@ func telemetryRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "object"
 		//	        },
 		//	        "LogDeliveryParameters": {
-		//	          "description": "Parameters for BedrockAgentCore log delivery",
+		//	          "additionalProperties": false,
+		//	          "description": "Parameters for log delivery configuration",
 		//	          "properties": {
 		//	            "LogTypes": {
-		//	              "description": "Types of logs to deliver for BedrockAgentCore resources",
+		//	              "description": "Types of logs to deliver",
 		//	              "insertionOrder": false,
 		//	              "items": {
 		//	                "enum": [
 		//	                  "APPLICATION_LOGS",
-		//	                  "USAGE_LOGS"
+		//	                  "USAGE_LOGS",
+		//	                  "SECURITY_FINDING_LOGS"
 		//	                ],
 		//	                "type": "string"
 		//	              },
@@ -449,7 +451,8 @@ func telemetryRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	        "AWS::EC2::Instance",
 		//	        "AWS::BedrockAgentCore::Runtime",
 		//	        "AWS::BedrockAgentCore::Browser",
-		//	        "AWS::BedrockAgentCore::CodeInterpreter"
+		//	        "AWS::BedrockAgentCore::CodeInterpreter",
+		//	        "AWS::SecurityHub::Hub"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -704,7 +707,7 @@ func telemetryRuleResource(ctx context.Context) (resource.Resource, error) {
 								// Property: LogTypes
 								"log_types": schema.SetAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
-									Description: "Types of logs to deliver for BedrockAgentCore resources",
+									Description: "Types of logs to deliver",
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.Set{ /*START VALIDATORS*/
@@ -713,6 +716,7 @@ func telemetryRuleResource(ctx context.Context) (resource.Resource, error) {
 											stringvalidator.OneOf(
 												"APPLICATION_LOGS",
 												"USAGE_LOGS",
+												"SECURITY_FINDING_LOGS",
 											),
 										),
 									}, /*END VALIDATORS*/
@@ -721,7 +725,7 @@ func telemetryRuleResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "Parameters for BedrockAgentCore log delivery",
+							Description: "Parameters for log delivery configuration",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1036,6 +1040,7 @@ func telemetryRuleResource(ctx context.Context) (resource.Resource, error) {
 							"AWS::BedrockAgentCore::Runtime",
 							"AWS::BedrockAgentCore::Browser",
 							"AWS::BedrockAgentCore::CodeInterpreter",
+							"AWS::SecurityHub::Hub",
 						),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
