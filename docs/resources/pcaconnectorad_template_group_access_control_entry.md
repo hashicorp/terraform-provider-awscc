@@ -19,9 +19,6 @@ Definition of AWS::PCAConnectorAD::TemplateGroupAccessControlEntry Resource Type
 
 - `access_rights` (Attributes) (see [below for nested schema](#nestedatt--access_rights))
 - `group_display_name` (String)
-
-### Optional
-
 - `group_security_identifier` (String)
 - `template_arn` (String)
 

@@ -61,6 +61,7 @@ Read-Only:
 - `destination_pattern` (String) Pattern for telemetry data destination
 - `destination_type` (String) Type of telemetry destination
 - `elb_load_balancer_logging_parameters` (Attributes) Telemetry parameters for ELB/NLB Load Balancer Logs (see [below for nested schema](#nestedatt--rule--destination_configuration--elb_load_balancer_logging_parameters))
+- `log_delivery_parameters` (Attributes) Parameters for log delivery configuration (see [below for nested schema](#nestedatt--rule--destination_configuration--log_delivery_parameters))
 - `retention_in_days` (Number) Number of days to retain the telemetry data in the specified destination
 - `vpc_flow_log_parameters` (Attributes) Telemetry parameters for VPC Flow logs (see [below for nested schema](#nestedatt--rule--destination_configuration--vpc_flow_log_parameters))
 - `waf_logging_parameters` (Attributes) Telemetry parameters for WAF v2 Web ACL (see [below for nested schema](#nestedatt--rule--destination_configuration--waf_logging_parameters))
@@ -103,6 +104,14 @@ Read-Only:
 
 - `field_delimiter` (String) A delimiter to delineate log fields
 - `output_format` (String)
+
+
+<a id="nestedatt--rule--destination_configuration--log_delivery_parameters"></a>
+### Nested Schema for `rule.destination_configuration.log_delivery_parameters`
+
+Read-Only:
+
+- `log_types` (Set of String) Types of logs to deliver
 
 
 <a id="nestedatt--rule--destination_configuration--vpc_flow_log_parameters"></a>

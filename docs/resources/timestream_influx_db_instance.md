@@ -162,6 +162,7 @@ resource "awscc_timestream_influx_db_instance" "example" {
 - `db_storage_type` (String) The storage type of the InfluxDB instance.
 - `deployment_type` (String) Deployment type of the InfluxDB Instance.
 - `log_delivery_configuration` (Attributes) Configuration for sending logs to customer account from the InfluxDB instance. (see [below for nested schema](#nestedatt--log_delivery_configuration))
+- `maintenance_schedule` (Attributes) The maintenance schedule for the InfluxDB instance. (see [below for nested schema](#nestedatt--maintenance_schedule))
 - `name` (String) The unique name that is associated with the InfluxDB instance.
 - `network_type` (String) Network type of the InfluxDB Instance.
 - `organization` (String) The organization for the InfluxDB instance.
@@ -181,6 +182,7 @@ resource "awscc_timestream_influx_db_instance" "example" {
 - `id` (String) Uniquely identifies the resource.
 - `influx_auth_parameters_secret_arn` (String) The Auth parameters secret Amazon Resource name (ARN) that is associated with the InfluxDB instance.
 - `influx_db_instance_id` (String) The service generated unique identifier for InfluxDB instance.
+- `next_maintenance_time` (String) The timestamp of the next scheduled maintenance event.
 - `secondary_availability_zone` (String) The Secondary Availability Zone (AZ) where the InfluxDB instance is created, if DeploymentType is set as WITH_MULTIAZ_STANDBY.
 - `status` (String) Status of the InfluxDB Instance.
 
@@ -199,6 +201,15 @@ Optional:
 - `bucket_name` (String) The bucket name for logs to be sent from the InfluxDB instance
 - `enabled` (Boolean) Specifies whether logging to customer specified bucket is enabled.
 
+
+
+<a id="nestedatt--maintenance_schedule"></a>
+### Nested Schema for `maintenance_schedule`
+
+Optional:
+
+- `preferred_maintenance_window` (String) The preferred maintenance window in format ddd:HH:MM-ddd:HH:MM.
+- `timezone` (String) The IANA timezone identifier for the maintenance schedule.
 
 
 <a id="nestedatt--tags"></a>

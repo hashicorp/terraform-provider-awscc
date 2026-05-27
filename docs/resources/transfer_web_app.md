@@ -60,6 +60,7 @@ Optional:
 
 Optional:
 
+- `ip_address_type` (String) The IP address type for the VPC endpoint used by the web app.
 - `security_group_ids` (List of String)
 - `subnet_ids` (List of String)
 - `vpc_id` (String)
