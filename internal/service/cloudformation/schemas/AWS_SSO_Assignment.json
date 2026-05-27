@@ -83,6 +83,7 @@
         "sso:ListAccountAssignments",
         "iam:GetSAMLProvider",
         "iam:CreateSAMLProvider",
+        "iam:UpdateSAMLProvider",
         "iam:AttachRolePolicy",
         "iam:PutRolePolicy",
         "iam:CreateRole",

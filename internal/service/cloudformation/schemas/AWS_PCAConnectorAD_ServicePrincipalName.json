@@ -16,6 +16,10 @@
       "pattern": "^arn:[\\w-]+:pca-connector-ad:[\\w-]+:[0-9]+:directory-registration(\\/[\\w-]+)$"
     }
   },
+  "required": [
+    "ConnectorArn",
+    "DirectoryRegistrationArn"
+  ],
   "tagging": {
     "taggable": false,
     "tagOnCreate": false,

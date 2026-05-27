@@ -27,7 +27,8 @@
         "AWS::EC2::Instance",
         "AWS::BedrockAgentCore::Runtime",
         "AWS::BedrockAgentCore::Browser",
-        "AWS::BedrockAgentCore::CodeInterpreter"
+        "AWS::BedrockAgentCore::CodeInterpreter",
+        "AWS::SecurityHub::Hub"
       ]
     },
     "TelemetryType": {
@@ -188,11 +189,11 @@
           "$ref": "#/definitions/WAFLoggingParameters"
         },
         "LogDeliveryParameters": {
-          "description": "Parameters for BedrockAgentCore log delivery",
+          "description": "Parameters for log delivery configuration",
           "type": "object",
           "properties": {
             "LogTypes": {
-              "description": "Types of logs to deliver for BedrockAgentCore resources",
+              "description": "Types of logs to deliver",
               "type": "array",
               "uniqueItems": true,
               "insertionOrder": false,
@@ -201,11 +202,13 @@
                 "type": "string",
                 "enum": [
                   "APPLICATION_LOGS",
-                  "USAGE_LOGS"
+                  "USAGE_LOGS",
+                  "SECURITY_FINDING_LOGS"
                 ]
               }
             }
-          }
+          },
+          "additionalProperties": false
         }
       },
       "required": [],

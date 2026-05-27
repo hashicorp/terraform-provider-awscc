@@ -114,10 +114,6 @@
       },
       "additionalProperties": false
     },
-    "Unit": {
-      "type": "object",
-      "additionalProperties": false
-    },
     "Tag": {
       "description": "A key-value pair to associate with a resource.",
       "type": "object",

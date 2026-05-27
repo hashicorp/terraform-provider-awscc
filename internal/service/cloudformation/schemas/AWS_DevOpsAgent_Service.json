@@ -21,7 +21,8 @@
         "servicenow",
         "pagerduty",
         "azureidentity",
-        "mcpserversigv4"
+        "mcpserversigv4",
+        "mcpservergrafana"
       ]
     },
     "ServiceDetails": {
@@ -124,6 +125,17 @@
           },
           "required": [
             "MCPServerSigV4"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "MCPServerGrafana": {
+              "$ref": "#/definitions/MCPServerGrafanaDetails"
+            }
+          },
+          "required": [
+            "MCPServerGrafana"
           ],
           "additionalProperties": false
         }
@@ -544,6 +556,53 @@
       ],
       "additionalProperties": false
     },
+    "MCPServerGrafanaDetails": {
+      "description": "Grafana MCP server configuration",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "description": "MCP server name",
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "Endpoint": {
+          "description": "MCP server endpoint URL",
+          "type": "string",
+          "pattern": "^https://[a-zA-Z0-9.-]+(?::[0-9]+)?(?:/.*)?$"
+        },
+        "Description": {
+          "description": "Optional description for the MCP server",
+          "type": "string",
+          "maxLength": 500
+        },
+        "AuthorizationConfig": {
+          "$ref": "#/definitions/MCPServerGrafanaAuthorizationConfig"
+        }
+      },
+      "required": [
+        "Name",
+        "Endpoint",
+        "AuthorizationConfig"
+      ],
+      "additionalProperties": false
+    },
+    "MCPServerGrafanaAuthorizationConfig": {
+      "description": "Grafana MCP server authorization configuration",
+      "type": "object",
+      "oneOf": [
+        {
+          "properties": {
+            "BearerToken": {
+              "$ref": "#/definitions/BearerTokenDetails"
+            }
+          },
+          "required": [
+            "BearerToken"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
     "NewRelicServiceDetails": {
       "description": "New Relic service configuration",
       "type": "object",
@@ -762,6 +821,17 @@
             "MCPServerSigV4"
           ],
           "additionalProperties": false
+        },
+        {
+          "properties": {
+            "MCPServerGrafana": {
+              "$ref": "#/definitions/RegisteredMCPServerGrafanaDetails"
+            }
+          },
+          "required": [
+            "MCPServerGrafana"
+          ],
+          "additionalProperties": false
         }
       ]
     },
@@ -797,6 +867,36 @@
       },
       "required": [
         "Name",
+        "Endpoint",
+        "AuthorizationMethod"
+      ],
+      "additionalProperties": false
+    },
+    "RegisteredMCPServerGrafanaDetails": {
+      "description": "Grafana MCP server details returned after registration",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "description": "MCP server name",
+          "type": "string"
+        },
+        "Endpoint": {
+          "description": "MCP server endpoint URL",
+          "type": "string"
+        },
+        "AuthorizationMethod": {
+          "description": "MCP server authorization method",
+          "type": "string",
+          "enum": [
+            "bearer-token"
+          ]
+        },
+        "Description": {
+          "description": "Optional description for the MCP server",
+          "type": "string"
+        }
+      },
+      "required": [
         "Endpoint",
         "AuthorizationMethod"
       ],
@@ -1087,6 +1187,7 @@
     "/properties/ServiceDetails/ServiceNow",
     "/properties/ServiceDetails/PagerDuty",
     "/properties/ServiceDetails/AzureIdentity",
+    "/properties/ServiceDetails/MCPServerGrafana",
     "/properties/KmsKeyArn"
   ],
   "primaryIdentifier": [

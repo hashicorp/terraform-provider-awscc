@@ -68,7 +68,17 @@
     "list": {
       "permissions": [
         "lambda:GetLayerVersionPolicy"
-      ]
+      ],
+      "handlerSchema": {
+        "properties": {
+          "LayerVersionArn": {
+            "$ref": "resource-schema.json#/properties/LayerVersionArn"
+          }
+        },
+        "required": [
+          "LayerVersionArn"
+        ]
+      }
     }
   },
   "propertyTransform": {

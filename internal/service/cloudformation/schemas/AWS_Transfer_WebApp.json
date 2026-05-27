@@ -42,6 +42,14 @@
             "minLength": 11,
             "pattern": "^sg-[0-9a-f]{8,17}$"
           }
+        },
+        "IpAddressType": {
+          "type": "string",
+          "description": "The IP address type for the VPC endpoint used by the web app.",
+          "enum": [
+            "IPV4",
+            "DUALSTACK"
+          ]
         }
       },
       "additionalProperties": false
@@ -214,7 +222,8 @@
     "/properties/EndpointDetails/Vpc/SecurityGroupIds"
   ],
   "writeOnlyProperties": [
-    "/properties/EndpointDetails/Vpc/SecurityGroupIds"
+    "/properties/EndpointDetails/Vpc/SecurityGroupIds",
+    "/properties/EndpointDetails/Vpc/IpAddressType"
   ],
   "primaryIdentifier": [
     "/properties/Arn"

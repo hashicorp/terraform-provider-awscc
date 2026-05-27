@@ -182,9 +182,7 @@
     "/properties/Type",
     "/properties/StandbyReplicas",
     "/properties/CollectionGroupName",
-    "/properties/EncryptionConfig",
-    "/properties/VectorOptions",
-    "/properties/VectorOptions/ServerlessVectorAcceleration"
+    "/properties/EncryptionConfig"
   ],
   "primaryIdentifier": [
     "/properties/Id"
