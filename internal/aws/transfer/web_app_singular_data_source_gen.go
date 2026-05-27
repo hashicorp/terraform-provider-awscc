@@ -60,6 +60,14 @@ func webAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "additionalProperties": false,
 		//	      "description": "You can provide a structure that contains the details for the VPC endpoint to use with your web app.",
 		//	      "properties": {
+		//	        "IpAddressType": {
+		//	          "description": "The IP address type for the VPC endpoint used by the web app.",
+		//	          "enum": [
+		//	            "IPV4",
+		//	            "DUALSTACK"
+		//	          ],
+		//	          "type": "string"
+		//	        },
 		//	        "SecurityGroupIds": {
 		//	          "insertionOrder": false,
 		//	          "items": {
@@ -99,6 +107,11 @@ func webAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: Vpc
 				"vpc": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IpAddressType
+						"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The IP address type for the VPC endpoint used by the web app.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 						// Property: SecurityGroupIds
 						"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
@@ -347,6 +360,7 @@ func webAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"favicon_file":              "FaviconFile",
 		"identity_provider_details": "IdentityProviderDetails",
 		"instance_arn":              "InstanceArn",
+		"ip_address_type":           "IpAddressType",
 		"key":                       "Key",
 		"logo_file":                 "LogoFile",
 		"provisioned":               "Provisioned",

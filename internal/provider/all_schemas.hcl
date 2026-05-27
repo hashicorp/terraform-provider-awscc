@@ -746,8 +746,12 @@ resource_schema "aws_bedrockagentcore_code_interpreter_custom" {
 }
 
 resource_schema "aws_bedrockagentcore_dataset" {
-  cloudformation_type_name     = "AWS::BedrockAgentCore::Dataset"
-  suppress_resource_generation = true
+  cloudformation_type_name = "AWS::BedrockAgentCore::Dataset"
+
+  # Ref: https://github.com/hashicorp/terraform-provider-awscc/issues/3168
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_bedrockagentcore_evaluator" {

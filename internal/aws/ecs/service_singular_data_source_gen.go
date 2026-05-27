@@ -178,21 +178,21 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "LifecycleHooks": {
-		//	      "description": "An array of deployment lifecycle hook objects to run custom logic at specific stages of the deployment lifecycle.",
+		//	      "description": "An array of deployment lifecycle hook objects to run custom logic or pause the deployment at specific stages of the deployment lifecycle.",
 		//	      "items": {
 		//	        "additionalProperties": false,
-		//	        "description": "A deployment lifecycle hook runs custom logic at specific stages of the deployment process. Currently, you can use Lambda functions as hook targets.\n For more information, see [Lifecycle hooks for Amazon ECS service deployments](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-lifecycle-hooks.html) in the *Amazon Elastic Container Service Developer Guide*.",
+		//	        "description": "A deployment lifecycle hook runs custom logic or pauses the deployment at specific stages of the deployment process. You can use Lambda functions or pause hooks as hook targets.\n For more information, see [Lifecycle hooks for Amazon ECS service deployments](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-lifecycle-hooks.html) in the *Amazon Elastic Container Service Developer Guide*.",
 		//	        "properties": {
 		//	          "HookDetails": {
 		//	            "description": "Use this field to specify custom parameters that ECS passes to your hook target invocations (such as a Lambda function).\n This field must be a JSON object as a string.",
 		//	            "type": "string"
 		//	          },
 		//	          "HookTargetArn": {
-		//	            "description": "The Amazon Resource Name (ARN) of the hook target. Currently, only Lambda function ARNs are supported.\n You must provide this parameter when configuring a deployment lifecycle hook.",
+		//	            "description": "The Amazon Resource Name (ARN) of the hook target. For ``AWS_LAMBDA`` hooks, this is the Lambda function ARN. This field is not applicable for ``PAUSE`` hooks.\n You must provide this parameter when configuring an ``AWS_LAMBDA`` lifecycle hook.",
 		//	            "type": "string"
 		//	          },
 		//	          "LifecycleStages": {
-		//	            "description": "The lifecycle stages at which to run the hook. Choose from these valid values:\n  +  RECONCILE_SERVICE\n The reconciliation stage that only happens when you start a new service deployment with more than 1 service revision in an ACTIVE state.\n You can use a lifecycle hook for this stage.\n  +  PRE_SCALE_UP\n The green service revision has not started. The blue service revision is handling 100% of the production traffic. There is no test traffic.\n You can use a lifecycle hook for this stage.\n  +  POST_SCALE_UP\n The green service revision has started. The blue service revision is handling 100% of the production traffic. There is no test traffic.\n You can use a lifecycle hook for this stage.\n  +  TEST_TRAFFIC_SHIFT\n The blue and green service revisions are running. The blue service revision handles 100% of the production traffic. The green service revision is migrating from 0% to 100% of test traffic.\n You can use a lifecycle hook for this stage.\n  +  POST_TEST_TRAFFIC_SHIFT\n The test traffic shift is complete. The green service revision handles 100% of the test traffic.\n You can use a lifecycle hook for this stage.\n  +  PRODUCTION_TRAFFIC_SHIFT\n Production traffic is shifting to the green service revision. The green service revision is migrating from 0% to 100% of production traffic.\n You can use a lifecycle hook for this stage.\n  +  POST_PRODUCTION_TRAFFIC_SHIFT\n The production traffic shift is complete.\n You can use a lifecycle hook for this stage.\n  \n You must provide this parameter when configuring a deployment lifecycle hook.",
+		//	            "description": "The lifecycle stages at which to run the hook. Choose from these valid values:\n  +  RECONCILE_SERVICE\n The reconciliation stage that only happens when you start a new service deployment with more than 1 service revision in an ACTIVE state.\n You can use a lifecycle hook for this stage.\n  +  PRE_SCALE_UP\n The green service revision has not started. The blue service revision is handling 100% of the production traffic. There is no test traffic.\n You can use a lifecycle hook for this stage.\n  +  POST_SCALE_UP\n The green service revision has started. The blue service revision is handling 100% of the production traffic. There is no test traffic.\n You can use a lifecycle hook for this stage.\n  +  TEST_TRAFFIC_SHIFT\n The blue and green service revisions are running. The blue service revision handles 100% of the production traffic. The green service revision is migrating from 0% to 100% of test traffic.\n You can use a lifecycle hook for this stage.\n  +  POST_TEST_TRAFFIC_SHIFT\n The test traffic shift is complete. The green service revision handles 100% of the test traffic.\n You can use a lifecycle hook for this stage.\n  +  PRE_PRODUCTION_TRAFFIC_SHIFT\n Occurs before production traffic shift. For linear and canary deployments, this stage is invoked before every traffic shift step.\n You can use a lifecycle hook for this stage.\n  +  PRODUCTION_TRAFFIC_SHIFT\n Production traffic is shifting to the green service revision. The green service revision is migrating from 0% to 100% of production traffic. For linear and canary deployments, this stage is invoked at every traffic shift step.\n You can use a lifecycle hook for this stage.\n  +  POST_PRODUCTION_TRAFFIC_SHIFT\n The production traffic shift is complete.\n You can use a lifecycle hook for this stage.\n  \n  ``PAUSE`` hooks cannot be configured at ``TEST_TRAFFIC_SHIFT`` or ``PRODUCTION_TRAFFIC_SHIFT`` stages. These stages are only valid for ``AWS_LAMBDA`` hooks.\n  You must provide this parameter when configuring a deployment lifecycle hook.",
 		//	            "items": {
 		//	              "enum": [
 		//	                "RECONCILE_SERVICE",
@@ -214,7 +214,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "type": "string"
 		//	          },
 		//	          "TargetType": {
-		//	            "description": "",
+		//	            "description": "The type of action the lifecycle hook performs. Valid values are:\n  +  ``AWS_LAMBDA`` - Invokes a Lambda function at the specified lifecycle stage. This is the default value.\n  +  ``PAUSE`` - Pauses the deployment at the specified lifecycle stage until you call ``ContinueServiceDeployment`` to continue or roll back.\n  \n This field is optional. If not specified, the default value is ``AWS_LAMBDA``.",
 		//	            "enum": [
 		//	              "AWS_LAMBDA",
 		//	              "PAUSE"
@@ -223,9 +223,10 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          },
 		//	          "TimeoutConfiguration": {
 		//	            "additionalProperties": false,
-		//	            "description": "",
+		//	            "description": "The timeout configuration for the lifecycle hook. This specifies how long Amazon ECS waits before taking the timeout action if the hook is not resolved.",
 		//	            "properties": {
 		//	              "Action": {
+		//	                "description": "",
 		//	                "enum": [
 		//	                  "ROLLBACK",
 		//	                  "CONTINUE"
@@ -233,6 +234,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "type": "string"
 		//	              },
 		//	              "TimeoutInMinutes": {
+		//	                "description": "",
 		//	                "maximum": 20160,
 		//	                "minimum": 1,
 		//	                "type": "integer"
@@ -363,13 +365,13 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: HookTargetArn
 							"hook_target_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The Amazon Resource Name (ARN) of the hook target. Currently, only Lambda function ARNs are supported.\n You must provide this parameter when configuring a deployment lifecycle hook.",
+								Description: "The Amazon Resource Name (ARN) of the hook target. For ``AWS_LAMBDA`` hooks, this is the Lambda function ARN. This field is not applicable for ``PAUSE`` hooks.\n You must provide this parameter when configuring an ``AWS_LAMBDA`` lifecycle hook.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: LifecycleStages
 							"lifecycle_stages": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
-								Description: "The lifecycle stages at which to run the hook. Choose from these valid values:\n  +  RECONCILE_SERVICE\n The reconciliation stage that only happens when you start a new service deployment with more than 1 service revision in an ACTIVE state.\n You can use a lifecycle hook for this stage.\n  +  PRE_SCALE_UP\n The green service revision has not started. The blue service revision is handling 100% of the production traffic. There is no test traffic.\n You can use a lifecycle hook for this stage.\n  +  POST_SCALE_UP\n The green service revision has started. The blue service revision is handling 100% of the production traffic. There is no test traffic.\n You can use a lifecycle hook for this stage.\n  +  TEST_TRAFFIC_SHIFT\n The blue and green service revisions are running. The blue service revision handles 100% of the production traffic. The green service revision is migrating from 0% to 100% of test traffic.\n You can use a lifecycle hook for this stage.\n  +  POST_TEST_TRAFFIC_SHIFT\n The test traffic shift is complete. The green service revision handles 100% of the test traffic.\n You can use a lifecycle hook for this stage.\n  +  PRODUCTION_TRAFFIC_SHIFT\n Production traffic is shifting to the green service revision. The green service revision is migrating from 0% to 100% of production traffic.\n You can use a lifecycle hook for this stage.\n  +  POST_PRODUCTION_TRAFFIC_SHIFT\n The production traffic shift is complete.\n You can use a lifecycle hook for this stage.\n  \n You must provide this parameter when configuring a deployment lifecycle hook.",
+								Description: "The lifecycle stages at which to run the hook. Choose from these valid values:\n  +  RECONCILE_SERVICE\n The reconciliation stage that only happens when you start a new service deployment with more than 1 service revision in an ACTIVE state.\n You can use a lifecycle hook for this stage.\n  +  PRE_SCALE_UP\n The green service revision has not started. The blue service revision is handling 100% of the production traffic. There is no test traffic.\n You can use a lifecycle hook for this stage.\n  +  POST_SCALE_UP\n The green service revision has started. The blue service revision is handling 100% of the production traffic. There is no test traffic.\n You can use a lifecycle hook for this stage.\n  +  TEST_TRAFFIC_SHIFT\n The blue and green service revisions are running. The blue service revision handles 100% of the production traffic. The green service revision is migrating from 0% to 100% of test traffic.\n You can use a lifecycle hook for this stage.\n  +  POST_TEST_TRAFFIC_SHIFT\n The test traffic shift is complete. The green service revision handles 100% of the test traffic.\n You can use a lifecycle hook for this stage.\n  +  PRE_PRODUCTION_TRAFFIC_SHIFT\n Occurs before production traffic shift. For linear and canary deployments, this stage is invoked before every traffic shift step.\n You can use a lifecycle hook for this stage.\n  +  PRODUCTION_TRAFFIC_SHIFT\n Production traffic is shifting to the green service revision. The green service revision is migrating from 0% to 100% of production traffic. For linear and canary deployments, this stage is invoked at every traffic shift step.\n You can use a lifecycle hook for this stage.\n  +  POST_PRODUCTION_TRAFFIC_SHIFT\n The production traffic shift is complete.\n You can use a lifecycle hook for this stage.\n  \n  ``PAUSE`` hooks cannot be configured at ``TEST_TRAFFIC_SHIFT`` or ``PRODUCTION_TRAFFIC_SHIFT`` stages. These stages are only valid for ``AWS_LAMBDA`` hooks.\n  You must provide this parameter when configuring a deployment lifecycle hook.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: RoleArn
@@ -379,7 +381,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: TargetType
 							"target_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "",
+								Description: "The type of action the lifecycle hook performs. Valid values are:\n  +  ``AWS_LAMBDA`` - Invokes a Lambda function at the specified lifecycle stage. This is the default value.\n  +  ``PAUSE`` - Pauses the deployment at the specified lifecycle stage until you call ``ContinueServiceDeployment`` to continue or roll back.\n  \n This field is optional. If not specified, the default value is ``AWS_LAMBDA``.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: TimeoutConfiguration
@@ -387,19 +389,21 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Action
 									"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
+										Description: "",
+										Computed:    true,
 									}, /*END ATTRIBUTE*/
 									// Property: TimeoutInMinutes
 									"timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Computed: true,
+										Description: "",
+										Computed:    true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Description: "",
+								Description: "The timeout configuration for the lifecycle hook. This specifies how long Amazon ECS waits before taking the timeout action if the hook is not resolved.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "An array of deployment lifecycle hook objects to run custom logic at specific stages of the deployment lifecycle.",
+					Description: "An array of deployment lifecycle hook objects to run custom logic or pause the deployment at specific stages of the deployment lifecycle.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: LinearConfiguration

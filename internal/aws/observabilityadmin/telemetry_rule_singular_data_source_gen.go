@@ -224,15 +224,17 @@ func telemetryRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	          "type": "object"
 		//	        },
 		//	        "LogDeliveryParameters": {
-		//	          "description": "Parameters for BedrockAgentCore log delivery",
+		//	          "additionalProperties": false,
+		//	          "description": "Parameters for log delivery configuration",
 		//	          "properties": {
 		//	            "LogTypes": {
-		//	              "description": "Types of logs to deliver for BedrockAgentCore resources",
+		//	              "description": "Types of logs to deliver",
 		//	              "insertionOrder": false,
 		//	              "items": {
 		//	                "enum": [
 		//	                  "APPLICATION_LOGS",
-		//	                  "USAGE_LOGS"
+		//	                  "USAGE_LOGS",
+		//	                  "SECURITY_FINDING_LOGS"
 		//	                ],
 		//	                "type": "string"
 		//	              },
@@ -430,7 +432,8 @@ func telemetryRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	        "AWS::EC2::Instance",
 		//	        "AWS::BedrockAgentCore::Runtime",
 		//	        "AWS::BedrockAgentCore::Browser",
-		//	        "AWS::BedrockAgentCore::CodeInterpreter"
+		//	        "AWS::BedrockAgentCore::CodeInterpreter",
+		//	        "AWS::SecurityHub::Hub"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -591,11 +594,11 @@ func telemetryRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 								// Property: LogTypes
 								"log_types": schema.SetAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
-									Description: "Types of logs to deliver for BedrockAgentCore resources",
+									Description: "Types of logs to deliver",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "Parameters for BedrockAgentCore log delivery",
+							Description: "Parameters for log delivery configuration",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: RetentionInDays

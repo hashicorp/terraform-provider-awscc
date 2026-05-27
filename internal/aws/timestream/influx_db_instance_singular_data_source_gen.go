@@ -8,6 +8,7 @@ package timestream
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -237,6 +238,50 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 			Description: "Configuration for sending logs to customer account from the InfluxDB instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: MaintenanceSchedule
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The maintenance schedule for the InfluxDB instance.",
+		//	  "properties": {
+		//	    "PreferredMaintenanceWindow": {
+		//	      "description": "The preferred maintenance window in format ddd:HH:MM-ddd:HH:MM.",
+		//	      "maxLength": 19,
+		//	      "minLength": 0,
+		//	      "pattern": "^$|^(Mon|Tue|Wed|Thu|Fri|Sat|Sun):([01]\\d|2[0-3]):[0-5]\\d-(Mon|Tue|Wed|Thu|Fri|Sat|Sun):([01]\\d|2[0-3]):[0-5]\\d$",
+		//	      "type": "string"
+		//	    },
+		//	    "Timezone": {
+		//	      "description": "The IANA timezone identifier for the maintenance schedule.",
+		//	      "maxLength": 64,
+		//	      "minLength": 1,
+		//	      "pattern": "^(UTC|[A-Za-z_]+/[A-Za-z0-9_]+(/[A-Za-z0-9_]+)?)$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Timezone",
+		//	    "PreferredMaintenanceWindow"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"maintenance_schedule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PreferredMaintenanceWindow
+				"preferred_maintenance_window": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The preferred maintenance window in format ddd:HH:MM-ddd:HH:MM.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Timezone
+				"timezone": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The IANA timezone identifier for the maintenance schedule.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The maintenance schedule for the InfluxDB instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -264,6 +309,19 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	}
 		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Network type of the InfluxDB Instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: NextMaintenanceTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The timestamp of the next scheduled maintenance event.",
+		//	  "format": "date-time",
+		//	  "type": "string"
+		//	}
+		"next_maintenance_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp of the next scheduled maintenance event.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Organization
@@ -486,16 +544,20 @@ func influxDBInstanceDataSource(ctx context.Context) (datasource.DataSource, err
 		"influx_db_instance_id":             "Id",
 		"key":                               "Key",
 		"log_delivery_configuration":        "LogDeliveryConfiguration",
+		"maintenance_schedule":              "MaintenanceSchedule",
 		"name":                              "Name",
 		"network_type":                      "NetworkType",
+		"next_maintenance_time":             "NextMaintenanceTime",
 		"organization":                      "Organization",
 		"password":                          "Password",
 		"port":                              "Port",
+		"preferred_maintenance_window":      "PreferredMaintenanceWindow",
 		"publicly_accessible":               "PubliclyAccessible",
 		"s3_configuration":                  "S3Configuration",
 		"secondary_availability_zone":       "SecondaryAvailabilityZone",
 		"status":                            "Status",
 		"tags":                              "Tags",
+		"timezone":                          "Timezone",
 		"username":                          "Username",
 		"value":                             "Value",
 		"vpc_security_group_ids":            "VpcSecurityGroupIds",
