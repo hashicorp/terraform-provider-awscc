@@ -1,0 +1,1067 @@
+{
+  "typeName": "AWS::BedrockAgentCore::Harness",
+  "description": "Definition of AWS::BedrockAgentCore::Harness resource type - a managed agentic loop service that provides a turnkey solution for running stateful, tool-equipped AI agents.",
+  "definitions": {
+    "HarnessStatus": {
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "CREATE_FAILED",
+        "UPDATING",
+        "UPDATE_FAILED",
+        "READY",
+        "DELETING",
+        "DELETE_FAILED"
+      ]
+    },
+    "HarnessEnvironmentArtifact": {
+      "type": "object",
+      "properties": {
+        "ContainerConfiguration": {
+          "$ref": "#/definitions/ContainerConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ContainerConfiguration": {
+      "type": "object",
+      "properties": {
+        "ContainerUri": {
+          "type": "string",
+          "description": "The ECR URI of the container.",
+          "minLength": 1,
+          "maxLength": 1024,
+          "pattern": "^(([0-9]{12})\\.dkr\\.ecr\\.([a-z0-9-]+)\\.amazonaws\\.com(\\.cn)?|public\\.ecr\\.aws)/((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*)(?::([^:@]{1,300}))?(?:@(.+))?$"
+        }
+      },
+      "required": [
+        "ContainerUri"
+      ],
+      "additionalProperties": false
+    },
+    "HarnessEnvironmentProvider": {
+      "type": "object",
+      "properties": {
+        "AgentCoreRuntimeEnvironment": {
+          "$ref": "#/definitions/HarnessAgentCoreRuntimeEnvironment"
+        }
+      },
+      "additionalProperties": false
+    },
+    "HarnessAgentCoreRuntimeEnvironment": {
+      "type": "object",
+      "properties": {
+        "AgentRuntimeArn": {
+          "type": "string",
+          "description": "The ARN of the underlying AgentCore Runtime.",
+          "minLength": 20,
+          "maxLength": 1011
+        },
+        "AgentRuntimeName": {
+          "type": "string",
+          "description": "The name of the underlying AgentCore Runtime."
+        },
+        "AgentRuntimeId": {
+          "type": "string",
+          "description": "The ID of the underlying AgentCore Runtime."
+        },
+        "LifecycleConfiguration": {
+          "$ref": "#/definitions/LifecycleConfiguration"
+        },
+        "NetworkConfiguration": {
+          "$ref": "#/definitions/NetworkConfiguration"
+        },
+        "FilesystemConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FilesystemConfiguration"
+          },
+          "minItems": 0,
+          "maxItems": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "LifecycleConfiguration": {
+      "type": "object",
+      "properties": {
+        "IdleRuntimeSessionTimeout": {
+          "type": "integer",
+          "minimum": 60,
+          "maximum": 28800
+        },
+        "MaxLifetime": {
+          "type": "integer",
+          "minimum": 60,
+          "maximum": 28800
+        }
+      },
+      "additionalProperties": false
+    },
+    "NetworkConfiguration": {
+      "type": "object",
+      "properties": {
+        "NetworkMode": {
+          "type": "string",
+          "enum": [
+            "PUBLIC",
+            "VPC"
+          ]
+        },
+        "NetworkModeConfig": {
+          "$ref": "#/definitions/VpcConfig"
+        }
+      },
+      "required": [
+        "NetworkMode"
+      ],
+      "additionalProperties": false
+    },
+    "VpcConfig": {
+      "type": "object",
+      "properties": {
+        "SecurityGroups": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^sg-[0-9a-zA-Z]{8,17}$"
+          },
+          "minItems": 1,
+          "maxItems": 16
+        },
+        "Subnets": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^subnet-[0-9a-zA-Z]{8,17}$"
+          },
+          "minItems": 1,
+          "maxItems": 16
+        }
+      },
+      "required": [
+        "SecurityGroups",
+        "Subnets"
+      ],
+      "additionalProperties": false
+    },
+    "FilesystemConfiguration": {
+      "type": "object",
+      "properties": {
+        "SessionStorage": {
+          "$ref": "#/definitions/SessionStorageConfiguration"
+        }
+      },
+      "required": [
+        "SessionStorage"
+      ],
+      "additionalProperties": false
+    },
+    "SessionStorageConfiguration": {
+      "type": "object",
+      "properties": {
+        "MountPath": {
+          "type": "string",
+          "minLength": 6,
+          "maxLength": 200,
+          "pattern": "^/mnt/[a-zA-Z0-9._-]+/?$"
+        }
+      },
+      "required": [
+        "MountPath"
+      ],
+      "additionalProperties": false
+    },
+    "HarnessModelConfiguration": {
+      "type": "object",
+      "properties": {
+        "BedrockModelConfig": {
+          "$ref": "#/definitions/HarnessBedrockModelConfig"
+        },
+        "OpenAiModelConfig": {
+          "$ref": "#/definitions/HarnessOpenAiModelConfig"
+        },
+        "GeminiModelConfig": {
+          "$ref": "#/definitions/HarnessGeminiModelConfig"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "BedrockModelConfig"
+          ]
+        },
+        {
+          "required": [
+            "OpenAiModelConfig"
+          ]
+        },
+        {
+          "required": [
+            "GeminiModelConfig"
+          ]
+        }
+      ],
+      "additionalProperties": false
+    },
+    "HarnessBedrockModelConfig": {
+      "type": "object",
+      "properties": {
+        "ModelId": {
+          "type": "string"
+        },
+        "MaxTokens": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "Temperature": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "TopP": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "ModelId"
+      ],
+      "additionalProperties": false
+    },
+    "HarnessOpenAiModelConfig": {
+      "type": "object",
+      "properties": {
+        "ModelId": {
+          "type": "string"
+        },
+        "ApiKeyArn": {
+          "type": "string",
+          "pattern": "^arn:aws:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:token-vault/[a-zA-Z0-9-.]+/apikeycredentialprovider/[a-zA-Z0-9-.]+$"
+        },
+        "MaxTokens": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "Temperature": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "TopP": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "ModelId",
+        "ApiKeyArn"
+      ],
+      "additionalProperties": false
+    },
+    "HarnessGeminiModelConfig": {
+      "type": "object",
+      "properties": {
+        "ModelId": {
+          "type": "string"
+        },
+        "ApiKeyArn": {
+          "type": "string",
+          "pattern": "^arn:aws:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:token-vault/[a-zA-Z0-9-.]+/apikeycredentialprovider/[a-zA-Z0-9-.]+$"
+        },
+        "MaxTokens": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "Temperature": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "TopP": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "TopK": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 500
+        }
+      },
+      "required": [
+        "ModelId",
+        "ApiKeyArn"
+      ],
+      "additionalProperties": false
+    },
+    "AuthorizerConfiguration": {
+      "type": "object",
+      "properties": {
+        "CustomJWTAuthorizer": {
+          "$ref": "#/definitions/CustomJWTAuthorizerConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CustomJWTAuthorizerConfiguration": {
+      "type": "object",
+      "properties": {
+        "DiscoveryUrl": {
+          "type": "string",
+          "pattern": "^.+/\\.well-known/openid-configuration$"
+        },
+        "AllowedAudience": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "AllowedClients": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "AllowedScopes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "pattern": "^[\\x21\\x23-\\x5B\\x5D-\\x7E]+$"
+          },
+          "minItems": 1
+        },
+        "CustomClaims": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomClaimValidationType"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "DiscoveryUrl"
+      ],
+      "additionalProperties": false
+    },
+    "CustomClaimValidationType": {
+      "type": "object",
+      "properties": {
+        "InboundTokenClaimName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255,
+          "pattern": "^[A-Za-z0-9_.-:]+$"
+        },
+        "InboundTokenClaimValueType": {
+          "type": "string",
+          "enum": [
+            "STRING",
+            "STRING_ARRAY"
+          ]
+        },
+        "AuthorizingClaimMatchValue": {
+          "$ref": "#/definitions/AuthorizingClaimMatchValueType"
+        }
+      },
+      "required": [
+        "InboundTokenClaimName",
+        "InboundTokenClaimValueType",
+        "AuthorizingClaimMatchValue"
+      ],
+      "additionalProperties": false
+    },
+    "AuthorizingClaimMatchValueType": {
+      "type": "object",
+      "properties": {
+        "ClaimMatchValue": {
+          "$ref": "#/definitions/ClaimMatchValueType"
+        },
+        "ClaimMatchOperator": {
+          "type": "string",
+          "enum": [
+            "EQUALS",
+            "CONTAINS",
+            "CONTAINS_ANY"
+          ]
+        }
+      },
+      "required": [
+        "ClaimMatchValue",
+        "ClaimMatchOperator"
+      ],
+      "additionalProperties": false
+    },
+    "ClaimMatchValueType": {
+      "type": "object",
+      "properties": {
+        "MatchValueString": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255,
+          "pattern": "^[A-Za-z0-9_.-]+$"
+        },
+        "MatchValueStringList": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "pattern": "^[A-Za-z0-9_.-]+$"
+          },
+          "minItems": 1
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "MatchValueString"
+          ]
+        },
+        {
+          "required": [
+            "MatchValueStringList"
+          ]
+        }
+      ],
+      "additionalProperties": false
+    },
+    "HarnessSystemContentBlock": {
+      "type": "object",
+      "properties": {
+        "Text": {
+          "type": "string",
+          "description": "The text content of the system prompt block.",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "Text"
+      ],
+      "additionalProperties": false
+    },
+    "HarnessTool": {
+      "type": "object",
+      "properties": {
+        "Type": {
+          "type": "string",
+          "enum": [
+            "remote_mcp",
+            "agentcore_browser",
+            "agentcore_gateway",
+            "inline_function",
+            "agentcore_code_interpreter"
+          ]
+        },
+        "Name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "Config": {
+          "$ref": "#/definitions/HarnessToolConfiguration"
+        }
+      },
+      "required": [
+        "Type"
+      ],
+      "additionalProperties": false
+    },
+    "HarnessToolConfiguration": {
+      "type": "object",
+      "properties": {
+        "RemoteMcp": {
+          "$ref": "#/definitions/HarnessRemoteMcpConfig"
+        },
+        "AgentCoreBrowser": {
+          "$ref": "#/definitions/HarnessAgentCoreBrowserConfig"
+        },
+        "AgentCoreGateway": {
+          "$ref": "#/definitions/HarnessAgentCoreGatewayConfig"
+        },
+        "InlineFunction": {
+          "$ref": "#/definitions/HarnessInlineFunctionConfig"
+        },
+        "AgentCoreCodeInterpreter": {
+          "$ref": "#/definitions/HarnessAgentCoreCodeInterpreterConfig"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "RemoteMcp"
+          ]
+        },
+        {
+          "required": [
+            "AgentCoreBrowser"
+          ]
+        },
+        {
+          "required": [
+            "AgentCoreGateway"
+          ]
+        },
+        {
+          "required": [
+            "InlineFunction"
+          ]
+        },
+        {
+          "required": [
+            "AgentCoreCodeInterpreter"
+          ]
+        }
+      ],
+      "additionalProperties": false
+    },
+    "HarnessRemoteMcpConfig": {
+      "type": "object",
+      "properties": {
+        "Url": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 16383
+        },
+        "Headers": {
+          "type": "object",
+          "patternProperties": {
+            "": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 16383
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "Url"
+      ],
+      "additionalProperties": false
+    },
+    "HarnessAgentCoreBrowserConfig": {
+      "type": "object",
+      "properties": {
+        "BrowserArn": {
+          "type": "string",
+          "pattern": "^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:(aws|[0-9]{12}):browser(-custom)?/(aws\\.browser\\.v1|[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10})$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "HarnessAgentCoreGatewayConfig": {
+      "type": "object",
+      "properties": {
+        "GatewayArn": {
+          "type": "string",
+          "pattern": "^arn:aws(|-cn|-us-gov):bedrock-agentcore:[a-z0-9-]{1,20}:[0-9]{12}:gateway/([0-9a-z][-]?){1,48}-[a-z0-9]{10}$"
+        },
+        "OutboundAuth": {
+          "$ref": "#/definitions/HarnessGatewayOutboundAuth"
+        }
+      },
+      "required": [
+        "GatewayArn"
+      ],
+      "additionalProperties": false
+    },
+    "HarnessGatewayOutboundAuth": {
+      "type": "object",
+      "properties": {
+        "AwsIam": {
+          "type": "object",
+          "additionalProperties": false
+        },
+        "None": {
+          "type": "object",
+          "additionalProperties": false
+        },
+        "Oauth": {
+          "$ref": "#/definitions/OAuthCredentialProvider"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "AwsIam"
+          ]
+        },
+        {
+          "required": [
+            "None"
+          ]
+        },
+        {
+          "required": [
+            "Oauth"
+          ]
+        }
+      ],
+      "additionalProperties": false
+    },
+    "OAuthCredentialProvider": {
+      "type": "object",
+      "properties": {
+        "ProviderArn": {
+          "type": "string",
+          "pattern": "^arn:([^:]*):([^:]*):([^:]*):([0-9]{12})?:(.+)$"
+        },
+        "Scopes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "maxItems": 100
+        },
+        "CustomParameters": {
+          "type": "object",
+          "patternProperties": {
+            "": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2048
+            }
+          },
+          "additionalProperties": false,
+          "minProperties": 1,
+          "maxProperties": 10
+        },
+        "GrantType": {
+          "type": "string",
+          "enum": [
+            "CLIENT_CREDENTIALS",
+            "AUTHORIZATION_CODE"
+          ]
+        },
+        "DefaultReturnUrl": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048,
+          "pattern": "^\\w+:(\\/?\\/?)[^\\s]+$"
+        }
+      },
+      "required": [
+        "ProviderArn",
+        "Scopes"
+      ],
+      "additionalProperties": false
+    },
+    "HarnessInlineFunctionConfig": {
+      "type": "object",
+      "properties": {
+        "Description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "InputSchema": {
+          "type": "object",
+          "description": "JSON Schema describing the tool's input parameters."
+        }
+      },
+      "required": [
+        "Description",
+        "InputSchema"
+      ],
+      "additionalProperties": false
+    },
+    "HarnessAgentCoreCodeInterpreterConfig": {
+      "type": "object",
+      "properties": {
+        "CodeInterpreterArn": {
+          "type": "string",
+          "pattern": "^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:(aws|[0-9]{12}):code-interpreter(-custom)?/(aws\\.codeinterpreter\\.v1|[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10})$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "HarnessSkill": {
+      "type": "object",
+      "properties": {
+        "Path": {
+          "type": "string",
+          "description": "The filesystem path to the skill definition.",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "Path"
+      ],
+      "additionalProperties": false
+    },
+    "HarnessMemoryConfiguration": {
+      "type": "object",
+      "properties": {
+        "AgentCoreMemoryConfiguration": {
+          "$ref": "#/definitions/HarnessAgentCoreMemoryConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "HarnessAgentCoreMemoryConfiguration": {
+      "type": "object",
+      "properties": {
+        "Arn": {
+          "type": "string",
+          "pattern": "^arn:aws:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:memory/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$"
+        },
+        "ActorId": {
+          "type": "string"
+        },
+        "MessagesCount": {
+          "type": "integer"
+        },
+        "RetrievalConfig": {
+          "type": "object",
+          "patternProperties": {
+            "": {
+              "$ref": "#/definitions/HarnessAgentCoreMemoryRetrievalConfig"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "Arn"
+      ],
+      "additionalProperties": false
+    },
+    "HarnessAgentCoreMemoryRetrievalConfig": {
+      "type": "object",
+      "properties": {
+        "TopK": {
+          "type": "integer"
+        },
+        "RelevanceScore": {
+          "type": "number"
+        },
+        "StrategyId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "HarnessTruncationConfiguration": {
+      "type": "object",
+      "properties": {
+        "Strategy": {
+          "type": "string",
+          "enum": [
+            "sliding_window",
+            "summarization",
+            "none"
+          ]
+        },
+        "Config": {
+          "$ref": "#/definitions/HarnessTruncationStrategyConfiguration"
+        }
+      },
+      "required": [
+        "Strategy"
+      ],
+      "additionalProperties": false
+    },
+    "HarnessTruncationStrategyConfiguration": {
+      "type": "object",
+      "properties": {
+        "SlidingWindow": {
+          "$ref": "#/definitions/HarnessSlidingWindowConfiguration"
+        },
+        "Summarization": {
+          "$ref": "#/definitions/HarnessSummarizationConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "HarnessSlidingWindowConfiguration": {
+      "type": "object",
+      "properties": {
+        "MessagesCount": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "HarnessSummarizationConfiguration": {
+      "type": "object",
+      "properties": {
+        "SummaryRatio": {
+          "type": "number"
+        },
+        "PreserveRecentMessages": {
+          "type": "integer"
+        },
+        "SummarizationSystemPrompt": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9\\s_.:/=+\\-@]*$"
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256,
+          "pattern": "^[a-zA-Z0-9\\s_.:/=+\\-@]*$"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the harness.",
+      "pattern": "^arn:([^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:harness/[a-zA-Z][a-zA-Z0-9_]{0,39}-[a-zA-Z0-9]{10}$"
+    },
+    "HarnessId": {
+      "type": "string",
+      "description": "The unique identifier of the harness.",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,39}-[a-zA-Z0-9]{10}$"
+    },
+    "HarnessName": {
+      "type": "string",
+      "description": "The name of the harness.",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,39}$"
+    },
+    "Status": {
+      "$ref": "#/definitions/HarnessStatus",
+      "description": "The current status of the harness."
+    },
+    "ExecutionRoleArn": {
+      "type": "string",
+      "description": "The ARN of the IAM role that the harness assumes when running.",
+      "minLength": 1,
+      "maxLength": 2048,
+      "pattern": "^arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+$"
+    },
+    "Environment": {
+      "$ref": "#/definitions/HarnessEnvironmentProvider",
+      "description": "The compute environment configuration for the harness, including underlying runtime information."
+    },
+    "EnvironmentArtifact": {
+      "$ref": "#/definitions/HarnessEnvironmentArtifact",
+      "description": "The environment artifact for the harness, such as a custom container image."
+    },
+    "EnvironmentVariables": {
+      "type": "object",
+      "description": "Environment variables to set in the harness runtime environment.",
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 5000
+        }
+      },
+      "additionalProperties": false,
+      "maxProperties": 50
+    },
+    "AuthorizerConfiguration": {
+      "$ref": "#/definitions/AuthorizerConfiguration",
+      "description": "The inbound authorization configuration for authenticating incoming requests."
+    },
+    "Model": {
+      "$ref": "#/definitions/HarnessModelConfiguration",
+      "description": "The model configuration for the harness."
+    },
+    "SystemPrompt": {
+      "type": "array",
+      "description": "The system prompt that defines the agent's behavior.",
+      "items": {
+        "$ref": "#/definitions/HarnessSystemContentBlock"
+      }
+    },
+    "Tools": {
+      "type": "array",
+      "description": "The tools available to the agent.",
+      "items": {
+        "$ref": "#/definitions/HarnessTool"
+      }
+    },
+    "Skills": {
+      "type": "array",
+      "description": "The skills available to the agent.",
+      "items": {
+        "$ref": "#/definitions/HarnessSkill"
+      }
+    },
+    "AllowedTools": {
+      "type": "array",
+      "description": "The tools that the agent is allowed to use.",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 64,
+        "pattern": "^(\\*|@?[^/]+(/[^/]+)?)$"
+      }
+    },
+    "Memory": {
+      "$ref": "#/definitions/HarnessMemoryConfiguration",
+      "description": "The AgentCore Memory configuration for persisting conversation context."
+    },
+    "Truncation": {
+      "$ref": "#/definitions/HarnessTruncationConfiguration",
+      "description": "The truncation configuration for managing conversation context."
+    },
+    "MaxIterations": {
+      "type": "integer",
+      "description": "The maximum number of iterations the agent loop can execute per invocation."
+    },
+    "MaxTokens": {
+      "type": "integer",
+      "description": "The maximum number of tokens the agent can generate per iteration."
+    },
+    "TimeoutSeconds": {
+      "type": "integer",
+      "description": "The maximum duration in seconds for the agent loop execution per invocation."
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The timestamp when the harness was created.",
+      "format": "date-time"
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "The timestamp when the harness was last updated.",
+      "format": "date-time"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Tags to apply to the harness resource.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50,
+      "insertionOrder": false
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "HarnessName",
+    "ExecutionRoleArn",
+    "Model"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/HarnessId",
+    "/properties/Status",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt",
+    "/properties/Environment/AgentCoreRuntimeEnvironment/AgentRuntimeArn",
+    "/properties/Environment/AgentCoreRuntimeEnvironment/AgentRuntimeName",
+    "/properties/Environment/AgentCoreRuntimeEnvironment/AgentRuntimeId"
+  ],
+  "createOnlyProperties": [
+    "/properties/HarnessName",
+    "/properties/Environment/AgentCoreRuntimeEnvironment/NetworkConfiguration"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/HarnessId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "tagProperty": "/properties/Tags",
+    "cloudFormationSystemTags": true,
+    "permissions": [
+      "bedrock-agentcore:TagResource",
+      "bedrock-agentcore:UntagResource",
+      "bedrock-agentcore:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "bedrock-agentcore:CreateAgentRuntime",
+        "bedrock-agentcore:CreateAgentRuntimeEndpoint",
+        "bedrock-agentcore:CreateHarness",
+        "bedrock-agentcore:CreateWorkloadIdentity",
+        "bedrock-agentcore:DeleteAgentRuntime",
+        "bedrock-agentcore:DeleteAgentRuntimeEndpoint",
+        "bedrock-agentcore:DeleteWorkloadIdentity",
+        "bedrock-agentcore:GetAgentRuntime",
+        "bedrock-agentcore:GetAgentRuntimeEndpoint",
+        "bedrock-agentcore:GetHarness",
+        "bedrock-agentcore:TagResource",
+        "bedrock-agentcore:UpdateAgentRuntime",
+        "bedrock-agentcore:UpdateAgentRuntimeEndpoint",
+        "iam:PassRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "bedrock-agentcore:GetHarness",
+        "bedrock-agentcore:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "bedrock-agentcore:CreateAgentRuntime",
+        "bedrock-agentcore:CreateAgentRuntimeEndpoint",
+        "bedrock-agentcore:CreateWorkloadIdentity",
+        "bedrock-agentcore:DeleteAgentRuntime",
+        "bedrock-agentcore:DeleteAgentRuntimeEndpoint",
+        "bedrock-agentcore:DeleteWorkloadIdentity",
+        "bedrock-agentcore:GetAgentRuntime",
+        "bedrock-agentcore:GetAgentRuntimeEndpoint",
+        "bedrock-agentcore:GetHarness",
+        "bedrock-agentcore:ListTagsForResource",
+        "bedrock-agentcore:TagResource",
+        "bedrock-agentcore:UntagResource",
+        "bedrock-agentcore:UpdateAgentRuntime",
+        "bedrock-agentcore:UpdateAgentRuntimeEndpoint",
+        "bedrock-agentcore:UpdateHarness",
+        "iam:PassRole"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "bedrock-agentcore:CreateAgentRuntime",
+        "bedrock-agentcore:CreateAgentRuntimeEndpoint",
+        "bedrock-agentcore:CreateWorkloadIdentity",
+        "bedrock-agentcore:DeleteAgentRuntime",
+        "bedrock-agentcore:DeleteAgentRuntimeEndpoint",
+        "bedrock-agentcore:DeleteHarness",
+        "bedrock-agentcore:DeleteWorkloadIdentity",
+        "bedrock-agentcore:GetAgentRuntime",
+        "bedrock-agentcore:GetAgentRuntimeEndpoint",
+        "bedrock-agentcore:GetHarness",
+        "bedrock-agentcore:UpdateAgentRuntime",
+        "bedrock-agentcore:UpdateAgentRuntimeEndpoint"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "bedrock-agentcore:ListHarnesses"
+      ]
+    }
+  }
+}

@@ -1,0 +1,238 @@
+{
+  "typeName": "AWS::BedrockAgentCore::Dataset",
+  "description": "Definition of AWS::BedrockAgentCore::Dataset Resource Type",
+  "definitions": {
+    "InlineExamplesSource": {
+      "type": "object",
+      "description": "Inline examples provided directly in the request body.",
+      "properties": {
+        "Examples": {
+          "type": "array",
+          "description": "Examples to add. Each example is a free-form JSON document validated against the declared schemaType.",
+          "items": {
+            "type": "object"
+          },
+          "minItems": 1,
+          "maxItems": 1000
+        }
+      },
+      "required": [
+        "Examples"
+      ],
+      "additionalProperties": false
+    },
+    "S3Source": {
+      "type": "object",
+      "description": "S3 location of a JSONL file containing dataset examples.",
+      "properties": {
+        "S3Uri": {
+          "type": "string",
+          "description": "S3 URI of the JSONL file (e.g. s3://my-bucket/path/to/examples.jsonl).",
+          "pattern": ""
+        }
+      },
+      "required": [
+        "S3Uri"
+      ],
+      "additionalProperties": false
+    },
+    "DataSourceType": {
+      "type": "object",
+      "description": "Source of initial examples. Provide either inline examples or an S3 URI pointing to a JSONL file.",
+      "properties": {
+        "InlineExamples": {
+          "$ref": "#/definitions/InlineExamplesSource"
+        },
+        "S3Source": {
+          "$ref": "#/definitions/S3Source"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "DatasetArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the dataset.",
+      "pattern": "^arn:aws(-[a-z]+)*:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:dataset/[a-zA-Z0-9_-]{1,110}$"
+    },
+    "DatasetId": {
+      "type": "string",
+      "description": "The unique identifier of the dataset.",
+      "pattern": "^[a-zA-Z0-9_-]{1,110}$"
+    },
+    "DatasetName": {
+      "type": "string",
+      "description": "Human-readable name for the dataset. Unique within the account (case-insensitive). Immutable after creation.",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$"
+    },
+    "Description": {
+      "type": "string",
+      "description": "A description of the dataset.",
+      "maxLength": 200
+    },
+    "SchemaType": {
+      "type": "string",
+      "description": "Versioned schema type governing the structure of examples. Immutable after creation.",
+      "enum": [
+        "AGENTCORE_EVALUATION_PREDEFINED_V1",
+        "AGENTCORE_EVALUATION_SIMULATED_V1"
+      ]
+    },
+    "Source": {
+      "$ref": "#/definitions/DataSourceType"
+    },
+    "KmsKeyArn": {
+      "type": "string",
+      "description": "Optional AWS KMS key ARN for SSE-KMS on service S3 writes.",
+      "minLength": 1,
+      "maxLength": 2048,
+      "pattern": "^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$"
+    },
+    "Status": {
+      "type": "string",
+      "description": "The current status of the dataset.",
+      "enum": [
+        "CREATING",
+        "UPDATING",
+        "DELETING",
+        "ACTIVE",
+        "CREATE_FAILED",
+        "UPDATE_FAILED",
+        "DELETE_FAILED"
+      ]
+    },
+    "ExampleCount": {
+      "type": "integer",
+      "description": "The number of examples in the dataset DRAFT."
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The timestamp when the dataset was created.",
+      "format": "date-time"
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "The timestamp when the dataset was last updated.",
+      "format": "date-time"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "A list of tags to assign to the dataset.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50,
+      "insertionOrder": false
+    }
+  },
+  "required": [
+    "DatasetName",
+    "SchemaType"
+  ],
+  "readOnlyProperties": [
+    "/properties/DatasetArn",
+    "/properties/DatasetId",
+    "/properties/Status",
+    "/properties/ExampleCount",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/DatasetName",
+    "/properties/SchemaType",
+    "/properties/KmsKeyArn",
+    "/properties/Source"
+  ],
+  "writeOnlyProperties": [
+    "/properties/Source"
+  ],
+  "primaryIdentifier": [
+    "/properties/DatasetArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/DatasetId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "bedrock-agentcore:TagResource",
+      "bedrock-agentcore:UntagResource",
+      "bedrock-agentcore:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "bedrock-agentcore:CreateDataset",
+        "bedrock-agentcore:GetDataset",
+        "bedrock-agentcore:TagResource",
+        "kms:DescribeKey",
+        "kms:Decrypt",
+        "kms:GenerateDataKey",
+        "s3:GetObject",
+        "s3:GetBucketLocation"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "bedrock-agentcore:GetDataset",
+        "bedrock-agentcore:ListTagsForResource",
+        "kms:Decrypt",
+        "kms:DescribeKey"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "bedrock-agentcore:UpdateDataset",
+        "bedrock-agentcore:GetDataset",
+        "bedrock-agentcore:TagResource",
+        "bedrock-agentcore:UntagResource",
+        "bedrock-agentcore:ListTagsForResource",
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:GenerateDataKey"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "bedrock-agentcore:DeleteDataset",
+        "bedrock-agentcore:GetDataset",
+        "kms:Decrypt",
+        "kms:DescribeKey"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "bedrock-agentcore:ListDatasets"
+      ]
+    }
+  },
+  "additionalProperties": false
+}
