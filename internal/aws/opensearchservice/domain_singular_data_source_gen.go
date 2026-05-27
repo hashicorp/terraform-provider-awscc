@@ -353,6 +353,44 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: AutomatedSnapshotPauseOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Enabled": {
+		//	      "type": "boolean"
+		//	    },
+		//	    "EndTime": {
+		//	      "type": "string"
+		//	    },
+		//	    "StartTime": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Enabled"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"automated_snapshot_pause_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: EndTime
+				"end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: StartTime
+				"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClusterConfig
 		// CloudFormation resource type schema:
 		//
@@ -1187,6 +1225,10 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "EgressEnabled": {
+		//	      "description": "Controls whether egress traffic from the domain is routed through the customer VPC.",
+		//	      "type": "boolean"
+		//	    },
 		//	    "SecurityGroupIds": {
 		//	      "items": {
 		//	        "type": "string"
@@ -1206,6 +1248,11 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"vpc_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EgressEnabled
+				"egress_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Controls whether egress traffic from the domain is routed through the customer VPC.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: SecurityGroupIds
 				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
@@ -1236,112 +1283,116 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::OpenSearchService::Domain").WithTerraformTypeName("awscc_opensearchservice_domain")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"access_policies":                 "AccessPolicies",
-		"advanced_options":                "AdvancedOptions",
-		"advanced_security_options":       "AdvancedSecurityOptions",
-		"aiml_options":                    "AIMLOptions",
-		"anonymous_auth_disable_date":     "AnonymousAuthDisableDate",
-		"anonymous_auth_enabled":          "AnonymousAuthEnabled",
-		"arn":                             "Arn",
-		"auto_software_update_enabled":    "AutoSoftwareUpdateEnabled",
-		"automated_snapshot_start_hour":   "AutomatedSnapshotStartHour",
-		"automated_update_date":           "AutomatedUpdateDate",
-		"availability_zone_count":         "AvailabilityZoneCount",
-		"cancellable":                     "Cancellable",
-		"cloudwatch_logs_log_group_arn":   "CloudWatchLogsLogGroupArn",
-		"cluster_config":                  "ClusterConfig",
-		"cognito_options":                 "CognitoOptions",
-		"cold_storage_options":            "ColdStorageOptions",
-		"count":                           "Count",
-		"current_version":                 "CurrentVersion",
-		"custom_endpoint":                 "CustomEndpoint",
-		"custom_endpoint_certificate_arn": "CustomEndpointCertificateArn",
-		"custom_endpoint_enabled":         "CustomEndpointEnabled",
-		"dedicated_master_count":          "DedicatedMasterCount",
-		"dedicated_master_enabled":        "DedicatedMasterEnabled",
-		"dedicated_master_type":           "DedicatedMasterType",
-		"deployment_strategy":             "DeploymentStrategy",
-		"deployment_strategy_options":     "DeploymentStrategyOptions",
-		"description":                     "Description",
-		"domain_arn":                      "DomainArn",
-		"domain_endpoint":                 "DomainEndpoint",
-		"domain_endpoint_options":         "DomainEndpointOptions",
-		"domain_endpoint_v2":              "DomainEndpointV2",
-		"domain_endpoints":                "DomainEndpoints",
-		"domain_id":                       "Id",
-		"domain_name":                     "DomainName",
-		"ebs_enabled":                     "EBSEnabled",
-		"ebs_options":                     "EBSOptions",
-		"enabled":                         "Enabled",
-		"enabled_api_access":              "EnabledAPIAccess",
-		"encryption_at_rest_options":      "EncryptionAtRestOptions",
-		"enforce_https":                   "EnforceHTTPS",
-		"engine_version":                  "EngineVersion",
-		"entity_id":                       "EntityId",
-		"hours":                           "Hours",
-		"iam_federation_options":          "IAMFederationOptions",
-		"identity_center_application_arn": "IdentityCenterApplicationARN",
-		"identity_center_instance_arn":    "IdentityCenterInstanceARN",
-		"identity_center_options":         "IdentityCenterOptions",
-		"identity_pool_id":                "IdentityPoolId",
-		"identity_store_id":               "IdentityStoreId",
-		"idp":                             "Idp",
-		"instance_count":                  "InstanceCount",
-		"instance_type":                   "InstanceType",
-		"internal_user_database_enabled":  "InternalUserDatabaseEnabled",
-		"iops":                            "Iops",
-		"ip_address_type":                 "IPAddressType",
-		"jwt_options":                     "JWTOptions",
-		"key":                             "Key",
-		"kms_key_id":                      "KmsKeyId",
-		"log_publishing_options":          "LogPublishingOptions",
-		"master_backend_role":             "MasterBackendRole",
-		"master_user_arn":                 "MasterUserARN",
-		"master_user_name":                "MasterUserName",
-		"master_user_options":             "MasterUserOptions",
-		"master_user_password":            "MasterUserPassword",
-		"metadata_content":                "MetadataContent",
-		"minutes":                         "Minutes",
-		"multi_az_with_standby_enabled":   "MultiAZWithStandbyEnabled",
-		"new_version":                     "NewVersion",
-		"node_config":                     "NodeConfig",
-		"node_options":                    "NodeOptions",
-		"node_to_node_encryption_options": "NodeToNodeEncryptionOptions",
-		"node_type":                       "NodeType",
-		"off_peak_window":                 "OffPeakWindow",
-		"off_peak_window_options":         "OffPeakWindowOptions",
-		"optional_deployment":             "OptionalDeployment",
-		"public_key":                      "PublicKey",
-		"role_arn":                        "RoleArn",
-		"roles_key":                       "RolesKey",
-		"s3_vectors_engine":               "S3VectorsEngine",
-		"saml_options":                    "SAMLOptions",
-		"security_group_ids":              "SecurityGroupIds",
-		"serverless_vector_acceleration":  "ServerlessVectorAcceleration",
-		"service_software_options":        "ServiceSoftwareOptions",
-		"session_timeout_minutes":         "SessionTimeoutMinutes",
-		"skip_shard_migration_wait":       "SkipShardMigrationWait",
-		"snapshot_options":                "SnapshotOptions",
-		"software_update_options":         "SoftwareUpdateOptions",
-		"subject_key":                     "SubjectKey",
-		"subnet_ids":                      "SubnetIds",
-		"tags":                            "Tags",
-		"throughput":                      "Throughput",
-		"tls_security_policy":             "TLSSecurityPolicy",
-		"type":                            "Type",
-		"update_available":                "UpdateAvailable",
-		"update_status":                   "UpdateStatus",
-		"user_pool_id":                    "UserPoolId",
-		"value":                           "Value",
-		"volume_size":                     "VolumeSize",
-		"volume_type":                     "VolumeType",
-		"vpc_options":                     "VPCOptions",
-		"warm_count":                      "WarmCount",
-		"warm_enabled":                    "WarmEnabled",
-		"warm_type":                       "WarmType",
-		"window_start_time":               "WindowStartTime",
-		"zone_awareness_config":           "ZoneAwarenessConfig",
-		"zone_awareness_enabled":          "ZoneAwarenessEnabled",
+		"access_policies":                  "AccessPolicies",
+		"advanced_options":                 "AdvancedOptions",
+		"advanced_security_options":        "AdvancedSecurityOptions",
+		"aiml_options":                     "AIMLOptions",
+		"anonymous_auth_disable_date":      "AnonymousAuthDisableDate",
+		"anonymous_auth_enabled":           "AnonymousAuthEnabled",
+		"arn":                              "Arn",
+		"auto_software_update_enabled":     "AutoSoftwareUpdateEnabled",
+		"automated_snapshot_pause_options": "AutomatedSnapshotPauseOptions",
+		"automated_snapshot_start_hour":    "AutomatedSnapshotStartHour",
+		"automated_update_date":            "AutomatedUpdateDate",
+		"availability_zone_count":          "AvailabilityZoneCount",
+		"cancellable":                      "Cancellable",
+		"cloudwatch_logs_log_group_arn":    "CloudWatchLogsLogGroupArn",
+		"cluster_config":                   "ClusterConfig",
+		"cognito_options":                  "CognitoOptions",
+		"cold_storage_options":             "ColdStorageOptions",
+		"count":                            "Count",
+		"current_version":                  "CurrentVersion",
+		"custom_endpoint":                  "CustomEndpoint",
+		"custom_endpoint_certificate_arn":  "CustomEndpointCertificateArn",
+		"custom_endpoint_enabled":          "CustomEndpointEnabled",
+		"dedicated_master_count":           "DedicatedMasterCount",
+		"dedicated_master_enabled":         "DedicatedMasterEnabled",
+		"dedicated_master_type":            "DedicatedMasterType",
+		"deployment_strategy":              "DeploymentStrategy",
+		"deployment_strategy_options":      "DeploymentStrategyOptions",
+		"description":                      "Description",
+		"domain_arn":                       "DomainArn",
+		"domain_endpoint":                  "DomainEndpoint",
+		"domain_endpoint_options":          "DomainEndpointOptions",
+		"domain_endpoint_v2":               "DomainEndpointV2",
+		"domain_endpoints":                 "DomainEndpoints",
+		"domain_id":                        "Id",
+		"domain_name":                      "DomainName",
+		"ebs_enabled":                      "EBSEnabled",
+		"ebs_options":                      "EBSOptions",
+		"egress_enabled":                   "EgressEnabled",
+		"enabled":                          "Enabled",
+		"enabled_api_access":               "EnabledAPIAccess",
+		"encryption_at_rest_options":       "EncryptionAtRestOptions",
+		"end_time":                         "EndTime",
+		"enforce_https":                    "EnforceHTTPS",
+		"engine_version":                   "EngineVersion",
+		"entity_id":                        "EntityId",
+		"hours":                            "Hours",
+		"iam_federation_options":           "IAMFederationOptions",
+		"identity_center_application_arn":  "IdentityCenterApplicationARN",
+		"identity_center_instance_arn":     "IdentityCenterInstanceARN",
+		"identity_center_options":          "IdentityCenterOptions",
+		"identity_pool_id":                 "IdentityPoolId",
+		"identity_store_id":                "IdentityStoreId",
+		"idp":                              "Idp",
+		"instance_count":                   "InstanceCount",
+		"instance_type":                    "InstanceType",
+		"internal_user_database_enabled":   "InternalUserDatabaseEnabled",
+		"iops":                             "Iops",
+		"ip_address_type":                  "IPAddressType",
+		"jwt_options":                      "JWTOptions",
+		"key":                              "Key",
+		"kms_key_id":                       "KmsKeyId",
+		"log_publishing_options":           "LogPublishingOptions",
+		"master_backend_role":              "MasterBackendRole",
+		"master_user_arn":                  "MasterUserARN",
+		"master_user_name":                 "MasterUserName",
+		"master_user_options":              "MasterUserOptions",
+		"master_user_password":             "MasterUserPassword",
+		"metadata_content":                 "MetadataContent",
+		"minutes":                          "Minutes",
+		"multi_az_with_standby_enabled":    "MultiAZWithStandbyEnabled",
+		"new_version":                      "NewVersion",
+		"node_config":                      "NodeConfig",
+		"node_options":                     "NodeOptions",
+		"node_to_node_encryption_options":  "NodeToNodeEncryptionOptions",
+		"node_type":                        "NodeType",
+		"off_peak_window":                  "OffPeakWindow",
+		"off_peak_window_options":          "OffPeakWindowOptions",
+		"optional_deployment":              "OptionalDeployment",
+		"public_key":                       "PublicKey",
+		"role_arn":                         "RoleArn",
+		"roles_key":                        "RolesKey",
+		"s3_vectors_engine":                "S3VectorsEngine",
+		"saml_options":                     "SAMLOptions",
+		"security_group_ids":               "SecurityGroupIds",
+		"serverless_vector_acceleration":   "ServerlessVectorAcceleration",
+		"service_software_options":         "ServiceSoftwareOptions",
+		"session_timeout_minutes":          "SessionTimeoutMinutes",
+		"skip_shard_migration_wait":        "SkipShardMigrationWait",
+		"snapshot_options":                 "SnapshotOptions",
+		"software_update_options":          "SoftwareUpdateOptions",
+		"start_time":                       "StartTime",
+		"subject_key":                      "SubjectKey",
+		"subnet_ids":                       "SubnetIds",
+		"tags":                             "Tags",
+		"throughput":                       "Throughput",
+		"tls_security_policy":              "TLSSecurityPolicy",
+		"type":                             "Type",
+		"update_available":                 "UpdateAvailable",
+		"update_status":                    "UpdateStatus",
+		"user_pool_id":                     "UserPoolId",
+		"value":                            "Value",
+		"volume_size":                      "VolumeSize",
+		"volume_type":                      "VolumeType",
+		"vpc_options":                      "VPCOptions",
+		"warm_count":                       "WarmCount",
+		"warm_enabled":                     "WarmEnabled",
+		"warm_type":                        "WarmType",
+		"window_start_time":                "WindowStartTime",
+		"zone_awareness_config":            "ZoneAwarenessConfig",
+		"zone_awareness_enabled":           "ZoneAwarenessEnabled",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

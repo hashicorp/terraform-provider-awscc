@@ -370,6 +370,10 @@
         "identifier": ["Name"]
     },
     {
+        "resource": "awscc_appstream_stack_user_association",
+        "identifier": ["StackName","UserName","AuthenticationType"]
+    },
+    {
         "resource": "awscc_appsync_api",
         "generateListResource": true,
         "identifier": ["ApiArn"]
@@ -727,6 +731,11 @@
         "resource": "awscc_bedrockagentcore_evaluator",
         "generateListResource": true,
         "identifier": ["EvaluatorArn"]
+    },
+    {
+        "resource": "awscc_bedrockagentcore_harness",
+        "generateListResource": true,
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_bedrockagentcore_online_evaluation_config",

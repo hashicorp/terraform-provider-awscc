@@ -9,6 +9,7 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
@@ -359,6 +360,72 @@ func influxDBInstanceResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: MaintenanceSchedule
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The maintenance schedule for the InfluxDB instance.",
+		//	  "properties": {
+		//	    "PreferredMaintenanceWindow": {
+		//	      "description": "The preferred maintenance window in format ddd:HH:MM-ddd:HH:MM.",
+		//	      "maxLength": 19,
+		//	      "minLength": 0,
+		//	      "pattern": "^$|^(Mon|Tue|Wed|Thu|Fri|Sat|Sun):([01]\\d|2[0-3]):[0-5]\\d-(Mon|Tue|Wed|Thu|Fri|Sat|Sun):([01]\\d|2[0-3]):[0-5]\\d$",
+		//	      "type": "string"
+		//	    },
+		//	    "Timezone": {
+		//	      "description": "The IANA timezone identifier for the maintenance schedule.",
+		//	      "maxLength": 64,
+		//	      "minLength": 1,
+		//	      "pattern": "^(UTC|[A-Za-z_]+/[A-Za-z0-9_]+(/[A-Za-z0-9_]+)?)$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Timezone",
+		//	    "PreferredMaintenanceWindow"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"maintenance_schedule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PreferredMaintenanceWindow
+				"preferred_maintenance_window": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The preferred maintenance window in format ddd:HH:MM-ddd:HH:MM.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(0, 19),
+						stringvalidator.RegexMatches(regexp.MustCompile("^$|^(Mon|Tue|Wed|Thu|Fri|Sat|Sun):([01]\\d|2[0-3]):[0-5]\\d-(Mon|Tue|Wed|Thu|Fri|Sat|Sun):([01]\\d|2[0-3]):[0-5]\\d$"), ""),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Timezone
+				"timezone": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The IANA timezone identifier for the maintenance schedule.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 64),
+						stringvalidator.RegexMatches(regexp.MustCompile("^(UTC|[A-Za-z_]+/[A-Za-z0-9_]+(/[A-Za-z0-9_]+)?)$"), ""),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The maintenance schedule for the InfluxDB instance.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -406,6 +473,22 @@ func influxDBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: NextMaintenanceTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The timestamp of the next scheduled maintenance event.",
+		//	  "format": "date-time",
+		//	  "type": "string"
+		//	}
+		"next_maintenance_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
+			Description: "The timestamp of the next scheduled maintenance event.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Organization
@@ -727,16 +810,20 @@ func influxDBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"influx_db_instance_id":             "Id",
 		"key":                               "Key",
 		"log_delivery_configuration":        "LogDeliveryConfiguration",
+		"maintenance_schedule":              "MaintenanceSchedule",
 		"name":                              "Name",
 		"network_type":                      "NetworkType",
+		"next_maintenance_time":             "NextMaintenanceTime",
 		"organization":                      "Organization",
 		"password":                          "Password",
 		"port":                              "Port",
+		"preferred_maintenance_window":      "PreferredMaintenanceWindow",
 		"publicly_accessible":               "PubliclyAccessible",
 		"s3_configuration":                  "S3Configuration",
 		"secondary_availability_zone":       "SecondaryAvailabilityZone",
 		"status":                            "Status",
 		"tags":                              "Tags",
+		"timezone":                          "Timezone",
 		"username":                          "Username",
 		"value":                             "Value",
 		"vpc_security_group_ids":            "VpcSecurityGroupIds",

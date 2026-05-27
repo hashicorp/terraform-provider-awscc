@@ -26,6 +26,7 @@ Data Source schema for AWS::OpenSearchService::Domain
 - `advanced_security_options` (Attributes) (see [below for nested schema](#nestedatt--advanced_security_options))
 - `aiml_options` (Attributes) (see [below for nested schema](#nestedatt--aiml_options))
 - `arn` (String)
+- `automated_snapshot_pause_options` (Attributes) (see [below for nested schema](#nestedatt--automated_snapshot_pause_options))
 - `cluster_config` (Attributes) (see [below for nested schema](#nestedatt--cluster_config))
 - `cognito_options` (Attributes) (see [below for nested schema](#nestedatt--cognito_options))
 - `deployment_strategy_options` (Attributes) (see [below for nested schema](#nestedatt--deployment_strategy_options))
@@ -143,6 +144,16 @@ Read-Only:
 
 - `enabled` (Boolean) Whether to enable serverless vector acceleration.
 
+
+
+<a id="nestedatt--automated_snapshot_pause_options"></a>
+### Nested Schema for `automated_snapshot_pause_options`
+
+Read-Only:
+
+- `enabled` (Boolean)
+- `end_time` (String)
+- `start_time` (String)
 
 
 <a id="nestedatt--cluster_config"></a>
@@ -353,5 +364,6 @@ Read-Only:
 
 Read-Only:
 
+- `egress_enabled` (Boolean) Controls whether egress traffic from the domain is routed through the customer VPC.
 - `security_group_ids` (List of String)
 - `subnet_ids` (List of String)

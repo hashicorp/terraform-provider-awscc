@@ -223,6 +223,26 @@ func organizationTelemetryRuleDataSource(ctx context.Context) (datasource.DataSo
 		//	          },
 		//	          "type": "object"
 		//	        },
+		//	        "LogDeliveryParameters": {
+		//	          "additionalProperties": false,
+		//	          "description": "Parameters for log delivery configuration",
+		//	          "properties": {
+		//	            "LogTypes": {
+		//	              "description": "Types of logs to deliver",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "enum": [
+		//	                  "SECURITY_FINDING_LOGS"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "minItems": 1,
+		//	              "type": "array",
+		//	              "uniqueItems": true
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "RetentionInDays": {
 		//	          "description": "Number of days to retain the telemetry data in the specified destination",
 		//	          "type": "integer"
@@ -407,7 +427,8 @@ func organizationTelemetryRuleDataSource(ctx context.Context) (datasource.DataSo
 		//	        "AWS::CloudTrail",
 		//	        "AWS::EKS::Cluster",
 		//	        "AWS::ElasticLoadBalancingV2::LoadBalancer",
-		//	        "AWS::EC2::Instance"
+		//	        "AWS::EC2::Instance",
+		//	        "AWS::SecurityHub::Hub"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -563,6 +584,19 @@ func organizationTelemetryRuleDataSource(ctx context.Context) (datasource.DataSo
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Telemetry parameters for ELB/NLB Load Balancer Logs",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: LogDeliveryParameters
+						"log_delivery_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: LogTypes
+								"log_types": schema.SetAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "Types of logs to deliver",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Parameters for log delivery configuration",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: RetentionInDays
@@ -861,8 +895,10 @@ func organizationTelemetryRuleDataSource(ctx context.Context) (datasource.DataSo
 		"key":                                  "Key",
 		"label_name":                           "LabelName",
 		"label_name_condition":                 "LabelNameCondition",
+		"log_delivery_parameters":              "LogDeliveryParameters",
 		"log_format":                           "LogFormat",
 		"log_type":                             "LogType",
+		"log_types":                            "LogTypes",
 		"logging_filter":                       "LoggingFilter",
 		"max_aggregation_interval":             "MaxAggregationInterval",
 		"method":                               "Method",

@@ -83,6 +83,14 @@ func webAppResource(ctx context.Context) (resource.Resource, error) {
 		//	      "additionalProperties": false,
 		//	      "description": "You can provide a structure that contains the details for the VPC endpoint to use with your web app.",
 		//	      "properties": {
+		//	        "IpAddressType": {
+		//	          "description": "The IP address type for the VPC endpoint used by the web app.",
+		//	          "enum": [
+		//	            "IPV4",
+		//	            "DUALSTACK"
+		//	          ],
+		//	          "type": "string"
+		//	        },
 		//	        "SecurityGroupIds": {
 		//	          "insertionOrder": false,
 		//	          "items": {
@@ -122,6 +130,22 @@ func webAppResource(ctx context.Context) (resource.Resource, error) {
 				// Property: Vpc
 				"vpc": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IpAddressType
+						"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The IP address type for the VPC endpoint used by the web app.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"IPV4",
+									"DUALSTACK",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+							// IpAddressType is a write-only property.
+						}, /*END ATTRIBUTE*/
 						// Property: SecurityGroupIds
 						"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
@@ -521,6 +545,7 @@ func webAppResource(ctx context.Context) (resource.Resource, error) {
 		"favicon_file":              "FaviconFile",
 		"identity_provider_details": "IdentityProviderDetails",
 		"instance_arn":              "InstanceArn",
+		"ip_address_type":           "IpAddressType",
 		"key":                       "Key",
 		"logo_file":                 "LogoFile",
 		"provisioned":               "Provisioned",
@@ -541,6 +566,7 @@ func webAppResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/EndpointDetails/Vpc/SecurityGroupIds",
+		"/properties/EndpointDetails/Vpc/IpAddressType",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

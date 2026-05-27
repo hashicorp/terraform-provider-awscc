@@ -418,6 +418,11 @@ resource_schema "aws_appstream_stack" {
   cloudformation_type_name = "AWS::AppStream::Stack"
 }
 
+resource_schema "aws_appstream_stack_user_association" {
+  cloudformation_type_name               = "AWS::AppStream::StackUserAssociation"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_appsync_api" {
   cloudformation_type_name = "AWS::AppSync::Api"
 }
@@ -740,8 +745,21 @@ resource_schema "aws_bedrockagentcore_code_interpreter_custom" {
   cloudformation_type_name = "AWS::BedrockAgentCore::CodeInterpreterCustom"
 }
 
+resource_schema "aws_bedrockagentcore_dataset" {
+  cloudformation_type_name = "AWS::BedrockAgentCore::Dataset"
+
+  # Ref: https://github.com/hashicorp/terraform-provider-awscc/issues/3168
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
 resource_schema "aws_bedrockagentcore_evaluator" {
   cloudformation_type_name = "AWS::BedrockAgentCore::Evaluator"
+}
+
+resource_schema "aws_bedrockagentcore_harness" {
+  cloudformation_type_name = "AWS::BedrockAgentCore::Harness"
 }
 
 resource_schema "aws_bedrockagentcore_online_evaluation_config" {

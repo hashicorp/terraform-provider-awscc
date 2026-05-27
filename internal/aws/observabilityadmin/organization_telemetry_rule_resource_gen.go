@@ -242,6 +242,26 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 		//	          },
 		//	          "type": "object"
 		//	        },
+		//	        "LogDeliveryParameters": {
+		//	          "additionalProperties": false,
+		//	          "description": "Parameters for log delivery configuration",
+		//	          "properties": {
+		//	            "LogTypes": {
+		//	              "description": "Types of logs to deliver",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "enum": [
+		//	                  "SECURITY_FINDING_LOGS"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "minItems": 1,
+		//	              "type": "array",
+		//	              "uniqueItems": true
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "RetentionInDays": {
 		//	          "description": "Number of days to retain the telemetry data in the specified destination",
 		//	          "type": "integer"
@@ -426,7 +446,8 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 		//	        "AWS::CloudTrail",
 		//	        "AWS::EKS::Cluster",
 		//	        "AWS::ElasticLoadBalancingV2::LoadBalancer",
-		//	        "AWS::EC2::Instance"
+		//	        "AWS::EC2::Instance",
+		//	        "AWS::SecurityHub::Hub"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -672,6 +693,35 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Telemetry parameters for ELB/NLB Load Balancer Logs",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: LogDeliveryParameters
+						"log_delivery_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: LogTypes
+								"log_types": schema.SetAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "Types of logs to deliver",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Set{ /*START VALIDATORS*/
+										setvalidator.SizeAtLeast(1),
+										setvalidator.ValueStringsAre(
+											stringvalidator.OneOf(
+												"SECURITY_FINDING_LOGS",
+											),
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+										setplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Parameters for log delivery configuration",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -983,6 +1033,7 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 							"AWS::EKS::Cluster",
 							"AWS::ElasticLoadBalancingV2::LoadBalancer",
 							"AWS::EC2::Instance",
+							"AWS::SecurityHub::Hub",
 						),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
@@ -1201,8 +1252,10 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 		"key":                                  "Key",
 		"label_name":                           "LabelName",
 		"label_name_condition":                 "LabelNameCondition",
+		"log_delivery_parameters":              "LogDeliveryParameters",
 		"log_format":                           "LogFormat",
 		"log_type":                             "LogType",
+		"log_types":                            "LogTypes",
 		"logging_filter":                       "LoggingFilter",
 		"max_aggregation_interval":             "MaxAggregationInterval",
 		"method":                               "Method",

@@ -218,28 +218,28 @@ smoke: prereq-go ## Run smoke tests
 	@TF_LOG=ERROR make testacc PKG_NAME=internal/aws/logs TESTARGS='-run=TestAccAWSLogsLogGroup_\|TestAccAWSLogsLogGroupDataSource_' ACCTEST_PARALLELISM=3
 
 commitdatas: ## Commit data source changes
-	@git add -A && git commit -m "$$(date -I) CloudFormation schemas in us-east-1; Generate Terraform data source schemas"
+	@git add -A && git commit -m "$$(date -u -I) CloudFormation schemas in us-east-1; Generate Terraform data source schemas"
 
 commitresources: ## Commit resource changes
-	@git add -A && git commit -m "$$(date -I) CloudFormation schemas in us-east-1; Generate Terraform resource schemas"
+	@git add -A && git commit -m "$$(date -u -I) CloudFormation schemas in us-east-1; Generate Terraform resource schemas"
 
 commitschemas: ## Commit schema changes
-	@git add -A && git commit -m "$$(date -I) CloudFormation schemas in us-east-1; New schemas"
+	@git add -A && git commit -m "$$(date -u -I) CloudFormation schemas in us-east-1; New schemas"
 
 commitrefresh: ## Commit schema refresh changes
-	@git add -A && git commit -m "$$(date -I) CloudFormation schemas in us-east-1; Refresh existing schemas"
+	@git add -A && git commit -m "$$(date -u -I) CloudFormation schemas in us-east-1; Refresh existing schemas"
 
 commitdocs: ## Commit documentation changes
-	@git add -A && git commit -m "$$(date -I) Documentation; Update generated documentation"
+	@git add -A && git commit -m "$$(date -u -I) Documentation; Update generated documentation"
 
 bigdiffer: ## Show big diff between current branch and main
 	@echo "==> Showing big diff between this schema generation and last"
 	@echo "==> Manually add each new resource/data source type to internal/provider/all_schemas.hcl"
-	@LAST_VERSION_DATE=$$(git log -1 --format=%cd --date=format:%Y-%m-%d version/VERSION); \
-	diff internal/provider/generators/allschemas/available_schemas.$$LAST_VERSION_DATE.hcl internal/provider/generators/allschemas/available_schemas.$$(date -I).hcl || true
+	@LAST_VERSION_DATE=$$(TZ=UTC git log -1 --format=%cd --date=format-local:%Y-%m-%d version/VERSION); \
+	diff internal/provider/generators/allschemas/available_schemas.$$LAST_VERSION_DATE.hcl internal/provider/generators/allschemas/available_schemas.$$(date -u -I).hcl || true
 
 newbranch: ## Create a new branch for schema updates
-	@NEW_BRANCH="$$(date -I)-schema-updates"; \
+	@NEW_BRANCH="$$(date -u -I)-schema-updates"; \
 	echo "==> Creating and switching to new branch $$NEW_BRANCH"; \
 	git checkout -b $$NEW_BRANCH
 
@@ -262,7 +262,7 @@ suppressions: ## Checkout suppressed schema files
 
 biglister: prereq-go ## List all resources and data sources
 	@echo "==> Listing all currently available resources and data sources..."
-	@OUTPUT_FILE="internal/provider/generators/allschemas/available_schemas.$$(date -I).hcl"; \
+	@OUTPUT_FILE="internal/provider/generators/allschemas/available_schemas.$$(date -u -I).hcl"; \
 	( \
 		SECONDS=0; \
 		while sleep 1; do \

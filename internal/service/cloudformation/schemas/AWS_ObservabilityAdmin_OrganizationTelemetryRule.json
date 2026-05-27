@@ -24,7 +24,8 @@
         "AWS::CloudTrail",
         "AWS::EKS::Cluster",
         "AWS::ElasticLoadBalancingV2::LoadBalancer",
-        "AWS::EC2::Instance"
+        "AWS::EC2::Instance",
+        "AWS::SecurityHub::Hub"
       ]
     },
     "TelemetryType": {
@@ -182,6 +183,26 @@
         },
         "WAFLoggingParameters": {
           "$ref": "#/definitions/WAFLoggingParameters"
+        },
+        "LogDeliveryParameters": {
+          "description": "Parameters for log delivery configuration",
+          "type": "object",
+          "properties": {
+            "LogTypes": {
+              "description": "Types of logs to deliver",
+              "type": "array",
+              "uniqueItems": true,
+              "insertionOrder": false,
+              "minItems": 1,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "SECURITY_FINDING_LOGS"
+                ]
+              }
+            }
+          },
+          "additionalProperties": false
         }
       },
       "required": [],

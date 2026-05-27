@@ -134,7 +134,7 @@ Read-Only:
 - `canary_configuration` (Attributes) Configuration for canary deployment strategy. Only valid when the deployment strategy is ``CANARY``. This configuration enables shifting a fixed percentage of traffic for testing, followed by shifting the remaining traffic after a bake period. (see [below for nested schema](#nestedatt--deployment_configuration--canary_configuration))
 - `deployment_circuit_breaker` (Attributes) The deployment circuit breaker can only be used for services using the rolling update (``ECS``) deployment type.
   The *deployment circuit breaker* determines whether a service deployment will fail if the service can't reach a steady state. If you use the deployment circuit breaker, a service deployment will transition to a failed state and stop launching new tasks. If you use the rollback option, when a service deployment fails, the service is rolled back to the last deployment that completed successfully. For more information, see [Rolling update](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html) in the *Amazon Elastic Container Service Developer Guide* (see [below for nested schema](#nestedatt--deployment_configuration--deployment_circuit_breaker))
-- `lifecycle_hooks` (Attributes List) An array of deployment lifecycle hook objects to run custom logic at specific stages of the deployment lifecycle. (see [below for nested schema](#nestedatt--deployment_configuration--lifecycle_hooks))
+- `lifecycle_hooks` (Attributes List) An array of deployment lifecycle hook objects to run custom logic or pause the deployment at specific stages of the deployment lifecycle. (see [below for nested schema](#nestedatt--deployment_configuration--lifecycle_hooks))
 - `linear_configuration` (Attributes) Configuration for linear deployment strategy. Only valid when the deployment strategy is ``LINEAR``. This configuration enables progressive traffic shifting in equal percentage increments with configurable bake times between each step. (see [below for nested schema](#nestedatt--deployment_configuration--linear_configuration))
 - `maximum_percent` (Number) If a service is using the rolling update (``ECS``) deployment type, the ``maximumPercent`` parameter represents an upper limit on the number of your service's tasks that are allowed in the ``RUNNING`` or ``PENDING`` state during a deployment, as a percentage of the ``desiredCount`` (rounded down to the nearest integer). This parameter enables you to define the deployment batch size. For example, if your service is using the ``REPLICA`` service scheduler and has a ``desiredCount`` of four tasks and a ``maximumPercent`` value of 200%, the scheduler may start four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available). The default ``maximumPercent`` value for a service using the ``REPLICA`` service scheduler is 200%.
  The Amazon ECS scheduler uses this parameter to replace unhealthy tasks by starting replacement tasks first and then stopping the unhealthy tasks, as long as cluster resources for starting replacement tasks are available. For more information about how the scheduler replaces unhealthy tasks, see [Amazon ECS services](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html).
@@ -198,8 +198,8 @@ Read-Only:
 
 - `hook_details` (String) Use this field to specify custom parameters that ECS passes to your hook target invocations (such as a Lambda function).
  This field must be a JSON object as a string.
-- `hook_target_arn` (String) The Amazon Resource Name (ARN) of the hook target. Currently, only Lambda function ARNs are supported.
- You must provide this parameter when configuring a deployment lifecycle hook.
+- `hook_target_arn` (String) The Amazon Resource Name (ARN) of the hook target. For ``AWS_LAMBDA`` hooks, this is the Lambda function ARN. This field is not applicable for ``PAUSE`` hooks.
+ You must provide this parameter when configuring an ``AWS_LAMBDA`` lifecycle hook.
 - `lifecycle_stages` (List of String) The lifecycle stages at which to run the hook. Choose from these valid values:
   +  RECONCILE_SERVICE
  The reconciliation stage that only happens when you start a new service deployment with more than 1 service revision in an ACTIVE state.
@@ -216,18 +216,26 @@ Read-Only:
   +  POST_TEST_TRAFFIC_SHIFT
  The test traffic shift is complete. The green service revision handles 100% of the test traffic.
  You can use a lifecycle hook for this stage.
+  +  PRE_PRODUCTION_TRAFFIC_SHIFT
+ Occurs before production traffic shift. For linear and canary deployments, this stage is invoked before every traffic shift step.
+ You can use a lifecycle hook for this stage.
   +  PRODUCTION_TRAFFIC_SHIFT
- Production traffic is shifting to the green service revision. The green service revision is migrating from 0% to 100% of production traffic.
+ Production traffic is shifting to the green service revision. The green service revision is migrating from 0% to 100% of production traffic. For linear and canary deployments, this stage is invoked at every traffic shift step.
  You can use a lifecycle hook for this stage.
   +  POST_PRODUCTION_TRAFFIC_SHIFT
  The production traffic shift is complete.
  You can use a lifecycle hook for this stage.
   
- You must provide this parameter when configuring a deployment lifecycle hook.
+  ``PAUSE`` hooks cannot be configured at ``TEST_TRAFFIC_SHIFT`` or ``PRODUCTION_TRAFFIC_SHIFT`` stages. These stages are only valid for ``AWS_LAMBDA`` hooks.
+  You must provide this parameter when configuring a deployment lifecycle hook.
 - `role_arn` (String) The Amazon Resource Name (ARN) of the IAM role that grants Amazon ECS permission to call Lambda functions on your behalf.
  For more information, see [Permissions required for Lambda functions in Amazon ECS blue/green deployments](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/blue-green-permissions.html) in the *Amazon Elastic Container Service Developer Guide*.
-- `target_type` (String)
-- `timeout_configuration` (Attributes) (see [below for nested schema](#nestedatt--deployment_configuration--lifecycle_hooks--timeout_configuration))
+- `target_type` (String) The type of action the lifecycle hook performs. Valid values are:
+  +  ``AWS_LAMBDA`` - Invokes a Lambda function at the specified lifecycle stage. This is the default value.
+  +  ``PAUSE`` - Pauses the deployment at the specified lifecycle stage until you call ``ContinueServiceDeployment`` to continue or roll back.
+  
+ This field is optional. If not specified, the default value is ``AWS_LAMBDA``.
+- `timeout_configuration` (Attributes) The timeout configuration for the lifecycle hook. This specifies how long Amazon ECS waits before taking the timeout action if the hook is not resolved. (see [below for nested schema](#nestedatt--deployment_configuration--lifecycle_hooks--timeout_configuration))
 
 <a id="nestedatt--deployment_configuration--lifecycle_hooks--timeout_configuration"></a>
 ### Nested Schema for `deployment_configuration.lifecycle_hooks.timeout_configuration`

@@ -1,4 +1,13 @@
-## 1.86.0 (Unreleased)
+## 1.86.0 (May 27, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_appstream_stack_user_association`
+* **New Data Source:** `awscc_bedrockagentcore_harness`
+* **New Data Source:** `awscc_bedrockagentcore_harnesses`
+* **New List Resource:** `awscc_bedrockagentcore_harness`
+* **New Resource:** `awscc_appstream_stack_user_association`
+* **New Resource:** `awscc_bedrockagentcore_harness`
 
 ## 1.85.0 (May 20, 2026)
 

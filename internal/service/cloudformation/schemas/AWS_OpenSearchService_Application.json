@@ -74,6 +74,10 @@
     }
   },
   "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "Amazon Resource Name (ARN) format."
+    },
     "IamIdentityCenterOptions": {
       "type": "object",
       "description": "Options for configuring IAM Identity Center",
@@ -92,10 +96,6 @@
         }
       },
       "additionalProperties": false
-    },
-    "Arn": {
-      "type": "string",
-      "description": "Amazon Resource Name (ARN) format."
     },
     "Id": {
       "type": "string",
