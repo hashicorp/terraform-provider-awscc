@@ -174,6 +174,39 @@ func replicationGroupDataSource(ctx context.Context) (datasource.DataSource, err
 			Description: "Enables data tiering. Data tiering is only supported for replication groups using the r6gd node type. This parameter must be set to true when using r6gd nodes.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Durability
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The durability setting for the replication group. Valid values: default, async, sync, disabled. Enabling durability on an existing non-durable cluster or disabling durability on an existing durable cluster is not currently supported and will result in an error; specify the desired durability at create time. The resolved state is returned in EffectiveDurability.",
+		//	  "enum": [
+		//	    "default",
+		//	    "async",
+		//	    "sync",
+		//	    "disabled"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"durability": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The durability setting for the replication group. Valid values: default, async, sync, disabled. Enabling durability on an existing non-durable cluster or disabling durability on an existing durable cluster is not currently supported and will result in an error; specify the desired durability at create time. The resolved state is returned in EffectiveDurability.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: EffectiveDurability
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The resolved durability state of the replication group after resolving the default value. This is a read-only property.",
+		//	  "enum": [
+		//	    "async",
+		//	    "sync",
+		//	    "disabled"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"effective_durability": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The resolved durability state of the replication group after resolving the default value. This is a read-only property.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Engine
 		// CloudFormation resource type schema:
 		//
@@ -882,6 +915,8 @@ func replicationGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		"delivery_stream":               "DeliveryStream",
 		"destination_details":           "DestinationDetails",
 		"destination_type":              "DestinationType",
+		"durability":                    "Durability",
+		"effective_durability":          "EffectiveDurability",
 		"engine":                        "Engine",
 		"engine_version":                "EngineVersion",
 		"global_replication_group_id":   "GlobalReplicationGroupId",

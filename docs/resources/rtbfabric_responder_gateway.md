@@ -72,8 +72,11 @@ data "aws_availability_zones" "available" {
 
 ### Optional
 
+- `acm_certificate_arn` (String)
 - `description` (String)
 - `domain_name` (String)
+- `gateway_type` (String)
+- `listener_config` (Attributes) (see [below for nested schema](#nestedatt--listener_config))
 - `managed_endpoint_configuration` (Attributes) (see [below for nested schema](#nestedatt--managed_endpoint_configuration))
 - `tags` (Attributes Set) Tags to assign to the Responder Gateway. (see [below for nested schema](#nestedatt--tags))
 - `trust_store_configuration` (Attributes) (see [below for nested schema](#nestedatt--trust_store_configuration))
@@ -81,11 +84,21 @@ data "aws_availability_zones" "available" {
 ### Read-Only
 
 - `arn` (String)
+- `certificate_association_status` (String)
 - `created_timestamp` (String)
+- `external_inbound_endpoint` (String)
 - `gateway_id` (String)
 - `id` (String) Uniquely identifies the resource.
 - `responder_gateway_status` (String)
 - `updated_timestamp` (String)
+
+<a id="nestedatt--listener_config"></a>
+### Nested Schema for `listener_config`
+
+Optional:
+
+- `protocols` (List of String)
+
 
 <a id="nestedatt--managed_endpoint_configuration"></a>
 ### Nested Schema for `managed_endpoint_configuration`

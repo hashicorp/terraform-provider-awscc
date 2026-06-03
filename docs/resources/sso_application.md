@@ -55,6 +55,7 @@ data "aws_ssoadmin_instances" "example" {}
 
 - `application_arn` (String) The Application ARN that is returned upon creation of the Identity Center (SSO) Application
 - `id` (String) Uniquely identifies the resource.
+- `identity_store_arn` (String) The ARN of the identity store associated with the Identity Center instance
 
 <a id="nestedatt--portal_options"></a>
 ### Nested Schema for `portal_options`

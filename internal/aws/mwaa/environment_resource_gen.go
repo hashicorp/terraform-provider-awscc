@@ -984,7 +984,8 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Choice for mode of webserver access including over public internet or via private VPC endpoint.",
 		//	  "enum": [
 		//	    "PRIVATE_ONLY",
-		//	    "PUBLIC_ONLY"
+		//	    "PUBLIC_ONLY",
+		//	    "PUBLIC_AND_PRIVATE"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -996,6 +997,7 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.OneOf(
 					"PRIVATE_ONLY",
 					"PUBLIC_ONLY",
+					"PUBLIC_AND_PRIVATE",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

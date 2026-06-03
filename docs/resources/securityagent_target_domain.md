@@ -31,6 +31,7 @@ Resource Type definition for AWS::SecurityAgent::TargetDomain
 - `target_domain_id` (String) Unique identifier of the target domain
 - `verification_details` (Attributes) Verification details to verify registered target domain (see [below for nested schema](#nestedatt--verification_details))
 - `verification_status` (String) Current verification status of the registered target domain
+- `verification_status_reason` (String) Reason for the current target domain verification status
 - `verified_at` (String) Timestamp when the target domain was last successfully verified
 
 <a id="nestedatt--tags"></a>

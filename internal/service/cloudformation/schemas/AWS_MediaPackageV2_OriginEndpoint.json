@@ -31,6 +31,34 @@
         "ISM"
       ]
     },
+    "CustomAdType": {
+      "type": "string",
+      "enum": [
+        "PROGRAM",
+        "CHAPTER",
+        "UNSCHEDULED_EVENT",
+        "ALTERNATE_CONTENT_OPPORTUNITY",
+        "NETWORK"
+      ]
+    },
+    "DashAvailabilityStartTimeConfiguration": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "FixedAvailabilityStartTime",
+          "properties": {
+            "FixedAvailabilityStartTime": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          "required": [
+            "FixedAvailabilityStartTime"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
     "DashBaseUrl": {
       "type": "object",
       "description": "<p>The base URLs to use for retrieving segments. You can specify multiple locations and indicate the priority and weight for when each should be used, for use in mutli-CDN workflows.</p>",
@@ -481,6 +509,12 @@
         },
         "SubtitleConfiguration": {
           "$ref": "#/definitions/DashSubtitleConfiguration"
+        },
+        "UriPathType": {
+          "$ref": "#/definitions/UriPathType"
+        },
+        "AvailabilityStartTimeConfiguration": {
+          "$ref": "#/definitions/DashAvailabilityStartTimeConfiguration"
         }
       },
       "required": [
@@ -530,6 +564,9 @@
         "UrlEncodeChildManifest": {
           "type": "boolean",
           "description": "<p>When enabled, MediaPackage URL-encodes the query string for API requests for HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html\">Amazon Web Services Signature Version 4 for API requests</a> in <i>Identity and Access Management User Guide</i>.</p>"
+        },
+        "UriPathType": {
+          "$ref": "#/definitions/UriPathType"
         }
       },
       "required": [
@@ -579,6 +616,9 @@
         "UrlEncodeChildManifest": {
           "type": "boolean",
           "description": "<p>When enabled, MediaPackage URL-encodes the query string for API requests for LL-HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html\">Amazon Web Services Signature Version 4 for API requests</a> in <i>Identity and Access Management User Guide</i>.</p>"
+        },
+        "UriPathType": {
+          "$ref": "#/definitions/UriPathType"
         }
       },
       "required": [
@@ -666,6 +706,15 @@
         },
         "ScteInSegments": {
           "$ref": "#/definitions/ScteInSegments"
+        },
+        "CustomAdTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomAdType"
+          },
+          "maxItems": 25,
+          "minItems": 0,
+          "description": "<p>A list of additional non-Ad SCTE-35 event types to treat as advertisements. When configured, events matching these types produce ad markers (such as <code>SCTE35-OUT</code> and <code>SCTE35-IN</code> in HLS DATERANGE tags) in manifests.</p> <p>Valid values: <code>PROGRAM</code> | <code>CHAPTER</code> | <code>UNSCHEDULED_EVENT</code> | <code>ALTERNATE_CONTENT_OPPORTUNITY</code> | <code>NETWORK</code> </p> <p>If you don't specify any values, the default is empty (only default ad types are used).</p>"
         }
       },
       "additionalProperties": false
@@ -676,6 +725,9 @@
       "properties": {
         "AdMarkerDash": {
           "$ref": "#/definitions/AdMarkerDash"
+        },
+        "ScteInManifests": {
+          "$ref": "#/definitions/ScteInManifests"
         }
       },
       "additionalProperties": false
@@ -691,7 +743,15 @@
         "DISTRIBUTOR_PLACEMENT_OPPORTUNITY",
         "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY",
         "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY",
-        "PROGRAM"
+        "PROGRAM",
+        "CHAPTER",
+        "UNSCHEDULED_EVENT",
+        "ALTERNATE_CONTENT_OPPORTUNITY",
+        "NETWORK",
+        "PROVIDER_PROMO",
+        "DISTRIBUTOR_PROMO",
+        "PROVIDER_AD_BLOCK",
+        "DISTRIBUTOR_AD_BLOCK"
       ]
     },
     "ScteHls": {
@@ -700,15 +760,26 @@
       "properties": {
         "AdMarkerHls": {
           "$ref": "#/definitions/AdMarkerHls"
+        },
+        "ScteInManifests": {
+          "$ref": "#/definitions/ScteInManifests"
         }
       },
       "additionalProperties": false
+    },
+    "ScteInManifests": {
+      "type": "string",
+      "enum": [
+        "ALL",
+        "MATCHES_FILTER"
+      ]
     },
     "ScteInSegments": {
       "type": "string",
       "enum": [
         "NONE",
-        "ALL"
+        "ALL",
+        "MATCHES_FILTER"
       ]
     },
     "Segment": {
@@ -789,7 +860,7 @@
           "maxLength": 2048,
           "minLength": 20,
           "pattern": "^arn:([^:\\n]+):acm:([^:\\n]+):([0-9]+):certificate/[a-zA-Z0-9-_]+$",
-          "description": "<p>The ARN for the certificate that you imported to AWS Certificate Manager to add content key encryption to this endpoint. For this feature to work, your DRM key provider must support content key encryption.</p>"
+          "description": "<p>The ARN for the certificate that you imported to Amazon Web Services Certificate Manager to add content key encryption to this endpoint. For this feature to work, your DRM key provider must support content key encryption.</p>"
         }
       },
       "required": [
@@ -824,6 +895,20 @@
       "enum": [
         "AES_128",
         "SAMPLE_AES"
+      ]
+    },
+    "UriPathType": {
+      "type": "string",
+      "enum": [
+        "LEAF",
+        "ROOT"
+      ]
+    },
+    "UriSeparator": {
+      "type": "string",
+      "enum": [
+        "UNDERSCORE",
+        "HYPHEN"
       ]
     },
     "Tag": {
@@ -918,8 +1003,11 @@
     "StartoverWindowSeconds": {
       "type": "integer",
       "maximum": 1209600,
-      "minimum": 60,
+      "minimum": 0,
       "description": "<p>The size of the window (in seconds) to create a window of the live stream that's available for on-demand viewing. Viewers can start-over or catch-up on content that falls within the window. The maximum startover window is 1,209,600 seconds (14 days).</p>"
+    },
+    "UriSeparator": {
+      "$ref": "#/definitions/UriSeparator"
     },
     "DashManifestUrls": {
       "type": "array",
@@ -1032,7 +1120,7 @@
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": false,
+    "cloudFormationSystemTags": true,
     "tagProperty": "/properties/Tags",
     "permissions": [
       "mediapackagev2:TagResource",

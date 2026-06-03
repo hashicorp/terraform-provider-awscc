@@ -49,6 +49,12 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "AccessAppsNativeDataStore": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "Action": {
 		//	      "enum": [
 		//	        "DENY"
@@ -92,6 +98,12 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 		//	      "type": "string"
 		//	    },
 		//	    "ApproveFlowShareRequests": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Apps": {
 		//	      "enum": [
 		//	        "DENY"
 		//	      ],
@@ -176,6 +188,12 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 		//	      "type": "string"
 		//	    },
 		//	    "CreateAndUpdateAmazonSThreeAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "CreateAndUpdateApps": {
 		//	      "enum": [
 		//	        "DENY"
 		//	      ],
@@ -475,6 +493,12 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 		//	      ],
 		//	      "type": "string"
 		//	    },
+		//	    "CreateSpaces": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "Dashboard": {
 		//	      "enum": [
 		//	        "DENY"
@@ -578,6 +602,12 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 		//	      "type": "string"
 		//	    },
 		//	    "IntercomAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "InvokeAppsAIInference": {
 		//	      "enum": [
 		//	        "DENY"
 		//	      ],
@@ -775,6 +805,12 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 		//	      ],
 		//	      "type": "string"
 		//	    },
+		//	    "ShareApps": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "ShareAsanaAction": {
 		//	      "enum": [
 		//	        "DENY"
@@ -794,6 +830,12 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 		//	      "type": "string"
 		//	    },
 		//	    "ShareCanvaAgentAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareChatAgents": {
 		//	      "enum": [
 		//	        "DENY"
 		//	      ],
@@ -1022,6 +1064,12 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 		//	      "type": "string"
 		//	    },
 		//	    "ShareSmartsheetAction": {
+		//	      "enum": [
+		//	        "DENY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ShareSpaces": {
 		//	      "enum": [
 		//	        "DENY"
 		//	      ],
@@ -1362,6 +1410,10 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 		//	}
 		"capabilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AccessAppsNativeDataStore
+				"access_apps_native_data_store": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: Action
 				"action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
@@ -1392,6 +1444,10 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				}, /*END ATTRIBUTE*/
 				// Property: ApproveFlowShareRequests
 				"approve_flow_share_requests": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Apps
+				"apps": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: AsanaAction
@@ -1448,6 +1504,10 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				}, /*END ATTRIBUTE*/
 				// Property: CreateAndUpdateAmazonSThreeAction
 				"create_and_update_amazon_s_three_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreateAndUpdateApps
+				"create_and_update_apps": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: CreateAndUpdateAsanaAction
@@ -1646,6 +1706,10 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				"create_shared_folders": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: CreateSpaces
+				"create_spaces": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: Dashboard
 				"dashboard": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
@@ -1716,6 +1780,10 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				}, /*END ATTRIBUTE*/
 				// Property: IntercomAction
 				"intercom_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: InvokeAppsAIInference
+				"invoke_apps_ai_inference": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: JiraAction
@@ -1846,6 +1914,10 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				"share_analyses": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: ShareApps
+				"share_apps": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: ShareAsanaAction
 				"share_asana_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
@@ -1860,6 +1932,10 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				}, /*END ATTRIBUTE*/
 				// Property: ShareCanvaAgentAction
 				"share_canva_agent_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareChatAgents
+				"share_chat_agents": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: ShareComprehendAction
@@ -2012,6 +2088,10 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 				}, /*END ATTRIBUTE*/
 				// Property: ShareSmartsheetAction
 				"share_smartsheet_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareSpaces
+				"share_spaces": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: ShareTextractAction
@@ -2314,31 +2394,34 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 	opts = opts.WithCloudFormationTypeName("AWS::QuickSight::CustomPermissions").WithTerraformTypeName("awscc_quicksight_custom_permissions")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"action": "Action",
-		"add_or_run_anomaly_detection_for_analyses":        "AddOrRunAnomalyDetectionForAnalyses",
-		"amazon_bedrock_ars_action":                        "AmazonBedrockARSAction",
-		"amazon_bedrock_fs_action":                         "AmazonBedrockFSAction",
-		"amazon_bedrock_krs_action":                        "AmazonBedrockKRSAction",
-		"amazon_s_three_action":                            "AmazonSThreeAction",
-		"analysis":                                         "Analysis",
-		"approve_flow_share_requests":                      "ApproveFlowShareRequests",
-		"arn":                                              "Arn",
-		"asana_action":                                     "AsanaAction",
-		"automate":                                         "Automate",
-		"aws_account_id":                                   "AwsAccountId",
-		"bamboo_hr_action":                                 "BambooHRAction",
-		"box_agent_action":                                 "BoxAgentAction",
-		"build_calculated_field_with_q":                    "BuildCalculatedFieldWithQ",
-		"canva_agent_action":                               "CanvaAgentAction",
-		"capabilities":                                     "Capabilities",
-		"chat_agent":                                       "ChatAgent",
-		"comprehend_action":                                "ComprehendAction",
-		"comprehend_medical_action":                        "ComprehendMedicalAction",
-		"confluence_action":                                "ConfluenceAction",
+		"access_apps_native_data_store": "AccessAppsNativeDataStore",
+		"action":                        "Action",
+		"add_or_run_anomaly_detection_for_analyses": "AddOrRunAnomalyDetectionForAnalyses",
+		"amazon_bedrock_ars_action":                 "AmazonBedrockARSAction",
+		"amazon_bedrock_fs_action":                  "AmazonBedrockFSAction",
+		"amazon_bedrock_krs_action":                 "AmazonBedrockKRSAction",
+		"amazon_s_three_action":                     "AmazonSThreeAction",
+		"analysis":                                  "Analysis",
+		"approve_flow_share_requests":               "ApproveFlowShareRequests",
+		"apps":                                      "Apps",
+		"arn":                                       "Arn",
+		"asana_action":                              "AsanaAction",
+		"automate":                                  "Automate",
+		"aws_account_id":                            "AwsAccountId",
+		"bamboo_hr_action":                          "BambooHRAction",
+		"box_agent_action":                          "BoxAgentAction",
+		"build_calculated_field_with_q":             "BuildCalculatedFieldWithQ",
+		"canva_agent_action":                        "CanvaAgentAction",
+		"capabilities":                              "Capabilities",
+		"chat_agent":                                "ChatAgent",
+		"comprehend_action":                         "ComprehendAction",
+		"comprehend_medical_action":                 "ComprehendMedicalAction",
+		"confluence_action":                         "ConfluenceAction",
 		"create_and_update_amazon_bedrock_ars_action":      "CreateAndUpdateAmazonBedrockARSAction",
 		"create_and_update_amazon_bedrock_fs_action":       "CreateAndUpdateAmazonBedrockFSAction",
 		"create_and_update_amazon_bedrock_krs_action":      "CreateAndUpdateAmazonBedrockKRSAction",
 		"create_and_update_amazon_s_three_action":          "CreateAndUpdateAmazonSThreeAction",
+		"create_and_update_apps":                           "CreateAndUpdateApps",
 		"create_and_update_asana_action":                   "CreateAndUpdateAsanaAction",
 		"create_and_update_bamboo_hr_action":               "CreateAndUpdateBambooHRAction",
 		"create_and_update_box_agent_action":               "CreateAndUpdateBoxAgentAction",
@@ -2387,6 +2470,7 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 		"create_chat_agents":                               "CreateChatAgents",
 		"create_dashboard_executive_summary_with_q":        "CreateDashboardExecutiveSummaryWithQ",
 		"create_shared_folders":                            "CreateSharedFolders",
+		"create_spaces":                                    "CreateSpaces",
 		"create_spice_dataset":                             "CreateSPICEDataset",
 		"custom_permissions_name":                          "CustomPermissionsName",
 		"dashboard":                                        "Dashboard",
@@ -2407,6 +2491,7 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 		"hugging_face_action":                              "HuggingFaceAction",
 		"include_content_in_scheduled_reports_email":       "IncludeContentInScheduledReportsEmail",
 		"intercom_action":                                  "IntercomAction",
+		"invoke_apps_ai_inference":                         "InvokeAppsAIInference",
 		"jira_action":                                      "JiraAction",
 		"key":                                              "Key",
 		"knowledge_base":                                   "KnowledgeBase",
@@ -2440,10 +2525,12 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 		"share_amazon_bedrock_krs_action":                  "ShareAmazonBedrockKRSAction",
 		"share_amazon_s_three_action":                      "ShareAmazonSThreeAction",
 		"share_analyses":                                   "ShareAnalyses",
+		"share_apps":                                       "ShareApps",
 		"share_asana_action":                               "ShareAsanaAction",
 		"share_bamboo_hr_action":                           "ShareBambooHRAction",
 		"share_box_agent_action":                           "ShareBoxAgentAction",
 		"share_canva_agent_action":                         "ShareCanvaAgentAction",
+		"share_chat_agents":                                "ShareChatAgents",
 		"share_comprehend_action":                          "ShareComprehendAction",
 		"share_comprehend_medical_action":                  "ShareComprehendMedicalAction",
 		"share_confluence_action":                          "ShareConfluenceAction",
@@ -2482,6 +2569,7 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 		"share_share_point_action":                         "ShareSharePointAction",
 		"share_slack_action":                               "ShareSlackAction",
 		"share_smartsheet_action":                          "ShareSmartsheetAction",
+		"share_spaces":                                     "ShareSpaces",
 		"share_textract_action":                            "ShareTextractAction",
 		"share_zendesk_action":                             "ShareZendeskAction",
 		"slack_action":                                     "SlackAction",

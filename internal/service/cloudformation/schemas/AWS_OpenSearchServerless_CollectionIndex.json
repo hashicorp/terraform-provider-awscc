@@ -1,0 +1,77 @@
+{
+  "typeName": "AWS::OpenSearchServerless::CollectionIndex",
+  "description": "Resource schema for AWS::OpenSearchServerless::CollectionIndex",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-opensearchserverless",
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
+  "definitions": {},
+  "properties": {
+    "Id": {
+      "description": "The identifier of the collection",
+      "type": "string",
+      "maxLength": 40,
+      "minLength": 3,
+      "pattern": "^[a-z0-9]{3,40}$"
+    },
+    "IndexName": {
+      "description": "The name of the collection index",
+      "type": "string",
+      "pattern": "",
+      "maxLength": 255,
+      "minLength": 1
+    },
+    "IndexSchema": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2480,
+      "pattern": "",
+      "description": "The Mappings for the collection index"
+    }
+  },
+  "required": [
+    "Id",
+    "IndexName"
+  ],
+  "createOnlyProperties": [
+    "/properties/Id",
+    "/properties/IndexName"
+  ],
+  "primaryIdentifier": [
+    "/properties/Id",
+    "/properties/IndexName"
+  ],
+  "additionalProperties": false,
+  "handlers": {
+    "create": {
+      "permissions": [
+        "aoss:CreateIndex",
+        "aoss:GetIndex",
+        "aoss:APIAccessAll"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "aoss:GetIndex",
+        "aoss:APIAccessAll"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "aoss:UpdateIndex",
+        "aoss:GetIndex",
+        "aoss:APIAccessAll"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "aoss:DeleteIndex",
+        "aoss:GetIndex",
+        "aoss:APIAccessAll"
+      ]
+    }
+  }
+}

@@ -9,6 +9,7 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -361,7 +362,8 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		//	  "enum": [
 		//	    "CUSTOM_JWT",
 		//	    "AWS_IAM",
-		//	    "NONE"
+		//	    "NONE",
+		//	    "AUTHENTICATE_ONLY"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -372,6 +374,7 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 					"CUSTOM_JWT",
 					"AWS_IAM",
 					"NONE",
+					"AUTHENTICATE_ONLY",
 				),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
@@ -810,18 +813,18 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "enum": [
-		//	    "MCP"
-		//	  ],
-		//	  "type": "string"
+		//	  "allOf": [
+		//	    {},
+		//	    {}
+		//	  ]
 		//	}
 		"protocol_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"MCP",
-				),
-			}, /*END VALIDATORS*/
+			CustomType: jsontypes.NormalizedType{},
+			Optional:   true,
+			Computed:   true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:

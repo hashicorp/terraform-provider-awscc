@@ -86,6 +86,21 @@
         "Flow": {
           "$ref": "#/definitions/CapabilityState"
         },
+        "Apps": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "CreateAndUpdateApps": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareApps": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "InvokeAppsAIInference": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "AccessAppsNativeDataStore": {
+          "$ref": "#/definitions/CapabilityState"
+        },
         "PublishWithoutApproval": {
           "$ref": "#/definitions/CapabilityState"
         },
@@ -632,10 +647,19 @@
         "Space": {
           "$ref": "#/definitions/CapabilityState"
         },
+        "CreateSpaces": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareSpaces": {
+          "$ref": "#/definitions/CapabilityState"
+        },
         "ChatAgent": {
           "$ref": "#/definitions/CapabilityState"
         },
         "CreateChatAgents": {
+          "$ref": "#/definitions/CapabilityState"
+        },
+        "ShareChatAgents": {
           "$ref": "#/definitions/CapabilityState"
         },
         "Research": {

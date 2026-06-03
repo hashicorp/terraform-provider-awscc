@@ -156,7 +156,8 @@ func targetDomainDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	      "description": "Type of domain ownership verification method",
 		//	      "enum": [
 		//	        "DNS_TXT",
-		//	        "HTTP_ROUTE"
+		//	        "HTTP_ROUTE",
+		//	        "PRIVATE_VPC"
 		//	      ],
 		//	      "type": "string"
 		//	    }
@@ -220,7 +221,8 @@ func targetDomainDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "Verification method for the target domain",
 		//	  "enum": [
 		//	    "DNS_TXT",
-		//	    "HTTP_ROUTE"
+		//	    "HTTP_ROUTE",
+		//	    "PRIVATE_VPC"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -243,6 +245,17 @@ func targetDomainDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	}
 		"verification_status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Current verification status of the registered target domain",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: VerificationStatusReason
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Reason for the current target domain verification status",
+		//	  "type": "string"
+		//	}
+		"verification_status_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Reason for the current target domain verification status",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VerifiedAt
@@ -275,23 +288,24 @@ func targetDomainDataSource(ctx context.Context) (datasource.DataSource, error) 
 	opts = opts.WithCloudFormationTypeName("AWS::SecurityAgent::TargetDomain").WithTerraformTypeName("awscc_securityagent_target_domain")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"created_at":           "CreatedAt",
-		"dns_record_name":      "DnsRecordName",
-		"dns_record_type":      "DnsRecordType",
-		"dns_txt":              "DnsTxt",
-		"http_route":           "HttpRoute",
-		"key":                  "Key",
-		"method":               "Method",
-		"route_path":           "RoutePath",
-		"tags":                 "Tags",
-		"target_domain_id":     "TargetDomainId",
-		"target_domain_name":   "TargetDomainName",
-		"token":                "Token",
-		"value":                "Value",
-		"verification_details": "VerificationDetails",
-		"verification_method":  "VerificationMethod",
-		"verification_status":  "VerificationStatus",
-		"verified_at":          "VerifiedAt",
+		"created_at":                 "CreatedAt",
+		"dns_record_name":            "DnsRecordName",
+		"dns_record_type":            "DnsRecordType",
+		"dns_txt":                    "DnsTxt",
+		"http_route":                 "HttpRoute",
+		"key":                        "Key",
+		"method":                     "Method",
+		"route_path":                 "RoutePath",
+		"tags":                       "Tags",
+		"target_domain_id":           "TargetDomainId",
+		"target_domain_name":         "TargetDomainName",
+		"token":                      "Token",
+		"value":                      "Value",
+		"verification_details":       "VerificationDetails",
+		"verification_method":        "VerificationMethod",
+		"verification_status":        "VerificationStatus",
+		"verification_status_reason": "VerificationStatusReason",
+		"verified_at":                "VerifiedAt",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

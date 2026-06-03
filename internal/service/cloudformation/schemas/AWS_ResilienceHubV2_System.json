@@ -1,0 +1,169 @@
+{
+  "typeName": "AWS::ResilienceHubV2::System",
+  "description": "Creates a system that represents a logical grouping of services.",
+  "additionalProperties": false,
+  "properties": {
+    "SystemArn": {
+      "type": "string",
+      "description": "The ARN of the system.",
+      "pattern": ""
+    },
+    "SystemId": {
+      "type": "string",
+      "description": "The system ID.",
+      "pattern": "^\\S{1,255}$"
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the system.",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$"
+    },
+    "Description": {
+      "type": "string",
+      "description": "The description of the system.",
+      "maxLength": 500
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Tags assigned to the system.",
+      "maxItems": 50,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "insertionOrder": false
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The timestamp when the system was created.",
+      "format": "date-time"
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "The timestamp when the system was last updated.",
+      "format": "date-time"
+    },
+    "KmsKeyId": {
+      "type": "string",
+      "description": "The KMS key ID for encrypting system data.",
+      "minLength": 1,
+      "maxLength": 2048,
+      "pattern": "^((arn:aws(-[^:]+)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:((key/[a-zA-Z0-9-]{36})|(alias/[a-zA-Z0-9-_/]+)))|([a-zA-Z0-9-]{36})|(alias/[a-zA-Z0-9-_/]+))$"
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The tag key.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The tag value.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "required": [
+    "Name"
+  ],
+  "primaryIdentifier": [
+    "/properties/SystemArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/SystemId"
+    ]
+  ],
+  "readOnlyProperties": [
+    "/properties/SystemArn",
+    "/properties/SystemId",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/KmsKeyId"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "resiliencehub:TagResource",
+      "resiliencehub:UntagResource",
+      "resiliencehub:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "resiliencehub:CreateSystem",
+        "resiliencehub:GetSystem",
+        "resiliencehub:TagResource",
+        "resiliencehub:ListTagsForResource",
+        "kms:DescribeKey",
+        "kms:GenerateDataKey",
+        "kms:Decrypt",
+        "kms:Encrypt",
+        "kms:CreateGrant",
+        "kms:RetireGrant"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "resiliencehub:GetSystem",
+        "resiliencehub:ListTagsForResource",
+        "kms:DescribeKey",
+        "kms:Decrypt"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "resiliencehub:UpdateSystem",
+        "resiliencehub:GetSystem",
+        "resiliencehub:TagResource",
+        "resiliencehub:UntagResource",
+        "resiliencehub:ListTagsForResource",
+        "kms:DescribeKey",
+        "kms:Decrypt",
+        "kms:GenerateDataKey",
+        "kms:Encrypt",
+        "kms:CreateGrant",
+        "kms:RetireGrant"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "resiliencehub:DeleteSystem",
+        "resiliencehub:GetSystem",
+        "kms:DescribeKey",
+        "kms:Decrypt",
+        "kms:RetireGrant",
+        "kms:GenerateDataKey",
+        "kms:Encrypt",
+        "kms:CreateGrant"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "resiliencehub:ListSystems"
+      ]
+    }
+  },
+  "writeOnlyProperties": [
+    "/properties/KmsKeyId"
+  ]
+}

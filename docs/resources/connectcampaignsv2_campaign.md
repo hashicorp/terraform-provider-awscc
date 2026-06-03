@@ -304,6 +304,7 @@ Optional:
 
 - `default_time_zone` (String) Time Zone Id in the IANA format
 - `local_time_zone_detection` (List of String) Local TimeZone Detection method list
+- `local_time_zone_detection_scope` (String) Local TimeZone Detection scope
 
 
 <a id="nestedatt--communication_time_config--sms"></a>

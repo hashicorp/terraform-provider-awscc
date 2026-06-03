@@ -1,7 +1,7 @@
 {
   "typeName": "AWS::Lex::ResourcePolicy",
   "description": "Resource Type definition for a resource policy with specified policy statements that attaches to a Lex bot or bot alias.",
-  "sourceUrl": "https://docs.aws.amazon.com/lexv2/latest/dg/security_iam_service-with-iam.html#security_iam_service-with-iam-resource-based-policies",
+  "sourceUrl": "https://docs.aws.amazon.com/lexv2/latest/dg/security_iam_service-with-iam.html",
   "definitions": {
     "ResourceArn": {
       "description": "The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy is attached to.",
@@ -90,6 +90,16 @@
       ]
     },
     "list": {
+      "handlerSchema": {
+        "properties": {
+          "ResourceArn": {
+            "$ref": "resource-schema.json#/properties/ResourceArn"
+          }
+        },
+        "required": [
+          "ResourceArn"
+        ]
+      },
       "permissions": [
         "lex:DescribeResourcePolicy"
       ]

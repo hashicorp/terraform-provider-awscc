@@ -38,8 +38,10 @@ func originEndpointPolicyResource(ctx context.Context) (resource.Resource, error
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "\u003cp\u003eThe settings to enable CDN authorization headers in MediaPackage.\u003c/p\u003e",
 		//	  "properties": {
 		//	    "CdnIdentifierSecretArns": {
+		//	      "description": "\u003cp\u003eThe ARN for the secret in Secrets Manager that your CDN uses for authorization to access the endpoint.\u003c/p\u003e",
 		//	      "items": {
 		//	        "maxLength": 2048,
 		//	        "minLength": 20,
@@ -50,6 +52,7 @@ func originEndpointPolicyResource(ctx context.Context) (resource.Resource, error
 		//	      "type": "array"
 		//	    },
 		//	    "SecretsRoleArn": {
+		//	      "description": "\u003cp\u003eThe ARN for the IAM role that gives MediaPackage read access to Secrets Manager and KMS for CDN authorization.\u003c/p\u003e",
 		//	      "maxLength": 2048,
 		//	      "minLength": 20,
 		//	      "type": "string"
@@ -66,6 +69,7 @@ func originEndpointPolicyResource(ctx context.Context) (resource.Resource, error
 				// Property: CdnIdentifierSecretArns
 				"cdn_identifier_secret_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
+					Description: "<p>The ARN for the secret in Secrets Manager that your CDN uses for authorization to access the endpoint.</p>",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
@@ -81,8 +85,9 @@ func originEndpointPolicyResource(ctx context.Context) (resource.Resource, error
 				}, /*END ATTRIBUTE*/
 				// Property: SecretsRoleArn
 				"secrets_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Description: "<p>The ARN for the IAM role that gives MediaPackage read access to Secrets Manager and KMS for CDN authorization.</p>",
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(20, 2048),
 						fwvalidators.NotNullString(),
@@ -92,8 +97,9 @@ func originEndpointPolicyResource(ctx context.Context) (resource.Resource, error
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Optional: true,
-			Computed: true,
+			Description: "<p>The settings to enable CDN authorization headers in MediaPackage.</p>",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/

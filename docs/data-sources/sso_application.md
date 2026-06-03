@@ -24,6 +24,7 @@ Data Source schema for AWS::SSO::Application
 - `application_arn` (String) The Application ARN that is returned upon creation of the Identity Center (SSO) Application
 - `application_provider_arn` (String) The ARN of the application provider under which the operation will run
 - `description` (String) The description information for the Identity Center (SSO) Application
+- `identity_store_arn` (String) The ARN of the identity store associated with the Identity Center instance
 - `instance_arn` (String) The ARN of the instance of IAM Identity Center under which the operation will run
 - `name` (String) The name you want to assign to this Identity Center (SSO) Application
 - `portal_options` (Attributes) A structure that describes the options for the portal associated with an application (see [below for nested schema](#nestedatt--portal_options))

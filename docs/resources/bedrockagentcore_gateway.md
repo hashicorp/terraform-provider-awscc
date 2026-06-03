@@ -19,7 +19,6 @@ Definition of AWS::BedrockAgentCore::Gateway Resource Type
 
 - `authorizer_type` (String)
 - `name` (String)
-- `protocol_type` (String)
 - `role_arn` (String)
 
 ### Optional
@@ -31,6 +30,7 @@ Definition of AWS::BedrockAgentCore::Gateway Resource Type
 - `kms_key_arn` (String)
 - `policy_engine_configuration` (Attributes) The configuration for a policy engine associated with a gateway. A policy engine is a collection of policies that evaluates and authorizes agent tool calls. When associated with a gateway, the policy engine intercepts all agent requests and determines whether to allow or deny each action based on the defined policies. (see [below for nested schema](#nestedatt--policy_engine_configuration))
 - `protocol_configuration` (Attributes) (see [below for nested schema](#nestedatt--protocol_configuration))
+- `protocol_type` (String)
 - `tags` (Map of String)
 
 ### Read-Only

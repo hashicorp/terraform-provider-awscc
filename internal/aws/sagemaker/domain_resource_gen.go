@@ -515,6 +515,13 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	              "maxLength": 256,
 		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
 		//	              "type": "string"
+		//	            },
+		//	            "TrainingPlanArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
+		//	              "maxLength": 2048,
+		//	              "minLength": 0,
+		//	              "pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$",
+		//	              "type": "string"
 		//	            }
 		//	          },
 		//	          "type": "object"
@@ -729,6 +736,13 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	              "description": "The Amazon Resource Name (ARN) of the image version created on the instance.",
 		//	              "maxLength": 256,
 		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "type": "string"
+		//	            },
+		//	            "TrainingPlanArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
+		//	              "maxLength": 2048,
+		//	              "minLength": 0,
+		//	              "pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -981,6 +995,13 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	              "description": "The Amazon Resource Name (ARN) of the image version created on the instance.",
 		//	              "maxLength": 256,
 		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "type": "string"
+		//	            },
+		//	            "TrainingPlanArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
+		//	              "maxLength": 2048,
+		//	              "minLength": 0,
+		//	              "pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -1613,6 +1634,19 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
+								// Property: TrainingPlanArn
+								"training_plan_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(0, 2048),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the JupyterLab app.",
 							Optional:    true,
@@ -1864,6 +1898,19 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: TrainingPlanArn
+								"training_plan_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(0, 2048),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -2176,6 +2223,19 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: TrainingPlanArn
+								"training_plan_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(0, 2048),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -2578,6 +2638,13 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	              "description": "The Amazon Resource Name (ARN) of the image version created on the instance.",
 		//	              "maxLength": 256,
 		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "type": "string"
+		//	            },
+		//	            "TrainingPlanArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
+		//	              "maxLength": 2048,
+		//	              "minLength": 0,
+		//	              "pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -2999,6 +3066,13 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	              "maxLength": 256,
 		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
 		//	              "type": "string"
+		//	            },
+		//	            "TrainingPlanArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
+		//	              "maxLength": 2048,
+		//	              "minLength": 0,
+		//	              "pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$",
+		//	              "type": "string"
 		//	            }
 		//	          },
 		//	          "type": "object"
@@ -3213,6 +3287,13 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	              "description": "The Amazon Resource Name (ARN) of the image version created on the instance.",
 		//	              "maxLength": 256,
 		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "type": "string"
+		//	            },
+		//	            "TrainingPlanArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
+		//	              "maxLength": 2048,
+		//	              "minLength": 0,
+		//	              "pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -3466,6 +3547,13 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	              "maxLength": 256,
 		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
 		//	              "type": "string"
+		//	            },
+		//	            "TrainingPlanArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
+		//	              "maxLength": 2048,
+		//	              "minLength": 0,
+		//	              "pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$",
+		//	              "type": "string"
 		//	            }
 		//	          },
 		//	          "type": "object"
@@ -3716,6 +3804,13 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	              "description": "The Amazon Resource Name (ARN) of the image version created on the instance.",
 		//	              "maxLength": 256,
 		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "type": "string"
+		//	            },
+		//	            "TrainingPlanArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
+		//	              "maxLength": 2048,
+		//	              "minLength": 0,
+		//	              "pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -4481,6 +4576,19 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
+								// Property: TrainingPlanArn
+								"training_plan_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(0, 2048),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the CodeEditor app.",
 							Optional:    true,
@@ -5080,6 +5188,19 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
+								// Property: TrainingPlanArn
+								"training_plan_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(0, 2048),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the JupyterLab app.",
 							Optional:    true,
@@ -5331,6 +5452,19 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: TrainingPlanArn
+								"training_plan_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(0, 2048),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -5648,6 +5782,19 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
+								// Property: TrainingPlanArn
+								"training_plan_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(0, 2048),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the KernelGateway app.",
 							Optional:    true,
@@ -5956,6 +6103,19 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
 										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: TrainingPlanArn
+								"training_plan_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(0, 2048),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -6754,6 +6914,13 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	              "maxLength": 256,
 		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
 		//	              "type": "string"
+		//	            },
+		//	            "TrainingPlanArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
+		//	              "maxLength": 2048,
+		//	              "minLength": 0,
+		//	              "pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$",
+		//	              "type": "string"
 		//	            }
 		//	          },
 		//	          "type": "object"
@@ -7149,6 +7316,19 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
+								// Property: TrainingPlanArn
+								"training_plan_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(0, 2048),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Optional: true,
 							Computed: true,
@@ -7329,6 +7509,31 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: HomeEfsFileSystemCreation
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates whether a home EFS file system is created for the domain. Set to Disabled to skip EFS creation and reduce domain creation time.",
+		//	  "enum": [
+		//	    "Enabled",
+		//	    "Disabled"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"home_efs_file_system_creation": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether a home EFS file system is created for the domain. Set to Disabled to skip EFS creation and reduce domain creation time.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"Enabled",
+					"Disabled",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: HomeEfsFileSystemId
@@ -7648,6 +7853,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"hidden_instance_types":                          "HiddenInstanceTypes",
 		"hidden_ml_tools":                                "HiddenMlTools",
 		"hidden_sage_maker_image_version_aliases":        "HiddenSageMakerImageVersionAliases",
+		"home_efs_file_system_creation":                  "HomeEfsFileSystemCreation",
 		"home_efs_file_system_id":                        "HomeEfsFileSystemId",
 		"idle_settings":                                  "IdleSettings",
 		"idle_timeout_in_minutes":                        "IdleTimeoutInMinutes",
@@ -7696,6 +7902,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"subnet_ids":                                     "SubnetIds",
 		"tag_propagation":                                "TagPropagation",
 		"tags":                                           "Tags",
+		"training_plan_arn":                              "TrainingPlanArn",
 		"uid":                                            "Uid",
 		"unified_studio_settings":                        "UnifiedStudioSettings",
 		"url":                                            "Url",

@@ -1268,6 +1268,14 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "string"
 		//	          },
 		//	          "type": "array"
+		//	        },
+		//	        "LocalTimeZoneDetectionScope": {
+		//	          "description": "Local TimeZone Detection scope",
+		//	          "enum": [
+		//	            "PRIMARY_ONLY",
+		//	            "ALL_AVAILABLE"
+		//	          ],
+		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -1824,6 +1832,21 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								generic.Multiset(),
 								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: LocalTimeZoneDetectionScope
+						"local_time_zone_detection_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Local TimeZone Detection scope",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"PRIMARY_ONLY",
+									"ALL_AVAILABLE",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -2786,6 +2809,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		"key":                               "Key",
 		"local_time_zone_config":            "LocalTimeZoneConfig",
 		"local_time_zone_detection":         "LocalTimeZoneDetection",
+		"local_time_zone_detection_scope":   "LocalTimeZoneDetectionScope",
 		"max_count_per_recipient":           "MaxCountPerRecipient",
 		"max_entry_count":                   "MaxEntryCount",
 		"min_entry_interval":                "MinEntryInterval",

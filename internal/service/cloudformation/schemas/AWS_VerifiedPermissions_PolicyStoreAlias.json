@@ -1,0 +1,62 @@
+{
+  "typeName": "AWS::VerifiedPermissions::PolicyStoreAlias",
+  "description": "Definition of AWS::VerifiedPermissions::PolicyStoreAlias Resource Type",
+  "properties": {
+    "AliasName": {
+      "type": "string",
+      "maxLength": 150,
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9-_/]*$"
+    },
+    "PolicyStoreId": {
+      "type": "string",
+      "maxLength": 200,
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9-]*$"
+    }
+  },
+  "required": [
+    "AliasName",
+    "PolicyStoreId"
+  ],
+  "createOnlyProperties": [
+    "/properties/AliasName",
+    "/properties/PolicyStoreId"
+  ],
+  "primaryIdentifier": [
+    "/properties/AliasName"
+  ],
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-avp",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "verifiedpermissions:CreatePolicyStoreAlias",
+        "verifiedpermissions:GetPolicyStoreAlias"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "verifiedpermissions:GetPolicyStoreAlias"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "verifiedpermissions:DeletePolicyStoreAlias",
+        "verifiedpermissions:GetPolicyStoreAlias"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "verifiedpermissions:ListPolicyStoreAliases",
+        "verifiedpermissions:GetPolicyStoreAlias"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,176 @@
+{
+  "typeName": "AWS::BedrockAgentCore::PaymentConnector",
+  "description": "Resource Type definition for AWS::BedrockAgentCore::PaymentConnector",
+  "definitions": {
+    "PaymentConnectorStatus": {
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "UPDATING",
+        "DELETING",
+        "READY",
+        "CREATE_FAILED",
+        "UPDATE_FAILED",
+        "DELETE_FAILED"
+      ]
+    },
+    "PaymentConnectorType": {
+      "type": "string",
+      "enum": [
+        "CoinbaseCDP",
+        "StripePrivy"
+      ]
+    },
+    "CredentialsProviderConfiguration": {
+      "type": "object",
+      "properties": {
+        "CoinbaseCDP": {
+          "$ref": "#/definitions/PaymentCredentialProviderConfiguration"
+        },
+        "StripePrivy": {
+          "$ref": "#/definitions/PaymentCredentialProviderConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PaymentCredentialProviderConfiguration": {
+      "type": "object",
+      "properties": {
+        "CredentialProviderArn": {
+          "type": "string",
+          "description": "The ARN of the payment credential provider"
+        }
+      },
+      "required": [
+        "CredentialProviderArn"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "PaymentManagerId": {
+      "type": "string",
+      "description": "The identifier of the parent payment manager",
+      "pattern": "^([0-9a-z][-]?){1,100}-[0-9a-z]{10}$"
+    },
+    "PaymentConnectorId": {
+      "type": "string",
+      "description": "The unique identifier for the payment connector",
+      "pattern": "^([0-9a-z][-]?){1,100}-[0-9a-z]{10}$"
+    },
+    "PaymentConnectorArn": {
+      "type": "string",
+      "description": "Synthetic ARN for the payment connector (used for engine resolution)",
+      "pattern": "^arn:aws[-a-z]{0,7}:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:payment-manager/[a-z0-9-]+/connector/[a-z0-9-]+$"
+    },
+    "ConnectorName": {
+      "type": "string",
+      "description": "The name of the payment connector",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$"
+    },
+    "Description": {
+      "type": "string",
+      "description": "A description of the payment connector",
+      "minLength": 1,
+      "maxLength": 4096,
+      "pattern": "^[a-zA-Z0-9\\s]+$"
+    },
+    "ConnectorType": {
+      "$ref": "#/definitions/PaymentConnectorType"
+    },
+    "CredentialProviderConfigurations": {
+      "type": "array",
+      "description": "The credential provider configurations for the connector",
+      "items": {
+        "$ref": "#/definitions/CredentialsProviderConfiguration"
+      },
+      "minItems": 1,
+      "maxItems": 1,
+      "insertionOrder": false
+    },
+    "ConnectorStatus": {
+      "$ref": "#/definitions/PaymentConnectorStatus"
+    },
+    "ConnectorCreatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the connector was created"
+    },
+    "ConnectorLastUpdatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the connector was last updated"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "PaymentManagerId",
+    "ConnectorName",
+    "ConnectorType",
+    "CredentialProviderConfigurations"
+  ],
+  "readOnlyProperties": [
+    "/properties/PaymentConnectorId",
+    "/properties/PaymentConnectorArn",
+    "/properties/ConnectorStatus",
+    "/properties/ConnectorCreatedAt",
+    "/properties/ConnectorLastUpdatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/PaymentManagerId",
+    "/properties/ConnectorName"
+  ],
+  "primaryIdentifier": [
+    "/properties/PaymentConnectorArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/PaymentManagerId",
+      "/properties/PaymentConnectorId"
+    ]
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "bedrock-agentcore:CreatePaymentConnector",
+        "bedrock-agentcore:GetPaymentConnector"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "bedrock-agentcore:GetPaymentConnector"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "bedrock-agentcore:UpdatePaymentConnector",
+        "bedrock-agentcore:GetPaymentConnector"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "bedrock-agentcore:DeletePaymentConnector",
+        "bedrock-agentcore:GetPaymentConnector"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "bedrock-agentcore:ListPaymentConnectors"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "PaymentManagerId": {
+            "type": "string",
+            "pattern": "^([0-9a-z][-]?){1,100}-[0-9a-z]{10}$"
+          }
+        },
+        "required": [
+          "PaymentManagerId"
+        ]
+      }
+    }
+  }
+}

@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1359 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1396 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -768,6 +768,11 @@ resource_schema "aws_bedrockagentcore_online_evaluation_config" {
 
 resource_schema "aws_bedrockagentcore_o_auth_2_credential_provider" {
   cloudformation_type_name = "AWS::BedrockAgentCore::OAuth2CredentialProvider"
+}
+
+resource_schema "aws_bedrockagentcore_payment_connector" {
+  cloudformation_type_name               = "AWS::BedrockAgentCore::PaymentConnector"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_bedrockagentcore_payment_credential_provider" {
@@ -4473,6 +4478,11 @@ resource_schema "aws_opensearchserverless_collection_group" {
   cloudformation_type_name = "AWS::OpenSearchServerless::CollectionGroup"
 }
 
+resource_schema "aws_opensearchserverless_collection_index" {
+  cloudformation_type_name               = "AWS::OpenSearchServerless::CollectionIndex"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_opensearchserverless_lifecycle_policy" {
   cloudformation_type_name               = "AWS::OpenSearchServerless::LifecyclePolicy"
   suppress_plural_data_source_generation = true
@@ -4919,6 +4929,18 @@ resource_schema "aws_resiliencehub_app" {
 
 resource_schema "aws_resiliencehub_resiliency_policy" {
   cloudformation_type_name = "AWS::ResilienceHub::ResiliencyPolicy"
+}
+
+resource_schema "aws_resiliencehubv2_policy" {
+  cloudformation_type_name = "AWS::ResilienceHubV2::Policy"
+}
+
+resource_schema "aws_resiliencehubv2_service" {
+  cloudformation_type_name = "AWS::ResilienceHubV2::Service"
+}
+
+resource_schema "aws_resiliencehubv2_system" {
+  cloudformation_type_name = "AWS::ResilienceHubV2::System"
 }
 
 resource_schema "aws_resourceexplorer2_default_view_association" {
@@ -6016,6 +6038,10 @@ resource_schema "aws_verifiedpermissions_policy_store" {
 resource_schema "aws_verifiedpermissions_policy_template" {
   cloudformation_type_name               = "AWS::VerifiedPermissions::PolicyTemplate"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_verifiedpermissions_policy_store_alias" {
+  cloudformation_type_name = "AWS::VerifiedPermissions::PolicyStoreAlias"
 }
 
 resource_schema "aws_voiceid_domain" {

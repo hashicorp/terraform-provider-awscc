@@ -8,6 +8,7 @@ package bedrockagentcore
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -238,7 +239,8 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "enum": [
 		//	    "CUSTOM_JWT",
 		//	    "AWS_IAM",
-		//	    "NONE"
+		//	    "NONE",
+		//	    "AUTHENTICATE_ONLY"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -537,13 +539,14 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "enum": [
-		//	    "MCP"
-		//	  ],
-		//	  "type": "string"
+		//	  "allOf": [
+		//	    {},
+		//	    {}
+		//	  ]
 		//	}
 		"protocol_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			CustomType: jsontypes.NormalizedType{},
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:

@@ -177,7 +177,7 @@ Optional:
 
 Optional:
 
-- `input_params` (String)
+- `input_params` (String) Specifies the S3 location of input parameter files for your Guard rules. You can specify either a single S3 location or an array of up to 10 S3 locations.
 
 
 <a id="nestedatt--stack_filters"></a>

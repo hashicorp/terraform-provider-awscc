@@ -10,6 +10,7 @@
     "SubnetIds": {
       "type": "array",
       "uniqueItems": false,
+      "insertionOrder": false,
       "items": {
         "type": "string"
       },
@@ -18,6 +19,7 @@
     "SecurityGroupIds": {
       "type": "array",
       "uniqueItems": false,
+      "insertionOrder": false,
       "items": {
         "type": "string"
       },
@@ -57,7 +59,13 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "cloudFormationSystemTags": true,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "apigateway:GET",
+      "apigateway:PUT",
+      "apigateway:PATCH",
+      "apigateway:DELETE"
+    ]
   },
   "handlers": {
     "create": {
@@ -73,7 +81,9 @@
     "update": {
       "permissions": [
         "apigateway:PATCH",
+        "apigateway:POST",
         "apigateway:GET",
+        "apigateway:DELETE",
         "apigateway:TagResource",
         "apigateway:unTagResource",
         "iam:CreateServiceLinkedRole",

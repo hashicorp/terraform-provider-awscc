@@ -146,10 +146,11 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "\u003cp\u003eThe configuration for input switching based on the media quality confidence score (MQCS) as provided from AWS Elemental MediaLive.\u003c/p\u003e",
 		//	  "properties": {
 		//	    "MQCSInputSwitching": {
-		//	      "description": "\u003cp\u003eWhen true, AWS Elemental MediaPackage performs input switching based on the MQCS. Default is true. This setting is valid only when \u003ccode\u003eInputType\u003c/code\u003e is \u003ccode\u003eCMAF\u003c/code\u003e.\u003c/p\u003e",
+		//	      "description": "\u003cp\u003eWhen true, AWS Elemental MediaPackage performs input switching based on the MQCS. Default is false. This setting is valid only when \u003ccode\u003eInputType\u003c/code\u003e is \u003ccode\u003eCMAF\u003c/code\u003e.\u003c/p\u003e",
 		//	      "type": "boolean"
 		//	    },
 		//	    "PreferredInput": {
+		//	      "description": "\u003cp\u003eFor CMAF inputs, indicates which input MediaPackage should prefer when both inputs have equal MQCS scores. Select \u003ccode\u003e1\u003c/code\u003e to prefer the first ingest endpoint, or \u003ccode\u003e2\u003c/code\u003e to prefer the second ingest endpoint. If you don't specify a preferred input, MediaPackage uses its default switching behavior when MQCS scores are equal.\u003c/p\u003e",
 		//	      "maximum": 2,
 		//	      "minimum": 1,
 		//	      "type": "integer"
@@ -161,12 +162,13 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: MQCSInputSwitching
 				"mqcs_input_switching": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "<p>When true, AWS Elemental MediaPackage performs input switching based on the MQCS. Default is true. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>",
+					Description: "<p>When true, AWS Elemental MediaPackage performs input switching based on the MQCS. Default is false. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: PreferredInput
 				"preferred_input": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "<p>For CMAF inputs, indicates which input MediaPackage should prefer when both inputs have equal MQCS scores. Select <code>1</code> to prefer the first ingest endpoint, or <code>2</code> to prefer the second ingest endpoint. If you don't specify a preferred input, MediaPackage uses its default switching behavior when MQCS scores are equal.</p>",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "<p>The configuration for input switching based on the media quality confidence score (MQCS) as provided from AWS Elemental MediaLive.</p>",
