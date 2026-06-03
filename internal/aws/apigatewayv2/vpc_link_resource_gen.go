@@ -45,6 +45,7 @@ func vpcLinkResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "A list of security group IDs for the VPC link.",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
@@ -57,6 +58,7 @@ func vpcLinkResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
@@ -66,6 +68,7 @@ func vpcLinkResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "A list of subnet IDs to include in the VPC link.",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
@@ -77,6 +80,7 @@ func vpcLinkResource(ctx context.Context) (resource.Resource, error) {
 			Description: "A list of subnet IDs to include in the VPC link.",
 			Required:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/

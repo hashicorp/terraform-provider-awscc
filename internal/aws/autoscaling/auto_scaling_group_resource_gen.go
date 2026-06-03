@@ -2555,7 +2555,7 @@ func autoScalingGroupResource(ctx context.Context) (resource.Resource, error) {
 	})
 	opts = opts.WithCreateTimeoutInMinutes(360).WithDeleteTimeoutInMinutes(240)
 
-	opts = opts.WithUpdateTimeoutInMinutes(660)
+	opts = opts.WithUpdateTimeoutInMinutes(2160)
 
 	v, err := generic.NewResource(ctx, opts...)
 

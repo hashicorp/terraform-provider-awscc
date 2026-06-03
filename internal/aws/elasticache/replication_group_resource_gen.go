@@ -9,6 +9,7 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
@@ -240,6 +241,54 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
 				boolplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Durability
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The durability setting for the replication group. Valid values: default, async, sync, disabled. Enabling durability on an existing non-durable cluster or disabling durability on an existing durable cluster is not currently supported and will result in an error; specify the desired durability at create time. The resolved state is returned in EffectiveDurability.",
+		//	  "enum": [
+		//	    "default",
+		//	    "async",
+		//	    "sync",
+		//	    "disabled"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"durability": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The durability setting for the replication group. Valid values: default, async, sync, disabled. Enabling durability on an existing non-durable cluster or disabling durability on an existing durable cluster is not currently supported and will result in an error; specify the desired durability at create time. The resolved state is returned in EffectiveDurability.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"default",
+					"async",
+					"sync",
+					"disabled",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EffectiveDurability
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The resolved durability state of the replication group after resolving the default value. This is a read-only property.",
+		//	  "enum": [
+		//	    "async",
+		//	    "sync",
+		//	    "disabled"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"effective_durability": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The resolved durability state of the replication group after resolving the default value. This is a read-only property.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Engine
@@ -1198,6 +1247,8 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		"delivery_stream":               "DeliveryStream",
 		"destination_details":           "DestinationDetails",
 		"destination_type":              "DestinationType",
+		"durability":                    "Durability",
+		"effective_durability":          "EffectiveDurability",
 		"engine":                        "Engine",
 		"engine_version":                "EngineVersion",
 		"global_replication_group_id":   "GlobalReplicationGroupId",

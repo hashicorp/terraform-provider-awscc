@@ -382,6 +382,7 @@ func launchConfigurationResource(ctx context.Context) (resource.Resource, error)
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
+			// KernelId is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: KeyName
 		// CloudFormation resource type schema:
@@ -511,6 +512,7 @@ func launchConfigurationResource(ctx context.Context) (resource.Resource, error)
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
+			// RamDiskId is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroups
 		// CloudFormation resource type schema:
@@ -642,6 +644,8 @@ func launchConfigurationResource(ctx context.Context) (resource.Resource, error)
 		"/properties/InstanceId",
 		"/properties/ClassicLinkVPCId",
 		"/properties/ClassicLinkVPCSecurityGroups",
+		"/properties/KernelId",
+		"/properties/RamDiskId",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

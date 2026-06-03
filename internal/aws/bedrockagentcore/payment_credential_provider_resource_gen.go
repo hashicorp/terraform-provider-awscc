@@ -146,16 +146,77 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        },
+		//	        "ApiKeySecretConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "A reference to a customer-provided secret stored in AWS Secrets Manager",
+		//	          "properties": {
+		//	            "JsonKey": {
+		//	              "description": "The JSON key within the secret that contains the credential value",
+		//	              "maxLength": 128,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "SecretId": {
+		//	              "description": "The ID or ARN of the secret in AWS Secrets Manager",
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SecretId",
+		//	            "JsonKey"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "ApiKeySecretSource": {
+		//	          "description": "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+		//	          "enum": [
+		//	            "MANAGED",
+		//	            "EXTERNAL"
+		//	          ],
+		//	          "type": "string"
+		//	        },
 		//	        "WalletSecret": {
 		//	          "description": "The Coinbase CDP wallet secret",
 		//	          "maxLength": 2048,
 		//	          "minLength": 1,
 		//	          "type": "string"
+		//	        },
+		//	        "WalletSecretConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "A reference to a customer-provided secret stored in AWS Secrets Manager",
+		//	          "properties": {
+		//	            "JsonKey": {
+		//	              "description": "The JSON key within the secret that contains the credential value",
+		//	              "maxLength": 128,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "SecretId": {
+		//	              "description": "The ID or ARN of the secret in AWS Secrets Manager",
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SecretId",
+		//	            "JsonKey"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "WalletSecretSource": {
+		//	          "description": "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+		//	          "enum": [
+		//	            "MANAGED",
+		//	            "EXTERNAL"
+		//	          ],
+		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "required": [
-		//	        "ApiKeyId",
-		//	        "ApiKeySecret"
+		//	        "ApiKeyId"
 		//	      ],
 		//	      "type": "object"
 		//	    },
@@ -175,6 +236,37 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        },
+		//	        "AppSecretConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "A reference to a customer-provided secret stored in AWS Secrets Manager",
+		//	          "properties": {
+		//	            "JsonKey": {
+		//	              "description": "The JSON key within the secret that contains the credential value",
+		//	              "maxLength": 128,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "SecretId": {
+		//	              "description": "The ID or ARN of the secret in AWS Secrets Manager",
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SecretId",
+		//	            "JsonKey"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "AppSecretSource": {
+		//	          "description": "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+		//	          "enum": [
+		//	            "MANAGED",
+		//	            "EXTERNAL"
+		//	          ],
+		//	          "type": "string"
+		//	        },
 		//	        "AuthorizationId": {
 		//	          "description": "The authorization ID for the Stripe Privy integration",
 		//	          "maxLength": 512,
@@ -186,12 +278,41 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 		//	          "maxLength": 4096,
 		//	          "minLength": 1,
 		//	          "type": "string"
+		//	        },
+		//	        "AuthorizationPrivateKeyConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "A reference to a customer-provided secret stored in AWS Secrets Manager",
+		//	          "properties": {
+		//	            "JsonKey": {
+		//	              "description": "The JSON key within the secret that contains the credential value",
+		//	              "maxLength": 128,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "SecretId": {
+		//	              "description": "The ID or ARN of the secret in AWS Secrets Manager",
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SecretId",
+		//	            "JsonKey"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "AuthorizationPrivateKeySource": {
+		//	          "description": "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+		//	          "enum": [
+		//	            "MANAGED",
+		//	            "EXTERNAL"
+		//	          ],
+		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "required": [
 		//	        "AppId",
-		//	        "AppSecret",
-		//	        "AuthorizationPrivateKey",
 		//	        "AuthorizationId"
 		//	      ],
 		//	      "type": "object"
@@ -224,7 +345,58 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 2048),
-								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ApiKeySecretConfig
+						"api_key_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: JsonKey
+								"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The JSON key within the secret that contains the credential value",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 128),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SecretId
+								"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID or ARN of the secret in AWS Secrets Manager",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 2048),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ApiKeySecretSource
+						"api_key_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"MANAGED",
+									"EXTERNAL",
+								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -237,6 +409,58 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 2048),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: WalletSecretConfig
+						"wallet_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: JsonKey
+								"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The JSON key within the secret that contains the credential value",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 128),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SecretId
+								"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID or ARN of the secret in AWS Secrets Manager",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 2048),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: WalletSecretSource
+						"wallet_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"MANAGED",
+									"EXTERNAL",
+								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -273,7 +497,58 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 2048),
-								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: AppSecretConfig
+						"app_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: JsonKey
+								"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The JSON key within the secret that contains the credential value",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 128),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SecretId
+								"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID or ARN of the secret in AWS Secrets Manager",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 2048),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: AppSecretSource
+						"app_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"MANAGED",
+									"EXTERNAL",
+								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -299,7 +574,58 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(1, 4096),
-								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: AuthorizationPrivateKeyConfig
+						"authorization_private_key_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: JsonKey
+								"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The JSON key within the secret that contains the credential value",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 128),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SecretId
+								"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID or ARN of the secret in AWS Secrets Manager",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 2048),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: AuthorizationPrivateKeySource
+						"authorization_private_key_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"MANAGED",
+									"EXTERNAL",
+								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
@@ -354,6 +680,20 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 		//	          ],
 		//	          "type": "object"
 		//	        },
+		//	        "ApiKeySecretJsonKey": {
+		//	          "description": "The JSON key within the secret that contains the API key secret value",
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "ApiKeySecretSource": {
+		//	          "description": "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+		//	          "enum": [
+		//	            "MANAGED",
+		//	            "EXTERNAL"
+		//	          ],
+		//	          "type": "string"
+		//	        },
 		//	        "WalletSecretArn": {
 		//	          "additionalProperties": false,
 		//	          "description": "Contains information about a secret in AWS Secrets Manager",
@@ -368,6 +708,20 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 		//	            "SecretArn"
 		//	          ],
 		//	          "type": "object"
+		//	        },
+		//	        "WalletSecretJsonKey": {
+		//	          "description": "The JSON key within the secret that contains the wallet secret value",
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "WalletSecretSource": {
+		//	          "description": "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+		//	          "enum": [
+		//	            "MANAGED",
+		//	            "EXTERNAL"
+		//	          ],
+		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "required": [
@@ -401,6 +755,20 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 		//	          ],
 		//	          "type": "object"
 		//	        },
+		//	        "AppSecretJsonKey": {
+		//	          "description": "The JSON key within the secret that contains the app secret value",
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "AppSecretSource": {
+		//	          "description": "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+		//	          "enum": [
+		//	            "MANAGED",
+		//	            "EXTERNAL"
+		//	          ],
+		//	          "type": "string"
+		//	        },
 		//	        "AuthorizationId": {
 		//	          "description": "The authorization ID for the Stripe Privy integration",
 		//	          "maxLength": 512,
@@ -421,6 +789,20 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 		//	            "SecretArn"
 		//	          ],
 		//	          "type": "object"
+		//	        },
+		//	        "AuthorizationPrivateKeyJsonKey": {
+		//	          "description": "The JSON key within the secret that contains the authorization private key value",
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "AuthorizationPrivateKeySource": {
+		//	          "description": "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+		//	          "enum": [
+		//	            "MANAGED",
+		//	            "EXTERNAL"
+		//	          ],
+		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "required": [
@@ -456,6 +838,16 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 							Description: "Contains information about a secret in AWS Secrets Manager",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
+						// Property: ApiKeySecretJsonKey
+						"api_key_secret_json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The JSON key within the secret that contains the API key secret value",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ApiKeySecretSource
+						"api_key_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 						// Property: WalletSecretArn
 						"wallet_secret_arn": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -466,6 +858,16 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Contains information about a secret in AWS Secrets Manager",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: WalletSecretJsonKey
+						"wallet_secret_json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The JSON key within the secret that contains the wallet secret value",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: WalletSecretSource
+						"wallet_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -492,6 +894,16 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 							Description: "Contains information about a secret in AWS Secrets Manager",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
+						// Property: AppSecretJsonKey
+						"app_secret_json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The JSON key within the secret that contains the app secret value",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AppSecretSource
+						"app_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 						// Property: AuthorizationId
 						"authorization_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The authorization ID for the Stripe Privy integration",
@@ -507,6 +919,16 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "Contains information about a secret in AWS Secrets Manager",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AuthorizationPrivateKeyJsonKey
+						"authorization_private_key_json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The JSON key within the secret that contains the authorization private key value",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AuthorizationPrivateKeySource
+						"authorization_private_key_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -622,30 +1044,44 @@ func paymentCredentialProviderResource(ctx context.Context) (resource.Resource, 
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"api_key_id":                    "ApiKeyId",
-		"api_key_secret":                "ApiKeySecret",
-		"api_key_secret_arn":            "ApiKeySecretArn",
-		"app_id":                        "AppId",
-		"app_secret":                    "AppSecret",
-		"app_secret_arn":                "AppSecretArn",
-		"authorization_id":              "AuthorizationId",
-		"authorization_private_key":     "AuthorizationPrivateKey",
-		"authorization_private_key_arn": "AuthorizationPrivateKeyArn",
-		"coinbase_cdp_configuration":    "CoinbaseCdpConfiguration",
-		"created_time":                  "CreatedTime",
-		"credential_provider_arn":       "CredentialProviderArn",
-		"credential_provider_vendor":    "CredentialProviderVendor",
-		"key":                           "Key",
-		"last_updated_time":             "LastUpdatedTime",
-		"name":                          "Name",
-		"provider_configuration_input":  "ProviderConfigurationInput",
-		"provider_configuration_output": "ProviderConfigurationOutput",
-		"secret_arn":                    "SecretArn",
-		"stripe_privy_configuration":    "StripePrivyConfiguration",
-		"tags":                          "Tags",
-		"value":                         "Value",
-		"wallet_secret":                 "WalletSecret",
-		"wallet_secret_arn":             "WalletSecretArn",
+		"api_key_id":                         "ApiKeyId",
+		"api_key_secret":                     "ApiKeySecret",
+		"api_key_secret_arn":                 "ApiKeySecretArn",
+		"api_key_secret_config":              "ApiKeySecretConfig",
+		"api_key_secret_json_key":            "ApiKeySecretJsonKey",
+		"api_key_secret_source":              "ApiKeySecretSource",
+		"app_id":                             "AppId",
+		"app_secret":                         "AppSecret",
+		"app_secret_arn":                     "AppSecretArn",
+		"app_secret_config":                  "AppSecretConfig",
+		"app_secret_json_key":                "AppSecretJsonKey",
+		"app_secret_source":                  "AppSecretSource",
+		"authorization_id":                   "AuthorizationId",
+		"authorization_private_key":          "AuthorizationPrivateKey",
+		"authorization_private_key_arn":      "AuthorizationPrivateKeyArn",
+		"authorization_private_key_config":   "AuthorizationPrivateKeyConfig",
+		"authorization_private_key_json_key": "AuthorizationPrivateKeyJsonKey",
+		"authorization_private_key_source":   "AuthorizationPrivateKeySource",
+		"coinbase_cdp_configuration":         "CoinbaseCdpConfiguration",
+		"created_time":                       "CreatedTime",
+		"credential_provider_arn":            "CredentialProviderArn",
+		"credential_provider_vendor":         "CredentialProviderVendor",
+		"json_key":                           "JsonKey",
+		"key":                                "Key",
+		"last_updated_time":                  "LastUpdatedTime",
+		"name":                               "Name",
+		"provider_configuration_input":       "ProviderConfigurationInput",
+		"provider_configuration_output":      "ProviderConfigurationOutput",
+		"secret_arn":                         "SecretArn",
+		"secret_id":                          "SecretId",
+		"stripe_privy_configuration":         "StripePrivyConfiguration",
+		"tags":                               "Tags",
+		"value":                              "Value",
+		"wallet_secret":                      "WalletSecret",
+		"wallet_secret_arn":                  "WalletSecretArn",
+		"wallet_secret_config":               "WalletSecretConfig",
+		"wallet_secret_json_key":             "WalletSecretJsonKey",
+		"wallet_secret_source":               "WalletSecretSource",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

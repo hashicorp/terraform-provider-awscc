@@ -90,6 +90,23 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: IdentityStoreArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the identity store associated with the Identity Center instance",
+		//	  "maxLength": 1224,
+		//	  "minLength": 10,
+		//	  "pattern": "^arn:aws(-[a-z]{1,5}){0,3}:identitystore::\\d{12}:identitystore/d-[0-9a-f]{10}$",
+		//	  "type": "string"
+		//	}
+		"identity_store_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the identity store associated with the Identity Center instance",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -368,6 +385,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"application_provider_arn": "ApplicationProviderArn",
 		"application_url":          "ApplicationUrl",
 		"description":              "Description",
+		"identity_store_arn":       "IdentityStoreArn",
 		"instance_arn":             "InstanceArn",
 		"key":                      "Key",
 		"name":                     "Name",
