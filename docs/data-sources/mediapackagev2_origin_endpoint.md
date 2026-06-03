@@ -41,12 +41,14 @@ Data Source schema for AWS::MediaPackageV2::OriginEndpoint
 - `segment` (Attributes) <p>The segment configuration, including the segment name, duration, and other configuration values.</p> (see [below for nested schema](#nestedatt--segment))
 - `startover_window_seconds` (Number) <p>The size of the window (in seconds) to create a window of the live stream that's available for on-demand viewing. Viewers can start-over or catch-up on content that falls within the window. The maximum startover window is 1,209,600 seconds (14 days).</p>
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `uri_separator` (String)
 
 <a id="nestedatt--dash_manifests"></a>
 ### Nested Schema for `dash_manifests`
 
 Read-Only:
 
+- `availability_start_time_configuration` (Attributes) (see [below for nested schema](#nestedatt--dash_manifests--availability_start_time_configuration))
 - `base_urls` (Attributes List) <p>The base URL to use for retrieving segments.</p> (see [below for nested schema](#nestedatt--dash_manifests--base_urls))
 - `compactness` (String)
 - `drm_signaling` (String)
@@ -63,7 +65,16 @@ Read-Only:
 - `segment_template_format` (String)
 - `subtitle_configuration` (Attributes) <p>The configuration for DASH subtitles.</p> (see [below for nested schema](#nestedatt--dash_manifests--subtitle_configuration))
 - `suggested_presentation_delay_seconds` (Number) <p>The amount of time (in seconds) that the player should be from the end of the manifest.</p>
+- `uri_path_type` (String)
 - `utc_timing` (Attributes) <p>Determines the type of UTC timing included in the DASH Media Presentation Description (MPD).</p> (see [below for nested schema](#nestedatt--dash_manifests--utc_timing))
+
+<a id="nestedatt--dash_manifests--availability_start_time_configuration"></a>
+### Nested Schema for `dash_manifests.availability_start_time_configuration`
+
+Read-Only:
+
+- `fixed_availability_start_time` (String)
+
 
 <a id="nestedatt--dash_manifests--base_urls"></a>
 ### Nested Schema for `dash_manifests.base_urls`
@@ -135,6 +146,7 @@ Read-Only:
 Read-Only:
 
 - `ad_marker_dash` (String)
+- `scte_in_manifests` (String)
 
 
 <a id="nestedatt--dash_manifests--subtitle_configuration"></a>
@@ -183,6 +195,7 @@ Read-Only:
 - `program_date_time_interval_seconds` (Number) <p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval, EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest. The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player.</p> <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>
 - `scte_hls` (Attributes) <p>The SCTE configuration.</p> (see [below for nested schema](#nestedatt--hls_manifests--scte_hls))
 - `start_tag` (Attributes) <p>To insert an EXT-X-START tag in your HLS playlist, specify a StartTag configuration object with a valid TimeOffset. When you do, you can also optionally specify whether to include a PRECISE value in the EXT-X-START tag.</p> (see [below for nested schema](#nestedatt--hls_manifests--start_tag))
+- `uri_path_type` (String)
 - `url` (String) <p>The egress domain URL for stream delivery from MediaPackage.</p>
 - `url_encode_child_manifest` (Boolean) <p>When enabled, MediaPackage URL-encodes the query string for API requests for HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html">Amazon Web Services Signature Version 4 for API requests</a> in <i>Identity and Access Management User Guide</i>.</p>
 
@@ -205,6 +218,7 @@ Read-Only:
 Read-Only:
 
 - `ad_marker_hls` (String)
+- `scte_in_manifests` (String)
 
 
 <a id="nestedatt--hls_manifests--start_tag"></a>
@@ -229,6 +243,7 @@ Read-Only:
 - `program_date_time_interval_seconds` (Number) <p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval, EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest. The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player.</p> <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>
 - `scte_hls` (Attributes) <p>The SCTE configuration.</p> (see [below for nested schema](#nestedatt--low_latency_hls_manifests--scte_hls))
 - `start_tag` (Attributes) <p>To insert an EXT-X-START tag in your HLS playlist, specify a StartTag configuration object with a valid TimeOffset. When you do, you can also optionally specify whether to include a PRECISE value in the EXT-X-START tag.</p> (see [below for nested schema](#nestedatt--low_latency_hls_manifests--start_tag))
+- `uri_path_type` (String)
 - `url` (String) <p>The egress domain URL for stream delivery from MediaPackage.</p>
 - `url_encode_child_manifest` (Boolean) <p>When enabled, MediaPackage URL-encodes the query string for API requests for LL-HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html">Amazon Web Services Signature Version 4 for API requests</a> in <i>Identity and Access Management User Guide</i>.</p>
 
@@ -251,6 +266,7 @@ Read-Only:
 Read-Only:
 
 - `ad_marker_hls` (String)
+- `scte_in_manifests` (String)
 
 
 <a id="nestedatt--low_latency_hls_manifests--start_tag"></a>
@@ -326,7 +342,7 @@ Read-Only:
 
 Read-Only:
 
-- `certificate_arn` (String) <p>The ARN for the certificate that you imported to AWS Certificate Manager to add content key encryption to this endpoint. For this feature to work, your DRM key provider must support content key encryption.</p>
+- `certificate_arn` (String) <p>The ARN for the certificate that you imported to Amazon Web Services Certificate Manager to add content key encryption to this endpoint. For this feature to work, your DRM key provider must support content key encryption.</p>
 - `drm_systems` (List of String) <p>The DRM solution provider you're using to protect your content during distribution.</p>
 - `encryption_contract_configuration` (Attributes) <p>Configure one or more content encryption keys for your endpoints that use SPEKE Version 2.0. The encryption contract defines which content keys are used to encrypt the audio and video tracks in your stream. To configure the encryption contract, specify which audio and video encryption presets to use.</p> (see [below for nested schema](#nestedatt--segment--encryption--speke_key_provider--encryption_contract_configuration))
 - `resource_id` (String) <p>The unique identifier for the content. The service sends this to the key server to identify the current endpoint. How unique you make this depends on how fine-grained you want access controls to be. The service does not permit you to use the same ID for two simultaneous encryption processes. The resource ID is also known as the content ID.</p> <p>The following example shows a resource ID: <code>MovieNight20171126093045</code> </p>
@@ -349,6 +365,7 @@ Read-Only:
 
 Read-Only:
 
+- `custom_ad_types` (List of String) <p>A list of additional non-Ad SCTE-35 event types to treat as advertisements. When configured, events matching these types produce ad markers (such as <code>SCTE35-OUT</code> and <code>SCTE35-IN</code> in HLS DATERANGE tags) in manifests.</p> <p>Valid values: <code>PROGRAM</code> | <code>CHAPTER</code> | <code>UNSCHEDULED_EVENT</code> | <code>ALTERNATE_CONTENT_OPPORTUNITY</code> | <code>NETWORK</code> </p> <p>If you don't specify any values, the default is empty (only default ad types are used).</p>
 - `scte_filter` (List of String) <p>The SCTE-35 message types that you want to be treated as ad markers in the output.</p>
 - `scte_in_segments` (String)
 

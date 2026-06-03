@@ -99,6 +99,7 @@ Required:
 
 Optional:
 
+- `scale_down_idle_time_in_seconds` (Number) The time before an idle node is scaled down.
 - `slurm_custom_settings` (Attributes List) Additional Slurm-specific configuration that directly maps to Slurm settings. (see [below for nested schema](#nestedatt--slurm_configuration--slurm_custom_settings))
 
 <a id="nestedatt--slurm_configuration--slurm_custom_settings"></a>

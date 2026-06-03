@@ -1,5 +1,28 @@
 ## 1.87.0 (Unreleased)
 
+FEATURES:
+
+* **New Data Source:** `awscc_bedrockagentcore_payment_connector`
+* **New Data Source:** `awscc_opensearchserverless_collection_index`
+* **New Data Source:** `awscc_resiliencehubv2_policies`
+* **New Data Source:** `awscc_resiliencehubv2_policy`
+* **New Data Source:** `awscc_resiliencehubv2_service`
+* **New Data Source:** `awscc_resiliencehubv2_services`
+* **New Data Source:** `awscc_resiliencehubv2_system`
+* **New Data Source:** `awscc_resiliencehubv2_systems`
+* **New Data Source:** `awscc_verifiedpermissions_policy_store_alias`
+* **New Data Source:** `awscc_verifiedpermissions_policy_store_aliases`
+* **New List Resource:** `awscc_resiliencehubv2_policy`
+* **New List Resource:** `awscc_resiliencehubv2_service`
+* **New List Resource:** `awscc_resiliencehubv2_system`
+* **New List Resource:** `awscc_verifiedpermissions_policy_store_alias`
+* **New Resource:** `awscc_bedrockagentcore_payment_connector`
+* **New Resource:** `awscc_opensearchserverless_collection_index`
+* **New Resource:** `awscc_resiliencehubv2_policy`
+* **New Resource:** `awscc_resiliencehubv2_service`
+* **New Resource:** `awscc_resiliencehubv2_system`
+* **New Resource:** `awscc_verifiedpermissions_policy_store_alias`
+
 ## 1.86.0 (May 27, 2026)
 
 FEATURES:

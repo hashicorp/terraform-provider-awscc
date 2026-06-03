@@ -45,7 +45,29 @@ Read-Only:
 
 - `api_key_id` (String) The Coinbase CDP API key ID
 - `api_key_secret` (String) The Coinbase CDP API key secret
+- `api_key_secret_config` (Attributes) A reference to a customer-provided secret stored in AWS Secrets Manager (see [below for nested schema](#nestedatt--provider_configuration_input--coinbase_cdp_configuration--api_key_secret_config))
+- `api_key_secret_source` (String) The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.
 - `wallet_secret` (String) The Coinbase CDP wallet secret
+- `wallet_secret_config` (Attributes) A reference to a customer-provided secret stored in AWS Secrets Manager (see [below for nested schema](#nestedatt--provider_configuration_input--coinbase_cdp_configuration--wallet_secret_config))
+- `wallet_secret_source` (String) The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.
+
+<a id="nestedatt--provider_configuration_input--coinbase_cdp_configuration--api_key_secret_config"></a>
+### Nested Schema for `provider_configuration_input.coinbase_cdp_configuration.api_key_secret_config`
+
+Read-Only:
+
+- `json_key` (String) The JSON key within the secret that contains the credential value
+- `secret_id` (String) The ID or ARN of the secret in AWS Secrets Manager
+
+
+<a id="nestedatt--provider_configuration_input--coinbase_cdp_configuration--wallet_secret_config"></a>
+### Nested Schema for `provider_configuration_input.coinbase_cdp_configuration.wallet_secret_config`
+
+Read-Only:
+
+- `json_key` (String) The JSON key within the secret that contains the credential value
+- `secret_id` (String) The ID or ARN of the secret in AWS Secrets Manager
+
 
 
 <a id="nestedatt--provider_configuration_input--stripe_privy_configuration"></a>
@@ -55,8 +77,30 @@ Read-Only:
 
 - `app_id` (String) The app ID provided by Privy
 - `app_secret` (String) The app secret provided by Privy
+- `app_secret_config` (Attributes) A reference to a customer-provided secret stored in AWS Secrets Manager (see [below for nested schema](#nestedatt--provider_configuration_input--stripe_privy_configuration--app_secret_config))
+- `app_secret_source` (String) The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.
 - `authorization_id` (String) The authorization ID for the Stripe Privy integration
 - `authorization_private_key` (String) The authorization private key for the Stripe Privy integration
+- `authorization_private_key_config` (Attributes) A reference to a customer-provided secret stored in AWS Secrets Manager (see [below for nested schema](#nestedatt--provider_configuration_input--stripe_privy_configuration--authorization_private_key_config))
+- `authorization_private_key_source` (String) The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.
+
+<a id="nestedatt--provider_configuration_input--stripe_privy_configuration--app_secret_config"></a>
+### Nested Schema for `provider_configuration_input.stripe_privy_configuration.app_secret_config`
+
+Read-Only:
+
+- `json_key` (String) The JSON key within the secret that contains the credential value
+- `secret_id` (String) The ID or ARN of the secret in AWS Secrets Manager
+
+
+<a id="nestedatt--provider_configuration_input--stripe_privy_configuration--authorization_private_key_config"></a>
+### Nested Schema for `provider_configuration_input.stripe_privy_configuration.authorization_private_key_config`
+
+Read-Only:
+
+- `json_key` (String) The JSON key within the secret that contains the credential value
+- `secret_id` (String) The ID or ARN of the secret in AWS Secrets Manager
+
 
 
 
@@ -75,7 +119,11 @@ Read-Only:
 
 - `api_key_id` (String) The Coinbase CDP API key ID
 - `api_key_secret_arn` (Attributes) Contains information about a secret in AWS Secrets Manager (see [below for nested schema](#nestedatt--provider_configuration_output--coinbase_cdp_configuration--api_key_secret_arn))
+- `api_key_secret_json_key` (String) The JSON key within the secret that contains the API key secret value
+- `api_key_secret_source` (String) The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.
 - `wallet_secret_arn` (Attributes) Contains information about a secret in AWS Secrets Manager (see [below for nested schema](#nestedatt--provider_configuration_output--coinbase_cdp_configuration--wallet_secret_arn))
+- `wallet_secret_json_key` (String) The JSON key within the secret that contains the wallet secret value
+- `wallet_secret_source` (String) The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.
 
 <a id="nestedatt--provider_configuration_output--coinbase_cdp_configuration--api_key_secret_arn"></a>
 ### Nested Schema for `provider_configuration_output.coinbase_cdp_configuration.api_key_secret_arn`
@@ -101,8 +149,12 @@ Read-Only:
 
 - `app_id` (String) The app ID provided by Privy
 - `app_secret_arn` (Attributes) Contains information about a secret in AWS Secrets Manager (see [below for nested schema](#nestedatt--provider_configuration_output--stripe_privy_configuration--app_secret_arn))
+- `app_secret_json_key` (String) The JSON key within the secret that contains the app secret value
+- `app_secret_source` (String) The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.
 - `authorization_id` (String) The authorization ID for the Stripe Privy integration
 - `authorization_private_key_arn` (Attributes) Contains information about a secret in AWS Secrets Manager (see [below for nested schema](#nestedatt--provider_configuration_output--stripe_privy_configuration--authorization_private_key_arn))
+- `authorization_private_key_json_key` (String) The JSON key within the secret that contains the authorization private key value
+- `authorization_private_key_source` (String) The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.
 
 <a id="nestedatt--provider_configuration_output--stripe_privy_configuration--app_secret_arn"></a>
 ### Nested Schema for `provider_configuration_output.stripe_privy_configuration.app_secret_arn`
