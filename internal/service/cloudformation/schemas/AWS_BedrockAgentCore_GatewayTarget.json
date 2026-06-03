@@ -244,7 +244,9 @@
       "enum": [
         "GATEWAY_IAM_ROLE",
         "OAUTH",
-        "API_KEY"
+        "API_KEY",
+        "CALLER_IAM_CREDENTIALS",
+        "JWT_PASSTHROUGH"
       ]
     },
     "McpLambdaTargetConfiguration": {
@@ -280,12 +282,80 @@
           "type": "string",
           "pattern": "^https://.*"
         },
+        "McpToolSchema": {
+          "$ref": "#/definitions/McpToolSchemaConfiguration"
+        },
         "ListingMode": {
           "$ref": "#/definitions/McpServerListingMode"
         }
       },
       "required": [
         "Endpoint"
+      ],
+      "additionalProperties": false
+    },
+    "McpToolSchemaConfiguration": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "S3",
+          "properties": {
+            "S3": {
+              "$ref": "#/definitions/S3Configuration"
+            }
+          },
+          "required": [
+            "S3"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "InlinePayload",
+          "properties": {
+            "InlinePayload": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "InlinePayload"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "AuthorizationData": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "Oauth2",
+          "properties": {
+            "Oauth2": {
+              "$ref": "#/definitions/OAuth2AuthorizationData"
+            }
+          },
+          "required": [
+            "Oauth2"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "OAuth2AuthorizationData": {
+      "type": "object",
+      "properties": {
+        "AuthorizationUrl": {
+          "type": "string",
+          "minLength": 1
+        },
+        "UserId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "AuthorizationUrl"
       ],
       "additionalProperties": false
     },
@@ -369,7 +439,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "maxLength": 64,
+            "maxLength": 128,
             "minLength": 1
           },
           "maxItems": 100
@@ -411,7 +481,8 @@
       "type": "string",
       "enum": [
         "AUTHORIZATION_CODE",
-        "CLIENT_CREDENTIALS"
+        "CLIENT_CREDENTIALS",
+        "TOKEN_EXCHANGE"
       ]
     },
     "S3Configuration": {
@@ -489,6 +560,19 @@
             "Mcp"
           ],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "Http",
+          "properties": {
+            "Http": {
+              "$ref": "#/definitions/HttpTargetConfiguration"
+            }
+          },
+          "required": [
+            "Http"
+          ],
+          "additionalProperties": false
         }
       ]
     },
@@ -502,7 +586,10 @@
         "READY",
         "FAILED",
         "SYNCHRONIZING",
-        "SYNCHRONIZE_UNSUCCESSFUL"
+        "SYNCHRONIZE_UNSUCCESSFUL",
+        "CREATE_PENDING_AUTH",
+        "UPDATE_PENDING_AUTH",
+        "SYNCHRONIZE_PENDING_AUTH"
       ]
     },
     "ToolDefinition": {
@@ -584,9 +671,53 @@
         }
       },
       "additionalProperties": false
+    },
+    "HttpTargetConfiguration": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "AgentcoreRuntime",
+          "properties": {
+            "AgentcoreRuntime": {
+              "$ref": "#/definitions/RuntimeTargetConfiguration"
+            }
+          },
+          "required": [
+            "AgentcoreRuntime"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "RuntimeTargetConfiguration": {
+      "type": "object",
+      "properties": {
+        "Arn": {
+          "type": "string",
+          "pattern": "^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:runtime/[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10}$"
+        },
+        "Qualifier": {
+          "type": "string",
+          "pattern": "^(([1-9][0-9]{0,4})|([a-zA-Z][a-zA-Z0-9_]{0,47}))$"
+        }
+      },
+      "required": [
+        "Arn"
+      ],
+      "additionalProperties": false
+    },
+    "TargetProtocolType": {
+      "type": "string",
+      "enum": [
+        "MCP",
+        "HTTP"
+      ]
     }
   },
   "properties": {
+    "AuthorizationData": {
+      "$ref": "#/definitions/AuthorizationData"
+    },
     "CreatedAt": {
       "type": "string",
       "format": "date-time"
@@ -644,6 +775,9 @@
     "UpdatedAt": {
       "type": "string",
       "format": "date-time"
+    },
+    "ProtocolType": {
+      "$ref": "#/definitions/TargetProtocolType"
     }
   },
   "required": [
@@ -660,7 +794,9 @@
     "/properties/Status",
     "/properties/StatusReasons",
     "/properties/TargetId",
-    "/properties/UpdatedAt"
+    "/properties/UpdatedAt",
+    "/properties/AuthorizationData",
+    "/properties/ProtocolType"
   ],
   "primaryIdentifier": [
     "/properties/GatewayIdentifier",
@@ -674,6 +810,7 @@
         "bedrock-agentcore:GetGatewayTarget",
         "bedrock-agentcore:GetResourceOauth2Token",
         "bedrock-agentcore:GetWorkloadAccessToken",
+        "bedrock-agentcore:GetWorkloadAccessTokenForUserId",
         "bedrock-agentcore:SynchronizeGatewayTargets",
         "kms:Decrypt",
         "kms:GenerateDataKey",
@@ -693,6 +830,7 @@
         "bedrock-agentcore:GetGatewayTarget",
         "bedrock-agentcore:GetResourceOauth2Token",
         "bedrock-agentcore:GetWorkloadAccessToken",
+        "bedrock-agentcore:GetWorkloadAccessTokenForUserId",
         "bedrock-agentcore:SynchronizeGatewayTargets",
         "bedrock-agentcore:UpdateGatewayTarget",
         "kms:Decrypt",

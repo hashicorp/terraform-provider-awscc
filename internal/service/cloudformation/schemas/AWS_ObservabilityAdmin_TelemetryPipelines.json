@@ -2,29 +2,6 @@
   "typeName": "AWS::ObservabilityAdmin::TelemetryPipelines",
   "description": "Resource Type definition for AWS::ObservabilityAdmin::TelemetryPipelines",
   "definitions": {
-    "Tag": {
-      "description": "A key-value pair to associate with a resource",
-      "type": "object",
-      "properties": {
-        "Key": {
-          "type": "string",
-          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-          "minLength": 1,
-          "maxLength": 128
-        },
-        "Value": {
-          "type": "string",
-          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-          "minLength": 0,
-          "maxLength": 256
-        }
-      },
-      "required": [
-        "Key",
-        "Value"
-      ],
-      "additionalProperties": false
-    },
     "TelemetryPipeline": {
       "type": "object",
       "properties": {
@@ -103,6 +80,29 @@
     "Unit": {
       "type": "object",
       "additionalProperties": false
+    },
+    "Tag": {
+      "description": "A key-value pair to associate with a resource",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -168,12 +168,27 @@
   "handlers": {
     "create": {
       "permissions": [
+        "cloudwatch:PutPipelineRule",
         "iam:PassRole",
         "logs:PutPipelineRule",
         "observabilityadmin:CreateTelemetryPipeline",
         "observabilityadmin:GetTelemetryPipeline",
         "observabilityadmin:ListTagsForResource",
         "observabilityadmin:TagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cloudwatch:DeletePipelineRule",
+        "logs:DeletePipelineRule",
+        "observabilityadmin:DeleteTelemetryPipeline",
+        "observabilityadmin:GetTelemetryPipeline"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "observabilityadmin:ListTagsForResource",
+        "observabilityadmin:ListTelemetryPipelines"
       ]
     },
     "read": {
@@ -184,6 +199,7 @@
     },
     "update": {
       "permissions": [
+        "cloudwatch:PutPipelineRule",
         "iam:PassRole",
         "logs:DeletePipelineRule",
         "logs:PutPipelineRule",
@@ -192,19 +208,6 @@
         "observabilityadmin:TagResource",
         "observabilityadmin:UntagResource",
         "observabilityadmin:UpdateTelemetryPipeline"
-      ]
-    },
-    "delete": {
-      "permissions": [
-        "logs:DeletePipelineRule",
-        "observabilityadmin:DeleteTelemetryPipeline",
-        "observabilityadmin:GetTelemetryPipeline"
-      ]
-    },
-    "list": {
-      "permissions": [
-        "observabilityadmin:ListTagsForResource",
-        "observabilityadmin:ListTelemetryPipelines"
       ]
     }
   },

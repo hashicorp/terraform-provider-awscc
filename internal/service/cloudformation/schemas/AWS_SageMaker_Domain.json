@@ -125,6 +125,14 @@
         "ENABLED",
         "DISABLED"
       ]
+    },
+    "HomeEfsFileSystemCreation": {
+      "type": "string",
+      "description": "Indicates whether a home EFS file system is created for the domain. Set to Disabled to skip EFS creation and reduce domain creation time.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ]
     }
   },
   "definitions": {
@@ -325,6 +333,13 @@
           "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
           "maxLength": 256,
           "pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$"
+        },
+        "TrainingPlanArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
+          "minLength": 0,
+          "maxLength": 2048,
+          "pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$"
         }
       }
     },

@@ -438,7 +438,7 @@
         "Key": {
           "type": "string",
           "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -",
-          "pattern": "",
+          "pattern": "^[a-zA-Z+-=._:/]+$",
           "minLength": 1,
           "maxLength": 128
         },
@@ -526,7 +526,9 @@
         "connect:CreateRule",
         "cases:GetTemplate",
         "cases:ListFields",
-        "cases:ListFieldOptions"
+        "cases:ListFieldOptions",
+        "connect:TagResource",
+        "connect:DeleteRule"
       ]
     },
     "read": {
@@ -548,6 +550,21 @@
         "cases:ListFieldOptions",
         "connect:TagResource",
         "connect:UntagResource"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "InstanceArn": {
+            "$ref": "resource-schema.json#/properties/InstanceArn"
+          }
+        },
+        "required": [
+          "InstanceArn"
+        ]
+      },
+      "permissions": [
+        "connect:ListRules"
       ]
     }
   },

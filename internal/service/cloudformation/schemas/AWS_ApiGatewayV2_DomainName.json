@@ -118,9 +118,15 @@
   "tagging": {
     "taggable": true,
     "tagOnCreate": true,
-    "tagUpdatable": false,
-    "cloudFormationSystemTags": false,
-    "tagProperty": "/properties/Tags"
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "apigateway:PUT",
+      "apigateway:PATCH",
+      "apigateway:GET",
+      "apigateway:DELETE"
+    ]
   },
   "handlers": {
     "create": {
@@ -134,7 +140,9 @@
       "permissions": [
         "apigateway:PATCH",
         "apigateway:GET",
-        "apigateway:PUT"
+        "apigateway:PUT",
+        "apigateway:POST",
+        "apigateway:DELETE"
       ]
     },
     "read": {

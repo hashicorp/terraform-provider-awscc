@@ -15,22 +15,33 @@
     "read": {
       "permissions": [
         "rtbfabric:GetResponderGateway",
-        "rtbfabric:ListTagsForResource"
+        "rtbfabric:GetCertificateAssociation",
+        "rtbfabric:ListCertificateAssociations",
+        "rtbfabric:ListTagsForResource",
+        "acm:DescribeCertificate"
       ]
     },
     "create": {
       "permissions": [
         "rtbfabric:CreateResponderGateway",
         "rtbfabric:GetResponderGateway",
+        "rtbfabric:AssociateCertificate",
+        "rtbfabric:GetCertificateAssociation",
+        "rtbfabric:ListCertificateAssociations",
         "rtbfabric:TagResource",
         "rtbfabric:ListTagsForResource",
-        "iam:CreateServiceLinkedRole"
+        "iam:CreateServiceLinkedRole",
+        "acm:CreateCertificateRelation",
+        "quickbeam:CreateCertificateRelation",
+        "quickbeam-admin:CreateCertificateRelation",
+        "acm:DescribeCertificate"
       ]
     },
     "update": {
       "permissions": [
         "rtbfabric:GetResponderGateway",
         "rtbfabric:UpdateResponderGateway",
+        "rtbfabric:ListCertificateAssociations",
         "rtbfabric:TagResource",
         "rtbfabric:UntagResource",
         "rtbfabric:ListTagsForResource"
@@ -38,13 +49,20 @@
     },
     "list": {
       "permissions": [
-        "rtbfabric:ListResponderGateways"
+        "rtbfabric:ListResponderGateways",
+        "rtbfabric:ListCertificateAssociations"
       ]
     },
     "delete": {
       "permissions": [
         "rtbfabric:DeleteResponderGateway",
-        "rtbfabric:GetResponderGateway"
+        "rtbfabric:GetResponderGateway",
+        "rtbfabric:DisassociateCertificate",
+        "rtbfabric:ListCertificateAssociations",
+        "rtbfabric:GetCertificateAssociation",
+        "acm:RemoveCertificateRelation",
+        "quickbeam:RemoveCertificateRelation",
+        "quickbeam-admin:RemoveCertificateRelation"
       ]
     }
   },
@@ -54,7 +72,9 @@
     "/properties/Arn",
     "/properties/ResponderGatewayStatus",
     "/properties/CreatedTimestamp",
-    "/properties/UpdatedTimestamp"
+    "/properties/UpdatedTimestamp",
+    "/properties/ExternalInboundEndpoint",
+    "/properties/CertificateAssociationStatus"
   ],
   "description": "Resource Type definition for AWS::RTBFabric::ResponderGateway Resource Type",
   "additionalIdentifiers": [
@@ -90,6 +110,13 @@
       "maximum": 65535,
       "type": "integer",
       "minimum": 1
+    },
+    "GatewayType": {
+      "type": "string",
+      "enum": [
+        "EXTERNAL",
+        "INTERNAL"
+      ]
     },
     "TotalLinksCount": {
       "type": "integer"
@@ -180,6 +207,24 @@
         "RoleArn"
       ]
     },
+    "ListenerConfig": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Protocols": {
+          "minItems": 1,
+          "maxItems": 2,
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Protocol"
+          }
+        }
+      },
+      "required": [
+        "Protocols"
+      ]
+    },
     "AutoScalingGroupNameList": {
       "uniqueItems": true,
       "insertionOrder": false,
@@ -187,6 +232,17 @@
       "items": {
         "type": "string"
       }
+    },
+    "CertificateAssociationStatus": {
+      "type": "string",
+      "enum": [
+        "PENDING_ASSOCIATION",
+        "ASSOCIATED",
+        "PENDING_DISASSOCIATION",
+        "DISASSOCIATED",
+        "EXPIRED",
+        "FAILED"
+      ]
     },
     "Protocol": {
       "type": "string",
@@ -205,6 +261,14 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "AcmCertificateArn": {
+      "relationshipRef": {
+        "typeName": "AWS::CertificateManager::Certificate",
+        "propertyPath": "/properties/CertificateArn"
+      },
+      "pattern": "",
+      "type": "string"
     },
     "InboundLinksCount": {
       "type": "integer"
@@ -237,6 +301,9 @@
         "AutoScalingGroupNameList",
         "RoleArn"
       ]
+    },
+    "ExternalInboundEndpoint": {
+      "$ref": "#/definitions/DomainName"
     },
     "GatewayId": {
       "pattern": "^(rtbapp-[a-z0-9-]{1,25}|rtb-gw-[a-z0-9-]{1,25})$",
@@ -398,6 +465,12 @@
     "Port": {
       "$ref": "#/definitions/Port"
     },
+    "GatewayType": {
+      "$ref": "#/definitions/GatewayType"
+    },
+    "ExternalInboundEndpoint": {
+      "$ref": "#/definitions/ExternalInboundEndpoint"
+    },
     "GatewayId": {
       "$ref": "#/definitions/GatewayId"
     },
@@ -410,11 +483,17 @@
     "SecurityGroupIds": {
       "$ref": "#/definitions/SecurityGroupIds"
     },
+    "ListenerConfig": {
+      "$ref": "#/definitions/ListenerConfig"
+    },
     "VpcId": {
       "$ref": "#/definitions/VpcId"
     },
     "ResponderGatewayStatus": {
       "$ref": "#/definitions/ResponderGatewayStatus"
+    },
+    "CertificateAssociationStatus": {
+      "$ref": "#/definitions/CertificateAssociationStatus"
     },
     "Arn": {
       "$ref": "#/definitions/Arn"
@@ -424,6 +503,9 @@
     },
     "Tags": {
       "$ref": "#/definitions/Tags"
+    },
+    "AcmCertificateArn": {
+      "$ref": "#/definitions/AcmCertificateArn"
     }
   },
   "required": [
@@ -441,6 +523,9 @@
     "/properties/Port",
     "/properties/Protocol",
     "/properties/DomainName",
-    "/properties/TrustStoreConfiguration"
+    "/properties/TrustStoreConfiguration",
+    "/properties/ManagedEndpointConfiguration",
+    "/properties/GatewayType",
+    "/properties/AcmCertificateArn"
   ]
 }

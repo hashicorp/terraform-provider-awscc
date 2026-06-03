@@ -191,7 +191,13 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "cloudFormationSystemTags": true,
-    "tagProperty": "/properties/Tags"
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "apigateway:GET",
+      "apigateway:PUT",
+      "apigateway:PATCH",
+      "apigateway:DELETE"
+    ]
   },
   "handlers": {
     "create": {
@@ -207,6 +213,7 @@
         "apigateway:GET",
         "apigateway:PUT",
         "apigateway:POST",
+        "apigateway:DELETE",
         "s3:getObject"
       ]
     },

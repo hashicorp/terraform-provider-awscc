@@ -227,6 +227,12 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
+        "ScaleDownIdleTimeInSeconds": {
+          "description": "The time before an idle node is scaled down.",
+          "maximum": 10000000,
+          "type": "integer",
+          "minimum": 1
+        },
         "SlurmCustomSettings": {
           "description": "Additional Slurm-specific configuration that directly maps to Slurm settings.",
           "insertionOrder": false,

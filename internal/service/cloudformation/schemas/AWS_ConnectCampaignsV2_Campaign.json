@@ -673,6 +673,14 @@
         "AREA_CODE"
       ]
     },
+    "LocalTimeZoneDetectionScope": {
+      "type": "string",
+      "description": "Local TimeZone Detection scope",
+      "enum": [
+        "PRIMARY_ONLY",
+        "ALL_AVAILABLE"
+      ]
+    },
     "LocalTimeZoneDetection": {
       "type": "array",
       "description": "Local TimeZone Detection method list",
@@ -690,6 +698,9 @@
         },
         "LocalTimeZoneDetection": {
           "$ref": "#/definitions/LocalTimeZoneDetection"
+        },
+        "LocalTimeZoneDetectionScope": {
+          "$ref": "#/definitions/LocalTimeZoneDetectionScope"
         }
       },
       "additionalProperties": false

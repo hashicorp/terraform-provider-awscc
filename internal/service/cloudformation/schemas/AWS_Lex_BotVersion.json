@@ -122,6 +122,16 @@
       ]
     },
     "list": {
+      "handlerSchema": {
+        "properties": {
+          "BotId": {
+            "$ref": "resource-schema.json#/properties/BotId"
+          }
+        },
+        "required": [
+          "BotId"
+        ]
+      },
       "permissions": [
         "lex:ListBotVersions"
       ]

@@ -16,7 +16,8 @@
       "description": "Verification method for the target domain",
       "enum": [
         "DNS_TXT",
-        "HTTP_ROUTE"
+        "HTTP_ROUTE",
+        "PRIVATE_VPC"
       ]
     },
     "VerificationStatus": {
@@ -28,6 +29,10 @@
         "FAILED",
         "UNREACHABLE"
       ]
+    },
+    "VerificationStatusReason": {
+      "type": "string",
+      "description": "Reason for the current target domain verification status"
     },
     "VerificationDetails": {
       "$ref": "#/definitions/VerificationDetails"
@@ -86,7 +91,8 @@
           "description": "Type of domain ownership verification method",
           "enum": [
             "DNS_TXT",
-            "HTTP_ROUTE"
+            "HTTP_ROUTE",
+            "PRIVATE_VPC"
           ]
         },
         "DnsTxt": {
@@ -157,6 +163,7 @@
   "readOnlyProperties": [
     "/properties/TargetDomainId",
     "/properties/VerificationStatus",
+    "/properties/VerificationStatusReason",
     "/properties/VerificationDetails",
     "/properties/CreatedAt",
     "/properties/VerifiedAt"

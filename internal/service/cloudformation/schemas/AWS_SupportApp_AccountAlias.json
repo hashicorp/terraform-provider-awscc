@@ -2,6 +2,12 @@
   "typeName": "AWS::SupportApp::AccountAlias",
   "description": "An AWS Support App resource that creates, updates, reads, and deletes a customer's account alias.",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-supportapp.git",
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
   "properties": {
     "AccountAlias": {
       "description": "An account alias associated with a customer's account.",
