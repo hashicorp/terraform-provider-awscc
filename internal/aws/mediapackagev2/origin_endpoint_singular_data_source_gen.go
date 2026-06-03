@@ -108,6 +108,15 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	    "additionalProperties": false,
 		//	    "description": "\u003cp\u003eRetrieve the DASH manifest configuration.\u003c/p\u003e",
 		//	    "properties": {
+		//	      "AvailabilityStartTimeConfiguration": {
+		//	        "properties": {
+		//	          "FixedAvailabilityStartTime": {
+		//	            "format": "date-time",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
 		//	      "BaseUrls": {
 		//	        "description": "\u003cp\u003eThe base URL to use for retrieving segments.\u003c/p\u003e",
 		//	        "items": {
@@ -358,6 +367,13 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "XML"
 		//	            ],
 		//	            "type": "string"
+		//	          },
+		//	          "ScteInManifests": {
+		//	            "enum": [
+		//	              "ALL",
+		//	              "MATCHES_FILTER"
+		//	            ],
+		//	            "type": "string"
 		//	          }
 		//	        },
 		//	        "type": "object"
@@ -396,6 +412,13 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	        "description": "\u003cp\u003eThe amount of time (in seconds) that the player should be from the end of the manifest.\u003c/p\u003e",
 		//	        "type": "integer"
 		//	      },
+		//	      "UriPathType": {
+		//	        "enum": [
+		//	          "LEAF",
+		//	          "ROOT"
+		//	        ],
+		//	        "type": "string"
+		//	      },
 		//	      "UtcTiming": {
 		//	        "additionalProperties": false,
 		//	        "description": "\u003cp\u003eDetermines the type of UTC timing included in the DASH Media Presentation Description (MPD).\u003c/p\u003e",
@@ -429,6 +452,17 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		"dash_manifests": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AvailabilityStartTimeConfiguration
+					"availability_start_time_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: FixedAvailabilityStartTime
+							"fixed_availability_start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType: timetypes.RFC3339Type{},
+								Computed:   true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
 					// Property: BaseUrls
 					"base_urls": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -625,6 +659,10 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 							"ad_marker_dash": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Computed: true,
 							}, /*END ATTRIBUTE*/
+							// Property: ScteInManifests
+							"scte_in_manifests": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "<p>The SCTE configuration.</p>",
 						Computed:    true,
@@ -655,6 +693,10 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 					"suggested_presentation_delay_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 						Description: "<p>The amount of time (in seconds) that the player should be from the end of the manifest.</p>",
 						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: UriPathType
+					"uri_path_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
 					}, /*END ATTRIBUTE*/
 					// Property: UtcTiming
 					"utc_timing": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -819,6 +861,13 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "SCTE35_ENHANCED"
 		//	            ],
 		//	            "type": "string"
+		//	          },
+		//	          "ScteInManifests": {
+		//	            "enum": [
+		//	              "ALL",
+		//	              "MATCHES_FILTER"
+		//	            ],
+		//	            "type": "string"
 		//	          }
 		//	        },
 		//	        "type": "object"
@@ -840,6 +889,13 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "TimeOffset"
 		//	        ],
 		//	        "type": "object"
+		//	      },
+		//	      "UriPathType": {
+		//	        "enum": [
+		//	          "LEAF",
+		//	          "ROOT"
+		//	        ],
+		//	        "type": "string"
 		//	      },
 		//	      "Url": {
 		//	        "description": "\u003cp\u003eThe egress domain URL for stream delivery from MediaPackage.\u003c/p\u003e",
@@ -927,6 +983,10 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 							"ad_marker_hls": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Computed: true,
 							}, /*END ATTRIBUTE*/
+							// Property: ScteInManifests
+							"scte_in_manifests": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "<p>The SCTE configuration.</p>",
 						Computed:    true,
@@ -947,6 +1007,10 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 						}, /*END SCHEMA*/
 						Description: "<p>To insert an EXT-X-START tag in your HLS playlist, specify a StartTag configuration object with a valid TimeOffset. When you do, you can also optionally specify whether to include a PRECISE value in the EXT-X-START tag.</p>",
 						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: UriPathType
+					"uri_path_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
 					}, /*END ATTRIBUTE*/
 					// Property: Url
 					"url": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1057,6 +1121,13 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "SCTE35_ENHANCED"
 		//	            ],
 		//	            "type": "string"
+		//	          },
+		//	          "ScteInManifests": {
+		//	            "enum": [
+		//	              "ALL",
+		//	              "MATCHES_FILTER"
+		//	            ],
+		//	            "type": "string"
 		//	          }
 		//	        },
 		//	        "type": "object"
@@ -1078,6 +1149,13 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "TimeOffset"
 		//	        ],
 		//	        "type": "object"
+		//	      },
+		//	      "UriPathType": {
+		//	        "enum": [
+		//	          "LEAF",
+		//	          "ROOT"
+		//	        ],
+		//	        "type": "string"
 		//	      },
 		//	      "Url": {
 		//	        "description": "\u003cp\u003eThe egress domain URL for stream delivery from MediaPackage.\u003c/p\u003e",
@@ -1165,6 +1243,10 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 							"ad_marker_hls": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Computed: true,
 							}, /*END ATTRIBUTE*/
+							// Property: ScteInManifests
+							"scte_in_manifests": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "<p>The SCTE configuration.</p>",
 						Computed:    true,
@@ -1185,6 +1267,10 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 						}, /*END SCHEMA*/
 						Description: "<p>To insert an EXT-X-START tag in your HLS playlist, specify a StartTag configuration object with a valid TimeOffset. When you do, you can also optionally specify whether to include a PRECISE value in the EXT-X-START tag.</p>",
 						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: UriPathType
+					"uri_path_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
 					}, /*END ATTRIBUTE*/
 					// Property: Url
 					"url": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1436,7 +1522,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	          "description": "\u003cp\u003eThe parameters for the SPEKE key provider.\u003c/p\u003e",
 		//	          "properties": {
 		//	            "CertificateArn": {
-		//	              "description": "\u003cp\u003eThe ARN for the certificate that you imported to AWS Certificate Manager to add content key encryption to this endpoint. For this feature to work, your DRM key provider must support content key encryption.\u003c/p\u003e",
+		//	              "description": "\u003cp\u003eThe ARN for the certificate that you imported to Amazon Web Services Certificate Manager to add content key encryption to this endpoint. For this feature to work, your DRM key provider must support content key encryption.\u003c/p\u003e",
 		//	              "maxLength": 2048,
 		//	              "minLength": 20,
 		//	              "pattern": "^arn:([^:\\n]+):acm:([^:\\n]+):([0-9]+):certificate/[a-zA-Z0-9-_]+$",
@@ -1538,6 +1624,22 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      "additionalProperties": false,
 		//	      "description": "\u003cp\u003eThe SCTE configuration.\u003c/p\u003e",
 		//	      "properties": {
+		//	        "CustomAdTypes": {
+		//	          "description": "\u003cp\u003eA list of additional non-Ad SCTE-35 event types to treat as advertisements. When configured, events matching these types produce ad markers (such as \u003ccode\u003eSCTE35-OUT\u003c/code\u003e and \u003ccode\u003eSCTE35-IN\u003c/code\u003e in HLS DATERANGE tags) in manifests.\u003c/p\u003e \u003cp\u003eValid values: \u003ccode\u003ePROGRAM\u003c/code\u003e | \u003ccode\u003eCHAPTER\u003c/code\u003e | \u003ccode\u003eUNSCHEDULED_EVENT\u003c/code\u003e | \u003ccode\u003eALTERNATE_CONTENT_OPPORTUNITY\u003c/code\u003e | \u003ccode\u003eNETWORK\u003c/code\u003e \u003c/p\u003e \u003cp\u003eIf you don't specify any values, the default is empty (only default ad types are used).\u003c/p\u003e",
+		//	          "items": {
+		//	            "enum": [
+		//	              "PROGRAM",
+		//	              "CHAPTER",
+		//	              "UNSCHEDULED_EVENT",
+		//	              "ALTERNATE_CONTENT_OPPORTUNITY",
+		//	              "NETWORK"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 25,
+		//	          "minItems": 0,
+		//	          "type": "array"
+		//	        },
 		//	        "ScteFilter": {
 		//	          "description": "\u003cp\u003eThe SCTE-35 message types that you want to be treated as ad markers in the output.\u003c/p\u003e",
 		//	          "items": {
@@ -1550,7 +1652,15 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "DISTRIBUTOR_PLACEMENT_OPPORTUNITY",
 		//	              "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY",
 		//	              "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY",
-		//	              "PROGRAM"
+		//	              "PROGRAM",
+		//	              "CHAPTER",
+		//	              "UNSCHEDULED_EVENT",
+		//	              "ALTERNATE_CONTENT_OPPORTUNITY",
+		//	              "NETWORK",
+		//	              "PROVIDER_PROMO",
+		//	              "DISTRIBUTOR_PROMO",
+		//	              "PROVIDER_AD_BLOCK",
+		//	              "DISTRIBUTOR_AD_BLOCK"
 		//	            ],
 		//	            "type": "string"
 		//	          },
@@ -1561,7 +1671,8 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	        "ScteInSegments": {
 		//	          "enum": [
 		//	            "NONE",
-		//	            "ALL"
+		//	            "ALL",
+		//	            "MATCHES_FILTER"
 		//	          ],
 		//	          "type": "string"
 		//	        }
@@ -1636,7 +1747,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: CertificateArn
 								"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "<p>The ARN for the certificate that you imported to AWS Certificate Manager to add content key encryption to this endpoint. For this feature to work, your DRM key provider must support content key encryption.</p>",
+									Description: "<p>The ARN for the certificate that you imported to Amazon Web Services Certificate Manager to add content key encryption to this endpoint. For this feature to work, your DRM key provider must support content key encryption.</p>",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: DrmSystems
@@ -1691,6 +1802,12 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 				// Property: Scte
 				"scte": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CustomAdTypes
+						"custom_ad_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "<p>A list of additional non-Ad SCTE-35 event types to treat as advertisements. When configured, events matching these types produce ad markers (such as <code>SCTE35-OUT</code> and <code>SCTE35-IN</code> in HLS DATERANGE tags) in manifests.</p> <p>Valid values: <code>PROGRAM</code> | <code>CHAPTER</code> | <code>UNSCHEDULED_EVENT</code> | <code>ALTERNATE_CONTENT_OPPORTUNITY</code> | <code>NETWORK</code> </p> <p>If you don't specify any values, the default is empty (only default ad types are used).</p>",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 						// Property: ScteFilter
 						"scte_filter": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
@@ -1735,7 +1852,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	{
 		//	  "description": "\u003cp\u003eThe size of the window (in seconds) to create a window of the live stream that's available for on-demand viewing. Viewers can start-over or catch-up on content that falls within the window. The maximum startover window is 1,209,600 seconds (14 days).\u003c/p\u003e",
 		//	  "maximum": 1209600,
-		//	  "minimum": 60,
+		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
 		"startover_window_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -1776,6 +1893,19 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 			}, /*END NESTED OBJECT*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: UriSeparator
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "UNDERSCORE",
+		//	    "HYPHEN"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"uri_separator": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -1793,105 +1923,111 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithCloudFormationTypeName("AWS::MediaPackageV2::OriginEndpoint").WithTerraformTypeName("awscc_mediapackagev2_origin_endpoint")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"ad_marker_dash":                       "AdMarkerDash",
-		"ad_marker_hls":                        "AdMarkerHls",
-		"arn":                                  "Arn",
-		"base_urls":                            "BaseUrls",
-		"certificate_arn":                      "CertificateArn",
-		"channel_group_name":                   "ChannelGroupName",
-		"channel_name":                         "ChannelName",
-		"child_manifest_name":                  "ChildManifestName",
-		"clip_start_time":                      "ClipStartTime",
-		"cmaf_encryption_method":               "CmafEncryptionMethod",
-		"cmaf_exclude_segment_drm_metadata":    "CmafExcludeSegmentDrmMetadata",
-		"compactness":                          "Compactness",
-		"constant_initialization_vector":       "ConstantInitializationVector",
-		"container_type":                       "ContainerType",
-		"copyright":                            "Copyright",
-		"created_at":                           "CreatedAt",
-		"dash_manifest_urls":                   "DashManifestUrls",
-		"dash_manifests":                       "DashManifests",
-		"description":                          "Description",
-		"drm_settings":                         "DrmSettings",
-		"drm_signaling":                        "DrmSignaling",
-		"drm_systems":                          "DrmSystems",
-		"dvb_priority":                         "DvbPriority",
-		"dvb_settings":                         "DvbSettings",
-		"dvb_weight":                           "DvbWeight",
-		"encryption":                           "Encryption",
-		"encryption_contract_configuration":    "EncryptionContractConfiguration",
-		"encryption_method":                    "EncryptionMethod",
-		"end":                                  "End",
-		"endpoint_error_conditions":            "EndpointErrorConditions",
-		"error_metrics":                        "ErrorMetrics",
-		"filter_configuration":                 "FilterConfiguration",
-		"font_download":                        "FontDownload",
-		"font_family":                          "FontFamily",
-		"force_endpoint_error_configuration":   "ForceEndpointErrorConfiguration",
-		"hls_manifest_urls":                    "HlsManifestUrls",
-		"hls_manifests":                        "HlsManifests",
-		"include_iframe_only_streams":          "IncludeIframeOnlyStreams",
-		"ism_encryption_method":                "IsmEncryptionMethod",
-		"key":                                  "Key",
-		"key_rotation_interval_seconds":        "KeyRotationIntervalSeconds",
-		"language_code":                        "LanguageCode",
-		"low_latency_hls_manifest_urls":        "LowLatencyHlsManifestUrls",
-		"low_latency_hls_manifests":            "LowLatencyHlsManifests",
-		"manifest_filter":                      "ManifestFilter",
-		"manifest_layout":                      "ManifestLayout",
-		"manifest_name":                        "ManifestName",
-		"manifest_window_seconds":              "ManifestWindowSeconds",
-		"mime_type":                            "MimeType",
-		"min_buffer_time_seconds":              "MinBufferTimeSeconds",
-		"min_update_period_seconds":            "MinUpdatePeriodSeconds",
-		"modified_at":                          "ModifiedAt",
-		"more_information_url":                 "MoreInformationUrl",
-		"mss_manifest_urls":                    "MssManifestUrls",
-		"mss_manifests":                        "MssManifests",
-		"origin_endpoint_name":                 "OriginEndpointName",
-		"period_triggers":                      "PeriodTriggers",
-		"precise":                              "Precise",
-		"preset_speke_20_audio":                "PresetSpeke20Audio",
-		"preset_speke_20_video":                "PresetSpeke20Video",
-		"probability":                          "Probability",
-		"profiles":                             "Profiles",
-		"program_date_time_interval_seconds":   "ProgramDateTimeIntervalSeconds",
-		"program_information":                  "ProgramInformation",
-		"reporting_url":                        "ReportingUrl",
-		"resource_id":                          "ResourceId",
-		"role_arn":                             "RoleArn",
-		"scte":                                 "Scte",
-		"scte_dash":                            "ScteDash",
-		"scte_filter":                          "ScteFilter",
-		"scte_hls":                             "ScteHls",
-		"scte_in_segments":                     "ScteInSegments",
-		"segment":                              "Segment",
-		"segment_duration_seconds":             "SegmentDurationSeconds",
-		"segment_name":                         "SegmentName",
-		"segment_template_format":              "SegmentTemplateFormat",
-		"service_location":                     "ServiceLocation",
-		"source":                               "Source",
-		"speke_key_provider":                   "SpekeKeyProvider",
-		"start":                                "Start",
-		"start_tag":                            "StartTag",
-		"startover_window_seconds":             "StartoverWindowSeconds",
-		"subtitle_configuration":               "SubtitleConfiguration",
-		"suggested_presentation_delay_seconds": "SuggestedPresentationDelaySeconds",
-		"tags":                                 "Tags",
-		"time_delay_seconds":                   "TimeDelaySeconds",
-		"time_offset":                          "TimeOffset",
-		"timing_mode":                          "TimingMode",
-		"timing_source":                        "TimingSource",
-		"title":                                "Title",
-		"ts_encryption_method":                 "TsEncryptionMethod",
-		"ts_include_dvb_subtitles":             "TsIncludeDvbSubtitles",
-		"ts_use_audio_rendition_group":         "TsUseAudioRenditionGroup",
-		"ttml_configuration":                   "TtmlConfiguration",
-		"ttml_profile":                         "TtmlProfile",
-		"url":                                  "Url",
-		"url_encode_child_manifest":            "UrlEncodeChildManifest",
-		"utc_timing":                           "UtcTiming",
-		"value":                                "Value",
+		"ad_marker_dash":                        "AdMarkerDash",
+		"ad_marker_hls":                         "AdMarkerHls",
+		"arn":                                   "Arn",
+		"availability_start_time_configuration": "AvailabilityStartTimeConfiguration",
+		"base_urls":                             "BaseUrls",
+		"certificate_arn":                       "CertificateArn",
+		"channel_group_name":                    "ChannelGroupName",
+		"channel_name":                          "ChannelName",
+		"child_manifest_name":                   "ChildManifestName",
+		"clip_start_time":                       "ClipStartTime",
+		"cmaf_encryption_method":                "CmafEncryptionMethod",
+		"cmaf_exclude_segment_drm_metadata":     "CmafExcludeSegmentDrmMetadata",
+		"compactness":                           "Compactness",
+		"constant_initialization_vector":        "ConstantInitializationVector",
+		"container_type":                        "ContainerType",
+		"copyright":                             "Copyright",
+		"created_at":                            "CreatedAt",
+		"custom_ad_types":                       "CustomAdTypes",
+		"dash_manifest_urls":                    "DashManifestUrls",
+		"dash_manifests":                        "DashManifests",
+		"description":                           "Description",
+		"drm_settings":                          "DrmSettings",
+		"drm_signaling":                         "DrmSignaling",
+		"drm_systems":                           "DrmSystems",
+		"dvb_priority":                          "DvbPriority",
+		"dvb_settings":                          "DvbSettings",
+		"dvb_weight":                            "DvbWeight",
+		"encryption":                            "Encryption",
+		"encryption_contract_configuration":     "EncryptionContractConfiguration",
+		"encryption_method":                     "EncryptionMethod",
+		"end":                                   "End",
+		"endpoint_error_conditions":             "EndpointErrorConditions",
+		"error_metrics":                         "ErrorMetrics",
+		"filter_configuration":                  "FilterConfiguration",
+		"fixed_availability_start_time":         "FixedAvailabilityStartTime",
+		"font_download":                         "FontDownload",
+		"font_family":                           "FontFamily",
+		"force_endpoint_error_configuration":    "ForceEndpointErrorConfiguration",
+		"hls_manifest_urls":                     "HlsManifestUrls",
+		"hls_manifests":                         "HlsManifests",
+		"include_iframe_only_streams":           "IncludeIframeOnlyStreams",
+		"ism_encryption_method":                 "IsmEncryptionMethod",
+		"key":                                   "Key",
+		"key_rotation_interval_seconds":         "KeyRotationIntervalSeconds",
+		"language_code":                         "LanguageCode",
+		"low_latency_hls_manifest_urls":         "LowLatencyHlsManifestUrls",
+		"low_latency_hls_manifests":             "LowLatencyHlsManifests",
+		"manifest_filter":                       "ManifestFilter",
+		"manifest_layout":                       "ManifestLayout",
+		"manifest_name":                         "ManifestName",
+		"manifest_window_seconds":               "ManifestWindowSeconds",
+		"mime_type":                             "MimeType",
+		"min_buffer_time_seconds":               "MinBufferTimeSeconds",
+		"min_update_period_seconds":             "MinUpdatePeriodSeconds",
+		"modified_at":                           "ModifiedAt",
+		"more_information_url":                  "MoreInformationUrl",
+		"mss_manifest_urls":                     "MssManifestUrls",
+		"mss_manifests":                         "MssManifests",
+		"origin_endpoint_name":                  "OriginEndpointName",
+		"period_triggers":                       "PeriodTriggers",
+		"precise":                               "Precise",
+		"preset_speke_20_audio":                 "PresetSpeke20Audio",
+		"preset_speke_20_video":                 "PresetSpeke20Video",
+		"probability":                           "Probability",
+		"profiles":                              "Profiles",
+		"program_date_time_interval_seconds":    "ProgramDateTimeIntervalSeconds",
+		"program_information":                   "ProgramInformation",
+		"reporting_url":                         "ReportingUrl",
+		"resource_id":                           "ResourceId",
+		"role_arn":                              "RoleArn",
+		"scte":                                  "Scte",
+		"scte_dash":                             "ScteDash",
+		"scte_filter":                           "ScteFilter",
+		"scte_hls":                              "ScteHls",
+		"scte_in_manifests":                     "ScteInManifests",
+		"scte_in_segments":                      "ScteInSegments",
+		"segment":                               "Segment",
+		"segment_duration_seconds":              "SegmentDurationSeconds",
+		"segment_name":                          "SegmentName",
+		"segment_template_format":               "SegmentTemplateFormat",
+		"service_location":                      "ServiceLocation",
+		"source":                                "Source",
+		"speke_key_provider":                    "SpekeKeyProvider",
+		"start":                                 "Start",
+		"start_tag":                             "StartTag",
+		"startover_window_seconds":              "StartoverWindowSeconds",
+		"subtitle_configuration":                "SubtitleConfiguration",
+		"suggested_presentation_delay_seconds":  "SuggestedPresentationDelaySeconds",
+		"tags":                                  "Tags",
+		"time_delay_seconds":                    "TimeDelaySeconds",
+		"time_offset":                           "TimeOffset",
+		"timing_mode":                           "TimingMode",
+		"timing_source":                         "TimingSource",
+		"title":                                 "Title",
+		"ts_encryption_method":                  "TsEncryptionMethod",
+		"ts_include_dvb_subtitles":              "TsIncludeDvbSubtitles",
+		"ts_use_audio_rendition_group":          "TsUseAudioRenditionGroup",
+		"ttml_configuration":                    "TtmlConfiguration",
+		"ttml_profile":                          "TtmlProfile",
+		"uri_path_type":                         "UriPathType",
+		"uri_separator":                         "UriSeparator",
+		"url":                                   "Url",
+		"url_encode_child_manifest":             "UrlEncodeChildManifest",
+		"utc_timing":                            "UtcTiming",
+		"value":                                 "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

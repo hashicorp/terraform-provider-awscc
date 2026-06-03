@@ -265,6 +265,12 @@ func computeNodeGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "additionalProperties": false,
 		//	  "description": "Additional options related to the Slurm scheduler.",
 		//	  "properties": {
+		//	    "ScaleDownIdleTimeInSeconds": {
+		//	      "description": "The time before an idle node is scaled down.",
+		//	      "maximum": 10000000,
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    },
 		//	    "SlurmCustomSettings": {
 		//	      "description": "Additional Slurm-specific configuration that directly maps to Slurm settings.",
 		//	      "insertionOrder": false,
@@ -294,6 +300,11 @@ func computeNodeGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	}
 		"slurm_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ScaleDownIdleTimeInSeconds
+				"scale_down_idle_time_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The time before an idle node is scaled down.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: SlurmCustomSettings
 				"slurm_custom_settings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -419,33 +430,34 @@ func computeNodeGroupDataSource(ctx context.Context) (datasource.DataSource, err
 	opts = opts.WithCloudFormationTypeName("AWS::PCS::ComputeNodeGroup").WithTerraformTypeName("awscc_pcs_compute_node_group")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"allocation_strategy":      "AllocationStrategy",
-		"ami_id":                   "AmiId",
-		"arn":                      "Arn",
-		"cluster_id":               "ClusterId",
-		"code":                     "Code",
-		"compute_node_group_id":    "Id",
-		"custom_launch_template":   "CustomLaunchTemplate",
-		"error_info":               "ErrorInfo",
-		"iam_instance_profile_arn": "IamInstanceProfileArn",
-		"instance_configs":         "InstanceConfigs",
-		"instance_type":            "InstanceType",
-		"max_instance_count":       "MaxInstanceCount",
-		"message":                  "Message",
-		"min_instance_count":       "MinInstanceCount",
-		"name":                     "Name",
-		"parameter_name":           "ParameterName",
-		"parameter_value":          "ParameterValue",
-		"purchase_option":          "PurchaseOption",
-		"scaling_configuration":    "ScalingConfiguration",
-		"slurm_configuration":      "SlurmConfiguration",
-		"slurm_custom_settings":    "SlurmCustomSettings",
-		"spot_options":             "SpotOptions",
-		"status":                   "Status",
-		"subnet_ids":               "SubnetIds",
-		"tags":                     "Tags",
-		"template_id":              "TemplateId",
-		"version":                  "Version",
+		"allocation_strategy":             "AllocationStrategy",
+		"ami_id":                          "AmiId",
+		"arn":                             "Arn",
+		"cluster_id":                      "ClusterId",
+		"code":                            "Code",
+		"compute_node_group_id":           "Id",
+		"custom_launch_template":          "CustomLaunchTemplate",
+		"error_info":                      "ErrorInfo",
+		"iam_instance_profile_arn":        "IamInstanceProfileArn",
+		"instance_configs":                "InstanceConfigs",
+		"instance_type":                   "InstanceType",
+		"max_instance_count":              "MaxInstanceCount",
+		"message":                         "Message",
+		"min_instance_count":              "MinInstanceCount",
+		"name":                            "Name",
+		"parameter_name":                  "ParameterName",
+		"parameter_value":                 "ParameterValue",
+		"purchase_option":                 "PurchaseOption",
+		"scale_down_idle_time_in_seconds": "ScaleDownIdleTimeInSeconds",
+		"scaling_configuration":           "ScalingConfiguration",
+		"slurm_configuration":             "SlurmConfiguration",
+		"slurm_custom_settings":           "SlurmCustomSettings",
+		"spot_options":                    "SpotOptions",
+		"status":                          "Status",
+		"subnet_ids":                      "SubnetIds",
+		"tags":                            "Tags",
+		"template_id":                     "TemplateId",
+		"version":                         "Version",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

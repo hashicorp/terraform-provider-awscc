@@ -23,6 +23,20 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::RTBFabric::ResponderGateway resource.
 func responderGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AcmCertificateArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "pattern": "",
+		//	  "relationshipRef": {
+		//	    "propertyPath": "/properties/CertificateArn",
+		//	    "typeName": "AWS::CertificateManager::Certificate"
+		//	  },
+		//	  "type": "string"
+		//	}
+		"acm_certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -33,6 +47,23 @@ func responderGatewayDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: CertificateAssociationStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "PENDING_ASSOCIATION",
+		//	    "ASSOCIATED",
+		//	    "PENDING_DISASSOCIATION",
+		//	    "DISASSOCIATED",
+		//	    "EXPIRED",
+		//	    "FAILED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"certificate_association_status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTimestamp
@@ -64,6 +95,16 @@ func responderGatewayDataSource(ctx context.Context) (datasource.DataSource, err
 		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: ExternalInboundEndpoint
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "pattern": "^(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)(?:\\.(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?))+$",
+		//	  "type": "string"
+		//	}
+		"external_inbound_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: GatewayId
 		// CloudFormation resource type schema:
 		//
@@ -72,6 +113,54 @@ func responderGatewayDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "string"
 		//	}
 		"gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: GatewayType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "EXTERNAL",
+		//	    "INTERNAL"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"gateway_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: ListenerConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Protocols": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "enum": [
+		//	          "HTTP",
+		//	          "HTTPS"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 2,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Protocols"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"listener_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Protocols
+				"protocols": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: ManagedEndpointConfiguration
@@ -500,9 +589,11 @@ func responderGatewayDataSource(ctx context.Context) (datasource.DataSource, err
 	opts = opts.WithCloudFormationTypeName("AWS::RTBFabric::ResponderGateway").WithTerraformTypeName("awscc_rtbfabric_responder_gateway")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"acm_certificate_arn":                     "AcmCertificateArn",
 		"arn":                                     "Arn",
 		"auto_scaling_group_name_list":            "AutoScalingGroupNameList",
 		"auto_scaling_groups_configuration":       "AutoScalingGroupsConfiguration",
+		"certificate_association_status":          "CertificateAssociationStatus",
 		"certificate_authority_certificates":      "CertificateAuthorityCertificates",
 		"cluster_api_server_ca_certificate_chain": "ClusterApiServerCaCertificateChain",
 		"cluster_api_server_endpoint_uri":         "ClusterApiServerEndpointUri",
@@ -513,15 +604,19 @@ func responderGatewayDataSource(ctx context.Context) (datasource.DataSource, err
 		"eks_endpoints_configuration":             "EksEndpointsConfiguration",
 		"endpoints_resource_name":                 "EndpointsResourceName",
 		"endpoints_resource_namespace":            "EndpointsResourceNamespace",
+		"external_inbound_endpoint":               "ExternalInboundEndpoint",
 		"gateway_id":                              "GatewayId",
+		"gateway_type":                            "GatewayType",
 		"health_check_config":                     "HealthCheckConfig",
 		"healthy_threshold_count":                 "HealthyThresholdCount",
 		"interval_seconds":                        "IntervalSeconds",
 		"key":                                     "Key",
+		"listener_config":                         "ListenerConfig",
 		"managed_endpoint_configuration":          "ManagedEndpointConfiguration",
 		"path":                                    "Path",
 		"port":                                    "Port",
 		"protocol":                                "Protocol",
+		"protocols":                               "Protocols",
 		"responder_gateway_status":                "ResponderGatewayStatus",
 		"role_arn":                                "RoleArn",
 		"security_group_ids":                      "SecurityGroupIds",

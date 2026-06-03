@@ -912,6 +912,14 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "type": "string"
 		//	          },
 		//	          "type": "array"
+		//	        },
+		//	        "LocalTimeZoneDetectionScope": {
+		//	          "description": "Local TimeZone Detection scope",
+		//	          "enum": [
+		//	            "PRIMARY_ONLY",
+		//	            "ALL_AVAILABLE"
+		//	          ],
+		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -1365,6 +1373,11 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 						"local_time_zone_detection": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
 							Description: "Local TimeZone Detection method list",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: LocalTimeZoneDetectionScope
+						"local_time_zone_detection_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Local TimeZone Detection scope",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -1924,6 +1937,7 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"key":                               "Key",
 		"local_time_zone_config":            "LocalTimeZoneConfig",
 		"local_time_zone_detection":         "LocalTimeZoneDetection",
+		"local_time_zone_detection_scope":   "LocalTimeZoneDetectionScope",
 		"max_count_per_recipient":           "MaxCountPerRecipient",
 		"max_entry_count":                   "MaxEntryCount",
 		"min_entry_interval":                "MinEntryInterval",

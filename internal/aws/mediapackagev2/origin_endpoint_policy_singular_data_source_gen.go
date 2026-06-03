@@ -28,8 +28,10 @@ func originEndpointPolicyDataSource(ctx context.Context) (datasource.DataSource,
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "\u003cp\u003eThe settings to enable CDN authorization headers in MediaPackage.\u003c/p\u003e",
 		//	  "properties": {
 		//	    "CdnIdentifierSecretArns": {
+		//	      "description": "\u003cp\u003eThe ARN for the secret in Secrets Manager that your CDN uses for authorization to access the endpoint.\u003c/p\u003e",
 		//	      "items": {
 		//	        "maxLength": 2048,
 		//	        "minLength": 20,
@@ -40,6 +42,7 @@ func originEndpointPolicyDataSource(ctx context.Context) (datasource.DataSource,
 		//	      "type": "array"
 		//	    },
 		//	    "SecretsRoleArn": {
+		//	      "description": "\u003cp\u003eThe ARN for the IAM role that gives MediaPackage read access to Secrets Manager and KMS for CDN authorization.\u003c/p\u003e",
 		//	      "maxLength": 2048,
 		//	      "minLength": 20,
 		//	      "type": "string"
@@ -56,14 +59,17 @@ func originEndpointPolicyDataSource(ctx context.Context) (datasource.DataSource,
 				// Property: CdnIdentifierSecretArns
 				"cdn_identifier_secret_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
+					Description: "<p>The ARN for the secret in Secrets Manager that your CDN uses for authorization to access the endpoint.</p>",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SecretsRoleArn
 				"secrets_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "<p>The ARN for the IAM role that gives MediaPackage read access to Secrets Manager and KMS for CDN authorization.</p>",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Computed: true,
+			Description: "<p>The settings to enable CDN authorization headers in MediaPackage.</p>",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ChannelGroupName
 		// CloudFormation resource type schema:
