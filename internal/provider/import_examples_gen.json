@@ -748,6 +748,10 @@
         "identifier": ["CredentialProviderArn"]
     },
     {
+        "resource": "awscc_bedrockagentcore_payment_connector",
+        "identifier": ["PaymentConnectorArn"]
+    },
+    {
         "resource": "awscc_bedrockagentcore_payment_credential_provider",
         "generateListResource": true,
         "identifier": ["CredentialProviderArn"]
@@ -4648,6 +4652,10 @@
         "identifier": ["Id"]
     },
     {
+        "resource": "awscc_opensearchserverless_collection_index",
+        "identifier": ["Id","IndexName"]
+    },
+    {
         "resource": "awscc_opensearchserverless_lifecycle_policy",
         "identifier": ["Type","Name"]
     },
@@ -5085,6 +5093,21 @@
         "resource": "awscc_resiliencehub_resiliency_policy",
         "generateListResource": true,
         "identifier": ["PolicyArn"]
+    },
+    {
+        "resource": "awscc_resiliencehubv2_policy",
+        "generateListResource": true,
+        "identifier": ["PolicyArn"]
+    },
+    {
+        "resource": "awscc_resiliencehubv2_service",
+        "generateListResource": true,
+        "identifier": ["ServiceArn"]
+    },
+    {
+        "resource": "awscc_resiliencehubv2_system",
+        "generateListResource": true,
+        "identifier": ["SystemArn"]
     },
     {
         "resource": "awscc_resourceexplorer2_default_view_association",
@@ -6268,6 +6291,11 @@
     {
         "resource": "awscc_verifiedpermissions_policy_template",
         "identifier": ["PolicyStoreId","PolicyTemplateId"]
+    },
+    {
+        "resource": "awscc_verifiedpermissions_policy_store_alias",
+        "generateListResource": true,
+        "identifier": ["AliasName"]
     },
     {
         "resource": "awscc_voiceid_domain",
