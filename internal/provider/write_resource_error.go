@@ -5,5 +5,6 @@
 
 package provider
 
-// writeResourceError is a no-op in normal builds.
-func writeResourceError(_ string, _ error) {}
+// writeProviderError writes a factory error to the log file.
+// kind should be "resource", "data source", or "list resource".
+func writeProviderError(_ string, _ string, _ error) {}

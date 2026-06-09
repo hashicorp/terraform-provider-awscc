@@ -13,20 +13,29 @@ import (
 // resourceErrorLog holds the log file opened at program startup.
 var resourceErrorLog *os.File
 
-// init opens and truncates resource_errors.log when the provider binary starts.
+// init opens the resource error log when the provider binary starts.
+// The log path is read from $RESOURCE_ERROR_LOG; defaults to resource_errors.log
+// in the current working directory. Uses O_APPEND because terraform invokes the
+// provider binary multiple times per plan — O_TRUNC would wipe earlier entries.
+// Truncate the file once before running terraform (e.g. in the make target).
 // Enabled via the `writeerrors` build tag.
 func init() {
-	f, err := os.OpenFile("resource_errors.log", os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0o644)
+	path := os.Getenv("RESOURCE_ERROR_LOG")
+	if path == "" {
+		path = ".startup_errors.log"
+	}
+	f, err := os.OpenFile(path, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0o644)
 	if err != nil {
 		return
 	}
 	resourceErrorLog = f
 }
 
-// writeResourceError writes a resource factory error to the log file.
-func writeResourceError(name string, err error) {
+// writeProviderError writes a factory error to the log file.
+// kind should be "resource", "data source", or "list resource".
+func writeProviderError(kind string, name string, err error) {
 	if resourceErrorLog == nil {
 		return
 	}
-	fmt.Fprintf(resourceErrorLog, "resource=%s error=%s\n", name, err)
+	fmt.Fprintf(resourceErrorLog, "kind=%s name=%s error=%s\n", kind, name, err)
 }

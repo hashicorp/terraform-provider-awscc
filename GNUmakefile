@@ -212,6 +212,23 @@ update: prereq-go ## Update Schema
 	echo "==> Updating Schema..."
 	$(GO_VER) run $$(find internal/update -name "*.go" -not -name "*_test.go")
 
+check-startup-error: prereq-go ## Build with writeerrors tag and run terraform plan against a minimal data source config
+	@echo "==> Installing provider with writeerrors tag..."
+	$(GO_VER) install -tags writeerrors .
+	@GOBIN="$$($(GO_VER) env GOPATH)/bin"; \
+	REPO_ROOT="$$(pwd)"; \
+	LOG_FILE="$$REPO_ROOT/.startup-errors.log"; \
+	WORK_DIR=$$(mktemp -d); \
+	trap 'rm -rf "$$WORK_DIR"' EXIT; \
+	echo "==> Writing Terraform config to $$WORK_DIR"; \
+	printf 'terraform {\n  required_providers {\n    awscc = {\n      source = "hashicorp/awscc"\n    }\n  }\n}\n\nprovider "awscc" {\n  region = "us-east-1"\n}\n\ndata "awscc_s3_bucket" "example" {\n  id = "my-example-bucket"\n}\n' > "$$WORK_DIR/main.tf"; \
+	printf 'provider_installation {\n  dev_overrides {\n    "hashicorp/awscc" = "%s"\n  }\n  direct {}\n}\n' "$$GOBIN" > "$$WORK_DIR/terraform.rc"; \
+	echo "==> Running terraform plan (errors logged to $$LOG_FILE)..."; \
+	: > "$$LOG_FILE"; \
+	cd "$$WORK_DIR" && RESOURCE_ERROR_LOG="$$LOG_FILE" TF_CLI_CONFIG_FILE="$$WORK_DIR/terraform.rc" terraform plan; \
+	echo "==> resource_errors.log (if any):"; \
+	cat "$$LOG_FILE" 2>/dev/null || echo "(no errors logged)"
+
 smoke: prereq-go ## Run smoke tests
 	@echo "make: Running smoke tests..."
 	@echo "make: NOTE: All tests should pass. Error output for sdk.proto, \"Response contains error diagnostic\" can be ignored."
@@ -287,6 +304,7 @@ biglister: prereq-go ## List all resources and data sources
 .PHONY: bigdiffer
 .PHONY: biglister
 .PHONY: build
+.PHONY: check-startup-error
 .PHONY: cleanschemas
 .PHONY: commitdatas
 .PHONY: commitdocs
