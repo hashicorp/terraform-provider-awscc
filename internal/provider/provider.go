@@ -445,6 +445,8 @@ func (p *ccProvider) Resources(ctx context.Context) []func() resource.Resource {
 				fmt.Sprintf("Error getting the %s Resource, this is an error in the provider.\n%s\n", name, err),
 			)
 
+			writeProviderError("resource", name, err)
+
 			continue
 		}
 
