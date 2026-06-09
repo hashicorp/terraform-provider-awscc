@@ -20,7 +20,7 @@ var resourceErrorLog *os.File
 // Truncate the file once before running terraform (e.g. in the make target).
 // Enabled via the `writeerrors` build tag.
 func init() {
-	path := os.Getenv("RESOURCE_ERROR_LOG")
+	path := os.Getenv("STARTUP_ERROR_LOG")
 	if path == "" {
 		path = ".startup_errors.log"
 	}
