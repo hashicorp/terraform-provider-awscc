@@ -217,7 +217,7 @@ check-startup-errors: prereq-go ## Build with writeerrors tag and run terraform 
 	$(GO_VER) install -tags writeerrors .
 	@GOBIN="$$($(GO_VER) env GOPATH)/bin"; \
 	REPO_ROOT="$$(pwd)"; \
-	LOG_FILE="$$REPO_ROOT/.startup-errors.log"; \
+	LOG_FILE="$$REPO_ROOT/.make-startup-errors.log"; \
 	WORK_DIR=$$(mktemp -d); \
 	trap 'rm -rf "$$WORK_DIR"' EXIT; \
 	echo "==> Writing Terraform config to $$WORK_DIR"; \
