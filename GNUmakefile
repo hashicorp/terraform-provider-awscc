@@ -212,7 +212,7 @@ update: prereq-go ## Update Schema
 	echo "==> Updating Schema..."
 	$(GO_VER) run $$(find internal/update -name "*.go" -not -name "*_test.go")
 
-check-startup-error: prereq-go ## Build with writeerrors tag and run terraform plan against a minimal data source config
+check-startup-errors: prereq-go ## Build with writeerrors tag and run terraform plan against a minimal data source config
 	@echo "==> Installing provider with writeerrors tag..."
 	$(GO_VER) install -tags writeerrors .
 	@GOBIN="$$($(GO_VER) env GOPATH)/bin"; \
