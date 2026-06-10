@@ -304,6 +304,20 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Defines the state of a key",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Policy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The resource-based policy attached to the key, in JSON format.",
+		//	  "maxLength": 20480,
+		//	  "minLength": 1,
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The resource-based policy attached to the key, in JSON format.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ReplicationRegions
 		// CloudFormation resource type schema:
 		//
@@ -445,6 +459,7 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"key_state":                 "KeyState",
 		"key_usage":                 "KeyUsage",
 		"no_restrictions":           "NoRestrictions",
+		"policy":                    "Policy",
 		"replication_regions":       "ReplicationRegions",
 		"replication_status":        "ReplicationStatus",
 		"sign":                      "Sign",

@@ -630,6 +630,44 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          ],
 		//	          "type": "object"
 		//	        },
+		//	        "PersistentVolumeConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Iops": {
+		//	              "default": 3000,
+		//	              "maximum": 80000,
+		//	              "minimum": 100,
+		//	              "type": "integer"
+		//	            },
+		//	            "LastUsedTtlHours": {
+		//	              "default": 168,
+		//	              "maximum": 8760,
+		//	              "minimum": 1,
+		//	              "type": "integer"
+		//	            },
+		//	            "MountPath": {
+		//	              "maxLength": 255,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "SizeGiB": {
+		//	              "default": 250,
+		//	              "maximum": 65536,
+		//	              "minimum": 1,
+		//	              "type": "integer"
+		//	            },
+		//	            "ThroughputMiB": {
+		//	              "default": 125,
+		//	              "maximum": 2000,
+		//	              "minimum": 125,
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "MountPath"
+		//	          ],
+		//	          "type": "object"
+		//	        },
 		//	        "StorageProfileId": {
 		//	          "pattern": "^sp-[0-9a-f]{32}$",
 		//	          "type": "string"
@@ -982,6 +1020,32 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 							}, /*END SCHEMA*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
+						// Property: PersistentVolumeConfiguration
+						"persistent_volume_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Iops
+								"iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: LastUsedTtlHours
+								"last_used_ttl_hours": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: MountPath
+								"mount_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: SizeGiB
+								"size_gi_b": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: ThroughputMiB
+								"throughput_mi_b": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 						// Property: StorageProfileId
 						"storage_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
@@ -1218,65 +1282,68 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Deadline::Fleet").WithTerraformTypeName("awscc_deadline_fleet")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"accelerator_capabilities":      "AcceleratorCapabilities",
-		"accelerator_count":             "AcceleratorCount",
-		"accelerator_total_memory_mi_b": "AcceleratorTotalMemoryMiB",
-		"accelerator_types":             "AcceleratorTypes",
-		"allowed_instance_types":        "AllowedInstanceTypes",
-		"amounts":                       "Amounts",
-		"arn":                           "Arn",
-		"attributes":                    "Attributes",
-		"auto_scaling_configuration":    "AutoScalingConfiguration",
-		"capabilities":                  "Capabilities",
-		"configuration":                 "Configuration",
-		"count":                         "Count",
-		"cpu_architecture_type":         "CpuArchitectureType",
-		"custom_amounts":                "CustomAmounts",
-		"custom_attributes":             "CustomAttributes",
-		"customer_managed":              "CustomerManaged",
-		"description":                   "Description",
-		"display_name":                  "DisplayName",
-		"excluded_instance_types":       "ExcludedInstanceTypes",
-		"farm_id":                       "FarmId",
-		"fleet_id":                      "FleetId",
-		"host_configuration":            "HostConfiguration",
-		"instance_capabilities":         "InstanceCapabilities",
-		"instance_market_options":       "InstanceMarketOptions",
-		"iops":                          "Iops",
-		"key":                           "Key",
-		"max":                           "Max",
-		"max_worker_count":              "MaxWorkerCount",
-		"memory_mi_b":                   "MemoryMiB",
-		"min":                           "Min",
-		"min_worker_count":              "MinWorkerCount",
-		"mode":                          "Mode",
-		"name":                          "Name",
-		"os_family":                     "OsFamily",
-		"resource_configuration_arns":   "ResourceConfigurationArns",
-		"role_arn":                      "RoleArn",
-		"root_ebs_volume":               "RootEbsVolume",
-		"runtime":                       "Runtime",
-		"scale_out_workers_per_minute":  "ScaleOutWorkersPerMinute",
-		"script_body":                   "ScriptBody",
-		"script_timeout_seconds":        "ScriptTimeoutSeconds",
-		"selections":                    "Selections",
-		"service_managed_ec_2":          "ServiceManagedEc2",
-		"size_gi_b":                     "SizeGiB",
-		"standby_worker_count":          "StandbyWorkerCount",
-		"status":                        "Status",
-		"status_message":                "StatusMessage",
-		"storage_profile_id":            "StorageProfileId",
-		"tag_propagation_mode":          "TagPropagationMode",
-		"tags":                          "Tags",
-		"throughput_mi_b":               "ThroughputMiB",
-		"type":                          "Type",
-		"v_cpu_count":                   "VCpuCount",
-		"value":                         "Value",
-		"values":                        "Values",
-		"vpc_configuration":             "VpcConfiguration",
-		"worker_capabilities":           "WorkerCapabilities",
-		"worker_count":                  "WorkerCount",
-		"worker_idle_duration_seconds":  "WorkerIdleDurationSeconds",
+		"accelerator_capabilities":        "AcceleratorCapabilities",
+		"accelerator_count":               "AcceleratorCount",
+		"accelerator_total_memory_mi_b":   "AcceleratorTotalMemoryMiB",
+		"accelerator_types":               "AcceleratorTypes",
+		"allowed_instance_types":          "AllowedInstanceTypes",
+		"amounts":                         "Amounts",
+		"arn":                             "Arn",
+		"attributes":                      "Attributes",
+		"auto_scaling_configuration":      "AutoScalingConfiguration",
+		"capabilities":                    "Capabilities",
+		"configuration":                   "Configuration",
+		"count":                           "Count",
+		"cpu_architecture_type":           "CpuArchitectureType",
+		"custom_amounts":                  "CustomAmounts",
+		"custom_attributes":               "CustomAttributes",
+		"customer_managed":                "CustomerManaged",
+		"description":                     "Description",
+		"display_name":                    "DisplayName",
+		"excluded_instance_types":         "ExcludedInstanceTypes",
+		"farm_id":                         "FarmId",
+		"fleet_id":                        "FleetId",
+		"host_configuration":              "HostConfiguration",
+		"instance_capabilities":           "InstanceCapabilities",
+		"instance_market_options":         "InstanceMarketOptions",
+		"iops":                            "Iops",
+		"key":                             "Key",
+		"last_used_ttl_hours":             "LastUsedTtlHours",
+		"max":                             "Max",
+		"max_worker_count":                "MaxWorkerCount",
+		"memory_mi_b":                     "MemoryMiB",
+		"min":                             "Min",
+		"min_worker_count":                "MinWorkerCount",
+		"mode":                            "Mode",
+		"mount_path":                      "MountPath",
+		"name":                            "Name",
+		"os_family":                       "OsFamily",
+		"persistent_volume_configuration": "PersistentVolumeConfiguration",
+		"resource_configuration_arns":     "ResourceConfigurationArns",
+		"role_arn":                        "RoleArn",
+		"root_ebs_volume":                 "RootEbsVolume",
+		"runtime":                         "Runtime",
+		"scale_out_workers_per_minute":    "ScaleOutWorkersPerMinute",
+		"script_body":                     "ScriptBody",
+		"script_timeout_seconds":          "ScriptTimeoutSeconds",
+		"selections":                      "Selections",
+		"service_managed_ec_2":            "ServiceManagedEc2",
+		"size_gi_b":                       "SizeGiB",
+		"standby_worker_count":            "StandbyWorkerCount",
+		"status":                          "Status",
+		"status_message":                  "StatusMessage",
+		"storage_profile_id":              "StorageProfileId",
+		"tag_propagation_mode":            "TagPropagationMode",
+		"tags":                            "Tags",
+		"throughput_mi_b":                 "ThroughputMiB",
+		"type":                            "Type",
+		"v_cpu_count":                     "VCpuCount",
+		"value":                           "Value",
+		"values":                          "Values",
+		"vpc_configuration":               "VpcConfiguration",
+		"worker_capabilities":             "WorkerCapabilities",
+		"worker_count":                    "WorkerCount",
+		"worker_idle_duration_seconds":    "WorkerIdleDurationSeconds",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -165,6 +165,18 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 150,
+		//	  "minLength": 0,
+		//	  "pattern": "^[a-zA-Z0-9-/_]*$",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyId
 		// CloudFormation resource type schema:
 		//
@@ -223,6 +235,7 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description":        "Description",
 		"entity_id":          "EntityId",
 		"entity_type":        "EntityType",
+		"name":               "Name",
 		"policy_id":          "PolicyId",
 		"policy_store_id":    "PolicyStoreId",
 		"policy_template_id": "PolicyTemplateId",

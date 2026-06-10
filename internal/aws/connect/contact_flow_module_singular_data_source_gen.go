@@ -74,9 +74,6 @@ func contactFlowModuleDataSource(ctx context.Context) (datasource.DataSource, er
 		//	      "type": "boolean"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "Enabled"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"external_invocation_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/

@@ -66,6 +66,21 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The OpenSearch Dashboards endpoint for the collection.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DeletionProtection
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The deletion protection state of the collection",
+		//	  "enum": [
+		//	    "ENABLED",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"deletion_protection": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The deletion protection state of the collection",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -313,6 +328,7 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"collection_group_name":          "CollectionGroupName",
 		"collection_id":                  "Id",
 		"dashboard_endpoint":             "DashboardEndpoint",
+		"deletion_protection":            "DeletionProtection",
 		"description":                    "Description",
 		"encryption_config":              "EncryptionConfig",
 		"fips_endpoints":                 "FipsEndpoints",

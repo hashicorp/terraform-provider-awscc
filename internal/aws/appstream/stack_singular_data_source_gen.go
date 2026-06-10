@@ -121,6 +121,76 @@ func stackDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The stack attributes to delete.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ContentRedirection
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The content redirection settings for the stack. These settings control URL redirection between the streaming session and the local device.",
+		//	  "properties": {
+		//	    "HostToClient": {
+		//	      "additionalProperties": false,
+		//	      "description": "The URL redirection configuration from the streaming session host to the client.",
+		//	      "properties": {
+		//	        "AllowedUrls": {
+		//	          "description": "The URLs that are allowed for redirection.",
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        },
+		//	        "DeniedUrls": {
+		//	          "description": "The URLs that are denied for redirection.",
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        },
+		//	        "Enabled": {
+		//	          "description": "Specifies whether URL redirection is enabled or disabled.",
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Enabled"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"content_redirection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: HostToClient
+				"host_to_client": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AllowedUrls
+						"allowed_urls": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The URLs that are allowed for redirection.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DeniedUrls
+						"denied_urls": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The URLs that are denied for redirection.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies whether URL redirection is enabled or disabled.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The URL redirection configuration from the streaming session host to the client.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The content redirection settings for the stack. These settings control URL redirection between the streaming session and the local device.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DeleteStorageConnectors
 		// CloudFormation resource type schema:
 		//
@@ -404,10 +474,13 @@ func stackDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_endpoints":              "AccessEndpoints",
 		"action":                        "Action",
+		"allowed_urls":                  "AllowedUrls",
 		"application_settings":          "ApplicationSettings",
 		"attributes_to_delete":          "AttributesToDelete",
 		"connector_type":                "ConnectorType",
+		"content_redirection":           "ContentRedirection",
 		"delete_storage_connectors":     "DeleteStorageConnectors",
+		"denied_urls":                   "DeniedUrls",
 		"description":                   "Description",
 		"display_name":                  "DisplayName",
 		"domains":                       "Domains",
@@ -415,6 +488,7 @@ func stackDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"enabled":                       "Enabled",
 		"endpoint_type":                 "EndpointType",
 		"feedback_url":                  "FeedbackURL",
+		"host_to_client":                "HostToClient",
 		"key":                           "Key",
 		"maximum_length":                "MaximumLength",
 		"name":                          "Name",

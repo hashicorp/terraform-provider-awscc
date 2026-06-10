@@ -64,6 +64,34 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 			Description: "The ARN of the client secret in AWS Secrets Manager",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ClientSecretJsonKey
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The JSON key within the secret that contains the client secret value",
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"client_secret_json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The JSON key within the secret that contains the client secret value",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ClientSecretSource
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The source of the client secret",
+		//	  "enum": [
+		//	    "MANAGED",
+		//	    "EXTERNAL"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"client_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The source of the client secret",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -174,11 +202,40 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	          "maxLength": 2048,
 		//	          "minLength": 1,
 		//	          "type": "string"
+		//	        },
+		//	        "ClientSecretConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "A reference to a customer-provided secret stored in AWS Secrets Manager",
+		//	          "properties": {
+		//	            "JsonKey": {
+		//	              "description": "The JSON key within the secret that contains the credential value",
+		//	              "maxLength": 128,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "SecretId": {
+		//	              "description": "The ID or ARN of the secret in AWS Secrets Manager",
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SecretId",
+		//	            "JsonKey"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "ClientSecretSource": {
+		//	          "enum": [
+		//	            "MANAGED",
+		//	            "EXTERNAL"
+		//	          ],
+		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "required": [
-		//	        "ClientId",
-		//	        "ClientSecret"
+		//	        "ClientId"
 		//	      ],
 		//	      "type": "object"
 		//	    },
@@ -186,6 +243,15 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	      "additionalProperties": false,
 		//	      "description": "Input configuration for a custom OAuth2 provider",
 		//	      "properties": {
+		//	        "ClientAuthenticationMethod": {
+		//	          "description": "The client authentication method to use when authenticating with the token endpoint",
+		//	          "enum": [
+		//	            "CLIENT_SECRET_BASIC",
+		//	            "CLIENT_SECRET_POST",
+		//	            "AWS_IAM_ID_TOKEN_JWT"
+		//	          ],
+		//	          "type": "string"
+		//	        },
 		//	        "ClientId": {
 		//	          "description": "The client ID for the custom OAuth2 provider",
 		//	          "maxLength": 256,
@@ -196,6 +262,37 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	          "description": "The client secret for the custom OAuth2 provider",
 		//	          "maxLength": 2048,
 		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "ClientSecretConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "A reference to a customer-provided secret stored in AWS Secrets Manager",
+		//	          "properties": {
+		//	            "JsonKey": {
+		//	              "description": "The JSON key within the secret that contains the credential value",
+		//	              "maxLength": 128,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "SecretId": {
+		//	              "description": "The ID or ARN of the secret in AWS Secrets Manager",
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SecretId",
+		//	            "JsonKey"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "ClientSecretSource": {
+		//	          "description": "The source of the client secret",
+		//	          "enum": [
+		//	            "MANAGED",
+		//	            "EXTERNAL"
+		//	          ],
 		//	          "type": "string"
 		//	        },
 		//	        "OauthDiscovery": {
@@ -306,11 +403,40 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	          "maxLength": 2048,
 		//	          "minLength": 1,
 		//	          "type": "string"
+		//	        },
+		//	        "ClientSecretConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "A reference to a customer-provided secret stored in AWS Secrets Manager",
+		//	          "properties": {
+		//	            "JsonKey": {
+		//	              "description": "The JSON key within the secret that contains the credential value",
+		//	              "maxLength": 128,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "SecretId": {
+		//	              "description": "The ID or ARN of the secret in AWS Secrets Manager",
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SecretId",
+		//	            "JsonKey"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "ClientSecretSource": {
+		//	          "enum": [
+		//	            "MANAGED",
+		//	            "EXTERNAL"
+		//	          ],
+		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "required": [
-		//	        "ClientId",
-		//	        "ClientSecret"
+		//	        "ClientId"
 		//	      ],
 		//	      "type": "object"
 		//	    },
@@ -327,11 +453,40 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	          "maxLength": 2048,
 		//	          "minLength": 1,
 		//	          "type": "string"
+		//	        },
+		//	        "ClientSecretConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "A reference to a customer-provided secret stored in AWS Secrets Manager",
+		//	          "properties": {
+		//	            "JsonKey": {
+		//	              "description": "The JSON key within the secret that contains the credential value",
+		//	              "maxLength": 128,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "SecretId": {
+		//	              "description": "The ID or ARN of the secret in AWS Secrets Manager",
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SecretId",
+		//	            "JsonKey"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "ClientSecretSource": {
+		//	          "enum": [
+		//	            "MANAGED",
+		//	            "EXTERNAL"
+		//	          ],
+		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "required": [
-		//	        "ClientId",
-		//	        "ClientSecret"
+		//	        "ClientId"
 		//	      ],
 		//	      "type": "object"
 		//	    },
@@ -353,6 +508,36 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        },
+		//	        "ClientSecretConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "A reference to a customer-provided secret stored in AWS Secrets Manager",
+		//	          "properties": {
+		//	            "JsonKey": {
+		//	              "description": "The JSON key within the secret that contains the credential value",
+		//	              "maxLength": 128,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "SecretId": {
+		//	              "description": "The ID or ARN of the secret in AWS Secrets Manager",
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SecretId",
+		//	            "JsonKey"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "ClientSecretSource": {
+		//	          "enum": [
+		//	            "MANAGED",
+		//	            "EXTERNAL"
+		//	          ],
+		//	          "type": "string"
+		//	        },
 		//	        "Issuer": {
 		//	          "description": "Token issuer of your isolated OAuth2 application tenant",
 		//	          "type": "string"
@@ -363,8 +548,7 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	        }
 		//	      },
 		//	      "required": [
-		//	        "ClientId",
-		//	        "ClientSecret"
+		//	        "ClientId"
 		//	      ],
 		//	      "type": "object"
 		//	    },
@@ -381,11 +565,40 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	          "maxLength": 2048,
 		//	          "minLength": 1,
 		//	          "type": "string"
+		//	        },
+		//	        "ClientSecretConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "A reference to a customer-provided secret stored in AWS Secrets Manager",
+		//	          "properties": {
+		//	            "JsonKey": {
+		//	              "description": "The JSON key within the secret that contains the credential value",
+		//	              "maxLength": 128,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "SecretId": {
+		//	              "description": "The ID or ARN of the secret in AWS Secrets Manager",
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SecretId",
+		//	            "JsonKey"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "ClientSecretSource": {
+		//	          "enum": [
+		//	            "MANAGED",
+		//	            "EXTERNAL"
+		//	          ],
+		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "required": [
-		//	        "ClientId",
-		//	        "ClientSecret"
+		//	        "ClientId"
 		//	      ],
 		//	      "type": "object"
 		//	    },
@@ -403,6 +616,36 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        },
+		//	        "ClientSecretConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "A reference to a customer-provided secret stored in AWS Secrets Manager",
+		//	          "properties": {
+		//	            "JsonKey": {
+		//	              "description": "The JSON key within the secret that contains the credential value",
+		//	              "maxLength": 128,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "SecretId": {
+		//	              "description": "The ID or ARN of the secret in AWS Secrets Manager",
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SecretId",
+		//	            "JsonKey"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "ClientSecretSource": {
+		//	          "enum": [
+		//	            "MANAGED",
+		//	            "EXTERNAL"
+		//	          ],
+		//	          "type": "string"
+		//	        },
 		//	        "TenantId": {
 		//	          "description": "The Microsoft Entra ID tenant ID",
 		//	          "maxLength": 2048,
@@ -411,8 +654,7 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	        }
 		//	      },
 		//	      "required": [
-		//	        "ClientId",
-		//	        "ClientSecret"
+		//	        "ClientId"
 		//	      ],
 		//	      "type": "object"
 		//	    },
@@ -429,11 +671,40 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	          "maxLength": 2048,
 		//	          "minLength": 1,
 		//	          "type": "string"
+		//	        },
+		//	        "ClientSecretConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "A reference to a customer-provided secret stored in AWS Secrets Manager",
+		//	          "properties": {
+		//	            "JsonKey": {
+		//	              "description": "The JSON key within the secret that contains the credential value",
+		//	              "maxLength": 128,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "SecretId": {
+		//	              "description": "The ID or ARN of the secret in AWS Secrets Manager",
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SecretId",
+		//	            "JsonKey"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "ClientSecretSource": {
+		//	          "enum": [
+		//	            "MANAGED",
+		//	            "EXTERNAL"
+		//	          ],
+		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "required": [
-		//	        "ClientId",
-		//	        "ClientSecret"
+		//	        "ClientId"
 		//	      ],
 		//	      "type": "object"
 		//	    },
@@ -450,11 +721,40 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	          "maxLength": 2048,
 		//	          "minLength": 1,
 		//	          "type": "string"
+		//	        },
+		//	        "ClientSecretConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "A reference to a customer-provided secret stored in AWS Secrets Manager",
+		//	          "properties": {
+		//	            "JsonKey": {
+		//	              "description": "The JSON key within the secret that contains the credential value",
+		//	              "maxLength": 128,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "SecretId": {
+		//	              "description": "The ID or ARN of the secret in AWS Secrets Manager",
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SecretId",
+		//	            "JsonKey"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "ClientSecretSource": {
+		//	          "enum": [
+		//	            "MANAGED",
+		//	            "EXTERNAL"
+		//	          ],
+		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "required": [
-		//	        "ClientId",
-		//	        "ClientSecret"
+		//	        "ClientId"
 		//	      ],
 		//	      "type": "object"
 		//	    }
@@ -474,6 +774,27 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 						"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretConfig
+						"client_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: JsonKey
+								"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The JSON key within the secret that contains the credential value",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecretId
+								"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID or ARN of the secret in AWS Secrets Manager",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretSource
+						"client_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Input configuration for an Atlassian OAuth2 provider",
 					Computed:    true,
@@ -481,6 +802,11 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 				// Property: CustomOauth2ProviderConfig
 				"custom_oauth_2_provider_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ClientAuthenticationMethod
+						"client_authentication_method": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The client authentication method to use when authenticating with the token endpoint",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 						// Property: ClientId
 						"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The client ID for the custom OAuth2 provider",
@@ -489,6 +815,28 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 						// Property: ClientSecret
 						"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The client secret for the custom OAuth2 provider",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretConfig
+						"client_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: JsonKey
+								"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The JSON key within the secret that contains the credential value",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecretId
+								"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID or ARN of the secret in AWS Secrets Manager",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretSource
+						"client_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The source of the client secret",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: OauthDiscovery
@@ -576,6 +924,27 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 						"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretConfig
+						"client_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: JsonKey
+								"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The JSON key within the secret that contains the credential value",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecretId
+								"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID or ARN of the secret in AWS Secrets Manager",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretSource
+						"client_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Input configuration for a GitHub OAuth2 provider",
 					Computed:    true,
@@ -589,6 +958,27 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 						}, /*END ATTRIBUTE*/
 						// Property: ClientSecret
 						"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretConfig
+						"client_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: JsonKey
+								"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The JSON key within the secret that contains the credential value",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecretId
+								"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID or ARN of the secret in AWS Secrets Manager",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretSource
+						"client_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -609,6 +999,27 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 						}, /*END ATTRIBUTE*/
 						// Property: ClientSecret
 						"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretConfig
+						"client_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: JsonKey
+								"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The JSON key within the secret that contains the credential value",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecretId
+								"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID or ARN of the secret in AWS Secrets Manager",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretSource
+						"client_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 						// Property: Issuer
@@ -636,6 +1047,27 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 						"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretConfig
+						"client_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: JsonKey
+								"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The JSON key within the secret that contains the credential value",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecretId
+								"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID or ARN of the secret in AWS Secrets Manager",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretSource
+						"client_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Input configuration for a LinkedIn OAuth2 provider",
 					Computed:    true,
@@ -649,6 +1081,27 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 						}, /*END ATTRIBUTE*/
 						// Property: ClientSecret
 						"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretConfig
+						"client_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: JsonKey
+								"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The JSON key within the secret that contains the credential value",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecretId
+								"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID or ARN of the secret in AWS Secrets Manager",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretSource
+						"client_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 						// Property: TenantId
@@ -671,6 +1124,27 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 						"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretConfig
+						"client_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: JsonKey
+								"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The JSON key within the secret that contains the credential value",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecretId
+								"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID or ARN of the secret in AWS Secrets Manager",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretSource
+						"client_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Input configuration for a Salesforce OAuth2 provider",
 					Computed:    true,
@@ -684,6 +1158,27 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 						}, /*END ATTRIBUTE*/
 						// Property: ClientSecret
 						"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretConfig
+						"client_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: JsonKey
+								"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The JSON key within the secret that contains the credential value",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecretId
+								"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID or ARN of the secret in AWS Secrets Manager",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClientSecretSource
+						"client_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -701,6 +1196,15 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	  "additionalProperties": false,
 		//	  "description": "The output configuration for the OAuth2 provider",
 		//	  "properties": {
+		//	    "ClientAuthenticationMethod": {
+		//	      "description": "The client authentication method used when authenticating with the token endpoint",
+		//	      "enum": [
+		//	        "CLIENT_SECRET_BASIC",
+		//	        "CLIENT_SECRET_POST",
+		//	        "AWS_IAM_ID_TOKEN_JWT"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "ClientId": {
 		//	      "maxLength": 256,
 		//	      "minLength": 1,
@@ -800,6 +1304,11 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	}
 		"oauth_2_provider_config_output": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ClientAuthenticationMethod
+				"client_authentication_method": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The client authentication method used when authenticating with the token endpoint",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: ClientId
 				"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
@@ -948,9 +1457,13 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		"authorization_endpoint":             "AuthorizationEndpoint",
 		"authorization_server_metadata":      "AuthorizationServerMetadata",
 		"callback_url":                       "CallbackUrl",
+		"client_authentication_method":       "ClientAuthenticationMethod",
 		"client_id":                          "ClientId",
 		"client_secret":                      "ClientSecret",
 		"client_secret_arn":                  "ClientSecretArn",
+		"client_secret_config":               "ClientSecretConfig",
+		"client_secret_json_key":             "ClientSecretJsonKey",
+		"client_secret_source":               "ClientSecretSource",
 		"created_time":                       "CreatedTime",
 		"credential_provider_arn":            "CredentialProviderArn",
 		"credential_provider_vendor":         "CredentialProviderVendor",
@@ -961,6 +1474,7 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		"grant_type":                         "GrantType",
 		"included_oauth_2_provider_config":   "IncludedOauth2ProviderConfig",
 		"issuer":                             "Issuer",
+		"json_key":                           "JsonKey",
 		"key":                                "Key",
 		"last_updated_time":                  "LastUpdatedTime",
 		"linkedin_oauth_2_provider_config":   "LinkedinOauth2ProviderConfig",
@@ -973,6 +1487,7 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		"response_types":                     "ResponseTypes",
 		"salesforce_oauth_2_provider_config": "SalesforceOauth2ProviderConfig",
 		"secret_arn":                         "SecretArn",
+		"secret_id":                          "SecretId",
 		"slack_oauth_2_provider_config":      "SlackOauth2ProviderConfig",
 		"tags":                               "Tags",
 		"tenant_id":                          "TenantId",

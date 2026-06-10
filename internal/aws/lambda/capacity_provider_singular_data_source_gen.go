@@ -260,6 +260,84 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 			Description: "The permissions configuration for the capacity provider.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: PropagateTags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "",
+		//	  "properties": {
+		//	    "ExplicitTags": {
+		//	      "description": "A list of tags to explicitly propagate to managed resources.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "A key-value pair that provides metadata for the capacity provider.",
+		//	        "properties": {
+		//	          "Key": {
+		//	            "description": "The key name of the tag.",
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "description": "The value for the tag.",
+		//	            "maxLength": 256,
+		//	            "minLength": 0,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Key"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 40,
+		//	      "minItems": 0,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "Mode": {
+		//	      "description": "The mode for tag propagation.",
+		//	      "enum": [
+		//	        "None",
+		//	        "Explicit"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"propagate_tags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ExplicitTags
+				"explicit_tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Key
+							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The key name of the tag.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The value for the tag.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of tags to explicitly propagate to managed resources.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Mode
+				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The mode for tag propagation.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -408,12 +486,15 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		"capacity_provider_operator_role_arn": "CapacityProviderOperatorRoleArn",
 		"capacity_provider_scaling_config":    "CapacityProviderScalingConfig",
 		"excluded_instance_types":             "ExcludedInstanceTypes",
+		"explicit_tags":                       "ExplicitTags",
 		"instance_requirements":               "InstanceRequirements",
 		"key":                                 "Key",
 		"kms_key_arn":                         "KmsKeyArn",
 		"max_v_cpu_count":                     "MaxVCpuCount",
+		"mode":                                "Mode",
 		"permissions_config":                  "PermissionsConfig",
 		"predefined_metric_type":              "PredefinedMetricType",
+		"propagate_tags":                      "PropagateTags",
 		"scaling_mode":                        "ScalingMode",
 		"scaling_policies":                    "ScalingPolicies",
 		"security_group_ids":                  "SecurityGroupIds",

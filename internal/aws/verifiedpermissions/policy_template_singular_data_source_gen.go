@@ -33,6 +33,18 @@ func policyTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 150,
+		//	  "minLength": 0,
+		//	  "pattern": "^[a-zA-Z0-9-/_]*$",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyStoreId
 		// CloudFormation resource type schema:
 		//
@@ -86,6 +98,7 @@ func policyTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"description":        "Description",
+		"name":               "Name",
 		"policy_store_id":    "PolicyStoreId",
 		"policy_template_id": "PolicyTemplateId",
 		"statement":          "Statement",

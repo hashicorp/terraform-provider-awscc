@@ -332,6 +332,21 @@ func flowOutputDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The name of the output. This value must be unique within the current flow.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: NdiOutputTimecodeSource
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The timecode source for the NDI output.",
+		//	  "enum": [
+		//	    "EMBEDDED_TIMECODE",
+		//	    "UTC_SYSTEM_TIME"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"ndi_output_timecode_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The timecode source for the NDI output.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NdiProgramName
 		// CloudFormation resource type schema:
 		//
@@ -660,6 +675,7 @@ func flowOutputDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"media_stream_output_configurations":    "MediaStreamOutputConfigurations",
 		"min_latency":                           "MinLatency",
 		"name":                                  "Name",
+		"ndi_output_timecode_source":            "NdiOutputTimecodeSource",
 		"ndi_program_name":                      "NdiProgramName",
 		"ndi_speed_hq_quality":                  "NdiSpeedHqQuality",
 		"output_arn":                            "OutputArn",

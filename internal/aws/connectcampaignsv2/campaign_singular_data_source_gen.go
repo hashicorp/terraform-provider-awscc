@@ -90,8 +90,8 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            },
 		//	            "SourceEmailAddressDisplayName": {
 		//	              "description": "The name of the source email address display name",
-		//	              "maxLength": 127,
-		//	              "minLength": 1,
+		//	              "maxLength": 256,
+		//	              "minLength": 0,
 		//	              "type": "string"
 		//	            },
 		//	            "WisdomTemplateArn": {
@@ -315,7 +315,7 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                    "DurationInSeconds": {
 		//	                      "description": "Timeout duration for a preview contact in seconds",
 		//	                      "maximum": 300,
-		//	                      "minimum": 10,
+		//	                      "minimum": 1,
 		//	                      "type": "integer"
 		//	                    }
 		//	                  },
@@ -1666,7 +1666,7 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "description": "Minimum time interval between entries for the same participant in ISO 8601 duration format",
 		//	      "maxLength": 50,
 		//	      "minLength": 0,
-		//	      "pattern": "^[a-zA-Z0-9.]*$",
+		//	      "pattern": "^P(?:([-+]?[0-9]+)D)?(T(?:([-+]?[0-9]+)H)?(?:([-+]?[0-9]+)M)?(?:([-+]?[0-9]+)(?:[.,]([0-9]{0,9}))?S)?)?$",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -1721,7 +1721,7 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "description": "Time duration in ISO 8601 format",
 		//	      "maxLength": 50,
 		//	      "minLength": 0,
-		//	      "pattern": "^[a-zA-Z0-9.]*$",
+		//	      "pattern": "^P(?:([-+]?[0-9]+)D)?(T(?:([-+]?[0-9]+)H)?(?:([-+]?[0-9]+)M)?(?:([-+]?[0-9]+)(?:[.,]([0-9]{0,9}))?S)?)?$",
 		//	      "type": "string"
 		//	    },
 		//	    "StartTime": {
