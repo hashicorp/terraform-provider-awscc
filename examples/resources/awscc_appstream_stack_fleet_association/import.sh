@@ -1,0 +1,1 @@
+$ terraform import awscc_appstream_stack_fleet_association.example "fleet_name|stack_name"

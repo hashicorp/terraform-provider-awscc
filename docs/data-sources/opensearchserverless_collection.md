@@ -26,6 +26,7 @@ Data Source schema for AWS::OpenSearchServerless::Collection
 - `collection_group_name` (String) The name of the collection group to associate with the collection.
 - `collection_id` (String) The identifier of the collection
 - `dashboard_endpoint` (String) The OpenSearch Dashboards endpoint for the collection.
+- `deletion_protection` (String) The deletion protection state of the collection
 - `description` (String) The description of the collection
 - `encryption_config` (Attributes) Encryption settings for the collection (see [below for nested schema](#nestedatt--encryption_config))
 - `fips_endpoints` (Attributes) (see [below for nested schema](#nestedatt--fips_endpoints))

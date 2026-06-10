@@ -86,6 +86,7 @@ resource "awscc_ec2_route" "example" {
 - `local_gateway_id` (String) The ID of the local gateway.
 - `nat_gateway_id` (String) [IPv4 traffic only] The ID of a NAT gateway.
 - `network_interface_id` (String) The ID of a network interface.
+- `odb_network_arn` (String)
 - `transit_gateway_id` (String) The ID of a transit gateway.
 - `vpc_endpoint_id` (String) The ID of a VPC endpoint. Supported for Gateway Load Balancer endpoints only.
 - `vpc_peering_connection_id` (String) The ID of a VPC peering connection.

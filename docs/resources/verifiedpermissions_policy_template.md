@@ -172,6 +172,7 @@ resource "awscc_verifiedpermissions_policy_store" "example" {
 ### Optional
 
 - `description` (String)
+- `name` (String)
 
 ### Read-Only
 

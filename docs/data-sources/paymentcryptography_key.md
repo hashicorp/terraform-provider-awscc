@@ -29,6 +29,7 @@ Data Source schema for AWS::PaymentCryptography::Key
 - `key_identifier` (String)
 - `key_origin` (String) Defines the source of a key
 - `key_state` (String) Defines the state of a key
+- `policy` (String) The resource-based policy attached to the key, in JSON format.
 - `replication_regions` (List of String)
 - `replication_status` (Attributes Map) (see [below for nested schema](#nestedatt--replication_status))
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))

@@ -124,6 +124,7 @@ resource "awscc_paymentcryptography_key" "example" {
 - `derive_key_usage` (String)
 - `enabled` (Boolean)
 - `key_check_value_algorithm` (String)
+- `policy` (String) The resource-based policy attached to the key, in JSON format.
 - `replication_regions` (List of String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 

@@ -1,6 +1,7 @@
 import {
   to = awscc_apigatewayv2_stage.example
   identity = {
-    id = "id"
+    api_id     = "api_id"
+    stage_name = "stage_name"
   }
 }

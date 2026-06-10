@@ -22,6 +22,7 @@ Data Source schema for AWS::VerifiedPermissions::Policy
 ### Read-Only
 
 - `definition` (Attributes) (see [below for nested schema](#nestedatt--definition))
+- `name` (String)
 - `policy_id` (String)
 - `policy_store_id` (String)
 - `policy_type` (String)

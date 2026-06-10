@@ -238,6 +238,7 @@ Optional:
 - `auto_scaling_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--auto_scaling_configuration))
 - `instance_capabilities` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--instance_capabilities))
 - `instance_market_options` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--instance_market_options))
+- `persistent_volume_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--persistent_volume_configuration))
 - `storage_profile_id` (String)
 - `vpc_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--vpc_configuration))
 
@@ -348,6 +349,18 @@ Optional:
 Optional:
 
 - `type` (String)
+
+
+<a id="nestedatt--configuration--service_managed_ec_2--persistent_volume_configuration"></a>
+### Nested Schema for `configuration.service_managed_ec_2.persistent_volume_configuration`
+
+Optional:
+
+- `iops` (Number)
+- `last_used_ttl_hours` (Number)
+- `mount_path` (String)
+- `size_gi_b` (Number)
+- `throughput_mi_b` (Number)
 
 
 <a id="nestedatt--configuration--service_managed_ec_2--vpc_configuration"></a>

@@ -133,6 +133,7 @@ resource "awscc_lambda_capacity_provider" "example" {
 - `capacity_provider_scaling_config` (Attributes) The scaling configuration for the capacity provider. (see [below for nested schema](#nestedatt--capacity_provider_scaling_config))
 - `instance_requirements` (Attributes) The instance requirements for compute resources managed by the capacity provider. (see [below for nested schema](#nestedatt--instance_requirements))
 - `kms_key_arn` (String) The ARN of the KMS key used to encrypt the capacity provider's resources.
+- `propagate_tags` (Attributes) (see [below for nested schema](#nestedatt--propagate_tags))
 - `tags` (Attributes Set) A key-value pair that provides metadata for the capacity provider. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -185,6 +186,24 @@ Optional:
 - `allowed_instance_types` (List of String) A list of EC2 instance types that the capacity provider is allowed to use. If not specified, all compatible instance types are allowed.
 - `architectures` (List of String) A list of supported CPU architectures for compute instances. Valid values include ``x86_64`` and ``arm64``.
 - `excluded_instance_types` (List of String) A list of EC2 instance types that the capacity provider should not use, even if they meet other requirements.
+
+
+<a id="nestedatt--propagate_tags"></a>
+### Nested Schema for `propagate_tags`
+
+Optional:
+
+- `explicit_tags` (Attributes Set) A list of tags to explicitly propagate to managed resources. (see [below for nested schema](#nestedatt--propagate_tags--explicit_tags))
+- `mode` (String) The mode for tag propagation.
+
+<a id="nestedatt--propagate_tags--explicit_tags"></a>
+### Nested Schema for `propagate_tags.explicit_tags`
+
+Optional:
+
+- `key` (String) The key name of the tag.
+- `value` (String) The value for the tag.
+
 
 
 <a id="nestedatt--tags"></a>

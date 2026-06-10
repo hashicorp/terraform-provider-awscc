@@ -1,0 +1,1 @@
+$ terraform import awscc_resiliencehubv2_service_function.example "service_arn|service_function_id"
