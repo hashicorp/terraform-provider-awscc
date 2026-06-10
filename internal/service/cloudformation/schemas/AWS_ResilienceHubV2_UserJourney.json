@@ -1,0 +1,106 @@
+{
+  "typeName": "AWS::ResilienceHubV2::UserJourney",
+  "description": "Creates a user journey within a Resilience Hub system.",
+  "additionalProperties": false,
+  "properties": {
+    "SystemIdentifier": {
+      "type": "string",
+      "description": "The system ARN or system ID that owns this user journey.",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "UserJourneyId": {
+      "type": "string",
+      "description": "The server-generated user journey ID.",
+      "pattern": "^\\S{1,255}$"
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the user journey.",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$"
+    },
+    "Description": {
+      "type": "string",
+      "description": "The description of the user journey.",
+      "maxLength": 500
+    },
+    "PolicyArn": {
+      "type": "string",
+      "description": "The ARN of the resilience policy to associate with this user journey.",
+      "pattern": ""
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The timestamp when the user journey was created.",
+      "format": "date-time"
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "The timestamp when the user journey was last updated.",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "SystemIdentifier",
+    "Name"
+  ],
+  "primaryIdentifier": [
+    "/properties/SystemIdentifier",
+    "/properties/UserJourneyId"
+  ],
+  "readOnlyProperties": [
+    "/properties/UserJourneyId",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/SystemIdentifier",
+    "/properties/Name"
+  ],
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "resiliencehub:CreateUserJourney",
+        "resiliencehub:GetUserJourney"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "resiliencehub:GetUserJourney"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "resiliencehub:UpdateUserJourney",
+        "resiliencehub:GetUserJourney"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "resiliencehub:DeleteUserJourney"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "resiliencehub:ListUserJourneys"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "SystemIdentifier": {
+            "type": "string",
+            "description": "The system identifier to list user journeys for."
+          }
+        },
+        "required": [
+          "SystemIdentifier"
+        ]
+      }
+    }
+  }
+}

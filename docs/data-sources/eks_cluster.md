@@ -140,16 +140,27 @@ Read-Only:
 
 Read-Only:
 
-- `control_plane_instance_type` (String) Specify the Instance type of the machines that should be used to create your cluster.
-- `control_plane_placement` (Attributes) Specify the placement group of the control plane machines for your cluster. (see [below for nested schema](#nestedatt--outpost_config--control_plane_placement))
-- `outpost_arns` (List of String) Specify one or more Arn(s) of Outpost(s) on which you would like to create your cluster.
+- `control_plane_instance_type` (String) The EC2 instance type for the Kubernetes control plane instances of your local Amazon EKS cluster on AWS Outposts. This instance type applies to all control plane instances and cannot be changed after cluster creation.
+- `control_plane_placement` (Attributes) An object representing the placement configuration for all the control plane instances of your local Amazon EKS cluster on an AWS Outpost. (see [below for nested schema](#nestedatt--outpost_config--control_plane_placement))
+- `etcd_instance_type` (String) The EC2 instance type for etcd instances of your local Amazon EKS cluster on AWS Outposts. This instance type applies to all etcd instances and cannot be changed after cluster creation.
+- `etcd_placement` (Attributes) An object representing the placement configuration for the etcd instances of your local Amazon EKS cluster on an AWS Outpost. (see [below for nested schema](#nestedatt--outpost_config--etcd_placement))
+- `outpost_arns` (List of String) The ARN of the Outpost that you want to use for your local Amazon EKS cluster on Outposts. Only a single Outpost ARN is supported.
 
 <a id="nestedatt--outpost_config--control_plane_placement"></a>
 ### Nested Schema for `outpost_config.control_plane_placement`
 
 Read-Only:
 
-- `group_name` (String) Specify the placement group name of the control place machines for your cluster.
+- `group_name` (String) The name of the placement group for the Kubernetes control plane instances. This setting can't be changed after cluster creation.
+- `spread_level` (String) Optional parameter to specify the placement group spread level for control plane instances. If not provided, EKS will deploy control plane instances without a placement group.
+
+
+<a id="nestedatt--outpost_config--etcd_placement"></a>
+### Nested Schema for `outpost_config.etcd_placement`
+
+Read-Only:
+
+- `spread_level` (String) Optional parameter to specify the placement group spread level for etcd instances. If not provided, EKS will deploy etcd instances without a placement group.
 
 
 

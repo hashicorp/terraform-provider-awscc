@@ -23,6 +23,8 @@ Data Source schema for AWS::BedrockAgentCore::OAuth2CredentialProvider
 
 - `callback_url` (String) The callback URL for the OAuth2 authorization flow
 - `client_secret_arn` (Attributes) The ARN of the client secret in AWS Secrets Manager (see [below for nested schema](#nestedatt--client_secret_arn))
+- `client_secret_json_key` (String) The JSON key within the secret that contains the client secret value
+- `client_secret_source` (String) The source of the client secret
 - `created_time` (String) The timestamp when the credential provider was created
 - `credential_provider_arn` (String) The Amazon Resource Name (ARN) of the OAuth2 credential provider
 - `credential_provider_vendor` (String) The vendor of the OAuth2 credential provider
@@ -62,6 +64,17 @@ Read-Only:
 
 - `client_id` (String)
 - `client_secret` (String)
+- `client_secret_config` (Attributes) A reference to a customer-provided secret stored in AWS Secrets Manager (see [below for nested schema](#nestedatt--oauth_2_provider_config_input--atlassian_oauth_2_provider_config--client_secret_config))
+- `client_secret_source` (String)
+
+<a id="nestedatt--oauth_2_provider_config_input--atlassian_oauth_2_provider_config--client_secret_config"></a>
+### Nested Schema for `oauth_2_provider_config_input.atlassian_oauth_2_provider_config.client_secret_config`
+
+Read-Only:
+
+- `json_key` (String) The JSON key within the secret that contains the credential value
+- `secret_id` (String) The ID or ARN of the secret in AWS Secrets Manager
+
 
 
 <a id="nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config"></a>
@@ -69,10 +82,22 @@ Read-Only:
 
 Read-Only:
 
+- `client_authentication_method` (String) The client authentication method to use when authenticating with the token endpoint
 - `client_id` (String) The client ID for the custom OAuth2 provider
 - `client_secret` (String) The client secret for the custom OAuth2 provider
+- `client_secret_config` (Attributes) A reference to a customer-provided secret stored in AWS Secrets Manager (see [below for nested schema](#nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--client_secret_config))
+- `client_secret_source` (String) The source of the client secret
 - `oauth_discovery` (Attributes) Discovery information for an OAuth2 provider (see [below for nested schema](#nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--oauth_discovery))
 - `on_behalf_of_token_exchange_config` (Attributes) Configuration for on-behalf-of token exchange (see [below for nested schema](#nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--on_behalf_of_token_exchange_config))
+
+<a id="nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--client_secret_config"></a>
+### Nested Schema for `oauth_2_provider_config_input.custom_oauth_2_provider_config.client_secret_config`
+
+Read-Only:
+
+- `json_key` (String) The JSON key within the secret that contains the credential value
+- `secret_id` (String) The ID or ARN of the secret in AWS Secrets Manager
+
 
 <a id="nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--oauth_discovery"></a>
 ### Nested Schema for `oauth_2_provider_config_input.custom_oauth_2_provider_config.oauth_discovery`
@@ -120,6 +145,17 @@ Read-Only:
 
 - `client_id` (String)
 - `client_secret` (String)
+- `client_secret_config` (Attributes) A reference to a customer-provided secret stored in AWS Secrets Manager (see [below for nested schema](#nestedatt--oauth_2_provider_config_input--github_oauth_2_provider_config--client_secret_config))
+- `client_secret_source` (String)
+
+<a id="nestedatt--oauth_2_provider_config_input--github_oauth_2_provider_config--client_secret_config"></a>
+### Nested Schema for `oauth_2_provider_config_input.github_oauth_2_provider_config.client_secret_config`
+
+Read-Only:
+
+- `json_key` (String) The JSON key within the secret that contains the credential value
+- `secret_id` (String) The ID or ARN of the secret in AWS Secrets Manager
+
 
 
 <a id="nestedatt--oauth_2_provider_config_input--google_oauth_2_provider_config"></a>
@@ -129,6 +165,17 @@ Read-Only:
 
 - `client_id` (String)
 - `client_secret` (String)
+- `client_secret_config` (Attributes) A reference to a customer-provided secret stored in AWS Secrets Manager (see [below for nested schema](#nestedatt--oauth_2_provider_config_input--google_oauth_2_provider_config--client_secret_config))
+- `client_secret_source` (String)
+
+<a id="nestedatt--oauth_2_provider_config_input--google_oauth_2_provider_config--client_secret_config"></a>
+### Nested Schema for `oauth_2_provider_config_input.google_oauth_2_provider_config.client_secret_config`
+
+Read-Only:
+
+- `json_key` (String) The JSON key within the secret that contains the credential value
+- `secret_id` (String) The ID or ARN of the secret in AWS Secrets Manager
+
 
 
 <a id="nestedatt--oauth_2_provider_config_input--included_oauth_2_provider_config"></a>
@@ -139,8 +186,19 @@ Read-Only:
 - `authorization_endpoint` (String) OAuth2 authorization endpoint for your isolated OAuth2 application tenant
 - `client_id` (String)
 - `client_secret` (String)
+- `client_secret_config` (Attributes) A reference to a customer-provided secret stored in AWS Secrets Manager (see [below for nested schema](#nestedatt--oauth_2_provider_config_input--included_oauth_2_provider_config--client_secret_config))
+- `client_secret_source` (String)
 - `issuer` (String) Token issuer of your isolated OAuth2 application tenant
 - `token_endpoint` (String) OAuth2 token endpoint for your isolated OAuth2 application tenant
+
+<a id="nestedatt--oauth_2_provider_config_input--included_oauth_2_provider_config--client_secret_config"></a>
+### Nested Schema for `oauth_2_provider_config_input.included_oauth_2_provider_config.client_secret_config`
+
+Read-Only:
+
+- `json_key` (String) The JSON key within the secret that contains the credential value
+- `secret_id` (String) The ID or ARN of the secret in AWS Secrets Manager
+
 
 
 <a id="nestedatt--oauth_2_provider_config_input--linkedin_oauth_2_provider_config"></a>
@@ -150,6 +208,17 @@ Read-Only:
 
 - `client_id` (String)
 - `client_secret` (String)
+- `client_secret_config` (Attributes) A reference to a customer-provided secret stored in AWS Secrets Manager (see [below for nested schema](#nestedatt--oauth_2_provider_config_input--linkedin_oauth_2_provider_config--client_secret_config))
+- `client_secret_source` (String)
+
+<a id="nestedatt--oauth_2_provider_config_input--linkedin_oauth_2_provider_config--client_secret_config"></a>
+### Nested Schema for `oauth_2_provider_config_input.linkedin_oauth_2_provider_config.client_secret_config`
+
+Read-Only:
+
+- `json_key` (String) The JSON key within the secret that contains the credential value
+- `secret_id` (String) The ID or ARN of the secret in AWS Secrets Manager
+
 
 
 <a id="nestedatt--oauth_2_provider_config_input--microsoft_oauth_2_provider_config"></a>
@@ -159,7 +228,18 @@ Read-Only:
 
 - `client_id` (String)
 - `client_secret` (String)
+- `client_secret_config` (Attributes) A reference to a customer-provided secret stored in AWS Secrets Manager (see [below for nested schema](#nestedatt--oauth_2_provider_config_input--microsoft_oauth_2_provider_config--client_secret_config))
+- `client_secret_source` (String)
 - `tenant_id` (String) The Microsoft Entra ID tenant ID
+
+<a id="nestedatt--oauth_2_provider_config_input--microsoft_oauth_2_provider_config--client_secret_config"></a>
+### Nested Schema for `oauth_2_provider_config_input.microsoft_oauth_2_provider_config.client_secret_config`
+
+Read-Only:
+
+- `json_key` (String) The JSON key within the secret that contains the credential value
+- `secret_id` (String) The ID or ARN of the secret in AWS Secrets Manager
+
 
 
 <a id="nestedatt--oauth_2_provider_config_input--salesforce_oauth_2_provider_config"></a>
@@ -169,6 +249,17 @@ Read-Only:
 
 - `client_id` (String)
 - `client_secret` (String)
+- `client_secret_config` (Attributes) A reference to a customer-provided secret stored in AWS Secrets Manager (see [below for nested schema](#nestedatt--oauth_2_provider_config_input--salesforce_oauth_2_provider_config--client_secret_config))
+- `client_secret_source` (String)
+
+<a id="nestedatt--oauth_2_provider_config_input--salesforce_oauth_2_provider_config--client_secret_config"></a>
+### Nested Schema for `oauth_2_provider_config_input.salesforce_oauth_2_provider_config.client_secret_config`
+
+Read-Only:
+
+- `json_key` (String) The JSON key within the secret that contains the credential value
+- `secret_id` (String) The ID or ARN of the secret in AWS Secrets Manager
+
 
 
 <a id="nestedatt--oauth_2_provider_config_input--slack_oauth_2_provider_config"></a>
@@ -178,6 +269,17 @@ Read-Only:
 
 - `client_id` (String)
 - `client_secret` (String)
+- `client_secret_config` (Attributes) A reference to a customer-provided secret stored in AWS Secrets Manager (see [below for nested schema](#nestedatt--oauth_2_provider_config_input--slack_oauth_2_provider_config--client_secret_config))
+- `client_secret_source` (String)
+
+<a id="nestedatt--oauth_2_provider_config_input--slack_oauth_2_provider_config--client_secret_config"></a>
+### Nested Schema for `oauth_2_provider_config_input.slack_oauth_2_provider_config.client_secret_config`
+
+Read-Only:
+
+- `json_key` (String) The JSON key within the secret that contains the credential value
+- `secret_id` (String) The ID or ARN of the secret in AWS Secrets Manager
+
 
 
 
@@ -186,6 +288,7 @@ Read-Only:
 
 Read-Only:
 
+- `client_authentication_method` (String) The client authentication method used when authenticating with the token endpoint
 - `client_id` (String)
 - `oauth_discovery` (Attributes) Discovery information for an OAuth2 provider (see [below for nested schema](#nestedatt--oauth_2_provider_config_output--oauth_discovery))
 - `on_behalf_of_token_exchange_config` (Attributes) Configuration for on-behalf-of token exchange (see [below for nested schema](#nestedatt--oauth_2_provider_config_output--on_behalf_of_token_exchange_config))

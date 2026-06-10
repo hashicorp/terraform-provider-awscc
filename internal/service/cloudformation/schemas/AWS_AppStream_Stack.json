@@ -83,9 +83,54 @@
         "$ref": "#/definitions/AccessEndpoint"
       },
       "description": "The list of virtual private cloud (VPC) interface endpoint objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints."
+    },
+    "ContentRedirection": {
+      "$ref": "#/definitions/ContentRedirection",
+      "description": "The content redirection settings for the stack. These settings control URL redirection between the streaming session and the local device."
     }
   },
   "definitions": {
+    "UrlRedirectionConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The configuration for URL redirection.",
+      "properties": {
+        "Enabled": {
+          "type": "boolean",
+          "description": "Specifies whether URL redirection is enabled or disabled."
+        },
+        "AllowedUrls": {
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "type": "string"
+          },
+          "description": "The URLs that are allowed for redirection."
+        },
+        "DeniedUrls": {
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "type": "string"
+          },
+          "description": "The URLs that are denied for redirection."
+        }
+      },
+      "required": [
+        "Enabled"
+      ]
+    },
+    "ContentRedirection": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The content redirection settings for the stack.",
+      "properties": {
+        "HostToClient": {
+          "$ref": "#/definitions/UrlRedirectionConfig",
+          "description": "The URL redirection configuration from the streaming session host to the client."
+        }
+      }
+    },
     "StorageConnector": {
       "type": "object",
       "additionalProperties": false,

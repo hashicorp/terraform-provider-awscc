@@ -40,16 +40,14 @@ func telemetryEnrichmentResource(ctx context.Context) (resource.Resource, error)
 		//	}
 		"scope": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Scope of the Telemetry Enrichment",
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"ACCOUNT",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
+				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Status

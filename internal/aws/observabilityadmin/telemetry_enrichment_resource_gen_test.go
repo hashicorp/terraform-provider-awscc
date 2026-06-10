@@ -6,6 +6,7 @@
 package observabilityadmin_test
 
 import (
+	"regexp"
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
@@ -17,30 +18,8 @@ func TestAccAWSObservabilityAdminTelemetryEnrichment_basic(t *testing.T) {
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
-			Config: td.EmptyConfig(),
-			Check: resource.ComposeTestCheckFunc(
-				td.CheckExistsInAWS(),
-			),
-		},
-		{
-			ResourceName:      td.ResourceName,
-			ImportState:       true,
-			ImportStateVerify: true,
-		},
-	})
-}
-
-func TestAccAWSObservabilityAdminTelemetryEnrichment_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::ObservabilityAdmin::TelemetryEnrichment", "awscc_observabilityadmin_telemetry_enrichment", "test")
-
-	td.ResourceTest(t, []resource.TestStep{
-		{
-			Config: td.EmptyConfig(),
-			Check: resource.ComposeTestCheckFunc(
-				td.CheckExistsInAWS(),
-				td.DeleteResource(),
-			),
-			ExpectNonEmptyPlan: true,
+			Config:      td.EmptyConfig(),
+			ExpectError: regexp.MustCompile("Missing required argument"),
 		},
 	})
 }

@@ -418,6 +418,11 @@ resource_schema "aws_appstream_stack" {
   cloudformation_type_name = "AWS::AppStream::Stack"
 }
 
+resource_schema "aws_appstream_stack_fleet_association" {
+  cloudformation_type_name               = "AWS::AppStream::StackFleetAssociation"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_appstream_stack_user_association" {
   cloudformation_type_name               = "AWS::AppStream::StackUserAssociation"
   suppress_plural_data_source_generation = true
@@ -779,6 +784,10 @@ resource_schema "aws_bedrockagentcore_payment_credential_provider" {
   cloudformation_type_name = "AWS::BedrockAgentCore::PaymentCredentialProvider"
 }
 
+resource_schema "aws_bedrockagentcore_payment_manager" {
+  cloudformation_type_name = "AWS::BedrockAgentCore::PaymentManager"
+}
+
 resource_schema "aws_bedrockagentcore_policy" {
   cloudformation_type_name               = "AWS::BedrockAgentCore::Policy"
   suppress_plural_data_source_generation = true
@@ -786,6 +795,11 @@ resource_schema "aws_bedrockagentcore_policy" {
 
 resource_schema "aws_bedrockagentcore_policy_engine" {
   cloudformation_type_name = "AWS::BedrockAgentCore::PolicyEngine"
+}
+
+resource_schema "aws_bedrockagentcore_resource_policy" {
+  cloudformation_type_name               = "AWS::BedrockAgentCore::ResourcePolicy"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_bedrockagentcore_gateway" {
@@ -4939,8 +4953,18 @@ resource_schema "aws_resiliencehubv2_service" {
   cloudformation_type_name = "AWS::ResilienceHubV2::Service"
 }
 
+resource_schema "aws_resiliencehubv2_service_function" {
+  cloudformation_type_name               = "AWS::ResilienceHubV2::ServiceFunction"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_resiliencehubv2_system" {
   cloudformation_type_name = "AWS::ResilienceHubV2::System"
+}
+
+resource_schema "aws_resiliencehubv2_user_journey" {
+  cloudformation_type_name               = "AWS::ResilienceHubV2::UserJourney"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_resourceexplorer2_default_view_association" {
@@ -5158,6 +5182,11 @@ resource_schema "aws_rtbfabric_inbound_external_link" {
 
 resource_schema "aws_rtbfabric_link" {
   cloudformation_type_name               = "AWS::RTBFabric::Link"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_rtbfabric_link_routing_rule" {
+  cloudformation_type_name               = "AWS::RTBFabric::LinkRoutingRule"
   suppress_plural_data_source_generation = true
 }
 

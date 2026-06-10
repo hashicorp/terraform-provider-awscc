@@ -24,6 +24,7 @@ Data Source schema for AWS::AppStream::Stack
 - `access_endpoints` (Attributes List) The list of virtual private cloud (VPC) interface endpoint objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints. (see [below for nested schema](#nestedatt--access_endpoints))
 - `application_settings` (Attributes) The persistent application settings for users of the stack. When these settings are enabled, changes that users make to applications and Windows settings are automatically saved after each session and applied to the next session. (see [below for nested schema](#nestedatt--application_settings))
 - `attributes_to_delete` (List of String) The stack attributes to delete.
+- `content_redirection` (Attributes) The content redirection settings for the stack. These settings control URL redirection between the streaming session and the local device. (see [below for nested schema](#nestedatt--content_redirection))
 - `delete_storage_connectors` (Boolean) This parameter has been deprecated. Deletes the storage connectors currently enabled for the stack.
 - `description` (String) The description to display.
 - `display_name` (String) The stack name to display.
@@ -52,6 +53,24 @@ Read-Only:
 
 - `enabled` (Boolean) Enables or disables persistent application settings for users during their streaming sessions.
 - `settings_group` (String) The path prefix for the S3 bucket where users? persistent application settings are stored. You can allow the same persistent application settings to be used across multiple stacks by specifying the same settings group for each stack.
+
+
+<a id="nestedatt--content_redirection"></a>
+### Nested Schema for `content_redirection`
+
+Read-Only:
+
+- `host_to_client` (Attributes) The URL redirection configuration from the streaming session host to the client. (see [below for nested schema](#nestedatt--content_redirection--host_to_client))
+
+<a id="nestedatt--content_redirection--host_to_client"></a>
+### Nested Schema for `content_redirection.host_to_client`
+
+Read-Only:
+
+- `allowed_urls` (List of String) The URLs that are allowed for redirection.
+- `denied_urls` (List of String) The URLs that are denied for redirection.
+- `enabled` (Boolean) Specifies whether URL redirection is enabled or disabled.
+
 
 
 <a id="nestedatt--storage_connectors"></a>

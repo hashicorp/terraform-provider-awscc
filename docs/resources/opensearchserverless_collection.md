@@ -56,6 +56,7 @@ Contains between 3 and 64 characters
 ### Optional
 
 - `collection_group_name` (String) The name of the collection group to associate with the collection.
+- `deletion_protection` (String) The deletion protection state of the collection
 - `description` (String) The description of the collection
 - `encryption_config` (Attributes) Encryption settings for the collection (see [below for nested schema](#nestedatt--encryption_config))
 - `standby_replicas` (String) The possible standby replicas for the collection

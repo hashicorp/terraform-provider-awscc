@@ -49,6 +49,14 @@
         "DISABLED"
       ]
     },
+    "DeletionProtection": {
+      "type": "string",
+      "description": "The deletion protection state of the collection",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
     "ServerlessVectorAcceleration": {
       "type": "string",
       "description": "Indicates whether GPU acceleration is enabled for vector indexing",
@@ -142,6 +150,9 @@
     },
     "StandbyReplicas": {
       "$ref": "#/definitions/StandbyReplicas"
+    },
+    "DeletionProtection": {
+      "$ref": "#/definitions/DeletionProtection"
     },
     "CollectionGroupName": {
       "type": "string",

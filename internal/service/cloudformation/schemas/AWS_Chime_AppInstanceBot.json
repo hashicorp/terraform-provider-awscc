@@ -204,6 +204,19 @@
       ]
     },
     "list": {
+      "handlerSchema": {
+        "properties": {
+          "AppInstanceArn": {
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 1600,
+            "pattern": ""
+          }
+        },
+        "required": [
+          "AppInstanceArn"
+        ]
+      },
       "permissions": [
         "chime:ListAppInstanceBots"
       ]

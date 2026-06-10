@@ -92,6 +92,31 @@ func collectionResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DeletionProtection
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The deletion protection state of the collection",
+		//	  "enum": [
+		//	    "ENABLED",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"deletion_protection": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The deletion protection state of the collection",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ENABLED",
+					"DISABLED",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -452,6 +477,7 @@ func collectionResource(ctx context.Context) (resource.Resource, error) {
 		"collection_group_name":          "CollectionGroupName",
 		"collection_id":                  "Id",
 		"dashboard_endpoint":             "DashboardEndpoint",
+		"deletion_protection":            "DeletionProtection",
 		"description":                    "Description",
 		"encryption_config":              "EncryptionConfig",
 		"fips_endpoints":                 "FipsEndpoints",

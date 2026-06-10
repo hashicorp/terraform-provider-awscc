@@ -46,6 +46,26 @@ func policyTemplateResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 150,
+		//	  "minLength": 0,
+		//	  "pattern": "^[a-zA-Z0-9-/_]*$",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(0, 150),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-/_]*$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyStoreId
 		// CloudFormation resource type schema:
 		//
@@ -127,6 +147,7 @@ func policyTemplateResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"description":        "Description",
+		"name":               "Name",
 		"policy_store_id":    "PolicyStoreId",
 		"policy_template_id": "PolicyTemplateId",
 		"statement":          "Statement",

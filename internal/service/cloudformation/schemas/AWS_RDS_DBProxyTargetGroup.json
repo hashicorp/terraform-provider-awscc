@@ -99,11 +99,18 @@
   "primaryIdentifier": [
     "/properties/TargetGroupArn"
   ],
+  "additionalIdentifiers": [
+    [
+      "/properties/DBProxyName",
+      "/properties/TargetGroupName"
+    ]
+  ],
   "handlers": {
     "create": {
       "permissions": [
         "rds:DescribeDBProxies",
         "rds:DescribeDBProxyTargetGroups",
+        "rds:DescribeDBProxyTargets",
         "rds:ModifyDBProxyTargetGroup",
         "rds:RegisterDBProxyTargets"
       ]
@@ -117,6 +124,7 @@
     "update": {
       "permissions": [
         "rds:DescribeDBProxyTargetGroups",
+        "rds:DescribeDBProxyTargets",
         "rds:ModifyDBProxyTargetGroup",
         "rds:RegisterDBProxyTargets",
         "rds:DeregisterDBProxyTargets"

@@ -21,7 +21,7 @@ Data Source schema for AWS::ApiGatewayV2::ApiMapping
 
 ### Read-Only
 
-- `api_id` (String) The identifier of the API.
+- `api_id` (String) The API identifier.
 - `api_mapping_id` (String)
 - `api_mapping_key` (String) The API mapping key.
 - `domain_name` (String) The domain name.

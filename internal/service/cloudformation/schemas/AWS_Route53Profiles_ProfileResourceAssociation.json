@@ -98,7 +98,8 @@
     },
     "update": {
       "permissions": [
-        "route53profiles:UpdateProfileResourceAssociation"
+        "route53profiles:UpdateProfileResourceAssociation",
+        "route53profiles:GetProfileResourceAssociation"
       ]
     }
   }

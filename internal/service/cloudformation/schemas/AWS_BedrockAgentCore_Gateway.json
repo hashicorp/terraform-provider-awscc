@@ -335,6 +335,32 @@
         },
         "SearchType": {
           "$ref": "#/definitions/SearchType"
+        },
+        "SessionConfiguration": {
+          "$ref": "#/definitions/SessionConfiguration"
+        },
+        "StreamingConfiguration": {
+          "$ref": "#/definitions/StreamingConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "SessionConfiguration": {
+      "type": "object",
+      "properties": {
+        "SessionTimeoutInSeconds": {
+          "type": "integer",
+          "minimum": 900,
+          "maximum": 28800
+        }
+      },
+      "additionalProperties": false
+    },
+    "StreamingConfiguration": {
+      "type": "object",
+      "properties": {
+        "EnableResponseStreaming": {
+          "type": "boolean"
         }
       },
       "additionalProperties": false

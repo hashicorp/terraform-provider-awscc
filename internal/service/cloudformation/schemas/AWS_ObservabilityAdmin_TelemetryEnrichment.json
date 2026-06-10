@@ -32,7 +32,9 @@
     }
   },
   "additionalProperties": false,
-  "required": [],
+  "required": [
+    "Scope"
+  ],
   "createOnlyProperties": [
     "/properties/Scope"
   ],

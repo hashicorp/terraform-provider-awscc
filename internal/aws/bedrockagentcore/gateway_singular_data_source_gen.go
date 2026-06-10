@@ -498,6 +498,26 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          ],
 		//	          "type": "string"
 		//	        },
+		//	        "SessionConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "SessionTimeoutInSeconds": {
+		//	              "maximum": 28800,
+		//	              "minimum": 900,
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "StreamingConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "EnableResponseStreaming": {
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "SupportedVersions": {
 		//	          "items": {
 		//	            "default": "2025-03-26",
@@ -522,6 +542,26 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: SearchType
 						"search_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SessionConfiguration
+						"session_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SessionTimeoutInSeconds
+								"session_timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: StreamingConfiguration
+						"streaming_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: EnableResponseStreaming
+								"enable_response_streaming": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 						// Property: SupportedVersions
@@ -680,6 +720,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"custom_jwt_authorizer":          "CustomJWTAuthorizer",
 		"description":                    "Description",
 		"discovery_url":                  "DiscoveryUrl",
+		"enable_response_streaming":      "EnableResponseStreaming",
 		"exception_level":                "ExceptionLevel",
 		"gateway_arn":                    "GatewayArn",
 		"gateway_identifier":             "GatewayIdentifier",
@@ -704,8 +745,11 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"protocol_type":                  "ProtocolType",
 		"role_arn":                       "RoleArn",
 		"search_type":                    "SearchType",
+		"session_configuration":          "SessionConfiguration",
+		"session_timeout_in_seconds":     "SessionTimeoutInSeconds",
 		"status":                         "Status",
 		"status_reasons":                 "StatusReasons",
+		"streaming_configuration":        "StreamingConfiguration",
 		"supported_versions":             "SupportedVersions",
 		"tags":                           "Tags",
 		"updated_at":                     "UpdatedAt",

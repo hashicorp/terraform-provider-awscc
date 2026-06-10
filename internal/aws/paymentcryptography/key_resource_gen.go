@@ -469,6 +469,27 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Policy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The resource-based policy attached to the key, in JSON format.",
+		//	  "maxLength": 20480,
+		//	  "minLength": 1,
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The resource-based policy attached to the key, in JSON format.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 20480),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ReplicationRegions
 		// CloudFormation resource type schema:
 		//
@@ -658,6 +679,7 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 		"key_state":                 "KeyState",
 		"key_usage":                 "KeyUsage",
 		"no_restrictions":           "NoRestrictions",
+		"policy":                    "Policy",
 		"replication_regions":       "ReplicationRegions",
 		"replication_status":        "ReplicationStatus",
 		"sign":                      "Sign",

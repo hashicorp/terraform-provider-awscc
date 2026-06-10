@@ -1,4 +1,21 @@
-## 1.88.0 (Unreleased)
+## 1.88.0 (June 10, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_appstream_stack_fleet_association`
+* **New Data Source:** `awscc_bedrockagentcore_payment_manager`
+* **New Data Source:** `awscc_bedrockagentcore_payment_managers`
+* **New Data Source:** `awscc_bedrockagentcore_resource_policy`
+* **New Data Source:** `awscc_resiliencehubv2_service_function`
+* **New Data Source:** `awscc_resiliencehubv2_user_journey`
+* **New Data Source:** `awscc_rtbfabric_link_routing_rule`
+* **New List Resource:** `awscc_bedrockagentcore_payment_manager`
+* **New Resource:** `awscc_appstream_stack_fleet_association`
+* **New Resource:** `awscc_bedrockagentcore_payment_manager`
+* **New Resource:** `awscc_bedrockagentcore_resource_policy`
+* **New Resource:** `awscc_resiliencehubv2_service_function`
+* **New Resource:** `awscc_resiliencehubv2_user_journey`
+* **New Resource:** `awscc_rtbfabric_link_routing_rule`
 
 ## 1.87.0 (June 3, 2026)
 

@@ -22,15 +22,27 @@ Resource Type definition for AWS::BedrockAgentCore::ApiKeyCredentialProvider
 ### Optional
 
 - `api_key` (String) The API key to use for authentication
+- `api_key_secret_config` (Attributes) Configuration for a customer-provided secret containing the API key (see [below for nested schema](#nestedatt--api_key_secret_config))
+- `api_key_secret_source` (String) The source of the API key secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.
 - `tags` (Attributes List) Tags to assign to the API key credential provider (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `api_key_secret_arn` (Attributes) The ARN of the API key secret in AWS Secrets Manager (see [below for nested schema](#nestedatt--api_key_secret_arn))
+- `api_key_secret_json_key` (String) The JSON key within the secret that contains the API key value
 - `created_time` (String) The timestamp when the credential provider was created
 - `credential_provider_arn` (String) The Amazon Resource Name (ARN) of the API key credential provider
 - `id` (String) Uniquely identifies the resource.
 - `last_updated_time` (String) The timestamp when the credential provider was last updated
+
+<a id="nestedatt--api_key_secret_config"></a>
+### Nested Schema for `api_key_secret_config`
+
+Optional:
+
+- `json_key` (String) The JSON key within the secret that contains the credential value
+- `secret_id` (String) The ID or ARN of the secret in AWS Secrets Manager
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

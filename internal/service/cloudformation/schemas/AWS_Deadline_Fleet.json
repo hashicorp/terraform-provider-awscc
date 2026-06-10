@@ -413,6 +413,44 @@
       },
       "additionalProperties": false
     },
+    "PersistentVolumeConfiguration": {
+      "type": "object",
+      "properties": {
+        "SizeGiB": {
+          "type": "integer",
+          "default": 250,
+          "maximum": 65536,
+          "minimum": 1
+        },
+        "Iops": {
+          "type": "integer",
+          "default": 3000,
+          "maximum": 80000,
+          "minimum": 100
+        },
+        "ThroughputMiB": {
+          "type": "integer",
+          "default": 125,
+          "maximum": 2000,
+          "minimum": 125
+        },
+        "MountPath": {
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 1
+        },
+        "LastUsedTtlHours": {
+          "type": "integer",
+          "default": 168,
+          "maximum": 8760,
+          "minimum": 1
+        }
+      },
+      "required": [
+        "MountPath"
+      ],
+      "additionalProperties": false
+    },
     "ServiceManagedEc2FleetConfiguration": {
       "type": "object",
       "properties": {
@@ -428,6 +466,9 @@
         "StorageProfileId": {
           "type": "string",
           "pattern": "^sp-[0-9a-f]{32}$"
+        },
+        "PersistentVolumeConfiguration": {
+          "$ref": "#/definitions/PersistentVolumeConfiguration"
         },
         "AutoScalingConfiguration": {
           "$ref": "#/definitions/ServiceManagedEc2AutoScalingConfiguration"

@@ -67,6 +67,10 @@
     "VpcPeeringConnectionId": {
       "type": "string",
       "description": "The ID of a VPC peering connection."
+    },
+    "OdbNetworkArn": {
+      "type": "string",
+      "description": ""
     }
   },
   "tagging": {

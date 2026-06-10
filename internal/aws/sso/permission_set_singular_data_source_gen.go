@@ -50,7 +50,7 @@ func permissionSetDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 20,
+		//	  "maxItems": 25,
 		//	  "type": "array"
 		//	}
 		"customer_managed_policy_references": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -119,7 +119,7 @@ func permissionSetDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	    "minLength": 20,
 		//	    "type": "string"
 		//	  },
-		//	  "maxItems": 20,
+		//	  "maxItems": 25,
 		//	  "type": "array"
 		//	}
 		"managed_policies": schema.ListAttribute{ /*START ATTRIBUTE*/

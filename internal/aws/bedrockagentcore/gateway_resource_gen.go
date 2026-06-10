@@ -11,11 +11,13 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -744,6 +746,26 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		//	          ],
 		//	          "type": "string"
 		//	        },
+		//	        "SessionConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "SessionTimeoutInSeconds": {
+		//	              "maximum": 28800,
+		//	              "minimum": 900,
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "StreamingConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "EnableResponseStreaming": {
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "SupportedVersions": {
 		//	          "items": {
 		//	            "default": "2025-03-26",
@@ -784,6 +806,45 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SessionConfiguration
+						"session_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SessionTimeoutInSeconds
+								"session_timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										int64validator.Between(900, 28800),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: StreamingConfiguration
+						"streaming_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: EnableResponseStreaming
+								"enable_response_streaming": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: SupportedVersions
@@ -989,6 +1050,7 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		"custom_jwt_authorizer":          "CustomJWTAuthorizer",
 		"description":                    "Description",
 		"discovery_url":                  "DiscoveryUrl",
+		"enable_response_streaming":      "EnableResponseStreaming",
 		"exception_level":                "ExceptionLevel",
 		"gateway_arn":                    "GatewayArn",
 		"gateway_identifier":             "GatewayIdentifier",
@@ -1013,8 +1075,11 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		"protocol_type":                  "ProtocolType",
 		"role_arn":                       "RoleArn",
 		"search_type":                    "SearchType",
+		"session_configuration":          "SessionConfiguration",
+		"session_timeout_in_seconds":     "SessionTimeoutInSeconds",
 		"status":                         "Status",
 		"status_reasons":                 "StatusReasons",
+		"streaming_configuration":        "StreamingConfiguration",
 		"supported_versions":             "SupportedVersions",
 		"tags":                           "Tags",
 		"updated_at":                     "UpdatedAt",

@@ -496,6 +496,31 @@ func flowOutputResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: NdiOutputTimecodeSource
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The timecode source for the NDI output.",
+		//	  "enum": [
+		//	    "EMBEDDED_TIMECODE",
+		//	    "UTC_SYSTEM_TIME"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"ndi_output_timecode_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The timecode source for the NDI output.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"EMBEDDED_TIMECODE",
+					"UTC_SYSTEM_TIME",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: NdiProgramName
 		// CloudFormation resource type schema:
 		//
@@ -972,6 +997,7 @@ func flowOutputResource(ctx context.Context) (resource.Resource, error) {
 		"media_stream_output_configurations":    "MediaStreamOutputConfigurations",
 		"min_latency":                           "MinLatency",
 		"name":                                  "Name",
+		"ndi_output_timecode_source":            "NdiOutputTimecodeSource",
 		"ndi_program_name":                      "NdiProgramName",
 		"ndi_speed_hq_quality":                  "NdiSpeedHqQuality",
 		"output_arn":                            "OutputArn",

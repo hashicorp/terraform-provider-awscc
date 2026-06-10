@@ -172,7 +172,8 @@ func customDBEngineVersionDataSource(ctx context.Context) (datasource.DataSource
 		//	  "enum": [
 		//	    "available",
 		//	    "inactive",
-		//	    "inactive-except-restore"
+		//	    "inactive-except-restore",
+		//	    "pending-validation"
 		//	  ],
 		//	  "type": "string"
 		//	}

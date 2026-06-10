@@ -110,8 +110,8 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		//	            },
 		//	            "SourceEmailAddressDisplayName": {
 		//	              "description": "The name of the source email address display name",
-		//	              "maxLength": 127,
-		//	              "minLength": 1,
+		//	              "maxLength": 256,
+		//	              "minLength": 0,
 		//	              "type": "string"
 		//	            },
 		//	            "WisdomTemplateArn": {
@@ -335,7 +335,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "DurationInSeconds": {
 		//	                      "description": "Timeout duration for a preview contact in seconds",
 		//	                      "maximum": 300,
-		//	                      "minimum": 10,
+		//	                      "minimum": 1,
 		//	                      "type": "integer"
 		//	                    }
 		//	                  },
@@ -471,7 +471,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 127),
+										stringvalidator.LengthBetween(0, 256),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -813,7 +813,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 													Optional:    true,
 													Computed:    true,
 													Validators: []validator.Int64{ /*START VALIDATORS*/
-														int64validator.Between(10, 300),
+														int64validator.Between(1, 300),
 													}, /*END VALIDATORS*/
 													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 														int64planmodifier.UseStateForUnknown(),
@@ -2419,7 +2419,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "Minimum time interval between entries for the same participant in ISO 8601 duration format",
 		//	      "maxLength": 50,
 		//	      "minLength": 0,
-		//	      "pattern": "^[a-zA-Z0-9.]*$",
+		//	      "pattern": "^P(?:([-+]?[0-9]+)D)?(T(?:([-+]?[0-9]+)H)?(?:([-+]?[0-9]+)M)?(?:([-+]?[0-9]+)(?:[.,]([0-9]{0,9}))?S)?)?$",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -2451,7 +2451,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(0, 50),
-						stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9.]*$"), ""),
+						stringvalidator.RegexMatches(regexp.MustCompile("^P(?:([-+]?[0-9]+)D)?(T(?:([-+]?[0-9]+)H)?(?:([-+]?[0-9]+)M)?(?:([-+]?[0-9]+)(?:[.,]([0-9]{0,9}))?S)?)?$"), ""),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2498,7 +2498,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "Time duration in ISO 8601 format",
 		//	      "maxLength": 50,
 		//	      "minLength": 0,
-		//	      "pattern": "^[a-zA-Z0-9.]*$",
+		//	      "pattern": "^P(?:([-+]?[0-9]+)D)?(T(?:([-+]?[0-9]+)H)?(?:([-+]?[0-9]+)M)?(?:([-+]?[0-9]+)(?:[.,]([0-9]{0,9}))?S)?)?$",
 		//	      "type": "string"
 		//	    },
 		//	    "StartTime": {
@@ -2535,7 +2535,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(0, 50),
-						stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9.]*$"), ""),
+						stringvalidator.RegexMatches(regexp.MustCompile("^P(?:([-+]?[0-9]+)D)?(T(?:([-+]?[0-9]+)H)?(?:([-+]?[0-9]+)M)?(?:([-+]?[0-9]+)(?:[.,]([0-9]{0,9}))?S)?)?$"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),

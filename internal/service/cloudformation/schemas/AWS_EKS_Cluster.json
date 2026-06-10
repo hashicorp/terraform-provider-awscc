@@ -78,7 +78,7 @@
         "eks:TagResource",
         "eks:UntagResource"
       ],
-      "timeoutInMinutes": 180
+      "timeoutInMinutes": 2160
     },
     "list": {
       "permissions": [
@@ -215,6 +215,17 @@
         }
       }
     },
+    "EtcdPlacement": {
+      "description": "The placement configuration for the etcd instances of your local Amazon EKS cluster on an AWS Outpost.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "SpreadLevel": {
+          "description": "Optional parameter to specify the placement group spread level for etcd instances. If not provided, EKS will deploy etcd instances without a placement group.",
+          "type": "string"
+        }
+      }
+    },
     "RemotePodNetworks": {
       "description": "Network configuration of pods run on-premises with EKS Hybrid Nodes.",
       "insertionOrder": false,
@@ -247,8 +258,12 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
+        "EtcdPlacement": {
+          "description": "An object representing the placement configuration for the etcd instances of your local Amazon EKS cluster on an AWS Outpost.",
+          "$ref": "#/definitions/EtcdPlacement"
+        },
         "OutpostArns": {
-          "description": "Specify one or more Arn(s) of Outpost(s) on which you would like to create your cluster.",
+          "description": "The ARN of the Outpost that you want to use for your local Amazon EKS cluster on Outposts. Only a single Outpost ARN is supported.",
           "insertionOrder": false,
           "type": "array",
           "items": {
@@ -257,11 +272,15 @@
           }
         },
         "ControlPlanePlacement": {
-          "description": "Specify the placement group of the control plane machines for your cluster.",
+          "description": "An object representing the placement configuration for all the control plane instances of your local Amazon EKS cluster on an AWS Outpost.",
           "$ref": "#/definitions/ControlPlanePlacement"
         },
+        "EtcdInstanceType": {
+          "description": "The EC2 instance type for etcd instances of your local Amazon EKS cluster on AWS Outposts. This instance type applies to all etcd instances and cannot be changed after cluster creation.",
+          "type": "string"
+        },
         "ControlPlaneInstanceType": {
-          "description": "Specify the Instance type of the machines that should be used to create your cluster.",
+          "description": "The EC2 instance type for the Kubernetes control plane instances of your local Amazon EKS cluster on AWS Outposts. This instance type applies to all control plane instances and cannot be changed after cluster creation.",
           "type": "string"
         }
       },
@@ -351,12 +370,16 @@
       }
     },
     "ControlPlanePlacement": {
-      "description": "Specify the placement group of the control plane machines for your cluster.",
+      "description": "The placement configuration for all the control plane instances of your local Amazon EKS cluster on an AWS Outpost.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "GroupName": {
-          "description": "Specify the placement group name of the control place machines for your cluster.",
+          "description": "The name of the placement group for the Kubernetes control plane instances. This setting can't be changed after cluster creation.",
+          "type": "string"
+        },
+        "SpreadLevel": {
+          "description": "Optional parameter to specify the placement group spread level for control plane instances. If not provided, EKS will deploy control plane instances without a placement group.",
           "type": "string"
         }
       }

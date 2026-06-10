@@ -1,0 +1,121 @@
+{
+  "typeName": "AWS::ResilienceHubV2::ServiceFunction",
+  "description": "Creates a service function within a Resilience Hub service.",
+  "additionalProperties": false,
+  "properties": {
+    "ServiceArn": {
+      "type": "string",
+      "description": "The ARN of the parent service.",
+      "pattern": ""
+    },
+    "ServiceFunctionId": {
+      "type": "string",
+      "description": "The server-generated service function ID."
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the service function.",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$"
+    },
+    "Description": {
+      "type": "string",
+      "description": "The description of the service function.",
+      "maxLength": 500
+    },
+    "Criticality": {
+      "type": "string",
+      "description": "The criticality of the service function.",
+      "enum": [
+        "PRIMARY",
+        "SUPPLEMENTAL"
+      ]
+    },
+    "ResourceCount": {
+      "type": "integer",
+      "description": "The number of resources associated with this function."
+    },
+    "Source": {
+      "type": "string",
+      "description": "The source of the service function.",
+      "enum": [
+        "AI_GENERATED",
+        "USER"
+      ]
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The timestamp when the service function was created.",
+      "format": "date-time"
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "The timestamp when the service function was last updated.",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "ServiceArn",
+    "Name",
+    "Criticality"
+  ],
+  "primaryIdentifier": [
+    "/properties/ServiceArn",
+    "/properties/ServiceFunctionId"
+  ],
+  "readOnlyProperties": [
+    "/properties/ServiceFunctionId",
+    "/properties/ResourceCount",
+    "/properties/Source",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/ServiceArn"
+  ],
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "resiliencehub:CreateServiceFunction",
+        "resiliencehub:ListServiceFunctions"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "resiliencehub:ListServiceFunctions"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "resiliencehub:UpdateServiceFunction",
+        "resiliencehub:ListServiceFunctions"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "resiliencehub:DeleteServiceFunction"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "resiliencehub:ListServiceFunctions"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "ServiceArn": {
+            "type": "string",
+            "description": "The service ARN to list service functions for."
+          }
+        },
+        "required": [
+          "ServiceArn"
+        ]
+      }
+    }
+  }
+}

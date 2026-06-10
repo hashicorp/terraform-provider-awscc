@@ -37,7 +37,7 @@ resource "awscc_apigatewayv2_domain_name" "example" {
 
 - `domain_name_configurations` (Attributes List) The domain name configurations. (see [below for nested schema](#nestedatt--domain_name_configurations))
 - `mutual_tls_authentication` (Attributes) The mutual TLS authentication configuration for a custom domain name. (see [below for nested schema](#nestedatt--mutual_tls_authentication))
-- `routing_mode` (String)
+- `routing_mode` (String) The routing mode API Gateway uses to route traffic to your APIs.
 - `tags` (Map of String) The collection of tags associated with a domain name.
 
 ### Read-Only
@@ -55,7 +55,7 @@ Optional:
 - `certificate_arn` (String) An AWS-managed certificate that will be used by the edge-optimized endpoint for this domain name. AWS Certificate Manager is the only supported source.
 - `certificate_name` (String) The user-friendly name of the certificate that will be used by the edge-optimized endpoint for this domain name.
 - `endpoint_type` (String) The endpoint type.
-- `ip_address_type` (String)
+- `ip_address_type` (String) The IP address types that can invoke the domain name. Use ``ipv4`` to allow only IPv4 addresses to invoke your domain name, or use ``dualstack`` to allow both IPv4 and IPv6 addresses to invoke your domain name.
 - `ownership_verification_certificate_arn` (String) The Amazon resource name (ARN) for the public certificate issued by ACMlong. This ARN is used to validate custom domain ownership. It's required only if you configure mutual TLS and use either an ACM-imported or a private CA certificate ARN as the regionalCertificateArn.
 - `security_policy` (String) The Transport Layer Security (TLS) version of the security policy for this domain name. The valid values are ``TLS_1_0`` and ``TLS_1_2``.
 

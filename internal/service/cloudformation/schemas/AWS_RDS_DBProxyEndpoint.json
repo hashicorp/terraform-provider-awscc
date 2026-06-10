@@ -136,7 +136,8 @@
     "create": {
       "permissions": [
         "rds:CreateDBProxyEndpoint",
-        "rds:DescribeDBProxyEndpoints"
+        "rds:DescribeDBProxyEndpoints",
+        "rds:AddTagsToResource"
       ]
     },
     "read": {
@@ -148,6 +149,7 @@
     "update": {
       "permissions": [
         "rds:ModifyDBProxyEndpoint",
+        "rds:DescribeDBProxyEndpoints",
         "rds:AddTagsToResource",
         "rds:RemoveTagsFromResource"
       ]

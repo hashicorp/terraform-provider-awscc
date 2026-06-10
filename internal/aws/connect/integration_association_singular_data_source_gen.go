@@ -69,12 +69,70 @@ func integrationAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//	    "LEX_BOT",
 		//	    "LAMBDA_FUNCTION",
 		//	    "APPLICATION",
-		//	    "CASES_DOMAIN"
+		//	    "CASES_DOMAIN",
+		//	    "WISDOM_ASSISTANT",
+		//	    "WISDOM_KNOWLEDGE_BASE",
+		//	    "WISDOM_QUICK_RESPONSES",
+		//	    "FILE_SCANNER",
+		//	    "MESSAGE_PROCESSOR",
+		//	    "Q_MESSAGE_TEMPLATES",
+		//	    "SES_IDENTITY"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"integration_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies the integration type to be associated with the instance",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The tags used to organize, track, or control access for this resource.",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A key-value pair to associate with a resource.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key name of the tag.",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value for the tag.",
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 200,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags used to organize, track, or control access for this resource.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -98,6 +156,9 @@ func integrationAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		"integration_arn":            "IntegrationArn",
 		"integration_association_id": "IntegrationAssociationId",
 		"integration_type":           "IntegrationType",
+		"key":                        "Key",
+		"tags":                       "Tags",
+		"value":                      "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

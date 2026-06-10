@@ -34,6 +34,7 @@ Data Source schema for AWS::EC2::Route
 - `local_gateway_id` (String) The ID of the local gateway.
 - `nat_gateway_id` (String) [IPv4 traffic only] The ID of a NAT gateway.
 - `network_interface_id` (String) The ID of a network interface.
+- `odb_network_arn` (String)
 - `route_table_id` (String) The ID of the route table for the route.
 - `transit_gateway_id` (String) The ID of a transit gateway.
 - `vpc_endpoint_id` (String) The ID of a VPC endpoint. Supported for Gateway Load Balancer endpoints only.

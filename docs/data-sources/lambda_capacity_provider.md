@@ -27,6 +27,7 @@ Data Source schema for AWS::Lambda::CapacityProvider
 - `instance_requirements` (Attributes) The instance requirements for compute resources managed by the capacity provider. (see [below for nested schema](#nestedatt--instance_requirements))
 - `kms_key_arn` (String) The ARN of the KMS key used to encrypt the capacity provider's resources.
 - `permissions_config` (Attributes) The permissions configuration for the capacity provider. (see [below for nested schema](#nestedatt--permissions_config))
+- `propagate_tags` (Attributes) (see [below for nested schema](#nestedatt--propagate_tags))
 - `state` (String) The current state of the capacity provider. Indicates whether the provider is being created, is active and ready for use, has failed, or is being deleted.
 - `tags` (Attributes Set) A key-value pair that provides metadata for the capacity provider. (see [below for nested schema](#nestedatt--tags))
 - `vpc_config` (Attributes) The VPC configuration for the capacity provider. (see [below for nested schema](#nestedatt--vpc_config))
@@ -66,6 +67,24 @@ Read-Only:
 Read-Only:
 
 - `capacity_provider_operator_role_arn` (String) The ARN of the IAM role that the capacity provider uses to manage compute instances and other AWS resources.
+
+
+<a id="nestedatt--propagate_tags"></a>
+### Nested Schema for `propagate_tags`
+
+Read-Only:
+
+- `explicit_tags` (Attributes Set) A list of tags to explicitly propagate to managed resources. (see [below for nested schema](#nestedatt--propagate_tags--explicit_tags))
+- `mode` (String) The mode for tag propagation.
+
+<a id="nestedatt--propagate_tags--explicit_tags"></a>
+### Nested Schema for `propagate_tags.explicit_tags`
+
+Read-Only:
+
+- `key` (String) The key name of the tag.
+- `value` (String) The value for the tag.
+
 
 
 <a id="nestedatt--tags"></a>

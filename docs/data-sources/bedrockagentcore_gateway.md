@@ -147,7 +147,25 @@ Read-Only:
 
 - `instructions` (String)
 - `search_type` (String)
+- `session_configuration` (Attributes) (see [below for nested schema](#nestedatt--protocol_configuration--mcp--session_configuration))
+- `streaming_configuration` (Attributes) (see [below for nested schema](#nestedatt--protocol_configuration--mcp--streaming_configuration))
 - `supported_versions` (List of String)
+
+<a id="nestedatt--protocol_configuration--mcp--session_configuration"></a>
+### Nested Schema for `protocol_configuration.mcp.session_configuration`
+
+Read-Only:
+
+- `session_timeout_in_seconds` (Number)
+
+
+<a id="nestedatt--protocol_configuration--mcp--streaming_configuration"></a>
+### Nested Schema for `protocol_configuration.mcp.streaming_configuration`
+
+Read-Only:
+
+- `enable_response_streaming` (Boolean)
+
 
 
 

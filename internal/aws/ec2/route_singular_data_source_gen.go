@@ -154,6 +154,17 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The ID of a network interface.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: OdbNetworkArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"odb_network_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RouteTableId
 		// CloudFormation resource type schema:
 		//
@@ -227,6 +238,7 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"local_gateway_id":                "LocalGatewayId",
 		"nat_gateway_id":                  "NatGatewayId",
 		"network_interface_id":            "NetworkInterfaceId",
+		"odb_network_arn":                 "OdbNetworkArn",
 		"route_table_id":                  "RouteTableId",
 		"transit_gateway_id":              "TransitGatewayId",
 		"vpc_endpoint_id":                 "VpcEndpointId",

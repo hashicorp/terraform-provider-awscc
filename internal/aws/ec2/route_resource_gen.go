@@ -207,6 +207,21 @@ func routeResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: OdbNetworkArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"odb_network_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RouteTableId
 		// CloudFormation resource type schema:
 		//
@@ -311,6 +326,7 @@ func routeResource(ctx context.Context) (resource.Resource, error) {
 		"local_gateway_id":                "LocalGatewayId",
 		"nat_gateway_id":                  "NatGatewayId",
 		"network_interface_id":            "NetworkInterfaceId",
+		"odb_network_arn":                 "OdbNetworkArn",
 		"route_table_id":                  "RouteTableId",
 		"transit_gateway_id":              "TransitGatewayId",
 		"vpc_endpoint_id":                 "VpcEndpointId",

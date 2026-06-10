@@ -168,22 +168,22 @@ func alarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "",
+		//	  "description": "The evaluation criteria for the alarm.",
 		//	  "properties": {
 		//	    "PromQLCriteria": {
 		//	      "additionalProperties": false,
-		//	      "description": "",
+		//	      "description": "The PromQL criteria for the alarm evaluation.",
 		//	      "properties": {
 		//	        "PendingPeriod": {
-		//	          "description": "The pending period for the alarm.",
+		//	          "description": "The duration, in seconds, that a contributor must be continuously breaching before it transitions to the ``ALARM`` state.",
 		//	          "type": "integer"
 		//	        },
 		//	        "Query": {
-		//	          "description": "The PromQL query string.",
+		//	          "description": "The PromQL query that the alarm evaluates. The query must return a result of vector type. Each entry in the vector result represents an alarm contributor.",
 		//	          "type": "string"
 		//	        },
 		//	        "RecoveryPeriod": {
-		//	          "description": "The recovery period for the alarm.",
+		//	          "description": "The duration, in seconds, that a contributor must continuously not be breaching before it transitions back to the ``OK`` state.",
 		//	          "type": "integer"
 		//	        }
 		//	      },
@@ -199,36 +199,36 @@ func alarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: PendingPeriod
 						"pending_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The pending period for the alarm.",
+							Description: "The duration, in seconds, that a contributor must be continuously breaching before it transitions to the ``ALARM`` state.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Query
 						"query": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The PromQL query string.",
+							Description: "The PromQL query that the alarm evaluates. The query must return a result of vector type. Each entry in the vector result represents an alarm contributor.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: RecoveryPeriod
 						"recovery_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The recovery period for the alarm.",
+							Description: "The duration, in seconds, that a contributor must continuously not be breaching before it transitions back to the ``OK`` state.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "",
+					Description: "The PromQL criteria for the alarm evaluation.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "",
+			Description: "The evaluation criteria for the alarm.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EvaluationInterval
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The frequency, in seconds, at which the alarm is evaluated.",
 		//	  "type": "integer"
 		//	}
 		"evaluation_interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "The frequency, in seconds, at which the alarm is evaluated.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EvaluationPeriods
