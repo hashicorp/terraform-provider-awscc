@@ -68,7 +68,7 @@ func domainNameResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The domain name configurations.",
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "The ``DomainNameConfiguration`` property type specifies the configuration for an API's domain name.\n  ``DomainNameConfiguration`` is a property of the [AWS::ApiGatewayV2::DomainName](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-domainname.html) resource.",
+		//	    "description": "The ``DomainNameConfiguration`` property type specifies the configuration for an API's domain name.\n ``DomainNameConfiguration`` is a property of the [AWS::ApiGatewayV2::DomainName](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-domainname.html) resource.",
 		//	    "properties": {
 		//	      "CertificateArn": {
 		//	        "description": "An AWS-managed certificate that will be used by the edge-optimized endpoint for this domain name. AWS Certificate Manager is the only supported source.",
@@ -83,7 +83,7 @@ func domainNameResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "IpAddressType": {
-		//	        "description": "",
+		//	        "description": "The IP address types that can invoke the domain name. Use ``ipv4`` to allow only IPv4 addresses to invoke your domain name, or use ``dualstack`` to allow both IPv4 and IPv6 addresses to invoke your domain name.",
 		//	        "type": "string"
 		//	      },
 		//	      "OwnershipVerificationCertificateArn": {
@@ -132,7 +132,7 @@ func domainNameResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: IpAddressType
 					"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "",
+						Description: "The IP address types that can invoke the domain name. Use ``ipv4`` to allow only IPv4 addresses to invoke your domain name, or use ``dualstack`` to allow both IPv4 and IPv6 addresses to invoke your domain name.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -245,7 +245,7 @@ func domainNameResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "default": "API_MAPPING_ONLY",
-		//	  "description": "",
+		//	  "description": "The routing mode API Gateway uses to route traffic to your APIs.",
 		//	  "enum": [
 		//	    "API_MAPPING_ONLY",
 		//	    "ROUTING_RULE_THEN_API_MAPPING",
@@ -254,7 +254,7 @@ func domainNameResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"routing_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "The routing mode API Gateway uses to route traffic to your APIs.",
 			Optional:    true,
 			Computed:    true,
 			Default:     stringdefault.StaticString("API_MAPPING_ONLY"),

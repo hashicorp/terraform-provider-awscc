@@ -99,9 +99,6 @@ func contactFlowModuleResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "boolean"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "Enabled"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"external_invocation_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -111,9 +108,6 @@ func contactFlowModuleResource(ctx context.Context) (resource.Resource, error) {
 					Description: "Specifies whether the flow module resource is enabled for external invocation",
 					Optional:    true,
 					Computed:    true,
-					Validators: []validator.Bool{ /*START VALIDATORS*/
-						fwvalidators.NotNullBool(),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 						boolplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/

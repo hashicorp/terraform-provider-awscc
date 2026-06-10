@@ -30,11 +30,11 @@ func apiMappingResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The identifier of the API.",
+		//	  "description": "The API identifier.",
 		//	  "type": "string"
 		//	}
 		"api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the API.",
+			Description: "The API identifier.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ApiMappingId

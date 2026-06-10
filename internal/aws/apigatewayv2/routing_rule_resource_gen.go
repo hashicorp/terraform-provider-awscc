@@ -35,17 +35,23 @@ func routingRuleResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The resulting action based on matching a routing rules condition. Only InvokeApi is supported.",
 		//	  "items": {
+		//	    "description": "Represents a routing rule action. The only supported action is ``invokeApi``.",
 		//	    "properties": {
 		//	      "InvokeApi": {
+		//	        "description": "Represents an InvokeApi action.",
 		//	        "properties": {
 		//	          "ApiId": {
+		//	            "description": "The API identifier of the target API.",
 		//	            "type": "string"
 		//	          },
 		//	          "Stage": {
+		//	            "description": "The name of the target stage.",
 		//	            "type": "string"
 		//	          },
 		//	          "StripBasePath": {
+		//	            "description": "The strip base path setting. When true, API Gateway strips the incoming matched base path when forwarding the request to the target API.",
 		//	            "type": "boolean"
 		//	          }
 		//	        },
@@ -71,36 +77,45 @@ func routingRuleResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: ApiId
 							"api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Required: true,
+								Description: "The API identifier of the target API.",
+								Required:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Stage
 							"stage": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Required: true,
+								Description: "The name of the target stage.",
+								Required:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: StripBasePath
 							"strip_base_path": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
-								Computed: true,
+								Description: "The strip base path setting. When true, API Gateway strips the incoming matched base path when forwarding the request to the target API.",
+								Optional:    true,
+								Computed:    true,
 								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 									boolplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Required: true,
+						Description: "Represents an InvokeApi action.",
+						Required:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Required: true,
+			Description: "The resulting action based on matching a routing rules condition. Only InvokeApi is supported.",
+			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Conditions
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The conditions of the routing rule.",
 		//	  "items": {
+		//	    "description": "Represents a condition. Conditions can contain up to two ``matchHeaders`` conditions and one ``matchBasePaths`` conditions. API Gateway evaluates header conditions and base path conditions together. You can only use AND between header and base path conditions.",
 		//	    "properties": {
 		//	      "MatchBasePaths": {
+		//	        "description": "The base path to be matched.",
 		//	        "properties": {
 		//	          "AnyOf": {
+		//	            "description": "The string of the case sensitive base path to be matched.",
 		//	            "items": {
 		//	              "type": "string"
 		//	            },
@@ -113,14 +128,19 @@ func routingRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "MatchHeaders": {
+		//	        "description": "The headers to be matched.",
 		//	        "properties": {
 		//	          "AnyOf": {
+		//	            "description": "The header name and header value glob to be matched. The matchHeaders condition is matched if any of the header name and header value globs are matched.",
 		//	            "items": {
+		//	              "description": "Represents a ``MatchHeaderValue``.",
 		//	              "properties": {
 		//	                "Header": {
+		//	                  "description": "The case insensitive header name to be matched. The header name must be less than 40 characters and the only allowed characters are ``a-z``, ``A-Z``, ``0-9``, and the following special characters: ``*?-!#$%\u0026'.^_`|~.``.",
 		//	                  "type": "string"
 		//	                },
 		//	                "ValueGlob": {
+		//	                  "description": "The case sensitive header glob value to be matched against entire header value. The header glob value must be less than 128 characters and the only allowed characters are ``a-z``, ``A-Z``, ``0-9``, and the following special characters: ``*?-!#$%\u0026'.^_`|~``. Wildcard matching is supported for header glob values but must be for ``*prefix-match``, ``suffix-match*``, or ``*infix*-match``.",
 		//	                  "type": "string"
 		//	                }
 		//	              },
@@ -152,6 +172,7 @@ func routingRuleResource(ctx context.Context) (resource.Resource, error) {
 							// Property: AnyOf
 							"any_of": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
+								Description: "The string of the case sensitive base path to be matched.",
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.List{ /*START VALIDATORS*/
@@ -162,8 +183,9 @@ func routingRuleResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
-						Computed: true,
+						Description: "The base path to be matched.",
+						Optional:    true,
+						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -177,8 +199,9 @@ func routingRuleResource(ctx context.Context) (resource.Resource, error) {
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: Header
 										"header": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
+											Description: "The case insensitive header name to be matched. The header name must be less than 40 characters and the only allowed characters are ``a-z``, ``A-Z``, ``0-9``, and the following special characters: ``*?-!#$%&'.^_`|~.``.",
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -188,8 +211,9 @@ func routingRuleResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 										// Property: ValueGlob
 										"value_glob": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
+											Description: "The case sensitive header glob value to be matched against entire header value. The header glob value must be less than 128 characters and the only allowed characters are ``a-z``, ``A-Z``, ``0-9``, and the following special characters: ``*?-!#$%&'.^_`|~``. Wildcard matching is supported for header glob values but must be for ``*prefix-match``, ``suffix-match*``, or ``*infix*-match``.",
+											Optional:    true,
+											Computed:    true,
 											Validators: []validator.String{ /*START VALIDATORS*/
 												fwvalidators.NotNullString(),
 											}, /*END VALIDATORS*/
@@ -199,8 +223,9 @@ func routingRuleResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Optional: true,
-								Computed: true,
+								Description: "The header name and header value glob to be matched. The matchHeaders condition is matched if any of the header name and header value globs are matched.",
+								Optional:    true,
+								Computed:    true,
 								Validators: []validator.List{ /*START VALIDATORS*/
 									fwvalidators.NotNullList(),
 								}, /*END VALIDATORS*/
@@ -209,25 +234,27 @@ func routingRuleResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
-						Computed: true,
+						Description: "The headers to be matched.",
+						Optional:    true,
+						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Required: true,
+			Description: "The conditions of the routing rule.",
+			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DomainNameArn
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The amazon resource name (ARN) of the domain name resource.",
+		//	  "description": "The ARN of the domain name.",
 		//	  "type": "string"
 		//	}
 		"domain_name_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The amazon resource name (ARN) of the domain name resource.",
+			Description: "The ARN of the domain name.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -237,20 +264,22 @@ func routingRuleResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The order in which API Gateway evaluates a rule. Priority is evaluated from the lowest value to the highest value. Rules can't have the same priority. Priority values 1-1,000,000 are supported.",
 		//	  "type": "integer"
 		//	}
 		"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Description: "The order in which API Gateway evaluates a rule. Priority is evaluated from the lowest value to the highest value. Rules can't have the same priority. Priority values 1-1,000,000 are supported.",
+			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RoutingRuleArn
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Amazon Resource Name (ARN) of the resource.",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"routing_rule_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Amazon Resource Name (ARN) of the resource.",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -260,11 +289,11 @@ func routingRuleResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "RoutingRule Id generated by service",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"routing_rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "RoutingRule Id generated by service",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -282,7 +311,7 @@ func routingRuleResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Schema for AWS::ApiGatewayV2::RoutingRule",
+		Description: "Represents a routing rule. When the incoming request to a domain name matches the conditions for a rule, API Gateway invokes a stage of a target API. Supported only for REST APIs.",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -294,7 +323,6 @@ func routingRuleResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithPrimaryIdentifier(
 		identity.Identifier{
 			Name:              "routing_rule_arn",
-			Description:       "Amazon Resource Name (ARN) of the resource",
 			RequiredForImport: true,
 		})
 

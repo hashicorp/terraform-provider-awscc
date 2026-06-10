@@ -234,22 +234,22 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "",
+		//	  "description": "The evaluation criteria for the alarm.",
 		//	  "properties": {
 		//	    "PromQLCriteria": {
 		//	      "additionalProperties": false,
-		//	      "description": "",
+		//	      "description": "The PromQL criteria for the alarm evaluation.",
 		//	      "properties": {
 		//	        "PendingPeriod": {
-		//	          "description": "The pending period for the alarm.",
+		//	          "description": "The duration, in seconds, that a contributor must be continuously breaching before it transitions to the ``ALARM`` state.",
 		//	          "type": "integer"
 		//	        },
 		//	        "Query": {
-		//	          "description": "The PromQL query string.",
+		//	          "description": "The PromQL query that the alarm evaluates. The query must return a result of vector type. Each entry in the vector result represents an alarm contributor.",
 		//	          "type": "string"
 		//	        },
 		//	        "RecoveryPeriod": {
-		//	          "description": "The recovery period for the alarm.",
+		//	          "description": "The duration, in seconds, that a contributor must continuously not be breaching before it transitions back to the ``OK`` state.",
 		//	          "type": "integer"
 		//	        }
 		//	      },
@@ -265,7 +265,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: PendingPeriod
 						"pending_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The pending period for the alarm.",
+							Description: "The duration, in seconds, that a contributor must be continuously breaching before it transitions to the ``ALARM`` state.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -274,7 +274,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Query
 						"query": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The PromQL query string.",
+							Description: "The PromQL query that the alarm evaluates. The query must return a result of vector type. Each entry in the vector result represents an alarm contributor.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -283,7 +283,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: RecoveryPeriod
 						"recovery_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The recovery period for the alarm.",
+							Description: "The duration, in seconds, that a contributor must continuously not be breaching before it transitions back to the ``OK`` state.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
@@ -291,7 +291,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "",
+					Description: "The PromQL criteria for the alarm evaluation.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -299,7 +299,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "",
+			Description: "The evaluation criteria for the alarm.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -310,11 +310,11 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The frequency, in seconds, at which the alarm is evaluated.",
 		//	  "type": "integer"
 		//	}
 		"evaluation_interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "The frequency, in seconds, at which the alarm is evaluated.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/

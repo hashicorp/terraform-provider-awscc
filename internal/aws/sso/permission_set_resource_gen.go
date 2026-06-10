@@ -62,7 +62,7 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 20,
+		//	  "maxItems": 25,
 		//	  "type": "array"
 		//	}
 		"customer_managed_policy_references": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -98,7 +98,7 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeAtMost(20),
+				listvalidator.SizeAtMost(25),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
@@ -175,7 +175,7 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 		//	    "minLength": 20,
 		//	    "type": "string"
 		//	  },
-		//	  "maxItems": 20,
+		//	  "maxItems": 25,
 		//	  "type": "array"
 		//	}
 		"managed_policies": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -184,7 +184,7 @@ func permissionSetResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Default:     defaults.StaticListOfString(),
 			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeAtMost(20),
+				listvalidator.SizeAtMost(25),
 				listvalidator.ValueStringsAre(
 					stringvalidator.LengthBetween(20, 2048),
 				),

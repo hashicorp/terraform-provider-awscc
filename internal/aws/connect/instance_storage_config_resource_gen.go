@@ -278,7 +278,14 @@ func instanceStorageConfigResource(ctx context.Context) (resource.Resource, erro
 		//	    "SCHEDULED_REPORTS",
 		//	    "MEDIA_STREAMS",
 		//	    "CONTACT_TRACE_RECORDS",
-		//	    "AGENT_EVENTS"
+		//	    "AGENT_EVENTS",
+		//	    "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS",
+		//	    "ATTACHMENTS",
+		//	    "CONTACT_EVALUATIONS",
+		//	    "SCREEN_RECORDINGS",
+		//	    "REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS",
+		//	    "REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS",
+		//	    "EMAIL_MESSAGES"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -293,6 +300,13 @@ func instanceStorageConfigResource(ctx context.Context) (resource.Resource, erro
 					"MEDIA_STREAMS",
 					"CONTACT_TRACE_RECORDS",
 					"AGENT_EVENTS",
+					"REAL_TIME_CONTACT_ANALYSIS_SEGMENTS",
+					"ATTACHMENTS",
+					"CONTACT_EVALUATIONS",
+					"SCREEN_RECORDINGS",
+					"REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS",
+					"REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS",
+					"EMAIL_MESSAGES",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

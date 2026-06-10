@@ -87,6 +87,111 @@ func apiKeyCredentialProviderResource(ctx context.Context) (resource.Resource, e
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ApiKeySecretConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration for a customer-provided secret containing the API key",
+		//	  "properties": {
+		//	    "JsonKey": {
+		//	      "description": "The JSON key within the secret that contains the credential value",
+		//	      "maxLength": 128,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    },
+		//	    "SecretId": {
+		//	      "description": "The ID or ARN of the secret in AWS Secrets Manager",
+		//	      "maxLength": 2048,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "SecretId",
+		//	    "JsonKey"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"api_key_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: JsonKey
+				"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The JSON key within the secret that contains the credential value",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 128),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SecretId
+				"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ID or ARN of the secret in AWS Secrets Manager",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 2048),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for a customer-provided secret containing the API key",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// ApiKeySecretConfig is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: ApiKeySecretJsonKey
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The JSON key within the secret that contains the API key value",
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"api_key_secret_json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The JSON key within the secret that contains the API key value",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ApiKeySecretSource
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The source of the API key secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+		//	  "enum": [
+		//	    "MANAGED",
+		//	    "EXTERNAL"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"api_key_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The source of the API key secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"MANAGED",
+					"EXTERNAL",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// ApiKeySecretSource is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -259,18 +364,25 @@ func apiKeyCredentialProviderResource(ctx context.Context) (resource.Resource, e
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"api_key":                 "ApiKey",
 		"api_key_secret_arn":      "ApiKeySecretArn",
+		"api_key_secret_config":   "ApiKeySecretConfig",
+		"api_key_secret_json_key": "ApiKeySecretJsonKey",
+		"api_key_secret_source":   "ApiKeySecretSource",
 		"created_time":            "CreatedTime",
 		"credential_provider_arn": "CredentialProviderArn",
+		"json_key":                "JsonKey",
 		"key":                     "Key",
 		"last_updated_time":       "LastUpdatedTime",
 		"name":                    "Name",
 		"secret_arn":              "SecretArn",
+		"secret_id":               "SecretId",
 		"tags":                    "Tags",
 		"value":                   "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/ApiKey",
+		"/properties/ApiKeySecretConfig",
+		"/properties/ApiKeySecretSource",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

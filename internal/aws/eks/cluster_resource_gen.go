@@ -662,22 +662,41 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "An object representing the Outpost configuration to use for AWS EKS outpost cluster.",
 		//	  "properties": {
 		//	    "ControlPlaneInstanceType": {
-		//	      "description": "Specify the Instance type of the machines that should be used to create your cluster.",
+		//	      "description": "The EC2 instance type for the Kubernetes control plane instances of your local Amazon EKS cluster on AWS Outposts. This instance type applies to all control plane instances and cannot be changed after cluster creation.",
 		//	      "type": "string"
 		//	    },
 		//	    "ControlPlanePlacement": {
 		//	      "additionalProperties": false,
-		//	      "description": "Specify the placement group of the control plane machines for your cluster.",
+		//	      "description": "An object representing the placement configuration for all the control plane instances of your local Amazon EKS cluster on an AWS Outpost.",
 		//	      "properties": {
 		//	        "GroupName": {
-		//	          "description": "Specify the placement group name of the control place machines for your cluster.",
+		//	          "description": "The name of the placement group for the Kubernetes control plane instances. This setting can't be changed after cluster creation.",
+		//	          "type": "string"
+		//	        },
+		//	        "SpreadLevel": {
+		//	          "description": "Optional parameter to specify the placement group spread level for control plane instances. If not provided, EKS will deploy control plane instances without a placement group.",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "EtcdInstanceType": {
+		//	      "description": "The EC2 instance type for etcd instances of your local Amazon EKS cluster on AWS Outposts. This instance type applies to all etcd instances and cannot be changed after cluster creation.",
+		//	      "type": "string"
+		//	    },
+		//	    "EtcdPlacement": {
+		//	      "additionalProperties": false,
+		//	      "description": "An object representing the placement configuration for the etcd instances of your local Amazon EKS cluster on an AWS Outpost.",
+		//	      "properties": {
+		//	        "SpreadLevel": {
+		//	          "description": "Optional parameter to specify the placement group spread level for etcd instances. If not provided, EKS will deploy etcd instances without a placement group.",
 		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "OutpostArns": {
-		//	      "description": "Specify one or more Arn(s) of Outpost(s) on which you would like to create your cluster.",
+		//	      "description": "The ARN of the Outpost that you want to use for your local Amazon EKS cluster on Outposts. Only a single Outpost ARN is supported.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "minItems": 1,
@@ -696,7 +715,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: ControlPlaneInstanceType
 				"control_plane_instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specify the Instance type of the machines that should be used to create your cluster.",
+					Description: "The EC2 instance type for the Kubernetes control plane instances of your local Amazon EKS cluster on AWS Outposts. This instance type applies to all control plane instances and cannot be changed after cluster creation.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -711,7 +730,16 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: GroupName
 						"group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Specify the placement group name of the control place machines for your cluster.",
+							Description: "The name of the placement group for the Kubernetes control plane instances. This setting can't be changed after cluster creation.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SpreadLevel
+						"spread_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Optional parameter to specify the placement group spread level for control plane instances. If not provided, EKS will deploy control plane instances without a placement group.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -719,7 +747,36 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "Specify the placement group of the control plane machines for your cluster.",
+					Description: "An object representing the placement configuration for all the control plane instances of your local Amazon EKS cluster on an AWS Outpost.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: EtcdInstanceType
+				"etcd_instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The EC2 instance type for etcd instances of your local Amazon EKS cluster on AWS Outposts. This instance type applies to all etcd instances and cannot be changed after cluster creation.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: EtcdPlacement
+				"etcd_placement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SpreadLevel
+						"spread_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Optional parameter to specify the placement group spread level for etcd instances. If not provided, EKS will deploy etcd instances without a placement group.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "An object representing the placement configuration for the etcd instances of your local Amazon EKS cluster on an AWS Outpost.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -729,7 +786,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				// Property: OutpostArns
 				"outpost_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Description: "Specify one or more Arn(s) of Outpost(s) on which you would like to create your cluster.",
+					Description: "The ARN of the Outpost that you want to use for your local Amazon EKS cluster on Outposts. Only a single Outpost ARN is supported.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
@@ -1259,6 +1316,8 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"endpoint":                                    "Endpoint",
 		"endpoint_private_access":                     "EndpointPrivateAccess",
 		"endpoint_public_access":                      "EndpointPublicAccess",
+		"etcd_instance_type":                          "EtcdInstanceType",
+		"etcd_placement":                              "EtcdPlacement",
 		"force":                                       "Force",
 		"group_name":                                  "GroupName",
 		"ip_family":                                   "IpFamily",
@@ -1283,6 +1342,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"security_group_ids":                          "SecurityGroupIds",
 		"service_ipv_4_cidr":                          "ServiceIpv4Cidr",
 		"service_ipv_6_cidr":                          "ServiceIpv6Cidr",
+		"spread_level":                                "SpreadLevel",
 		"storage_config":                              "StorageConfig",
 		"subnet_ids":                                  "SubnetIds",
 		"support_type":                                "SupportType",
@@ -1302,7 +1362,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	opts = opts.WithUpdateTimeoutInMinutes(180)
+	opts = opts.WithUpdateTimeoutInMinutes(2160)
 
 	v, err := generic.NewResource(ctx, opts...)
 

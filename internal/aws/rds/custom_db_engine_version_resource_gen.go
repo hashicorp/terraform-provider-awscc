@@ -254,7 +254,8 @@ func customDBEngineVersionResource(ctx context.Context) (resource.Resource, erro
 		//	  "enum": [
 		//	    "available",
 		//	    "inactive",
-		//	    "inactive-except-restore"
+		//	    "inactive-except-restore",
+		//	    "pending-validation"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -268,6 +269,7 @@ func customDBEngineVersionResource(ctx context.Context) (resource.Resource, erro
 					"available",
 					"inactive",
 					"inactive-except-restore",
+					"pending-validation",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
