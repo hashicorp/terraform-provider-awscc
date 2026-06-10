@@ -347,6 +347,14 @@
       "type": "integer",
       "description": "A quality setting for the NDI Speed HQ encoder."
     },
+    "NdiOutputTimecodeSource": {
+      "type": "string",
+      "enum": [
+        "EMBEDDED_TIMECODE",
+        "UTC_SYSTEM_TIME"
+      ],
+      "description": "The timecode source for the NDI output."
+    },
     "RouterIntegrationState": {
       "type": "string",
       "enum": [

@@ -3,6 +3,30 @@
   "description": "Resource Type definition for AWS::Connect::IntegrationAssociation",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-connect",
   "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "description": "The key name of the tag.",
+          "type": "string",
+          "pattern": "",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "description": "The value for the tag.",
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "Key",
+        "Value"
+      ]
+    },
     "IntegrationArn": {
       "description": "ARN of Integration being associated with the instance",
       "type": "string",
@@ -16,7 +40,14 @@
         "LEX_BOT",
         "LAMBDA_FUNCTION",
         "APPLICATION",
-        "CASES_DOMAIN"
+        "CASES_DOMAIN",
+        "WISDOM_ASSISTANT",
+        "WISDOM_KNOWLEDGE_BASE",
+        "WISDOM_QUICK_RESPONSES",
+        "FILE_SCANNER",
+        "MESSAGE_PROCESSOR",
+        "Q_MESSAGE_TEMPLATES",
+        "SES_IDENTITY"
       ]
     },
     "InstanceId": {
@@ -43,13 +74,28 @@
     },
     "IntegrationType": {
       "$ref": "#/definitions/IntegrationType"
+    },
+    "Tags": {
+      "description": "The tags used to organize, track, or control access for this resource.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "minItems": 0,
+      "maxItems": 200
     }
   },
   "tagging": {
-    "taggable": false,
-    "tagOnCreate": false,
-    "tagUpdatable": false,
-    "cloudFormationSystemTags": false
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "connect:TagResource",
+      "connect:UntagResource",
+      "connect:ListTagsForResource"
+    ]
   },
   "additionalProperties": false,
   "required": [
@@ -80,13 +126,17 @@
         "cases:GetDomain",
         "wisdom:GetAssistant",
         "wisdom:GetKnowledgeBase",
+        "wisdom:GetQuickResponse",
+        "wisdom:GetMessageTemplate",
         "wisdom:TagResource",
         "voiceid:DescribeDomain",
         "events:PutTargets",
+        "ses:GetIdentityVerificationAttributes",
         "events:PutRule",
         "connect:AssociateBot",
         "connect:AssociateLambdaFunction",
         "connect:CreateIntegrationAssociation",
+        "connect:TagResource",
         "connect:ListBots",
         "connect:ListLambdaFunctions",
         "connect:ListIntegrationAssociations",
@@ -109,11 +159,17 @@
       "permissions": [
         "connect:ListBots",
         "connect:ListLambdaFunctions",
-        "connect:ListIntegrationAssociations"
+        "connect:ListIntegrationAssociations",
+        "connect:ListTagsForResource"
       ]
     },
     "update": {
-      "permissions": []
+      "permissions": [
+        "connect:TagResource",
+        "connect:UntagResource",
+        "connect:ListTagsForResource",
+        "connect:ListIntegrationAssociations"
+      ]
     },
     "delete": {
       "permissions": [
@@ -142,7 +198,8 @@
       "permissions": [
         "connect:ListBots",
         "connect:ListLambdaFunctions",
-        "connect:ListIntegrationAssociations"
+        "connect:ListIntegrationAssociations",
+        "connect:ListTagsForResource"
       ],
       "handlerSchema": {
         "properties": {

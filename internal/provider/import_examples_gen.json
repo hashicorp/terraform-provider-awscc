@@ -231,7 +231,7 @@
     },
     {
         "resource": "awscc_apigatewayv2_stage",
-        "identifier": ["Id"]
+        "identifier": ["ApiId","StageName"]
     },
     {
         "resource": "awscc_apigatewayv2_vpc_link",

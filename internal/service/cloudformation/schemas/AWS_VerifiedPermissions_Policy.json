@@ -120,6 +120,12 @@
     },
     "PolicyType": {
       "$ref": "#/definitions/PolicyType"
+    },
+    "Name": {
+      "type": "string",
+      "maxLength": 150,
+      "minLength": 0,
+      "pattern": "^[a-zA-Z0-9-/_]*$"
     }
   },
   "required": [

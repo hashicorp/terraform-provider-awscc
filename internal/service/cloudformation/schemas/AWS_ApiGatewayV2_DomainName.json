@@ -34,7 +34,7 @@
     },
     "RoutingMode": {
       "type": "string",
-      "description": "",
+      "description": "The routing mode API Gateway uses to route traffic to your APIs.",
       "default": "API_MAPPING_ONLY",
       "enum": [
         "API_MAPPING_ONLY",
@@ -95,10 +95,10 @@
         },
         "IpAddressType": {
           "type": "string",
-          "description": ""
+          "description": "The IP address types that can invoke the domain name. Use ``ipv4`` to allow only IPv4 addresses to invoke your domain name, or use ``dualstack`` to allow both IPv4 and IPv6 addresses to invoke your domain name."
         }
       },
-      "description": "The ``DomainNameConfiguration`` property type specifies the configuration for an API's domain name.\n  ``DomainNameConfiguration`` is a property of the [AWS::ApiGatewayV2::DomainName](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-domainname.html) resource."
+      "description": "The ``DomainNameConfiguration`` property type specifies the configuration for an API's domain name.\n ``DomainNameConfiguration`` is a property of the [AWS::ApiGatewayV2::DomainName](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-domainname.html) resource."
     }
   },
   "required": [

@@ -124,40 +124,41 @@
       }
     },
     "EvaluationCriteria": {
-      "description": "",
+      "description": "The evaluation criteria for the alarm.",
       "$ref": "#/definitions/EvaluationCriteria"
     },
     "EvaluationInterval": {
-      "description": "",
+      "description": "The frequency, in seconds, at which the alarm is evaluated.",
       "type": "integer"
     }
   },
   "definitions": {
     "EvaluationCriteria": {
-      "description": "",
+      "description": "The evaluation criteria for an alarm. This is a union type that currently supports ``PromQLCriteria``.",
       "type": "object",
       "additionalProperties": false,
       "properties": {
         "PromQLCriteria": {
-          "$ref": "#/definitions/AlarmPromQLCriteria"
+          "$ref": "#/definitions/AlarmPromQLCriteria",
+          "description": "The PromQL criteria for the alarm evaluation."
         }
       }
     },
     "AlarmPromQLCriteria": {
-      "description": "",
+      "description": "Contains the configuration that determines how a PromQL alarm evaluates its contributors, including the query to run and the durations that define when contributors transition between states.",
       "type": "object",
       "additionalProperties": false,
       "properties": {
         "Query": {
-          "description": "The PromQL query string.",
+          "description": "The PromQL query that the alarm evaluates. The query must return a result of vector type. Each entry in the vector result represents an alarm contributor.",
           "type": "string"
         },
         "PendingPeriod": {
-          "description": "The pending period for the alarm.",
+          "description": "The duration, in seconds, that a contributor must be continuously breaching before it transitions to the ``ALARM`` state.",
           "type": "integer"
         },
         "RecoveryPeriod": {
-          "description": "The recovery period for the alarm.",
+          "description": "The duration, in seconds, that a contributor must continuously not be breaching before it transitions back to the ``OK`` state.",
           "type": "integer"
         }
       }

@@ -1066,6 +1066,8 @@
         "quicksight:CreateTopic",
         "quicksight:PassDataSet",
         "quicksight:DescribeTopicRefresh",
+        "quicksight:CreateFolderMembership",
+        "quicksight:ListFoldersForResource",
         "quicksight:TagResource"
       ]
     },
@@ -1079,7 +1081,10 @@
       "permissions": [
         "quicksight:UpdateTopic",
         "quicksight:PassDataSet",
-        "quicksight:DescribeTopicRefresh"
+        "quicksight:DescribeTopicRefresh",
+        "quicksight:CreateFolderMembership",
+        "quicksight:DeleteFolderMembership",
+        "quicksight:ListFoldersForResource"
       ]
     },
     "delete": {

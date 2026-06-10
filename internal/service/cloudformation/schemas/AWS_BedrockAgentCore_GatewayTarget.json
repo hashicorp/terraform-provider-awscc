@@ -148,6 +148,120 @@
       ],
       "additionalProperties": false
     },
+    "PrivateEndpoint": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "SelfManagedLatticeResource",
+          "properties": {
+            "SelfManagedLatticeResource": {
+              "$ref": "#/definitions/SelfManagedLatticeResource"
+            }
+          },
+          "required": [
+            "SelfManagedLatticeResource"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "ManagedVpcResource",
+          "properties": {
+            "ManagedVpcResource": {
+              "$ref": "#/definitions/ManagedVpcResource"
+            }
+          },
+          "required": [
+            "ManagedVpcResource"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "SelfManagedLatticeResource": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "ResourceConfigurationIdentifier",
+          "properties": {
+            "ResourceConfigurationIdentifier": {
+              "type": "string",
+              "maxLength": 2048,
+              "minLength": 20,
+              "pattern": "^((rcfg-[0-9a-z]{17})|(arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceconfiguration/rcfg-[0-9a-z]{17}))$"
+            }
+          },
+          "required": [
+            "ResourceConfigurationIdentifier"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "ManagedVpcResource": {
+      "type": "object",
+      "properties": {
+        "VpcIdentifier": {
+          "type": "string",
+          "pattern": "^vpc-(([0-9a-z]{8})|([0-9a-z]{17}))$"
+        },
+        "SubnetIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^subnet-[0-9a-zA-Z]{8,17}$"
+          },
+          "minItems": 1
+        },
+        "EndpointIpAddressType": {
+          "$ref": "#/definitions/EndpointIpAddressType"
+        },
+        "SecurityGroupIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^sg-(([0-9a-z]{8})|([0-9a-z]{17}))$"
+          },
+          "maxItems": 5,
+          "minItems": 0
+        },
+        "RoutingDomain": {
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 3
+        }
+      },
+      "required": [
+        "EndpointIpAddressType",
+        "SubnetIds",
+        "VpcIdentifier"
+      ],
+      "additionalProperties": false
+    },
+    "EndpointIpAddressType": {
+      "type": "string",
+      "enum": [
+        "IPV4",
+        "IPV6"
+      ]
+    },
+    "ManagedResourceDetails": {
+      "type": "object",
+      "properties": {
+        "Domain": {
+          "type": "string"
+        },
+        "ResourceGatewayArn": {
+          "type": "string",
+          "pattern": "^arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourcegateway/rgw-[0-9a-z]{17}$"
+        },
+        "ResourceAssociationArn": {
+          "type": "string",
+          "pattern": "^(arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:servicenetworkresourceassociation/)?snra-[0-9a-f]{17}$"
+        }
+      },
+      "additionalProperties": false
+    },
     "RestApiMethod": {
       "type": "string",
       "enum": [
@@ -287,6 +401,11 @@
         },
         "ListingMode": {
           "$ref": "#/definitions/McpServerListingMode"
+        },
+        "ResourcePriority": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000
         }
       },
       "required": [
@@ -754,6 +873,15 @@
       "type": "string",
       "pattern": "^([0-9a-zA-Z][-]?){1,100}$"
     },
+    "PrivateEndpoint": {
+      "$ref": "#/definitions/PrivateEndpoint"
+    },
+    "PrivateEndpointManagedResources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ManagedResourceDetails"
+      }
+    },
     "Status": {
       "$ref": "#/definitions/TargetStatus"
     },
@@ -794,6 +922,7 @@
     "/properties/Status",
     "/properties/StatusReasons",
     "/properties/TargetId",
+    "/properties/PrivateEndpointManagedResources",
     "/properties/UpdatedAt",
     "/properties/AuthorizationData",
     "/properties/ProtocolType"
@@ -816,7 +945,22 @@
         "kms:GenerateDataKey",
         "kms:ListGrants",
         "s3:GetObject",
-        "secretsmanager:GetSecretValue"
+        "secretsmanager:GetSecretValue",
+        "iam:CreateServiceLinkedRole",
+        "ec2:DescribeVpcs",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeSecurityGroups",
+        "ec2:CreateNetworkInterface",
+        "vpc-lattice:AssociateViaAWSService",
+        "vpc-lattice:GetResourceConfiguration",
+        "vpc-lattice:CreateResourceConfiguration",
+        "vpc-lattice:CreateResourceGateway",
+        "vpc-lattice:DeleteResourceConfiguration",
+        "vpc-lattice:DeleteResourceGateway",
+        "vpc-lattice:GetServiceNetworkResourceAssociation",
+        "vpc-lattice:CreateServiceNetworkResourceAssociation",
+        "vpc-lattice:DeleteServiceNetworkResourceAssociation",
+        "vpc-lattice:ListServiceNetworkResourceAssociations"
       ]
     },
     "read": {
@@ -837,7 +981,22 @@
         "kms:GenerateDataKey",
         "kms:ListGrants",
         "s3:GetObject",
-        "secretsmanager:GetSecretValue"
+        "secretsmanager:GetSecretValue",
+        "iam:CreateServiceLinkedRole",
+        "ec2:DescribeVpcs",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeSecurityGroups",
+        "ec2:CreateNetworkInterface",
+        "vpc-lattice:AssociateViaAWSService",
+        "vpc-lattice:GetResourceConfiguration",
+        "vpc-lattice:CreateResourceConfiguration",
+        "vpc-lattice:CreateResourceGateway",
+        "vpc-lattice:DeleteResourceConfiguration",
+        "vpc-lattice:DeleteResourceGateway",
+        "vpc-lattice:GetServiceNetworkResourceAssociation",
+        "vpc-lattice:CreateServiceNetworkResourceAssociation",
+        "vpc-lattice:DeleteServiceNetworkResourceAssociation",
+        "vpc-lattice:ListServiceNetworkResourceAssociations"
       ]
     },
     "delete": {
@@ -846,7 +1005,10 @@
         "bedrock-agentcore:GetGatewayTarget",
         "kms:Decrypt",
         "kms:GenerateDataKey",
-        "kms:ListGrants"
+        "kms:ListGrants",
+        "vpc-lattice:DeleteResourceConfiguration",
+        "vpc-lattice:DeleteResourceGateway",
+        "vpc-lattice:DeleteServiceNetworkResourceAssociation"
       ]
     },
     "list": {

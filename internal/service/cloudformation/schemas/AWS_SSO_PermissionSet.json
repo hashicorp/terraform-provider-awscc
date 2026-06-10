@@ -115,7 +115,7 @@
       "items": {
         "$ref": "#/definitions/ManagedPolicyArn"
       },
-      "maxItems": 20,
+      "maxItems": 25,
       "default": []
     },
     "InlinePolicy": {
@@ -139,7 +139,7 @@
       "items": {
         "$ref": "#/definitions/CustomerManagedPolicyReference"
       },
-      "maxItems": 20,
+      "maxItems": 25,
       "default": []
     },
     "PermissionsBoundary": {
