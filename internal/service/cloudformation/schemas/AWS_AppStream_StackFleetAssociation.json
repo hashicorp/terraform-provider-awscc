@@ -1,0 +1,80 @@
+{
+  "typeName": "AWS::AppStream::StackFleetAssociation",
+  "description": "Resource Type definition for AWS::AppStream::StackFleetAssociation",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-appstream/tree/master/aws-appstream-stackfleetassociation.git",
+  "properties": {
+    "FleetName": {
+      "description": "The name of the fleet. To associate a fleet with a stack, you must specify a dependency on the fleet resource.",
+      "type": "string"
+    },
+    "StackName": {
+      "description": "The name of the stack. To associate a fleet with a stack, you must specify a dependency on the stack resource.",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "FleetName",
+    "StackName"
+  ],
+  "createOnlyProperties": [
+    "/properties/FleetName",
+    "/properties/StackName"
+  ],
+  "primaryIdentifier": [
+    "/properties/FleetName",
+    "/properties/StackName"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "appstream:AssociateFleet",
+        "appstream:ListAssociatedStacks"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "appstream:ListAssociatedStacks"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "appstream:DisassociateFleet",
+        "appstream:ListAssociatedStacks"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "FleetName": {
+            "type": "string",
+            "description": "Fleet name to filter associations"
+          },
+          "StackName": {
+            "type": "string",
+            "description": "Stack name to filter associations"
+          }
+        },
+        "anyOf": [
+          {
+            "required": [
+              "FleetName"
+            ]
+          },
+          {
+            "required": [
+              "StackName"
+            ]
+          }
+        ]
+      },
+      "permissions": [
+        "appstream:ListAssociatedStacks",
+        "appstream:ListAssociatedFleets"
+      ]
+    }
+  }
+}
