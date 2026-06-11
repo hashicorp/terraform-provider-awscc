@@ -16,9 +16,9 @@ The HashiCorp Terraform AWS provider team is:
 * Graham Davison, Engineer - GitHub [@gdavison](https://github.com/gdavison)
 * Jared Baker, Engineer - GitHub [@jar-b](https://github.com/jar-b)
 * Kit Ewbank, Engineer - GitHub [@ewbankkit](https://github.com/ewbankkit)
-* Subham Mukhopadhyay, Engineer - Github [@subham-ibmhc](https://github.com/subham-ibmhc)
-* Tarun Teja, Engineer - Github [@taruntej-a](https://github.com/taruntej-a)
-* Bella Rosas, Intern - Github [@brosas07](https://github.com/brosas07)
+* Subham Mukhopadhyay, Engineer - GitHub [@subham-ibmhc](https://github.com/subham-ibmhc)
+* Tarun Teja, Engineer - GitHub [@taruntej-a](https://github.com/taruntej-a)
+* Bella Rosas, Intern - GitHub [@brosas07](https://github.com/brosas07)
 
 ### How is this provider different from the existing AWS provider?
 
