@@ -1,7 +1,7 @@
 <!-- Copyright IBM Corp. 2021, 2026 -->
 <!-- SPDX-License-Identifier: MPL-2.0 -->
 
-# Terraform AWS Cloud Control Provider Resource Behavior
+# Resource Behavior
 
 This document describes the behavior of resources implemented by the provider. In particular it describes in detail how [AWS CloudFormation resource types](https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-model.html) are defined as [Terraform resources](https://developer.hashicorp.com/terraform/language/resources).
 
@@ -33,7 +33,7 @@ Note that we will use the terms argument and attribute interchangeably from now 
 
 [Data sources](https://developer.hashicorp.com/terraform/language/data-sources) are a variant of resource intended to allow Terraform to reference external data. Unlike [managed resources](#terraform-resources), Terraform does not manage the underlying infrastructure object's lifecycle. Data sources are intended to have no side-effects.
 
-For the purposes of this document we consider data sources to be similar to resources with only a Read method. We will call out differences where they are significant.
+For the purposes of this document we consider data sources to be similar to resources with only a `Read` method. We will call out differences where they are significant.
 
 ### AWS CloudFormation Resources
 
@@ -44,19 +44,20 @@ For the purposes of this document we consider data sources to be similar to reso
 
 ## Interpretation Of CloudFormation Resource Schemas
 
-During [generation](./generating.md) of the Terraform AWS Cloud Control Provider, all available CloudFormation resource schemas are downloaded from the CloudFormation registry and are cached in this GitHub repository (so as to have reproducible builds).
+During [generation](./generating-the-provider.md) of the Terraform AWS Cloud Control Provider, all available CloudFormation resource schemas are downloaded from the CloudFormation registry and are cached in this GitHub repository (so as to have reproducible builds).
 Unless suppressed, each CloudFormation resource schema is then used to generate
 
 * A Terraform resource.
 * A Terraform singular data source. A singular data source returns attributes of a single AWS object. A unique identifier is used to specify for which AWS object information is returned.
 * A plural data source. A plural data source returns a list of the unique identifiers for every AWS object of the resource's type (in the [configured](https://registry.terraform.io/providers/hashicorp/awscc/latest/docs#schema) AWS account and Region).
+* A Terraform list resource. A list resource enables querying AWS for all resources of a certain type (in the [configured](https://registry.terraform.io/providers/hashicorp/awscc/latest/docs#schema) AWS account and Region).
 
 ### Resource Type Naming
 
 CloudFormation resource [type names](https://github.com/aws-cloudformation/cloudformation-resource-schema?tab=readme-ov-file#resource-type-name) consist of three parts; an organization, service and resource (for example `AWS::EC2::Instance`).
 Terraform type names are derived from the CloudFormation type name by lower casing the service part, [snake casing](https://en.wikipedia.org/wiki/Snake_case) the resource part and using `awscc_` as a prefix. The resource part is pluralized for any plural data source type name.
 
-For example, the `AWS::EC2::Instance` CloudFormation resource type leads to the generation of the `awscc_ec2_instance` resource and `awscc_ec2_instance` and `awscc_ec2_instances` data sources.
+For example, the `AWS::EC2::Instance` CloudFormation resource type leads to the generation of the `awscc_ec2_instance` resource, `awscc_ec2_instance` and `awscc_ec2_instances` data sources, and an `awscc_ec2_instance` list resource.
 
 ### Resource Shape
 
@@ -213,8 +214,9 @@ If the operation succeeds, the resource is removed from state.
 
 ### List
 
-The provider has no `List` method. Instead when a [plural data source's](#interpretation-of-cloudformation-resource-schemas) `Read` method is called the provider uses the CloudFormation resource type name to call the [`ListResources` API](https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_ListResources.html).
+The provider's `List` method is called from [`terraform  query`](https://developer.hashicorp.com/terraform/cli/commands/query) when a list resource is configured. Additionally, a [plural data source's](#interpretation-of-cloudformation-resource-schemas) `Read` method uses the CloudFormation resource type name to call the [`ListResources` API](https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_ListResources.html).
 
-If the operation fails, the error is returned to the Terraform CLI.
+If the operation fails for either case, the error is returned to the Terraform CLI.
 
-If the operation succeeds, a list of primary identifiers for all resources is returned and stored in state as the value of the `ids` attribute.
+If the operation succeeds for a list resource, the query result will contain details for all existing resources of the specified type.
+If the operation succeeds for a plural data source, a list of primary identifiers for all resources is returned and stored in state as the value of the `ids` attribute.

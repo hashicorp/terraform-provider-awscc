@@ -39,7 +39,7 @@ issues of each type.
 
 ### [Feature Requests](https://github.com/hashicorp/terraform-provider-awscc/issues/new?labels=enhancement&template=Feature_Request.md)
 
-- [ ] __Ensure coverage status__: The generated provider will only support functionality available in the CloudFormation schema provided by AWS. To influence that prioritization please refer to the [CloudFormation Open Coverage](https://github.com/aws-cloudformation/cloudformation-coverage-roadmap/projects/1) roadmap. At this time we will not accept PR's which add or modify functionality in generated resources. There may however be a bug in the generation code which prevents a resource from being available in the provider. Typically, we will be aware of this issue and will track it publically, but if you are seeing an issue in generation that does not have an issue attached please feel free to submit a bug report.
+- [ ] __Ensure coverage status__: The generated provider will only support functionality available in the CloudFormation schema provided by AWS. To influence that prioritization please refer to the [CloudFormation Open Coverage](https://github.com/aws-cloudformation/cloudformation-coverage-roadmap/projects/1) roadmap. At this time we will not accept PR's which add or modify functionality in generated resources. There may however be a bug in the generation code which prevents a resource from being available in the provider. Typically, we will be aware of this issue and will track it publicly, but if you are seeing an issue in generation that does not have an issue attached please feel free to submit a bug report.
 
 - [ ] __Search for possible duplicate requests__: It's helpful to keep requests
    consolidated to one thread, so do a quick search on existing requests to
@@ -56,7 +56,7 @@ issues of each type.
 - [ ] __Search for answers in Terraform documentation__: We're happy to answer
    questions in GitHub Issues, but it helps reduce issue churn and maintainer
    workload if you work to [find answers to common questions in the
-   documentation](https://www.terraform.io/docs/providers/aws/index.html). Oftentimes Question issues result in documentation updates
+   documentation](https://www.terraform.io/docs/providers/aws/index.html). Often Question issues result in documentation updates
    to help future users, so if you don't find an answer, you can give us
    pointers for where you'd expect to see it in the docs.
 

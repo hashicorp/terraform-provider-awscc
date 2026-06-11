@@ -1,7 +1,7 @@
 <!-- Copyright IBM Corp. 2021, 2026 -->
 <!-- SPDX-License-Identifier: MPL-2.0 -->
 
-# Generating The Terraform AWS Cloud Control Provider
+# Generating the Provider
 
 This document describes the process of generating the Terraform AWS Cloud Control Provider.
 
