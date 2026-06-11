@@ -99,8 +99,8 @@ make biglister
 > There may be a bit of output to `stdout` during this generation.
 > It can be ignored as it pertains to the current version of the schema (e.g. `Quicksight::Analysis`) and we are using the previous version for the resource generation.
 
-Compare this latest schemas with the previous list.
-The experimental command below attempts handle this automatically.
+Compare the latest schemas with the previous list.
+The experimental command below attempts to handle this automatically.
 
 ```sh
 make bigdiffer
