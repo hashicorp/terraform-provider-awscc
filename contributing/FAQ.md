@@ -9,7 +9,6 @@
 
 The HashiCorp Terraform AWS provider team is:
 
-* Marc Cosentino, Product Manager - GitHub [@marcosentino](https://github.com/marcosentino)
 * Simon Davis, Engineering Manager - GitHub [@breathingdust](https://github.com/breathingdust)
 * Justin Retzolk, Ecosystem Engineer - GitHub [@justinretzolk](https://github.com/justinretzolk)
 * Adrian Johnson, Engineer - GitHub [@johnsonaj](https://github.com/johnsonaj)

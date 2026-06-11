@@ -16,8 +16,8 @@ ability to merge PRs and respond to issues.
 
 - [Development Environment Setup](./docs/development-environment-setup.md)
 - [Resource Behavior](./docs/resource-behavior.md)
-- [Generating the Provider](./docs/generating-the-provider.md)
 - [Adding Examples to Generated Documentation](./docs/adding-examples-to-documentation.md)
+- [Generating the Provider](./docs/generating-the-provider.md)
 - [Issue Reporting and Lifecycle](./docs/issue-reporting-and-lifecycle.md)
 - [Pull Request Submission and Lifecycle](./docs/pull-request-submission-and-lifecycle.md)
 - [FAQ](FAQ.md)
