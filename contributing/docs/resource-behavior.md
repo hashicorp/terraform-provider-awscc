@@ -214,7 +214,7 @@ If the operation succeeds, the resource is removed from state.
 
 ### List
 
-The provider's `List` method is called from [`terraform  query`](https://developer.hashicorp.com/terraform/cli/commands/query) when a list resource is configured. Additionally, a [plural data source's](#interpretation-of-cloudformation-resource-schemas) `Read` method uses the CloudFormation resource type name to call the [`ListResources` API](https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_ListResources.html).
+The provider's `List` method is called from [`terraform query`](https://developer.hashicorp.com/terraform/cli/commands/query) when a list resource is configured. Additionally, a [plural data source's](#interpretation-of-cloudformation-resource-schemas) `Read` method uses the CloudFormation resource type name to call the [`ListResources` API](https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_ListResources.html).
 
 If the operation fails for either case, the error is returned to the Terraform CLI.
 
