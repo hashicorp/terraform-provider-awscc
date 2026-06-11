@@ -291,5 +291,5 @@ make commitdocs
 
 ## 10. Open Pull Request
 
-Once all steps are complete, open a pull request any verify all CI checks pass.
+Once all steps are complete, open a pull request and verify all CI checks pass.
 Once merged a new release can be completed.
