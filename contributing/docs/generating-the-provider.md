@@ -78,7 +78,7 @@ This operation uses the CloudFormation API and may be rate-limited.
 If `git status` shows that schemas have been deleted then there were errors during download.
 
 > [!NOTE]
-> When an update to an existing schema causes an new failure, the schema may need to be added to the suppression list.
+> When an update to an existing schema causes a new failure, the schema may need to be added to the suppression list.
 > Once added, re-run the suppression step above to ensure schema retrieval completes without issue.
 
 Commit the updated schemas:
