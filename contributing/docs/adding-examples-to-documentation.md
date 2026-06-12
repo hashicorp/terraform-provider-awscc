@@ -45,4 +45,4 @@ In order to change the position of a single example, you will need to add a new 
 
 > [!IMPORTANT]
 > Documentation generation is expected to be done locally, and changes committed to the repository.
-> Once a PR is is raised, a check will run to compare the source in your branch to the output of the `make docs` command and will fail if they are not identical.
+> Once a PR is raised, a check will run to compare the source in your branch to the output of the `make docs` command and will fail if they are not identical.
