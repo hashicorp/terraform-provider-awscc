@@ -28,7 +28,7 @@ make tools
 ```
 
 To compile the provider, run `make build`.
-This will generate the resources and data sources, build the provider and put the provider binary in the `$GOPATH/bin` directory.
+This will build the provider and put the provider binary in the `$GOPATH/bin` directory.
 
 ```sh
 make build
