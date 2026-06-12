@@ -6,13 +6,11 @@
 ## Requirements
 
 - [Terraform](https://developer.hashicorp.com/terraform/install) 1.0.11+ (to run acceptance tests)
-- [Go](https://golang.org/doc/install) 1.22 (to build the provider plugin)
+- [Go](https://golang.org/doc/install) 1.26 (to build the provider plugin)
 
 ## Quick Start
 
 If you wish to work on the provider, you'll first need [Go](http://www.golang.org) installed on your machine (please check the [requirements](#requirements) before proceeding).
-
-*Note:* This project uses [Go Modules](https://blog.golang.org/using-go-modules) making it safe to work with it outside of your existing [GOPATH](http://golang.org/doc/code.html#GOPATH). The instructions that follow assume a directory in your home directory outside of the standard GOPATH (i.e `$HOME/development/terraform-providers/`).
 
 Clone repository to: `$HOME/development/terraform-providers/`
 
@@ -22,37 +20,38 @@ $ git clone git@github.com:hashicorp/terraform-provider-awscc
 ...
 ```
 
-Enter the provider directory and run `make tools`. This will install the needed tools for the provider.
+Enter the provider directory and run `make tools`.
+This will install the needed tools for the provider.
 
 ```sh
-$ make tools
+make tools
 ```
 
-To compile the provider, run `make all`. This will generate the resources and datasources, build the provider and put the provider binary in the `$GOPATH/bin` directory.
+To compile the provider, run `make build`.
+This will build the provider and put the provider binary in the `$GOPATH/bin` directory.
 
 ```sh
-$ make all
-...
-$ $GOPATH/bin/terraform-provider-awscc
-...
+make build
 ```
 
 ## Testing the Provider
 
-In order to test the provider, you can run `make test`.
+In order to unit test the provider, run `make test`.
 
 *Note:* Make sure no `AWS_ACCESS_KEY_ID` or `AWS_SECRET_ACCESS_KEY` variables are set, and there's no `[default]` section in the AWS credentials file `~/.aws/credentials`.
 
 ```sh
-$ make test
+make test
 ```
 
 In order to run the full suite of Acceptance tests, run `make testacc`.
+Acceptance tests require valid AWS credentials.
 
-*Note:* Acceptance tests create real resources, and often cost money to run. At this time all acceptance tests are also generated.
+> [!Note]
+> Acceptance tests create real resources, and often cost money to run.
 
 ```sh
-$ make testacc
+make testacc
 ```
 
 ## Using the Provider

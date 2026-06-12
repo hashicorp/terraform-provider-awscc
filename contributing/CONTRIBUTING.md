@@ -1,7 +1,7 @@
 <!-- Copyright IBM Corp. 2021, 2026 -->
 <!-- SPDX-License-Identifier: MPL-2.0 -->
 
-# Contributing to Terraform - AWS Cloud Control Provider
+# Contributing to the Terraform AWS Cloud Control Provider
 
 **First:** if you're unsure or afraid of _anything_, ask for help! You can
 submit a work in progress (WIP) pull request, or file an issue with the parts
@@ -14,7 +14,10 @@ the best opportunity to work with you, by making sure we have the things we need
 in order to make it happen. Doing your best to follow it will speed up our
 ability to merge PRs and respond to issues.
 
-- [Development Environment Setup](DEVELOPMENT.md)
-- [Adding Examples to Generated Documentation](add-examples-to-documentation.md)
-- [Issue Reporting and Lifecycle](issue-reporting-and-lifecycle.md)
-- [Pull Request Submission and Lifecycle](pullrequest-submission-and-lifecycle.md)
+- [Development Environment Setup](./docs/development-environment-setup.md)
+- [Resource Behavior](./docs/resource-behavior.md)
+- [Adding Examples to Generated Documentation](./docs/adding-examples-to-documentation.md)
+- [Generating the Provider](./docs/generating-the-provider.md)
+- [Issue Reporting and Lifecycle](./docs/issue-reporting-and-lifecycle.md)
+- [Pull Request Submission and Lifecycle](./docs/pull-request-submission-and-lifecycle.md)
+- [FAQ](FAQ.md)

@@ -32,14 +32,14 @@ expect:
    or removing `[WIP]` from the pull request title if necessary, and a
    maintainer will review it.
 
-1. One of Terraform's provider team members will look over your contribution and
+1. One of the provider team members will look over your contribution and
    either approve it or provide comments letting you know if there is anything
    left to do. We'll try give you the opportunity to make the required changes yourself, but in some cases we may perform the changes ourselves if it makes sense to (minor changes, or for urgent issues).  We do our best to keep up with the volume of PRs waiting for
    review, but it may take some time depending on the complexity of the work.
 
 1. Once all outstanding comments have been addressed, your
    contribution will be merged! Merged PRs will be included in the next
-   Terraform release.
+   provider release.
 
 1. In some cases, we might decide that a PR should be closed without merging.
    We'll make sure to provide clear reasoning when this happens.
@@ -48,18 +48,16 @@ expect:
 
 We try to use a common set of branch name prefixes when submitting pull requests. Prefixes give us an idea of what the branch is for. For example, `td-staticcheck-st1008` would let us know the branch was created to fix a technical debt issue, and `d-improve-contributing-guide` would indicate enhancements to the contributing guide. These are the prefixes we currently use:
 
-- f = feature
-- b = bug fix
-- d = documentation
-- t = tests
-- td = technical debt
-- v = dependencies
-
-Conventions across non-AWS providers varies so when working with other providers please check the names of previously created branches and conform to their standard practices.
+- `f` = feature
+- `b` = bug fix
+- `d` = documentation
+- `t` = tests
+- `td` = technical debt
+- `v` = dependencies
 
 ## Common Review Items
 
-The Terraform AWS Provider follows common practices to ensure consistent and
+The Terraform AWSCC Provider follows common practices to ensure consistent and
 reliable implementations across all resources in the project. While there may be
 older resource and testing code that predates these guidelines, new submissions
 are generally expected to adhere to these items to maintain Terraform Provider
@@ -69,26 +67,20 @@ based on these guidelines to speed up the review and merge process.
 
 ### Go Coding Style
 
-All Go code is automatically checked for compliance with various linters, such as `gofmt`. These tools can be installed using the `GNUMakefile` in this repository.
+All Go code is automatically checked for compliance with various linters, such as `gofmt`.
+These tools can be installed using the `GNUMakefile` in this repository.
 
-```console
-% cd terraform-provider-awscc
-% make tools
+```sh
+make tools
 ```
 
 Check your code with the linters:
 
-```console
-% make lint
+```sh
+make lint
 ```
 
-`gofmt` will also fix many simple formatting issues for you. The Makefile includes a target for this:
-
-```console
-% make fmt
-```
-
-The import statement in a Go file follows these rules:
+The `import` statement in a Go file follows these rules:
 
 1. Import declarations are grouped into a maximum of three groups with the following order:
     - Standard packages (also called short import path or built-in packages)
@@ -99,8 +91,8 @@ The import statement in a Go file follows these rules:
 
 Check your imports:
 
-```console
-% make importlint
+```sh
+make importlint
 ```
 
 For greater detail, the following Go language resources provide common coding preferences that may be referenced during review, if not automatically handled by the project's linting tools.
