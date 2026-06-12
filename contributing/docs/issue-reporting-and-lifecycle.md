@@ -56,7 +56,7 @@ issues of each type.
 - [ ] __Search for answers in Terraform documentation__: We're happy to answer
    questions in GitHub Issues, but it helps reduce issue churn and maintainer
    workload if you work to [find answers to common questions in the
-   documentation](https://www.terraform.io/docs/providers/aws/index.html). Often Question issues result in documentation updates
+   documentation](https://www.terraform.io/docs/providers/aws/index.html). Oftentimes Question issues result in documentation updates
    to help future users, so if you don't find an answer, you can give us
    pointers for where you'd expect to see it in the docs.
 
