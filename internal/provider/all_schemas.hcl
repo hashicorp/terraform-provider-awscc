@@ -1060,6 +1060,11 @@ resource_schema "aws_cloudformation_type_activation" {
 
 resource_schema "aws_cloudfront_anycast_ip_list" {
   cloudformation_type_name = "AWS::CloudFront::AnycastIpList"
+
+  # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_cloudfront_cache_policy" {
@@ -1084,6 +1089,11 @@ resource_schema "aws_cloudfront_continuous_deployment_policy" {
 
 resource_schema "aws_cloudfront_distribution" {
   cloudformation_type_name = "AWS::CloudFront::Distribution"
+
+  # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_cloudfront_distribution_tenant" {
