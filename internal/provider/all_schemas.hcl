@@ -83,6 +83,11 @@ resource_schema "aws_accessanalyzer_analyzer" {
 
 resource_schema "aws_amazonmq_broker" {
   cloudformation_type_name = "AWS::AmazonMQ::Broker"
+
+  # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_amazonmq_configuration" {
