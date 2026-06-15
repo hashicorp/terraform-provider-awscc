@@ -6184,6 +6184,11 @@ resource_schema "aws_vpclattice_service_network_vpc_association" {
 
 resource_schema "aws_vpclattice_target_group" {
   cloudformation_type_name = "AWS::VpcLattice::TargetGroup"
+
+  # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_wafv2_ip_set" {
