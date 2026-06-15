@@ -60,11 +60,6 @@
         "identifier": ["Arn"]
     },
     {
-        "resource": "awscc_amazonmq_broker",
-        "generateListResource": true,
-        "identifier": ["Id"]
-    },
-    {
         "resource": "awscc_amazonmq_configuration",
         "generateListResource": true,
         "identifier": ["Id"]
@@ -1043,11 +1038,6 @@
         "identifier": ["Arn"]
     },
     {
-        "resource": "awscc_cloudfront_anycast_ip_list",
-        "generateListResource": true,
-        "identifier": ["Id"]
-    },
-    {
         "resource": "awscc_cloudfront_cache_policy",
         "generateListResource": true,
         "identifier": ["Id"]
@@ -1069,11 +1059,6 @@
     },
     {
         "resource": "awscc_cloudfront_continuous_deployment_policy",
-        "generateListResource": true,
-        "identifier": ["Id"]
-    },
-    {
-        "resource": "awscc_cloudfront_distribution",
         "generateListResource": true,
         "identifier": ["Id"]
     },
@@ -2533,10 +2518,6 @@
         "identifier": ["IdentityProviderConfigName","ClusterName","Type"]
     },
     {
-        "resource": "awscc_eks_nodegroup",
-        "identifier": ["Id"]
-    },
-    {
         "resource": "awscc_eks_pod_identity_association",
         "identifier": ["AssociationArn"]
     },
@@ -2563,16 +2544,6 @@
         "resource": "awscc_emr_wal_workspace",
         "generateListResource": true,
         "identifier": ["WALWorkspaceName"]
-    },
-    {
-        "resource": "awscc_emrcontainers_security_configuration",
-        "generateListResource": true,
-        "identifier": ["Arn"]
-    },
-    {
-        "resource": "awscc_emrcontainers_virtual_cluster",
-        "generateListResource": true,
-        "identifier": ["Id"]
     },
     {
         "resource": "awscc_emrserverless_application",
@@ -4214,16 +4185,6 @@
     },
     {
         "resource": "awscc_mediapackage_asset",
-        "generateListResource": true,
-        "identifier": ["Id"]
-    },
-    {
-        "resource": "awscc_mediapackage_channel",
-        "generateListResource": true,
-        "identifier": ["Id"]
-    },
-    {
-        "resource": "awscc_mediapackage_origin_endpoint",
         "generateListResource": true,
         "identifier": ["Id"]
     },
@@ -6379,11 +6340,6 @@
     },
     {
         "resource": "awscc_vpclattice_service_network_vpc_association",
-        "generateListResource": true,
-        "identifier": ["Arn"]
-    },
-    {
-        "resource": "awscc_vpclattice_target_group",
         "generateListResource": true,
         "identifier": ["Arn"]
     },
