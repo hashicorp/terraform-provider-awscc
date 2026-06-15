@@ -87,7 +87,6 @@ resource_schema "aws_amazonmq_broker" {
   # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_amazonmq_configuration" {
@@ -1064,7 +1063,6 @@ resource_schema "aws_cloudfront_anycast_ip_list" {
   # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_cloudfront_cache_policy" {
@@ -1093,7 +1091,6 @@ resource_schema "aws_cloudfront_distribution" {
   # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_cloudfront_distribution_tenant" {
@@ -6184,7 +6181,6 @@ resource_schema "aws_vpclattice_target_group" {
   # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_wafv2_ip_set" {
