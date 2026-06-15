@@ -2580,7 +2580,6 @@ resource_schema "aws_emrcontainers_security_configuration" {
   # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_emrcontainers_virtual_cluster" {
@@ -2589,7 +2588,6 @@ resource_schema "aws_emrcontainers_virtual_cluster" {
   # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_emrserverless_application" {

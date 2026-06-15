@@ -381,6 +381,8 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_emr_studios -cftype AWS::EMR::Studio -package emr ../aws/emr/studio_plural_data_source_gen.go ../aws/emr/studio_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_emr_studio_session_mappings -cftype AWS::EMR::StudioSessionMapping -package emr ../aws/emr/studio_session_mapping_plural_data_source_gen.go ../aws/emr/studio_session_mapping_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_emr_wal_workspaces -cftype AWS::EMR::WALWorkspace -package emr ../aws/emr/wal_workspace_plural_data_source_gen.go ../aws/emr/wal_workspace_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_emrcontainers_security_configurations -cftype AWS::EMRContainers::SecurityConfiguration -package emrcontainers ../aws/emrcontainers/security_configuration_plural_data_source_gen.go ../aws/emrcontainers/security_configuration_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_emrcontainers_virtual_clusters -cftype AWS::EMRContainers::VirtualCluster -package emrcontainers ../aws/emrcontainers/virtual_cluster_plural_data_source_gen.go ../aws/emrcontainers/virtual_cluster_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_emrserverless_applications -cftype AWS::EMRServerless::Application -package emrserverless ../aws/emrserverless/application_plural_data_source_gen.go ../aws/emrserverless/application_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_elasticache_cache_clusters -cftype AWS::ElastiCache::CacheCluster -package elasticache ../aws/elasticache/cache_cluster_plural_data_source_gen.go ../aws/elasticache/cache_cluster_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_elasticache_global_replication_groups -cftype AWS::ElastiCache::GlobalReplicationGroup -package elasticache ../aws/elasticache/global_replication_group_plural_data_source_gen.go ../aws/elasticache/global_replication_group_plural_data_source_gen_test.go
@@ -1127,6 +1129,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/elasticloadbalancingv2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/elementalinference"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/emr"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/emrcontainers"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/emrserverless"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/entityresolution"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/events"
