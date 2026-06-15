@@ -472,6 +472,7 @@ func (p *ccProvider) DataSources(ctx context.Context) []func() datasource.DataSo
 			)
 
 			writeProviderError("data source", name, err)
+
 			continue
 		}
 
