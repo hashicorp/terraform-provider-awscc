@@ -471,6 +471,8 @@ func (p *ccProvider) DataSources(ctx context.Context) []func() datasource.DataSo
 				fmt.Sprintf("Error getting the %s Data Source, this is an error in the provider.\n%s\n", name, err),
 			)
 
+			writeProviderError("data source", name, err)
+
 			continue
 		}
 

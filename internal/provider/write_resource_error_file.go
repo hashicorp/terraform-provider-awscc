@@ -14,13 +14,13 @@ import (
 var resourceErrorLog *os.File
 
 // init opens the resource error log when the provider binary starts.
-// The log path is read from $RESOURCE_ERROR_LOG; defaults to resource_errors.log
+// The log path is read from $RESOURCE_ERROR_LOG; defaults to .startup_errors.log
 // in the current working directory. Uses O_APPEND because terraform invokes the
 // provider binary multiple times per plan — O_TRUNC would wipe earlier entries.
 // Truncate the file once before running terraform (e.g. in the make target).
 // Enabled via the `writeerrors` build tag.
 func init() {
-	path := os.Getenv("STARTUP_ERROR_LOG")
+	path := os.Getenv("RESOURCE_ERROR_LOG")
 	if path == "" {
 		path = ".startup_errors.log"
 	}
