@@ -494,7 +494,13 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	                "ml.r6id.24xlarge",
 		//	                "ml.r6id.32xlarge",
 		//	                "ml.p5.4xlarge",
-		//	                "ml.p6-b200.48xlarge"
+		//	                "ml.p6-b200.48xlarge",
+		//	                "ml.g7e.2xlarge",
+		//	                "ml.g7e.4xlarge",
+		//	                "ml.g7e.8xlarge",
+		//	                "ml.g7e.12xlarge",
+		//	                "ml.g7e.24xlarge",
+		//	                "ml.g7e.48xlarge"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -716,7 +722,13 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	                "ml.r6id.24xlarge",
 		//	                "ml.r6id.32xlarge",
 		//	                "ml.p5.4xlarge",
-		//	                "ml.p6-b200.48xlarge"
+		//	                "ml.p6-b200.48xlarge",
+		//	                "ml.g7e.2xlarge",
+		//	                "ml.g7e.4xlarge",
+		//	                "ml.g7e.8xlarge",
+		//	                "ml.g7e.12xlarge",
+		//	                "ml.g7e.24xlarge",
+		//	                "ml.g7e.48xlarge"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -975,7 +987,13 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	                "ml.r6id.24xlarge",
 		//	                "ml.r6id.32xlarge",
 		//	                "ml.p5.4xlarge",
-		//	                "ml.p6-b200.48xlarge"
+		//	                "ml.p6-b200.48xlarge",
+		//	                "ml.g7e.2xlarge",
+		//	                "ml.g7e.4xlarge",
+		//	                "ml.g7e.8xlarge",
+		//	                "ml.g7e.12xlarge",
+		//	                "ml.g7e.24xlarge",
+		//	                "ml.g7e.48xlarge"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -1589,6 +1607,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 											"ml.r6id.32xlarge",
 											"ml.p5.4xlarge",
 											"ml.p6-b200.48xlarge",
+											"ml.g7e.2xlarge",
+											"ml.g7e.4xlarge",
+											"ml.g7e.8xlarge",
+											"ml.g7e.12xlarge",
+											"ml.g7e.24xlarge",
+											"ml.g7e.48xlarge",
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1858,6 +1882,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 											"ml.r6id.32xlarge",
 											"ml.p5.4xlarge",
 											"ml.p6-b200.48xlarge",
+											"ml.g7e.2xlarge",
+											"ml.g7e.4xlarge",
+											"ml.g7e.8xlarge",
+											"ml.g7e.12xlarge",
+											"ml.g7e.24xlarge",
+											"ml.g7e.48xlarge",
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2183,6 +2213,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 											"ml.r6id.32xlarge",
 											"ml.p5.4xlarge",
 											"ml.p6-b200.48xlarge",
+											"ml.g7e.2xlarge",
+											"ml.g7e.4xlarge",
+											"ml.g7e.8xlarge",
+											"ml.g7e.12xlarge",
+											"ml.g7e.24xlarge",
+											"ml.g7e.48xlarge",
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2618,7 +2654,13 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	                "ml.r6id.24xlarge",
 		//	                "ml.r6id.32xlarge",
 		//	                "ml.p5.4xlarge",
-		//	                "ml.p6-b200.48xlarge"
+		//	                "ml.p6-b200.48xlarge",
+		//	                "ml.g7e.2xlarge",
+		//	                "ml.g7e.4xlarge",
+		//	                "ml.g7e.8xlarge",
+		//	                "ml.g7e.12xlarge",
+		//	                "ml.g7e.24xlarge",
+		//	                "ml.g7e.48xlarge"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -3045,7 +3087,13 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	                "ml.r6id.24xlarge",
 		//	                "ml.r6id.32xlarge",
 		//	                "ml.p5.4xlarge",
-		//	                "ml.p6-b200.48xlarge"
+		//	                "ml.p6-b200.48xlarge",
+		//	                "ml.g7e.2xlarge",
+		//	                "ml.g7e.4xlarge",
+		//	                "ml.g7e.8xlarge",
+		//	                "ml.g7e.12xlarge",
+		//	                "ml.g7e.24xlarge",
+		//	                "ml.g7e.48xlarge"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -3267,7 +3315,13 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	                "ml.r6id.24xlarge",
 		//	                "ml.r6id.32xlarge",
 		//	                "ml.p5.4xlarge",
-		//	                "ml.p6-b200.48xlarge"
+		//	                "ml.p6-b200.48xlarge",
+		//	                "ml.g7e.2xlarge",
+		//	                "ml.g7e.4xlarge",
+		//	                "ml.g7e.8xlarge",
+		//	                "ml.g7e.12xlarge",
+		//	                "ml.g7e.24xlarge",
+		//	                "ml.g7e.48xlarge"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -3526,7 +3580,13 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	                "ml.r6id.24xlarge",
 		//	                "ml.r6id.32xlarge",
 		//	                "ml.p5.4xlarge",
-		//	                "ml.p6-b200.48xlarge"
+		//	                "ml.p6-b200.48xlarge",
+		//	                "ml.g7e.2xlarge",
+		//	                "ml.g7e.4xlarge",
+		//	                "ml.g7e.8xlarge",
+		//	                "ml.g7e.12xlarge",
+		//	                "ml.g7e.24xlarge",
+		//	                "ml.g7e.48xlarge"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -3784,7 +3844,13 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	                "ml.r6id.24xlarge",
 		//	                "ml.r6id.32xlarge",
 		//	                "ml.p5.4xlarge",
-		//	                "ml.p6-b200.48xlarge"
+		//	                "ml.p6-b200.48xlarge",
+		//	                "ml.g7e.2xlarge",
+		//	                "ml.g7e.4xlarge",
+		//	                "ml.g7e.8xlarge",
+		//	                "ml.g7e.12xlarge",
+		//	                "ml.g7e.24xlarge",
+		//	                "ml.g7e.48xlarge"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -4113,7 +4179,13 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	              "ml.r6id.24xlarge",
 		//	              "ml.r6id.32xlarge",
 		//	              "ml.p5.4xlarge",
-		//	              "ml.p6-b200.48xlarge"
+		//	              "ml.p6-b200.48xlarge",
+		//	              "ml.g7e.2xlarge",
+		//	              "ml.g7e.4xlarge",
+		//	              "ml.g7e.8xlarge",
+		//	              "ml.g7e.12xlarge",
+		//	              "ml.g7e.24xlarge",
+		//	              "ml.g7e.48xlarge"
 		//	            ],
 		//	            "type": "string"
 		//	          },
@@ -4531,6 +4603,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 											"ml.r6id.32xlarge",
 											"ml.p5.4xlarge",
 											"ml.p6-b200.48xlarge",
+											"ml.g7e.2xlarge",
+											"ml.g7e.4xlarge",
+											"ml.g7e.8xlarge",
+											"ml.g7e.12xlarge",
+											"ml.g7e.24xlarge",
+											"ml.g7e.48xlarge",
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -5143,6 +5221,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 											"ml.r6id.32xlarge",
 											"ml.p5.4xlarge",
 											"ml.p6-b200.48xlarge",
+											"ml.g7e.2xlarge",
+											"ml.g7e.4xlarge",
+											"ml.g7e.8xlarge",
+											"ml.g7e.12xlarge",
+											"ml.g7e.24xlarge",
+											"ml.g7e.48xlarge",
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -5412,6 +5496,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 											"ml.r6id.32xlarge",
 											"ml.p5.4xlarge",
 											"ml.p6-b200.48xlarge",
+											"ml.g7e.2xlarge",
+											"ml.g7e.4xlarge",
+											"ml.g7e.8xlarge",
+											"ml.g7e.12xlarge",
+											"ml.g7e.24xlarge",
+											"ml.g7e.48xlarge",
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -5737,6 +5827,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 											"ml.r6id.32xlarge",
 											"ml.p5.4xlarge",
 											"ml.p6-b200.48xlarge",
+											"ml.g7e.2xlarge",
+											"ml.g7e.4xlarge",
+											"ml.g7e.8xlarge",
+											"ml.g7e.12xlarge",
+											"ml.g7e.24xlarge",
+											"ml.g7e.48xlarge",
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -6063,6 +6159,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 											"ml.r6id.32xlarge",
 											"ml.p5.4xlarge",
 											"ml.p6-b200.48xlarge",
+											"ml.g7e.2xlarge",
+											"ml.g7e.4xlarge",
+											"ml.g7e.8xlarge",
+											"ml.g7e.12xlarge",
+											"ml.g7e.24xlarge",
+											"ml.g7e.48xlarge",
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -6512,6 +6614,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 										"ml.r6id.32xlarge",
 										"ml.p5.4xlarge",
 										"ml.p6-b200.48xlarge",
+										"ml.g7e.2xlarge",
+										"ml.g7e.4xlarge",
+										"ml.g7e.8xlarge",
+										"ml.g7e.12xlarge",
+										"ml.g7e.24xlarge",
+										"ml.g7e.48xlarge",
 									),
 								),
 							}, /*END VALIDATORS*/
@@ -6893,7 +7001,13 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	                "ml.r6id.24xlarge",
 		//	                "ml.r6id.32xlarge",
 		//	                "ml.p5.4xlarge",
-		//	                "ml.p6-b200.48xlarge"
+		//	                "ml.p6-b200.48xlarge",
+		//	                "ml.g7e.2xlarge",
+		//	                "ml.g7e.4xlarge",
+		//	                "ml.g7e.8xlarge",
+		//	                "ml.g7e.12xlarge",
+		//	                "ml.g7e.24xlarge",
+		//	                "ml.g7e.48xlarge"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -7271,6 +7385,12 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 											"ml.r6id.32xlarge",
 											"ml.p5.4xlarge",
 											"ml.p6-b200.48xlarge",
+											"ml.g7e.2xlarge",
+											"ml.g7e.4xlarge",
+											"ml.g7e.8xlarge",
+											"ml.g7e.12xlarge",
+											"ml.g7e.24xlarge",
+											"ml.g7e.48xlarge",
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

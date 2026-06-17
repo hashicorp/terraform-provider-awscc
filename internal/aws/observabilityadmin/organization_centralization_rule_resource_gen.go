@@ -118,6 +118,25 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 		//	          },
 		//	          "type": "object"
 		//	        },
+		//	        "DestinationMetricsConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "BackupConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Region": {
+		//	                  "minLength": 1,
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Region"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "Region": {
 		//	          "minLength": 1,
 		//	          "type": "string"
@@ -170,6 +189,17 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 		//	          "required": [
 		//	            "EncryptedLogGroupStrategy"
 		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "SourceMetricsConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "MetricsSelectionCriteria": {
+		//	              "maxLength": 2000,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
 		//	          "type": "object"
 		//	        }
 		//	      },
@@ -320,6 +350,38 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
+						// Property: DestinationMetricsConfiguration
+						"destination_metrics_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BackupConfiguration
+								"backup_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Region
+										"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthAtLeast(1),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: Region
 						"region": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Required: true,
@@ -386,6 +448,27 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 								}, /*END ATTRIBUTE*/
 								// Property: LogGroupSelectionCriteria
 								"log_group_selection_criteria": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 2000),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SourceMetricsConfiguration
+						"source_metrics_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: MetricsSelectionCriteria
+								"metrics_selection_criteria": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Optional: true,
 									Computed: true,
 									Validators: []validator.String{ /*START VALIDATORS*/
@@ -545,6 +628,7 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 		"data_source_selection_criteria":          "DataSourceSelectionCriteria",
 		"destination":                             "Destination",
 		"destination_logs_configuration":          "DestinationLogsConfiguration",
+		"destination_metrics_configuration":       "DestinationMetricsConfiguration",
 		"encrypted_log_group_strategy":            "EncryptedLogGroupStrategy",
 		"encryption_conflict_resolution_strategy": "EncryptionConflictResolutionStrategy",
 		"encryption_strategy":                     "EncryptionStrategy",
@@ -554,6 +638,7 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 		"log_group_name_pattern":                  "LogGroupNamePattern",
 		"log_group_selection_criteria":            "LogGroupSelectionCriteria",
 		"logs_encryption_configuration":           "LogsEncryptionConfiguration",
+		"metrics_selection_criteria":              "MetricsSelectionCriteria",
 		"region":                                  "Region",
 		"regions":                                 "Regions",
 		"rule":                                    "Rule",
@@ -562,6 +647,7 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 		"scope":                                   "Scope",
 		"source":                                  "Source",
 		"source_logs_configuration":               "SourceLogsConfiguration",
+		"source_metrics_configuration":            "SourceMetricsConfiguration",
 		"tags":                                    "Tags",
 		"value":                                   "Value",
 	})

@@ -74,7 +74,7 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "additionalProperties": false,
 		//	  "properties": {
 		//	    "CustomInstructionsString": {
-		//	      "maxLength": 5000,
+		//	      "maxLength": 10000,
 		//	      "minLength": 0,
 		//	      "type": "string"
 		//	    }

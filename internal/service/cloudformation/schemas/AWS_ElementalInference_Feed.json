@@ -2,6 +2,22 @@
   "typeName": "AWS::ElementalInference::Feed",
   "description": "Represents a feed that receives media for inference processing",
   "definitions": {
+    "AspectRatio": {
+      "type": "object",
+      "properties": {
+        "Width": {
+          "type": "integer"
+        },
+        "Height": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "Height",
+        "Width"
+      ],
+      "additionalProperties": false
+    },
     "ClippingConfig": {
       "type": "object",
       "properties": {
@@ -70,6 +86,19 @@
             "Clipping"
           ],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "Subtitling",
+          "properties": {
+            "Subtitling": {
+              "$ref": "#/definitions/SubtitlingConfig"
+            }
+          },
+          "required": [
+            "Subtitling"
+          ],
+          "additionalProperties": false
         }
       ]
     },
@@ -79,6 +108,38 @@
         "ENABLED",
         "DISABLED"
       ]
+    },
+    "ProfanityFilterMode": {
+      "type": "string",
+      "enum": [
+        "DISABLED",
+        "CENSOR",
+        "DROP"
+      ]
+    },
+    "SubtitlingConfig": {
+      "type": "object",
+      "properties": {
+        "Language": {
+          "$ref": "#/definitions/TranscriptionLanguage"
+        },
+        "AspectRatio": {
+          "$ref": "#/definitions/AspectRatio"
+        },
+        "Dictionary": {
+          "type": "string",
+          "maxLength": 19,
+          "minLength": 1,
+          "pattern": "^[a-zA-Z0-9]+$"
+        },
+        "ProfanityFilter": {
+          "$ref": "#/definitions/ProfanityFilterMode"
+        }
+      },
+      "required": [
+        "Language"
+      ],
+      "additionalProperties": false
     },
     "TagMap": {
       "type": "object",
@@ -90,9 +151,19 @@
       },
       "additionalProperties": false
     },
-    "Unit": {
-      "type": "object",
-      "additionalProperties": false
+    "TranscriptionLanguage": {
+      "type": "string",
+      "enum": [
+        "eng",
+        "eng-au",
+        "eng-gb",
+        "eng-us",
+        "fra",
+        "ita",
+        "deu",
+        "spa",
+        "por"
+      ]
     }
   },
   "properties": {

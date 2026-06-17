@@ -164,6 +164,7 @@ resource "awscc_codepipeline_webhook" "example" {
 
 - `name` (String) The name of the webhook
 - `register_with_third_party` (Boolean) Configures a connection between the webhook that was created and the external tool with events to be detected.
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `target_pipeline_version` (Number) The version number of the pipeline to be connected to the trigger request.
 
 ### Read-Only
@@ -191,6 +192,15 @@ Required:
 Optional:
 
 - `match_equals` (String) The value selected by the JsonPath expression must match what is supplied in the MatchEquals field. Otherwise, the request is ignored.
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

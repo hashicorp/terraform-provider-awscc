@@ -228,6 +228,20 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Indicates the database engine version.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: GlobalClusterIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the Neptune global database to which this new DB cluster should be added.",
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "pattern": "^[A-Za-z][0-9A-Za-z-:._]*$",
+		//	  "type": "string"
+		//	}
+		"global_cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Neptune global database to which this new DB cluster should be added.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IamAuthEnabled
 		// CloudFormation resource type schema:
 		//
@@ -248,6 +262,21 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the AWS KMS key that is used to encrypt the database instances in the DB cluster, such as arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef. If you enable the StorageEncrypted property but don't specify this property, the default KMS key is used. If you specify this property, you must set the StorageEncrypted property to true.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: NetworkType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The network type of the DB cluster.",
+		//	  "enum": [
+		//	    "IPV4",
+		//	    "DUAL"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The network type of the DB cluster.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Port
@@ -502,11 +531,13 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"endpoint":                         "Endpoint",
 		"engine_version":                   "EngineVersion",
 		"feature_name":                     "FeatureName",
+		"global_cluster_identifier":        "GlobalClusterIdentifier",
 		"iam_auth_enabled":                 "IamAuthEnabled",
 		"key":                              "Key",
 		"kms_key_id":                       "KmsKeyId",
 		"max_capacity":                     "MaxCapacity",
 		"min_capacity":                     "MinCapacity",
+		"network_type":                     "NetworkType",
 		"port":                             "Port",
 		"preferred_backup_window":          "PreferredBackupWindow",
 		"preferred_maintenance_window":     "PreferredMaintenanceWindow",

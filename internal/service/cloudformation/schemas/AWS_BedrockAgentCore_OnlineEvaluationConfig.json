@@ -241,6 +241,52 @@
         }
       },
       "additionalProperties": false
+    },
+    "Insight": {
+      "type": "object",
+      "description": "An insight configuration for failure analysis.",
+      "properties": {
+        "InsightId": {
+          "type": "string",
+          "description": "The unique identifier of the insight.",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[a-zA-Z][a-zA-Z0-9._]+$"
+        }
+      },
+      "required": [
+        "InsightId"
+      ],
+      "additionalProperties": false
+    },
+    "ClusteringFrequency": {
+      "type": "string",
+      "description": "The frequency at which clustering reports are generated.",
+      "enum": [
+        "DAILY",
+        "WEEKLY",
+        "MONTHLY"
+      ]
+    },
+    "ClusteringConfig": {
+      "type": "object",
+      "description": "The configuration for clustering analysis of evaluation results.",
+      "properties": {
+        "Frequencies": {
+          "type": "array",
+          "description": "The list of frequencies at which clustering reports are generated.",
+          "items": {
+            "$ref": "#/definitions/ClusteringFrequency"
+          },
+          "minItems": 0,
+          "maxItems": 3,
+          "insertionOrder": false
+        }
+      },
+      "required": [
+        "Frequencies"
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -282,7 +328,7 @@
       "items": {
         "$ref": "#/definitions/EvaluatorReference"
       },
-      "minItems": 1,
+      "minItems": 0,
       "maxItems": 10,
       "insertionOrder": false
     },
@@ -318,6 +364,20 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "Insights": {
+      "type": "array",
+      "description": "The list of insights to enable for failure analysis.",
+      "items": {
+        "$ref": "#/definitions/Insight"
+      },
+      "minItems": 0,
+      "maxItems": 10,
+      "insertionOrder": false
+    },
+    "ClusteringConfig": {
+      "$ref": "#/definitions/ClusteringConfig",
+      "description": "The configuration for clustering analysis of evaluation results."
     }
   },
   "additionalProperties": false,
@@ -325,7 +385,6 @@
     "OnlineEvaluationConfigName",
     "DataSourceConfig",
     "EvaluationExecutionRoleArn",
-    "Evaluators",
     "Rule"
   ],
   "readOnlyProperties": [

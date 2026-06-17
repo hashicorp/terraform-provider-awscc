@@ -24,6 +24,7 @@ Resource Type definition for AWS::BedrockAgentCore::Policy
 ### Optional
 
 - `description` (String) A human-readable description of the policy's purpose and functionality.
+- `enforcement_mode` (String) Whether the policy contributes to the enforce decision returned to Gateway. LOG_ONLY policies are still evaluated but their decisions are observed only, allowing customers to validate a policy against real traffic before promoting it.
 - `validation_mode` (String) The validation mode for the policy. Determines how Cedar analyzer validation results are handled.
 
 ### Read-Only
@@ -39,16 +40,25 @@ Resource Type definition for AWS::BedrockAgentCore::Policy
 <a id="nestedatt--definition"></a>
 ### Nested Schema for `definition`
 
-Required:
+Optional:
 
 - `cedar` (Attributes) A Cedar policy statement within the AgentCore Policy system. (see [below for nested schema](#nestedatt--definition--cedar))
+- `policy` (Attributes) A policy statement within the AgentCore Policy system. (see [below for nested schema](#nestedatt--definition--policy))
 
 <a id="nestedatt--definition--cedar"></a>
 ### Nested Schema for `definition.cedar`
 
-Required:
+Optional:
 
 - `statement` (String) The Cedar policy statement that defines the authorization logic.
+
+
+<a id="nestedatt--definition--policy"></a>
+### Nested Schema for `definition.policy`
+
+Optional:
+
+- `statement` (String) The policy statement.
 
 ## Import
 

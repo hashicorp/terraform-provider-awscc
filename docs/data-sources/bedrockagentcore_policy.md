@@ -24,6 +24,7 @@ Data Source schema for AWS::BedrockAgentCore::Policy
 - `created_at` (String) The timestamp when the policy was created.
 - `definition` (Attributes) The definition structure for policies. Encapsulates different policy formats. (see [below for nested schema](#nestedatt--definition))
 - `description` (String) A human-readable description of the policy's purpose and functionality.
+- `enforcement_mode` (String) Whether the policy contributes to the enforce decision returned to Gateway. LOG_ONLY policies are still evaluated but their decisions are observed only, allowing customers to validate a policy against real traffic before promoting it.
 - `name` (String) The customer-assigned immutable name for the policy. Must be unique within the policy engine.
 - `policy_arn` (String) The Amazon Resource Name (ARN) of the policy.
 - `policy_engine_id` (String) The identifier of the policy engine which contains this policy.
@@ -39,6 +40,7 @@ Data Source schema for AWS::BedrockAgentCore::Policy
 Read-Only:
 
 - `cedar` (Attributes) A Cedar policy statement within the AgentCore Policy system. (see [below for nested schema](#nestedatt--definition--cedar))
+- `policy` (Attributes) A policy statement within the AgentCore Policy system. (see [below for nested schema](#nestedatt--definition--policy))
 
 <a id="nestedatt--definition--cedar"></a>
 ### Nested Schema for `definition.cedar`
@@ -46,3 +48,11 @@ Read-Only:
 Read-Only:
 
 - `statement` (String) The Cedar policy statement that defines the authorization logic.
+
+
+<a id="nestedatt--definition--policy"></a>
+### Nested Schema for `definition.policy`
+
+Read-Only:
+
+- `statement` (String) The policy statement.

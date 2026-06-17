@@ -158,11 +158,11 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The Amazon Resource Name (ARN) of the ODB network.",
 		//	  "type": "string"
 		//	}
 		"odb_network_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "The Amazon Resource Name (ARN) of the ODB network.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RouteTableId

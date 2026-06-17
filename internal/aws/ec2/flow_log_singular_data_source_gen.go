@@ -10,6 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -189,6 +190,51 @@ func flowLogDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The type of resource for which to create the flow log. For example, if you specified a VPC ID for the ResourceId property, specify VPC for this property.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: TagFieldSpecifications
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The resource types and associated tags for EC2 resources associated with the EC2 Tags feature for log enrichment.",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "ResourceType": {
+		//	        "type": "string"
+		//	      },
+		//	      "TagKeys": {
+		//	        "items": {
+		//	          "type": "string"
+		//	        },
+		//	        "type": "array",
+		//	        "uniqueItems": false
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "ResourceType",
+		//	      "TagKeys"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tag_field_specifications": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ResourceType
+					"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: TagKeys
+					"tag_keys": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The resource types and associated tags for EC2 resources associated with the EC2 Tags feature for log enrichment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -277,6 +323,8 @@ func flowLogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"per_hour_partition":          "PerHourPartition",
 		"resource_id":                 "ResourceId",
 		"resource_type":               "ResourceType",
+		"tag_field_specifications":    "TagFieldSpecifications",
+		"tag_keys":                    "TagKeys",
 		"tags":                        "Tags",
 		"traffic_type":                "TrafficType",
 		"value":                       "Value",

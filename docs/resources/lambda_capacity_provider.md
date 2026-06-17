@@ -135,6 +135,7 @@ resource "awscc_lambda_capacity_provider" "example" {
 - `kms_key_arn` (String) The ARN of the KMS key used to encrypt the capacity provider's resources.
 - `propagate_tags` (Attributes) (see [below for nested schema](#nestedatt--propagate_tags))
 - `tags` (Attributes Set) A key-value pair that provides metadata for the capacity provider. (see [below for nested schema](#nestedatt--tags))
+- `telemetry_config` (Attributes) (see [below for nested schema](#nestedatt--telemetry_config))
 
 ### Read-Only
 
@@ -193,7 +194,7 @@ Optional:
 
 Optional:
 
-- `explicit_tags` (Attributes Set) A list of tags to explicitly propagate to managed resources. (see [below for nested schema](#nestedatt--propagate_tags--explicit_tags))
+- `explicit_tags` (Attributes Set) (see [below for nested schema](#nestedatt--propagate_tags--explicit_tags))
 - `mode` (String) The mode for tag propagation.
 
 <a id="nestedatt--propagate_tags--explicit_tags"></a>
@@ -213,6 +214,22 @@ Optional:
 
 - `key` (String) The key name of the tag.
 - `value` (String) The value for the tag.
+
+
+<a id="nestedatt--telemetry_config"></a>
+### Nested Schema for `telemetry_config`
+
+Optional:
+
+- `logging_config` (Attributes) The logging configuration for the capacity provider. (see [below for nested schema](#nestedatt--telemetry_config--logging_config))
+
+<a id="nestedatt--telemetry_config--logging_config"></a>
+### Nested Schema for `telemetry_config.logging_config`
+
+Optional:
+
+- `log_group` (String) The log group name.
+- `system_log_level` (String) System log granularity level
 
 ## Import
 

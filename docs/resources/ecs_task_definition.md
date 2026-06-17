@@ -306,7 +306,7 @@ Optional:
 - `readonly_root_filesystem` (Boolean) When this parameter is true, the container is given read-only access to its root file system. This parameter maps to ``ReadonlyRootfs`` in the docker container create command and the ``--read-only`` option to docker run.
   This parameter is not supported for Windows containers.
 - `repository_credentials` (Attributes) The private repository authentication credentials to use. (see [below for nested schema](#nestedatt--container_definitions--repository_credentials))
-- `resource_requirements` (Attributes List) The type and amount of a resource to assign to a container. The only supported resource is a GPU. (see [below for nested schema](#nestedatt--container_definitions--resource_requirements))
+- `resource_requirements` (Attributes List) The type and amount of a resource to assign to a container. The supported resources are GPUs and Neuron devices. (see [below for nested schema](#nestedatt--container_definitions--resource_requirements))
 - `restart_policy` (Attributes) The restart policy for a container. When you set up a restart policy, Amazon ECS can restart the container without needing to replace the task. For more information, see [Restart individual containers in Amazon ECS tasks with container restart policies](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-restart-policy.html) in the *Amazon Elastic Container Service Developer Guide*. (see [below for nested schema](#nestedatt--container_definitions--restart_policy))
 - `secrets` (Attributes List) The secrets to pass to the container. For more information, see [Specifying Sensitive Data](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html) in the *Amazon Elastic Container Service Developer Guide*. (see [below for nested schema](#nestedatt--container_definitions--secrets))
 - `start_timeout` (Number) Time duration (in seconds) to wait before giving up on resolving dependencies for a container. For example, you specify two containers in a task definition with containerA having a dependency on containerB reaching a ``COMPLETE``, ``SUCCESS``, or ``HEALTHY`` status. If a ``startTimeout`` value is specified for containerB and it doesn't reach the desired status within that time then containerA gives up and not start. This results in the task transitioning to a ``STOPPED`` state.
@@ -433,8 +433,7 @@ Optional:
 - `swappiness` (Number) This allows you to tune a container's memory swappiness behavior. A ``swappiness`` value of ``0`` will cause swapping to not happen unless absolutely necessary. A ``swappiness`` value of ``100`` will cause pages to be swapped very aggressively. Accepted values are whole numbers between ``0`` and ``100``. If the ``swappiness`` parameter is not specified, a default value of ``60`` is used. If a value is not specified for ``maxSwap`` then this parameter is ignored. This parameter maps to the ``--memory-swappiness`` option to docker run.
   If you're using tasks that use the Fargate launch type, the ``swappiness`` parameter isn't supported.
  If you're using tasks on Amazon Linux 2023 the ``swappiness`` parameter isn't supported.
-- `tmpfs` (Attributes List) The container path, mount options, and size (in MiB) of the tmpfs mount. This parameter maps to the ``--tmpfs`` option to docker run.
-  If you're using tasks that use the Fargate launch type, the ``tmpfs`` parameter isn't supported. (see [below for nested schema](#nestedatt--container_definitions--linux_parameters--tmpfs))
+- `tmpfs` (Attributes List) The container path, mount options, and size (in MiB) of the tmpfs mount. This parameter maps to the ``--tmpfs`` option to docker run. (see [below for nested schema](#nestedatt--container_definitions--linux_parameters--tmpfs))
 
 <a id="nestedatt--container_definitions--linux_parameters--capabilities"></a>
 ### Nested Schema for `container_definitions.linux_parameters.capabilities`
@@ -578,7 +577,8 @@ Optional:
 
 - `type` (String) The type of resource to assign to a container.
 - `value` (String) The value for the specified resource type.
- When the type is ``GPU``, the value is the number of physical ``GPUs`` the Amazon ECS container agent reserves for the container. The number of GPUs that's reserved for all containers in a task can't exceed the number of available GPUs on the container instance that the task is launched on.
+ When the type is ``GPU``, the value is the number of physical ``GPUs`` the Amazon ECS container agent reserves for the container. The number of GPUs that's reserved for all containers in a task can't exceed the number of available GPUs on the container instance that the task is launched on. You can also specify ``ALL`` to allocate all available GPUs on the instance to the container.
+ When the type is ``NeuronDevice``, the value must be ``ALL``. This allocates all available Neuron devices on the instance to the container. Only one container in a task can specify ``NeuronDevice`` resources. This resource type is only supported on Managed Instances.
  When the type is ``InferenceAccelerator``, the ``value`` matches the ``deviceName`` for an [InferenceAccelerator](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_InferenceAccelerator.html) specified in a task definition.
 
 
@@ -724,7 +724,8 @@ Optional:
  When using a volume configured at launch, the ``name`` is required and must also be specified as the volume name in the ``ServiceVolumeConfiguration`` or ``TaskVolumeConfiguration`` parameter when creating your service or standalone task.
  For all other types of volumes, this name is referenced in the ``sourceVolume`` parameter of the ``mountPoints`` object in the container definition.
  When a volume is using the ``efsVolumeConfiguration``, the name is required.
-- `s3_files_volume_configuration` (Attributes) (see [below for nested schema](#nestedatt--volumes--s3_files_volume_configuration))
+ When a volume is using the ``s3filesVolumeConfiguration``, the name is required.
+- `s3_files_volume_configuration` (Attributes) This parameter is specified when you use an Amazon S3 Files file system for task storage. (see [below for nested schema](#nestedatt--volumes--s3_files_volume_configuration))
 
 <a id="nestedatt--volumes--docker_volume_configuration"></a>
 ### Nested Schema for `volumes.docker_volume_configuration`
@@ -794,10 +795,11 @@ Optional:
 
 Optional:
 
-- `access_point_arn` (String)
-- `file_system_arn` (String)
-- `root_directory` (String)
-- `transit_encryption_port` (Number)
+- `access_point_arn` (String) The full ARN of the S3 Files access point to use. If an access point is specified, the root directory value specified in the ``S3FilesVolumeConfiguration`` must either be omitted or set to ``/`` which will enforce the path set on the S3 Files access point. For more information, see [Creating S3 Files access points](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-files-access-points-creating.html).
+- `file_system_arn` (String) The full ARN of the S3 Files file system to mount.
+- `root_directory` (String) The directory within the Amazon S3 Files file system to mount as the root directory. If this parameter is omitted, the root of the Amazon S3 Files file system will be used. Specifying ``/`` will have the same effect as omitting this parameter.
+  If a S3 Files access point is specified in the ``accessPointArn``, the root directory parameter must either be omitted or set to ``/`` which will enforce the path set on the S3 Files access point.
+- `transit_encryption_port` (Number) The port to use for sending encrypted data between the ECS host and the S3 Files file system. If you do not specify a transit encryption port, it will use the port selection strategy that the Amazon S3 Files mount helper uses. For more information, see [S3 Files mount helper](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-files-mounting.html).
 
 ## Import
 

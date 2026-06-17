@@ -18,6 +18,26 @@
         "Value",
         "Key"
       ]
+    },
+    "TagFieldSpecification": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ResourceType": {
+          "type": "string"
+        },
+        "TagKeys": {
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "ResourceType",
+        "TagKeys"
+      ]
     }
   },
   "properties": {
@@ -114,6 +134,14 @@
         "HiveCompatiblePartitions",
         "PerHourPartition"
       ]
+    },
+    "TagFieldSpecifications": {
+      "description": "The resource types and associated tags for EC2 resources associated with the EC2 Tags feature for log enrichment.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/TagFieldSpecification"
+      }
     }
   },
   "required": [
@@ -131,7 +159,8 @@
     "/properties/ResourceType",
     "/properties/LogFormat",
     "/properties/MaxAggregationInterval",
-    "/properties/DestinationOptions"
+    "/properties/DestinationOptions",
+    "/properties/TagFieldSpecifications"
   ],
   "readOnlyProperties": [
     "/properties/Id"
@@ -153,9 +182,12 @@
   "handlers": {
     "create": {
       "permissions": [
+        "autoscaling:DescribeTags",
         "ec2:CreateFlowLogs",
         "ec2:DescribeFlowLogs",
+        "ec2:DescribeTags",
         "ec2:CreateTags",
+        "iam:CreateServiceLinkedRole",
         "iam:PassRole",
         "logs:CreateLogDelivery",
         "s3:GetBucketPolicy",

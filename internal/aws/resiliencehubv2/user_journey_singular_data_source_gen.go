@@ -53,7 +53,7 @@ func userJourneyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The name of the user journey.",
-		//	  "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$",
+		//	  "pattern": "^[A-Za-z0-9][A-Za-z0-9 _\\-]{1,59}$",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/

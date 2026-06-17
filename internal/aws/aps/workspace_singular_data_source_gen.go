@@ -328,9 +328,19 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "array",
 		//	      "uniqueItems": true
 		//	    },
+		//	    "OutOfOrderTimeWindowInSeconds": {
+		//	      "description": "The time window in seconds for accepting out-of-order samples",
+		//	      "minimum": 0,
+		//	      "type": "integer"
+		//	    },
 		//	    "RetentionPeriodInDays": {
 		//	      "description": "How many days that metrics are retained in the workspace",
 		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    },
+		//	    "RuleQueryOffsetInSeconds": {
+		//	      "description": "Duration in seconds to offset rule evaluation queries into the past",
+		//	      "minimum": 0,
 		//	      "type": "integer"
 		//	    }
 		//	  },
@@ -378,9 +388,19 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "An array of label set and associated limits",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: OutOfOrderTimeWindowInSeconds
+				"out_of_order_time_window_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The time window in seconds for accepting out-of-order samples",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: RetentionPeriodInDays
 				"retention_period_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Description: "How many days that metrics are retained in the workspace",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RuleQueryOffsetInSeconds
+				"rule_query_offset_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Duration in seconds to offset rule evaluation queries into the past",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -418,29 +438,31 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::APS::Workspace").WithTerraformTypeName("awscc_aps_workspace")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"alert_manager_definition":    "AlertManagerDefinition",
-		"alias":                       "Alias",
-		"arn":                         "Arn",
-		"cloudwatch_logs":             "CloudWatchLogs",
-		"destinations":                "Destinations",
-		"filters":                     "Filters",
-		"key":                         "Key",
-		"kms_key_arn":                 "KmsKeyArn",
-		"label_set":                   "LabelSet",
-		"limits":                      "Limits",
-		"limits_per_label_sets":       "LimitsPerLabelSets",
-		"log_group_arn":               "LogGroupArn",
-		"logging_configuration":       "LoggingConfiguration",
-		"max_series":                  "MaxSeries",
-		"name":                        "Name",
-		"prometheus_endpoint":         "PrometheusEndpoint",
-		"qsp_threshold":               "QspThreshold",
-		"query_logging_configuration": "QueryLoggingConfiguration",
-		"retention_period_in_days":    "RetentionPeriodInDays",
-		"tags":                        "Tags",
-		"value":                       "Value",
-		"workspace_configuration":     "WorkspaceConfiguration",
-		"workspace_id":                "WorkspaceId",
+		"alert_manager_definition":            "AlertManagerDefinition",
+		"alias":                               "Alias",
+		"arn":                                 "Arn",
+		"cloudwatch_logs":                     "CloudWatchLogs",
+		"destinations":                        "Destinations",
+		"filters":                             "Filters",
+		"key":                                 "Key",
+		"kms_key_arn":                         "KmsKeyArn",
+		"label_set":                           "LabelSet",
+		"limits":                              "Limits",
+		"limits_per_label_sets":               "LimitsPerLabelSets",
+		"log_group_arn":                       "LogGroupArn",
+		"logging_configuration":               "LoggingConfiguration",
+		"max_series":                          "MaxSeries",
+		"name":                                "Name",
+		"out_of_order_time_window_in_seconds": "OutOfOrderTimeWindowInSeconds",
+		"prometheus_endpoint":                 "PrometheusEndpoint",
+		"qsp_threshold":                       "QspThreshold",
+		"query_logging_configuration":         "QueryLoggingConfiguration",
+		"retention_period_in_days":            "RetentionPeriodInDays",
+		"rule_query_offset_in_seconds":        "RuleQueryOffsetInSeconds",
+		"tags":                                "Tags",
+		"value":                               "Value",
+		"workspace_configuration":             "WorkspaceConfiguration",
+		"workspace_id":                        "WorkspaceId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

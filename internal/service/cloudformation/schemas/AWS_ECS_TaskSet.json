@@ -1,5 +1,4 @@
 {
-  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ecs.git",
   "tagging": {
     "permissions": [
       "ecs:TagResource",
@@ -12,6 +11,34 @@
     "tagProperty": "/properties/Tags",
     "cloudFormationSystemTags": false
   },
+  "typeName": "AWS::ECS::TaskSet",
+  "readOnlyProperties": [
+    "/properties/Id"
+  ],
+  "description": "Create a task set in the specified cluster and service. This is used when a service uses the EXTERNAL deployment controller type. For more information, see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.htmlin the Amazon Elastic Container Service Developer Guide.",
+  "createOnlyProperties": [
+    "/properties/Cluster",
+    "/properties/ExternalId",
+    "/properties/LaunchType",
+    "/properties/LoadBalancers",
+    "/properties/NetworkConfiguration",
+    "/properties/PlatformVersion",
+    "/properties/Service",
+    "/properties/ServiceRegistries",
+    "/properties/TaskDefinition",
+    "/properties/CapacityProviderStrategy"
+  ],
+  "primaryIdentifier": [
+    "/properties/Cluster",
+    "/properties/Service",
+    "/properties/Id"
+  ],
+  "required": [
+    "Cluster",
+    "Service",
+    "TaskDefinition"
+  ],
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ecs.git",
   "handlers": {
     "read": {
       "permissions": [
@@ -40,29 +67,7 @@
       ]
     }
   },
-  "typeName": "AWS::ECS::TaskSet",
-  "readOnlyProperties": [
-    "/properties/Id"
-  ],
-  "description": "Create a task set in the specified cluster and service. This is used when a service uses the EXTERNAL deployment controller type. For more information, see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.htmlin the Amazon Elastic Container Service Developer Guide.",
-  "createOnlyProperties": [
-    "/properties/Cluster",
-    "/properties/ExternalId",
-    "/properties/LaunchType",
-    "/properties/LoadBalancers",
-    "/properties/NetworkConfiguration",
-    "/properties/PlatformVersion",
-    "/properties/Service",
-    "/properties/ServiceRegistries",
-    "/properties/TaskDefinition",
-    "/properties/CapacityProviderStrategy"
-  ],
   "additionalProperties": false,
-  "primaryIdentifier": [
-    "/properties/Cluster",
-    "/properties/Service",
-    "/properties/Id"
-  ],
   "definitions": {
     "CapacityProviderStrategyItem": {
       "additionalProperties": false,
@@ -196,11 +201,6 @@
       }
     }
   },
-  "required": [
-    "Cluster",
-    "Service",
-    "TaskDefinition"
-  ],
   "properties": {
     "PlatformVersion": {
       "description": "The platform version that the tasks in the task set should use. A platform version is specified only for tasks using the Fargate launch type. If one isn't specified, the LATEST platform version is used by default.",

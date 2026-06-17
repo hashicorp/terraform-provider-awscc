@@ -107,6 +107,25 @@ func organizationCentralizationRuleDataSource(ctx context.Context) (datasource.D
 		//	          },
 		//	          "type": "object"
 		//	        },
+		//	        "DestinationMetricsConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "BackupConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Region": {
+		//	                  "minLength": 1,
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Region"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "Region": {
 		//	          "minLength": 1,
 		//	          "type": "string"
@@ -159,6 +178,17 @@ func organizationCentralizationRuleDataSource(ctx context.Context) (datasource.D
 		//	          "required": [
 		//	            "EncryptedLogGroupStrategy"
 		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "SourceMetricsConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "MetricsSelectionCriteria": {
+		//	              "maxLength": 2000,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
 		//	          "type": "object"
 		//	        }
 		//	      },
@@ -231,6 +261,22 @@ func organizationCentralizationRuleDataSource(ctx context.Context) (datasource.D
 							}, /*END SCHEMA*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
+						// Property: DestinationMetricsConfiguration
+						"destination_metrics_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BackupConfiguration
+								"backup_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Region
+										"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 						// Property: Region
 						"region": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
@@ -263,6 +309,16 @@ func organizationCentralizationRuleDataSource(ctx context.Context) (datasource.D
 								}, /*END ATTRIBUTE*/
 								// Property: LogGroupSelectionCriteria
 								"log_group_selection_criteria": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SourceMetricsConfiguration
+						"source_metrics_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: MetricsSelectionCriteria
+								"metrics_selection_criteria": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -370,6 +426,7 @@ func organizationCentralizationRuleDataSource(ctx context.Context) (datasource.D
 		"data_source_selection_criteria":          "DataSourceSelectionCriteria",
 		"destination":                             "Destination",
 		"destination_logs_configuration":          "DestinationLogsConfiguration",
+		"destination_metrics_configuration":       "DestinationMetricsConfiguration",
 		"encrypted_log_group_strategy":            "EncryptedLogGroupStrategy",
 		"encryption_conflict_resolution_strategy": "EncryptionConflictResolutionStrategy",
 		"encryption_strategy":                     "EncryptionStrategy",
@@ -379,6 +436,7 @@ func organizationCentralizationRuleDataSource(ctx context.Context) (datasource.D
 		"log_group_name_pattern":                  "LogGroupNamePattern",
 		"log_group_selection_criteria":            "LogGroupSelectionCriteria",
 		"logs_encryption_configuration":           "LogsEncryptionConfiguration",
+		"metrics_selection_criteria":              "MetricsSelectionCriteria",
 		"region":                                  "Region",
 		"regions":                                 "Regions",
 		"rule":                                    "Rule",
@@ -387,6 +445,7 @@ func organizationCentralizationRuleDataSource(ctx context.Context) (datasource.D
 		"scope":                                   "Scope",
 		"source":                                  "Source",
 		"source_logs_configuration":               "SourceLogsConfiguration",
+		"source_metrics_configuration":            "SourceMetricsConfiguration",
 		"tags":                                    "Tags",
 		"value":                                   "Value",
 	})

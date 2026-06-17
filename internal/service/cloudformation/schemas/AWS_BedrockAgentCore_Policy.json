@@ -20,10 +20,22 @@
       "properties": {
         "Cedar": {
           "$ref": "#/definitions/CedarPolicy"
+        },
+        "Policy": {
+          "$ref": "#/definitions/PolicyStatement"
         }
       },
-      "required": [
-        "Cedar"
+      "oneOf": [
+        {
+          "required": [
+            "Cedar"
+          ]
+        },
+        {
+          "required": [
+            "Policy"
+          ]
+        }
       ],
       "additionalProperties": false
     },
@@ -35,13 +47,38 @@
           "type": "string",
           "description": "The Cedar policy statement that defines the authorization logic.",
           "minLength": 35,
-          "maxLength": 153600
+          "maxLength": 10000
         }
       },
       "required": [
         "Statement"
       ],
       "additionalProperties": false
+    },
+    "PolicyStatement": {
+      "type": "object",
+      "description": "A policy statement within the AgentCore Policy system.",
+      "properties": {
+        "Statement": {
+          "type": "string",
+          "description": "The policy statement.",
+          "minLength": 35,
+          "maxLength": 10000
+        }
+      },
+      "required": [
+        "Statement"
+      ],
+      "additionalProperties": false
+    },
+    "EnforcementMode": {
+      "type": "string",
+      "description": "Whether the policy contributes to the enforce decision returned to Gateway. LOG_ONLY policies are still evaluated but their decisions are observed only, allowing customers to validate a policy against real traffic before promoting it.",
+      "enum": [
+        "ACTIVE",
+        "LOG_ONLY"
+      ],
+      "default": "ACTIVE"
     },
     "PolicyValidationMode": {
       "type": "string",
@@ -78,6 +115,9 @@
     },
     "ValidationMode": {
       "$ref": "#/definitions/PolicyValidationMode"
+    },
+    "EnforcementMode": {
+      "$ref": "#/definitions/EnforcementMode"
     },
     "PolicyId": {
       "type": "string",

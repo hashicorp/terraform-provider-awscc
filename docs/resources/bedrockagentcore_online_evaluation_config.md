@@ -19,14 +19,16 @@ Resource Type definition for AWS::BedrockAgentCore::OnlineEvaluationConfig - Cre
 
 - `data_source_config` (Attributes) The data source configuration that specifies CloudWatch log groups and service names to monitor. (see [below for nested schema](#nestedatt--data_source_config))
 - `evaluation_execution_role_arn` (String) The Amazon Resource Name (ARN) of the IAM role that grants permissions for evaluation.
-- `evaluators` (Attributes List) The list of evaluators to apply during online evaluation. (see [below for nested schema](#nestedatt--evaluators))
 - `online_evaluation_config_name` (String) The name of the online evaluation configuration. Must be unique within your account.
 - `rule` (Attributes) The evaluation rule that defines sampling configuration, filters, and session detection settings. (see [below for nested schema](#nestedatt--rule))
 
 ### Optional
 
+- `clustering_config` (Attributes) The configuration for clustering analysis of evaluation results. (see [below for nested schema](#nestedatt--clustering_config))
 - `description` (String) The description of the online evaluation configuration.
+- `evaluators` (Attributes List) The list of evaluators to apply during online evaluation. (see [below for nested schema](#nestedatt--evaluators))
 - `execution_status` (String) The execution status indicating whether the online evaluation is currently running.
+- `insights` (Attributes List) The list of insights to enable for failure analysis. (see [below for nested schema](#nestedatt--insights))
 - `tags` (Attributes List) A list of tags to assign to the online evaluation configuration. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -54,14 +56,6 @@ Required:
 - `log_group_names` (List of String) The list of CloudWatch log group names to monitor for agent traces.
 - `service_names` (List of String) The list of service names to filter traces within the specified log groups.
 
-
-
-<a id="nestedatt--evaluators"></a>
-### Nested Schema for `evaluators`
-
-Required:
-
-- `evaluator_id` (String) The unique identifier of the evaluator.
 
 
 <a id="nestedatt--rule"></a>
@@ -111,6 +105,30 @@ Optional:
 
 - `session_timeout_minutes` (Number) The number of minutes of inactivity after which an agent session is considered complete.
 
+
+
+<a id="nestedatt--clustering_config"></a>
+### Nested Schema for `clustering_config`
+
+Optional:
+
+- `frequencies` (List of String) The list of frequencies at which clustering reports are generated.
+
+
+<a id="nestedatt--evaluators"></a>
+### Nested Schema for `evaluators`
+
+Optional:
+
+- `evaluator_id` (String) The unique identifier of the evaluator.
+
+
+<a id="nestedatt--insights"></a>
+### Nested Schema for `insights`
+
+Optional:
+
+- `insight_id` (String) The unique identifier of the insight.
 
 
 <a id="nestedatt--tags"></a>

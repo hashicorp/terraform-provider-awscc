@@ -96,6 +96,16 @@
     },
     "AdDecisionServerConfiguration": {
       "$ref": "#/definitions/AdDecisionServerConfiguration"
+    },
+    "FunctionMapping": {
+      "description": "A map of event names to function identifiers for custom processing during session lifecycle events.",
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+        "": {
+          "type": "string"
+        }
+      }
     }
   },
   "definitions": {
@@ -400,7 +410,7 @@
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": false,
+    "cloudFormationSystemTags": true,
     "tagProperty": "/properties/Tags",
     "permissions": [
       "mediatailor:TagResource",

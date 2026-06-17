@@ -1,0 +1,686 @@
+{
+  "typeName": "AWS::BCM::Dashboard",
+  "description": "Definition of AWS::BCM::Dashboard Resource Type",
+  "definitions": {
+    "Widget": {
+      "type": "object",
+      "properties": {
+        "Title": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 50,
+          "pattern": ""
+        },
+        "Description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200,
+          "pattern": ""
+        },
+        "Width": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 6
+        },
+        "Height": {
+          "type": "integer",
+          "minimum": 4,
+          "maximum": 10
+        },
+        "HorizontalOffset": {
+          "type": "integer"
+        },
+        "Configs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WidgetConfig"
+          },
+          "minItems": 1,
+          "maxItems": 2,
+          "insertionOrder": true
+        }
+      },
+      "required": [
+        "Title",
+        "Configs"
+      ],
+      "additionalProperties": false
+    },
+    "WidgetConfig": {
+      "type": "object",
+      "properties": {
+        "QueryParameters": {
+          "$ref": "#/definitions/QueryParameters"
+        },
+        "DisplayConfig": {
+          "$ref": "#/definitions/DisplayConfig"
+        }
+      },
+      "required": [
+        "QueryParameters",
+        "DisplayConfig"
+      ],
+      "additionalProperties": false
+    },
+    "QueryParameters": {
+      "type": "object",
+      "properties": {
+        "CostAndUsage": {
+          "$ref": "#/definitions/CostAndUsageQuery"
+        },
+        "SavingsPlansCoverage": {
+          "$ref": "#/definitions/SavingsPlansCoverageQuery"
+        },
+        "SavingsPlansUtilization": {
+          "$ref": "#/definitions/SavingsPlansUtilizationQuery"
+        },
+        "ReservationCoverage": {
+          "$ref": "#/definitions/ReservationCoverageQuery"
+        },
+        "ReservationUtilization": {
+          "$ref": "#/definitions/ReservationUtilizationQuery"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CostAndUsageQuery": {
+      "type": "object",
+      "properties": {
+        "Metrics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricName"
+          },
+          "insertionOrder": true
+        },
+        "TimeRange": {
+          "$ref": "#/definitions/DateTimeRange"
+        },
+        "Granularity": {
+          "$ref": "#/definitions/Granularity"
+        },
+        "GroupBy": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupDefinition"
+          },
+          "insertionOrder": true
+        },
+        "Filter": {
+          "$ref": "#/definitions/CostAndUsageExpression"
+        }
+      },
+      "required": [
+        "Metrics",
+        "TimeRange",
+        "Granularity"
+      ],
+      "additionalProperties": false
+    },
+    "SavingsPlansCoverageQuery": {
+      "type": "object",
+      "properties": {
+        "TimeRange": {
+          "$ref": "#/definitions/DateTimeRange"
+        },
+        "Metrics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricName"
+          },
+          "insertionOrder": true
+        },
+        "Granularity": {
+          "$ref": "#/definitions/Granularity"
+        },
+        "GroupBy": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupDefinition"
+          },
+          "insertionOrder": true
+        },
+        "Filter": {
+          "$ref": "#/definitions/Expression"
+        }
+      },
+      "required": [
+        "TimeRange"
+      ],
+      "additionalProperties": false
+    },
+    "SavingsPlansUtilizationQuery": {
+      "type": "object",
+      "properties": {
+        "TimeRange": {
+          "$ref": "#/definitions/DateTimeRange"
+        },
+        "Granularity": {
+          "$ref": "#/definitions/Granularity"
+        },
+        "Filter": {
+          "$ref": "#/definitions/Expression"
+        }
+      },
+      "required": [
+        "TimeRange"
+      ],
+      "additionalProperties": false
+    },
+    "ReservationCoverageQuery": {
+      "type": "object",
+      "properties": {
+        "TimeRange": {
+          "$ref": "#/definitions/DateTimeRange"
+        },
+        "GroupBy": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupDefinition"
+          },
+          "insertionOrder": true
+        },
+        "Granularity": {
+          "$ref": "#/definitions/Granularity"
+        },
+        "Filter": {
+          "$ref": "#/definitions/Expression"
+        },
+        "Metrics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricName"
+          },
+          "insertionOrder": true
+        }
+      },
+      "required": [
+        "TimeRange"
+      ],
+      "additionalProperties": false
+    },
+    "ReservationUtilizationQuery": {
+      "type": "object",
+      "properties": {
+        "TimeRange": {
+          "$ref": "#/definitions/DateTimeRange"
+        },
+        "GroupBy": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupDefinition"
+          },
+          "insertionOrder": true
+        },
+        "Granularity": {
+          "$ref": "#/definitions/Granularity"
+        },
+        "Filter": {
+          "$ref": "#/definitions/Expression"
+        }
+      },
+      "required": [
+        "TimeRange"
+      ],
+      "additionalProperties": false
+    },
+    "DateTimeRange": {
+      "type": "object",
+      "properties": {
+        "StartTime": {
+          "$ref": "#/definitions/DateTimeValue"
+        },
+        "EndTime": {
+          "$ref": "#/definitions/DateTimeValue"
+        }
+      },
+      "required": [
+        "StartTime",
+        "EndTime"
+      ],
+      "additionalProperties": false
+    },
+    "DateTimeValue": {
+      "type": "object",
+      "properties": {
+        "Type": {
+          "$ref": "#/definitions/DateTimeType"
+        },
+        "Value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Type",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "DateTimeType": {
+      "type": "string",
+      "enum": [
+        "ABSOLUTE",
+        "RELATIVE"
+      ]
+    },
+    "Granularity": {
+      "type": "string",
+      "enum": [
+        "HOURLY",
+        "DAILY",
+        "MONTHLY"
+      ]
+    },
+    "MetricName": {
+      "type": "string",
+      "enum": [
+        "AmortizedCost",
+        "BlendedCost",
+        "NetAmortizedCost",
+        "NetUnblendedCost",
+        "NormalizedUsageAmount",
+        "UnblendedCost",
+        "UsageQuantity",
+        "SpendCoveredBySavingsPlans",
+        "Hour",
+        "Unit",
+        "Cost"
+      ]
+    },
+    "GroupDefinition": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024,
+          "pattern": "^[\\S\\s]*$"
+        },
+        "Type": {
+          "$ref": "#/definitions/GroupDefinitionType"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "additionalProperties": false
+    },
+    "GroupDefinitionType": {
+      "type": "string",
+      "enum": [
+        "DIMENSION",
+        "TAG",
+        "COST_CATEGORY"
+      ]
+    },
+    "Expression": {
+      "type": "object",
+      "properties": {
+        "And": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Expression"
+          },
+          "insertionOrder": true
+        },
+        "Not": {
+          "$ref": "#/definitions/Expression"
+        },
+        "Dimensions": {
+          "$ref": "#/definitions/DimensionValues"
+        },
+        "Tags": {
+          "$ref": "#/definitions/TagValues"
+        },
+        "CostCategories": {
+          "$ref": "#/definitions/CostCategoryValues"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CostAndUsageExpression": {
+      "type": "object",
+      "properties": {
+        "Or": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CostAndUsageExpression"
+          },
+          "insertionOrder": true
+        },
+        "And": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CostAndUsageExpression"
+          },
+          "insertionOrder": true
+        },
+        "Not": {
+          "$ref": "#/definitions/CostAndUsageExpression"
+        },
+        "Dimensions": {
+          "$ref": "#/definitions/DimensionValues"
+        },
+        "Tags": {
+          "$ref": "#/definitions/TagValues"
+        },
+        "CostCategories": {
+          "$ref": "#/definitions/CostCategoryValues"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DimensionValues": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "$ref": "#/definitions/Dimension"
+        },
+        "Values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "insertionOrder": true
+        },
+        "MatchOptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MatchOption"
+          },
+          "insertionOrder": true
+        }
+      },
+      "required": [
+        "Key",
+        "Values"
+      ],
+      "additionalProperties": false
+    },
+    "TagValues": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string"
+        },
+        "Values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "insertionOrder": true
+        },
+        "MatchOptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MatchOption"
+          },
+          "insertionOrder": true
+        }
+      },
+      "required": [
+        "Key",
+        "Values"
+      ],
+      "additionalProperties": false
+    },
+    "CostCategoryValues": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string"
+        },
+        "Values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "insertionOrder": true
+        },
+        "MatchOptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MatchOption"
+          },
+          "insertionOrder": true
+        }
+      },
+      "required": [
+        "Key",
+        "Values"
+      ],
+      "additionalProperties": false
+    },
+    "Dimension": {
+      "type": "string",
+      "enum": [
+        "AZ",
+        "INSTANCE_TYPE",
+        "LINKED_ACCOUNT",
+        "OPERATION",
+        "PURCHASE_TYPE",
+        "REGION",
+        "SERVICE",
+        "USAGE_TYPE",
+        "USAGE_TYPE_GROUP",
+        "RECORD_TYPE",
+        "OPERATING_SYSTEM",
+        "TENANCY",
+        "SCOPE",
+        "PLATFORM",
+        "SUBSCRIPTION_ID",
+        "LEGAL_ENTITY_NAME",
+        "DEPLOYMENT_OPTION",
+        "DATABASE_ENGINE",
+        "CACHE_ENGINE",
+        "INSTANCE_TYPE_FAMILY",
+        "BILLING_ENTITY",
+        "RESERVATION_ID",
+        "RESOURCE_ID",
+        "SAVINGS_PLANS_TYPE",
+        "TAG_KEY",
+        "COST_CATEGORY_NAME"
+      ]
+    },
+    "MatchOption": {
+      "type": "string",
+      "enum": [
+        "EQUALS",
+        "ABSENT",
+        "STARTS_WITH",
+        "ENDS_WITH",
+        "CONTAINS",
+        "GREATER_THAN_OR_EQUAL",
+        "CASE_SENSITIVE",
+        "CASE_INSENSITIVE"
+      ]
+    },
+    "DisplayConfig": {
+      "type": "object",
+      "properties": {
+        "Graph": {
+          "$ref": "#/definitions/GraphDisplayConfigMap"
+        },
+        "Table": {
+          "$ref": "#/definitions/TableDisplayConfigStruct"
+        }
+      },
+      "additionalProperties": false
+    },
+    "GraphDisplayConfigMap": {
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "$ref": "#/definitions/GraphDisplayConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "GraphDisplayConfig": {
+      "type": "object",
+      "properties": {
+        "VisualType": {
+          "$ref": "#/definitions/VisualType"
+        }
+      },
+      "required": [
+        "VisualType"
+      ],
+      "additionalProperties": false
+    },
+    "TableDisplayConfigStruct": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "VisualType": {
+      "type": "string",
+      "enum": [
+        "LINE",
+        "BAR",
+        "STACK"
+      ]
+    },
+    "DashboardType": {
+      "type": "string",
+      "enum": [
+        "CUSTOM"
+      ]
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 2048,
+      "pattern": "^arn:aws[-a-z0-9]*:bcm-dashboards::[0-9]{12}:dashboard/(\\*|[-a-z0-9]+)$"
+    },
+    "Name": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 50,
+      "pattern": ""
+    },
+    "Description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "pattern": ""
+    },
+    "Type": {
+      "$ref": "#/definitions/DashboardType"
+    },
+    "Widgets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Widget"
+      },
+      "minItems": 0,
+      "maxItems": 20,
+      "insertionOrder": true
+    },
+    "CreatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "Tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 200,
+      "insertionOrder": false
+    }
+  },
+  "required": [
+    "Name",
+    "Widgets"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/Type",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "bcm-dashboards:CreateDashboard",
+        "bcm-dashboards:TagResource",
+        "ce:GetCostAndUsage",
+        "ce:GetSavingsPlansCoverage",
+        "ce:GetSavingsPlansUtilization",
+        "ce:GetReservationCoverage",
+        "ce:GetReservationUtilization"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "bcm-dashboards:GetDashboard",
+        "bcm-dashboards:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "bcm-dashboards:UpdateDashboard",
+        "bcm-dashboards:TagResource",
+        "bcm-dashboards:UntagResource",
+        "ce:GetCostAndUsage",
+        "ce:GetSavingsPlansCoverage",
+        "ce:GetSavingsPlansUtilization",
+        "ce:GetReservationCoverage",
+        "ce:GetReservationUtilization"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "bcm-dashboards:DeleteDashboard",
+        "bcm-dashboards:GetDashboard"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "bcm-dashboards:ListDashboards"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "bcm-dashboards:TagResource",
+      "bcm-dashboards:UntagResource",
+      "bcm-dashboards:ListTagsForResource"
+    ]
+  },
+  "additionalProperties": false
+}

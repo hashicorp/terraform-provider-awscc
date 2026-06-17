@@ -1,4 +1,35 @@
-## 1.89.0 (Unreleased)
+## 1.89.0 (June 17, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_awsexternalanthropic_workspace`
+* **New Data Source:** `awscc_awsexternalanthropic_workspaces`
+* **New Data Source:** `awscc_bedrockagentcore_configuration_bundle`
+* **New Data Source:** `awscc_bedrockagentcore_configuration_bundles`
+* **New Data Source:** `awscc_cloudwatch_log_alarm`
+* **New Data Source:** `awscc_cloudwatch_log_alarms`
+* **New Data Source:** `awscc_elasticloadbalancing_load_balancer`
+* **New Data Source:** `awscc_elasticloadbalancing_load_balancers`
+* **New Data Source:** `awscc_elementalinference_dictionaries`
+* **New Data Source:** `awscc_elementalinference_dictionary`
+* **New Data Source:** `awscc_neptune_global_cluster`
+* **New Data Source:** `awscc_neptune_global_clusters`
+* **New Data Source:** `awscc_sagemaker_mlflow_app`
+* **New Data Source:** `awscc_sagemaker_mlflow_apps`
+* **New List Resource:** `awscc_awsexternalanthropic_workspace`
+* **New List Resource:** `awscc_bedrockagentcore_configuration_bundle`
+* **New List Resource:** `awscc_cloudwatch_log_alarm`
+* **New List Resource:** `awscc_elasticloadbalancing_load_balancer`
+* **New List Resource:** `awscc_elementalinference_dictionary`
+* **New List Resource:** `awscc_neptune_global_cluster`
+* **New List Resource:** `awscc_sagemaker_mlflow_app`
+* **New Resource:** `awscc_awsexternalanthropic_workspace`
+* **New Resource:** `awscc_bedrockagentcore_configuration_bundle`
+* **New Resource:** `awscc_cloudwatch_log_alarm`
+* **New Resource:** `awscc_elasticloadbalancing_load_balancer`
+* **New Resource:** `awscc_elementalinference_dictionary`
+* **New Resource:** `awscc_neptune_global_cluster`
+* **New Resource:** `awscc_sagemaker_mlflow_app`
 
 ## 1.88.0 (June 10, 2026)
 

@@ -30,6 +30,7 @@ Data Source schema for AWS::Lambda::CapacityProvider
 - `propagate_tags` (Attributes) (see [below for nested schema](#nestedatt--propagate_tags))
 - `state` (String) The current state of the capacity provider. Indicates whether the provider is being created, is active and ready for use, has failed, or is being deleted.
 - `tags` (Attributes Set) A key-value pair that provides metadata for the capacity provider. (see [below for nested schema](#nestedatt--tags))
+- `telemetry_config` (Attributes) (see [below for nested schema](#nestedatt--telemetry_config))
 - `vpc_config` (Attributes) The VPC configuration for the capacity provider. (see [below for nested schema](#nestedatt--vpc_config))
 
 <a id="nestedatt--capacity_provider_scaling_config"></a>
@@ -74,7 +75,7 @@ Read-Only:
 
 Read-Only:
 
-- `explicit_tags` (Attributes Set) A list of tags to explicitly propagate to managed resources. (see [below for nested schema](#nestedatt--propagate_tags--explicit_tags))
+- `explicit_tags` (Attributes Set) (see [below for nested schema](#nestedatt--propagate_tags--explicit_tags))
 - `mode` (String) The mode for tag propagation.
 
 <a id="nestedatt--propagate_tags--explicit_tags"></a>
@@ -94,6 +95,23 @@ Read-Only:
 
 - `key` (String) The key name of the tag.
 - `value` (String) The value for the tag.
+
+
+<a id="nestedatt--telemetry_config"></a>
+### Nested Schema for `telemetry_config`
+
+Read-Only:
+
+- `logging_config` (Attributes) The logging configuration for the capacity provider. (see [below for nested schema](#nestedatt--telemetry_config--logging_config))
+
+<a id="nestedatt--telemetry_config--logging_config"></a>
+### Nested Schema for `telemetry_config.logging_config`
+
+Read-Only:
+
+- `log_group` (String) The log group name.
+- `system_log_level` (String) System log granularity level
+
 
 
 <a id="nestedatt--vpc_config"></a>

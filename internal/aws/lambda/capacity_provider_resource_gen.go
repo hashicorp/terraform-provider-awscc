@@ -403,7 +403,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "",
 		//	  "properties": {
 		//	    "ExplicitTags": {
-		//	      "description": "A list of tags to explicitly propagate to managed resources.",
+		//	      "description": "",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "additionalProperties": false,
@@ -476,7 +476,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "A list of tags to explicitly propagate to managed resources.",
+					Description: "",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.Set{ /*START VALIDATORS*/
@@ -595,6 +595,89 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: TelemetryConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "",
+		//	  "properties": {
+		//	    "LoggingConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "The logging configuration for the capacity provider.",
+		//	      "properties": {
+		//	        "LogGroup": {
+		//	          "description": "The log group name.",
+		//	          "maxLength": 512,
+		//	          "minLength": 1,
+		//	          "pattern": "[\\.\\-_/#A-Za-z0-9]+",
+		//	          "type": "string"
+		//	        },
+		//	        "SystemLogLevel": {
+		//	          "description": "System log granularity level",
+		//	          "enum": [
+		//	            "DEBUG",
+		//	            "INFO",
+		//	            "WARN"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"telemetry_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: LoggingConfig
+				"logging_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: LogGroup
+						"log_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The log group name.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 512),
+								stringvalidator.RegexMatches(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SystemLogLevel
+						"system_log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "System log granularity level",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"DEBUG",
+									"INFO",
+									"WARN",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The logging configuration for the capacity provider.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: VpcConfig
@@ -717,6 +800,8 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		"instance_requirements":               "InstanceRequirements",
 		"key":                                 "Key",
 		"kms_key_arn":                         "KmsKeyArn",
+		"log_group":                           "LogGroup",
+		"logging_config":                      "LoggingConfig",
 		"max_v_cpu_count":                     "MaxVCpuCount",
 		"mode":                                "Mode",
 		"permissions_config":                  "PermissionsConfig",
@@ -727,8 +812,10 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		"security_group_ids":                  "SecurityGroupIds",
 		"state":                               "State",
 		"subnet_ids":                          "SubnetIds",
+		"system_log_level":                    "SystemLogLevel",
 		"tags":                                "Tags",
 		"target_value":                        "TargetValue",
+		"telemetry_config":                    "TelemetryConfig",
 		"value":                               "Value",
 		"vpc_config":                          "VpcConfig",
 	})

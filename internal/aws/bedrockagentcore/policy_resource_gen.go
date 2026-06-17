@@ -14,13 +14,16 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -53,6 +56,18 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "description": "The definition structure for policies. Encapsulates different policy formats.",
+		//	  "oneOf": [
+		//	    {
+		//	      "required": [
+		//	        "Cedar"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "Policy"
+		//	      ]
+		//	    }
+		//	  ],
 		//	  "properties": {
 		//	    "Cedar": {
 		//	      "additionalProperties": false,
@@ -60,7 +75,23 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		//	      "properties": {
 		//	        "Statement": {
 		//	          "description": "The Cedar policy statement that defines the authorization logic.",
-		//	          "maxLength": 153600,
+		//	          "maxLength": 10000,
+		//	          "minLength": 35,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Statement"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "Policy": {
+		//	      "additionalProperties": false,
+		//	      "description": "A policy statement within the AgentCore Policy system.",
+		//	      "properties": {
+		//	        "Statement": {
+		//	          "description": "The policy statement.",
+		//	          "maxLength": 10000,
 		//	          "minLength": 35,
 		//	          "type": "string"
 		//	        }
@@ -71,9 +102,6 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "Cedar"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -84,14 +112,47 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 						// Property: Statement
 						"statement": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The Cedar policy statement that defines the authorization logic.",
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(35, 153600),
+								stringvalidator.LengthBetween(35, 10000),
+								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "A Cedar policy statement within the AgentCore Policy system.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Policy
+				"policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Statement
+						"statement": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The policy statement.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(35, 10000),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "A policy statement within the AgentCore Policy system.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The definition structure for policies. Encapsulates different policy formats.",
@@ -112,6 +173,33 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 4096),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EnforcementMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": "ACTIVE",
+		//	  "description": "Whether the policy contributes to the enforce decision returned to Gateway. LOG_ONLY policies are still evaluated but their decisions are observed only, allowing customers to validate a policy against real traffic before promoting it.",
+		//	  "enum": [
+		//	    "ACTIVE",
+		//	    "LOG_ONLY"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"enforcement_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether the policy contributes to the enforce decision returned to Gateway. LOG_ONLY policies are still evaluated but their decisions are observed only, allowing customers to validate a policy against real traffic before promoting it.",
+			Optional:    true,
+			Computed:    true,
+			Default:     stringdefault.StaticString("ACTIVE"),
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"ACTIVE",
+					"LOG_ONLY",
+				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -311,7 +399,9 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		"created_at":       "CreatedAt",
 		"definition":       "Definition",
 		"description":      "Description",
+		"enforcement_mode": "EnforcementMode",
 		"name":             "Name",
+		"policy":           "Policy",
 		"policy_arn":       "PolicyArn",
 		"policy_engine_id": "PolicyEngineId",
 		"policy_id":        "PolicyId",

@@ -43,6 +43,29 @@
           "maxLength": 100
         }
       }
+    },
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -104,6 +127,15 @@
     "RegisterWithThirdParty": {
       "description": "Configures a connection between the webhook that was created and the external tool with events to be detected.",
       "type": "boolean"
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to this resource.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
     }
   },
   "additionalProperties": false,
@@ -129,14 +161,23 @@
     "/properties/Id"
   ],
   "tagging": {
-    "taggable": false
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "codepipeline:TagResource",
+      "codepipeline:UntagResource"
+    ]
   },
   "handlers": {
     "create": {
       "permissions": [
         "codepipeline:ListWebhooks",
         "codepipeline:RegisterWebhookWithThirdParty",
-        "codepipeline:PutWebhook"
+        "codepipeline:PutWebhook",
+        "codepipeline:TagResource"
       ]
     },
     "read": {
@@ -149,14 +190,17 @@
         "codepipeline:ListWebhooks",
         "codepipeline:RegisterWebhookWithThirdParty",
         "codepipeline:PutWebhook",
-        "codepipeline:DeregisterWebhookWithThirdParty"
+        "codepipeline:DeregisterWebhookWithThirdParty",
+        "codepipeline:TagResource",
+        "codepipeline:UntagResource"
       ]
     },
     "delete": {
       "permissions": [
         "codepipeline:ListWebhooks",
         "codepipeline:DeleteWebhook",
-        "codepipeline:DeregisterWebhookWithThirdParty"
+        "codepipeline:DeregisterWebhookWithThirdParty",
+        "codepipeline:UntagResource"
       ]
     },
     "list": {

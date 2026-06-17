@@ -166,6 +166,7 @@
         "ec2:DeleteSnapshot",
         "ec2:DescribeImages",
         "ec2:DescribeSnapshots",
+        "iam:CreateServiceLinkedRole",
         "kms:CreateGrant",
         "kms:Decrypt",
         "kms:DescribeKey",

@@ -42,13 +42,13 @@ resource "awscc_quicksight_action_connector" "example" {
 ### Required
 
 - `action_connector_id` (String)
+- `authentication_config` (Attributes) (see [below for nested schema](#nestedatt--authentication_config))
 - `aws_account_id` (String)
 - `name` (String)
 - `type` (String)
 
 ### Optional
 
-- `authentication_config` (Attributes) (see [below for nested schema](#nestedatt--authentication_config))
 - `description` (String)
 - `permissions` (Attributes List) (see [below for nested schema](#nestedatt--permissions))
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
@@ -66,7 +66,7 @@ resource "awscc_quicksight_action_connector" "example" {
 <a id="nestedatt--authentication_config"></a>
 ### Nested Schema for `authentication_config`
 
-Optional:
+Required:
 
 - `authentication_metadata` (Attributes) (see [below for nested schema](#nestedatt--authentication_config--authentication_metadata))
 - `authentication_type` (String)

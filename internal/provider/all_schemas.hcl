@@ -553,6 +553,10 @@ resource_schema "aws_autoscaling_warm_pool" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_awsexternalanthropic_workspace" {
+  cloudformation_type_name = "AWS::AWSExternalAnthropic::Workspace"
+}
+
 resource_schema "aws_b2bi_capability" {
   cloudformation_type_name = "AWS::B2BI::Capability"
 }
@@ -567,6 +571,15 @@ resource_schema "aws_b2bi_profile" {
 
 resource_schema "aws_b2bi_transformer" {
   cloudformation_type_name = "AWS::B2BI::Transformer"
+}
+
+resource_schema "aws_bcm_dashboard" {
+  cloudformation_type_name = "AWS::BCM::Dashboard"
+  
+  # suppression reason: recursive object definitions
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_bcmdataexports_export" {
@@ -752,6 +765,10 @@ resource_schema "aws_bedrockagentcore_browser_profile" {
 
 resource_schema "aws_bedrockagentcore_code_interpreter_custom" {
   cloudformation_type_name = "AWS::BedrockAgentCore::CodeInterpreterCustom"
+}
+
+resource_schema "aws_bedrockagentcore_configuration_bundle" {
+  cloudformation_type_name = "AWS::BedrockAgentCore::ConfigurationBundle"
 }
 
 resource_schema "aws_bedrockagentcore_dataset" {
@@ -1178,6 +1195,10 @@ resource_schema "aws_cloudwatch_composite_alarm" {
 
 resource_schema "aws_cloudwatch_dashboard" {
   cloudformation_type_name = "AWS::CloudWatch::Dashboard"
+}
+
+resource_schema "aws_cloudwatch_log_alarm" {
+  cloudformation_type_name = "AWS::CloudWatch::LogAlarm"
 }
 
 resource_schema "aws_cloudwatch_metric_stream" {
@@ -2644,6 +2665,10 @@ resource_schema "aws_elasticbeanstalk_environment" {
   cloudformation_type_name = "AWS::ElasticBeanstalk::Environment"
 }
 
+resource_schema "aws_elasticloadbalancing_load_balancer" {
+  cloudformation_type_name = "AWS::ElasticLoadBalancing::LoadBalancer"
+}
+
 resource_schema "aws_elasticloadbalancingv2_listener" {
   cloudformation_type_name = "AWS::ElasticLoadBalancingV2::Listener"
 
@@ -2672,6 +2697,10 @@ resource_schema "aws_elasticloadbalancingv2_trust_store" {
 resource_schema "aws_elasticloadbalancingv2_trust_store_revocation" {
   cloudformation_type_name               = "AWS::ElasticLoadBalancingV2::TrustStoreRevocation"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_elementalinference_dictionary" {
+  cloudformation_type_name = "AWS::ElementalInference::Dictionary"
 }
 
 resource_schema "aws_elementalinference_feed" {
@@ -4203,6 +4232,10 @@ resource_schema "aws_neptune_event_subscription" {
   cloudformation_type_name = "AWS::Neptune::EventSubscription"
 }
 
+resource_schema "aws_neptune_global_cluster" {
+  cloudformation_type_name = "AWS::Neptune::GlobalCluster"
+}
+
 resource_schema "aws_neptunegraph_graph" {
   cloudformation_type_name = "AWS::NeptuneGraph::Graph"
 }
@@ -5651,6 +5684,10 @@ resource_schema "aws_sagemaker_inference_component" {
 
 resource_schema "aws_sagemaker_inference_experiment" {
   cloudformation_type_name = "AWS::SageMaker::InferenceExperiment"
+}
+
+resource_schema "aws_sagemaker_mlflow_app" {
+  cloudformation_type_name = "AWS::SageMaker::MlflowApp"
 }
 
 resource_schema "aws_sagemaker_mlflow_tracking_server" {

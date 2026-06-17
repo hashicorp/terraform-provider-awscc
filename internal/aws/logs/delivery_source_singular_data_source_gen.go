@@ -37,6 +37,27 @@ func deliverySourceDataSource(ctx context.Context) (datasource.DataSource, error
 			Description: "The Amazon Resource Name (ARN) that uniquely identifies this delivery source.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DeliverySourceConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "A map of key-value pairs to configure the delivery source. Both keys and values must be between 1 and 255 characters in length.",
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "maxLength": 255,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"delivery_source_configuration": // Pattern: ""
+		schema.MapAttribute{             /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A map of key-value pairs to configure the delivery source. Both keys and values must be between 1 and 255 characters in length.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LogType
 		// CloudFormation resource type schema:
 		//
@@ -114,6 +135,35 @@ func deliverySourceDataSource(ctx context.Context) (datasource.DataSource, error
 			Description: "The AWS service that is sending logs.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The status of this delivery source. The value can be ACTIVE or INACTIVE.",
+		//	  "enum": [
+		//	    "ACTIVE",
+		//	    "INACTIVE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of this delivery source. The value can be ACTIVE or INACTIVE.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: StatusReason
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The reason for the status of this delivery source, such as RESOURCE_DELETED.",
+		//	  "enum": [
+		//	    "RESOURCE_DELETED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"status_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The reason for the status of this delivery source, such as RESOURCE_DELETED.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -181,15 +231,18 @@ func deliverySourceDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithCloudFormationTypeName("AWS::Logs::DeliverySource").WithTerraformTypeName("awscc_logs_delivery_source")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":           "Arn",
-		"key":           "Key",
-		"log_type":      "LogType",
-		"name":          "Name",
-		"resource_arn":  "ResourceArn",
-		"resource_arns": "ResourceArns",
-		"service":       "Service",
-		"tags":          "Tags",
-		"value":         "Value",
+		"arn":                           "Arn",
+		"delivery_source_configuration": "DeliverySourceConfiguration",
+		"key":                           "Key",
+		"log_type":                      "LogType",
+		"name":                          "Name",
+		"resource_arn":                  "ResourceArn",
+		"resource_arns":                 "ResourceArns",
+		"service":                       "Service",
+		"status":                        "Status",
+		"status_reason":                 "StatusReason",
+		"tags":                          "Tags",
+		"value":                         "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

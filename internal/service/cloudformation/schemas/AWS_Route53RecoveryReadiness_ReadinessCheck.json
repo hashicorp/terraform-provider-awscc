@@ -104,7 +104,7 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "tagProperty": "/properties/Tags",
-    "cloudFormationSystemTags": false,
+    "cloudFormationSystemTags": true,
     "permissions": [
       "route53-recovery-readiness:TagResource",
       "route53-recovery-readiness:UntagResource",

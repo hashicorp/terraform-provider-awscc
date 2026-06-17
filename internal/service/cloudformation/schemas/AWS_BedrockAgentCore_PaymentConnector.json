@@ -1,6 +1,13 @@
 {
   "typeName": "AWS::BedrockAgentCore::PaymentConnector",
   "description": "Resource Type definition for AWS::BedrockAgentCore::PaymentConnector",
+  "resourceLink": {
+    "templateUri": "/bedrock-agentcore/payments/managers/${PaymentManagerId}/connectors/${PaymentConnectorId}?region=${awsRegion}",
+    "mappings": {
+      "PaymentManagerId": "/PaymentManagerId",
+      "PaymentConnectorId": "/PaymentConnectorId"
+    }
+  },
   "definitions": {
     "PaymentConnectorStatus": {
       "type": "string",

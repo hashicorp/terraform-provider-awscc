@@ -45,6 +45,7 @@ Read-Only:
 
 - `clipping` (Attributes) (see [below for nested schema](#nestedatt--outputs--output_config--clipping))
 - `cropping` (String)
+- `subtitling` (Attributes) (see [below for nested schema](#nestedatt--outputs--output_config--subtitling))
 
 <a id="nestedatt--outputs--output_config--clipping"></a>
 ### Nested Schema for `outputs.output_config.clipping`
@@ -52,3 +53,22 @@ Read-Only:
 Read-Only:
 
 - `callback_metadata` (String)
+
+
+<a id="nestedatt--outputs--output_config--subtitling"></a>
+### Nested Schema for `outputs.output_config.subtitling`
+
+Read-Only:
+
+- `aspect_ratio` (Attributes) (see [below for nested schema](#nestedatt--outputs--output_config--subtitling--aspect_ratio))
+- `dictionary` (String)
+- `language` (String)
+- `profanity_filter` (String)
+
+<a id="nestedatt--outputs--output_config--subtitling--aspect_ratio"></a>
+### Nested Schema for `outputs.output_config.subtitling.aspect_ratio`
+
+Read-Only:
+
+- `height` (Number)
+- `width` (Number)

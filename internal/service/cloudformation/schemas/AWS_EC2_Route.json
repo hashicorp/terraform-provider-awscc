@@ -70,7 +70,7 @@
     },
     "OdbNetworkArn": {
       "type": "string",
-      "description": ""
+      "description": "The Amazon Resource Name (ARN) of the ODB network."
     }
   },
   "tagging": {

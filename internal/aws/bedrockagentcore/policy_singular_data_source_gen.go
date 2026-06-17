@@ -43,6 +43,18 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "description": "The definition structure for policies. Encapsulates different policy formats.",
+		//	  "oneOf": [
+		//	    {
+		//	      "required": [
+		//	        "Cedar"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "Policy"
+		//	      ]
+		//	    }
+		//	  ],
 		//	  "properties": {
 		//	    "Cedar": {
 		//	      "additionalProperties": false,
@@ -50,7 +62,23 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "properties": {
 		//	        "Statement": {
 		//	          "description": "The Cedar policy statement that defines the authorization logic.",
-		//	          "maxLength": 153600,
+		//	          "maxLength": 10000,
+		//	          "minLength": 35,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Statement"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "Policy": {
+		//	      "additionalProperties": false,
+		//	      "description": "A policy statement within the AgentCore Policy system.",
+		//	      "properties": {
+		//	        "Statement": {
+		//	          "description": "The policy statement.",
+		//	          "maxLength": 10000,
 		//	          "minLength": 35,
 		//	          "type": "string"
 		//	        }
@@ -61,9 +89,6 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "object"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "Cedar"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -78,6 +103,18 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "A Cedar policy statement within the AgentCore Policy system.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Policy
+				"policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Statement
+						"statement": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The policy statement.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "A policy statement within the AgentCore Policy system.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -95,6 +132,22 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A human-readable description of the policy's purpose and functionality.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: EnforcementMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": "ACTIVE",
+		//	  "description": "Whether the policy contributes to the enforce decision returned to Gateway. LOG_ONLY policies are still evaluated but their decisions are observed only, allowing customers to validate a policy against real traffic before promoting it.",
+		//	  "enum": [
+		//	    "ACTIVE",
+		//	    "LOG_ONLY"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"enforcement_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether the policy contributes to the enforce decision returned to Gateway. LOG_ONLY policies are still evaluated but their decisions are observed only, allowing customers to validate a policy against real traffic before promoting it.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -238,7 +291,9 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"created_at":       "CreatedAt",
 		"definition":       "Definition",
 		"description":      "Description",
+		"enforcement_mode": "EnforcementMode",
 		"name":             "Name",
+		"policy":           "Policy",
 		"policy_arn":       "PolicyArn",
 		"policy_engine_id": "PolicyEngineId",
 		"policy_id":        "PolicyId",

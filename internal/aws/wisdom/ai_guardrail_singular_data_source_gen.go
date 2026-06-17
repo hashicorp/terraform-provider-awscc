@@ -27,7 +27,7 @@ func aIGuardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}){0,2}$",
+		//	  "pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}){0,2}(:[A-Z0-9_$]+){0,1}$",
 		//	  "type": "string"
 		//	}
 		"ai_guardrail_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -262,6 +262,15 @@ func aIGuardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Description of the guardrail or its version",
 			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ModifiedTimeSeconds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "number"
+		//	}
+		"modified_time_seconds": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
@@ -676,6 +685,7 @@ func aIGuardrailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"filters_config":                      "FiltersConfig",
 		"input_strength":                      "InputStrength",
 		"managed_word_lists_config":           "ManagedWordListsConfig",
+		"modified_time_seconds":               "ModifiedTimeSeconds",
 		"name":                                "Name",
 		"output_strength":                     "OutputStrength",
 		"pattern":                             "Pattern",

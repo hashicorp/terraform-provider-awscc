@@ -95,6 +95,21 @@ func collectionGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 			Description: "The description of the collection group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Generation
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The generation of Amazon OpenSearch Serverless for the collection group. Valid values are CLASSIC and NEXTGEN.",
+		//	  "enum": [
+		//	    "CLASSIC",
+		//	    "NEXTGEN"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"generation": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The generation of Amazon OpenSearch Serverless for the collection group. Valid values are CLASSIC and NEXTGEN.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -208,6 +223,7 @@ func collectionGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		"capacity_limits":              "CapacityLimits",
 		"collection_group_id":          "Id",
 		"description":                  "Description",
+		"generation":                   "Generation",
 		"key":                          "Key",
 		"max_indexing_capacity_in_ocu": "MaxIndexingCapacityInOcu",
 		"max_search_capacity_in_ocu":   "MaxSearchCapacityInOcu",
