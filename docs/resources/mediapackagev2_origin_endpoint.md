@@ -107,6 +107,7 @@ resource "awscc_mediapackagev2_origin_endpoint" "example" {
 
 Optional:
 
+- `audio_timeline_pattern` (String)
 - `availability_start_time_configuration` (Attributes) (see [below for nested schema](#nestedatt--dash_manifests--availability_start_time_configuration))
 - `base_urls` (Attributes List) <p>The base URL to use for retrieving segments.</p> (see [below for nested schema](#nestedatt--dash_manifests--base_urls))
 - `compactness` (String)

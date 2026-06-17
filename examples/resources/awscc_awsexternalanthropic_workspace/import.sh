@@ -1,0 +1,1 @@
+$ terraform import awscc_awsexternalanthropic_workspace.example "arn"

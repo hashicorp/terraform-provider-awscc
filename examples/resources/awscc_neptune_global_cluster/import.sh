@@ -1,0 +1,1 @@
+$ terraform import awscc_neptune_global_cluster.example "global_cluster_identifier"

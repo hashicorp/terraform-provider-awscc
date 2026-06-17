@@ -55,6 +55,7 @@ resource "awscc_opensearchserverless_collection_group" "example" {
 
 - `capacity_limits` (Attributes) (see [below for nested schema](#nestedatt--capacity_limits))
 - `description` (String) The description of the collection group.
+- `generation` (String) The generation of Amazon OpenSearch Serverless for the collection group. Valid values are CLASSIC and NEXTGEN.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

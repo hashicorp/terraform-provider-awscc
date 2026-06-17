@@ -88,7 +88,9 @@ Read-Only:
 Read-Only:
 
 - `limits_per_label_sets` (Attributes Set) An array of label set and associated limits (see [below for nested schema](#nestedatt--workspace_configuration--limits_per_label_sets))
+- `out_of_order_time_window_in_seconds` (Number) The time window in seconds for accepting out-of-order samples
 - `retention_period_in_days` (Number) How many days that metrics are retained in the workspace
+- `rule_query_offset_in_seconds` (Number) Duration in seconds to offset rule evaluation queries into the past
 
 <a id="nestedatt--workspace_configuration--limits_per_label_sets"></a>
 ### Nested Schema for `workspace_configuration.limits_per_label_sets`

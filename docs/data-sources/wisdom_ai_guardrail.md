@@ -30,6 +30,7 @@ Data Source schema for AWS::Wisdom::AIGuardrail
 - `content_policy_config` (Attributes) Content policy config for a guardrail. (see [below for nested schema](#nestedatt--content_policy_config))
 - `contextual_grounding_policy_config` (Attributes) Contextual grounding policy config for a guardrail. (see [below for nested schema](#nestedatt--contextual_grounding_policy_config))
 - `description` (String) Description of the guardrail or its version
+- `modified_time_seconds` (Number)
 - `name` (String)
 - `sensitive_information_policy_config` (Attributes) Sensitive information policy config for a guardrail. (see [below for nested schema](#nestedatt--sensitive_information_policy_config))
 - `tags` (Map of String)

@@ -41,6 +41,7 @@ Read-Only:
 
 - `account` (String)
 - `destination_logs_configuration` (Attributes) (see [below for nested schema](#nestedatt--rule--destination--destination_logs_configuration))
+- `destination_metrics_configuration` (Attributes) (see [below for nested schema](#nestedatt--rule--destination--destination_metrics_configuration))
 - `region` (String)
 
 <a id="nestedatt--rule--destination--destination_logs_configuration"></a>
@@ -80,6 +81,22 @@ Read-Only:
 
 
 
+<a id="nestedatt--rule--destination--destination_metrics_configuration"></a>
+### Nested Schema for `rule.destination.destination_metrics_configuration`
+
+Read-Only:
+
+- `backup_configuration` (Attributes) (see [below for nested schema](#nestedatt--rule--destination--destination_metrics_configuration--backup_configuration))
+
+<a id="nestedatt--rule--destination--destination_metrics_configuration--backup_configuration"></a>
+### Nested Schema for `rule.destination.destination_metrics_configuration.backup_configuration`
+
+Read-Only:
+
+- `region` (String)
+
+
+
 
 <a id="nestedatt--rule--source"></a>
 ### Nested Schema for `rule.source`
@@ -89,6 +106,7 @@ Read-Only:
 - `regions` (Set of String)
 - `scope` (String)
 - `source_logs_configuration` (Attributes) (see [below for nested schema](#nestedatt--rule--source--source_logs_configuration))
+- `source_metrics_configuration` (Attributes) (see [below for nested schema](#nestedatt--rule--source--source_metrics_configuration))
 
 <a id="nestedatt--rule--source--source_logs_configuration"></a>
 ### Nested Schema for `rule.source.source_logs_configuration`
@@ -98,6 +116,14 @@ Read-Only:
 - `data_source_selection_criteria` (String)
 - `encrypted_log_group_strategy` (String)
 - `log_group_selection_criteria` (String)
+
+
+<a id="nestedatt--rule--source--source_metrics_configuration"></a>
+### Nested Schema for `rule.source.source_metrics_configuration`
+
+Read-Only:
+
+- `metrics_selection_criteria` (String)
 
 
 

@@ -25,6 +25,7 @@ Data Source schema for AWS::OpenSearchServerless::CollectionGroup
 - `capacity_limits` (Attributes) (see [below for nested schema](#nestedatt--capacity_limits))
 - `collection_group_id` (String) The unique identifier of the collection group.
 - `description` (String) The description of the collection group.
+- `generation` (String) The generation of Amazon OpenSearch Serverless for the collection group. Valid values are CLASSIC and NEXTGEN.
 - `name` (String) The name of the collection group.
 - `standby_replicas` (String) Indicates whether standby replicas are used for the collection group.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))

@@ -26,6 +26,7 @@ Data Source schema for AWS::CodePipeline::Webhook
 - `filters` (Attributes List) A list of rules applied to the body/payload sent in the POST request to a webhook URL (see [below for nested schema](#nestedatt--filters))
 - `name` (String) The name of the webhook
 - `register_with_third_party` (Boolean) Configures a connection between the webhook that was created and the external tool with events to be detected.
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `target_action` (String) The name of the action in a pipeline you want to connect to the webhook.
 - `target_pipeline` (String) The name of the pipeline you want to connect to the webhook.
 - `target_pipeline_version` (Number) The version number of the pipeline to be connected to the trigger request.
@@ -48,3 +49,12 @@ Read-Only:
 
 - `json_path` (String) A JsonPath expression that is applied to the body/payload of the webhook. The value selected by the JsonPath expression must match the value specified in the MatchEquals field. Otherwise, the request is ignored.
 - `match_equals` (String) The value selected by the JsonPath expression must match what is supplied in the MatchEquals field. Otherwise, the request is ignored.
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

@@ -1,0 +1,1 @@
+$ terraform import awscc_elasticloadbalancing_load_balancer.example "load_balancer_name"
