@@ -1,0 +1,255 @@
+{
+  "typeName": "AWS::CloudWatch::LogAlarm",
+  "description": "Resource Type definition for AWS::CloudWatch::LogAlarm. A LogAlarm evaluates scheduled query results from CloudWatch Logs and triggers actions when thresholds are breached.",
+  "additionalProperties": false,
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-cloudwatch.git",
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "cloudwatch:TagResource",
+      "cloudwatch:UntagResource",
+      "cloudwatch:ListTagsForResource"
+    ]
+  },
+  "definitions": {
+    "Tag": {
+      "description": "Metadata that you can assign to a log alarm. Tags can help you organize and categorize your resources.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "description": "A unique identifier for the tag. The combination of tag keys and values can help you organize and categorize your resources.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "description": "The value for the specified tag key.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    },
+    "ScheduleConfiguration": {
+      "description": "The schedule configuration for the scheduled query.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ScheduleExpression": {
+          "description": "The expression that defines when the scheduled query runs, e.g. rate(1 minute).",
+          "type": "string"
+        },
+        "StartTimeOffset": {
+          "description": "The number of seconds into the past to start the query window.",
+          "type": "integer"
+        },
+        "EndTimeOffset": {
+          "description": "The number of seconds into the past to end the query window.",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "ScheduleExpression"
+      ]
+    },
+    "ScheduledQueryConfiguration": {
+      "description": "The scheduled query configuration for the log alarm.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "QueryString": {
+          "description": "The query string to execute against the specified log groups.",
+          "type": "string"
+        },
+        "AggregationExpression": {
+          "description": "The aggregation expression for the scheduled query, e.g. count(*) or avg(latency) by host.",
+          "type": "string"
+        },
+        "LogGroupIdentifiers": {
+          "description": "The log groups to query.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "insertionOrder": false
+        },
+        "ScheduledQueryRoleARN": {
+          "description": "The ARN of the IAM role that grants permissions to execute the scheduled query.",
+          "type": "string"
+        },
+        "ScheduleConfiguration": {
+          "description": "The schedule configuration.",
+          "$ref": "#/definitions/ScheduleConfiguration"
+        }
+      },
+      "required": [
+        "QueryString",
+        "AggregationExpression",
+        "LogGroupIdentifiers",
+        "ScheduledQueryRoleARN",
+        "ScheduleConfiguration"
+      ]
+    }
+  },
+  "properties": {
+    "AlarmName": {
+      "description": "The name of the log alarm.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "AlarmDescription": {
+      "description": "The description of the log alarm.",
+      "type": "string"
+    },
+    "ActionsEnabled": {
+      "description": "Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.",
+      "type": "boolean",
+      "default": true
+    },
+    "OKActions": {
+      "description": "The actions to execute when this alarm transitions to the OK state from any other state.",
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "AlarmActions": {
+      "description": "The list of actions to execute when this alarm transitions into an ALARM state from any other state.",
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "InsufficientDataActions": {
+      "description": "The actions to execute when this alarm transitions to the INSUFFICIENT_DATA state from any other state.",
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "Threshold": {
+      "description": "The value to compare against the results of the scheduled query evaluation.",
+      "type": "number"
+    },
+    "ComparisonOperator": {
+      "description": "The arithmetic operation to use when comparing the specified threshold and the query results. Valid values are GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, and LessThanOrEqualToThreshold.",
+      "type": "string"
+    },
+    "QueryResultsToEvaluate": {
+      "description": "The number of query results over which data is compared to the specified threshold.",
+      "type": "integer"
+    },
+    "QueryResultsToAlarm": {
+      "description": "The number of query results that must be breaching to trigger the alarm.",
+      "type": "integer"
+    },
+    "TreatMissingData": {
+      "description": "Sets how this alarm is to handle missing data points. Valid values are breaching, notBreaching, ignore, and missing.",
+      "type": "string"
+    },
+    "ScheduledQueryConfiguration": {
+      "description": "The scheduled query configuration for the log alarm.",
+      "$ref": "#/definitions/ScheduledQueryConfiguration"
+    },
+    "ActionLogLineCount": {
+      "description": "The number of log lines to include in alarm notifications. Valid values are 0 to 50.",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 50
+    },
+    "ActionLogLineRoleArn": {
+      "description": "The ARN of the IAM role that grants CloudWatch permissions to fetch log lines for alarm notifications. Required when ActionLogLineCount is greater than 0.",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "A list of key-value pairs to associate with the log alarm.",
+      "type": "array",
+      "maxItems": 50,
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "Arn": {
+      "description": "The ARN of the log alarm.",
+      "type": "string"
+    }
+  },
+  "required": [
+    "ComparisonOperator",
+    "Threshold",
+    "QueryResultsToAlarm",
+    "QueryResultsToEvaluate",
+    "ScheduledQueryConfiguration"
+  ],
+  "primaryIdentifier": [
+    "/properties/AlarmName"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn"
+  ],
+  "createOnlyProperties": [
+    "/properties/AlarmName"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cloudwatch:PutLogAlarm",
+        "cloudwatch:DescribeAlarms",
+        "cloudwatch:TagResource",
+        "logs:GetScheduledQuery",
+        "logs:CreateScheduledQuery",
+        "logs:UpdateScheduledQuery",
+        "logs:DeleteScheduledQuery",
+        "iam:PassRole"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cloudwatch:PutLogAlarm",
+        "cloudwatch:DescribeAlarms",
+        "cloudwatch:TagResource",
+        "cloudwatch:UntagResource",
+        "logs:GetScheduledQuery",
+        "logs:CreateScheduledQuery",
+        "logs:UpdateScheduledQuery",
+        "logs:DeleteScheduledQuery",
+        "iam:PassRole"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cloudwatch:DeleteAlarms",
+        "cloudwatch:DescribeAlarms",
+        "logs:GetScheduledQuery",
+        "logs:CreateScheduledQuery",
+        "logs:DeleteScheduledQuery"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cloudwatch:DescribeAlarms"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cloudwatch:DescribeAlarms",
+        "cloudwatch:ListTagsForResource"
+      ]
+    }
+  }
+}

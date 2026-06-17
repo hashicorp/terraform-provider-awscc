@@ -1,0 +1,483 @@
+{
+  "typeName": "AWS::ElasticLoadBalancing::LoadBalancer",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-elasticloadbalancing",
+  "documentationUrl": "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-elb.html",
+  "description": "Resource Type definition for AWS::ElasticLoadBalancing::LoadBalancer",
+  "additionalProperties": false,
+  "properties": {
+    "AccessLoggingPolicy": {
+      "description": "Information about where and how access logs are stored for the load balancer.",
+      "$ref": "#/definitions/AccessLoggingPolicy"
+    },
+    "AppCookieStickinessPolicy": {
+      "description": "Information about a policy for application-controlled session stickiness.",
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/AppCookieStickinessPolicy"
+      }
+    },
+    "AvailabilityZones": {
+      "description": "The Availability Zones for a load balancer in a default VPC. For a load balancer in a nondefault VPC, specify Subnets instead.",
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "ConnectionDrainingPolicy": {
+      "description": "If enabled, the load balancer allows existing requests to complete before the load balancer shifts traffic away from a deregistered or unhealthy instance.",
+      "$ref": "#/definitions/ConnectionDrainingPolicy"
+    },
+    "ConnectionSettings": {
+      "description": "If enabled, the load balancer allows the connections to remain idle (no data is sent over the connection) for the specified duration.",
+      "$ref": "#/definitions/ConnectionSettings"
+    },
+    "CrossZone": {
+      "description": "If enabled, the load balancer routes the request traffic evenly across all instances regardless of the Availability Zones.",
+      "type": "boolean"
+    },
+    "HealthCheck": {
+      "description": "The health check settings to use when evaluating the health of your EC2 instances.",
+      "$ref": "#/definitions/HealthCheck"
+    },
+    "Instances": {
+      "description": "The IDs of the instances for the load balancer.",
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "LBCookieStickinessPolicy": {
+      "description": "Information about a policy for duration-based session stickiness.",
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/LBCookieStickinessPolicy"
+      }
+    },
+    "Listeners": {
+      "description": "The Listeners for the load balancer. You can specify at most one listener per port.",
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/Listeners"
+      }
+    },
+    "LoadBalancerName": {
+      "description": "The name of the load balancer. This name must be unique within your set of load balancers for the region.",
+      "type": "string"
+    },
+    "Policies": {
+      "description": "The policies defined for your Classic Load Balancer. Specify only back-end server policies.",
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/Policies"
+      }
+    },
+    "Scheme": {
+      "description": "The type of load balancer. Valid only for load balancers in a VPC.",
+      "type": "string"
+    },
+    "SecurityGroups": {
+      "description": "The security groups for the load balancer. Valid only for load balancers in a VPC.",
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "Subnets": {
+      "description": "The IDs of the subnets for the load balancer. You can specify at most one subnet per Availability Zone.",
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "Tags": {
+      "description": "The tags associated with a load balancer.",
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "CanonicalHostedZoneName": {
+      "description": "The name of the Route 53 hosted zone that is associated with the load balancer. Internal-facing load balancers.",
+      "type": "string"
+    },
+    "CanonicalHostedZoneNameID": {
+      "description": "The ID of the Route 53 hosted zone name that is associated with the load balancer.",
+      "type": "string"
+    },
+    "DNSName": {
+      "description": "The DNS name for the load balancer",
+      "type": "string"
+    },
+    "SourceSecurityGroup": {
+      "$ref": "#/definitions/SourceSecurityGroup"
+    }
+  },
+  "definitions": {
+    "Listeners": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "PolicyNames": {
+          "description": "The names of the policies to associate with the listener.",
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "InstancePort": {
+          "description": "The port on which the instance is listening.",
+          "type": "string"
+        },
+        "LoadBalancerPort": {
+          "description": "The port on which the load balancer is listening. On EC2-VPC, you can specify any port from the range 1-65535. On EC2-Classic, you can specify any port from the following list: 25, 80, 443, 465, 587, 1024-65535.",
+          "type": "string"
+        },
+        "Protocol": {
+          "description": "The load balancer transport protocol to use for routing: HTTP, HTTPS, TCP, or SSL.",
+          "type": "string"
+        },
+        "SSLCertificateId": {
+          "description": "The Amazon Resource Name (ARN) of the server certificate.",
+          "type": "string"
+        },
+        "InstanceProtocol": {
+          "description": "The protocol to use for routing traffic to instances: HTTP, HTTPS, TCP, or SSL.\n\nIf the front-end protocol is TCP or SSL, the back-end protocol must be TCP or SSL. If the front-end protocol is HTTP or HTTPS, the back-end protocol must be HTTP or HTTPS.\n\nIf there is another listener with the same `InstancePort` whose `InstanceProtocol` is secure, (HTTPS or SSL), the listener's `InstanceProtocol` must also be secure.\n\nIf there is another listener with the same `InstancePort` whose `InstanceProtocol` is HTTP or TCP, the listener's `InstanceProtocol` must be HTTP or TCP.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "InstancePort",
+        "LoadBalancerPort",
+        "Protocol"
+      ]
+    },
+    "ConnectionDrainingPolicy": {
+      "description": "If enabled, the load balancer allows existing requests to complete before the load balancer shifts traffic away from a deregistered or unhealthy instance.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Enabled": {
+          "description": "Specifies whether connection draining is enabled for the load balancer.",
+          "type": "boolean"
+        },
+        "Timeout": {
+          "description": "The maximum time, in seconds, to keep the existing connections open before deregistering the instances.",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "Enabled"
+      ]
+    },
+    "PolicyItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      }
+    },
+    "Policies": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Attributes": {
+          "description": "The policy attributes.",
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/PolicyItem"
+          }
+        },
+        "PolicyType": {
+          "description": "The name of the policy type.",
+          "type": "string"
+        },
+        "LoadBalancerPorts": {
+          "description": "The load balancer ports for the policy. Required only for some policy types.",
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "PolicyName": {
+          "description": "The name of the policy.",
+          "type": "string"
+        },
+        "InstancePorts": {
+          "description": "The instance ports for the policy. Required only for some policy types.",
+          "type": "array",
+          "uniqueItems": false,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "PolicyType",
+        "PolicyName",
+        "Attributes"
+      ]
+    },
+    "AppCookieStickinessPolicy": {
+      "description": "Information about a policy for application-controlled session stickiness.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "CookieName": {
+          "description": "The name of the application cookie used for stickiness.",
+          "type": "string"
+        },
+        "PolicyName": {
+          "description": "The mnemonic name for the policy being created. The name must be unique within a set of policies for this load balancer.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "PolicyName",
+        "CookieName"
+      ]
+    },
+    "LBCookieStickinessPolicy": {
+      "description": "Information about a policy for duration-based session stickiness.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "CookieExpirationPeriod": {
+          "description": "The time period, in seconds, after which the cookie should be considered stale. If this parameter is not specified, the stickiness session lasts for the duration of the browser session.",
+          "type": "string"
+        },
+        "PolicyName": {
+          "description": "The name of the policy. This name must be unique within the set of policies for this load balancer.",
+          "type": "string"
+        }
+      }
+    },
+    "HealthCheck": {
+      "description": "The health check settings to use when evaluating the health of your EC2 instances.\n\nUpdate requires replacement if you did not previously specify health check settings or if you are removing the health check settings. Otherwise, update requires no interruption.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Target": {
+          "description": "The instance being checked.",
+          "type": "string"
+        },
+        "UnhealthyThreshold": {
+          "description": "The number of consecutive health check failures required before moving the instance to the `Unhealthy` state.",
+          "type": "string"
+        },
+        "Timeout": {
+          "description": "The amount of time, in seconds, during which no response means a failed health check.\n\nThis value must be less than the `Interval` value.",
+          "type": "string"
+        },
+        "HealthyThreshold": {
+          "description": "The number of consecutive health checks successes required before moving the instance to the `Healthy` state.",
+          "type": "string"
+        },
+        "Interval": {
+          "description": "The approximate interval, in seconds, between health checks of an individual instance.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Target",
+        "UnhealthyThreshold",
+        "Timeout",
+        "HealthyThreshold",
+        "Interval"
+      ]
+    },
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Value": {
+          "description": "The value for the tag. You can specify a value that's 1 to 256 characters in length.",
+          "type": "string"
+        },
+        "Key": {
+          "description": "The key name of the tag. You can specify a value that's 1 to 128 Unicode characters in length and can't be prefixed with `aws:`. You can use any of the following characters: the set of Unicode letters, digits, whitespace, `_`, `.`, `/`, `=`, `+`, and `-`.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ]
+    },
+    "AccessLoggingPolicy": {
+      "description": "Information about where and how access logs are stored for the load balancer.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Enabled": {
+          "description": "Specifies whether access logs are enabled for the load balancer.",
+          "type": "boolean"
+        },
+        "S3BucketName": {
+          "description": "The name of the Amazon S3 bucket where the access logs are stored.",
+          "type": "string"
+        },
+        "EmitInterval": {
+          "description": "The interval for publishing the access logs. You can specify an interval of either 5 minutes or 60 minutes.\n\nDefault: 60 minutes",
+          "type": "integer"
+        },
+        "S3BucketPrefix": {
+          "description": "The logical hierarchy you created for your Amazon S3 bucket, for example `my-bucket-prefix/prod`. If the prefix is not provided, the log is placed at the root level of the bucket.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Enabled",
+        "S3BucketName"
+      ]
+    },
+    "ConnectionSettings": {
+      "description": "If enabled, the load balancer allows the connections to remain idle (no data is sent over the connection) for the specified duration.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "IdleTimeout": {
+          "description": "The time, in seconds, that the connection is allowed to be idle (no data has been sent over the connection) before it is closed by the load balancer.",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "IdleTimeout"
+      ]
+    },
+    "SourceSecurityGroup": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "GroupName": {
+          "description": "The name of the security group that you can use as part of your inbound rules for your load balancer's back-end instances.",
+          "type": "string"
+        },
+        "OwnerAlias": {
+          "description": "The owner of the source security group.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "required": [
+    "Listeners"
+  ],
+  "createOnlyProperties": [
+    "/properties/LoadBalancerName",
+    "/properties/Scheme"
+  ],
+  "conditionalCreateOnlyProperties": [
+    "/properties/AvailabilityZones",
+    "/properties/HealthCheck",
+    "/properties/Subnets"
+  ],
+  "primaryIdentifier": [
+    "/properties/LoadBalancerName"
+  ],
+  "readOnlyProperties": [
+    "/properties/CanonicalHostedZoneName",
+    "/properties/CanonicalHostedZoneNameID",
+    "/properties/SourceSecurityGroup",
+    "/properties/SourceSecurityGroup/GroupName",
+    "/properties/DNSName",
+    "/properties/SourceSecurityGroup/OwnerAlias"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "elasticloadbalancing:AddTags",
+      "elasticloadbalancing:RemoveTags"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "elasticloadbalancing:DescribeLoadBalancers",
+        "elasticloadbalancing:CreateLoadBalancer",
+        "elasticloadbalancing:ModifyLoadBalancerAttributes",
+        "elasticloadbalancing:ConfigureHealthCheck",
+        "elasticloadbalancing:CreateLoadBalancerPolicy",
+        "elasticloadbalancing:SetLoadBalancerPoliciesForBackendServer",
+        "elasticloadbalancing:SetLoadBalancerPoliciesOfListener",
+        "elasticloadbalancing:RegisterInstancesWithLoadBalancer",
+        "elasticloadbalancing:CreateAppCookieStickinessPolicy",
+        "elasticloadbalancing:CreateLBCookieStickinessPolicy",
+        "elasticloadbalancing:AddTags",
+        "elasticloadbalancing:DescribeLoadBalancerAttributes",
+        "elasticloadbalancing:DescribeTags",
+        "ec2:CreateSecurityGroup",
+        "ec2:DescribeSecurityGroups"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "elasticloadbalancing:DescribeLoadBalancers",
+        "elasticloadbalancing:DescribeLoadBalancerPolicies",
+        "elasticloadbalancing:DescribeLoadBalancerAttributes",
+        "elasticloadbalancing:DescribeTags"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "elasticloadbalancing:SetLoadBalancerPoliciesForBackendServer",
+        "elasticloadbalancing:DetachLoadBalancerFromSubnets",
+        "elasticloadbalancing:AttachLoadBalancerToSubnets",
+        "elasticloadbalancing:ConfigureHealthCheck",
+        "elasticloadbalancing:CreateLBCookieStickinessPolicy",
+        "elasticloadbalancing:CreateLoadBalancerListeners",
+        "elasticloadbalancing:SetLoadBalancerListenerSSLCertificate",
+        "elasticloadbalancing:DescribeTags",
+        "elasticloadbalancing:AddTags",
+        "elasticloadbalancing:RemoveTags",
+        "elasticloadbalancing:SetLoadBalancerPoliciesOfListener",
+        "elasticloadbalancing:ApplySecurityGroupsToLoadBalancer",
+        "elasticloadbalancing:CreateAppCookieStickinessPolicy",
+        "elasticloadbalancing:DeleteLoadBalancerListeners",
+        "elasticloadbalancing:DeregisterInstancesFromLoadBalancer",
+        "elasticloadbalancing:RegisterInstancesWithLoadBalancer",
+        "elasticloadbalancing:ModifyLoadBalancerAttributes",
+        "elasticloadbalancing:CreateLoadBalancerPolicy",
+        "elasticloadbalancing:DeleteLoadBalancerPolicy",
+        "elasticloadbalancing:DisableAvailabilityZonesForLoadBalancer",
+        "elasticloadbalancing:EnableAvailabilityZonesForLoadBalancer",
+        "elasticloadbalancing:DescribeLoadBalancers",
+        "elasticloadbalancing:DescribeLoadBalancerAttributes",
+        "elasticloadbalancing:DescribeTags",
+        "ec2:CreateSecurityGroup",
+        "ec2:DescribeSecurityGroups"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "elasticloadbalancing:DeleteLoadBalancer",
+        "elasticloadbalancing:DescribeLoadBalancers"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "elasticloadbalancing:DescribeLoadBalancers"
+      ]
+    }
+  }
+}

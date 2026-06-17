@@ -504,6 +504,11 @@
         "identifier": ["AutoScalingGroupName"]
     },
     {
+        "resource": "awscc_awsexternalanthropic_workspace",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_b2bi_capability",
         "generateListResource": true,
         "identifier": ["CapabilityId"]
@@ -725,6 +730,11 @@
         "resource": "awscc_bedrockagentcore_code_interpreter_custom",
         "generateListResource": true,
         "identifier": ["CodeInterpreterId"]
+    },
+    {
+        "resource": "awscc_bedrockagentcore_configuration_bundle",
+        "generateListResource": true,
+        "identifier": ["BundleArn"]
     },
     {
         "resource": "awscc_bedrockagentcore_evaluator",
@@ -1163,6 +1173,11 @@
         "resource": "awscc_cloudwatch_dashboard",
         "generateListResource": true,
         "identifier": ["DashboardName"]
+    },
+    {
+        "resource": "awscc_cloudwatch_log_alarm",
+        "generateListResource": true,
+        "identifier": ["AlarmName"]
     },
     {
         "resource": "awscc_cloudwatch_metric_stream",
@@ -2611,6 +2626,11 @@
         "identifier": ["EnvironmentName"]
     },
     {
+        "resource": "awscc_elasticloadbalancing_load_balancer",
+        "generateListResource": true,
+        "identifier": ["LoadBalancerName"]
+    },
+    {
         "resource": "awscc_elasticloadbalancingv2_listener",
         "generateListResource": true,
         "identifier": ["ListenerArn"]
@@ -2638,6 +2658,11 @@
     {
         "resource": "awscc_elasticloadbalancingv2_trust_store_revocation",
         "identifier": ["RevocationId","TrustStoreArn"]
+    },
+    {
+        "resource": "awscc_elementalinference_dictionary",
+        "generateListResource": true,
+        "identifier": ["Id"]
     },
     {
         "resource": "awscc_elementalinference_feed",
@@ -4302,6 +4327,11 @@
         "identifier": ["SubscriptionName"]
     },
     {
+        "resource": "awscc_neptune_global_cluster",
+        "generateListResource": true,
+        "identifier": ["GlobalClusterIdentifier"]
+    },
+    {
         "resource": "awscc_neptunegraph_graph",
         "generateListResource": true,
         "identifier": ["GraphId"]
@@ -5822,6 +5852,11 @@
         "resource": "awscc_sagemaker_inference_experiment",
         "generateListResource": true,
         "identifier": ["Name"]
+    },
+    {
+        "resource": "awscc_sagemaker_mlflow_app",
+        "generateListResource": true,
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_sagemaker_mlflow_tracking_server",
