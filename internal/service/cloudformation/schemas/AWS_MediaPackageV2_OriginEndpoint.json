@@ -100,6 +100,13 @@
         "NONE"
       ]
     },
+    "DashAudioTimelinePattern": {
+      "type": "string",
+      "enum": [
+        "NONE",
+        "PATTERNED"
+      ]
+    },
     "DashDrmSignaling": {
       "type": "string",
       "enum": [
@@ -507,6 +514,9 @@
         "Compactness": {
           "$ref": "#/definitions/DashCompactness"
         },
+        "AudioTimelinePattern": {
+          "$ref": "#/definitions/DashAudioTimelinePattern"
+        },
         "SubtitleConfiguration": {
           "$ref": "#/definitions/DashSubtitleConfiguration"
         },
@@ -751,7 +761,9 @@
         "PROVIDER_PROMO",
         "DISTRIBUTOR_PROMO",
         "PROVIDER_AD_BLOCK",
-        "DISTRIBUTOR_AD_BLOCK"
+        "DISTRIBUTOR_AD_BLOCK",
+        "CONTENT_IDENTIFICATION",
+        "CALL_AD_SERVER"
       ]
     },
     "ScteHls": {

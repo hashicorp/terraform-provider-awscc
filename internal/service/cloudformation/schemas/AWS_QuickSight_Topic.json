@@ -120,7 +120,7 @@
       "properties": {
         "CustomInstructionsString": {
           "type": "string",
-          "maxLength": 5000,
+          "maxLength": 10000,
           "minLength": 0
         }
       },

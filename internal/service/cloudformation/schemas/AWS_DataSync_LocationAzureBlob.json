@@ -114,7 +114,7 @@
         "maxLength": 128
       },
       "minItems": 1,
-      "maxItems": 4,
+      "maxItems": 8,
       "insertionOrder": false
     },
     "AzureBlobAuthenticationType": {

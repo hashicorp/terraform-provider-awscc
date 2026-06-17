@@ -590,7 +590,15 @@
         "kafka:DescribeReplicator",
         "kafka:GetBootstrapBrokers",
         "kafka:ListTagsForResource",
-        "kafka:TagResource"
+        "kafka:TagResource",
+        "logs:CreateLogDelivery",
+        "logs:DescribeLogGroups",
+        "logs:DescribeResourcePolicies",
+        "logs:ListLogDeliveries",
+        "logs:PutResourcePolicy",
+        "s3:GetBucketPolicy",
+        "s3:PutBucketPolicy",
+        "firehose:TagDeliveryStream"
       ]
     },
     "read": {
@@ -605,7 +613,16 @@
         "kafka:ListTagsForResource",
         "kafka:TagResource",
         "kafka:UntagResource",
-        "kafka:UpdateReplicationInfo"
+        "kafka:UpdateReplicationInfo",
+        "logs:CreateLogDelivery",
+        "logs:DeleteLogDelivery",
+        "logs:DescribeLogGroups",
+        "logs:DescribeResourcePolicies",
+        "logs:ListLogDeliveries",
+        "logs:PutResourcePolicy",
+        "s3:GetBucketPolicy",
+        "s3:PutBucketPolicy",
+        "firehose:TagDeliveryStream"
       ]
     },
     "delete": {
@@ -613,7 +630,9 @@
         "kafka:DeleteReplicator",
         "kafka:DescribeReplicator",
         "kafka:ListTagsForResource",
-        "kafka:UntagResource"
+        "kafka:UntagResource",
+        "logs:DeleteLogDelivery",
+        "logs:ListLogDeliveries"
       ]
     },
     "list": {

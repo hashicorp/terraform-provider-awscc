@@ -81,6 +81,33 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "DeliverySourceConfiguration": {
+      "description": "A map of key-value pairs to configure the delivery source. Both keys and values must be between 1 and 255 characters in length.",
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255
+        }
+      },
+      "additionalProperties": false
+    },
+    "Status": {
+      "description": "The status of this delivery source. The value can be ACTIVE or INACTIVE.",
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "INACTIVE"
+      ]
+    },
+    "StatusReason": {
+      "description": "The reason for the status of this delivery source, such as RESOURCE_DELETED.",
+      "type": "string",
+      "enum": [
+        "RESOURCE_DELETED"
+      ]
     }
   },
   "additionalProperties": false,
@@ -99,7 +126,9 @@
   "readOnlyProperties": [
     "/properties/Service",
     "/properties/ResourceArns",
-    "/properties/Arn"
+    "/properties/Arn",
+    "/properties/Status",
+    "/properties/StatusReason"
   ],
   "handlers": {
     "create": {

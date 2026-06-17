@@ -385,7 +385,7 @@
           "items": {
             "type": "string"
           },
-          "maxItems": 20,
+          "maxItems": 30,
           "minItems": 1,
           "description": "<p>The IAM action to grant or revoke permissions on.</p>"
         }
@@ -508,6 +508,7 @@
   },
   "required": [
     "ActionConnectorId",
+    "AuthenticationConfig",
     "AwsAccountId",
     "Name",
     "Type"

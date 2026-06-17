@@ -7,6 +7,7 @@
 
 internal/service/cloudformation/schemas/AWS_AppFlow_ConnectorProfile.json
 internal/service/cloudformation/schemas/AWS_Bedrock_FlowVersion.json
+internal/service/cloudformation/schemas/AWS_BedrockAgentCore_Harness.json
 internal/service/cloudformation/schemas/AWS_ControlTower_EnabledControl.json
 internal/service/cloudformation/schemas/AWS_CustomerProfiles_Domain.json
 internal/service/cloudformation/schemas/AWS_DataSync_StorageSystem.json

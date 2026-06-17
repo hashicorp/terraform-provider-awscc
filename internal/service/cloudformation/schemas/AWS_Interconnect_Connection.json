@@ -190,6 +190,9 @@
     "/properties/RemoteOwnerAccount",
     "/properties/RemoteAccount"
   ],
+  "deprecatedProperties": [
+    "/properties/RemoteOwnerAccount"
+  ],
   "primaryIdentifier": [
     "/properties/Arn"
   ],

@@ -96,6 +96,14 @@
         "DISABLED"
       ]
     },
+    "Generation": {
+      "type": "string",
+      "description": "The generation of Amazon OpenSearch Serverless for the collection group. Valid values are CLASSIC and NEXTGEN.",
+      "enum": [
+        "CLASSIC",
+        "NEXTGEN"
+      ]
+    },
     "CapacityLimits": {
       "$ref": "#/definitions/CapacityLimits"
     },
@@ -119,7 +127,8 @@
   ],
   "createOnlyProperties": [
     "/properties/Name",
-    "/properties/StandbyReplicas"
+    "/properties/StandbyReplicas",
+    "/properties/Generation"
   ],
   "primaryIdentifier": [
     "/properties/Id"
