@@ -1,4 +1,4 @@
-## 1.89.0 (Unreleased)
+## 1.89.0 (June 17, 2026)
 
 FEATURES:
 
