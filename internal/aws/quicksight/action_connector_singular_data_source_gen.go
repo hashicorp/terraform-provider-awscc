@@ -506,7 +506,7 @@ func actionConnectorDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	        "items": {
 		//	          "type": "string"
 		//	        },
-		//	        "maxItems": 20,
+		//	        "maxItems": 30,
 		//	        "minItems": 1,
 		//	        "type": "array"
 		//	      },

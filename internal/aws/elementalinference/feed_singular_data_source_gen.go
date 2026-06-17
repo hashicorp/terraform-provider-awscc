@@ -98,6 +98,59 @@ func feedDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "Cropping": {
 		//	            "additionalProperties": false,
 		//	            "type": "object"
+		//	          },
+		//	          "Subtitling": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "AspectRatio": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Height": {
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "Width": {
+		//	                    "type": "integer"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Height",
+		//	                  "Width"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "Dictionary": {
+		//	                "maxLength": 19,
+		//	                "minLength": 1,
+		//	                "pattern": "^[a-zA-Z0-9]+$",
+		//	                "type": "string"
+		//	              },
+		//	              "Language": {
+		//	                "enum": [
+		//	                  "eng",
+		//	                  "eng-au",
+		//	                  "eng-gb",
+		//	                  "eng-us",
+		//	                  "fra",
+		//	                  "ita",
+		//	                  "deu",
+		//	                  "spa",
+		//	                  "por"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "ProfanityFilter": {
+		//	                "enum": [
+		//	                  "DISABLED",
+		//	                  "CENSOR",
+		//	                  "DROP"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Language"
+		//	            ],
+		//	            "type": "object"
 		//	          }
 		//	        },
 		//	        "type": "object"
@@ -148,6 +201,38 @@ func feedDataSource(ctx context.Context) (datasource.DataSource, error) {
 								CustomType: jsontypes.NormalizedType{},
 								Computed:   true,
 							}, /*END ATTRIBUTE*/
+							// Property: Subtitling
+							"subtitling": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AspectRatio
+									"aspect_ratio": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Height
+											"height": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Width
+											"width": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Dictionary
+									"dictionary": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Language
+									"language": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: ProfanityFilter
+									"profanity_filter": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Computed: true,
 					}, /*END ATTRIBUTE*/
@@ -195,17 +280,24 @@ func feedDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":               "Arn",
+		"aspect_ratio":      "AspectRatio",
 		"callback_metadata": "CallbackMetadata",
 		"clipping":          "Clipping",
 		"cropping":          "Cropping",
 		"data_endpoints":    "DataEndpoints",
 		"description":       "Description",
+		"dictionary":        "Dictionary",
 		"feed_id":           "Id",
+		"height":            "Height",
+		"language":          "Language",
 		"name":              "Name",
 		"output_config":     "OutputConfig",
 		"outputs":           "Outputs",
+		"profanity_filter":  "ProfanityFilter",
 		"status":            "Status",
+		"subtitling":        "Subtitling",
 		"tags":              "Tags",
+		"width":             "Width",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

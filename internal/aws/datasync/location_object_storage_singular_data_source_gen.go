@@ -48,7 +48,7 @@ func locationObjectStorageDataSource(ctx context.Context) (datasource.DataSource
 		//	    "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$",
 		//	    "type": "string"
 		//	  },
-		//	  "maxItems": 4,
+		//	  "maxItems": 8,
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}

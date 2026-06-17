@@ -32,6 +32,23 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"apply_only_at_cron_interval": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: AssociationDispatchAssumeRole
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A role used by association to take actions on your behalf.",
+		//	  "examples": [
+		//	    "arn:aws:iam::123456789012:role/myAssociationDispatchAssumeRole"
+		//	  ],
+		//	  "maxLength": 512,
+		//	  "minLength": 1,
+		//	  "pattern": "arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+",
+		//	  "type": "string"
+		//	}
+		"association_dispatch_assume_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A role used by association to take actions on your behalf.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: AssociationId
 		// CloudFormation resource type schema:
 		//
@@ -306,6 +323,60 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"sync_compliance": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A key-value pair to associate with a resource.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Metadata that you assign to your AWS resources.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The name of the tag.",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value of the tag.",
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 1000,
+		//	  "minItems": 0,
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value of the tag.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A key-value pair to associate with a resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Targets
 		// CloudFormation resource type schema:
 		//
@@ -386,6 +457,7 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"apply_only_at_cron_interval":      "ApplyOnlyAtCronInterval",
+		"association_dispatch_assume_role": "AssociationDispatchAssumeRole",
 		"association_id":                   "AssociationId",
 		"association_name":                 "AssociationName",
 		"automation_target_parameter_name": "AutomationTargetParameterName",
@@ -406,7 +478,9 @@ func associationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"schedule_expression":              "ScheduleExpression",
 		"schedule_offset":                  "ScheduleOffset",
 		"sync_compliance":                  "SyncCompliance",
+		"tags":                             "Tags",
 		"targets":                          "Targets",
+		"value":                            "Value",
 		"values":                           "Values",
 		"wait_for_success_timeout_seconds": "WaitForSuccessTimeoutSeconds",
 	})

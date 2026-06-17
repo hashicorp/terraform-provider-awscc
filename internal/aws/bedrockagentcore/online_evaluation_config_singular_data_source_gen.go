@@ -24,6 +24,47 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::BedrockAgentCore::OnlineEvaluationConfig resource.
 func onlineEvaluationConfigDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ClusteringConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The configuration for clustering analysis of evaluation results.",
+		//	  "properties": {
+		//	    "Frequencies": {
+		//	      "description": "The list of frequencies at which clustering reports are generated.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "description": "The frequency at which clustering reports are generated.",
+		//	        "enum": [
+		//	          "DAILY",
+		//	          "WEEKLY",
+		//	          "MONTHLY"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 3,
+		//	      "minItems": 0,
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Frequencies"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"clustering_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Frequencies
+				"frequencies": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The list of frequencies at which clustering reports are generated.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration for clustering analysis of evaluation results.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -161,7 +202,7 @@ func onlineEvaluationConfigDataSource(ctx context.Context) (datasource.DataSourc
 		//	    "type": "object"
 		//	  },
 		//	  "maxItems": 10,
-		//	  "minItems": 1,
+		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
 		"evaluators": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -190,6 +231,46 @@ func onlineEvaluationConfigDataSource(ctx context.Context) (datasource.DataSourc
 		//	}
 		"execution_status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The execution status indicating whether the online evaluation is currently running.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Insights
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The list of insights to enable for failure analysis.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "An insight configuration for failure analysis.",
+		//	    "properties": {
+		//	      "InsightId": {
+		//	        "description": "The unique identifier of the insight.",
+		//	        "maxLength": 256,
+		//	        "minLength": 1,
+		//	        "pattern": "^[a-zA-Z][a-zA-Z0-9._]+$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "InsightId"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 10,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"insights": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: InsightId
+					"insight_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The unique identifier of the insight.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The list of insights to enable for failure analysis.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OnlineEvaluationConfigArn
@@ -540,6 +621,7 @@ func onlineEvaluationConfigDataSource(ctx context.Context) (datasource.DataSourc
 		"boolean_value":                 "BooleanValue",
 		"cloudwatch_config":             "CloudWatchConfig",
 		"cloudwatch_logs":               "CloudWatchLogs",
+		"clustering_config":             "ClusteringConfig",
 		"created_at":                    "CreatedAt",
 		"data_source_config":            "DataSourceConfig",
 		"description":                   "Description",
@@ -549,6 +631,9 @@ func onlineEvaluationConfigDataSource(ctx context.Context) (datasource.DataSourc
 		"evaluators":                    "Evaluators",
 		"execution_status":              "ExecutionStatus",
 		"filters":                       "Filters",
+		"frequencies":                   "Frequencies",
+		"insight_id":                    "InsightId",
+		"insights":                      "Insights",
 		"key":                           "Key",
 		"log_group_name":                "LogGroupName",
 		"log_group_names":               "LogGroupNames",

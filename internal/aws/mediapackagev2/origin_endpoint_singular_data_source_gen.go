@@ -108,6 +108,13 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	    "additionalProperties": false,
 		//	    "description": "\u003cp\u003eRetrieve the DASH manifest configuration.\u003c/p\u003e",
 		//	    "properties": {
+		//	      "AudioTimelinePattern": {
+		//	        "enum": [
+		//	          "NONE",
+		//	          "PATTERNED"
+		//	        ],
+		//	        "type": "string"
+		//	      },
 		//	      "AvailabilityStartTimeConfiguration": {
 		//	        "properties": {
 		//	          "FixedAvailabilityStartTime": {
@@ -452,6 +459,10 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		"dash_manifests": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AudioTimelinePattern
+					"audio_timeline_pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
 					// Property: AvailabilityStartTimeConfiguration
 					"availability_start_time_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1660,7 +1671,9 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	              "PROVIDER_PROMO",
 		//	              "DISTRIBUTOR_PROMO",
 		//	              "PROVIDER_AD_BLOCK",
-		//	              "DISTRIBUTOR_AD_BLOCK"
+		//	              "DISTRIBUTOR_AD_BLOCK",
+		//	              "CONTENT_IDENTIFICATION",
+		//	              "CALL_AD_SERVER"
 		//	            ],
 		//	            "type": "string"
 		//	          },
@@ -1926,6 +1939,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		"ad_marker_dash":                        "AdMarkerDash",
 		"ad_marker_hls":                         "AdMarkerHls",
 		"arn":                                   "Arn",
+		"audio_timeline_pattern":                "AudioTimelinePattern",
 		"availability_start_time_configuration": "AvailabilityStartTimeConfiguration",
 		"base_urls":                             "BaseUrls",
 		"certificate_arn":                       "CertificateArn",

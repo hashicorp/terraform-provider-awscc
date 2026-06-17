@@ -330,7 +330,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	            "type": "integer"
 		//	          },
 		//	          "Tmpfs": {
-		//	            "description": "The container path, mount options, and size (in MiB) of the tmpfs mount. This parameter maps to the ``--tmpfs`` option to docker run.\n  If you're using tasks that use the Fargate launch type, the ``tmpfs`` parameter isn't supported.",
+		//	            "description": "The container path, mount options, and size (in MiB) of the tmpfs mount. This parameter maps to the ``--tmpfs`` option to docker run.",
 		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "additionalProperties": false,
@@ -514,18 +514,18 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	        "type": "object"
 		//	      },
 		//	      "ResourceRequirements": {
-		//	        "description": "The type and amount of a resource to assign to a container. The only supported resource is a GPU.",
+		//	        "description": "The type and amount of a resource to assign to a container. The supported resources are GPUs and Neuron devices.",
 		//	        "insertionOrder": false,
 		//	        "items": {
 		//	          "additionalProperties": false,
-		//	          "description": "The type and amount of a resource to assign to a container. The supported resource types are GPUs and Elastic Inference accelerators. For more information, see [Working with GPUs on Amazon ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-gpu.html) or [Working with Amazon Elastic Inference on Amazon ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html) in the *Amazon Elastic Container Service Developer Guide*",
+		//	          "description": "The type and amount of a resource to assign to a container. The supported resource types are GPUs, Neuron devices, and Elastic Inference accelerators. For more information, see [Working with GPUs on Amazon ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-gpu.html) or [Working with Amazon Elastic Inference on Amazon ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html) in the *Amazon Elastic Container Service Developer Guide*",
 		//	          "properties": {
 		//	            "Type": {
 		//	              "description": "The type of resource to assign to a container.",
 		//	              "type": "string"
 		//	            },
 		//	            "Value": {
-		//	              "description": "The value for the specified resource type.\n When the type is ``GPU``, the value is the number of physical ``GPUs`` the Amazon ECS container agent reserves for the container. The number of GPUs that's reserved for all containers in a task can't exceed the number of available GPUs on the container instance that the task is launched on.\n When the type is ``InferenceAccelerator``, the ``value`` matches the ``deviceName`` for an [InferenceAccelerator](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_InferenceAccelerator.html) specified in a task definition.",
+		//	              "description": "The value for the specified resource type.\n When the type is ``GPU``, the value is the number of physical ``GPUs`` the Amazon ECS container agent reserves for the container. The number of GPUs that's reserved for all containers in a task can't exceed the number of available GPUs on the container instance that the task is launched on. You can also specify ``ALL`` to allocate all available GPUs on the instance to the container.\n When the type is ``NeuronDevice``, the value must be ``ALL``. This allocates all available Neuron devices on the instance to the container. Only one container in a task can specify ``NeuronDevice`` resources. This resource type is only supported on Managed Instances.\n When the type is ``InferenceAccelerator``, the ``value`` matches the ``deviceName`` for an [InferenceAccelerator](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_InferenceAccelerator.html) specified in a task definition.",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -988,7 +988,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Description: "The container path, mount options, and size (in MiB) of the tmpfs mount. This parameter maps to the ``--tmpfs`` option to docker run.\n  If you're using tasks that use the Fargate launch type, the ``tmpfs`` parameter isn't supported.",
+								Description: "The container path, mount options, and size (in MiB) of the tmpfs mount. This parameter maps to the ``--tmpfs`` option to docker run.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -1149,12 +1149,12 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 								}, /*END ATTRIBUTE*/
 								// Property: Value
 								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The value for the specified resource type.\n When the type is ``GPU``, the value is the number of physical ``GPUs`` the Amazon ECS container agent reserves for the container. The number of GPUs that's reserved for all containers in a task can't exceed the number of available GPUs on the container instance that the task is launched on.\n When the type is ``InferenceAccelerator``, the ``value`` matches the ``deviceName`` for an [InferenceAccelerator](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_InferenceAccelerator.html) specified in a task definition.",
+									Description: "The value for the specified resource type.\n When the type is ``GPU``, the value is the number of physical ``GPUs`` the Amazon ECS container agent reserves for the container. The number of GPUs that's reserved for all containers in a task can't exceed the number of available GPUs on the container instance that the task is launched on. You can also specify ``ALL`` to allocate all available GPUs on the instance to the container.\n When the type is ``NeuronDevice``, the value must be ``ALL``. This allocates all available Neuron devices on the instance to the container. Only one container in a task can specify ``NeuronDevice`` resources. This resource type is only supported on Managed Instances.\n When the type is ``InferenceAccelerator``, the ``value`` matches the ``deviceName`` for an [InferenceAccelerator](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_InferenceAccelerator.html) specified in a task definition.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Description: "The type and amount of a resource to assign to a container. The only supported resource is a GPU.",
+						Description: "The type and amount of a resource to assign to a container. The supported resources are GPUs and Neuron devices.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: RestartPolicy
@@ -1686,7 +1686,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "The data volume configuration for tasks launched using this task definition. Specifying a volume configuration in a task definition is optional. The volume configuration may contain multiple volumes but only one volume configured at launch is supported. Each volume defined in the volume configuration may only specify a ``name`` and one of either ``configuredAtLaunch``, ``dockerVolumeConfiguration``, ``efsVolumeConfiguration``, ``fsxWindowsFileServerVolumeConfiguration``, or ``host``. If an empty volume configuration is specified, by default Amazon ECS uses a host volume. For more information, see [Using data volumes in tasks](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html).",
+		//	    "description": "The data volume configuration for tasks launched using this task definition. Specifying a volume configuration in a task definition is optional. The volume configuration may contain multiple volumes but only one volume configured at launch is supported. Each volume defined in the volume configuration may only specify a ``name`` and one of either ``configuredAtLaunch``, ``dockerVolumeConfiguration``, ``efsVolumeConfiguration``, ``s3filesVolumeConfiguration``, ``fsxWindowsFileServerVolumeConfiguration``, or ``host``. If an empty volume configuration is specified, by default Amazon ECS uses a host volume. For more information, see [Using data volumes in tasks](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html).",
 		//	    "properties": {
 		//	      "ConfiguredAtLaunch": {
 		//	        "description": "Indicates whether the volume should be configured at launch time. This is used to create Amazon EBS volumes for standalone tasks or tasks created as part of a service. Each task definition revision may only have one volume configured at launch in the volume configuration.\n To configure a volume at launch time, use this task definition revision and specify a ``volumeConfigurations`` object when calling the ``CreateService``, ``UpdateService``, ``RunTask`` or ``StartTask`` APIs.",
@@ -1830,23 +1830,27 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	        "type": "object"
 		//	      },
 		//	      "Name": {
-		//	        "description": "The name of the volume. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed.\n When using a volume configured at launch, the ``name`` is required and must also be specified as the volume name in the ``ServiceVolumeConfiguration`` or ``TaskVolumeConfiguration`` parameter when creating your service or standalone task.\n For all other types of volumes, this name is referenced in the ``sourceVolume`` parameter of the ``mountPoints`` object in the container definition.\n When a volume is using the ``efsVolumeConfiguration``, the name is required.",
+		//	        "description": "The name of the volume. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed.\n When using a volume configured at launch, the ``name`` is required and must also be specified as the volume name in the ``ServiceVolumeConfiguration`` or ``TaskVolumeConfiguration`` parameter when creating your service or standalone task.\n For all other types of volumes, this name is referenced in the ``sourceVolume`` parameter of the ``mountPoints`` object in the container definition.\n When a volume is using the ``efsVolumeConfiguration``, the name is required.\n When a volume is using the ``s3filesVolumeConfiguration``, the name is required.",
 		//	        "type": "string"
 		//	      },
 		//	      "S3FilesVolumeConfiguration": {
 		//	        "additionalProperties": false,
-		//	        "description": "",
+		//	        "description": "This parameter is specified when you use an Amazon S3 Files file system for task storage.",
 		//	        "properties": {
 		//	          "AccessPointArn": {
+		//	            "description": "The full ARN of the S3 Files access point to use. If an access point is specified, the root directory value specified in the ``S3FilesVolumeConfiguration`` must either be omitted or set to ``/`` which will enforce the path set on the S3 Files access point. For more information, see [Creating S3 Files access points](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-files-access-points-creating.html).",
 		//	            "type": "string"
 		//	          },
 		//	          "FileSystemArn": {
+		//	            "description": "The full ARN of the S3 Files file system to mount.",
 		//	            "type": "string"
 		//	          },
 		//	          "RootDirectory": {
+		//	            "description": "The directory within the Amazon S3 Files file system to mount as the root directory. If this parameter is omitted, the root of the Amazon S3 Files file system will be used. Specifying ``/`` will have the same effect as omitting this parameter.\n  If a S3 Files access point is specified in the ``accessPointArn``, the root directory parameter must either be omitted or set to ``/`` which will enforce the path set on the S3 Files access point.",
 		//	            "type": "string"
 		//	          },
 		//	          "TransitEncryptionPort": {
+		//	            "description": "The port to use for sending encrypted data between the ECS host and the S3 Files file system. If you do not specify a transit encryption port, it will use the port selection strategy that the Amazon S3 Files mount helper uses. For more information, see [S3 Files mount helper](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-files-mounting.html).",
 		//	            "type": "integer"
 		//	          }
 		//	        },
@@ -1997,7 +2001,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 					}, /*END ATTRIBUTE*/
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the volume. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed.\n When using a volume configured at launch, the ``name`` is required and must also be specified as the volume name in the ``ServiceVolumeConfiguration`` or ``TaskVolumeConfiguration`` parameter when creating your service or standalone task.\n For all other types of volumes, this name is referenced in the ``sourceVolume`` parameter of the ``mountPoints`` object in the container definition.\n When a volume is using the ``efsVolumeConfiguration``, the name is required.",
+						Description: "The name of the volume. Up to 255 letters (uppercase and lowercase), numbers, underscores, and hyphens are allowed.\n When using a volume configured at launch, the ``name`` is required and must also be specified as the volume name in the ``ServiceVolumeConfiguration`` or ``TaskVolumeConfiguration`` parameter when creating your service or standalone task.\n For all other types of volumes, this name is referenced in the ``sourceVolume`` parameter of the ``mountPoints`` object in the container definition.\n When a volume is using the ``efsVolumeConfiguration``, the name is required.\n When a volume is using the ``s3filesVolumeConfiguration``, the name is required.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: S3FilesVolumeConfiguration
@@ -2005,22 +2009,26 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: AccessPointArn
 							"access_point_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
+								Description: "The full ARN of the S3 Files access point to use. If an access point is specified, the root directory value specified in the ``S3FilesVolumeConfiguration`` must either be omitted or set to ``/`` which will enforce the path set on the S3 Files access point. For more information, see [Creating S3 Files access points](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-files-access-points-creating.html).",
+								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: FileSystemArn
 							"file_system_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
+								Description: "The full ARN of the S3 Files file system to mount.",
+								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: RootDirectory
 							"root_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
+								Description: "The directory within the Amazon S3 Files file system to mount as the root directory. If this parameter is omitted, the root of the Amazon S3 Files file system will be used. Specifying ``/`` will have the same effect as omitting this parameter.\n  If a S3 Files access point is specified in the ``accessPointArn``, the root directory parameter must either be omitted or set to ``/`` which will enforce the path set on the S3 Files access point.",
+								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: TransitEncryptionPort
 							"transit_encryption_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
+								Description: "The port to use for sending encrypted data between the ECS host and the S3 Files file system. If you do not specify a transit encryption port, it will use the port selection strategy that the Amazon S3 Files mount helper uses. For more information, see [S3 Files mount helper](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-files-mounting.html).",
+								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "",
+						Description: "This parameter is specified when you use an Amazon S3 Files file system for task storage.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/

@@ -268,7 +268,7 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "",
 		//	  "properties": {
 		//	    "ExplicitTags": {
-		//	      "description": "A list of tags to explicitly propagate to managed resources.",
+		//	      "description": "",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "additionalProperties": false,
@@ -326,7 +326,7 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "A list of tags to explicitly propagate to managed resources.",
+					Description: "",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Mode
@@ -402,6 +402,62 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "A key-value pair that provides metadata for the capacity provider.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: TelemetryConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "",
+		//	  "properties": {
+		//	    "LoggingConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "The logging configuration for the capacity provider.",
+		//	      "properties": {
+		//	        "LogGroup": {
+		//	          "description": "The log group name.",
+		//	          "maxLength": 512,
+		//	          "minLength": 1,
+		//	          "pattern": "[\\.\\-_/#A-Za-z0-9]+",
+		//	          "type": "string"
+		//	        },
+		//	        "SystemLogLevel": {
+		//	          "description": "System log granularity level",
+		//	          "enum": [
+		//	            "DEBUG",
+		//	            "INFO",
+		//	            "WARN"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"telemetry_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: LoggingConfig
+				"logging_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: LogGroup
+						"log_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The log group name.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SystemLogLevel
+						"system_log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "System log granularity level",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The logging configuration for the capacity provider.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VpcConfig
@@ -490,6 +546,8 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		"instance_requirements":               "InstanceRequirements",
 		"key":                                 "Key",
 		"kms_key_arn":                         "KmsKeyArn",
+		"log_group":                           "LogGroup",
+		"logging_config":                      "LoggingConfig",
 		"max_v_cpu_count":                     "MaxVCpuCount",
 		"mode":                                "Mode",
 		"permissions_config":                  "PermissionsConfig",
@@ -500,8 +558,10 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		"security_group_ids":                  "SecurityGroupIds",
 		"state":                               "State",
 		"subnet_ids":                          "SubnetIds",
+		"system_log_level":                    "SystemLogLevel",
 		"tags":                                "Tags",
 		"target_value":                        "TargetValue",
+		"telemetry_config":                    "TelemetryConfig",
 		"value":                               "Value",
 		"vpc_config":                          "VpcConfig",
 	})
