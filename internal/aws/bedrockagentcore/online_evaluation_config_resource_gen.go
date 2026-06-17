@@ -40,6 +40,67 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::BedrockAgentCore::OnlineEvaluationConfig resource.
 func onlineEvaluationConfigResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ClusteringConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The configuration for clustering analysis of evaluation results.",
+		//	  "properties": {
+		//	    "Frequencies": {
+		//	      "description": "The list of frequencies at which clustering reports are generated.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "description": "The frequency at which clustering reports are generated.",
+		//	        "enum": [
+		//	          "DAILY",
+		//	          "WEEKLY",
+		//	          "MONTHLY"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 3,
+		//	      "minItems": 0,
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Frequencies"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"clustering_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Frequencies
+				"frequencies": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The list of frequencies at which clustering reports are generated.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(0, 3),
+						listvalidator.ValueStringsAre(
+							stringvalidator.OneOf(
+								"DAILY",
+								"WEEKLY",
+								"MONTHLY",
+							),
+						),
+						fwvalidators.NotNullList(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration for clustering analysis of evaluation results.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -211,7 +272,7 @@ func onlineEvaluationConfigResource(ctx context.Context) (resource.Resource, err
 		//	    "type": "object"
 		//	  },
 		//	  "maxItems": 10,
-		//	  "minItems": 1,
+		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
 		"evaluators": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -220,20 +281,27 @@ func onlineEvaluationConfigResource(ctx context.Context) (resource.Resource, err
 					// Property: EvaluatorId
 					"evaluator_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The unique identifier of the evaluator.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.RegexMatches(regexp.MustCompile("^(Builtin\\.[a-zA-Z0-9_-]+|[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10})$"), ""),
+							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "The list of evaluators to apply during online evaluation.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(1, 10),
+				listvalidator.SizeBetween(0, 10),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ExecutionStatus
@@ -259,6 +327,63 @@ func onlineEvaluationConfigResource(ctx context.Context) (resource.Resource, err
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Insights
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The list of insights to enable for failure analysis.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "An insight configuration for failure analysis.",
+		//	    "properties": {
+		//	      "InsightId": {
+		//	        "description": "The unique identifier of the insight.",
+		//	        "maxLength": 256,
+		//	        "minLength": 1,
+		//	        "pattern": "^[a-zA-Z][a-zA-Z0-9._]+$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "InsightId"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 10,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"insights": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: InsightId
+					"insight_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The unique identifier of the insight.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 256),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9._]+$"), ""),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The list of insights to enable for failure analysis.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(0, 10),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: OnlineEvaluationConfigArn
@@ -733,6 +858,7 @@ func onlineEvaluationConfigResource(ctx context.Context) (resource.Resource, err
 		"boolean_value":                 "BooleanValue",
 		"cloudwatch_config":             "CloudWatchConfig",
 		"cloudwatch_logs":               "CloudWatchLogs",
+		"clustering_config":             "ClusteringConfig",
 		"created_at":                    "CreatedAt",
 		"data_source_config":            "DataSourceConfig",
 		"description":                   "Description",
@@ -742,6 +868,9 @@ func onlineEvaluationConfigResource(ctx context.Context) (resource.Resource, err
 		"evaluators":                    "Evaluators",
 		"execution_status":              "ExecutionStatus",
 		"filters":                       "Filters",
+		"frequencies":                   "Frequencies",
+		"insight_id":                    "InsightId",
+		"insights":                      "Insights",
 		"key":                           "Key",
 		"log_group_name":                "LogGroupName",
 		"log_group_names":               "LogGroupNames",

@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -23,6 +24,7 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -120,6 +122,59 @@ func feedResource(ctx context.Context) (resource.Resource, error) {
 		//	          "Cropping": {
 		//	            "additionalProperties": false,
 		//	            "type": "object"
+		//	          },
+		//	          "Subtitling": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "AspectRatio": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Height": {
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "Width": {
+		//	                    "type": "integer"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Height",
+		//	                  "Width"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "Dictionary": {
+		//	                "maxLength": 19,
+		//	                "minLength": 1,
+		//	                "pattern": "^[a-zA-Z0-9]+$",
+		//	                "type": "string"
+		//	              },
+		//	              "Language": {
+		//	                "enum": [
+		//	                  "eng",
+		//	                  "eng-au",
+		//	                  "eng-gb",
+		//	                  "eng-us",
+		//	                  "fra",
+		//	                  "ita",
+		//	                  "deu",
+		//	                  "spa",
+		//	                  "por"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "ProfanityFilter": {
+		//	                "enum": [
+		//	                  "DISABLED",
+		//	                  "CENSOR",
+		//	                  "DROP"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Language"
+		//	            ],
+		//	            "type": "object"
 		//	          }
 		//	        },
 		//	        "type": "object"
@@ -197,6 +252,97 @@ func feedResource(ctx context.Context) (resource.Resource, error) {
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
+							// Property: Subtitling
+							"subtitling": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AspectRatio
+									"aspect_ratio": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Height
+											"height": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.Int64{ /*START VALIDATORS*/
+													fwvalidators.NotNullInt64(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Width
+											"width": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												Validators: []validator.Int64{ /*START VALIDATORS*/
+													fwvalidators.NotNullInt64(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Dictionary
+									"dictionary": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 19),
+											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]+$"), ""),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Language
+									"language": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"eng",
+												"eng-au",
+												"eng-gb",
+												"eng-us",
+												"fra",
+												"ita",
+												"deu",
+												"spa",
+												"por",
+											),
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ProfanityFilter
+									"profanity_filter": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"DISABLED",
+												"CENSOR",
+												"DROP",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Required: true,
 					}, /*END ATTRIBUTE*/
@@ -265,17 +411,24 @@ func feedResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":               "Arn",
+		"aspect_ratio":      "AspectRatio",
 		"callback_metadata": "CallbackMetadata",
 		"clipping":          "Clipping",
 		"cropping":          "Cropping",
 		"data_endpoints":    "DataEndpoints",
 		"description":       "Description",
+		"dictionary":        "Dictionary",
 		"feed_id":           "Id",
+		"height":            "Height",
+		"language":          "Language",
 		"name":              "Name",
 		"output_config":     "OutputConfig",
 		"outputs":           "Outputs",
+		"profanity_filter":  "ProfanityFilter",
 		"status":            "Status",
+		"subtitling":        "Subtitling",
 		"tags":              "Tags",
+		"width":             "Width",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

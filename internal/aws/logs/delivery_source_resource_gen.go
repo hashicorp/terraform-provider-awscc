@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -47,6 +48,31 @@ func deliverySourceResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DeliverySourceConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "A map of key-value pairs to configure the delivery source. Both keys and values must be between 1 and 255 characters in length.",
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "maxLength": 255,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"delivery_source_configuration": // Pattern: ""
+		schema.MapAttribute{             /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A map of key-value pairs to configure the delivery source. Both keys and values must be between 1 and 255 characters in length.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+				mapplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: LogType
@@ -156,6 +182,41 @@ func deliverySourceResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The status of this delivery source. The value can be ACTIVE or INACTIVE.",
+		//	  "enum": [
+		//	    "ACTIVE",
+		//	    "INACTIVE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of this delivery source. The value can be ACTIVE or INACTIVE.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: StatusReason
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The reason for the status of this delivery source, such as RESOURCE_DELETED.",
+		//	  "enum": [
+		//	    "RESOURCE_DELETED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"status_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The reason for the status of this delivery source, such as RESOURCE_DELETED.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -255,15 +316,18 @@ func deliverySourceResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":           "Arn",
-		"key":           "Key",
-		"log_type":      "LogType",
-		"name":          "Name",
-		"resource_arn":  "ResourceArn",
-		"resource_arns": "ResourceArns",
-		"service":       "Service",
-		"tags":          "Tags",
-		"value":         "Value",
+		"arn":                           "Arn",
+		"delivery_source_configuration": "DeliverySourceConfiguration",
+		"key":                           "Key",
+		"log_type":                      "LogType",
+		"name":                          "Name",
+		"resource_arn":                  "ResourceArn",
+		"resource_arns":                 "ResourceArns",
+		"service":                       "Service",
+		"status":                        "Status",
+		"status_reason":                 "StatusReason",
+		"tags":                          "Tags",
+		"value":                         "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

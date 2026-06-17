@@ -41,7 +41,7 @@ func aIGuardrailResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}){0,2}$",
+		//	  "pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}){0,2}(:[A-Z0-9_$]+){0,1}$",
 		//	  "type": "string"
 		//	}
 		"ai_guardrail_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -387,6 +387,18 @@ func aIGuardrailResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ModifiedTimeSeconds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "number"
+		//	}
+		"modified_time_seconds": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+				float64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -1017,6 +1029,7 @@ func aIGuardrailResource(ctx context.Context) (resource.Resource, error) {
 		"filters_config":                      "FiltersConfig",
 		"input_strength":                      "InputStrength",
 		"managed_word_lists_config":           "ManagedWordListsConfig",
+		"modified_time_seconds":               "ModifiedTimeSeconds",
 		"name":                                "Name",
 		"output_strength":                     "OutputStrength",
 		"pattern":                             "Pattern",

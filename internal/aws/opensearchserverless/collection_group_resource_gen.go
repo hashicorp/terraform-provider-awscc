@@ -136,6 +136,32 @@ func collectionGroupResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Generation
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The generation of Amazon OpenSearch Serverless for the collection group. Valid values are CLASSIC and NEXTGEN.",
+		//	  "enum": [
+		//	    "CLASSIC",
+		//	    "NEXTGEN"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"generation": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The generation of Amazon OpenSearch Serverless for the collection group. Valid values are CLASSIC and NEXTGEN.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"CLASSIC",
+					"NEXTGEN",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -300,6 +326,7 @@ func collectionGroupResource(ctx context.Context) (resource.Resource, error) {
 		"capacity_limits":              "CapacityLimits",
 		"collection_group_id":          "Id",
 		"description":                  "Description",
+		"generation":                   "Generation",
 		"key":                          "Key",
 		"max_indexing_capacity_in_ocu": "MaxIndexingCapacityInOcu",
 		"max_search_capacity_in_ocu":   "MaxSearchCapacityInOcu",

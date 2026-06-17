@@ -639,19 +639,11 @@ func actionConnectorResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
-					Validators: []validator.Object{ /*START VALIDATORS*/
-						fwvalidators.NotNullObject(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
+					Required: true,
 				}, /*END ATTRIBUTE*/
 				// Property: AuthenticationType
 				"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Required: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"BASIC",
@@ -661,18 +653,10 @@ func actionConnectorResource(ctx context.Context) (resource.Resource, error) {
 							"IAM",
 							"OAUTH2_AUTHORIZATION_CODE",
 						),
-						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
+			Required: true,
 			// AuthenticationConfig is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: AwsAccountId
@@ -789,7 +773,7 @@ func actionConnectorResource(ctx context.Context) (resource.Resource, error) {
 		//	        "items": {
 		//	          "type": "string"
 		//	        },
-		//	        "maxItems": 20,
+		//	        "maxItems": 30,
 		//	        "minItems": 1,
 		//	        "type": "array"
 		//	      },
@@ -820,7 +804,7 @@ func actionConnectorResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.List{ /*START VALIDATORS*/
-							listvalidator.SizeBetween(1, 20),
+							listvalidator.SizeBetween(1, 30),
 							fwvalidators.NotNullList(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/

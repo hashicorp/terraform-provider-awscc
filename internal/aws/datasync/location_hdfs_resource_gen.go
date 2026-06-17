@@ -50,7 +50,7 @@ func locationHDFSResource(ctx context.Context) (resource.Resource, error) {
 		//	    "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$",
 		//	    "type": "string"
 		//	  },
-		//	  "maxItems": 4,
+		//	  "maxItems": 8,
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
@@ -59,7 +59,7 @@ func locationHDFSResource(ctx context.Context) (resource.Resource, error) {
 			Description: "ARN(s) of the agent(s) to use for an HDFS location.",
 			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(1, 4),
+				listvalidator.SizeBetween(1, 8),
 				listvalidator.ValueStringsAre(
 					stringvalidator.LengthAtMost(128),
 					stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$"), ""),

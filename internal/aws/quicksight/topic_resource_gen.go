@@ -110,7 +110,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		//	  "additionalProperties": false,
 		//	  "properties": {
 		//	    "CustomInstructionsString": {
-		//	      "maxLength": 5000,
+		//	      "maxLength": 10000,
 		//	      "minLength": 0,
 		//	      "type": "string"
 		//	    }
@@ -127,7 +127,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 					Optional: true,
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(0, 5000),
+						stringvalidator.LengthBetween(0, 10000),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

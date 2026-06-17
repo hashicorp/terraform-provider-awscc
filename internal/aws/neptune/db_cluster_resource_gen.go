@@ -334,6 +334,29 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: GlobalClusterIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the Neptune global database to which this new DB cluster should be added.",
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "pattern": "^[A-Za-z][0-9A-Za-z-:._]*$",
+		//	  "type": "string"
+		//	}
+		"global_cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Neptune global database to which this new DB cluster should be added.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 255),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z][0-9A-Za-z-:._]*$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: IamAuthEnabled
 		// CloudFormation resource type schema:
 		//
@@ -363,6 +386,31 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: NetworkType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The network type of the DB cluster.",
+		//	  "enum": [
+		//	    "IPV4",
+		//	    "DUAL"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The network type of the DB cluster.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"IPV4",
+					"DUAL",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Port
@@ -728,11 +776,13 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		"endpoint":                         "Endpoint",
 		"engine_version":                   "EngineVersion",
 		"feature_name":                     "FeatureName",
+		"global_cluster_identifier":        "GlobalClusterIdentifier",
 		"iam_auth_enabled":                 "IamAuthEnabled",
 		"key":                              "Key",
 		"kms_key_id":                       "KmsKeyId",
 		"max_capacity":                     "MaxCapacity",
 		"min_capacity":                     "MinCapacity",
+		"network_type":                     "NetworkType",
 		"port":                             "Port",
 		"preferred_backup_window":          "PreferredBackupWindow",
 		"preferred_maintenance_window":     "PreferredMaintenanceWindow",
