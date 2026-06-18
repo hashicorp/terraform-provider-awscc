@@ -1847,6 +1847,10 @@
         "identifier": ["Name"]
     },
     {
+        "resource": "awscc_devopsagent_service",
+        "identifier": ["ServiceId"]
+    },
+    {
         "resource": "awscc_devopsguru_log_anomaly_detection_integration",
         "generateListResource": true,
         "identifier": ["AccountId"]

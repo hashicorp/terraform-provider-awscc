@@ -1938,11 +1938,6 @@ resource_schema "aws_devopsagent_private_connection" {
 
 resource_schema "aws_devopsagent_service" {
   cloudformation_type_name = "AWS::DevOpsAgent::Service"
-
-  # Suppression Reason:
-  # AccessibleResources is of unsupported type: list of undefined schema https://github.com/hashicorp/terraform-provider-awscc/issues/3020
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
 }
 
