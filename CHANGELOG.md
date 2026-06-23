@@ -7,6 +7,11 @@ BREAKING CHANGES:
 * resource/awscc_omics_annotation_store: The argument `store_options.tsv_store_options.schema` now expects a list of key-value pairs instead of a list of strings. ([#30207](https://github.com/hashicorp/terraform-provider-awscc/pull/3207))
 * resource/awscc_scheduler_schedule: The argument `target.ecs_parameters.tags` now expects a list of key-value pairs instead of a list of strings. ([#30207](https://github.com/hashicorp/terraform-provider-awscc/pull/3207))
 
+FEATURES:
+
+* **New Data Source:** `awscc_devopsagent_service`
+* **New Resource:** `awscc_devopsagent_service`
+
 ## 1.89.0 (June 17, 2026)
 
 FEATURES:
