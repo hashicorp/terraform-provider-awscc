@@ -367,7 +367,7 @@ func annotationStoreResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Schema
 						"schema": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.ListType{ElemType: types.StringType},
+							ElementType: types.MapType{ElemType: types.StringType},
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/

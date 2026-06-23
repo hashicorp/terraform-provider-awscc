@@ -260,7 +260,7 @@ func annotationStoreDataSource(ctx context.Context) (datasource.DataSource, erro
 						}, /*END ATTRIBUTE*/
 						// Property: Schema
 						"schema": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.ListType{ElemType: types.StringType},
+							ElementType: types.MapType{ElemType: types.StringType},
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/

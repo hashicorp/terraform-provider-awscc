@@ -458,13 +458,13 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 					}
 					switch nestedPatternProperty.Type.String() {
 					case cfschema.PropertyTypeBoolean:
-						elementType = "types.ListType{ElemType: types.BoolType}"
+						elementType = "types.MapType{ElemType: types.BoolType}"
 					case cfschema.PropertyTypeInteger:
-						elementType = "types.ListType{ElemType: types.Int64Type}"
+						elementType = "types.MapType{ElemType: types.Int64Type}"
 					case cfschema.PropertyTypeNumber:
-						elementType = "types.ListType{ElemType: types.Float64Type}"
+						elementType = "types.MapType{ElemType: types.Float64Type}"
 					case cfschema.PropertyTypeString:
-						elementType = "types.ListType{ElemType: types.StringType}"
+						elementType = "types.MapType{ElemType: types.StringType}"
 					default:
 						return features, unsupportedTypeError(path, fmt.Sprintf("list of key-value map of %s", nestedPatternProperty.Type.String()))
 					}
