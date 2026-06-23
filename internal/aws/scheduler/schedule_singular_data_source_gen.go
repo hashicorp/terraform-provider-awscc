@@ -730,7 +730,7 @@ func scheduleDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Tags
 						"tags": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.ListType{ElemType: types.StringType},
+							ElementType: types.MapType{ElemType: types.StringType},
 							Description: "The metadata that you apply to the task to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. To learn more, see RunTask in the Amazon ECS API Reference.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
