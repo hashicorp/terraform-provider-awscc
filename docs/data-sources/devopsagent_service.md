@@ -21,7 +21,7 @@ Data Source schema for AWS::DevOpsAgent::Service
 
 ### Read-Only
 
-- `accessible_resources` (List of List of String) List of accessible resources for this service
+- `accessible_resources` (List of Map of String) List of accessible resources for this service
 - `additional_service_details` (Attributes) Additional details specific to the service type (see [below for nested schema](#nestedatt--additional_service_details))
 - `arn` (String) The Amazon Resource Name (ARN) of the Service.
 - `kms_key_arn` (String) The ARN of the KMS key to use for encryption.
