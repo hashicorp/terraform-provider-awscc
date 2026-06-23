@@ -53,7 +53,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array"
 		//	}
 		"accessible_resources": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.ListType{ElemType: types.StringType},
+			ElementType: types.MapType{ElemType: types.StringType},
 			Description: "List of accessible resources for this service",
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/

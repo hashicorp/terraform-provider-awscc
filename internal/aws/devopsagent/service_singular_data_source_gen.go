@@ -40,7 +40,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array"
 		//	}
 		"accessible_resources": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.ListType{ElemType: types.StringType},
+			ElementType: types.MapType{ElemType: types.StringType},
 			Description: "List of accessible resources for this service",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
