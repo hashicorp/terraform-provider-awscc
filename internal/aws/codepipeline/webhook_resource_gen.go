@@ -103,6 +103,7 @@ func webhookResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// SecretToken is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Properties that configure the authentication applied to incoming webhook trigger requests",
@@ -407,6 +408,7 @@ func webhookResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/TargetPipelineVersion",
 		"/properties/RegisterWithThirdParty",
+		"/properties/AuthenticationConfiguration/SecretToken",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

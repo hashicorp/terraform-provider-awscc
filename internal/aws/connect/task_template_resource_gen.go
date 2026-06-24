@@ -316,7 +316,7 @@ func taskTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The identifier of the contact flow.",
-		//	  "pattern": "^$|arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*$",
+		//	  "pattern": "^$|arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*(:[a-zA-Z0-9-]+)?$",
 		//	  "type": "string"
 		//	}
 		"contact_flow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -324,7 +324,7 @@ func taskTemplateResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^$|arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*$"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^$|arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*(:[a-zA-Z0-9-]+)?$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -483,7 +483,6 @@ func taskTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	          "description": "Single select field identifier",
 		//	          "maxLength": 100,
 		//	          "minLength": 1,
-		//	          "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9_.,\\s-]*[A-Za-z0-9_.,-])?$",
 		//	          "type": "string"
 		//	        },
 		//	        "maxItems": 50,
@@ -571,7 +570,6 @@ func taskTemplateResource(ctx context.Context) (resource.Resource, error) {
 							listvalidator.SizeAtMost(50),
 							listvalidator.ValueStringsAre(
 								stringvalidator.LengthBetween(1, 100),
-								stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9](?:[A-Za-z0-9_.,\\s-]*[A-Za-z0-9_.,-])?$"), ""),
 							),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -658,7 +656,7 @@ func taskTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The identifier of the contact flow.",
-		//	  "pattern": "^$|arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*$",
+		//	  "pattern": "^$|arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*(:[a-zA-Z0-9-]+)?$",
 		//	  "type": "string"
 		//	}
 		"self_assign_contact_flow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -666,7 +664,7 @@ func taskTemplateResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^$|arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*$"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^$|arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*(:[a-zA-Z0-9-]+)?$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

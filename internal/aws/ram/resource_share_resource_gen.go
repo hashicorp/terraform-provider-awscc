@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -202,6 +203,53 @@ func resourceShareResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// ResourceArns is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: ResourceShareConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Specifies the configuration for the resource share",
+		//	  "properties": {
+		//	    "ExclusiveAccountAccess": {
+		//	      "description": "The resource share restricts access to an account",
+		//	      "type": "boolean"
+		//	    },
+		//	    "RetainSharingOnAccountLeaveOrganization": {
+		//	      "description": "Specifies whether the consumer account retains access to the resource share after leaving the organization.",
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"resource_share_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ExclusiveAccountAccess
+				"exclusive_account_access": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "The resource share restricts access to an account",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RetainSharingOnAccountLeaveOrganization
+				"retain_sharing_on_account_leave_organization": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether the consumer account retains access to the resource share after leaving the organization.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+						boolplanmodifier.RequiresReplaceIfConfigured(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies the configuration for the resource share",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Sources
 		// CloudFormation resource type schema:
 		//
@@ -337,21 +385,24 @@ func resourceShareResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"allow_external_principals": "AllowExternalPrincipals",
-		"arn":                       "Arn",
-		"creation_time":             "CreationTime",
-		"feature_set":               "FeatureSet",
-		"key":                       "Key",
-		"last_updated_time":         "LastUpdatedTime",
-		"name":                      "Name",
-		"owning_account_id":         "OwningAccountId",
-		"permission_arns":           "PermissionArns",
-		"principals":                "Principals",
-		"resource_arns":             "ResourceArns",
-		"sources":                   "Sources",
-		"status":                    "Status",
-		"tags":                      "Tags",
-		"value":                     "Value",
+		"allow_external_principals":    "AllowExternalPrincipals",
+		"arn":                          "Arn",
+		"creation_time":                "CreationTime",
+		"exclusive_account_access":     "ExclusiveAccountAccess",
+		"feature_set":                  "FeatureSet",
+		"key":                          "Key",
+		"last_updated_time":            "LastUpdatedTime",
+		"name":                         "Name",
+		"owning_account_id":            "OwningAccountId",
+		"permission_arns":              "PermissionArns",
+		"principals":                   "Principals",
+		"resource_arns":                "ResourceArns",
+		"resource_share_configuration": "ResourceShareConfiguration",
+		"retain_sharing_on_account_leave_organization": "RetainSharingOnAccountLeaveOrganization",
+		"sources": "Sources",
+		"status":  "Status",
+		"tags":    "Tags",
+		"value":   "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
