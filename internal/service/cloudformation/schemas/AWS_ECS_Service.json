@@ -82,7 +82,8 @@
   "writeOnlyProperties": [
     "/properties/ServiceConnectConfiguration",
     "/properties/VolumeConfigurations",
-    "/properties/ForceNewDeployment"
+    "/properties/ForceNewDeployment",
+    "/properties/Monitoring"
   ],
   "additionalProperties": false,
   "definitions": {
@@ -240,6 +241,37 @@
       },
       "required": [
         "Port"
+      ]
+    },
+    "MetricConfiguration": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ResolutionSeconds": {
+          "type": "integer",
+          "enum": [
+            20,
+            60
+          ]
+        },
+        "MetricNames": {
+          "minItems": 1,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "CPUUtilization",
+              "MemoryUtilization"
+            ]
+          }
+        }
+      },
+      "required": [
+        "MetricNames",
+        "ResolutionSeconds"
       ]
     },
     "ServiceVolumeConfiguration": {
@@ -511,6 +543,24 @@
       },
       "required": [
         "Format"
+      ]
+    },
+    "MonitoringConfiguration": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "MetricConfigurations": {
+          "minItems": 1,
+          "maxItems": 2,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricConfiguration"
+          }
+        }
+      },
+      "required": [
+        "MetricConfigurations"
       ]
     },
     "LoadBalancer": {
@@ -1011,6 +1061,10 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "Monitoring": {
+      "description": "",
+      "$ref": "#/definitions/MonitoringConfiguration"
     },
     "ForceNewDeployment": {
       "description": "Determines whether to force a new deployment of the service. By default, deployments aren't forced. You can use this option to start a new deployment with no service definition changes. For example, you can update a service's tasks to use a newer Docker image with the same image/tag combination (``my_image:latest``) or to roll Fargate tasks onto a newer platform version.",

@@ -155,7 +155,8 @@
   ],
   "writeOnlyProperties": [
     "/properties/TargetPipelineVersion",
-    "/properties/RegisterWithThirdParty"
+    "/properties/RegisterWithThirdParty",
+    "/properties/AuthenticationConfiguration/SecretToken"
   ],
   "primaryIdentifier": [
     "/properties/Id"

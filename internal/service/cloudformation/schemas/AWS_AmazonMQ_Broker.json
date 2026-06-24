@@ -226,6 +226,16 @@
         "$ref": "#/definitions/TagsEntry"
       },
       "insertionOrder": false
+    },
+    "ResourceShareArns": {
+      "description": "The ARNs of the resource shares to be associated with the broker.\n",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^arn:.*"
+      },
+      "insertionOrder": false
     }
   },
   "definitions": {
@@ -494,6 +504,9 @@
         "mq:CreateBroker",
         "mq:CreateReplicaBroker",
         "mq:DescribeBroker",
+        "mq:DescribeSharedResources",
+        "mq:UpdateBroker",
+        "mq:RebootBroker",
         "mq:CreateTags",
         "kms:CreateGrant",
         "kms:DescribeKey",
@@ -511,6 +524,8 @@
         "ec2:DescribeVpcEndpoints",
         "ec2:ModifyNetworkInterfaceAttribute",
         "iam:CreateServiceLinkedRole",
+        "ram:AssociateResourceShare",
+        "vpc-lattice:PutResourcePolicy",
         "route53:AssociateVPCWithHostedZone",
         "ec2:DeleteNetworkInterface",
         "ec2:DeleteNetworkInterfacePermission",
@@ -520,12 +535,14 @@
     },
     "read": {
       "permissions": [
-        "mq:DescribeBroker"
+        "mq:DescribeBroker",
+        "mq:DescribeSharedResources"
       ]
     },
     "update": {
       "permissions": [
         "mq:DescribeBroker",
+        "mq:DescribeSharedResources",
         "mq:UpdateBroker",
         "mq:RebootBroker",
         "mq:DescribeUser",
@@ -552,6 +569,8 @@
         "ec2:DescribeVpcEndpoints",
         "ec2:ModifyNetworkInterfaceAttribute",
         "iam:CreateServiceLinkedRole",
+        "ram:AssociateResourceShare",
+        "vpc-lattice:PutResourcePolicy",
         "route53:AssociateVPCWithHostedZone"
       ]
     },

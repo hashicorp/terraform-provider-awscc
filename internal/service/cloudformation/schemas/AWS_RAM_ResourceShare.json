@@ -20,6 +20,9 @@
     "/properties/OwningAccountId"
   ],
   "description": "Resource type definition for AWS::RAM::ResourceShare",
+  "createOnlyProperties": [
+    "/properties/ResourceShareConfiguration/RetainSharingOnAccountLeaveOrganization"
+  ],
   "primaryIdentifier": [
     "/properties/Arn"
   ],
@@ -73,6 +76,21 @@
   ],
   "additionalProperties": false,
   "definitions": {
+    "ResourceShareConfiguration": {
+      "description": "The configuration for a resource share.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ExclusiveAccountAccess": {
+          "description": "The resource share restricts access to an account",
+          "type": "boolean"
+        },
+        "RetainSharingOnAccountLeaveOrganization": {
+          "description": "Specifies whether the consumer account retains access to the resource share after leaving the organization.",
+          "type": "boolean"
+        }
+      }
+    },
     "Tag": {
       "description": "A key-value pair to associate with a resource.",
       "additionalProperties": false,
@@ -104,6 +122,10 @@
         "DELETING",
         "DELETED"
       ]
+    },
+    "ResourceShareConfiguration": {
+      "description": "Specifies the configuration for the resource share",
+      "$ref": "#/definitions/ResourceShareConfiguration"
     },
     "PermissionArns": {
       "description": "Specifies the [Amazon Resource Names (ARNs)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the AWS RAM permission to associate with the resource share. If you do not specify an ARN for the permission, AWS RAM automatically attaches the default version of the permission for each resource type. You can associate only one permission with each resource type included in the resource share.",

@@ -1,76 +1,11 @@
 {
-  "tagging": {
-    "taggable": false,
-    "tagOnCreate": false,
-    "tagUpdatable": false,
-    "cloudFormationSystemTags": false
-  },
   "typeName": "AWS::Lambda::LayerVersion",
-  "readOnlyProperties": [
-    "/properties/LayerVersionArn"
-  ],
   "description": "Resource Type definition for AWS::Lambda::LayerVersion",
-  "createOnlyProperties": [
-    "/properties/CompatibleRuntimes",
-    "/properties/LicenseInfo",
-    "/properties/CompatibleArchitectures",
-    "/properties/LayerName",
-    "/properties/Description",
-    "/properties/Content"
-  ],
-  "primaryIdentifier": [
-    "/properties/LayerVersionArn"
-  ],
-  "required": [
-    "Content"
-  ],
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-lambda.git",
-  "propertyTransform": {
-    "/properties/LayerName": "$split(LayerName, \":\")[-1] $OR LayerName"
-  },
-  "handlers": {
-    "read": {
-      "permissions": [
-        "lambda:GetLayerVersion"
-      ]
-    },
-    "create": {
-      "permissions": [
-        "lambda:PublishLayerVersion",
-        "s3:GetObject",
-        "s3:GetObjectVersion"
-      ]
-    },
-    "list": {
-      "permissions": [
-        "lambda:ListLayerVersions"
-      ],
-      "handlerSchema": {
-        "properties": {
-          "LayerName": {
-            "$ref": "resource-schema.json#/properties/LayerName"
-          }
-        },
-        "required": [
-          "LayerName"
-        ]
-      }
-    },
-    "delete": {
-      "permissions": [
-        "lambda:GetLayerVersion",
-        "lambda:DeleteLayerVersion"
-      ]
-    }
-  },
-  "writeOnlyProperties": [
-    "/properties/Content"
-  ],
-  "additionalProperties": false,
   "definitions": {
     "Content": {
-      "additionalProperties": false,
       "type": "object",
+      "additionalProperties": false,
       "properties": {
         "S3ObjectVersion": {
           "description": "For versioned objects, the version of the layer archive object to use.",
@@ -83,6 +18,14 @@
         "S3Key": {
           "description": "The Amazon S3 key of the layer archive.",
           "type": "string"
+        },
+        "S3ObjectStorageMode": {
+          "type": "string",
+          "description": "Specifies whether Lambda should copy the deployment package to its internal storage (COPY) or reference it directly from your S3 bucket (REFERENCE).",
+          "enum": [
+            "COPY",
+            "REFERENCE"
+          ]
         }
       },
       "required": [
@@ -93,10 +36,10 @@
   },
   "properties": {
     "CompatibleRuntimes": {
-      "uniqueItems": false,
       "description": "A list of compatible function runtimes. Used for filtering with ListLayers and ListLayerVersions.",
-      "insertionOrder": false,
       "type": "array",
+      "insertionOrder": false,
+      "uniqueItems": false,
       "items": {
         "type": "string"
       }
@@ -113,20 +56,85 @@
       "description": "The name or Amazon Resource Name (ARN) of the layer.",
       "type": "string"
     },
-    "LayerVersionArn": {
-      "type": "string"
-    },
     "Content": {
       "description": "The function layer archive.",
       "$ref": "#/definitions/Content"
     },
+    "LayerVersionArn": {
+      "type": "string"
+    },
     "CompatibleArchitectures": {
-      "uniqueItems": false,
       "description": "A list of compatible instruction set architectures.",
-      "insertionOrder": false,
       "type": "array",
+      "insertionOrder": false,
+      "uniqueItems": false,
       "items": {
         "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "Content"
+  ],
+  "createOnlyProperties": [
+    "/properties/CompatibleRuntimes",
+    "/properties/LicenseInfo",
+    "/properties/CompatibleArchitectures",
+    "/properties/LayerName",
+    "/properties/Description",
+    "/properties/Content"
+  ],
+  "readOnlyProperties": [
+    "/properties/LayerVersionArn"
+  ],
+  "writeOnlyProperties": [
+    "/properties/Content"
+  ],
+  "primaryIdentifier": [
+    "/properties/LayerVersionArn"
+  ],
+  "propertyTransform": {
+    "/properties/LayerName": "$split(LayerName, \":\")[-1] $OR LayerName"
+  },
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "lambda:PublishLayerVersion",
+        "s3:GetObject",
+        "s3:GetObjectVersion"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "lambda:GetLayerVersion"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "lambda:GetLayerVersion",
+        "lambda:DeleteLayerVersion"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "lambda:ListLayerVersions"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "LayerName": {
+            "$ref": "resource-schema.json#/properties/LayerName"
+          }
+        },
+        "required": [
+          "LayerName"
+        ]
       }
     }
   }

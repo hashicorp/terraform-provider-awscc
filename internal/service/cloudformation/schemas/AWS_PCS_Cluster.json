@@ -411,7 +411,6 @@
   "createOnlyProperties": [
     "/properties/Name",
     "/properties/Networking",
-    "/properties/Scheduler",
     "/properties/Size"
   ],
   "readOnlyProperties": [
