@@ -683,6 +683,78 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "A list of load balancer objects to associate with the service. If you specify the ``Role`` property, ``LoadBalancers`` must be specified as well. For information about the number of load balancers that you can specify per service, see [Service Load Balancing](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html) in the *Amazon Elastic Container Service Developer Guide*.\n  To remove this property from your service resource, specify an empty ``LoadBalancer`` array.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Monitoring
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "",
+		//	  "properties": {
+		//	    "MetricConfigurations": {
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "",
+		//	        "properties": {
+		//	          "MetricNames": {
+		//	            "items": {
+		//	              "enum": [
+		//	                "CPUUtilization",
+		//	                "MemoryUtilization"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "maxItems": 2,
+		//	            "minItems": 1,
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          },
+		//	          "ResolutionSeconds": {
+		//	            "enum": [
+		//	              20,
+		//	              60
+		//	            ],
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "MetricNames",
+		//	          "ResolutionSeconds"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 2,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "MetricConfigurations"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"monitoring": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MetricConfigurations
+				"metric_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: MetricNames
+							"metric_names": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ResolutionSeconds
+							"resolution_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -1814,7 +1886,10 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"log_driver":                        "LogDriver",
 		"managed_ebs_volume":                "ManagedEBSVolume",
 		"maximum_percent":                   "MaximumPercent",
+		"metric_configurations":             "MetricConfigurations",
+		"metric_names":                      "MetricNames",
 		"minimum_healthy_percent":           "MinimumHealthyPercent",
+		"monitoring":                        "Monitoring",
 		"name":                              "Name",
 		"namespace":                         "Namespace",
 		"network_configuration":             "NetworkConfiguration",
@@ -1828,6 +1903,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"production_listener_rule":          "ProductionListenerRule",
 		"propagate_tags":                    "PropagateTags",
 		"registry_arn":                      "RegistryArn",
+		"resolution_seconds":                "ResolutionSeconds",
 		"resource_type":                     "ResourceType",
 		"role":                              "Role",
 		"role_arn":                          "RoleArn",

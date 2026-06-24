@@ -72,6 +72,14 @@ func layerVersionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	      "description": "The Amazon S3 key of the layer archive.",
 		//	      "type": "string"
 		//	    },
+		//	    "S3ObjectStorageMode": {
+		//	      "description": "Specifies whether Lambda should copy the deployment package to its internal storage (COPY) or reference it directly from your S3 bucket (REFERENCE).",
+		//	      "enum": [
+		//	        "COPY",
+		//	        "REFERENCE"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "S3ObjectVersion": {
 		//	      "description": "For versioned objects, the version of the layer archive object to use.",
 		//	      "type": "string"
@@ -93,6 +101,11 @@ func layerVersionDataSource(ctx context.Context) (datasource.DataSource, error) 
 				// Property: S3Key
 				"s3_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The Amazon S3 key of the layer archive.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3ObjectStorageMode
+				"s3_object_storage_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether Lambda should copy the deployment package to its internal storage (COPY) or reference it directly from your S3 bucket (REFERENCE).",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: S3ObjectVersion
@@ -172,6 +185,7 @@ func layerVersionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"license_info":             "LicenseInfo",
 		"s3_bucket":                "S3Bucket",
 		"s3_key":                   "S3Key",
+		"s3_object_storage_mode":   "S3ObjectStorageMode",
 		"s3_object_version":        "S3ObjectVersion",
 	})
 

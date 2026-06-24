@@ -84,6 +84,7 @@ func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	                        "COUNT",
 		//	                        "CAPTCHA",
 		//	                        "CHALLENGE",
+		//	                        "MONETIZE",
 		//	                        "EXCLUDED_AS_COUNT"
 		//	                      ],
 		//	                      "type": "string"

@@ -672,6 +672,10 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "An object representing the VPC configuration to use for an Amazon EKS cluster.",
 		//	  "properties": {
+		//	    "ControlPlaneEgressMode": {
+		//	      "description": "Specify the egress mode for the cluster control plane. If you set this to CUSTOMER_ROUTED, the control plane routes traffic through your VPC subnets instead of using AWS managed networking.",
+		//	      "type": "string"
+		//	    },
 		//	    "EndpointPrivateAccess": {
 		//	      "description": "Set this value to true to enable private access for your cluster's Kubernetes API server endpoint. If you enable private access, Kubernetes API requests from within your cluster's VPC use the private VPC endpoint. The default value for this parameter is false, which disables private access for your Kubernetes API server. If you disable private access and you have nodes or AWS Fargate pods in the cluster, then ensure that publicAccessCidrs includes the necessary CIDR blocks for communication with the nodes or Fargate pods.",
 		//	      "type": "boolean"
@@ -715,6 +719,11 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"resources_vpc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ControlPlaneEgressMode
+				"control_plane_egress_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specify the egress mode for the cluster control plane. If you set this to CUSTOMER_ROUTED, the control plane routes traffic through your VPC subnets instead of using AWS managed networking.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: EndpointPrivateAccess
 				"endpoint_private_access": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Set this value to true to enable private access for your cluster's Kubernetes API server endpoint. If you enable private access, Kubernetes API requests from within your cluster's VPC use the private VPC endpoint. The default value for this parameter is false, which disables private access for your Kubernetes API server. If you disable private access and you have nodes or AWS Fargate pods in the cluster, then ensure that publicAccessCidrs includes the necessary CIDR blocks for communication with the nodes or Fargate pods.",
@@ -942,6 +951,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"cluster_logging":                             "ClusterLogging",
 		"cluster_security_group_id":                   "ClusterSecurityGroupId",
 		"compute_config":                              "ComputeConfig",
+		"control_plane_egress_mode":                   "ControlPlaneEgressMode",
 		"control_plane_instance_type":                 "ControlPlaneInstanceType",
 		"control_plane_placement":                     "ControlPlanePlacement",
 		"control_plane_scaling_config":                "ControlPlaneScalingConfig",

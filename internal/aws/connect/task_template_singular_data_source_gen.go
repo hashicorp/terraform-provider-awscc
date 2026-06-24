@@ -224,7 +224,7 @@ func taskTemplateDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//
 		//	{
 		//	  "description": "The identifier of the contact flow.",
-		//	  "pattern": "^$|arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*$",
+		//	  "pattern": "^$|arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*(:[a-zA-Z0-9-]+)?$",
 		//	  "type": "string"
 		//	}
 		"contact_flow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -347,7 +347,6 @@ func taskTemplateDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	          "description": "Single select field identifier",
 		//	          "maxLength": 100,
 		//	          "minLength": 1,
-		//	          "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9_.,\\s-]*[A-Za-z0-9_.,-])?$",
 		//	          "type": "string"
 		//	        },
 		//	        "maxItems": 50,
@@ -449,7 +448,7 @@ func taskTemplateDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//
 		//	{
 		//	  "description": "The identifier of the contact flow.",
-		//	  "pattern": "^$|arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*$",
+		//	  "pattern": "^$|arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*(:[a-zA-Z0-9-]+)?$",
 		//	  "type": "string"
 		//	}
 		"self_assign_contact_flow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

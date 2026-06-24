@@ -70,6 +70,50 @@ func userPoolDomainDataSource(ctx context.Context) (datasource.DataSource, error
 		"managed_login_version": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: Routing
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Failover": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "PrimaryRoute53HealthCheckId": {
+		//	          "type": "string"
+		//	        },
+		//	        "SecondaryRegion": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "SecondaryRegion",
+		//	        "PrimaryRoute53HealthCheckId"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"routing": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Failover
+				"failover": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PrimaryRoute53HealthCheckId
+						"primary_route_53_health_check_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SecondaryRegion
+						"secondary_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: UserPoolId
 		// CloudFormation resource type schema:
 		//
@@ -96,12 +140,16 @@ func userPoolDomainDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithCloudFormationTypeName("AWS::Cognito::UserPoolDomain").WithTerraformTypeName("awscc_cognito_user_pool_domain")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"certificate_arn":         "CertificateArn",
-		"cloudfront_distribution": "CloudFrontDistribution",
-		"custom_domain_config":    "CustomDomainConfig",
-		"domain":                  "Domain",
-		"managed_login_version":   "ManagedLoginVersion",
-		"user_pool_id":            "UserPoolId",
+		"certificate_arn":                  "CertificateArn",
+		"cloudfront_distribution":          "CloudFrontDistribution",
+		"custom_domain_config":             "CustomDomainConfig",
+		"domain":                           "Domain",
+		"failover":                         "Failover",
+		"managed_login_version":            "ManagedLoginVersion",
+		"primary_route_53_health_check_id": "PrimaryRoute53HealthCheckId",
+		"routing":                          "Routing",
+		"secondary_region":                 "SecondaryRegion",
+		"user_pool_id":                     "UserPoolId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

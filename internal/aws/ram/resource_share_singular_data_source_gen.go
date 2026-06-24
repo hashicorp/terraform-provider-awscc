@@ -156,6 +156,40 @@ func resourceShareDataSource(ctx context.Context) (datasource.DataSource, error)
 			Description: "Specifies a list of one or more ARNs of the resources to associate with the resource share.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ResourceShareConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Specifies the configuration for the resource share",
+		//	  "properties": {
+		//	    "ExclusiveAccountAccess": {
+		//	      "description": "The resource share restricts access to an account",
+		//	      "type": "boolean"
+		//	    },
+		//	    "RetainSharingOnAccountLeaveOrganization": {
+		//	      "description": "Specifies whether the consumer account retains access to the resource share after leaving the organization.",
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"resource_share_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ExclusiveAccountAccess
+				"exclusive_account_access": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "The resource share restricts access to an account",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RetainSharingOnAccountLeaveOrganization
+				"retain_sharing_on_account_leave_organization": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether the consumer account retains access to the resource share after leaving the organization.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies the configuration for the resource share",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Sources
 		// CloudFormation resource type schema:
 		//
@@ -253,21 +287,24 @@ func resourceShareDataSource(ctx context.Context) (datasource.DataSource, error)
 	opts = opts.WithCloudFormationTypeName("AWS::RAM::ResourceShare").WithTerraformTypeName("awscc_ram_resource_share")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"allow_external_principals": "AllowExternalPrincipals",
-		"arn":                       "Arn",
-		"creation_time":             "CreationTime",
-		"feature_set":               "FeatureSet",
-		"key":                       "Key",
-		"last_updated_time":         "LastUpdatedTime",
-		"name":                      "Name",
-		"owning_account_id":         "OwningAccountId",
-		"permission_arns":           "PermissionArns",
-		"principals":                "Principals",
-		"resource_arns":             "ResourceArns",
-		"sources":                   "Sources",
-		"status":                    "Status",
-		"tags":                      "Tags",
-		"value":                     "Value",
+		"allow_external_principals":    "AllowExternalPrincipals",
+		"arn":                          "Arn",
+		"creation_time":                "CreationTime",
+		"exclusive_account_access":     "ExclusiveAccountAccess",
+		"feature_set":                  "FeatureSet",
+		"key":                          "Key",
+		"last_updated_time":            "LastUpdatedTime",
+		"name":                         "Name",
+		"owning_account_id":            "OwningAccountId",
+		"permission_arns":              "PermissionArns",
+		"principals":                   "Principals",
+		"resource_arns":                "ResourceArns",
+		"resource_share_configuration": "ResourceShareConfiguration",
+		"retain_sharing_on_account_leave_organization": "RetainSharingOnAccountLeaveOrganization",
+		"sources": "Sources",
+		"status":  "Status",
+		"tags":    "Tags",
+		"value":   "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)
