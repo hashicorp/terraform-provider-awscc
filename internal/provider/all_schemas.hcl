@@ -3687,6 +3687,14 @@ resource_schema "aws_lambda_layer_version_permission" {
   cloudformation_type_name = "AWS::Lambda::LayerVersionPermission"
 }
 
+resource_schema "aws_lambda_microvm_image" {
+  cloudformation_type_name = "AWS::Lambda::MicrovmImage"
+}
+
+resource_schema "aws_lambda_network_connector" {
+  cloudformation_type_name = "AWS::Lambda::NetworkConnector"
+}
+
 resource_schema "aws_lambda_permission" {
   cloudformation_type_name               = "AWS::Lambda::Permission"
   suppress_plural_data_source_generation = true

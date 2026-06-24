@@ -94,6 +94,20 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "additionalProperties": false,
 		//	        "description": "Details of the client authentication used by the Apache Kafka cluster.",
 		//	        "properties": {
+		//	          "MTLS": {
+		//	            "additionalProperties": false,
+		//	            "description": "Details for mTLS client authentication.",
+		//	            "properties": {
+		//	              "SecretArn": {
+		//	                "description": "The Amazon Resource Name (ARN) of the Secrets Manager secret.",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "SecretArn"
+		//	            ],
+		//	            "type": "object"
+		//	          },
 		//	          "SaslScram": {
 		//	            "additionalProperties": false,
 		//	            "description": "Details for SASL/SCRAM client authentication.",
@@ -118,9 +132,6 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "type": "object"
 		//	          }
 		//	        },
-		//	        "required": [
-		//	          "SaslScram"
-		//	        ],
 		//	        "type": "object"
 		//	      },
 		//	      "EncryptionInTransit": {
@@ -219,6 +230,18 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 					// Property: ClientAuthentication
 					"client_authentication": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: MTLS
+							"mtls": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: SecretArn
+									"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The Amazon Resource Name (ARN) of the Secrets Manager secret.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Details for mTLS client authentication.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
 							// Property: SaslScram
 							"sasl_scram": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -855,6 +878,7 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"log_group":                            "LogGroup",
 		"mechanism":                            "Mechanism",
 		"msk_cluster_arn":                      "MskClusterArn",
+		"mtls":                                 "MTLS",
 		"prefix":                               "Prefix",
 		"replication_info_list":                "ReplicationInfoList",
 		"replicator_arn":                       "ReplicatorArn",

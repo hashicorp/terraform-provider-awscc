@@ -65,6 +65,7 @@ resource "awscc_ram_resource_share" "example" {
 
 - An ARN of an IAM user
 - `resource_arns` (List of String) Specifies a list of one or more ARNs of the resources to associate with the resource share.
+- `resource_share_configuration` (Attributes) Specifies the configuration for the resource share (see [below for nested schema](#nestedatt--resource_share_configuration))
 - `sources` (List of String) Specifies from which source accounts the service principal has access to the resources in this resource share.
 - `tags` (Attributes Set) Specifies one or more tags to attach to the resource share itself. It doesn't attach the tags to the resources associated with the resource share. (see [below for nested schema](#nestedatt--tags))
 
@@ -77,6 +78,15 @@ resource "awscc_ram_resource_share" "example" {
 - `last_updated_time` (String) The date and time when the resource share was last updated.
 - `owning_account_id` (String) The ID of the AWS account that owns the resource share.
 - `status` (String) The current status of the resource share.
+
+<a id="nestedatt--resource_share_configuration"></a>
+### Nested Schema for `resource_share_configuration`
+
+Optional:
+
+- `exclusive_account_access` (Boolean) The resource share restricts access to an account
+- `retain_sharing_on_account_leave_organization` (Boolean) Specifies whether the consumer account retains access to the resource share after leaving the organization.
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

@@ -95,6 +95,7 @@ func loggingConfigurationResource(ctx context.Context) (resource.Resource, error
 		//	                        "COUNT",
 		//	                        "CAPTCHA",
 		//	                        "CHALLENGE",
+		//	                        "MONETIZE",
 		//	                        "EXCLUDED_AS_COUNT"
 		//	                      ],
 		//	                      "type": "string"
@@ -208,6 +209,7 @@ func loggingConfigurationResource(ctx context.Context) (resource.Resource, error
 															"COUNT",
 															"CAPTCHA",
 															"CHALLENGE",
+															"MONETIZE",
 															"EXCLUDED_AS_COUNT",
 														),
 														fwvalidators.NotNullString(),

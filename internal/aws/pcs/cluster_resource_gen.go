@@ -337,9 +337,6 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END SCHEMA*/
 			Description: "The cluster management and job scheduling software associated with the cluster.",
 			Required:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Size
 		// CloudFormation resource type schema:

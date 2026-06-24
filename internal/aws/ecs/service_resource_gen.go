@@ -1013,6 +1013,117 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Monitoring
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "",
+		//	  "properties": {
+		//	    "MetricConfigurations": {
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "",
+		//	        "properties": {
+		//	          "MetricNames": {
+		//	            "items": {
+		//	              "enum": [
+		//	                "CPUUtilization",
+		//	                "MemoryUtilization"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "maxItems": 2,
+		//	            "minItems": 1,
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          },
+		//	          "ResolutionSeconds": {
+		//	            "enum": [
+		//	              20,
+		//	              60
+		//	            ],
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "MetricNames",
+		//	          "ResolutionSeconds"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 2,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "MetricConfigurations"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"monitoring": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MetricConfigurations
+				"metric_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: MetricNames
+							"metric_names": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.SizeBetween(1, 2),
+									listvalidator.UniqueValues(),
+									listvalidator.ValueStringsAre(
+										stringvalidator.OneOf(
+											"CPUUtilization",
+											"MemoryUtilization",
+										),
+									),
+									fwvalidators.NotNullList(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ResolutionSeconds
+							"resolution_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.Int64{ /*START VALIDATORS*/
+									int64validator.OneOf(
+										20,
+										60,
+									),
+									fwvalidators.NotNullInt64(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 2),
+						fwvalidators.NotNullList(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// Monitoring is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -2592,7 +2703,10 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"log_driver":                        "LogDriver",
 		"managed_ebs_volume":                "ManagedEBSVolume",
 		"maximum_percent":                   "MaximumPercent",
+		"metric_configurations":             "MetricConfigurations",
+		"metric_names":                      "MetricNames",
 		"minimum_healthy_percent":           "MinimumHealthyPercent",
+		"monitoring":                        "Monitoring",
 		"name":                              "Name",
 		"namespace":                         "Namespace",
 		"network_configuration":             "NetworkConfiguration",
@@ -2606,6 +2720,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"production_listener_rule":          "ProductionListenerRule",
 		"propagate_tags":                    "PropagateTags",
 		"registry_arn":                      "RegistryArn",
+		"resolution_seconds":                "ResolutionSeconds",
 		"resource_type":                     "ResourceType",
 		"role":                              "Role",
 		"role_arn":                          "RoleArn",
@@ -2650,6 +2765,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/ServiceConnectConfiguration",
 		"/properties/VolumeConfigurations",
 		"/properties/ForceNewDeployment",
+		"/properties/Monitoring",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(2160).WithDeleteTimeoutInMinutes(30)
 

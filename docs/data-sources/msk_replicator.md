@@ -64,7 +64,16 @@ Read-Only:
 
 Read-Only:
 
+- `mtls` (Attributes) Details for mTLS client authentication. (see [below for nested schema](#nestedatt--kafka_clusters--client_authentication--mtls))
 - `sasl_scram` (Attributes) Details for SASL/SCRAM client authentication. (see [below for nested schema](#nestedatt--kafka_clusters--client_authentication--sasl_scram))
+
+<a id="nestedatt--kafka_clusters--client_authentication--mtls"></a>
+### Nested Schema for `kafka_clusters.client_authentication.mtls`
+
+Read-Only:
+
+- `secret_arn` (String) The Amazon Resource Name (ARN) of the Secrets Manager secret.
+
 
 <a id="nestedatt--kafka_clusters--client_authentication--sasl_scram"></a>
 ### Nested Schema for `kafka_clusters.client_authentication.sasl_scram`

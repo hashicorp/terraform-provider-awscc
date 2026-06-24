@@ -1,4 +1,4 @@
-## 1.90.0 (Unreleased)
+## 1.90.0 (June 24, 2026)
 
 BREAKING CHANGES:
 
@@ -10,7 +10,15 @@ BREAKING CHANGES:
 FEATURES:
 
 * **New Data Source:** `awscc_devopsagent_service`
+* **New Data Source:** `awscc_lambda_microvm_image`
+* **New Data Source:** `awscc_lambda_microvm_images`
+* **New Data Source:** `awscc_lambda_network_connector`
+* **New Data Source:** `awscc_lambda_network_connectors`
+* **New List Resource:** `awscc_lambda_microvm_image`
+* **New List Resource:** `awscc_lambda_network_connector`
 * **New Resource:** `awscc_devopsagent_service`
+* **New Resource:** `awscc_lambda_microvm_image`
+* **New Resource:** `awscc_lambda_network_connector`
 
 ## 1.89.0 (June 17, 2026)
 

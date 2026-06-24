@@ -14,9 +14,11 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -94,6 +96,72 @@ func userPoolDomainResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// ManagedLoginVersion is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: Routing
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Failover": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "PrimaryRoute53HealthCheckId": {
+		//	          "type": "string"
+		//	        },
+		//	        "SecondaryRegion": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "SecondaryRegion",
+		//	        "PrimaryRoute53HealthCheckId"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"routing": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Failover
+				"failover": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PrimaryRoute53HealthCheckId
+						"primary_route_53_health_check_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SecondaryRegion
+						"secondary_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: UserPoolId
 		// CloudFormation resource type schema:
 		//
@@ -138,12 +206,16 @@ func userPoolDomainResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"certificate_arn":         "CertificateArn",
-		"cloudfront_distribution": "CloudFrontDistribution",
-		"custom_domain_config":    "CustomDomainConfig",
-		"domain":                  "Domain",
-		"managed_login_version":   "ManagedLoginVersion",
-		"user_pool_id":            "UserPoolId",
+		"certificate_arn":                  "CertificateArn",
+		"cloudfront_distribution":          "CloudFrontDistribution",
+		"custom_domain_config":             "CustomDomainConfig",
+		"domain":                           "Domain",
+		"failover":                         "Failover",
+		"managed_login_version":            "ManagedLoginVersion",
+		"primary_route_53_health_check_id": "PrimaryRoute53HealthCheckId",
+		"routing":                          "Routing",
+		"secondary_region":                 "SecondaryRegion",
+		"user_pool_id":                     "UserPoolId",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

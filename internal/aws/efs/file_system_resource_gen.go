@@ -617,8 +617,8 @@ func fileSystemResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/BypassPolicyLockoutSafetyCheck",
-		"/properties/ReplicationConfiguration/Destinations/0/AvailabilityZoneName",
-		"/properties/ReplicationConfiguration/Destinations/0/KmsKeyId",
+		"/properties/ReplicationConfiguration/Destinations/*/AvailabilityZoneName",
+		"/properties/ReplicationConfiguration/Destinations/*/KmsKeyId",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

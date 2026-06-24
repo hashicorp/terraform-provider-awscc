@@ -1,0 +1,1 @@
+$ terraform import awscc_lambda_network_connector.example "arn"

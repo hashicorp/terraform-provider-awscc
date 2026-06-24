@@ -153,6 +153,63 @@ func containerGroupDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	      "pattern": "^[a-zA-Z0-9-_\\.@\\/:]+$",
 		//	      "type": "string"
 		//	    },
+		//	    "LinuxCapabilities": {
+		//	      "additionalProperties": false,
+		//	      "description": "Linux-specific modifications applied to the default Docker container configuration, such as Linux capabilities.",
+		//	      "properties": {
+		//	        "Include": {
+		//	          "description": "The list of Linux capabilities to add to the container's default configuration.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "enum": [
+		//	              "AUDIT_CONTROL",
+		//	              "AUDIT_WRITE",
+		//	              "BLOCK_SUSPEND",
+		//	              "CHOWN",
+		//	              "DAC_OVERRIDE",
+		//	              "DAC_READ_SEARCH",
+		//	              "FOWNER",
+		//	              "FSETID",
+		//	              "IPC_LOCK",
+		//	              "IPC_OWNER",
+		//	              "KILL",
+		//	              "LEASE",
+		//	              "LINUX_IMMUTABLE",
+		//	              "MAC_ADMIN",
+		//	              "MAC_OVERRIDE",
+		//	              "MKNOD",
+		//	              "NET_ADMIN",
+		//	              "NET_BIND_SERVICE",
+		//	              "NET_BROADCAST",
+		//	              "NET_RAW",
+		//	              "SETFCAP",
+		//	              "SETGID",
+		//	              "SETPCAP",
+		//	              "SETUID",
+		//	              "SYS_ADMIN",
+		//	              "SYS_BOOT",
+		//	              "SYS_CHROOT",
+		//	              "SYS_MODULE",
+		//	              "SYS_NICE",
+		//	              "SYS_PACCT",
+		//	              "SYS_PTRACE",
+		//	              "SYS_RAWIO",
+		//	              "SYS_RESOURCE",
+		//	              "SYS_TIME",
+		//	              "SYS_TTY_CONFIG",
+		//	              "SYSLOG",
+		//	              "WAKE_ALARM"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 37,
+		//	          "minItems": 0,
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "MountPoints": {
 		//	      "description": "A list of mount point configurations to be used in a container.",
 		//	      "insertionOrder": false,
@@ -310,6 +367,19 @@ func containerGroupDefinitionDataSource(ctx context.Context) (datasource.DataSou
 				// Property: ImageUri
 				"image_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Specifies the image URI of this container.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LinuxCapabilities
+				"linux_capabilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Include
+						"include": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The list of Linux capabilities to add to the container's default configuration.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Linux-specific modifications applied to the default Docker container configuration, such as Linux capabilities.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: MountPoints
@@ -593,6 +663,63 @@ func containerGroupDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		//	        "pattern": "^[a-zA-Z0-9-_\\.@\\/:]+$",
 		//	        "type": "string"
 		//	      },
+		//	      "LinuxCapabilities": {
+		//	        "additionalProperties": false,
+		//	        "description": "Linux-specific modifications applied to the default Docker container configuration, such as Linux capabilities.",
+		//	        "properties": {
+		//	          "Include": {
+		//	            "description": "The list of Linux capabilities to add to the container's default configuration.",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "enum": [
+		//	                "AUDIT_CONTROL",
+		//	                "AUDIT_WRITE",
+		//	                "BLOCK_SUSPEND",
+		//	                "CHOWN",
+		//	                "DAC_OVERRIDE",
+		//	                "DAC_READ_SEARCH",
+		//	                "FOWNER",
+		//	                "FSETID",
+		//	                "IPC_LOCK",
+		//	                "IPC_OWNER",
+		//	                "KILL",
+		//	                "LEASE",
+		//	                "LINUX_IMMUTABLE",
+		//	                "MAC_ADMIN",
+		//	                "MAC_OVERRIDE",
+		//	                "MKNOD",
+		//	                "NET_ADMIN",
+		//	                "NET_BIND_SERVICE",
+		//	                "NET_BROADCAST",
+		//	                "NET_RAW",
+		//	                "SETFCAP",
+		//	                "SETGID",
+		//	                "SETPCAP",
+		//	                "SETUID",
+		//	                "SYS_ADMIN",
+		//	                "SYS_BOOT",
+		//	                "SYS_CHROOT",
+		//	                "SYS_MODULE",
+		//	                "SYS_NICE",
+		//	                "SYS_PACCT",
+		//	                "SYS_PTRACE",
+		//	                "SYS_RAWIO",
+		//	                "SYS_RESOURCE",
+		//	                "SYS_TIME",
+		//	                "SYS_TTY_CONFIG",
+		//	                "SYSLOG",
+		//	                "WAKE_ALARM"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "maxItems": 37,
+		//	            "minItems": 0,
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
 		//	      "MemoryHardLimitMebibytes": {
 		//	        "description": "The total memory limit of container groups following this definition in MiB",
 		//	        "maximum": 1024000,
@@ -799,6 +926,19 @@ func containerGroupDefinitionDataSource(ctx context.Context) (datasource.DataSou
 					// Property: ImageUri
 					"image_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Specifies the image URI of this container.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: LinuxCapabilities
+					"linux_capabilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Include
+							"include": schema.SetAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "The list of Linux capabilities to add to the container's default configuration.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Linux-specific modifications applied to the default Docker container configuration, such as Linux capabilities.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: MemoryHardLimitMebibytes
@@ -1014,9 +1154,11 @@ func containerGroupDefinitionDataSource(ctx context.Context) (datasource.DataSou
 		"game_server_container_definition": "GameServerContainerDefinition",
 		"health_check":                     "HealthCheck",
 		"image_uri":                        "ImageUri",
+		"include":                          "Include",
 		"instance_path":                    "InstancePath",
 		"interval":                         "Interval",
 		"key":                              "Key",
+		"linux_capabilities":               "LinuxCapabilities",
 		"memory_hard_limit_mebibytes":      "MemoryHardLimitMebibytes",
 		"mount_points":                     "MountPoints",
 		"name":                             "Name",

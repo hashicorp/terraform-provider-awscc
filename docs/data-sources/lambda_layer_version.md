@@ -36,4 +36,5 @@ Read-Only:
 
 - `s3_bucket` (String) The Amazon S3 bucket of the layer archive.
 - `s3_key` (String) The Amazon S3 key of the layer archive.
+- `s3_object_storage_mode` (String) Specifies whether Lambda should copy the deployment package to its internal storage (COPY) or reference it directly from your S3 bucket (REFERENCE).
 - `s3_object_version` (String) For versioned objects, the version of the layer archive object to use.

@@ -25,6 +25,7 @@ Data Source schema for AWS::Cognito::UserPoolDomain
 - `custom_domain_config` (Attributes) (see [below for nested schema](#nestedatt--custom_domain_config))
 - `domain` (String)
 - `managed_login_version` (Number)
+- `routing` (Attributes) (see [below for nested schema](#nestedatt--routing))
 - `user_pool_id` (String)
 
 <a id="nestedatt--custom_domain_config"></a>
@@ -33,3 +34,19 @@ Data Source schema for AWS::Cognito::UserPoolDomain
 Read-Only:
 
 - `certificate_arn` (String)
+
+
+<a id="nestedatt--routing"></a>
+### Nested Schema for `routing`
+
+Read-Only:
+
+- `failover` (Attributes) (see [below for nested schema](#nestedatt--routing--failover))
+
+<a id="nestedatt--routing--failover"></a>
+### Nested Schema for `routing.failover`
+
+Read-Only:
+
+- `primary_route_53_health_check_id` (String)
+- `secondary_region` (String)

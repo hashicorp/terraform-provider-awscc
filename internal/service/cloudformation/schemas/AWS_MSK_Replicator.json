@@ -394,10 +394,25 @@
         "SaslScram": {
           "description": "Details for SASL/SCRAM client authentication.",
           "$ref": "#/definitions/KafkaClusterSaslScramAuthentication"
+        },
+        "MTLS": {
+          "description": "Details for mTLS client authentication.",
+          "$ref": "#/definitions/KafkaClusterMtlsAuthentication"
+        }
+      }
+    },
+    "KafkaClusterMtlsAuthentication": {
+      "description": "Details for mTLS client authentication.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "SecretArn": {
+          "description": "The Amazon Resource Name (ARN) of the Secrets Manager secret.",
+          "type": "string"
         }
       },
       "required": [
-        "SaslScram"
+        "SecretArn"
       ]
     },
     "KafkaClusterSaslScramAuthentication": {

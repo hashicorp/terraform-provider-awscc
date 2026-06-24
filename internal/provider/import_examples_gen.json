@@ -3767,6 +3767,16 @@
         "identifier": ["Id"]
     },
     {
+        "resource": "awscc_lambda_microvm_image",
+        "generateListResource": true,
+        "identifier": ["ImageArn"]
+    },
+    {
+        "resource": "awscc_lambda_network_connector",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_lambda_permission",
         "identifier": ["FunctionName","Id"]
     },

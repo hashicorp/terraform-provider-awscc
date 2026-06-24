@@ -8,12 +8,14 @@ package lambda
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
@@ -90,6 +92,14 @@ func layerVersionResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "The Amazon S3 key of the layer archive.",
 		//	      "type": "string"
 		//	    },
+		//	    "S3ObjectStorageMode": {
+		//	      "description": "Specifies whether Lambda should copy the deployment package to its internal storage (COPY) or reference it directly from your S3 bucket (REFERENCE).",
+		//	      "enum": [
+		//	        "COPY",
+		//	        "REFERENCE"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "S3ObjectVersion": {
 		//	      "description": "For versioned objects, the version of the layer archive object to use.",
 		//	      "type": "string"
@@ -112,6 +122,21 @@ func layerVersionResource(ctx context.Context) (resource.Resource, error) {
 				"s3_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The Amazon S3 key of the layer archive.",
 					Required:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3ObjectStorageMode
+				"s3_object_storage_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether Lambda should copy the deployment package to its internal storage (COPY) or reference it directly from your S3 bucket (REFERENCE).",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"COPY",
+							"REFERENCE",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: S3ObjectVersion
 				"s3_object_version": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -227,6 +252,7 @@ func layerVersionResource(ctx context.Context) (resource.Resource, error) {
 		"license_info":             "LicenseInfo",
 		"s3_bucket":                "S3Bucket",
 		"s3_key":                   "S3Key",
+		"s3_object_storage_mode":   "S3ObjectStorageMode",
 		"s3_object_version":        "S3ObjectVersion",
 	})
 
