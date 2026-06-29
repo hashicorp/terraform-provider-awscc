@@ -18,6 +18,9 @@ on:
       - main.go
       - tools/**
 
+permissions:
+  contents: read # Needed for checkout
+
 jobs:
   go_mod_download:
     name: go mod download
@@ -100,6 +103,9 @@ jobs:
 
   semgrep:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read # Needed for checkout
+      security-events: write # Needed to upload results
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
       - name: semgrep

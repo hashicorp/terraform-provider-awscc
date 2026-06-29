@@ -11,10 +11,13 @@ on:
         required: true
         type: string
 
+permissions:
+  contents: write # Needed to push the CHANGELOG branch
+  pull-requests: write # Needed to create pull requests
+
 jobs:
   update-changelog:
     runs-on: ubuntu-latest
-    
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:

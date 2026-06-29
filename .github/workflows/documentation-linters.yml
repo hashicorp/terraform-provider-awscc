@@ -17,6 +17,9 @@ on:
       - tools/go.mod
       # - website/**
 
+permissions:
+  contents: read # Needed for checkout
+
 jobs:
   markdown-link-check:
     runs-on: ubuntu-latest
