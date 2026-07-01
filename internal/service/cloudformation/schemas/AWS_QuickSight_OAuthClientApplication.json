@@ -1,0 +1,224 @@
+{
+  "typeName": "AWS::QuickSight::OAuthClientApplication",
+  "description": "Definition of AWS::QuickSight::OAuthClientApplication Resource Type",
+  "properties": {
+    "OAuthClientApplicationId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": ""
+    },
+    "Arn": {
+      "type": "string",
+      "pattern": "^arn:[-a-z0-9]*:quicksight:[-a-z0-9]*:[0-9]{12}:oauthclientapplication/.+"
+    },
+    "Name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "OAuthClientAuthenticationType": {
+      "type": "string",
+      "enum": [
+        "TOKEN"
+      ]
+    },
+    "ClientId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "ClientSecret": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "OAuthTokenEndpointUrl": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "OAuthAuthorizationEndpointUrl": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "OAuthScopes": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "DataSourceType": {
+      "type": "string",
+      "enum": [
+        "ADOBE_ANALYTICS",
+        "AMAZON_ELASTICSEARCH",
+        "AMAZON_OPENSEARCH",
+        "ATHENA",
+        "AURORA",
+        "AURORA_POSTGRESQL",
+        "AWS_IOT_ANALYTICS",
+        "BIGQUERY",
+        "CONFLUENCE",
+        "DATABRICKS",
+        "EXASOL",
+        "GITHUB",
+        "GOOGLESHEETS",
+        "GOOGLE_DRIVE",
+        "JIRA",
+        "MARIADB",
+        "MYSQL",
+        "ONE_DRIVE",
+        "ORACLE",
+        "POSTGRESQL",
+        "PRESTO",
+        "QBUSINESS",
+        "REDSHIFT",
+        "S3",
+        "S3_KNOWLEDGE_BASE",
+        "S3_TABLES",
+        "SALESFORCE",
+        "SERVICENOW",
+        "SHAREPOINT",
+        "SNOWFLAKE",
+        "SPARK",
+        "SQLSERVER",
+        "STARBURST",
+        "TERADATA",
+        "TIMESTREAM",
+        "TRINO",
+        "TWITTER",
+        "WEB_CRAWLER"
+      ]
+    },
+    "IdentityProviderVpcConnectionProperties": {
+      "$ref": "#/definitions/IdentityProviderVpcConnectionProperties"
+    },
+    "CreatedTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "LastUpdatedTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "Tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 200,
+      "insertionOrder": false
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "IdentityProviderVpcConnectionProperties": {
+      "type": "object",
+      "properties": {
+        "VpcConnectionArn": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "VpcConnectionArn"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "OAuthClientApplicationId",
+    "Name",
+    "OAuthClientAuthenticationType",
+    "OAuthTokenEndpointUrl"
+  ],
+  "additionalProperties": false,
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/OAuthClientApplicationId"
+    ]
+  ],
+  "createOnlyProperties": [
+    "/properties/OAuthClientApplicationId",
+    "/properties/OAuthClientAuthenticationType"
+  ],
+  "writeOnlyProperties": [
+    "/properties/ClientId",
+    "/properties/ClientSecret"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/CreatedTime",
+    "/properties/LastUpdatedTime"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "quicksight:TagResource",
+      "quicksight:UntagResource",
+      "quicksight:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "quicksight:CreateOAuthClientApplication",
+        "quicksight:DescribeOAuthClientApplication",
+        "quicksight:TagResource",
+        "quicksight:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "quicksight:DescribeOAuthClientApplication",
+        "quicksight:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "quicksight:UpdateOAuthClientApplication",
+        "quicksight:DescribeOAuthClientApplication",
+        "quicksight:TagResource",
+        "quicksight:UntagResource",
+        "quicksight:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "quicksight:DeleteOAuthClientApplication",
+        "quicksight:DescribeOAuthClientApplication"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "quicksight:ListOAuthClientApplications"
+      ]
+    }
+  }
+}

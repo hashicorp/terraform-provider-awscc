@@ -908,6 +908,20 @@
         "identifier": ["AccountId"]
     },
     {
+        "resource": "awscc_certificatemanager_acme_domain_validation",
+        "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_certificatemanager_acme_endpoint",
+        "generateListResource": true,
+        "identifier": ["AcmeEndpointArn"]
+    },
+    {
+        "resource": "awscc_certificatemanager_acme_external_account_binding",
+        "generateListResource": true,
+        "identifier": ["AcmeExternalAccountBindingArn"]
+    },
+    {
         "resource": "awscc_chatbot_custom_action",
         "generateListResource": true,
         "identifier": ["CustomActionArn"]
@@ -1377,6 +1391,11 @@
         "resource": "awscc_config_stored_query",
         "generateListResource": true,
         "identifier": ["QueryName"]
+    },
+    {
+        "resource": "awscc_config_remediation_configuration",
+        "generateListResource": true,
+        "identifier": ["ConfigRuleName"]
     },
     {
         "resource": "awscc_connect_agent_status",
@@ -2951,6 +2970,10 @@
         "identifier": ["DatabaseName"]
     },
     {
+        "resource": "awscc_glue_data_catalog_encryption_settings",
+        "identifier": ["CatalogId"]
+    },
+    {
         "resource": "awscc_glue_identity_center_configuration",
         "identifier": ["AccountId"]
     },
@@ -4213,6 +4236,10 @@
         "identifier": ["Id"]
     },
     {
+        "resource": "awscc_medialive_node",
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_medialive_sdi_source",
         "generateListResource": true,
         "identifier": ["Id"]
@@ -4728,6 +4755,11 @@
         "identifier": ["Id"]
     },
     {
+        "resource": "awscc_outposts_site",
+        "generateListResource": true,
+        "identifier": ["SiteArn"]
+    },
+    {
         "resource": "awscc_pcaconnectorad_connector",
         "generateListResource": true,
         "identifier": ["ConnectorArn"]
@@ -4907,6 +4939,11 @@
         "resource": "awscc_quicksight_folder",
         "generateListResource": true,
         "identifier": ["AwsAccountId","FolderId"]
+    },
+    {
+        "resource": "awscc_quicksight_o_auth_client_application",
+        "generateListResource": true,
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_quicksight_refresh_schedule",
@@ -5801,6 +5838,11 @@
         "identifier": ["InstanceArn","PermissionSetArn"]
     },
     {
+        "resource": "awscc_sagemaker_algorithm",
+        "generateListResource": true,
+        "identifier": ["AlgorithmArn"]
+    },
+    {
         "resource": "awscc_sagemaker_app",
         "generateListResource": true,
         "identifier": ["AppName","AppType","DomainId","UserProfileName"]
@@ -5847,6 +5889,11 @@
         "resource": "awscc_sagemaker_feature_group",
         "generateListResource": true,
         "identifier": ["FeatureGroupName"]
+    },
+    {
+        "resource": "awscc_sagemaker_hub",
+        "generateListResource": true,
+        "identifier": ["HubArn"]
     },
     {
         "resource": "awscc_sagemaker_image",
@@ -5990,6 +6037,11 @@
     {
         "resource": "awscc_securityagent_pentest",
         "identifier": ["PentestId","AgentSpaceId"]
+    },
+    {
+        "resource": "awscc_securityagent_security_requirement_pack",
+        "generateListResource": true,
+        "identifier": ["PackId"]
     },
     {
         "resource": "awscc_securityagent_target_domain",

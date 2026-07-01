@@ -1,0 +1,170 @@
+{
+  "typeName": "AWS::CertificateManager::AcmeExternalAccountBinding",
+  "description": "Resource Type definition for AWS::CertificateManager::AcmeExternalAccountBinding",
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "description": "The key name of the tag.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "description": "The value for the tag.",
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "Expiration": {
+      "description": "The expiration configuration for the external account binding.",
+      "type": "object",
+      "properties": {
+        "Value": {
+          "description": "The expiration value.",
+          "type": "integer"
+        },
+        "Type": {
+          "description": "The time unit for the expiration value.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Value",
+        "Type"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "AcmeExternalAccountBindingArn": {
+      "description": "The Amazon Resource Name (ARN) of the external account binding.",
+      "type": "string"
+    },
+    "AcmeEndpointArn": {
+      "description": "The ARN of the ACME endpoint this binding is associated with.",
+      "type": "string"
+    },
+    "RoleArn": {
+      "description": "The IAM role ARN for cross-account access.",
+      "type": "string"
+    },
+    "Expiration": {
+      "$ref": "#/definitions/Expiration"
+    },
+    "Tags": {
+      "description": "Tags associated with the external account binding.",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "type": "object",
+        "properties": {
+          "Key": {
+            "description": "The key name of the tag.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "Value": {
+            "description": "The value for the tag.",
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 256
+          }
+        },
+        "required": [
+          "Key",
+          "Value"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 50
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "AcmeEndpointArn",
+    "RoleArn"
+  ],
+  "readOnlyProperties": [
+    "/properties/AcmeExternalAccountBindingArn"
+  ],
+  "writeOnlyProperties": [
+    "/properties/Expiration"
+  ],
+  "createOnlyProperties": [
+    "/properties/AcmeEndpointArn",
+    "/properties/RoleArn",
+    "/properties/Expiration"
+  ],
+  "primaryIdentifier": [
+    "/properties/AcmeExternalAccountBindingArn"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "acm:TagResource",
+      "acm:UntagResource",
+      "acm:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "acm:CreateAcmeExternalAccountBinding",
+        "acm:DescribeAcmeExternalAccountBinding",
+        "acm:TagResource",
+        "acm:ListTagsForResource",
+        "iam:PassRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "acm:DescribeAcmeExternalAccountBinding",
+        "acm:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "acm:DescribeAcmeExternalAccountBinding",
+        "acm:TagResource",
+        "acm:UntagResource",
+        "acm:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "acm:DeleteAcmeExternalAccountBinding",
+        "acm:DescribeAcmeExternalAccountBinding"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "AcmeEndpointArn": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "AcmeEndpointArn"
+        ]
+      },
+      "permissions": [
+        "acm:ListAcmeExternalAccountBindings"
+      ]
+    }
+  }
+}
