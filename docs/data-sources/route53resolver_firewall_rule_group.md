@@ -53,6 +53,7 @@ Read-Only:
 - `firewall_threat_protection_id` (String) ResourceId
 - `priority` (Number) Rule Priority
 - `qtype` (String) Qtype
+- `status` (String) The status of the firewall rule.
 
 <a id="nestedatt--firewall_rules--firewall_rule_type"></a>
 ### Nested Schema for `firewall_rules.firewall_rule_type`
@@ -61,6 +62,7 @@ Read-Only:
 
 - `firewall_advanced_content_category` (Attributes) Configuration for an advanced content category rule type. (see [below for nested schema](#nestedatt--firewall_rules--firewall_rule_type--firewall_advanced_content_category))
 - `firewall_advanced_threat_category` (Attributes) Configuration for an advanced threat category rule type. (see [below for nested schema](#nestedatt--firewall_rules--firewall_rule_type--firewall_advanced_threat_category))
+- `partner_threat_protection` (Attributes) Configuration for a partner threat protection rule type. (see [below for nested schema](#nestedatt--firewall_rules--firewall_rule_type--partner_threat_protection))
 
 <a id="nestedatt--firewall_rules--firewall_rule_type--firewall_advanced_content_category"></a>
 ### Nested Schema for `firewall_rules.firewall_rule_type.firewall_advanced_content_category`
@@ -76,6 +78,14 @@ Read-Only:
 Read-Only:
 
 - `category` (String) The threat category value.
+
+
+<a id="nestedatt--firewall_rules--firewall_rule_type--partner_threat_protection"></a>
+### Nested Schema for `firewall_rules.firewall_rule_type.partner_threat_protection`
+
+Read-Only:
+
+- `partner` (String) The partner identifier value.
 
 
 

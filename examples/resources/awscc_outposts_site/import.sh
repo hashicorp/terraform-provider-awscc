@@ -1,0 +1,1 @@
+$ terraform import awscc_outposts_site.example "site_arn"

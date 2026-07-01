@@ -18,6 +18,7 @@ Resource Type definition for AWS::AppStream::Stack
 ### Optional
 
 - `access_endpoints` (Attributes List) The list of virtual private cloud (VPC) interface endpoint objects. Users of the stack can connect to AppStream 2.0 only through the specified endpoints. (see [below for nested schema](#nestedatt--access_endpoints))
+- `agent_access_config` (Attributes) The configuration for agent access on the stack. If specified, agent access is enabled for the stack. (see [below for nested schema](#nestedatt--agent_access_config))
 - `application_settings` (Attributes) The persistent application settings for users of the stack. When these settings are enabled, changes that users make to applications and Windows settings are automatically saved after each session and applied to the next session. (see [below for nested schema](#nestedatt--application_settings))
 - `attributes_to_delete` (List of String) The stack attributes to delete.
 - `content_redirection` (Attributes) The content redirection settings for the stack. These settings control URL redirection between the streaming session and the local device. (see [below for nested schema](#nestedatt--content_redirection))
@@ -46,13 +47,35 @@ Optional:
 - `vpce_id` (String) The identifier (ID) of the VPC in which the interface endpoint is used.
 
 
+<a id="nestedatt--agent_access_config"></a>
+### Nested Schema for `agent_access_config`
+
+Optional:
+
+- `s3_bucket_arn` (String) The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots are stored. Required when ScreenshotsUploadEnabled is true.
+- `screen_image_format` (String) The image format for agent screen captures.
+- `screen_resolution` (String) The screen resolution for the agent streaming environment.
+- `screenshots_upload_enabled` (Boolean) Indicates whether screenshot uploads to Amazon S3 are enabled for agent sessions.
+- `settings` (Attributes List) The list of agent access settings that define permissions for each agent action. You must specify at least one setting. (see [below for nested schema](#nestedatt--agent_access_config--settings))
+- `user_control_mode` (String) The user control mode for agent sessions. This setting determines how users can interact with agent sessions. Valid values are VIEW_ONLY, VIEW_STOP, and DISABLED.
+
+<a id="nestedatt--agent_access_config--settings"></a>
+### Nested Schema for `agent_access_config.settings`
+
+Optional:
+
+- `agent_action` (String) The agent action to configure. Valid values are COMPUTER_VISION, COMPUTER_INPUT, and FORWARD_MCP_TOOLS. COMPUTER_VISION allows agents to take screenshots of the desktop. COMPUTER_INPUT allows agents to click, type, and scroll on the desktop and requires COMPUTER_VISION to also be enabled. FORWARD_MCP_TOOLS allows agents to interact with applications and the desktop operating system through direct MCP calls rather than using computer use tools. Forwards MCP tools configured on the WorkSpaces application session to the agent.
+- `permission` (String) Whether the agent action is enabled or disabled.
+
+
+
 <a id="nestedatt--application_settings"></a>
 ### Nested Schema for `application_settings`
 
 Optional:
 
 - `enabled` (Boolean) Enables or disables persistent application settings for users during their streaming sessions.
-- `settings_group` (String) The path prefix for the S3 bucket where users? persistent application settings are stored. You can allow the same persistent application settings to be used across multiple stacks by specifying the same settings group for each stack.
+- `settings_group` (String) The path prefix for the S3 bucket where users' persistent application settings are stored. You can allow the same persistent application settings to be used across multiple stacks by specifying the same settings group for each stack.
 
 
 <a id="nestedatt--content_redirection"></a>

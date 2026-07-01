@@ -17,20 +17,21 @@ Resource Type definition for AWS::ECS::ExpressGatewayService
 
 ### Required
 
-- `execution_role_arn` (String)
 - `infrastructure_role_arn` (String)
-- `primary_container` (Attributes) (see [below for nested schema](#nestedatt--primary_container))
 
 ### Optional
 
 - `cluster` (String)
 - `cpu` (String)
+- `execution_role_arn` (String)
 - `health_check_path` (String)
 - `memory` (String)
 - `network_configuration` (Attributes) (see [below for nested schema](#nestedatt--network_configuration))
+- `primary_container` (Attributes) (see [below for nested schema](#nestedatt--primary_container))
 - `scaling_target` (Attributes) (see [below for nested schema](#nestedatt--scaling_target))
 - `service_name` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `task_definition_arn` (String)
 - `task_role_arn` (String)
 
 ### Read-Only
@@ -44,12 +45,17 @@ Resource Type definition for AWS::ECS::ExpressGatewayService
 - `status` (Attributes) (see [below for nested schema](#nestedatt--status))
 - `updated_at` (String)
 
+<a id="nestedatt--network_configuration"></a>
+### Nested Schema for `network_configuration`
+
+Optional:
+
+- `security_groups` (List of String)
+- `subnets` (List of String)
+
+
 <a id="nestedatt--primary_container"></a>
 ### Nested Schema for `primary_container`
-
-Required:
-
-- `image` (String)
 
 Optional:
 
@@ -57,6 +63,7 @@ Optional:
 - `command` (List of String)
 - `container_port` (Number)
 - `environment` (Attributes List) (see [below for nested schema](#nestedatt--primary_container--environment))
+- `image` (String)
 - `repository_credentials` (Attributes) (see [below for nested schema](#nestedatt--primary_container--repository_credentials))
 - `secrets` (Attributes List) (see [below for nested schema](#nestedatt--primary_container--secrets))
 
@@ -96,15 +103,6 @@ Optional:
 
 
 
-<a id="nestedatt--network_configuration"></a>
-### Nested Schema for `network_configuration`
-
-Optional:
-
-- `security_groups` (List of String)
-- `subnets` (List of String)
-
-
 <a id="nestedatt--scaling_target"></a>
 ### Nested Schema for `scaling_target`
 
@@ -140,6 +138,7 @@ Read-Only:
 - `primary_container` (Attributes) (see [below for nested schema](#nestedatt--active_configurations--primary_container))
 - `scaling_target` (Attributes) (see [below for nested schema](#nestedatt--active_configurations--scaling_target))
 - `service_revision_arn` (String)
+- `task_definition_arn` (String)
 - `task_role_arn` (String)
 
 <a id="nestedatt--active_configurations--ingress_paths"></a>

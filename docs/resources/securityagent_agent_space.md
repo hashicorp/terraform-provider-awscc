@@ -81,8 +81,54 @@ Optional:
 
 Optional:
 
+- `bitbucket_capabilities` (Attributes) Bitbucket repository capabilities (see [below for nested schema](#nestedatt--integrated_resources--provider_resources--bitbucket_capabilities))
+- `bitbucket_repository` (Attributes) Bitbucket repository details (see [below for nested schema](#nestedatt--integrated_resources--provider_resources--bitbucket_repository))
+- `confluence_capabilities` (Attributes) Confluence document capabilities (see [below for nested schema](#nestedatt--integrated_resources--provider_resources--confluence_capabilities))
+- `confluence_document` (Attributes) Confluence document details (see [below for nested schema](#nestedatt--integrated_resources--provider_resources--confluence_document))
 - `git_hub_capabilities` (Attributes) GitHub repository capabilities (see [below for nested schema](#nestedatt--integrated_resources--provider_resources--git_hub_capabilities))
 - `git_hub_repository` (Attributes) GitHub repository details (see [below for nested schema](#nestedatt--integrated_resources--provider_resources--git_hub_repository))
+- `git_lab_capabilities` (Attributes) GitLab repository capabilities (see [below for nested schema](#nestedatt--integrated_resources--provider_resources--git_lab_capabilities))
+- `git_lab_repository` (Attributes) GitLab repository details (see [below for nested schema](#nestedatt--integrated_resources--provider_resources--git_lab_repository))
+
+<a id="nestedatt--integrated_resources--provider_resources--bitbucket_capabilities"></a>
+### Nested Schema for `integrated_resources.provider_resources.bitbucket_capabilities`
+
+Optional:
+
+- `leave_comments` (Boolean) Enables Code Review in the repository
+- `remediate_code` (Boolean) Enables creation of pull requests with automated fixes
+
+
+<a id="nestedatt--integrated_resources--provider_resources--bitbucket_repository"></a>
+### Nested Schema for `integrated_resources.provider_resources.bitbucket_repository`
+
+Optional:
+
+- `name` (String) Bitbucket repository name
+- `workspace` (String) Bitbucket workspace slug owning the repository
+
+
+<a id="nestedatt--integrated_resources--provider_resources--confluence_capabilities"></a>
+### Nested Schema for `integrated_resources.provider_resources.confluence_capabilities`
+
+Optional:
+
+- `create_document` (Boolean) Enables creation of new Confluence documents in the same space
+- `fetch_document` (Boolean) Enables read access to the document content
+- `update_document` (Boolean) Enables updates to the document
+
+
+<a id="nestedatt--integrated_resources--provider_resources--confluence_document"></a>
+### Nested Schema for `integrated_resources.provider_resources.confluence_document`
+
+Optional:
+
+- `name` (String) Customer-supplied logical name for the Confluence document
+- `page_id` (String) Confluence page identifier
+- `space_key` (String) Confluence space key containing the document
+- `space_title` (String) Read-only human-readable title of the containing space, populated from service-side metadata
+- `title` (String) Read-only human-readable title of the page, populated from service-side metadata
+
 
 <a id="nestedatt--integrated_resources--provider_resources--git_hub_capabilities"></a>
 ### Nested Schema for `integrated_resources.provider_resources.git_hub_capabilities`
@@ -100,6 +146,24 @@ Optional:
 
 - `name` (String) GitHub repository name
 - `owner` (String) GitHub repository owner (user or organization)
+
+
+<a id="nestedatt--integrated_resources--provider_resources--git_lab_capabilities"></a>
+### Nested Schema for `integrated_resources.provider_resources.git_lab_capabilities`
+
+Optional:
+
+- `leave_comments` (Boolean) Enables Code Review in the repository
+- `remediate_code` (Boolean) Enables creation of merge requests with automated fixes
+
+
+<a id="nestedatt--integrated_resources--provider_resources--git_lab_repository"></a>
+### Nested Schema for `integrated_resources.provider_resources.git_lab_repository`
+
+Optional:
+
+- `name` (String) GitLab project name
+- `namespace` (String) GitLab project namespace (user, group, or subgroup path)
 
 
 

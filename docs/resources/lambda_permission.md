@@ -94,7 +94,7 @@ resource "awscc_iam_role" "default" {
 
 - `event_source_token` (String) For Alexa Smart Home functions, a token that the invoker must supply.
 - `function_url_auth_type` (String) The type of authentication that your function URL uses. Set to ``AWS_IAM`` if you want to restrict access to authenticated users only. Set to ``NONE`` if you want to bypass IAM authentication to create a public endpoint. For more information, see [Control access to Lambda function URLs](https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html).
-- `invoked_via_function_url` (Boolean) Restricts the ``lambda:InvokeFunction`` action to function URL calls. When specified, this option prevents the principal from invoking the function by any means other than the function URL. For more information, see [Control access to Lambda function URLs](https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html).
+- `invoked_via_function_url` (Boolean) Indicates whether the permission applies when the function is invoked through a function URL.
 - `principal_org_id` (String) The identifier for your organization in AOlong. Use this to grant permissions to all the AWS-accounts under this organization.
 - `source_account` (String) For AWS-service, the ID of the AWS-account that owns the resource. Use this together with ``SourceArn`` to ensure that the specified account owns the resource. It is possible for an Amazon S3 bucket to be deleted by its owner and recreated by another account.
 - `source_arn` (String) For AWS-services, the ARN of the AWS resource that invokes the function. For example, an Amazon S3 bucket or Amazon SNS topic.

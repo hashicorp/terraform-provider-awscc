@@ -1,5 +1,46 @@
 ## 1.91.0 (Unreleased)
 
+FEATURES:
+
+* **New Data Source:** `awscc_certificatemanager_acme_domain_validation`
+* **New Data Source:** `awscc_certificatemanager_acme_endpoint`
+* **New Data Source:** `awscc_certificatemanager_acme_endpoints`
+* **New Data Source:** `awscc_certificatemanager_acme_external_account_binding`
+* **New Data Source:** `awscc_certificatemanager_acme_external_account_bindings`
+* **New Data Source:** `awscc_config_remediation_configuration`
+* **New Data Source:** `awscc_config_remediation_configurations`
+* **New Data Source:** `awscc_glue_data_catalog_encryption_settings`
+* **New Data Source:** `awscc_medialive_node`
+* **New Data Source:** `awscc_outposts_site`
+* **New Data Source:** `awscc_outposts_sites`
+* **New Data Source:** `awscc_quicksight_o_auth_client_application`
+* **New Data Source:** `awscc_quicksight_o_auth_client_applications`
+* **New Data Source:** `awscc_sagemaker_algorithm`
+* **New Data Source:** `awscc_sagemaker_algorithms`
+* **New Data Source:** `awscc_sagemaker_hub`
+* **New Data Source:** `awscc_sagemaker_hubs`
+* **New Data Source:** `awscc_securityagent_security_requirement_pack`
+* **New Data Source:** `awscc_securityagent_security_requirement_packs`
+* **New List Resource:** `awscc_certificatemanager_acme_endpoint`
+* **New List Resource:** `awscc_certificatemanager_acme_external_account_binding`
+* **New List Resource:** `awscc_config_remediation_configuration`
+* **New List Resource:** `awscc_outposts_site`
+* **New List Resource:** `awscc_quicksight_o_auth_client_application`
+* **New List Resource:** `awscc_sagemaker_algorithm`
+* **New List Resource:** `awscc_sagemaker_hub`
+* **New List Resource:** `awscc_securityagent_security_requirement_pack`
+* **New Resource:** `awscc_certificatemanager_acme_domain_validation`
+* **New Resource:** `awscc_certificatemanager_acme_endpoint`
+* **New Resource:** `awscc_certificatemanager_acme_external_account_binding`
+* **New Resource:** `awscc_config_remediation_configuration`
+* **New Resource:** `awscc_glue_data_catalog_encryption_settings`
+* **New Resource:** `awscc_medialive_node`
+* **New Resource:** `awscc_outposts_site`
+* **New Resource:** `awscc_quicksight_o_auth_client_application`
+* **New Resource:** `awscc_sagemaker_algorithm`
+* **New Resource:** `awscc_sagemaker_hub`
+* **New Resource:** `awscc_securityagent_security_requirement_pack`
+
 ## 1.90.0 (June 24, 2026)
 
 BREAKING CHANGES:
