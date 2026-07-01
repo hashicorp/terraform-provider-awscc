@@ -86,7 +86,7 @@
       "type": "string",
       "maxLength": 2048,
       "minLength": 1,
-      "pattern": "^(arn:aws(-cn|-us-gov|-eusc|-iso(-[b-f])?)?:(bedrock):[a-z0-9-]{1,20}:([0-9]{12})?:([a-z-]+\/)?)?([a-zA-Z0-9.-]{1,63}){0,2}(([:][a-z0-9-]{1,63}){0,2})?(\/[a-z0-9]{1,12})?$",
+      "pattern": "^(arn:aws(-cn|-us-gov|-eusc|-iso(-[b-f])?)?:(bedrock):[a-z0-9-]{1,20}:([0-9]{12})?:([a-z-]+/)?)?([a-zA-Z0-9.-]{1,63}){0,2}(([:][a-z0-9-]{1,63}){0,2})?(/[a-z0-9]{1,12})?$",
       "description": "The model's ARN."
     },
     "ChunkingConfiguration": {
@@ -166,6 +166,9 @@
         },
         "WebConfiguration": {
           "$ref": "#/definitions/WebDataSourceConfiguration"
+        },
+        "ManagedKnowledgeBaseConnectorConfiguration": {
+          "$ref": "#/definitions/ManagedKnowledgeBaseConnectorConfiguration"
         }
       },
       "required": [
@@ -179,7 +182,10 @@
       "enum": [
         "AVAILABLE",
         "DELETING",
-        "DELETE_UNSUCCESSFUL"
+        "DELETE_UNSUCCESSFUL",
+        "CREATING",
+        "UPDATING",
+        "FAILED"
       ]
     },
     "DataSourceType": {
@@ -192,7 +198,8 @@
         "SHAREPOINT",
         "WEB",
         "CUSTOM",
-        "REDSHIFT_METADATA"
+        "REDSHIFT_METADATA",
+        "MANAGED_KNOWLEDGE_BASE_CONNECTOR"
       ]
     },
     "DataDeletionPolicy": {
@@ -337,8 +344,109 @@
       "description": "The parsing strategy for the data source.",
       "enum": [
         "BEDROCK_FOUNDATION_MODEL",
-        "BEDROCK_DATA_AUTOMATION"
+        "BEDROCK_DATA_AUTOMATION",
+        "SMART_PARSING"
       ]
+    },
+    "EnabledOrDisabledState": {
+      "type": "string",
+      "description": "Indicates whether a feature is enabled or disabled.",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "ManagedKnowledgeBaseConnectorConfiguration": {
+      "type": "object",
+      "description": "Configuration for managed knowledge base connector data sources.",
+      "properties": {
+        "DeletionProtectionConfiguration": {
+          "$ref": "#/definitions/DeletionProtectionConfiguration"
+        },
+        "MediaExtractionConfiguration": {
+          "$ref": "#/definitions/MediaExtractionConfiguration"
+        },
+        "ConnectorParameters": {
+          "type": "object",
+          "description": "Connector-specific parameters."
+        }
+      },
+      "additionalProperties": false
+    },
+    "DeletionProtectionConfiguration": {
+      "type": "object",
+      "description": "Configuration for deletion protection.",
+      "properties": {
+        "DeletionProtectionStatus": {
+          "$ref": "#/definitions/EnabledOrDisabledState"
+        },
+        "DeletionProtectionThreshold": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100,
+          "default": 15,
+          "description": "Threshold for deletion protection."
+        }
+      },
+      "required": [
+        "DeletionProtectionStatus"
+      ],
+      "additionalProperties": false
+    },
+    "MediaExtractionConfiguration": {
+      "type": "object",
+      "description": "Configuration for media extraction settings.",
+      "properties": {
+        "ImageExtractionConfiguration": {
+          "$ref": "#/definitions/ImageExtractionConfiguration"
+        },
+        "AudioExtractionConfiguration": {
+          "$ref": "#/definitions/AudioExtractionConfiguration"
+        },
+        "VideoExtractionConfiguration": {
+          "$ref": "#/definitions/VideoExtractionConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ImageExtractionConfiguration": {
+      "type": "object",
+      "description": "Configuration for image extraction.",
+      "properties": {
+        "ImageExtractionStatus": {
+          "$ref": "#/definitions/EnabledOrDisabledState"
+        }
+      },
+      "required": [
+        "ImageExtractionStatus"
+      ],
+      "additionalProperties": false
+    },
+    "AudioExtractionConfiguration": {
+      "type": "object",
+      "description": "Configuration for audio extraction.",
+      "properties": {
+        "AudioExtractionStatus": {
+          "$ref": "#/definitions/EnabledOrDisabledState"
+        }
+      },
+      "required": [
+        "AudioExtractionStatus"
+      ],
+      "additionalProperties": false
+    },
+    "VideoExtractionConfiguration": {
+      "type": "object",
+      "description": "Configuration for video extraction.",
+      "properties": {
+        "VideoExtractionStatus": {
+          "$ref": "#/definitions/EnabledOrDisabledState"
+        }
+      },
+      "required": [
+        "VideoExtractionStatus"
+      ],
+      "additionalProperties": false
     },
     "S3DataSourceConfiguration": {
       "type": "object",
@@ -1004,7 +1112,8 @@
         "bedrock:CreateDataSource",
         "bedrock:GetDataSource",
         "bedrock:GetKnowledgeBase",
-        "kms:GenerateDataKey"
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
       ]
     },
     "read": {
@@ -1016,7 +1125,8 @@
       "permissions": [
         "bedrock:GetDataSource",
         "bedrock:UpdateDataSource",
-        "kms:GenerateDataKey"
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
       ]
     },
     "delete": {

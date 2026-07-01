@@ -169,6 +169,7 @@
     },
     "delete": {
       "permissions": [
+        "organizations:ListTargetsForPolicy",
         "organizations:DetachPolicy",
         "organizations:DeletePolicy"
       ]

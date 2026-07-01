@@ -87,9 +87,73 @@
     "ContentRedirection": {
       "$ref": "#/definitions/ContentRedirection",
       "description": "The content redirection settings for the stack. These settings control URL redirection between the streaming session and the local device."
+    },
+    "AgentAccessConfig": {
+      "$ref": "#/definitions/AgentAccessConfig",
+      "description": "The configuration for agent access on the stack. If specified, agent access is enabled for the stack."
     }
   },
   "definitions": {
+    "AgentAccessSetting": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "A permission setting for an agent action. Each setting specifies an agent action and whether it is enabled or disabled.",
+      "properties": {
+        "AgentAction": {
+          "type": "string",
+          "description": "The agent action to configure. Valid values are COMPUTER_VISION, COMPUTER_INPUT, and FORWARD_MCP_TOOLS. COMPUTER_VISION allows agents to take screenshots of the desktop. COMPUTER_INPUT allows agents to click, type, and scroll on the desktop and requires COMPUTER_VISION to also be enabled. FORWARD_MCP_TOOLS allows agents to interact with applications and the desktop operating system through direct MCP calls rather than using computer use tools. Forwards MCP tools configured on the WorkSpaces application session to the agent."
+        },
+        "Permission": {
+          "type": "string",
+          "description": "Whether the agent action is enabled or disabled."
+        }
+      },
+      "required": [
+        "AgentAction",
+        "Permission"
+      ]
+    },
+    "AgentAccessConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The configuration for agent access on a stack. Agent access enables AI agents to interact with desktop applications during streaming sessions.",
+      "properties": {
+        "Settings": {
+          "type": "array",
+          "uniqueItems": false,
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/AgentAccessSetting"
+          },
+          "description": "The list of agent access settings that define permissions for each agent action. You must specify at least one setting."
+        },
+        "ScreenResolution": {
+          "type": "string",
+          "description": "The screen resolution for the agent streaming environment."
+        },
+        "ScreenImageFormat": {
+          "type": "string",
+          "description": "The image format for agent screen captures."
+        },
+        "S3BucketArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots are stored. Required when ScreenshotsUploadEnabled is true."
+        },
+        "ScreenshotsUploadEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether screenshot uploads to Amazon S3 are enabled for agent sessions."
+        },
+        "UserControlMode": {
+          "type": "string",
+          "description": "The user control mode for agent sessions. This setting determines how users can interact with agent sessions. Valid values are VIEW_ONLY, VIEW_STOP, and DISABLED."
+        }
+      },
+      "required": [
+        "Settings",
+        "ScreenResolution",
+        "ScreenImageFormat"
+      ]
+    },
     "UrlRedirectionConfig": {
       "type": "object",
       "additionalProperties": false,
@@ -164,7 +228,7 @@
       "properties": {
         "SettingsGroup": {
           "type": "string",
-          "description": "The path prefix for the S3 bucket where users? persistent application settings are stored. You can allow the same persistent application settings to be used across multiple stacks by specifying the same settings group for each stack."
+          "description": "The path prefix for the S3 bucket where users' persistent application settings are stored. You can allow the same persistent application settings to be used across multiple stacks by specifying the same settings group for each stack."
         },
         "Enabled": {
           "type": "boolean",
