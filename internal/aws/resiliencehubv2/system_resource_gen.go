@@ -14,6 +14,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -108,6 +110,23 @@ func systemResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SharingEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": false,
+		//	  "description": "Whether the system is enabled to be shared with other members of the Organization. Only applicable if the system owner is a management account or delegated admin.",
+		//	  "type": "boolean"
+		//	}
+		"sharing_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether the system is enabled to be shared with other members of the Organization. Only applicable if the system owner is a management account or delegated admin.",
+			Optional:    true,
+			Computed:    true,
+			Default:     booldefault.StaticBool(false),
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SystemArn
@@ -258,16 +277,17 @@ func systemResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"created_at":  "CreatedAt",
-		"description": "Description",
-		"key":         "Key",
-		"kms_key_id":  "KmsKeyId",
-		"name":        "Name",
-		"system_arn":  "SystemArn",
-		"system_id":   "SystemId",
-		"tags":        "Tags",
-		"updated_at":  "UpdatedAt",
-		"value":       "Value",
+		"created_at":      "CreatedAt",
+		"description":     "Description",
+		"key":             "Key",
+		"kms_key_id":      "KmsKeyId",
+		"name":            "Name",
+		"sharing_enabled": "SharingEnabled",
+		"system_arn":      "SystemArn",
+		"system_id":       "SystemId",
+		"tags":            "Tags",
+		"updated_at":      "UpdatedAt",
+		"value":           "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

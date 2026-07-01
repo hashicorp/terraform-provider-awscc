@@ -50,7 +50,7 @@ func viewVersionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The description for the view version.",
 		//	  "maxLength": 4096,
 		//	  "minLength": 1,
-		//	  "pattern": "^([\\p{L}\\p{N}_.:\\/=+\\-@,]+[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@,]*)$",
+		//	  "pattern": "^([\\p{L}\\p{N}_.:\\/=+\\-@,()']+[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@,()']*)$",
 		//	  "type": "string"
 		//	}
 		"version_description": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -59,7 +59,7 @@ func viewVersionResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 4096),
-				stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{N}_.:\\/=+\\-@,]+[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@,]*)$"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{N}_.:\\/=+\\-@,()']+[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@,()']*)$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

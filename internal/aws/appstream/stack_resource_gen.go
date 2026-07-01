@@ -96,6 +96,168 @@ func stackResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: AgentAccessConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The configuration for agent access on the stack. If specified, agent access is enabled for the stack.",
+		//	  "properties": {
+		//	    "S3BucketArn": {
+		//	      "description": "The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots are stored. Required when ScreenshotsUploadEnabled is true.",
+		//	      "type": "string"
+		//	    },
+		//	    "ScreenImageFormat": {
+		//	      "description": "The image format for agent screen captures.",
+		//	      "type": "string"
+		//	    },
+		//	    "ScreenResolution": {
+		//	      "description": "The screen resolution for the agent streaming environment.",
+		//	      "type": "string"
+		//	    },
+		//	    "ScreenshotsUploadEnabled": {
+		//	      "description": "Indicates whether screenshot uploads to Amazon S3 are enabled for agent sessions.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "Settings": {
+		//	      "description": "The list of agent access settings that define permissions for each agent action. You must specify at least one setting.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "A permission setting for an agent action. Each setting specifies an agent action and whether it is enabled or disabled.",
+		//	        "properties": {
+		//	          "AgentAction": {
+		//	            "description": "The agent action to configure. Valid values are COMPUTER_VISION, COMPUTER_INPUT, and FORWARD_MCP_TOOLS. COMPUTER_VISION allows agents to take screenshots of the desktop. COMPUTER_INPUT allows agents to click, type, and scroll on the desktop and requires COMPUTER_VISION to also be enabled. FORWARD_MCP_TOOLS allows agents to interact with applications and the desktop operating system through direct MCP calls rather than using computer use tools. Forwards MCP tools configured on the WorkSpaces application session to the agent.",
+		//	            "type": "string"
+		//	          },
+		//	          "Permission": {
+		//	            "description": "Whether the agent action is enabled or disabled.",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "AgentAction",
+		//	          "Permission"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": false
+		//	    },
+		//	    "UserControlMode": {
+		//	      "description": "The user control mode for agent sessions. This setting determines how users can interact with agent sessions. Valid values are VIEW_ONLY, VIEW_STOP, and DISABLED.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Settings",
+		//	    "ScreenResolution",
+		//	    "ScreenImageFormat"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"agent_access_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: S3BucketArn
+				"s3_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent screenshots are stored. Required when ScreenshotsUploadEnabled is true.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ScreenImageFormat
+				"screen_image_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The image format for agent screen captures.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ScreenResolution
+				"screen_resolution": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The screen resolution for the agent streaming environment.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ScreenshotsUploadEnabled
+				"screenshots_upload_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether screenshot uploads to Amazon S3 are enabled for agent sessions.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Settings
+				"settings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AgentAction
+							"agent_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The agent action to configure. Valid values are COMPUTER_VISION, COMPUTER_INPUT, and FORWARD_MCP_TOOLS. COMPUTER_VISION allows agents to take screenshots of the desktop. COMPUTER_INPUT allows agents to click, type, and scroll on the desktop and requires COMPUTER_VISION to also be enabled. FORWARD_MCP_TOOLS allows agents to interact with applications and the desktop operating system through direct MCP calls rather than using computer use tools. Forwards MCP tools configured on the WorkSpaces application session to the agent.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Permission
+							"permission": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Whether the agent action is enabled or disabled.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The list of agent access settings that define permissions for each agent action. You must specify at least one setting.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						fwvalidators.NotNullList(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UserControlMode
+				"user_control_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The user control mode for agent sessions. This setting determines how users can interact with agent sessions. Valid values are VIEW_ONLY, VIEW_STOP, and DISABLED.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration for agent access on the stack. If specified, agent access is enabled for the stack.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ApplicationSettings
 		// CloudFormation resource type schema:
 		//
@@ -108,7 +270,7 @@ func stackResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "boolean"
 		//	    },
 		//	    "SettingsGroup": {
-		//	      "description": "The path prefix for the S3 bucket where users? persistent application settings are stored. You can allow the same persistent application settings to be used across multiple stacks by specifying the same settings group for each stack.",
+		//	      "description": "The path prefix for the S3 bucket where users' persistent application settings are stored. You can allow the same persistent application settings to be used across multiple stacks by specifying the same settings group for each stack.",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -133,7 +295,7 @@ func stackResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: SettingsGroup
 				"settings_group": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The path prefix for the S3 bucket where users? persistent application settings are stored. You can allow the same persistent application settings to be used across multiple stacks by specifying the same settings group for each stack.",
+					Description: "The path prefix for the S3 bucket where users' persistent application settings are stored. You can allow the same persistent application settings to be used across multiple stacks by specifying the same settings group for each stack.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -654,6 +816,8 @@ func stackResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"access_endpoints":              "AccessEndpoints",
 		"action":                        "Action",
+		"agent_access_config":           "AgentAccessConfig",
+		"agent_action":                  "AgentAction",
 		"allowed_urls":                  "AllowedUrls",
 		"application_settings":          "ApplicationSettings",
 		"attributes_to_delete":          "AttributesToDelete",
@@ -676,10 +840,16 @@ func stackResource(ctx context.Context) (resource.Resource, error) {
 		"preferred_protocol":            "PreferredProtocol",
 		"redirect_url":                  "RedirectURL",
 		"resource_identifier":           "ResourceIdentifier",
+		"s3_bucket_arn":                 "S3BucketArn",
+		"screen_image_format":           "ScreenImageFormat",
+		"screen_resolution":             "ScreenResolution",
+		"screenshots_upload_enabled":    "ScreenshotsUploadEnabled",
+		"settings":                      "Settings",
 		"settings_group":                "SettingsGroup",
 		"storage_connectors":            "StorageConnectors",
 		"streaming_experience_settings": "StreamingExperienceSettings",
 		"tags":                          "Tags",
+		"user_control_mode":             "UserControlMode",
 		"user_settings":                 "UserSettings",
 		"value":                         "Value",
 		"vpce_id":                       "VpceId",
