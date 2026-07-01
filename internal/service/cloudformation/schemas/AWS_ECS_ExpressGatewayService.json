@@ -45,12 +45,10 @@
     "/properties/ServiceArn"
   ],
   "required": [
-    "ExecutionRoleArn",
-    "InfrastructureRoleArn",
-    "PrimaryContainer"
+    "InfrastructureRoleArn"
   ],
   "propertyTransform": {
-    "/properties/Cluster": "Cluster $OR $join([\"arn:(aws)[-]{0,1}[a-z]{0,3}[-]{0,1}[a-z]{0,3}:ecs:[a-z0-9-]+:[0-9]{12}:cluster/{1}\", Cluster])"
+    "/properties/Cluster": "Cluster $OR $join([\"arn:(aws)[-]{0,1}[a-z]{0,3}[-]{0,1}[a-z]{0,3}:ecs:[a-z0-9-]+:[0-9]{12}:cluster/\", Cluster])"
   },
   "handlers": {
     "read": {
@@ -77,6 +75,8 @@
         "ecs:UpdateExpressGatewayService",
         "ecs:DescribeExpressGatewayService",
         "ecs:DescribeServiceDeployments",
+        "ecs:DescribeServiceRevisions",
+        "ecs:DescribeServices",
         "ecs:ListServiceDeployments",
         "ecs:RegisterTaskDefinition",
         "iam:PassRole"
@@ -95,6 +95,7 @@
   "writeOnlyProperties": [
     "/properties/ExecutionRoleArn",
     "/properties/TaskRoleArn",
+    "/properties/TaskDefinitionArn",
     "/properties/HealthCheckPath",
     "/properties/PrimaryContainer",
     "/properties/NetworkConfiguration",
@@ -332,6 +333,9 @@
         },
         "NetworkConfiguration": {
           "$ref": "#/definitions/ExpressGatewayServiceNetworkConfiguration"
+        },
+        "TaskDefinitionArn": {
+          "type": "string"
         }
       }
     },
@@ -493,6 +497,9 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "TaskDefinitionArn": {
+      "type": "string"
     }
   }
 }

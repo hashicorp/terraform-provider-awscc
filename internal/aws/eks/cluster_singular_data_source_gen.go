@@ -767,6 +767,33 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes control plane to make calls to AWS API operations on your behalf.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: RollbackConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The rollback configuration to use for the cluster version rollback.",
+		//	  "properties": {
+		//	    "TimeoutMinutes": {
+		//	      "description": "The timeout in minutes for the version rollback operation. If not specified, defaults to 720 minutes (12 hours).",
+		//	      "maximum": 10080,
+		//	      "minimum": 120,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"rollback_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: TimeoutMinutes
+				"timeout_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The timeout in minutes for the version rollback operation. If not specified, defaults to 720 minutes (12 hours).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The rollback configuration to use for the cluster version rollback.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StorageConfig
 		// CloudFormation resource type schema:
 		//
@@ -987,6 +1014,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"resources":                                   "Resources",
 		"resources_vpc_config":                        "ResourcesVpcConfig",
 		"role_arn":                                    "RoleArn",
+		"rollback_config":                             "RollbackConfig",
 		"security_group_ids":                          "SecurityGroupIds",
 		"service_ipv_4_cidr":                          "ServiceIpv4Cidr",
 		"service_ipv_6_cidr":                          "ServiceIpv6Cidr",
@@ -996,6 +1024,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"support_type":                                "SupportType",
 		"tags":                                        "Tags",
 		"tier":                                        "Tier",
+		"timeout_minutes":                             "TimeoutMinutes",
 		"type":                                        "Type",
 		"upgrade_policy":                              "UpgradePolicy",
 		"value":                                       "Value",

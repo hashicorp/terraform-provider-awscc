@@ -60,10 +60,8 @@
         "s3files:ListMountTargets",
         "kms:CreateGrant",
         "kms:Decrypt",
-        "kms:DescribeKey",
         "kms:Encrypt",
         "kms:GenerateDataKey",
-        "kms:GenerateDataKeyWithoutPlaintext",
         "lambda:GetCodeSigningConfig",
         "lambda:GetFunctionCodeSigningConfig",
         "lambda:GetLayerVersion",
@@ -95,9 +93,7 @@
         "s3files:ListMountTargets",
         "kms:CreateGrant",
         "kms:Decrypt",
-        "kms:DescribeKey",
         "kms:GenerateDataKey",
-        "kms:GenerateDataKeyWithoutPlaintext",
         "lambda:GetRuntimeManagementConfig",
         "lambda:PutRuntimeManagementConfig",
         "lambda:PutFunctionCodeSigningConfig",
@@ -133,6 +129,7 @@
     "/properties/Code/S3ObjectVersion",
     "/properties/Code/ZipFile",
     "/properties/Code/SourceKMSKeyArn",
+    "/properties/Code/S3ObjectStorageMode",
     "/properties/PublishToLatestPublished"
   ],
   "additionalProperties": false,
@@ -403,6 +400,14 @@
           "description": "The Amazon S3 key of the deployment package.",
           "type": "string",
           "maxLength": 1024
+        },
+        "S3ObjectStorageMode": {
+          "description": "",
+          "type": "string",
+          "enum": [
+            "COPY",
+            "REFERENCE"
+          ]
         },
         "ImageUri": {
           "description": "URI of a [container image](https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html) in the Amazon ECR registry.",

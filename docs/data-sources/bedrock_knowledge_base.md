@@ -40,6 +40,7 @@ Data Source schema for AWS::Bedrock::KnowledgeBase
 Read-Only:
 
 - `kendra_knowledge_base_configuration` (Attributes) Configurations for a Kendra knowledge base (see [below for nested schema](#nestedatt--knowledge_base_configuration--kendra_knowledge_base_configuration))
+- `managed_knowledge_base_configuration` (Attributes) Contains details about the model used to create vector embeddings for a managed knowledge base. (see [below for nested schema](#nestedatt--knowledge_base_configuration--managed_knowledge_base_configuration))
 - `sql_knowledge_base_configuration` (Attributes) Configurations for a SQL knowledge base (see [below for nested schema](#nestedatt--knowledge_base_configuration--sql_knowledge_base_configuration))
 - `type` (String) The type of a knowledge base.
 - `vector_knowledge_base_configuration` (Attributes) Contains details about the model used to create vector embeddings for the knowledge base. (see [below for nested schema](#nestedatt--knowledge_base_configuration--vector_knowledge_base_configuration))
@@ -50,6 +51,76 @@ Read-Only:
 Read-Only:
 
 - `kendra_index_arn` (String) Arn of a Kendra index
+
+
+<a id="nestedatt--knowledge_base_configuration--managed_knowledge_base_configuration"></a>
+### Nested Schema for `knowledge_base_configuration.managed_knowledge_base_configuration`
+
+Read-Only:
+
+- `embedding_model_arn` (String) The ARN of the model used to create vector embeddings for the knowledge base.
+- `embedding_model_configuration` (Attributes) The embeddings model configuration details for the vector model used in Knowledge Base. (see [below for nested schema](#nestedatt--knowledge_base_configuration--managed_knowledge_base_configuration--embedding_model_configuration))
+- `embedding_model_type` (String) The type of embedding model to use for the managed knowledge base.
+- `server_side_encryption_configuration` (Attributes) Contains details about the server-side encryption for the managed knowledge base. (see [below for nested schema](#nestedatt--knowledge_base_configuration--managed_knowledge_base_configuration--server_side_encryption_configuration))
+
+<a id="nestedatt--knowledge_base_configuration--managed_knowledge_base_configuration--embedding_model_configuration"></a>
+### Nested Schema for `knowledge_base_configuration.managed_knowledge_base_configuration.embedding_model_configuration`
+
+Read-Only:
+
+- `bedrock_embedding_model_configuration` (Attributes) The vector configuration details for the Bedrock embeddings model. (see [below for nested schema](#nestedatt--knowledge_base_configuration--managed_knowledge_base_configuration--embedding_model_configuration--bedrock_embedding_model_configuration))
+
+<a id="nestedatt--knowledge_base_configuration--managed_knowledge_base_configuration--embedding_model_configuration--bedrock_embedding_model_configuration"></a>
+### Nested Schema for `knowledge_base_configuration.managed_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration`
+
+Read-Only:
+
+- `audio` (Attributes List) List of audio configurations for multi modal ingestion. (see [below for nested schema](#nestedatt--knowledge_base_configuration--managed_knowledge_base_configuration--embedding_model_configuration--bedrock_embedding_model_configuration--audio))
+- `dimensions` (Number) The dimensions details for the vector configuration used on the Bedrock embeddings model.
+- `embedding_data_type` (String) The data type for the vectors when using a model to convert text into vector embeddings.
+- `video` (Attributes List) List of video configurations for multi modal ingestion. (see [below for nested schema](#nestedatt--knowledge_base_configuration--managed_knowledge_base_configuration--embedding_model_configuration--bedrock_embedding_model_configuration--video))
+
+<a id="nestedatt--knowledge_base_configuration--managed_knowledge_base_configuration--embedding_model_configuration--bedrock_embedding_model_configuration--audio"></a>
+### Nested Schema for `knowledge_base_configuration.managed_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.audio`
+
+Read-Only:
+
+- `segmentation_configuration` (Attributes) Configure the audio segmentation configuration for multi modal ingestion. (see [below for nested schema](#nestedatt--knowledge_base_configuration--managed_knowledge_base_configuration--embedding_model_configuration--bedrock_embedding_model_configuration--audio--segmentation_configuration))
+
+<a id="nestedatt--knowledge_base_configuration--managed_knowledge_base_configuration--embedding_model_configuration--bedrock_embedding_model_configuration--audio--segmentation_configuration"></a>
+### Nested Schema for `knowledge_base_configuration.managed_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.audio.segmentation_configuration`
+
+Read-Only:
+
+- `fixed_length_duration` (Number) Duration in seconds to segment the multi modal media
+
+
+
+<a id="nestedatt--knowledge_base_configuration--managed_knowledge_base_configuration--embedding_model_configuration--bedrock_embedding_model_configuration--video"></a>
+### Nested Schema for `knowledge_base_configuration.managed_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.video`
+
+Read-Only:
+
+- `segmentation_configuration` (Attributes) Configure the video segmentation configuration for multi modal ingestion. (see [below for nested schema](#nestedatt--knowledge_base_configuration--managed_knowledge_base_configuration--embedding_model_configuration--bedrock_embedding_model_configuration--video--segmentation_configuration))
+
+<a id="nestedatt--knowledge_base_configuration--managed_knowledge_base_configuration--embedding_model_configuration--bedrock_embedding_model_configuration--video--segmentation_configuration"></a>
+### Nested Schema for `knowledge_base_configuration.managed_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.video.segmentation_configuration`
+
+Read-Only:
+
+- `fixed_length_duration` (Number) Duration in seconds to segment the multi modal media
+
+
+
+
+
+<a id="nestedatt--knowledge_base_configuration--managed_knowledge_base_configuration--server_side_encryption_configuration"></a>
+### Nested Schema for `knowledge_base_configuration.managed_knowledge_base_configuration.server_side_encryption_configuration`
+
+Read-Only:
+
+- `kms_key_arn` (String) The ARN of the AWS KMS key used to encrypt the managed knowledge base.
+
 
 
 <a id="nestedatt--knowledge_base_configuration--sql_knowledge_base_configuration"></a>

@@ -48,6 +48,11 @@
       "minLength": 1,
       "maxLength": 2048,
       "pattern": "^((arn:aws(-[^:]+)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:((key/[a-zA-Z0-9-]{36})|(alias/[a-zA-Z0-9-_/]+)))|([a-zA-Z0-9-]{36})|(alias/[a-zA-Z0-9-_/]+))$"
+    },
+    "SharingEnabled": {
+      "type": "boolean",
+      "description": "Whether the system is enabled to be shared with other members of the Organization. Only applicable if the system owner is a management account or delegated admin.",
+      "default": false
     }
   },
   "definitions": {

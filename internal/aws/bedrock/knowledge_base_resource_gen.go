@@ -133,6 +133,139 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "object"
 		//	    },
+		//	    "ManagedKnowledgeBaseConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Contains details about the model used to create vector embeddings for a managed knowledge base.",
+		//	      "properties": {
+		//	        "EmbeddingModelArn": {
+		//	          "description": "The ARN of the model used to create vector embeddings for the knowledge base.",
+		//	          "maxLength": 2048,
+		//	          "minLength": 20,
+		//	          "pattern": "^(arn:aws(-[^:]+)?:[a-z0-9-]+:[a-z0-9-]{1,20}:[0-9]{0,12}:[a-zA-Z0-9-:/._+]+)$",
+		//	          "type": "string"
+		//	        },
+		//	        "EmbeddingModelConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "The embeddings model configuration details for the vector model used in Knowledge Base.",
+		//	          "properties": {
+		//	            "BedrockEmbeddingModelConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "description": "The vector configuration details for the Bedrock embeddings model.",
+		//	              "properties": {
+		//	                "Audio": {
+		//	                  "description": "List of audio configurations for multi modal ingestion.",
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "Configure the audio configuration for multi modal ingestion.",
+		//	                    "properties": {
+		//	                      "SegmentationConfiguration": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "Configure the audio segmentation configuration for multi modal ingestion.",
+		//	                        "properties": {
+		//	                          "FixedLengthDuration": {
+		//	                            "description": "Duration in seconds to segment the multi modal media",
+		//	                            "maximum": 30,
+		//	                            "minimum": 1,
+		//	                            "type": "integer"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "FixedLengthDuration"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "SegmentationConfiguration"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "maxItems": 1,
+		//	                  "minItems": 1,
+		//	                  "type": "array"
+		//	                },
+		//	                "Dimensions": {
+		//	                  "description": "The dimensions details for the vector configuration used on the Bedrock embeddings model.",
+		//	                  "maximum": 4096,
+		//	                  "minimum": 0,
+		//	                  "type": "integer"
+		//	                },
+		//	                "EmbeddingDataType": {
+		//	                  "description": "The data type for the vectors when using a model to convert text into vector embeddings.",
+		//	                  "enum": [
+		//	                    "FLOAT32",
+		//	                    "BINARY"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "Video": {
+		//	                  "description": "List of video configurations for multi modal ingestion.",
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "Configure the video configuration for multi modal ingestion.",
+		//	                    "properties": {
+		//	                      "SegmentationConfiguration": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "Configure the video segmentation configuration for multi modal ingestion.",
+		//	                        "properties": {
+		//	                          "FixedLengthDuration": {
+		//	                            "description": "Duration in seconds to segment the multi modal media",
+		//	                            "maximum": 30,
+		//	                            "minimum": 1,
+		//	                            "type": "integer"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "FixedLengthDuration"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "SegmentationConfiguration"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "maxItems": 1,
+		//	                  "minItems": 1,
+		//	                  "type": "array"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "EmbeddingModelType": {
+		//	          "description": "The type of embedding model to use for the managed knowledge base.",
+		//	          "enum": [
+		//	            "CUSTOM",
+		//	            "MANAGED"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "ServerSideEncryptionConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Contains details about the server-side encryption for the managed knowledge base.",
+		//	          "properties": {
+		//	            "KmsKeyArn": {
+		//	              "description": "The ARN of the AWS KMS key used to encrypt the managed knowledge base.",
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "pattern": "^arn:aws(-cn|-us-gov|-eusc|-iso(-[b-f])?)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "EmbeddingModelArn"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "SqlKnowledgeBaseConfiguration": {
 		//	      "additionalProperties": false,
 		//	      "description": "Configurations for a SQL knowledge base",
@@ -449,7 +582,8 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		//	      "enum": [
 		//	        "VECTOR",
 		//	        "KENDRA",
-		//	        "SQL"
+		//	        "SQL",
+		//	        "MANAGED"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -641,6 +775,208 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Configurations for a Kendra knowledge base",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+						objectplanmodifier.RequiresReplaceIfConfigured(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ManagedKnowledgeBaseConfiguration
+				"managed_knowledge_base_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EmbeddingModelArn
+						"embedding_model_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the model used to create vector embeddings for the knowledge base.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(20, 2048),
+								stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws(-[^:]+)?:[a-z0-9-]+:[a-z0-9-]{1,20}:[0-9]{0,12}:[a-zA-Z0-9-:/._+]+)$"), ""),
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: EmbeddingModelConfiguration
+						"embedding_model_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BedrockEmbeddingModelConfiguration
+								"bedrock_embedding_model_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Audio
+										"audio": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: SegmentationConfiguration
+													"segmentation_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: FixedLengthDuration
+															"fixed_length_duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Description: "Duration in seconds to segment the multi modal media",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.Int64{ /*START VALIDATORS*/
+																	int64validator.Between(1, 30),
+																	fwvalidators.NotNullInt64(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																	int64planmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "Configure the audio segmentation configuration for multi modal ingestion.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.Object{ /*START VALIDATORS*/
+															fwvalidators.NotNullObject(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+															objectplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Description: "List of audio configurations for multi modal ingestion.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.SizeBetween(1, 1),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												generic.Multiset(),
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Dimensions
+										"dimensions": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The dimensions details for the vector configuration used on the Bedrock embeddings model.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.Int64{ /*START VALIDATORS*/
+												int64validator.Between(0, 4096),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: EmbeddingDataType
+										"embedding_data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The data type for the vectors when using a model to convert text into vector embeddings.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"FLOAT32",
+													"BINARY",
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Video
+										"video": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: SegmentationConfiguration
+													"segmentation_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: FixedLengthDuration
+															"fixed_length_duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Description: "Duration in seconds to segment the multi modal media",
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.Int64{ /*START VALIDATORS*/
+																	int64validator.Between(1, 30),
+																	fwvalidators.NotNullInt64(),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+																	int64planmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "Configure the video segmentation configuration for multi modal ingestion.",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.Object{ /*START VALIDATORS*/
+															fwvalidators.NotNullObject(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+															objectplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Description: "List of video configurations for multi modal ingestion.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.SizeBetween(1, 1),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												generic.Multiset(),
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The vector configuration details for the Bedrock embeddings model.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The embeddings model configuration details for the vector model used in Knowledge Base.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: EmbeddingModelType
+						"embedding_model_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The type of embedding model to use for the managed knowledge base.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"CUSTOM",
+									"MANAGED",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ServerSideEncryptionConfiguration
+						"server_side_encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: KmsKeyArn
+								"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ARN of the AWS KMS key used to encrypt the managed knowledge base.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 2048),
+										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-cn|-us-gov|-eusc|-iso(-[b-f])?)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Contains details about the server-side encryption for the managed knowledge base.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Contains details about the model used to create vector embeddings for a managed knowledge base.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1144,6 +1480,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 							"VECTOR",
 							"KENDRA",
 							"SQL",
+							"MANAGED",
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1444,7 +1781,8 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		//	    "DELETING",
 		//	    "UPDATING",
 		//	    "FAILED",
-		//	    "DELETE_UNSUCCESSFUL"
+		//	    "DELETE_UNSUCCESSFUL",
+		//	    "UPDATE_UNSUCCESSFUL"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -2764,6 +3102,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		"embedding_data_type":                      "EmbeddingDataType",
 		"embedding_model_arn":                      "EmbeddingModelArn",
 		"embedding_model_configuration":            "EmbeddingModelConfiguration",
+		"embedding_model_type":                     "EmbeddingModelType",
 		"endpoint":                                 "Endpoint",
 		"endpoint_service_name":                    "EndpointServiceName",
 		"execution_timeout_seconds":                "ExecutionTimeoutSeconds",
@@ -2777,9 +3116,11 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		"index_name":                               "IndexName",
 		"kendra_index_arn":                         "KendraIndexArn",
 		"kendra_knowledge_base_configuration":      "KendraKnowledgeBaseConfiguration",
+		"kms_key_arn":                              "KmsKeyArn",
 		"knowledge_base_arn":                       "KnowledgeBaseArn",
 		"knowledge_base_configuration":             "KnowledgeBaseConfiguration",
 		"knowledge_base_id":                        "KnowledgeBaseId",
+		"managed_knowledge_base_configuration":     "ManagedKnowledgeBaseConfiguration",
 		"metadata_field":                           "MetadataField",
 		"mongo_db_atlas_configuration":             "MongoDbAtlasConfiguration",
 		"name":                                     "Name",
@@ -2800,6 +3141,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		"s3_location":                              "S3Location",
 		"s3_vectors_configuration":                 "S3VectorsConfiguration",
 		"segmentation_configuration":               "SegmentationConfiguration",
+		"server_side_encryption_configuration":     "ServerSideEncryptionConfiguration",
 		"serverless_configuration":                 "ServerlessConfiguration",
 		"sql":                                      "Sql",
 		"sql_knowledge_base_configuration":         "SqlKnowledgeBaseConfiguration",

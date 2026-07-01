@@ -137,7 +137,7 @@ resource "awscc_ecs_service" "nginx" {
   If you want to use Managed Instances, you must use the ``capacityProviderStrategy`` request parameter
 - `load_balancers` (Attributes List) A list of load balancer objects to associate with the service. If you specify the ``Role`` property, ``LoadBalancers`` must be specified as well. For information about the number of load balancers that you can specify per service, see [Service Load Balancing](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html) in the *Amazon Elastic Container Service Developer Guide*.
   To remove this property from your service resource, specify an empty ``LoadBalancer`` array. (see [below for nested schema](#nestedatt--load_balancers))
-- `monitoring` (Attributes) (see [below for nested schema](#nestedatt--monitoring))
+- `monitoring` (Attributes) The optional monitoring configuration for the service, which defines the resolution for the service-level ``CPUUtilization`` and ``MemoryUtilization`` Amazon CloudWatch metrics. When not specified, Amazon ECS uses the default resolution of ``60`` seconds. (see [below for nested schema](#nestedatt--monitoring))
 - `network_configuration` (Attributes) The network configuration for the service. This parameter is required for task definitions that use the ``awsvpc`` network mode to receive their own elastic network interface, and it is not supported for other network modes. For more information, see [Task Networking](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html) in the *Amazon Elastic Container Service Developer Guide*. (see [below for nested schema](#nestedatt--network_configuration))
 - `placement_constraints` (Attributes List) An array of placement constraint objects to use for tasks in your service. You can specify a maximum of 10 constraints for each task. This limit includes constraints in the task definition and those specified at runtime.
   To remove this property from your service resource, specify an empty ``PlacementConstraint`` array. (see [below for nested schema](#nestedatt--placement_constraints))
@@ -437,15 +437,15 @@ Optional:
 
 Optional:
 
-- `metric_configurations` (Attributes List) (see [below for nested schema](#nestedatt--monitoring--metric_configurations))
+- `metric_configurations` (Attributes List) The list of metric configurations for the service monitoring. (see [below for nested schema](#nestedatt--monitoring--metric_configurations))
 
 <a id="nestedatt--monitoring--metric_configurations"></a>
 ### Nested Schema for `monitoring.metric_configurations`
 
 Optional:
 
-- `metric_names` (List of String)
-- `resolution_seconds` (Number)
+- `metric_names` (List of String) The list of metric names to configure. The supported metric names are ``CPUUtilization`` and ``MemoryUtilization``.
+- `resolution_seconds` (Number) The resolution, in seconds, at which to collect the metrics. The valid values are ``20`` and ``60``.
 
 
 

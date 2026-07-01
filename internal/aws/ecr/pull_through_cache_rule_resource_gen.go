@@ -36,7 +36,7 @@ func pullThroughCacheRuleResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The ARN of the Secrets Manager secret associated with the pull through cache rule.",
 		//	  "maxLength": 612,
 		//	  "minLength": 50,
-		//	  "pattern": "^arn:aws:secretsmanager:[a-zA-Z0-9-:]+:secret:ecr\\-pullthroughcache\\/[a-zA-Z0-9\\/_+=.@-]+$",
+		//	  "pattern": "^arn:[a-zA-Z-]+:secretsmanager:[a-zA-Z0-9-:]+:secret:ecr\\-pullthroughcache\\/[a-zA-Z0-9\\/_+=.@-]+$",
 		//	  "type": "string"
 		//	}
 		"credential_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -45,7 +45,7 @@ func pullThroughCacheRuleResource(ctx context.Context) (resource.Resource, error
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(50, 612),
-				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws:secretsmanager:[a-zA-Z0-9-:]+:secret:ecr\\-pullthroughcache\\/[a-zA-Z0-9\\/_+=.@-]+$"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:[a-zA-Z-]+:secretsmanager:[a-zA-Z0-9-:]+:secret:ecr\\-pullthroughcache\\/[a-zA-Z0-9\\/_+=.@-]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),

@@ -225,6 +225,7 @@ resource "awscc_kms_key" "main" {
 - `name` (String) The unique name to give to your cluster.
 - `outpost_config` (Attributes) An object representing the Outpost configuration to use for AWS EKS outpost cluster. (see [below for nested schema](#nestedatt--outpost_config))
 - `remote_network_config` (Attributes) Configuration fields for specifying on-premises node and pod CIDRs that are external to the VPC passed during cluster creation. (see [below for nested schema](#nestedatt--remote_network_config))
+- `rollback_config` (Attributes) The rollback configuration to use for the cluster version rollback. (see [below for nested schema](#nestedatt--rollback_config))
 - `storage_config` (Attributes) Todo: add description (see [below for nested schema](#nestedatt--storage_config))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `upgrade_policy` (Attributes) An object representing the Upgrade Policy to use for the cluster. (see [below for nested schema](#nestedatt--upgrade_policy))
@@ -400,6 +401,14 @@ Optional:
 
 - `cidrs` (List of String) Specifies the list of remote pod CIDRs.
 
+
+
+<a id="nestedatt--rollback_config"></a>
+### Nested Schema for `rollback_config`
+
+Optional:
+
+- `timeout_minutes` (Number) The timeout in minutes for the version rollback operation. If not specified, defaults to 720 minutes (12 hours).
 
 
 <a id="nestedatt--storage_config"></a>

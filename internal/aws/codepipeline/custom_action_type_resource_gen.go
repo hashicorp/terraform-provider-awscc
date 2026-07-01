@@ -355,6 +355,7 @@ func customActionTypeResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// ThirdPartyConfigurationUrl is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "URLs that provide users information about this custom action.",
@@ -504,6 +505,7 @@ func customActionTypeResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/ConfigurationProperties/*/Type",
+		"/properties/Settings/ThirdPartyConfigurationUrl",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

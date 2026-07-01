@@ -180,7 +180,8 @@
     "/properties/Version"
   ],
   "writeOnlyProperties": [
-    "/properties/ConfigurationProperties/*/Type"
+    "/properties/ConfigurationProperties/*/Type",
+    "/properties/Settings/ThirdPartyConfigurationUrl"
   ],
   "readOnlyProperties": [
     "/properties/Id"

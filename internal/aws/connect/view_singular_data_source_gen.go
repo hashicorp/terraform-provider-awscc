@@ -51,7 +51,7 @@ func viewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The description of the view.",
 		//	  "maxLength": 4096,
 		//	  "minLength": 0,
-		//	  "pattern": "^([\\p{L}\\p{N}_.:\\/=+\\-@,]+[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@,]*)$",
+		//	  "pattern": "^([\\p{L}\\p{N}_.:\\/=+\\-@,()']+[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@,()']*)$",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -79,7 +79,7 @@ func viewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the view.",
 		//	  "maxLength": 512,
 		//	  "minLength": 1,
-		//	  "pattern": "^([\\p{L}\\p{N}_.:\\/=+\\-@]+[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*)$",
+		//	  "pattern": "^([\\p{L}\\p{N}_.:\\/=+\\-@()']+[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@()']*)$",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/

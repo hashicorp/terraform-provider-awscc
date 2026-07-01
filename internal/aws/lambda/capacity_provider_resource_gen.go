@@ -400,10 +400,10 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "",
+		//	  "description": "Configuration for tag propagation to managed resources launched by the capacity provider.",
 		//	  "properties": {
 		//	    "ExplicitTags": {
-		//	      "description": "",
+		//	      "description": "A list of tags to explicitly propagate to managed resources. Maximum of 40 tags.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "additionalProperties": false,
@@ -433,7 +433,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": true
 		//	    },
 		//	    "Mode": {
-		//	      "description": "The mode for tag propagation.",
+		//	      "description": "The mode for tag propagation. Use ``Explicit`` to propagate specific tags, or ``None`` to disable propagation.",
 		//	      "enum": [
 		//	        "None",
 		//	        "Explicit"
@@ -476,7 +476,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "",
+					Description: "A list of tags to explicitly propagate to managed resources. Maximum of 40 tags.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.Set{ /*START VALIDATORS*/
@@ -488,7 +488,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Mode
 				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The mode for tag propagation.",
+					Description: "The mode for tag propagation. Use ``Explicit`` to propagate specific tags, or ``None`` to disable propagation.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -502,7 +502,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "",
+			Description: "Configuration for tag propagation to managed resources launched by the capacity provider.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -606,17 +606,17 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	  "properties": {
 		//	    "LoggingConfig": {
 		//	      "additionalProperties": false,
-		//	      "description": "The logging configuration for the capacity provider.",
+		//	      "description": "",
 		//	      "properties": {
 		//	        "LogGroup": {
-		//	          "description": "The log group name.",
+		//	          "description": "",
 		//	          "maxLength": 512,
 		//	          "minLength": 1,
 		//	          "pattern": "[\\.\\-_/#A-Za-z0-9]+",
 		//	          "type": "string"
 		//	        },
 		//	        "SystemLogLevel": {
-		//	          "description": "System log granularity level",
+		//	          "description": "",
 		//	          "enum": [
 		//	            "DEBUG",
 		//	            "INFO",
@@ -637,7 +637,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: LogGroup
 						"log_group": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The log group name.",
+							Description: "",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
@@ -650,7 +650,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: SystemLogLevel
 						"system_log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "System log granularity level",
+							Description: "",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
@@ -665,7 +665,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "The logging configuration for the capacity provider.",
+					Description: "",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/

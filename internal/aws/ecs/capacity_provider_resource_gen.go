@@ -329,7 +329,13 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "t4g",
 		//	                  "vu9p",
 		//	                  "v100",
-		//	                  "l40s"
+		//	                  "l40s",
+		//	                  "l4",
+		//	                  "gaudi-hl-205",
+		//	                  "inferentia2",
+		//	                  "trainium",
+		//	                  "trainium2",
+		//	                  "u30"
 		//	                ],
 		//	                "type": "string"
 		//	              },
@@ -827,6 +833,12 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 												"vu9p",
 												"v100",
 												"l40s",
+												"l4",
+												"gaudi-hl-205",
+												"inferentia2",
+												"trainium",
+												"trainium2",
+												"u30",
 											),
 										),
 									}, /*END VALIDATORS*/

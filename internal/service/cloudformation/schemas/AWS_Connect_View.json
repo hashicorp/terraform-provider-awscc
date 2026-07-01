@@ -54,14 +54,14 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 512,
-      "pattern": "^([\\p{L}\\p{N}_.:\\/=+\\-@]+[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*)$"
+      "pattern": "^([\\p{L}\\p{N}_.:\\/=+\\-@()']+[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@()']*)$"
     },
     "Description": {
       "description": "The description of the view.",
       "type": "string",
       "minLength": 0,
       "maxLength": 4096,
-      "pattern": "^([\\p{L}\\p{N}_.:\\/=+\\-@,]+[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@,]*)$"
+      "pattern": "^([\\p{L}\\p{N}_.:\\/=+\\-@,()']+[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@,()']*)$"
     },
     "Template": {
       "description": "The template of the view as JSON.",

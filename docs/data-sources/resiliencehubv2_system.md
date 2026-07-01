@@ -25,6 +25,7 @@ Data Source schema for AWS::ResilienceHubV2::System
 - `description` (String) The description of the system.
 - `kms_key_id` (String) The KMS key ID for encrypting system data.
 - `name` (String) The name of the system.
+- `sharing_enabled` (Boolean) Whether the system is enabled to be shared with other members of the Organization. Only applicable if the system owner is a management account or delegated admin.
 - `system_arn` (String) The ARN of the system.
 - `system_id` (String) The system ID.
 - `tags` (Attributes List) Tags assigned to the system. (see [below for nested schema](#nestedatt--tags))

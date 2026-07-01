@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1396 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1427 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -575,7 +575,7 @@ resource_schema "aws_b2bi_transformer" {
 
 resource_schema "aws_bcm_dashboard" {
   cloudformation_type_name = "AWS::BCM::Dashboard"
-  
+
   # suppression reason: recursive object definitions
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
@@ -941,6 +941,19 @@ resource_schema "aws_cassandra_type" {
 resource_schema "aws_certificatemanager_account" {
   cloudformation_type_name               = "AWS::CertificateManager::Account"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_certificatemanager_acme_domain_validation" {
+  cloudformation_type_name               = "AWS::CertificateManager::AcmeDomainValidation"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_certificatemanager_acme_endpoint" {
+  cloudformation_type_name = "AWS::CertificateManager::AcmeEndpoint"
+}
+
+resource_schema "aws_certificatemanager_acme_external_account_binding" {
+  cloudformation_type_name = "AWS::CertificateManager::AcmeExternalAccountBinding"
 }
 
 resource_schema "aws_chatbot_custom_action" {
@@ -1398,6 +1411,10 @@ resource_schema "aws_config_organization_conformance_pack" {
 
 resource_schema "aws_config_stored_query" {
   cloudformation_type_name = "AWS::Config::StoredQuery"
+}
+
+resource_schema "aws_config_remediation_configuration" {
+  cloudformation_type_name = "AWS::Config::RemediationConfiguration"
 }
 
 resource_schema "aws_connect_agent_status" {
@@ -1937,8 +1954,8 @@ resource_schema "aws_devopsagent_private_connection" {
 }
 
 resource_schema "aws_devopsagent_service" {
-  cloudformation_type_name = "AWS::DevOpsAgent::Service"
-  suppress_plural_data_source_generation   = true
+  cloudformation_type_name               = "AWS::DevOpsAgent::Service"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_devopsguru_log_anomaly_detection_integration" {
@@ -2939,6 +2956,11 @@ resource_schema "aws_glue_crawler" {
 
 resource_schema "aws_glue_database" {
   cloudformation_type_name = "AWS::Glue::Database"
+}
+
+resource_schema "aws_glue_data_catalog_encryption_settings" {
+  cloudformation_type_name               = "AWS::Glue::DataCatalogEncryptionSettings"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_glue_identity_center_configuration" {
@@ -4094,6 +4116,11 @@ resource_schema "aws_medialive_network" {
   cloudformation_type_name = "AWS::MediaLive::Network"
 }
 
+resource_schema "aws_medialive_node" {
+  cloudformation_type_name               = "AWS::MediaLive::Node"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_medialive_sdi_source" {
   cloudformation_type_name = "AWS::MediaLive::SdiSource"
 }
@@ -4629,6 +4656,10 @@ resource_schema "aws_organizations_resource_policy" {
   cloudformation_type_name = "AWS::Organizations::ResourcePolicy"
 }
 
+resource_schema "aws_outposts_site" {
+  cloudformation_type_name = "AWS::Outposts::Site"
+}
+
 resource_schema "aws_pcaconnectorad_connector" {
   cloudformation_type_name = "AWS::PCAConnectorAD::Connector"
 }
@@ -4822,6 +4853,10 @@ resource_schema "aws_quicksight_data_source" {
 
 resource_schema "aws_quicksight_folder" {
   cloudformation_type_name = "AWS::QuickSight::Folder"
+}
+
+resource_schema "aws_quicksight_o_auth_client_application" {
+  cloudformation_type_name = "AWS::QuickSight::OAuthClientApplication"
 }
 
 resource_schema "aws_quicksight_refresh_schedule" {
@@ -5630,6 +5665,10 @@ resource_schema "aws_sso_permission_set" {
   cloudformation_type_name = "AWS::SSO::PermissionSet"
 }
 
+resource_schema "aws_sagemaker_algorithm" {
+  cloudformation_type_name = "AWS::SageMaker::Algorithm"
+}
+
 resource_schema "aws_sagemaker_app" {
   cloudformation_type_name = "AWS::SageMaker::App"
 }
@@ -5670,6 +5709,10 @@ resource_schema "aws_sagemaker_endpoint" {
 
 resource_schema "aws_sagemaker_feature_group" {
   cloudformation_type_name = "AWS::SageMaker::FeatureGroup"
+}
+
+resource_schema "aws_sagemaker_hub" {
+  cloudformation_type_name = "AWS::SageMaker::Hub"
 }
 
 resource_schema "aws_sagemaker_image" {
@@ -5799,6 +5842,10 @@ resource_schema "aws_securityagent_application" {
 resource_schema "aws_securityagent_pentest" {
   cloudformation_type_name               = "AWS::SecurityAgent::Pentest"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_securityagent_security_requirement_pack" {
+  cloudformation_type_name = "AWS::SecurityAgent::SecurityRequirementPack"
 }
 
 resource_schema "aws_securityagent_target_domain" {

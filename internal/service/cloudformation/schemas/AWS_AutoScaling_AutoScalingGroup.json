@@ -503,7 +503,8 @@
           "type": "string",
           "enum": [
             "balanced-best-effort",
-            "balanced-only"
+            "balanced-only",
+            "reservations-then-balanced"
           ]
         }
       }

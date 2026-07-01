@@ -247,7 +247,13 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	                  "t4g",
 		//	                  "vu9p",
 		//	                  "v100",
-		//	                  "l40s"
+		//	                  "l40s",
+		//	                  "l4",
+		//	                  "gaudi-hl-205",
+		//	                  "inferentia2",
+		//	                  "trainium",
+		//	                  "trainium2",
+		//	                  "u30"
 		//	                ],
 		//	                "type": "string"
 		//	              },

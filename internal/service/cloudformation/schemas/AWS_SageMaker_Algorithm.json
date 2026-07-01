@@ -1,0 +1,509 @@
+{
+  "typeName": "AWS::SageMaker::Algorithm",
+  "description": "Resource Type definition for AWS::SageMaker::Algorithm",
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "MetricDefinition": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255,
+          "pattern": "^.+$"
+        },
+        "Regex": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500,
+          "pattern": "^.+$"
+        }
+      },
+      "required": [
+        "Name",
+        "Regex"
+      ],
+      "additionalProperties": false
+    },
+    "HyperParameterSpecification": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "maxLength": 256
+        },
+        "Description": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "Type": {
+          "type": "string",
+          "enum": [
+            "Integer",
+            "Continuous",
+            "Categorical",
+            "FreeText"
+          ]
+        },
+        "Range": {
+          "$ref": "#/definitions/ParameterRange"
+        },
+        "IsTunable": {
+          "type": "boolean"
+        },
+        "IsRequired": {
+          "type": "boolean"
+        },
+        "DefaultValue": {
+          "type": "string",
+          "maxLength": 2500
+        }
+      },
+      "required": [
+        "Name",
+        "Type"
+      ],
+      "additionalProperties": false
+    },
+    "ParameterRange": {
+      "type": "object",
+      "properties": {
+        "IntegerParameterRangeSpecification": {
+          "$ref": "#/definitions/IntegerParameterRangeSpecification"
+        },
+        "ContinuousParameterRangeSpecification": {
+          "$ref": "#/definitions/ContinuousParameterRangeSpecification"
+        },
+        "CategoricalParameterRangeSpecification": {
+          "$ref": "#/definitions/CategoricalParameterRangeSpecification"
+        }
+      },
+      "additionalProperties": false
+    },
+    "IntegerParameterRangeSpecification": {
+      "type": "object",
+      "properties": {
+        "MinValue": {
+          "type": "string",
+          "maxLength": 256
+        },
+        "MaxValue": {
+          "type": "string",
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "MinValue",
+        "MaxValue"
+      ],
+      "additionalProperties": false
+    },
+    "ContinuousParameterRangeSpecification": {
+      "type": "object",
+      "properties": {
+        "MinValue": {
+          "type": "string",
+          "maxLength": 256
+        },
+        "MaxValue": {
+          "type": "string",
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "MinValue",
+        "MaxValue"
+      ],
+      "additionalProperties": false
+    },
+    "CategoricalParameterRangeSpecification": {
+      "type": "object",
+      "properties": {
+        "Values": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 256
+          },
+          "minItems": 1,
+          "maxItems": 30
+        }
+      },
+      "required": [
+        "Values"
+      ],
+      "additionalProperties": false
+    },
+    "ChannelSpecification": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[A-Za-z0-9\\.\\-_]+$"
+        },
+        "Description": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "IsRequired": {
+          "type": "boolean"
+        },
+        "SupportedContentTypes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 256
+          }
+        },
+        "SupportedCompressionTypes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "None",
+              "Gzip"
+            ]
+          }
+        },
+        "SupportedInputModes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Pipe",
+              "File",
+              "FastFile"
+            ]
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "Name",
+        "SupportedContentTypes",
+        "SupportedInputModes"
+      ],
+      "additionalProperties": false
+    },
+    "HyperParameterTuningJobObjective": {
+      "type": "object",
+      "properties": {
+        "Type": {
+          "type": "string",
+          "enum": [
+            "Maximize",
+            "Minimize"
+          ]
+        },
+        "MetricName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255,
+          "pattern": "^.+$"
+        }
+      },
+      "required": [
+        "Type",
+        "MetricName"
+      ],
+      "additionalProperties": false
+    },
+    "TrainingSpecification": {
+      "type": "object",
+      "properties": {
+        "TrainingImage": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "TrainingImageDigest": {
+          "type": "string",
+          "maxLength": 72,
+          "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"
+        },
+        "SupportedHyperParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HyperParameterSpecification"
+          },
+          "maxItems": 100
+        },
+        "SupportedTrainingInstanceTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "SupportsDistributedTraining": {
+          "type": "boolean"
+        },
+        "MetricDefinitions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricDefinition"
+          },
+          "maxItems": 40
+        },
+        "TrainingChannels": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChannelSpecification"
+          },
+          "minItems": 1,
+          "maxItems": 8
+        },
+        "SupportedTuningJobObjectiveMetrics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HyperParameterTuningJobObjective"
+          }
+        }
+      },
+      "required": [
+        "TrainingImage",
+        "SupportedTrainingInstanceTypes",
+        "TrainingChannels"
+      ],
+      "additionalProperties": false
+    },
+    "ModelPackageContainerDefinition": {
+      "type": "object",
+      "properties": {
+        "ContainerHostname": {
+          "type": "string",
+          "maxLength": 63,
+          "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
+        },
+        "Image": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "ImageDigest": {
+          "type": "string",
+          "maxLength": 72,
+          "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"
+        },
+        "Environment": {
+          "type": "object",
+          "patternProperties": {
+            "": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "ModelInput": {
+          "$ref": "#/definitions/ModelInput"
+        },
+        "Framework": {
+          "type": "string"
+        },
+        "FrameworkVersion": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 10,
+          "pattern": "^[0-9]\\.[A-Za-z0-9.-]+$"
+        },
+        "NearestModelName": {
+          "type": "string"
+        },
+        "IsCheckpoint": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "Image"
+      ],
+      "additionalProperties": false
+    },
+    "ModelInput": {
+      "type": "object",
+      "properties": {
+        "DataInputConfig": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "DataInputConfig"
+      ],
+      "additionalProperties": false
+    },
+    "InferenceSpecification": {
+      "type": "object",
+      "properties": {
+        "Containers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModelPackageContainerDefinition"
+          },
+          "minItems": 1,
+          "maxItems": 15
+        },
+        "SupportedTransformInstanceTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "SupportedRealtimeInferenceInstanceTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "SupportedContentTypes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 256
+          }
+        },
+        "SupportedResponseMIMETypes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 1024,
+            "pattern": "^[-\\w]+\\/.+$"
+          }
+        }
+      },
+      "required": [
+        "Containers"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "AlgorithmName": {
+      "type": "string",
+      "description": "The name of the algorithm.",
+      "minLength": 1,
+      "maxLength": 63,
+      "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
+    },
+    "AlgorithmArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the algorithm.",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "AlgorithmDescription": {
+      "type": "string",
+      "description": "A description of the algorithm.",
+      "maxLength": 1024
+    },
+    "TrainingSpecification": {
+      "$ref": "#/definitions/TrainingSpecification"
+    },
+    "InferenceSpecification": {
+      "$ref": "#/definitions/InferenceSpecification"
+    },
+    "CertifyForMarketplace": {
+      "type": "boolean",
+      "description": "Whether to certify the algorithm so that it can be listed in AWS Marketplace."
+    },
+    "Tags": {
+      "type": "array",
+      "description": "An array of key-value pairs to apply to this resource.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50
+    },
+    "CreationTime": {
+      "type": "string",
+      "description": "A timestamp specifying when the algorithm was created."
+    }
+  },
+  "required": [
+    "AlgorithmName",
+    "TrainingSpecification"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/AlgorithmArn",
+    "/properties/CreationTime"
+  ],
+  "createOnlyProperties": [
+    "/properties/AlgorithmName",
+    "/properties/AlgorithmDescription",
+    "/properties/TrainingSpecification",
+    "/properties/InferenceSpecification",
+    "/properties/CertifyForMarketplace"
+  ],
+  "primaryIdentifier": [
+    "/properties/AlgorithmArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/AlgorithmName"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "sagemaker:AddTags",
+      "sagemaker:DeleteTags",
+      "sagemaker:ListTags"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "sagemaker:CreateAlgorithm",
+        "sagemaker:DescribeAlgorithm",
+        "sagemaker:AddTags"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "sagemaker:DescribeAlgorithm",
+        "sagemaker:ListTags"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "sagemaker:DescribeAlgorithm",
+        "sagemaker:AddTags",
+        "sagemaker:DeleteTags",
+        "sagemaker:ListTags"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "sagemaker:DeleteAlgorithm",
+        "sagemaker:DescribeAlgorithm"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "sagemaker:ListAlgorithms"
+      ]
+    }
+  }
+}

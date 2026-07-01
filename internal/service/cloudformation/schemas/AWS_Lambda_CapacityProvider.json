@@ -160,16 +160,16 @@
       "additionalProperties": false
     },
     "PropagateTagsConfig": {
-      "description": "",
+      "description": "Configuration that defines how tags are propagated to managed resources.",
       "type": "object",
       "additionalProperties": false,
       "properties": {
         "Mode": {
           "$ref": "#/definitions/PropagateTagsMode",
-          "description": ""
+          "description": "The mode for tag propagation. Use ``Explicit`` to propagate specific tags, or ``None`` to disable propagation."
         },
         "ExplicitTags": {
-          "description": "",
+          "description": "A list of tags to explicitly propagate to managed resources. Maximum of 40 tags.",
           "type": "array",
           "uniqueItems": true,
           "insertionOrder": false,
@@ -195,7 +195,7 @@
       "additionalProperties": false,
       "properties": {
         "LoggingConfig": {
-          "description": "The logging configuration for the capacity provider.",
+          "description": "",
           "$ref": "#/definitions/CapacityProviderLoggingConfig"
         }
       }
@@ -207,14 +207,14 @@
       "properties": {
         "LogGroup": {
           "type": "string",
-          "description": "The log group name.",
+          "description": "",
           "pattern": "[\\.\\-_/#A-Za-z0-9]+",
           "minLength": 1,
           "maxLength": 512
         },
         "SystemLogLevel": {
           "type": "string",
-          "description": "System log granularity level",
+          "description": "",
           "enum": [
             "DEBUG",
             "INFO",
@@ -318,7 +318,7 @@
       "$ref": "#/definitions/CapacityProviderVpcConfig"
     },
     "PropagateTags": {
-      "description": "",
+      "description": "Configuration for tag propagation to managed resources launched by the capacity provider.",
       "$ref": "#/definitions/PropagateTagsConfig"
     },
     "TelemetryConfig": {

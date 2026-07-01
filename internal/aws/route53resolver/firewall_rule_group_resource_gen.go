@@ -166,6 +166,11 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	        "oneOf": [
 		//	          {
 		//	            "required": [
+		//	              "PartnerThreatProtection"
+		//	            ]
+		//	          },
+		//	          {
+		//	            "required": [
 		//	              "FirewallAdvancedContentCategory"
 		//	            ]
 		//	          },
@@ -207,6 +212,22 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	              "Category"
 		//	            ],
 		//	            "type": "object"
+		//	          },
+		//	          "PartnerThreatProtection": {
+		//	            "additionalProperties": false,
+		//	            "description": "Configuration for a partner threat protection rule type.",
+		//	            "properties": {
+		//	              "Partner": {
+		//	                "description": "The partner identifier value.",
+		//	                "maxLength": 128,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Partner"
+		//	            ],
+		//	            "type": "object"
 		//	          }
 		//	        },
 		//	        "type": "object"
@@ -225,6 +246,15 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "Qtype",
 		//	        "maxLength": 16,
 		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Status": {
+		//	        "description": "The status of the firewall rule.",
+		//	        "enum": [
+		//	          "COMPLETE",
+		//	          "CREATING",
+		//	          "CREATION_FAILED"
+		//	        ],
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -421,6 +451,30 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 									objectplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
+							// Property: PartnerThreatProtection
+							"partner_threat_protection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Partner
+									"partner": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The partner identifier value.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 128),
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Configuration for a partner threat protection rule type.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "Advanced firewall rule type. Mutually exclusive with FirewallDomainListId and DnsThreatProtection/ConfidenceThreshold.",
 						Optional:    true,
@@ -460,6 +514,22 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 16),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Status
+					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The status of the firewall rule.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"COMPLETE",
+								"CREATING",
+								"CREATION_FAILED",
+							),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -733,6 +803,8 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 		"modification_time":                  "ModificationTime",
 		"name":                               "Name",
 		"owner_id":                           "OwnerId",
+		"partner":                            "Partner",
+		"partner_threat_protection":          "PartnerThreatProtection",
 		"priority":                           "Priority",
 		"qtype":                              "Qtype",
 		"rule_count":                         "RuleCount",

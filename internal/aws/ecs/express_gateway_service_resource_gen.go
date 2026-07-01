@@ -214,6 +214,9 @@ func expressGatewayServiceResource(ctx context.Context) (resource.Resource, erro
 		//	      "ServiceRevisionArn": {
 		//	        "type": "string"
 		//	      },
+		//	      "TaskDefinitionArn": {
+		//	        "type": "string"
+		//	      },
 		//	      "TaskRoleArn": {
 		//	        "type": "string"
 		//	      }
@@ -383,6 +386,10 @@ func expressGatewayServiceResource(ctx context.Context) (resource.Resource, erro
 					}, /*END ATTRIBUTE*/
 					// Property: ServiceRevisionArn
 					"service_revision_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: TaskDefinitionArn
+					"task_definition_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
 					}, /*END ATTRIBUTE*/
 					// Property: TaskRoleArn
@@ -603,7 +610,11 @@ func expressGatewayServiceResource(ctx context.Context) (resource.Resource, erro
 		//	  "type": "string"
 		//	}
 		"execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// ExecutionRoleArn is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: HealthCheckPath
@@ -877,7 +888,14 @@ func expressGatewayServiceResource(ctx context.Context) (resource.Resource, erro
 				}, /*END ATTRIBUTE*/
 				// Property: Image
 				"image": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: RepositoryCredentials
 				"repository_credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -935,7 +953,11 @@ func expressGatewayServiceResource(ctx context.Context) (resource.Resource, erro
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Required: true,
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// PrimaryContainer is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ScalingTarget
@@ -1132,6 +1154,20 @@ func expressGatewayServiceResource(ctx context.Context) (resource.Resource, erro
 				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: TaskDefinitionArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"task_definition_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// TaskDefinitionArn is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: TaskRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -1240,6 +1276,7 @@ func expressGatewayServiceResource(ctx context.Context) (resource.Resource, erro
 		"subnets":                           "Subnets",
 		"tags":                              "Tags",
 		"target_group_arns":                 "TargetGroupArns",
+		"task_definition_arn":               "TaskDefinitionArn",
 		"task_role_arn":                     "TaskRoleArn",
 		"updated_at":                        "UpdatedAt",
 		"value":                             "Value",
@@ -1249,6 +1286,7 @@ func expressGatewayServiceResource(ctx context.Context) (resource.Resource, erro
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/ExecutionRoleArn",
 		"/properties/TaskRoleArn",
+		"/properties/TaskDefinitionArn",
 		"/properties/HealthCheckPath",
 		"/properties/PrimaryContainer",
 		"/properties/NetworkConfiguration",

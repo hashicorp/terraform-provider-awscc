@@ -27,7 +27,7 @@ Data Source schema for AWS::Lambda::CapacityProvider
 - `instance_requirements` (Attributes) The instance requirements for compute resources managed by the capacity provider. (see [below for nested schema](#nestedatt--instance_requirements))
 - `kms_key_arn` (String) The ARN of the KMS key used to encrypt the capacity provider's resources.
 - `permissions_config` (Attributes) The permissions configuration for the capacity provider. (see [below for nested schema](#nestedatt--permissions_config))
-- `propagate_tags` (Attributes) (see [below for nested schema](#nestedatt--propagate_tags))
+- `propagate_tags` (Attributes) Configuration for tag propagation to managed resources launched by the capacity provider. (see [below for nested schema](#nestedatt--propagate_tags))
 - `state` (String) The current state of the capacity provider. Indicates whether the provider is being created, is active and ready for use, has failed, or is being deleted.
 - `tags` (Attributes Set) A key-value pair that provides metadata for the capacity provider. (see [below for nested schema](#nestedatt--tags))
 - `telemetry_config` (Attributes) (see [below for nested schema](#nestedatt--telemetry_config))
@@ -75,8 +75,8 @@ Read-Only:
 
 Read-Only:
 
-- `explicit_tags` (Attributes Set) (see [below for nested schema](#nestedatt--propagate_tags--explicit_tags))
-- `mode` (String) The mode for tag propagation.
+- `explicit_tags` (Attributes Set) A list of tags to explicitly propagate to managed resources. Maximum of 40 tags. (see [below for nested schema](#nestedatt--propagate_tags--explicit_tags))
+- `mode` (String) The mode for tag propagation. Use ``Explicit`` to propagate specific tags, or ``None`` to disable propagation.
 
 <a id="nestedatt--propagate_tags--explicit_tags"></a>
 ### Nested Schema for `propagate_tags.explicit_tags`
@@ -102,15 +102,15 @@ Read-Only:
 
 Read-Only:
 
-- `logging_config` (Attributes) The logging configuration for the capacity provider. (see [below for nested schema](#nestedatt--telemetry_config--logging_config))
+- `logging_config` (Attributes) (see [below for nested schema](#nestedatt--telemetry_config--logging_config))
 
 <a id="nestedatt--telemetry_config--logging_config"></a>
 ### Nested Schema for `telemetry_config.logging_config`
 
 Read-Only:
 
-- `log_group` (String) The log group name.
-- `system_log_level` (String) System log granularity level
+- `log_group` (String)
+- `system_log_level` (String)
 
 
 

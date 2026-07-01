@@ -38,6 +38,7 @@ Data Source schema for AWS::ECS::ExpressGatewayService
 - `service_name` (String)
 - `status` (Attributes) (see [below for nested schema](#nestedatt--status))
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `task_definition_arn` (String)
 - `task_role_arn` (String)
 - `updated_at` (String)
 
@@ -56,6 +57,7 @@ Read-Only:
 - `primary_container` (Attributes) (see [below for nested schema](#nestedatt--active_configurations--primary_container))
 - `scaling_target` (Attributes) (see [below for nested schema](#nestedatt--active_configurations--scaling_target))
 - `service_revision_arn` (String)
+- `task_definition_arn` (String)
 - `task_role_arn` (String)
 
 <a id="nestedatt--active_configurations--ingress_paths"></a>

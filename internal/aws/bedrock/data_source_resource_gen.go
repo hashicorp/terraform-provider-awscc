@@ -9,11 +9,13 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -209,6 +211,103 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "required": [
 		//	        "SourceConfiguration"
 		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "ManagedKnowledgeBaseConnectorConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration for managed knowledge base connector data sources.",
+		//	      "properties": {
+		//	        "ConnectorParameters": {
+		//	          "description": "Connector-specific parameters.",
+		//	          "type": "object"
+		//	        },
+		//	        "DeletionProtectionConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration for deletion protection.",
+		//	          "properties": {
+		//	            "DeletionProtectionStatus": {
+		//	              "description": "Indicates whether a feature is enabled or disabled.",
+		//	              "enum": [
+		//	                "ENABLED",
+		//	                "DISABLED"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "DeletionProtectionThreshold": {
+		//	              "default": 15,
+		//	              "description": "Threshold for deletion protection.",
+		//	              "maximum": 100,
+		//	              "minimum": 0,
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "DeletionProtectionStatus"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "MediaExtractionConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration for media extraction settings.",
+		//	          "properties": {
+		//	            "AudioExtractionConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "description": "Configuration for audio extraction.",
+		//	              "properties": {
+		//	                "AudioExtractionStatus": {
+		//	                  "description": "Indicates whether a feature is enabled or disabled.",
+		//	                  "enum": [
+		//	                    "ENABLED",
+		//	                    "DISABLED"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "AudioExtractionStatus"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "ImageExtractionConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "description": "Configuration for image extraction.",
+		//	              "properties": {
+		//	                "ImageExtractionStatus": {
+		//	                  "description": "Indicates whether a feature is enabled or disabled.",
+		//	                  "enum": [
+		//	                    "ENABLED",
+		//	                    "DISABLED"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "ImageExtractionStatus"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "VideoExtractionConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "description": "Configuration for video extraction.",
+		//	              "properties": {
+		//	                "VideoExtractionStatus": {
+		//	                  "description": "Indicates whether a feature is enabled or disabled.",
+		//	                  "enum": [
+		//	                    "ENABLED",
+		//	                    "DISABLED"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "VideoExtractionStatus"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "S3Configuration": {
@@ -525,7 +624,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        "SHAREPOINT",
 		//	        "WEB",
 		//	        "CUSTOM",
-		//	        "REDSHIFT_METADATA"
+		//	        "REDSHIFT_METADATA",
+		//	        "MANAGED_KNOWLEDGE_BASE_CONNECTOR"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -847,6 +947,159 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The configuration information to connect to Confluence as your data source.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ManagedKnowledgeBaseConnectorConfiguration
+				"managed_knowledge_base_connector_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ConnectorParameters
+						"connector_parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType:  jsontypes.NormalizedType{},
+							Description: "Connector-specific parameters.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DeletionProtectionConfiguration
+						"deletion_protection_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DeletionProtectionStatus
+								"deletion_protection_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Indicates whether a feature is enabled or disabled.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"ENABLED",
+											"DISABLED",
+										),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: DeletionProtectionThreshold
+								"deletion_protection_threshold": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "Threshold for deletion protection.",
+									Optional:    true,
+									Computed:    true,
+									Default:     int64default.StaticInt64(15),
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										int64validator.Between(0, 100),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for deletion protection.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MediaExtractionConfiguration
+						"media_extraction_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AudioExtractionConfiguration
+								"audio_extraction_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AudioExtractionStatus
+										"audio_extraction_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Indicates whether a feature is enabled or disabled.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"ENABLED",
+													"DISABLED",
+												),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Configuration for audio extraction.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ImageExtractionConfiguration
+								"image_extraction_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ImageExtractionStatus
+										"image_extraction_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Indicates whether a feature is enabled or disabled.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"ENABLED",
+													"DISABLED",
+												),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Configuration for image extraction.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: VideoExtractionConfiguration
+								"video_extraction_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: VideoExtractionStatus
+										"video_extraction_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Indicates whether a feature is enabled or disabled.",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"ENABLED",
+													"DISABLED",
+												),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Configuration for video extraction.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for media extraction settings.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for managed knowledge base connector data sources.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1324,6 +1577,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							"WEB",
 							"CUSTOM",
 							"REDSHIFT_METADATA",
+							"MANAGED_KNOWLEDGE_BASE_CONNECTOR",
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1542,7 +1796,10 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "enum": [
 		//	    "AVAILABLE",
 		//	    "DELETING",
-		//	    "DELETE_UNSUCCESSFUL"
+		//	    "DELETE_UNSUCCESSFUL",
+		//	    "CREATING",
+		//	    "UPDATING",
+		//	    "FAILED"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -2004,7 +2261,8 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	          "description": "The parsing strategy for the data source.",
 		//	          "enum": [
 		//	            "BEDROCK_FOUNDATION_MODEL",
-		//	            "BEDROCK_DATA_AUTOMATION"
+		//	            "BEDROCK_DATA_AUTOMATION",
+		//	            "SMART_PARSING"
 		//	          ],
 		//	          "type": "string"
 		//	        }
@@ -2499,6 +2757,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 								stringvalidator.OneOf(
 									"BEDROCK_FOUNDATION_MODEL",
 									"BEDROCK_DATA_AUTOMATION",
+									"SMART_PARSING",
 								),
 								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
@@ -2557,83 +2816,95 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"auth_type":                              "AuthType",
-		"bedrock_data_automation_configuration":  "BedrockDataAutomationConfiguration",
-		"bedrock_foundation_model_configuration": "BedrockFoundationModelConfiguration",
-		"breakpoint_percentile_threshold":        "BreakpointPercentileThreshold",
-		"bucket_arn":                             "BucketArn",
-		"bucket_owner_account_id":                "BucketOwnerAccountId",
-		"buffer_size":                            "BufferSize",
-		"chunking_configuration":                 "ChunkingConfiguration",
-		"chunking_strategy":                      "ChunkingStrategy",
-		"confluence_configuration":               "ConfluenceConfiguration",
-		"context_enrichment_configuration":       "ContextEnrichmentConfiguration",
-		"crawler_configuration":                  "CrawlerConfiguration",
-		"crawler_limits":                         "CrawlerLimits",
-		"created_at":                             "CreatedAt",
-		"credentials_secret_arn":                 "CredentialsSecretArn",
-		"custom_transformation_configuration":    "CustomTransformationConfiguration",
-		"data_deletion_policy":                   "DataDeletionPolicy",
-		"data_source_configuration":              "DataSourceConfiguration",
-		"data_source_id":                         "DataSourceId",
-		"data_source_status":                     "DataSourceStatus",
-		"description":                            "Description",
-		"domain":                                 "Domain",
-		"enrichment_strategy_configuration":      "EnrichmentStrategyConfiguration",
-		"exclusion_filters":                      "ExclusionFilters",
-		"failure_reasons":                        "FailureReasons",
-		"filter_configuration":                   "FilterConfiguration",
-		"filters":                                "Filters",
-		"fixed_size_chunking_configuration":      "FixedSizeChunkingConfiguration",
-		"hierarchical_chunking_configuration":    "HierarchicalChunkingConfiguration",
-		"host_type":                              "HostType",
-		"host_url":                               "HostUrl",
-		"inclusion_filters":                      "InclusionFilters",
-		"inclusion_prefixes":                     "InclusionPrefixes",
-		"intermediate_storage":                   "IntermediateStorage",
-		"kms_key_arn":                            "KmsKeyArn",
-		"knowledge_base_id":                      "KnowledgeBaseId",
-		"lambda_arn":                             "LambdaArn",
-		"level_configurations":                   "LevelConfigurations",
-		"max_pages":                              "MaxPages",
-		"max_tokens":                             "MaxTokens",
-		"method":                                 "Method",
-		"model_arn":                              "ModelArn",
-		"name":                                   "Name",
-		"object_type":                            "ObjectType",
-		"overlap_percentage":                     "OverlapPercentage",
-		"overlap_tokens":                         "OverlapTokens",
-		"parsing_configuration":                  "ParsingConfiguration",
-		"parsing_modality":                       "ParsingModality",
-		"parsing_prompt":                         "ParsingPrompt",
-		"parsing_prompt_text":                    "ParsingPromptText",
-		"parsing_strategy":                       "ParsingStrategy",
-		"pattern_object_filter":                  "PatternObjectFilter",
-		"rate_limit":                             "RateLimit",
-		"s3_configuration":                       "S3Configuration",
-		"s3_location":                            "S3Location",
-		"salesforce_configuration":               "SalesforceConfiguration",
-		"scope":                                  "Scope",
-		"seed_urls":                              "SeedUrls",
-		"semantic_chunking_configuration":        "SemanticChunkingConfiguration",
-		"server_side_encryption_configuration":   "ServerSideEncryptionConfiguration",
-		"share_point_configuration":              "SharePointConfiguration",
-		"site_urls":                              "SiteUrls",
-		"source_configuration":                   "SourceConfiguration",
-		"step_to_apply":                          "StepToApply",
-		"tenant_id":                              "TenantId",
-		"transformation_function":                "TransformationFunction",
-		"transformation_lambda_configuration":    "TransformationLambdaConfiguration",
-		"transformations":                        "Transformations",
-		"type":                                   "Type",
-		"updated_at":                             "UpdatedAt",
-		"uri":                                    "URI",
-		"url":                                    "Url",
-		"url_configuration":                      "UrlConfiguration",
-		"user_agent":                             "UserAgent",
-		"user_agent_header":                      "UserAgentHeader",
-		"vector_ingestion_configuration":         "VectorIngestionConfiguration",
-		"web_configuration":                      "WebConfiguration",
+		"audio_extraction_configuration":                 "AudioExtractionConfiguration",
+		"audio_extraction_status":                        "AudioExtractionStatus",
+		"auth_type":                                      "AuthType",
+		"bedrock_data_automation_configuration":          "BedrockDataAutomationConfiguration",
+		"bedrock_foundation_model_configuration":         "BedrockFoundationModelConfiguration",
+		"breakpoint_percentile_threshold":                "BreakpointPercentileThreshold",
+		"bucket_arn":                                     "BucketArn",
+		"bucket_owner_account_id":                        "BucketOwnerAccountId",
+		"buffer_size":                                    "BufferSize",
+		"chunking_configuration":                         "ChunkingConfiguration",
+		"chunking_strategy":                              "ChunkingStrategy",
+		"confluence_configuration":                       "ConfluenceConfiguration",
+		"connector_parameters":                           "ConnectorParameters",
+		"context_enrichment_configuration":               "ContextEnrichmentConfiguration",
+		"crawler_configuration":                          "CrawlerConfiguration",
+		"crawler_limits":                                 "CrawlerLimits",
+		"created_at":                                     "CreatedAt",
+		"credentials_secret_arn":                         "CredentialsSecretArn",
+		"custom_transformation_configuration":            "CustomTransformationConfiguration",
+		"data_deletion_policy":                           "DataDeletionPolicy",
+		"data_source_configuration":                      "DataSourceConfiguration",
+		"data_source_id":                                 "DataSourceId",
+		"data_source_status":                             "DataSourceStatus",
+		"deletion_protection_configuration":              "DeletionProtectionConfiguration",
+		"deletion_protection_status":                     "DeletionProtectionStatus",
+		"deletion_protection_threshold":                  "DeletionProtectionThreshold",
+		"description":                                    "Description",
+		"domain":                                         "Domain",
+		"enrichment_strategy_configuration":              "EnrichmentStrategyConfiguration",
+		"exclusion_filters":                              "ExclusionFilters",
+		"failure_reasons":                                "FailureReasons",
+		"filter_configuration":                           "FilterConfiguration",
+		"filters":                                        "Filters",
+		"fixed_size_chunking_configuration":              "FixedSizeChunkingConfiguration",
+		"hierarchical_chunking_configuration":            "HierarchicalChunkingConfiguration",
+		"host_type":                                      "HostType",
+		"host_url":                                       "HostUrl",
+		"image_extraction_configuration":                 "ImageExtractionConfiguration",
+		"image_extraction_status":                        "ImageExtractionStatus",
+		"inclusion_filters":                              "InclusionFilters",
+		"inclusion_prefixes":                             "InclusionPrefixes",
+		"intermediate_storage":                           "IntermediateStorage",
+		"kms_key_arn":                                    "KmsKeyArn",
+		"knowledge_base_id":                              "KnowledgeBaseId",
+		"lambda_arn":                                     "LambdaArn",
+		"level_configurations":                           "LevelConfigurations",
+		"managed_knowledge_base_connector_configuration": "ManagedKnowledgeBaseConnectorConfiguration",
+		"max_pages":                                      "MaxPages",
+		"max_tokens":                                     "MaxTokens",
+		"media_extraction_configuration":                 "MediaExtractionConfiguration",
+		"method":                                         "Method",
+		"model_arn":                                      "ModelArn",
+		"name":                                           "Name",
+		"object_type":                                    "ObjectType",
+		"overlap_percentage":                             "OverlapPercentage",
+		"overlap_tokens":                                 "OverlapTokens",
+		"parsing_configuration":                          "ParsingConfiguration",
+		"parsing_modality":                               "ParsingModality",
+		"parsing_prompt":                                 "ParsingPrompt",
+		"parsing_prompt_text":                            "ParsingPromptText",
+		"parsing_strategy":                               "ParsingStrategy",
+		"pattern_object_filter":                          "PatternObjectFilter",
+		"rate_limit":                                     "RateLimit",
+		"s3_configuration":                               "S3Configuration",
+		"s3_location":                                    "S3Location",
+		"salesforce_configuration":                       "SalesforceConfiguration",
+		"scope":                                          "Scope",
+		"seed_urls":                                      "SeedUrls",
+		"semantic_chunking_configuration":                "SemanticChunkingConfiguration",
+		"server_side_encryption_configuration":           "ServerSideEncryptionConfiguration",
+		"share_point_configuration":                      "SharePointConfiguration",
+		"site_urls":                                      "SiteUrls",
+		"source_configuration":                           "SourceConfiguration",
+		"step_to_apply":                                  "StepToApply",
+		"tenant_id":                                      "TenantId",
+		"transformation_function":                        "TransformationFunction",
+		"transformation_lambda_configuration":            "TransformationLambdaConfiguration",
+		"transformations":                                "Transformations",
+		"type":                                           "Type",
+		"updated_at":                                     "UpdatedAt",
+		"uri":                                            "URI",
+		"url":                                            "Url",
+		"url_configuration":                              "UrlConfiguration",
+		"user_agent":                                     "UserAgent",
+		"user_agent_header":                              "UserAgentHeader",
+		"vector_ingestion_configuration":                 "VectorIngestionConfiguration",
+		"video_extraction_configuration":                 "VideoExtractionConfiguration",
+		"video_extraction_status":                        "VideoExtractionStatus",
+		"web_configuration":                              "WebConfiguration",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

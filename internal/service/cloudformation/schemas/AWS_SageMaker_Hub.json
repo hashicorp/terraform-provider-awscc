@@ -1,0 +1,184 @@
+{
+  "typeName": "AWS::SageMaker::Hub",
+  "description": "Resource type definition for AWS::SageMaker::Hub",
+  "properties": {
+    "HubArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the hub.",
+      "maxLength": 255,
+      "pattern": ".*"
+    },
+    "HubName": {
+      "type": "string",
+      "description": "The name of the hub.",
+      "minLength": 0,
+      "maxLength": 63,
+      "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
+    },
+    "HubDescription": {
+      "type": "string",
+      "description": "A description of the hub.",
+      "minLength": 0,
+      "maxLength": 1023,
+      "pattern": ".*"
+    },
+    "HubDisplayName": {
+      "type": "string",
+      "description": "The display name of the hub.",
+      "minLength": 0,
+      "maxLength": 255,
+      "pattern": ".*"
+    },
+    "HubSearchKeywords": {
+      "type": "array",
+      "description": "The searchable keywords for the hub.",
+      "items": {
+        "type": "string",
+        "minLength": 0,
+        "maxLength": 255,
+        "pattern": "^[^A-Z]*$"
+      },
+      "minItems": 0,
+      "maxItems": 50,
+      "insertionOrder": false
+    },
+    "S3StorageConfig": {
+      "type": "object",
+      "description": "The Amazon S3 storage configuration for the hub.",
+      "properties": {
+        "S3OutputPath": {
+          "type": "string",
+          "description": "The Amazon S3 bucket prefix for hosting hub content.",
+          "minLength": 0,
+          "maxLength": 1024,
+          "pattern": "^(https|s3)://([^/]+)/?(.*)$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "HubStatus": {
+      "type": "string",
+      "description": "The status of the hub.",
+      "enum": [
+        "InService",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "CreateFailed",
+        "UpdateFailed",
+        "DeleteFailed"
+      ]
+    },
+    "CreationTime": {
+      "type": "string",
+      "description": "The date and time that the hub was created."
+    },
+    "LastModifiedTime": {
+      "type": "string",
+      "description": "The date and time that the hub was last modified."
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Tags to associate with the hub.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "minItems": 0,
+      "maxItems": 50,
+      "insertionOrder": false
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "HubName",
+    "HubDescription"
+  ],
+  "readOnlyProperties": [
+    "/properties/HubArn",
+    "/properties/HubStatus",
+    "/properties/CreationTime",
+    "/properties/LastModifiedTime"
+  ],
+  "createOnlyProperties": [
+    "/properties/HubName",
+    "/properties/S3StorageConfig"
+  ],
+  "primaryIdentifier": [
+    "/properties/HubArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/HubName"
+    ]
+  ],
+  "additionalProperties": false,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "sagemaker:AddTags",
+      "sagemaker:DeleteTags",
+      "sagemaker:ListTags"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "sagemaker:CreateHub",
+        "sagemaker:DescribeHub",
+        "sagemaker:AddTags",
+        "sagemaker:ListTags"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "sagemaker:DescribeHub",
+        "sagemaker:ListTags"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "sagemaker:UpdateHub",
+        "sagemaker:DescribeHub",
+        "sagemaker:AddTags",
+        "sagemaker:DeleteTags",
+        "sagemaker:ListTags"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "sagemaker:DeleteHub",
+        "sagemaker:DescribeHub"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "sagemaker:ListHubs"
+      ]
+    }
+  }
+}

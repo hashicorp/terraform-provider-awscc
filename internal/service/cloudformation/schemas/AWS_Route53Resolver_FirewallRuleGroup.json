@@ -2,6 +2,22 @@
   "typeName": "AWS::Route53Resolver::FirewallRuleGroup",
   "description": "Resource schema for AWS::Route53Resolver::FirewallRuleGroup.",
   "definitions": {
+    "PartnerThreatProtectionConfig": {
+      "description": "Configuration for a partner threat protection rule type.",
+      "type": "object",
+      "properties": {
+        "Partner": {
+          "description": "The partner identifier value.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "Partner"
+      ],
+      "additionalProperties": false
+    },
     "FirewallAdvancedContentCategoryConfig": {
       "description": "Configuration for an advanced content category rule type.",
       "type": "object",
@@ -38,6 +54,9 @@
       "description": "Firewall rule type union. Exactly one member must be set. Mutually exclusive with FirewallDomainListId and DnsThreatProtection/ConfidenceThreshold.",
       "type": "object",
       "properties": {
+        "PartnerThreatProtection": {
+          "$ref": "#/definitions/PartnerThreatProtectionConfig"
+        },
         "FirewallAdvancedContentCategory": {
           "$ref": "#/definitions/FirewallAdvancedContentCategoryConfig"
         },
@@ -46,6 +65,11 @@
         }
       },
       "oneOf": [
+        {
+          "required": [
+            "PartnerThreatProtection"
+          ]
+        },
         {
           "required": [
             "FirewallAdvancedContentCategory"
@@ -151,6 +175,15 @@
         "FirewallRuleType": {
           "description": "Advanced firewall rule type. Mutually exclusive with FirewallDomainListId and DnsThreatProtection/ConfidenceThreshold.",
           "$ref": "#/definitions/FirewallRuleType"
+        },
+        "Status": {
+          "description": "The status of the firewall rule.",
+          "type": "string",
+          "enum": [
+            "COMPLETE",
+            "CREATING",
+            "CREATION_FAILED"
+          ]
         }
       },
       "required": [
@@ -298,7 +331,8 @@
     "/properties/CreatorRequestId",
     "/properties/CreationTime",
     "/properties/ModificationTime",
-    "/properties/FirewallRules/*/FirewallThreatProtectionId"
+    "/properties/FirewallRules/*/FirewallThreatProtectionId",
+    "/properties/FirewallRules/*/Status"
   ],
   "primaryIdentifier": [
     "/properties/Id"

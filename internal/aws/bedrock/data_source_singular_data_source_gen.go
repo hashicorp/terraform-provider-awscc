@@ -8,6 +8,7 @@ package bedrock
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -184,6 +185,103 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "required": [
 		//	        "SourceConfiguration"
 		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "ManagedKnowledgeBaseConnectorConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration for managed knowledge base connector data sources.",
+		//	      "properties": {
+		//	        "ConnectorParameters": {
+		//	          "description": "Connector-specific parameters.",
+		//	          "type": "object"
+		//	        },
+		//	        "DeletionProtectionConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration for deletion protection.",
+		//	          "properties": {
+		//	            "DeletionProtectionStatus": {
+		//	              "description": "Indicates whether a feature is enabled or disabled.",
+		//	              "enum": [
+		//	                "ENABLED",
+		//	                "DISABLED"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "DeletionProtectionThreshold": {
+		//	              "default": 15,
+		//	              "description": "Threshold for deletion protection.",
+		//	              "maximum": 100,
+		//	              "minimum": 0,
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "DeletionProtectionStatus"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "MediaExtractionConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration for media extraction settings.",
+		//	          "properties": {
+		//	            "AudioExtractionConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "description": "Configuration for audio extraction.",
+		//	              "properties": {
+		//	                "AudioExtractionStatus": {
+		//	                  "description": "Indicates whether a feature is enabled or disabled.",
+		//	                  "enum": [
+		//	                    "ENABLED",
+		//	                    "DISABLED"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "AudioExtractionStatus"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "ImageExtractionConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "description": "Configuration for image extraction.",
+		//	              "properties": {
+		//	                "ImageExtractionStatus": {
+		//	                  "description": "Indicates whether a feature is enabled or disabled.",
+		//	                  "enum": [
+		//	                    "ENABLED",
+		//	                    "DISABLED"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "ImageExtractionStatus"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "VideoExtractionConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "description": "Configuration for video extraction.",
+		//	              "properties": {
+		//	                "VideoExtractionStatus": {
+		//	                  "description": "Indicates whether a feature is enabled or disabled.",
+		//	                  "enum": [
+		//	                    "ENABLED",
+		//	                    "DISABLED"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "VideoExtractionStatus"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
 		//	      "type": "object"
 		//	    },
 		//	    "S3Configuration": {
@@ -500,7 +598,8 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "SHAREPOINT",
 		//	        "WEB",
 		//	        "CUSTOM",
-		//	        "REDSHIFT_METADATA"
+		//	        "REDSHIFT_METADATA",
+		//	        "MANAGED_KNOWLEDGE_BASE_CONNECTOR"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -717,6 +816,79 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The configuration information to connect to Confluence as your data source.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ManagedKnowledgeBaseConnectorConfiguration
+				"managed_knowledge_base_connector_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ConnectorParameters
+						"connector_parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType:  jsontypes.NormalizedType{},
+							Description: "Connector-specific parameters.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DeletionProtectionConfiguration
+						"deletion_protection_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DeletionProtectionStatus
+								"deletion_protection_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Indicates whether a feature is enabled or disabled.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: DeletionProtectionThreshold
+								"deletion_protection_threshold": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "Threshold for deletion protection.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for deletion protection.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: MediaExtractionConfiguration
+						"media_extraction_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AudioExtractionConfiguration
+								"audio_extraction_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AudioExtractionStatus
+										"audio_extraction_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Indicates whether a feature is enabled or disabled.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Configuration for audio extraction.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ImageExtractionConfiguration
+								"image_extraction_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ImageExtractionStatus
+										"image_extraction_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Indicates whether a feature is enabled or disabled.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Configuration for image extraction.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: VideoExtractionConfiguration
+								"video_extraction_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: VideoExtractionStatus
+										"video_extraction_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Indicates whether a feature is enabled or disabled.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Configuration for video extraction.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for media extraction settings.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for managed knowledge base connector data sources.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: S3Configuration
@@ -1035,7 +1207,10 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "enum": [
 		//	    "AVAILABLE",
 		//	    "DELETING",
-		//	    "DELETE_UNSUCCESSFUL"
+		//	    "DELETE_UNSUCCESSFUL",
+		//	    "CREATING",
+		//	    "UPDATING",
+		//	    "FAILED"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -1459,7 +1634,8 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "description": "The parsing strategy for the data source.",
 		//	          "enum": [
 		//	            "BEDROCK_FOUNDATION_MODEL",
-		//	            "BEDROCK_DATA_AUTOMATION"
+		//	            "BEDROCK_DATA_AUTOMATION",
+		//	            "SMART_PARSING"
 		//	          ],
 		//	          "type": "string"
 		//	        }
@@ -1720,83 +1896,95 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Bedrock::DataSource").WithTerraformTypeName("awscc_bedrock_data_source")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"auth_type":                              "AuthType",
-		"bedrock_data_automation_configuration":  "BedrockDataAutomationConfiguration",
-		"bedrock_foundation_model_configuration": "BedrockFoundationModelConfiguration",
-		"breakpoint_percentile_threshold":        "BreakpointPercentileThreshold",
-		"bucket_arn":                             "BucketArn",
-		"bucket_owner_account_id":                "BucketOwnerAccountId",
-		"buffer_size":                            "BufferSize",
-		"chunking_configuration":                 "ChunkingConfiguration",
-		"chunking_strategy":                      "ChunkingStrategy",
-		"confluence_configuration":               "ConfluenceConfiguration",
-		"context_enrichment_configuration":       "ContextEnrichmentConfiguration",
-		"crawler_configuration":                  "CrawlerConfiguration",
-		"crawler_limits":                         "CrawlerLimits",
-		"created_at":                             "CreatedAt",
-		"credentials_secret_arn":                 "CredentialsSecretArn",
-		"custom_transformation_configuration":    "CustomTransformationConfiguration",
-		"data_deletion_policy":                   "DataDeletionPolicy",
-		"data_source_configuration":              "DataSourceConfiguration",
-		"data_source_id":                         "DataSourceId",
-		"data_source_status":                     "DataSourceStatus",
-		"description":                            "Description",
-		"domain":                                 "Domain",
-		"enrichment_strategy_configuration":      "EnrichmentStrategyConfiguration",
-		"exclusion_filters":                      "ExclusionFilters",
-		"failure_reasons":                        "FailureReasons",
-		"filter_configuration":                   "FilterConfiguration",
-		"filters":                                "Filters",
-		"fixed_size_chunking_configuration":      "FixedSizeChunkingConfiguration",
-		"hierarchical_chunking_configuration":    "HierarchicalChunkingConfiguration",
-		"host_type":                              "HostType",
-		"host_url":                               "HostUrl",
-		"inclusion_filters":                      "InclusionFilters",
-		"inclusion_prefixes":                     "InclusionPrefixes",
-		"intermediate_storage":                   "IntermediateStorage",
-		"kms_key_arn":                            "KmsKeyArn",
-		"knowledge_base_id":                      "KnowledgeBaseId",
-		"lambda_arn":                             "LambdaArn",
-		"level_configurations":                   "LevelConfigurations",
-		"max_pages":                              "MaxPages",
-		"max_tokens":                             "MaxTokens",
-		"method":                                 "Method",
-		"model_arn":                              "ModelArn",
-		"name":                                   "Name",
-		"object_type":                            "ObjectType",
-		"overlap_percentage":                     "OverlapPercentage",
-		"overlap_tokens":                         "OverlapTokens",
-		"parsing_configuration":                  "ParsingConfiguration",
-		"parsing_modality":                       "ParsingModality",
-		"parsing_prompt":                         "ParsingPrompt",
-		"parsing_prompt_text":                    "ParsingPromptText",
-		"parsing_strategy":                       "ParsingStrategy",
-		"pattern_object_filter":                  "PatternObjectFilter",
-		"rate_limit":                             "RateLimit",
-		"s3_configuration":                       "S3Configuration",
-		"s3_location":                            "S3Location",
-		"salesforce_configuration":               "SalesforceConfiguration",
-		"scope":                                  "Scope",
-		"seed_urls":                              "SeedUrls",
-		"semantic_chunking_configuration":        "SemanticChunkingConfiguration",
-		"server_side_encryption_configuration":   "ServerSideEncryptionConfiguration",
-		"share_point_configuration":              "SharePointConfiguration",
-		"site_urls":                              "SiteUrls",
-		"source_configuration":                   "SourceConfiguration",
-		"step_to_apply":                          "StepToApply",
-		"tenant_id":                              "TenantId",
-		"transformation_function":                "TransformationFunction",
-		"transformation_lambda_configuration":    "TransformationLambdaConfiguration",
-		"transformations":                        "Transformations",
-		"type":                                   "Type",
-		"updated_at":                             "UpdatedAt",
-		"uri":                                    "URI",
-		"url":                                    "Url",
-		"url_configuration":                      "UrlConfiguration",
-		"user_agent":                             "UserAgent",
-		"user_agent_header":                      "UserAgentHeader",
-		"vector_ingestion_configuration":         "VectorIngestionConfiguration",
-		"web_configuration":                      "WebConfiguration",
+		"audio_extraction_configuration":                 "AudioExtractionConfiguration",
+		"audio_extraction_status":                        "AudioExtractionStatus",
+		"auth_type":                                      "AuthType",
+		"bedrock_data_automation_configuration":          "BedrockDataAutomationConfiguration",
+		"bedrock_foundation_model_configuration":         "BedrockFoundationModelConfiguration",
+		"breakpoint_percentile_threshold":                "BreakpointPercentileThreshold",
+		"bucket_arn":                                     "BucketArn",
+		"bucket_owner_account_id":                        "BucketOwnerAccountId",
+		"buffer_size":                                    "BufferSize",
+		"chunking_configuration":                         "ChunkingConfiguration",
+		"chunking_strategy":                              "ChunkingStrategy",
+		"confluence_configuration":                       "ConfluenceConfiguration",
+		"connector_parameters":                           "ConnectorParameters",
+		"context_enrichment_configuration":               "ContextEnrichmentConfiguration",
+		"crawler_configuration":                          "CrawlerConfiguration",
+		"crawler_limits":                                 "CrawlerLimits",
+		"created_at":                                     "CreatedAt",
+		"credentials_secret_arn":                         "CredentialsSecretArn",
+		"custom_transformation_configuration":            "CustomTransformationConfiguration",
+		"data_deletion_policy":                           "DataDeletionPolicy",
+		"data_source_configuration":                      "DataSourceConfiguration",
+		"data_source_id":                                 "DataSourceId",
+		"data_source_status":                             "DataSourceStatus",
+		"deletion_protection_configuration":              "DeletionProtectionConfiguration",
+		"deletion_protection_status":                     "DeletionProtectionStatus",
+		"deletion_protection_threshold":                  "DeletionProtectionThreshold",
+		"description":                                    "Description",
+		"domain":                                         "Domain",
+		"enrichment_strategy_configuration":              "EnrichmentStrategyConfiguration",
+		"exclusion_filters":                              "ExclusionFilters",
+		"failure_reasons":                                "FailureReasons",
+		"filter_configuration":                           "FilterConfiguration",
+		"filters":                                        "Filters",
+		"fixed_size_chunking_configuration":              "FixedSizeChunkingConfiguration",
+		"hierarchical_chunking_configuration":            "HierarchicalChunkingConfiguration",
+		"host_type":                                      "HostType",
+		"host_url":                                       "HostUrl",
+		"image_extraction_configuration":                 "ImageExtractionConfiguration",
+		"image_extraction_status":                        "ImageExtractionStatus",
+		"inclusion_filters":                              "InclusionFilters",
+		"inclusion_prefixes":                             "InclusionPrefixes",
+		"intermediate_storage":                           "IntermediateStorage",
+		"kms_key_arn":                                    "KmsKeyArn",
+		"knowledge_base_id":                              "KnowledgeBaseId",
+		"lambda_arn":                                     "LambdaArn",
+		"level_configurations":                           "LevelConfigurations",
+		"managed_knowledge_base_connector_configuration": "ManagedKnowledgeBaseConnectorConfiguration",
+		"max_pages":                                      "MaxPages",
+		"max_tokens":                                     "MaxTokens",
+		"media_extraction_configuration":                 "MediaExtractionConfiguration",
+		"method":                                         "Method",
+		"model_arn":                                      "ModelArn",
+		"name":                                           "Name",
+		"object_type":                                    "ObjectType",
+		"overlap_percentage":                             "OverlapPercentage",
+		"overlap_tokens":                                 "OverlapTokens",
+		"parsing_configuration":                          "ParsingConfiguration",
+		"parsing_modality":                               "ParsingModality",
+		"parsing_prompt":                                 "ParsingPrompt",
+		"parsing_prompt_text":                            "ParsingPromptText",
+		"parsing_strategy":                               "ParsingStrategy",
+		"pattern_object_filter":                          "PatternObjectFilter",
+		"rate_limit":                                     "RateLimit",
+		"s3_configuration":                               "S3Configuration",
+		"s3_location":                                    "S3Location",
+		"salesforce_configuration":                       "SalesforceConfiguration",
+		"scope":                                          "Scope",
+		"seed_urls":                                      "SeedUrls",
+		"semantic_chunking_configuration":                "SemanticChunkingConfiguration",
+		"server_side_encryption_configuration":           "ServerSideEncryptionConfiguration",
+		"share_point_configuration":                      "SharePointConfiguration",
+		"site_urls":                                      "SiteUrls",
+		"source_configuration":                           "SourceConfiguration",
+		"step_to_apply":                                  "StepToApply",
+		"tenant_id":                                      "TenantId",
+		"transformation_function":                        "TransformationFunction",
+		"transformation_lambda_configuration":            "TransformationLambdaConfiguration",
+		"transformations":                                "Transformations",
+		"type":                                           "Type",
+		"updated_at":                                     "UpdatedAt",
+		"uri":                                            "URI",
+		"url":                                            "Url",
+		"url_configuration":                              "UrlConfiguration",
+		"user_agent":                                     "UserAgent",
+		"user_agent_header":                              "UserAgentHeader",
+		"vector_ingestion_configuration":                 "VectorIngestionConfiguration",
+		"video_extraction_configuration":                 "VideoExtractionConfiguration",
+		"video_extraction_status":                        "VideoExtractionStatus",
+		"web_configuration":                              "WebConfiguration",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -220,6 +220,14 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		//	      "minLength": 1,
 		//	      "type": "string"
 		//	    },
+		//	    "S3ObjectStorageMode": {
+		//	      "description": "",
+		//	      "enum": [
+		//	        "COPY",
+		//	        "REFERENCE"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "S3ObjectVersion": {
 		//	      "description": "For versioned objects, the version of the deployment package object to use.",
 		//	      "maxLength": 1024,
@@ -275,6 +283,22 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 					// S3Key is a write-only property.
+				}, /*END ATTRIBUTE*/
+				// Property: S3ObjectStorageMode
+				"s3_object_storage_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"COPY",
+							"REFERENCE",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+					// S3ObjectStorageMode is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: S3ObjectVersion
 				"s3_object_version": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1562,6 +1586,7 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		"runtime_version_arn":                       "RuntimeVersionArn",
 		"s3_bucket":                                 "S3Bucket",
 		"s3_key":                                    "S3Key",
+		"s3_object_storage_mode":                    "S3ObjectStorageMode",
 		"s3_object_version":                         "S3ObjectVersion",
 		"security_group_ids":                        "SecurityGroupIds",
 		"size":                                      "Size",
@@ -1593,6 +1618,7 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/Code/S3ObjectVersion",
 		"/properties/Code/ZipFile",
 		"/properties/Code/SourceKMSKeyArn",
+		"/properties/Code/S3ObjectStorageMode",
 		"/properties/PublishToLatestPublished",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
