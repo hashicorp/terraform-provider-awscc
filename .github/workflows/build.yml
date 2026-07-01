@@ -18,6 +18,9 @@ name: build
 #
 on: [workflow_dispatch, push]
 
+permissions:
+  contents: read # Needed for checkout
+
 env:
   PKG_NAME: "terraform-provider-awscc"
 

@@ -36,6 +36,8 @@ on:
           - "production"
         default: "staging"
 
+permissions: {} # Workflow uses BOB_GITHUB_TOKEN secret
+
 env:
   slack_channel: "C09L3G3V55J" # #feed-tf-aws
   product_name: "terraform-provider-awscc"
