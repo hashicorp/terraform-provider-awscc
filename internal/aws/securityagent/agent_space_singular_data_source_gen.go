@@ -267,6 +267,21 @@ func agentSpaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                  "required": [
 		//	                    "GitHubRepository"
 		//	                  ]
+		//	                },
+		//	                {
+		//	                  "required": [
+		//	                    "GitLabRepository"
+		//	                  ]
+		//	                },
+		//	                {
+		//	                  "required": [
+		//	                    "BitbucketRepository"
+		//	                  ]
+		//	                },
+		//	                {
+		//	                  "required": [
+		//	                    "ConfluenceDocument"
+		//	                  ]
 		//	                }
 		//	              ]
 		//	            },
@@ -276,12 +291,112 @@ func agentSpaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                  "required": [
 		//	                    "GitHubCapabilities"
 		//	                  ]
+		//	                },
+		//	                {
+		//	                  "required": [
+		//	                    "GitLabCapabilities"
+		//	                  ]
+		//	                },
+		//	                {
+		//	                  "required": [
+		//	                    "BitbucketCapabilities"
+		//	                  ]
+		//	                },
+		//	                {
+		//	                  "required": [
+		//	                    "ConfluenceCapabilities"
+		//	                  ]
 		//	                }
 		//	              ]
 		//	            }
 		//	          ],
-		//	          "description": "Selected Resource (eg: Code Repository) from an Integration",
+		//	          "description": "Selected Resource (eg: Code Repository, Document) from an Integration",
 		//	          "properties": {
+		//	            "BitbucketCapabilities": {
+		//	              "additionalProperties": false,
+		//	              "description": "Bitbucket repository capabilities",
+		//	              "properties": {
+		//	                "LeaveComments": {
+		//	                  "description": "Enables Code Review in the repository",
+		//	                  "type": "boolean"
+		//	                },
+		//	                "RemediateCode": {
+		//	                  "description": "Enables creation of pull requests with automated fixes",
+		//	                  "type": "boolean"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "BitbucketRepository": {
+		//	              "additionalProperties": false,
+		//	              "description": "Bitbucket repository details",
+		//	              "properties": {
+		//	                "Name": {
+		//	                  "description": "Bitbucket repository name",
+		//	                  "type": "string"
+		//	                },
+		//	                "Workspace": {
+		//	                  "description": "Bitbucket workspace slug owning the repository",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Name",
+		//	                "Workspace"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "ConfluenceCapabilities": {
+		//	              "additionalProperties": false,
+		//	              "description": "Confluence document capabilities",
+		//	              "properties": {
+		//	                "CreateDocument": {
+		//	                  "description": "Enables creation of new Confluence documents in the same space",
+		//	                  "type": "boolean"
+		//	                },
+		//	                "FetchDocument": {
+		//	                  "description": "Enables read access to the document content",
+		//	                  "type": "boolean"
+		//	                },
+		//	                "UpdateDocument": {
+		//	                  "description": "Enables updates to the document",
+		//	                  "type": "boolean"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "ConfluenceDocument": {
+		//	              "additionalProperties": false,
+		//	              "description": "Confluence document details",
+		//	              "properties": {
+		//	                "Name": {
+		//	                  "description": "Customer-supplied logical name for the Confluence document",
+		//	                  "type": "string"
+		//	                },
+		//	                "PageId": {
+		//	                  "description": "Confluence page identifier",
+		//	                  "type": "string"
+		//	                },
+		//	                "SpaceKey": {
+		//	                  "description": "Confluence space key containing the document",
+		//	                  "type": "string"
+		//	                },
+		//	                "SpaceTitle": {
+		//	                  "description": "Read-only human-readable title of the containing space, populated from service-side metadata",
+		//	                  "type": "string"
+		//	                },
+		//	                "Title": {
+		//	                  "description": "Read-only human-readable title of the page, populated from service-side metadata",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Name",
+		//	                "SpaceKey",
+		//	                "PageId"
+		//	              ],
+		//	              "type": "object"
+		//	            },
 		//	            "GitHubCapabilities": {
 		//	              "additionalProperties": false,
 		//	              "description": "GitHub repository capabilities",
@@ -319,6 +434,40 @@ func agentSpaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "Owner"
 		//	              ],
 		//	              "type": "object"
+		//	            },
+		//	            "GitLabCapabilities": {
+		//	              "additionalProperties": false,
+		//	              "description": "GitLab repository capabilities",
+		//	              "properties": {
+		//	                "LeaveComments": {
+		//	                  "description": "Enables Code Review in the repository",
+		//	                  "type": "boolean"
+		//	                },
+		//	                "RemediateCode": {
+		//	                  "description": "Enables creation of merge requests with automated fixes",
+		//	                  "type": "boolean"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "GitLabRepository": {
+		//	              "additionalProperties": false,
+		//	              "description": "GitLab repository details",
+		//	              "properties": {
+		//	                "Name": {
+		//	                  "description": "GitLab project name",
+		//	                  "type": "string"
+		//	                },
+		//	                "Namespace": {
+		//	                  "description": "GitLab project namespace (user, group, or subgroup path)",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Name",
+		//	                "Namespace"
+		//	              ],
+		//	              "type": "object"
 		//	            }
 		//	          },
 		//	          "type": "object"
@@ -346,6 +495,94 @@ func agentSpaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 					"provider_resources": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BitbucketCapabilities
+								"bitbucket_capabilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: LeaveComments
+										"leave_comments": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Description: "Enables Code Review in the repository",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: RemediateCode
+										"remediate_code": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Description: "Enables creation of pull requests with automated fixes",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Bitbucket repository capabilities",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: BitbucketRepository
+								"bitbucket_repository": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Bitbucket repository name",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Workspace
+										"workspace": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Bitbucket workspace slug owning the repository",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Bitbucket repository details",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ConfluenceCapabilities
+								"confluence_capabilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: CreateDocument
+										"create_document": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Description: "Enables creation of new Confluence documents in the same space",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: FetchDocument
+										"fetch_document": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Description: "Enables read access to the document content",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: UpdateDocument
+										"update_document": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Description: "Enables updates to the document",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Confluence document capabilities",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ConfluenceDocument
+								"confluence_document": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Customer-supplied logical name for the Confluence document",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: PageId
+										"page_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Confluence page identifier",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: SpaceKey
+										"space_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Confluence space key containing the document",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: SpaceTitle
+										"space_title": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Read-only human-readable title of the containing space, populated from service-side metadata",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Title
+										"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Read-only human-readable title of the page, populated from service-side metadata",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Confluence document details",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
 								// Property: GitHubCapabilities
 								"git_hub_capabilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -378,6 +615,40 @@ func agentSpaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "GitHub repository details",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: GitLabCapabilities
+								"git_lab_capabilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: LeaveComments
+										"leave_comments": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Description: "Enables Code Review in the repository",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: RemediateCode
+										"remediate_code": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Description: "Enables creation of merge requests with automated fixes",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "GitLab repository capabilities",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: GitLabRepository
+								"git_lab_repository": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "GitLab project name",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Namespace
+										"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "GitLab project namespace (user, group, or subgroup path)",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "GitLab repository details",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -512,13 +783,21 @@ func agentSpaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"agent_space_id":           "AgentSpaceId",
 		"aws_resources":            "AwsResources",
+		"bitbucket_capabilities":   "BitbucketCapabilities",
+		"bitbucket_repository":     "BitbucketRepository",
 		"code_review_settings":     "CodeReviewSettings",
+		"confluence_capabilities":  "ConfluenceCapabilities",
+		"confluence_document":      "ConfluenceDocument",
 		"controls_scanning":        "ControlsScanning",
+		"create_document":          "CreateDocument",
 		"created_at":               "CreatedAt",
 		"description":              "Description",
+		"fetch_document":           "FetchDocument",
 		"general_purpose_scanning": "GeneralPurposeScanning",
 		"git_hub_capabilities":     "GitHubCapabilities",
 		"git_hub_repository":       "GitHubRepository",
+		"git_lab_capabilities":     "GitLabCapabilities",
+		"git_lab_repository":       "GitLabRepository",
 		"iam_roles":                "IamRoles",
 		"integrated_resources":     "IntegratedResources",
 		"integration":              "Integration",
@@ -528,19 +807,26 @@ func agentSpaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"leave_comments":           "LeaveComments",
 		"log_groups":               "LogGroups",
 		"name":                     "Name",
+		"namespace":                "Namespace",
 		"owner":                    "Owner",
+		"page_id":                  "PageId",
 		"provider_resources":       "ProviderResources",
 		"remediate_code":           "RemediateCode",
 		"s3_buckets":               "S3Buckets",
 		"secret_arns":              "SecretArns",
 		"security_group_arns":      "SecurityGroupArns",
+		"space_key":                "SpaceKey",
+		"space_title":              "SpaceTitle",
 		"subnet_arns":              "SubnetArns",
 		"tags":                     "Tags",
 		"target_domain_ids":        "TargetDomainIds",
+		"title":                    "Title",
+		"update_document":          "UpdateDocument",
 		"updated_at":               "UpdatedAt",
 		"value":                    "Value",
 		"vpc_arn":                  "VpcArn",
 		"vpcs":                     "Vpcs",
+		"workspace":                "Workspace",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

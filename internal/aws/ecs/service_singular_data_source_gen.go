@@ -688,14 +688,16 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "",
+		//	  "description": "The optional monitoring configuration for the service, which defines the resolution for the service-level ``CPUUtilization`` and ``MemoryUtilization`` Amazon CloudWatch metrics. When not specified, Amazon ECS uses the default resolution of ``60`` seconds.",
 		//	  "properties": {
 		//	    "MetricConfigurations": {
+		//	      "description": "The list of metric configurations for the service monitoring.",
 		//	      "items": {
 		//	        "additionalProperties": false,
-		//	        "description": "",
+		//	        "description": "The configuration for a specific set of metrics to collect for a service.",
 		//	        "properties": {
 		//	          "MetricNames": {
+		//	            "description": "The list of metric names to configure. The supported metric names are ``CPUUtilization`` and ``MemoryUtilization``.",
 		//	            "items": {
 		//	              "enum": [
 		//	                "CPUUtilization",
@@ -709,6 +711,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "uniqueItems": true
 		//	          },
 		//	          "ResolutionSeconds": {
+		//	            "description": "The resolution, in seconds, at which to collect the metrics. The valid values are ``20`` and ``60``.",
 		//	            "enum": [
 		//	              20,
 		//	              60
@@ -741,18 +744,21 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 							// Property: MetricNames
 							"metric_names": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
+								Description: "The list of metric names to configure. The supported metric names are ``CPUUtilization`` and ``MemoryUtilization``.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: ResolutionSeconds
 							"resolution_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
+								Description: "The resolution, in seconds, at which to collect the metrics. The valid values are ``20`` and ``60``.",
+								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Computed: true,
+					Description: "The list of metric configurations for the service monitoring.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "",
+			Description: "The optional monitoring configuration for the service, which defines the resolution for the service-level ``CPUUtilization`` and ``MemoryUtilization`` Amazon CloudWatch metrics. When not specified, Amazon ECS uses the default resolution of ``60`` seconds.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name

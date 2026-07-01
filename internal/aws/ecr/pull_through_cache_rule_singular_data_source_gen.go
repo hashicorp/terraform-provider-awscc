@@ -29,7 +29,7 @@ func pullThroughCacheRuleDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The ARN of the Secrets Manager secret associated with the pull through cache rule.",
 		//	  "maxLength": 612,
 		//	  "minLength": 50,
-		//	  "pattern": "^arn:aws:secretsmanager:[a-zA-Z0-9-:]+:secret:ecr\\-pullthroughcache\\/[a-zA-Z0-9\\/_+=.@-]+$",
+		//	  "pattern": "^arn:[a-zA-Z-]+:secretsmanager:[a-zA-Z0-9-:]+:secret:ecr\\-pullthroughcache\\/[a-zA-Z0-9\\/_+=.@-]+$",
 		//	  "type": "string"
 		//	}
 		"credential_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

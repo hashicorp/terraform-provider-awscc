@@ -97,11 +97,11 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Restricts the ``lambda:InvokeFunction`` action to function URL calls. When specified, this option prevents the principal from invoking the function by any means other than the function URL. For more information, see [Control access to Lambda function URLs](https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html).",
+		//	  "description": "Indicates whether the permission applies when the function is invoked through a function URL.",
 		//	  "type": "boolean"
 		//	}
 		"invoked_via_function_url": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Restricts the ``lambda:InvokeFunction`` action to function URL calls. When specified, this option prevents the principal from invoking the function by any means other than the function URL. For more information, see [Control access to Lambda function URLs](https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html).",
+			Description: "Indicates whether the permission applies when the function is invoked through a function URL.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Principal

@@ -146,6 +146,11 @@ func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, er
 		//	        "oneOf": [
 		//	          {
 		//	            "required": [
+		//	              "PartnerThreatProtection"
+		//	            ]
+		//	          },
+		//	          {
+		//	            "required": [
 		//	              "FirewallAdvancedContentCategory"
 		//	            ]
 		//	          },
@@ -187,6 +192,22 @@ func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, er
 		//	              "Category"
 		//	            ],
 		//	            "type": "object"
+		//	          },
+		//	          "PartnerThreatProtection": {
+		//	            "additionalProperties": false,
+		//	            "description": "Configuration for a partner threat protection rule type.",
+		//	            "properties": {
+		//	              "Partner": {
+		//	                "description": "The partner identifier value.",
+		//	                "maxLength": 128,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Partner"
+		//	            ],
+		//	            "type": "object"
 		//	          }
 		//	        },
 		//	        "type": "object"
@@ -205,6 +226,15 @@ func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, er
 		//	        "description": "Qtype",
 		//	        "maxLength": 16,
 		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Status": {
+		//	        "description": "The status of the firewall rule.",
+		//	        "enum": [
+		//	          "COMPLETE",
+		//	          "CREATING",
+		//	          "CREATION_FAILED"
+		//	        ],
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -292,6 +322,18 @@ func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, er
 								Description: "Configuration for an advanced threat category rule type.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
+							// Property: PartnerThreatProtection
+							"partner_threat_protection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Partner
+									"partner": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The partner identifier value.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Configuration for a partner threat protection rule type.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "Advanced firewall rule type. Mutually exclusive with FirewallDomainListId and DnsThreatProtection/ConfidenceThreshold.",
 						Computed:    true,
@@ -309,6 +351,11 @@ func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, er
 					// Property: Qtype
 					"qtype": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Qtype",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Status
+					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The status of the firewall rule.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -514,6 +561,8 @@ func firewallRuleGroupDataSource(ctx context.Context) (datasource.DataSource, er
 		"modification_time":                  "ModificationTime",
 		"name":                               "Name",
 		"owner_id":                           "OwnerId",
+		"partner":                            "Partner",
+		"partner_threat_protection":          "PartnerThreatProtection",
 		"priority":                           "Priority",
 		"qtype":                              "Qtype",
 		"rule_count":                         "RuleCount",

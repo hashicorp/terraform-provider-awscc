@@ -150,6 +150,14 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "minLength": 1,
 		//	      "type": "string"
 		//	    },
+		//	    "S3ObjectStorageMode": {
+		//	      "description": "",
+		//	      "enum": [
+		//	        "COPY",
+		//	        "REFERENCE"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "S3ObjectVersion": {
 		//	      "description": "For versioned objects, the version of the deployment package object to use.",
 		//	      "maxLength": 1024,
@@ -183,6 +191,11 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: S3Key
 				"s3_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The Amazon S3 key of the deployment package.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3ObjectStorageMode
+				"s3_object_storage_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: S3ObjectVersion
@@ -1071,6 +1084,7 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"runtime_version_arn":                       "RuntimeVersionArn",
 		"s3_bucket":                                 "S3Bucket",
 		"s3_key":                                    "S3Key",
+		"s3_object_storage_mode":                    "S3ObjectStorageMode",
 		"s3_object_version":                         "S3ObjectVersion",
 		"security_group_ids":                        "SecurityGroupIds",
 		"size":                                      "Size",

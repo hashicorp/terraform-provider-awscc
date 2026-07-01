@@ -203,6 +203,9 @@ func expressGatewayServiceDataSource(ctx context.Context) (datasource.DataSource
 		//	      "ServiceRevisionArn": {
 		//	        "type": "string"
 		//	      },
+		//	      "TaskDefinitionArn": {
+		//	        "type": "string"
+		//	      },
 		//	      "TaskRoleArn": {
 		//	        "type": "string"
 		//	      }
@@ -366,6 +369,10 @@ func expressGatewayServiceDataSource(ctx context.Context) (datasource.DataSource
 					}, /*END ATTRIBUTE*/
 					// Property: ServiceRevisionArn
 					"service_revision_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: TaskDefinitionArn
+					"task_definition_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
 					}, /*END ATTRIBUTE*/
 					// Property: TaskRoleArn
@@ -927,6 +934,15 @@ func expressGatewayServiceDataSource(ctx context.Context) (datasource.DataSource
 			}, /*END NESTED OBJECT*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: TaskDefinitionArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"task_definition_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: TaskRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -1016,6 +1032,7 @@ func expressGatewayServiceDataSource(ctx context.Context) (datasource.DataSource
 		"subnets":                           "Subnets",
 		"tags":                              "Tags",
 		"target_group_arns":                 "TargetGroupArns",
+		"task_definition_arn":               "TaskDefinitionArn",
 		"task_role_arn":                     "TaskRoleArn",
 		"updated_at":                        "UpdatedAt",
 		"value":                             "Value",

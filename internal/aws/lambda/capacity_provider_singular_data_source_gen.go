@@ -265,10 +265,10 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "",
+		//	  "description": "Configuration for tag propagation to managed resources launched by the capacity provider.",
 		//	  "properties": {
 		//	    "ExplicitTags": {
-		//	      "description": "",
+		//	      "description": "A list of tags to explicitly propagate to managed resources. Maximum of 40 tags.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "additionalProperties": false,
@@ -298,7 +298,7 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	      "uniqueItems": true
 		//	    },
 		//	    "Mode": {
-		//	      "description": "The mode for tag propagation.",
+		//	      "description": "The mode for tag propagation. Use ``Explicit`` to propagate specific tags, or ``None`` to disable propagation.",
 		//	      "enum": [
 		//	        "None",
 		//	        "Explicit"
@@ -326,16 +326,16 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "",
+					Description: "A list of tags to explicitly propagate to managed resources. Maximum of 40 tags.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Mode
 				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The mode for tag propagation.",
+					Description: "The mode for tag propagation. Use ``Explicit`` to propagate specific tags, or ``None`` to disable propagation.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "",
+			Description: "Configuration for tag propagation to managed resources launched by the capacity provider.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: State
@@ -413,17 +413,17 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "properties": {
 		//	    "LoggingConfig": {
 		//	      "additionalProperties": false,
-		//	      "description": "The logging configuration for the capacity provider.",
+		//	      "description": "",
 		//	      "properties": {
 		//	        "LogGroup": {
-		//	          "description": "The log group name.",
+		//	          "description": "",
 		//	          "maxLength": 512,
 		//	          "minLength": 1,
 		//	          "pattern": "[\\.\\-_/#A-Za-z0-9]+",
 		//	          "type": "string"
 		//	        },
 		//	        "SystemLogLevel": {
-		//	          "description": "System log granularity level",
+		//	          "description": "",
 		//	          "enum": [
 		//	            "DEBUG",
 		//	            "INFO",
@@ -444,16 +444,16 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: LogGroup
 						"log_group": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The log group name.",
+							Description: "",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: SystemLogLevel
 						"system_log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "System log granularity level",
+							Description: "",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "The logging configuration for the capacity provider.",
+					Description: "",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
