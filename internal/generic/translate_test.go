@@ -1045,3 +1045,232 @@ func BenchmarkReorderKeyValueSlicesToMatchPrior(b *testing.B) {
 		reorderKeyValueSlicesToMatchPrior(current, prior)
 	}
 }
+
+// testDuplicateIdSchema models a resource that has both a top-level CloudFormation
+// property named "Id" (renamed by the generator to "distribution_id" as Terraform
+// reserves "id" for the resource's primary identifier) and a nested property named
+// "Id" (mapped to "id"), e.g. AWS::CloudFront::Distribution or AWS::CloudFront::AnycastIpList.
+var testDuplicateIdSchema = schema.Schema{
+	Attributes: map[string]schema.Attribute{
+		"distribution_id": schema.StringAttribute{
+			Computed: true,
+		},
+		"id": schema.StringAttribute{
+			Computed: true,
+		},
+		"origins": schema.ListNestedAttribute{
+			NestedObject: schema.NestedAttributeObject{
+				Attributes: map[string]schema.Attribute{
+					"id": schema.StringAttribute{
+						Required: true,
+					},
+					"domain_name": schema.StringAttribute{
+						Required: true,
+					},
+				},
+			},
+			Required: true,
+		},
+	},
+}
+
+// duplicateIdTfToCfNameMap is the attribute name map as emitted by the code generator
+// for testDuplicateIdSchema: two Terraform attribute names map to the CloudFormation
+// property name "Id".
+var duplicateIdTfToCfNameMap = map[string]string{
+	"distribution_id": "Id",
+	"domain_name":     "DomainName",
+	"id":              "Id",
+	"origins":         "Origins",
+}
+
+var duplicateIdObjectType = tftypes.Object{
+	AttributeTypes: map[string]tftypes.Type{
+		"distribution_id": tftypes.String,
+		"id":              tftypes.String,
+		"origins": tftypes.List{
+			ElementType: originElementType,
+		},
+	},
+}
+
+var originElementType = tftypes.Object{
+	AttributeTypes: map[string]tftypes.Type{
+		"id":          tftypes.String,
+		"domain_name": tftypes.String,
+	},
+}
+
+func TestInvertAttributeNameMap(t *testing.T) {
+	testCases := []struct {
+		TestName                  string
+		TfToCfNameMap             map[string]string
+		ExpectedError             bool
+		ExpectedCfToTfNameMap     map[string]string
+		ExpectedRootCfToTfNameMap map[string]string
+		ExpectedRootTfToCfNameMap map[string]string
+	}{
+		{
+			TestName:      "no duplicates",
+			TfToCfNameMap: simpleTfToCfNameMap,
+			ExpectedCfToTfNameMap: map[string]string{
+				"Arn":        "arn",
+				"Identifier": "identifier",
+				"Name":       "name",
+				"Number":     "number",
+			},
+		},
+		{
+			TestName:      "duplicate mapping for Id",
+			TfToCfNameMap: duplicateIdTfToCfNameMap,
+			ExpectedCfToTfNameMap: map[string]string{
+				"DomainName": "domain_name",
+				"Id":         "id",
+				"Origins":    "origins",
+			},
+			ExpectedRootCfToTfNameMap: map[string]string{
+				"Id": "distribution_id",
+			},
+			ExpectedRootTfToCfNameMap: map[string]string{
+				"id": "ID",
+			},
+		},
+		{
+			TestName: "duplicate mapping for Provider",
+			TfToCfNameMap: map[string]string{
+				"name":          "Name",
+				"provider":      "Provider",
+				"provider_name": "Provider",
+			},
+			ExpectedCfToTfNameMap: map[string]string{
+				"Name":     "name",
+				"Provider": "provider",
+			},
+			ExpectedRootCfToTfNameMap: map[string]string{
+				"Provider": "provider_name",
+			},
+		},
+		{
+			TestName: "irreconcilable duplicate mapping",
+			TfToCfNameMap: map[string]string{
+				"first":  "Name",
+				"second": "Name",
+			},
+			ExpectedError: true,
+		},
+	}
+
+	for _, testCase := range testCases {
+		t.Run(testCase.TestName, func(t *testing.T) {
+			cfToTfNameMap, rootCfToTfNameMap, rootTfToCfNameMap, err := invertAttributeNameMap(testCase.TfToCfNameMap)
+
+			if err == nil && testCase.ExpectedError {
+				t.Fatalf("expected error")
+			}
+
+			if err != nil && !testCase.ExpectedError {
+				t.Fatalf("unexpected error: %s", err)
+			}
+
+			if err != nil {
+				return
+			}
+
+			if diff := cmp.Diff(cfToTfNameMap, testCase.ExpectedCfToTfNameMap); diff != "" {
+				t.Errorf("unexpected cfToTfNameMap diff (+wanted, -got): %s", diff)
+			}
+
+			if diff := cmp.Diff(rootCfToTfNameMap, testCase.ExpectedRootCfToTfNameMap); diff != "" {
+				t.Errorf("unexpected rootCfToTfNameMap diff (+wanted, -got): %s", diff)
+			}
+
+			if diff := cmp.Diff(rootTfToCfNameMap, testCase.ExpectedRootTfToCfNameMap); diff != "" {
+				t.Errorf("unexpected rootTfToCfNameMap diff (+wanted, -got): %s", diff)
+			}
+		})
+	}
+}
+
+func TestTranslateRoundTripWithDuplicateId(t *testing.T) {
+	var r genericResource
+
+	if err := resourceWithAttributeNameMap(duplicateIdTfToCfNameMap)(&r); err != nil {
+		t.Fatalf("unexpected error: %s", err)
+	}
+
+	// Cloud Control GetResource response -> Terraform State.
+	// The top-level "Id" property maps to "distribution_id", the nested "Id" property maps to "id".
+	resourceModel := map[string]any{
+		"Id": "E2EXAMPLE123",
+		"Origins": []any{
+			map[string]any{
+				"Id":         "origin1",
+				"DomainName": "example.com",
+			},
+		},
+	}
+
+	toTF := toTerraform{cfToTfNameMap: r.cfToTfNameMap, rootCfToTfNameMap: r.rootCfToTfNameMap}
+	schema := testDuplicateIdSchema
+	val, err := toTF.FromRaw(context.TODO(), &schema, resourceModel)
+
+	if err != nil {
+		t.Fatalf("unexpected error: %s", err)
+	}
+
+	expectedVal := tftypes.NewValue(duplicateIdObjectType, map[string]tftypes.Value{
+		"distribution_id": tftypes.NewValue(tftypes.String, "E2EXAMPLE123"),
+		// The "id" attribute holds the Cloud Control resource identifier and is set separately.
+		"id": tftypes.NewValue(tftypes.String, nil),
+		"origins": tftypes.NewValue(tftypes.List{
+			ElementType: originElementType,
+		}, []tftypes.Value{
+			tftypes.NewValue(originElementType, map[string]tftypes.Value{
+				"id":          tftypes.NewValue(tftypes.String, "origin1"),
+				"domain_name": tftypes.NewValue(tftypes.String, "example.com"),
+			}),
+		}),
+	})
+
+	if diff := cmp.Diff(val, expectedVal); diff != "" {
+		t.Errorf("unexpected diff (+wanted, -got): %s", diff)
+	}
+
+	// Terraform State -> Cloud Control DesiredState.
+	// The top-level "id" attribute maps to the synthetic "ID" property,
+	// the top-level "distribution_id" attribute maps to "Id" and the nested "id" attribute maps to "Id".
+	stateVal := tftypes.NewValue(duplicateIdObjectType, map[string]tftypes.Value{
+		"distribution_id": tftypes.NewValue(tftypes.String, "E2EXAMPLE123"),
+		"id":              tftypes.NewValue(tftypes.String, "E2EXAMPLE123"),
+		"origins": tftypes.NewValue(tftypes.List{
+			ElementType: originElementType,
+		}, []tftypes.Value{
+			tftypes.NewValue(originElementType, map[string]tftypes.Value{
+				"id":          tftypes.NewValue(tftypes.String, "origin1"),
+				"domain_name": tftypes.NewValue(tftypes.String, "example.com"),
+			}),
+		}),
+	})
+
+	toCC := toCloudControl{tfToCfNameMap: r.tfToCfNameMap, rootTfToCfNameMap: r.rootTfToCfNameMap}
+	raw, err := toCC.AsRaw(context.TODO(), &schema, stateVal)
+
+	if err != nil {
+		t.Fatalf("unexpected error: %s", err)
+	}
+
+	expectedRaw := map[string]any{
+		"ID": "E2EXAMPLE123",
+		"Id": "E2EXAMPLE123",
+		"Origins": []any{
+			map[string]any{
+				"Id":         "origin1",
+				"DomainName": "example.com",
+			},
+		},
+	}
+
+	if diff := cmp.Diff(raw, expectedRaw); diff != "" {
+		t.Errorf("unexpected diff (+wanted, -got): %s", diff)
+	}
+}
