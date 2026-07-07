@@ -1,5 +1,12 @@
 ## 1.92.0 (Unreleased)
 
+FEATURES:
+
+* **New Data Source:** `awscc_wafv2_rule_group`
+* **New Data Source:** `awscc_wafv2_web_acl`
+* **New Resource:** `awscc_wafv2_rule_group`
+* **New Resource:** `awscc_wafv2_web_acl`
+
 ## 1.91.0 (July 1, 2026)
 
 FEATURES:

@@ -6458,6 +6458,14 @@
         "identifier": ["Name","Id","Scope"]
     },
     {
+        "resource": "awscc_wafv2_rule_group",
+        "identifier": ["Name","Id","Scope"]
+    },
+    {
+        "resource": "awscc_wafv2_web_acl",
+        "identifier": ["Name","Id","Scope"]
+    },
+    {
         "resource": "awscc_wafv2_web_acl_association",
         "identifier": ["ResourceArn","WebACLArn"]
     },

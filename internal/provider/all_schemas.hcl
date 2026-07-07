@@ -6288,20 +6288,22 @@ resource_schema "aws_wafv2_rule_group" {
   cloudformation_type_name               = "AWS::WAFv2::RuleGroup"
   suppress_plural_data_source_generation = true
 
-  # Suppression Reason:
+  # Latest schema updates are suppressed.
+  # Local schema is de-recursed to 3 levels of statement nesting via
+  # python3 tools/derecurse-schema.py internal/service/cloudformation/schemas/AWS_WAFv2_RuleGroup.json
+  # Re-apply the script after refreshing the schema.
   # Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
 }
 
 resource_schema "aws_wafv2_web_acl" {
   cloudformation_type_name               = "AWS::WAFv2::WebACL"
   suppress_plural_data_source_generation = true
 
-  # Suppression Reason:
+  # Latest schema updates are suppressed.
+  # Local schema is de-recursed to 3 levels of statement nesting via
+  # python3 tools/derecurse-schema.py internal/service/cloudformation/schemas/AWS_WAFv2_WebACL.json
+  # Re-apply the script after refreshing the schema.
   # Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
 }
 
 resource_schema "aws_wafv2_web_acl_association" {
