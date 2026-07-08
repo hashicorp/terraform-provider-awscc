@@ -1,5 +1,28 @@
 ## 1.92.0 (Unreleased)
 
+FEATURES:
+
+* **New Data Source:** `awscc_cloudwatch_insight_rule`
+* **New Data Source:** `awscc_cloudwatch_insight_rules`
+* **New Data Source:** `awscc_cognito_user_pool_regional_configuration_attachment`
+* **New Data Source:** `awscc_cognito_user_pool_replica`
+* **New Data Source:** `awscc_config_connector`
+* **New Data Source:** `awscc_config_connectors`
+* **New Data Source:** `awscc_connect_test_case`
+* **New Data Source:** `awscc_customerprofiles_domain_object_type`
+* **New Data Source:** `awscc_servicecatalog_accepted_portfolio_share`
+* **New Data Source:** `awscc_servicecatalog_accepted_portfolio_shares`
+* **New List Resource:** `awscc_cloudwatch_insight_rule`
+* **New List Resource:** `awscc_config_connector`
+* **New List Resource:** `awscc_servicecatalog_accepted_portfolio_share`
+* **New Resource:** `awscc_cloudwatch_insight_rule`
+* **New Resource:** `awscc_cognito_user_pool_regional_configuration_attachment`
+* **New Resource:** `awscc_cognito_user_pool_replica`
+* **New Resource:** `awscc_config_connector`
+* **New Resource:** `awscc_connect_test_case`
+* **New Resource:** `awscc_customerprofiles_domain_object_type`
+* **New Resource:** `awscc_servicecatalog_accepted_portfolio_share`
+
 ## 1.91.0 (July 1, 2026)
 
 FEATURES:

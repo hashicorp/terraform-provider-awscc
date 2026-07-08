@@ -189,7 +189,18 @@ Read-Only:
 Read-Only:
 
 - `enable` (Boolean) Determines whether to use the deployment circuit breaker logic for the service.
+- `reset_on_healthy_task` (Boolean)
 - `rollback` (Boolean) Determines whether to configure Amazon ECS to roll back the service if a service deployment fails. If rollback is on, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.
+- `threshold_configuration` (Attributes) (see [below for nested schema](#nestedatt--deployment_configuration--deployment_circuit_breaker--threshold_configuration))
+
+<a id="nestedatt--deployment_configuration--deployment_circuit_breaker--threshold_configuration"></a>
+### Nested Schema for `deployment_configuration.deployment_circuit_breaker.threshold_configuration`
+
+Read-Only:
+
+- `type` (String)
+- `value` (Number)
+
 
 
 <a id="nestedatt--deployment_configuration--lifecycle_hooks"></a>

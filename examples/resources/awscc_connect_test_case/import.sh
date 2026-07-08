@@ -1,0 +1,1 @@
+$ terraform import awscc_connect_test_case.example "test_case_arn"

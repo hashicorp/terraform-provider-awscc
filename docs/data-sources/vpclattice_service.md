@@ -27,6 +27,7 @@ Data Source schema for AWS::VpcLattice::Service
 - `created_at` (String)
 - `custom_domain_name` (String)
 - `dns_entry` (Attributes) (see [below for nested schema](#nestedatt--dns_entry))
+- `idle_timeout_seconds` (Number)
 - `last_updated_at` (String)
 - `name` (String)
 - `service_id` (String)
