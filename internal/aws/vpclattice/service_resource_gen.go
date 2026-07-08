@@ -9,10 +9,12 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
@@ -177,6 +179,24 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: IdleTimeoutSeconds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maximum": 600,
+		//	  "minimum": 60,
+		//	  "type": "integer"
+		//	}
+		"idle_timeout_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.Int64{ /*START VALIDATORS*/
+				int64validator.Between(60, 600),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -324,21 +344,22 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                "Arn",
-		"auth_type":          "AuthType",
-		"certificate_arn":    "CertificateArn",
-		"created_at":         "CreatedAt",
-		"custom_domain_name": "CustomDomainName",
-		"dns_entry":          "DnsEntry",
-		"domain_name":        "DomainName",
-		"hosted_zone_id":     "HostedZoneId",
-		"key":                "Key",
-		"last_updated_at":    "LastUpdatedAt",
-		"name":               "Name",
-		"service_id":         "Id",
-		"status":             "Status",
-		"tags":               "Tags",
-		"value":              "Value",
+		"arn":                  "Arn",
+		"auth_type":            "AuthType",
+		"certificate_arn":      "CertificateArn",
+		"created_at":           "CreatedAt",
+		"custom_domain_name":   "CustomDomainName",
+		"dns_entry":            "DnsEntry",
+		"domain_name":          "DomainName",
+		"hosted_zone_id":       "HostedZoneId",
+		"idle_timeout_seconds": "IdleTimeoutSeconds",
+		"key":                  "Key",
+		"last_updated_at":      "LastUpdatedAt",
+		"name":                 "Name",
+		"service_id":           "Id",
+		"status":               "Status",
+		"tags":                 "Tags",
+		"value":                "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

@@ -193,6 +193,7 @@ resource "awscc_codepipeline_pipeline" "example" {
 
 ### Read-Only
 
+- `arn` (String) The Amazon Resource Name (ARN) of the pipeline.
 - `id` (String) Uniquely identifies the resource.
 - `version` (String) The version of the pipeline.
 

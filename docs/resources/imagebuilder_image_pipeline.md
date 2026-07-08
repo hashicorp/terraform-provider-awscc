@@ -24,6 +24,7 @@ Resource schema for AWS::ImageBuilder::ImagePipeline
 - `execution_role` (String) The execution role name/ARN for the image build, if provided
 - `image_recipe_arn` (String) The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed.
 - `image_scanning_configuration` (Attributes) Contains settings for vulnerability scans. (see [below for nested schema](#nestedatt--image_scanning_configuration))
+- `image_tags` (Map of String) The tags to be applied to images created by this pipeline.
 - `image_tests_configuration` (Attributes) The image tests configuration of the image pipeline. (see [below for nested schema](#nestedatt--image_tests_configuration))
 - `infrastructure_configuration_arn` (String) The Amazon Resource Name (ARN) of the infrastructure configuration associated with this image pipeline.
 - `logging_configuration` (Attributes) The logging configuration settings for the image pipeline. (see [below for nested schema](#nestedatt--logging_configuration))

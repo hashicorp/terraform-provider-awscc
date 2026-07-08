@@ -372,6 +372,7 @@ func analyzerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Amazon Resource Name (ARN) of the analyzer",
 		//	  "maxLength": 1600,
 		//	  "minLength": 1,
+		//	  "pattern": "^arn:[^:]+:access-analyzer(-beta|-gamma)?:[^:]*:[^:]*:analyzer/.+$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/

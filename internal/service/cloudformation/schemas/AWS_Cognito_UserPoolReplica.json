@@ -1,0 +1,132 @@
+{
+  "typeName": "AWS::Cognito::UserPoolReplica",
+  "description": "Resource Type definition for AWS::Cognito::UserPoolReplica",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "properties": {
+    "UserPoolId": {
+      "type": "string"
+    },
+    "RegionName": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 32
+    },
+    "UserPoolTagsAtCreate": {
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/UserPoolTagsAtCreate",
+    "permissions": [
+      "cognito-idp:TagResource"
+    ]
+  },
+  "additionalProperties": false,
+  "required": [
+    "UserPoolId",
+    "RegionName"
+  ],
+  "createOnlyProperties": [
+    "/properties/UserPoolId",
+    "/properties/RegionName",
+    "/properties/UserPoolTagsAtCreate"
+  ],
+  "primaryIdentifier": [
+    "/properties/UserPoolId",
+    "/properties/RegionName"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cognito-idp:CreateUserPoolReplica",
+        "cognito-idp:ListUserPoolReplicas",
+        "cognito-idp:TagResource",
+        "iam:PassRole",
+        "iam:CreateServiceLinkedRole",
+        "kms:CreateGrant",
+        "kms:DescribeKey",
+        "kms:Decrypt",
+        "kms:Encrypt",
+        "kms:GenerateDataKeyWithoutPlaintext",
+        "kms:ReEncryptFrom",
+        "kms:ReEncryptTo"
+      ],
+      "timeoutInMinutes": 2160
+    },
+    "read": {
+      "permissions": [
+        "cognito-idp:ListUserPoolReplicas",
+        "cognito-idp:ListTagsForResource",
+        "kms:CreateGrant",
+        "kms:DescribeKey",
+        "kms:Decrypt",
+        "kms:Encrypt",
+        "kms:GenerateDataKeyWithoutPlaintext",
+        "kms:ReEncryptFrom",
+        "kms:ReEncryptTo"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cognito-idp:ListUserPoolReplicas",
+        "cognito-idp:TagResource",
+        "cognito-idp:UntagResource",
+        "kms:CreateGrant",
+        "kms:DescribeKey",
+        "kms:Decrypt",
+        "kms:Encrypt",
+        "kms:GenerateDataKeyWithoutPlaintext",
+        "kms:ReEncryptFrom",
+        "kms:ReEncryptTo"
+      ],
+      "timeoutInMinutes": 2
+    },
+    "delete": {
+      "permissions": [
+        "cognito-idp:DeleteUserPoolReplica",
+        "cognito-idp:ListUserPoolReplicas",
+        "iam:PassRole",
+        "kms:CreateGrant",
+        "kms:DescribeKey",
+        "kms:Decrypt",
+        "kms:Encrypt",
+        "kms:GenerateDataKeyWithoutPlaintext",
+        "kms:ReEncryptFrom",
+        "kms:ReEncryptTo"
+      ],
+      "timeoutInMinutes": 2160
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "UserPoolId": {
+            "$ref": "resource-schema.json#/properties/UserPoolId"
+          }
+        },
+        "required": [
+          "UserPoolId"
+        ]
+      },
+      "permissions": [
+        "cognito-idp:ListUserPoolReplicas",
+        "kms:CreateGrant",
+        "kms:DescribeKey",
+        "kms:Decrypt",
+        "kms:Encrypt",
+        "kms:GenerateDataKeyWithoutPlaintext",
+        "kms:ReEncryptFrom",
+        "kms:ReEncryptTo"
+      ]
+    }
+  }
+}

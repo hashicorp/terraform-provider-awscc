@@ -81,6 +81,16 @@
         }
       }
     },
+    "ImageTags": {
+      "description": "The tags to be applied to images created by this pipeline.",
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+        "": {
+          "type": "string"
+        }
+      }
+    },
     "DeploymentId": {
       "description": "The deployment ID of the pipeline, used for resource create/update triggers.",
       "type": "string"

@@ -1,0 +1,266 @@
+{
+  "typeName": "AWS::Cognito::UserPoolRegionalConfigurationAttachment",
+  "description": "Resource Type definition for AWS::Cognito::UserPoolRegionalConfigurationAttachment",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {
+    "EmailConfiguration": {
+      "type": "object",
+      "properties": {
+        "ReplyToEmailAddress": {
+          "type": "string"
+        },
+        "SourceArn": {
+          "type": "string"
+        },
+        "From": {
+          "type": "string"
+        },
+        "ConfigurationSet": {
+          "type": "string"
+        },
+        "EmailSendingAccount": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CustomEmailSender": {
+      "type": "object",
+      "properties": {
+        "LambdaVersion": {
+          "type": "string"
+        },
+        "LambdaArn": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CustomSMSSender": {
+      "type": "object",
+      "properties": {
+        "LambdaVersion": {
+          "type": "string"
+        },
+        "LambdaArn": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PreTokenGenerationConfig": {
+      "type": "object",
+      "properties": {
+        "LambdaVersion": {
+          "type": "string"
+        },
+        "LambdaArn": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "InboundFederation": {
+      "type": "object",
+      "properties": {
+        "LambdaVersion": {
+          "type": "string"
+        },
+        "LambdaArn": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "LambdaConfig": {
+      "type": "object",
+      "properties": {
+        "CreateAuthChallenge": {
+          "type": "string"
+        },
+        "CustomMessage": {
+          "type": "string"
+        },
+        "DefineAuthChallenge": {
+          "type": "string"
+        },
+        "PostAuthentication": {
+          "type": "string"
+        },
+        "PostConfirmation": {
+          "type": "string"
+        },
+        "PreAuthentication": {
+          "type": "string"
+        },
+        "PreSignUp": {
+          "type": "string"
+        },
+        "VerifyAuthChallengeResponse": {
+          "type": "string"
+        },
+        "UserMigration": {
+          "type": "string"
+        },
+        "PreTokenGeneration": {
+          "type": "string"
+        },
+        "CustomEmailSender": {
+          "$ref": "#/definitions/CustomEmailSender"
+        },
+        "CustomSMSSender": {
+          "$ref": "#/definitions/CustomSMSSender"
+        },
+        "PreTokenGenerationConfig": {
+          "$ref": "#/definitions/PreTokenGenerationConfig"
+        },
+        "InboundFederation": {
+          "$ref": "#/definitions/InboundFederation"
+        },
+        "KMSKeyID": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "SmsConfiguration": {
+      "type": "object",
+      "properties": {
+        "ExternalId": {
+          "type": "string"
+        },
+        "SnsCallerArn": {
+          "type": "string"
+        },
+        "SnsRegion": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "UserPoolId": {
+      "type": "string"
+    },
+    "Status": {
+      "type": "string",
+      "description": "The status of the replica. Set to ACTIVE or INACTIVE."
+    },
+    "EmailConfiguration": {
+      "$ref": "#/definitions/EmailConfiguration"
+    },
+    "LambdaConfig": {
+      "$ref": "#/definitions/LambdaConfig"
+    },
+    "SmsConfiguration": {
+      "$ref": "#/definitions/SmsConfiguration"
+    },
+    "UserPoolTags": {
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/UserPoolTags",
+    "permissions": [
+      "cognito-idp:ListTagsForResource",
+      "cognito-idp:UntagResource",
+      "cognito-idp:TagResource"
+    ]
+  },
+  "additionalProperties": false,
+  "required": [
+    "UserPoolId"
+  ],
+  "createOnlyProperties": [
+    "/properties/UserPoolId"
+  ],
+  "primaryIdentifier": [
+    "/properties/UserPoolId"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cognito-idp:DescribeUserPool",
+        "cognito-idp:ListTagsForResource",
+        "cognito-idp:ListUserPoolReplicas",
+        "cognito-idp:TagResource",
+        "cognito-idp:UntagResource",
+        "cognito-idp:UpdateUserPool",
+        "cognito-idp:UpdateUserPoolReplica",
+        "iam:PassRole",
+        "kms:CreateGrant",
+        "kms:DescribeKey",
+        "kms:Decrypt",
+        "kms:Encrypt",
+        "kms:GenerateDataKeyWithoutPlaintext",
+        "kms:ReEncryptFrom",
+        "kms:ReEncryptTo"
+      ],
+      "timeoutInMinutes": 2
+    },
+    "read": {
+      "permissions": [
+        "cognito-idp:DescribeUserPool",
+        "cognito-idp:ListTagsForResource",
+        "cognito-idp:ListUserPoolReplicas",
+        "kms:CreateGrant",
+        "kms:DescribeKey",
+        "kms:Decrypt",
+        "kms:Encrypt",
+        "kms:GenerateDataKeyWithoutPlaintext",
+        "kms:ReEncryptFrom",
+        "kms:ReEncryptTo"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cognito-idp:DescribeUserPool",
+        "cognito-idp:ListTagsForResource",
+        "cognito-idp:ListUserPoolReplicas",
+        "cognito-idp:TagResource",
+        "cognito-idp:UntagResource",
+        "cognito-idp:UpdateUserPool",
+        "cognito-idp:UpdateUserPoolReplica",
+        "iam:PassRole",
+        "kms:CreateGrant",
+        "kms:DescribeKey",
+        "kms:Decrypt",
+        "kms:Encrypt",
+        "kms:GenerateDataKeyWithoutPlaintext",
+        "kms:ReEncryptFrom",
+        "kms:ReEncryptTo"
+      ],
+      "timeoutInMinutes": 2
+    },
+    "delete": {
+      "permissions": [
+        "cognito-idp:DescribeUserPool",
+        "cognito-idp:ListTagsForResource",
+        "cognito-idp:ListUserPoolReplicas",
+        "cognito-idp:UntagResource",
+        "cognito-idp:UpdateUserPool",
+        "cognito-idp:UpdateUserPoolReplica",
+        "iam:PassRole",
+        "kms:CreateGrant",
+        "kms:DescribeKey",
+        "kms:Decrypt",
+        "kms:Encrypt",
+        "kms:GenerateDataKeyWithoutPlaintext",
+        "kms:ReEncryptFrom",
+        "kms:ReEncryptTo"
+      ],
+      "timeoutInMinutes": 2
+    }
+  }
+}

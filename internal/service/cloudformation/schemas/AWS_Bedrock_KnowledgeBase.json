@@ -867,9 +867,6 @@
           "$ref": "#/definitions/ManagedKnowledgeBaseServerSideEncryptionConfiguration"
         }
       },
-      "required": [
-        "EmbeddingModelArn"
-      ],
       "additionalProperties": false
     },
     "ManagedKnowledgeBaseServerSideEncryptionConfiguration": {

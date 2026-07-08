@@ -89,6 +89,7 @@ resource "awscc_mediaconnect_router_input" "example" {
 ### Optional
 
 - `availability_zone` (String) The Availability Zone where you want to create the router input. This must be a valid Availability Zone for the region specified by regionName, or the current region if no regionName is provided.
+- `content_quality_analysis_configuration` (Attributes) The content quality analysis configuration for the router input. The content quality analysis feature only monitors the first video stream and the first audio stream it encounters within the router input source. (see [below for nested schema](#nestedatt--content_quality_analysis_configuration))
 - `maintenance_configuration` (Attributes) The configuration settings for maintenance operations, including preferred maintenance windows and schedules. (see [below for nested schema](#nestedatt--maintenance_configuration))
 - `region_name` (String) The Amazon Web Services Region for the router input. Defaults to the current region if not specified.
 - `tags` (Attributes List) Key-value pairs that can be used to tag and organize this router input. (see [below for nested schema](#nestedatt--tags))
@@ -97,6 +98,7 @@ resource "awscc_mediaconnect_router_input" "example" {
 ### Read-Only
 
 - `arn` (String)
+- `content_quality_analysis_type` (String)
 - `created_at` (String) The timestamp when the router input was created.
 - `id` (String) Uniquely identifies the resource.
 - `input_type` (String)
@@ -418,6 +420,51 @@ Optional:
 
 
 
+
+
+
+
+<a id="nestedatt--content_quality_analysis_configuration"></a>
+### Nested Schema for `content_quality_analysis_configuration`
+
+Optional:
+
+- `content_level` (Attributes) Configures the content quality analysis features for the router input. (see [below for nested schema](#nestedatt--content_quality_analysis_configuration--content_level))
+
+<a id="nestedatt--content_quality_analysis_configuration--content_level"></a>
+### Nested Schema for `content_quality_analysis_configuration.content_level`
+
+Optional:
+
+- `black_frames` (Attributes) Detects black frames in the router input's source content and reports them through a CloudWatch metric, an EventBridge event, and a router input message. (see [below for nested schema](#nestedatt--content_quality_analysis_configuration--content_level--black_frames))
+- `frozen_frames` (Attributes) Detects frozen video frames in the router input's source content and reports them through a CloudWatch metric, an EventBridge event, and a router input message. (see [below for nested schema](#nestedatt--content_quality_analysis_configuration--content_level--frozen_frames))
+- `silent_audio` (Attributes) Detects silent audio in the router input's source content and reports it through a CloudWatch metric, an EventBridge event, and a router input message. (see [below for nested schema](#nestedatt--content_quality_analysis_configuration--content_level--silent_audio))
+
+<a id="nestedatt--content_quality_analysis_configuration--content_level--black_frames"></a>
+### Nested Schema for `content_quality_analysis_configuration.content_level.black_frames`
+
+Optional:
+
+- `state` (String)
+- `threshold_seconds` (Number) The number of consecutive seconds of black frames that MediaConnect must detect before it reports an issue.
+
+
+<a id="nestedatt--content_quality_analysis_configuration--content_level--frozen_frames"></a>
+### Nested Schema for `content_quality_analysis_configuration.content_level.frozen_frames`
+
+Optional:
+
+- `state` (String)
+- `threshold_seconds` (Number) The number of consecutive seconds of a frozen frame that MediaConnect must detect before it reports an issue.
+
+
+<a id="nestedatt--content_quality_analysis_configuration--content_level--silent_audio"></a>
+### Nested Schema for `content_quality_analysis_configuration.content_level.silent_audio`
+
+Optional:
+
+- `state` (String)
+- `threshold_seconds` (Number) The number of consecutive seconds of silence that MediaConnect must detect before it reports an issue.
 
 
 

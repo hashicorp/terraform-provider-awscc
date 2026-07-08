@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1427 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1435 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -1210,6 +1210,10 @@ resource_schema "aws_cloudwatch_dashboard" {
   cloudformation_type_name = "AWS::CloudWatch::Dashboard"
 }
 
+resource_schema "aws_cloudwatch_insight_rule" {
+  cloudformation_type_name = "AWS::CloudWatch::InsightRule"
+}
+
 resource_schema "aws_cloudwatch_log_alarm" {
   cloudformation_type_name = "AWS::CloudWatch::LogAlarm"
 }
@@ -1351,6 +1355,16 @@ resource_schema "aws_cognito_user_pool_identity_provider" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_cognito_user_pool_regional_configuration_attachment" {
+  cloudformation_type_name               = "AWS::Cognito::UserPoolRegionalConfigurationAttachment"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_cognito_user_pool_replica" {
+  cloudformation_type_name               = "AWS::Cognito::UserPoolReplica"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_cognito_user_pool_resource_server" {
   cloudformation_type_name               = "AWS::Cognito::UserPoolResourceServer"
   suppress_plural_data_source_generation = true
@@ -1403,6 +1417,10 @@ resource_schema "aws_config_configuration_aggregator" {
 
 resource_schema "aws_config_conformance_pack" {
   cloudformation_type_name = "AWS::Config::ConformancePack"
+}
+
+resource_schema "aws_config_connector" {
+  cloudformation_type_name = "AWS::Config::Connector"
 }
 
 resource_schema "aws_config_organization_conformance_pack" {
@@ -1557,6 +1575,11 @@ resource_schema "aws_connect_task_template" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_connect_test_case" {
+  cloudformation_type_name               = "AWS::Connect::TestCase"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_connect_traffic_distribution_group" {
   cloudformation_type_name = "AWS::Connect::TrafficDistributionGroup"
 }
@@ -1644,6 +1667,11 @@ resource_schema "aws_customerprofiles_domain" {
   # git checkout internal/service/cloudformation/schemas/AWS_CustomerProfiles_Domain.json
   # Suppression Reason:  Matching/AutoMerging/Consolidation/MatchingAttributesList is of unsupported type: list of array.
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1528
+}
+
+resource_schema "aws_customerprofiles_domain_object_type" {
+  cloudformation_type_name               = "AWS::CustomerProfiles::DomainObjectType"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_customerprofiles_event_stream" {
@@ -3699,6 +3727,11 @@ resource_schema "aws_lambda_event_source_mapping" {
 
 resource_schema "aws_lambda_function" {
   cloudformation_type_name = "AWS::Lambda::Function"
+
+  # Latest schema updates are suppressed.
+  # git checkout internal/service/cloudformation/schemas/AWS_Lambda_Function.json
+  # Suppression Reason: KmsKeyArn overwrites KMSKeyArn for Terraform attribute kms_key_arn.
+  # Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/3229
 }
 
 resource_schema "aws_lambda_layer_version" {
@@ -5939,6 +5972,10 @@ resource_schema "aws_securitylake_subscriber" {
 
 resource_schema "aws_securitylake_subscriber_notification" {
   cloudformation_type_name = "AWS::SecurityLake::SubscriberNotification"
+}
+
+resource_schema "aws_servicecatalog_accepted_portfolio_share" {
+  cloudformation_type_name = "AWS::ServiceCatalog::AcceptedPortfolioShare"
 }
 
 resource_schema "aws_servicecatalog_cloudformation_product" {

@@ -531,6 +531,7 @@
         "athena:CreateWorkGroup",
         "athena:TagResource",
         "iam:PassRole",
+        "iam:CreateServiceLinkedRole",
         "s3:GetBucketLocation",
         "s3:GetObject",
         "s3:ListBucket",
@@ -592,7 +593,12 @@
   "writeOnlyProperties": [
     "/properties/WorkGroupConfigurationUpdates",
     "/properties/RecursiveDeleteOption",
-    "/properties/WorkGroupConfiguration/AdditionalConfiguration"
+    "/properties/WorkGroupConfiguration/AdditionalConfiguration",
+    "/properties/WorkGroupConfiguration/EngineConfiguration/CoordinatorDpuSize",
+    "/properties/WorkGroupConfiguration/EngineConfiguration/MaxConcurrentDpus",
+    "/properties/WorkGroupConfiguration/EngineConfiguration/DefaultExecutorDpuSize",
+    "/properties/WorkGroupConfiguration/EngineConfiguration/AdditionalConfigs",
+    "/properties/WorkGroupConfiguration/EngineConfiguration/SparkProperties"
   ],
   "primaryIdentifier": [
     "/properties/Name"
@@ -602,7 +608,7 @@
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": true,
+    "cloudFormationSystemTags": false,
     "tagProperty": "/properties/Tags",
     "permissions": [
       "athena:UntagResource",

@@ -24,6 +24,18 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::CodePipeline::Pipeline resource.
 func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the pipeline.",
+		//	  "pattern": "arn:aws(-[\\w]+)*:codepipeline:[a-z0-9-]+:[0-9]{12}:.+",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the pipeline.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ArtifactStore
 		// CloudFormation resource type schema:
 		//
@@ -1796,6 +1808,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"action_type_id":                    "ActionTypeId",
 		"actions":                           "Actions",
+		"arn":                               "Arn",
 		"artifact_store":                    "ArtifactStore",
 		"artifact_stores":                   "ArtifactStores",
 		"before_entry":                      "BeforeEntry",

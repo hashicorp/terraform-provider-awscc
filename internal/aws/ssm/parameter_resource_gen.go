@@ -46,6 +46,21 @@ func parameterResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// AllowedPattern is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "pattern": "arn:aws(-[a-z0-9-]+)*:ssm:[a-z0-9-]+:[0-9]{12}:parameter/.+",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DataType
 		// CloudFormation resource type schema:
 		//
@@ -232,6 +247,7 @@ func parameterResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"allowed_pattern": "AllowedPattern",
+		"arn":             "Arn",
 		"data_type":       "DataType",
 		"description":     "Description",
 		"name":            "Name",

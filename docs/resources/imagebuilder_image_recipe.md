@@ -84,6 +84,7 @@ resource "awscc_imagebuilder_image_recipe" "example" {
 
 - `additional_instance_configuration` (Attributes) Specify additional settings and launch scripts for your build instances. (see [below for nested schema](#nestedatt--additional_instance_configuration))
 - `ami_tags` (Map of String) The tags to apply to the AMI created by this image recipe.
+- `ami_watermarks` (List of String) The AMI watermark names to attach to the output AMI from this recipe. AMI watermarks are lineage markers that automatically propagate to derivative AMIs when the source AMI is copied or distributed.
 - `block_device_mappings` (Attributes List) The block device mappings to apply when creating images from this recipe. (see [below for nested schema](#nestedatt--block_device_mappings))
 - `components` (Attributes List) The components of the image recipe. (see [below for nested schema](#nestedatt--components))
 - `description` (String) The description of the image recipe.

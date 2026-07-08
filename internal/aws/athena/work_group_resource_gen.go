@@ -542,6 +542,7 @@ func workGroupResource(ctx context.Context) (resource.Resource, error) {
 							PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
 								mapplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
+							// AdditionalConfigs is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: Classifications
 						"classifications": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -584,6 +585,7 @@ func workGroupResource(ctx context.Context) (resource.Resource, error) {
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 								int64planmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
+							// CoordinatorDpuSize is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: DefaultExecutorDpuSize
 						"default_executor_dpu_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -593,6 +595,7 @@ func workGroupResource(ctx context.Context) (resource.Resource, error) {
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 								int64planmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
+							// DefaultExecutorDpuSize is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: MaxConcurrentDpus
 						"max_concurrent_dpus": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -602,6 +605,7 @@ func workGroupResource(ctx context.Context) (resource.Resource, error) {
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 								int64planmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
+							// MaxConcurrentDpus is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: SparkProperties
 						"spark_properties":  // Pattern: ""
@@ -613,6 +617,7 @@ func workGroupResource(ctx context.Context) (resource.Resource, error) {
 							PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
 								mapplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
+							// SparkProperties is a write-only property.
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The engine configuration for running queries.",
@@ -1847,6 +1852,11 @@ func workGroupResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/WorkGroupConfigurationUpdates",
 		"/properties/RecursiveDeleteOption",
 		"/properties/WorkGroupConfiguration/AdditionalConfiguration",
+		"/properties/WorkGroupConfiguration/EngineConfiguration/CoordinatorDpuSize",
+		"/properties/WorkGroupConfiguration/EngineConfiguration/MaxConcurrentDpus",
+		"/properties/WorkGroupConfiguration/EngineConfiguration/DefaultExecutorDpuSize",
+		"/properties/WorkGroupConfiguration/EngineConfiguration/AdditionalConfigs",
+		"/properties/WorkGroupConfiguration/EngineConfiguration/SparkProperties",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

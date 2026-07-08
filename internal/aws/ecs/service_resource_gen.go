@@ -215,9 +215,35 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	          "description": "Determines whether to use the deployment circuit breaker logic for the service.",
 		//	          "type": "boolean"
 		//	        },
+		//	        "ResetOnHealthyTask": {
+		//	          "description": "",
+		//	          "type": "boolean"
+		//	        },
 		//	        "Rollback": {
 		//	          "description": "Determines whether to configure Amazon ECS to roll back the service if a service deployment fails. If rollback is on, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.",
 		//	          "type": "boolean"
+		//	        },
+		//	        "ThresholdConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "",
+		//	          "properties": {
+		//	            "Type": {
+		//	              "enum": [
+		//	                "COUNT",
+		//	                "BOUNDED_PERCENT",
+		//	                "UNBOUNDED_PERCENT"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "Value": {
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Type",
+		//	            "Value"
+		//	          ],
+		//	          "type": "object"
 		//	        }
 		//	      },
 		//	      "required": [
@@ -451,6 +477,15 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
+						// Property: ResetOnHealthyTask
+						"reset_on_healthy_task": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: Rollback
 						"rollback": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Description: "Determines whether to configure Amazon ECS to roll back the service if a service deployment fails. If rollback is on, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.",
@@ -461,6 +496,44 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ThresholdConfiguration
+						"threshold_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Type
+								"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"COUNT",
+											"BOUNDED_PERCENT",
+											"UNBOUNDED_PERCENT",
+										),
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										fwvalidators.NotNullInt64(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -2726,6 +2799,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"production_listener_rule":          "ProductionListenerRule",
 		"propagate_tags":                    "PropagateTags",
 		"registry_arn":                      "RegistryArn",
+		"reset_on_healthy_task":             "ResetOnHealthyTask",
 		"resolution_seconds":                "ResolutionSeconds",
 		"resource_type":                     "ResourceType",
 		"role":                              "Role",
@@ -2752,6 +2826,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"task_definition":                   "TaskDefinition",
 		"test_listener_rule":                "TestListenerRule",
 		"test_traffic_rules":                "TestTrafficRules",
+		"threshold_configuration":           "ThresholdConfiguration",
 		"throughput":                        "Throughput",
 		"timeout":                           "Timeout",
 		"timeout_configuration":             "TimeoutConfiguration",

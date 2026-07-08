@@ -1189,6 +1189,11 @@
         "identifier": ["DashboardName"]
     },
     {
+        "resource": "awscc_cloudwatch_insight_rule",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_cloudwatch_log_alarm",
         "generateListResource": true,
         "identifier": ["AlarmName"]
@@ -1328,6 +1333,14 @@
         "identifier": ["UserPoolId","ProviderName"]
     },
     {
+        "resource": "awscc_cognito_user_pool_regional_configuration_attachment",
+        "identifier": ["UserPoolId"]
+    },
+    {
+        "resource": "awscc_cognito_user_pool_replica",
+        "identifier": ["UserPoolId","RegionName"]
+    },
+    {
         "resource": "awscc_cognito_user_pool_resource_server",
         "identifier": ["UserPoolId","Identifier"]
     },
@@ -1381,6 +1394,11 @@
         "resource": "awscc_config_conformance_pack",
         "generateListResource": true,
         "identifier": ["ConformancePackName"]
+    },
+    {
+        "resource": "awscc_config_connector",
+        "generateListResource": true,
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_config_organization_conformance_pack",
@@ -1503,6 +1521,10 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_connect_test_case",
+        "identifier": ["TestCaseArn"]
+    },
+    {
         "resource": "awscc_connect_traffic_distribution_group",
         "generateListResource": true,
         "identifier": ["TrafficDistributionGroupArn"]
@@ -1557,6 +1579,10 @@
     {
         "resource": "awscc_customerprofiles_domain",
         "identifier": ["DomainName"]
+    },
+    {
+        "resource": "awscc_customerprofiles_domain_object_type",
+        "identifier": ["DomainName","ObjectTypeName"]
     },
     {
         "resource": "awscc_customerprofiles_event_stream",
@@ -6132,6 +6158,11 @@
         "resource": "awscc_securitylake_subscriber_notification",
         "generateListResource": true,
         "identifier": ["SubscriberArn"]
+    },
+    {
+        "resource": "awscc_servicecatalog_accepted_portfolio_share",
+        "generateListResource": true,
+        "identifier": ["PortfolioId"]
     },
     {
         "resource": "awscc_servicecatalog_cloudformation_product",

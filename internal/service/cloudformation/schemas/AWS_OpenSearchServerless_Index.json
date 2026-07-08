@@ -1,7 +1,7 @@
 {
   "typeName": "AWS::OpenSearchServerless::Index",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-opensearchserverless",
-  "description": "An OpenSearch Serverless index resource",
+  "description": "Resource Type definition for AWS::OpenSearchServerless::Index",
   "tagging": {
     "taggable": false
   },
@@ -25,6 +25,48 @@
             "KnnAlgoParamEfSearch": {
               "type": "integer",
               "description": "Size of the dynamic list for the nearest neighbors"
+            }
+          }
+        },
+        "Analysis": {
+          "type": "object",
+          "description": "Custom analysis configuration including analyzers, tokenizers, and filters",
+          "additionalProperties": false,
+          "properties": {
+            "Analyzer": {
+              "type": "object",
+              "description": "Custom analyzer definitions",
+              "patternProperties": {
+                "": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "Type": {
+                      "type": "string",
+                      "description": "The analyzer type (e.g. custom, standard, simple)"
+                    },
+                    "Tokenizer": {
+                      "type": "string",
+                      "description": "The tokenizer to use"
+                    },
+                    "Filter": {
+                      "type": "array",
+                      "description": "Token filters to apply",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "CharFilter": {
+                      "type": "array",
+                      "description": "Character filters to apply",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "additionalProperties": false
             }
           }
         }
@@ -115,7 +157,37 @@
           "description": "The field data type. Must be a valid OpenSearch field type.",
           "enum": [
             "text",
-            "knn_vector"
+            "knn_vector",
+            "keyword",
+            "integer"
+          ]
+        },
+        "Analyzer": {
+          "type": "string",
+          "description": "The analyzer to use for this field (for text and keyword fields)"
+        },
+        "SpaceType": {
+          "type": "string",
+          "description": "The distance function used for k-NN search (field-level, outside Method)",
+          "enum": [
+            "l2",
+            "l1",
+            "linf",
+            "cosinesimil",
+            "innerproduct",
+            "hamming"
+          ]
+        },
+        "CompressionLevel": {
+          "type": "string",
+          "description": "The compression level for knn_vector fields",
+          "enum": [
+            "16x",
+            "32x",
+            "8x",
+            "4x",
+            "2x",
+            "1x"
           ]
         },
         "Value": {
@@ -179,7 +251,8 @@
   ],
   "createOnlyProperties": [
     "/properties/IndexName",
-    "/properties/CollectionEndpoint"
+    "/properties/CollectionEndpoint",
+    "/properties/Settings/Analysis"
   ],
   "writeOnlyProperties": [
     "/properties/Settings/Index/RefreshInterval",

@@ -297,6 +297,7 @@
         "glue:TagResource",
         "glue:GetTags",
         "iam:PassRole",
+        "iam:CreateServiceLinkedRole",
         "kms:Decrypt",
         "kms:Encrypt",
         "kms:GenerateDataKey",
