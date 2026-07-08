@@ -166,9 +166,35 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "description": "Determines whether to use the deployment circuit breaker logic for the service.",
 		//	          "type": "boolean"
 		//	        },
+		//	        "ResetOnHealthyTask": {
+		//	          "description": "",
+		//	          "type": "boolean"
+		//	        },
 		//	        "Rollback": {
 		//	          "description": "Determines whether to configure Amazon ECS to roll back the service if a service deployment fails. If rollback is on, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.",
 		//	          "type": "boolean"
+		//	        },
+		//	        "ThresholdConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "",
+		//	          "properties": {
+		//	            "Type": {
+		//	              "enum": [
+		//	                "COUNT",
+		//	                "BOUNDED_PERCENT",
+		//	                "UNBOUNDED_PERCENT"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "Value": {
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Type",
+		//	            "Value"
+		//	          ],
+		//	          "type": "object"
 		//	        }
 		//	      },
 		//	      "required": [
@@ -345,9 +371,29 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 							Description: "Determines whether to use the deployment circuit breaker logic for the service.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
+						// Property: ResetOnHealthyTask
+						"reset_on_healthy_task": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 						// Property: Rollback
 						"rollback": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Description: "Determines whether to configure Amazon ECS to roll back the service if a service deployment fails. If rollback is on, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ThresholdConfiguration
+						"threshold_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Type
+								"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -1909,6 +1955,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"production_listener_rule":          "ProductionListenerRule",
 		"propagate_tags":                    "PropagateTags",
 		"registry_arn":                      "RegistryArn",
+		"reset_on_healthy_task":             "ResetOnHealthyTask",
 		"resolution_seconds":                "ResolutionSeconds",
 		"resource_type":                     "ResourceType",
 		"role":                              "Role",
@@ -1935,6 +1982,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"task_definition":                   "TaskDefinition",
 		"test_listener_rule":                "TestListenerRule",
 		"test_traffic_rules":                "TestTrafficRules",
+		"threshold_configuration":           "ThresholdConfiguration",
 		"throughput":                        "Throughput",
 		"timeout":                           "Timeout",
 		"timeout_configuration":             "TimeoutConfiguration",

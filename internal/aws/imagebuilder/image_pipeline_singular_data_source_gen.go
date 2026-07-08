@@ -173,6 +173,25 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 			Description: "Contains settings for vulnerability scans.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ImageTags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The tags to be applied to images created by this pipeline.",
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"image_tags":        // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The tags to be applied to images created by this pipeline.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ImageTestsConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -491,6 +510,7 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		"image_recipe_arn":                   "ImageRecipeArn",
 		"image_scanning_configuration":       "ImageScanningConfiguration",
 		"image_scanning_enabled":             "ImageScanningEnabled",
+		"image_tags":                         "ImageTags",
 		"image_tests_configuration":          "ImageTestsConfiguration",
 		"image_tests_enabled":                "ImageTestsEnabled",
 		"infrastructure_configuration_arn":   "InfrastructureConfigurationArn",

@@ -119,6 +119,17 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"service_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: IdleTimeoutSeconds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maximum": 600,
+		//	  "minimum": 60,
+		//	  "type": "integer"
+		//	}
+		"idle_timeout_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -218,21 +229,22 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::VpcLattice::Service").WithTerraformTypeName("awscc_vpclattice_service")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                "Arn",
-		"auth_type":          "AuthType",
-		"certificate_arn":    "CertificateArn",
-		"created_at":         "CreatedAt",
-		"custom_domain_name": "CustomDomainName",
-		"dns_entry":          "DnsEntry",
-		"domain_name":        "DomainName",
-		"hosted_zone_id":     "HostedZoneId",
-		"key":                "Key",
-		"last_updated_at":    "LastUpdatedAt",
-		"name":               "Name",
-		"service_id":         "Id",
-		"status":             "Status",
-		"tags":               "Tags",
-		"value":              "Value",
+		"arn":                  "Arn",
+		"auth_type":            "AuthType",
+		"certificate_arn":      "CertificateArn",
+		"created_at":           "CreatedAt",
+		"custom_domain_name":   "CustomDomainName",
+		"dns_entry":            "DnsEntry",
+		"domain_name":          "DomainName",
+		"hosted_zone_id":       "HostedZoneId",
+		"idle_timeout_seconds": "IdleTimeoutSeconds",
+		"key":                  "Key",
+		"last_updated_at":      "LastUpdatedAt",
+		"name":                 "Name",
+		"service_id":           "Id",
+		"status":               "Status",
+		"tags":                 "Tags",
+		"value":                "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

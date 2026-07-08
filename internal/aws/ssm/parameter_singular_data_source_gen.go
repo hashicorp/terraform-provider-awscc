@@ -34,6 +34,18 @@ func parameterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "A regular expression used to validate the parameter value. For example, for ``String`` types with values restricted to numbers, you can specify the following: ``AllowedPattern=^\\d+$``",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "pattern": "arn:aws(-[a-z0-9-]+)*:ssm:[a-z0-9-]+:[0-9]{12}:parameter/.+",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataType
 		// CloudFormation resource type schema:
 		//
@@ -161,6 +173,7 @@ func parameterDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"allowed_pattern": "AllowedPattern",
+		"arn":             "Arn",
 		"data_type":       "DataType",
 		"description":     "Description",
 		"name":            "Name",

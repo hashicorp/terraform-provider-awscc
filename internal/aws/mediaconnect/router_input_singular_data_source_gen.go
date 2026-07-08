@@ -1160,6 +1160,167 @@ func routerInputDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The configuration settings for a router input.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ContentQualityAnalysisConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The content quality analysis configuration for the router input. The content quality analysis feature only monitors the first video stream and the first audio stream it encounters within the router input source.",
+		//	  "properties": {
+		//	    "ContentLevel": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configures the content quality analysis features for the router input.",
+		//	      "properties": {
+		//	        "BlackFrames": {
+		//	          "additionalProperties": false,
+		//	          "description": "Detects black frames in the router input's source content and reports them through a CloudWatch metric, an EventBridge event, and a router input message.",
+		//	          "properties": {
+		//	            "State": {
+		//	              "enum": [
+		//	                "ENABLED",
+		//	                "DISABLED"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "ThresholdSeconds": {
+		//	              "description": "The number of consecutive seconds of black frames that MediaConnect must detect before it reports an issue.",
+		//	              "maximum": 60,
+		//	              "minimum": 10,
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "State",
+		//	            "ThresholdSeconds"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "FrozenFrames": {
+		//	          "additionalProperties": false,
+		//	          "description": "Detects frozen video frames in the router input's source content and reports them through a CloudWatch metric, an EventBridge event, and a router input message.",
+		//	          "properties": {
+		//	            "State": {
+		//	              "enum": [
+		//	                "ENABLED",
+		//	                "DISABLED"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "ThresholdSeconds": {
+		//	              "description": "The number of consecutive seconds of a frozen frame that MediaConnect must detect before it reports an issue.",
+		//	              "maximum": 60,
+		//	              "minimum": 10,
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "State",
+		//	            "ThresholdSeconds"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "SilentAudio": {
+		//	          "additionalProperties": false,
+		//	          "description": "Detects silent audio in the router input's source content and reports it through a CloudWatch metric, an EventBridge event, and a router input message.",
+		//	          "properties": {
+		//	            "State": {
+		//	              "enum": [
+		//	                "ENABLED",
+		//	                "DISABLED"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "ThresholdSeconds": {
+		//	              "description": "The number of consecutive seconds of silence that MediaConnect must detect before it reports an issue.",
+		//	              "maximum": 60,
+		//	              "minimum": 10,
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "State",
+		//	            "ThresholdSeconds"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"content_quality_analysis_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ContentLevel
+				"content_level": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BlackFrames
+						"black_frames": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: State
+								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: ThresholdSeconds
+								"threshold_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The number of consecutive seconds of black frames that MediaConnect must detect before it reports an issue.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Detects black frames in the router input's source content and reports them through a CloudWatch metric, an EventBridge event, and a router input message.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: FrozenFrames
+						"frozen_frames": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: State
+								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: ThresholdSeconds
+								"threshold_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The number of consecutive seconds of a frozen frame that MediaConnect must detect before it reports an issue.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Detects frozen video frames in the router input's source content and reports them through a CloudWatch metric, an EventBridge event, and a router input message.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SilentAudio
+						"silent_audio": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: State
+								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: ThresholdSeconds
+								"threshold_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The number of consecutive seconds of silence that MediaConnect must detect before it reports an issue.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Detects silent audio in the router input's source content and reports it through a CloudWatch metric, an EventBridge event, and a router input message.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configures the content quality analysis features for the router input.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The content quality analysis configuration for the router input. The content quality analysis feature only monitors the first video stream and the first audio stream it encounters within the router input source.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ContentQualityAnalysisType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "CONTENT_LEVEL"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"content_quality_analysis_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -1549,68 +1710,75 @@ func routerInputDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::MediaConnect::RouterInput").WithTerraformTypeName("awscc_mediaconnect_router_input")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                                "Arn",
-		"automatic":                          "Automatic",
-		"availability_zone":                  "AvailabilityZone",
-		"configuration":                      "Configuration",
-		"created_at":                         "CreatedAt",
-		"day":                                "Day",
-		"decryption_configuration":           "DecryptionConfiguration",
-		"default":                            "Default",
-		"encryption_key":                     "EncryptionKey",
-		"encryption_key_configuration":       "EncryptionKeyConfiguration",
-		"encryption_key_type":                "EncryptionKeyType",
-		"failover":                           "Failover",
-		"flow_arn":                           "FlowArn",
-		"flow_output_arn":                    "FlowOutputArn",
-		"forward_error_correction":           "ForwardErrorCorrection",
-		"input_type":                         "InputType",
-		"ip_address":                         "IpAddress",
-		"key":                                "Key",
-		"maintenance_configuration":          "MaintenanceConfiguration",
-		"maintenance_type":                   "MaintenanceType",
-		"maximum_bitrate":                    "MaximumBitrate",
-		"media_connect_flow":                 "MediaConnectFlow",
-		"media_live_channel":                 "MediaLiveChannel",
-		"media_live_channel_arn":             "MediaLiveChannelArn",
-		"media_live_channel_output_name":     "MediaLiveChannelOutputName",
-		"media_live_pipeline_id":             "MediaLivePipelineId",
-		"merge":                              "Merge",
-		"merge_recovery_window_milliseconds": "MergeRecoveryWindowMilliseconds",
-		"minimum_latency_milliseconds":       "MinimumLatencyMilliseconds",
-		"name":                               "Name",
-		"network_interface_arn":              "NetworkInterfaceArn",
-		"port":                               "Port",
-		"preferred_day_time":                 "PreferredDayTime",
-		"primary_source_index":               "PrimarySourceIndex",
-		"protocol":                           "Protocol",
-		"protocol_configuration":             "ProtocolConfiguration",
-		"protocol_configurations":            "ProtocolConfigurations",
-		"recovery_latency_milliseconds":      "RecoveryLatencyMilliseconds",
-		"region_name":                        "RegionName",
-		"rist":                               "Rist",
-		"role_arn":                           "RoleArn",
-		"routed_outputs":                     "RoutedOutputs",
-		"router_input_id":                    "Id",
-		"routing_scope":                      "RoutingScope",
-		"rtp":                                "Rtp",
-		"secret_arn":                         "SecretArn",
-		"secrets_manager":                    "SecretsManager",
-		"source_address":                     "SourceAddress",
-		"source_port":                        "SourcePort",
-		"source_priority_mode":               "SourcePriorityMode",
-		"source_transit_decryption":          "SourceTransitDecryption",
-		"srt_caller":                         "SrtCaller",
-		"srt_listener":                       "SrtListener",
-		"standard":                           "Standard",
-		"state":                              "State",
-		"stream_id":                          "StreamId",
-		"tags":                               "Tags",
-		"tier":                               "Tier",
-		"time":                               "Time",
-		"transit_encryption":                 "TransitEncryption",
-		"updated_at":                         "UpdatedAt",
-		"value":                              "Value",
+		"arn":                                    "Arn",
+		"automatic":                              "Automatic",
+		"availability_zone":                      "AvailabilityZone",
+		"black_frames":                           "BlackFrames",
+		"configuration":                          "Configuration",
+		"content_level":                          "ContentLevel",
+		"content_quality_analysis_configuration": "ContentQualityAnalysisConfiguration",
+		"content_quality_analysis_type":          "ContentQualityAnalysisType",
+		"created_at":                             "CreatedAt",
+		"day":                                    "Day",
+		"decryption_configuration":               "DecryptionConfiguration",
+		"default":                                "Default",
+		"encryption_key":                         "EncryptionKey",
+		"encryption_key_configuration":           "EncryptionKeyConfiguration",
+		"encryption_key_type":                    "EncryptionKeyType",
+		"failover":                               "Failover",
+		"flow_arn":                               "FlowArn",
+		"flow_output_arn":                        "FlowOutputArn",
+		"forward_error_correction":               "ForwardErrorCorrection",
+		"frozen_frames":                          "FrozenFrames",
+		"input_type":                             "InputType",
+		"ip_address":                             "IpAddress",
+		"key":                                    "Key",
+		"maintenance_configuration":              "MaintenanceConfiguration",
+		"maintenance_type":                       "MaintenanceType",
+		"maximum_bitrate":                        "MaximumBitrate",
+		"media_connect_flow":                     "MediaConnectFlow",
+		"media_live_channel":                     "MediaLiveChannel",
+		"media_live_channel_arn":                 "MediaLiveChannelArn",
+		"media_live_channel_output_name":         "MediaLiveChannelOutputName",
+		"media_live_pipeline_id":                 "MediaLivePipelineId",
+		"merge":                                  "Merge",
+		"merge_recovery_window_milliseconds":     "MergeRecoveryWindowMilliseconds",
+		"minimum_latency_milliseconds":           "MinimumLatencyMilliseconds",
+		"name":                                   "Name",
+		"network_interface_arn":                  "NetworkInterfaceArn",
+		"port":                                   "Port",
+		"preferred_day_time":                     "PreferredDayTime",
+		"primary_source_index":                   "PrimarySourceIndex",
+		"protocol":                               "Protocol",
+		"protocol_configuration":                 "ProtocolConfiguration",
+		"protocol_configurations":                "ProtocolConfigurations",
+		"recovery_latency_milliseconds":          "RecoveryLatencyMilliseconds",
+		"region_name":                            "RegionName",
+		"rist":                                   "Rist",
+		"role_arn":                               "RoleArn",
+		"routed_outputs":                         "RoutedOutputs",
+		"router_input_id":                        "Id",
+		"routing_scope":                          "RoutingScope",
+		"rtp":                                    "Rtp",
+		"secret_arn":                             "SecretArn",
+		"secrets_manager":                        "SecretsManager",
+		"silent_audio":                           "SilentAudio",
+		"source_address":                         "SourceAddress",
+		"source_port":                            "SourcePort",
+		"source_priority_mode":                   "SourcePriorityMode",
+		"source_transit_decryption":              "SourceTransitDecryption",
+		"srt_caller":                             "SrtCaller",
+		"srt_listener":                           "SrtListener",
+		"standard":                               "Standard",
+		"state":                                  "State",
+		"stream_id":                              "StreamId",
+		"tags":                                   "Tags",
+		"threshold_seconds":                      "ThresholdSeconds",
+		"tier":                                   "Tier",
+		"time":                                   "Time",
+		"transit_encryption":                     "TransitEncryption",
+		"updated_at":                             "UpdatedAt",
+		"value":                                  "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)
