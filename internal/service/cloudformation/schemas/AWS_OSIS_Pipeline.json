@@ -230,7 +230,7 @@
     "VpcEndpointService": {
       "description": "The VPC endpoint service name for the pipeline.",
       "type": "string",
-      "minLength": 1,
+      "minLength": 0,
       "maxLength": 128
     },
     "PipelineArn": {

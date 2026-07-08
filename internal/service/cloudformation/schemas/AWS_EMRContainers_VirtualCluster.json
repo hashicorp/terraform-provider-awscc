@@ -111,6 +111,10 @@
       "minLength": 1,
       "maxLength": 64,
       "pattern": "[0-9a-z]+"
+    },
+    "SessionEnabled": {
+      "description": "Whether the virtual cluster is session-enabled for Spark Connect.",
+      "type": "boolean"
     }
   },
   "additionalProperties": false,
@@ -120,7 +124,9 @@
   ],
   "createOnlyProperties": [
     "/properties/ContainerProvider",
-    "/properties/Name"
+    "/properties/Name",
+    "/properties/SecurityConfigurationId",
+    "/properties/SessionEnabled"
   ],
   "readOnlyProperties": [
     "/properties/Arn",

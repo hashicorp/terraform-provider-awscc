@@ -26,6 +26,16 @@
       },
       "additionalProperties": false
     },
+    "SlaTargetFieldValue": {
+      "description": "",
+      "type": "object",
+      "properties": {
+        "StringValue": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
     "Field": {
       "description": "",
       "type": "object",
@@ -222,6 +232,10 @@
         "Recipient": {
           "$ref": "#/definitions/NotificationRecipientType",
           "description": "Notification recipient."
+        },
+        "Exclusion": {
+          "$ref": "#/definitions/NotificationRecipientType",
+          "description": ""
         }
       },
       "required": [
@@ -301,6 +315,7 @@
           "description": "The name of the event source.",
           "type": "string",
           "enum": [
+            "OnEmailAnalysisAvailable",
             "OnContactEvaluationSubmit",
             "OnPostCallAnalysisAvailable",
             "OnRealTimeCallAnalysisAvailable",
@@ -311,7 +326,11 @@
             "OnSalesforceCaseCreate",
             "OnMetricDataUpdate",
             "OnCaseCreate",
-            "OnCaseUpdate"
+            "OnCaseUpdate",
+            "OnSlaBreach",
+            "OnSchedulePublish",
+            "OnScheduleUpdate",
+            "OnScheduleTimeOffRequestActivity"
           ]
         },
         "IntegrationAssociationArn": {
@@ -426,6 +445,10 @@
         "SubmitAutoEvaluationActions": {
           "$ref": "#/definitions/SubmitAutoEvaluationActions",
           "description": ""
+        },
+        "AssignSlaActions": {
+          "$ref": "#/definitions/AssignSlaActions",
+          "description": ""
         }
       },
       "additionalProperties": false
@@ -452,6 +475,80 @@
         "Key",
         "Value"
       ]
+    },
+    "AssignSlaAction": {
+      "description": "",
+      "type": "object",
+      "properties": {
+        "SlaAssignmentType": {
+          "description": "The type of SLA assignment.",
+          "type": "string",
+          "enum": [
+            "CASES"
+          ]
+        },
+        "CaseSlaConfiguration": {
+          "description": "The SLA configuration for cases.",
+          "type": "object",
+          "properties": {
+            "Type": {
+              "description": "The type of SLA.",
+              "type": "string",
+              "enum": [
+                "CaseField"
+              ]
+            },
+            "Name": {
+              "description": "The name of the SLA.",
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            },
+            "FieldId": {
+              "description": "The field Id for the SLA.",
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            },
+            "TargetFieldValues": {
+              "description": "The target field values for the SLA.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SlaTargetFieldValue"
+              },
+              "maxItems": 1
+            },
+            "TargetSlaMinutes": {
+              "description": "The target SLA time in minutes.",
+              "type": "number",
+              "minimum": 1,
+              "maximum": 1051200
+            }
+          },
+          "required": [
+            "Type",
+            "Name",
+            "TargetSlaMinutes"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "SlaAssignmentType",
+        "CaseSlaConfiguration"
+      ],
+      "additionalProperties": false
+    },
+    "AssignSlaActions": {
+      "description": "This action will assign an SLA when a rule is triggered.",
+      "type": "array",
+      "insertionOrder": false,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/AssignSlaAction"
+      },
+      "minItems": 1,
+      "maxItems": 1
     }
   },
   "properties": {

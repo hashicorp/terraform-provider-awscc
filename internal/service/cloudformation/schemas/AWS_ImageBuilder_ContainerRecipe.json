@@ -310,6 +310,9 @@
     "/properties/ImageOsVersionOverride",
     "/properties/PlatformOverride"
   ],
+  "propertyTransform": {
+    "/properties/Version": "$join([\"^\", $replace($replace(Version, \".\", \"\\\\.\"), \"x\", \"[0-9]+\"), \"$\"])"
+  },
   "tagging": {
     "taggable": true,
     "tagOnCreate": true,
