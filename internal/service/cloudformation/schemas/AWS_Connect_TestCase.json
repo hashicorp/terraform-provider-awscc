@@ -1,0 +1,220 @@
+{
+  "typeName": "AWS::Connect::TestCase",
+  "description": "Resource Type definition for AWS::Connect::TestCase",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-connect",
+  "definitions": {
+    "Timestamp": {
+      "description": "A epoch time stamp field used for test case operations.",
+      "type": "number"
+    },
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+          "pattern": "",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    },
+    "EntryPoint": {
+      "description": "The Entry Point associated with the test case",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Type": {
+          "description": "The type of the Entry Point",
+          "type": "string",
+          "enum": [
+            "VOICE_CALL",
+            "CHAT"
+          ]
+        },
+        "VoiceCallEntryPointParameters": {
+          "description": "The voice call entry point parameters for the test case",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "DestinationPhoneNumber": {
+              "description": "The destination phonenumber of the EntryPoint",
+              "type": "string"
+            },
+            "FlowId": {
+              "description": "The flow id used for the TestCase",
+              "type": "string"
+            },
+            "SourcePhoneNumber": {
+              "description": "The source phonenumber of the EntryPoint",
+              "type": "string"
+            }
+          }
+        },
+        "ChatEntryPointParameters": {
+          "description": "The chat entry point parameters for the test case",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "FlowId": {
+              "description": "The flow id used for the TestCase",
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            }
+          }
+        }
+      }
+    }
+  },
+  "properties": {
+    "InstanceArn": {
+      "description": "The identifier of the Amazon Connect instance.",
+      "type": "string",
+      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "TestCaseArn": {
+      "description": "The identifier of the test case.",
+      "type": "string",
+      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/test-case/[-a-zA-Z0-9]*$",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "Name": {
+      "description": "The name of the test case.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 127,
+      "pattern": ".*\\S.*"
+    },
+    "Content": {
+      "description": "The content of the test case.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256000
+    },
+    "Description": {
+      "description": "The description of the test case.",
+      "type": "string",
+      "maxLength": 500,
+      "pattern": ".*\\S.*"
+    },
+    "Status": {
+      "description": "The status of the test case.",
+      "type": "string",
+      "enum": [
+        "SAVED",
+        "PUBLISHED"
+      ]
+    },
+    "InitializationData": {
+      "description": "The initialization data of the test case.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256000
+    },
+    "LastModifiedTime": {
+      "description": "Last modified time.",
+      "$ref": "#/definitions/Timestamp"
+    },
+    "LastModifiedRegion": {
+      "description": "Last modified region.",
+      "type": "string",
+      "pattern": "[a-z]{2}(-[a-z]+){1,2}(-[0-9])?"
+    },
+    "Tags": {
+      "description": "One or more tags.",
+      "type": "array",
+      "maxItems": 50,
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "EntryPoint": {
+      "description": "Entry point for Testcase.",
+      "$ref": "#/definitions/EntryPoint"
+    }
+  },
+  "required": [
+    "InstanceArn",
+    "Name",
+    "Content"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "connect:ListTagsForResource",
+      "connect:UntagResource",
+      "connect:TagResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "connect:CreateTestCase",
+        "connect:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "connect:DescribeTestCase"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "connect:DeleteTestCase",
+        "connect:UntagResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "connect:UpdateTestCase",
+        "connect:TagResource",
+        "connect:UntagResource"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "InstanceArn": {
+            "$ref": "resource-schema.json#/properties/InstanceArn"
+          }
+        },
+        "required": [
+          "InstanceArn"
+        ]
+      },
+      "permissions": [
+        "connect:ListTestCases"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "primaryIdentifier": [
+    "/properties/TestCaseArn"
+  ],
+  "readOnlyProperties": [
+    "/properties/TestCaseArn",
+    "/properties/LastModifiedRegion",
+    "/properties/LastModifiedTime"
+  ]
+}
