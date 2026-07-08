@@ -17,6 +17,7 @@ internal/service/cloudformation/schemas/AWS_EMRServerless_Application.json
 internal/service/cloudformation/schemas/AWS_FSx_S3AccessPointAttachment.json
 internal/service/cloudformation/schemas/AWS_IoTFleetHub_Application.json
 internal/service/cloudformation/schemas/AWS_IoTFleetWise_DecoderManifest.json
+internal/service/cloudformation/schemas/AWS_Lambda_Function.json
 internal/service/cloudformation/schemas/AWS_Lex_Bot.json
 internal/service/cloudformation/schemas/AWS_Logs_LogGroup.json
 internal/service/cloudformation/schemas/AWS_LookoutMetrics_Alert.json
