@@ -503,6 +503,7 @@ func analyzerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Amazon Resource Name (ARN) of the analyzer",
 		//	  "maxLength": 1600,
 		//	  "minLength": 1,
+		//	  "pattern": "^arn:[^:]+:access-analyzer(-beta|-gamma)?:[^:]*:[^:]*:analyzer/.+$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/

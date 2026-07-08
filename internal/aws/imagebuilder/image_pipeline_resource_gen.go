@@ -236,6 +236,29 @@ func imagePipelineResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ImageTags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The tags to be applied to images created by this pipeline.",
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"image_tags":        // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The tags to be applied to images created by this pipeline.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+				mapplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ImageTestsConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -681,6 +704,7 @@ func imagePipelineResource(ctx context.Context) (resource.Resource, error) {
 		"image_recipe_arn":                   "ImageRecipeArn",
 		"image_scanning_configuration":       "ImageScanningConfiguration",
 		"image_scanning_enabled":             "ImageScanningEnabled",
+		"image_tags":                         "ImageTags",
 		"image_tests_configuration":          "ImageTestsConfiguration",
 		"image_tests_enabled":                "ImageTestsEnabled",
 		"infrastructure_configuration_arn":   "InfrastructureConfigurationArn",

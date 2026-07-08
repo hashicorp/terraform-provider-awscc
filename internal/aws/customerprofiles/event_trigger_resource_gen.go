@@ -352,6 +352,7 @@ func eventTriggerResource(ctx context.Context) (resource.Resource, error) {
 		//	          "Unit": {
 		//	            "description": "The unit of time.",
 		//	            "enum": [
+		//	              "MINUTES",
 		//	              "HOURS",
 		//	              "DAYS",
 		//	              "WEEKS",
@@ -365,7 +366,7 @@ func eventTriggerResource(ctx context.Context) (resource.Resource, error) {
 		//	          },
 		//	          "Value": {
 		//	            "description": "The amount of time of the specified unit.",
-		//	            "maximum": 24,
+		//	            "maximum": 60,
 		//	            "minimum": 1,
 		//	            "type": "integer"
 		//	          }
@@ -417,6 +418,7 @@ func eventTriggerResource(ctx context.Context) (resource.Resource, error) {
 								Computed:    true,
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
+										"MINUTES",
 										"HOURS",
 										"DAYS",
 										"WEEKS",
@@ -443,7 +445,7 @@ func eventTriggerResource(ctx context.Context) (resource.Resource, error) {
 								Optional:    true,
 								Computed:    true,
 								Validators: []validator.Int64{ /*START VALIDATORS*/
-									int64validator.Between(1, 24),
+									int64validator.Between(1, 60),
 									fwvalidators.NotNullInt64(),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
