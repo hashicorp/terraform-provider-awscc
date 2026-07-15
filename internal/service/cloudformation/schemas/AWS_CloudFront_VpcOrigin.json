@@ -37,6 +37,15 @@
           "type": "integer",
           "description": "The HTTPS port of the CloudFront VPC origin endpoint configuration. The default value is ``443``."
         },
+        "IpAddressType": {
+          "default": "ipv4",
+          "enum": [
+            "ipv4",
+            "dualstack"
+          ],
+          "type": "string",
+          "description": ""
+        },
         "Name": {
           "type": "string",
           "description": "The name of the CloudFront VPC origin endpoint configuration."

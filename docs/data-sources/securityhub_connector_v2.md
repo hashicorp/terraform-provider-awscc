@@ -26,6 +26,9 @@ Data Source schema for AWS::SecurityHub::ConnectorV2
 - `connector_status` (String) The status of the connector
 - `created_at` (String) The timestamp formatted in ISO8601
 - `description` (String) A description of the connector
+- `enablement_status` (String) The enablement status of the connector
+- `enablement_status_reason` (String) The reason for the enablement status of the connector
+- `issues` (Attributes List) The list of health issues associated with the connector (see [below for nested schema](#nestedatt--issues))
 - `kms_key_arn` (String) The ARN of KMS key used for the connector
 - `last_checked_at` (String) The timestamp formatted in ISO8601
 - `last_updated_at` (String) The timestamp formatted in ISO8601
@@ -34,13 +37,42 @@ Data Source schema for AWS::SecurityHub::ConnectorV2
 - `provider_name` (Attributes) The third-party provider configuration for the connector (see [below for nested schema](#nestedatt--provider_name))
 - `tags` (Map of String) A key-value pair to associate with a resource.
 
+<a id="nestedatt--issues"></a>
+### Nested Schema for `issues`
+
+Read-Only:
+
+- `code` (String) The code identifying the type of health issue
+- `message` (String) The message describing the health issue
+
+
 <a id="nestedatt--provider_name"></a>
 ### Nested Schema for `provider_name`
 
 Read-Only:
 
+- `azure` (Attributes) The configuration settings required to establish an integration between AWS Security Hub and Azure (see [below for nested schema](#nestedatt--provider_name--azure))
 - `jira_cloud` (Attributes) The initial configuration settings required to establish an integration between Security Hub and Jira Cloud (see [below for nested schema](#nestedatt--provider_name--jira_cloud))
 - `service_now` (Attributes) The initial configuration settings required to establish an integration between Security Hub and ServiceNow ITSM (see [below for nested schema](#nestedatt--provider_name--service_now))
+
+<a id="nestedatt--provider_name--azure"></a>
+### Nested Schema for `provider_name.azure`
+
+Read-Only:
+
+- `aws_config_connector_arn` (String) The ARN of the AWS Config connector used for the Azure integration
+- `azure_regions` (Set of String) The list of Azure regions to include in the connector scope
+- `scope_configuration` (Attributes) The scope configuration for an Azure connector (see [below for nested schema](#nestedatt--provider_name--azure--scope_configuration))
+
+<a id="nestedatt--provider_name--azure--scope_configuration"></a>
+### Nested Schema for `provider_name.azure.scope_configuration`
+
+Read-Only:
+
+- `scope_type` (String) The scope type for the Azure connector
+- `scope_values` (Set of String) The list of scope values for the Azure connector
+
+
 
 <a id="nestedatt--provider_name--jira_cloud"></a>
 ### Nested Schema for `provider_name.jira_cloud`

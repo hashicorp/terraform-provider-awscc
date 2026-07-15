@@ -1009,6 +1009,11 @@ resource_schema "aws_cleanrooms_id_namespace_association" {
   suppress_singular_data_source_generation = true
 }
 
+resource_schema "aws_cleanrooms_intermediate_table" {
+  cloudformation_type_name               = "AWS::CleanRooms::IntermediateTable"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_cleanrooms_membership" {
   cloudformation_type_name = "AWS::CleanRooms::Membership"
 }
@@ -1465,6 +1470,11 @@ resource_schema "aws_connect_contact_flow_module_version" {
 
 resource_schema "aws_connect_contact_flow_version" {
   cloudformation_type_name               = "AWS::Connect::ContactFlowVersion"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_connect_data_lake_association" {
+  cloudformation_type_name               = "AWS::Connect::DataLakeAssociation"
   suppress_plural_data_source_generation = true
 }
 
@@ -2349,6 +2359,10 @@ resource_schema "aws_ec2_transit_gateway_peering_attachment" {
   cloudformation_type_name = "AWS::EC2::TransitGatewayPeeringAttachment"
 }
 
+resource_schema "aws_ec2_transit_gateway_policy_table" {
+  cloudformation_type_name = "AWS::EC2::TransitGatewayPolicyTable"
+}
+
 resource_schema "aws_ec2_transit_gateway_route" {
   cloudformation_type_name               = "AWS::EC2::TransitGatewayRoute"
   suppress_plural_data_source_generation = true
@@ -2603,6 +2617,13 @@ resource_schema "aws_eks_pod_identity_association" {
 #  suppress_singular_data_source_generation = true
 #  suppress_plural_data_source_generation   = true
 #}
+
+resource_schema "aws_emr_instance_group_config" {
+  cloudformation_type_name                 = "AWS::EMR::InstanceGroupConfig"
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
 
 resource_schema "aws_emr_security_configuration" {
   cloudformation_type_name = "AWS::EMR::SecurityConfiguration"
@@ -5906,6 +5927,10 @@ resource_schema "aws_securityhub_automation_rule_v2" {
 
 resource_schema "aws_securityhub_configuration_policy" {
   cloudformation_type_name = "AWS::SecurityHub::ConfigurationPolicy"
+}
+
+resource_schema "aws_securityhub_connector" {
+  cloudformation_type_name = "AWS::SecurityHub::Connector"
 }
 
 resource_schema "aws_securityhub_connector_v2" {

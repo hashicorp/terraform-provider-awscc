@@ -52,12 +52,6 @@ func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The status of the connector",
-		//	  "enum": [
-		//	    "CONNECTED",
-		//	    "FAILED_TO_CONNECT",
-		//	    "PENDING_AUTHORIZATION",
-		//	    "PENDING_CONFIGURATION"
-		//	  ],
 		//	  "type": "string"
 		//	}
 		"connector_status": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -88,6 +82,73 @@ func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A description of the connector",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: EnablementStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The enablement status of the connector",
+		//	  "type": "string"
+		//	}
+		"enablement_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The enablement status of the connector",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: EnablementStatusReason
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The reason for the enablement status of the connector",
+		//	  "type": "string"
+		//	}
+		"enablement_status_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The reason for the enablement status of the connector",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Issues
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The list of health issues associated with the connector",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A health issue associated with the connector",
+		//	    "properties": {
+		//	      "Code": {
+		//	        "description": "The code identifying the type of health issue",
+		//	        "type": "string"
+		//	      },
+		//	      "Message": {
+		//	        "description": "The message describing the health issue",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Code",
+		//	      "Message"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"issues": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Code
+					"code": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The code identifying the type of health issue",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Message
+					"message": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The message describing the health issue",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The list of health issues associated with the connector",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyArn
@@ -159,6 +220,62 @@ func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "description": "The third-party provider configuration for the connector",
 		//	  "properties": {
+		//	    "Azure": {
+		//	      "additionalProperties": false,
+		//	      "description": "The configuration settings required to establish an integration between AWS Security Hub and Azure",
+		//	      "properties": {
+		//	        "AWSConfigConnectorArn": {
+		//	          "description": "The ARN of the AWS Config connector used for the Azure integration",
+		//	          "type": "string"
+		//	        },
+		//	        "AzureRegions": {
+		//	          "description": "The list of Azure regions to include in the connector scope",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 100,
+		//	          "minItems": 1,
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        },
+		//	        "ScopeConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "The scope configuration for an Azure connector",
+		//	          "properties": {
+		//	            "ScopeType": {
+		//	              "description": "The scope type for the Azure connector",
+		//	              "enum": [
+		//	                "TENANT",
+		//	                "SUBSCRIPTION"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "ScopeValues": {
+		//	              "description": "The list of scope values for the Azure connector",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 100,
+		//	              "minItems": 0,
+		//	              "type": "array",
+		//	              "uniqueItems": true
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ScopeType"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "AWSConfigConnectorArn",
+		//	        "ScopeConfiguration",
+		//	        "AzureRegions"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "JiraCloud": {
 		//	      "additionalProperties": false,
 		//	      "description": "The initial configuration settings required to establish an integration between Security Hub and Jira Cloud",
@@ -204,6 +321,42 @@ func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"provider_name": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Azure
+				"azure": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AWSConfigConnectorArn
+						"aws_config_connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the AWS Config connector used for the Azure integration",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AzureRegions
+						"azure_regions": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "The list of Azure regions to include in the connector scope",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ScopeConfiguration
+						"scope_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ScopeType
+								"scope_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The scope type for the Azure connector",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ScopeValues
+								"scope_values": schema.SetAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "The list of scope values for the Azure connector",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The scope configuration for an Azure connector",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration settings required to establish an integration between AWS Security Hub and Azure",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: JiraCloud
 				"jira_cloud": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -276,23 +429,33 @@ func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::SecurityHub::ConnectorV2").WithTerraformTypeName("awscc_securityhub_connector_v2")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"connector_arn":    "ConnectorArn",
-		"connector_id":     "ConnectorId",
-		"connector_status": "ConnectorStatus",
-		"created_at":       "CreatedAt",
-		"description":      "Description",
-		"instance_name":    "InstanceName",
-		"jira_cloud":       "JiraCloud",
-		"kms_key_arn":      "KmsKeyArn",
-		"last_checked_at":  "LastCheckedAt",
-		"last_updated_at":  "LastUpdatedAt",
-		"message":          "Message",
-		"name":             "Name",
-		"project_key":      "ProjectKey",
-		"provider_name":    "Provider",
-		"secret_arn":       "SecretArn",
-		"service_now":      "ServiceNow",
-		"tags":             "Tags",
+		"aws_config_connector_arn": "AWSConfigConnectorArn",
+		"azure":                    "Azure",
+		"azure_regions":            "AzureRegions",
+		"code":                     "Code",
+		"connector_arn":            "ConnectorArn",
+		"connector_id":             "ConnectorId",
+		"connector_status":         "ConnectorStatus",
+		"created_at":               "CreatedAt",
+		"description":              "Description",
+		"enablement_status":        "EnablementStatus",
+		"enablement_status_reason": "EnablementStatusReason",
+		"instance_name":            "InstanceName",
+		"issues":                   "Issues",
+		"jira_cloud":               "JiraCloud",
+		"kms_key_arn":              "KmsKeyArn",
+		"last_checked_at":          "LastCheckedAt",
+		"last_updated_at":          "LastUpdatedAt",
+		"message":                  "Message",
+		"name":                     "Name",
+		"project_key":              "ProjectKey",
+		"provider_name":            "Provider",
+		"scope_configuration":      "ScopeConfiguration",
+		"scope_type":               "ScopeType",
+		"scope_values":             "ScopeValues",
+		"secret_arn":               "SecretArn",
+		"service_now":              "ServiceNow",
+		"tags":                     "Tags",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

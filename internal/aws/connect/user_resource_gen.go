@@ -53,6 +53,15 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		//	        "additionalProperties": false,
 		//	        "description": "After Contact Work configuration.",
 		//	        "properties": {
+		//	          "AfterContactWorkMode": {
+		//	            "description": "The after contact work (ACW) mode for the channel.",
+		//	            "enum": [
+		//	              "ON",
+		//	              "OFF",
+		//	              "ON_DEMAND"
+		//	            ],
+		//	            "type": "string"
+		//	          },
 		//	          "AfterContactWorkTimeLimit": {
 		//	            "description": "The After Call Work (ACW) timeout setting, in seconds.",
 		//	            "minimum": 0,
@@ -65,6 +74,15 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		//	        "additionalProperties": false,
 		//	        "description": "After Contact Work configuration.",
 		//	        "properties": {
+		//	          "AfterContactWorkMode": {
+		//	            "description": "The after contact work (ACW) mode for the channel.",
+		//	            "enum": [
+		//	              "ON",
+		//	              "OFF",
+		//	              "ON_DEMAND"
+		//	            ],
+		//	            "type": "string"
+		//	          },
 		//	          "AfterContactWorkTimeLimit": {
 		//	            "description": "The After Call Work (ACW) timeout setting, in seconds.",
 		//	            "minimum": 0,
@@ -98,6 +116,22 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 					// Property: AfterContactWorkConfig
 					"after_contact_work_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AfterContactWorkMode
+							"after_contact_work_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The after contact work (ACW) mode for the channel.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"ON",
+										"OFF",
+										"ON_DEMAND",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: AfterContactWorkTimeLimit
 							"after_contact_work_time_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
 								Description: "The After Call Work (ACW) timeout setting, in seconds.",
@@ -124,6 +158,22 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 					// Property: AgentFirstCallbackAfterContactWorkConfig
 					"agent_first_callback_after_contact_work_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AfterContactWorkMode
+							"after_contact_work_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The after contact work (ACW) mode for the channel.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"ON",
+										"OFF",
+										"ON_DEMAND",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: AfterContactWorkTimeLimit
 							"after_contact_work_time_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
 								Description: "The After Call Work (ACW) timeout setting, in seconds.",
@@ -1045,6 +1095,7 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"after_contact_work_config":                      "AfterContactWorkConfig",
 		"after_contact_work_configs":                     "AfterContactWorkConfigs",
+		"after_contact_work_mode":                        "AfterContactWorkMode",
 		"after_contact_work_time_limit":                  "AfterContactWorkTimeLimit",
 		"agent_first_callback_after_contact_work_config": "AgentFirstCallbackAfterContactWorkConfig",
 		"agent_first_callback_auto_accept":               "AgentFirstCallbackAutoAccept",

@@ -1,0 +1,405 @@
+{
+  "typeName": "AWS::CleanRooms::IntermediateTable",
+  "description": "Represents an intermediate table that stores cached query results within a collaboration",
+  "definitions": {
+    "UUID": {
+      "type": "string",
+      "maxLength": 36,
+      "minLength": 36,
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "IntermediateTableStatus": {
+      "type": "string",
+      "enum": [
+        "CREATED",
+        "POPULATE_STARTED",
+        "POPULATE_SUCCESS",
+        "POPULATE_FAILED",
+        "DISALLOWED_BY_DATA_PROVIDER",
+        "BASE_TABLE_REMOVED"
+      ]
+    },
+    "PopulationAnalysisConfiguration": {
+      "type": "object",
+      "properties": {
+        "SqlParameters": {
+          "$ref": "#/definitions/PopulationAnalysisSqlParameters"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PopulationAnalysisSqlParameters": {
+      "type": "object",
+      "properties": {
+        "QueryString": {
+          "type": "string",
+          "maxLength": 500000
+        },
+        "AnalysisTemplateArn": {
+          "type": "string",
+          "maxLength": 256
+        }
+      },
+      "additionalProperties": false
+    },
+    "IntermediateTableAnalysisRule": {
+      "type": "object",
+      "properties": {
+        "Type": {
+          "$ref": "#/definitions/IntermediateTableAnalysisRuleType"
+        },
+        "Policy": {
+          "$ref": "#/definitions/IntermediateTableAnalysisRulePolicy"
+        }
+      },
+      "required": [
+        "Type",
+        "Policy"
+      ],
+      "additionalProperties": false
+    },
+    "IntermediateTableAnalysisRuleType": {
+      "type": "string",
+      "enum": [
+        "CUSTOM"
+      ]
+    },
+    "IntermediateTableAnalysisRulePolicy": {
+      "type": "object",
+      "title": "V1",
+      "properties": {
+        "V1": {
+          "$ref": "#/definitions/IntermediateTableAnalysisRulePolicyV1"
+        }
+      },
+      "required": [
+        "V1"
+      ],
+      "additionalProperties": false
+    },
+    "IntermediateTableAnalysisRulePolicyV1": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "Custom",
+          "properties": {
+            "Custom": {
+              "$ref": "#/definitions/IntermediateTableAnalysisRuleCustom"
+            }
+          },
+          "required": [
+            "Custom"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "IntermediateTableAnalysisRuleCustom": {
+      "type": "object",
+      "properties": {
+        "AllowedAnalyses": {
+          "$ref": "#/definitions/AllowedAnalyses"
+        },
+        "AllowedAnalysisProviders": {
+          "$ref": "#/definitions/AllowedAnalysisProviders"
+        },
+        "AdditionalAnalyses": {
+          "$ref": "#/definitions/AdditionalAnalyses"
+        },
+        "AllowedResultReceivers": {
+          "$ref": "#/definitions/AllowedResultReceivers"
+        },
+        "DifferentialPrivacy": {
+          "$ref": "#/definitions/DifferentialPrivacy"
+        },
+        "DisallowedOutputColumns": {
+          "$ref": "#/definitions/DisallowedOutputColumns"
+        }
+      },
+      "required": [
+        "AllowedAnalyses"
+      ],
+      "additionalProperties": false
+    },
+    "AllowedAnalysis": {
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 200,
+      "pattern": "(ANY_QUERY|ANY_JOB|arn:[\\w]{3}:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:membership/[\\d\\w-]+/analysistemplate/[\\d\\w-]+)"
+    },
+    "AllowedAnalyses": {
+      "type": "array",
+      "insertionOrder": false,
+      "minItems": 0,
+      "items": {
+        "$ref": "#/definitions/AllowedAnalysis"
+      }
+    },
+    "AllowedAnalysisProvider": {
+      "type": "string",
+      "minLength": 12,
+      "maxLength": 12,
+      "pattern": "\\d+"
+    },
+    "AllowedAnalysisProviders": {
+      "type": "array",
+      "insertionOrder": false,
+      "minItems": 0,
+      "items": {
+        "$ref": "#/definitions/AllowedAnalysisProvider"
+      }
+    },
+    "AllowedResultReceivers": {
+      "type": "array",
+      "insertionOrder": false,
+      "minItems": 0,
+      "items": {
+        "type": "string",
+        "minLength": 12,
+        "maxLength": 12,
+        "pattern": "\\d+"
+      }
+    },
+    "AdditionalAnalyses": {
+      "type": "string",
+      "enum": [
+        "ALLOWED",
+        "REQUIRED",
+        "NOT_ALLOWED"
+      ]
+    },
+    "DifferentialPrivacyColumn": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Name"
+      ],
+      "additionalProperties": false
+    },
+    "DifferentialPrivacy": {
+      "type": "object",
+      "properties": {
+        "Columns": {
+          "type": "array",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/DifferentialPrivacyColumn"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "Columns"
+      ],
+      "additionalProperties": false
+    },
+    "DisallowedOutputColumns": {
+      "type": "array",
+      "insertionOrder": false,
+      "minItems": 0,
+      "items": {
+        "type": "string",
+        "maxLength": 127,
+        "minLength": 1,
+        "pattern": "^[a-z0-9_](([a-z0-9_ ]+-)*([a-z0-9_ ]+))?$"
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "Value": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 1
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "IntermediateTableIdentifier": {
+      "$ref": "#/definitions/UUID"
+    },
+    "Arn": {
+      "type": "string",
+      "maxLength": 256
+    },
+    "MembershipIdentifier": {
+      "$ref": "#/definitions/UUID"
+    },
+    "MembershipArn": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "CollaborationIdentifier": {
+      "$ref": "#/definitions/UUID"
+    },
+    "CollaborationArn": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "Name": {
+      "type": "string",
+      "maxLength": 100,
+      "minLength": 1,
+      "pattern": ""
+    },
+    "Description": {
+      "type": "string",
+      "maxLength": 255,
+      "pattern": ""
+    },
+    "PopulationAnalysisConfiguration": {
+      "$ref": "#/definitions/PopulationAnalysisConfiguration"
+    },
+    "Status": {
+      "$ref": "#/definitions/IntermediateTableStatus"
+    },
+    "KmsKeyArn": {
+      "type": "string",
+      "maxLength": 2048,
+      "minLength": 4
+    },
+    "AnalysisRules": {
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/IntermediateTableAnalysisRule"
+      },
+      "maxItems": 1,
+      "minItems": 1
+    },
+    "Tags": {
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "MembershipIdentifier",
+    "Name",
+    "PopulationAnalysisConfiguration"
+  ],
+  "readOnlyProperties": [
+    "/properties/IntermediateTableIdentifier",
+    "/properties/Arn",
+    "/properties/MembershipArn",
+    "/properties/CollaborationIdentifier",
+    "/properties/CollaborationArn",
+    "/properties/Status"
+  ],
+  "createOnlyProperties": [
+    "/properties/MembershipIdentifier",
+    "/properties/Name",
+    "/properties/PopulationAnalysisConfiguration"
+  ],
+  "primaryIdentifier": [
+    "/properties/IntermediateTableIdentifier",
+    "/properties/MembershipIdentifier"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "cleanrooms:ListTagsForResource",
+      "cleanrooms:UntagResource",
+      "cleanrooms:TagResource"
+    ]
+  },
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-cleanrooms",
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cleanrooms:CreateIntermediateTable",
+        "cleanrooms:GetIntermediateTable",
+        "cleanrooms:ListIntermediateTables",
+        "cleanrooms:PopulateIntermediateTable",
+        "cleanrooms:CreateIntermediateTableAnalysisRule",
+        "cleanrooms:GetIntermediateTableAnalysisRule",
+        "cleanrooms:GetCollaborationAnalysisTemplate",
+        "cleanrooms:ListTagsForResource",
+        "cleanrooms:TagResource",
+        "cleanrooms:GetMembership",
+        "cleanrooms:GetCollaboration",
+        "kms:DescribeKey",
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cleanrooms:GetIntermediateTable",
+        "cleanrooms:GetIntermediateTableAnalysisRule",
+        "cleanrooms:ListTagsForResource",
+        "cleanrooms:GetMembership",
+        "cleanrooms:GetCollaboration"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cleanrooms:UpdateIntermediateTable",
+        "cleanrooms:GetIntermediateTable",
+        "cleanrooms:CreateIntermediateTableAnalysisRule",
+        "cleanrooms:UpdateIntermediateTableAnalysisRule",
+        "cleanrooms:GetIntermediateTableAnalysisRule",
+        "cleanrooms:DeleteIntermediateTableAnalysisRule",
+        "cleanrooms:GetMembership",
+        "cleanrooms:ListTagsForResource",
+        "cleanrooms:TagResource",
+        "cleanrooms:UntagResource",
+        "kms:DescribeKey",
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cleanrooms:DeleteIntermediateTable",
+        "cleanrooms:GetIntermediateTable",
+        "cleanrooms:ListIntermediateTables",
+        "cleanrooms:DeleteIntermediateTableAnalysisRule",
+        "cleanrooms:GetIntermediateTableAnalysisRule",
+        "cleanrooms:GetMembership",
+        "cleanrooms:ListTagsForResource",
+        "cleanrooms:UntagResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cleanrooms:ListIntermediateTables",
+        "cleanrooms:GetMembership",
+        "cleanrooms:GetCollaboration"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "MembershipIdentifier": {
+            "$ref": "resource-schema.json#/properties/MembershipIdentifier"
+          }
+        },
+        "required": [
+          "MembershipIdentifier"
+        ]
+      }
+    }
+  },
+  "additionalProperties": false
+}

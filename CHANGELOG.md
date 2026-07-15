@@ -1,4 +1,19 @@
-## 1.93.0 (Unreleased)
+## 1.93.0 (July 15, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_cleanrooms_intermediate_table`
+* **New Data Source:** `awscc_connect_data_lake_association`
+* **New Data Source:** `awscc_ec2_transit_gateway_policy_table`
+* **New Data Source:** `awscc_ec2_transit_gateway_policy_tables`
+* **New Data Source:** `awscc_securityhub_connector`
+* **New Data Source:** `awscc_securityhub_connectors`
+* **New List Resource:** `awscc_ec2_transit_gateway_policy_table`
+* **New List Resource:** `awscc_securityhub_connector`
+* **New Resource:** `awscc_cleanrooms_intermediate_table`
+* **New Resource:** `awscc_connect_data_lake_association`
+* **New Resource:** `awscc_ec2_transit_gateway_policy_table`
+* **New Resource:** `awscc_securityhub_connector`
 
 ## 1.92.0 (July 8, 2026)
 

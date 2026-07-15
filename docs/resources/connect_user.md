@@ -273,6 +273,7 @@ Optional:
 
 Optional:
 
+- `after_contact_work_mode` (String) The after contact work (ACW) mode for the channel.
 - `after_contact_work_time_limit` (Number) The After Call Work (ACW) timeout setting, in seconds.
 
 
@@ -281,6 +282,7 @@ Optional:
 
 Optional:
 
+- `after_contact_work_mode` (String) The after contact work (ACW) mode for the channel.
 - `after_contact_work_time_limit` (Number) The After Call Work (ACW) timeout setting, in seconds.
 
 

@@ -63,7 +63,7 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Contains configuration information about a CloudFront function.",
 		//	  "properties": {
 		//	    "Comment": {
-		//	      "description": "A comment to describe the function.",
+		//	      "description": "A comment to describe the function. The comment cannot be longer than 128 characters.",
 		//	      "type": "string"
 		//	    },
 		//	    "KeyValueStoreAssociations": {
@@ -100,7 +100,7 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Comment
 				"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A comment to describe the function.",
+					Description: "A comment to describe the function. The comment cannot be longer than 128 characters.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: KeyValueStoreAssociations

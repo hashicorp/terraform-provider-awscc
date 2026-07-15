@@ -182,6 +182,7 @@ Optional:
 
 - `http_port` (Number) The HTTP port for the CloudFront VPC origin endpoint configuration. The default value is ``80``.
 - `https_port` (Number) The HTTPS port of the CloudFront VPC origin endpoint configuration. The default value is ``443``.
+- `ip_address_type` (String)
 - `origin_protocol_policy` (String) The origin protocol policy for the CloudFront VPC origin endpoint configuration.
 - `origin_ssl_protocols` (List of String) Specifies the minimum SSL/TLS protocol that CloudFront uses when connecting to your origin over HTTPS. Valid values include ``SSLv3``, ``TLSv1``, ``TLSv1.1``, and ``TLSv1.2``.
  For more information, see [Minimum Origin SSL Protocol](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginSSLProtocols) in the *Amazon CloudFront Developer Guide*.

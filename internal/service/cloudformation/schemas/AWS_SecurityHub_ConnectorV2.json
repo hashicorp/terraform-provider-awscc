@@ -29,6 +29,65 @@
         "FAILED"
       ]
     },
+    "AzureScopeConfiguration": {
+      "type": "object",
+      "description": "The scope configuration for an Azure connector",
+      "properties": {
+        "ScopeType": {
+          "description": "The scope type for the Azure connector",
+          "type": "string",
+          "enum": [
+            "TENANT",
+            "SUBSCRIPTION"
+          ]
+        },
+        "ScopeValues": {
+          "description": "The list of scope values for the Azure connector",
+          "insertionOrder": false,
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        }
+      },
+      "required": [
+        "ScopeType"
+      ],
+      "additionalProperties": false
+    },
+    "AzureProviderConfiguration": {
+      "type": "object",
+      "description": "The configuration settings required to establish an integration between AWS Security Hub and Azure",
+      "properties": {
+        "AWSConfigConnectorArn": {
+          "description": "The ARN of the AWS Config connector used for the Azure integration",
+          "type": "string"
+        },
+        "ScopeConfiguration": {
+          "$ref": "#/definitions/AzureScopeConfiguration"
+        },
+        "AzureRegions": {
+          "description": "The list of Azure regions to include in the connector scope",
+          "type": "array",
+          "insertionOrder": false,
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "maxItems": 100
+        }
+      },
+      "required": [
+        "AWSConfigConnectorArn",
+        "ScopeConfiguration",
+        "AzureRegions"
+      ],
+      "additionalProperties": false
+    },
     "JiraCloudProviderConfiguration": {
       "type": "object",
       "description": "The initial configuration settings required to establish an integration between Security Hub and Jira Cloud",
@@ -96,8 +155,39 @@
             "ServiceNow"
           ],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "Azure": {
+              "$ref": "#/definitions/AzureProviderConfiguration"
+            }
+          },
+          "required": [
+            "Azure"
+          ],
+          "additionalProperties": false
         }
       ]
+    },
+    "HealthIssue": {
+      "description": "A health issue associated with the connector",
+      "type": "object",
+      "properties": {
+        "Code": {
+          "description": "The code identifying the type of health issue",
+          "type": "string"
+        },
+        "Message": {
+          "description": "The message describing the health issue",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Code",
+        "Message"
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -131,13 +221,7 @@
     },
     "ConnectorStatus": {
       "description": "The status of the connector",
-      "type": "string",
-      "enum": [
-        "CONNECTED",
-        "FAILED_TO_CONNECT",
-        "PENDING_AUTHORIZATION",
-        "PENDING_CONFIGURATION"
-      ]
+      "type": "string"
     },
     "Tags": {
       "$ref": "#/definitions/Tags"
@@ -160,6 +244,22 @@
     },
     "CreatedAt": {
       "$ref": "#/definitions/ISO8601DateString"
+    },
+    "EnablementStatus": {
+      "description": "The enablement status of the connector",
+      "type": "string"
+    },
+    "EnablementStatusReason": {
+      "description": "The reason for the enablement status of the connector",
+      "type": "string"
+    },
+    "Issues": {
+      "description": "The list of health issues associated with the connector",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/HealthIssue"
+      }
     }
   },
   "required": [
@@ -169,7 +269,8 @@
   "createOnlyProperties": [
     "/properties/Name",
     "/properties/KmsKeyArn",
-    "/properties/Provider/ServiceNow/InstanceName"
+    "/properties/Provider/ServiceNow/InstanceName",
+    "/properties/Provider/Azure/AWSConfigConnectorArn"
   ],
   "readOnlyProperties": [
     "/properties/ConnectorArn",
@@ -178,7 +279,10 @@
     "/properties/ConnectorStatus",
     "/properties/LastUpdatedAt",
     "/properties/LastCheckedAt",
-    "/properties/CreatedAt"
+    "/properties/CreatedAt",
+    "/properties/EnablementStatus",
+    "/properties/EnablementStatusReason",
+    "/properties/Issues"
   ],
   "primaryIdentifier": [
     "/properties/ConnectorArn"
@@ -201,6 +305,7 @@
       "permissions": [
         "securityhub:CreateConnectorV2",
         "securityhub:GetConnectorV2",
+        "securityhub:ListConnectorsV2",
         "securityhub:TagResource",
         "securityhub:ListTagsForResource",
         "kms:DescribeKey",
@@ -218,6 +323,7 @@
       "permissions": [
         "securityhub:UpdateConnectorV2",
         "securityhub:GetConnectorV2",
+        "securityhub:ListConnectorsV2",
         "securityhub:TagResource",
         "securityhub:UntagResource",
         "securityhub:ListTagsForResource"
@@ -226,7 +332,8 @@
     "delete": {
       "permissions": [
         "securityhub:GetConnectorV2",
-        "securityhub:DeleteConnectorV2"
+        "securityhub:DeleteConnectorV2",
+        "securityhub:ListConnectorsV2"
       ]
     },
     "list": {
