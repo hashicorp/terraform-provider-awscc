@@ -37,6 +37,15 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "additionalProperties": false,
 		//	        "description": "After Contact Work configuration.",
 		//	        "properties": {
+		//	          "AfterContactWorkMode": {
+		//	            "description": "The after contact work (ACW) mode for the channel.",
+		//	            "enum": [
+		//	              "ON",
+		//	              "OFF",
+		//	              "ON_DEMAND"
+		//	            ],
+		//	            "type": "string"
+		//	          },
 		//	          "AfterContactWorkTimeLimit": {
 		//	            "description": "The After Call Work (ACW) timeout setting, in seconds.",
 		//	            "minimum": 0,
@@ -49,6 +58,15 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "additionalProperties": false,
 		//	        "description": "After Contact Work configuration.",
 		//	        "properties": {
+		//	          "AfterContactWorkMode": {
+		//	            "description": "The after contact work (ACW) mode for the channel.",
+		//	            "enum": [
+		//	              "ON",
+		//	              "OFF",
+		//	              "ON_DEMAND"
+		//	            ],
+		//	            "type": "string"
+		//	          },
 		//	          "AfterContactWorkTimeLimit": {
 		//	            "description": "The After Call Work (ACW) timeout setting, in seconds.",
 		//	            "minimum": 0,
@@ -82,6 +100,11 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 					// Property: AfterContactWorkConfig
 					"after_contact_work_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AfterContactWorkMode
+							"after_contact_work_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The after contact work (ACW) mode for the channel.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
 							// Property: AfterContactWorkTimeLimit
 							"after_contact_work_time_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
 								Description: "The After Call Work (ACW) timeout setting, in seconds.",
@@ -94,6 +117,11 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 					// Property: AgentFirstCallbackAfterContactWorkConfig
 					"agent_first_callback_after_contact_work_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AfterContactWorkMode
+							"after_contact_work_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The after contact work (ACW) mode for the channel.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
 							// Property: AfterContactWorkTimeLimit
 							"after_contact_work_time_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
 								Description: "The After Call Work (ACW) timeout setting, in seconds.",
@@ -710,6 +738,7 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"after_contact_work_config":                      "AfterContactWorkConfig",
 		"after_contact_work_configs":                     "AfterContactWorkConfigs",
+		"after_contact_work_mode":                        "AfterContactWorkMode",
 		"after_contact_work_time_limit":                  "AfterContactWorkTimeLimit",
 		"agent_first_callback_after_contact_work_config": "AgentFirstCallbackAfterContactWorkConfig",
 		"agent_first_callback_auto_accept":               "AgentFirstCallbackAutoAccept",

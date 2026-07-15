@@ -155,6 +155,15 @@ func vpcOriginDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "description": "The HTTPS port of the CloudFront VPC origin endpoint configuration. The default value is ``443``.",
 		//	      "type": "integer"
 		//	    },
+		//	    "IpAddressType": {
+		//	      "default": "ipv4",
+		//	      "description": "",
+		//	      "enum": [
+		//	        "ipv4",
+		//	        "dualstack"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "Name": {
 		//	      "description": "The name of the CloudFront VPC origin endpoint configuration.",
 		//	      "type": "string"
@@ -200,6 +209,11 @@ func vpcOriginDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "The HTTPS port of the CloudFront VPC origin endpoint configuration. The default value is ``443``.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: IpAddressType
+				"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: Name
 				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The name of the CloudFront VPC origin endpoint configuration.",
@@ -242,6 +256,7 @@ func vpcOriginDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"created_time":               "CreatedTime",
 		"http_port":                  "HTTPPort",
 		"https_port":                 "HTTPSPort",
+		"ip_address_type":            "IpAddressType",
 		"key":                        "Key",
 		"last_modified_time":         "LastModifiedTime",
 		"name":                       "Name",

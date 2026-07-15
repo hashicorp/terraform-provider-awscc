@@ -2619,9 +2619,10 @@ resource_schema "aws_eks_pod_identity_association" {
 #}
 
 resource_schema "aws_emr_instance_group_config" {
-  cloudformation_type_name               = "AWS::EMR::InstanceGroupConfig"
-  suppress_resource_generation           = true
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name                 = "AWS::EMR::InstanceGroupConfig"
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_emr_security_configuration" {

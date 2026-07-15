@@ -16,19 +16,19 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceFactory("awscc_securityhub_connector_v2", connectorV2DataSource)
+	registry.AddDataSourceFactory("awscc_securityhub_connector", connectorDataSource)
 }
 
-// connectorV2DataSource returns the Terraform awscc_securityhub_connector_v2 data source.
-// This Terraform data source corresponds to the CloudFormation AWS::SecurityHub::ConnectorV2 resource.
-func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
+// connectorDataSource returns the Terraform awscc_securityhub_connector data source.
+// This Terraform data source corresponds to the CloudFormation AWS::SecurityHub::Connector resource.
+func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
 		// Property: ConnectorArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "description": "The ARN of the connector",
-		//	  "pattern": "^arn:aws\\S*:securityhub:[a-z0-9-]+:[0-9]{12}:connectorv2/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+		//	  "pattern": "^arn:aws\\S*:securityhub:[a-z0-9-]+:[0-9]{12}:connector/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
 		"connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -62,12 +62,23 @@ func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The timestamp formatted in ISO8601",
+		//	  "description": "The date and time for createdAt in UTC and ISO 8601 format.",
 		//	  "pattern": "^(\\d\\d\\d\\d)-([0][1-9]|[1][0-2])-([0][1-9]|[1-2](\\d)|[3][0-1])[T](?:([0-1](\\d)|[2][0-3]):[0-5](\\d):[0-5](\\d)|23:59:60)(?:\\.(\\d)+)?([Z]|[+-](\\d\\d)(:?(\\d\\d))?)$",
 		//	  "type": "string"
 		//	}
 		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The timestamp formatted in ISO8601",
+			Description: "The date and time for createdAt in UTC and ISO 8601 format.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: CreatedBy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The principal that created the connector",
+		//	  "type": "string"
+		//	}
+		"created_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The principal that created the connector",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description
@@ -75,9 +86,6 @@ func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "A description of the connector",
-		//	  "maxLength": 256,
-		//	  "minLength": 0,
-		//	  "pattern": ".*\\S.*",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -93,17 +101,6 @@ func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"enablement_status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The enablement status of the connector",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
-		// Property: EnablementStatusReason
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "description": "The reason for the enablement status of the connector",
-		//	  "type": "string"
-		//	}
-		"enablement_status_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The reason for the enablement status of the connector",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Issues
@@ -151,53 +148,39 @@ func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The list of health issues associated with the connector",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
-		// Property: KmsKeyArn
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "description": "The ARN of KMS key used for the connector",
-		//	  "maxLength": 2048,
-		//	  "minLength": 20,
-		//	  "pattern": ".*\\S.*",
-		//	  "type": "string"
-		//	}
-		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of KMS key used for the connector",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
 		// Property: LastCheckedAt
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The timestamp formatted in ISO8601",
+		//	  "description": "The date and time for lastCheckedAt in UTC and ISO 8601 format.",
 		//	  "pattern": "^(\\d\\d\\d\\d)-([0][1-9]|[1][0-2])-([0][1-9]|[1-2](\\d)|[3][0-1])[T](?:([0-1](\\d)|[2][0-3]):[0-5](\\d):[0-5](\\d)|23:59:60)(?:\\.(\\d)+)?([Z]|[+-](\\d\\d)(:?(\\d\\d))?)$",
 		//	  "type": "string"
 		//	}
 		"last_checked_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The timestamp formatted in ISO8601",
+			Description: "The date and time for lastCheckedAt in UTC and ISO 8601 format.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The timestamp formatted in ISO8601",
+		//	  "description": "The date and time for lastUpdatedAt in UTC and ISO 8601 format.",
 		//	  "pattern": "^(\\d\\d\\d\\d)-([0][1-9]|[1][0-2])-([0][1-9]|[1-2](\\d)|[3][0-1])[T](?:([0-1](\\d)|[2][0-3]):[0-5](\\d):[0-5](\\d)|23:59:60)(?:\\.(\\d)+)?([Z]|[+-](\\d\\d)(:?(\\d\\d))?)$",
 		//	  "type": "string"
 		//	}
 		"last_updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The timestamp formatted in ISO8601",
+			Description: "The date and time for lastUpdatedAt in UTC and ISO 8601 format.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Message
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The message of the connector status change",
+		//	  "description": "The message associated with the connector status change",
 		//	  "type": "string"
 		//	}
 		"message": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The message of the connector status change",
+			Description: "The message associated with the connector status change",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Name
@@ -205,9 +188,6 @@ func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The name of the connector",
-		//	  "maxLength": 64,
-		//	  "minLength": 1,
-		//	  "pattern": ".*\\S.*",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -218,11 +198,12 @@ func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The third-party provider configuration for the connector",
+		//	  "additionalProperties": false,
+		//	  "description": "The CSPM provider configuration for the connector",
 		//	  "properties": {
 		//	    "Azure": {
 		//	      "additionalProperties": false,
-		//	      "description": "The configuration settings required to establish an integration between AWS Security Hub and Azure",
+		//	      "description": "The configuration settings for an Azure CSPM provider",
 		//	      "properties": {
 		//	        "AWSConfigConnectorArn": {
 		//	          "description": "The ARN of the AWS Config connector used for the Azure integration",
@@ -275,48 +256,11 @@ func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "AzureRegions"
 		//	      ],
 		//	      "type": "object"
-		//	    },
-		//	    "JiraCloud": {
-		//	      "additionalProperties": false,
-		//	      "description": "The initial configuration settings required to establish an integration between Security Hub and Jira Cloud",
-		//	      "properties": {
-		//	        "ProjectKey": {
-		//	          "description": "The project key for a Jira Cloud instance",
-		//	          "maxLength": 10,
-		//	          "minLength": 2,
-		//	          "type": "string"
-		//	        }
-		//	      },
-		//	      "required": [
-		//	        "ProjectKey"
-		//	      ],
-		//	      "type": "object"
-		//	    },
-		//	    "ServiceNow": {
-		//	      "additionalProperties": false,
-		//	      "description": "The initial configuration settings required to establish an integration between Security Hub and ServiceNow ITSM",
-		//	      "properties": {
-		//	        "InstanceName": {
-		//	          "description": "The instance name of ServiceNow ITSM",
-		//	          "maxLength": 128,
-		//	          "minLength": 1,
-		//	          "type": "string"
-		//	        },
-		//	        "SecretArn": {
-		//	          "description": "The Amazon Resource Name (ARN) of the AWS Secrets Manager secret that contains the ServiceNow credentials",
-		//	          "maxLength": 2048,
-		//	          "minLength": 20,
-		//	          "pattern": ".*\\S.*",
-		//	          "type": "string"
-		//	        }
-		//	      },
-		//	      "required": [
-		//	        "InstanceName",
-		//	        "SecretArn"
-		//	      ],
-		//	      "type": "object"
 		//	    }
 		//	  },
+		//	  "required": [
+		//	    "Azure"
+		//	  ],
 		//	  "type": "object"
 		//	}
 		"provider_name": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -354,40 +298,11 @@ func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "The configuration settings required to establish an integration between AWS Security Hub and Azure",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: JiraCloud
-				"jira_cloud": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ProjectKey
-						"project_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The project key for a Jira Cloud instance",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The initial configuration settings required to establish an integration between Security Hub and Jira Cloud",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ServiceNow
-				"service_now": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: InstanceName
-						"instance_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The instance name of ServiceNow ITSM",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SecretArn
-						"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Amazon Resource Name (ARN) of the AWS Secrets Manager secret that contains the ServiceNow credentials",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The initial configuration settings required to establish an integration between Security Hub and ServiceNow ITSM",
+					Description: "The configuration settings for an Azure CSPM provider",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The third-party provider configuration for the connector",
+			Description: "The CSPM provider configuration for the connector",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -398,7 +313,7 @@ func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A key-value pair to associate with a resource.",
 		//	  "patternProperties": {
 		//	    "": {
-		//	      "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	      "description": "The value for the tag.",
 		//	      "maxLength": 256,
 		//	      "minLength": 0,
 		//	      "type": "string"
@@ -420,13 +335,13 @@ func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Data Source schema for AWS::SecurityHub::ConnectorV2",
+		Description: "Data Source schema for AWS::SecurityHub::Connector",
 		Attributes:  attributes,
 	}
 
 	var opts generic.DataSourceOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::SecurityHub::ConnectorV2").WithTerraformTypeName("awscc_securityhub_connector_v2")
+	opts = opts.WithCloudFormationTypeName("AWS::SecurityHub::Connector").WithTerraformTypeName("awscc_securityhub_connector")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"aws_config_connector_arn": "AWSConfigConnectorArn",
@@ -437,24 +352,18 @@ func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 		"connector_id":             "ConnectorId",
 		"connector_status":         "ConnectorStatus",
 		"created_at":               "CreatedAt",
+		"created_by":               "CreatedBy",
 		"description":              "Description",
 		"enablement_status":        "EnablementStatus",
-		"enablement_status_reason": "EnablementStatusReason",
-		"instance_name":            "InstanceName",
 		"issues":                   "Issues",
-		"jira_cloud":               "JiraCloud",
-		"kms_key_arn":              "KmsKeyArn",
 		"last_checked_at":          "LastCheckedAt",
 		"last_updated_at":          "LastUpdatedAt",
 		"message":                  "Message",
 		"name":                     "Name",
-		"project_key":              "ProjectKey",
 		"provider_name":            "Provider",
 		"scope_configuration":      "ScopeConfiguration",
 		"scope_type":               "ScopeType",
 		"scope_values":             "ScopeValues",
-		"secret_arn":               "SecretArn",
-		"service_now":              "ServiceNow",
 		"tags":                     "Tags",
 	})
 
