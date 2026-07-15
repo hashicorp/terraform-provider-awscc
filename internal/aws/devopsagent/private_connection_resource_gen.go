@@ -116,6 +116,14 @@ func privateConnectionResource(ctx context.Context) (resource.Resource, error) {
 		//	      "additionalProperties": false,
 		//	      "description": "Configuration for a service-managed Private Connection.",
 		//	      "properties": {
+		//	        "DnsResolution": {
+		//	          "description": "DNS resolution mode for the resource gateway. Defaults to PUBLIC when not set.",
+		//	          "enum": [
+		//	            "PUBLIC",
+		//	            "IN_VPC"
+		//	          ],
+		//	          "type": "string"
+		//	        },
 		//	        "HostAddress": {
 		//	          "description": "IP address or DNS name of the target resource.",
 		//	          "maxLength": 255,
@@ -219,6 +227,21 @@ func privateConnectionResource(ctx context.Context) (resource.Resource, error) {
 				// Property: ServiceManaged
 				"service_managed": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DnsResolution
+						"dns_resolution": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "DNS resolution mode for the resource gateway. Defaults to PUBLIC when not set.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"PUBLIC",
+									"IN_VPC",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: HostAddress
 						"host_address": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "IP address or DNS name of the target resource.",
@@ -490,6 +513,7 @@ func privateConnectionResource(ctx context.Context) (resource.Resource, error) {
 		"certificate":               "Certificate",
 		"certificate_expiry_time":   "CertificateExpiryTime",
 		"connection_configuration":  "ConnectionConfiguration",
+		"dns_resolution":            "DnsResolution",
 		"host_address":              "HostAddress",
 		"ip_address_type":           "IpAddressType",
 		"ipv_4_addresses_per_eni":   "Ipv4AddressesPerEni",

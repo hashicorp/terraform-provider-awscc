@@ -8,6 +8,7 @@ package cloudfront
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64default"
@@ -201,6 +202,15 @@ func vpcOriginResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "The HTTPS port of the CloudFront VPC origin endpoint configuration. The default value is ``443``.",
 		//	      "type": "integer"
 		//	    },
+		//	    "IpAddressType": {
+		//	      "default": "ipv4",
+		//	      "description": "",
+		//	      "enum": [
+		//	        "ipv4",
+		//	        "dualstack"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "Name": {
 		//	      "description": "The name of the CloudFront VPC origin endpoint configuration.",
 		//	      "type": "string"
@@ -254,6 +264,22 @@ func vpcOriginResource(ctx context.Context) (resource.Resource, error) {
 					Default:     int64default.StaticInt64(443),
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: IpAddressType
+				"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "",
+					Optional:    true,
+					Computed:    true,
+					Default:     stringdefault.StaticString("ipv4"),
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"ipv4",
+							"dualstack",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Name
@@ -323,6 +349,7 @@ func vpcOriginResource(ctx context.Context) (resource.Resource, error) {
 		"created_time":               "CreatedTime",
 		"http_port":                  "HTTPPort",
 		"https_port":                 "HTTPSPort",
+		"ip_address_type":            "IpAddressType",
 		"key":                        "Key",
 		"last_modified_time":         "LastModifiedTime",
 		"name":                       "Name",
