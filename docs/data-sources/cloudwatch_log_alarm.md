@@ -48,15 +48,25 @@ Read-Only:
 - `query_string` (String) The query string to execute against the specified log groups.
 - `schedule_configuration` (Attributes) The schedule configuration. (see [below for nested schema](#nestedatt--scheduled_query_configuration--schedule_configuration))
 - `scheduled_query_role_arn` (String) The ARN of the IAM role that grants permissions to execute the scheduled query.
+- `tags` (Attributes Set) A list of key-value pairs to associate with the scheduled query that backs the log alarm. (see [below for nested schema](#nestedatt--scheduled_query_configuration--tags))
 
 <a id="nestedatt--scheduled_query_configuration--schedule_configuration"></a>
 ### Nested Schema for `scheduled_query_configuration.schedule_configuration`
 
 Read-Only:
 
-- `end_time_offset` (Number) The number of seconds into the past to end the query window.
+- `end_time_offset` (Number) The number of seconds into the past to end the query window. Must be a non-negative value and cannot exceed 2592000 seconds (30 days).
 - `schedule_expression` (String) The expression that defines when the scheduled query runs, e.g. rate(1 minute).
-- `start_time_offset` (Number) The number of seconds into the past to start the query window.
+- `start_time_offset` (Number) The number of seconds into the past to start the query window. Must be a positive value and cannot exceed 2592000 seconds (30 days).
+
+
+<a id="nestedatt--scheduled_query_configuration--tags"></a>
+### Nested Schema for `scheduled_query_configuration.tags`
+
+Read-Only:
+
+- `key` (String) A unique identifier for the tag. The combination of tag keys and values can help you organize and categorize your resources.
+- `value` (String) The value for the specified tag key.
 
 
 

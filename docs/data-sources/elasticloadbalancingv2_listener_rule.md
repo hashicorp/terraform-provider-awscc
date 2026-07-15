@@ -30,6 +30,7 @@ Data Source schema for AWS::ElasticLoadBalancingV2::ListenerRule
 - `priority` (Number) The rule priority. A listener can't have multiple rules with the same priority.
  If you try to reorder rules by updating their priorities, do not specify a new priority if an existing rule already uses this priority, as this can cause an error. If you need to reuse a priority with a different rule, you must remove it as a priority first, and then specify it in a subsequent update.
 - `rule_arn` (String)
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `transforms` (Attributes Set) (see [below for nested schema](#nestedatt--transforms))
 
 <a id="nestedatt--actions"></a>
@@ -262,6 +263,15 @@ Read-Only:
 - `values` (Set of String) The source IP addresses, in CIDR format. You can use both IPv4 and IPv6 addresses. Wildcards are not supported.
  If you specify multiple addresses, the condition is satisfied if the source IP address of the request matches one of the CIDR blocks. This condition is not satisfied by the addresses in the X-Forwarded-For header.
 
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
 
 
 <a id="nestedatt--transforms"></a>

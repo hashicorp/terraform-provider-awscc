@@ -50,6 +50,7 @@ Read-Only:
 
 Read-Only:
 
+- `dns_resolution` (String) DNS resolution mode for the resource gateway. Defaults to PUBLIC when not set.
 - `host_address` (String) IP address or DNS name of the target resource.
 - `ip_address_type` (String) IP address type of the service-managed Resource Gateway.
 - `ipv_4_addresses_per_eni` (Number) Number of IPv4 addresses in each ENI for the service-managed Resource Gateway.
