@@ -74,6 +74,12 @@
       ]
     }
   },
+  "additionalIdentifiers": [
+    [
+      "/properties/ApplicationId",
+      "/properties/Name"
+    ]
+  ],
   "writeOnlyProperties": [
     "/properties/DeletionProtectionCheck"
   ],

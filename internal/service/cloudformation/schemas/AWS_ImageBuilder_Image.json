@@ -8,7 +8,7 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "tagProperty": "/properties/Tags",
-    "cloudFormationSystemTags": true
+    "cloudFormationSystemTags": false
   },
   "typeName": "AWS::ImageBuilder::Image",
   "readOnlyProperties": [

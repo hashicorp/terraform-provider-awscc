@@ -6,7 +6,7 @@
       "properties": {
         "Comment": {
           "type": "string",
-          "description": "A comment to describe the function."
+          "description": "A comment to describe the function. The comment cannot be longer than 128 characters."
         },
         "Runtime": {
           "type": "string",
