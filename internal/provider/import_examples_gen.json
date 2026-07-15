@@ -969,6 +969,10 @@
         "identifier": ["IdMappingTableIdentifier","MembershipIdentifier"]
     },
     {
+        "resource": "awscc_cleanrooms_intermediate_table",
+        "identifier": ["IntermediateTableIdentifier","MembershipIdentifier"]
+    },
+    {
         "resource": "awscc_cleanrooms_membership",
         "generateListResource": true,
         "identifier": ["MembershipIdentifier"]
@@ -1444,6 +1448,10 @@
     {
         "resource": "awscc_connect_contact_flow_version",
         "identifier": ["ContactFlowVersionARN"]
+    },
+    {
+        "resource": "awscc_connect_data_lake_association",
+        "identifier": ["InstanceId","DataSetId","TargetAccountId"]
     },
     {
         "resource": "awscc_connect_data_table",
@@ -2324,6 +2332,11 @@
         "resource": "awscc_ec2_transit_gateway_peering_attachment",
         "generateListResource": true,
         "identifier": ["TransitGatewayAttachmentId"]
+    },
+    {
+        "resource": "awscc_ec2_transit_gateway_policy_table",
+        "generateListResource": true,
+        "identifier": ["TransitGatewayPolicyTableId"]
     },
     {
         "resource": "awscc_ec2_transit_gateway_route",
@@ -6088,6 +6101,11 @@
         "resource": "awscc_securityhub_configuration_policy",
         "generateListResource": true,
         "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_securityhub_connector",
+        "generateListResource": true,
+        "identifier": ["ConnectorArn"]
     },
     {
         "resource": "awscc_securityhub_connector_v2",

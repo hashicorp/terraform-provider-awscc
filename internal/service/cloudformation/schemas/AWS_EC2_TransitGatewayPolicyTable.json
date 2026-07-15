@@ -1,0 +1,107 @@
+{
+  "typeName": "AWS::EC2::TransitGatewayPolicyTable",
+  "description": "AWS::EC2::TransitGatewayPolicyTable Resource Definition",
+  "properties": {
+    "TransitGatewayId": {
+      "description": "The Id of transit gateway",
+      "type": "string"
+    },
+    "TransitGatewayPolicyTableId": {
+      "description": "The Id of transit gateway policy table.",
+      "type": "string"
+    },
+    "State": {
+      "description": "State of the transit gateway policy table",
+      "type": "string"
+    },
+    "CreationTime": {
+      "description": "Creation time of the transit gateway policy table",
+      "type": "string"
+    },
+    "Tags": {
+      "type": "array",
+      "insertionOrder": false,
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "TransitGatewayId"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "ec2:CreateTags",
+      "ec2:DeleteTags"
+    ]
+  },
+  "readOnlyProperties": [
+    "/properties/TransitGatewayPolicyTableId",
+    "/properties/State",
+    "/properties/CreationTime"
+  ],
+  "createOnlyProperties": [
+    "/properties/TransitGatewayId"
+  ],
+  "primaryIdentifier": [
+    "/properties/TransitGatewayPolicyTableId"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ec2:DescribeTransitGatewayPolicyTables",
+        "ec2:CreateTransitGatewayPolicyTable",
+        "ec2:CreateTags"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ec2:DescribeTransitGatewayPolicyTables"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ec2:DescribeTransitGatewayPolicyTables",
+        "ec2:DeleteTags",
+        "ec2:CreateTags"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ec2:DescribeTransitGatewayPolicyTables",
+        "ec2:DeleteTransitGatewayPolicyTable",
+        "ec2:DeleteTags"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ec2:DescribeTransitGatewayPolicyTables"
+      ]
+    }
+  }
+}
