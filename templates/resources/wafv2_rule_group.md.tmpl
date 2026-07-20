@@ -1,0 +1,60 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Statement nesting depth
+
+This resource is generated from a depth-limited schema: rule statements support up to
+**3 levels of `statement` nesting**, which allows **2 chained logical statements**
+(`and_statement`, `or_statement`, `not_statement`) above a match statement — for
+example `and_statement` → `not_statement` → `byte_match_statement`. The AWS WAF API
+itself imposes no nesting limit, and the hand-written `aws_wafv2_rule_group` resource in
+terraform-provider-aws currently supports one additional logical level.
+
+Consequences of the depth limit:
+
+* Configuration nested deeper than the schema cannot be expressed; deeper attributes
+  are not part of the schema.
+* **Importing a rule group whose rules nest deeper than the schema silently omits the
+  deeper statement levels from Terraform state.** The rule group itself is not modified
+  by the import, and `terraform plan` will report no changes, but the state does not
+  fully describe the remote resource.
+* Updating a rule whose statements were truncated at import can produce incorrect
+  patches against the remote rule group. Rule groups that use deeper nesting should not be
+  managed with this resource until it supports their full depth.
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if or .HasImport .HasImportIDConfig .HasImportIdentityConfig }}
+
+## Import
+
+Import is supported using the following syntax:
+{{- end }}
+{{- if .HasImportIdentityConfig }}
+
+In Terraform v1.12.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `identity` attribute, for example:
+
+{{tffile .ImportIdentityConfigFile }}
+
+{{ .IdentitySchemaMarkdown | trimspace }}
+{{- end }}
+{{- if .HasImportIDConfig }}
+
+In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.com/terraform/language/import) can be used with the `id` attribute, for example:
+
+{{tffile .ImportIDConfigFile }}
+{{- end }}
+{{- if .HasImport }}
+
+The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
+
+{{codefile "shell" .ImportFile }}
+
+{{- end }}
