@@ -6289,8 +6289,13 @@ resource_schema "aws_wafv2_rule_group" {
   suppress_plural_data_source_generation = true
 
   # Latest schema updates are suppressed.
-  # Local schema is de-recursed to 3 levels of statement nesting via
+  # Local schema is de-recursed via
   # python3 tools/derecurse-schema.py internal/service/cloudformation/schemas/AWS_WAFv2_RuleGroup.json
+  # to 3 levels of Statement nesting = 2 chained logical statements (And/Or/Not) above a
+  # match statement. terraform-provider-aws's hand-written schema allows one more logical
+  # level; --depth 4 currently exceeds a Go per-function compiler limit in the generated
+  # code ("internal compiler error: NewBulk too big"), so parity needs generator changes.
+  # Statements deeper than the schema are silently omitted from state on import/read.
   # Re-apply the script after refreshing the schema.
   # Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95
 }
@@ -6300,8 +6305,13 @@ resource_schema "aws_wafv2_web_acl" {
   suppress_plural_data_source_generation = true
 
   # Latest schema updates are suppressed.
-  # Local schema is de-recursed to 3 levels of statement nesting via
+  # Local schema is de-recursed via
   # python3 tools/derecurse-schema.py internal/service/cloudformation/schemas/AWS_WAFv2_WebACL.json
+  # to 3 levels of Statement nesting = 2 chained logical statements (And/Or/Not) above a
+  # match statement. terraform-provider-aws's hand-written schema allows one more logical
+  # level; --depth 4 currently exceeds a Go per-function compiler limit in the generated
+  # code ("internal compiler error: NewBulk too big"), so parity needs generator changes.
+  # Statements deeper than the schema are silently omitted from state on import/read.
   # Re-apply the script after refreshing the schema.
   # Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/95
 }
