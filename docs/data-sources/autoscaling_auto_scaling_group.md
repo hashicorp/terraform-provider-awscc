@@ -85,7 +85,7 @@ Data Source schema for AWS::AutoScaling::AutoScalingGroup
 - `traffic_sources` (Attributes Set) The traffic sources associated with this Auto Scaling group. (see [below for nested schema](#nestedatt--traffic_sources))
 - `vpc_zone_identifier` (List of String) A list of subnet IDs for a virtual private cloud (VPC) where instances in the Auto Scaling group can be created.
  If this resource specifies public subnets and is also in a VPC that is defined in the same stack template, you must use the [DependsOn attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-dependson.html) to declare a dependency on the [VPC-gateway attachment](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpc-gateway-attachment.html).
-  When you update ``VPCZoneIdentifier``, this retains the same Auto Scaling group and replaces old instances with new ones, according to the specified subnets. You can optionally specify how CloudFormation handles these updates by using an [UpdatePolicy attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-updatepolicy.html).
+  When you update ``VPCZoneIdentifier``, this retains the same Auto Scaling group and replaces old instances with new ones, according to the specified subnets. To control how CloudFormation replaces the instances, add an [UpdatePolicy attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-updatepolicy.html) to your stack. Set the update policy to ``AutoScalingInstanceRefresh``. For more information, see the [AutoScalingInstanceRefresh policy](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-updatepolicy.html#cfn-attributes-updatepolicy-instancerefresh).
   Required to launch instances into a nondefault VPC. If you specify ``VPCZoneIdentifier`` with ``AvailabilityZones``, the subnets that you specify for this property must reside in those Availability Zones.
 
 <a id="nestedatt--availability_zone_distribution"></a>
@@ -96,6 +96,7 @@ Read-Only:
 - `capacity_distribution_strategy` (String) If launches fail in an Availability Zone, the following strategies are available. The default is ``balanced-best-effort``. 
   +  ``balanced-only`` - If launches fail in an Availability Zone, Auto Scaling will continue to attempt to launch in the unhealthy zone to preserve a balanced distribution.
   +  ``balanced-best-effort`` - If launches fail in an Availability Zone, Auto Scaling will attempt to launch in another healthy Availability Zone instead.
+  +  ``reservations-then-balanced`` - Auto Scaling will first attempt to launch into your Capacity Reservations, and then balance any remaining capacity across healthy Availability Zones.
 
 
 <a id="nestedatt--availability_zone_impairment_policy"></a>

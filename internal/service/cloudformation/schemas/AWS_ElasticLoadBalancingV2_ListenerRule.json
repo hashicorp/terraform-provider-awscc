@@ -43,12 +43,38 @@
       },
       "description": ""
     },
+    "Tags": {
+      "type": "array",
+      "description": "",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
     "IsDefault": {
       "type": "boolean",
       "description": ""
     }
   },
   "definitions": {
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Value": {
+          "type": "string"
+        },
+        "Key": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ],
+      "description": ""
+    },
     "TargetGroupTuple": {
       "type": "object",
       "additionalProperties": false,
@@ -640,16 +666,23 @@
     "/properties/ListenerArn"
   ],
   "tagging": {
-    "taggable": false,
-    "tagOnCreate": false,
-    "tagUpdatable": false,
-    "cloudFormationSystemTags": false
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "elasticloadbalancing:AddTags",
+      "elasticloadbalancing:DescribeTags",
+      "elasticloadbalancing:RemoveTags"
+    ]
   },
   "handlers": {
     "create": {
       "permissions": [
         "elasticloadbalancing:CreateRule",
         "elasticloadbalancing:DescribeRules",
+        "elasticloadbalancing:AddTags",
         "cognito-idp:DescribeUserPoolClient"
       ]
     },
@@ -693,14 +726,18 @@
     },
     "read": {
       "permissions": [
-        "elasticloadbalancing:DescribeRules"
+        "elasticloadbalancing:DescribeRules",
+        "elasticloadbalancing:DescribeTags"
       ]
     },
     "update": {
       "permissions": [
         "elasticloadbalancing:ModifyRule",
         "elasticloadbalancing:SetRulePriorities",
-        "elasticloadbalancing:DescribeRules"
+        "elasticloadbalancing:DescribeRules",
+        "elasticloadbalancing:AddTags",
+        "elasticloadbalancing:RemoveTags",
+        "elasticloadbalancing:DescribeTags"
       ]
     }
   }

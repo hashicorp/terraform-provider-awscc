@@ -231,7 +231,8 @@ func enforcedGuardrailConfigurationResource(ctx context.Context) (resource.Resou
 		//	{
 		//	  "description": "Configuration owner type",
 		//	  "enum": [
-		//	    "ACCOUNT"
+		//	    "ACCOUNT",
+		//	    "ORGANIZATION"
 		//	  ],
 		//	  "type": "string"
 		//	}

@@ -51,6 +51,7 @@ func keyspaceResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// ClientSideTimestampsEnabled is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: KeyspaceName
 		// CloudFormation resource type schema:
@@ -89,28 +90,7 @@ func keyspaceResource(ctx context.Context) (resource.Resource, error) {
 		//	    "RegionList": {
 		//	      "insertionOrder": false,
 		//	      "items": {
-		//	        "enum": [
-		//	          "af-south-1",
-		//	          "ap-east-1",
-		//	          "ap-northeast-1",
-		//	          "ap-northeast-2",
-		//	          "ap-south-1",
-		//	          "ap-southeast-1",
-		//	          "ap-southeast-2",
-		//	          "ca-central-1",
-		//	          "eu-central-1",
-		//	          "eu-north-1",
-		//	          "eu-west-1",
-		//	          "eu-west-2",
-		//	          "eu-west-3",
-		//	          "me-central-1",
-		//	          "me-south-1",
-		//	          "sa-east-1",
-		//	          "us-east-1",
-		//	          "us-east-2",
-		//	          "us-west-1",
-		//	          "us-west-2"
-		//	        ],
+		//	        "pattern": "^[a-z]{2,}-[a-z]+-[0-9]+$",
 		//	        "type": "string"
 		//	      },
 		//	      "maxItems": 20,
@@ -138,33 +118,13 @@ func keyspaceResource(ctx context.Context) (resource.Resource, error) {
 					Validators: []validator.Set{ /*START VALIDATORS*/
 						setvalidator.SizeBetween(2, 20),
 						setvalidator.ValueStringsAre(
-							stringvalidator.OneOf(
-								"af-south-1",
-								"ap-east-1",
-								"ap-northeast-1",
-								"ap-northeast-2",
-								"ap-south-1",
-								"ap-southeast-1",
-								"ap-southeast-2",
-								"ca-central-1",
-								"eu-central-1",
-								"eu-north-1",
-								"eu-west-1",
-								"eu-west-2",
-								"eu-west-3",
-								"me-central-1",
-								"me-south-1",
-								"sa-east-1",
-								"us-east-1",
-								"us-east-2",
-								"us-west-1",
-								"us-west-2",
-							),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[a-z]{2,}-[a-z]+-[0-9]+$"), ""),
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 						setplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// RegionList is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: ReplicationStrategy
 				"replication_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -294,6 +254,10 @@ func keyspaceResource(ctx context.Context) (resource.Resource, error) {
 		"value":                          "Value",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/ClientSideTimestampsEnabled",
+		"/properties/ReplicationSpecification/RegionList",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

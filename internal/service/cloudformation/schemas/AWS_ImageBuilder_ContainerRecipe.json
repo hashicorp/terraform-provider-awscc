@@ -310,11 +310,14 @@
     "/properties/ImageOsVersionOverride",
     "/properties/PlatformOverride"
   ],
+  "propertyTransform": {
+    "/properties/Version": "$join([\"^\", $replace($replace(Version, \".\", \"\\\\.\"), \"x\", \"[0-9]+\"), \"$\"])"
+  },
   "tagging": {
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": true,
+    "cloudFormationSystemTags": false,
     "tagProperty": "/properties/Tags",
     "permissions": [
       "imagebuilder:TagResource",

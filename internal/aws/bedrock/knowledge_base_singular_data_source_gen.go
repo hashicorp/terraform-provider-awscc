@@ -230,9 +230,6 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	          "type": "object"
 		//	        }
 		//	      },
-		//	      "required": [
-		//	        "EmbeddingModelArn"
-		//	      ],
 		//	      "type": "object"
 		//	    },
 		//	    "SqlKnowledgeBaseConfiguration": {

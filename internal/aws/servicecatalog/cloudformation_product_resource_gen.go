@@ -8,7 +8,7 @@ package servicecatalog
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
@@ -36,24 +36,29 @@ func cloudFormationProductResource(ctx context.Context) (resource.Resource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The language code.",
 		//	  "type": "string"
 		//	}
 		"accept_language": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "The language code.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// AcceptLanguage is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The description of the product.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "The description of the product.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -62,11 +67,13 @@ func cloudFormationProductResource(ctx context.Context) (resource.Resource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The distributor of the product.",
 		//	  "type": "string"
 		//	}
 		"distributor": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "The distributor of the product.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -75,10 +82,12 @@ func cloudFormationProductResource(ctx context.Context) (resource.Resource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The ID of the product, such as prod-tsjbmal34qvek",
 		//	  "type": "string"
 		//	}
 		"cloudformation_product_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The ID of the product, such as prod-tsjbmal34qvek",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -87,28 +96,34 @@ func cloudFormationProductResource(ctx context.Context) (resource.Resource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The name of the product.",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Description: "The name of the product.",
+			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Owner
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The owner of the product.",
 		//	  "type": "string"
 		//	}
 		"owner": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Description: "The owner of the product.",
+			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProductName
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The name of the product.",
 		//	  "type": "string"
 		//	}
 		"product_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The name of the product.",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -117,11 +132,31 @@ func cloudFormationProductResource(ctx context.Context) (resource.Resource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The type of product.",
+		//	  "enum": [
+		//	    "CLOUD_FORMATION_TEMPLATE",
+		//	    "MARKETPLACE_AMI",
+		//	    "MARKETPLACE_CAR",
+		//	    "TERRAFORM_OPEN_SOURCE",
+		//	    "TERRAFORM_CLOUD",
+		//	    "EXTERNAL"
+		//	  ],
 		//	  "type": "string"
 		//	}
 		"product_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "The type of product.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"CLOUD_FORMATION_TEMPLATE",
+					"MARKETPLACE_AMI",
+					"MARKETPLACE_CAR",
+					"TERRAFORM_OPEN_SOURCE",
+					"TERRAFORM_CLOUD",
+					"EXTERNAL",
+				),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -130,10 +165,12 @@ func cloudFormationProductResource(ctx context.Context) (resource.Resource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The IDs of the provisioning artifacts",
 		//	  "type": "string"
 		//	}
 		"provisioning_artifact_ids": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The IDs of the provisioning artifacts",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -142,10 +179,12 @@ func cloudFormationProductResource(ctx context.Context) (resource.Resource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The names of the provisioning artifacts",
 		//	  "type": "string"
 		//	}
 		"provisioning_artifact_names": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The names of the provisioning artifacts",
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -154,22 +193,48 @@ func cloudFormationProductResource(ctx context.Context) (resource.Resource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The configuration of the provisioning artifact (also known as a version).",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "Description": {
+		//	        "description": "The description of the provisioning artifact, including how it differs from the previous provisioning artifact.",
 		//	        "type": "string"
 		//	      },
 		//	      "DisableTemplateValidation": {
+		//	        "description": "If set to true, AWS Service Catalog stops validating the specified provisioning artifact even if it is invalid.",
 		//	        "type": "boolean"
 		//	      },
 		//	      "Info": {
+		//	        "additionalProperties": false,
+		//	        "description": "Specify the template source with one of the following options, but not both. Keys accepted: [ LoadTemplateFromURL, ImportFromPhysicalId ] The URL of the AWS CloudFormation template in Amazon S3 in JSON format. Specify the URL in JSON format as follows:\n\n\"LoadTemplateFromURL\": \"https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/...\"\n\nImportFromPhysicalId: The physical id of the resource that contains the template. Currently only supports AWS CloudFormation stack arn. Specify the physical id in JSON format as follows: ImportFromPhysicalId: \"arn:aws:cloudformation:[us-east-1]:[accountId]:stack/[StackName]/[resourceId]",
+		//	        "properties": {
+		//	          "ImportFromPhysicalId": {
+		//	            "description": "The physical id of the resource that contains the template. Currently only supports AWS CloudFormation stack arn",
+		//	            "type": "string"
+		//	          },
+		//	          "LoadTemplateFromURL": {
+		//	            "description": "The URL of the AWS CloudFormation template in Amazon S3 in JSON format.",
+		//	            "type": "string"
+		//	          }
+		//	        },
 		//	        "type": "object"
 		//	      },
 		//	      "Name": {
+		//	        "description": "The name of the provisioning artifact (for example, v1 v2beta). No spaces are allowed.",
 		//	        "type": "string"
 		//	      },
 		//	      "Type": {
+		//	        "description": "The type of provisioning artifact. Valid values are CLOUD_FORMATION_TEMPLATE, TERRAFORM_OPEN_SOURCE, TERRAFORM_CLOUD, EXTERNAL",
+		//	        "enum": [
+		//	          "CLOUD_FORMATION_TEMPLATE",
+		//	          "MARKETPLACE_AMI",
+		//	          "MARKETPLACE_CAR",
+		//	          "TERRAFORM_OPEN_SOURCE",
+		//	          "TERRAFORM_CLOUD",
+		//	          "EXTERNAL"
+		//	        ],
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -186,53 +251,89 @@ func cloudFormationProductResource(ctx context.Context) (resource.Resource, erro
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Description
 					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "The description of the provisioning artifact, including how it differs from the previous provisioning artifact.",
+						Optional:    true,
+						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: DisableTemplateValidation
 					"disable_template_validation": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "If set to true, AWS Service Catalog stops validating the specified provisioning artifact even if it is invalid.",
+						Optional:    true,
+						Computed:    true,
 						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 							boolplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Info
-					"info": schema.StringAttribute{ /*START ATTRIBUTE*/
-						CustomType: jsontypes.NormalizedType{},
-						Optional:   true,
-						Computed:   true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
+					"info": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ImportFromPhysicalId
+							"import_from_physical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The physical id of the resource that contains the template. Currently only supports AWS CloudFormation stack arn",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: LoadTemplateFromURL
+							"load_template_from_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The URL of the AWS CloudFormation template in Amazon S3 in JSON format.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Specify the template source with one of the following options, but not both. Keys accepted: [ LoadTemplateFromURL, ImportFromPhysicalId ] The URL of the AWS CloudFormation template in Amazon S3 in JSON format. Specify the URL in JSON format as follows:\n\n\"LoadTemplateFromURL\": \"https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/...\"\n\nImportFromPhysicalId: The physical id of the resource that contains the template. Currently only supports AWS CloudFormation stack arn. Specify the physical id in JSON format as follows: ImportFromPhysicalId: \"arn:aws:cloudformation:[us-east-1]:[accountId]:stack/[StackName]/[resourceId]",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.Object{ /*START VALIDATORS*/
+							fwvalidators.NotNullObject(),
 						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "The name of the provisioning artifact (for example, v1 v2beta). No spaces are allowed.",
+						Optional:    true,
+						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Type
 					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "The type of provisioning artifact. Valid values are CLOUD_FORMATION_TEMPLATE, TERRAFORM_OPEN_SOURCE, TERRAFORM_CLOUD, EXTERNAL",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"CLOUD_FORMATION_TEMPLATE",
+								"MARKETPLACE_AMI",
+								"MARKETPLACE_CAR",
+								"TERRAFORM_OPEN_SOURCE",
+								"TERRAFORM_CLOUD",
+								"EXTERNAL",
+							),
+						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Optional: true,
-			Computed: true,
+			Description: "The configuration of the provisioning artifact (also known as a version).",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -240,37 +341,46 @@ func cloudFormationProductResource(ctx context.Context) (resource.Resource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "This property is turned off by default. If turned off, you can update provisioning artifacts or product attributes (such as description, distributor, name, owner, and more) and the associated provisioning artifacts will retain the same unique identifier. Provisioning artifacts are matched within the CloudFormationProduct resource, and only those that have been updated will be changed. Provisioning artifacts are matched by a combinaton of provisioning artifact template URL and name.",
 		//	  "type": "boolean"
 		//	}
 		"replace_provisioning_artifacts": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "This property is turned off by default. If turned off, you can update provisioning artifacts or product attributes (such as description, distributor, name, owner, and more) and the associated provisioning artifacts will retain the same unique identifier. Provisioning artifacts are matched within the CloudFormationProduct resource, and only those that have been updated will be changed. Provisioning artifacts are matched by a combinaton of provisioning artifact template URL and name.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// ReplaceProvisioningArtifacts is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: SourceConnection
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "A top level ProductViewDetail response containing details about the product's connection. AWS Service Catalog returns this field for the CreateProduct, UpdateProduct, DescribeProductAsAdmin, and SearchProductAsAdmin APIs. This response contains the same fields as the ConnectionParameters request, with the addition of the LastSync response.",
 		//	  "properties": {
 		//	    "ConnectionParameters": {
 		//	      "additionalProperties": false,
+		//	      "description": "The connection details based on the connection Type.",
 		//	      "properties": {
 		//	        "CodeStar": {
 		//	          "additionalProperties": false,
 		//	          "properties": {
 		//	            "ArtifactPath": {
+		//	              "description": "The absolute path where the artifact resides within the repo and branch, formatted as \"folder/file.json\".",
 		//	              "type": "string"
 		//	            },
 		//	            "Branch": {
+		//	              "description": "The specific branch where the artifact resides.",
 		//	              "type": "string"
 		//	            },
 		//	            "ConnectionArn": {
+		//	              "description": "The CodeStar ARN, which is the connection between AWS Service Catalog and the external repository.\n\n",
 		//	              "type": "string"
 		//	            },
 		//	            "Repository": {
+		//	              "description": "The specific repository where the product's artifact-to-be-synced resides, formatted as \"Account/Repo.\"",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -286,12 +396,13 @@ func cloudFormationProductResource(ctx context.Context) (resource.Resource, erro
 		//	      "type": "object"
 		//	    },
 		//	    "Type": {
+		//	      "description": "The only supported SourceConnection type is Codestar.",
 		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "required": [
-		//	    "Type",
-		//	    "ConnectionParameters"
+		//	    "ConnectionParameters",
+		//	    "Type"
 		//	  ],
 		//	  "type": "object"
 		//	}
@@ -305,8 +416,9 @@ func cloudFormationProductResource(ctx context.Context) (resource.Resource, erro
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: ArtifactPath
 								"artifact_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "The absolute path where the artifact resides within the repo and branch, formatted as \"folder/file.json\".",
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -316,8 +428,9 @@ func cloudFormationProductResource(ctx context.Context) (resource.Resource, erro
 								}, /*END ATTRIBUTE*/
 								// Property: Branch
 								"branch": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "The specific branch where the artifact resides.",
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -327,8 +440,9 @@ func cloudFormationProductResource(ctx context.Context) (resource.Resource, erro
 								}, /*END ATTRIBUTE*/
 								// Property: ConnectionArn
 								"connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "The CodeStar ARN, which is the connection between AWS Service Catalog and the external repository.\n\n",
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -338,8 +452,9 @@ func cloudFormationProductResource(ctx context.Context) (resource.Resource, erro
 								}, /*END ATTRIBUTE*/
 								// Property: Repository
 								"repository": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "The specific repository where the product's artifact-to-be-synced resides, formatted as \"Account/Repo.\"",
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										fwvalidators.NotNullString(),
 									}, /*END VALIDATORS*/
@@ -355,8 +470,9 @@ func cloudFormationProductResource(ctx context.Context) (resource.Resource, erro
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
+					Description: "The connection details based on the connection Type.",
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.Object{ /*START VALIDATORS*/
 						fwvalidators.NotNullObject(),
 					}, /*END VALIDATORS*/
@@ -366,8 +482,9 @@ func cloudFormationProductResource(ctx context.Context) (resource.Resource, erro
 				}, /*END ATTRIBUTE*/
 				// Property: Type
 				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
+					Description: "The only supported SourceConnection type is Codestar.",
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
@@ -376,8 +493,9 @@ func cloudFormationProductResource(ctx context.Context) (resource.Resource, erro
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Optional: true,
-			Computed: true,
+			Description: "A top level ProductViewDetail response containing details about the product's connection. AWS Service Catalog returns this field for the CreateProduct, UpdateProduct, DescribeProductAsAdmin, and SearchProductAsAdmin APIs. This response contains the same fields as the ConnectionParameters request, with the addition of the LastSync response.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -386,11 +504,13 @@ func cloudFormationProductResource(ctx context.Context) (resource.Resource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The support information about the product.",
 		//	  "type": "string"
 		//	}
 		"support_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "The support information about the product.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -399,11 +519,13 @@ func cloudFormationProductResource(ctx context.Context) (resource.Resource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The contact email for product support.",
 		//	  "type": "string"
 		//	}
 		"support_email": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "The contact email for product support.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -412,11 +534,13 @@ func cloudFormationProductResource(ctx context.Context) (resource.Resource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The contact URL for product support.",
 		//	  "type": "string"
 		//	}
 		"support_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "The contact URL for product support.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -425,13 +549,17 @@ func cloudFormationProductResource(ctx context.Context) (resource.Resource, erro
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "One or more tags.",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "The tag key.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "The tag value",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -449,8 +577,9 @@ func cloudFormationProductResource(ctx context.Context) (resource.Resource, erro
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "The tag key.",
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -460,8 +589,9 @@ func cloudFormationProductResource(ctx context.Context) (resource.Resource, erro
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
+						Description: "The tag value",
+						Optional:    true,
+						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
@@ -471,9 +601,11 @@ func cloudFormationProductResource(ctx context.Context) (resource.Resource, erro
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Optional: true,
-			Computed: true,
+			Description: "One or more tags.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -489,7 +621,7 @@ func cloudFormationProductResource(ctx context.Context) (resource.Resource, erro
 	}
 
 	schema := schema.Schema{
-		Description: "Resource Type definition for AWS::ServiceCatalog::CloudFormationProduct",
+		Description: "Resource type definition for AWS::ServiceCatalog::CloudFormationProduct",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -501,6 +633,7 @@ func cloudFormationProductResource(ctx context.Context) (resource.Resource, erro
 	opts = opts.WithPrimaryIdentifier(
 		identity.Identifier{
 			Name:              "id",
+			Description:       "The ID of the product, such as prod-tsjbmal34qvek",
 			RequiredForImport: true,
 		})
 
@@ -515,8 +648,10 @@ func cloudFormationProductResource(ctx context.Context) (resource.Resource, erro
 		"description":                      "Description",
 		"disable_template_validation":      "DisableTemplateValidation",
 		"distributor":                      "Distributor",
+		"import_from_physical_id":          "ImportFromPhysicalId",
 		"info":                             "Info",
 		"key":                              "Key",
+		"load_template_from_url":           "LoadTemplateFromURL",
 		"name":                             "Name",
 		"owner":                            "Owner",
 		"product_name":                     "ProductName",
@@ -535,6 +670,11 @@ func cloudFormationProductResource(ctx context.Context) (resource.Resource, erro
 		"value":                            "Value",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/AcceptLanguage",
+		"/properties/ReplaceProvisioningArtifacts",
+		"/properties/ProvisioningArtifactParameters/*/DisableTemplateValidation",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

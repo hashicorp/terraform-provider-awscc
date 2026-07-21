@@ -103,7 +103,6 @@ func automatedReasoningPolicyResource(ctx context.Context) (resource.Resource, e
 			Default:     booldefault.StaticBool(false),
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
-				boolplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 			// ForceDelete is a write-only property.
 		}, /*END ATTRIBUTE*/

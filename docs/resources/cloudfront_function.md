@@ -81,7 +81,7 @@ variable "key_store_arn" {
 
 Required:
 
-- `comment` (String) A comment to describe the function.
+- `comment` (String) A comment to describe the function. The comment cannot be longer than 128 characters.
 - `runtime` (String) The function's runtime environment version.
 
 Optional:

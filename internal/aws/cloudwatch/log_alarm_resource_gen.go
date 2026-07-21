@@ -241,6 +241,7 @@ func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 		//	  "properties": {
 		//	    "AggregationExpression": {
 		//	      "description": "The aggregation expression for the scheduled query, e.g. count(*) or avg(latency) by host.",
+		//	      "maxLength": 2048,
 		//	      "type": "string"
 		//	    },
 		//	    "LogGroupIdentifiers": {
@@ -260,7 +261,9 @@ func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "The schedule configuration.",
 		//	      "properties": {
 		//	        "EndTimeOffset": {
-		//	          "description": "The number of seconds into the past to end the query window.",
+		//	          "description": "The number of seconds into the past to end the query window. Must be a non-negative value and cannot exceed 2592000 seconds (30 days).",
+		//	          "maximum": 2592000,
+		//	          "minimum": 0,
 		//	          "type": "integer"
 		//	        },
 		//	        "ScheduleExpression": {
@@ -268,24 +271,56 @@ func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "string"
 		//	        },
 		//	        "StartTimeOffset": {
-		//	          "description": "The number of seconds into the past to start the query window.",
+		//	          "description": "The number of seconds into the past to start the query window. Must be a positive value and cannot exceed 2592000 seconds (30 days).",
+		//	          "maximum": 2592000,
+		//	          "minimum": 1,
 		//	          "type": "integer"
 		//	        }
 		//	      },
 		//	      "required": [
-		//	        "ScheduleExpression"
+		//	        "ScheduleExpression",
+		//	        "StartTimeOffset"
 		//	      ],
 		//	      "type": "object"
 		//	    },
 		//	    "ScheduledQueryRoleARN": {
 		//	      "description": "The ARN of the IAM role that grants permissions to execute the scheduled query.",
 		//	      "type": "string"
+		//	    },
+		//	    "Tags": {
+		//	      "description": "A list of key-value pairs to associate with the scheduled query that backs the log alarm.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Metadata that you can assign to a log alarm. Tags can help you organize and categorize your resources.",
+		//	        "properties": {
+		//	          "Key": {
+		//	            "description": "A unique identifier for the tag. The combination of tag keys and values can help you organize and categorize your resources.",
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "description": "The value for the specified tag key.",
+		//	            "maxLength": 256,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Key",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 50,
+		//	      "type": "array",
+		//	      "uniqueItems": true
 		//	    }
 		//	  },
 		//	  "required": [
 		//	    "QueryString",
 		//	    "AggregationExpression",
-		//	    "LogGroupIdentifiers",
 		//	    "ScheduledQueryRoleARN",
 		//	    "ScheduleConfiguration"
 		//	  ],
@@ -297,14 +332,19 @@ func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 				"aggregation_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The aggregation expression for the scheduled query, e.g. count(*) or avg(latency) by host.",
 					Required:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthAtMost(2048),
+					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 				// Property: LogGroupIdentifiers
 				"log_group_identifiers": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
 					Description: "The log groups to query.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: QueryString
@@ -317,9 +357,12 @@ func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: EndTimeOffset
 						"end_time_offset": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The number of seconds into the past to end the query window.",
+							Description: "The number of seconds into the past to end the query window. Must be a non-negative value and cannot exceed 2592000 seconds (30 days).",
 							Optional:    true,
 							Computed:    true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(0, 2592000),
+							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 								int64planmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
@@ -331,12 +374,11 @@ func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: StartTimeOffset
 						"start_time_offset": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The number of seconds into the past to start the query window.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
+							Description: "The number of seconds into the past to start the query window. Must be a positive value and cannot exceed 2592000 seconds (30 days).",
+							Required:    true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(1, 2592000),
+							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "The schedule configuration.",
@@ -346,6 +388,48 @@ func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 				"scheduled_query_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The ARN of the IAM role that grants permissions to execute the scheduled query.",
 					Required:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Tags
+				"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Key
+							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A unique identifier for the tag. The combination of tag keys and values can help you organize and categorize your resources.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 128),
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The value for the specified tag key.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 256),
+									fwvalidators.NotNullString(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of key-value pairs to associate with the scheduled query that backs the log alarm.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Set{ /*START VALIDATORS*/
+						setvalidator.SizeAtMost(50),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The scheduled query configuration for the log alarm.",

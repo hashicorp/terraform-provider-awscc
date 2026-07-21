@@ -324,8 +324,16 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
+        "ThresholdConfiguration": {
+          "description": "",
+          "$ref": "#/definitions/ThresholdConfiguration"
+        },
         "Enable": {
           "description": "Determines whether to use the deployment circuit breaker logic for the service.",
+          "type": "boolean"
+        },
+        "ResetOnHealthyTask": {
+          "description": "",
           "type": "boolean"
         },
         "Rollback": {
@@ -847,6 +855,28 @@
           "type": "string"
         }
       }
+    },
+    "ThresholdConfiguration": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Type": {
+          "type": "string",
+          "enum": [
+            "COUNT",
+            "BOUNDED_PERCENT",
+            "UNBOUNDED_PERCENT"
+          ]
+        },
+        "Value": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "Type",
+        "Value"
+      ]
     },
     "ServiceRegistry": {
       "description": "The details for the service registry.\n Each service may be associated with one service registry. Multiple service registries for each service are not supported.\n When you add, update, or remove the service registries configuration, Amazon ECS starts a new deployment. New tasks are registered and deregistered to the updated service registry configuration.",

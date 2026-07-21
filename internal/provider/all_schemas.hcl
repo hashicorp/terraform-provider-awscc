@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1427 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1435 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -1009,6 +1009,11 @@ resource_schema "aws_cleanrooms_id_namespace_association" {
   suppress_singular_data_source_generation = true
 }
 
+resource_schema "aws_cleanrooms_intermediate_table" {
+  cloudformation_type_name               = "AWS::CleanRooms::IntermediateTable"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_cleanrooms_membership" {
   cloudformation_type_name = "AWS::CleanRooms::Membership"
 }
@@ -1210,6 +1215,10 @@ resource_schema "aws_cloudwatch_dashboard" {
   cloudformation_type_name = "AWS::CloudWatch::Dashboard"
 }
 
+resource_schema "aws_cloudwatch_insight_rule" {
+  cloudformation_type_name = "AWS::CloudWatch::InsightRule"
+}
+
 resource_schema "aws_cloudwatch_log_alarm" {
   cloudformation_type_name = "AWS::CloudWatch::LogAlarm"
 }
@@ -1351,6 +1360,16 @@ resource_schema "aws_cognito_user_pool_identity_provider" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_cognito_user_pool_regional_configuration_attachment" {
+  cloudformation_type_name               = "AWS::Cognito::UserPoolRegionalConfigurationAttachment"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_cognito_user_pool_replica" {
+  cloudformation_type_name               = "AWS::Cognito::UserPoolReplica"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_cognito_user_pool_resource_server" {
   cloudformation_type_name               = "AWS::Cognito::UserPoolResourceServer"
   suppress_plural_data_source_generation = true
@@ -1405,6 +1424,10 @@ resource_schema "aws_config_conformance_pack" {
   cloudformation_type_name = "AWS::Config::ConformancePack"
 }
 
+resource_schema "aws_config_connector" {
+  cloudformation_type_name = "AWS::Config::Connector"
+}
+
 resource_schema "aws_config_organization_conformance_pack" {
   cloudformation_type_name = "AWS::Config::OrganizationConformancePack"
 }
@@ -1447,6 +1470,11 @@ resource_schema "aws_connect_contact_flow_module_version" {
 
 resource_schema "aws_connect_contact_flow_version" {
   cloudformation_type_name               = "AWS::Connect::ContactFlowVersion"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_connect_data_lake_association" {
+  cloudformation_type_name               = "AWS::Connect::DataLakeAssociation"
   suppress_plural_data_source_generation = true
 }
 
@@ -1557,6 +1585,11 @@ resource_schema "aws_connect_task_template" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_connect_test_case" {
+  cloudformation_type_name               = "AWS::Connect::TestCase"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_connect_traffic_distribution_group" {
   cloudformation_type_name = "AWS::Connect::TrafficDistributionGroup"
 }
@@ -1644,6 +1677,11 @@ resource_schema "aws_customerprofiles_domain" {
   # git checkout internal/service/cloudformation/schemas/AWS_CustomerProfiles_Domain.json
   # Suppression Reason:  Matching/AutoMerging/Consolidation/MatchingAttributesList is of unsupported type: list of array.
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1528
+}
+
+resource_schema "aws_customerprofiles_domain_object_type" {
+  cloudformation_type_name               = "AWS::CustomerProfiles::DomainObjectType"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_customerprofiles_event_stream" {
@@ -2321,6 +2359,10 @@ resource_schema "aws_ec2_transit_gateway_peering_attachment" {
   cloudformation_type_name = "AWS::EC2::TransitGatewayPeeringAttachment"
 }
 
+resource_schema "aws_ec2_transit_gateway_policy_table" {
+  cloudformation_type_name = "AWS::EC2::TransitGatewayPolicyTable"
+}
+
 resource_schema "aws_ec2_transit_gateway_route" {
   cloudformation_type_name               = "AWS::EC2::TransitGatewayRoute"
   suppress_plural_data_source_generation = true
@@ -2575,6 +2617,13 @@ resource_schema "aws_eks_pod_identity_association" {
 #  suppress_singular_data_source_generation = true
 #  suppress_plural_data_source_generation   = true
 #}
+
+resource_schema "aws_emr_instance_group_config" {
+  cloudformation_type_name                 = "AWS::EMR::InstanceGroupConfig"
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
 
 resource_schema "aws_emr_security_configuration" {
   cloudformation_type_name = "AWS::EMR::SecurityConfiguration"
@@ -3699,6 +3748,11 @@ resource_schema "aws_lambda_event_source_mapping" {
 
 resource_schema "aws_lambda_function" {
   cloudformation_type_name = "AWS::Lambda::Function"
+
+  # Latest schema updates are suppressed.
+  # git checkout internal/service/cloudformation/schemas/AWS_Lambda_Function.json
+  # Suppression Reason: KmsKeyArn overwrites KMSKeyArn for Terraform attribute kms_key_arn.
+  # Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/3229
 }
 
 resource_schema "aws_lambda_layer_version" {
@@ -5875,6 +5929,10 @@ resource_schema "aws_securityhub_configuration_policy" {
   cloudformation_type_name = "AWS::SecurityHub::ConfigurationPolicy"
 }
 
+resource_schema "aws_securityhub_connector" {
+  cloudformation_type_name = "AWS::SecurityHub::Connector"
+}
+
 resource_schema "aws_securityhub_connector_v2" {
   cloudformation_type_name = "AWS::SecurityHub::ConnectorV2"
 }
@@ -5939,6 +5997,10 @@ resource_schema "aws_securitylake_subscriber" {
 
 resource_schema "aws_securitylake_subscriber_notification" {
   cloudformation_type_name = "AWS::SecurityLake::SubscriberNotification"
+}
+
+resource_schema "aws_servicecatalog_accepted_portfolio_share" {
+  cloudformation_type_name = "AWS::ServiceCatalog::AcceptedPortfolioShare"
 }
 
 resource_schema "aws_servicecatalog_cloudformation_product" {

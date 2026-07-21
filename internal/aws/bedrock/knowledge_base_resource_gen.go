@@ -261,9 +261,6 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "object"
 		//	        }
 		//	      },
-		//	      "required": [
-		//	        "EmbeddingModelArn"
-		//	      ],
 		//	      "type": "object"
 		//	    },
 		//	    "SqlKnowledgeBaseConfiguration": {
@@ -793,7 +790,6 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.LengthBetween(20, 2048),
 								stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws(-[^:]+)?:[a-z0-9-]+:[a-z0-9-]{1,20}:[0-9]{0,12}:[a-zA-Z0-9-:/._+]+)$"), ""),
-								fwvalidators.NotNullString(),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),

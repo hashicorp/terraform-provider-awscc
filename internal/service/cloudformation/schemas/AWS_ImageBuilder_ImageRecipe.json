@@ -57,6 +57,19 @@
         }
       }
     },
+    "AmiWatermarks": {
+      "description": "The AMI watermark names to attach to the output AMI from this recipe. AMI watermarks are lineage markers that automatically propagate to derivative AMIs when the source AMI is copied or distributed.",
+      "type": "array",
+      "insertionOrder": false,
+      "minItems": 1,
+      "maxItems": 5,
+      "items": {
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 128,
+        "pattern": "^[A-Za-z0-9()\\[\\]./'@_\\-][A-Za-z0-9 ()\\[\\]./'@_\\-]{1,126}[A-Za-z0-9()\\[\\]./'@_\\-]$"
+      }
+    },
     "Tags": {
       "description": "The tags of the image recipe.",
       "type": "object",
@@ -260,13 +273,19 @@
     "/properties/ParentImage",
     "/properties/Description",
     "/properties/BlockDeviceMappings",
-    "/properties/WorkingDirectory"
+    "/properties/WorkingDirectory",
+    "/properties/AdditionalInstanceConfiguration",
+    "/properties/AmiTags",
+    "/properties/AmiWatermarks"
   ],
+  "propertyTransform": {
+    "/properties/Version": "$join([\"^\", $replace($replace(Version, \".\", \"\\\\.\"), \"x\", \"[0-9]+\"), \"$\"])"
+  },
   "tagging": {
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": true,
+    "cloudFormationSystemTags": false,
     "tagProperty": "/properties/Tags",
     "permissions": [
       "imagebuilder:TagResource",

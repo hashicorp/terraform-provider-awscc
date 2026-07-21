@@ -1,0 +1,95 @@
+{
+  "typeName": "AWS::Connect::DataLakeAssociation",
+  "description": "Resource schema for AWS::Connect::DataLakeAssociation",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
+  "properties": {
+    "InstanceId": {
+      "type": "string",
+      "description": "The identifier of the Amazon Connect instance",
+      "pattern": "^[-a-zA-Z0-9]*$",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "DataSetId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255,
+      "description": "The identifier of the analytics data set."
+    },
+    "TargetAccountId": {
+      "type": "string",
+      "description": "The identifier of the target account",
+      "pattern": "^\\d+$",
+      "minLength": 12,
+      "maxLength": 12
+    },
+    "ResourceShareArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the AWS Resource Access Manager share",
+      "maxLength": 2048
+    },
+    "ResourceShareId": {
+      "type": "string",
+      "description": "The AWS Resource Access Manager share ID"
+    }
+  },
+  "required": [
+    "InstanceId",
+    "DataSetId"
+  ],
+  "primaryIdentifier": [
+    "/properties/InstanceId",
+    "/properties/DataSetId",
+    "/properties/TargetAccountId"
+  ],
+  "readOnlyProperties": [
+    "/properties/ResourceShareId",
+    "/properties/ResourceShareArn"
+  ],
+  "createOnlyProperties": [
+    "/properties/InstanceId",
+    "/properties/DataSetId",
+    "/properties/TargetAccountId"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "connect:AssociateAnalyticsDataSet",
+        "connect:ListAnalyticsDataAssociations"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "connect:ListAnalyticsDataAssociations"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "connect:DisassociateAnalyticsDataSet",
+        "connect:ListAnalyticsDataAssociations"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "InstanceId": {
+            "$ref": "resource-schema.json#/properties/InstanceId"
+          }
+        },
+        "required": [
+          "InstanceId"
+        ]
+      },
+      "permissions": [
+        "connect:ListAnalyticsDataAssociations"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

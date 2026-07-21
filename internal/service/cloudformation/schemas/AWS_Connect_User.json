@@ -224,6 +224,15 @@
         "AfterContactWorkConfig"
       ]
     },
+    "AfterContactWorkMode": {
+      "description": "The after contact work (ACW) mode for the channel.",
+      "type": "string",
+      "enum": [
+        "ON",
+        "OFF",
+        "ON_DEMAND"
+      ]
+    },
     "AfterContactWorkConfig": {
       "description": "After Contact Work configuration.",
       "type": "object",
@@ -231,6 +240,9 @@
       "properties": {
         "AfterContactWorkTimeLimit": {
           "$ref": "#/definitions/AfterContactWorkTimeLimit"
+        },
+        "AfterContactWorkMode": {
+          "$ref": "#/definitions/AfterContactWorkMode"
         }
       }
     },
@@ -475,7 +487,7 @@
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": true,
+    "cloudFormationSystemTags": false,
     "tagProperty": "/properties/Tags",
     "permissions": [
       "connect:TagResource",

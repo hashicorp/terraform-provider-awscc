@@ -969,6 +969,10 @@
         "identifier": ["IdMappingTableIdentifier","MembershipIdentifier"]
     },
     {
+        "resource": "awscc_cleanrooms_intermediate_table",
+        "identifier": ["IntermediateTableIdentifier","MembershipIdentifier"]
+    },
+    {
         "resource": "awscc_cleanrooms_membership",
         "generateListResource": true,
         "identifier": ["MembershipIdentifier"]
@@ -1189,6 +1193,11 @@
         "identifier": ["DashboardName"]
     },
     {
+        "resource": "awscc_cloudwatch_insight_rule",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_cloudwatch_log_alarm",
         "generateListResource": true,
         "identifier": ["AlarmName"]
@@ -1328,6 +1337,14 @@
         "identifier": ["UserPoolId","ProviderName"]
     },
     {
+        "resource": "awscc_cognito_user_pool_regional_configuration_attachment",
+        "identifier": ["UserPoolId"]
+    },
+    {
+        "resource": "awscc_cognito_user_pool_replica",
+        "identifier": ["UserPoolId","RegionName"]
+    },
+    {
         "resource": "awscc_cognito_user_pool_resource_server",
         "identifier": ["UserPoolId","Identifier"]
     },
@@ -1383,6 +1400,11 @@
         "identifier": ["ConformancePackName"]
     },
     {
+        "resource": "awscc_config_connector",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_config_organization_conformance_pack",
         "generateListResource": true,
         "identifier": ["OrganizationConformancePackName"]
@@ -1426,6 +1448,10 @@
     {
         "resource": "awscc_connect_contact_flow_version",
         "identifier": ["ContactFlowVersionARN"]
+    },
+    {
+        "resource": "awscc_connect_data_lake_association",
+        "identifier": ["InstanceId","DataSetId","TargetAccountId"]
     },
     {
         "resource": "awscc_connect_data_table",
@@ -1503,6 +1529,10 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_connect_test_case",
+        "identifier": ["TestCaseArn"]
+    },
+    {
         "resource": "awscc_connect_traffic_distribution_group",
         "generateListResource": true,
         "identifier": ["TrafficDistributionGroupArn"]
@@ -1557,6 +1587,10 @@
     {
         "resource": "awscc_customerprofiles_domain",
         "identifier": ["DomainName"]
+    },
+    {
+        "resource": "awscc_customerprofiles_domain_object_type",
+        "identifier": ["DomainName","ObjectTypeName"]
     },
     {
         "resource": "awscc_customerprofiles_event_stream",
@@ -2298,6 +2332,11 @@
         "resource": "awscc_ec2_transit_gateway_peering_attachment",
         "generateListResource": true,
         "identifier": ["TransitGatewayAttachmentId"]
+    },
+    {
+        "resource": "awscc_ec2_transit_gateway_policy_table",
+        "generateListResource": true,
+        "identifier": ["TransitGatewayPolicyTableId"]
     },
     {
         "resource": "awscc_ec2_transit_gateway_route",
@@ -6064,6 +6103,11 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_securityhub_connector",
+        "generateListResource": true,
+        "identifier": ["ConnectorArn"]
+    },
+    {
         "resource": "awscc_securityhub_connector_v2",
         "generateListResource": true,
         "identifier": ["ConnectorArn"]
@@ -6132,6 +6176,11 @@
         "resource": "awscc_securitylake_subscriber_notification",
         "generateListResource": true,
         "identifier": ["SubscriberArn"]
+    },
+    {
+        "resource": "awscc_servicecatalog_accepted_portfolio_share",
+        "generateListResource": true,
+        "identifier": ["PortfolioId"]
     },
     {
         "resource": "awscc_servicecatalog_cloudformation_product",

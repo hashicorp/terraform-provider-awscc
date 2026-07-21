@@ -39,7 +39,7 @@ Data Source schema for AWS::CloudFront::ConnectionFunction
 
 Read-Only:
 
-- `comment` (String) A comment to describe the function.
+- `comment` (String) A comment to describe the function. The comment cannot be longer than 128 characters.
 - `key_value_store_associations` (Attributes List) The configuration for the key value store associations. (see [below for nested schema](#nestedatt--connection_function_config--key_value_store_associations))
 - `runtime` (String) The function's runtime environment version.
 

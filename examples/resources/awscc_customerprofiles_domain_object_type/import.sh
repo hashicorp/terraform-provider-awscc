@@ -1,0 +1,1 @@
+$ terraform import awscc_customerprofiles_domain_object_type.example "domain_name|object_type_name"

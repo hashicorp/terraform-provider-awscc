@@ -137,6 +137,7 @@ resource "awscc_elasticloadbalancingv2_listener_rule" "example" {
 ### Optional
 
 - `listener_arn` (String) The Amazon Resource Name (ARN) of the listener.
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `transforms` (Attributes Set) (see [below for nested schema](#nestedatt--transforms))
 
 ### Read-Only
@@ -378,6 +379,15 @@ Optional:
 - `values` (Set of String) The source IP addresses, in CIDR format. You can use both IPv4 and IPv6 addresses. Wildcards are not supported.
  If you specify multiple addresses, the condition is satisfied if the source IP address of the request matches one of the CIDR blocks. This condition is not satisfied by the addresses in the X-Forwarded-For header.
 
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
 
 
 <a id="nestedatt--transforms"></a>

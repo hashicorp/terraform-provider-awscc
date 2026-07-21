@@ -7,7 +7,9 @@ package imagebuilder
 
 import (
 	"context"
+	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -97,6 +99,7 @@ func imageRecipeResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: AmiTags
@@ -120,6 +123,41 @@ func imageRecipeResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
 				mapplanmodifier.UseStateForUnknown(),
+				mapplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AmiWatermarks
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AMI watermark names to attach to the output AMI from this recipe. AMI watermarks are lineage markers that automatically propagate to derivative AMIs when the source AMI is copied or distributed.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "maxLength": 128,
+		//	    "minLength": 3,
+		//	    "pattern": "^[A-Za-z0-9()\\[\\]./'@_\\-][A-Za-z0-9 ()\\[\\]./'@_\\-]{1,126}[A-Za-z0-9()\\[\\]./'@_\\-]$",
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 5,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"ami_watermarks": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The AMI watermark names to attach to the output AMI from this recipe. AMI watermarks are lineage markers that automatically propagate to derivative AMIs when the source AMI is copied or distributed.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(1, 5),
+				listvalidator.ValueStringsAre(
+					stringvalidator.LengthBetween(3, 128),
+					stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9()\\[\\]./'@_\\-][A-Za-z0-9 ()\\[\\]./'@_\\-]{1,126}[A-Za-z0-9()\\[\\]./'@_\\-]$"), ""),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Arn
@@ -637,6 +675,7 @@ func imageRecipeResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"additional_instance_configuration": "AdditionalInstanceConfiguration",
 		"ami_tags":                          "AmiTags",
+		"ami_watermarks":                    "AmiWatermarks",
 		"arn":                               "Arn",
 		"block_device_mappings":             "BlockDeviceMappings",
 		"component_arn":                     "ComponentArn",

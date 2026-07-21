@@ -90,6 +90,27 @@ func imageRecipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The tags to apply to the AMI created by this image recipe.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: AmiWatermarks
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AMI watermark names to attach to the output AMI from this recipe. AMI watermarks are lineage markers that automatically propagate to derivative AMIs when the source AMI is copied or distributed.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "maxLength": 128,
+		//	    "minLength": 3,
+		//	    "pattern": "^[A-Za-z0-9()\\[\\]./'@_\\-][A-Za-z0-9 ()\\[\\]./'@_\\-]{1,126}[A-Za-z0-9()\\[\\]./'@_\\-]$",
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 5,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"ami_watermarks": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The AMI watermark names to attach to the output AMI from this recipe. AMI watermarks are lineage markers that automatically propagate to derivative AMIs when the source AMI is copied or distributed.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -471,6 +492,7 @@ func imageRecipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"additional_instance_configuration": "AdditionalInstanceConfiguration",
 		"ami_tags":                          "AmiTags",
+		"ami_watermarks":                    "AmiWatermarks",
 		"arn":                               "Arn",
 		"block_device_mappings":             "BlockDeviceMappings",
 		"component_arn":                     "ComponentArn",

@@ -49,16 +49,21 @@
           "type": "string"
         },
         "StartTimeOffset": {
-          "description": "The number of seconds into the past to start the query window.",
-          "type": "integer"
+          "description": "The number of seconds into the past to start the query window. Must be a positive value and cannot exceed 2592000 seconds (30 days).",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2592000
         },
         "EndTimeOffset": {
-          "description": "The number of seconds into the past to end the query window.",
-          "type": "integer"
+          "description": "The number of seconds into the past to end the query window. Must be a non-negative value and cannot exceed 2592000 seconds (30 days).",
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2592000
         }
       },
       "required": [
-        "ScheduleExpression"
+        "ScheduleExpression",
+        "StartTimeOffset"
       ]
     },
     "ScheduledQueryConfiguration": {
@@ -72,7 +77,8 @@
         },
         "AggregationExpression": {
           "description": "The aggregation expression for the scheduled query, e.g. count(*) or avg(latency) by host.",
-          "type": "string"
+          "type": "string",
+          "maxLength": 2048
         },
         "LogGroupIdentifiers": {
           "description": "The log groups to query.",
@@ -89,12 +95,21 @@
         "ScheduleConfiguration": {
           "description": "The schedule configuration.",
           "$ref": "#/definitions/ScheduleConfiguration"
+        },
+        "Tags": {
+          "description": "A list of key-value pairs to associate with the scheduled query that backs the log alarm.",
+          "type": "array",
+          "maxItems": 50,
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/Tag"
+          }
         }
       },
       "required": [
         "QueryString",
         "AggregationExpression",
-        "LogGroupIdentifiers",
         "ScheduledQueryRoleARN",
         "ScheduleConfiguration"
       ]
@@ -215,6 +230,8 @@
         "logs:CreateScheduledQuery",
         "logs:UpdateScheduledQuery",
         "logs:DeleteScheduledQuery",
+        "logs:ListTagsForResource",
+        "logs:TagResource",
         "iam:PassRole"
       ]
     },
@@ -228,6 +245,9 @@
         "logs:CreateScheduledQuery",
         "logs:UpdateScheduledQuery",
         "logs:DeleteScheduledQuery",
+        "logs:ListTagsForResource",
+        "logs:TagResource",
+        "logs:UntagResource",
         "iam:PassRole"
       ]
     },
@@ -248,7 +268,8 @@
     "read": {
       "permissions": [
         "cloudwatch:DescribeAlarms",
-        "cloudwatch:ListTagsForResource"
+        "cloudwatch:ListTagsForResource",
+        "logs:ListTagsForResource"
       ]
     }
   }

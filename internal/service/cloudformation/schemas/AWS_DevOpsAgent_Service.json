@@ -273,7 +273,12 @@
           "maxLength": 100
         },
         "RoleArn": {
-          "description": "IAM role ARN to assume for SigV4 signing",
+          "description": "Deprecated - use McpRoleArn instead. IAM role ARN to assume for SigV4 signing",
+          "type": "string",
+          "pattern": "^arn:aws:iam::\\d{12}:role/[a-zA-Z0-9+=,.@_/-]+$"
+        },
+        "McpRoleArn": {
+          "description": "IAM role ARN to assume for SigV4 signing. Optional - when omitted, credentials are resolved at runtime via a monitor account association.",
           "type": "string",
           "pattern": "^arn:aws:iam::\\d{12}:role/[a-zA-Z0-9+=,.@_/-]+$"
         },
@@ -291,8 +296,7 @@
       },
       "required": [
         "Region",
-        "Service",
-        "RoleArn"
+        "Service"
       ],
       "additionalProperties": false
     },
@@ -1061,7 +1065,11 @@
           "type": "string"
         },
         "RoleArn": {
-          "description": "IAM role ARN for SigV4 signing",
+          "description": "Deprecated - use McpRoleArn instead. IAM role ARN for SigV4 signing",
+          "type": "string"
+        },
+        "McpRoleArn": {
+          "description": "IAM role ARN for SigV4 signing. Absent when no dedicated role is configured.",
           "type": "string"
         },
         "CustomHeaders": {
@@ -1230,7 +1238,8 @@
         "aidevops:GetService",
         "aidevops:TagResource",
         "aidevops:UntagResource",
-        "aidevops:ListTagsForResource"
+        "aidevops:ListTagsForResource",
+        "iam:PassRole"
       ]
     },
     "delete": {

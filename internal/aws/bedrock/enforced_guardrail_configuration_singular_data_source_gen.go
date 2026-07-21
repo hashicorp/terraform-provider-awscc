@@ -172,7 +172,8 @@ func enforcedGuardrailConfigurationDataSource(ctx context.Context) (datasource.D
 		//	{
 		//	  "description": "Configuration owner type",
 		//	  "enum": [
-		//	    "ACCOUNT"
+		//	    "ACCOUNT",
+		//	    "ORGANIZATION"
 		//	  ],
 		//	  "type": "string"
 		//	}

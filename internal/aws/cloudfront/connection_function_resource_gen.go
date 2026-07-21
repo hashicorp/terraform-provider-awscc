@@ -86,7 +86,7 @@ func connectionFunctionResource(ctx context.Context) (resource.Resource, error) 
 		//	  "description": "Contains configuration information about a CloudFront function.",
 		//	  "properties": {
 		//	    "Comment": {
-		//	      "description": "A comment to describe the function.",
+		//	      "description": "A comment to describe the function. The comment cannot be longer than 128 characters.",
 		//	      "type": "string"
 		//	    },
 		//	    "KeyValueStoreAssociations": {
@@ -126,7 +126,7 @@ func connectionFunctionResource(ctx context.Context) (resource.Resource, error) 
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Comment
 				"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A comment to describe the function.",
+					Description: "A comment to describe the function. The comment cannot be longer than 128 characters.",
 					Required:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: KeyValueStoreAssociations

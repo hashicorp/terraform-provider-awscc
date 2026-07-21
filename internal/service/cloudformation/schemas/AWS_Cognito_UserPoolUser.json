@@ -1,6 +1,4 @@
 {
-  "typeName": "AWS::Cognito::UserPoolUser",
-  "description": "Resource Type definition for AWS::Cognito::UserPoolUser",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
   "tagging": {
     "taggable": false,
@@ -8,21 +6,105 @@
     "tagUpdatable": false,
     "cloudFormationSystemTags": false
   },
+  "handlers": {
+    "read": {
+      "permissions": [
+        "cognito-idp:AdminGetUser"
+      ]
+    },
+    "create": {
+      "permissions": [
+        "cognito-idp:AdminCreateUser",
+        "cognito-idp:AdminGetUser",
+        "iam:PassRole"
+      ],
+      "timeoutInMinutes": 2
+    },
+    "list": {
+      "permissions": [
+        "cognito-idp:ListUsers"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "UserPoolId": {
+            "$ref": "resource-schema.json#/properties/UserPoolId"
+          }
+        },
+        "required": [
+          "UserPoolId"
+        ]
+      }
+    },
+    "delete": {
+      "permissions": [
+        "cognito-idp:AdminDeleteUser"
+      ],
+      "timeoutInMinutes": 2
+    }
+  },
+  "typeName": "AWS::Cognito::UserPoolUser",
+  "description": "Resource Type definition for AWS::Cognito::UserPoolUser",
+  "writeOnlyProperties": [
+    "/properties/DesiredDeliveryMediums",
+    "/properties/ForceAliasCreation",
+    "/properties/ValidationData",
+    "/properties/ClientMetadata",
+    "/properties/MessageAction"
+  ],
+  "createOnlyProperties": [
+    "/properties/DesiredDeliveryMediums",
+    "/properties/ForceAliasCreation",
+    "/properties/UserAttributes",
+    "/properties/Username",
+    "/properties/UserPoolId",
+    "/properties/ValidationData",
+    "/properties/ClientMetadata",
+    "/properties/MessageAction"
+  ],
+  "additionalProperties": false,
+  "primaryIdentifier": [
+    "/properties/UserPoolId",
+    "/properties/Username"
+  ],
   "definitions": {
     "AttributeType": {
+      "additionalProperties": false,
       "type": "object",
       "properties": {
-        "Name": {
-          "type": "string"
-        },
         "Value": {
           "type": "string"
+        },
+        "Name": {
+          "type": "string"
         }
-      },
-      "additionalProperties": false
+      }
     }
   },
   "properties": {
+    "ValidationData": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/AttributeType"
+      }
+    },
+    "UserPoolId": {
+      "type": "string"
+    },
+    "Username": {
+      "type": "string"
+    },
+    "MessageAction": {
+      "type": "string"
+    },
+    "ClientMetadata": {
+      "patternProperties": {
+        "": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
     "DesiredDeliveryMediums": {
       "type": "array",
       "items": {
@@ -37,91 +119,9 @@
       "items": {
         "$ref": "#/definitions/AttributeType"
       }
-    },
-    "MessageAction": {
-      "type": "string"
-    },
-    "Username": {
-      "type": "string"
-    },
-    "UserPoolId": {
-      "type": "string"
-    },
-    "ValidationData": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/AttributeType"
-      }
-    },
-    "ClientMetadata": {
-      "type": "object",
-      "patternProperties": {
-        "": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": false
     }
   },
-  "additionalProperties": false,
   "required": [
     "UserPoolId"
-  ],
-  "primaryIdentifier": [
-    "/properties/UserPoolId",
-    "/properties/Username"
-  ],
-  "createOnlyProperties": [
-    "/properties/DesiredDeliveryMediums",
-    "/properties/ForceAliasCreation",
-    "/properties/UserAttributes",
-    "/properties/Username",
-    "/properties/UserPoolId",
-    "/properties/ValidationData",
-    "/properties/ClientMetadata",
-    "/properties/MessageAction"
-  ],
-  "writeOnlyProperties": [
-    "/properties/DesiredDeliveryMediums",
-    "/properties/ForceAliasCreation",
-    "/properties/ValidationData",
-    "/properties/ClientMetadata",
-    "/properties/MessageAction"
-  ],
-  "handlers": {
-    "create": {
-      "permissions": [
-        "cognito-idp:AdminCreateUser",
-        "cognito-idp:AdminGetUser",
-        "iam:PassRole"
-      ],
-      "timeoutInMinutes": 2
-    },
-    "read": {
-      "permissions": [
-        "cognito-idp:AdminGetUser"
-      ]
-    },
-    "delete": {
-      "permissions": [
-        "cognito-idp:AdminDeleteUser"
-      ],
-      "timeoutInMinutes": 2
-    },
-    "list": {
-      "handlerSchema": {
-        "properties": {
-          "UserPoolId": {
-            "$ref": "resource-schema.json#/properties/UserPoolId"
-          }
-        },
-        "required": [
-          "UserPoolId"
-        ]
-      },
-      "permissions": [
-        "cognito-idp:ListUsers"
-      ]
-    }
-  }
+  ]
 }

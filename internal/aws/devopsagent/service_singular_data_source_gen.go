@@ -242,6 +242,10 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "description": "The MCP server endpoint URL",
 		//	          "type": "string"
 		//	        },
+		//	        "McpRoleArn": {
+		//	          "description": "IAM role ARN for SigV4 signing. Absent when no dedicated role is configured.",
+		//	          "type": "string"
+		//	        },
 		//	        "Name": {
 		//	          "description": "The MCP server name",
 		//	          "type": "string"
@@ -251,7 +255,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "type": "string"
 		//	        },
 		//	        "RoleArn": {
-		//	          "description": "IAM role ARN for SigV4 signing",
+		//	          "description": "Deprecated - use McpRoleArn instead. IAM role ARN for SigV4 signing",
 		//	          "type": "string"
 		//	        },
 		//	        "Service": {
@@ -504,6 +508,11 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 							Description: "The MCP server endpoint URL",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
+						// Property: McpRoleArn
+						"mcp_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "IAM role ARN for SigV4 signing. Absent when no dedicated role is configured.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 						// Property: Name
 						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The MCP server name",
@@ -516,7 +525,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: RoleArn
 						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "IAM role ARN for SigV4 signing",
+							Description: "Deprecated - use McpRoleArn instead. IAM role ARN for SigV4 signing",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Service
@@ -989,13 +998,18 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              },
 		//	              "type": "object"
 		//	            },
+		//	            "McpRoleArn": {
+		//	              "description": "IAM role ARN to assume for SigV4 signing. Optional - when omitted, credentials are resolved at runtime via a monitor account association.",
+		//	              "pattern": "^arn:aws:iam::\\d{12}:role/[a-zA-Z0-9+=,.@_/-]+$",
+		//	              "type": "string"
+		//	            },
 		//	            "Region": {
 		//	              "description": "AWS region for SigV4 signing. Use '*' for SigV4a multi-region signing.",
 		//	              "pattern": "^(\\*|[a-z]{2,4}(-[a-z]+)+-\\d+)$",
 		//	              "type": "string"
 		//	            },
 		//	            "RoleArn": {
-		//	              "description": "IAM role ARN to assume for SigV4 signing",
+		//	              "description": "Deprecated - use McpRoleArn instead. IAM role ARN to assume for SigV4 signing",
 		//	              "pattern": "^arn:aws:iam::\\d{12}:role/[a-zA-Z0-9+=,.@_/-]+$",
 		//	              "type": "string"
 		//	            },
@@ -1008,8 +1022,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          },
 		//	          "required": [
 		//	            "Region",
-		//	            "Service",
-		//	            "RoleArn"
+		//	            "Service"
 		//	          ],
 		//	          "type": "object"
 		//	        },
@@ -1512,6 +1525,11 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Description: "Custom headers for the SigV4 MCP server",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
+								// Property: McpRoleArn
+								"mcp_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "IAM role ARN to assume for SigV4 signing. Optional - when omitted, credentials are resolved at runtime via a monitor account association.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
 								// Property: Region
 								"region": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "AWS region for SigV4 signing. Use '*' for SigV4a multi-region signing.",
@@ -1519,7 +1537,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: RoleArn
 								"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "IAM role ARN to assume for SigV4 signing",
+									Description: "Deprecated - use McpRoleArn instead. IAM role ARN to assume for SigV4 signing",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: Service
@@ -1834,6 +1852,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"instance_url":                 "InstanceUrl",
 		"key":                          "Key",
 		"kms_key_arn":                  "KmsKeyArn",
+		"mcp_role_arn":                 "McpRoleArn",
 		"mcp_server":                   "MCPServer",
 		"mcp_server_grafana":           "MCPServerGrafana",
 		"mcp_server_new_relic":         "MCPServerNewRelic",

@@ -15,8 +15,7 @@
     "/properties/KmsKeyArn"
   ],
   "createOnlyProperties": [
-    "/properties/KmsKeyId",
-    "/properties/ForceDelete"
+    "/properties/KmsKeyId"
   ],
   "writeOnlyProperties": [
     "/properties/KmsKeyId",

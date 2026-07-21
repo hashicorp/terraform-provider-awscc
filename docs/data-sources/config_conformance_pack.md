@@ -21,10 +21,12 @@ Data Source schema for AWS::Config::ConformancePack
 
 ### Read-Only
 
+- `conformance_pack_arn` (String) Amazon Resource Name (ARN) of the conformance pack.
 - `conformance_pack_input_parameters` (Attributes List) A list of ConformancePackInputParameter objects. (see [below for nested schema](#nestedatt--conformance_pack_input_parameters))
 - `conformance_pack_name` (String) Name of the conformance pack which will be assigned as the unique identifier.
 - `delivery_s3_bucket` (String) AWS Config stores intermediate files while processing conformance pack template.
 - `delivery_s3_key_prefix` (String) The prefix for delivery S3 bucket.
+- `tags` (Attributes List) The tags for the conformance pack. (see [below for nested schema](#nestedatt--tags))
 - `template_body` (String) A string containing full conformance pack template body. You can only specify one of the template body or template S3Uri fields.
 - `template_s3_uri` (String) Location of file containing the template body which points to the conformance pack template that is located in an Amazon S3 bucket. You can only specify one of the template body or template S3Uri fields.
 - `template_ssm_document_details` (Attributes) The TemplateSSMDocumentDetails object contains the name of the SSM document and the version of the SSM document. (see [below for nested schema](#nestedatt--template_ssm_document_details))
@@ -36,6 +38,15 @@ Read-Only:
 
 - `parameter_name` (String) Key part of key-value pair with value being parameter value
 - `parameter_value` (String) Value part of key-value pair with key being parameter Name
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 
 <a id="nestedatt--template_ssm_document_details"></a>

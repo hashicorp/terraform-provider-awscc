@@ -81,6 +81,16 @@
         }
       }
     },
+    "ImageTags": {
+      "description": "The tags to be applied to images created by this pipeline.",
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+        "": {
+          "type": "string"
+        }
+      }
+    },
     "DeploymentId": {
       "description": "The deployment ID of the pipeline, used for resource create/update triggers.",
       "type": "string"
@@ -275,7 +285,7 @@
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": true,
+    "cloudFormationSystemTags": false,
     "tagProperty": "/properties/Tags",
     "permissions": [
       "imagebuilder:TagResource",

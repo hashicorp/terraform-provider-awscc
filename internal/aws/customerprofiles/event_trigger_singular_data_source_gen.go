@@ -252,6 +252,7 @@ func eventTriggerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	          "Unit": {
 		//	            "description": "The unit of time.",
 		//	            "enum": [
+		//	              "MINUTES",
 		//	              "HOURS",
 		//	              "DAYS",
 		//	              "WEEKS",
@@ -265,7 +266,7 @@ func eventTriggerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	          },
 		//	          "Value": {
 		//	            "description": "The amount of time of the specified unit.",
-		//	            "maximum": 24,
+		//	            "maximum": 60,
 		//	            "minimum": 1,
 		//	            "type": "integer"
 		//	          }

@@ -429,7 +429,7 @@ func pipelineResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "The VPC endpoint service name for the pipeline.",
 		//	  "maxLength": 128,
-		//	  "minLength": 1,
+		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
 		"vpc_endpoint_service": schema.StringAttribute{ /*START ATTRIBUTE*/

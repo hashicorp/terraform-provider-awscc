@@ -29,7 +29,8 @@
       "type": "string",
       "description": "Configuration owner type",
       "enum": [
-        "ACCOUNT"
+        "ACCOUNT",
+        "ORGANIZATION"
       ]
     },
     "ModelEnforcement": {

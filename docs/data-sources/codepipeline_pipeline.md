@@ -21,6 +21,7 @@ Data Source schema for AWS::CodePipeline::Pipeline
 
 ### Read-Only
 
+- `arn` (String) The Amazon Resource Name (ARN) of the pipeline.
 - `artifact_store` (Attributes) The S3 bucket where artifacts for the pipeline are stored. (see [below for nested schema](#nestedatt--artifact_store))
 - `artifact_stores` (Attributes List) A mapping of artifactStore objects and their corresponding AWS Regions. There must be an artifact store for the pipeline Region and for each cross-region action in the pipeline. (see [below for nested schema](#nestedatt--artifact_stores))
 - `disable_inbound_stage_transitions` (Attributes List) Represents the input of a DisableStageTransition action. (see [below for nested schema](#nestedatt--disable_inbound_stage_transitions))

@@ -665,7 +665,8 @@
     },
     "read": {
       "permissions": [
-        "profile:GetIntegration"
+        "profile:GetIntegration",
+        "profile:ListTagsForResource"
       ]
     },
     "delete": {
@@ -696,6 +697,7 @@
         "events:PutEvents",
         "profile:UntagResource",
         "profile:TagResource",
+        "profile:ListTagsForResource",
         "connect:DescribeInstance",
         "ds:DescribeDirectories"
       ]

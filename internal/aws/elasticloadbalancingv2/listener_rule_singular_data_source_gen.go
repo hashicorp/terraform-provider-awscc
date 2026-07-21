@@ -974,6 +974,48 @@ func listenerRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 			Description: "",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Value",
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Transforms
 		// CloudFormation resource type schema:
 		//
@@ -1207,6 +1249,7 @@ func listenerRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"session_timeout":                     "SessionTimeout",
 		"source_ip_config":                    "SourceIpConfig",
 		"status_code":                         "StatusCode",
+		"tags":                                "Tags",
 		"target_group_arn":                    "TargetGroupArn",
 		"target_group_stickiness_config":      "TargetGroupStickinessConfig",
 		"target_groups":                       "TargetGroups",
