@@ -326,3 +326,56 @@ func Test_resolveMutuallyExclusiveProperties(t *testing.T) {
 		})
 	}
 }
+
+func Test_appendMutuallyExclusiveResolutionsForModel(t *testing.T) {
+	// Remote model contains a pair inside content the patch does not touch
+	// (e.g. a statement subtree beyond a depth-limited schema's maximum depth).
+	model := `{
+		"Description": "old",
+		"Rules": [
+			{
+				"Statement": {
+					"NotStatement": {
+						"Statement": {
+							"OrStatement": {
+								"Statements": [
+									{
+										"ByteMatchStatement": {
+											"SearchString": "marker",
+											"SearchStringBase64": "bWFya2Vy"
+										}
+									}
+								]
+							}
+						}
+					}
+				}
+			}
+		]
+	}`
+
+	got, err := appendMutuallyExclusiveResolutionsForModel(`[{"op":"replace","path":"/Description","value":"new"}]`, model)
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := `[{"op":"replace","path":"/Description","value":"new"},{"op":"remove","path":"/Rules/0/Statement/NotStatement/Statement/OrStatement/Statements/0/ByteMatchStatement/SearchString"}]`
+	if got != want {
+		t.Errorf("got %s, want %s", got, want)
+	}
+
+	// Pair already resolved by the state-based pass: no duplicate remove.
+	resolved := `[{"op":"remove","path":"/Rules/0/Statement/NotStatement/Statement/OrStatement/Statements/0/ByteMatchStatement/SearchString"}]`
+	got, err = appendMutuallyExclusiveResolutionsForModel(resolved, model)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got != resolved {
+		t.Errorf("expected unchanged document, got %s", got)
+	}
+
+	// Invalid inputs are a no-op.
+	got, err = appendMutuallyExclusiveResolutionsForModel("[]", "not json")
+	if err != nil || got != "[]" {
+		t.Errorf("invalid model: got %s, err %v", got, err)
+	}
+}

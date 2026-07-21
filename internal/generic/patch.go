@@ -70,11 +70,23 @@ func resolveMutuallyExclusiveProperties(patch []jsonpatch.JsonPatchOperation, ol
 		return patch
 	}
 
+	return append(patch, mutuallyExclusiveResolutions(patch, oldDoc)...)
+}
+
+// mutuallyExclusiveResolutions returns the remove operations needed to leave exactly
+// one member of each known mutually exclusive property pair wherever `doc` contains
+// both members of a pair in the same object.
+func mutuallyExclusiveResolutions(patch []jsonpatch.JsonPatchOperation, doc map[string]any) []jsonpatch.JsonPatchOperation {
 	patchedPaths := make(map[string]bool, len(patch))
+	removedPaths := make(map[string]bool)
 	for _, op := range patch {
 		patchedPaths[op.Path] = true
+		if op.Operation == "remove" {
+			removedPaths[op.Path] = true
+		}
 	}
 
+	var resolutions []jsonpatch.JsonPatchOperation
 	var walk func(node any, path string)
 	walk = func(node any, path string) {
 		switch v := node.(type) {
@@ -87,12 +99,14 @@ func resolveMutuallyExclusiveProperties(patch []jsonpatch.JsonPatchOperation, ol
 				derivedPath := path + "/" + derived
 				canonicalPath := path + "/" + canonical
 				switch {
+				case removedPaths[derivedPath] || removedPaths[canonicalPath]:
+					// Already resolved.
 				case patchedPaths[derivedPath] && patchedPaths[canonicalPath]:
 					// Both explicitly changed; leave the conflict to the service.
 				case patchedPaths[derivedPath]:
-					patch = append(patch, jsonpatch.NewPatch("remove", canonicalPath, nil))
+					resolutions = append(resolutions, jsonpatch.NewPatch("remove", canonicalPath, nil))
 				default:
-					patch = append(patch, jsonpatch.NewPatch("remove", derivedPath, nil))
+					resolutions = append(resolutions, jsonpatch.NewPatch("remove", derivedPath, nil))
 				}
 			}
 			for key, val := range v {
@@ -104,9 +118,39 @@ func resolveMutuallyExclusiveProperties(patch []jsonpatch.JsonPatchOperation, ol
 			}
 		}
 	}
-	walk(oldDoc, "")
+	walk(doc, "")
 
-	return patch
+	return resolutions
+}
+
+// appendMutuallyExclusiveResolutionsForModel appends remove operations to a marshaled
+// patch document for mutually exclusive property pairs found in `resourceModel` (the
+// remote Cloud Control resource model). Terraform state cannot see pairs that live in
+// parts of the resource its schema does not represent (e.g. statements beyond a
+// depth-limited schema's maximum depth), so pair resolution against prior state alone
+// misses them — but the service still validates the whole resulting model on update.
+func appendMutuallyExclusiveResolutionsForModel(patchDocument, resourceModel string) (string, error) {
+	var model map[string]any
+	if err := json.Unmarshal([]byte(resourceModel), &model); err != nil {
+		return patchDocument, nil
+	}
+
+	var ops []jsonpatch.JsonPatchOperation
+	if err := json.Unmarshal([]byte(patchDocument), &ops); err != nil {
+		return patchDocument, nil
+	}
+
+	resolutions := mutuallyExclusiveResolutions(ops, model)
+	if len(resolutions) == 0 {
+		return patchDocument, nil
+	}
+
+	b, err := json.Marshal(append(ops, resolutions...))
+	if err != nil {
+		return "", err
+	}
+
+	return string(b), nil
 }
 
 // escapeJSONPointerToken escapes a single JSON Pointer reference token (RFC 6901).

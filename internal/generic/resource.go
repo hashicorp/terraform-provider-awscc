@@ -848,6 +848,25 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 
 			return
 		}
+
+		// Mutually exclusive property pairs in parts of the resource the schema cannot
+		// represent are invisible to the state-based resolution in patchDocument, but the
+		// service still validates the whole resulting model. Resolve against the remote
+		// model so untouched-but-unrepresentable content doesn't fail the update.
+		patchDocument, err = appendMutuallyExclusiveResolutionsForModel(patchDocument, aws.ToString(description.Properties))
+
+		if err != nil {
+			response.Diagnostics.AddError(
+				"Creation Of JSON Patch Unsuccessful",
+				fmt.Sprintf("Unable to create a JSON Patch for resource update. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+			)
+
+			return
+		}
+
+		tflog.Debug(ctx, "Cloud Control API PatchDocument after model-based pair resolution", map[string]any{
+			"value": patchDocument,
+		})
 	}
 
 	input := &cloudcontrol.UpdateResourceInput{
