@@ -113,6 +113,13 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (resource.Resource, error) 
 	{{- end }}
 	})
 {{- end }}
+{{ if .UnrepresentableProperties }}
+	opts = opts.WithUnrepresentableProperties([]string{
+	{{- range .UnrepresentableProperties }}
+		"{{ . }}",
+	{{- end }}
+	})
+{{- end }}
 	opts = opts.WithCreateTimeoutInMinutes({{ .CreateTimeoutInMinutes }}).WithDeleteTimeoutInMinutes({{ .DeleteTimeoutInMinutes }})
 {{ if .HasUpdateMethod }}
 	opts = opts.WithUpdateTimeoutInMinutes({{ .UpdateTimeoutInMinutes }})
