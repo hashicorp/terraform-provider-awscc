@@ -158159,6 +158159,12 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		"xss_match_statement":                   "XssMatchStatement",
 	})
 
+	opts = opts.WithUnrepresentableProperties([]string{
+		"AndStatement",
+		"NotStatement",
+		"OrStatement",
+		"ScopeDownStatement",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
