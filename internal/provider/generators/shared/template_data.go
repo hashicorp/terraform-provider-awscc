@@ -144,6 +144,12 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 		templateData.WriteOnlyPropertyPaths = append(templateData.WriteOnlyPropertyPaths, string(path))
 	}
 
+	unrepresentable, err := unrepresentableProperties(cfTypeSchemaFile)
+	if err != nil {
+		return nil, err
+	}
+	templateData.UnrepresentableProperties = unrepresentable
+
 	var identifiers []identity.Identifier
 	for _, path := range resource.CfResource.PrimaryIdentifier {
 		id := strings.TrimPrefix(string(path), "/properties/")
@@ -245,6 +251,7 @@ type TemplateData struct {
 	SchemaDescription             string
 	SchemaVersion                 int64
 	TerraformTypeName             string
+	UnrepresentableProperties     []string
 	UpdateTimeoutInMinutes        int
 	WriteOnlyPropertyPaths        []string
 
@@ -276,6 +283,31 @@ func schemaIsDeRecursed(cfTypeSchemaFile string) (bool, error) {
 	}
 
 	return len(doc.XDerecursed) > 0, nil
+}
+
+// unrepresentableProperties returns the property names recorded under the
+// "x-derecursed" key of a depth-limited (de-recursed) local schema — properties
+// pruned at the depth boundary that the generated Terraform schema therefore cannot
+// represent. tools/derecurse-schema.py writes the key; pristine schemas lack it.
+func unrepresentableProperties(cfTypeSchemaFile string) ([]string, error) {
+	data, err := os.ReadFile(cfTypeSchemaFile)
+	if err != nil {
+		return nil, fmt.Errorf("reading CloudFormation resource schema %s: %w", cfTypeSchemaFile, err)
+	}
+
+	var doc struct {
+		XDerecursed *struct {
+			PrunedProperties []string `json:"prunedProperties"`
+		} `json:"x-derecursed"`
+	}
+	if err := json.Unmarshal(data, &doc); err != nil {
+		return nil, fmt.Errorf("parsing CloudFormation resource schema %s: %w", cfTypeSchemaFile, err)
+	}
+
+	if doc.XDerecursed == nil {
+		return nil, nil
+	}
+	return doc.XDerecursed.PrunedProperties, nil
 }
 
 // NewResource creates a Resource type

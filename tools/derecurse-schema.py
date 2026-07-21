@@ -176,6 +176,7 @@ class Unroller:
         self.members = set(component)
         self.counting = counting_members(component, graph)
         self.depth = depth
+        self.pruned_properties = set()
 
     def target_level(self, target, level):
         """Level of the clone that a ref to `target` from level `level` uses."""
@@ -239,6 +240,7 @@ class Unroller:
             for prop in sorted(properties):
                 if not self.refs_ok(properties[prop], level, constructible):
                     del properties[prop]
+                    self.pruned_properties.add(prop)
         self.redirect(body, level)
         return body
 
@@ -366,7 +368,13 @@ def inline_aliases(schema):
 
 
 def derecurse(schema, depth):
-    """Unroll all recursion cycles in schema; returns a list of change notes."""
+    """Unroll all recursion cycles in schema; returns a list of change notes.
+
+    Also records the set of property names pruned at the depth boundary under
+    the "x-derecursed" key so the code generator can surface truncation at
+    runtime (a warning when an imported/read resource carries them beyond the
+    modeled depth).
+    """
     definitions = schema.get("definitions")
     if not isinstance(definitions, dict):
         return []
@@ -375,10 +383,18 @@ def derecurse(schema, depth):
         name: sorted(set(collect_refs(definitions[name], [])))
         for name in definitions
     }
-    return [
-        Unroller(definitions, component, graph, depth).unroll()
-        for component in strongly_connected_components(graph)
-    ]
+    notes = []
+    pruned = set()
+    for component in strongly_connected_components(graph):
+        unroller = Unroller(definitions, component, graph, depth)
+        notes.append(unroller.unroll())
+        pruned |= unroller.pruned_properties
+    if pruned:
+        schema["x-derecursed"] = {
+            "depth": depth,
+            "prunedProperties": sorted(pruned),
+        }
+    return notes
 
 
 def main():
