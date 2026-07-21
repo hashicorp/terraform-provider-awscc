@@ -2019,5 +2019,14 @@
         ]
       }
     }
+  },
+  "x-derecursed": {
+    "depth": 3,
+    "prunedProperties": [
+      "AndStatement",
+      "NotStatement",
+      "OrStatement",
+      "ScopeDownStatement"
+    ]
   }
 }
