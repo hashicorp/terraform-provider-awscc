@@ -5,7 +5,9 @@ package generic
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
+	"sort"
 	"strings"
 	"time"
 
@@ -281,6 +283,21 @@ func (opts ResourceOptions) WithWriteOnlyPropertyPaths(v []string) ResourceOptio
 	return append(opts, resourceWithWriteOnlyPropertyPaths(v))
 }
 
+// WithUnrepresentableProperties is a helper function to construct functional options
+// that set the CloudFormation property names that the resource type's Terraform schema
+// cannot represent (e.g. properties pruned at the boundary of a depth-limited
+// (de-recursed) schema). When such a property is found in the Cloud Control resource
+// model during Read, a warning diagnostic is emitted instead of the property being
+// silently omitted from state, and updates touching the affected part of the resource
+// are rejected.
+// It is intended to be chained with other similar helper functions in a builder pattern.
+func (opts ResourceOptions) WithUnrepresentableProperties(v []string) ResourceOptions {
+	return append(opts, func(o *genericResource) error {
+		o.unrepresentableProperties = v
+		return nil
+	})
+}
+
 // WithCreateTimeoutInMinutes is a helper function to construct functional options
 // that set a resource type's create timeout, append that function to the
 // current slice of functional options and return the new slice of options.
@@ -344,19 +361,20 @@ func NewResource(_ context.Context, optFns ...ResourceOptionsFunc) (resource.Res
 
 // Implements resource.Resource.
 type genericResource struct {
-	cfTypeName              string                     // CloudFormation type name for the resource type
-	tfSchema                schema.Schema              // Terraform schema for the resource type
-	tfTypeName              string                     // Terraform type name for resource type
-	tfToCfNameMap           map[string]string          // Map of Terraform attribute name to CloudFormation property name
-	cfToTfNameMap           map[string]string          // Map of CloudFormation property name to Terraform attribute name
-	isImmutableType         bool                       // Resources cannot be updated and must be recreated
-	writeOnlyAttributePaths []*path.Path               // Paths to any write-only attributes
-	createTimeout           time.Duration              // Maximum wait time for resource creation
-	updateTimeout           time.Duration              // Maximum wait time for resource update
-	deleteTimeout           time.Duration              // Maximum wait time for resource deletion
-	configValidators        []resource.ConfigValidator // Required attributes validators
-	provider                tfcloudcontrol.Provider
-	primaryIdentifier       identity.Identifiers
+	cfTypeName                string                     // CloudFormation type name for the resource type
+	tfSchema                  schema.Schema              // Terraform schema for the resource type
+	tfTypeName                string                     // Terraform type name for resource type
+	tfToCfNameMap             map[string]string          // Map of Terraform attribute name to CloudFormation property name
+	cfToTfNameMap             map[string]string          // Map of CloudFormation property name to Terraform attribute name
+	isImmutableType           bool                       // Resources cannot be updated and must be recreated
+	writeOnlyAttributePaths   []*path.Path               // Paths to any write-only attributes
+	unrepresentableProperties []string                   // CloudFormation property names the Terraform schema cannot represent (e.g. pruned by schema de-recursion)
+	createTimeout             time.Duration              // Maximum wait time for resource creation
+	updateTimeout             time.Duration              // Maximum wait time for resource update
+	deleteTimeout             time.Duration              // Maximum wait time for resource deletion
+	configValidators          []resource.ConfigValidator // Required attributes validators
+	provider                  tfcloudcontrol.Provider
+	primaryIdentifier         identity.Identifiers
 
 	isGlobal           bool
 	hasMutableIdentity bool
@@ -367,6 +385,136 @@ var (
 	// This attribute is required for acceptance testing.
 	idAttributePath = path.Root("id")
 )
+
+// findUnrepresentablePropertyPaths walks the raw Cloud Control resource model in
+// parallel with the Terraform schema — mirroring toTerraform.valueFromRaw's mapping —
+// and returns the JSON Pointer paths of declared-unrepresentable properties that the
+// schema cannot represent at their location. A declared property name (e.g.
+// "AndStatement" in a depth-limited WAFv2 schema) may be perfectly representable at
+// shallow nesting; only occurrences where the schema lookup fails are returned.
+func (r *genericResource) findUnrepresentablePropertyPaths(ctx context.Context, resourceModel string) []string {
+	if len(r.unrepresentableProperties) == 0 {
+		return nil
+	}
+
+	var model map[string]any
+	if err := json.Unmarshal([]byte(resourceModel), &model); err != nil {
+		return nil
+	}
+
+	declared := make(map[string]bool, len(r.unrepresentableProperties))
+	for _, name := range r.unrepresentableProperties {
+		declared[name] = true
+	}
+
+	schema := r.tfSchema
+	var found []string
+
+	var walk func(v any, tfPath *tftypes.AttributePath, cfPointer string)
+	walk = func(v any, tfPath *tftypes.AttributePath, cfPointer string) {
+		switch v := v.(type) {
+		case map[string]any:
+			for key, val := range v {
+				attributeName, ok := r.cfToTfNameMap[key]
+				if !ok {
+					if declared[key] {
+						found = append(found, cfPointer+"/"+key)
+					}
+					continue
+				}
+				childPath := tfPath.WithAttributeName(attributeName)
+				if _, err := schema.TypeAtTerraformPath(ctx, childPath); err != nil {
+					if declared[key] {
+						found = append(found, cfPointer+"/"+key)
+					}
+					continue
+				}
+				walk(val, childPath, cfPointer+"/"+key)
+			}
+		case []any:
+			for idx, val := range v {
+				walk(val, tfPath.WithElementKeyInt(idx), fmt.Sprintf("%s/%d", cfPointer, idx))
+			}
+		}
+	}
+	walk(model, nil, "")
+
+	sort.Strings(found)
+	return found
+}
+
+// patchTouchesUnrepresentableProperties reports whether any operation in the JSON
+// Patch document overlaps a part of the remote resource model that contains
+// properties the Terraform schema cannot represent. Overlap means the operation's
+// path is an ancestor of an unrepresentable property (a replace/remove/add there
+// would rewrite the subtree from truncated state) or a descendant of one.
+func (r *genericResource) patchTouchesUnrepresentableProperties(ctx context.Context, patchDocument, resourceModel string) (bool, []string) {
+	unrepresentable := r.findUnrepresentablePropertyPaths(ctx, resourceModel)
+	if len(unrepresentable) == 0 {
+		return false, nil
+	}
+
+	var ops []struct {
+		Path string `json:"path"`
+	}
+	if err := json.Unmarshal([]byte(patchDocument), &ops); err != nil {
+		// Fail closed: the remote resource has unrepresentable content and the
+		// patch cannot be inspected.
+		return true, unrepresentable
+	}
+
+	var touched []string
+	for _, u := range unrepresentable {
+		for _, op := range ops {
+			if strings.HasPrefix(u, op.Path+"/") || strings.HasPrefix(op.Path, u+"/") || op.Path == u {
+				touched = append(touched, u)
+				break
+			}
+		}
+	}
+
+	return len(touched) > 0, touched
+}
+
+// unrepresentablePropertiesWarning returns a warning diagnostic if any property the
+// Terraform schema is declared unable to represent was skipped while translating the
+// Cloud Control resource model to state. Skips of undeclared properties (e.g. new API
+// fields the schema does not know yet) stay log-only, as before.
+func (r *genericResource) unrepresentablePropertiesWarning(skipped []skippedProperty) diag.Diagnostic {
+	if len(r.unrepresentableProperties) == 0 || len(skipped) == 0 {
+		return nil
+	}
+
+	declared := make(map[string]bool, len(r.unrepresentableProperties))
+	for _, name := range r.unrepresentableProperties {
+		declared[name] = true
+	}
+
+	var locations []string
+	seen := make(map[string]bool)
+	for _, s := range skipped {
+		if !declared[s.PropertyName] {
+			continue
+		}
+		location := fmt.Sprintf("%s (at %s)", s.PropertyName, s.ParentPath)
+		if !seen[location] {
+			seen[location] = true
+			locations = append(locations, location)
+		}
+	}
+
+	if len(locations) == 0 {
+		return nil
+	}
+
+	return diag.NewWarningDiagnostic(
+		"Resource Contains Properties Not Representable In The Terraform Schema",
+		fmt.Sprintf("The remote resource contains properties beyond what this resource type's schema can represent (for example, rule statements nested more deeply than the schema's maximum depth). "+
+			"The following were NOT saved to Terraform state, so state does not fully describe the remote resource:\n  - %s\n\n"+
+			"The remote resource has not been modified. Updating the affected parts of this resource with Terraform is blocked to avoid corrupting them; manage those parts outside Terraform or restructure them to fit the schema.",
+			strings.Join(locations, "\n  - ")),
+	)
+}
 
 func (r *genericResource) Metadata(_ context.Context, request resource.MetadataRequest, response *resource.MetadataResponse) {
 	response.TypeName = r.tfTypeName
@@ -536,7 +684,8 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 		return
 	}
 
-	translator := toTerraform{cfToTfNameMap: r.cfToTfNameMap}
+	var skipped []skippedProperty
+	translator := toTerraform{cfToTfNameMap: r.cfToTfNameMap, skipped: &skipped}
 	schema := currentState.Schema
 	// Reorder key-value lists (Tags, LoadBalancerAttributes, etc.) to match prior state
 	// so plan shows no diff regardless of user config order.
@@ -558,6 +707,10 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 		)
 
 		return
+	}
+
+	if diag := r.unrepresentablePropertiesWarning(skipped); diag != nil {
+		response.Diagnostics.Append(diag)
 	}
 
 	response.State = tfsdk.State{
@@ -675,6 +828,46 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 	tflog.Debug(ctx, "Cloud Control API PatchDocument", map[string]any{
 		"value": patchDocument,
 	})
+
+	if len(r.unrepresentableProperties) > 0 {
+		description, err := r.describe(ctx, conn, id)
+
+		if err != nil {
+			response.Diagnostics.Append(ServiceOperationErrorDiag("Cloud Control API", "GetResource", err))
+
+			return
+		}
+
+		if blocked, locations := r.patchTouchesUnrepresentableProperties(ctx, patchDocument, aws.ToString(description.Properties)); blocked {
+			response.Diagnostics.AddError(
+				"Update Would Modify Properties Not Representable In The Terraform Schema",
+				fmt.Sprintf("The remote resource contains properties beyond what this resource type's schema can represent, and this update would modify the parts of the resource that contain them:\n  - %s\n\n"+
+					"Because Terraform state does not fully describe those parts, applying this update could remove or corrupt them. Modify them outside Terraform, or restructure them to fit the schema.",
+					strings.Join(locations, "\n  - ")),
+			)
+
+			return
+		}
+
+		// Mutually exclusive property pairs in parts of the resource the schema cannot
+		// represent are invisible to the state-based resolution in patchDocument, but the
+		// service still validates the whole resulting model. Resolve against the remote
+		// model so untouched-but-unrepresentable content doesn't fail the update.
+		patchDocument, err = appendMutuallyExclusiveResolutionsForModel(patchDocument, aws.ToString(description.Properties))
+
+		if err != nil {
+			response.Diagnostics.AddError(
+				"Creation Of JSON Patch Unsuccessful",
+				fmt.Sprintf("Unable to create a JSON Patch for resource update. This is typically an error with the Terraform provider implementation. Original Error: %s", err.Error()),
+			)
+
+			return
+		}
+
+		tflog.Debug(ctx, "Cloud Control API PatchDocument after model-based pair resolution", map[string]any{
+			"value": patchDocument,
+		})
+	}
 
 	input := &cloudcontrol.UpdateResourceInput{
 		ClientToken:   aws.String(tfresource.UniqueId()),
