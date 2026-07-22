@@ -232,7 +232,7 @@ func TestUnknownsSetValue(t *testing.T) {
 				t.Fatalf("unexpected error: %s", err)
 			}
 
-			err = SetUnknownValuesFromResourceModel(context.TODO(), &testCase.State, unknowns, testCase.ResourceModel, testCase.CfToTfNameMap)
+			err = SetUnknownValuesFromResourceModel(context.TODO(), &testCase.State, unknowns, testCase.ResourceModel, testCase.CfToTfNameMap, nil)
 
 			if err == nil && testCase.ExpectedError {
 				t.Fatalf("expected error")

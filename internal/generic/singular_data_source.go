@@ -94,7 +94,7 @@ func (sd *genericSingularDataSource) Read(ctx context.Context, request datasourc
 		return
 	}
 
-	translator := toTerraform{cfToTfNameMap: sd.cfToTfNameMap}
+	translator := toTerraform{cfToTfNameMap: sd.cfToTfNameMap, rootCfToTfNameMap: sd.rootCfToTfNameMap}
 	schema := currentConfig.Schema
 	val, err := translator.FromString(ctx, schema, aws.ToString(description.Properties), nil)
 

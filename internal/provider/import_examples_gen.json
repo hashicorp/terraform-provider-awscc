@@ -1066,6 +1066,11 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_cloudfront_anycast_ip_list",
+        "generateListResource": true,
+        "identifier": ["Id"]
+    },
+    {
         "resource": "awscc_cloudfront_cache_policy",
         "generateListResource": true,
         "identifier": ["Id"]
@@ -1087,6 +1092,11 @@
     },
     {
         "resource": "awscc_cloudfront_continuous_deployment_policy",
+        "generateListResource": true,
+        "identifier": ["Id"]
+    },
+    {
+        "resource": "awscc_cloudfront_distribution",
         "generateListResource": true,
         "identifier": ["Id"]
     },

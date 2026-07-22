@@ -4,8 +4,6 @@
 package generic
 
 import (
-	"fmt"
-
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 )
 
@@ -23,17 +21,14 @@ func dataSourceWithAttributeNameMap(v map[string]string) DataSourceOptionsFunc {
 			v["id"] = "ID"
 		}
 
-		cfToTfNameMap := make(map[string]string, len(v))
+		cfToTfNameMap, rootCfToTfNameMap, _, err := invertAttributeNameMap(v)
 
-		for tfName, cfName := range v {
-			_, ok := cfToTfNameMap[cfName]
-			if ok {
-				return fmt.Errorf("duplicate attribute name mapping for CloudFormation property %s", cfName)
-			}
-			cfToTfNameMap[cfName] = tfName
+		if err != nil {
+			return err
 		}
 
 		o.cfToTfNameMap = cfToTfNameMap
+		o.rootCfToTfNameMap = rootCfToTfNameMap
 
 		return nil
 	}
@@ -110,8 +105,9 @@ func (opts DataSourceOptions) WithTerraformTypeName(v string) DataSourceOptions 
 }
 
 type genericDataSource struct {
-	cfToTfNameMap map[string]string // Map of CloudFormation property name to Terraform attribute name
-	cfTypeName    string            // CloudFormation type name for the resource type
-	tfSchema      schema.Schema     // Terraform schema for the data source type
-	tfTypeName    string            // Terraform type name for data source type
+	cfToTfNameMap     map[string]string // Map of CloudFormation property name to Terraform attribute name
+	rootCfToTfNameMap map[string]string // Top-level property overrides for cfToTfNameMap
+	cfTypeName        string            // CloudFormation type name for the resource type
+	tfSchema          schema.Schema     // Terraform schema for the data source type
+	tfTypeName        string            // Terraform type name for data source type
 }
