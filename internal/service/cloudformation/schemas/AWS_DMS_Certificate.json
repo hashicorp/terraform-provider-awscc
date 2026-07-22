@@ -1,0 +1,64 @@
+{
+  "typeName": "AWS::DMS::Certificate",
+  "description": "Resource Type definition for AWS::DMS::Certificate",
+  "additionalProperties": false,
+  "properties": {
+    "CertificateArn": {
+      "description": "The certificate Arn",
+      "type": "string",
+      "pattern": "arn:(aws|aws-cn|aws-us-gov):dms:[\\w-]+:[0-9]+:cert:[A-Z0-9]+"
+    },
+    "CertificateIdentifier": {
+      "description": "The certificate Identifier",
+      "type": "string"
+    },
+    "CertificatePem": {
+      "description": "The certificate Pem",
+      "type": "string"
+    },
+    "CertificateWallet": {
+      "description": "The certificate Wallet",
+      "type": "string"
+    }
+  },
+  "createOnlyProperties": [
+    "/properties/CertificateIdentifier",
+    "/properties/CertificatePem",
+    "/properties/CertificateWallet"
+  ],
+  "writeOnlyProperties": [
+    "/properties/CertificatePem",
+    "/properties/CertificateWallet"
+  ],
+  "primaryIdentifier": [
+    "/properties/CertificateArn"
+  ],
+  "readOnlyProperties": [
+    "/properties/CertificateArn"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "dms:ImportCertificate"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "dms:DeleteCertificate"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "dms:DescribeCertificates"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "dms:DescribeCertificates"
+      ]
+    }
+  }
+}

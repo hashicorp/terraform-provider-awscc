@@ -84,6 +84,7 @@ Read-Only:
 - `auto_disable_policy` (Attributes) The auto-disable policy for the image pipeline. (see [below for nested schema](#nestedatt--schedule--auto_disable_policy))
 - `pipeline_execution_start_condition` (String) The condition configures when the pipeline should trigger a new image build.
 - `schedule_expression` (String) The expression determines how often EC2 Image Builder evaluates your pipelineExecutionStartCondition.
+- `timezone` (String) The timezone that applies to the scheduling expression, for example "Etc/UTC" or "America/Los_Angeles" in IANA timezone format. If not specified, this defaults to UTC.
 
 <a id="nestedatt--schedule--auto_disable_policy"></a>
 ### Nested Schema for `schedule.auto_disable_policy`

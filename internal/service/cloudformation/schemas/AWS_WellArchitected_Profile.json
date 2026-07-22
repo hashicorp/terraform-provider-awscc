@@ -1,0 +1,175 @@
+{
+  "typeName": "AWS::WellArchitected::Profile",
+  "description": "Definition of AWS::WellArchitected::Profile Resource Type",
+  "definitions": {
+    "ProfileQuestionUpdate": {
+      "type": "object",
+      "description": "An update to a profile question.",
+      "properties": {
+        "QuestionId": {
+          "type": "string",
+          "description": "The ID of the question.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "SelectedChoiceIds": {
+          "type": "array",
+          "description": "The selected choices.",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with a resource.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "ProfileArn": {
+      "type": "string",
+      "description": "The profile ARN.",
+      "maxLength": 2084,
+      "pattern": "^arn:aws[-a-z]*:wellarchitected:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:profile/[a-z0-9]+$"
+    },
+    "ProfileVersion": {
+      "type": "string",
+      "description": "The profile version.",
+      "minLength": 1,
+      "maxLength": 32,
+      "pattern": "^[A-Za-z0-9.\\-]+$"
+    },
+    "ProfileName": {
+      "type": "string",
+      "description": "The name of the profile.",
+      "minLength": 3,
+      "maxLength": 100
+    },
+    "ProfileDescription": {
+      "type": "string",
+      "description": "The profile description.",
+      "minLength": 3,
+      "maxLength": 100
+    },
+    "ProfileQuestions": {
+      "type": "array",
+      "description": "The profile questions.",
+      "items": {
+        "$ref": "#/definitions/ProfileQuestionUpdate"
+      }
+    },
+    "Owner": {
+      "type": "string",
+      "description": "The owner of the profile."
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The date and time the profile was created.",
+      "format": "date-time"
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "The date and time the profile was last updated.",
+      "format": "date-time"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags assigned to the profile.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50,
+      "insertionOrder": false
+    }
+  },
+  "required": [
+    "ProfileName",
+    "ProfileDescription",
+    "ProfileQuestions"
+  ],
+  "readOnlyProperties": [
+    "/properties/ProfileArn",
+    "/properties/ProfileVersion",
+    "/properties/Owner",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/ProfileName"
+  ],
+  "primaryIdentifier": [
+    "/properties/ProfileArn"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "wellarchitected:TagResource",
+      "wellarchitected:UntagResource",
+      "wellarchitected:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "wellarchitected:CreateProfile",
+        "wellarchitected:GetProfile",
+        "wellarchitected:TagResource",
+        "wellarchitected:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "wellarchitected:GetProfile",
+        "wellarchitected:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "wellarchitected:UpdateProfile",
+        "wellarchitected:GetProfile",
+        "wellarchitected:TagResource",
+        "wellarchitected:UntagResource",
+        "wellarchitected:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "wellarchitected:DeleteProfile",
+        "wellarchitected:GetProfile"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "wellarchitected:ListProfiles"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

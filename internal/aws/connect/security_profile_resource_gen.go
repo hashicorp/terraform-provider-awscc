@@ -88,7 +88,7 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 2,
+		//	  "maxItems": 4,
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
@@ -127,7 +127,7 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.Set{ /*START VALIDATORS*/
-				setvalidator.SizeAtMost(2),
+				setvalidator.SizeAtMost(4),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
@@ -156,10 +156,6 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      }
 		//	    },
-		//	    "required": [
-		//	      "Type",
-		//	      "FlowModuleId"
-		//	    ],
 		//	    "type": "object"
 		//	  },
 		//	  "maxItems": 10,
@@ -176,7 +172,6 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -189,7 +184,6 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -226,7 +220,7 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        },
-		//	        "maxItems": 10,
+		//	        "maxItems": 50,
 		//	        "type": "array",
 		//	        "uniqueItems": true
 		//	      },
@@ -245,10 +239,6 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      }
 		//	    },
-		//	    "required": [
-		//	      "ApplicationPermissions",
-		//	      "Namespace"
-		//	    ],
 		//	    "type": "object"
 		//	  },
 		//	  "maxItems": 10,
@@ -265,11 +255,10 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.Set{ /*START VALIDATORS*/
-							setvalidator.SizeAtMost(10),
+							setvalidator.SizeAtMost(50),
 							setvalidator.ValueStringsAre(
 								stringvalidator.LengthBetween(1, 128),
 							),
-							fwvalidators.NotNullSet(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 							setplanmodifier.UseStateForUnknown(),
@@ -282,7 +271,6 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -383,11 +371,6 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "uniqueItems": true
 		//	                  }
 		//	                },
-		//	                "required": [
-		//	                  "AccessType",
-		//	                  "AttributeName",
-		//	                  "Values"
-		//	                ],
 		//	                "type": "object"
 		//	              },
 		//	              "maxItems": 5,
@@ -396,9 +379,6 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	              "uniqueItems": true
 		//	            }
 		//	          },
-		//	          "required": [
-		//	            "PrimaryAttributeValues"
-		//	          ],
 		//	          "type": "object"
 		//	        }
 		//	      },
@@ -428,7 +408,6 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 													stringvalidator.OneOf(
 														"ALLOW",
 													),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
@@ -441,7 +420,6 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.LengthBetween(1, 127),
-													fwvalidators.NotNullString(),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
@@ -459,7 +437,6 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 													listvalidator.ValueStringsAre(
 														stringvalidator.LengthBetween(1, 1000),
 													),
-													fwvalidators.NotNullList(),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 													listplanmodifier.UseStateForUnknown(),
@@ -473,7 +450,6 @@ func securityProfileResource(ctx context.Context) (resource.Resource, error) {
 									Validators: []validator.List{ /*START VALIDATORS*/
 										listvalidator.SizeBetween(1, 5),
 										listvalidator.UniqueValues(),
-										fwvalidators.NotNullList(),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 										listplanmodifier.UseStateForUnknown(),

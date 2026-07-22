@@ -1,0 +1,148 @@
+{
+  "typeName": "AWS::StorageGateway::TapePool",
+  "description": "Creates a custom tape pool for archiving virtual tapes with optional retention lock.",
+  "properties": {
+    "PoolARN": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the custom tape pool.",
+      "minLength": 50,
+      "maxLength": 500
+    },
+    "PoolId": {
+      "type": "string",
+      "description": "The unique identifier of the custom tape pool, extracted from the ARN."
+    },
+    "PoolName": {
+      "type": "string",
+      "description": "The name of the custom tape pool.",
+      "minLength": 1,
+      "maxLength": 100,
+      "pattern": "^[ -\\.0-\\[\\]-~]*[!-\\.0-\\[\\]-~][ -\\.0-\\[\\]-~]*$"
+    },
+    "StorageClass": {
+      "type": "string",
+      "description": "The storage class associated with the custom pool (S3 Glacier or S3 Glacier Deep Archive).",
+      "enum": [
+        "DEEP_ARCHIVE",
+        "GLACIER"
+      ]
+    },
+    "RetentionLockType": {
+      "type": "string",
+      "description": "Tape retention lock type. Governance mode allows authorized removal; compliance mode prevents all removal.",
+      "enum": [
+        "COMPLIANCE",
+        "GOVERNANCE",
+        "NONE"
+      ]
+    },
+    "RetentionLockTimeInDays": {
+      "type": "integer",
+      "description": "Tape retention lock time in days (up to 36,500 days / 100 years).",
+      "minimum": 0,
+      "maximum": 36500
+    },
+    "Tags": {
+      "type": "array",
+      "description": "A list of up to 50 tags for the tape pool.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50,
+      "insertionOrder": false
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The tag key.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+        },
+        "Value": {
+          "type": "string",
+          "description": "The tag value.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "PoolName",
+    "StorageClass"
+  ],
+  "createOnlyProperties": [
+    "/properties/PoolName",
+    "/properties/StorageClass",
+    "/properties/RetentionLockType",
+    "/properties/RetentionLockTimeInDays"
+  ],
+  "readOnlyProperties": [
+    "/properties/PoolARN",
+    "/properties/PoolId"
+  ],
+  "primaryIdentifier": [
+    "/properties/PoolARN"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/PoolId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "storagegateway:AddTagsToResource",
+      "storagegateway:RemoveTagsFromResource",
+      "storagegateway:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "storagegateway:CreateTapePool",
+        "storagegateway:AddTagsToResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "storagegateway:ListTapePools",
+        "storagegateway:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "storagegateway:ListTapePools",
+        "storagegateway:AddTagsToResource",
+        "storagegateway:RemoveTagsFromResource",
+        "storagegateway:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "storagegateway:DeleteTapePool",
+        "storagegateway:ListTapePools"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "storagegateway:ListTapePools"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

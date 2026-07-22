@@ -34,6 +34,9 @@ resource "awscc_globalaccelerator_accelerator" "example" {
 ### Optional
 
 - `enabled` (Boolean) Indicates whether an accelerator is enabled. The value is true or false.
+- `flow_logs_enabled` (Boolean) Indicates whether flow logs are enabled for the accelerator.
+- `flow_logs_s3_bucket` (String) The name of the Amazon S3 bucket for the flow logs.
+- `flow_logs_s3_prefix` (String) The prefix for the location in the Amazon S3 bucket for the flow logs.
 - `ip_address_type` (String) IP Address type.
 - `ip_addresses` (List of String) The IP addresses from BYOIP Prefix pool.
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))

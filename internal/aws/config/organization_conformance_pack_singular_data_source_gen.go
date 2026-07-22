@@ -111,6 +111,17 @@ func organizationConformancePackDataSource(ctx context.Context) (datasource.Data
 			Description: "A list of AWS accounts to be excluded from an organization conformance pack while deploying a conformance pack.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: OrganizationConformancePackArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Amazon Resource Name (ARN) of the organization conformance pack.",
+		//	  "type": "string"
+		//	}
+		"organization_conformance_pack_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Amazon Resource Name (ARN) of the organization conformance pack.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: OrganizationConformancePackName
 		// CloudFormation resource type schema:
 		//
@@ -123,6 +134,56 @@ func organizationConformancePackDataSource(ctx context.Context) (datasource.Data
 		//	}
 		"organization_conformance_pack_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the organization conformance pack.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The tags for the organization conformance pack.",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A key-value pair to associate with a resource.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Value",
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags for the organization conformance pack.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: TemplateBody
@@ -173,11 +234,15 @@ func organizationConformancePackDataSource(ctx context.Context) (datasource.Data
 		"delivery_s3_bucket":                 "DeliveryS3Bucket",
 		"delivery_s3_key_prefix":             "DeliveryS3KeyPrefix",
 		"excluded_accounts":                  "ExcludedAccounts",
+		"key":                                "Key",
+		"organization_conformance_pack_arn":  "OrganizationConformancePackArn",
 		"organization_conformance_pack_name": "OrganizationConformancePackName",
 		"parameter_name":                     "ParameterName",
 		"parameter_value":                    "ParameterValue",
+		"tags":                               "Tags",
 		"template_body":                      "TemplateBody",
 		"template_s3_uri":                    "TemplateS3Uri",
+		"value":                              "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

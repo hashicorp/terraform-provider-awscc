@@ -3,12 +3,12 @@
 page_title: "awscc_imagebuilder_container_recipe Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource schema for AWS::ImageBuilder::ContainerRecipe
+  Resource Type definition for AWS::ImageBuilder::ContainerRecipe
 ---
 
 # awscc_imagebuilder_container_recipe (Resource)
 
-Resource schema for AWS::ImageBuilder::ContainerRecipe
+Resource Type definition for AWS::ImageBuilder::ContainerRecipe
 
 ## Example Usage
 

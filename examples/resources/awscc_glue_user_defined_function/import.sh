@@ -1,0 +1,1 @@
+$ terraform import awscc_glue_user_defined_function.example "arn"

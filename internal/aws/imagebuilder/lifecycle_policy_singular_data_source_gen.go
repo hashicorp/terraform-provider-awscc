@@ -28,6 +28,7 @@ func lifecyclePolicyDataSource(ctx context.Context) (datasource.DataSource, erro
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the lifecycle policy.",
+		//	  "pattern": "^arn:[^:]+:imagebuilder:[^:]+:[^:]+:lifecycle-policy/.+$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/

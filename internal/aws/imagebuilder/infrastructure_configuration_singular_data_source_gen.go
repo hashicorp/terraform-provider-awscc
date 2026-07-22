@@ -28,6 +28,7 @@ func infrastructureConfigurationDataSource(ctx context.Context) (datasource.Data
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the infrastructure configuration.",
+		//	  "pattern": "^arn:[^:]+:imagebuilder:[^:]+:[^:]+:infrastructure-configuration/.+$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/

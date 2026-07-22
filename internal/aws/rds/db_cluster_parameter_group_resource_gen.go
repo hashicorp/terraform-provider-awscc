@@ -38,6 +38,7 @@ func dBClusterParameterGroupResource(ctx context.Context) (resource.Resource, er
 		//
 		//	{
 		//	  "description": "The name of the DB cluster parameter group.\n Constraints:\n  +  Must not match the name of an existing DB cluster parameter group.\n  \n  This value is stored as a lowercase string.",
+		//	  "minLength": 1,
 		//	  "pattern": "^[a-zA-Z]{1}(?:-?[a-zA-Z0-9])*$",
 		//	  "type": "string"
 		//	}
@@ -46,6 +47,7 @@ func dBClusterParameterGroupResource(ctx context.Context) (resource.Resource, er
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtLeast(1),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z]{1}(?:-?[a-zA-Z0-9])*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

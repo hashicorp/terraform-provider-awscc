@@ -185,7 +185,9 @@ resource "awscc_cloudformation_lambda_hook" "example" {
 
 ### Optional
 
+- `auto_update` (Boolean) Whether to automatically update the extension in this account and Region when a new minor version is published by the extension publisher.
 - `hook_status` (String) Attribute to specify which stacks this hook applies to or should get invoked for
+- `logging_config` (Attributes) Contains logging configuration information for the hook. (see [below for nested schema](#nestedatt--logging_config))
 - `stack_filters` (Attributes) Filters to allow hooks to target specific stack attributes (see [below for nested schema](#nestedatt--stack_filters))
 - `target_filters` (Attributes) Attribute to specify which targets should invoke the hook (see [below for nested schema](#nestedatt--target_filters))
 
@@ -193,6 +195,15 @@ resource "awscc_cloudformation_lambda_hook" "example" {
 
 - `hook_arn` (String) The Amazon Resource Name (ARN) of the activated hook
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--logging_config"></a>
+### Nested Schema for `logging_config`
+
+Optional:
+
+- `log_group_name` (String) The Amazon CloudWatch Logs group to which CloudFormation sends error logging information when invoking the extension's handlers.
+- `log_role_arn` (String) The ARN of the role that CloudFormation should assume when sending log entries to CloudWatch Logs.
+
 
 <a id="nestedatt--stack_filters"></a>
 ### Nested Schema for `stack_filters`

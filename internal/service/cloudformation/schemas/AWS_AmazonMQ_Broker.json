@@ -89,6 +89,10 @@
         }
       ]
     },
+    "StorageSize": {
+      "description": "The broker's storage size in GB.",
+      "type": "integer"
+    },
     "EncryptionOptions": {
       "$ref": "#/definitions/EncryptionOptions"
     },

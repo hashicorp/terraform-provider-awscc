@@ -220,6 +220,12 @@
   "tagging": {
     "taggable": false
   },
+  "required": [
+    "InstanceArn",
+    "DataTableArn",
+    "Name",
+    "ValueType"
+  ],
   "primaryIdentifier": [
     "/properties/InstanceArn",
     "/properties/DataTableArn",

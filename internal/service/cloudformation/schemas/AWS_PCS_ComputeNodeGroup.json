@@ -122,6 +122,33 @@
     "/properties/Arn"
   ],
   "definitions": {
+    "NodeLifecycleStages": {
+      "description": "The ordered scripts to run at each compute node lifecycle stage.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "NodeBootstrapped": {
+          "minItems": 1,
+          "maxItems": 20,
+          "description": "Scripts to run after the node is bootstrapped, once the PCS configuration phase completes and before slurmd starts.",
+          "insertionOrder": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeLifecycleScript"
+          }
+        },
+        "NodeReady": {
+          "minItems": 1,
+          "maxItems": 20,
+          "description": "Scripts to execute when the node becomes ready (every boot).",
+          "insertionOrder": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeLifecycleScript"
+          }
+        }
+      }
+    },
     "InstanceConfig": {
       "description": "An EC2 instance configuration AWS PCS uses to launch compute nodes.",
       "additionalProperties": false,
@@ -132,6 +159,54 @@
           "type": "string"
         }
       }
+    },
+    "NodeLifecycleScript": {
+      "description": "A single lifecycle script with its source, arguments, and error behavior.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ExecutionPolicy": {
+          "description": "Whether the script runs only on the node's first boot (FIRST_BOOT_ONLY) or on every boot including reboots (EVERY_BOOT). Defaults to FIRST_BOOT_ONLY.",
+          "type": "string",
+          "enum": [
+            "FIRST_BOOT_ONLY",
+            "EVERY_BOOT"
+          ]
+        },
+        "Arguments": {
+          "maxItems": 20,
+          "description": "An ordered list of arguments passed to the script.",
+          "insertionOrder": true,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 256
+          }
+        },
+        "OnError": {
+          "description": "The behavior when the script exits with an error. Defaults to TERMINATE.",
+          "type": "string",
+          "enum": [
+            "TERMINATE",
+            "STOP_SEQUENCE",
+            "CONTINUE"
+          ]
+        },
+        "ScriptSource": {
+          "$ref": "#/definitions/ScriptSource"
+        },
+        "Name": {
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9 _-]*$",
+          "description": "A human-readable name that identifies the script.",
+          "type": "string",
+          "maxLength": 64
+        }
+      },
+      "required": [
+        "Name",
+        "ScriptSource"
+      ]
     },
     "ErrorInfo": {
       "description": "An error that occurred during resource provisioning.",
@@ -148,9 +223,59 @@
         }
       }
     },
+    "NodeLifecycleActions": {
+      "description": "Custom scripts that run at defined points in a compute node's lifecycle.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ScriptCachingPolicy": {
+          "description": "Controls whether lifecycle scripts are downloaded once at first boot (CACHE_ONCE) or re-downloaded on every reboot (REFRESH_ON_REBOOT). Defaults to CACHE_ONCE.",
+          "type": "string",
+          "enum": [
+            "CACHE_ONCE",
+            "REFRESH_ON_REBOOT"
+          ]
+        },
+        "Stages": {
+          "$ref": "#/definitions/NodeLifecycleStages"
+        }
+      },
+      "required": [
+        "Stages"
+      ]
+    },
     "SubnetId": {
       "description": "A VPC subnet ID.",
       "type": "string"
+    },
+    "ScriptSource": {
+      "description": "The external location of a lifecycle script.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Checksum": {
+          "minLength": 64,
+          "pattern": "^[a-fA-F0-9]{64}$",
+          "description": "A 64-character hexadecimal SHA-256 digest used to verify script integrity.",
+          "type": "string",
+          "maxLength": 64
+        },
+        "S3VersionId": {
+          "description": "The S3 object version ID of the script, when stored in a versioned bucket.",
+          "type": "string",
+          "maxLength": 1024
+        },
+        "ScriptLocation": {
+          "minLength": 1,
+          "pattern": "^(s3://[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]/.+|https://.+)$",
+          "description": "The S3 URI or HTTPS URL where the script is stored.",
+          "type": "string",
+          "maxLength": 1024
+        }
+      },
+      "required": [
+        "ScriptLocation"
+      ]
     },
     "SlurmCustomSetting": {
       "description": "Additional settings that directly map to Slurm settings.",
@@ -254,6 +379,9 @@
     "Name": {
       "description": "The name that identifies the compute node group.",
       "type": "string"
+    },
+    "NodeLifecycleActions": {
+      "$ref": "#/definitions/NodeLifecycleActions"
     },
     "ScalingConfiguration": {
       "description": "Specifies the boundaries of the compute node group auto scaling.",

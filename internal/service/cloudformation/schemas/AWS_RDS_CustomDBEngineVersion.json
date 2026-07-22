@@ -58,7 +58,7 @@
     },
     "Engine": {
       "type": "string",
-      "description": "The database engine to use for your custom engine version (CEV).\n Valid values:\n  +   ``custom-oracle-ee`` \n  +   ``custom-oracle-ee-cdb``",
+      "description": "The database engine to use for your custom engine version (CEV).\n Valid values:\n  +   ``custom-oracle-ee`` \n  +   ``custom-oracle-ee-cdb`` \n  +   ``sqlserver-dev-ee`` \n  +   ``sqlserver-ee`` \n  +   ``sqlserver-se``",
       "minLength": 1,
       "maxLength": 35
     },

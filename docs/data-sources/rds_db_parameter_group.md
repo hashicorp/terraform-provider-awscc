@@ -40,6 +40,7 @@ Data Source schema for AWS::RDS::DBParameterGroup
   +   ``aurora-mysql`` 
   +   ``aurora-postgresql`` 
   +   ``db2-ae`` 
+  +   ``db2-ce`` 
   +   ``db2-se`` 
   +   ``mysql`` 
   +   ``oracle-ee`` 

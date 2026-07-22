@@ -189,17 +189,17 @@ Read-Only:
 Read-Only:
 
 - `enable` (Boolean) Determines whether to use the deployment circuit breaker logic for the service.
-- `reset_on_healthy_task` (Boolean)
+- `reset_on_healthy_task` (Boolean) Specifies whether the deployment circuit breaker resets its failure count when a task reaches a healthy state. When set to ``true``, a task that reaches a healthy state resets the failure count to ``0``. When set to ``false``, Amazon ECS does not reset the failure count. The default is ``true``.
 - `rollback` (Boolean) Determines whether to configure Amazon ECS to roll back the service if a service deployment fails. If rollback is on, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.
-- `threshold_configuration` (Attributes) (see [below for nested schema](#nestedatt--deployment_configuration--deployment_circuit_breaker--threshold_configuration))
+- `threshold_configuration` (Attributes) The threshold configuration that controls when the deployment circuit breaker triggers. The ``type`` and ``value`` together determine how many task failures are tolerated before the circuit breaker activates. (see [below for nested schema](#nestedatt--deployment_configuration--deployment_circuit_breaker--threshold_configuration))
 
 <a id="nestedatt--deployment_configuration--deployment_circuit_breaker--threshold_configuration"></a>
 ### Nested Schema for `deployment_configuration.deployment_circuit_breaker.threshold_configuration`
 
 Read-Only:
 
-- `type` (String)
-- `value` (Number)
+- `type` (String) Determines how Amazon ECS uses ``value`` to calculate the failure threshold. For the percentage types (``BOUNDED_PERCENT`` and ``UNBOUNDED_PERCENT``), Amazon ECS multiplies ``value`` by the latest service desired count. For ``COUNT``, Amazon ECS uses ``value`` directly as the threshold. The default is ``BOUNDED_PERCENT``.
+- `value` (Number) Specifies the integer that Amazon ECS uses to calculate the failure threshold. When ``type`` is ``COUNT``, this value is the failure threshold itself. When ``type`` is a percentage type, Amazon ECS multiplies this value by the latest service desired count to produce the failure threshold. The default is ``50``.
 
 
 

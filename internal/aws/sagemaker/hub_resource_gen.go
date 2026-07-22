@@ -9,6 +9,7 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -39,9 +40,11 @@ func hubResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The date and time that the hub was created.",
+		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
 			Description: "The date and time that the hub was created.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -186,9 +189,11 @@ func hubResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The date and time that the hub was last modified.",
+		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
 			Description: "The date and time that the hub was last modified.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

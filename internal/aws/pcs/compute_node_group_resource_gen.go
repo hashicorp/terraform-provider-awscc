@@ -10,6 +10,7 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -251,6 +252,495 @@ func computeNodeGroupResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: NodeLifecycleActions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Custom scripts that run at defined points in a compute node's lifecycle.",
+		//	  "properties": {
+		//	    "ScriptCachingPolicy": {
+		//	      "description": "Controls whether lifecycle scripts are downloaded once at first boot (CACHE_ONCE) or re-downloaded on every reboot (REFRESH_ON_REBOOT). Defaults to CACHE_ONCE.",
+		//	      "enum": [
+		//	        "CACHE_ONCE",
+		//	        "REFRESH_ON_REBOOT"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Stages": {
+		//	      "additionalProperties": false,
+		//	      "description": "The ordered scripts to run at each compute node lifecycle stage.",
+		//	      "properties": {
+		//	        "NodeBootstrapped": {
+		//	          "description": "Scripts to run after the node is bootstrapped, once the PCS configuration phase completes and before slurmd starts.",
+		//	          "insertionOrder": true,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "A single lifecycle script with its source, arguments, and error behavior.",
+		//	            "properties": {
+		//	              "Arguments": {
+		//	                "description": "An ordered list of arguments passed to the script.",
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "maxLength": 256,
+		//	                  "type": "string"
+		//	                },
+		//	                "maxItems": 20,
+		//	                "type": "array"
+		//	              },
+		//	              "ExecutionPolicy": {
+		//	                "description": "Whether the script runs only on the node's first boot (FIRST_BOOT_ONLY) or on every boot including reboots (EVERY_BOOT). Defaults to FIRST_BOOT_ONLY.",
+		//	                "enum": [
+		//	                  "FIRST_BOOT_ONLY",
+		//	                  "EVERY_BOOT"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Name": {
+		//	                "description": "A human-readable name that identifies the script.",
+		//	                "maxLength": 64,
+		//	                "minLength": 1,
+		//	                "pattern": "^[A-Za-z0-9][A-Za-z0-9 _-]*$",
+		//	                "type": "string"
+		//	              },
+		//	              "OnError": {
+		//	                "description": "The behavior when the script exits with an error. Defaults to TERMINATE.",
+		//	                "enum": [
+		//	                  "TERMINATE",
+		//	                  "STOP_SEQUENCE",
+		//	                  "CONTINUE"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "ScriptSource": {
+		//	                "additionalProperties": false,
+		//	                "description": "The external location of a lifecycle script.",
+		//	                "properties": {
+		//	                  "Checksum": {
+		//	                    "description": "A 64-character hexadecimal SHA-256 digest used to verify script integrity.",
+		//	                    "maxLength": 64,
+		//	                    "minLength": 64,
+		//	                    "pattern": "^[a-fA-F0-9]{64}$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "S3VersionId": {
+		//	                    "description": "The S3 object version ID of the script, when stored in a versioned bucket.",
+		//	                    "maxLength": 1024,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "ScriptLocation": {
+		//	                    "description": "The S3 URI or HTTPS URL where the script is stored.",
+		//	                    "maxLength": 1024,
+		//	                    "minLength": 1,
+		//	                    "pattern": "^(s3://[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]/.+|https://.+)$",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "ScriptLocation"
+		//	                ],
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Name",
+		//	              "ScriptSource"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 20,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        },
+		//	        "NodeReady": {
+		//	          "description": "Scripts to execute when the node becomes ready (every boot).",
+		//	          "insertionOrder": true,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "A single lifecycle script with its source, arguments, and error behavior.",
+		//	            "properties": {
+		//	              "Arguments": {
+		//	                "description": "An ordered list of arguments passed to the script.",
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "maxLength": 256,
+		//	                  "type": "string"
+		//	                },
+		//	                "maxItems": 20,
+		//	                "type": "array"
+		//	              },
+		//	              "ExecutionPolicy": {
+		//	                "description": "Whether the script runs only on the node's first boot (FIRST_BOOT_ONLY) or on every boot including reboots (EVERY_BOOT). Defaults to FIRST_BOOT_ONLY.",
+		//	                "enum": [
+		//	                  "FIRST_BOOT_ONLY",
+		//	                  "EVERY_BOOT"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Name": {
+		//	                "description": "A human-readable name that identifies the script.",
+		//	                "maxLength": 64,
+		//	                "minLength": 1,
+		//	                "pattern": "^[A-Za-z0-9][A-Za-z0-9 _-]*$",
+		//	                "type": "string"
+		//	              },
+		//	              "OnError": {
+		//	                "description": "The behavior when the script exits with an error. Defaults to TERMINATE.",
+		//	                "enum": [
+		//	                  "TERMINATE",
+		//	                  "STOP_SEQUENCE",
+		//	                  "CONTINUE"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "ScriptSource": {
+		//	                "additionalProperties": false,
+		//	                "description": "The external location of a lifecycle script.",
+		//	                "properties": {
+		//	                  "Checksum": {
+		//	                    "description": "A 64-character hexadecimal SHA-256 digest used to verify script integrity.",
+		//	                    "maxLength": 64,
+		//	                    "minLength": 64,
+		//	                    "pattern": "^[a-fA-F0-9]{64}$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "S3VersionId": {
+		//	                    "description": "The S3 object version ID of the script, when stored in a versioned bucket.",
+		//	                    "maxLength": 1024,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "ScriptLocation": {
+		//	                    "description": "The S3 URI or HTTPS URL where the script is stored.",
+		//	                    "maxLength": 1024,
+		//	                    "minLength": 1,
+		//	                    "pattern": "^(s3://[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]/.+|https://.+)$",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "ScriptLocation"
+		//	                ],
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Name",
+		//	              "ScriptSource"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 20,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Stages"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"node_lifecycle_actions": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ScriptCachingPolicy
+				"script_caching_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Controls whether lifecycle scripts are downloaded once at first boot (CACHE_ONCE) or re-downloaded on every reboot (REFRESH_ON_REBOOT). Defaults to CACHE_ONCE.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"CACHE_ONCE",
+							"REFRESH_ON_REBOOT",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Stages
+				"stages": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: NodeBootstrapped
+						"node_bootstrapped": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Arguments
+									"arguments": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "An ordered list of arguments passed to the script.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											listvalidator.SizeAtMost(20),
+											listvalidator.ValueStringsAre(
+												stringvalidator.LengthAtMost(256),
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ExecutionPolicy
+									"execution_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Whether the script runs only on the node's first boot (FIRST_BOOT_ONLY) or on every boot including reboots (EVERY_BOOT). Defaults to FIRST_BOOT_ONLY.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"FIRST_BOOT_ONLY",
+												"EVERY_BOOT",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Name
+									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "A human-readable name that identifies the script.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 64),
+											stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9][A-Za-z0-9 _-]*$"), ""),
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: OnError
+									"on_error": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The behavior when the script exits with an error. Defaults to TERMINATE.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"TERMINATE",
+												"STOP_SEQUENCE",
+												"CONTINUE",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ScriptSource
+									"script_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Checksum
+											"checksum": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "A 64-character hexadecimal SHA-256 digest used to verify script integrity.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(64, 64),
+													stringvalidator.RegexMatches(regexp.MustCompile("^[a-fA-F0-9]{64}$"), ""),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: S3VersionId
+											"s3_version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The S3 object version ID of the script, when stored in a versioned bucket.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthAtMost(1024),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: ScriptLocation
+											"script_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The S3 URI or HTTPS URL where the script is stored.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 1024),
+													stringvalidator.RegexMatches(regexp.MustCompile("^(s3://[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]/.+|https://.+)$"), ""),
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "The external location of a lifecycle script.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Object{ /*START VALIDATORS*/
+											fwvalidators.NotNullObject(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "Scripts to run after the node is bootstrapped, once the PCS configuration phase completes and before slurmd starts.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(1, 20),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: NodeReady
+						"node_ready": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Arguments
+									"arguments": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "An ordered list of arguments passed to the script.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											listvalidator.SizeAtMost(20),
+											listvalidator.ValueStringsAre(
+												stringvalidator.LengthAtMost(256),
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ExecutionPolicy
+									"execution_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Whether the script runs only on the node's first boot (FIRST_BOOT_ONLY) or on every boot including reboots (EVERY_BOOT). Defaults to FIRST_BOOT_ONLY.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"FIRST_BOOT_ONLY",
+												"EVERY_BOOT",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Name
+									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "A human-readable name that identifies the script.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 64),
+											stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9][A-Za-z0-9 _-]*$"), ""),
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: OnError
+									"on_error": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The behavior when the script exits with an error. Defaults to TERMINATE.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"TERMINATE",
+												"STOP_SEQUENCE",
+												"CONTINUE",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ScriptSource
+									"script_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Checksum
+											"checksum": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "A 64-character hexadecimal SHA-256 digest used to verify script integrity.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(64, 64),
+													stringvalidator.RegexMatches(regexp.MustCompile("^[a-fA-F0-9]{64}$"), ""),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: S3VersionId
+											"s3_version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The S3 object version ID of the script, when stored in a versioned bucket.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthAtMost(1024),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: ScriptLocation
+											"script_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The S3 URI or HTTPS URL where the script is stored.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 1024),
+													stringvalidator.RegexMatches(regexp.MustCompile("^(s3://[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]/.+|https://.+)$"), ""),
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "The external location of a lifecycle script.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Object{ /*START VALIDATORS*/
+											fwvalidators.NotNullObject(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "Scripts to execute when the node becomes ready (every boot).",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(1, 20),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The ordered scripts to run at each compute node lifecycle stage.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Object{ /*START VALIDATORS*/
+						fwvalidators.NotNullObject(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Custom scripts that run at defined points in a compute node's lifecycle.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: PurchaseOption
@@ -569,12 +1059,15 @@ func computeNodeGroupResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"allocation_strategy":             "AllocationStrategy",
 		"ami_id":                          "AmiId",
+		"arguments":                       "Arguments",
 		"arn":                             "Arn",
+		"checksum":                        "Checksum",
 		"cluster_id":                      "ClusterId",
 		"code":                            "Code",
 		"compute_node_group_id":           "Id",
 		"custom_launch_template":          "CustomLaunchTemplate",
 		"error_info":                      "ErrorInfo",
+		"execution_policy":                "ExecutionPolicy",
 		"iam_instance_profile_arn":        "IamInstanceProfileArn",
 		"instance_configs":                "InstanceConfigs",
 		"instance_type":                   "InstanceType",
@@ -582,14 +1075,23 @@ func computeNodeGroupResource(ctx context.Context) (resource.Resource, error) {
 		"message":                         "Message",
 		"min_instance_count":              "MinInstanceCount",
 		"name":                            "Name",
+		"node_bootstrapped":               "NodeBootstrapped",
+		"node_lifecycle_actions":          "NodeLifecycleActions",
+		"node_ready":                      "NodeReady",
+		"on_error":                        "OnError",
 		"parameter_name":                  "ParameterName",
 		"parameter_value":                 "ParameterValue",
 		"purchase_option":                 "PurchaseOption",
+		"s3_version_id":                   "S3VersionId",
 		"scale_down_idle_time_in_seconds": "ScaleDownIdleTimeInSeconds",
 		"scaling_configuration":           "ScalingConfiguration",
+		"script_caching_policy":           "ScriptCachingPolicy",
+		"script_location":                 "ScriptLocation",
+		"script_source":                   "ScriptSource",
 		"slurm_configuration":             "SlurmConfiguration",
 		"slurm_custom_settings":           "SlurmCustomSettings",
 		"spot_options":                    "SpotOptions",
+		"stages":                          "Stages",
 		"status":                          "Status",
 		"subnet_ids":                      "SubnetIds",
 		"tags":                            "Tags",

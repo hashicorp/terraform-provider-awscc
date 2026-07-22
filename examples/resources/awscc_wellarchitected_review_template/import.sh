@@ -1,0 +1,1 @@
+$ terraform import awscc_wellarchitected_review_template.example "template_arn"

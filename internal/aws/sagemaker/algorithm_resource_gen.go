@@ -9,6 +9,7 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -114,9 +115,11 @@ func algorithmResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "A timestamp specifying when the algorithm was created.",
+		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
 			Description: "A timestamp specifying when the algorithm was created.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

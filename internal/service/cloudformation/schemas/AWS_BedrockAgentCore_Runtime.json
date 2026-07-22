@@ -157,12 +157,76 @@
         },
         "CustomClaims": {
           "$ref": "#/definitions/CustomClaimsList"
+        },
+        "AllowedWorkloadConfiguration": {
+          "$ref": "#/definitions/AllowedWorkloadConfiguration"
+        },
+        "PrivateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint"
+        },
+        "PrivateEndpointOverrides": {
+          "$ref": "#/definitions/PrivateEndpointOverridesList"
         }
       },
       "required": [
         "DiscoveryUrl"
       ],
       "additionalProperties": false
+    },
+    "AllowedWorkloadConfiguration": {
+      "type": "object",
+      "description": "Allow-list of upstream workloads permitted to reach this resource via the workload identity chain. When set, the data plane enforces that the introspected workload chain's caller matches one of the configured hosting environments or workload identities; absent means no chain enforcement.",
+      "properties": {
+        "HostingEnvironments": {
+          "$ref": "#/definitions/HostingEnvironmentsList"
+        },
+        "WorkloadIdentities": {
+          "$ref": "#/definitions/WorkloadIdentitiesList"
+        }
+      },
+      "additionalProperties": false
+    },
+    "HostingEnvironmentsList": {
+      "type": "array",
+      "description": "List of allow-listed hosting environments",
+      "minItems": 1,
+      "maxItems": 10,
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/HostingEnvironment"
+      }
+    },
+    "HostingEnvironment": {
+      "type": "object",
+      "description": "An upstream workload identified by the ARN of its hosting environment (for example a Gateway or Runtime ARN)",
+      "properties": {
+        "Arn": {
+          "type": "string",
+          "description": "The ARN of the bedrock-agentcore hosting environment",
+          "minLength": 20,
+          "maxLength": 1011
+        }
+      },
+      "required": [
+        "Arn"
+      ],
+      "additionalProperties": false
+    },
+    "WorkloadIdentitiesList": {
+      "type": "array",
+      "description": "List of allow-listed workload identity names",
+      "minItems": 1,
+      "maxItems": 10,
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "type": "string",
+        "description": "Allowed workload identity name",
+        "minLength": 3,
+        "maxLength": 255,
+        "pattern": "^[A-Za-z0-9_.-]+$"
+      }
     },
     "DiscoveryUrl": {
       "type": "string",
@@ -619,6 +683,137 @@
       "minItems": 0,
       "maxItems": 5,
       "insertionOrder": false
+    },
+    "PrivateEndpoint": {
+      "type": "object",
+      "description": "Private endpoint configuration. Exactly one of SelfManagedLatticeResource or ManagedVpcResource must be specified.",
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "SelfManagedLatticeResource",
+          "properties": {
+            "SelfManagedLatticeResource": {
+              "$ref": "#/definitions/SelfManagedLatticeResource"
+            }
+          },
+          "required": [
+            "SelfManagedLatticeResource"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "ManagedVpcResource",
+          "properties": {
+            "ManagedVpcResource": {
+              "$ref": "#/definitions/ManagedVpcResource"
+            }
+          },
+          "required": [
+            "ManagedVpcResource"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "SelfManagedLatticeResource": {
+      "type": "object",
+      "description": "Self-managed VPC Lattice resource configuration",
+      "properties": {
+        "ResourceConfigurationIdentifier": {
+          "type": "string",
+          "description": "The identifier of the VPC Lattice resource configuration"
+        }
+      },
+      "required": [
+        "ResourceConfigurationIdentifier"
+      ],
+      "additionalProperties": false
+    },
+    "ManagedVpcResource": {
+      "type": "object",
+      "description": "Managed VPC resource configuration",
+      "properties": {
+        "VpcIdentifier": {
+          "type": "string",
+          "description": "The VPC identifier"
+        },
+        "SubnetIds": {
+          "type": "array",
+          "description": "The subnet IDs",
+          "minItems": 1,
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "EndpointIpAddressType": {
+          "type": "string",
+          "description": "The IP address type for the endpoint",
+          "enum": [
+            "IPV4",
+            "IPV6"
+          ]
+        },
+        "SecurityGroupIds": {
+          "type": "array",
+          "description": "The security group IDs",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "RoutingDomain": {
+          "type": "string",
+          "description": "An intermediate domain to use as the resource configuration endpoint instead of the actual target domain"
+        },
+        "Tags": {
+          "type": "object",
+          "description": "Tags to apply to the managed VPC Lattice resource gateway",
+          "additionalProperties": false,
+          "patternProperties": {
+            "": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "required": [
+        "VpcIdentifier",
+        "SubnetIds",
+        "EndpointIpAddressType"
+      ],
+      "additionalProperties": false
+    },
+    "PrivateEndpointOverride": {
+      "type": "object",
+      "description": "Override mapping of a domain to a private endpoint",
+      "properties": {
+        "Domain": {
+          "type": "string",
+          "description": "The domain to override",
+          "minLength": 1,
+          "maxLength": 253
+        },
+        "PrivateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint"
+        }
+      },
+      "required": [
+        "Domain",
+        "PrivateEndpoint"
+      ],
+      "additionalProperties": false
+    },
+    "PrivateEndpointOverridesList": {
+      "type": "array",
+      "description": "List of private endpoint overrides",
+      "minItems": 0,
+      "maxItems": 5,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/PrivateEndpointOverride"
+      }
     }
   },
   "properties": {
@@ -739,7 +934,16 @@
         "iam:PassRole",
         "s3:GetObject",
         "s3:GetObjectVersion",
-        "kms:Decrypt"
+        "kms:Decrypt",
+        "vpc-lattice:GetResourceConfiguration",
+        "vpc-lattice:CreateServiceNetworkResourceAssociation",
+        "vpc-lattice:GetServiceNetworkResourceAssociation",
+        "vpc-lattice:ListServiceNetworkResourceAssociations",
+        "vpc-lattice:AssociateViaAWSService",
+        "ec2:DescribeVpcs",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeSecurityGroups",
+        "ec2:CreateNetworkInterface"
       ]
     },
     "read": {
@@ -762,7 +966,16 @@
         "iam:PassRole",
         "s3:GetObject",
         "s3:GetObjectVersion",
-        "kms:Decrypt"
+        "kms:Decrypt",
+        "vpc-lattice:GetResourceConfiguration",
+        "vpc-lattice:CreateServiceNetworkResourceAssociation",
+        "vpc-lattice:GetServiceNetworkResourceAssociation",
+        "vpc-lattice:ListServiceNetworkResourceAssociations",
+        "vpc-lattice:AssociateViaAWSService",
+        "ec2:DescribeVpcs",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeSecurityGroups",
+        "ec2:CreateNetworkInterface"
       ]
     },
     "delete": {
@@ -782,7 +995,7 @@
     }
   },
   "tagging": {
-    "cloudFormationSystemTags": false,
+    "cloudFormationSystemTags": true,
     "tagOnCreate": true,
     "tagProperty": "/properties/Tags",
     "tagUpdatable": true,

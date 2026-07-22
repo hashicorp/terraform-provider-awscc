@@ -1,0 +1,1 @@
+$ terraform import awscc_sagemaker_trial_component.example "trial_component_arn"

@@ -39,6 +39,7 @@ func infrastructureConfigurationResource(ctx context.Context) (resource.Resource
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the infrastructure configuration.",
+		//	  "pattern": "^arn:[^:]+:imagebuilder:[^:]+:[^:]+:infrastructure-configuration/.+$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -451,7 +452,7 @@ func infrastructureConfigurationResource(ctx context.Context) (resource.Resource
 	}
 
 	schema := schema.Schema{
-		Description: "Resource schema for AWS::ImageBuilder::InfrastructureConfiguration",
+		Description: "Resource Type definition for AWS::ImageBuilder::InfrastructureConfiguration",
 		Version:     1,
 		Attributes:  attributes,
 	}

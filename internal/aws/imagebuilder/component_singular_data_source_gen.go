@@ -28,6 +28,7 @@ func componentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the component.",
+		//	  "pattern": "^arn:[^:]+:imagebuilder:[^:]+:[^:]+:component/.+$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/

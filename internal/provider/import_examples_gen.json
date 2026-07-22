@@ -475,6 +475,11 @@
         "identifier": ["AssessmentId"]
     },
     {
+        "resource": "awscc_auditmanager_assessment_framework",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_autoscaling_auto_scaling_group",
         "generateListResource": true,
         "identifier": ["AutoScalingGroupName"]
@@ -696,6 +701,10 @@
     {
         "resource": "awscc_bedrock_knowledge_base",
         "generateListResource": true,
+        "identifier": ["KnowledgeBaseId"]
+    },
+    {
+        "resource": "awscc_bedrock_knowledge_base_policy",
         "identifier": ["KnowledgeBaseId"]
     },
     {
@@ -995,6 +1004,11 @@
         "resource": "awscc_cleanroomsml_training_dataset",
         "generateListResource": true,
         "identifier": ["TrainingDatasetArn"]
+    },
+    {
+        "resource": "awscc_cloudformation_generated_template",
+        "generateListResource": true,
+        "identifier": ["GeneratedTemplateId"]
     },
     {
         "resource": "awscc_cloudformation_guard_hook",
@@ -1623,6 +1637,11 @@
         "identifier": ["Id"]
     },
     {
+        "resource": "awscc_dms_certificate",
+        "generateListResource": true,
+        "identifier": ["CertificateArn"]
+    },
+    {
         "resource": "awscc_dms_data_migration",
         "generateListResource": true,
         "identifier": ["DataMigrationArn"]
@@ -1922,6 +1941,11 @@
         "resource": "awscc_directoryservice_simple_ad",
         "generateListResource": true,
         "identifier": ["DirectoryId"]
+    },
+    {
+        "resource": "awscc_docdb_event_subscription",
+        "generateListResource": true,
+        "identifier": ["SubscriptionName"]
     },
     {
         "resource": "awscc_docdb_global_cluster",
@@ -2337,6 +2361,10 @@
         "resource": "awscc_ec2_transit_gateway_policy_table",
         "generateListResource": true,
         "identifier": ["TransitGatewayPolicyTableId"]
+    },
+    {
+        "resource": "awscc_ec2_transit_gateway_policy_table_association",
+        "identifier": ["TransitGatewayPolicyTableId","TransitGatewayAttachmentId"]
     },
     {
         "resource": "awscc_ec2_transit_gateway_route",
@@ -2994,6 +3022,11 @@
         "identifier": ["ListenerArn"]
     },
     {
+        "resource": "awscc_glue_blueprint",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_glue_catalog",
         "generateListResource": true,
         "identifier": ["ResourceArn"]
@@ -3053,6 +3086,10 @@
         "resource": "awscc_glue_trigger",
         "generateListResource": true,
         "identifier": ["Name"]
+    },
+    {
+        "resource": "awscc_glue_user_defined_function",
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_grafana_workspace",
@@ -3142,6 +3179,10 @@
         "resource": "awscc_healthimaging_datastore",
         "generateListResource": true,
         "identifier": ["DatastoreId"]
+    },
+    {
+        "resource": "awscc_healthlake_data_transformation_profile",
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_healthlake_fhir_datastore",
@@ -4980,6 +5021,11 @@
         "identifier": ["AwsAccountId","FolderId"]
     },
     {
+        "resource": "awscc_quicksight_knowledge_base",
+        "generateListResource": true,
+        "identifier": ["AwsAccountId","KnowledgeBaseId"]
+    },
+    {
         "resource": "awscc_quicksight_o_auth_client_application",
         "generateListResource": true,
         "identifier": ["Arn"]
@@ -5730,6 +5776,11 @@
         "identifier": ["ProtectConfigurationId"]
     },
     {
+        "resource": "awscc_smsvoice_registration",
+        "generateListResource": true,
+        "identifier": ["RegistrationArn"]
+    },
+    {
         "resource": "awscc_smsvoice_resource_policy",
         "generateListResource": true,
         "identifier": ["ResourceArn"]
@@ -5877,6 +5928,11 @@
         "identifier": ["InstanceArn","PermissionSetArn"]
     },
     {
+        "resource": "awscc_sagemaker_action",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_sagemaker_algorithm",
         "generateListResource": true,
         "identifier": ["AlgorithmArn"]
@@ -5907,6 +5963,11 @@
         "identifier": ["ClusterArn"]
     },
     {
+        "resource": "awscc_sagemaker_context",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_sagemaker_device",
         "identifier": ["DeviceDeviceName"]
     },
@@ -5923,6 +5984,16 @@
         "resource": "awscc_sagemaker_endpoint",
         "generateListResource": true,
         "identifier": ["EndpointArn"]
+    },
+    {
+        "resource": "awscc_sagemaker_experiment",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_sagemaker_experiment_trial_component",
+        "generateListResource": true,
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_sagemaker_feature_group",
@@ -6027,6 +6098,11 @@
         "resource": "awscc_sagemaker_studio_lifecycle_config",
         "generateListResource": true,
         "identifier": ["StudioLifecycleConfigName"]
+    },
+    {
+        "resource": "awscc_sagemaker_trial_component",
+        "generateListResource": true,
+        "identifier": ["TrialComponentArn"]
     },
     {
         "resource": "awscc_sagemaker_user_profile",
@@ -6319,6 +6395,11 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_storagegateway_tape_pool",
+        "generateListResource": true,
+        "identifier": ["PoolARN"]
+    },
+    {
         "resource": "awscc_supportapp_account_alias",
         "generateListResource": true,
         "identifier": ["AccountAliasResourceId"]
@@ -6372,6 +6453,11 @@
         "resource": "awscc_timestream_table",
         "generateListResource": true,
         "identifier": ["DatabaseName","TableName"]
+    },
+    {
+        "resource": "awscc_transcribe_vocabulary_filter",
+        "generateListResource": true,
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_transfer_agreement",
@@ -6511,6 +6597,21 @@
         "identifier": ["ResourceArn","WebACLArn"]
     },
     {
+        "resource": "awscc_wellarchitected_lens",
+        "generateListResource": true,
+        "identifier": ["LensArn"]
+    },
+    {
+        "resource": "awscc_wellarchitected_profile",
+        "generateListResource": true,
+        "identifier": ["ProfileArn"]
+    },
+    {
+        "resource": "awscc_wellarchitected_review_template",
+        "generateListResource": true,
+        "identifier": ["TemplateArn"]
+    },
+    {
         "resource": "awscc_wisdom_ai_agent",
         "identifier": ["AIAgentId","AssistantId"]
     },
@@ -6564,6 +6665,11 @@
         "resource": "awscc_workspaces_connection_alias",
         "generateListResource": true,
         "identifier": ["AliasId"]
+    },
+    {
+        "resource": "awscc_workspaces_workspace_ip_group",
+        "generateListResource": true,
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_workspaces_workspaces_pool",

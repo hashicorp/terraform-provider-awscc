@@ -40,6 +40,7 @@ func lifecyclePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the lifecycle policy.",
+		//	  "pattern": "^arn:[^:]+:imagebuilder:[^:]+:[^:]+:lifecycle-policy/.+$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -675,7 +676,7 @@ func lifecyclePolicyResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Resource schema for AWS::ImageBuilder::LifecyclePolicy",
+		Description: "Resource Type definition for AWS::ImageBuilder::LifecyclePolicy",
 		Version:     1,
 		Attributes:  attributes,
 	}

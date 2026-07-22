@@ -13,19 +13,21 @@
   "handlers": {
     "read": {
       "permissions": [
-        "ec2:DescribeVpcs",
-        "ec2:DescribeSecurityGroups",
         "ec2:DescribeNetworkAcls",
-        "ec2:DescribeVpcAttribute"
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeVpcAttribute",
+        "ec2:DescribeVpcEncryptionControls",
+        "ec2:DescribeVpcs"
       ]
     },
     "create": {
       "permissions": [
+        "ec2:CreateTags",
         "ec2:CreateVpc",
-        "ec2:DescribeVpcs",
+        "ec2:CreateVpcEncryptionControl",
         "ec2:DescribeVpcAttribute",
-        "ec2:ModifyVpcAttribute",
-        "ec2:CreateTags"
+        "ec2:DescribeVpcs",
+        "ec2:ModifyVpcAttribute"
       ]
     },
     "update": {
@@ -39,6 +41,7 @@
     },
     "list": {
       "permissions": [
+        "ec2:DescribeVpcEncryptionControls",
         "ec2:DescribeVpcs"
       ]
     },
@@ -55,23 +58,205 @@
     "/properties/DefaultNetworkAcl",
     "/properties/DefaultSecurityGroup",
     "/properties/Ipv6CidrBlocks",
-    "/properties/VpcId"
+    "/properties/VpcId",
+    "/properties/VpcEncryptionControl/VpcId",
+    "/properties/VpcEncryptionControl/VpcEncryptionControlId",
+    "/properties/VpcEncryptionControl/State",
+    "/properties/VpcEncryptionControl/StateMessage",
+    "/properties/VpcEncryptionControl/ResourceExclusions",
+    "/properties/VpcEncryptionControl/ResourceExclusions/InternetGateway",
+    "/properties/VpcEncryptionControl/ResourceExclusions/InternetGateway/State",
+    "/properties/VpcEncryptionControl/ResourceExclusions/InternetGateway/StateMessage",
+    "/properties/VpcEncryptionControl/ResourceExclusions/EgressOnlyInternetGateway",
+    "/properties/VpcEncryptionControl/ResourceExclusions/EgressOnlyInternetGateway/State",
+    "/properties/VpcEncryptionControl/ResourceExclusions/EgressOnlyInternetGateway/StateMessage",
+    "/properties/VpcEncryptionControl/ResourceExclusions/NatGateway",
+    "/properties/VpcEncryptionControl/ResourceExclusions/NatGateway/State",
+    "/properties/VpcEncryptionControl/ResourceExclusions/NatGateway/StateMessage",
+    "/properties/VpcEncryptionControl/ResourceExclusions/VirtualPrivateGateway",
+    "/properties/VpcEncryptionControl/ResourceExclusions/VirtualPrivateGateway/State",
+    "/properties/VpcEncryptionControl/ResourceExclusions/VirtualPrivateGateway/StateMessage",
+    "/properties/VpcEncryptionControl/ResourceExclusions/VpcPeering",
+    "/properties/VpcEncryptionControl/ResourceExclusions/VpcPeering/State",
+    "/properties/VpcEncryptionControl/ResourceExclusions/VpcPeering/StateMessage",
+    "/properties/VpcEncryptionControl/ResourceExclusions/Lambda",
+    "/properties/VpcEncryptionControl/ResourceExclusions/Lambda/State",
+    "/properties/VpcEncryptionControl/ResourceExclusions/Lambda/StateMessage",
+    "/properties/VpcEncryptionControl/ResourceExclusions/VpcLattice",
+    "/properties/VpcEncryptionControl/ResourceExclusions/VpcLattice/State",
+    "/properties/VpcEncryptionControl/ResourceExclusions/VpcLattice/StateMessage",
+    "/properties/VpcEncryptionControl/ResourceExclusions/ElasticFileSystem",
+    "/properties/VpcEncryptionControl/ResourceExclusions/ElasticFileSystem/State",
+    "/properties/VpcEncryptionControl/ResourceExclusions/ElasticFileSystem/StateMessage"
   ],
   "description": "Specifies a virtual private cloud (VPC).\n A VPC must have an associated IPv4 CIDR block. You can specify an IPv4 CIDR block or an IPAM-allocated IPv4 CIDR block. To associate an IPv6 CIDR block with the VPC, see [AWS::EC2::VPCCidrBlock](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpccidrblock.html).\n For more information, see [Virtual private clouds (VPC)](https://docs.aws.amazon.com/vpc/latest/userguide/configure-your-vpc.html) in the *Amazon VPC User Guide*.",
   "writeOnlyProperties": [
     "/properties/Ipv4IpamPoolId",
-    "/properties/Ipv4NetmaskLength"
+    "/properties/Ipv4NetmaskLength",
+    "/properties/VpcEncryptionControl/InternetGatewayExclusion",
+    "/properties/VpcEncryptionControl/EgressOnlyInternetGatewayExclusion",
+    "/properties/VpcEncryptionControl/NatGatewayExclusion",
+    "/properties/VpcEncryptionControl/VirtualPrivateGatewayExclusion",
+    "/properties/VpcEncryptionControl/VpcPeeringExclusion",
+    "/properties/VpcEncryptionControl/LambdaExclusion",
+    "/properties/VpcEncryptionControl/VpcLatticeExclusion",
+    "/properties/VpcEncryptionControl/ElasticFileSystemExclusion"
   ],
   "createOnlyProperties": [
     "/properties/CidrBlock",
     "/properties/Ipv4IpamPoolId",
-    "/properties/Ipv4NetmaskLength"
+    "/properties/Ipv4NetmaskLength",
+    "/properties/VpcEncryptionControl"
   ],
   "additionalProperties": false,
   "primaryIdentifier": [
     "/properties/VpcId"
   ],
   "definitions": {
+    "VpcEncryptionControlExclusions": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ElasticFileSystem": {
+          "$ref": "#/definitions/VpcEncryptionControlExclusion"
+        },
+        "VpcLattice": {
+          "$ref": "#/definitions/VpcEncryptionControlExclusion"
+        },
+        "VpcPeering": {
+          "$ref": "#/definitions/VpcEncryptionControlExclusion"
+        },
+        "InternetGateway": {
+          "$ref": "#/definitions/VpcEncryptionControlExclusion"
+        },
+        "EgressOnlyInternetGateway": {
+          "$ref": "#/definitions/VpcEncryptionControlExclusion"
+        },
+        "VirtualPrivateGateway": {
+          "$ref": "#/definitions/VpcEncryptionControlExclusion"
+        },
+        "NatGateway": {
+          "$ref": "#/definitions/VpcEncryptionControlExclusion"
+        },
+        "Lambda": {
+          "$ref": "#/definitions/VpcEncryptionControlExclusion"
+        }
+      }
+    },
+    "VpcEncryptionControlExclusion": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "State": {
+          "description": "The exclusion state of the resource type.",
+          "type": "string"
+        },
+        "StateMessage": {
+          "description": "A message describing the exclusion state of the resource type.",
+          "type": "string"
+        }
+      }
+    },
+    "VpcEncryptionControl": {
+      "description": "",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ElasticFileSystemExclusion": {
+          "description": "The desired exclusion mode for Elastic File System.",
+          "type": "string",
+          "enum": [
+            "enable",
+            "disable"
+          ]
+        },
+        "VirtualPrivateGatewayExclusion": {
+          "description": "The desired exclusion mode for Virtual Private Gateways.",
+          "type": "string",
+          "enum": [
+            "enable",
+            "disable"
+          ]
+        },
+        "Mode": {
+          "description": "The mode of the VPC encryption control.",
+          "type": "string",
+          "enum": [
+            "monitor",
+            "enforce"
+          ]
+        },
+        "VpcEncryptionControlId": {
+          "description": "The ID of the VPC encryption control.",
+          "type": "string"
+        },
+        "VpcLatticeExclusion": {
+          "description": "The desired exclusion mode for VPC Lattice.",
+          "type": "string",
+          "enum": [
+            "enable",
+            "disable"
+          ]
+        },
+        "VpcId": {
+          "description": "The ID of the VPC.",
+          "type": "string"
+        },
+        "State": {
+          "description": "The state of the VPC encryption control.",
+          "type": "string"
+        },
+        "NatGatewayExclusion": {
+          "description": "The desired exclusion mode for NAT Gateways.",
+          "type": "string",
+          "enum": [
+            "enable",
+            "disable"
+          ]
+        },
+        "EgressOnlyInternetGatewayExclusion": {
+          "description": "The desired exclusion mode for Egress-Only Internet Gateways.",
+          "type": "string",
+          "enum": [
+            "enable",
+            "disable"
+          ]
+        },
+        "StateMessage": {
+          "description": "A message describing the state of the VPC encryption control.",
+          "type": "string"
+        },
+        "LambdaExclusion": {
+          "description": "The desired exclusion mode for Lambda.",
+          "type": "string",
+          "enum": [
+            "enable",
+            "disable"
+          ]
+        },
+        "ResourceExclusions": {
+          "$ref": "#/definitions/VpcEncryptionControlExclusions"
+        },
+        "InternetGatewayExclusion": {
+          "description": "The desired exclusion mode for Internet Gateways.",
+          "type": "string",
+          "enum": [
+            "enable",
+            "disable"
+          ]
+        },
+        "VpcPeeringExclusion": {
+          "description": "The desired exclusion mode for VPC Peering.",
+          "type": "string",
+          "enum": [
+            "enable",
+            "disable"
+          ]
+        }
+      }
+    },
     "Tag": {
       "description": "Specifies a tag. For more information, see [Resource tags](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html).",
       "additionalProperties": false,
@@ -93,18 +278,6 @@
     }
   },
   "properties": {
-    "VpcId": {
-      "description": "",
-      "type": "string"
-    },
-    "InstanceTenancy": {
-      "description": "The allowed tenancy of instances launched into the VPC.\n  +  ``default``: An instance launched into the VPC runs on shared hardware by default, unless you explicitly specify a different tenancy during instance launch.\n  +  ``dedicated``: An instance launched into the VPC runs on dedicated hardware by default, unless you explicitly specify a tenancy of ``host`` during instance launch. You cannot specify a tenancy of ``default`` during instance launch.\n  \n Updating ``InstanceTenancy`` requires no replacement only if you are updating its value from ``dedicated`` to ``default``. Updating ``InstanceTenancy`` from ``default`` to ``dedicated`` requires replacement.",
-      "type": "string"
-    },
-    "Ipv4NetmaskLength": {
-      "description": "The netmask length of the IPv4 CIDR you want to allocate to this VPC from an Amazon VPC IP Address Manager (IPAM) pool. For more information about IPAM, see [What is IPAM?](https://docs.aws.amazon.com//vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC IPAM User Guide*.",
-      "type": "integer"
-    },
     "CidrBlockAssociations": {
       "uniqueItems": false,
       "description": "",
@@ -118,9 +291,25 @@
       "description": "The IPv4 network range for the VPC, in CIDR notation. For example, ``10.0.0.0/16``. We modify the specified CIDR block to its canonical form; for example, if you specify ``100.68.0.18/18``, we modify it to ``100.68.0.0/18``.\n You must specify either``CidrBlock`` or ``Ipv4IpamPoolId``.",
       "type": "string"
     },
+    "VpcId": {
+      "description": "",
+      "type": "string"
+    },
+    "InstanceTenancy": {
+      "description": "The allowed tenancy of instances launched into the VPC.\n  +  ``default``: An instance launched into the VPC runs on shared hardware by default, unless you explicitly specify a different tenancy during instance launch.\n  +  ``dedicated``: An instance launched into the VPC runs on dedicated hardware by default, unless you explicitly specify a tenancy of ``host`` during instance launch. You cannot specify a tenancy of ``default`` during instance launch.\n  \n Updating ``InstanceTenancy`` requires no replacement only if you are updating its value from ``dedicated`` to ``default``. Updating ``InstanceTenancy`` from ``default`` to ``dedicated`` requires replacement.",
+      "type": "string"
+    },
+    "Ipv4NetmaskLength": {
+      "description": "The netmask length of the IPv4 CIDR you want to allocate to this VPC from an Amazon VPC IP Address Manager (IPAM) pool. For more information about IPAM, see [What is IPAM?](https://docs.aws.amazon.com//vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC IPAM User Guide*.",
+      "type": "integer"
+    },
     "Ipv4IpamPoolId": {
       "description": "The ID of an IPv4 IPAM pool you want to use for allocating this VPC's CIDR. For more information, see [What is IPAM?](https://docs.aws.amazon.com//vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC IPAM User Guide*.\n You must specify either``CidrBlock`` or ``Ipv4IpamPoolId``.",
       "type": "string"
+    },
+    "VpcEncryptionControl": {
+      "description": "",
+      "$ref": "#/definitions/VpcEncryptionControl"
     },
     "DefaultNetworkAcl": {
       "description": "",

@@ -102,8 +102,28 @@ Read-Only:
 - `allowed_audience` (List of String) List of allowed audiences
 - `allowed_clients` (List of String) List of allowed clients
 - `allowed_scopes` (List of String) List of allowed scopes
+- `allowed_workload_configuration` (Attributes) Allow-list of upstream workloads permitted to reach this resource via the workload identity chain. When set, the data plane enforces that the introspected workload chain's caller matches one of the configured hosting environments or workload identities; absent means no chain enforcement. (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--allowed_workload_configuration))
 - `custom_claims` (Attributes List) List of required custom claims (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--custom_claims))
 - `discovery_url` (String) OpenID Connect discovery URL
+- `private_endpoint` (Attributes) Private endpoint configuration. Exactly one of SelfManagedLatticeResource or ManagedVpcResource must be specified. (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint))
+- `private_endpoint_overrides` (Attributes List) List of private endpoint overrides (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint_overrides))
+
+<a id="nestedatt--authorizer_configuration--custom_jwt_authorizer--allowed_workload_configuration"></a>
+### Nested Schema for `authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration`
+
+Read-Only:
+
+- `hosting_environments` (Attributes Set) List of allow-listed hosting environments (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--allowed_workload_configuration--hosting_environments))
+- `workload_identities` (Set of String) List of allow-listed workload identity names
+
+<a id="nestedatt--authorizer_configuration--custom_jwt_authorizer--allowed_workload_configuration--hosting_environments"></a>
+### Nested Schema for `authorizer_configuration.custom_jwt_authorizer.allowed_workload_configuration.hosting_environments`
+
+Read-Only:
+
+- `arn` (String) The ARN of the bedrock-agentcore hosting environment
+
+
 
 <a id="nestedatt--authorizer_configuration--custom_jwt_authorizer--custom_claims"></a>
 ### Nested Schema for `authorizer_configuration.custom_jwt_authorizer.custom_claims`
@@ -129,6 +149,75 @@ Read-Only:
 
 - `match_value_string` (String) The string value to match for
 - `match_value_string_list` (List of String) The list of strings to check for a match
+
+
+
+
+<a id="nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint"></a>
+### Nested Schema for `authorizer_configuration.custom_jwt_authorizer.private_endpoint`
+
+Read-Only:
+
+- `managed_vpc_resource` (Attributes) Managed VPC resource configuration (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint--managed_vpc_resource))
+- `self_managed_lattice_resource` (Attributes) Self-managed VPC Lattice resource configuration (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint--self_managed_lattice_resource))
+
+<a id="nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint--managed_vpc_resource"></a>
+### Nested Schema for `authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource`
+
+Read-Only:
+
+- `endpoint_ip_address_type` (String) The IP address type for the endpoint
+- `routing_domain` (String) An intermediate domain to use as the resource configuration endpoint instead of the actual target domain
+- `security_group_ids` (List of String) The security group IDs
+- `subnet_ids` (List of String) The subnet IDs
+- `tags` (Map of String) Tags to apply to the managed VPC Lattice resource gateway
+- `vpc_identifier` (String) The VPC identifier
+
+
+<a id="nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint--self_managed_lattice_resource"></a>
+### Nested Schema for `authorizer_configuration.custom_jwt_authorizer.private_endpoint.self_managed_lattice_resource`
+
+Read-Only:
+
+- `resource_configuration_identifier` (String) The identifier of the VPC Lattice resource configuration
+
+
+
+<a id="nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint_overrides"></a>
+### Nested Schema for `authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides`
+
+Read-Only:
+
+- `domain` (String) The domain to override
+- `private_endpoint` (Attributes) Private endpoint configuration. Exactly one of SelfManagedLatticeResource or ManagedVpcResource must be specified. (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint_overrides--private_endpoint))
+
+<a id="nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint_overrides--private_endpoint"></a>
+### Nested Schema for `authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides.private_endpoint`
+
+Read-Only:
+
+- `managed_vpc_resource` (Attributes) Managed VPC resource configuration (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint_overrides--private_endpoint--managed_vpc_resource))
+- `self_managed_lattice_resource` (Attributes) Self-managed VPC Lattice resource configuration (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint_overrides--private_endpoint--self_managed_lattice_resource))
+
+<a id="nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint_overrides--private_endpoint--managed_vpc_resource"></a>
+### Nested Schema for `authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides.private_endpoint.managed_vpc_resource`
+
+Read-Only:
+
+- `endpoint_ip_address_type` (String) The IP address type for the endpoint
+- `routing_domain` (String) An intermediate domain to use as the resource configuration endpoint instead of the actual target domain
+- `security_group_ids` (List of String) The security group IDs
+- `subnet_ids` (List of String) The subnet IDs
+- `tags` (Map of String) Tags to apply to the managed VPC Lattice resource gateway
+- `vpc_identifier` (String) The VPC identifier
+
+
+<a id="nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint_overrides--private_endpoint--self_managed_lattice_resource"></a>
+### Nested Schema for `authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides.private_endpoint.self_managed_lattice_resource`
+
+Read-Only:
+
+- `resource_configuration_identifier` (String) The identifier of the VPC Lattice resource configuration
 
 
 

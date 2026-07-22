@@ -49,6 +49,9 @@ func userPoolDomainResource(ctx context.Context) (resource.Resource, error) {
 		//	  "properties": {
 		//	    "CertificateArn": {
 		//	      "type": "string"
+		//	    },
+		//	    "SecurityPolicy": {
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -57,6 +60,14 @@ func userPoolDomainResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: CertificateArn
 				"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SecurityPolicy
+				"security_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -215,6 +226,7 @@ func userPoolDomainResource(ctx context.Context) (resource.Resource, error) {
 		"primary_route_53_health_check_id": "PrimaryRoute53HealthCheckId",
 		"routing":                          "Routing",
 		"secondary_region":                 "SecondaryRegion",
+		"security_policy":                  "SecurityPolicy",
 		"user_pool_id":                     "UserPoolId",
 	})
 

@@ -374,6 +374,10 @@ func matchingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "EnableRealTimeMatching": {
+		//	      "description": "Enables the workflow to use real-time matching. Can only be set on creation for RULE_MATCHING workflows that define RuleConditionProperties.",
+		//	      "type": "boolean"
+		//	    },
 		//	    "ProviderProperties": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -522,6 +526,16 @@ func matchingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"resolution_techniques": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EnableRealTimeMatching
+				"enable_real_time_matching": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Enables the workflow to use real-time matching. Can only be set on creation for RULE_MATCHING workflows that define RuleConditionProperties.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+						boolplanmodifier.RequiresReplaceIfConfigured(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: ProviderProperties
 				"provider_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -921,6 +935,7 @@ func matchingWorkflowResource(ctx context.Context) (resource.Resource, error) {
 		"customer_profiles_integration_config": "CustomerProfilesIntegrationConfig",
 		"description":                          "Description",
 		"domain_arn":                           "DomainArn",
+		"enable_real_time_matching":            "EnableRealTimeMatching",
 		"enable_transitive_matching":           "EnableTransitiveMatching",
 		"hashed":                               "Hashed",
 		"incremental_run_config":               "IncrementalRunConfig",

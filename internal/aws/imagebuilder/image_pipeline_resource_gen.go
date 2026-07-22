@@ -7,6 +7,7 @@ package imagebuilder
 
 import (
 	"context"
+	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -41,6 +42,7 @@ func imagePipelineResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the image pipeline.",
+		//	  "pattern": "^arn:[^:]+:imagebuilder:[^:]+:[^:]+:image-pipeline/.+$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -420,6 +422,13 @@ func imagePipelineResource(ctx context.Context) (resource.Resource, error) {
 		//	    "ScheduleExpression": {
 		//	      "description": "The expression determines how often EC2 Image Builder evaluates your pipelineExecutionStartCondition.",
 		//	      "type": "string"
+		//	    },
+		//	    "Timezone": {
+		//	      "description": "The timezone that applies to the scheduling expression, for example \"Etc/UTC\" or \"America/Los_Angeles\" in IANA timezone format. If not specified, this defaults to UTC.",
+		//	      "maxLength": 100,
+		//	      "minLength": 3,
+		//	      "pattern": "^[a-zA-Z0-9]{2,}(?:\\/[a-zA-Z0-9\\-_+]+)*$",
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -470,6 +479,19 @@ func imagePipelineResource(ctx context.Context) (resource.Resource, error) {
 					Description: "The expression determines how often EC2 Image Builder evaluates your pipelineExecutionStartCondition.",
 					Optional:    true,
 					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Timezone
+				"timezone": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The timezone that applies to the scheduling expression, for example \"Etc/UTC\" or \"America/Los_Angeles\" in IANA timezone format. If not specified, this defaults to UTC.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(3, 100),
+						stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]{2,}(?:\\/[a-zA-Z0-9\\-_+]+)*$"), ""),
+					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -672,7 +694,7 @@ func imagePipelineResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Resource schema for AWS::ImageBuilder::ImagePipeline",
+		Description: "Resource Type definition for AWS::ImageBuilder::ImagePipeline",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -721,6 +743,7 @@ func imagePipelineResource(ctx context.Context) (resource.Resource, error) {
 		"status":                             "Status",
 		"tags":                               "Tags",
 		"timeout_minutes":                    "TimeoutMinutes",
+		"timezone":                           "Timezone",
 		"value":                              "Value",
 		"workflow_arn":                       "WorkflowArn",
 		"workflows":                          "Workflows",

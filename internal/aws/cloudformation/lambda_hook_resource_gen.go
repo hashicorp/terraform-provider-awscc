@@ -14,6 +14,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
@@ -51,6 +53,25 @@ func lambdaHookResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AutoUpdate
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": true,
+		//	  "description": "Whether to automatically update the extension in this account and Region when a new minor version is published by the extension publisher.",
+		//	  "type": "boolean"
+		//	}
+		"auto_update": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether to automatically update the extension in this account and Region when a new minor version is published by the extension publisher.",
+			Optional:    true,
+			Computed:    true,
+			Default:     booldefault.StaticBool(true),
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+				boolplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// AutoUpdate is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ExecutionRole
 		// CloudFormation resource type schema:
@@ -149,6 +170,74 @@ func lambdaHookResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.LengthBetween(1, 170),
 				stringvalidator.RegexMatches(regexp.MustCompile("(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?(-iso([a-z])?)?-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?"), ""),
 			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LoggingConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Contains logging configuration information for the hook.",
+		//	  "properties": {
+		//	    "LogGroupName": {
+		//	      "description": "The Amazon CloudWatch Logs group to which CloudFormation sends error logging information when invoking the extension's handlers.",
+		//	      "maxLength": 512,
+		//	      "minLength": 1,
+		//	      "pattern": "^[\\.\\-_/#A-Za-z0-9]+$",
+		//	      "type": "string"
+		//	    },
+		//	    "LogRoleArn": {
+		//	      "description": "The ARN of the role that CloudFormation should assume when sending log entries to CloudWatch Logs.",
+		//	      "maxLength": 256,
+		//	      "minLength": 1,
+		//	      "pattern": "arn:.+:iam::[0-9]{12}:role/.+",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "LogGroupName",
+		//	    "LogRoleArn"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"logging_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: LogGroupName
+				"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon CloudWatch Logs group to which CloudFormation sends error logging information when invoking the extension's handlers.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 512),
+						stringvalidator.RegexMatches(regexp.MustCompile("^[\\.\\-_/#A-Za-z0-9]+$"), ""),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: LogRoleArn
+				"log_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the role that CloudFormation should assume when sending log entries to CloudWatch Logs.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 256),
+						stringvalidator.RegexMatches(regexp.MustCompile("arn:.+:iam::[0-9]{12}:role/.+"), ""),
+						fwvalidators.NotNullString(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Contains logging configuration information for the hook.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+			// LoggingConfig is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: StackFilters
 		// CloudFormation resource type schema:
@@ -652,6 +741,7 @@ func lambdaHookResource(ctx context.Context) (resource.Resource, error) {
 		"action":             "Action",
 		"actions":            "Actions",
 		"alias":              "Alias",
+		"auto_update":        "AutoUpdate",
 		"exclude":            "Exclude",
 		"execution_role":     "ExecutionRole",
 		"failure_mode":       "FailureMode",
@@ -662,6 +752,9 @@ func lambdaHookResource(ctx context.Context) (resource.Resource, error) {
 		"invocation_point":   "InvocationPoint",
 		"invocation_points":  "InvocationPoints",
 		"lambda_function":    "LambdaFunction",
+		"log_group_name":     "LogGroupName",
+		"log_role_arn":       "LogRoleArn",
+		"logging_config":     "LoggingConfig",
 		"stack_filters":      "StackFilters",
 		"stack_names":        "StackNames",
 		"stack_roles":        "StackRoles",
@@ -672,6 +765,10 @@ func lambdaHookResource(ctx context.Context) (resource.Resource, error) {
 		"targets":            "Targets",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/AutoUpdate",
+		"/properties/LoggingConfig",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

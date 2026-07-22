@@ -68,6 +68,42 @@ func acceleratorDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Indicates whether an accelerator is enabled. The value is true or false.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: FlowLogsEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": false,
+		//	  "description": "Indicates whether flow logs are enabled for the accelerator.",
+		//	  "type": "boolean"
+		//	}
+		"flow_logs_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether flow logs are enabled for the accelerator.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: FlowLogsS3Bucket
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the Amazon S3 bucket for the flow logs.",
+		//	  "maxLength": 255,
+		//	  "type": "string"
+		//	}
+		"flow_logs_s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the Amazon S3 bucket for the flow logs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: FlowLogsS3Prefix
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The prefix for the location in the Amazon S3 bucket for the flow logs.",
+		//	  "maxLength": 255,
+		//	  "type": "string"
+		//	}
+		"flow_logs_s3_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The prefix for the location in the Amazon S3 bucket for the flow logs.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpAddressType
 		// CloudFormation resource type schema:
 		//
@@ -216,6 +252,9 @@ func acceleratorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"dns_name":            "DnsName",
 		"dual_stack_dns_name": "DualStackDnsName",
 		"enabled":             "Enabled",
+		"flow_logs_enabled":   "FlowLogsEnabled",
+		"flow_logs_s3_bucket": "FlowLogsS3Bucket",
+		"flow_logs_s3_prefix": "FlowLogsS3Prefix",
 		"ip_address_type":     "IpAddressType",
 		"ip_addresses":        "IpAddresses",
 		"ipv_4_addresses":     "Ipv4Addresses",

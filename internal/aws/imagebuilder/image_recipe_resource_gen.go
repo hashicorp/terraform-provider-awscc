@@ -165,6 +165,7 @@ func imageRecipeResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the image recipe.",
+		//	  "pattern": "^arn:[^:]+:imagebuilder:[^:]+:[^:]+:image-recipe/.+$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -656,7 +657,7 @@ func imageRecipeResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Resource schema for AWS::ImageBuilder::ImageRecipe",
+		Description: "Resource Type definition for AWS::ImageBuilder::ImageRecipe",
 		Version:     1,
 		Attributes:  attributes,
 	}

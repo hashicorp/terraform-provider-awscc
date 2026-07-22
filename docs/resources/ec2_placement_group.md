@@ -64,6 +64,7 @@ resource "awscc_ec2_placement_group" "web" {
 
 ### Read-Only
 
+- `group_id` (String) The ID of the placement group.
 - `group_name` (String) The Group Name of Placement Group.
 - `id` (String) Uniquely identifies the resource.
 

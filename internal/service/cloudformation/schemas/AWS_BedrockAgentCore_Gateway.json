@@ -62,12 +62,112 @@
             "$ref": "#/definitions/CustomClaimValidationType"
           },
           "minItems": 1
+        },
+        "PrivateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint"
         }
       },
       "required": [
         "DiscoveryUrl"
       ],
       "additionalProperties": false
+    },
+    "PrivateEndpoint": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "SelfManagedLatticeResource",
+          "properties": {
+            "SelfManagedLatticeResource": {
+              "$ref": "#/definitions/SelfManagedLatticeResource"
+            }
+          },
+          "required": [
+            "SelfManagedLatticeResource"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "ManagedVpcResource",
+          "properties": {
+            "ManagedVpcResource": {
+              "$ref": "#/definitions/ManagedVpcResource"
+            }
+          },
+          "required": [
+            "ManagedVpcResource"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "SelfManagedLatticeResource": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "ResourceConfigurationIdentifier",
+          "properties": {
+            "ResourceConfigurationIdentifier": {
+              "type": "string",
+              "maxLength": 2048,
+              "minLength": 20,
+              "pattern": "^((rcfg-[0-9a-z]{17})|(arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceconfiguration/rcfg-[0-9a-z]{17}))$"
+            }
+          },
+          "required": [
+            "ResourceConfigurationIdentifier"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "ManagedVpcResource": {
+      "type": "object",
+      "properties": {
+        "VpcIdentifier": {
+          "type": "string",
+          "pattern": "^vpc-(([0-9a-z]{8})|([0-9a-z]{17}))$"
+        },
+        "SubnetIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^subnet-(([0-9a-z]{8})|([0-9a-z]{17}))$"
+          },
+          "minItems": 1
+        },
+        "EndpointIpAddressType": {
+          "$ref": "#/definitions/EndpointIpAddressType"
+        },
+        "SecurityGroupIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^sg-(([0-9a-z]{8})|([0-9a-z]{17}))$"
+          },
+          "maxItems": 5,
+          "minItems": 0
+        },
+        "RoutingDomain": {
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 3
+        }
+      },
+      "required": [
+        "EndpointIpAddressType",
+        "SubnetIds",
+        "VpcIdentifier"
+      ],
+      "additionalProperties": false
+    },
+    "EndpointIpAddressType": {
+      "type": "string",
+      "enum": [
+        "IPV4",
+        "IPV6"
+      ]
     },
     "AllowedScope": {
       "type": "string",

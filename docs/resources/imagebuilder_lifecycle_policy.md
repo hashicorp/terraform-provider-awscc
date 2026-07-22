@@ -3,12 +3,12 @@
 page_title: "awscc_imagebuilder_lifecycle_policy Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource schema for AWS::ImageBuilder::LifecyclePolicy
+  Resource Type definition for AWS::ImageBuilder::LifecyclePolicy
 ---
 
 # awscc_imagebuilder_lifecycle_policy (Resource)
 
-Resource schema for AWS::ImageBuilder::LifecyclePolicy
+Resource Type definition for AWS::ImageBuilder::LifecyclePolicy
 
 ## Example Usage
 

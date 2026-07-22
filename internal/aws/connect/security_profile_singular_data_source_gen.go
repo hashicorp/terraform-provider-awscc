@@ -67,7 +67,7 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 2,
+		//	  "maxItems": 4,
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
@@ -112,10 +112,6 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	        "type": "string"
 		//	      }
 		//	    },
-		//	    "required": [
-		//	      "Type",
-		//	      "FlowModuleId"
-		//	    ],
 		//	    "type": "object"
 		//	  },
 		//	  "maxItems": 10,
@@ -159,7 +155,7 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	          "minLength": 1,
 		//	          "type": "string"
 		//	        },
-		//	        "maxItems": 10,
+		//	        "maxItems": 50,
 		//	        "type": "array",
 		//	        "uniqueItems": true
 		//	      },
@@ -178,10 +174,6 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	        "type": "string"
 		//	      }
 		//	    },
-		//	    "required": [
-		//	      "ApplicationPermissions",
-		//	      "Namespace"
-		//	    ],
 		//	    "type": "object"
 		//	  },
 		//	  "maxItems": 10,
@@ -273,11 +265,6 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	                    "uniqueItems": true
 		//	                  }
 		//	                },
-		//	                "required": [
-		//	                  "AccessType",
-		//	                  "AttributeName",
-		//	                  "Values"
-		//	                ],
 		//	                "type": "object"
 		//	              },
 		//	              "maxItems": 5,
@@ -286,9 +273,6 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	              "uniqueItems": true
 		//	            }
 		//	          },
-		//	          "required": [
-		//	            "PrimaryAttributeValues"
-		//	          ],
 		//	          "type": "object"
 		//	        }
 		//	      },

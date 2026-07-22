@@ -86,6 +86,7 @@ resource "awscc_rds_db_parameter_group" "this" {
   +   ``aurora-mysql`` 
   +   ``aurora-postgresql`` 
   +   ``db2-ae`` 
+  +   ``db2-ce`` 
   +   ``db2-se`` 
   +   ``mysql`` 
   +   ``oracle-ee`` 

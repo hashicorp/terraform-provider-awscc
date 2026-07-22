@@ -1,6 +1,12 @@
 {
   "typeName": "AWS::BedrockAgentCore::PaymentManager",
   "description": "Resource Type definition for AWS::BedrockAgentCore::PaymentManager",
+  "resourceLink": {
+    "templateUri": "/bedrock-agentcore/payments/managers/${PaymentManagerId}?region=${awsRegion}",
+    "mappings": {
+      "PaymentManagerId": "/PaymentManagerId"
+    }
+  },
   "definitions": {
     "PaymentManagerStatus": {
       "type": "string",
@@ -280,7 +286,7 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "tagProperty": "/properties/Tags",
-    "cloudFormationSystemTags": false,
+    "cloudFormationSystemTags": true,
     "permissions": [
       "bedrock-agentcore:TagResource",
       "bedrock-agentcore:UntagResource",
@@ -316,7 +322,8 @@
     "delete": {
       "permissions": [
         "bedrock-agentcore:DeletePaymentManager",
-        "bedrock-agentcore:GetPaymentManager"
+        "bedrock-agentcore:GetPaymentManager",
+        "bedrock-agentcore:DeleteWorkloadIdentity"
       ]
     },
     "list": {

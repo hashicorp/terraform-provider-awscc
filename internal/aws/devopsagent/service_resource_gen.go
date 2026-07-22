@@ -810,6 +810,33 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	              ],
 		//	              "type": "object"
 		//	            },
+		//	            "BearerToken": {
+		//	              "additionalProperties": false,
+		//	              "description": "Bearer token authentication details",
+		//	              "properties": {
+		//	                "AuthorizationHeader": {
+		//	                  "default": "Authorization",
+		//	                  "description": "HTTP header name to send the bearer token",
+		//	                  "pattern": "^[a-zA-Z0-9-]+$",
+		//	                  "type": "string"
+		//	                },
+		//	                "TokenName": {
+		//	                  "description": "User friendly bearer token name",
+		//	                  "pattern": "^[a-zA-Z0-9_\\s-]+$",
+		//	                  "type": "string"
+		//	                },
+		//	                "TokenValue": {
+		//	                  "description": "Bearer token value",
+		//	                  "pattern": "^[\\S]+$",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "TokenName",
+		//	                "TokenValue"
+		//	              ],
+		//	              "type": "object"
+		//	            },
 		//	            "OAuthClientCredentials": {
 		//	              "additionalProperties": false,
 		//	              "description": "MCP server OAuth client credentials configuration",
@@ -1459,7 +1486,6 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
-						objectplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: MCPServer
@@ -1512,6 +1538,56 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "API key authentication details",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: BearerToken
+								"bearer_token": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AuthorizationHeader
+										"authorization_header": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "HTTP header name to send the bearer token",
+											Optional:    true,
+											Computed:    true,
+											Default:     stringdefault.StaticString("Authorization"),
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-]+$"), ""),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: TokenName
+										"token_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "User friendly bearer token name",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_\\s-]+$"), ""),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: TokenValue
+										"token_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Bearer token value",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.RegexMatches(regexp.MustCompile("^[\\S]+$"), ""),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Bearer token authentication details",
 									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1650,7 +1726,6 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
-						objectplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: MCPServerGrafana
@@ -1764,7 +1839,6 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
-						objectplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: MCPServerNewRelic
@@ -1891,7 +1965,6 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
-						objectplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: MCPServerSigV4

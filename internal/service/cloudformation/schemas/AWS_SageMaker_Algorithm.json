@@ -433,6 +433,7 @@
     },
     "CreationTime": {
       "type": "string",
+      "format": "date-time",
       "description": "A timestamp specifying when the algorithm was created."
     }
   },

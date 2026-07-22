@@ -40,6 +40,7 @@ func distributionConfigurationResource(ctx context.Context) (resource.Resource, 
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the distribution configuration.",
+		//	  "pattern": "^arn:[^:]+:imagebuilder:[^:]+:[^:]+:distribution-configuration/.+$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -754,7 +755,7 @@ func distributionConfigurationResource(ctx context.Context) (resource.Resource, 
 	}
 
 	schema := schema.Schema{
-		Description: "Resource schema for AWS::ImageBuilder::DistributionConfiguration",
+		Description: "Resource Type definition for AWS::ImageBuilder::DistributionConfiguration",
 		Version:     1,
 		Attributes:  attributes,
 	}

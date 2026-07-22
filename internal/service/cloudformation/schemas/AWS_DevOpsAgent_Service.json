@@ -26,7 +26,7 @@
       ]
     },
     "ServiceDetails": {
-      "description": "Service-specific configuration details - only MCPServerSigV4 supports in-place updates, all other service types require replacement when modified",
+      "description": "Service-specific configuration details - MCPServerSigV4 supports in-place updates; GitLab (TokenValue), MCPServer (ApiKey or BearerToken credential rotation), MCPServerNewRelic (ApiKey rotation), and MCPServerGrafana (BearerToken rotation) support in-place credential rotation; all other service types and fields require replacement when modified",
       "type": "object",
       "oneOf": [
         {
@@ -353,6 +353,17 @@
           },
           "required": [
             "ApiKey"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "BearerToken": {
+              "$ref": "#/definitions/BearerTokenDetails"
+            }
+          },
+          "required": [
+            "BearerToken"
           ],
           "additionalProperties": false
         }
@@ -1193,14 +1204,10 @@
   "createOnlyProperties": [
     "/properties/ServiceType",
     "/properties/ServiceDetails/Dynatrace",
-    "/properties/ServiceDetails/MCPServer",
     "/properties/ServiceDetails/MCPServerSplunk",
-    "/properties/ServiceDetails/MCPServerNewRelic",
-    "/properties/ServiceDetails/GitLab",
     "/properties/ServiceDetails/ServiceNow",
     "/properties/ServiceDetails/PagerDuty",
     "/properties/ServiceDetails/AzureIdentity",
-    "/properties/ServiceDetails/MCPServerGrafana",
     "/properties/KmsKeyArn"
   ],
   "primaryIdentifier": [
@@ -1239,7 +1246,16 @@
         "aidevops:TagResource",
         "aidevops:UntagResource",
         "aidevops:ListTagsForResource",
-        "iam:PassRole"
+        "iam:PassRole",
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:Encrypt",
+        "kms:GenerateDataKey",
+        "kms:GenerateDataKeyPair",
+        "kms:GenerateDataKeyPairWithoutPlaintext",
+        "kms:GenerateDataKeyWithoutPlaintext",
+        "kms:ReEncryptFrom",
+        "kms:ReEncryptTo"
       ]
     },
     "delete": {

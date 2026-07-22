@@ -1,0 +1,1 @@
+$ terraform import awscc_dms_certificate.example "certificate_arn"

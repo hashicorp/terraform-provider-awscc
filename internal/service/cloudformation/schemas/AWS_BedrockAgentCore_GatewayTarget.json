@@ -705,8 +705,172 @@
             "Http"
           ],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "Inference",
+          "properties": {
+            "Inference": {
+              "$ref": "#/definitions/InferenceTargetConfiguration"
+            }
+          },
+          "required": [
+            "Inference"
+          ],
+          "additionalProperties": false
         }
       ]
+    },
+    "InferenceTargetConfiguration": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "Connector",
+          "properties": {
+            "Connector": {
+              "$ref": "#/definitions/InferenceConnectorTargetConfiguration"
+            }
+          },
+          "required": [
+            "Connector"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "Provider",
+          "properties": {
+            "Provider": {
+              "$ref": "#/definitions/InferenceProviderTargetConfiguration"
+            }
+          },
+          "required": [
+            "Provider"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "InferenceConnectorTargetConfiguration": {
+      "type": "object",
+      "properties": {
+        "Source": {
+          "$ref": "#/definitions/InferenceConnectorSource"
+        }
+      },
+      "required": [
+        "Source"
+      ],
+      "additionalProperties": false
+    },
+    "InferenceConnectorSource": {
+      "type": "object",
+      "properties": {
+        "ConnectorId": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 1
+        }
+      },
+      "required": [
+        "ConnectorId"
+      ],
+      "additionalProperties": false
+    },
+    "InferenceProviderTargetConfiguration": {
+      "type": "object",
+      "properties": {
+        "Endpoint": {
+          "type": "string",
+          "maxLength": 2048,
+          "minLength": 1,
+          "pattern": "^https://[a-zA-Z0-9\\-\\.]+(:[0-9]{1,5})?(/.*)?$"
+        },
+        "ModelMapping": {
+          "$ref": "#/definitions/ModelMapping"
+        },
+        "Operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InferenceOperationConfiguration"
+          },
+          "maxItems": 10,
+          "minItems": 1
+        }
+      },
+      "required": [
+        "Endpoint"
+      ],
+      "additionalProperties": false
+    },
+    "ModelMapping": {
+      "type": "object",
+      "properties": {
+        "ProviderPrefix": {
+          "$ref": "#/definitions/ProviderPrefix"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ProviderPrefix": {
+      "type": "object",
+      "properties": {
+        "Strip": {
+          "type": "boolean",
+          "default": false
+        },
+        "Separator": {
+          "type": "string",
+          "maxLength": 1,
+          "minLength": 1,
+          "default": "."
+        }
+      },
+      "additionalProperties": false
+    },
+    "InferenceOperationConfiguration": {
+      "type": "object",
+      "properties": {
+        "Path": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^/[a-zA-Z0-9\\-\\._/]+$"
+        },
+        "ProviderPath": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^/[a-zA-Z0-9\\-\\._/]+$"
+        },
+        "Models": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModelEntry"
+          },
+          "maxItems": 100,
+          "minItems": 1
+        }
+      },
+      "required": [
+        "Path"
+      ],
+      "additionalProperties": false
+    },
+    "ModelEntry": {
+      "type": "object",
+      "properties": {
+        "Model": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^[a-zA-Z0-9\\-\\._\\*\\?@]+(/[a-zA-Z0-9\\-\\._\\*\\?@]+)*$"
+        }
+      },
+      "required": [
+        "Model"
+      ],
+      "additionalProperties": false
     },
     "TargetStatus": {
       "type": "string",
@@ -858,7 +1022,8 @@
       "type": "string",
       "enum": [
         "MCP",
-        "HTTP"
+        "HTTP",
+        "INFERENCE"
       ]
     },
     "ConnectorConfiguration": {
@@ -1139,7 +1304,9 @@
         "vpc-lattice:GetServiceNetworkResourceAssociation",
         "vpc-lattice:CreateServiceNetworkResourceAssociation",
         "vpc-lattice:DeleteServiceNetworkResourceAssociation",
-        "vpc-lattice:ListServiceNetworkResourceAssociations"
+        "vpc-lattice:ListServiceNetworkResourceAssociations",
+        "bedrock-mantle:ListModels",
+        "bedrock-mantle:GetModel"
       ]
     },
     "read": {
@@ -1176,7 +1343,9 @@
         "vpc-lattice:GetServiceNetworkResourceAssociation",
         "vpc-lattice:CreateServiceNetworkResourceAssociation",
         "vpc-lattice:DeleteServiceNetworkResourceAssociation",
-        "vpc-lattice:ListServiceNetworkResourceAssociations"
+        "vpc-lattice:ListServiceNetworkResourceAssociations",
+        "bedrock-mantle:ListModels",
+        "bedrock-mantle:GetModel"
       ]
     },
     "delete": {

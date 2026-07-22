@@ -32,6 +32,29 @@
     },
     "AccountId": {
       "type": "string"
+    },
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ]
     }
   },
   "properties": {
@@ -84,17 +107,38 @@
       },
       "minItems": 0,
       "maxItems": 1000
+    },
+    "OrganizationConformancePackArn": {
+      "description": "Amazon Resource Name (ARN) of the organization conformance pack.",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "The tags for the organization conformance pack.",
+      "type": "array",
+      "maxItems": 50,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
     }
   },
   "tagging": {
-    "taggable": false,
-    "tagOnCreate": false,
-    "tagUpdatable": false,
-    "cloudFormationSystemTags": false,
-    "tagProperty": "/properties/Tags"
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "config:TagResource",
+      "config:UntagResource",
+      "config:ListTagsForResource"
+    ]
   },
   "required": [
     "OrganizationConformancePackName"
+  ],
+  "readOnlyProperties": [
+    "/properties/OrganizationConformancePackArn"
   ],
   "writeOnlyProperties": [
     "/properties/TemplateBody",
@@ -114,6 +158,8 @@
         "config:DescribeOrganizationConformancePackStatuses",
         "config:GetOrganizationConformancePackDetailedStatus",
         "config:DescribeOrganizationConformancePacks",
+        "config:TagResource",
+        "config:ListTagsForResource",
         "s3:GetObject",
         "s3:GetBucketAcl",
         "iam:CreateServiceLinkedRole",
@@ -125,7 +171,8 @@
     },
     "read": {
       "permissions": [
-        "config:DescribeOrganizationConformancePacks"
+        "config:DescribeOrganizationConformancePacks",
+        "config:ListTagsForResource"
       ]
     },
     "delete": {
@@ -133,6 +180,7 @@
         "config:DeleteOrganizationConformancePack",
         "config:DescribeOrganizationConformancePackStatuses",
         "config:GetOrganizationConformancePackDetailedStatus",
+        "config:UntagResource",
         "organizations:ListDelegatedAdministrators"
       ],
       "timeoutInMinutes": 706
@@ -142,6 +190,10 @@
         "config:PutOrganizationConformancePack",
         "config:DescribeOrganizationConformancePackStatuses",
         "config:GetOrganizationConformancePackDetailedStatus",
+        "config:DescribeOrganizationConformancePacks",
+        "config:TagResource",
+        "config:UntagResource",
+        "config:ListTagsForResource",
         "s3:GetObject",
         "s3:GetBucketAcl",
         "iam:CreateServiceLinkedRole",

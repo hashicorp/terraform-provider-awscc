@@ -28,6 +28,7 @@ func dBClusterParameterGroupDataSource(ctx context.Context) (datasource.DataSour
 		//
 		//	{
 		//	  "description": "The name of the DB cluster parameter group.\n Constraints:\n  +  Must not match the name of an existing DB cluster parameter group.\n  \n  This value is stored as a lowercase string.",
+		//	  "minLength": 1,
 		//	  "pattern": "^[a-zA-Z]{1}(?:-?[a-zA-Z0-9])*$",
 		//	  "type": "string"
 		//	}

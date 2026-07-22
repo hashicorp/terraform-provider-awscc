@@ -97,15 +97,13 @@ func dataTableResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The identifier of the Amazon Connect instance.",
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 100),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
+				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedRegion
@@ -177,15 +175,11 @@ func dataTableResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the Data Table",
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 128),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[\\p{L}\\p{Z}\\p{N}\\-_.:=@'|]+$"), ""),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Status
 		// CloudFormation resource type schema:
@@ -199,16 +193,14 @@ func dataTableResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The status of the Data Table",
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"PUBLISHED",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
+				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -294,11 +286,7 @@ func dataTableResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"time_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The time zone of the Data Table",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
+			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ValueLockLevel
 		// CloudFormation resource type schema:
@@ -316,8 +304,7 @@ func dataTableResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"value_lock_level": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The value lock level of the Data Table",
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"NONE",
@@ -327,9 +314,6 @@ func dataTableResource(ctx context.Context) (resource.Resource, error) {
 					"VALUE",
 				),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 

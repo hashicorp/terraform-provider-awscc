@@ -183,6 +183,13 @@
     "/properties/LastModifiedRegion",
     "/properties/LastModifiedTime"
   ],
+  "required": [
+    "InstanceArn",
+    "Name",
+    "TimeZone",
+    "ValueLockLevel",
+    "Status"
+  ],
   "additionalProperties": false,
   "primaryIdentifier": [
     "/properties/InstanceArn",

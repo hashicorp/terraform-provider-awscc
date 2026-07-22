@@ -8,6 +8,7 @@ package braket
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -27,9 +28,11 @@ func spendingLimitDataSource(ctx context.Context) (datasource.DataSource, error)
 		//
 		//	{
 		//	  "description": "The date and time when the spending limit was created, in ISO 8601 format.",
+		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
 			Description: "The date and time when the spending limit was created, in ISO 8601 format.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -143,10 +146,12 @@ func spendingLimitDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "properties": {
 		//	    "EndAt": {
 		//	      "description": "The end date and time for the spending limit period, in ISO 8601 format.",
+		//	      "format": "date-time",
 		//	      "type": "string"
 		//	    },
 		//	    "StartAt": {
 		//	      "description": "The start date and time for the spending limit period, in ISO 8601 format.",
+		//	      "format": "date-time",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -160,11 +165,13 @@ func spendingLimitDataSource(ctx context.Context) (datasource.DataSource, error)
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: EndAt
 				"end_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  timetypes.RFC3339Type{},
 					Description: "The end date and time for the spending limit period, in ISO 8601 format.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: StartAt
 				"start_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  timetypes.RFC3339Type{},
 					Description: "The start date and time for the spending limit period, in ISO 8601 format.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
@@ -188,9 +195,11 @@ func spendingLimitDataSource(ctx context.Context) (datasource.DataSource, error)
 		//
 		//	{
 		//	  "description": "The date and time when the spending limit was last modified, in ISO 8601 format.",
+		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
 			Description: "The date and time when the spending limit was last modified, in ISO 8601 format.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

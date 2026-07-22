@@ -116,6 +116,7 @@ func imageRecipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the image recipe.",
+		//	  "pattern": "^arn:[^:]+:imagebuilder:[^:]+:[^:]+:image-recipe/.+$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/

@@ -59,6 +59,7 @@ Read-Only:
 - `allowed_scopes` (List of String)
 - `custom_claims` (Attributes List) (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--custom_claims))
 - `discovery_url` (String)
+- `private_endpoint` (Attributes) (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint))
 
 <a id="nestedatt--authorizer_configuration--custom_jwt_authorizer--custom_claims"></a>
 ### Nested Schema for `authorizer_configuration.custom_jwt_authorizer.custom_claims`
@@ -85,6 +86,35 @@ Read-Only:
 - `match_value_string` (String) The string value to match for
 - `match_value_string_list` (List of String) The list of strings to check for a match
 
+
+
+
+<a id="nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint"></a>
+### Nested Schema for `authorizer_configuration.custom_jwt_authorizer.private_endpoint`
+
+Read-Only:
+
+- `managed_vpc_resource` (Attributes) (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint--managed_vpc_resource))
+- `self_managed_lattice_resource` (Attributes) (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint--self_managed_lattice_resource))
+
+<a id="nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint--managed_vpc_resource"></a>
+### Nested Schema for `authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource`
+
+Read-Only:
+
+- `endpoint_ip_address_type` (String)
+- `routing_domain` (String)
+- `security_group_ids` (List of String)
+- `subnet_ids` (List of String)
+- `vpc_identifier` (String)
+
+
+<a id="nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint--self_managed_lattice_resource"></a>
+### Nested Schema for `authorizer_configuration.custom_jwt_authorizer.private_endpoint.self_managed_lattice_resource`
+
+Read-Only:
+
+- `resource_configuration_identifier` (String)
 
 
 

@@ -21,6 +21,7 @@ Data Source schema for AWS::RDS::DBSubnetGroup
 
 ### Read-Only
 
+- `db_subnet_group_arn` (String)
 - `db_subnet_group_description` (String) The description for the DB subnet group.
 - `db_subnet_group_name` (String) The name for the DB subnet group. This value is stored as a lowercase string.
  Constraints:

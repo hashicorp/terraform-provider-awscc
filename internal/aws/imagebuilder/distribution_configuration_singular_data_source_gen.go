@@ -28,6 +28,7 @@ func distributionConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the distribution configuration.",
+		//	  "pattern": "^arn:[^:]+:imagebuilder:[^:]+:[^:]+:distribution-configuration/.+$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
