@@ -1,0 +1,149 @@
+{
+  "typeName": "AWS::CloudFormation::GeneratedTemplate",
+  "description": "Creates a generated template from existing resources using the CloudFormation IaC Generator.",
+  "properties": {
+    "GeneratedTemplateId": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the generated template.",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "GeneratedTemplateName": {
+      "type": "string",
+      "description": "The name assigned to the generated template.",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "TemplateConfiguration": {
+      "$ref": "#/definitions/TemplateConfiguration"
+    },
+    "Status": {
+      "type": "string",
+      "description": "The status of the template generation.",
+      "enum": [
+        "CREATE_PENDING",
+        "UPDATE_PENDING",
+        "DELETE_PENDING",
+        "CREATE_IN_PROGRESS",
+        "UPDATE_IN_PROGRESS",
+        "DELETE_IN_PROGRESS",
+        "FAILED",
+        "COMPLETE"
+      ]
+    },
+    "CreationTime": {
+      "type": "string",
+      "description": "The time the generated template was created.",
+      "format": "date-time"
+    },
+    "LastUpdatedTime": {
+      "type": "string",
+      "description": "The time the generated template was last updated.",
+      "format": "date-time"
+    },
+    "Progress": {
+      "$ref": "#/definitions/TemplateProgress"
+    },
+    "TotalWarnings": {
+      "type": "integer",
+      "description": "The number of warnings generated for this template.",
+      "minimum": 0
+    }
+  },
+  "definitions": {
+    "TemplateConfiguration": {
+      "type": "object",
+      "description": "The configuration details of the generated template.",
+      "properties": {
+        "DeletionPolicy": {
+          "type": "string",
+          "description": "The DeletionPolicy assigned to resources in the generated template.",
+          "enum": [
+            "DELETE",
+            "RETAIN"
+          ]
+        },
+        "UpdateReplacePolicy": {
+          "type": "string",
+          "description": "The UpdateReplacePolicy assigned to resources in the generated template.",
+          "enum": [
+            "DELETE",
+            "RETAIN"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "TemplateProgress": {
+      "type": "object",
+      "description": "A summary of the progress of the template generation.",
+      "properties": {
+        "ResourcesSucceeded": {
+          "type": "integer",
+          "description": "The number of resources that succeeded the template generation."
+        },
+        "ResourcesFailed": {
+          "type": "integer",
+          "description": "The number of resources that failed the template generation."
+        },
+        "ResourcesProcessing": {
+          "type": "integer",
+          "description": "The number of resources that are in-process for the template generation."
+        },
+        "ResourcesPending": {
+          "type": "integer",
+          "description": "The number of resources that are still pending the template generation."
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "GeneratedTemplateName"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/GeneratedTemplateId",
+    "/properties/Status",
+    "/properties/CreationTime",
+    "/properties/LastUpdatedTime",
+    "/properties/Progress",
+    "/properties/TotalWarnings"
+  ],
+  "primaryIdentifier": [
+    "/properties/GeneratedTemplateId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cloudformation:CreateGeneratedTemplate",
+        "cloudformation:DescribeGeneratedTemplate"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cloudformation:DescribeGeneratedTemplate"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cloudformation:UpdateGeneratedTemplate",
+        "cloudformation:DescribeGeneratedTemplate"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cloudformation:DeleteGeneratedTemplate",
+        "cloudformation:DescribeGeneratedTemplate"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cloudformation:ListGeneratedTemplates"
+      ]
+    }
+  }
+}

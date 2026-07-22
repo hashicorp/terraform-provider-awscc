@@ -1,0 +1,164 @@
+{
+  "typeName": "AWS::Glue::Blueprint",
+  "description": "Resource Type definition for AWS::Glue::Blueprint. Registers a blueprint with AWS Glue.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-glue",
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with a resource.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the blueprint."
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the blueprint.",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[\\.\\-_A-Za-z0-9]+$"
+    },
+    "BlueprintLocation": {
+      "type": "string",
+      "description": "Specifies a path in Amazon S3 where the blueprint is published.",
+      "minLength": 1,
+      "maxLength": 8192,
+      "pattern": "^s3://([^/]+)/([^/]+/)*([^/]+)$"
+    },
+    "Description": {
+      "type": "string",
+      "description": "A description of the blueprint.",
+      "minLength": 1,
+      "maxLength": 512
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags to be applied to this blueprint.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "minItems": 0,
+      "maxItems": 50
+    },
+    "Status": {
+      "type": "string",
+      "description": "The status of the blueprint registration.",
+      "enum": [
+        "CREATING",
+        "ACTIVE",
+        "UPDATING",
+        "FAILED"
+      ]
+    },
+    "CreatedOn": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the blueprint was registered."
+    },
+    "LastModifiedOn": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the blueprint was last modified."
+    },
+    "ParameterSpec": {
+      "type": "string",
+      "description": "A JSON string that indicates the list of parameter specifications for the blueprint.",
+      "minLength": 1,
+      "maxLength": 131072
+    }
+  },
+  "required": [
+    "Name",
+    "BlueprintLocation"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/Name"
+    ]
+  ],
+  "createOnlyProperties": [
+    "/properties/Name"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/Status",
+    "/properties/CreatedOn",
+    "/properties/LastModifiedOn",
+    "/properties/ParameterSpec"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "glue:CreateBlueprint",
+        "glue:GetBlueprint",
+        "glue:TagResource",
+        "glue:GetTags",
+        "s3:GetObject"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "glue:GetBlueprint",
+        "glue:GetTags"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "glue:UpdateBlueprint",
+        "glue:GetBlueprint",
+        "glue:TagResource",
+        "glue:UntagResource",
+        "glue:GetTags",
+        "s3:GetObject"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "glue:DeleteBlueprint",
+        "glue:GetBlueprint"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "glue:ListBlueprints"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "glue:TagResource",
+      "glue:UntagResource",
+      "glue:GetTags"
+    ]
+  },
+  "additionalProperties": false
+}

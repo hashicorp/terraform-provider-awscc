@@ -1,0 +1,198 @@
+{
+  "typeName": "AWS::SageMaker::Context",
+  "description": "Resource type definition for AWS::SageMaker::Context. A context is a lineage tracking entity that represents a logical grouping of other tracking or experiment entities.",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the context.",
+      "maxLength": 256,
+      "pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:context/"
+    },
+    "ContextName": {
+      "type": "string",
+      "description": "The name of the context. Must be unique to your account in an AWS Region.",
+      "minLength": 1,
+      "maxLength": 120,
+      "pattern": "^[a-zA-Z0-9]([-_]*[a-zA-Z0-9]){0,119}$"
+    },
+    "ContextType": {
+      "type": "string",
+      "description": "The context type.",
+      "minLength": 0,
+      "maxLength": 256
+    },
+    "Description": {
+      "type": "string",
+      "description": "The description of the context.",
+      "minLength": 0,
+      "maxLength": 3072
+    },
+    "Source": {
+      "type": "object",
+      "description": "The source type, ID, and URI.",
+      "properties": {
+        "SourceUri": {
+          "type": "string",
+          "description": "The URI of the source.",
+          "minLength": 1,
+          "maxLength": 2048
+        },
+        "SourceType": {
+          "type": "string",
+          "description": "The type of the source.",
+          "minLength": 0,
+          "maxLength": 256
+        },
+        "SourceId": {
+          "type": "string",
+          "description": "The ID of the source.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "SourceUri"
+      ],
+      "additionalProperties": false
+    },
+    "Properties": {
+      "type": "object",
+      "description": "A list of properties to add to the context.",
+      "maxProperties": 30,
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "maxLength": 2500
+        }
+      },
+      "additionalProperties": false
+    },
+    "Tags": {
+      "type": "array",
+      "description": "A list of tags to apply to the context.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Key": {
+            "type": "string",
+            "description": "The tag key.",
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+          },
+          "Value": {
+            "type": "string",
+            "description": "The tag value.",
+            "minLength": 0,
+            "maxLength": 256,
+            "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+          }
+        },
+        "required": [
+          "Key",
+          "Value"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 50
+    },
+    "CreationTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the context was created."
+    },
+    "LastModifiedTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the context was last modified."
+    }
+  },
+  "required": [
+    "ContextName",
+    "ContextType",
+    "Source"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/CreationTime",
+    "/properties/LastModifiedTime"
+  ],
+  "createOnlyProperties": [
+    "/properties/ContextName",
+    "/properties/ContextType",
+    "/properties/Source"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/ContextName"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "sagemaker:AddTags",
+      "sagemaker:DeleteTags",
+      "sagemaker:ListTags"
+    ]
+  },
+  "additionalProperties": false,
+  "handlers": {
+    "create": {
+      "permissions": [
+        "sagemaker:CreateContext",
+        "sagemaker:DescribeContext",
+        "sagemaker:AddTags",
+        "sagemaker:ListTags"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "sagemaker:DescribeContext",
+        "sagemaker:ListTags"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "sagemaker:UpdateContext",
+        "sagemaker:DescribeContext",
+        "sagemaker:AddTags",
+        "sagemaker:DeleteTags",
+        "sagemaker:ListTags"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "sagemaker:DeleteContext",
+        "sagemaker:DescribeContext",
+        "sagemaker:ListTags"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "Source": {
+            "type": "object",
+            "properties": {
+              "SourceUri": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2048
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "permissions": [
+        "sagemaker:ListContexts"
+      ]
+    }
+  }
+}
