@@ -9,6 +9,7 @@ import (
 	"context"
 	"regexp"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -37,9 +38,11 @@ func spendingLimitResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The date and time when the spending limit was created, in ISO 8601 format.",
+		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
 			Description: "The date and time when the spending limit was created, in ISO 8601 format.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -192,10 +195,12 @@ func spendingLimitResource(ctx context.Context) (resource.Resource, error) {
 		//	  "properties": {
 		//	    "EndAt": {
 		//	      "description": "The end date and time for the spending limit period, in ISO 8601 format.",
+		//	      "format": "date-time",
 		//	      "type": "string"
 		//	    },
 		//	    "StartAt": {
 		//	      "description": "The start date and time for the spending limit period, in ISO 8601 format.",
+		//	      "format": "date-time",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -209,6 +214,7 @@ func spendingLimitResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: EndAt
 				"end_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  timetypes.RFC3339Type{},
 					Description: "The end date and time for the spending limit period, in ISO 8601 format.",
 					Optional:    true,
 					Computed:    true,
@@ -221,6 +227,7 @@ func spendingLimitResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: StartAt
 				"start_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  timetypes.RFC3339Type{},
 					Description: "The start date and time for the spending limit period, in ISO 8601 format.",
 					Optional:    true,
 					Computed:    true,
@@ -258,9 +265,11 @@ func spendingLimitResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The date and time when the spending limit was last modified, in ISO 8601 format.",
+		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
 			Description: "The date and time when the spending limit was last modified, in ISO 8601 format.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

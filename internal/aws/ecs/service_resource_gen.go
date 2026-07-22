@@ -216,7 +216,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "boolean"
 		//	        },
 		//	        "ResetOnHealthyTask": {
-		//	          "description": "",
+		//	          "description": "Specifies whether the deployment circuit breaker resets its failure count when a task reaches a healthy state. When set to ``true``, a task that reaches a healthy state resets the failure count to ``0``. When set to ``false``, Amazon ECS does not reset the failure count. The default is ``true``.",
 		//	          "type": "boolean"
 		//	        },
 		//	        "Rollback": {
@@ -225,9 +225,10 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "ThresholdConfiguration": {
 		//	          "additionalProperties": false,
-		//	          "description": "",
+		//	          "description": "The threshold configuration that controls when the deployment circuit breaker triggers. The ``type`` and ``value`` together determine how many task failures are tolerated before the circuit breaker activates.",
 		//	          "properties": {
 		//	            "Type": {
+		//	              "description": "Determines how Amazon ECS uses ``value`` to calculate the failure threshold. For the percentage types (``BOUNDED_PERCENT`` and ``UNBOUNDED_PERCENT``), Amazon ECS multiplies ``value`` by the latest service desired count. For ``COUNT``, Amazon ECS uses ``value`` directly as the threshold. The default is ``BOUNDED_PERCENT``.",
 		//	              "enum": [
 		//	                "COUNT",
 		//	                "BOUNDED_PERCENT",
@@ -236,6 +237,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	              "type": "string"
 		//	            },
 		//	            "Value": {
+		//	              "description": "Specifies the integer that Amazon ECS uses to calculate the failure threshold. When ``type`` is ``COUNT``, this value is the failure threshold itself. When ``type`` is a percentage type, Amazon ECS multiplies this value by the latest service desired count to produce the failure threshold. The default is ``50``.",
 		//	              "type": "integer"
 		//	            }
 		//	          },
@@ -479,7 +481,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: ResetOnHealthyTask
 						"reset_on_healthy_task": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "",
+							Description: "Specifies whether the deployment circuit breaker resets its failure count when a task reaches a healthy state. When set to ``true``, a task that reaches a healthy state resets the failure count to ``0``. When set to ``false``, Amazon ECS does not reset the failure count. The default is ``true``.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -503,8 +505,9 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Type
 								"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "Determines how Amazon ECS uses ``value`` to calculate the failure threshold. For the percentage types (``BOUNDED_PERCENT`` and ``UNBOUNDED_PERCENT``), Amazon ECS multiplies ``value`` by the latest service desired count. For ``COUNT``, Amazon ECS uses ``value`` directly as the threshold. The default is ``BOUNDED_PERCENT``.",
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
 											"COUNT",
@@ -519,8 +522,9 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 								// Property: Value
 								"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "Specifies the integer that Amazon ECS uses to calculate the failure threshold. When ``type`` is ``COUNT``, this value is the failure threshold itself. When ``type`` is a percentage type, Amazon ECS multiplies this value by the latest service desired count to produce the failure threshold. The default is ``50``.",
+									Optional:    true,
+									Computed:    true,
 									Validators: []validator.Int64{ /*START VALIDATORS*/
 										fwvalidators.NotNullInt64(),
 									}, /*END VALIDATORS*/
@@ -529,7 +533,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "",
+							Description: "The threshold configuration that controls when the deployment circuit breaker triggers. The ``type`` and ``value`` together determine how many task failures are tolerated before the circuit breaker activates.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/

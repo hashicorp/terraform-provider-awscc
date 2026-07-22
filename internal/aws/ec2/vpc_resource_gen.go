@@ -8,11 +8,13 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -264,6 +266,563 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: VpcEncryptionControl
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "",
+		//	  "properties": {
+		//	    "EgressOnlyInternetGatewayExclusion": {
+		//	      "description": "The desired exclusion mode for Egress-Only Internet Gateways.",
+		//	      "enum": [
+		//	        "enable",
+		//	        "disable"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ElasticFileSystemExclusion": {
+		//	      "description": "The desired exclusion mode for Elastic File System.",
+		//	      "enum": [
+		//	        "enable",
+		//	        "disable"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "InternetGatewayExclusion": {
+		//	      "description": "The desired exclusion mode for Internet Gateways.",
+		//	      "enum": [
+		//	        "enable",
+		//	        "disable"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "LambdaExclusion": {
+		//	      "description": "The desired exclusion mode for Lambda.",
+		//	      "enum": [
+		//	        "enable",
+		//	        "disable"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Mode": {
+		//	      "description": "The mode of the VPC encryption control.",
+		//	      "enum": [
+		//	        "monitor",
+		//	        "enforce"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "NatGatewayExclusion": {
+		//	      "description": "The desired exclusion mode for NAT Gateways.",
+		//	      "enum": [
+		//	        "enable",
+		//	        "disable"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ResourceExclusions": {
+		//	      "additionalProperties": false,
+		//	      "description": "",
+		//	      "properties": {
+		//	        "EgressOnlyInternetGateway": {
+		//	          "additionalProperties": false,
+		//	          "description": "",
+		//	          "properties": {
+		//	            "State": {
+		//	              "description": "The exclusion state of the resource type.",
+		//	              "type": "string"
+		//	            },
+		//	            "StateMessage": {
+		//	              "description": "A message describing the exclusion state of the resource type.",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "ElasticFileSystem": {
+		//	          "additionalProperties": false,
+		//	          "description": "",
+		//	          "properties": {
+		//	            "State": {
+		//	              "description": "The exclusion state of the resource type.",
+		//	              "type": "string"
+		//	            },
+		//	            "StateMessage": {
+		//	              "description": "A message describing the exclusion state of the resource type.",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "InternetGateway": {
+		//	          "additionalProperties": false,
+		//	          "description": "",
+		//	          "properties": {
+		//	            "State": {
+		//	              "description": "The exclusion state of the resource type.",
+		//	              "type": "string"
+		//	            },
+		//	            "StateMessage": {
+		//	              "description": "A message describing the exclusion state of the resource type.",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "Lambda": {
+		//	          "additionalProperties": false,
+		//	          "description": "",
+		//	          "properties": {
+		//	            "State": {
+		//	              "description": "The exclusion state of the resource type.",
+		//	              "type": "string"
+		//	            },
+		//	            "StateMessage": {
+		//	              "description": "A message describing the exclusion state of the resource type.",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "NatGateway": {
+		//	          "additionalProperties": false,
+		//	          "description": "",
+		//	          "properties": {
+		//	            "State": {
+		//	              "description": "The exclusion state of the resource type.",
+		//	              "type": "string"
+		//	            },
+		//	            "StateMessage": {
+		//	              "description": "A message describing the exclusion state of the resource type.",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "VirtualPrivateGateway": {
+		//	          "additionalProperties": false,
+		//	          "description": "",
+		//	          "properties": {
+		//	            "State": {
+		//	              "description": "The exclusion state of the resource type.",
+		//	              "type": "string"
+		//	            },
+		//	            "StateMessage": {
+		//	              "description": "A message describing the exclusion state of the resource type.",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "VpcLattice": {
+		//	          "additionalProperties": false,
+		//	          "description": "",
+		//	          "properties": {
+		//	            "State": {
+		//	              "description": "The exclusion state of the resource type.",
+		//	              "type": "string"
+		//	            },
+		//	            "StateMessage": {
+		//	              "description": "A message describing the exclusion state of the resource type.",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "VpcPeering": {
+		//	          "additionalProperties": false,
+		//	          "description": "",
+		//	          "properties": {
+		//	            "State": {
+		//	              "description": "The exclusion state of the resource type.",
+		//	              "type": "string"
+		//	            },
+		//	            "StateMessage": {
+		//	              "description": "A message describing the exclusion state of the resource type.",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "State": {
+		//	      "description": "The state of the VPC encryption control.",
+		//	      "type": "string"
+		//	    },
+		//	    "StateMessage": {
+		//	      "description": "A message describing the state of the VPC encryption control.",
+		//	      "type": "string"
+		//	    },
+		//	    "VirtualPrivateGatewayExclusion": {
+		//	      "description": "The desired exclusion mode for Virtual Private Gateways.",
+		//	      "enum": [
+		//	        "enable",
+		//	        "disable"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "VpcEncryptionControlId": {
+		//	      "description": "The ID of the VPC encryption control.",
+		//	      "type": "string"
+		//	    },
+		//	    "VpcId": {
+		//	      "description": "The ID of the VPC.",
+		//	      "type": "string"
+		//	    },
+		//	    "VpcLatticeExclusion": {
+		//	      "description": "The desired exclusion mode for VPC Lattice.",
+		//	      "enum": [
+		//	        "enable",
+		//	        "disable"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "VpcPeeringExclusion": {
+		//	      "description": "The desired exclusion mode for VPC Peering.",
+		//	      "enum": [
+		//	        "enable",
+		//	        "disable"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"vpc_encryption_control": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EgressOnlyInternetGatewayExclusion
+				"egress_only_internet_gateway_exclusion": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The desired exclusion mode for Egress-Only Internet Gateways.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"enable",
+							"disable",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+					// EgressOnlyInternetGatewayExclusion is a write-only property.
+				}, /*END ATTRIBUTE*/
+				// Property: ElasticFileSystemExclusion
+				"elastic_file_system_exclusion": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The desired exclusion mode for Elastic File System.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"enable",
+							"disable",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+					// ElasticFileSystemExclusion is a write-only property.
+				}, /*END ATTRIBUTE*/
+				// Property: InternetGatewayExclusion
+				"internet_gateway_exclusion": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The desired exclusion mode for Internet Gateways.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"enable",
+							"disable",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+					// InternetGatewayExclusion is a write-only property.
+				}, /*END ATTRIBUTE*/
+				// Property: LambdaExclusion
+				"lambda_exclusion": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The desired exclusion mode for Lambda.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"enable",
+							"disable",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+					// LambdaExclusion is a write-only property.
+				}, /*END ATTRIBUTE*/
+				// Property: Mode
+				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The mode of the VPC encryption control.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"monitor",
+							"enforce",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: NatGatewayExclusion
+				"nat_gateway_exclusion": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The desired exclusion mode for NAT Gateways.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"enable",
+							"disable",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+					// NatGatewayExclusion is a write-only property.
+				}, /*END ATTRIBUTE*/
+				// Property: ResourceExclusions
+				"resource_exclusions": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EgressOnlyInternetGateway
+						"egress_only_internet_gateway": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: State
+								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The exclusion state of the resource type.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: StateMessage
+								"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "A message describing the exclusion state of the resource type.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ElasticFileSystem
+						"elastic_file_system": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: State
+								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The exclusion state of the resource type.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: StateMessage
+								"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "A message describing the exclusion state of the resource type.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: InternetGateway
+						"internet_gateway": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: State
+								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The exclusion state of the resource type.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: StateMessage
+								"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "A message describing the exclusion state of the resource type.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Lambda
+						"lambda": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: State
+								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The exclusion state of the resource type.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: StateMessage
+								"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "A message describing the exclusion state of the resource type.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: NatGateway
+						"nat_gateway": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: State
+								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The exclusion state of the resource type.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: StateMessage
+								"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "A message describing the exclusion state of the resource type.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: VirtualPrivateGateway
+						"virtual_private_gateway": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: State
+								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The exclusion state of the resource type.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: StateMessage
+								"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "A message describing the exclusion state of the resource type.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: VpcLattice
+						"vpc_lattice": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: State
+								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The exclusion state of the resource type.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: StateMessage
+								"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "A message describing the exclusion state of the resource type.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: VpcPeering
+						"vpc_peering": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: State
+								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The exclusion state of the resource type.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: StateMessage
+								"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "A message describing the exclusion state of the resource type.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "",
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: State
+				"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The state of the VPC encryption control.",
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: StateMessage
+				"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A message describing the state of the VPC encryption control.",
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: VirtualPrivateGatewayExclusion
+				"virtual_private_gateway_exclusion": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The desired exclusion mode for Virtual Private Gateways.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"enable",
+							"disable",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+					// VirtualPrivateGatewayExclusion is a write-only property.
+				}, /*END ATTRIBUTE*/
+				// Property: VpcEncryptionControlId
+				"vpc_encryption_control_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ID of the VPC encryption control.",
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: VpcId
+				"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ID of the VPC.",
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: VpcLatticeExclusion
+				"vpc_lattice_exclusion": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The desired exclusion mode for VPC Lattice.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"enable",
+							"disable",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+					// VpcLatticeExclusion is a write-only property.
+				}, /*END ATTRIBUTE*/
+				// Property: VpcPeeringExclusion
+				"vpc_peering_exclusion": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The desired exclusion mode for VPC Peering.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"enable",
+							"disable",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+					// VpcPeeringExclusion is a write-only property.
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -306,25 +865,55 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"cidr_block":              "CidrBlock",
-		"cidr_block_associations": "CidrBlockAssociations",
-		"default_network_acl":     "DefaultNetworkAcl",
-		"default_security_group":  "DefaultSecurityGroup",
-		"enable_dns_hostnames":    "EnableDnsHostnames",
-		"enable_dns_support":      "EnableDnsSupport",
-		"instance_tenancy":        "InstanceTenancy",
-		"ipv_4_ipam_pool_id":      "Ipv4IpamPoolId",
-		"ipv_4_netmask_length":    "Ipv4NetmaskLength",
-		"ipv_6_cidr_blocks":       "Ipv6CidrBlocks",
-		"key":                     "Key",
-		"tags":                    "Tags",
-		"value":                   "Value",
-		"vpc_id":                  "VpcId",
+		"cidr_block":                             "CidrBlock",
+		"cidr_block_associations":                "CidrBlockAssociations",
+		"default_network_acl":                    "DefaultNetworkAcl",
+		"default_security_group":                 "DefaultSecurityGroup",
+		"egress_only_internet_gateway":           "EgressOnlyInternetGateway",
+		"egress_only_internet_gateway_exclusion": "EgressOnlyInternetGatewayExclusion",
+		"elastic_file_system":                    "ElasticFileSystem",
+		"elastic_file_system_exclusion":          "ElasticFileSystemExclusion",
+		"enable_dns_hostnames":                   "EnableDnsHostnames",
+		"enable_dns_support":                     "EnableDnsSupport",
+		"instance_tenancy":                       "InstanceTenancy",
+		"internet_gateway":                       "InternetGateway",
+		"internet_gateway_exclusion":             "InternetGatewayExclusion",
+		"ipv_4_ipam_pool_id":                     "Ipv4IpamPoolId",
+		"ipv_4_netmask_length":                   "Ipv4NetmaskLength",
+		"ipv_6_cidr_blocks":                      "Ipv6CidrBlocks",
+		"key":                                    "Key",
+		"lambda":                                 "Lambda",
+		"lambda_exclusion":                       "LambdaExclusion",
+		"mode":                                   "Mode",
+		"nat_gateway":                            "NatGateway",
+		"nat_gateway_exclusion":                  "NatGatewayExclusion",
+		"resource_exclusions":                    "ResourceExclusions",
+		"state":                                  "State",
+		"state_message":                          "StateMessage",
+		"tags":                                   "Tags",
+		"value":                                  "Value",
+		"virtual_private_gateway":                "VirtualPrivateGateway",
+		"virtual_private_gateway_exclusion":      "VirtualPrivateGatewayExclusion",
+		"vpc_encryption_control":                 "VpcEncryptionControl",
+		"vpc_encryption_control_id":              "VpcEncryptionControlId",
+		"vpc_id":                                 "VpcId",
+		"vpc_lattice":                            "VpcLattice",
+		"vpc_lattice_exclusion":                  "VpcLatticeExclusion",
+		"vpc_peering":                            "VpcPeering",
+		"vpc_peering_exclusion":                  "VpcPeeringExclusion",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Ipv4IpamPoolId",
 		"/properties/Ipv4NetmaskLength",
+		"/properties/VpcEncryptionControl/InternetGatewayExclusion",
+		"/properties/VpcEncryptionControl/EgressOnlyInternetGatewayExclusion",
+		"/properties/VpcEncryptionControl/NatGatewayExclusion",
+		"/properties/VpcEncryptionControl/VirtualPrivateGatewayExclusion",
+		"/properties/VpcEncryptionControl/VpcPeeringExclusion",
+		"/properties/VpcEncryptionControl/LambdaExclusion",
+		"/properties/VpcEncryptionControl/VpcLatticeExclusion",
+		"/properties/VpcEncryptionControl/ElasticFileSystemExclusion",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

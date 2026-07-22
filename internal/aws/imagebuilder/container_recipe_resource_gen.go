@@ -40,6 +40,7 @@ func containerRecipeResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the container recipe.",
+		//	  "pattern": "^arn:[^:]+:imagebuilder:[^:]+:[^:]+:container-recipe/.+$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -741,7 +742,7 @@ func containerRecipeResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Resource schema for AWS::ImageBuilder::ContainerRecipe",
+		Description: "Resource Type definition for AWS::ImageBuilder::ContainerRecipe",
 		Version:     1,
 		Attributes:  attributes,
 	}

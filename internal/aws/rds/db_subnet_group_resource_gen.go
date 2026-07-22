@@ -32,6 +32,20 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::RDS::DBSubnetGroup resource.
 func dBSubnetGroupResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: DBSubnetGroupArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"db_subnet_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DBSubnetGroupDescription
 		// CloudFormation resource type schema:
 		//
@@ -181,6 +195,7 @@ func dBSubnetGroupResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"db_subnet_group_arn":         "DBSubnetGroupArn",
 		"db_subnet_group_description": "DBSubnetGroupDescription",
 		"db_subnet_group_name":        "DBSubnetGroupName",
 		"key":                         "Key",

@@ -111,7 +111,8 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//	          "PredefinedMetricType": {
 		//	            "description": "The predefined metric type to track for scaling decisions.",
 		//	            "enum": [
-		//	              "LambdaCapacityProviderAverageCPUUtilization"
+		//	              "LambdaCapacityProviderAverageCPUUtilization",
+		//	              "LambdaCapacityProviderAverageGPUUtilization"
 		//	            ],
 		//	            "type": "string"
 		//	          },
@@ -175,6 +176,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 								Validators: []validator.String{ /*START VALIDATORS*/
 									stringvalidator.OneOf(
 										"LambdaCapacityProviderAverageCPUUtilization",
+										"LambdaCapacityProviderAverageGPUUtilization",
 									),
 									fwvalidators.NotNullString(),
 								}, /*END VALIDATORS*/

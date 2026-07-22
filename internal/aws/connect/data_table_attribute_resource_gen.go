@@ -63,14 +63,12 @@ func dataTableAttributeResource(ctx context.Context) (resource.Resource, error) 
 		//	}
 		"data_table_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "",
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 2048),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
+				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Description
@@ -107,15 +105,13 @@ func dataTableAttributeResource(ctx context.Context) (resource.Resource, error) 
 		//	}
 		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "",
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 100),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
+				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedRegion
@@ -196,15 +192,11 @@ func dataTableAttributeResource(ctx context.Context) (resource.Resource, error) 
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "",
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 128),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[\\p{L}\\p{Z}\\p{N}\\-_.:=@'|]+$"), ""),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Primary
 		// CloudFormation resource type schema:
@@ -444,8 +436,7 @@ func dataTableAttributeResource(ctx context.Context) (resource.Resource, error) 
 		//	}
 		"value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "",
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"TEXT",
@@ -455,9 +446,6 @@ func dataTableAttributeResource(ctx context.Context) (resource.Resource, error) 
 					"NUMBER_LIST",
 				),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 

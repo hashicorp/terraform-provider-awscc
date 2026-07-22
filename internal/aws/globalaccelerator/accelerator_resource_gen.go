@@ -95,6 +95,61 @@ func acceleratorResource(ctx context.Context) (resource.Resource, error) {
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: FlowLogsEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": false,
+		//	  "description": "Indicates whether flow logs are enabled for the accelerator.",
+		//	  "type": "boolean"
+		//	}
+		"flow_logs_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether flow logs are enabled for the accelerator.",
+			Optional:    true,
+			Computed:    true,
+			Default:     booldefault.StaticBool(false),
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: FlowLogsS3Bucket
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the Amazon S3 bucket for the flow logs.",
+		//	  "maxLength": 255,
+		//	  "type": "string"
+		//	}
+		"flow_logs_s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the Amazon S3 bucket for the flow logs.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(255),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: FlowLogsS3Prefix
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The prefix for the location in the Amazon S3 bucket for the flow logs.",
+		//	  "maxLength": 255,
+		//	  "type": "string"
+		//	}
+		"flow_logs_s3_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The prefix for the location in the Amazon S3 bucket for the flow logs.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(255),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: IpAddressType
 		// CloudFormation resource type schema:
 		//
@@ -306,6 +361,9 @@ func acceleratorResource(ctx context.Context) (resource.Resource, error) {
 		"dns_name":            "DnsName",
 		"dual_stack_dns_name": "DualStackDnsName",
 		"enabled":             "Enabled",
+		"flow_logs_enabled":   "FlowLogsEnabled",
+		"flow_logs_s3_bucket": "FlowLogsS3Bucket",
+		"flow_logs_s3_prefix": "FlowLogsS3Prefix",
 		"ip_address_type":     "IpAddressType",
 		"ip_addresses":        "IpAddresses",
 		"ipv_4_addresses":     "Ipv4Addresses",

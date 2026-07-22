@@ -381,6 +381,52 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 		//	          "minItems": 1,
 		//	          "type": "array"
 		//	        },
+		//	        "AllowedWorkloadConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Allow-list of upstream workloads permitted to reach this resource via the workload identity chain. When set, the data plane enforces that the introspected workload chain's caller matches one of the configured hosting environments or workload identities; absent means no chain enforcement.",
+		//	          "properties": {
+		//	            "HostingEnvironments": {
+		//	              "description": "List of allow-listed hosting environments",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "description": "An upstream workload identified by the ARN of its hosting environment (for example a Gateway or Runtime ARN)",
+		//	                "properties": {
+		//	                  "Arn": {
+		//	                    "description": "The ARN of the bedrock-agentcore hosting environment",
+		//	                    "maxLength": 1011,
+		//	                    "minLength": 20,
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Arn"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 10,
+		//	              "minItems": 1,
+		//	              "type": "array",
+		//	              "uniqueItems": true
+		//	            },
+		//	            "WorkloadIdentities": {
+		//	              "description": "List of allow-listed workload identity names",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "description": "Allowed workload identity name",
+		//	                "maxLength": 255,
+		//	                "minLength": 3,
+		//	                "pattern": "^[A-Za-z0-9_.-]+$",
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 10,
+		//	              "minItems": 1,
+		//	              "type": "array",
+		//	              "uniqueItems": true
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "CustomClaims": {
 		//	          "description": "List of required custom claims",
 		//	          "insertionOrder": false,
@@ -460,6 +506,180 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 		//	          "description": "OpenID Connect discovery URL",
 		//	          "pattern": "^.+/\\.well-known/openid-configuration$",
 		//	          "type": "string"
+		//	        },
+		//	        "PrivateEndpoint": {
+		//	          "description": "Private endpoint configuration. Exactly one of SelfManagedLatticeResource or ManagedVpcResource must be specified.",
+		//	          "properties": {
+		//	            "ManagedVpcResource": {
+		//	              "additionalProperties": false,
+		//	              "description": "Managed VPC resource configuration",
+		//	              "properties": {
+		//	                "EndpointIpAddressType": {
+		//	                  "description": "The IP address type for the endpoint",
+		//	                  "enum": [
+		//	                    "IPV4",
+		//	                    "IPV6"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "RoutingDomain": {
+		//	                  "description": "An intermediate domain to use as the resource configuration endpoint instead of the actual target domain",
+		//	                  "type": "string"
+		//	                },
+		//	                "SecurityGroupIds": {
+		//	                  "description": "The security group IDs",
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array"
+		//	                },
+		//	                "SubnetIds": {
+		//	                  "description": "The subnet IDs",
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "minItems": 1,
+		//	                  "type": "array"
+		//	                },
+		//	                "Tags": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "Tags to apply to the managed VPC Lattice resource gateway",
+		//	                  "patternProperties": {
+		//	                    "": {
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "VpcIdentifier": {
+		//	                  "description": "The VPC identifier",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "VpcIdentifier",
+		//	                "SubnetIds",
+		//	                "EndpointIpAddressType"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "SelfManagedLatticeResource": {
+		//	              "additionalProperties": false,
+		//	              "description": "Self-managed VPC Lattice resource configuration",
+		//	              "properties": {
+		//	                "ResourceConfigurationIdentifier": {
+		//	                  "description": "The identifier of the VPC Lattice resource configuration",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "ResourceConfigurationIdentifier"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "PrivateEndpointOverrides": {
+		//	          "description": "List of private endpoint overrides",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "Override mapping of a domain to a private endpoint",
+		//	            "properties": {
+		//	              "Domain": {
+		//	                "description": "The domain to override",
+		//	                "maxLength": 253,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "PrivateEndpoint": {
+		//	                "description": "Private endpoint configuration. Exactly one of SelfManagedLatticeResource or ManagedVpcResource must be specified.",
+		//	                "properties": {
+		//	                  "ManagedVpcResource": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "Managed VPC resource configuration",
+		//	                    "properties": {
+		//	                      "EndpointIpAddressType": {
+		//	                        "description": "The IP address type for the endpoint",
+		//	                        "enum": [
+		//	                          "IPV4",
+		//	                          "IPV6"
+		//	                        ],
+		//	                        "type": "string"
+		//	                      },
+		//	                      "RoutingDomain": {
+		//	                        "description": "An intermediate domain to use as the resource configuration endpoint instead of the actual target domain",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "SecurityGroupIds": {
+		//	                        "description": "The security group IDs",
+		//	                        "insertionOrder": false,
+		//	                        "items": {
+		//	                          "type": "string"
+		//	                        },
+		//	                        "type": "array"
+		//	                      },
+		//	                      "SubnetIds": {
+		//	                        "description": "The subnet IDs",
+		//	                        "insertionOrder": false,
+		//	                        "items": {
+		//	                          "type": "string"
+		//	                        },
+		//	                        "minItems": 1,
+		//	                        "type": "array"
+		//	                      },
+		//	                      "Tags": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "Tags to apply to the managed VPC Lattice resource gateway",
+		//	                        "patternProperties": {
+		//	                          "": {
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "type": "object"
+		//	                      },
+		//	                      "VpcIdentifier": {
+		//	                        "description": "The VPC identifier",
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "VpcIdentifier",
+		//	                      "SubnetIds",
+		//	                      "EndpointIpAddressType"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "SelfManagedLatticeResource": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "Self-managed VPC Lattice resource configuration",
+		//	                    "properties": {
+		//	                      "ResourceConfigurationIdentifier": {
+		//	                        "description": "The identifier of the VPC Lattice resource configuration",
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "ResourceConfigurationIdentifier"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Domain",
+		//	              "PrivateEndpoint"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 5,
+		//	          "minItems": 0,
+		//	          "type": "array"
 		//	        }
 		//	      },
 		//	      "required": [
@@ -518,6 +738,63 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								generic.Multiset(),
 								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: AllowedWorkloadConfiguration
+						"allowed_workload_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: HostingEnvironments
+								"hosting_environments": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Arn
+											"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The ARN of the bedrock-agentcore hosting environment",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(20, 1011),
+													fwvalidators.NotNullString(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "List of allow-listed hosting environments",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Set{ /*START VALIDATORS*/
+										setvalidator.SizeBetween(1, 10),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+										setplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: WorkloadIdentities
+								"workload_identities": schema.SetAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "List of allow-listed workload identity names",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.Set{ /*START VALIDATORS*/
+										setvalidator.SizeBetween(1, 10),
+										setvalidator.ValueStringsAre(
+											stringvalidator.LengthBetween(3, 255),
+											stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9_.-]+$"), ""),
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+										setplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Allow-list of upstream workloads permitted to reach this resource via the workload identity chain. When set, the data plane enforces that the introspected workload chain's caller matches one of the configured hosting environments or workload identities; absent means no chain enforcement.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: CustomClaims
@@ -651,6 +928,277 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: PrivateEndpoint
+						"private_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ManagedVpcResource
+								"managed_vpc_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: EndpointIpAddressType
+										"endpoint_ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The IP address type for the endpoint",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"IPV4",
+													"IPV6",
+												),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: RoutingDomain
+										"routing_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "An intermediate domain to use as the resource configuration endpoint instead of the actual target domain",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: SecurityGroupIds
+										"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "The security group IDs",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												generic.Multiset(),
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: SubnetIds
+										"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "The subnet IDs",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.SizeAtLeast(1),
+												fwvalidators.NotNullList(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												generic.Multiset(),
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Tags
+										"tags":              // Pattern: ""
+										schema.MapAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "Tags to apply to the managed VPC Lattice resource gateway",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+												mapplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: VpcIdentifier
+										"vpc_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The VPC identifier",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Managed VPC resource configuration",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SelfManagedLatticeResource
+								"self_managed_lattice_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ResourceConfigurationIdentifier
+										"resource_configuration_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The identifier of the VPC Lattice resource configuration",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Self-managed VPC Lattice resource configuration",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Private endpoint configuration. Exactly one of SelfManagedLatticeResource or ManagedVpcResource must be specified.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: PrivateEndpointOverrides
+						"private_endpoint_overrides": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Domain
+									"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The domain to override",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 253),
+											fwvalidators.NotNullString(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: PrivateEndpoint
+									"private_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: ManagedVpcResource
+											"managed_vpc_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: EndpointIpAddressType
+													"endpoint_ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The IP address type for the endpoint",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.OneOf(
+																"IPV4",
+																"IPV6",
+															),
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: RoutingDomain
+													"routing_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "An intermediate domain to use as the resource configuration endpoint instead of the actual target domain",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: SecurityGroupIds
+													"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Description: "The security group IDs",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+															generic.Multiset(),
+															listplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: SubnetIds
+													"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Description: "The subnet IDs",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.List{ /*START VALIDATORS*/
+															listvalidator.SizeAtLeast(1),
+															fwvalidators.NotNullList(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+															generic.Multiset(),
+															listplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Tags
+													"tags":              // Pattern: ""
+													schema.MapAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Description: "Tags to apply to the managed VPC Lattice resource gateway",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+															mapplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: VpcIdentifier
+													"vpc_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The VPC identifier",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Managed VPC resource configuration",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: SelfManagedLatticeResource
+											"self_managed_lattice_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: ResourceConfigurationIdentifier
+													"resource_configuration_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The identifier of the VPC Lattice resource configuration",
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															fwvalidators.NotNullString(),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Self-managed VPC Lattice resource configuration",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Private endpoint configuration. Exactly one of SelfManagedLatticeResource or ManagedVpcResource must be specified.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Object{ /*START VALIDATORS*/
+											fwvalidators.NotNullObject(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "List of private endpoint overrides",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(0, 5),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -1340,62 +1888,77 @@ func runtimeResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"access_point_arn":               "AccessPointArn",
-		"agent_runtime_arn":              "AgentRuntimeArn",
-		"agent_runtime_artifact":         "AgentRuntimeArtifact",
-		"agent_runtime_id":               "AgentRuntimeId",
-		"agent_runtime_name":             "AgentRuntimeName",
-		"agent_runtime_version":          "AgentRuntimeVersion",
-		"allowed_audience":               "AllowedAudience",
-		"allowed_clients":                "AllowedClients",
-		"allowed_scopes":                 "AllowedScopes",
-		"authorizer_configuration":       "AuthorizerConfiguration",
-		"authorizing_claim_match_value":  "AuthorizingClaimMatchValue",
-		"bucket":                         "Bucket",
-		"claim_match_operator":           "ClaimMatchOperator",
-		"claim_match_value":              "ClaimMatchValue",
-		"code":                           "Code",
-		"code_configuration":             "CodeConfiguration",
-		"container_configuration":        "ContainerConfiguration",
-		"container_uri":                  "ContainerUri",
-		"created_at":                     "CreatedAt",
-		"custom_claims":                  "CustomClaims",
-		"custom_jwt_authorizer":          "CustomJWTAuthorizer",
-		"description":                    "Description",
-		"discovery_url":                  "DiscoveryUrl",
-		"efs_access_point":               "EfsAccessPoint",
-		"entry_point":                    "EntryPoint",
-		"environment_variables":          "EnvironmentVariables",
-		"failure_reason":                 "FailureReason",
-		"filesystem_configurations":      "FilesystemConfigurations",
-		"idle_runtime_session_timeout":   "IdleRuntimeSessionTimeout",
-		"inbound_token_claim_name":       "InboundTokenClaimName",
-		"inbound_token_claim_value_type": "InboundTokenClaimValueType",
-		"last_updated_at":                "LastUpdatedAt",
-		"lifecycle_configuration":        "LifecycleConfiguration",
-		"match_value_string":             "MatchValueString",
-		"match_value_string_list":        "MatchValueStringList",
-		"max_lifetime":                   "MaxLifetime",
-		"mount_path":                     "MountPath",
-		"network_configuration":          "NetworkConfiguration",
-		"network_mode":                   "NetworkMode",
-		"network_mode_config":            "NetworkModeConfig",
-		"prefix":                         "Prefix",
-		"protocol_configuration":         "ProtocolConfiguration",
-		"request_header_allowlist":       "RequestHeaderAllowlist",
-		"request_header_configuration":   "RequestHeaderConfiguration",
-		"role_arn":                       "RoleArn",
-		"runtime":                        "Runtime",
-		"s3":                             "S3",
-		"s3_files_access_point":          "S3FilesAccessPoint",
-		"security_groups":                "SecurityGroups",
-		"session_storage":                "SessionStorage",
-		"status":                         "Status",
-		"subnets":                        "Subnets",
-		"tags":                           "Tags",
-		"version_id":                     "VersionId",
-		"workload_identity_arn":          "WorkloadIdentityArn",
-		"workload_identity_details":      "WorkloadIdentityDetails",
+		"access_point_arn":                  "AccessPointArn",
+		"agent_runtime_arn":                 "AgentRuntimeArn",
+		"agent_runtime_artifact":            "AgentRuntimeArtifact",
+		"agent_runtime_id":                  "AgentRuntimeId",
+		"agent_runtime_name":                "AgentRuntimeName",
+		"agent_runtime_version":             "AgentRuntimeVersion",
+		"allowed_audience":                  "AllowedAudience",
+		"allowed_clients":                   "AllowedClients",
+		"allowed_scopes":                    "AllowedScopes",
+		"allowed_workload_configuration":    "AllowedWorkloadConfiguration",
+		"arn":                               "Arn",
+		"authorizer_configuration":          "AuthorizerConfiguration",
+		"authorizing_claim_match_value":     "AuthorizingClaimMatchValue",
+		"bucket":                            "Bucket",
+		"claim_match_operator":              "ClaimMatchOperator",
+		"claim_match_value":                 "ClaimMatchValue",
+		"code":                              "Code",
+		"code_configuration":                "CodeConfiguration",
+		"container_configuration":           "ContainerConfiguration",
+		"container_uri":                     "ContainerUri",
+		"created_at":                        "CreatedAt",
+		"custom_claims":                     "CustomClaims",
+		"custom_jwt_authorizer":             "CustomJWTAuthorizer",
+		"description":                       "Description",
+		"discovery_url":                     "DiscoveryUrl",
+		"domain":                            "Domain",
+		"efs_access_point":                  "EfsAccessPoint",
+		"endpoint_ip_address_type":          "EndpointIpAddressType",
+		"entry_point":                       "EntryPoint",
+		"environment_variables":             "EnvironmentVariables",
+		"failure_reason":                    "FailureReason",
+		"filesystem_configurations":         "FilesystemConfigurations",
+		"hosting_environments":              "HostingEnvironments",
+		"idle_runtime_session_timeout":      "IdleRuntimeSessionTimeout",
+		"inbound_token_claim_name":          "InboundTokenClaimName",
+		"inbound_token_claim_value_type":    "InboundTokenClaimValueType",
+		"last_updated_at":                   "LastUpdatedAt",
+		"lifecycle_configuration":           "LifecycleConfiguration",
+		"managed_vpc_resource":              "ManagedVpcResource",
+		"match_value_string":                "MatchValueString",
+		"match_value_string_list":           "MatchValueStringList",
+		"max_lifetime":                      "MaxLifetime",
+		"mount_path":                        "MountPath",
+		"network_configuration":             "NetworkConfiguration",
+		"network_mode":                      "NetworkMode",
+		"network_mode_config":               "NetworkModeConfig",
+		"prefix":                            "Prefix",
+		"private_endpoint":                  "PrivateEndpoint",
+		"private_endpoint_overrides":        "PrivateEndpointOverrides",
+		"protocol_configuration":            "ProtocolConfiguration",
+		"request_header_allowlist":          "RequestHeaderAllowlist",
+		"request_header_configuration":      "RequestHeaderConfiguration",
+		"resource_configuration_identifier": "ResourceConfigurationIdentifier",
+		"role_arn":                          "RoleArn",
+		"routing_domain":                    "RoutingDomain",
+		"runtime":                           "Runtime",
+		"s3":                                "S3",
+		"s3_files_access_point":             "S3FilesAccessPoint",
+		"security_group_ids":                "SecurityGroupIds",
+		"security_groups":                   "SecurityGroups",
+		"self_managed_lattice_resource":     "SelfManagedLatticeResource",
+		"session_storage":                   "SessionStorage",
+		"status":                            "Status",
+		"subnet_ids":                        "SubnetIds",
+		"subnets":                           "Subnets",
+		"tags":                              "Tags",
+		"version_id":                        "VersionId",
+		"vpc_identifier":                    "VpcIdentifier",
+		"workload_identities":               "WorkloadIdentities",
+		"workload_identity_arn":             "WorkloadIdentityArn",
+		"workload_identity_details":         "WorkloadIdentityDetails",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

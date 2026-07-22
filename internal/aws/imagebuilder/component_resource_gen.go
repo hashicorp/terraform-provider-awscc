@@ -37,6 +37,7 @@ func componentResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the component.",
+		//	  "pattern": "^arn:[^:]+:imagebuilder:[^:]+:[^:]+:component/.+$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -331,7 +332,7 @@ func componentResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Resource schema for AWS::ImageBuilder::Component",
+		Description: "Resource Type definition for AWS::ImageBuilder::Component",
 		Version:     1,
 		Attributes:  attributes,
 	}

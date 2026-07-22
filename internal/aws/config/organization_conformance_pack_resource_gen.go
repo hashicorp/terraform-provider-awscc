@@ -165,6 +165,20 @@ func organizationConformancePackResource(ctx context.Context) (resource.Resource
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: OrganizationConformancePackArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Amazon Resource Name (ARN) of the organization conformance pack.",
+		//	  "type": "string"
+		//	}
+		"organization_conformance_pack_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Amazon Resource Name (ARN) of the organization conformance pack.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: OrganizationConformancePackName
 		// CloudFormation resource type schema:
 		//
@@ -184,6 +198,80 @@ func organizationConformancePackResource(ctx context.Context) (resource.Resource
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The tags for the organization conformance pack.",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A key-value pair to associate with a resource.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Value",
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 256),
+							fwvalidators.NotNullString(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags for the organization conformance pack.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtMost(50),
+				listvalidator.UniqueValues(),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: TemplateBody
@@ -263,11 +351,15 @@ func organizationConformancePackResource(ctx context.Context) (resource.Resource
 		"delivery_s3_bucket":                 "DeliveryS3Bucket",
 		"delivery_s3_key_prefix":             "DeliveryS3KeyPrefix",
 		"excluded_accounts":                  "ExcludedAccounts",
+		"key":                                "Key",
+		"organization_conformance_pack_arn":  "OrganizationConformancePackArn",
 		"organization_conformance_pack_name": "OrganizationConformancePackName",
 		"parameter_name":                     "ParameterName",
 		"parameter_value":                    "ParameterValue",
+		"tags":                               "Tags",
 		"template_body":                      "TemplateBody",
 		"template_s3_uri":                    "TemplateS3Uri",
+		"value":                              "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

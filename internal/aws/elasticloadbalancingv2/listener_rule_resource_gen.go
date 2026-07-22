@@ -1025,6 +1025,10 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	        "additionalProperties": false,
 		//	        "description": "Information for a source IP condition. Specify only when ``Field`` is ``source-ip``.",
 		//	        "properties": {
+		//	          "IpAddressType": {
+		//	            "description": "",
+		//	            "type": "string"
+		//	          },
 		//	          "Values": {
 		//	            "description": "The source IP addresses, in CIDR format. You can use both IPv4 and IPv6 addresses. Wildcards are not supported.\n If you specify multiple addresses, the condition is satisfied if the source IP address of the request matches one of the CIDR blocks. This condition is not satisfied by the addresses in the X-Forwarded-For header.",
 		//	            "insertionOrder": false,
@@ -1239,6 +1243,15 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 					// Property: SourceIpConfig
 					"source_ip_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: IpAddressType
+							"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: Values
 							"values": schema.SetAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
@@ -1666,6 +1679,7 @@ func listenerRuleResource(ctx context.Context) (resource.Resource, error) {
 		"http_header_config":                  "HttpHeaderConfig",
 		"http_header_name":                    "HttpHeaderName",
 		"http_request_method_config":          "HttpRequestMethodConfig",
+		"ip_address_type":                     "IpAddressType",
 		"is_default":                          "IsDefault",
 		"issuer":                              "Issuer",
 		"jwks_endpoint":                       "JwksEndpoint",

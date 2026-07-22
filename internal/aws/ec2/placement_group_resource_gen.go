@@ -31,6 +31,20 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::EC2::PlacementGroup resource.
 func placementGroupResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: GroupId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the placement group.",
+		//	  "type": "string"
+		//	}
+		"group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the placement group.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: GroupName
 		// CloudFormation resource type schema:
 		//
@@ -193,6 +207,7 @@ func placementGroupResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"group_id":        "GroupId",
 		"group_name":      "GroupName",
 		"key":             "Key",
 		"partition_count": "PartitionCount",
