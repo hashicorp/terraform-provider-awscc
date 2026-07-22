@@ -28,6 +28,7 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the container recipe.",
+		//	  "pattern": "^arn:[^:]+:imagebuilder:[^:]+:[^:]+:container-recipe/.+$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/

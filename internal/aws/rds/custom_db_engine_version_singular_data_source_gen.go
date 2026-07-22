@@ -93,13 +93,13 @@ func customDBEngineVersionDataSource(ctx context.Context) (datasource.DataSource
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The database engine to use for your custom engine version (CEV).\n Valid values:\n  +   ``custom-oracle-ee`` \n  +   ``custom-oracle-ee-cdb``",
+		//	  "description": "The database engine to use for your custom engine version (CEV).\n Valid values:\n  +   ``custom-oracle-ee`` \n  +   ``custom-oracle-ee-cdb`` \n  +   ``sqlserver-dev-ee`` \n  +   ``sqlserver-ee`` \n  +   ``sqlserver-se``",
 		//	  "maxLength": 35,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The database engine to use for your custom engine version (CEV).\n Valid values:\n  +   ``custom-oracle-ee`` \n  +   ``custom-oracle-ee-cdb``",
+			Description: "The database engine to use for your custom engine version (CEV).\n Valid values:\n  +   ``custom-oracle-ee`` \n  +   ``custom-oracle-ee-cdb`` \n  +   ``sqlserver-dev-ee`` \n  +   ``sqlserver-ee`` \n  +   ``sqlserver-se``",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: EngineVersion

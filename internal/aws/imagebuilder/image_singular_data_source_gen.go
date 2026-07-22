@@ -28,6 +28,7 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the image.",
+		//	  "pattern": "^arn:[^:]+:imagebuilder:[^:]+:[^:]+:image/.+$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/

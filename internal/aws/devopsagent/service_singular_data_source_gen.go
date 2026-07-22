@@ -780,6 +780,33 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              ],
 		//	              "type": "object"
 		//	            },
+		//	            "BearerToken": {
+		//	              "additionalProperties": false,
+		//	              "description": "Bearer token authentication details",
+		//	              "properties": {
+		//	                "AuthorizationHeader": {
+		//	                  "default": "Authorization",
+		//	                  "description": "HTTP header name to send the bearer token",
+		//	                  "pattern": "^[a-zA-Z0-9-]+$",
+		//	                  "type": "string"
+		//	                },
+		//	                "TokenName": {
+		//	                  "description": "User friendly bearer token name",
+		//	                  "pattern": "^[a-zA-Z0-9_\\s-]+$",
+		//	                  "type": "string"
+		//	                },
+		//	                "TokenValue": {
+		//	                  "description": "Bearer token value",
+		//	                  "pattern": "^[\\S]+$",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "TokenName",
+		//	                "TokenValue"
+		//	              ],
+		//	              "type": "object"
+		//	            },
 		//	            "OAuthClientCredentials": {
 		//	              "additionalProperties": false,
 		//	              "description": "MCP server OAuth client credentials configuration",
@@ -1343,6 +1370,28 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "API key authentication details",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: BearerToken
+								"bearer_token": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AuthorizationHeader
+										"authorization_header": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "HTTP header name to send the bearer token",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: TokenName
+										"token_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "User friendly bearer token name",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: TokenValue
+										"token_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Bearer token value",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Bearer token authentication details",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: OAuthClientCredentials

@@ -28,6 +28,7 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//
 		//	{
 		//	  "description": "The Amazon Resource Name (ARN) of the image pipeline.",
+		//	  "pattern": "^arn:[^:]+:imagebuilder:[^:]+:[^:]+:image-pipeline/.+$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -317,6 +318,13 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	    "ScheduleExpression": {
 		//	      "description": "The expression determines how often EC2 Image Builder evaluates your pipelineExecutionStartCondition.",
 		//	      "type": "string"
+		//	    },
+		//	    "Timezone": {
+		//	      "description": "The timezone that applies to the scheduling expression, for example \"Etc/UTC\" or \"America/Los_Angeles\" in IANA timezone format. If not specified, this defaults to UTC.",
+		//	      "maxLength": 100,
+		//	      "minLength": 3,
+		//	      "pattern": "^[a-zA-Z0-9]{2,}(?:\\/[a-zA-Z0-9\\-_+]+)*$",
+		//	      "type": "string"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -343,6 +351,11 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 				// Property: ScheduleExpression
 				"schedule_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The expression determines how often EC2 Image Builder evaluates your pipelineExecutionStartCondition.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Timezone
+				"timezone": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The timezone that applies to the scheduling expression, for example \"Etc/UTC\" or \"America/Los_Angeles\" in IANA timezone format. If not specified, this defaults to UTC.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -527,6 +540,7 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		"status":                             "Status",
 		"tags":                               "Tags",
 		"timeout_minutes":                    "TimeoutMinutes",
+		"timezone":                           "Timezone",
 		"value":                              "Value",
 		"workflow_arn":                       "WorkflowArn",
 		"workflows":                          "Workflows",

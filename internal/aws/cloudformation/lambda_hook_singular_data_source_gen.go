@@ -35,6 +35,18 @@ func lambdaHookDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The typename alias for the hook.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: AutoUpdate
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": true,
+		//	  "description": "Whether to automatically update the extension in this account and Region when a new minor version is published by the extension publisher.",
+		//	  "type": "boolean"
+		//	}
+		"auto_update": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether to automatically update the extension in this account and Region when a new minor version is published by the extension publisher.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ExecutionRole
 		// CloudFormation resource type schema:
 		//
@@ -103,6 +115,50 @@ func lambdaHookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"lambda_function": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Amazon Resource Name (ARN), Partial ARN, name, version, or alias of the Lambda function to invoke with this hook.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: LoggingConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Contains logging configuration information for the hook.",
+		//	  "properties": {
+		//	    "LogGroupName": {
+		//	      "description": "The Amazon CloudWatch Logs group to which CloudFormation sends error logging information when invoking the extension's handlers.",
+		//	      "maxLength": 512,
+		//	      "minLength": 1,
+		//	      "pattern": "^[\\.\\-_/#A-Za-z0-9]+$",
+		//	      "type": "string"
+		//	    },
+		//	    "LogRoleArn": {
+		//	      "description": "The ARN of the role that CloudFormation should assume when sending log entries to CloudWatch Logs.",
+		//	      "maxLength": 256,
+		//	      "minLength": 1,
+		//	      "pattern": "arn:.+:iam::[0-9]{12}:role/.+",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "LogGroupName",
+		//	    "LogRoleArn"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"logging_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: LogGroupName
+				"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon CloudWatch Logs group to which CloudFormation sends error logging information when invoking the extension's handlers.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LogRoleArn
+				"log_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the role that CloudFormation should assume when sending log entries to CloudWatch Logs.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Contains logging configuration information for the hook.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: StackFilters
@@ -441,6 +497,7 @@ func lambdaHookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"action":             "Action",
 		"actions":            "Actions",
 		"alias":              "Alias",
+		"auto_update":        "AutoUpdate",
 		"exclude":            "Exclude",
 		"execution_role":     "ExecutionRole",
 		"failure_mode":       "FailureMode",
@@ -451,6 +508,9 @@ func lambdaHookDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"invocation_point":   "InvocationPoint",
 		"invocation_points":  "InvocationPoints",
 		"lambda_function":    "LambdaFunction",
+		"log_group_name":     "LogGroupName",
+		"log_role_arn":       "LogRoleArn",
+		"logging_config":     "LoggingConfig",
 		"stack_filters":      "StackFilters",
 		"stack_names":        "StackNames",
 		"stack_roles":        "StackRoles",

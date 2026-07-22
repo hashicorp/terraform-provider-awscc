@@ -261,6 +261,10 @@ func matchingWorkflowDataSource(ctx context.Context) (datasource.DataSource, err
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "EnableRealTimeMatching": {
+		//	      "description": "Enables the workflow to use real-time matching. Can only be set on creation for RULE_MATCHING workflows that define RuleConditionProperties.",
+		//	      "type": "boolean"
+		//	    },
 		//	    "ProviderProperties": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -409,6 +413,11 @@ func matchingWorkflowDataSource(ctx context.Context) (datasource.DataSource, err
 		//	}
 		"resolution_techniques": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EnableRealTimeMatching
+				"enable_real_time_matching": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Enables the workflow to use real-time matching. Can only be set on creation for RULE_MATCHING workflows that define RuleConditionProperties.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: ProviderProperties
 				"provider_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -631,6 +640,7 @@ func matchingWorkflowDataSource(ctx context.Context) (datasource.DataSource, err
 		"customer_profiles_integration_config": "CustomerProfilesIntegrationConfig",
 		"description":                          "Description",
 		"domain_arn":                           "DomainArn",
+		"enable_real_time_matching":            "EnableRealTimeMatching",
 		"enable_transitive_matching":           "EnableTransitiveMatching",
 		"hashed":                               "Hashed",
 		"incremental_run_config":               "IncrementalRunConfig",

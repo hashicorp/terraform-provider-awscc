@@ -8,6 +8,7 @@ package sagemaker
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -78,9 +79,11 @@ func algorithmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "A timestamp specifying when the algorithm was created.",
+		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
 			Description: "A timestamp specifying when the algorithm was created.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

@@ -82,7 +82,8 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	          "PredefinedMetricType": {
 		//	            "description": "The predefined metric type to track for scaling decisions.",
 		//	            "enum": [
-		//	              "LambdaCapacityProviderAverageCPUUtilization"
+		//	              "LambdaCapacityProviderAverageCPUUtilization",
+		//	              "LambdaCapacityProviderAverageGPUUtilization"
 		//	            ],
 		//	            "type": "string"
 		//	          },

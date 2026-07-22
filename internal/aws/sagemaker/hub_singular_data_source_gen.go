@@ -8,6 +8,7 @@ package sagemaker
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -28,9 +29,11 @@ func hubDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The date and time that the hub was created.",
+		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
 			Description: "The date and time that the hub was created.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -135,9 +138,11 @@ func hubDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The date and time that the hub was last modified.",
+		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
 		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  timetypes.RFC3339Type{},
 			Description: "The date and time that the hub was last modified.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

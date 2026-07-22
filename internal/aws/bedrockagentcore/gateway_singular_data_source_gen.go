@@ -144,6 +144,66 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "DiscoveryUrl": {
 		//	          "pattern": "^.+/\\.well-known/openid-configuration$",
 		//	          "type": "string"
+		//	        },
+		//	        "PrivateEndpoint": {
+		//	          "properties": {
+		//	            "ManagedVpcResource": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "EndpointIpAddressType": {
+		//	                  "enum": [
+		//	                    "IPV4",
+		//	                    "IPV6"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "RoutingDomain": {
+		//	                  "maxLength": 255,
+		//	                  "minLength": 3,
+		//	                  "type": "string"
+		//	                },
+		//	                "SecurityGroupIds": {
+		//	                  "items": {
+		//	                    "pattern": "^sg-(([0-9a-z]{8})|([0-9a-z]{17}))$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "maxItems": 5,
+		//	                  "minItems": 0,
+		//	                  "type": "array"
+		//	                },
+		//	                "SubnetIds": {
+		//	                  "items": {
+		//	                    "pattern": "^subnet-(([0-9a-z]{8})|([0-9a-z]{17}))$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "minItems": 1,
+		//	                  "type": "array"
+		//	                },
+		//	                "VpcIdentifier": {
+		//	                  "pattern": "^vpc-(([0-9a-z]{8})|([0-9a-z]{17}))$",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "EndpointIpAddressType",
+		//	                "SubnetIds",
+		//	                "VpcIdentifier"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "SelfManagedLatticeResource": {
+		//	              "properties": {
+		//	                "ResourceConfigurationIdentifier": {
+		//	                  "maxLength": 2048,
+		//	                  "minLength": 20,
+		//	                  "pattern": "^((rcfg-[0-9a-z]{17})|(arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceconfiguration/rcfg-[0-9a-z]{17}))$",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
 		//	        }
 		//	      },
 		//	      "required": [
@@ -224,6 +284,50 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: DiscoveryUrl
 						"discovery_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: PrivateEndpoint
+						"private_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ManagedVpcResource
+								"managed_vpc_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: EndpointIpAddressType
+										"endpoint_ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: RoutingDomain
+										"routing_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: SecurityGroupIds
+										"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: SubnetIds
+										"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: VpcIdentifier
+										"vpc_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: SelfManagedLatticeResource
+								"self_managed_lattice_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ResourceConfigurationIdentifier
+										"resource_configuration_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -706,55 +810,64 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::BedrockAgentCore::Gateway").WithTerraformTypeName("awscc_bedrockagentcore_gateway")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"allowed_audience":               "AllowedAudience",
-		"allowed_clients":                "AllowedClients",
-		"allowed_scopes":                 "AllowedScopes",
-		"arn":                            "Arn",
-		"authorizer_configuration":       "AuthorizerConfiguration",
-		"authorizer_type":                "AuthorizerType",
-		"authorizing_claim_match_value":  "AuthorizingClaimMatchValue",
-		"claim_match_operator":           "ClaimMatchOperator",
-		"claim_match_value":              "ClaimMatchValue",
-		"created_at":                     "CreatedAt",
-		"custom_claims":                  "CustomClaims",
-		"custom_jwt_authorizer":          "CustomJWTAuthorizer",
-		"description":                    "Description",
-		"discovery_url":                  "DiscoveryUrl",
-		"enable_response_streaming":      "EnableResponseStreaming",
-		"exception_level":                "ExceptionLevel",
-		"gateway_arn":                    "GatewayArn",
-		"gateway_identifier":             "GatewayIdentifier",
-		"gateway_url":                    "GatewayUrl",
-		"inbound_token_claim_name":       "InboundTokenClaimName",
-		"inbound_token_claim_value_type": "InboundTokenClaimValueType",
-		"input_configuration":            "InputConfiguration",
-		"instructions":                   "Instructions",
-		"interception_points":            "InterceptionPoints",
-		"interceptor":                    "Interceptor",
-		"interceptor_configurations":     "InterceptorConfigurations",
-		"kms_key_arn":                    "KmsKeyArn",
-		"lambda":                         "Lambda",
-		"match_value_string":             "MatchValueString",
-		"match_value_string_list":        "MatchValueStringList",
-		"mcp":                            "Mcp",
-		"mode":                           "Mode",
-		"name":                           "Name",
-		"pass_request_headers":           "PassRequestHeaders",
-		"policy_engine_configuration":    "PolicyEngineConfiguration",
-		"protocol_configuration":         "ProtocolConfiguration",
-		"protocol_type":                  "ProtocolType",
-		"role_arn":                       "RoleArn",
-		"search_type":                    "SearchType",
-		"session_configuration":          "SessionConfiguration",
-		"session_timeout_in_seconds":     "SessionTimeoutInSeconds",
-		"status":                         "Status",
-		"status_reasons":                 "StatusReasons",
-		"streaming_configuration":        "StreamingConfiguration",
-		"supported_versions":             "SupportedVersions",
-		"tags":                           "Tags",
-		"updated_at":                     "UpdatedAt",
-		"workload_identity_arn":          "WorkloadIdentityArn",
-		"workload_identity_details":      "WorkloadIdentityDetails",
+		"allowed_audience":                  "AllowedAudience",
+		"allowed_clients":                   "AllowedClients",
+		"allowed_scopes":                    "AllowedScopes",
+		"arn":                               "Arn",
+		"authorizer_configuration":          "AuthorizerConfiguration",
+		"authorizer_type":                   "AuthorizerType",
+		"authorizing_claim_match_value":     "AuthorizingClaimMatchValue",
+		"claim_match_operator":              "ClaimMatchOperator",
+		"claim_match_value":                 "ClaimMatchValue",
+		"created_at":                        "CreatedAt",
+		"custom_claims":                     "CustomClaims",
+		"custom_jwt_authorizer":             "CustomJWTAuthorizer",
+		"description":                       "Description",
+		"discovery_url":                     "DiscoveryUrl",
+		"enable_response_streaming":         "EnableResponseStreaming",
+		"endpoint_ip_address_type":          "EndpointIpAddressType",
+		"exception_level":                   "ExceptionLevel",
+		"gateway_arn":                       "GatewayArn",
+		"gateway_identifier":                "GatewayIdentifier",
+		"gateway_url":                       "GatewayUrl",
+		"inbound_token_claim_name":          "InboundTokenClaimName",
+		"inbound_token_claim_value_type":    "InboundTokenClaimValueType",
+		"input_configuration":               "InputConfiguration",
+		"instructions":                      "Instructions",
+		"interception_points":               "InterceptionPoints",
+		"interceptor":                       "Interceptor",
+		"interceptor_configurations":        "InterceptorConfigurations",
+		"kms_key_arn":                       "KmsKeyArn",
+		"lambda":                            "Lambda",
+		"managed_vpc_resource":              "ManagedVpcResource",
+		"match_value_string":                "MatchValueString",
+		"match_value_string_list":           "MatchValueStringList",
+		"mcp":                               "Mcp",
+		"mode":                              "Mode",
+		"name":                              "Name",
+		"pass_request_headers":              "PassRequestHeaders",
+		"policy_engine_configuration":       "PolicyEngineConfiguration",
+		"private_endpoint":                  "PrivateEndpoint",
+		"protocol_configuration":            "ProtocolConfiguration",
+		"protocol_type":                     "ProtocolType",
+		"resource_configuration_identifier": "ResourceConfigurationIdentifier",
+		"role_arn":                          "RoleArn",
+		"routing_domain":                    "RoutingDomain",
+		"search_type":                       "SearchType",
+		"security_group_ids":                "SecurityGroupIds",
+		"self_managed_lattice_resource":     "SelfManagedLatticeResource",
+		"session_configuration":             "SessionConfiguration",
+		"session_timeout_in_seconds":        "SessionTimeoutInSeconds",
+		"status":                            "Status",
+		"status_reasons":                    "StatusReasons",
+		"streaming_configuration":           "StreamingConfiguration",
+		"subnet_ids":                        "SubnetIds",
+		"supported_versions":                "SupportedVersions",
+		"tags":                              "Tags",
+		"updated_at":                        "UpdatedAt",
+		"vpc_identifier":                    "VpcIdentifier",
+		"workload_identity_arn":             "WorkloadIdentityArn",
+		"workload_identity_details":         "WorkloadIdentityDetails",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)
