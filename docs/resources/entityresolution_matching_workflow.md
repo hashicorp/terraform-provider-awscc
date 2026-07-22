@@ -90,6 +90,7 @@ Optional:
 
 Optional:
 
+- `enable_real_time_matching` (Boolean) Enables the workflow to use real-time matching. Can only be set on creation for RULE_MATCHING workflows that define RuleConditionProperties.
 - `provider_properties` (Attributes) (see [below for nested schema](#nestedatt--resolution_techniques--provider_properties))
 - `resolution_type` (String)
 - `rule_based_properties` (Attributes) (see [below for nested schema](#nestedatt--resolution_techniques--rule_based_properties))

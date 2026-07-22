@@ -1,5 +1,88 @@
 ## 1.94.0 (Unreleased)
 
+FEATURES:
+
+* **New Data Source:** `awscc_auditmanager_assessment_framework`
+* **New Data Source:** `awscc_auditmanager_assessment_frameworks`
+* **New Data Source:** `awscc_bedrock_knowledge_base_policy`
+* **New Data Source:** `awscc_cloudformation_generated_template`
+* **New Data Source:** `awscc_cloudformation_generated_templates`
+* **New Data Source:** `awscc_dms_certificate`
+* **New Data Source:** `awscc_dms_certificates`
+* **New Data Source:** `awscc_docdb_event_subscription`
+* **New Data Source:** `awscc_docdb_event_subscriptions`
+* **New Data Source:** `awscc_ec2_transit_gateway_policy_table_association`
+* **New Data Source:** `awscc_glue_blueprint`
+* **New Data Source:** `awscc_glue_blueprints`
+* **New Data Source:** `awscc_glue_user_defined_function`
+* **New Data Source:** `awscc_healthlake_data_transformation_profile`
+* **New Data Source:** `awscc_quicksight_knowledge_base`
+* **New Data Source:** `awscc_quicksight_knowledge_bases`
+* **New Data Source:** `awscc_sagemaker_action`
+* **New Data Source:** `awscc_sagemaker_actions`
+* **New Data Source:** `awscc_sagemaker_context`
+* **New Data Source:** `awscc_sagemaker_contexts`
+* **New Data Source:** `awscc_sagemaker_experiment`
+* **New Data Source:** `awscc_sagemaker_experiment_trial_component`
+* **New Data Source:** `awscc_sagemaker_experiment_trial_components`
+* **New Data Source:** `awscc_sagemaker_experiments`
+* **New Data Source:** `awscc_sagemaker_trial_component`
+* **New Data Source:** `awscc_sagemaker_trial_components`
+* **New Data Source:** `awscc_smsvoice_registration`
+* **New Data Source:** `awscc_smsvoice_registrations`
+* **New Data Source:** `awscc_storagegateway_tape_pool`
+* **New Data Source:** `awscc_storagegateway_tape_pools`
+* **New Data Source:** `awscc_transcribe_vocabulary_filter`
+* **New Data Source:** `awscc_transcribe_vocabulary_filters`
+* **New Data Source:** `awscc_wellarchitected_lens`
+* **New Data Source:** `awscc_wellarchitected_lenses`
+* **New Data Source:** `awscc_wellarchitected_profile`
+* **New Data Source:** `awscc_wellarchitected_profiles`
+* **New Data Source:** `awscc_wellarchitected_review_template`
+* **New Data Source:** `awscc_wellarchitected_review_templates`
+* **New Data Source:** `awscc_workspaces_workspace_ip_group`
+* **New Data Source:** `awscc_workspaces_workspace_ip_groups`
+* **New List Resource:** `awscc_auditmanager_assessment_framework`
+* **New List Resource:** `awscc_cloudformation_generated_template`
+* **New List Resource:** `awscc_dms_certificate`
+* **New List Resource:** `awscc_docdb_event_subscription`
+* **New List Resource:** `awscc_glue_blueprint`
+* **New List Resource:** `awscc_quicksight_knowledge_base`
+* **New List Resource:** `awscc_sagemaker_action`
+* **New List Resource:** `awscc_sagemaker_context`
+* **New List Resource:** `awscc_sagemaker_experiment`
+* **New List Resource:** `awscc_sagemaker_experiment_trial_component`
+* **New List Resource:** `awscc_sagemaker_trial_component`
+* **New List Resource:** `awscc_smsvoice_registration`
+* **New List Resource:** `awscc_storagegateway_tape_pool`
+* **New List Resource:** `awscc_transcribe_vocabulary_filter`
+* **New List Resource:** `awscc_wellarchitected_lens`
+* **New List Resource:** `awscc_wellarchitected_profile`
+* **New List Resource:** `awscc_wellarchitected_review_template`
+* **New List Resource:** `awscc_workspaces_workspace_ip_group`
+* **New Resource:** `awscc_auditmanager_assessment_framework`
+* **New Resource:** `awscc_bedrock_knowledge_base_policy`
+* **New Resource:** `awscc_cloudformation_generated_template`
+* **New Resource:** `awscc_dms_certificate`
+* **New Resource:** `awscc_docdb_event_subscription`
+* **New Resource:** `awscc_ec2_transit_gateway_policy_table_association`
+* **New Resource:** `awscc_glue_blueprint`
+* **New Resource:** `awscc_glue_user_defined_function`
+* **New Resource:** `awscc_healthlake_data_transformation_profile`
+* **New Resource:** `awscc_quicksight_knowledge_base`
+* **New Resource:** `awscc_sagemaker_action`
+* **New Resource:** `awscc_sagemaker_context`
+* **New Resource:** `awscc_sagemaker_experiment`
+* **New Resource:** `awscc_sagemaker_experiment_trial_component`
+* **New Resource:** `awscc_sagemaker_trial_component`
+* **New Resource:** `awscc_smsvoice_registration`
+* **New Resource:** `awscc_storagegateway_tape_pool`
+* **New Resource:** `awscc_transcribe_vocabulary_filter`
+* **New Resource:** `awscc_wellarchitected_lens`
+* **New Resource:** `awscc_wellarchitected_profile`
+* **New Resource:** `awscc_wellarchitected_review_template`
+* **New Resource:** `awscc_workspaces_workspace_ip_group`
+
 ## 1.93.0 (July 15, 2026)
 
 FEATURES:

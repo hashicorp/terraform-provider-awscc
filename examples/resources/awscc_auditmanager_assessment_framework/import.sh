@@ -1,0 +1,1 @@
+$ terraform import awscc_auditmanager_assessment_framework.example "arn"

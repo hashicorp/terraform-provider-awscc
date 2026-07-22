@@ -21,6 +21,7 @@ Data Source schema for AWS::EC2::PlacementGroup
 
 ### Read-Only
 
+- `group_id` (String) The ID of the placement group.
 - `group_name` (String) The Group Name of Placement Group.
 - `partition_count` (Number) The number of partitions. Valid only when **Strategy** is set to `partition`
 - `spread_level` (String) The Spread Level of Placement Group is an enum where it accepts either host or rack when strategy is spread

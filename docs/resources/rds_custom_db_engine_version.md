@@ -20,7 +20,10 @@ Creates a custom DB engine version (CEV).
 - `engine` (String) The database engine to use for your custom engine version (CEV).
  Valid values:
   +   ``custom-oracle-ee`` 
-  +   ``custom-oracle-ee-cdb``
+  +   ``custom-oracle-ee-cdb`` 
+  +   ``sqlserver-dev-ee`` 
+  +   ``sqlserver-ee`` 
+  +   ``sqlserver-se``
 - `engine_version` (String) The name of your CEV. The name format is ``major version.customized_string``. For example, a valid CEV name is ``19.my_cev1``. This setting is required for RDS Custom for Oracle, but optional for Amazon RDS. The combination of ``Engine`` and ``EngineVersion`` is unique per customer per Region.
  *Constraints:* Minimum length is 1. Maximum length is 60.
  *Pattern:*``^[a-z0-9_.-]{1,60$``}

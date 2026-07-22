@@ -25,12 +25,14 @@ Resource Type definition for AWS::Config::OrganizationConformancePack.
 - `delivery_s3_bucket` (String) AWS Config stores intermediate files while processing conformance pack template.
 - `delivery_s3_key_prefix` (String) The prefix for the delivery S3 bucket.
 - `excluded_accounts` (List of String) A list of AWS accounts to be excluded from an organization conformance pack while deploying a conformance pack.
+- `tags` (Attributes List) The tags for the organization conformance pack. (see [below for nested schema](#nestedatt--tags))
 - `template_body` (String) A string containing full conformance pack template body.
 - `template_s3_uri` (String) Location of file containing the template body.
 
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+- `organization_conformance_pack_arn` (String) Amazon Resource Name (ARN) of the organization conformance pack.
 
 <a id="nestedatt--conformance_pack_input_parameters"></a>
 ### Nested Schema for `conformance_pack_input_parameters`
@@ -39,6 +41,15 @@ Optional:
 
 - `parameter_name` (String)
 - `parameter_value` (String)
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

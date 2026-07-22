@@ -34,6 +34,7 @@ Data Source schema for AWS::Cognito::UserPoolDomain
 Read-Only:
 
 - `certificate_arn` (String)
+- `security_policy` (String)
 
 
 <a id="nestedatt--routing"></a>

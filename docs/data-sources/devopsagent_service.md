@@ -234,6 +234,7 @@ Read-Only:
 Read-Only:
 
 - `api_key` (Attributes) API key authentication details (see [below for nested schema](#nestedatt--service_details--mcp_server--authorization_config--api_key))
+- `bearer_token` (Attributes) Bearer token authentication details (see [below for nested schema](#nestedatt--service_details--mcp_server--authorization_config--bearer_token))
 - `o_auth_client_credentials` (Attributes) MCP server OAuth client credentials configuration (see [below for nested schema](#nestedatt--service_details--mcp_server--authorization_config--o_auth_client_credentials))
 
 <a id="nestedatt--service_details--mcp_server--authorization_config--api_key"></a>
@@ -244,6 +245,16 @@ Read-Only:
 - `api_key_header` (String) HTTP header name to send the API key
 - `api_key_name` (String) User friendly API key name
 - `api_key_value` (String) API key value
+
+
+<a id="nestedatt--service_details--mcp_server--authorization_config--bearer_token"></a>
+### Nested Schema for `service_details.mcp_server.authorization_config.bearer_token`
+
+Read-Only:
+
+- `authorization_header` (String) HTTP header name to send the bearer token
+- `token_name` (String) User friendly bearer token name
+- `token_value` (String) Bearer token value
 
 
 <a id="nestedatt--service_details--mcp_server--authorization_config--o_auth_client_credentials"></a>

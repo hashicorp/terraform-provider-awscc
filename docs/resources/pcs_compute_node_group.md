@@ -52,6 +52,7 @@ resource "awscc_pcs_compute_node_group" "login" {
 
 - `ami_id` (String) The ID of the Amazon Machine Image (AMI) that AWS PCS uses to launch instances. If not provided, AWS PCS uses the AMI ID specified in the custom launch template.
 - `name` (String) The name that identifies the compute node group.
+- `node_lifecycle_actions` (Attributes) Custom scripts that run at defined points in a compute node's lifecycle. (see [below for nested schema](#nestedatt--node_lifecycle_actions))
 - `purchase_option` (String) Specifies how EC2 instances are purchased on your behalf. AWS PCS supports On-Demand, Spot, Capacity Block, and Interruptible Capacity Reservation instances. For more information, see Instance purchasing options in the Amazon Elastic Compute Cloud User Guide. If you don't provide this option, it defaults to On-Demand.
 - `slurm_configuration` (Attributes) Additional options related to the Slurm scheduler. (see [below for nested schema](#nestedatt--slurm_configuration))
 - `spot_options` (Attributes) Additional configuration when you specify SPOT as the purchase option. (see [below for nested schema](#nestedatt--spot_options))
@@ -92,6 +93,68 @@ Required:
 
 - `max_instance_count` (Number) The upper bound of the number of instances allowed in the compute fleet.
 - `min_instance_count` (Number) The lower bound of the number of instances allowed in the compute fleet.
+
+
+<a id="nestedatt--node_lifecycle_actions"></a>
+### Nested Schema for `node_lifecycle_actions`
+
+Optional:
+
+- `script_caching_policy` (String) Controls whether lifecycle scripts are downloaded once at first boot (CACHE_ONCE) or re-downloaded on every reboot (REFRESH_ON_REBOOT). Defaults to CACHE_ONCE.
+- `stages` (Attributes) The ordered scripts to run at each compute node lifecycle stage. (see [below for nested schema](#nestedatt--node_lifecycle_actions--stages))
+
+<a id="nestedatt--node_lifecycle_actions--stages"></a>
+### Nested Schema for `node_lifecycle_actions.stages`
+
+Optional:
+
+- `node_bootstrapped` (Attributes List) Scripts to run after the node is bootstrapped, once the PCS configuration phase completes and before slurmd starts. (see [below for nested schema](#nestedatt--node_lifecycle_actions--stages--node_bootstrapped))
+- `node_ready` (Attributes List) Scripts to execute when the node becomes ready (every boot). (see [below for nested schema](#nestedatt--node_lifecycle_actions--stages--node_ready))
+
+<a id="nestedatt--node_lifecycle_actions--stages--node_bootstrapped"></a>
+### Nested Schema for `node_lifecycle_actions.stages.node_bootstrapped`
+
+Optional:
+
+- `arguments` (List of String) An ordered list of arguments passed to the script.
+- `execution_policy` (String) Whether the script runs only on the node's first boot (FIRST_BOOT_ONLY) or on every boot including reboots (EVERY_BOOT). Defaults to FIRST_BOOT_ONLY.
+- `name` (String) A human-readable name that identifies the script.
+- `on_error` (String) The behavior when the script exits with an error. Defaults to TERMINATE.
+- `script_source` (Attributes) The external location of a lifecycle script. (see [below for nested schema](#nestedatt--node_lifecycle_actions--stages--node_bootstrapped--script_source))
+
+<a id="nestedatt--node_lifecycle_actions--stages--node_bootstrapped--script_source"></a>
+### Nested Schema for `node_lifecycle_actions.stages.node_bootstrapped.script_source`
+
+Optional:
+
+- `checksum` (String) A 64-character hexadecimal SHA-256 digest used to verify script integrity.
+- `s3_version_id` (String) The S3 object version ID of the script, when stored in a versioned bucket.
+- `script_location` (String) The S3 URI or HTTPS URL where the script is stored.
+
+
+
+<a id="nestedatt--node_lifecycle_actions--stages--node_ready"></a>
+### Nested Schema for `node_lifecycle_actions.stages.node_ready`
+
+Optional:
+
+- `arguments` (List of String) An ordered list of arguments passed to the script.
+- `execution_policy` (String) Whether the script runs only on the node's first boot (FIRST_BOOT_ONLY) or on every boot including reboots (EVERY_BOOT). Defaults to FIRST_BOOT_ONLY.
+- `name` (String) A human-readable name that identifies the script.
+- `on_error` (String) The behavior when the script exits with an error. Defaults to TERMINATE.
+- `script_source` (Attributes) The external location of a lifecycle script. (see [below for nested schema](#nestedatt--node_lifecycle_actions--stages--node_ready--script_source))
+
+<a id="nestedatt--node_lifecycle_actions--stages--node_ready--script_source"></a>
+### Nested Schema for `node_lifecycle_actions.stages.node_ready.script_source`
+
+Optional:
+
+- `checksum` (String) A 64-character hexadecimal SHA-256 digest used to verify script integrity.
+- `s3_version_id` (String) The S3 object version ID of the script, when stored in a versioned bucket.
+- `script_location` (String) The S3 URI or HTTPS URL where the script is stored.
+
+
+
 
 
 <a id="nestedatt--slurm_configuration"></a>

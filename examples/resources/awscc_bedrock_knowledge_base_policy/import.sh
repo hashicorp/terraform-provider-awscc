@@ -1,0 +1,1 @@
+$ terraform import awscc_bedrock_knowledge_base_policy.example "knowledge_base_id"

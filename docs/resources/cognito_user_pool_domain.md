@@ -78,6 +78,7 @@ resource "awscc_cognito_user_pool_domain" "example" {
 Optional:
 
 - `certificate_arn` (String)
+- `security_policy` (String)
 
 
 <a id="nestedatt--routing"></a>
