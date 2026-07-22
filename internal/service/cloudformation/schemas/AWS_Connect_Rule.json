@@ -31,7 +31,8 @@
       "type": "object",
       "properties": {
         "StringValue": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         }
       },
       "additionalProperties": false
@@ -481,14 +482,14 @@
       "type": "object",
       "properties": {
         "SlaAssignmentType": {
-          "description": "The type of SLA assignment.",
+          "description": "",
           "type": "string",
           "enum": [
             "CASES"
           ]
         },
         "CaseSlaConfiguration": {
-          "description": "The SLA configuration for cases.",
+          "description": "",
           "type": "object",
           "properties": {
             "Type": {

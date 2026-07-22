@@ -14,6 +14,9 @@
       "properties": {
         "CertificateArn": {
           "type": "string"
+        },
+        "SecurityPolicy": {
+          "type": "string"
         }
       },
       "additionalProperties": false

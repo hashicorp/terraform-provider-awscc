@@ -71,10 +71,12 @@
     },
     "CreationTime": {
       "type": "string",
+      "format": "date-time",
       "description": "The date and time that the hub was created."
     },
     "LastModifiedTime": {
       "type": "string",
+      "format": "date-time",
       "description": "The date and time that the hub was last modified."
     },
     "Tags": {

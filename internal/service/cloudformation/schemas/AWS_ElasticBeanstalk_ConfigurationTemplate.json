@@ -171,11 +171,7 @@
     },
     "list": {
       "permissions": [
-        "elasticbeanstalk:DescribeApplications",
-        "s3:ListBucket",
-        "s3:GetObject",
-        "s3:GetBucketLocation",
-        "s3:GetBucketPolicy"
+        "elasticbeanstalk:DescribeApplications"
       ]
     }
   }

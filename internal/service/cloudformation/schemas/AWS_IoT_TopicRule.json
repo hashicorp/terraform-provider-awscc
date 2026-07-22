@@ -995,7 +995,9 @@
   ],
   "deprecatedProperties": [
     "/properties/TopicRulePayload/ErrorAction/IotAnalytics",
-    "/properties/TopicRulePayload/Actions/*/IotAnalytics"
+    "/properties/TopicRulePayload/Actions/*/IotAnalytics",
+    "/properties/TopicRulePayload/ErrorAction/IotEvents",
+    "/properties/TopicRulePayload/Actions/*/IotEvents"
   ],
   "handlers": {
     "create": {

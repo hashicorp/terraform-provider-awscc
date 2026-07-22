@@ -190,6 +190,14 @@
             "1x"
           ]
         },
+        "DataType": {
+          "type": "string",
+          "description": "The data type for knn_vector fields (e.g. float, byte). Controls how vector values are stored.",
+          "enum": [
+            "float",
+            "byte"
+          ]
+        },
         "Value": {
           "type": "string",
           "description": "Default value for the field when not specified in a document"

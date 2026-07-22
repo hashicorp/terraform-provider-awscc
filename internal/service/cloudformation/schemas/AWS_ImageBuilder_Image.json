@@ -22,7 +22,7 @@
     "/properties/LatestVersion/Minor",
     "/properties/LatestVersion/Patch"
   ],
-  "description": "Resource schema for AWS::ImageBuilder::Image",
+  "description": "Resource Type definition for AWS::ImageBuilder::Image",
   "createOnlyProperties": [
     "/properties/ImageRecipeArn",
     "/properties/ContainerRecipeArn",
@@ -398,6 +398,7 @@
       "$ref": "#/definitions/ImageTestsConfiguration"
     },
     "Arn": {
+      "pattern": "^arn:[^:]+:imagebuilder:[^:]+:[^:]+:image/.+$",
       "description": "The Amazon Resource Name (ARN) of the image.",
       "type": "string"
     },
