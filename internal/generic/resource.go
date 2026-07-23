@@ -125,6 +125,34 @@ func resourceIsImmutableType(v bool) ResourceOptionsFunc {
 
 // resourceWithWriteOnlyPropertyPaths is a helper function to construct functional options
 // that set a resource type's write-only property paths (JSON Pointer).
+// resourceWithUpdateIgnorePropertyPaths is a helper function to construct functional options
+// that set paths to be excluded from both sides of the Update patch diff.
+// Use for Optional+Computed attributes where the CloudControl handler persists a value
+// that violates its own schema constraints (e.g. empty arrays for minItems>0 fields),
+// causing UpdateResource to fail with a ValidationException on any subsequent update
+// even when the patch does not touch those fields.
+// If multiple resourceWithUpdateIgnorePropertyPaths calls are made, the last call overrides
+// the previous calls' values.
+func resourceWithUpdateIgnorePropertyPaths(v []string) ResourceOptionsFunc {
+	return func(o *genericResource) error {
+		updateIgnoreAttributePaths := make([]*path.Path, 0)
+
+		for _, propertyPath := range v {
+			attributePath, err := o.propertyPathToAttributePath(propertyPath)
+
+			if err != nil {
+				continue
+			}
+
+			updateIgnoreAttributePaths = append(updateIgnoreAttributePaths, attributePath)
+		}
+
+		o.updateIgnoreAttributePaths = updateIgnoreAttributePaths
+
+		return nil
+	}
+}
+
 // If multiple resourceWithWriteOnlyPropertyPaths calls are made, the last call overrides
 // the previous calls' values.
 func resourceWithWriteOnlyPropertyPaths(v []string) ResourceOptionsFunc {
@@ -281,6 +309,13 @@ func (opts ResourceOptions) WithWriteOnlyPropertyPaths(v []string) ResourceOptio
 	return append(opts, resourceWithWriteOnlyPropertyPaths(v))
 }
 
+// WithUpdateIgnorePropertyPaths is a helper function to construct functional options
+// that exclude specified paths from both sides of the Update patch diff.
+// It is intended to be chained with other similar helper functions in a builder pattern.
+func (opts ResourceOptions) WithUpdateIgnorePropertyPaths(v []string) ResourceOptions {
+	return append(opts, resourceWithUpdateIgnorePropertyPaths(v))
+}
+
 // WithCreateTimeoutInMinutes is a helper function to construct functional options
 // that set a resource type's create timeout, append that function to the
 // current slice of functional options and return the new slice of options.
@@ -349,8 +384,9 @@ type genericResource struct {
 	tfTypeName              string                     // Terraform type name for resource type
 	tfToCfNameMap           map[string]string          // Map of Terraform attribute name to CloudFormation property name
 	cfToTfNameMap           map[string]string          // Map of CloudFormation property name to Terraform attribute name
-	isImmutableType         bool                       // Resources cannot be updated and must be recreated
-	writeOnlyAttributePaths []*path.Path               // Paths to any write-only attributes
+	isImmutableType            bool                       // Resources cannot be updated and must be recreated
+	writeOnlyAttributePaths    []*path.Path               // Paths to any write-only attributes
+	updateIgnoreAttributePaths []*path.Path               // Paths excluded from both sides of Update patch diff
 	createTimeout           time.Duration              // Maximum wait time for resource creation
 	updateTimeout           time.Duration              // Maximum wait time for resource update
 	deleteTimeout           time.Duration              // Maximum wait time for resource deletion
@@ -640,6 +676,39 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 		if err != nil {
 			response.Diagnostics.Append(DesiredStateErrorDiag("Prior State", err))
 
+			return
+		}
+	}
+
+	// Clear paths that must be excluded from both sides of the Update patch diff.
+	// This prevents CloudControl from receiving patch operations for attributes whose
+	// stored values violate schema constraints (e.g. empty arrays for minItems>0 fields).
+	if len(r.updateIgnoreAttributePaths) > 0 {
+		nullifyPaths := func(raw tftypes.Value, s typeAtTerraformPather) (tftypes.Value, error) {
+			return tftypes.Transform(raw, func(tfPath *tftypes.AttributePath, val tftypes.Value) (tftypes.Value, error) {
+				if len(tfPath.Steps()) < 1 {
+					return val, nil
+				}
+				attrPath, diags := attributePath(ctx, tfPath, s)
+				if diags.HasError() {
+					return val, ccdiag.DiagnosticsError(diags)
+				}
+				for _, ignorePath := range r.updateIgnoreAttributePaths {
+					if ignorePath.Equal(attrPath) {
+						return tftypes.NewValue(val.Type(), nil), nil
+					}
+				}
+				return val, nil
+			})
+		}
+		currentStateRaw, err = nullifyPaths(currentStateRaw, currentState.Schema)
+		if err != nil {
+			response.Diagnostics.Append(DesiredStateErrorDiag("Prior State", err))
+			return
+		}
+		request.Plan.Raw, err = nullifyPaths(request.Plan.Raw, request.Plan.Schema)
+		if err != nil {
+			response.Diagnostics.Append(DesiredStateErrorDiag("Plan", err))
 			return
 		}
 	}

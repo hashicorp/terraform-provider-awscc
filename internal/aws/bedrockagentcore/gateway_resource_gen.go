@@ -1271,6 +1271,15 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
+	// The CloudControl handler for AWS::BedrockAgentCore::Gateway persists AllowedClients
+	// and AllowedScopes as [] when not set at creation time. UpdateResource re-validates the
+	// full stored model on every call, and [] fails minItems:1, blocking all updates.
+	// Excluding authorizer_configuration from the Update patch diff prevents this.
+	// Tracked upstream: https://github.com/aws-cloudformation/cloudformation-coverage-roadmap/issues/2528
+	opts = opts.WithUpdateIgnorePropertyPaths([]string{
+		"/properties/AuthorizerConfiguration",
+	})
+
 	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
