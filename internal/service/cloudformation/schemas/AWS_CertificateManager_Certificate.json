@@ -1,0 +1,174 @@
+{
+  "typeName": "AWS::CertificateManager::Certificate",
+  "description": "Resource Type definition for AWS::CertificateManager::Certificate",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-acmpca",
+  "additionalProperties": false,
+  "properties": {
+    "CertificateArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the private certificate authority (CA) that will be used to issue the certificate."
+    },
+    "CertificateAuthorityArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the private certificate authority (CA) that will be used to issue the certificate."
+    },
+    "CertificateTransparencyLoggingPreference": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ],
+      "description": "You can opt out of certificate transparency logging by specifying the DISABLED option. Opt in by specifying ENABLED."
+    },
+    "DomainName": {
+      "type": "string",
+      "description": "The fully qualified domain name (FQDN), such as www.example.com, with which you want to secure an ACM certificate"
+    },
+    "DomainValidationOptions": {
+      "type": "array",
+      "description": "Domain information that domain name registrars use to verify your identity.",
+      "items": {
+        "$ref": "#/definitions/DomainValidationOption"
+      }
+    },
+    "KeyAlgorithm": {
+      "type": "string",
+      "description": "Specifies the algorithm of the public and private key pair that your certificate uses to encrypt data."
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Key-value pairs that can identify the certificate.",
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "SubjectAlternativeNames": {
+      "type": "array",
+      "description": "Additional FQDNs to be included in the Subject Alternative Name extension of the ACM certificate.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "ValidationMethod": {
+      "type": "string",
+      "description": "The method you want to use to validate that you own or control the domain associated with a public certificate. Valid values are DNS, EMAIL or HTTP"
+    },
+    "CertificateExport": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ],
+      "description": "Specifies whether the certificate can be exported. ENABLED allows the certificate to be exported, DISABLED prevents export."
+    }
+  },
+  "definitions": {
+    "DomainValidationOption": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "DomainName": {
+          "type": "string"
+        },
+        "ValidationDomain": {
+          "type": "string"
+        },
+        "HostedZoneId": {
+          "type": "string"
+        }
+      }
+    },
+    "Tag": {
+      "description": "A tag is a key-value pair that is used to manage the resource.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Value": {
+          "description": "The tag's value.",
+          "type": "string"
+        },
+        "Key": {
+          "description": "The tag's key.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "acm:AddTagsToCertificate",
+      "acm:RemoveTagsFromCertificate"
+    ]
+  },
+  "required": [
+    "DomainName"
+  ],
+  "createOnlyProperties": [
+    "/properties/SubjectAlternativeNames",
+    "/properties/DomainValidationOptions",
+    "/properties/ValidationMethod",
+    "/properties/KeyAlgorithm",
+    "/properties/DomainName",
+    "/properties/CertificateAuthorityArn",
+    "/properties/CertificateExport"
+  ],
+  "writeOnlyProperties": [
+    "/properties/DomainValidationOptions/*/HostedZoneId",
+    "/properties/ValidationMethod"
+  ],
+  "readOnlyProperties": [
+    "/properties/CertificateArn"
+  ],
+  "primaryIdentifier": [
+    "/properties/CertificateArn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "acm:RequestCertificate",
+        "acm:DescribeCertificate",
+        "route53:ChangeResourceRecordSets",
+        "acm:AddTagsToCertificate",
+        "acm-pca:IssueCertificate",
+        "acm-pca:GetCertificate"
+      ],
+      "timeoutInMinutes": 2160
+    },
+    "read": {
+      "permissions": [
+        "acm:DescribeCertificate",
+        "acm:ListTagsForCertificate"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "acm:UpdateCertificateOptions",
+        "acm:AddTagsToCertificate",
+        "acm:RemoveTagsFromCertificate"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "acm:DeleteCertificate",
+        "acm:DescribeCertificate",
+        "acm:RemoveTagsFromCertificate"
+      ],
+      "timeoutInMinutes": 120
+    },
+    "list": {
+      "permissions": [
+        "acm:ListCertificates"
+      ]
+    }
+  }
+}

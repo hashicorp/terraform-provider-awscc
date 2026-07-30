@@ -1,0 +1,159 @@
+{
+  "typeName": "AWS::SCN::Namespace",
+  "description": "Definition of AWS::SCN::Namespace Resource Type",
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the namespace.",
+      "minLength": 20,
+      "maxLength": 1011,
+      "pattern": "^arn:aws:scn(?::([a-z0-9-]+):([0-9]+):instance)?/([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})[-_./A-Za-z0-9]*$"
+    },
+    "InstanceId": {
+      "type": "string",
+      "description": "The Amazon Web Services Supply Chain instance identifier.",
+      "minLength": 36,
+      "maxLength": 36,
+      "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the namespace.",
+      "minLength": 1,
+      "maxLength": 50,
+      "pattern": "^[a-z0-9_]+$"
+    },
+    "Description": {
+      "type": "string",
+      "description": "The description of the namespace.",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "CreatedTime": {
+      "type": "string",
+      "description": "The creation time of the namespace.",
+      "format": "date-time"
+    },
+    "LastModifiedTime": {
+      "type": "string",
+      "description": "The last modified time of the namespace.",
+      "format": "date-time"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags for the namespace.",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 200
+    }
+  },
+  "required": [
+    "InstanceId",
+    "Name"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/CreatedTime",
+    "/properties/LastModifiedTime"
+  ],
+  "createOnlyProperties": [
+    "/properties/InstanceId",
+    "/properties/Name"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/InstanceId",
+      "/properties/Name"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "scn:TagResource",
+      "scn:UntagResource",
+      "scn:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "scn:CreateDataLakeNamespace",
+        "scn:GetDataLakeNamespace",
+        "scn:TagResource",
+        "scn:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "scn:GetDataLakeNamespace",
+        "scn:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "scn:UpdateDataLakeNamespace",
+        "scn:GetDataLakeNamespace",
+        "scn:TagResource",
+        "scn:UntagResource",
+        "scn:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "scn:DeleteDataLakeNamespace",
+        "scn:GetDataLakeNamespace"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "InstanceId": {
+            "type": "string",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+          }
+        },
+        "required": [
+          "InstanceId"
+        ]
+      },
+      "permissions": [
+        "scn:ListDataLakeNamespaces"
+      ]
+    }
+  }
+}

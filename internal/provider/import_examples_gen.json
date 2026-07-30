@@ -584,6 +584,11 @@
         "identifier": ["TieringConfigurationName"]
     },
     {
+        "resource": "awscc_backup_legal_hold",
+        "generateListResource": true,
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_backupgateway_hypervisor",
         "generateListResource": true,
         "identifier": ["HypervisorArn"]
@@ -929,6 +934,11 @@
         "resource": "awscc_certificatemanager_acme_external_account_binding",
         "generateListResource": true,
         "identifier": ["AcmeExternalAccountBindingArn"]
+    },
+    {
+        "resource": "awscc_certificatemanager_certificate",
+        "generateListResource": true,
+        "identifier": ["CertificateArn"]
     },
     {
         "resource": "awscc_chatbot_custom_action",
@@ -2365,6 +2375,10 @@
     {
         "resource": "awscc_ec2_transit_gateway_policy_table_association",
         "identifier": ["TransitGatewayPolicyTableId","TransitGatewayAttachmentId"]
+    },
+    {
+        "resource": "awscc_ec2_transit_gateway_policy_table_entry",
+        "identifier": ["TransitGatewayPolicyTableId","PolicyRuleNumber"]
     },
     {
         "resource": "awscc_ec2_transit_gateway_route",
@@ -4166,6 +4180,11 @@
         "identifier": ["ReplicatorArn"]
     },
     {
+        "resource": "awscc_msk_channel",
+        "generateListResource": true,
+        "identifier": ["ChannelArn"]
+    },
+    {
         "resource": "awscc_msk_serverless_cluster",
         "generateListResource": true,
         "identifier": ["Arn"]
@@ -4466,6 +4485,11 @@
         "resource": "awscc_neptunegraph_private_graph_endpoint",
         "generateListResource": true,
         "identifier": ["PrivateGraphEndpointIdentifier"]
+    },
+    {
+        "resource": "awscc_networkflowmonitor_monitor",
+        "generateListResource": true,
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_networkfirewall_firewall",
@@ -5040,6 +5064,14 @@
         "identifier": ["AwsAccountId","TemplateId"]
     },
     {
+        "resource": "awscc_quicksight_agent",
+        "identifier": ["AwsAccountId","AgentId"]
+    },
+    {
+        "resource": "awscc_quicksight_space",
+        "identifier": ["AwsAccountId","SpaceId"]
+    },
+    {
         "resource": "awscc_quicksight_theme",
         "identifier": ["ThemeId","AwsAccountId"]
     },
@@ -5323,6 +5355,14 @@
         "resource": "awscc_rolesanywhere_trust_anchor",
         "generateListResource": true,
         "identifier": ["TrustAnchorId"]
+    },
+    {
+        "resource": "awscc_scn_dataset",
+        "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_scn_namespace",
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_route53_cidr_collection",
@@ -5824,6 +5864,11 @@
         "identifier": ["Name"]
     },
     {
+        "resource": "awscc_ssm_ops_item",
+        "generateListResource": true,
+        "identifier": ["OpsItemArn"]
+    },
+    {
         "resource": "awscc_ssm_maintenance_window",
         "generateListResource": true,
         "identifier": ["WindowId"]
@@ -6033,6 +6078,11 @@
         "resource": "awscc_sagemaker_mlflow_tracking_server",
         "generateListResource": true,
         "identifier": ["TrackingServerName"]
+    },
+    {
+        "resource": "awscc_servicediscovery_service",
+        "generateListResource": true,
+        "identifier": ["Id"]
     },
     {
         "resource": "awscc_sagemaker_model",

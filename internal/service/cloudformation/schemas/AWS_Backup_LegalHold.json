@@ -1,0 +1,175 @@
+{
+  "typeName": "AWS::Backup::LegalHold",
+  "description": "Creates a legal hold on recovery points (backups). A legal hold prevents backups from being deleted while under hold.",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the legal hold."
+    },
+    "LegalHoldId": {
+      "type": "string",
+      "description": "The ID of the legal hold."
+    },
+    "Title": {
+      "type": "string",
+      "description": "The title of the legal hold."
+    },
+    "Description": {
+      "type": "string",
+      "description": "The description of the legal hold."
+    },
+    "Status": {
+      "type": "string",
+      "description": "The status of the legal hold.",
+      "enum": [
+        "CREATING",
+        "ACTIVE",
+        "CANCELING",
+        "CANCELED"
+      ]
+    },
+    "CreationDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The time when the legal hold was created."
+    },
+    "RecoveryPointSelection": {
+      "type": "object",
+      "description": "The criteria to assign a set of resources, such as resource types or backup vaults.",
+      "properties": {
+        "VaultNames": {
+          "type": "array",
+          "description": "The names of the vaults in which the selected recovery points are contained.",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "ResourceIdentifiers": {
+          "type": "array",
+          "description": "The resources included in the resource selection.",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "DateRange": {
+          "type": "object",
+          "description": "A date range for filtering recovery points.",
+          "properties": {
+            "FromDate": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The beginning date, inclusive. ISO 8601 date-time."
+            },
+            "ToDate": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The end date, inclusive. ISO 8601 date-time."
+            }
+          },
+          "required": [
+            "FromDate",
+            "ToDate"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Optional tags to include.",
+      "insertionOrder": false,
+      "items": {
+        "type": "object",
+        "properties": {
+          "Key": {
+            "type": "string",
+            "description": "The key name of the tag."
+          },
+          "Value": {
+            "type": "string",
+            "description": "The value for the tag."
+          }
+        },
+        "required": [
+          "Key",
+          "Value"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "Title",
+    "Description",
+    "RecoveryPointSelection"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/LegalHoldId",
+    "/properties/Status",
+    "/properties/CreationDate"
+  ],
+  "createOnlyProperties": [
+    "/properties/Title",
+    "/properties/Description",
+    "/properties/RecoveryPointSelection"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/LegalHoldId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "backup:TagResource",
+      "backup:UntagResource",
+      "backup:ListTags"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "backup:CreateLegalHold",
+        "backup:GetLegalHold",
+        "backup:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "backup:GetLegalHold",
+        "backup:ListTags"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "backup:GetLegalHold",
+        "backup:TagResource",
+        "backup:UntagResource",
+        "backup:ListTags"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "backup:CancelLegalHold",
+        "backup:GetLegalHold"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "backup:ListLegalHolds"
+      ]
+    }
+  },
+  "additionalProperties": false
+}
