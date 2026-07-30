@@ -11,7 +11,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.75.0
 	github.com/google/go-cmp v0.7.0
 	github.com/google/go-github/v72 v72.0.0
-	github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.23.0
+	github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.24.0
 	github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.73
 	github.com/hashicorp/cli v1.1.7
 	github.com/hashicorp/go-hclog v1.6.3

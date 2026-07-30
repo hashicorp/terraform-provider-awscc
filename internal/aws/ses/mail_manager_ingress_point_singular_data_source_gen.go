@@ -8,7 +8,6 @@ package ses
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -175,10 +174,9 @@ func mailManagerIngressPointDataSource(ctx context.Context) (datasource.DataSour
 		//	      "additionalProperties": false,
 		//	      "properties": {
 		//	        "IpType": {
-		//	          "allOf": [
-		//	            {},
-		//	            {}
-		//	          ]
+		//	          "default": "IPV4",
+		//	          "$ref": "#/definitions/IpType",
+		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "required": [
@@ -206,8 +204,7 @@ func mailManagerIngressPointDataSource(ctx context.Context) (datasource.DataSour
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: IpType
 						"ip_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							CustomType: jsontypes.NormalizedType{},
-							Computed:   true,
+							Computed: true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Computed: true,

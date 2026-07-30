@@ -1,5 +1,12 @@
 ## 1.96.0 (Unreleased)
 
+BUG FIXES:
+
+* data-source/awscc_bedrockagentcore_gateway: Set correct schema type `protocol_type` attribute ([#3255](https://github.com/hashicorp/terraform-provider-awscc/pull/3255))
+* data-source/awscc_ses_mail_manager_ingress_point: Set correct schema type for `network_configuration.public_network_configuration.ip_type` attribute ([#3255](https://github.com/hashicorp/terraform-provider-awscc/pull/3255))
+* resource/awscc_bedrockagentcore_gateway: Set correct schema type `protocol_type` argument ([#3255](https://github.com/hashicorp/terraform-provider-awscc/pull/3255))
+* resource/awscc_ses_mail_manager_ingress_point: Set correct schema type for `network_configuration.public_network_configuration.ip_type` argument ([#3255](https://github.com/hashicorp/terraform-provider-awscc/pull/3255))
+
 ## 1.95.0 (July 30, 2026)
 
 FEATURES:

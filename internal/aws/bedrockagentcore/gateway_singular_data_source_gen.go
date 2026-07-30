@@ -8,7 +8,6 @@ package bedrockagentcore
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -683,14 +682,12 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "allOf": [
-		//	    {},
-		//	    {}
-		//	  ]
+		//	  "default": "MCP",
+		//	  "$ref": "#/definitions/GatewayProtocolType",
+		//	  "type": "string"
 		//	}
 		"protocol_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: jsontypes.NormalizedType{},
-			Computed:   true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:

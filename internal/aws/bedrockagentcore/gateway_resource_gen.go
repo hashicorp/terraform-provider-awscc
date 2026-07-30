@@ -9,7 +9,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
@@ -22,6 +21,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -1045,15 +1045,14 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "allOf": [
-		//	    {},
-		//	    {}
-		//	  ]
+		//	  "default": "MCP",
+		//	  "$ref": "#/definitions/GatewayProtocolType",
+		//	  "type": "string"
 		//	}
 		"protocol_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: jsontypes.NormalizedType{},
-			Optional:   true,
-			Computed:   true,
+			Optional: true,
+			Computed: true,
+			Default:  stringdefault.StaticString("MCP"),
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/

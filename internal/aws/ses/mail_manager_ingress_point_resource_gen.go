@@ -9,7 +9,6 @@ import (
 	"context"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -17,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -258,10 +258,9 @@ func mailManagerIngressPointResource(ctx context.Context) (resource.Resource, er
 		//	      "additionalProperties": false,
 		//	      "properties": {
 		//	        "IpType": {
-		//	          "allOf": [
-		//	            {},
-		//	            {}
-		//	          ]
+		//	          "default": "IPV4",
+		//	          "$ref": "#/definitions/IpType",
+		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "required": [
@@ -301,12 +300,9 @@ func mailManagerIngressPointResource(ctx context.Context) (resource.Resource, er
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: IpType
 						"ip_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							CustomType: jsontypes.NormalizedType{},
-							Optional:   true,
-							Computed:   true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								fwvalidators.NotNullString(),
-							}, /*END VALIDATORS*/
+							Optional: true,
+							Computed: true,
+							Default:  stringdefault.StaticString("IPV4"),
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
