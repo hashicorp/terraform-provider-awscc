@@ -1,4 +1,41 @@
-## 1.95.0 (Unreleased)
+## 1.95.0 (July 30, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_backup_legal_hold`
+* **New Data Source:** `awscc_backup_legal_holds`
+* **New Data Source:** `awscc_certificatemanager_certificate`
+* **New Data Source:** `awscc_certificatemanager_certificates`
+* **New Data Source:** `awscc_ec2_transit_gateway_policy_table_entry`
+* **New Data Source:** `awscc_msk_channel`
+* **New Data Source:** `awscc_msk_channels`
+* **New Data Source:** `awscc_networkflowmonitor_monitor`
+* **New Data Source:** `awscc_networkflowmonitor_monitors`
+* **New Data Source:** `awscc_quicksight_agent`
+* **New Data Source:** `awscc_quicksight_space`
+* **New Data Source:** `awscc_scn_dataset`
+* **New Data Source:** `awscc_scn_namespace`
+* **New Data Source:** `awscc_servicediscovery_service`
+* **New Data Source:** `awscc_servicediscovery_services`
+* **New Data Source:** `awscc_ssm_ops_item`
+* **New Data Source:** `awscc_ssm_ops_items`
+* **New List Resource:** `awscc_backup_legal_hold`
+* **New List Resource:** `awscc_certificatemanager_certificate`
+* **New List Resource:** `awscc_msk_channel`
+* **New List Resource:** `awscc_networkflowmonitor_monitor`
+* **New List Resource:** `awscc_servicediscovery_service`
+* **New List Resource:** `awscc_ssm_ops_item`
+* **New Resource:** `awscc_backup_legal_hold`
+* **New Resource:** `awscc_certificatemanager_certificate`
+* **New Resource:** `awscc_ec2_transit_gateway_policy_table_entry`
+* **New Resource:** `awscc_msk_channel`
+* **New Resource:** `awscc_networkflowmonitor_monitor`
+* **New Resource:** `awscc_quicksight_agent`
+* **New Resource:** `awscc_quicksight_space`
+* **New Resource:** `awscc_scn_dataset`
+* **New Resource:** `awscc_scn_namespace`
+* **New Resource:** `awscc_servicediscovery_service`
+* **New Resource:** `awscc_ssm_ops_item`
 
 ## 1.94.0 (July 22, 2026)
 

@@ -39,6 +39,7 @@ Data Source schema for AWS::OpenSearchService::Domain
 - `domain_name` (String)
 - `ebs_options` (Attributes) (see [below for nested schema](#nestedatt--ebs_options))
 - `encryption_at_rest_options` (Attributes) (see [below for nested schema](#nestedatt--encryption_at_rest_options))
+- `engine_mode` (String) The engine mode of the domain. Determines whether the domain runs the standard (GENERAL) engine or the optimized multi-engine (OPTIMIZED) engine. This value cannot be changed after the domain is created.
 - `engine_version` (String)
 - `identity_center_options` (Attributes) Options for configuring Identity Center (see [below for nested schema](#nestedatt--identity_center_options))
 - `ip_address_type` (String)
@@ -50,6 +51,7 @@ Data Source schema for AWS::OpenSearchService::Domain
 - `snapshot_options` (Attributes) (see [below for nested schema](#nestedatt--snapshot_options))
 - `software_update_options` (Attributes) (see [below for nested schema](#nestedatt--software_update_options))
 - `tags` (Attributes List) An arbitrary set of tags (key-value pairs) for this Domain. (see [below for nested schema](#nestedatt--tags))
+- `use_case` (String) The primary use case of the domain. Determines the default configuration tuned for the workload. For GENERAL engine-mode domains, this value can be changed after creation. For OPTIMIZED engine-mode domains, this value cannot be changed after creation.
 - `vpc_options` (Attributes) (see [below for nested schema](#nestedatt--vpc_options))
 
 <a id="nestedatt--advanced_security_options"></a>

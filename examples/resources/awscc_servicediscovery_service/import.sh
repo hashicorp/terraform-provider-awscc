@@ -1,0 +1,1 @@
+$ terraform import awscc_servicediscovery_service.example "id"

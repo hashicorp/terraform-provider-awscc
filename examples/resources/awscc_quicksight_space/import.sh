@@ -1,0 +1,1 @@
+$ terraform import awscc_quicksight_space.example "aws_account_id|space_id"

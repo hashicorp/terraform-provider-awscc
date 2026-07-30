@@ -1,0 +1,1 @@
+$ terraform import awscc_quicksight_agent.example "aws_account_id|agent_id"

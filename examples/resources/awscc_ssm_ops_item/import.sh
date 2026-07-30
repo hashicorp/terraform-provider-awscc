@@ -1,0 +1,1 @@
+$ terraform import awscc_ssm_ops_item.example "ops_item_arn"
