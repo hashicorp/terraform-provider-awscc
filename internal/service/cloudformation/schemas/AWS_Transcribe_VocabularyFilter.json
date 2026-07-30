@@ -118,6 +118,7 @@
       "permissions": [
         "transcribe:CreateVocabularyFilter",
         "transcribe:GetVocabularyFilter",
+        "transcribe:ListTagsForResource",
         "transcribe:TagResource",
         "iam:PassRole"
       ]
@@ -141,7 +142,8 @@
     "delete": {
       "permissions": [
         "transcribe:DeleteVocabularyFilter",
-        "transcribe:GetVocabularyFilter"
+        "transcribe:GetVocabularyFilter",
+        "transcribe:ListTagsForResource"
       ]
     },
     "list": {

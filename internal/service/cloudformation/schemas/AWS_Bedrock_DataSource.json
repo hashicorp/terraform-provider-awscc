@@ -1114,7 +1114,8 @@
         "bedrock:GetKnowledgeBase",
         "kms:GenerateDataKey",
         "kms:Decrypt"
-      ]
+      ],
+      "timeoutInMinutes": 60
     },
     "read": {
       "permissions": [
@@ -1133,7 +1134,8 @@
       "permissions": [
         "bedrock:GetDataSource",
         "bedrock:DeleteDataSource"
-      ]
+      ],
+      "timeoutInMinutes": 60
     },
     "list": {
       "permissions": [

@@ -115,7 +115,7 @@
           "type": "array",
           "uniqueItems": true,
           "minItems": 0,
-          "maxItems": 2,
+          "maxItems": 10,
           "items": {
             "$ref": "#/definitions/CustomFileSystemConfig"
           }
@@ -175,13 +175,20 @@
           "type": "string",
           "description": "The ARN of the image version created on the instance.",
           "maxLength": 256,
-          "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"
+          "pattern": "^(arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+|None)"
         },
         "LifecycleConfigArn": {
           "type": "string",
           "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
           "maxLength": 256,
           "pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$"
+        },
+        "TrainingPlanArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
+          "minLength": 0,
+          "maxLength": 2048,
+          "pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$"
         }
       }
     },
@@ -263,6 +270,10 @@
           "description": "The lifecycle configuration that runs before the default lifecycle configuration.",
           "maxLength": 256,
           "pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$"
+        },
+        "EmrSettings": {
+          "$ref": "#/definitions/EmrSettings",
+          "description": "The configuration parameters for EMR settings."
         }
       }
     },
@@ -857,7 +868,21 @@
         "ml.r6id.12xlarge",
         "ml.r6id.16xlarge",
         "ml.r6id.24xlarge",
-        "ml.r6id.32xlarge"
+        "ml.r6id.32xlarge",
+        "ml.p5.4xlarge",
+        "ml.p6-b200.48xlarge",
+        "ml.g7.2xlarge",
+        "ml.g7.4xlarge",
+        "ml.g7.8xlarge",
+        "ml.g7.12xlarge",
+        "ml.g7.24xlarge",
+        "ml.g7.48xlarge",
+        "ml.g7e.2xlarge",
+        "ml.g7e.4xlarge",
+        "ml.g7e.8xlarge",
+        "ml.g7e.12xlarge",
+        "ml.g7e.24xlarge",
+        "ml.g7e.48xlarge"
       ]
     },
     "HiddenSageMakerImage": {
@@ -884,6 +909,39 @@
           }
         }
       }
+    },
+    "EmrSettings": {
+      "type": "object",
+      "description": "Configuration parameters specifying IAM roles assumed by SageMaker's execution role and cluster instances.",
+      "additionalProperties": false,
+      "properties": {
+        "AssumableRoleArns": {
+          "type": "array",
+          "description": "An array of Amazon Resource Names (ARNs) of the IAM roles that the execution role of SageMaker can assume.",
+          "uniqueItems": false,
+          "minItems": 0,
+          "maxItems": 5,
+          "items": {
+            "type": "string",
+            "minLength": 20,
+            "maxLength": 2048,
+            "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"
+          }
+        },
+        "ExecutionRoleArns": {
+          "type": "array",
+          "description": "An array of ARNs of IAM roles used by EMR cluster instances or job execution environments.",
+          "uniqueItems": false,
+          "minItems": 0,
+          "maxItems": 5,
+          "items": {
+            "type": "string",
+            "minLength": 20,
+            "maxLength": 2048,
+            "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"
+          }
+        }
+      }
     }
   },
   "required": [
@@ -893,14 +951,10 @@
   "createOnlyProperties": [
     "/properties/DomainId",
     "/properties/UserProfileName",
+    "/properties/UserSettings/RStudioServerProAppSettings/AccessStatus",
     "/properties/SingleSignOnUserIdentifier",
     "/properties/SingleSignOnUserValue",
-    "/properties/UserSettings/RStudioServerProAppSettings/AccessStatus",
-    "/properties/UserSettings/RStudioServerProAppSettings/UserGroup",
-    "/properties/Tags"
-  ],
-  "writeOnlyProperties": [
-    "/properties/Tags"
+    "/properties/UserSettings/RStudioServerProAppSettings/UserGroup"
   ],
   "primaryIdentifier": [
     "/properties/UserProfileName",
@@ -909,6 +963,18 @@
   "readOnlyProperties": [
     "/properties/UserProfileArn"
   ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "sagemaker:AddTags",
+      "sagemaker:ListTags",
+      "sagemaker:DeleteTags"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -916,12 +982,24 @@
         "sagemaker:DescribeUserProfile",
         "sagemaker:DescribeImage",
         "sagemaker:DescribeImageVersion",
-        "iam:PassRole"
-      ]
+        "sagemaker:ListTags",
+        "iam:PassRole",
+        "sso:DescribeInstance",
+        "sso:ListInstances",
+        "identitystore:DescribeUser",
+        "identitystore:ListUsers",
+        "sagemaker:AddTags"
+      ],
+      "timeoutInMinutes": 30
     },
     "read": {
       "permissions": [
-        "sagemaker:DescribeUserProfile"
+        "sagemaker:DescribeUserProfile",
+        "sagemaker:ListTags",
+        "sso:DescribeInstance",
+        "sso:ListInstances",
+        "identitystore:DescribeUser",
+        "identitystore:ListUsers"
       ]
     },
     "update": {
@@ -930,18 +1008,37 @@
         "sagemaker:DescribeUserProfile",
         "sagemaker:DescribeImage",
         "sagemaker:DescribeImageVersion",
-        "iam:PassRole"
+        "sagemaker:AddTags",
+        "sagemaker:DeleteTags",
+        "sagemaker:ListTags",
+        "iam:PassRole",
+        "sso:DescribeInstance",
+        "sso:ListInstances",
+        "identitystore:DescribeUser",
+        "identitystore:ListUsers"
       ]
     },
     "delete": {
       "permissions": [
         "sagemaker:DeleteUserProfile",
-        "sagemaker:DescribeUserProfile"
+        "sagemaker:DescribeUserProfile",
+        "sagemaker:AddTags",
+        "sagemaker:ListTags",
+        "sagemaker:DeleteTags",
+        "sso:DescribeInstance",
+        "sso:ListInstances",
+        "identitystore:DescribeUser",
+        "identitystore:ListUsers"
       ]
     },
     "list": {
       "permissions": [
-        "sagemaker:ListUserProfiles"
+        "sagemaker:ListUserProfiles",
+        "sagemaker:ListTags",
+        "sso:DescribeInstance",
+        "sso:ListInstances",
+        "identitystore:DescribeUser",
+        "identitystore:ListUsers"
       ]
     }
   }
