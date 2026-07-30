@@ -37,12 +37,12 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ARN of the connector",
+		//	  "description": "",
 		//	  "pattern": "^arn:aws\\S*:securityhub:[a-z0-9-]+:[0-9]{12}:connector/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
 		"connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the connector",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -52,12 +52,12 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The ID of the connector",
+		//	  "description": "",
 		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
 		"connector_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the connector",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -81,12 +81,12 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The date and time for createdAt in UTC and ISO 8601 format.",
+		//	  "description": "The timestamp formatted in ISO8601",
 		//	  "pattern": "^(\\d\\d\\d\\d)-([0][1-9]|[1][0-2])-([0][1-9]|[1-2](\\d)|[3][0-1])[T](?:([0-1](\\d)|[2][0-3]):[0-5](\\d):[0-5](\\d)|23:59:60)(?:\\.(\\d)+)?([Z]|[+-](\\d\\d)(:?(\\d\\d))?)$",
 		//	  "type": "string"
 		//	}
 		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The date and time for createdAt in UTC and ISO 8601 format.",
+			Description: "The timestamp formatted in ISO8601",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -96,11 +96,11 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The principal that created the connector",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"created_by": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The principal that created the connector",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -110,11 +110,11 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "A description of the connector",
+		//	  "description": "The description of the connector.",
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description of the connector",
+			Description: "The description of the connector.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -139,18 +139,18 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The list of health issues associated with the connector",
+		//	  "description": "",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "A health issue associated with the connector",
+		//	    "description": "Represents a specific health issue detected for a connector.",
 		//	    "properties": {
 		//	      "Code": {
-		//	        "description": "The code identifying the type of health issue",
+		//	        "description": "The error code that identifies the type of health issue.",
 		//	        "type": "string"
 		//	      },
 		//	      "Message": {
-		//	        "description": "The message describing the health issue",
+		//	        "description": "A human-readable message that describes the health issue.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -167,17 +167,17 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Code
 					"code": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The code identifying the type of health issue",
+						Description: "The error code that identifies the type of health issue.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Message
 					"message": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The message describing the health issue",
+						Description: "A human-readable message that describes the health issue.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "The list of health issues associated with the connector",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
@@ -188,12 +188,12 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The date and time for lastCheckedAt in UTC and ISO 8601 format.",
+		//	  "description": "The timestamp formatted in ISO8601",
 		//	  "pattern": "^(\\d\\d\\d\\d)-([0][1-9]|[1][0-2])-([0][1-9]|[1-2](\\d)|[3][0-1])[T](?:([0-1](\\d)|[2][0-3]):[0-5](\\d):[0-5](\\d)|23:59:60)(?:\\.(\\d)+)?([Z]|[+-](\\d\\d)(:?(\\d\\d))?)$",
 		//	  "type": "string"
 		//	}
 		"last_checked_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The date and time for lastCheckedAt in UTC and ISO 8601 format.",
+			Description: "The timestamp formatted in ISO8601",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -203,12 +203,12 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The date and time for lastUpdatedAt in UTC and ISO 8601 format.",
+		//	  "description": "The timestamp formatted in ISO8601",
 		//	  "pattern": "^(\\d\\d\\d\\d)-([0][1-9]|[1][0-2])-([0][1-9]|[1-2](\\d)|[3][0-1])[T](?:([0-1](\\d)|[2][0-3]):[0-5](\\d):[0-5](\\d)|23:59:60)(?:\\.(\\d)+)?([Z]|[+-](\\d\\d)(:?(\\d\\d))?)$",
 		//	  "type": "string"
 		//	}
 		"last_updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The date and time for lastUpdatedAt in UTC and ISO 8601 format.",
+			Description: "The timestamp formatted in ISO8601",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -218,11 +218,11 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The message associated with the connector status change",
+		//	  "description": "",
 		//	  "type": "string"
 		//	}
 		"message": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The message associated with the connector status change",
+			Description: "",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -232,11 +232,11 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The name of the connector",
+		//	  "description": "The name of the connector.",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the connector",
+			Description: "The name of the connector.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -247,18 +247,18 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The CSPM provider configuration for the connector",
+		//	  "description": "",
 		//	  "properties": {
 		//	    "Azure": {
 		//	      "additionalProperties": false,
-		//	      "description": "The configuration settings for an Azure CSPM provider",
+		//	      "description": "The configuration for connecting to an Azure environment.",
 		//	      "properties": {
 		//	        "AWSConfigConnectorArn": {
-		//	          "description": "The ARN of the AWS Config connector used for the Azure integration",
+		//	          "description": "The ARN of the multi-cloud configuration connector used to establish the connection to Azure.",
 		//	          "type": "string"
 		//	        },
 		//	        "AzureRegions": {
-		//	          "description": "The list of Azure regions to include in the connector scope",
+		//	          "description": "The list of Azure regions to monitor.",
 		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "type": "string"
@@ -270,10 +270,10 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "ScopeConfiguration": {
 		//	          "additionalProperties": false,
-		//	          "description": "The scope configuration for an Azure connector",
+		//	          "description": "The scope configuration that defines which Azure resources are monitored.",
 		//	          "properties": {
 		//	            "ScopeType": {
-		//	              "description": "The scope type for the Azure connector",
+		//	              "description": "The type of scope. Valid values are ``tenant`` and ``subscription``.",
 		//	              "enum": [
 		//	                "TENANT",
 		//	                "SUBSCRIPTION"
@@ -281,7 +281,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	              "type": "string"
 		//	            },
 		//	            "ScopeValues": {
-		//	              "description": "The list of scope values for the Azure connector",
+		//	              "description": "The list of scope values, such as subscription IDs, when the scope type is ``subscription``.",
 		//	              "insertionOrder": false,
 		//	              "items": {
 		//	                "type": "string"
@@ -318,7 +318,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: AWSConfigConnectorArn
 						"aws_config_connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ARN of the AWS Config connector used for the Azure integration",
+							Description: "The ARN of the multi-cloud configuration connector used to establish the connection to Azure.",
 							Required:    true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.RequiresReplace(),
@@ -327,7 +327,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 						// Property: AzureRegions
 						"azure_regions": schema.SetAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Description: "The list of Azure regions to include in the connector scope",
+							Description: "The list of Azure regions to monitor.",
 							Required:    true,
 							Validators: []validator.Set{ /*START VALIDATORS*/
 								setvalidator.SizeBetween(1, 100),
@@ -338,7 +338,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: ScopeType
 								"scope_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The scope type for the Azure connector",
+									Description: "The type of scope. Valid values are ``tenant`` and ``subscription``.",
 									Required:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.OneOf(
@@ -350,7 +350,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 								// Property: ScopeValues
 								"scope_values": schema.SetAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
-									Description: "The list of scope values for the Azure connector",
+									Description: "The list of scope values, such as subscription IDs, when the scope type is ``subscription``.",
 									Optional:    true,
 									Computed:    true,
 									Validators: []validator.Set{ /*START VALIDATORS*/
@@ -361,15 +361,15 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "The scope configuration for an Azure connector",
+							Description: "The scope configuration that defines which Azure resources are monitored.",
 							Required:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "The configuration settings for an Azure CSPM provider",
+					Description: "The configuration for connecting to an Azure environment.",
 					Required:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The CSPM provider configuration for the connector",
+			Description: "",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -410,7 +410,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Resource schema for AWS::SecurityHub::Connector",
+		Description: "Creates a connector to a third-party cloud provider in Security Hub CSPM. A connector establishes a connection between Security Hub CSPM and a third-party cloud provider, enabling Security Hub CSPM to ingest security findings and resource data from the connected environment.",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -422,7 +422,6 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithPrimaryIdentifier(
 		identity.Identifier{
 			Name:              "connector_arn",
-			Description:       "The ARN of the connector",
 			RequiredForImport: true,
 		})
 

@@ -14,10 +14,12 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/identity"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
 func init() {
@@ -398,6 +400,36 @@ func userPoolRegionalConfigurationAttachmentResource(ctx context.Context) (resou
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "EumsSms": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "CallerArn": {
+		//	          "type": "string"
+		//	        },
+		//	        "ConfigurationSetName": {
+		//	          "type": "string"
+		//	        },
+		//	        "ExternalId": {
+		//	          "type": "string"
+		//	        },
+		//	        "InEntityId": {
+		//	          "type": "string"
+		//	        },
+		//	        "InTemplateId": {
+		//	          "type": "string"
+		//	        },
+		//	        "OriginationIdentity": {
+		//	          "type": "string"
+		//	        },
+		//	        "Region": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "CallerArn"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "ExternalId": {
 		//	      "type": "string"
 		//	    },
@@ -412,6 +444,75 @@ func userPoolRegionalConfigurationAttachmentResource(ctx context.Context) (resou
 		//	}
 		"sms_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EumsSms
+				"eums_sms": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CallerArn
+						"caller_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ConfigurationSetName
+						"configuration_set_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ExternalId
+						"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: InEntityId
+						"in_entity_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: InTemplateId
+						"in_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: OriginationIdentity
+						"origination_identity": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Region
+						"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: ExternalId
 				"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
@@ -519,7 +620,9 @@ func userPoolRegionalConfigurationAttachmentResource(ctx context.Context) (resou
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"caller_arn":                     "CallerArn",
 		"configuration_set":              "ConfigurationSet",
+		"configuration_set_name":         "ConfigurationSetName",
 		"create_auth_challenge":          "CreateAuthChallenge",
 		"custom_email_sender":            "CustomEmailSender",
 		"custom_message":                 "CustomMessage",
@@ -527,19 +630,24 @@ func userPoolRegionalConfigurationAttachmentResource(ctx context.Context) (resou
 		"define_auth_challenge":          "DefineAuthChallenge",
 		"email_configuration":            "EmailConfiguration",
 		"email_sending_account":          "EmailSendingAccount",
+		"eums_sms":                       "EumsSms",
 		"external_id":                    "ExternalId",
 		"from":                           "From",
+		"in_entity_id":                   "InEntityId",
+		"in_template_id":                 "InTemplateId",
 		"inbound_federation":             "InboundFederation",
 		"kms_key_id":                     "KMSKeyID",
 		"lambda_arn":                     "LambdaArn",
 		"lambda_config":                  "LambdaConfig",
 		"lambda_version":                 "LambdaVersion",
+		"origination_identity":           "OriginationIdentity",
 		"post_authentication":            "PostAuthentication",
 		"post_confirmation":              "PostConfirmation",
 		"pre_authentication":             "PreAuthentication",
 		"pre_sign_up":                    "PreSignUp",
 		"pre_token_generation":           "PreTokenGeneration",
 		"pre_token_generation_config":    "PreTokenGenerationConfig",
+		"region":                         "Region",
 		"reply_to_email_address":         "ReplyToEmailAddress",
 		"sms_configuration":              "SmsConfiguration",
 		"sns_caller_arn":                 "SnsCallerArn",
