@@ -131,6 +131,7 @@ resource "awscc_iam_role" "example" {
 - `role_arn` (String) IAM Role that will be used to grant the Grafana workspace access to a customers AWS resources.
 - `saml_configuration` (Attributes) SAML configuration data associated with an AMG workspace. (see [below for nested schema](#nestedatt--saml_configuration))
 - `stack_set_name` (String) The name of the AWS CloudFormation stack set to use to generate IAM roles to be used for this workspace.
+- `tags` (Attributes List) The list of tags associated with the workspace. (see [below for nested schema](#nestedatt--tags))
 - `vpc_configuration` (Attributes) The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to. (see [below for nested schema](#nestedatt--vpc_configuration))
 
 ### Read-Only
@@ -194,6 +195,15 @@ Optional:
 - `admin` (List of String) List of SAML roles which will be mapped into the Grafana Admin role.
 - `editor` (List of String) List of SAML roles which will be mapped into the Grafana Editor role.
 
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
 
 
 <a id="nestedatt--vpc_configuration"></a>

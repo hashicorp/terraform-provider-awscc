@@ -819,6 +819,21 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: EngineMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The engine mode of the domain. Determines whether the domain runs the standard (GENERAL) engine or the optimized multi-engine (OPTIMIZED) engine. This value cannot be changed after the domain is created.",
+		//	  "enum": [
+		//	    "GENERAL",
+		//	    "OPTIMIZED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"engine_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The engine mode of the domain. Determines whether the domain runs the standard (GENERAL) engine or the optimized multi-engine (OPTIMIZED) engine. This value cannot be changed after the domain is created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EngineVersion
 		// CloudFormation resource type schema:
 		//
@@ -1219,6 +1234,23 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "An arbitrary set of tags (key-value pairs) for this Domain.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: UseCase
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The primary use case of the domain. Determines the default configuration tuned for the workload. For GENERAL engine-mode domains, this value can be changed after creation. For OPTIMIZED engine-mode domains, this value cannot be changed after creation.",
+		//	  "enum": [
+		//	    "SEARCH",
+		//	    "VECTOR",
+		//	    "OBSERVABILITY",
+		//	    "MIXED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"use_case": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The primary use case of the domain. Determines the default configuration tuned for the workload. For GENERAL engine-mode domains, this value can be changed after creation. For OPTIMIZED engine-mode domains, this value cannot be changed after creation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VPCOptions
 		// CloudFormation resource type schema:
 		//
@@ -1326,6 +1358,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"encryption_at_rest_options":       "EncryptionAtRestOptions",
 		"end_time":                         "EndTime",
 		"enforce_https":                    "EnforceHTTPS",
+		"engine_mode":                      "EngineMode",
 		"engine_version":                   "EngineVersion",
 		"entity_id":                        "EntityId",
 		"hours":                            "Hours",
@@ -1382,6 +1415,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"type":                             "Type",
 		"update_available":                 "UpdateAvailable",
 		"update_status":                    "UpdateStatus",
+		"use_case":                         "UseCase",
 		"user_pool_id":                     "UserPoolId",
 		"value":                            "Value",
 		"volume_size":                      "VolumeSize",

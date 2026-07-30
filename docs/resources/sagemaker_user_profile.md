@@ -122,6 +122,7 @@ Optional:
 - `lifecycle_config_arn` (String) The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.
 - `sage_maker_image_arn` (String) The ARN of the SageMaker image that the image version belongs to.
 - `sage_maker_image_version_arn` (String) The ARN of the image version created on the instance.
+- `training_plan_arn` (String) The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.
 
 
 
@@ -181,6 +182,7 @@ Optional:
 - `code_repositories` (Attributes List) A list of CodeRepositories available for use with JupyterLab apps. (see [below for nested schema](#nestedatt--user_settings--jupyter_lab_app_settings--code_repositories))
 - `custom_images` (Attributes List) A list of custom images available for use for JupyterLab apps (see [below for nested schema](#nestedatt--user_settings--jupyter_lab_app_settings--custom_images))
 - `default_resource_spec` (Attributes) The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the JupyterLab app. (see [below for nested schema](#nestedatt--user_settings--jupyter_lab_app_settings--default_resource_spec))
+- `emr_settings` (Attributes) The configuration parameters for EMR settings. (see [below for nested schema](#nestedatt--user_settings--jupyter_lab_app_settings--emr_settings))
 - `lifecycle_config_arns` (List of String) A list of LifecycleConfigArns available for use with JupyterLab apps.
 
 <a id="nestedatt--user_settings--jupyter_lab_app_settings--app_lifecycle_management"></a>
@@ -229,6 +231,16 @@ Optional:
 - `lifecycle_config_arn` (String) The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.
 - `sage_maker_image_arn` (String) The ARN of the SageMaker image that the image version belongs to.
 - `sage_maker_image_version_arn` (String) The ARN of the image version created on the instance.
+- `training_plan_arn` (String) The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.
+
+
+<a id="nestedatt--user_settings--jupyter_lab_app_settings--emr_settings"></a>
+### Nested Schema for `user_settings.jupyter_lab_app_settings.emr_settings`
+
+Optional:
+
+- `assumable_role_arns` (List of String) An array of Amazon Resource Names (ARNs) of the IAM roles that the execution role of SageMaker can assume.
+- `execution_role_arns` (List of String) An array of ARNs of IAM roles used by EMR cluster instances or job execution environments.
 
 
 
@@ -249,6 +261,7 @@ Optional:
 - `lifecycle_config_arn` (String) The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.
 - `sage_maker_image_arn` (String) The ARN of the SageMaker image that the image version belongs to.
 - `sage_maker_image_version_arn` (String) The ARN of the image version created on the instance.
+- `training_plan_arn` (String) The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.
 
 
 
@@ -280,6 +293,7 @@ Optional:
 - `lifecycle_config_arn` (String) The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.
 - `sage_maker_image_arn` (String) The ARN of the SageMaker image that the image version belongs to.
 - `sage_maker_image_version_arn` (String) The ARN of the image version created on the instance.
+- `training_plan_arn` (String) The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.
 
 
 

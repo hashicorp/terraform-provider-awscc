@@ -79,6 +79,21 @@ func quickConnectDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "additionalProperties": false,
 		//	  "description": "Configuration settings for the quick connect.",
 		//	  "properties": {
+		//	    "FlowConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "The flow configuration. This is required only if QuickConnectType is FLOW.",
+		//	      "properties": {
+		//	        "ContactFlowArn": {
+		//	          "description": "The identifier of the contact flow.",
+		//	          "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*(:[a-zA-Z0-9-]+)?$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ContactFlowArn"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "PhoneConfig": {
 		//	      "additionalProperties": false,
 		//	      "description": "The phone configuration. This is required only if QuickConnectType is PHONE_NUMBER.",
@@ -100,7 +115,7 @@ func quickConnectDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	      "properties": {
 		//	        "ContactFlowArn": {
 		//	          "description": "The identifier of the contact flow.",
-		//	          "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*$",
+		//	          "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*(:[a-zA-Z0-9-]+)?$",
 		//	          "type": "string"
 		//	        },
 		//	        "QueueArn": {
@@ -120,7 +135,8 @@ func quickConnectDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	      "enum": [
 		//	        "PHONE_NUMBER",
 		//	        "QUEUE",
-		//	        "USER"
+		//	        "USER",
+		//	        "FLOW"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -130,7 +146,7 @@ func quickConnectDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	      "properties": {
 		//	        "ContactFlowArn": {
 		//	          "description": "The identifier of the contact flow.",
-		//	          "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*$",
+		//	          "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*(:[a-zA-Z0-9-]+)?$",
 		//	          "type": "string"
 		//	        },
 		//	        "UserArn": {
@@ -153,6 +169,18 @@ func quickConnectDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	}
 		"quick_connect_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FlowConfig
+				"flow_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ContactFlowArn
+						"contact_flow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The identifier of the contact flow.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The flow configuration. This is required only if QuickConnectType is FLOW.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: PhoneConfig
 				"phone_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -216,7 +244,8 @@ func quickConnectDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "enum": [
 		//	    "PHONE_NUMBER",
 		//	    "QUEUE",
-		//	    "USER"
+		//	    "USER",
+		//	    "FLOW"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -294,6 +323,7 @@ func quickConnectDataSource(ctx context.Context) (datasource.DataSource, error) 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"contact_flow_arn":     "ContactFlowArn",
 		"description":          "Description",
+		"flow_config":          "FlowConfig",
 		"instance_arn":         "InstanceArn",
 		"key":                  "Key",
 		"name":                 "Name",

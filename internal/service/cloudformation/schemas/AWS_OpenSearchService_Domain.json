@@ -678,6 +678,24 @@
     },
     "AutomatedSnapshotPauseOptions": {
       "$ref": "#/definitions/AutomatedSnapshotPauseOptions"
+    },
+    "EngineMode": {
+      "type": "string",
+      "description": "The engine mode of the domain. Determines whether the domain runs the standard (GENERAL) engine or the optimized multi-engine (OPTIMIZED) engine. This value cannot be changed after the domain is created.",
+      "enum": [
+        "GENERAL",
+        "OPTIMIZED"
+      ]
+    },
+    "UseCase": {
+      "type": "string",
+      "description": "The primary use case of the domain. Determines the default configuration tuned for the workload. For GENERAL engine-mode domains, this value can be changed after creation. For OPTIMIZED engine-mode domains, this value cannot be changed after creation.",
+      "enum": [
+        "SEARCH",
+        "VECTOR",
+        "OBSERVABILITY",
+        "MIXED"
+      ]
     }
   },
   "propertyTransform": {
@@ -697,7 +715,8 @@
   },
   "additionalProperties": false,
   "createOnlyProperties": [
-    "/properties/DomainName"
+    "/properties/DomainName",
+    "/properties/EngineMode"
   ],
   "conditionalCreateOnlyProperties": [
     "/properties/EncryptionAtRestOptions/properties",

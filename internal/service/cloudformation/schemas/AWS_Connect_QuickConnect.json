@@ -11,7 +11,7 @@
     "ContactFlowArn": {
       "description": "The identifier of the contact flow.",
       "type": "string",
-      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*$"
+      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*(:[a-zA-Z0-9-]+)?$"
     },
     "QueueArn": {
       "description": "The identifier for the queue.",
@@ -86,10 +86,26 @@
         },
         "UserConfig": {
           "$ref": "#/definitions/UserQuickConnectConfig"
+        },
+        "FlowConfig": {
+          "$ref": "#/definitions/FlowQuickConnectConfig"
         }
       },
       "required": [
         "QuickConnectType"
+      ]
+    },
+    "FlowQuickConnectConfig": {
+      "description": "The flow configuration. This is required only if QuickConnectType is FLOW.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ContactFlowArn": {
+          "$ref": "#/definitions/ContactFlowArn"
+        }
+      },
+      "required": [
+        "ContactFlowArn"
       ]
     },
     "QuickConnectType": {
@@ -98,7 +114,8 @@
       "enum": [
         "PHONE_NUMBER",
         "QUEUE",
-        "USER"
+        "USER",
+        "FLOW"
       ]
     },
     "Tag": {
@@ -168,7 +185,8 @@
       "enum": [
         "PHONE_NUMBER",
         "QUEUE",
-        "USER"
+        "USER",
+        "FLOW"
       ]
     }
   },
@@ -231,7 +249,7 @@
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": true,
+    "cloudFormationSystemTags": false,
     "tagProperty": "/properties/Tags",
     "permissions": [
       "connect:TagResource",

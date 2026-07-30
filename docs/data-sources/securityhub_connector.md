@@ -21,19 +21,19 @@ Data Source schema for AWS::SecurityHub::Connector
 
 ### Read-Only
 
-- `connector_arn` (String) The ARN of the connector
-- `connector_id` (String) The ID of the connector
+- `connector_arn` (String)
+- `connector_id` (String)
 - `connector_status` (String) The status of the connector
-- `created_at` (String) The date and time for createdAt in UTC and ISO 8601 format.
-- `created_by` (String) The principal that created the connector
-- `description` (String) A description of the connector
+- `created_at` (String) The timestamp formatted in ISO8601
+- `created_by` (String)
+- `description` (String) The description of the connector.
 - `enablement_status` (String) The enablement status of the connector
-- `issues` (Attributes List) The list of health issues associated with the connector (see [below for nested schema](#nestedatt--issues))
-- `last_checked_at` (String) The date and time for lastCheckedAt in UTC and ISO 8601 format.
-- `last_updated_at` (String) The date and time for lastUpdatedAt in UTC and ISO 8601 format.
-- `message` (String) The message associated with the connector status change
-- `name` (String) The name of the connector
-- `provider_name` (Attributes) The CSPM provider configuration for the connector (see [below for nested schema](#nestedatt--provider_name))
+- `issues` (Attributes List) (see [below for nested schema](#nestedatt--issues))
+- `last_checked_at` (String) The timestamp formatted in ISO8601
+- `last_updated_at` (String) The timestamp formatted in ISO8601
+- `message` (String)
+- `name` (String) The name of the connector.
+- `provider_name` (Attributes) (see [below for nested schema](#nestedatt--provider_name))
 - `tags` (Map of String) A key-value pair to associate with a resource.
 
 <a id="nestedatt--issues"></a>
@@ -41,8 +41,8 @@ Data Source schema for AWS::SecurityHub::Connector
 
 Read-Only:
 
-- `code` (String) The code identifying the type of health issue
-- `message` (String) The message describing the health issue
+- `code` (String) The error code that identifies the type of health issue.
+- `message` (String) A human-readable message that describes the health issue.
 
 
 <a id="nestedatt--provider_name"></a>
@@ -50,21 +50,21 @@ Read-Only:
 
 Read-Only:
 
-- `azure` (Attributes) The configuration settings for an Azure CSPM provider (see [below for nested schema](#nestedatt--provider_name--azure))
+- `azure` (Attributes) The configuration for connecting to an Azure environment. (see [below for nested schema](#nestedatt--provider_name--azure))
 
 <a id="nestedatt--provider_name--azure"></a>
 ### Nested Schema for `provider_name.azure`
 
 Read-Only:
 
-- `aws_config_connector_arn` (String) The ARN of the AWS Config connector used for the Azure integration
-- `azure_regions` (Set of String) The list of Azure regions to include in the connector scope
-- `scope_configuration` (Attributes) The scope configuration for an Azure connector (see [below for nested schema](#nestedatt--provider_name--azure--scope_configuration))
+- `aws_config_connector_arn` (String) The ARN of the multi-cloud configuration connector used to establish the connection to Azure.
+- `azure_regions` (Set of String) The list of Azure regions to monitor.
+- `scope_configuration` (Attributes) The scope configuration that defines which Azure resources are monitored. (see [below for nested schema](#nestedatt--provider_name--azure--scope_configuration))
 
 <a id="nestedatt--provider_name--azure--scope_configuration"></a>
 ### Nested Schema for `provider_name.azure.scope_configuration`
 
 Read-Only:
 
-- `scope_type` (String) The scope type for the Azure connector
-- `scope_values` (Set of String) The list of scope values for the Azure connector
+- `scope_type` (String) The type of scope. Valid values are ``tenant`` and ``subscription``.
+- `scope_values` (Set of String) The list of scope values, such as subscription IDs, when the scope type is ``subscription``.

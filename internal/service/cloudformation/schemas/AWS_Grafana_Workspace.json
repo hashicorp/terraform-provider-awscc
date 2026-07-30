@@ -393,6 +393,32 @@
     "PluginAdminEnabled": {
       "type": "boolean",
       "description": "Allow workspace admins to install plugins"
+    },
+    "Tags": {
+      "type": "array",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "type": "object",
+        "properties": {
+          "Key": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "Value": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 256
+          }
+        },
+        "required": [
+          "Key",
+          "Value"
+        ],
+        "additionalProperties": false
+      },
+      "description": "The list of tags associated with the workspace."
     }
   },
   "required": [
@@ -419,10 +445,16 @@
     "/properties/Id"
   ],
   "tagging": {
-    "taggable": false,
-    "tagOnCreate": false,
-    "tagUpdatable": false,
-    "cloudFormationSystemTags": false
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "grafana:TagResource",
+      "grafana:UntagResource",
+      "grafana:ListTagsForResource"
+    ]
   },
   "additionalProperties": false,
   "handlers": {
@@ -433,6 +465,8 @@
         "grafana:DescribeWorkspaceAuthentication",
         "grafana:DescribeWorkspaceConfiguration",
         "grafana:UpdateWorkspaceAuthentication",
+        "grafana:ListTagsForResource",
+        "grafana:TagResource",
         "sso:DescribeRegisteredRegions",
         "sso:CreateManagedApplicationInstance",
         "organizations:DescribeOrganization",
@@ -442,6 +476,8 @@
         "ec2:DescribeSecurityGroups",
         "ec2:DescribeSubnets",
         "ec2:DescribeVpcs",
+        "ec2:DescribeDhcpOptions",
+        "ec2:DescribeNetworkInterfaces",
         "iam:CreateServiceLinkedRole",
         "sso:ListApplicationInstances",
         "sso:GetApplicationInstance"
@@ -451,7 +487,8 @@
       "permissions": [
         "grafana:DescribeWorkspace",
         "grafana:DescribeWorkspaceAuthentication",
-        "grafana:DescribeWorkspaceConfiguration"
+        "grafana:DescribeWorkspaceConfiguration",
+        "grafana:ListTagsForResource"
       ]
     },
     "update": {
@@ -462,6 +499,9 @@
         "grafana:UpdateWorkspace",
         "grafana:UpdateWorkspaceAuthentication",
         "grafana:UpdateWorkspaceConfiguration",
+        "grafana:TagResource",
+        "grafana:UntagResource",
+        "grafana:ListTagsForResource",
         "sso:DescribeRegisteredRegions",
         "sso:CreateManagedApplicationInstance",
         "ec2:GetManagedPrefixListEntries",
@@ -469,6 +509,8 @@
         "ec2:DescribeSecurityGroups",
         "ec2:DescribeSubnets",
         "ec2:DescribeVpcs",
+        "ec2:DescribeDhcpOptions",
+        "ec2:DescribeNetworkInterfaces",
         "iam:CreateServiceLinkedRole",
         "sso:ListApplicationInstances",
         "sso:GetApplicationInstance"
@@ -488,7 +530,8 @@
       "permissions": [
         "grafana:ListWorkspaces",
         "grafana:DescribeWorkspaceAuthentication",
-        "grafana:DescribeWorkspaceConfiguration"
+        "grafana:DescribeWorkspaceConfiguration",
+        "grafana:ListTagsForResource"
       ]
     }
   }

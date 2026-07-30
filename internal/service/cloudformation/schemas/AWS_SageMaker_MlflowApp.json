@@ -73,10 +73,12 @@
     },
     "CreationTime": {
       "type": "string",
+      "format": "date-time",
       "description": "The date and time that the MLflow App was created."
     },
     "LastModifiedTime": {
       "type": "string",
+      "format": "date-time",
       "description": "The date and time that the MLflow App was last modified."
     },
     "Tags": {

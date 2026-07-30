@@ -106,9 +106,23 @@ Optional:
 
 Optional:
 
+- `eums_sms` (Attributes) (see [below for nested schema](#nestedatt--sms_configuration--eums_sms))
 - `external_id` (String)
 - `sns_caller_arn` (String)
 - `sns_region` (String)
+
+<a id="nestedatt--sms_configuration--eums_sms"></a>
+### Nested Schema for `sms_configuration.eums_sms`
+
+Optional:
+
+- `caller_arn` (String)
+- `configuration_set_name` (String)
+- `external_id` (String)
+- `in_entity_id` (String)
+- `in_template_id` (String)
+- `origination_identity` (String)
+- `region` (String)
 
 ## Import
 

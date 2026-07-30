@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1461 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1472 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -626,6 +626,10 @@ resource_schema "aws_backup_tiering_configuration" {
   cloudformation_type_name = "AWS::Backup::TieringConfiguration"
 }
 
+resource_schema "aws_backup_legal_hold" {
+  cloudformation_type_name = "AWS::Backup::LegalHold"
+}
+
 resource_schema "aws_backupgateway_hypervisor" {
   cloudformation_type_name = "AWS::BackupGateway::Hypervisor"
 }
@@ -963,6 +967,10 @@ resource_schema "aws_certificatemanager_acme_endpoint" {
 
 resource_schema "aws_certificatemanager_acme_external_account_binding" {
   cloudformation_type_name = "AWS::CertificateManager::AcmeExternalAccountBinding"
+}
+
+resource_schema "aws_certificatemanager_certificate" {
+  cloudformation_type_name = "AWS::CertificateManager::Certificate"
 }
 
 resource_schema "aws_chatbot_custom_action" {
@@ -2386,6 +2394,11 @@ resource_schema "aws_ec2_transit_gateway_policy_table" {
 
 resource_schema "aws_ec2_transit_gateway_policy_table_association" {
   cloudformation_type_name               = "AWS::EC2::TransitGatewayPolicyTableAssociation"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_ec2_transit_gateway_policy_table_entry" {
+  cloudformation_type_name               = "AWS::EC2::TransitGatewayPolicyTableEntry"
   suppress_plural_data_source_generation = true
 }
 
@@ -4081,6 +4094,10 @@ resource_schema "aws_msk_replicator" {
   cloudformation_type_name = "AWS::MSK::Replicator"
 }
 
+resource_schema "aws_msk_channel" {
+  cloudformation_type_name = "AWS::MSK::Channel"
+}
+
 resource_schema "aws_msk_serverless_cluster" {
   cloudformation_type_name = "AWS::MSK::ServerlessCluster"
 }
@@ -4370,6 +4387,10 @@ resource_schema "aws_neptunegraph_graph_snapshot" {
 
 resource_schema "aws_neptunegraph_private_graph_endpoint" {
   cloudformation_type_name = "AWS::NeptuneGraph::PrivateGraphEndpoint"
+}
+
+resource_schema "aws_networkflowmonitor_monitor" {
+  cloudformation_type_name = "AWS::NetworkFlowMonitor::Monitor"
 }
 
 resource_schema "aws_networkfirewall_firewall" {
@@ -4971,6 +4992,16 @@ resource_schema "aws_quicksight_template" {
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1531
 }
 
+resource_schema "aws_quicksight_agent" {
+  cloudformation_type_name               = "AWS::QuickSight::Agent"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_quicksight_space" {
+  cloudformation_type_name               = "AWS::QuickSight::Space"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_quicksight_theme" {
   cloudformation_type_name               = "AWS::QuickSight::Theme"
   suppress_plural_data_source_generation = true
@@ -5225,6 +5256,16 @@ resource_schema "aws_rolesanywhere_profile" {
 
 resource_schema "aws_rolesanywhere_trust_anchor" {
   cloudformation_type_name = "AWS::RolesAnywhere::TrustAnchor"
+}
+
+resource_schema "aws_scn_dataset" {
+  cloudformation_type_name               = "AWS::SCN::Dataset"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_scn_namespace" {
+  cloudformation_type_name               = "AWS::SCN::Namespace"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_route53_cidr_collection" {
@@ -5673,6 +5714,10 @@ resource_schema "aws_ssm_document" {
   cloudformation_type_name = "AWS::SSM::Document"
 }
 
+resource_schema "aws_ssm_ops_item" {
+  cloudformation_type_name = "AWS::SSM::OpsItem"
+}
+
 resource_schema "aws_ssm_maintenance_window" {
   cloudformation_type_name = "AWS::SSM::MaintenanceWindow"
 }
@@ -5856,6 +5901,10 @@ resource_schema "aws_sagemaker_mlflow_app" {
 
 resource_schema "aws_sagemaker_mlflow_tracking_server" {
   cloudformation_type_name = "AWS::SageMaker::MlflowTrackingServer"
+}
+
+resource_schema "aws_servicediscovery_service" {
+  cloudformation_type_name = "AWS::ServiceDiscovery::Service"
 }
 
 resource_schema "aws_sagemaker_model" {

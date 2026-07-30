@@ -34,10 +34,19 @@ Data Source schema for AWS::Connect::QuickConnect
 
 Read-Only:
 
+- `flow_config` (Attributes) The flow configuration. This is required only if QuickConnectType is FLOW. (see [below for nested schema](#nestedatt--quick_connect_config--flow_config))
 - `phone_config` (Attributes) The phone configuration. This is required only if QuickConnectType is PHONE_NUMBER. (see [below for nested schema](#nestedatt--quick_connect_config--phone_config))
 - `queue_config` (Attributes) The queue configuration. This is required only if QuickConnectType is QUEUE. (see [below for nested schema](#nestedatt--quick_connect_config--queue_config))
 - `quick_connect_type` (String) The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).
 - `user_config` (Attributes) The user configuration. This is required only if QuickConnectType is USER. (see [below for nested schema](#nestedatt--quick_connect_config--user_config))
+
+<a id="nestedatt--quick_connect_config--flow_config"></a>
+### Nested Schema for `quick_connect_config.flow_config`
+
+Read-Only:
+
+- `contact_flow_arn` (String) The identifier of the contact flow.
+
 
 <a id="nestedatt--quick_connect_config--phone_config"></a>
 ### Nested Schema for `quick_connect_config.phone_config`

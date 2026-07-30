@@ -59,6 +59,22 @@ func placementGroupResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ParentGroupId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of a parent placement group. Valid for strategies that support parent group linking.",
+		//	  "type": "string"
+		//	}
+		"parent_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of a parent placement group. Valid for strategies that support parent group linking.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PartitionCount
 		// CloudFormation resource type schema:
 		//
@@ -210,6 +226,7 @@ func placementGroupResource(ctx context.Context) (resource.Resource, error) {
 		"group_id":        "GroupId",
 		"group_name":      "GroupName",
 		"key":             "Key",
+		"parent_group_id": "ParentGroupId",
 		"partition_count": "PartitionCount",
 		"spread_level":    "SpreadLevel",
 		"strategy":        "Strategy",

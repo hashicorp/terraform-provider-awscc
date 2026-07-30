@@ -1,0 +1,237 @@
+{
+  "typeName": "AWS::ServiceDiscovery::Service",
+  "description": "Resource Type definition for AWS::ServiceDiscovery::Service",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-servicediscovery-service",
+  "additionalProperties": false,
+  "properties": {
+    "Type": {
+      "type": "string",
+      "description": "The type of service. Supported values are HTTP or DNS."
+    },
+    "Description": {
+      "type": "string",
+      "description": "A description for the service."
+    },
+    "ServiceAttributes": {
+      "description": "A string map that contains attributes and values for the service. You can specify a maximum of 30 key-value pairs.",
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "maxProperties": 30
+    },
+    "HealthCheckCustomConfig": {
+      "$ref": "#/definitions/HealthCheckCustomConfig",
+      "description": "Settings for custom health checks."
+    },
+    "DnsConfig": {
+      "$ref": "#/definitions/DnsConfig",
+      "description": "DNS-related configurations for the service."
+    },
+    "Id": {
+      "type": "string",
+      "description": "The unique identifier for the service."
+    },
+    "NamespaceId": {
+      "type": "string",
+      "description": "The ID of the namespace in which the service is created."
+    },
+    "HealthCheckConfig": {
+      "$ref": "#/definitions/HealthCheckConfig",
+      "description": "Settings for health checks. Used when routing is DNS-based."
+    },
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the service.",
+      "pattern": "^arn:[a-zA-Z0-9-]+:servicediscovery:[a-zA-Z0-9-]+:[0-9]{12}:(service|service/[a-zA-Z0-9-_]+|service:[a-zA-Z0-9-_]+)$"
+    },
+    "Tags": {
+      "type": "array",
+      "uniqueItems": false,
+      "description": "An array of key-value pairs to associate with the service.",
+      "insertionOrder": true,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the service."
+    }
+  },
+  "definitions": {
+    "HealthCheckCustomConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Configurations for custom health checks for the service.",
+      "properties": {
+        "FailureThreshold": {
+          "type": "number",
+          "description": "The number of consecutive health check failures required before the service is considered unhealthy."
+        }
+      }
+    },
+    "DnsConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "DNS configuration settings for the service.",
+      "properties": {
+        "DnsRecords": {
+          "type": "array",
+          "uniqueItems": false,
+          "description": "A list of DNS records associated with the service.",
+          "insertionOrder": true,
+          "items": {
+            "$ref": "#/definitions/DnsRecord"
+          }
+        },
+        "RoutingPolicy": {
+          "type": "string",
+          "description": "The routing policy to use for DNS queries."
+        },
+        "NamespaceId": {
+          "type": "string",
+          "description": "The ID of the namespace for the DNS configuration."
+        }
+      },
+      "required": [
+        "DnsRecords"
+      ]
+    },
+    "HealthCheckConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Configuration for health checks for the service.",
+      "properties": {
+        "Type": {
+          "type": "string",
+          "description": "The type of health check (e.g., HTTP, HTTPS, TCP)."
+        },
+        "ResourcePath": {
+          "type": "string",
+          "description": "The path to ping on the service for health checks."
+        },
+        "FailureThreshold": {
+          "type": "number",
+          "description": "The number of consecutive health check failures that must occur before declaring the service unhealthy."
+        }
+      },
+      "required": [
+        "Type"
+      ]
+    },
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "A key-value pair to associate with the service.",
+      "properties": {
+        "Value": {
+          "type": "string",
+          "description": "The value of the tag."
+        },
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag."
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ]
+    },
+    "DnsRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "A DNS record associated with the service.",
+      "properties": {
+        "TTL": {
+          "type": "number",
+          "description": "The time-to-live (TTL) for the DNS record."
+        },
+        "Type": {
+          "type": "string",
+          "description": "The DNS record type (e.g., A, AAAA, SRV)."
+        }
+      },
+      "required": [
+        "Type",
+        "TTL"
+      ]
+    }
+  },
+  "createOnlyProperties": [
+    "/properties/HealthCheckCustomConfig",
+    "/properties/Name",
+    "/properties/Type",
+    "/properties/NamespaceId"
+  ],
+  "primaryIdentifier": [
+    "/properties/Id"
+  ],
+  "readOnlyProperties": [
+    "/properties/Id",
+    "/properties/Arn"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "servicediscovery:TagResource",
+      "servicediscovery:UntagResource",
+      "servicediscovery:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "servicediscovery:CreateService",
+        "servicediscovery:TagResource",
+        "servicediscovery:UntagResource",
+        "servicediscovery:ListTagsForResource",
+        "servicediscovery:GetService",
+        "servicediscovery:ListServices",
+        "servicediscovery:UpdateServiceAttributes",
+        "servicediscovery:GetServiceAttributes"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "servicediscovery:DeleteService",
+        "servicediscovery:GetService"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "servicediscovery:ListServices",
+        "servicediscovery:GetServiceAttributes"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "servicediscovery:GetService",
+        "servicediscovery:ListTagsForResource",
+        "servicediscovery:GetServiceAttributes"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "servicediscovery:UpdateService",
+        "servicediscovery:TagResource",
+        "servicediscovery:UntagResource",
+        "servicediscovery:GetService",
+        "servicediscovery:GetOperation",
+        "servicediscovery:ListTagsForResource",
+        "servicediscovery:GetNamespace",
+        "servicediscovery:DeleteServiceAttributes",
+        "servicediscovery:UpdateServiceAttributes",
+        "servicediscovery:GetServiceAttributes"
+      ]
+    }
+  }
+}

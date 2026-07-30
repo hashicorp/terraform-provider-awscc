@@ -1,0 +1,120 @@
+{
+  "typeName": "AWS::EC2::TransitGatewayPolicyTableEntry",
+  "description": "AWS::EC2::TransitGatewayPolicyTableEntry Resource Definition",
+  "replacementStrategy": "delete_then_create",
+  "properties": {
+    "TransitGatewayPolicyTableId": {
+      "description": "The ID of the transit gateway policy table.",
+      "type": "string"
+    },
+    "PolicyRuleNumber": {
+      "description": "The rule number for the policy table entry.",
+      "type": "string"
+    },
+    "PolicyRule": {
+      "description": "The policy rule associated with the entry.",
+      "$ref": "#/definitions/TransitGatewayPolicyRule"
+    },
+    "TargetRouteTableId": {
+      "description": "The ID of the target route table.",
+      "type": "string"
+    },
+    "State": {
+      "description": "The state of the policy table entry.",
+      "type": "string"
+    }
+  },
+  "definitions": {
+    "TransitGatewayPolicyRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "SourceCidrBlock": {
+          "description": "The source CIDR block for the transit gateway policy rule.",
+          "type": "string"
+        },
+        "DestinationCidrBlock": {
+          "description": "The destination CIDR block for the transit gateway policy rule.",
+          "type": "string"
+        },
+        "SourcePortRange": {
+          "description": "The source port range for the transit gateway policy rule.",
+          "type": "string"
+        },
+        "DestinationPortRange": {
+          "description": "The destination port range for the transit gateway policy rule.",
+          "type": "string"
+        },
+        "Protocol": {
+          "description": "The protocol for the transit gateway policy rule.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "TransitGatewayPolicyTableId",
+    "PolicyRuleNumber",
+    "PolicyRule",
+    "TargetRouteTableId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "createOnlyProperties": [
+    "/properties/TransitGatewayPolicyTableId",
+    "/properties/PolicyRuleNumber"
+  ],
+  "readOnlyProperties": [
+    "/properties/State"
+  ],
+  "primaryIdentifier": [
+    "/properties/TransitGatewayPolicyTableId",
+    "/properties/PolicyRuleNumber"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ec2:CreateTransitGatewayPolicyTableEntry",
+        "ec2:GetTransitGatewayPolicyTableEntries"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ec2:GetTransitGatewayPolicyTableEntries"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ec2:ModifyTransitGatewayPolicyTableEntry",
+        "ec2:GetTransitGatewayPolicyTableEntries"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ec2:DeleteTransitGatewayPolicyTableEntry",
+        "ec2:GetTransitGatewayPolicyTableEntries"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ec2:GetTransitGatewayPolicyTableEntries"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "TransitGatewayPolicyTableId": {
+            "$ref": "resource-schema.json#/properties/TransitGatewayPolicyTableId"
+          }
+        },
+        "required": [
+          "TransitGatewayPolicyTableId"
+        ]
+      }
+    }
+  },
+  "propertyTransform": {
+    "/properties/PolicyRule/SourcePortRange": "$count($split(SourcePortRange, \"-\")) = 2 and $split(SourcePortRange, \"-\")[0] = $split(SourcePortRange, \"-\")[1] ? $split(SourcePortRange, \"-\")[0] : SourcePortRange",
+    "/properties/PolicyRule/DestinationPortRange": "$count($split(DestinationPortRange, \"-\")) = 2 and $split(DestinationPortRange, \"-\")[0] = $split(DestinationPortRange, \"-\")[1] ? $split(DestinationPortRange, \"-\")[0] : DestinationPortRange"
+  }
+}

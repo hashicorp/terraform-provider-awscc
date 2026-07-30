@@ -165,9 +165,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
-				listplanmodifier.RequiresReplaceIfConfigured(),
 			}, /*END PLAN MODIFIERS*/
-			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: UserProfileArn
 		// CloudFormation resource type schema:
@@ -472,7 +470,21 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	                "ml.r6id.12xlarge",
 		//	                "ml.r6id.16xlarge",
 		//	                "ml.r6id.24xlarge",
-		//	                "ml.r6id.32xlarge"
+		//	                "ml.r6id.32xlarge",
+		//	                "ml.p5.4xlarge",
+		//	                "ml.p6-b200.48xlarge",
+		//	                "ml.g7.2xlarge",
+		//	                "ml.g7.4xlarge",
+		//	                "ml.g7.8xlarge",
+		//	                "ml.g7.12xlarge",
+		//	                "ml.g7.24xlarge",
+		//	                "ml.g7.48xlarge",
+		//	                "ml.g7e.2xlarge",
+		//	                "ml.g7e.4xlarge",
+		//	                "ml.g7e.8xlarge",
+		//	                "ml.g7e.12xlarge",
+		//	                "ml.g7e.24xlarge",
+		//	                "ml.g7e.48xlarge"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -491,7 +503,14 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	            "SageMakerImageVersionArn": {
 		//	              "description": "The ARN of the image version created on the instance.",
 		//	              "maxLength": 256,
-		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "pattern": "^(arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+|None)",
+		//	              "type": "string"
+		//	            },
+		//	            "TrainingPlanArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
+		//	              "maxLength": 2048,
+		//	              "minLength": 0,
+		//	              "pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -579,7 +598,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "type": "object"
 		//	      },
-		//	      "maxItems": 2,
+		//	      "maxItems": 10,
 		//	      "minItems": 0,
 		//	      "type": "array",
 		//	      "uniqueItems": true
@@ -890,7 +909,21 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	                "ml.r6id.12xlarge",
 		//	                "ml.r6id.16xlarge",
 		//	                "ml.r6id.24xlarge",
-		//	                "ml.r6id.32xlarge"
+		//	                "ml.r6id.32xlarge",
+		//	                "ml.p5.4xlarge",
+		//	                "ml.p6-b200.48xlarge",
+		//	                "ml.g7.2xlarge",
+		//	                "ml.g7.4xlarge",
+		//	                "ml.g7.8xlarge",
+		//	                "ml.g7.12xlarge",
+		//	                "ml.g7.24xlarge",
+		//	                "ml.g7.48xlarge",
+		//	                "ml.g7e.2xlarge",
+		//	                "ml.g7e.4xlarge",
+		//	                "ml.g7e.8xlarge",
+		//	                "ml.g7e.12xlarge",
+		//	                "ml.g7e.24xlarge",
+		//	                "ml.g7e.48xlarge"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -909,8 +942,48 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	            "SageMakerImageVersionArn": {
 		//	              "description": "The ARN of the image version created on the instance.",
 		//	              "maxLength": 256,
-		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "pattern": "^(arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+|None)",
 		//	              "type": "string"
+		//	            },
+		//	            "TrainingPlanArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
+		//	              "maxLength": 2048,
+		//	              "minLength": 0,
+		//	              "pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "EmrSettings": {
+		//	          "additionalProperties": false,
+		//	          "description": "The configuration parameters for EMR settings.",
+		//	          "properties": {
+		//	            "AssumableRoleArns": {
+		//	              "description": "An array of Amazon Resource Names (ARNs) of the IAM roles that the execution role of SageMaker can assume.",
+		//	              "items": {
+		//	                "maxLength": 2048,
+		//	                "minLength": 20,
+		//	                "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 5,
+		//	              "minItems": 0,
+		//	              "type": "array",
+		//	              "uniqueItems": false
+		//	            },
+		//	            "ExecutionRoleArns": {
+		//	              "description": "An array of ARNs of IAM roles used by EMR cluster instances or job execution environments.",
+		//	              "items": {
+		//	                "maxLength": 2048,
+		//	                "minLength": 20,
+		//	                "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 5,
+		//	              "minItems": 0,
+		//	              "type": "array",
+		//	              "uniqueItems": false
 		//	            }
 		//	          },
 		//	          "type": "object"
@@ -1103,7 +1176,21 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	                "ml.r6id.12xlarge",
 		//	                "ml.r6id.16xlarge",
 		//	                "ml.r6id.24xlarge",
-		//	                "ml.r6id.32xlarge"
+		//	                "ml.r6id.32xlarge",
+		//	                "ml.p5.4xlarge",
+		//	                "ml.p6-b200.48xlarge",
+		//	                "ml.g7.2xlarge",
+		//	                "ml.g7.4xlarge",
+		//	                "ml.g7.8xlarge",
+		//	                "ml.g7.12xlarge",
+		//	                "ml.g7.24xlarge",
+		//	                "ml.g7.48xlarge",
+		//	                "ml.g7e.2xlarge",
+		//	                "ml.g7e.4xlarge",
+		//	                "ml.g7e.8xlarge",
+		//	                "ml.g7e.12xlarge",
+		//	                "ml.g7e.24xlarge",
+		//	                "ml.g7e.48xlarge"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -1122,7 +1209,14 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	            "SageMakerImageVersionArn": {
 		//	              "description": "The ARN of the image version created on the instance.",
 		//	              "maxLength": 256,
-		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "pattern": "^(arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+|None)",
+		//	              "type": "string"
+		//	            },
+		//	            "TrainingPlanArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
+		//	              "maxLength": 2048,
+		//	              "minLength": 0,
+		//	              "pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -1352,7 +1446,21 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	                "ml.r6id.12xlarge",
 		//	                "ml.r6id.16xlarge",
 		//	                "ml.r6id.24xlarge",
-		//	                "ml.r6id.32xlarge"
+		//	                "ml.r6id.32xlarge",
+		//	                "ml.p5.4xlarge",
+		//	                "ml.p6-b200.48xlarge",
+		//	                "ml.g7.2xlarge",
+		//	                "ml.g7.4xlarge",
+		//	                "ml.g7.8xlarge",
+		//	                "ml.g7.12xlarge",
+		//	                "ml.g7.24xlarge",
+		//	                "ml.g7.48xlarge",
+		//	                "ml.g7e.2xlarge",
+		//	                "ml.g7e.4xlarge",
+		//	                "ml.g7e.8xlarge",
+		//	                "ml.g7e.12xlarge",
+		//	                "ml.g7e.24xlarge",
+		//	                "ml.g7e.48xlarge"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -1371,7 +1479,14 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	            "SageMakerImageVersionArn": {
 		//	              "description": "The ARN of the image version created on the instance.",
 		//	              "maxLength": 256,
-		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "pattern": "^(arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+|None)",
+		//	              "type": "string"
+		//	            },
+		//	            "TrainingPlanArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
+		//	              "maxLength": 2048,
+		//	              "minLength": 0,
+		//	              "pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -1684,7 +1799,21 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	              "ml.r6id.12xlarge",
 		//	              "ml.r6id.16xlarge",
 		//	              "ml.r6id.24xlarge",
-		//	              "ml.r6id.32xlarge"
+		//	              "ml.r6id.32xlarge",
+		//	              "ml.p5.4xlarge",
+		//	              "ml.p6-b200.48xlarge",
+		//	              "ml.g7.2xlarge",
+		//	              "ml.g7.4xlarge",
+		//	              "ml.g7.8xlarge",
+		//	              "ml.g7.12xlarge",
+		//	              "ml.g7.24xlarge",
+		//	              "ml.g7.48xlarge",
+		//	              "ml.g7e.2xlarge",
+		//	              "ml.g7e.4xlarge",
+		//	              "ml.g7e.8xlarge",
+		//	              "ml.g7e.12xlarge",
+		//	              "ml.g7e.24xlarge",
+		//	              "ml.g7e.48xlarge"
 		//	            ],
 		//	            "type": "string"
 		//	          },
@@ -2097,6 +2226,20 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 											"ml.r6id.16xlarge",
 											"ml.r6id.24xlarge",
 											"ml.r6id.32xlarge",
+											"ml.p5.4xlarge",
+											"ml.p6-b200.48xlarge",
+											"ml.g7.2xlarge",
+											"ml.g7.4xlarge",
+											"ml.g7.8xlarge",
+											"ml.g7.12xlarge",
+											"ml.g7.24xlarge",
+											"ml.g7.48xlarge",
+											"ml.g7e.2xlarge",
+											"ml.g7e.4xlarge",
+											"ml.g7e.8xlarge",
+											"ml.g7e.12xlarge",
+											"ml.g7e.24xlarge",
+											"ml.g7e.48xlarge",
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2136,7 +2279,20 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
-										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+|None)"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: TrainingPlanArn
+								"training_plan_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(0, 2048),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -2287,7 +2443,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 					Optional: true,
 					Computed: true,
 					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.SizeBetween(0, 2),
+						listvalidator.SizeBetween(0, 10),
 						listvalidator.UniqueValues(),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -2698,6 +2854,20 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 											"ml.r6id.16xlarge",
 											"ml.r6id.24xlarge",
 											"ml.r6id.32xlarge",
+											"ml.p5.4xlarge",
+											"ml.p6-b200.48xlarge",
+											"ml.g7.2xlarge",
+											"ml.g7.4xlarge",
+											"ml.g7.8xlarge",
+											"ml.g7.12xlarge",
+											"ml.g7.24xlarge",
+											"ml.g7.48xlarge",
+											"ml.g7e.2xlarge",
+											"ml.g7e.4xlarge",
+											"ml.g7e.8xlarge",
+											"ml.g7e.12xlarge",
+											"ml.g7e.24xlarge",
+											"ml.g7e.48xlarge",
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2737,7 +2907,20 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
-										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+|None)"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: TrainingPlanArn
+								"training_plan_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(0, 2048),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -2745,6 +2928,51 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the JupyterLab app.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: EmrSettings
+						"emr_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AssumableRoleArns
+								"assumable_role_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "An array of Amazon Resource Names (ARNs) of the IAM roles that the execution role of SageMaker can assume.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.SizeBetween(0, 5),
+										listvalidator.ValueStringsAre(
+											stringvalidator.LengthBetween(20, 2048),
+											stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ExecutionRoleArns
+								"execution_role_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "An array of ARNs of IAM roles used by EMR cluster instances or job execution environments.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.SizeBetween(0, 5),
+										listvalidator.ValueStringsAre(
+											stringvalidator.LengthBetween(20, 2048),
+											stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The configuration parameters for EMR settings.",
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -2952,6 +3180,20 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 											"ml.r6id.16xlarge",
 											"ml.r6id.24xlarge",
 											"ml.r6id.32xlarge",
+											"ml.p5.4xlarge",
+											"ml.p6-b200.48xlarge",
+											"ml.g7.2xlarge",
+											"ml.g7.4xlarge",
+											"ml.g7.8xlarge",
+											"ml.g7.12xlarge",
+											"ml.g7.24xlarge",
+											"ml.g7.48xlarge",
+											"ml.g7e.2xlarge",
+											"ml.g7e.4xlarge",
+											"ml.g7e.8xlarge",
+											"ml.g7e.12xlarge",
+											"ml.g7e.24xlarge",
+											"ml.g7e.48xlarge",
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -2991,7 +3233,20 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
-										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+|None)"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: TrainingPlanArn
+								"training_plan_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(0, 2048),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -3261,6 +3516,20 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 											"ml.r6id.16xlarge",
 											"ml.r6id.24xlarge",
 											"ml.r6id.32xlarge",
+											"ml.p5.4xlarge",
+											"ml.p6-b200.48xlarge",
+											"ml.g7.2xlarge",
+											"ml.g7.4xlarge",
+											"ml.g7.8xlarge",
+											"ml.g7.12xlarge",
+											"ml.g7.24xlarge",
+											"ml.g7.48xlarge",
+											"ml.g7e.2xlarge",
+											"ml.g7e.4xlarge",
+											"ml.g7e.8xlarge",
+											"ml.g7e.12xlarge",
+											"ml.g7e.24xlarge",
+											"ml.g7e.48xlarge",
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3300,7 +3569,20 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
-										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+|None)"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: TrainingPlanArn
+								"training_plan_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(0, 2048),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -3714,6 +3996,20 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 										"ml.r6id.16xlarge",
 										"ml.r6id.24xlarge",
 										"ml.r6id.32xlarge",
+										"ml.p5.4xlarge",
+										"ml.p6-b200.48xlarge",
+										"ml.g7.2xlarge",
+										"ml.g7.4xlarge",
+										"ml.g7.8xlarge",
+										"ml.g7.12xlarge",
+										"ml.g7.24xlarge",
+										"ml.g7.48xlarge",
+										"ml.g7e.2xlarge",
+										"ml.g7e.4xlarge",
+										"ml.g7e.8xlarge",
+										"ml.g7e.12xlarge",
+										"ml.g7e.24xlarge",
+										"ml.g7e.48xlarge",
 									),
 								),
 							}, /*END VALIDATORS*/
@@ -3858,6 +4154,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		"access_status":                           "AccessStatus",
 		"app_image_config_name":                   "AppImageConfigName",
 		"app_lifecycle_management":                "AppLifecycleManagement",
+		"assumable_role_arns":                     "AssumableRoleArns",
 		"auto_mount_home_efs":                     "AutoMountHomeEFS",
 		"built_in_lifecycle_config_arn":           "BuiltInLifecycleConfigArn",
 		"code_editor_app_settings":                "CodeEditorAppSettings",
@@ -3871,7 +4168,9 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		"default_resource_spec":                   "DefaultResourceSpec",
 		"domain_id":                               "DomainId",
 		"efs_file_system_config":                  "EFSFileSystemConfig",
+		"emr_settings":                            "EmrSettings",
 		"execution_role":                          "ExecutionRole",
+		"execution_role_arns":                     "ExecutionRoleArns",
 		"file_system_id":                          "FileSystemId",
 		"file_system_path":                        "FileSystemPath",
 		"fsx_lustre_file_system_config":           "FSxLustreFileSystemConfig",
@@ -3914,6 +4213,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		"studio_web_portal":                       "StudioWebPortal",
 		"studio_web_portal_settings":              "StudioWebPortalSettings",
 		"tags":                                    "Tags",
+		"training_plan_arn":                       "TrainingPlanArn",
 		"uid":                                     "Uid",
 		"user_group":                              "UserGroup",
 		"user_profile_arn":                        "UserProfileArn",
@@ -3923,10 +4223,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		"version_aliases":                         "VersionAliases",
 	})
 
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/Tags",
-	})
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(30).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 

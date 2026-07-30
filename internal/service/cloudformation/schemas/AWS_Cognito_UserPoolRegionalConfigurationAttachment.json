@@ -134,8 +134,41 @@
         },
         "SnsRegion": {
           "type": "string"
+        },
+        "EumsSms": {
+          "$ref": "#/definitions/EumsSmsConfiguration"
         }
       },
+      "additionalProperties": false
+    },
+    "EumsSmsConfiguration": {
+      "type": "object",
+      "properties": {
+        "CallerArn": {
+          "type": "string"
+        },
+        "ExternalId": {
+          "type": "string"
+        },
+        "OriginationIdentity": {
+          "type": "string"
+        },
+        "ConfigurationSetName": {
+          "type": "string"
+        },
+        "InEntityId": {
+          "type": "string"
+        },
+        "InTemplateId": {
+          "type": "string"
+        },
+        "Region": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "CallerArn"
+      ],
       "additionalProperties": false
     }
   },

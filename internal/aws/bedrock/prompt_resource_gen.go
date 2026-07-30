@@ -653,7 +653,7 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 1,
+		//	  "maxItems": 3,
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
@@ -1360,7 +1360,7 @@ func promptResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(0, 1),
+				listvalidator.SizeBetween(0, 3),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),

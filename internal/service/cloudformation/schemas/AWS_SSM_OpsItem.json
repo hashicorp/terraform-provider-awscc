@@ -1,0 +1,174 @@
+{
+  "typeName": "AWS::SSM::OpsItem",
+  "description": "Resource schema for AWS::SSM::OpsItem.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "OpsItemId": {
+      "description": "The ID of the OpsItem.",
+      "type": "string",
+      "pattern": "^(oi)-[0-9a-f]{12}$"
+    },
+    "OpsItemArn": {
+      "description": "The ARN of the OpsItem.",
+      "type": "string"
+    },
+    "Title": {
+      "description": "The title of the OpsItem.",
+      "type": "string"
+    },
+    "Description": {
+      "description": "The description of the OpsItem.",
+      "type": "string"
+    },
+    "Source": {
+      "description": "The origin of the OpsItem.",
+      "type": "string"
+    },
+    "Priority": {
+      "description": "The priority of the OpsItem.",
+      "type": "integer"
+    },
+    "Severity": {
+      "description": "The severity of the OpsItem.",
+      "type": "string"
+    },
+    "Category": {
+      "description": "The category of the OpsItem.",
+      "type": "string"
+    },
+    "Status": {
+      "description": "The status of the OpsItem.",
+      "type": "string"
+    },
+    "CreatedBy": {
+      "description": "The user who created the OpsItem.",
+      "type": "string"
+    },
+    "CreatedTime": {
+      "description": "The time the OpsItem was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "LastModifiedBy": {
+      "description": "The user who last modified the OpsItem.",
+      "type": "string"
+    },
+    "LastModifiedTime": {
+      "description": "The time the OpsItem was last modified.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "OpsItemType": {
+      "description": "The type of OpsItem.",
+      "type": "string"
+    },
+    "Version": {
+      "description": "The version of the OpsItem.",
+      "type": "string"
+    },
+    "Tags": {
+      "description": "Tags for the OpsItem.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "Title",
+    "Description",
+    "Source"
+  ],
+  "readOnlyProperties": [
+    "/properties/OpsItemId",
+    "/properties/OpsItemArn",
+    "/properties/Status",
+    "/properties/CreatedBy",
+    "/properties/CreatedTime",
+    "/properties/LastModifiedBy",
+    "/properties/LastModifiedTime",
+    "/properties/OpsItemType",
+    "/properties/Version"
+  ],
+  "createOnlyProperties": [
+    "/properties/Source"
+  ],
+  "primaryIdentifier": [
+    "/properties/OpsItemArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/OpsItemId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "ssm:AddTagsToResource",
+      "ssm:RemoveTagsFromResource",
+      "ssm:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ssm:CreateOpsItem",
+        "ssm:GetOpsItem",
+        "ssm:DescribeOpsItems",
+        "ssm:AddTagsToResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ssm:GetOpsItem",
+        "ssm:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ssm:UpdateOpsItem",
+        "ssm:GetOpsItem",
+        "ssm:AddTagsToResource",
+        "ssm:RemoveTagsFromResource",
+        "ssm:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ssm:GetOpsItem",
+        "ssm:ListTagsForResource",
+        "ssm:DeleteOpsItem"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ssm:DescribeOpsItems"
+      ]
+    }
+  }
+}

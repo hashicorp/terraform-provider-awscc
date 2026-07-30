@@ -1,6 +1,6 @@
 {
   "typeName": "AWS::SecurityHub::Connector",
-  "description": "Resource schema for AWS::SecurityHub::Connector",
+  "description": "Creates a connector to a third-party cloud provider in Security Hub CSPM. A connector establishes a connection between Security Hub CSPM and a third-party cloud provider, enabling Security Hub CSPM to ingest security findings and resource data from the connected environment.",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-securityhub",
   "definitions": {
     "Tags": {
@@ -23,10 +23,10 @@
     },
     "AzureScopeConfiguration": {
       "type": "object",
-      "description": "The scope configuration for an Azure connector",
+      "description": "The scope configuration for an Azure connector, defining the tenant or subscription scope.",
       "properties": {
         "ScopeType": {
-          "description": "The scope type for the Azure connector",
+          "description": "The type of scope. Valid values are ``tenant`` and ``subscription``.",
           "type": "string",
           "enum": [
             "TENANT",
@@ -34,7 +34,7 @@
           ]
         },
         "ScopeValues": {
-          "description": "The list of scope values for the Azure connector",
+          "description": "The list of scope values, such as subscription IDs, when the scope type is ``subscription``.",
           "insertionOrder": false,
           "uniqueItems": true,
           "type": "array",
@@ -52,17 +52,18 @@
     },
     "AzureProviderConfiguration": {
       "type": "object",
-      "description": "The configuration settings for an Azure CSPM provider",
+      "description": "The configuration for connecting to an Azure environment.",
       "properties": {
         "AWSConfigConnectorArn": {
-          "description": "The ARN of the AWS Config connector used for the Azure integration",
+          "description": "The ARN of the multi-cloud configuration connector used to establish the connection to Azure.",
           "type": "string"
         },
         "ScopeConfiguration": {
-          "$ref": "#/definitions/AzureScopeConfiguration"
+          "$ref": "#/definitions/AzureScopeConfiguration",
+          "description": "The scope configuration that defines which Azure resources are monitored."
         },
         "AzureRegions": {
-          "description": "The list of Azure regions to include in the connector scope",
+          "description": "The list of Azure regions to monitor.",
           "type": "array",
           "insertionOrder": false,
           "uniqueItems": true,
@@ -82,10 +83,11 @@
     },
     "Provider": {
       "type": "object",
-      "description": "The CSPM provider configuration for the connector",
+      "description": "",
       "properties": {
         "Azure": {
-          "$ref": "#/definitions/AzureProviderConfiguration"
+          "$ref": "#/definitions/AzureProviderConfiguration",
+          "description": ""
         }
       },
       "required": [
@@ -102,15 +104,15 @@
       "type": "string"
     },
     "HealthIssue": {
-      "description": "A health issue associated with the connector",
+      "description": "Represents a specific health issue detected for a connector.",
       "type": "object",
       "properties": {
         "Code": {
-          "description": "The code identifying the type of health issue",
+          "description": "The error code that identifies the type of health issue.",
           "$ref": "#/definitions/HealthIssueCode"
         },
         "Message": {
-          "description": "The message describing the health issue",
+          "description": "A human-readable message that describes the health issue.",
           "type": "string"
         }
       },
@@ -127,58 +129,61 @@
   },
   "properties": {
     "Name": {
-      "description": "The name of the connector",
+      "description": "The name of the connector.",
       "type": "string"
     },
     "Description": {
-      "description": "A description of the connector",
+      "description": "The description of the connector.",
       "type": "string"
     },
     "Provider": {
-      "$ref": "#/definitions/Provider"
+      "$ref": "#/definitions/Provider",
+      "description": ""
     },
     "Tags": {
-      "$ref": "#/definitions/Tags"
+      "$ref": "#/definitions/Tags",
+      "description": ""
     },
     "ConnectorArn": {
-      "description": "The ARN of the connector",
+      "description": "",
       "type": "string",
       "pattern": "^arn:aws\\S*:securityhub:[a-z0-9-]+:[0-9]{12}:connector/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
     },
     "ConnectorId": {
-      "description": "The ID of the connector",
+      "description": "",
       "type": "string",
       "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
     },
     "ConnectorStatus": {
-      "$ref": "#/definitions/ConnectorStatus"
+      "$ref": "#/definitions/ConnectorStatus",
+      "description": ""
     },
     "Message": {
-      "description": "The message associated with the connector status change",
+      "description": "",
       "type": "string"
     },
     "LastCheckedAt": {
-      "description": "The date and time for lastCheckedAt in UTC and ISO 8601 format.",
+      "description": "",
       "$ref": "#/definitions/ISO8601DateString"
     },
     "CreatedAt": {
-      "description": "The date and time for createdAt in UTC and ISO 8601 format.",
+      "description": "",
       "$ref": "#/definitions/ISO8601DateString"
     },
     "LastUpdatedAt": {
-      "description": "The date and time for lastUpdatedAt in UTC and ISO 8601 format.",
+      "description": "",
       "$ref": "#/definitions/ISO8601DateString"
     },
     "CreatedBy": {
-      "description": "The principal that created the connector",
+      "description": "",
       "type": "string"
     },
     "EnablementStatus": {
-      "description": "The enablement status of the connector",
+      "description": "",
       "$ref": "#/definitions/EnablementStatus"
     },
     "Issues": {
-      "description": "The list of health issues associated with the connector",
+      "description": "",
       "type": "array",
       "insertionOrder": false,
       "items": {

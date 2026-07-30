@@ -57,6 +57,7 @@ resource "awscc_ec2_placement_group" "web" {
 
 ### Optional
 
+- `parent_group_id` (String) The ID of a parent placement group. Valid for strategies that support parent group linking.
 - `partition_count` (Number) The number of partitions. Valid only when **Strategy** is set to `partition`
 - `spread_level` (String) The Spread Level of Placement Group is an enum where it accepts either host or rack when strategy is spread
 - `strategy` (String) The placement strategy.
