@@ -603,6 +603,51 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "These enums represent the status of a workspace.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The list of tags associated with the workspace.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The list of tags associated with the workspace.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: VpcConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -695,6 +740,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"grafana_version":           "GrafanaVersion",
 		"groups":                    "Groups",
 		"idp_metadata":              "IdpMetadata",
+		"key":                       "Key",
 		"login":                     "Login",
 		"login_validity_duration":   "LoginValidityDuration",
 		"modification_timestamp":    "ModificationTimestamp",
@@ -717,7 +763,9 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"stack_set_name":            "StackSetName",
 		"status":                    "Status",
 		"subnet_ids":                "SubnetIds",
+		"tags":                      "Tags",
 		"url":                       "Url",
+		"value":                     "Value",
 		"vpc_configuration":         "VpcConfiguration",
 		"vpce_ids":                  "VpceIds",
 		"workspace_id":              "Id",

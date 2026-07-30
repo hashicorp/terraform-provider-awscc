@@ -273,6 +273,36 @@ func userPoolRegionalConfigurationAttachmentDataSource(ctx context.Context) (dat
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "EumsSms": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "CallerArn": {
+		//	          "type": "string"
+		//	        },
+		//	        "ConfigurationSetName": {
+		//	          "type": "string"
+		//	        },
+		//	        "ExternalId": {
+		//	          "type": "string"
+		//	        },
+		//	        "InEntityId": {
+		//	          "type": "string"
+		//	        },
+		//	        "InTemplateId": {
+		//	          "type": "string"
+		//	        },
+		//	        "OriginationIdentity": {
+		//	          "type": "string"
+		//	        },
+		//	        "Region": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "CallerArn"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "ExternalId": {
 		//	      "type": "string"
 		//	    },
@@ -287,6 +317,40 @@ func userPoolRegionalConfigurationAttachmentDataSource(ctx context.Context) (dat
 		//	}
 		"sms_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EumsSms
+				"eums_sms": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CallerArn
+						"caller_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ConfigurationSetName
+						"configuration_set_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ExternalId
+						"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: InEntityId
+						"in_entity_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: InTemplateId
+						"in_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: OriginationIdentity
+						"origination_identity": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Region
+						"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: ExternalId
 				"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
@@ -356,7 +420,9 @@ func userPoolRegionalConfigurationAttachmentDataSource(ctx context.Context) (dat
 	opts = opts.WithCloudFormationTypeName("AWS::Cognito::UserPoolRegionalConfigurationAttachment").WithTerraformTypeName("awscc_cognito_user_pool_regional_configuration_attachment")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"caller_arn":                     "CallerArn",
 		"configuration_set":              "ConfigurationSet",
+		"configuration_set_name":         "ConfigurationSetName",
 		"create_auth_challenge":          "CreateAuthChallenge",
 		"custom_email_sender":            "CustomEmailSender",
 		"custom_message":                 "CustomMessage",
@@ -364,19 +430,24 @@ func userPoolRegionalConfigurationAttachmentDataSource(ctx context.Context) (dat
 		"define_auth_challenge":          "DefineAuthChallenge",
 		"email_configuration":            "EmailConfiguration",
 		"email_sending_account":          "EmailSendingAccount",
+		"eums_sms":                       "EumsSms",
 		"external_id":                    "ExternalId",
 		"from":                           "From",
+		"in_entity_id":                   "InEntityId",
+		"in_template_id":                 "InTemplateId",
 		"inbound_federation":             "InboundFederation",
 		"kms_key_id":                     "KMSKeyID",
 		"lambda_arn":                     "LambdaArn",
 		"lambda_config":                  "LambdaConfig",
 		"lambda_version":                 "LambdaVersion",
+		"origination_identity":           "OriginationIdentity",
 		"post_authentication":            "PostAuthentication",
 		"post_confirmation":              "PostConfirmation",
 		"pre_authentication":             "PreAuthentication",
 		"pre_sign_up":                    "PreSignUp",
 		"pre_token_generation":           "PreTokenGeneration",
 		"pre_token_generation_config":    "PreTokenGenerationConfig",
+		"region":                         "Region",
 		"reply_to_email_address":         "ReplyToEmailAddress",
 		"sms_configuration":              "SmsConfiguration",
 		"sns_caller_arn":                 "SnsCallerArn",

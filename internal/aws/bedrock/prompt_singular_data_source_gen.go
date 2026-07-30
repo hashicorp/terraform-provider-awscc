@@ -598,7 +598,7 @@ func promptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 1,
+		//	  "maxItems": 3,
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}

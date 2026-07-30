@@ -44,6 +44,17 @@ func placementGroupDataSource(ctx context.Context) (datasource.DataSource, error
 			Description: "The Group Name of Placement Group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ParentGroupId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of a parent placement group. Valid for strategies that support parent group linking.",
+		//	  "type": "string"
+		//	}
+		"parent_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of a parent placement group. Valid for strategies that support parent group linking.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PartitionCount
 		// CloudFormation resource type schema:
 		//
@@ -147,6 +158,7 @@ func placementGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		"group_id":        "GroupId",
 		"group_name":      "GroupName",
 		"key":             "Key",
+		"parent_group_id": "ParentGroupId",
 		"partition_count": "PartitionCount",
 		"spread_level":    "SpreadLevel",
 		"strategy":        "Strategy",
