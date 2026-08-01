@@ -166,6 +166,7 @@ type AllSchemas struct {
 type ResourceAllSchema struct {
 	CloudFormationSchemaPath             string `hcl:"cloudformation_schema_path,optional"`
 	CloudFormationTypeName               string `hcl:"cloudformation_type_name"`
+	PathAwareAttributeNames              bool   `hcl:"path_aware_attribute_names,optional"`
 	SuppressionReason                    string `hcl:"suppression_reason,optional"`
 	ResourceTypeName                     string `hcl:"resource_type_name,label"` // Block Name
 	SuppressPluralDataSourceGeneration   bool   `hcl:"suppress_plural_data_source_generation,optional"`

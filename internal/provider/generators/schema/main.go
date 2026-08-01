@@ -47,6 +47,7 @@ type MetaSchema struct {
 type ResourceSchema struct {
 	CloudFormationSchemaPath             string `hcl:"cloudformation_schema_path,optional"`
 	CloudFormationTypeName               string `hcl:"cloudformation_type_name"`
+	PathAwareAttributeNames              bool   `hcl:"path_aware_attribute_names,optional"`
 	ResourceTypeName                     string `hcl:"resource_type_name,label"`
 	SuppressionReason                    string `hcl:"suppression_reason,optional"`
 	SuppressPluralDataSourceGeneration   bool   `hcl:"suppress_plural_data_source_generation,optional"`
@@ -304,6 +305,7 @@ func (d *Downloader) Schemas() ([]*ResourceData, *DataSources, error) {
 			GeneratedCodeFileName:        res + "_resource_gen",          // e.g. "log_group_resource_gen"
 			GeneratedCodePackageName:     svc,                            // e.g. "logs"
 			GeneratedCodePathSuffix:      fmt.Sprintf("%s/%s", org, svc), // e.g. "aws/logs"
+			PathAwareAttributeNames:      schema.PathAwareAttributeNames,
 			TerraformResourceType:        tfResourceTypeName,
 		}
 
@@ -418,6 +420,7 @@ type ResourceData struct {
 	GeneratedCodePackageName     string
 	GeneratedCodePathSuffix      string
 	GenerateListResource         bool
+	PathAwareAttributeNames      bool
 	TerraformResourceType        string
 }
 
@@ -548,7 +551,7 @@ func (g *Generator) GenerateResourceImportExamples(packageName, filename string,
 	}
 
 	for _, v := range resources {
-		tmplData, err := shared.GenerateTemplateData(g.UI(), v.CloudFormationTypeSchemaFile, shared.ResourceType, v.TerraformResourceType, v.GeneratedCodePackageName)
+		tmplData, err := shared.GenerateTemplateData(g.UI(), v.CloudFormationTypeSchemaFile, shared.ResourceType, v.TerraformResourceType, v.GeneratedCodePackageName, v.PathAwareAttributeNames)
 		if err != nil {
 			return fmt.Errorf("%s: %w", v.CloudFormationTypeSchemaFile, err)
 		}
