@@ -226,3 +226,156 @@ func Test_replaceKeyValueArrayPatchesWithFullReplace(t *testing.T) {
 		})
 	}
 }
+
+func Test_resolveMutuallyExclusiveProperties(t *testing.T) {
+	oldState := `{
+		"Description": "old",
+		"Rules": [
+			{
+				"Name": "r1",
+				"Statement": {
+					"ByteMatchStatement": {
+						"SearchString": "marker",
+						"SearchStringBase64": "bWFya2Vy",
+						"PositionalConstraint": "CONTAINS"
+					}
+				}
+			}
+		]
+	}`
+	oldStateSingle := `{
+		"Rules": [
+			{
+				"Statement": {
+					"ByteMatchStatement": {
+						"SearchStringBase64": "bWFya2Vy"
+					}
+				}
+			}
+		]
+	}`
+
+	tests := []struct {
+		name     string
+		oldState string
+		patch    []jsonpatch.JsonPatchOperation
+		want     []jsonpatch.JsonPatchOperation
+	}{
+		{
+			name:     "unrelated change drops derived member",
+			oldState: oldState,
+			patch: []jsonpatch.JsonPatchOperation{
+				{Operation: "replace", Path: "/Description", Value: "new"},
+			},
+			want: []jsonpatch.JsonPatchOperation{
+				{Operation: "replace", Path: "/Description", Value: "new"},
+				{Operation: "remove", Path: "/Rules/0/Statement/ByteMatchStatement/SearchString"},
+			},
+		},
+		{
+			name:     "changing derived member drops the other",
+			oldState: oldState,
+			patch: []jsonpatch.JsonPatchOperation{
+				{Operation: "replace", Path: "/Rules/0/Statement/ByteMatchStatement/SearchString", Value: "changed"},
+			},
+			want: []jsonpatch.JsonPatchOperation{
+				{Operation: "replace", Path: "/Rules/0/Statement/ByteMatchStatement/SearchString", Value: "changed"},
+				{Operation: "remove", Path: "/Rules/0/Statement/ByteMatchStatement/SearchStringBase64"},
+			},
+		},
+		{
+			name:     "both changed is left alone",
+			oldState: oldState,
+			patch: []jsonpatch.JsonPatchOperation{
+				{Operation: "replace", Path: "/Rules/0/Statement/ByteMatchStatement/SearchString", Value: "a"},
+				{Operation: "replace", Path: "/Rules/0/Statement/ByteMatchStatement/SearchStringBase64", Value: "YQ=="},
+			},
+			want: []jsonpatch.JsonPatchOperation{
+				{Operation: "replace", Path: "/Rules/0/Statement/ByteMatchStatement/SearchString", Value: "a"},
+				{Operation: "replace", Path: "/Rules/0/Statement/ByteMatchStatement/SearchStringBase64", Value: "YQ=="},
+			},
+		},
+		{
+			name:     "single member present is untouched",
+			oldState: oldStateSingle,
+			patch: []jsonpatch.JsonPatchOperation{
+				{Operation: "replace", Path: "/Description", Value: "new"},
+			},
+			want: []jsonpatch.JsonPatchOperation{
+				{Operation: "replace", Path: "/Description", Value: "new"},
+			},
+		},
+		{
+			name:     "invalid old state is a no-op",
+			oldState: "not json",
+			patch: []jsonpatch.JsonPatchOperation{
+				{Operation: "replace", Path: "/Description", Value: "new"},
+			},
+			want: []jsonpatch.JsonPatchOperation{
+				{Operation: "replace", Path: "/Description", Value: "new"},
+			},
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := resolveMutuallyExclusiveProperties(tt.patch, tt.oldState)
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("resolveMutuallyExclusiveProperties() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_appendMutuallyExclusiveResolutionsForModel(t *testing.T) {
+	// Remote model contains a pair inside content the patch does not touch
+	// (e.g. a statement subtree beyond a depth-limited schema's maximum depth).
+	model := `{
+		"Description": "old",
+		"Rules": [
+			{
+				"Statement": {
+					"NotStatement": {
+						"Statement": {
+							"OrStatement": {
+								"Statements": [
+									{
+										"ByteMatchStatement": {
+											"SearchString": "marker",
+											"SearchStringBase64": "bWFya2Vy"
+										}
+									}
+								]
+							}
+						}
+					}
+				}
+			}
+		]
+	}`
+
+	got, err := appendMutuallyExclusiveResolutionsForModel(`[{"op":"replace","path":"/Description","value":"new"}]`, model)
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := `[{"op":"replace","path":"/Description","value":"new"},{"op":"remove","path":"/Rules/0/Statement/NotStatement/Statement/OrStatement/Statements/0/ByteMatchStatement/SearchString"}]`
+	if got != want {
+		t.Errorf("got %s, want %s", got, want)
+	}
+
+	// Pair already resolved by the state-based pass: no duplicate remove.
+	resolved := `[{"op":"remove","path":"/Rules/0/Statement/NotStatement/Statement/OrStatement/Statements/0/ByteMatchStatement/SearchString"}]`
+	got, err = appendMutuallyExclusiveResolutionsForModel(resolved, model)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got != resolved {
+		t.Errorf("expected unchanged document, got %s", got)
+	}
+
+	// Invalid inputs are a no-op.
+	got, err = appendMutuallyExclusiveResolutionsForModel("[]", "not json")
+	if err != nil || got != "[]" {
+		t.Errorf("invalid model: got %s, err %v", got, err)
+	}
+}
