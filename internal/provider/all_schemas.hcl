@@ -6314,15 +6314,7 @@ resource_schema "aws_supportapp_slack_workspace_configuration" {
 }
 
 resource_schema "aws_synthetics_canary" {
-  cloudformation_type_name                 = "AWS::Synthetics::Canary"
-
-  # Suppression Reason:
-  # error generating Terraform resource import examples generation instructions: ../service/cloudformation/schemas/AWS_Synthetics_Canary.json: emitting schema
-  # code: VPCConfig overwrites VpcConfig for Terraform attribute vpc_config
-  #
-  # Ref: https://github.com/hashicorp/terraform-provider-awscc/issues/3263
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
+  cloudformation_type_name = "AWS::Synthetics::Canary"
 }
 
 resource_schema "aws_synthetics_group" {
