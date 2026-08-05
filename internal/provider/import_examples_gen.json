@@ -6508,6 +6508,11 @@
         "identifier": ["TeamId"]
     },
     {
+        "resource": "awscc_synthetics_canary",
+        "generateListResource": true,
+        "identifier": ["Name"]
+    },
+    {
         "resource": "awscc_synthetics_group",
         "generateListResource": true,
         "identifier": ["Name"]
