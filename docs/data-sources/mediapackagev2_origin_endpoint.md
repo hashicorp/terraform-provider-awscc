@@ -49,7 +49,7 @@ Data Source schema for AWS::MediaPackageV2::OriginEndpoint
 Read-Only:
 
 - `audio_timeline_pattern` (String)
-- `availability_start_time_configuration` (Attributes) (see [below for nested schema](#nestedatt--dash_manifests--availability_start_time_configuration))
+- `availability_start_time_configuration` (Attributes) <p>The configuration for the DASH <code>availabilityStartTime</code> attribute of the Media Presentation Description (MPD). Use this configuration to set a custom availability start time for your DASH manifest.</p> (see [below for nested schema](#nestedatt--dash_manifests--availability_start_time_configuration))
 - `base_urls` (Attributes List) <p>The base URL to use for retrieving segments.</p> (see [below for nested schema](#nestedatt--dash_manifests--base_urls))
 - `compactness` (String)
 - `drm_signaling` (String)
@@ -74,7 +74,7 @@ Read-Only:
 
 Read-Only:
 
-- `fixed_availability_start_time` (String)
+- `fixed_availability_start_time` (String) <p>The fixed availability start time for the DASH manifest, in ISO 8601 date-time format. The value must have hourly granularity, meaning that the minutes, seconds, and fractional seconds must be zero. The value must be on or after <code>2024-01-01T00:00:00Z</code> and must be at least 14 days before the current time.</p>
 
 
 <a id="nestedatt--dash_manifests--base_urls"></a>
@@ -311,6 +311,7 @@ Read-Only:
 
 - `encryption` (Attributes) <p>The parameters for encrypting content.</p> (see [below for nested schema](#nestedatt--segment--encryption))
 - `include_iframe_only_streams` (Boolean) <p>When selected, the stream set includes an additional I-frame only stream, along with the other tracks. If false, this extra stream is not included. MediaPackage generates an I-frame only stream from the first rendition in the manifest. The service inserts EXT-I-FRAMES-ONLY tags in the output manifest, and then generates and includes an I-frames only playlist in the stream. This playlist permits player functionality like fast forward and rewind.</p>
+- `output_timestamp_mode` (String)
 - `scte` (Attributes) <p>The SCTE configuration.</p> (see [below for nested schema](#nestedatt--segment--scte))
 - `segment_duration_seconds` (Number) <p>The duration (in seconds) of each segment. Enter a value equal to, or a multiple of, the input segment duration. If the value that you enter is different from the input segment duration, MediaPackage rounds segments to the nearest multiple of the input segment duration.</p>
 - `segment_name` (String) <p>The name that describes the segment. The name is the base name of the segment used in all content manifests inside of the endpoint. You can't use spaces in the name.</p>

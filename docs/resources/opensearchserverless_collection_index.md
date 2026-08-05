@@ -3,12 +3,12 @@
 page_title: "awscc_opensearchserverless_collection_index Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource schema for AWS::OpenSearchServerless::CollectionIndex
+  Resource Type definition for AWS::OpenSearchServerless::CollectionIndex
 ---
 
 # awscc_opensearchserverless_collection_index (Resource)
 
-Resource schema for AWS::OpenSearchServerless::CollectionIndex
+Resource Type definition for AWS::OpenSearchServerless::CollectionIndex
 
 
 

@@ -18,8 +18,8 @@ Definition of the AWS::QuickSight::Topic Resource Type.
 ### Optional
 
 - `aws_account_id` (String)
-- `config_options` (Attributes) Model for configuration of a Topic (see [below for nested schema](#nestedatt--config_options))
-- `custom_instructions` (Attributes) (see [below for nested schema](#nestedatt--custom_instructions))
+- `config_options` (Attributes) (see [below for nested schema](#nestedatt--config_options))
+- `custom_instructions` (Attributes) <p>Instructions that provide additional guidance and context for response generation.</p> (see [below for nested schema](#nestedatt--custom_instructions))
 - `data_sets` (Attributes List) (see [below for nested schema](#nestedatt--data_sets))
 - `description` (String)
 - `folder_arns` (List of String)
@@ -46,7 +46,7 @@ Optional:
 
 Optional:
 
-- `custom_instructions_string` (String)
+- `custom_instructions_string` (String) <p>A text field for providing additional guidance or context for response generation.</p>
 
 
 <a id="nestedatt--data_sets"></a>

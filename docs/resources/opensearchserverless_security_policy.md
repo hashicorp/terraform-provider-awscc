@@ -2,12 +2,12 @@
 page_title: "awscc_opensearchserverless_security_policy Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Amazon OpenSearchServerless security policy resource
+  Resource Type definition for AWS::OpenSearchServerless::SecurityPolicy
 ---
 
 # awscc_opensearchserverless_security_policy (Resource)
 
-Amazon OpenSearchServerless security policy resource
+Resource Type definition for AWS::OpenSearchServerless::SecurityPolicy
 
 ## Example Usage
 

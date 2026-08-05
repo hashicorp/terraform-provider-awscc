@@ -36,6 +36,7 @@ Resource Type definition for AWS::BedrockAgentCore::OAuth2CredentialProvider
 - `id` (String) Uniquely identifies the resource.
 - `last_updated_time` (String) The timestamp when the credential provider was last updated
 - `oauth_2_provider_config_output` (Attributes) The output configuration for the OAuth2 provider (see [below for nested schema](#nestedatt--oauth_2_provider_config_output))
+- `status` (String) The current status of the OAuth2 credential provider
 
 <a id="nestedatt--oauth_2_provider_config_input"></a>
 ### Nested Schema for `oauth_2_provider_config_input`
@@ -84,6 +85,9 @@ Optional:
 - `client_secret_source` (String) The source of the client secret
 - `oauth_discovery` (Attributes) Discovery information for an OAuth2 provider (see [below for nested schema](#nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--oauth_discovery))
 - `on_behalf_of_token_exchange_config` (Attributes) Configuration for on-behalf-of token exchange (see [below for nested schema](#nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--on_behalf_of_token_exchange_config))
+- `private_endpoint` (Attributes) The private endpoint configuration for connecting to private resources in your VPC (see [below for nested schema](#nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--private_endpoint))
+- `private_endpoint_overrides` (Attributes List) A list of private endpoint overrides. Each override maps a specific domain to a private endpoint, enabling secure connectivity through VPC Lattice resource configurations. (see [below for nested schema](#nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--private_endpoint_overrides))
+- `private_key_jwt_config` (Attributes) Configuration for private_key_jwt client authentication (RFC 7523) (see [below for nested schema](#nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--private_key_jwt_config))
 
 <a id="nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--client_secret_config"></a>
 ### Nested Schema for `oauth_2_provider_config_input.custom_oauth_2_provider_config.client_secret_config`
@@ -129,6 +133,102 @@ Optional:
 
 - `actor_token_content` (String) The actor token content type
 - `actor_token_scopes` (List of String) The actor token scopes. Only valid when ActorTokenContent is M2M.
+
+
+
+<a id="nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--private_endpoint"></a>
+### Nested Schema for `oauth_2_provider_config_input.custom_oauth_2_provider_config.private_endpoint`
+
+Optional:
+
+- `managed_vpc_resource` (Attributes) Configuration for a managed VPC Lattice resource. AgentCore creates and manages the VPC Lattice resource gateway and resource configuration on your behalf. (see [below for nested schema](#nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--private_endpoint--managed_vpc_resource))
+- `self_managed_lattice_resource` (Attributes) Configuration for a self-managed VPC Lattice resource. You create and manage the VPC Lattice resource gateway and resource configuration, then provide the resource configuration identifier. (see [below for nested schema](#nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--private_endpoint--self_managed_lattice_resource))
+
+<a id="nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--private_endpoint--managed_vpc_resource"></a>
+### Nested Schema for `oauth_2_provider_config_input.custom_oauth_2_provider_config.private_endpoint.managed_vpc_resource`
+
+Optional:
+
+- `endpoint_ip_address_type` (String) The IP address type for the resource configuration endpoint
+- `routing_domain` (String) An intermediate publicly resolvable domain used as the VPC Lattice resource configuration endpoint
+- `security_group_ids` (List of String) The security group IDs to associate with the VPC Lattice resource gateway
+- `subnet_ids` (List of String) The subnet IDs within the VPC where the VPC Lattice resource gateway is placed
+- `tags` (Map of String) Tags to apply to the managed VPC Lattice resource gateway
+- `vpc_identifier` (String) The ID of the VPC that contains your private resource
+
+
+<a id="nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--private_endpoint--self_managed_lattice_resource"></a>
+### Nested Schema for `oauth_2_provider_config_input.custom_oauth_2_provider_config.private_endpoint.self_managed_lattice_resource`
+
+Optional:
+
+- `resource_configuration_identifier` (String) The ARN or ID of the VPC Lattice resource configuration
+
+
+
+<a id="nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--private_endpoint_overrides"></a>
+### Nested Schema for `oauth_2_provider_config_input.custom_oauth_2_provider_config.private_endpoint_overrides`
+
+Optional:
+
+- `domain` (String) The domain to override with a private endpoint
+- `private_endpoint` (Attributes) The private endpoint configuration for connecting to private resources in your VPC (see [below for nested schema](#nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--private_endpoint_overrides--private_endpoint))
+
+<a id="nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--private_endpoint_overrides--private_endpoint"></a>
+### Nested Schema for `oauth_2_provider_config_input.custom_oauth_2_provider_config.private_endpoint_overrides.private_endpoint`
+
+Optional:
+
+- `managed_vpc_resource` (Attributes) Configuration for a managed VPC Lattice resource. AgentCore creates and manages the VPC Lattice resource gateway and resource configuration on your behalf. (see [below for nested schema](#nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--private_endpoint_overrides--private_endpoint--managed_vpc_resource))
+- `self_managed_lattice_resource` (Attributes) Configuration for a self-managed VPC Lattice resource. You create and manage the VPC Lattice resource gateway and resource configuration, then provide the resource configuration identifier. (see [below for nested schema](#nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--private_endpoint_overrides--private_endpoint--self_managed_lattice_resource))
+
+<a id="nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--private_endpoint_overrides--private_endpoint--managed_vpc_resource"></a>
+### Nested Schema for `oauth_2_provider_config_input.custom_oauth_2_provider_config.private_endpoint_overrides.private_endpoint.managed_vpc_resource`
+
+Optional:
+
+- `endpoint_ip_address_type` (String) The IP address type for the resource configuration endpoint
+- `routing_domain` (String) An intermediate publicly resolvable domain used as the VPC Lattice resource configuration endpoint
+- `security_group_ids` (List of String) The security group IDs to associate with the VPC Lattice resource gateway
+- `subnet_ids` (List of String) The subnet IDs within the VPC where the VPC Lattice resource gateway is placed
+- `tags` (Map of String) Tags to apply to the managed VPC Lattice resource gateway
+- `vpc_identifier` (String) The ID of the VPC that contains your private resource
+
+
+<a id="nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--private_endpoint_overrides--private_endpoint--self_managed_lattice_resource"></a>
+### Nested Schema for `oauth_2_provider_config_input.custom_oauth_2_provider_config.private_endpoint_overrides.private_endpoint.self_managed_lattice_resource`
+
+Optional:
+
+- `resource_configuration_identifier` (String) The ARN or ID of the VPC Lattice resource configuration
+
+
+
+
+<a id="nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--private_key_jwt_config"></a>
+### Nested Schema for `oauth_2_provider_config_input.custom_oauth_2_provider_config.private_key_jwt_config`
+
+Optional:
+
+- `additional_header_claims` (Map of String) A map of additional claims to include in the JWT client assertion
+- `additional_payload_claims` (Map of String) A map of additional claims to include in the JWT client assertion
+- `private_key_source` (Attributes) Contains the private key source configuration for a JWT client assertion (see [below for nested schema](#nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--private_key_jwt_config--private_key_source))
+- `signing_algorithm` (String) The algorithm used to sign the JWT client assertion
+
+<a id="nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--private_key_jwt_config--private_key_source"></a>
+### Nested Schema for `oauth_2_provider_config_input.custom_oauth_2_provider_config.private_key_jwt_config.private_key_source`
+
+Optional:
+
+- `kms_key_source` (Attributes) Contains the KMS key configuration for a JWT client assertion (see [below for nested schema](#nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--private_key_jwt_config--private_key_source--kms_key_source))
+
+<a id="nestedatt--oauth_2_provider_config_input--custom_oauth_2_provider_config--private_key_jwt_config--private_key_source--kms_key_source"></a>
+### Nested Schema for `oauth_2_provider_config_input.custom_oauth_2_provider_config.private_key_jwt_config.private_key_source.kms_key_source`
+
+Optional:
+
+- `kms_key_arn` (String) The Amazon Resource Name (ARN) of the KMS key used to sign the JWT client assertion
+
 
 
 
@@ -304,6 +404,9 @@ Read-Only:
 - `client_id` (String)
 - `oauth_discovery` (Attributes) Discovery information for an OAuth2 provider (see [below for nested schema](#nestedatt--oauth_2_provider_config_output--oauth_discovery))
 - `on_behalf_of_token_exchange_config` (Attributes) Configuration for on-behalf-of token exchange (see [below for nested schema](#nestedatt--oauth_2_provider_config_output--on_behalf_of_token_exchange_config))
+- `private_endpoint` (Attributes) The private endpoint configuration for connecting to private resources in your VPC (see [below for nested schema](#nestedatt--oauth_2_provider_config_output--private_endpoint))
+- `private_endpoint_overrides` (Attributes List) The list of private endpoint overrides for the OAuth2 provider. Each override maps a specific domain to a private endpoint, enabling secure connectivity through VPC Lattice resource configurations. (see [below for nested schema](#nestedatt--oauth_2_provider_config_output--private_endpoint_overrides))
+- `private_key_jwt_config` (Attributes) Configuration for private_key_jwt client authentication (RFC 7523) (see [below for nested schema](#nestedatt--oauth_2_provider_config_output--private_key_jwt_config))
 
 <a id="nestedatt--oauth_2_provider_config_output--oauth_discovery"></a>
 ### Nested Schema for `oauth_2_provider_config_output.oauth_discovery`
@@ -340,6 +443,101 @@ Read-Only:
 
 - `actor_token_content` (String) The actor token content type
 - `actor_token_scopes` (List of String) The actor token scopes. Only valid when ActorTokenContent is M2M.
+
+
+
+<a id="nestedatt--oauth_2_provider_config_output--private_endpoint"></a>
+### Nested Schema for `oauth_2_provider_config_output.private_endpoint`
+
+Read-Only:
+
+- `managed_vpc_resource` (Attributes) Configuration for a managed VPC Lattice resource. AgentCore creates and manages the VPC Lattice resource gateway and resource configuration on your behalf. (see [below for nested schema](#nestedatt--oauth_2_provider_config_output--private_endpoint--managed_vpc_resource))
+- `self_managed_lattice_resource` (Attributes) Configuration for a self-managed VPC Lattice resource. You create and manage the VPC Lattice resource gateway and resource configuration, then provide the resource configuration identifier. (see [below for nested schema](#nestedatt--oauth_2_provider_config_output--private_endpoint--self_managed_lattice_resource))
+
+<a id="nestedatt--oauth_2_provider_config_output--private_endpoint--managed_vpc_resource"></a>
+### Nested Schema for `oauth_2_provider_config_output.private_endpoint.managed_vpc_resource`
+
+Read-Only:
+
+- `endpoint_ip_address_type` (String) The IP address type for the resource configuration endpoint
+- `routing_domain` (String) An intermediate publicly resolvable domain used as the VPC Lattice resource configuration endpoint
+- `security_group_ids` (List of String) The security group IDs to associate with the VPC Lattice resource gateway
+- `subnet_ids` (List of String) The subnet IDs within the VPC where the VPC Lattice resource gateway is placed
+- `tags` (Map of String) Tags to apply to the managed VPC Lattice resource gateway
+- `vpc_identifier` (String) The ID of the VPC that contains your private resource
+
+
+<a id="nestedatt--oauth_2_provider_config_output--private_endpoint--self_managed_lattice_resource"></a>
+### Nested Schema for `oauth_2_provider_config_output.private_endpoint.self_managed_lattice_resource`
+
+Read-Only:
+
+- `resource_configuration_identifier` (String) The ARN or ID of the VPC Lattice resource configuration
+
+
+
+<a id="nestedatt--oauth_2_provider_config_output--private_endpoint_overrides"></a>
+### Nested Schema for `oauth_2_provider_config_output.private_endpoint_overrides`
+
+Read-Only:
+
+- `domain` (String) The domain to override with a private endpoint
+- `private_endpoint` (Attributes) The private endpoint configuration for connecting to private resources in your VPC (see [below for nested schema](#nestedatt--oauth_2_provider_config_output--private_endpoint_overrides--private_endpoint))
+
+<a id="nestedatt--oauth_2_provider_config_output--private_endpoint_overrides--private_endpoint"></a>
+### Nested Schema for `oauth_2_provider_config_output.private_endpoint_overrides.private_endpoint`
+
+Read-Only:
+
+- `managed_vpc_resource` (Attributes) Configuration for a managed VPC Lattice resource. AgentCore creates and manages the VPC Lattice resource gateway and resource configuration on your behalf. (see [below for nested schema](#nestedatt--oauth_2_provider_config_output--private_endpoint_overrides--private_endpoint--managed_vpc_resource))
+- `self_managed_lattice_resource` (Attributes) Configuration for a self-managed VPC Lattice resource. You create and manage the VPC Lattice resource gateway and resource configuration, then provide the resource configuration identifier. (see [below for nested schema](#nestedatt--oauth_2_provider_config_output--private_endpoint_overrides--private_endpoint--self_managed_lattice_resource))
+
+<a id="nestedatt--oauth_2_provider_config_output--private_endpoint_overrides--private_endpoint--managed_vpc_resource"></a>
+### Nested Schema for `oauth_2_provider_config_output.private_endpoint_overrides.private_endpoint.managed_vpc_resource`
+
+Read-Only:
+
+- `endpoint_ip_address_type` (String) The IP address type for the resource configuration endpoint
+- `routing_domain` (String) An intermediate publicly resolvable domain used as the VPC Lattice resource configuration endpoint
+- `security_group_ids` (List of String) The security group IDs to associate with the VPC Lattice resource gateway
+- `subnet_ids` (List of String) The subnet IDs within the VPC where the VPC Lattice resource gateway is placed
+- `tags` (Map of String) Tags to apply to the managed VPC Lattice resource gateway
+- `vpc_identifier` (String) The ID of the VPC that contains your private resource
+
+
+<a id="nestedatt--oauth_2_provider_config_output--private_endpoint_overrides--private_endpoint--self_managed_lattice_resource"></a>
+### Nested Schema for `oauth_2_provider_config_output.private_endpoint_overrides.private_endpoint.self_managed_lattice_resource`
+
+Read-Only:
+
+- `resource_configuration_identifier` (String) The ARN or ID of the VPC Lattice resource configuration
+
+
+
+
+<a id="nestedatt--oauth_2_provider_config_output--private_key_jwt_config"></a>
+### Nested Schema for `oauth_2_provider_config_output.private_key_jwt_config`
+
+Read-Only:
+
+- `additional_header_claims` (Map of String) A map of additional claims to include in the JWT client assertion
+- `additional_payload_claims` (Map of String) A map of additional claims to include in the JWT client assertion
+- `private_key_source` (Attributes) Contains the private key source configuration for a JWT client assertion (see [below for nested schema](#nestedatt--oauth_2_provider_config_output--private_key_jwt_config--private_key_source))
+- `signing_algorithm` (String) The algorithm used to sign the JWT client assertion
+
+<a id="nestedatt--oauth_2_provider_config_output--private_key_jwt_config--private_key_source"></a>
+### Nested Schema for `oauth_2_provider_config_output.private_key_jwt_config.private_key_source`
+
+Read-Only:
+
+- `kms_key_source` (Attributes) Contains the KMS key configuration for a JWT client assertion (see [below for nested schema](#nestedatt--oauth_2_provider_config_output--private_key_jwt_config--private_key_source--kms_key_source))
+
+<a id="nestedatt--oauth_2_provider_config_output--private_key_jwt_config--private_key_source--kms_key_source"></a>
+### Nested Schema for `oauth_2_provider_config_output.private_key_jwt_config.private_key_source.kms_key_source`
+
+Read-Only:
+
+- `kms_key_arn` (String) The Amazon Resource Name (ARN) of the KMS key used to sign the JWT client assertion
 
 ## Import
 

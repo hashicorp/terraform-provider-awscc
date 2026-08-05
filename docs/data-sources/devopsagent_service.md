@@ -24,11 +24,14 @@ Data Source schema for AWS::DevOpsAgent::Service
 - `accessible_resources` (List of Map of String) List of accessible resources for this service
 - `additional_service_details` (Attributes) Additional details specific to the service type (see [below for nested schema](#nestedatt--additional_service_details))
 - `arn` (String) The Amazon Resource Name (ARN) of the Service.
+- `exchange_url_private_connection_name` (String) The name of the private connection to use for OAuth token exchange requests only. Cannot be specified when PrivateConnectionName is provided.
 - `kms_key_arn` (String) The ARN of the KMS key to use for encryption.
+- `private_connection_name` (String) The name of the private connection to use for VPC connectivity.
 - `service_details` (Attributes) Service-specific configuration details for create operation (see [below for nested schema](#nestedatt--service_details))
 - `service_id` (String) The unique identifier of the service
 - `service_type` (String) The type of service being registered
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `target_url_private_connection_name` (String) The name of the private connection to use for API calls (target URL) only. Cannot be specified when PrivateConnectionName is provided.
 
 <a id="nestedatt--additional_service_details"></a>
 ### Nested Schema for `additional_service_details`

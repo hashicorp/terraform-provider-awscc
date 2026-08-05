@@ -38,6 +38,7 @@ Data Source schema for AWS::APS::Scraper
 Read-Only:
 
 - `amp_configuration` (Attributes) Configuration for Amazon Managed Prometheus metrics destination (see [below for nested schema](#nestedatt--destination--amp_configuration))
+- `cloudwatch_configuration` (Attributes) Configuration for CloudWatch metrics destination (see [below for nested schema](#nestedatt--destination--cloudwatch_configuration))
 
 <a id="nestedatt--destination--amp_configuration"></a>
 ### Nested Schema for `destination.amp_configuration`
@@ -45,6 +46,14 @@ Read-Only:
 Read-Only:
 
 - `workspace_arn` (String) ARN of an Amazon Managed Prometheus workspace
+
+
+<a id="nestedatt--destination--cloudwatch_configuration"></a>
+### Nested Schema for `destination.cloudwatch_configuration`
+
+Read-Only:
+
+- `dataset_arn` (String) ARN of a CloudWatch dataset
 
 
 

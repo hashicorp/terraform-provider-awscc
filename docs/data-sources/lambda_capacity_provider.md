@@ -30,7 +30,7 @@ Data Source schema for AWS::Lambda::CapacityProvider
 - `propagate_tags` (Attributes) Configuration for tag propagation to managed resources launched by the capacity provider. (see [below for nested schema](#nestedatt--propagate_tags))
 - `state` (String) The current state of the capacity provider. Indicates whether the provider is being created, is active and ready for use, has failed, or is being deleted.
 - `tags` (Attributes Set) A key-value pair that provides metadata for the capacity provider. (see [below for nested schema](#nestedatt--tags))
-- `telemetry_config` (Attributes) (see [below for nested schema](#nestedatt--telemetry_config))
+- `telemetry_config` (Attributes) The telemetry configuration for the capacity provider, including logging settings. (see [below for nested schema](#nestedatt--telemetry_config))
 - `vpc_config` (Attributes) The VPC configuration for the capacity provider. (see [below for nested schema](#nestedatt--vpc_config))
 
 <a id="nestedatt--capacity_provider_scaling_config"></a>
@@ -102,15 +102,15 @@ Read-Only:
 
 Read-Only:
 
-- `logging_config` (Attributes) (see [below for nested schema](#nestedatt--telemetry_config--logging_config))
+- `logging_config` (Attributes) The capacity provider's Amazon CloudWatch Logs configuration settings. (see [below for nested schema](#nestedatt--telemetry_config--logging_config))
 
 <a id="nestedatt--telemetry_config--logging_config"></a>
 ### Nested Schema for `telemetry_config.logging_config`
 
 Read-Only:
 
-- `log_group` (String)
-- `system_log_level` (String)
+- `log_group` (String) The name of the Amazon CloudWatch log group the capacity provider sends logs to. By default, Lambda capacity providers send logs to a default log group named ``/aws/lambda/capacity-provider/<capacity provider name>``. To use a different log group, enter an existing log group or enter a new log group name.
+- `system_log_level` (String) Set this property to filter the system logs for your capacity provider that Lambda sends to CloudWatch. Lambda only sends system logs at the selected level of detail and lower, where ``DEBUG`` is the highest level and ``WARN`` is the lowest.
 
 
 
