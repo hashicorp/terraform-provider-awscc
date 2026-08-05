@@ -6322,6 +6322,7 @@ resource_schema "aws_synthetics_canary" {
   #
   # Ref: https://github.com/hashicorp/terraform-provider-awscc/issues/3263
   suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
 }
 
 resource_schema "aws_synthetics_group" {

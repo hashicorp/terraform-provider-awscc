@@ -229,8 +229,10 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	                  "standard",
 		//	                  "io1",
 		//	                  "io2",
+		//	                  "io2a",
 		//	                  "gp2",
 		//	                  "gp3",
+		//	                  "gp3a",
 		//	                  "sc1",
 		//	                  "st1"
 		//	                ],

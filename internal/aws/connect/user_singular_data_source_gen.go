@@ -611,9 +611,9 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "Level": {
-		//	        "description": "The level of the proficiency. The valid values are 1, 2, 3, 4 and 5.",
-		//	        "maximum": 5.0,
-		//	        "minimum": 1.0,
+		//	        "description": "The level of the proficiency. The valid values are 0 to 10.",
+		//	        "maximum": 10.0,
+		//	        "minimum": 0.0,
 		//	        "type": "number"
 		//	      }
 		//	    },
@@ -641,7 +641,7 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Level
 					"level": schema.Float64Attribute{ /*START ATTRIBUTE*/
-						Description: "The level of the proficiency. The valid values are 1, 2, 3, 4 and 5.",
+						Description: "The level of the proficiency. The valid values are 0 to 10.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/

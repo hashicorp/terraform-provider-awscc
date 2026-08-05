@@ -225,6 +225,19 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "<p>The settings for what common media server data (CMSD) headers AWS Elemental MediaPackage includes in responses to the CDN.</p>",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: OutputLockingMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "EPOCH_LOCKED",
+		//	    "NON_EPOCH_LOCKED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"output_locking_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -290,6 +303,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"modified_at":                 "ModifiedAt",
 		"mqcs_input_switching":        "MQCSInputSwitching",
 		"output_header_configuration": "OutputHeaderConfiguration",
+		"output_locking_mode":         "OutputLockingMode",
 		"preferred_input":             "PreferredInput",
 		"publish_mqcs":                "PublishMQCS",
 		"tags":                        "Tags",

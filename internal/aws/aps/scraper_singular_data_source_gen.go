@@ -60,6 +60,11 @@ func scraperDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "required": [
 		//	        "AmpConfiguration"
 		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "CloudWatchConfiguration"
+		//	      ]
 		//	    }
 		//	  ],
 		//	  "properties": {
@@ -75,6 +80,21 @@ func scraperDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "required": [
 		//	        "WorkspaceArn"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "CloudWatchConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration for CloudWatch metrics destination",
+		//	      "properties": {
+		//	        "DatasetArn": {
+		//	          "description": "ARN of a CloudWatch dataset",
+		//	          "pattern": "^arn:aws[-a-z]*:cloudwatch:[-a-z0-9]+:[0-9]{12}:dataset\\/.+$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "DatasetArn"
 		//	      ],
 		//	      "type": "object"
 		//	    }
@@ -93,6 +113,18 @@ func scraperDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Configuration for Amazon Managed Prometheus metrics destination",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CloudWatchConfiguration
+				"cloudwatch_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DatasetArn
+						"dataset_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "ARN of a CloudWatch dataset",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for CloudWatch metrics destination",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -523,10 +555,12 @@ func scraperDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"alias":                         "Alias",
 		"amp_configuration":             "AmpConfiguration",
 		"arn":                           "Arn",
+		"cloudwatch_configuration":      "CloudWatchConfiguration",
 		"cloudwatch_logs":               "CloudWatchLogs",
 		"cluster_arn":                   "ClusterArn",
 		"config":                        "Config",
 		"configuration_blob":            "ConfigurationBlob",
+		"dataset_arn":                   "DatasetArn",
 		"destination":                   "Destination",
 		"eks_configuration":             "EksConfiguration",
 		"key":                           "Key",
