@@ -155,12 +155,32 @@
             "WorkspaceArn"
           ],
           "additionalProperties": false
+        },
+        "CloudWatchConfiguration": {
+          "description": "Configuration for CloudWatch metrics destination",
+          "type": "object",
+          "properties": {
+            "DatasetArn": {
+              "description": "ARN of a CloudWatch dataset",
+              "type": "string",
+              "pattern": "^arn:aws[-a-z]*:cloudwatch:[-a-z0-9]+:[0-9]{12}:dataset\\/.+$"
+            }
+          },
+          "required": [
+            "DatasetArn"
+          ],
+          "additionalProperties": false
         }
       },
       "oneOf": [
         {
           "required": [
             "AmpConfiguration"
+          ]
+        },
+        {
+          "required": [
+            "CloudWatchConfiguration"
           ]
         }
       ],

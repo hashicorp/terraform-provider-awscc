@@ -106,6 +106,14 @@
           "type": "string"
         }
       }
+    },
+    "AdsPersonalizationTimeouts": {
+      "description": "The ad decision server (ADS) request timeouts and personalization time budgets for live, VOD, and prefetch workflows.",
+      "$ref": "#/definitions/AdsPersonalizationTimeouts"
+    },
+    "AdsPersonalizationConcurrency": {
+      "description": "The settings that control how many concurrent requests MediaTailor makes to the ad decision server (ADS).",
+      "$ref": "#/definitions/AdsPersonalizationConcurrency"
     }
   },
   "definitions": {
@@ -402,6 +410,48 @@
       "patternProperties": {
         "": {
           "type": "string"
+        }
+      }
+    },
+    "AdsPersonalizationTimeouts": {
+      "description": "The ad decision server (ADS) request timeouts and personalization time budgets for live, VOD, and prefetch workflows.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "AdsRequestTimeoutMilliseconds": {
+          "description": "The maximum time, in milliseconds, that MediaTailor waits for a single ADS response during live or VOD playback. The default is 3000.",
+          "type": "integer"
+        },
+        "LiveMaximumAdsPersonalizationTimeMilliseconds": {
+          "description": "The maximum total time, in milliseconds, that MediaTailor spends on ADS activity for live manifests. The default is 10000.",
+          "type": "integer"
+        },
+        "VodMaximumAdsPersonalizationTimeMilliseconds": {
+          "description": "The maximum total time, in milliseconds, that MediaTailor spends on ADS activity for VOD manifests. The default is 10000.",
+          "type": "integer"
+        },
+        "PrefetchAdsRequestTimeoutMilliseconds": {
+          "description": "The maximum time, in milliseconds, that MediaTailor waits for a single ADS response during prefetch retrieval. If not set, MediaTailor uses the AdsRequestTimeoutMilliseconds value.",
+          "type": "integer"
+        },
+        "PrefetchMaximumAdsPersonalizationTimeMilliseconds": {
+          "description": "The maximum total time, in milliseconds, that MediaTailor spends on ADS activity during prefetch retrieval.",
+          "type": "integer"
+        }
+      }
+    },
+    "AdsPersonalizationConcurrency": {
+      "description": "The settings that control how many concurrent requests MediaTailor makes to the ad decision server (ADS).",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MaxConcurrentAdsRequests": {
+          "description": "The maximum number of simultaneous requests that MediaTailor makes to the ADS for each manifest request. The default is 1.",
+          "type": "integer"
+        },
+        "EnableVodVastParallelization": {
+          "description": "Enables parallel processing of ADS requests in VOD workflows when the ADS returns VAST responses. The default is false.",
+          "type": "boolean"
         }
       }
     }

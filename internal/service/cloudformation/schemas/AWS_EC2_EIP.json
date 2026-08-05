@@ -33,7 +33,7 @@
         "Value",
         "Key"
       ],
-      "description": "Specifies a tag. For more information, see [Add tags to a resource](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#cloudformation-add-tag-specifications)."
+      "description": "Specifies a tag. For more information, see [Resource tags](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html)."
     }
   },
   "properties": {
@@ -66,11 +66,11 @@
       "type": "string"
     },
     "IpamPoolId": {
-      "description": "",
+      "description": "The ID of an IPAM pool which has an Amazon-provided or BYOIP public IPv4 CIDR provisioned to it. For more information, see [Allocate sequential Elastic IP addresses from an IPAM pool](https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-eip-pool.html) in the *Amazon VPC IPAM User Guide*.",
       "type": "string"
     },
     "Address": {
-      "description": "",
+      "description": "An Elastic IP address or a carrier IP address in a Wavelength Zone.",
       "type": "string"
     },
     "Tags": {

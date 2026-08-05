@@ -41,7 +41,15 @@
         "NETWORK"
       ]
     },
+    "DashAudioTimelinePattern": {
+      "type": "string",
+      "enum": [
+        "NONE",
+        "PATTERNED"
+      ]
+    },
     "DashAvailabilityStartTimeConfiguration": {
+      "description": "<p>The configuration for the DASH <code>availabilityStartTime</code> attribute of the Media Presentation Description (MPD). Use this configuration to set a custom availability start time for your DASH manifest.</p>",
       "oneOf": [
         {
           "type": "object",
@@ -49,6 +57,7 @@
           "properties": {
             "FixedAvailabilityStartTime": {
               "type": "string",
+              "description": "<p>The fixed availability start time for the DASH manifest, in ISO 8601 date-time format. The value must have hourly granularity, meaning that the minutes, seconds, and fractional seconds must be zero. The value must be on or after <code>2024-01-01T00:00:00Z</code> and must be at least 14 days before the current time.</p>",
               "format": "date-time"
             }
           },
@@ -98,13 +107,6 @@
       "enum": [
         "STANDARD",
         "NONE"
-      ]
-    },
-    "DashAudioTimelinePattern": {
-      "type": "string",
-      "enum": [
-        "NONE",
-        "PATTERNED"
       ]
     },
     "DashDrmSignaling": {
@@ -676,6 +678,13 @@
         "COMPACT"
       ]
     },
+    "OutputTimestampMode": {
+      "type": "string",
+      "enum": [
+        "PASSTHROUGH",
+        "REBASED_TO_CHANNEL_START"
+      ]
+    },
     "PresetSpeke20Audio": {
       "type": "string",
       "enum": [
@@ -828,6 +837,9 @@
         },
         "Encryption": {
           "$ref": "#/definitions/Encryption"
+        },
+        "OutputTimestampMode": {
+          "$ref": "#/definitions/OutputTimestampMode"
         }
       },
       "additionalProperties": false

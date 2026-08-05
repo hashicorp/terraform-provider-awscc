@@ -52,6 +52,13 @@
       },
       "additionalProperties": false
     },
+    "OutputLockingMode": {
+      "type": "string",
+      "enum": [
+        "EPOCH_LOCKED",
+        "NON_EPOCH_LOCKED"
+      ]
+    },
     "Tag": {
       "type": "object",
       "properties": {
@@ -114,6 +121,9 @@
     "OutputHeaderConfiguration": {
       "$ref": "#/definitions/OutputHeaderConfiguration"
     },
+    "OutputLockingMode": {
+      "$ref": "#/definitions/OutputLockingMode"
+    },
     "IngestEndpointUrls": {
       "type": "array",
       "items": {
@@ -138,7 +148,8 @@
   "createOnlyProperties": [
     "/properties/ChannelGroupName",
     "/properties/ChannelName",
-    "/properties/InputType"
+    "/properties/InputType",
+    "/properties/OutputLockingMode"
   ],
   "primaryIdentifier": [
     "/properties/Arn"

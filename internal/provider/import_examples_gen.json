@@ -366,7 +366,7 @@
     },
     {
         "resource": "awscc_appstream_stack_fleet_association",
-        "identifier": ["FleetName","StackName"]
+        "identifier": ["Id"]
     },
     {
         "resource": "awscc_appstream_stack_user_association",
@@ -6463,11 +6463,6 @@
         "resource": "awscc_supportapp_slack_workspace_configuration",
         "generateListResource": true,
         "identifier": ["TeamId"]
-    },
-    {
-        "resource": "awscc_synthetics_canary",
-        "generateListResource": true,
-        "identifier": ["Name"]
     },
     {
         "resource": "awscc_synthetics_group",
