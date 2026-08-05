@@ -3090,7 +3090,6 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						listplanmodifier.UseStateForUnknown(),
-						listplanmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: LoadBalancersConfig
@@ -3202,7 +3201,6 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
-						int64planmodifier.RequiresReplaceIfConfigured(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ReplaceUnhealthyInstances

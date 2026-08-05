@@ -120,7 +120,7 @@ func lifecyclePolicyResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Amazon OpenSearchServerless lifecycle policy resource",
+		Description: "Resource Type definition for AWS::OpenSearchServerless::LifecyclePolicy",
 		Version:     1,
 		Attributes:  attributes,
 	}

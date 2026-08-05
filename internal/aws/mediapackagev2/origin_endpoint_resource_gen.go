@@ -160,8 +160,10 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "AvailabilityStartTimeConfiguration": {
+		//	        "description": "\u003cp\u003eThe configuration for the DASH \u003ccode\u003eavailabilityStartTime\u003c/code\u003e attribute of the Media Presentation Description (MPD). Use this configuration to set a custom availability start time for your DASH manifest.\u003c/p\u003e",
 		//	        "properties": {
 		//	          "FixedAvailabilityStartTime": {
+		//	            "description": "\u003cp\u003eThe fixed availability start time for the DASH manifest, in ISO 8601 date-time format. The value must have hourly granularity, meaning that the minutes, seconds, and fractional seconds must be zero. The value must be on or after \u003ccode\u003e2024-01-01T00:00:00Z\u003c/code\u003e and must be at least 14 days before the current time.\u003c/p\u003e",
 		//	            "format": "date-time",
 		//	            "type": "string"
 		//	          }
@@ -522,16 +524,18 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: FixedAvailabilityStartTime
 							"fixed_availability_start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-								CustomType: timetypes.RFC3339Type{},
-								Optional:   true,
-								Computed:   true,
+								CustomType:  timetypes.RFC3339Type{},
+								Description: "<p>The fixed availability start time for the DASH manifest, in ISO 8601 date-time format. The value must have hourly granularity, meaning that the minutes, seconds, and fractional seconds must be zero. The value must be on or after <code>2024-01-01T00:00:00Z</code> and must be at least 14 days before the current time.</p>",
+								Optional:    true,
+								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
-						Computed: true,
+						Description: "<p>The configuration for the DASH <code>availabilityStartTime</code> attribute of the Media Presentation Description (MPD). Use this configuration to set a custom availability start time for your DASH manifest.</p>",
+						Optional:    true,
+						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -2374,6 +2378,13 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "\u003cp\u003eWhen selected, the stream set includes an additional I-frame only stream, along with the other tracks. If false, this extra stream is not included. MediaPackage generates an I-frame only stream from the first rendition in the manifest. The service inserts EXT-I-FRAMES-ONLY tags in the output manifest, and then generates and includes an I-frames only playlist in the stream. This playlist permits player functionality like fast forward and rewind.\u003c/p\u003e",
 		//	      "type": "boolean"
 		//	    },
+		//	    "OutputTimestampMode": {
+		//	      "enum": [
+		//	        "PASSTHROUGH",
+		//	        "REBASED_TO_CHANNEL_START"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "Scte": {
 		//	      "additionalProperties": false,
 		//	      "description": "\u003cp\u003eThe SCTE configuration.\u003c/p\u003e",
@@ -2715,6 +2726,20 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 						boolplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: OutputTimestampMode
+				"output_timestamp_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"PASSTHROUGH",
+							"REBASED_TO_CHANNEL_START",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: Scte
 				"scte": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -3029,6 +3054,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 		"mss_manifest_urls":                     "MssManifestUrls",
 		"mss_manifests":                         "MssManifests",
 		"origin_endpoint_name":                  "OriginEndpointName",
+		"output_timestamp_mode":                 "OutputTimestampMode",
 		"period_triggers":                       "PeriodTriggers",
 		"precise":                               "Precise",
 		"preset_speke_20_audio":                 "PresetSpeke20Audio",

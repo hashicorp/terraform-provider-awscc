@@ -893,9 +893,9 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      },
 		//	      "Level": {
-		//	        "description": "The level of the proficiency. The valid values are 1, 2, 3, 4 and 5.",
-		//	        "maximum": 5.0,
-		//	        "minimum": 1.0,
+		//	        "description": "The level of the proficiency. The valid values are 0 to 10.",
+		//	        "maximum": 10.0,
+		//	        "minimum": 0.0,
 		//	        "type": "number"
 		//	      }
 		//	    },
@@ -939,11 +939,11 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Level
 					"level": schema.Float64Attribute{ /*START ATTRIBUTE*/
-						Description: "The level of the proficiency. The valid values are 1, 2, 3, 4 and 5.",
+						Description: "The level of the proficiency. The valid values are 0 to 10.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.Float64{ /*START VALIDATORS*/
-							float64validator.Between(1.000000, 5.000000),
+							float64validator.Between(0.000000, 10.000000),
 							fwvalidators.NotNullFloat64(),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/

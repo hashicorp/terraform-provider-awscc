@@ -102,7 +102,7 @@ func collectionIndexResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Resource schema for AWS::OpenSearchServerless::CollectionIndex",
+		Description: "Resource Type definition for AWS::OpenSearchServerless::CollectionIndex",
 		Version:     1,
 		Attributes:  attributes,
 	}

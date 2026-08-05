@@ -395,7 +395,7 @@ func securityConfigResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Amazon OpenSearchServerless security config resource",
+		Description: "Resource Type definition for AWS::OpenSearchServerless::SecurityConfig",
 		Version:     1,
 		Attributes:  attributes,
 	}

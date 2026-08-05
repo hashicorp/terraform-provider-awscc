@@ -122,7 +122,7 @@ func securityPolicyResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Amazon OpenSearchServerless security policy resource",
+		Description: "Resource Type definition for AWS::OpenSearchServerless::SecurityPolicy",
 		Version:     1,
 		Attributes:  attributes,
 	}
