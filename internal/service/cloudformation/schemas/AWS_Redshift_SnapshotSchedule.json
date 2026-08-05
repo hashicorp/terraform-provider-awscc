@@ -1,0 +1,128 @@
+{
+  "typeName": "AWS::Redshift::SnapshotSchedule",
+  "description": "Creates a snapshot schedule that lets you set up automatic snapshots of your Amazon Redshift cluster at regular intervals.",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the snapshot schedule."
+    },
+    "ScheduleIdentifier": {
+      "type": "string",
+      "description": "A unique identifier for the snapshot schedule. Only alphanumeric characters are allowed."
+    },
+    "ScheduleDescription": {
+      "type": "string",
+      "description": "The description of the snapshot schedule."
+    },
+    "ScheduleDefinitions": {
+      "type": "array",
+      "description": "The definition of the snapshot schedule. The definition is made up of schedule expressions, for example \"cron(30 12 *)\" or \"rate(12 hours)\".",
+      "items": {
+        "type": "string"
+      },
+      "insertionOrder": false
+    },
+    "AssociatedClusterCount": {
+      "type": "integer",
+      "description": "The number of clusters associated with the schedule."
+    },
+    "Tags": {
+      "type": "array",
+      "description": "An optional set of tags for the snapshot schedule.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "insertionOrder": false
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key, or name, for the resource tag.",
+          "minLength": 1,
+          "maxLength": 127
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the resource tag.",
+          "minLength": 0,
+          "maxLength": 255
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "ScheduleIdentifier",
+    "ScheduleDefinitions"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/AssociatedClusterCount"
+  ],
+  "createOnlyProperties": [
+    "/properties/ScheduleIdentifier",
+    "/properties/ScheduleDescription"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/ScheduleIdentifier"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "redshift:CreateTags",
+      "redshift:DeleteTags",
+      "redshift:DescribeSnapshotSchedules"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "redshift:CreateSnapshotSchedule",
+        "redshift:DescribeSnapshotSchedules",
+        "redshift:CreateTags"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "redshift:DescribeSnapshotSchedules"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "redshift:ModifySnapshotSchedule",
+        "redshift:DescribeSnapshotSchedules",
+        "redshift:CreateTags",
+        "redshift:DeleteTags"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "redshift:DeleteSnapshotSchedule",
+        "redshift:DescribeSnapshotSchedules"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "redshift:DescribeSnapshotSchedules"
+      ]
+    }
+  }
+}

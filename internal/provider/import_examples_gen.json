@@ -761,6 +761,10 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_bedrockagentcore_harness_endpoint",
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_bedrockagentcore_online_evaluation_config",
         "generateListResource": true,
         "identifier": ["OnlineEvaluationConfigArn"]
@@ -1660,6 +1664,16 @@
         "resource": "awscc_dms_data_provider",
         "generateListResource": true,
         "identifier": ["DataProviderArn"]
+    },
+    {
+        "resource": "awscc_dms_endpoint",
+        "generateListResource": true,
+        "identifier": ["EndpointArn"]
+    },
+    {
+        "resource": "awscc_dms_event_subscription",
+        "generateListResource": true,
+        "identifier": ["SubscriptionName"]
     },
     {
         "resource": "awscc_dms_instance_profile",
@@ -3106,6 +3120,11 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_glue_workflow",
+        "generateListResource": true,
+        "identifier": ["Name"]
+    },
+    {
         "resource": "awscc_grafana_workspace",
         "generateListResource": true,
         "identifier": ["Id"]
@@ -3941,6 +3960,11 @@
         "identifier": ["LicenseArn"]
     },
     {
+        "resource": "awscc_licensemanager_license_asset_rule_set",
+        "generateListResource": true,
+        "identifier": ["LicenseAssetRulesetArn"]
+    },
+    {
         "resource": "awscc_lightsail_alarm",
         "generateListResource": true,
         "identifier": ["AlarmName"]
@@ -4290,6 +4314,11 @@
         "resource": "awscc_mediaconnect_router_output",
         "generateListResource": true,
         "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_mediaconvert_preset",
+        "generateListResource": true,
+        "identifier": ["Name"]
     },
     {
         "resource": "awscc_medialive_channel_placement_group",
@@ -5081,6 +5110,11 @@
         "identifier": ["AwsAccountId","TopicId"]
     },
     {
+        "resource": "awscc_quicksight_topic_v2",
+        "generateListResource": true,
+        "identifier": ["AwsAccountId","TopicId"]
+    },
+    {
         "resource": "awscc_quicksight_vpc_connection",
         "generateListResource": true,
         "identifier": ["AwsAccountId","VPCConnectionId"]
@@ -5228,6 +5262,11 @@
         "resource": "awscc_redshiftserverless_workgroup",
         "generateListResource": true,
         "identifier": ["WorkgroupName"]
+    },
+    {
+        "resource": "awscc_redshift_snapshot_schedule",
+        "generateListResource": true,
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_refactorspaces_application",
@@ -5900,6 +5939,10 @@
         "resource": "awscc_ssm_resource_policy",
         "generateListResource": true,
         "identifier": ["PolicyId","ResourceArn"]
+    },
+    {
+        "resource": "awscc_ssm_service_setting",
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_ssmcontacts_contact",
