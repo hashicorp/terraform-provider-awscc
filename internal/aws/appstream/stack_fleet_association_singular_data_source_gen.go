@@ -26,23 +26,28 @@ func stackFleetAssociationDataSource(ctx context.Context) (datasource.DataSource
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The name of the fleet. To associate a fleet with a stack, you must specify a dependency on the fleet resource.",
 		//	  "type": "string"
 		//	}
 		"fleet_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the fleet. To associate a fleet with a stack, you must specify a dependency on the fleet resource.",
-			Computed:    true,
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"stack_fleet_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: StackName
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The name of the stack. To associate a fleet with a stack, you must specify a dependency on the stack resource.",
 		//	  "type": "string"
 		//	}
 		"stack_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the stack. To associate a fleet with a stack, you must specify a dependency on the stack resource.",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -61,8 +66,9 @@ func stackFleetAssociationDataSource(ctx context.Context) (datasource.DataSource
 	opts = opts.WithCloudFormationTypeName("AWS::AppStream::StackFleetAssociation").WithTerraformTypeName("awscc_appstream_stack_fleet_association")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"fleet_name": "FleetName",
-		"stack_name": "StackName",
+		"fleet_name":                 "FleetName",
+		"stack_fleet_association_id": "Id",
+		"stack_name":                 "StackName",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

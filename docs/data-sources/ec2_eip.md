@@ -21,13 +21,13 @@ Data Source schema for AWS::EC2::EIP
 
 ### Read-Only
 
-- `address` (String)
+- `address` (String) An Elastic IP address or a carrier IP address in a Wavelength Zone.
 - `allocation_id` (String)
 - `domain` (String) The network (``vpc``).
  If you define an Elastic IP address and associate it with a VPC that is defined in the same template, you must declare a dependency on the VPC-gateway attachment by using the [DependsOn Attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-dependson.html) on this resource.
 - `instance_id` (String) The ID of the instance.
   Updates to the ``InstanceId`` property may require *some interruptions*. Updates on an EIP reassociates the address on its associated resource.
-- `ipam_pool_id` (String)
+- `ipam_pool_id` (String) The ID of an IPAM pool which has an Amazon-provided or BYOIP public IPv4 CIDR provisioned to it. For more information, see [Allocate sequential Elastic IP addresses from an IPAM pool](https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-eip-pool.html) in the *Amazon VPC IPAM User Guide*.
 - `network_border_group` (String) A unique set of Availability Zones, Local Zones, or Wavelength Zones from which AWS advertises IP addresses. Use this parameter to limit the IP address to this location. IP addresses cannot move between network border groups.
  Use [DescribeAvailabilityZones](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html) to view the network border groups.
 - `public_ip` (String)

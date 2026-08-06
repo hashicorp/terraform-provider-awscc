@@ -32,6 +32,7 @@ Data Source schema for AWS::MediaPackageV2::Channel
 - `input_type` (String)
 - `modified_at` (String) <p>The date and time the channel was modified.</p>
 - `output_header_configuration` (Attributes) <p>The settings for what common media server data (CMSD) headers AWS Elemental MediaPackage includes in responses to the CDN.</p> (see [below for nested schema](#nestedatt--output_header_configuration))
+- `output_locking_mode` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--ingest_endpoints"></a>

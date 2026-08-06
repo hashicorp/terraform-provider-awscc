@@ -609,6 +609,20 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The Amazon Resource Name (ARN) of the Service.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ExchangeUrlPrivateConnectionName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the private connection to use for OAuth token exchange requests only. Cannot be specified when PrivateConnectionName is provided.",
+		//	  "maxLength": 30,
+		//	  "minLength": 3,
+		//	  "pattern": "^[a-z0-9]([a-z0-9-]*[a-z0-9])?$",
+		//	  "type": "string"
+		//	}
+		"exchange_url_private_connection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the private connection to use for OAuth token exchange requests only. Cannot be specified when PrivateConnectionName is provided.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyArn
 		// CloudFormation resource type schema:
 		//
@@ -620,6 +634,20 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN of the KMS key to use for encryption.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: PrivateConnectionName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the private connection to use for VPC connectivity.",
+		//	  "maxLength": 30,
+		//	  "minLength": 3,
+		//	  "pattern": "^[a-z0-9]([a-z0-9-]*[a-z0-9])?$",
+		//	  "type": "string"
+		//	}
+		"private_connection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the private connection to use for VPC connectivity.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ServiceDetails
@@ -1853,6 +1881,20 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "An array of key-value pairs to apply to this resource.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: TargetUrlPrivateConnectionName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the private connection to use for API calls (target URL) only. Cannot be specified when PrivateConnectionName is provided.",
+		//	  "maxLength": 30,
+		//	  "minLength": 3,
+		//	  "pattern": "^[a-z0-9]([a-z0-9-]*[a-z0-9])?$",
+		//	  "type": "string"
+		//	}
+		"target_url_private_connection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the private connection to use for API calls (target URL) only. Cannot be specified when PrivateConnectionName is provided.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -1870,63 +1912,66 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::DevOpsAgent::Service").WithTerraformTypeName("awscc_devopsagent_service")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"accessible_resources":         "AccessibleResources",
-		"account_id":                   "AccountId",
-		"account_urn":                  "AccountUrn",
-		"additional_service_details":   "AdditionalServiceDetails",
-		"alert_policy_ids":             "AlertPolicyIds",
-		"api_key":                      "ApiKey",
-		"api_key_header":               "ApiKeyHeader",
-		"api_key_name":                 "ApiKeyName",
-		"api_key_value":                "ApiKeyValue",
-		"application_ids":              "ApplicationIds",
-		"arn":                          "Arn",
-		"authorization_config":         "AuthorizationConfig",
-		"authorization_header":         "AuthorizationHeader",
-		"authorization_method":         "AuthorizationMethod",
-		"azure_identity":               "AzureIdentity",
-		"bearer_token":                 "BearerToken",
-		"client_id":                    "ClientId",
-		"client_name":                  "ClientName",
-		"client_secret":                "ClientSecret",
-		"custom_headers":               "CustomHeaders",
-		"description":                  "Description",
-		"dynatrace":                    "Dynatrace",
-		"endpoint":                     "Endpoint",
-		"entity_guids":                 "EntityGuids",
-		"exchange_parameters":          "ExchangeParameters",
-		"exchange_url":                 "ExchangeUrl",
-		"git_lab":                      "GitLab",
-		"group_id":                     "GroupId",
-		"instance_url":                 "InstanceUrl",
-		"key":                          "Key",
-		"kms_key_arn":                  "KmsKeyArn",
-		"mcp_role_arn":                 "McpRoleArn",
-		"mcp_server":                   "MCPServer",
-		"mcp_server_grafana":           "MCPServerGrafana",
-		"mcp_server_new_relic":         "MCPServerNewRelic",
-		"mcp_server_sig_v4":            "MCPServerSigV4",
-		"mcp_server_splunk":            "MCPServerSplunk",
-		"name":                         "Name",
-		"o_auth_client_credentials":    "OAuthClientCredentials",
-		"pager_duty":                   "PagerDuty",
-		"region":                       "Region",
-		"role_arn":                     "RoleArn",
-		"scopes":                       "Scopes",
-		"service":                      "Service",
-		"service_details":              "ServiceDetails",
-		"service_id":                   "ServiceId",
-		"service_now":                  "ServiceNow",
-		"service_type":                 "ServiceType",
-		"tags":                         "Tags",
-		"target_url":                   "TargetUrl",
-		"tenant_id":                    "TenantId",
-		"token_name":                   "TokenName",
-		"token_type":                   "TokenType",
-		"token_value":                  "TokenValue",
-		"value":                        "Value",
-		"web_identity_role_arn":        "WebIdentityRoleArn",
-		"web_identity_token_audiences": "WebIdentityTokenAudiences",
+		"accessible_resources":                 "AccessibleResources",
+		"account_id":                           "AccountId",
+		"account_urn":                          "AccountUrn",
+		"additional_service_details":           "AdditionalServiceDetails",
+		"alert_policy_ids":                     "AlertPolicyIds",
+		"api_key":                              "ApiKey",
+		"api_key_header":                       "ApiKeyHeader",
+		"api_key_name":                         "ApiKeyName",
+		"api_key_value":                        "ApiKeyValue",
+		"application_ids":                      "ApplicationIds",
+		"arn":                                  "Arn",
+		"authorization_config":                 "AuthorizationConfig",
+		"authorization_header":                 "AuthorizationHeader",
+		"authorization_method":                 "AuthorizationMethod",
+		"azure_identity":                       "AzureIdentity",
+		"bearer_token":                         "BearerToken",
+		"client_id":                            "ClientId",
+		"client_name":                          "ClientName",
+		"client_secret":                        "ClientSecret",
+		"custom_headers":                       "CustomHeaders",
+		"description":                          "Description",
+		"dynatrace":                            "Dynatrace",
+		"endpoint":                             "Endpoint",
+		"entity_guids":                         "EntityGuids",
+		"exchange_parameters":                  "ExchangeParameters",
+		"exchange_url":                         "ExchangeUrl",
+		"exchange_url_private_connection_name": "ExchangeUrlPrivateConnectionName",
+		"git_lab":                              "GitLab",
+		"group_id":                             "GroupId",
+		"instance_url":                         "InstanceUrl",
+		"key":                                  "Key",
+		"kms_key_arn":                          "KmsKeyArn",
+		"mcp_role_arn":                         "McpRoleArn",
+		"mcp_server":                           "MCPServer",
+		"mcp_server_grafana":                   "MCPServerGrafana",
+		"mcp_server_new_relic":                 "MCPServerNewRelic",
+		"mcp_server_sig_v4":                    "MCPServerSigV4",
+		"mcp_server_splunk":                    "MCPServerSplunk",
+		"name":                                 "Name",
+		"o_auth_client_credentials":            "OAuthClientCredentials",
+		"pager_duty":                           "PagerDuty",
+		"private_connection_name":              "PrivateConnectionName",
+		"region":                               "Region",
+		"role_arn":                             "RoleArn",
+		"scopes":                               "Scopes",
+		"service":                              "Service",
+		"service_details":                      "ServiceDetails",
+		"service_id":                           "ServiceId",
+		"service_now":                          "ServiceNow",
+		"service_type":                         "ServiceType",
+		"tags":                                 "Tags",
+		"target_url":                           "TargetUrl",
+		"target_url_private_connection_name":   "TargetUrlPrivateConnectionName",
+		"tenant_id":                            "TenantId",
+		"token_name":                           "TokenName",
+		"token_type":                           "TokenType",
+		"token_value":                          "TokenValue",
+		"value":                                "Value",
+		"web_identity_role_arn":                "WebIdentityRoleArn",
+		"web_identity_token_audiences":         "WebIdentityTokenAudiences",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

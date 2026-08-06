@@ -1,0 +1,293 @@
+{
+  "typeName": "AWS::QuickSight::TopicV2",
+  "description": "Definition of the AWS::QuickSight::TopicV2 Resource Type.",
+  "definitions": {
+    "CustomInstructions": {
+      "type": "object",
+      "properties": {
+        "CustomInstructionsString": {
+          "type": "string",
+          "maxLength": 5000,
+          "minLength": 0
+        }
+      },
+      "required": [
+        "CustomInstructionsString"
+      ],
+      "additionalProperties": false
+    },
+    "DataSetReference": {
+      "type": "object",
+      "description": "A dataset reference used by a V2 (SEMANTIC_VIEW) topic.",
+      "properties": {
+        "DataSetArn": {
+          "type": "string"
+        },
+        "DataSetName": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 0
+        }
+      },
+      "required": [
+        "DataSetArn"
+      ],
+      "additionalProperties": false
+    },
+    "DataSetRelation": {
+      "type": "object",
+      "description": "A relation between two datasets referenced by a V2 (SEMANTIC_VIEW) topic.",
+      "properties": {
+        "Left": {
+          "$ref": "#/definitions/DataSetRelationEndpoint"
+        },
+        "Right": {
+          "$ref": "#/definitions/DataSetRelationEndpoint"
+        }
+      },
+      "required": [
+        "Left",
+        "Right"
+      ],
+      "additionalProperties": false
+    },
+    "DataSetRelationEndpoint": {
+      "type": "object",
+      "properties": {
+        "DataSetArn": {
+          "type": "string"
+        },
+        "ColumnNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 5,
+          "minItems": 1
+        }
+      },
+      "required": [
+        "DataSetArn",
+        "ColumnNames"
+      ],
+      "additionalProperties": false
+    },
+    "ResourcePermission": {
+      "type": "object",
+      "properties": {
+        "Principal": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 1
+        },
+        "Actions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 20,
+          "minItems": 1
+        }
+      },
+      "required": [
+        "Actions",
+        "Principal"
+      ],
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "description": "<p>The key or keys of the key-value pairs for the resource tag or tags assigned to the\n            resource.</p>",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1,
+          "description": "<p>Tag key.</p>"
+        },
+        "Value": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 1,
+          "description": "<p>Tag value.</p>"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "TopicV2Details": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "Description": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 0
+        },
+        "DataSets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataSetReference"
+          },
+          "maxItems": 20,
+          "minItems": 1
+        },
+        "DataSetRelations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataSetRelation"
+          },
+          "maxItems": 20,
+          "minItems": 0
+        }
+      },
+      "required": [
+        "Name"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "type": "string"
+    },
+    "AwsAccountId": {
+      "type": "string",
+      "maxLength": 12,
+      "minLength": 12,
+      "pattern": "^[0-9]{12}$"
+    },
+    "CustomInstructions": {
+      "$ref": "#/definitions/CustomInstructions"
+    },
+    "DataSets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/DataSetReference"
+      },
+      "maxItems": 20,
+      "minItems": 1
+    },
+    "DataSetRelations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/DataSetRelation"
+      },
+      "maxItems": 20,
+      "minItems": 0
+    },
+    "Description": {
+      "type": "string",
+      "maxLength": 256,
+      "minLength": 0
+    },
+    "FolderArns": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 20,
+      "minItems": 0
+    },
+    "Name": {
+      "type": "string",
+      "maxLength": 128,
+      "minLength": 1
+    },
+    "Permissions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ResourcePermission"
+      },
+      "maxItems": 64,
+      "minItems": 1
+    },
+    "Tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 200,
+      "minItems": 1
+    },
+    "TopicId": {
+      "type": "string",
+      "maxLength": 256,
+      "minLength": 0,
+      "pattern": "^[A-Za-z0-9-_.\\\\+]*$"
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/Arn"
+  ],
+  "writeOnlyProperties": [
+    "/properties/FolderArns",
+    "/properties/DataSets/*/DataSetName"
+  ],
+  "createOnlyProperties": [
+    "/properties/AwsAccountId",
+    "/properties/FolderArns",
+    "/properties/TopicId",
+    "/properties/Tags"
+  ],
+  "primaryIdentifier": [
+    "/properties/AwsAccountId",
+    "/properties/TopicId"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "quicksight:CreateTopic",
+        "quicksight:PassDataSet",
+        "quicksight:CreateFolderMembership",
+        "quicksight:ListFoldersForResource",
+        "quicksight:TagResource",
+        "quicksight:UpdateTopicPermissions"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "quicksight:DescribeTopic",
+        "quicksight:DescribeTopicPermissions",
+        "quicksight:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "quicksight:UpdateTopic",
+        "quicksight:PassDataSet",
+        "quicksight:CreateFolderMembership",
+        "quicksight:DeleteFolderMembership",
+        "quicksight:ListFoldersForResource",
+        "quicksight:DescribeTopicPermissions",
+        "quicksight:UpdateTopicPermissions"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "quicksight:DeleteTopic"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "quicksight:ListTopics"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": []
+  }
+}

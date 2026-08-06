@@ -92,7 +92,8 @@ func exportDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "Compression": {
 		//	                  "enum": [
 		//	                    "GZIP",
-		//	                    "PARQUET"
+		//	                    "PARQUET",
+		//	                    "ZIP"
 		//	                  ],
 		//	                  "type": "string"
 		//	                },

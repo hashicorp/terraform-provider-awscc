@@ -49,7 +49,6 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "Model for configuration of a Topic",
 		//	  "properties": {
 		//	    "QBusinessInsightsEnabled": {
 		//	      "type": "boolean"
@@ -64,16 +63,17 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Model for configuration of a Topic",
-			Computed:    true,
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: CustomInstructions
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
+		//	  "description": "\u003cp\u003eInstructions that provide additional guidance and context for response generation.\u003c/p\u003e",
 		//	  "properties": {
 		//	    "CustomInstructionsString": {
+		//	      "description": "\u003cp\u003eA text field for providing additional guidance or context for response generation.\u003c/p\u003e",
 		//	      "maxLength": 10000,
 		//	      "minLength": 0,
 		//	      "type": "string"
@@ -88,10 +88,12 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: CustomInstructionsString
 				"custom_instructions_string": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "<p>A text field for providing additional guidance or context for response generation.</p>",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Computed: true,
+			Description: "<p>Instructions that provide additional guidance and context for response generation.</p>",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DataSets
 		// CloudFormation resource type schema:
@@ -141,7 +143,7 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "type": "array"
 		//	            },
 		//	            "CalculatedFieldDescription": {
-		//	              "maxLength": 256,
+		//	              "maxLength": 500,
 		//	              "minLength": 0,
 		//	              "type": "string"
 		//	            },
@@ -488,7 +490,7 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "type": "string"
 		//	            },
 		//	            "ColumnDescription": {
-		//	              "maxLength": 256,
+		//	              "maxLength": 500,
 		//	              "minLength": 0,
 		//	              "type": "string"
 		//	            },
@@ -880,12 +882,13 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "enum": [
 		//	                "ENFORCED_VALUE_FILTER",
 		//	                "CONDITIONAL_VALUE_FILTER",
-		//	                "NAMED_VALUE_FILTER"
+		//	                "NAMED_VALUE_FILTER",
+		//	                "DASHBOARD_DEFAULT_FILTER"
 		//	              ],
 		//	              "type": "string"
 		//	            },
 		//	            "FilterDescription": {
-		//	              "maxLength": 256,
+		//	              "maxLength": 500,
 		//	              "minLength": 0,
 		//	              "type": "string"
 		//	            },
@@ -908,7 +911,8 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "NUMERIC_EQUALITY_FILTER",
 		//	                "NUMERIC_RANGE_FILTER",
 		//	                "DATE_RANGE_FILTER",
-		//	                "RELATIVE_DATE_FILTER"
+		//	                "RELATIVE_DATE_FILTER",
+		//	                "NULL_FILTER"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -1147,7 +1151,7 @@ func topicDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "type": "array"
 		//	            },
 		//	            "EntityDescription": {
-		//	              "maxLength": 256,
+		//	              "maxLength": 500,
 		//	              "minLength": 0,
 		//	              "type": "string"
 		//	            },

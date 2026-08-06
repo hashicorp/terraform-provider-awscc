@@ -306,6 +306,30 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: OutputLockingMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "EPOCH_LOCKED",
+		//	    "NON_EPOCH_LOCKED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"output_locking_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"EPOCH_LOCKED",
+					"NON_EPOCH_LOCKED",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplaceIfConfigured(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -396,6 +420,7 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 		"modified_at":                 "ModifiedAt",
 		"mqcs_input_switching":        "MQCSInputSwitching",
 		"output_header_configuration": "OutputHeaderConfiguration",
+		"output_locking_mode":         "OutputLockingMode",
 		"preferred_input":             "PreferredInput",
 		"publish_mqcs":                "PublishMQCS",
 		"tags":                        "Tags",

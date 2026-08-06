@@ -1,4 +1,4 @@
-## 1.96.0 (Unreleased)
+## 1.96.0 (August 6, 2026)
 
 BUG FIXES:
 
@@ -6,6 +6,41 @@ BUG FIXES:
 * data-source/awscc_ses_mail_manager_ingress_point: Set correct schema type for `network_configuration.public_network_configuration.ip_type` attribute ([#3255](https://github.com/hashicorp/terraform-provider-awscc/pull/3255))
 * resource/awscc_bedrockagentcore_gateway: Set correct schema type `protocol_type` argument ([#3255](https://github.com/hashicorp/terraform-provider-awscc/pull/3255))
 * resource/awscc_ses_mail_manager_ingress_point: Set correct schema type for `network_configuration.public_network_configuration.ip_type` argument ([#3255](https://github.com/hashicorp/terraform-provider-awscc/pull/3255))
+
+FEATURES:
+
+* **New Data Source:** `awscc_bedrockagentcore_harness_endpoint`
+* **New Data Source:** `awscc_dms_endpoint`
+* **New Data Source:** `awscc_dms_endpoints`
+* **New Data Source:** `awscc_dms_event_subscription`
+* **New Data Source:** `awscc_dms_event_subscriptions`
+* **New Data Source:** `awscc_glue_workflow`
+* **New Data Source:** `awscc_glue_workflows`
+* **New Data Source:** `awscc_licensemanager_license_asset_rule_set`
+* **New Data Source:** `awscc_licensemanager_license_asset_rule_sets`
+* **New Data Source:** `awscc_mediaconvert_preset`
+* **New Data Source:** `awscc_mediaconvert_presets`
+* **New Data Source:** `awscc_quicksight_topic_v2`
+* **New Data Source:** `awscc_quicksight_topic_v2s`
+* **New Data Source:** `awscc_redshift_snapshot_schedule`
+* **New Data Source:** `awscc_redshift_snapshot_schedules`
+* **New Data Source:** `awscc_ssm_service_setting`
+* **New List Resource:** `awscc_dms_endpoint`
+* **New List Resource:** `awscc_dms_event_subscription`
+* **New List Resource:** `awscc_glue_workflow`
+* **New List Resource:** `awscc_licensemanager_license_asset_rule_set`
+* **New List Resource:** `awscc_mediaconvert_preset`
+* **New List Resource:** `awscc_quicksight_topic_v2`
+* **New List Resource:** `awscc_redshift_snapshot_schedule`
+* **New Resource:** `awscc_bedrockagentcore_harness_endpoint`
+* **New Resource:** `awscc_dms_endpoint`
+* **New Resource:** `awscc_dms_event_subscription`
+* **New Resource:** `awscc_glue_workflow`
+* **New Resource:** `awscc_licensemanager_license_asset_rule_set`
+* **New Resource:** `awscc_mediaconvert_preset`
+* **New Resource:** `awscc_quicksight_topic_v2`
+* **New Resource:** `awscc_redshift_snapshot_schedule`
+* **New Resource:** `awscc_ssm_service_setting`
 
 ## 1.95.0 (July 30, 2026)
 

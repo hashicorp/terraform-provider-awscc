@@ -26,11 +26,11 @@ func eIPDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "An Elastic IP address or a carrier IP address in a Wavelength Zone.",
 		//	  "type": "string"
 		//	}
 		"address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "An Elastic IP address or a carrier IP address in a Wavelength Zone.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AllocationId
@@ -70,11 +70,11 @@ func eIPDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "",
+		//	  "description": "The ID of an IPAM pool which has an Amazon-provided or BYOIP public IPv4 CIDR provisioned to it. For more information, see [Allocate sequential Elastic IP addresses from an IPAM pool](https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-eip-pool.html) in the *Amazon VPC IPAM User Guide*.",
 		//	  "type": "string"
 		//	}
 		"ipam_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
+			Description: "The ID of an IPAM pool which has an Amazon-provided or BYOIP public IPv4 CIDR provisioned to it. For more information, see [Allocate sequential Elastic IP addresses from an IPAM pool](https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-eip-pool.html) in the *Amazon VPC IPAM User Guide*.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: NetworkBorderGroup
@@ -118,7 +118,7 @@ func eIPDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "Specifies a tag. For more information, see [Add tags to a resource](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#cloudformation-add-tag-specifications).",
+		//	    "description": "Specifies a tag. For more information, see [Resource tags](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html).",
 		//	    "properties": {
 		//	      "Key": {
 		//	        "description": "The tag key.",

@@ -49,6 +49,7 @@ resource "awscc_mediapackagev2_channel_group" "example" {
 - `input_switch_configuration` (Attributes) <p>The configuration for input switching based on the media quality confidence score (MQCS) as provided from AWS Elemental MediaLive.</p> (see [below for nested schema](#nestedatt--input_switch_configuration))
 - `input_type` (String)
 - `output_header_configuration` (Attributes) <p>The settings for what common media server data (CMSD) headers AWS Elemental MediaPackage includes in responses to the CDN.</p> (see [below for nested schema](#nestedatt--output_header_configuration))
+- `output_locking_mode` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

@@ -139,7 +139,8 @@
     "delete": {
       "permissions": [
         "glue:DeleteBlueprint",
-        "glue:GetBlueprint"
+        "glue:GetBlueprint",
+        "glue:GetTags"
       ]
     },
     "list": {

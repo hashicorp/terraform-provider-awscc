@@ -168,13 +168,13 @@ Read-Only:
 
 Read-Only:
 
-- `field` (String) The field in the HTTP request. The following are the possible values:
-  +   ``http-header`` 
-  +   ``http-request-method`` 
-  +   ``host-header`` 
-  +   ``path-pattern`` 
-  +   ``query-string`` 
-  +   ``source-ip``
+- `field` (String) The name of the field. The possible values are:
+  +  ``http-header`` ? [ALB] Matches on an HTTP header field.
+  +  ``http-request-method`` ? [ALB] Matches on the HTTP request method.
+  +  ``host-header`` ? [ALB] Matches on the host header.
+  +  ``path-pattern`` ? [ALB] Matches on the URL path of the request.
+  +  ``query-string`` ? [ALB] Matches on a query string parameter.
+  +  ``source-ip`` ? [ALB, NLB] Matches on the source IP address. For ALB, use ``SourceIpConfig`` with ``Values`` to specify CIDR ranges. For NLB, use ``SourceIpConfig`` with ``IpAddressType`` to match the IP address type (``ipv4`` or ``ipv6``).
 - `host_header_config` (Attributes) Information for a host header condition. Specify only when ``Field`` is ``host-header``. (see [below for nested schema](#nestedatt--conditions--host_header_config))
 - `http_header_config` (Attributes) Information for an HTTP header condition. Specify only when ``Field`` is ``http-header``. (see [below for nested schema](#nestedatt--conditions--http_header_config))
 - `http_request_method_config` (Attributes) Information for an HTTP method condition. Specify only when ``Field`` is ``http-request-method``. (see [below for nested schema](#nestedatt--conditions--http_request_method_config))
@@ -271,8 +271,8 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) The key of the tag.
+- `value` (String) The value of the tag.
 
 
 <a id="nestedatt--transforms"></a>

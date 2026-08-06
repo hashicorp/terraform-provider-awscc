@@ -17,12 +17,13 @@ Resource Type definition for AWS::AppStream::StackFleetAssociation
 
 ### Required
 
-- `fleet_name` (String) The name of the fleet. To associate a fleet with a stack, you must specify a dependency on the fleet resource.
-- `stack_name` (String) The name of the stack. To associate a fleet with a stack, you must specify a dependency on the stack resource.
+- `fleet_name` (String)
+- `stack_name` (String)
 
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+- `stack_fleet_association_id` (String)
 
 ## Import
 
@@ -34,8 +35,7 @@ In Terraform v1.12.0 and later, the [`import` block](https://developer.hashicorp
 import {
   to = awscc_appstream_stack_fleet_association.example
   identity = {
-    fleet_name = "fleet_name"
-    stack_name = "stack_name"
+    id = "id"
   }
 }
 ```
@@ -45,8 +45,7 @@ import {
 
 #### Required
 
-- `fleet_name` (String) The name of the fleet
-- `stack_name` (String) The name of the stack
+- `id` (String)
 
 #### Optional
 
@@ -58,12 +57,12 @@ In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.
 ```terraform
 import {
   to = awscc_appstream_stack_fleet_association.example
-  id = "fleet_name|stack_name"
+  id = "id"
 }
 ```
 
 The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
-$ terraform import awscc_appstream_stack_fleet_association.example "fleet_name|stack_name"
+$ terraform import awscc_appstream_stack_fleet_association.example "id"
 ```

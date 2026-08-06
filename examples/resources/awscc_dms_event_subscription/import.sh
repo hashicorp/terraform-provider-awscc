@@ -1,0 +1,1 @@
+$ terraform import awscc_dms_event_subscription.example "subscription_name"

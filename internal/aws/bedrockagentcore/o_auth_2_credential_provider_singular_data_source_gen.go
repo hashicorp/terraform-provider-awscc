@@ -248,7 +248,8 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	          "enum": [
 		//	            "CLIENT_SECRET_BASIC",
 		//	            "CLIENT_SECRET_POST",
-		//	            "AWS_IAM_ID_TOKEN_JWT"
+		//	            "AWS_IAM_ID_TOKEN_JWT",
+		//	            "PRIVATE_KEY_JWT"
 		//	          ],
 		//	          "type": "string"
 		//	        },
@@ -382,6 +383,267 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	          "required": [
 		//	            "GrantType"
 		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "PrivateEndpoint": {
+		//	          "additionalProperties": false,
+		//	          "description": "The private endpoint configuration for connecting to private resources in your VPC",
+		//	          "properties": {
+		//	            "ManagedVpcResource": {
+		//	              "additionalProperties": false,
+		//	              "description": "Configuration for a managed VPC Lattice resource. AgentCore creates and manages the VPC Lattice resource gateway and resource configuration on your behalf.",
+		//	              "properties": {
+		//	                "EndpointIpAddressType": {
+		//	                  "description": "The IP address type for the resource configuration endpoint",
+		//	                  "enum": [
+		//	                    "IPV4",
+		//	                    "IPV6"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "RoutingDomain": {
+		//	                  "description": "An intermediate publicly resolvable domain used as the VPC Lattice resource configuration endpoint",
+		//	                  "maxLength": 255,
+		//	                  "minLength": 3,
+		//	                  "type": "string"
+		//	                },
+		//	                "SecurityGroupIds": {
+		//	                  "description": "The security group IDs to associate with the VPC Lattice resource gateway",
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "pattern": "^sg-(([0-9a-z]{8})|([0-9a-z]{17}))$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "maxItems": 5,
+		//	                  "type": "array"
+		//	                },
+		//	                "SubnetIds": {
+		//	                  "description": "The subnet IDs within the VPC where the VPC Lattice resource gateway is placed",
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "pattern": "^subnet-[0-9a-zA-Z]{8,17}$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array"
+		//	                },
+		//	                "Tags": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "Tags to apply to the managed VPC Lattice resource gateway",
+		//	                  "patternProperties": {
+		//	                    "": {
+		//	                      "maxLength": 256,
+		//	                      "minLength": 0,
+		//	                      "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "VpcIdentifier": {
+		//	                  "description": "The ID of the VPC that contains your private resource",
+		//	                  "pattern": "^vpc-(([0-9a-z]{8})|([0-9a-z]{17}))$",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "VpcIdentifier",
+		//	                "SubnetIds",
+		//	                "EndpointIpAddressType"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "SelfManagedLatticeResource": {
+		//	              "additionalProperties": false,
+		//	              "description": "Configuration for a self-managed VPC Lattice resource. You create and manage the VPC Lattice resource gateway and resource configuration, then provide the resource configuration identifier.",
+		//	              "properties": {
+		//	                "ResourceConfigurationIdentifier": {
+		//	                  "description": "The ARN or ID of the VPC Lattice resource configuration",
+		//	                  "maxLength": 2048,
+		//	                  "minLength": 20,
+		//	                  "pattern": "^((rcfg-[0-9a-z]{17})|(arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceconfiguration/rcfg-[0-9a-z]{17}))$",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "ResourceConfigurationIdentifier"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "PrivateEndpointOverrides": {
+		//	          "description": "A list of private endpoint overrides. Each override maps a specific domain to a private endpoint, enabling secure connectivity through VPC Lattice resource configurations.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "A mapping of a specific domain to a private endpoint for secure connectivity through a VPC Lattice resource configuration",
+		//	            "properties": {
+		//	              "Domain": {
+		//	                "description": "The domain to override with a private endpoint",
+		//	                "maxLength": 253,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "PrivateEndpoint": {
+		//	                "additionalProperties": false,
+		//	                "description": "The private endpoint configuration for connecting to private resources in your VPC",
+		//	                "properties": {
+		//	                  "ManagedVpcResource": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "Configuration for a managed VPC Lattice resource. AgentCore creates and manages the VPC Lattice resource gateway and resource configuration on your behalf.",
+		//	                    "properties": {
+		//	                      "EndpointIpAddressType": {
+		//	                        "description": "The IP address type for the resource configuration endpoint",
+		//	                        "enum": [
+		//	                          "IPV4",
+		//	                          "IPV6"
+		//	                        ],
+		//	                        "type": "string"
+		//	                      },
+		//	                      "RoutingDomain": {
+		//	                        "description": "An intermediate publicly resolvable domain used as the VPC Lattice resource configuration endpoint",
+		//	                        "maxLength": 255,
+		//	                        "minLength": 3,
+		//	                        "type": "string"
+		//	                      },
+		//	                      "SecurityGroupIds": {
+		//	                        "description": "The security group IDs to associate with the VPC Lattice resource gateway",
+		//	                        "insertionOrder": false,
+		//	                        "items": {
+		//	                          "pattern": "^sg-(([0-9a-z]{8})|([0-9a-z]{17}))$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "maxItems": 5,
+		//	                        "type": "array"
+		//	                      },
+		//	                      "SubnetIds": {
+		//	                        "description": "The subnet IDs within the VPC where the VPC Lattice resource gateway is placed",
+		//	                        "insertionOrder": false,
+		//	                        "items": {
+		//	                          "pattern": "^subnet-[0-9a-zA-Z]{8,17}$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "type": "array"
+		//	                      },
+		//	                      "Tags": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "Tags to apply to the managed VPC Lattice resource gateway",
+		//	                        "patternProperties": {
+		//	                          "": {
+		//	                            "maxLength": 256,
+		//	                            "minLength": 0,
+		//	                            "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$",
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "type": "object"
+		//	                      },
+		//	                      "VpcIdentifier": {
+		//	                        "description": "The ID of the VPC that contains your private resource",
+		//	                        "pattern": "^vpc-(([0-9a-z]{8})|([0-9a-z]{17}))$",
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "VpcIdentifier",
+		//	                      "SubnetIds",
+		//	                      "EndpointIpAddressType"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "SelfManagedLatticeResource": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "Configuration for a self-managed VPC Lattice resource. You create and manage the VPC Lattice resource gateway and resource configuration, then provide the resource configuration identifier.",
+		//	                    "properties": {
+		//	                      "ResourceConfigurationIdentifier": {
+		//	                        "description": "The ARN or ID of the VPC Lattice resource configuration",
+		//	                        "maxLength": 2048,
+		//	                        "minLength": 20,
+		//	                        "pattern": "^((rcfg-[0-9a-z]{17})|(arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceconfiguration/rcfg-[0-9a-z]{17}))$",
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "ResourceConfigurationIdentifier"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Domain",
+		//	              "PrivateEndpoint"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 5,
+		//	          "type": "array"
+		//	        },
+		//	        "PrivateKeyJwtConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration for private_key_jwt client authentication (RFC 7523)",
+		//	          "properties": {
+		//	            "AdditionalHeaderClaims": {
+		//	              "additionalProperties": false,
+		//	              "description": "A map of additional claims to include in the JWT client assertion",
+		//	              "patternProperties": {
+		//	                "": {
+		//	                  "maxLength": 2048,
+		//	                  "minLength": 1,
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "AdditionalPayloadClaims": {
+		//	              "additionalProperties": false,
+		//	              "description": "A map of additional claims to include in the JWT client assertion",
+		//	              "patternProperties": {
+		//	                "": {
+		//	                  "maxLength": 2048,
+		//	                  "minLength": 1,
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "PrivateKeySource": {
+		//	              "additionalProperties": false,
+		//	              "description": "Contains the private key source configuration for a JWT client assertion",
+		//	              "properties": {
+		//	                "KmsKeySource": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "Contains the KMS key configuration for a JWT client assertion",
+		//	                  "properties": {
+		//	                    "KmsKeyArn": {
+		//	                      "description": "The Amazon Resource Name (ARN) of the KMS key used to sign the JWT client assertion",
+		//	                      "maxLength": 2048,
+		//	                      "minLength": 1,
+		//	                      "pattern": "^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "KmsKeyArn"
+		//	                  ],
+		//	                  "type": "object"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "SigningAlgorithm": {
+		//	              "description": "The algorithm used to sign the JWT client assertion",
+		//	              "enum": [
+		//	                "RS256",
+		//	                "PS256",
+		//	                "ES256"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
 		//	          "type": "object"
 		//	        }
 		//	      },
@@ -909,6 +1171,185 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 							Description: "Configuration for on-behalf-of token exchange",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
+						// Property: PrivateEndpoint
+						"private_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ManagedVpcResource
+								"managed_vpc_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: EndpointIpAddressType
+										"endpoint_ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The IP address type for the resource configuration endpoint",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: RoutingDomain
+										"routing_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "An intermediate publicly resolvable domain used as the VPC Lattice resource configuration endpoint",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: SecurityGroupIds
+										"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "The security group IDs to associate with the VPC Lattice resource gateway",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: SubnetIds
+										"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "The subnet IDs within the VPC where the VPC Lattice resource gateway is placed",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Tags
+										"tags":              // Pattern: ""
+										schema.MapAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "Tags to apply to the managed VPC Lattice resource gateway",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: VpcIdentifier
+										"vpc_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The ID of the VPC that contains your private resource",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Configuration for a managed VPC Lattice resource. AgentCore creates and manages the VPC Lattice resource gateway and resource configuration on your behalf.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SelfManagedLatticeResource
+								"self_managed_lattice_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ResourceConfigurationIdentifier
+										"resource_configuration_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The ARN or ID of the VPC Lattice resource configuration",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Configuration for a self-managed VPC Lattice resource. You create and manage the VPC Lattice resource gateway and resource configuration, then provide the resource configuration identifier.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The private endpoint configuration for connecting to private resources in your VPC",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: PrivateEndpointOverrides
+						"private_endpoint_overrides": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Domain
+									"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The domain to override with a private endpoint",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: PrivateEndpoint
+									"private_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: ManagedVpcResource
+											"managed_vpc_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: EndpointIpAddressType
+													"endpoint_ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The IP address type for the resource configuration endpoint",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: RoutingDomain
+													"routing_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "An intermediate publicly resolvable domain used as the VPC Lattice resource configuration endpoint",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: SecurityGroupIds
+													"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Description: "The security group IDs to associate with the VPC Lattice resource gateway",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: SubnetIds
+													"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Description: "The subnet IDs within the VPC where the VPC Lattice resource gateway is placed",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Tags
+													"tags":              // Pattern: ""
+													schema.MapAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Description: "Tags to apply to the managed VPC Lattice resource gateway",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: VpcIdentifier
+													"vpc_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The ID of the VPC that contains your private resource",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Configuration for a managed VPC Lattice resource. AgentCore creates and manages the VPC Lattice resource gateway and resource configuration on your behalf.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: SelfManagedLatticeResource
+											"self_managed_lattice_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: ResourceConfigurationIdentifier
+													"resource_configuration_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The ARN or ID of the VPC Lattice resource configuration",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Configuration for a self-managed VPC Lattice resource. You create and manage the VPC Lattice resource gateway and resource configuration, then provide the resource configuration identifier.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "The private endpoint configuration for connecting to private resources in your VPC",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "A list of private endpoint overrides. Each override maps a specific domain to a private endpoint, enabling secure connectivity through VPC Lattice resource configurations.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: PrivateKeyJwtConfig
+						"private_key_jwt_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AdditionalHeaderClaims
+								"additional_header_claims": // Pattern: ""
+								schema.MapAttribute{        /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "A map of additional claims to include in the JWT client assertion",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: AdditionalPayloadClaims
+								"additional_payload_claims": // Pattern: ""
+								schema.MapAttribute{         /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "A map of additional claims to include in the JWT client assertion",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: PrivateKeySource
+								"private_key_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: KmsKeySource
+										"kms_key_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: KmsKeyArn
+												"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The Amazon Resource Name (ARN) of the KMS key used to sign the JWT client assertion",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "Contains the KMS key configuration for a JWT client assertion",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Contains the private key source configuration for a JWT client assertion",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SigningAlgorithm
+								"signing_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The algorithm used to sign the JWT client assertion",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for private_key_jwt client authentication (RFC 7523)",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Input configuration for a custom OAuth2 provider",
 					Computed:    true,
@@ -1201,7 +1642,8 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	      "enum": [
 		//	        "CLIENT_SECRET_BASIC",
 		//	        "CLIENT_SECRET_POST",
-		//	        "AWS_IAM_ID_TOKEN_JWT"
+		//	        "AWS_IAM_ID_TOKEN_JWT",
+		//	        "PRIVATE_KEY_JWT"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -1298,6 +1740,267 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	        "GrantType"
 		//	      ],
 		//	      "type": "object"
+		//	    },
+		//	    "PrivateEndpoint": {
+		//	      "additionalProperties": false,
+		//	      "description": "The private endpoint configuration for connecting to private resources in your VPC",
+		//	      "properties": {
+		//	        "ManagedVpcResource": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration for a managed VPC Lattice resource. AgentCore creates and manages the VPC Lattice resource gateway and resource configuration on your behalf.",
+		//	          "properties": {
+		//	            "EndpointIpAddressType": {
+		//	              "description": "The IP address type for the resource configuration endpoint",
+		//	              "enum": [
+		//	                "IPV4",
+		//	                "IPV6"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "RoutingDomain": {
+		//	              "description": "An intermediate publicly resolvable domain used as the VPC Lattice resource configuration endpoint",
+		//	              "maxLength": 255,
+		//	              "minLength": 3,
+		//	              "type": "string"
+		//	            },
+		//	            "SecurityGroupIds": {
+		//	              "description": "The security group IDs to associate with the VPC Lattice resource gateway",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "pattern": "^sg-(([0-9a-z]{8})|([0-9a-z]{17}))$",
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 5,
+		//	              "type": "array"
+		//	            },
+		//	            "SubnetIds": {
+		//	              "description": "The subnet IDs within the VPC where the VPC Lattice resource gateway is placed",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "pattern": "^subnet-[0-9a-zA-Z]{8,17}$",
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array"
+		//	            },
+		//	            "Tags": {
+		//	              "additionalProperties": false,
+		//	              "description": "Tags to apply to the managed VPC Lattice resource gateway",
+		//	              "patternProperties": {
+		//	                "": {
+		//	                  "maxLength": 256,
+		//	                  "minLength": 0,
+		//	                  "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "VpcIdentifier": {
+		//	              "description": "The ID of the VPC that contains your private resource",
+		//	              "pattern": "^vpc-(([0-9a-z]{8})|([0-9a-z]{17}))$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "VpcIdentifier",
+		//	            "SubnetIds",
+		//	            "EndpointIpAddressType"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "SelfManagedLatticeResource": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration for a self-managed VPC Lattice resource. You create and manage the VPC Lattice resource gateway and resource configuration, then provide the resource configuration identifier.",
+		//	          "properties": {
+		//	            "ResourceConfigurationIdentifier": {
+		//	              "description": "The ARN or ID of the VPC Lattice resource configuration",
+		//	              "maxLength": 2048,
+		//	              "minLength": 20,
+		//	              "pattern": "^((rcfg-[0-9a-z]{17})|(arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceconfiguration/rcfg-[0-9a-z]{17}))$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ResourceConfigurationIdentifier"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "PrivateEndpointOverrides": {
+		//	      "description": "The list of private endpoint overrides for the OAuth2 provider. Each override maps a specific domain to a private endpoint, enabling secure connectivity through VPC Lattice resource configurations.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "A mapping of a specific domain to a private endpoint for secure connectivity through a VPC Lattice resource configuration",
+		//	        "properties": {
+		//	          "Domain": {
+		//	            "description": "The domain to override with a private endpoint",
+		//	            "maxLength": 253,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "PrivateEndpoint": {
+		//	            "additionalProperties": false,
+		//	            "description": "The private endpoint configuration for connecting to private resources in your VPC",
+		//	            "properties": {
+		//	              "ManagedVpcResource": {
+		//	                "additionalProperties": false,
+		//	                "description": "Configuration for a managed VPC Lattice resource. AgentCore creates and manages the VPC Lattice resource gateway and resource configuration on your behalf.",
+		//	                "properties": {
+		//	                  "EndpointIpAddressType": {
+		//	                    "description": "The IP address type for the resource configuration endpoint",
+		//	                    "enum": [
+		//	                      "IPV4",
+		//	                      "IPV6"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "RoutingDomain": {
+		//	                    "description": "An intermediate publicly resolvable domain used as the VPC Lattice resource configuration endpoint",
+		//	                    "maxLength": 255,
+		//	                    "minLength": 3,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "SecurityGroupIds": {
+		//	                    "description": "The security group IDs to associate with the VPC Lattice resource gateway",
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "pattern": "^sg-(([0-9a-z]{8})|([0-9a-z]{17}))$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "maxItems": 5,
+		//	                    "type": "array"
+		//	                  },
+		//	                  "SubnetIds": {
+		//	                    "description": "The subnet IDs within the VPC where the VPC Lattice resource gateway is placed",
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "pattern": "^subnet-[0-9a-zA-Z]{8,17}$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "type": "array"
+		//	                  },
+		//	                  "Tags": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "Tags to apply to the managed VPC Lattice resource gateway",
+		//	                    "patternProperties": {
+		//	                      "": {
+		//	                        "maxLength": 256,
+		//	                        "minLength": 0,
+		//	                        "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$",
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
+		//	                  "VpcIdentifier": {
+		//	                    "description": "The ID of the VPC that contains your private resource",
+		//	                    "pattern": "^vpc-(([0-9a-z]{8})|([0-9a-z]{17}))$",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "VpcIdentifier",
+		//	                  "SubnetIds",
+		//	                  "EndpointIpAddressType"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "SelfManagedLatticeResource": {
+		//	                "additionalProperties": false,
+		//	                "description": "Configuration for a self-managed VPC Lattice resource. You create and manage the VPC Lattice resource gateway and resource configuration, then provide the resource configuration identifier.",
+		//	                "properties": {
+		//	                  "ResourceConfigurationIdentifier": {
+		//	                    "description": "The ARN or ID of the VPC Lattice resource configuration",
+		//	                    "maxLength": 2048,
+		//	                    "minLength": 20,
+		//	                    "pattern": "^((rcfg-[0-9a-z]{17})|(arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceconfiguration/rcfg-[0-9a-z]{17}))$",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "ResourceConfigurationIdentifier"
+		//	                ],
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Domain",
+		//	          "PrivateEndpoint"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 5,
+		//	      "type": "array"
+		//	    },
+		//	    "PrivateKeyJwtConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration for private_key_jwt client authentication (RFC 7523)",
+		//	      "properties": {
+		//	        "AdditionalHeaderClaims": {
+		//	          "additionalProperties": false,
+		//	          "description": "A map of additional claims to include in the JWT client assertion",
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "AdditionalPayloadClaims": {
+		//	          "additionalProperties": false,
+		//	          "description": "A map of additional claims to include in the JWT client assertion",
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "PrivateKeySource": {
+		//	          "additionalProperties": false,
+		//	          "description": "Contains the private key source configuration for a JWT client assertion",
+		//	          "properties": {
+		//	            "KmsKeySource": {
+		//	              "additionalProperties": false,
+		//	              "description": "Contains the KMS key configuration for a JWT client assertion",
+		//	              "properties": {
+		//	                "KmsKeyArn": {
+		//	                  "description": "The Amazon Resource Name (ARN) of the KMS key used to sign the JWT client assertion",
+		//	                  "maxLength": 2048,
+		//	                  "minLength": 1,
+		//	                  "pattern": "^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "KmsKeyArn"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "SigningAlgorithm": {
+		//	          "description": "The algorithm used to sign the JWT client assertion",
+		//	          "enum": [
+		//	            "RS256",
+		//	            "PS256",
+		//	            "ES256"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -1383,8 +2086,207 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 					Description: "Configuration for on-behalf-of token exchange",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: PrivateEndpoint
+				"private_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ManagedVpcResource
+						"managed_vpc_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: EndpointIpAddressType
+								"endpoint_ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The IP address type for the resource configuration endpoint",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: RoutingDomain
+								"routing_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "An intermediate publicly resolvable domain used as the VPC Lattice resource configuration endpoint",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecurityGroupIds
+								"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "The security group IDs to associate with the VPC Lattice resource gateway",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SubnetIds
+								"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "The subnet IDs within the VPC where the VPC Lattice resource gateway is placed",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Tags
+								"tags":              // Pattern: ""
+								schema.MapAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "Tags to apply to the managed VPC Lattice resource gateway",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: VpcIdentifier
+								"vpc_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ID of the VPC that contains your private resource",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for a managed VPC Lattice resource. AgentCore creates and manages the VPC Lattice resource gateway and resource configuration on your behalf.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SelfManagedLatticeResource
+						"self_managed_lattice_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ResourceConfigurationIdentifier
+								"resource_configuration_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The ARN or ID of the VPC Lattice resource configuration",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration for a self-managed VPC Lattice resource. You create and manage the VPC Lattice resource gateway and resource configuration, then provide the resource configuration identifier.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The private endpoint configuration for connecting to private resources in your VPC",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PrivateEndpointOverrides
+				"private_endpoint_overrides": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Domain
+							"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The domain to override with a private endpoint",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: PrivateEndpoint
+							"private_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ManagedVpcResource
+									"managed_vpc_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: EndpointIpAddressType
+											"endpoint_ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The IP address type for the resource configuration endpoint",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: RoutingDomain
+											"routing_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "An intermediate publicly resolvable domain used as the VPC Lattice resource configuration endpoint",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: SecurityGroupIds
+											"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Description: "The security group IDs to associate with the VPC Lattice resource gateway",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: SubnetIds
+											"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Description: "The subnet IDs within the VPC where the VPC Lattice resource gateway is placed",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Tags
+											"tags":              // Pattern: ""
+											schema.MapAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Description: "Tags to apply to the managed VPC Lattice resource gateway",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: VpcIdentifier
+											"vpc_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The ID of the VPC that contains your private resource",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Configuration for a managed VPC Lattice resource. AgentCore creates and manages the VPC Lattice resource gateway and resource configuration on your behalf.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: SelfManagedLatticeResource
+									"self_managed_lattice_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: ResourceConfigurationIdentifier
+											"resource_configuration_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The ARN or ID of the VPC Lattice resource configuration",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Configuration for a self-managed VPC Lattice resource. You create and manage the VPC Lattice resource gateway and resource configuration, then provide the resource configuration identifier.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The private endpoint configuration for connecting to private resources in your VPC",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The list of private endpoint overrides for the OAuth2 provider. Each override maps a specific domain to a private endpoint, enabling secure connectivity through VPC Lattice resource configurations.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PrivateKeyJwtConfig
+				"private_key_jwt_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AdditionalHeaderClaims
+						"additional_header_claims": // Pattern: ""
+						schema.MapAttribute{        /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "A map of additional claims to include in the JWT client assertion",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: AdditionalPayloadClaims
+						"additional_payload_claims": // Pattern: ""
+						schema.MapAttribute{         /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "A map of additional claims to include in the JWT client assertion",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: PrivateKeySource
+						"private_key_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: KmsKeySource
+								"kms_key_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: KmsKeyArn
+										"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The Amazon Resource Name (ARN) of the KMS key used to sign the JWT client assertion",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Contains the KMS key configuration for a JWT client assertion",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Contains the private key source configuration for a JWT client assertion",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SigningAlgorithm
+						"signing_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The algorithm used to sign the JWT client assertion",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for private_key_jwt client authentication (RFC 7523)",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The output configuration for the OAuth2 provider",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The current status of the OAuth2 credential provider",
+		//	  "enum": [
+		//	    "CREATING",
+		//	    "CREATE_FAILED",
+		//	    "UPDATING",
+		//	    "UPDATE_FAILED",
+		//	    "READY",
+		//	    "DELETING",
+		//	    "DELETE_FAILED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The current status of the OAuth2 credential provider",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -1453,6 +2355,8 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"actor_token_content":                "ActorTokenContent",
 		"actor_token_scopes":                 "ActorTokenScopes",
+		"additional_header_claims":           "AdditionalHeaderClaims",
+		"additional_payload_claims":          "AdditionalPayloadClaims",
 		"atlassian_oauth_2_provider_config":  "AtlassianOauth2ProviderConfig",
 		"authorization_endpoint":             "AuthorizationEndpoint",
 		"authorization_server_metadata":      "AuthorizationServerMetadata",
@@ -1469,6 +2373,8 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		"credential_provider_vendor":         "CredentialProviderVendor",
 		"custom_oauth_2_provider_config":     "CustomOauth2ProviderConfig",
 		"discovery_url":                      "DiscoveryUrl",
+		"domain":                             "Domain",
+		"endpoint_ip_address_type":           "EndpointIpAddressType",
 		"github_oauth_2_provider_config":     "GithubOauth2ProviderConfig",
 		"google_oauth_2_provider_config":     "GoogleOauth2ProviderConfig",
 		"grant_type":                         "GrantType",
@@ -1476,24 +2382,39 @@ func oAuth2CredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		"issuer":                             "Issuer",
 		"json_key":                           "JsonKey",
 		"key":                                "Key",
+		"kms_key_arn":                        "KmsKeyArn",
+		"kms_key_source":                     "KmsKeySource",
 		"last_updated_time":                  "LastUpdatedTime",
 		"linkedin_oauth_2_provider_config":   "LinkedinOauth2ProviderConfig",
+		"managed_vpc_resource":               "ManagedVpcResource",
 		"microsoft_oauth_2_provider_config":  "MicrosoftOauth2ProviderConfig",
 		"name":                               "Name",
 		"oauth_2_provider_config_input":      "Oauth2ProviderConfigInput",
 		"oauth_2_provider_config_output":     "Oauth2ProviderConfigOutput",
 		"oauth_discovery":                    "OauthDiscovery",
 		"on_behalf_of_token_exchange_config": "OnBehalfOfTokenExchangeConfig",
+		"private_endpoint":                   "PrivateEndpoint",
+		"private_endpoint_overrides":         "PrivateEndpointOverrides",
+		"private_key_jwt_config":             "PrivateKeyJwtConfig",
+		"private_key_source":                 "PrivateKeySource",
+		"resource_configuration_identifier":  "ResourceConfigurationIdentifier",
 		"response_types":                     "ResponseTypes",
+		"routing_domain":                     "RoutingDomain",
 		"salesforce_oauth_2_provider_config": "SalesforceOauth2ProviderConfig",
 		"secret_arn":                         "SecretArn",
 		"secret_id":                          "SecretId",
+		"security_group_ids":                 "SecurityGroupIds",
+		"self_managed_lattice_resource":      "SelfManagedLatticeResource",
+		"signing_algorithm":                  "SigningAlgorithm",
 		"slack_oauth_2_provider_config":      "SlackOauth2ProviderConfig",
+		"status":                             "Status",
+		"subnet_ids":                         "SubnetIds",
 		"tags":                               "Tags",
 		"tenant_id":                          "TenantId",
 		"token_endpoint":                     "TokenEndpoint",
 		"token_exchange_grant_type_config":   "TokenExchangeGrantTypeConfig",
 		"value":                              "Value",
+		"vpc_identifier":                     "VpcIdentifier",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

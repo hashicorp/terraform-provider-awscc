@@ -167,7 +167,7 @@ func vpcEndpointResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Amazon OpenSearchServerless vpc endpoint resource",
+		Description: "Resource Type definition for AWS::OpenSearchServerless::VpcEndpoint",
 		Version:     1,
 		Attributes:  attributes,
 	}

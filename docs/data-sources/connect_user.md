@@ -136,7 +136,7 @@ Read-Only:
 
 - `attribute_name` (String) The name of user's proficiency. You must use name of predefined attribute present in the Amazon Connect instance.
 - `attribute_value` (String) The value of user's proficiency. You must use value of predefined attribute present in the Amazon Connect instance.
-- `level` (Number) The level of the proficiency. The valid values are 1, 2, 3, 4 and 5.
+- `level` (Number) The level of the proficiency. The valid values are 0 to 10.
 
 
 <a id="nestedatt--voice_enhancement_configs"></a>

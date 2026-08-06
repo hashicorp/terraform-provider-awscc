@@ -21,5 +21,6 @@ Data Source schema for AWS::AppStream::StackFleetAssociation
 
 ### Read-Only
 
-- `fleet_name` (String) The name of the fleet. To associate a fleet with a stack, you must specify a dependency on the fleet resource.
-- `stack_name` (String) The name of the stack. To associate a fleet with a stack, you must specify a dependency on the stack resource.
+- `fleet_name` (String)
+- `stack_fleet_association_id` (String)
+- `stack_name` (String)

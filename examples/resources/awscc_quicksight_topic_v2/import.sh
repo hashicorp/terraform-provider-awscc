@@ -1,0 +1,1 @@
+$ terraform import awscc_quicksight_topic_v2.example "aws_account_id|topic_id"

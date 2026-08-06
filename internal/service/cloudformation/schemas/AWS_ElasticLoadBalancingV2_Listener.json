@@ -407,14 +407,16 @@
       }
     },
     "Tag": {
-      "description": "",
+      "description": "Information about a tag.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "Value": {
+          "description": "The value of the tag.",
           "type": "string"
         },
         "Key": {
+          "description": "The key of the tag.",
           "type": "string"
         }
       },

@@ -2,12 +2,12 @@
 page_title: "awscc_opensearchserverless_vpc_endpoint Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Amazon OpenSearchServerless vpc endpoint resource
+  Resource Type definition for AWS::OpenSearchServerless::VpcEndpoint
 ---
 
 # awscc_opensearchserverless_vpc_endpoint (Resource)
 
-Amazon OpenSearchServerless vpc endpoint resource
+Resource Type definition for AWS::OpenSearchServerless::VpcEndpoint
 
 ## Example Usage
 

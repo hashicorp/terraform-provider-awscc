@@ -801,6 +801,11 @@ resource_schema "aws_bedrockagentcore_harness" {
   cloudformation_type_name = "AWS::BedrockAgentCore::Harness"
 }
 
+resource_schema "aws_bedrockagentcore_harness_endpoint" {
+  cloudformation_type_name               = "AWS::BedrockAgentCore::HarnessEndpoint"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_bedrockagentcore_online_evaluation_config" {
   cloudformation_type_name = "AWS::BedrockAgentCore::OnlineEvaluationConfig"
 }
@@ -1748,6 +1753,14 @@ resource_schema "aws_dms_data_migration" {
 
 resource_schema "aws_dms_data_provider" {
   cloudformation_type_name = "AWS::DMS::DataProvider"
+}
+
+resource_schema "aws_dms_endpoint" {
+  cloudformation_type_name = "AWS::DMS::Endpoint"
+}
+
+resource_schema "aws_dms_event_subscription" {
+  cloudformation_type_name = "AWS::DMS::EventSubscription"
 }
 
 resource_schema "aws_dms_instance_profile" {
@@ -3109,6 +3122,10 @@ resource_schema "aws_glue_user_defined_function" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_glue_workflow" {
+  cloudformation_type_name = "AWS::Glue::Workflow"
+}
+
 resource_schema "aws_grafana_workspace" {
   cloudformation_type_name = "AWS::Grafana::Workspace"
 }
@@ -3872,6 +3889,10 @@ resource_schema "aws_licensemanager_license" {
   cloudformation_type_name = "AWS::LicenseManager::License"
 }
 
+resource_schema "aws_licensemanager_license_asset_rule_set" {
+  cloudformation_type_name = "AWS::LicenseManager::LicenseAssetRuleSet"
+}
+
 resource_schema "aws_lightsail_alarm" {
   cloudformation_type_name = "AWS::Lightsail::Alarm"
 }
@@ -4187,6 +4208,10 @@ resource_schema "aws_mediaconnect_router_network_interface" {
 
 resource_schema "aws_mediaconnect_router_output" {
   cloudformation_type_name = "AWS::MediaConnect::RouterOutput"
+}
+
+resource_schema "aws_mediaconvert_preset" {
+  cloudformation_type_name = "AWS::MediaConvert::Preset"
 }
 
 resource_schema "aws_medialive_channel_placement_group" {
@@ -5011,6 +5036,10 @@ resource_schema "aws_quicksight_topic" {
   cloudformation_type_name = "AWS::QuickSight::Topic"
 }
 
+resource_schema "aws_quicksight_topic_v2" {
+  cloudformation_type_name = "AWS::QuickSight::TopicV2"
+}
+
 resource_schema "aws_quicksight_vpc_connection" {
   cloudformation_type_name = "AWS::QuickSight::VPCConnection"
 }
@@ -5130,6 +5159,10 @@ resource_schema "aws_redshiftserverless_snapshot" {
 
 resource_schema "aws_redshiftserverless_workgroup" {
   cloudformation_type_name = "AWS::RedshiftServerless::Workgroup"
+}
+
+resource_schema "aws_redshift_snapshot_schedule" {
+  cloudformation_type_name = "AWS::Redshift::SnapshotSchedule"
 }
 
 resource_schema "aws_refactorspaces_application" {
@@ -5746,6 +5779,11 @@ resource_schema "aws_ssm_resource_data_sync" {
 
 resource_schema "aws_ssm_resource_policy" {
   cloudformation_type_name = "AWS::SSM::ResourcePolicy"
+}
+
+resource_schema "aws_ssm_service_setting" {
+  cloudformation_type_name               = "AWS::SSM::ServiceSetting"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_ssmcontacts_contact" {

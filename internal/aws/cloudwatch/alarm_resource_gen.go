@@ -8,6 +8,7 @@ package cloudwatch
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
@@ -160,11 +161,11 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		//	    "description": "Dimension is an embedded property of the ``AWS::CloudWatch::Alarm`` type. Dimensions are name/value pairs that can be associated with a CW metric. You can specify a maximum of 30 dimensions for a given metric.",
 		//	    "properties": {
 		//	      "Name": {
-		//	        "description": "The name of the dimension, from 1?255 characters in length. This dimension name must have been included when the metric was published.",
+		//	        "description": "The name of the dimension, from 1–255 characters in length. This dimension name must have been included when the metric was published.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "The value for the dimension, from 1?255 characters in length.",
+		//	        "description": "The value for the dimension, from 1–255 characters in length.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -182,7 +183,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the dimension, from 1?255 characters in length. This dimension name must have been included when the metric was published.",
+						Description: "The name of the dimension, from 1–255 characters in length. This dimension name must have been included when the metric was published.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -194,7 +195,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the dimension, from 1?255 characters in length.",
+						Description: "The value for the dimension, from 1–255 characters in length.",
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.String{ /*START VALIDATORS*/
@@ -336,6 +337,84 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: EvaluationWindow
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "",
+		//	  "oneOf": [
+		//	    {
+		//	      "required": [
+		//	        "WallClockWindow"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "SlidingWindow"
+		//	      ]
+		//	    }
+		//	  ],
+		//	  "properties": {
+		//	    "SlidingWindow": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration for sliding evaluation window (default behavior).",
+		//	      "type": "object"
+		//	    },
+		//	    "WallClockWindow": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration for wall clock based evaluation window.",
+		//	      "properties": {
+		//	        "Timezone": {
+		//	          "description": "The timezone for wall clock evaluation, in IANA time zone format (e.g., America/New_York, UTC).",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"evaluation_window": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SlidingWindow
+				"sliding_window": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType:  jsontypes.NormalizedType{},
+					Description: "Configuration for sliding evaluation window (default behavior).",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: WallClockWindow
+				"wall_clock_window": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Timezone
+						"timezone": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The timezone for wall clock evaluation, in IANA time zone format (e.g., America/New_York, UTC).",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration for wall clock based evaluation window.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ExtendedStatistic
 		// CloudFormation resource type schema:
 		//
@@ -427,11 +506,11 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "description": "Dimension is an embedded property of the ``AWS::CloudWatch::Alarm`` type. Dimensions are name/value pairs that can be associated with a CW metric. You can specify a maximum of 30 dimensions for a given metric.",
 		//	                  "properties": {
 		//	                    "Name": {
-		//	                      "description": "The name of the dimension, from 1?255 characters in length. This dimension name must have been included when the metric was published.",
+		//	                      "description": "The name of the dimension, from 1–255 characters in length. This dimension name must have been included when the metric was published.",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "Value": {
-		//	                      "description": "The value for the dimension, from 1?255 characters in length.",
+		//	                      "description": "The value for the dimension, from 1–255 characters in length.",
 		//	                      "type": "string"
 		//	                    }
 		//	                  },
@@ -546,7 +625,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: Name
 												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The name of the dimension, from 1?255 characters in length. This dimension name must have been included when the metric was published.",
+													Description: "The name of the dimension, from 1–255 characters in length. This dimension name must have been included when the metric was published.",
 													Optional:    true,
 													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
@@ -558,7 +637,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END ATTRIBUTE*/
 												// Property: Value
 												"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The value for the dimension, from 1?255 characters in length.",
+													Description: "The value for the dimension, from 1–255 characters in length.",
 													Optional:    true,
 													Computed:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
@@ -919,6 +998,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		"evaluation_criteria":                  "EvaluationCriteria",
 		"evaluation_interval":                  "EvaluationInterval",
 		"evaluation_periods":                   "EvaluationPeriods",
+		"evaluation_window":                    "EvaluationWindow",
 		"expression":                           "Expression",
 		"extended_statistic":                   "ExtendedStatistic",
 		"id":                                   "Id",
@@ -938,14 +1018,17 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 		"query":                                "Query",
 		"recovery_period":                      "RecoveryPeriod",
 		"return_data":                          "ReturnData",
+		"sliding_window":                       "SlidingWindow",
 		"stat":                                 "Stat",
 		"statistic":                            "Statistic",
 		"tags":                                 "Tags",
 		"threshold":                            "Threshold",
 		"threshold_metric_id":                  "ThresholdMetricId",
+		"timezone":                             "Timezone",
 		"treat_missing_data":                   "TreatMissingData",
 		"unit":                                 "Unit",
 		"value":                                "Value",
+		"wall_clock_window":                    "WallClockWindow",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

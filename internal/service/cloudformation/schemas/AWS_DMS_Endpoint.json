@@ -1,0 +1,1343 @@
+{
+  "typeName": "AWS::DMS::Endpoint",
+  "description": "Resource Type definition for AWS::DMS::Endpoint",
+  "additionalProperties": false,
+  "properties": {
+    "CertificateArn": {
+      "description": "The Amazon Resource Name (ARN) for the certificate.",
+      "type": "string"
+    },
+    "DatabaseName": {
+      "description": "The name of the endpoint database. For a MySQL source or target endpoint, don't specify DatabaseName. To migrate to a specific database, use this setting and targetDbType.",
+      "type": "string"
+    },
+    "DocDbSettings": {
+      "description": "Settings in JSON format for the source and target DocumentDB endpoint",
+      "$ref": "#/definitions/DocDbSettings"
+    },
+    "DynamoDbSettings": {
+      "description": "Settings in JSON format for the target Amazon DynamoDB endpoint",
+      "$ref": "#/definitions/DynamoDbSettings"
+    },
+    "ElasticsearchSettings": {
+      "description": "Settings in JSON format for the target OpenSearch endpoint",
+      "$ref": "#/definitions/ElasticsearchSettings"
+    },
+    "EndpointArn": {
+      "description": "The endpoint ARN.",
+      "type": "string"
+    },
+    "EndpointIdentifier": {
+      "description": "The database endpoint identifier. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen, or contain two consecutive hyphens.",
+      "type": "string"
+    },
+    "EndpointType": {
+      "description": "The type of endpoint. Valid values are source and target.",
+      "type": "string"
+    },
+    "EngineName": {
+      "description": "The type of engine for the endpoint, depending on the EndpointType value.",
+      "type": "string"
+    },
+    "ExternalId": {
+      "description": "A value that can be used for cross-account validation.",
+      "type": "string"
+    },
+    "ExtraConnectionAttributes": {
+      "description": "Additional attributes associated with the connection",
+      "type": "string"
+    },
+    "GcpMySQLSettings": {
+      "description": "Settings in JSON format for the source GCP MySQL endpoint",
+      "$ref": "#/definitions/GcpMySQLSettings"
+    },
+    "IbmDb2Settings": {
+      "description": "Settings in JSON format for the source IBM Db2 LUW endpoint",
+      "$ref": "#/definitions/IbmDb2Settings"
+    },
+    "KafkaSettings": {
+      "description": "Settings in JSON format for the target Apache Kafka endpoint",
+      "$ref": "#/definitions/KafkaSettings"
+    },
+    "KinesisSettings": {
+      "description": "Settings in JSON format for the target endpoint for Amazon Kinesis Data Streams",
+      "$ref": "#/definitions/KinesisSettings"
+    },
+    "KmsKeyId": {
+      "description": "An AWS KMS key identifier that is used to encrypt the connection parameters for the endpoint.If you don't specify a value for the KmsKeyId parameter, AWS DMS uses your default encryption key.",
+      "type": "string"
+    },
+    "MicrosoftSqlServerSettings": {
+      "description": "Settings in JSON format for the source and target Microsoft SQL Server endpoint",
+      "$ref": "#/definitions/MicrosoftSqlServerSettings"
+    },
+    "MongoDbSettings": {
+      "description": "Settings in JSON format for the source MongoDB endpoint",
+      "$ref": "#/definitions/MongoDbSettings"
+    },
+    "MySqlSettings": {
+      "description": "Settings in JSON format for the source and target MySQL endpoin",
+      "$ref": "#/definitions/MySqlSettings"
+    },
+    "NeptuneSettings": {
+      "description": "Settings in JSON format for the target Amazon Neptune endpoint",
+      "$ref": "#/definitions/NeptuneSettings"
+    },
+    "OracleSettings": {
+      "description": "Settings in JSON format for the source and target Oracle endpoint",
+      "$ref": "#/definitions/OracleSettings"
+    },
+    "Password": {
+      "description": "The password to be used to log in to the endpoint database.",
+      "type": "string"
+    },
+    "Port": {
+      "description": "The port used by the endpoint database.",
+      "type": "integer"
+    },
+    "PostgreSqlSettings": {
+      "description": "Settings in JSON format for the source and target PostgreSQL endpoint.",
+      "$ref": "#/definitions/PostgreSqlSettings"
+    },
+    "RedisSettings": {
+      "description": "Settings in JSON format for the target Redis endpoint",
+      "$ref": "#/definitions/RedisSettings"
+    },
+    "RedshiftSettings": {
+      "description": "Settings in JSON format for the Amazon Redshift endpoint.",
+      "$ref": "#/definitions/RedshiftSettings"
+    },
+    "ResourceIdentifier": {
+      "description": "A display name for the resource identifier at the end of the EndpointArn response parameter that is returned in the created Endpoint object.",
+      "type": "string"
+    },
+    "S3Settings": {
+      "description": "Settings in JSON format for the source and target Amazon S3 endpoint",
+      "$ref": "#/definitions/S3Settings"
+    },
+    "ServerName": {
+      "description": "The name of the server where the endpoint database resides.",
+      "type": "string"
+    },
+    "SslMode": {
+      "description": "The Secure Sockets Layer (SSL) mode to use for the SSL connection. The default is none.",
+      "type": "string"
+    },
+    "SybaseSettings": {
+      "description": "Settings in JSON format for the source and target SAP ASE endpoint.",
+      "$ref": "#/definitions/SybaseSettings"
+    },
+    "Tags": {
+      "description": "One or more tags to be assigned to the endpoint.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "type": "array",
+      "uniqueItems": false
+    },
+    "Username": {
+      "description": "The user name to be used to log in to the endpoint database.",
+      "type": "string"
+    }
+  },
+  "definitions": {
+    "DocDbSettings": {
+      "additionalProperties": false,
+      "description": "Provides information that defines a DocumentDB endpoint.",
+      "properties": {
+        "DocsToInvestigate": {
+          "description": "Indicates the number of documents to preview to determine the document organization. Use this setting when NestingLevel is set to \"one\".",
+          "type": "integer"
+        },
+        "ExtractDocId": {
+          "description": "Specifies the document ID. Use this setting when NestingLevel is set to \"none\"",
+          "type": "boolean"
+        },
+        "NestingLevel": {
+          "description": "Specifies either document or table mode.",
+          "type": "string"
+        },
+        "SecretsManagerAccessRoleArn": {
+          "description": "The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in SecretsManagerSecret. The role must allow the iam:PassRole action. SecretsManagerSecret has the value of the AWS Secrets Manager secret that allows access to the DocumentDB endpoint.",
+          "type": "string"
+        },
+        "SecretsManagerSecretId": {
+          "description": "The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in SecretsManagerSecret. The role must allow the iam:PassRole action. SecretsManagerSecret has the value of the AWS Secrets Manager secret that allows access to the DocumentDB endpoint.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "DynamoDbSettings": {
+      "additionalProperties": false,
+      "description": "Provides information, including the Amazon Resource Name (ARN) of the IAM role used to define an Amazon DynamoDB target endpoint.",
+      "properties": {
+        "ServiceAccessRoleArn": {
+          "description": "The Amazon Resource Name (ARN) used by the service to access the IAM role. The role must allow the iam:PassRole action.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ElasticsearchSettings": {
+      "additionalProperties": false,
+      "description": "Provides information that defines an OpenSearch endpoint.",
+      "properties": {
+        "EndpointUri": {
+          "description": "The endpoint for the OpenSearch cluster. AWS DMS uses HTTPS if a transport protocol (either HTTP or HTTPS) isn't specified.",
+          "type": "string"
+        },
+        "ErrorRetryDuration": {
+          "description": "The maximum number of seconds for which DMS retries failed API requests to the OpenSearch cluster.",
+          "type": "integer"
+        },
+        "FullLoadErrorPercentage": {
+          "description": "The maximum percentage of records that can fail to be written before a full load operation stops.",
+          "type": "integer"
+        },
+        "ServiceAccessRoleArn": {
+          "description": "The Amazon Resource Name (ARN) used by the service to access the IAM role. The role must allow the iam:PassRole action.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "GcpMySQLSettings": {
+      "additionalProperties": false,
+      "description": "Provides information that defines a GCP MySQL endpoint.",
+      "properties": {
+        "AfterConnectScript": {
+          "description": "Specifies a script to run immediately after AWS DMS connects to the endpoint. The migration task continues running regardless if the SQL statement succeeds or fails.",
+          "type": "string"
+        },
+        "CleanSourceMetadataOnMismatch": {
+          "description": "Adjusts the behavior of AWS DMS when migrating from an SQL Server source database that is hosted as part of an Always On availability group cluster. If you need AWS DMS to poll all the nodes in the Always On cluster for transaction backups, set this attribute to false.",
+          "type": "boolean"
+        },
+        "DatabaseName": {
+          "description": "Database name for the endpoint. For a MySQL source or target endpoint, don't explicitly specify the database using the DatabaseName request parameter on either the CreateEndpoint or ModifyEndpoint API call. Specifying DatabaseName when you create or modify a MySQL endpoint replicates all the task tables to this single database. For MySQL endpoints, you specify the database only when you specify the schema in the table-mapping rules of the AWS DMS task.",
+          "type": "string"
+        },
+        "EventsPollInterval": {
+          "description": "Specifies how often to check the binary log for new changes/events when the database is idle. The default is five seconds.",
+          "type": "integer"
+        },
+        "MaxFileSize": {
+          "description": "Specifies the maximum size (in KB) of any .csv file used to transfer data to a MySQL-compatible database.",
+          "type": "integer"
+        },
+        "ParallelLoadThreads": {
+          "description": "Improves performance when loading data into the MySQL-compatible target database. Specifies how many threads to use to load the data into the MySQL-compatible target database. Setting a large number of threads can have an adverse effect on database performance, because a separate connection is required for each thread. The default is one.",
+          "type": "integer"
+        },
+        "Password": {
+          "description": "Endpoint connection password.",
+          "type": "string"
+        },
+        "Port": {
+          "description": "The port used by the endpoint database.",
+          "type": "integer"
+        },
+        "SecretsManagerAccessRoleArn": {
+          "description": "The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in SecretsManagerSecret. The role must allow the iam:PassRole action. SecretsManagerSecret has the value of the AWS Secrets Manager secret that allows access to the MySQL endpoint.",
+          "type": "string"
+        },
+        "SecretsManagerSecretId": {
+          "description": "The full ARN, partial ARN, or display name of the SecretsManagerSecret that contains the MySQL endpoint connection details.",
+          "type": "string"
+        },
+        "ServerName": {
+          "description": "The MySQL host name.",
+          "type": "string"
+        },
+        "ServerTimezone": {
+          "description": "Specifies the time zone for the source MySQL database. Don't enclose time zones in single quotation marks.",
+          "type": "string"
+        },
+        "Username": {
+          "description": "Specifies the time zone for the source MySQL database. Don't enclose time zones in single quotation marks.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "IbmDb2Settings": {
+      "additionalProperties": false,
+      "description": "Provides information that defines an IBMDB2 endpoint.",
+      "properties": {
+        "CurrentLsn": {
+          "description": "For ongoing replication (CDC), use CurrentLSN to specify a log sequence number (LSN) where you want the replication to start.",
+          "type": "string"
+        },
+        "KeepCsvFiles": {
+          "description": "If true, AWS DMS saves any .csv files to the Db2 LUW target that were used to replicate data. DMS uses these files for analysis and troubleshooting.",
+          "type": "boolean"
+        },
+        "LoadTimeout": {
+          "description": "The amount of time (in milliseconds) before AWS DMS times out operations performed by DMS on the Db2 target. The default value is 1200 (20 minutes).",
+          "type": "integer"
+        },
+        "MaxFileSize": {
+          "description": "Specifies the maximum size (in KB) of .csv files used to transfer data to Db2 LUW.",
+          "type": "integer"
+        },
+        "MaxKBytesPerRead": {
+          "description": "Maximum number of bytes per read, as a NUMBER value. The default is 64 KB.",
+          "type": "integer"
+        },
+        "SecretsManagerAccessRoleArn": {
+          "description": "The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in SecretsManagerSecret. The role must allow the iam:PassRole action. SecretsManagerSecret has the value ofthe AWS Secrets Manager secret that allows access to the Db2 LUW endpoint.",
+          "type": "string"
+        },
+        "SecretsManagerSecretId": {
+          "description": "The full ARN, partial ARN, or display name of the SecretsManagerSecret that contains the IBMDB2 endpoint connection details.",
+          "type": "string"
+        },
+        "SetDataCaptureChanges": {
+          "description": "Enables ongoing replication (CDC) as a BOOLEAN value. The default is true.",
+          "type": "boolean"
+        },
+        "WriteBufferSize": {
+          "description": "The size (in KB) of the in-memory file write buffer used when generating .csv files on the local disk on the DMS replication instance. The default value is 1024 (1 MB).",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "KafkaSettings": {
+      "additionalProperties": false,
+      "description": "Provides information that describes an Apache Kafka endpoint.",
+      "properties": {
+        "Broker": {
+          "description": "A comma-separated list of one or more broker locations in your Kafka cluster that host your Kafka instance. Specify each broker location in the form broker-hostname-or-ip:port ",
+          "type": "string"
+        },
+        "IncludeControlDetails": {
+          "description": "Shows detailed control information for table definition, column definition, and table and column changes in the Kafka message output. The default is false.",
+          "type": "boolean"
+        },
+        "IncludeNullAndEmpty": {
+          "description": "Include NULL and empty columns for records migrated to the endpoint. The default is false.",
+          "type": "boolean"
+        },
+        "IncludePartitionValue": {
+          "description": "Shows the partition value within the Kafka message output unless the partition type is schema-table-type. The default is false.",
+          "type": "boolean"
+        },
+        "IncludeTableAlterOperations": {
+          "description": "Includes any data definition language (DDL) operations that change the table in the control data, such as rename-table, drop-table, add-column, drop-column, and rename-column. The default is false.",
+          "type": "boolean"
+        },
+        "IncludeTransactionDetails": {
+          "description": "Provides detailed transaction information from the source database. This information includes a commit timestamp, a log position, and values for transaction_id, previous transaction_id, and transaction_record_id (the record offset within a transaction). The default is false.",
+          "type": "boolean"
+        },
+        "MessageFormat": {
+          "description": "The output format for the records created on the endpoint. The message format is JSON (default) or JSON_UNFORMATTED (a single line with no tab).",
+          "type": "string"
+        },
+        "MessageMaxBytes": {
+          "description": "The maximum size in bytes for records created on the endpoint The default is 1,000,000.",
+          "type": "integer"
+        },
+        "NoHexPrefix": {
+          "description": "Set this optional parameter to true to avoid adding a '0x' prefix to raw data in hexadecimal format. For example, by default, AWS DMS adds a '0x' prefix to the LOB column type in hexadecimal format moving from an Oracle source to a Kafka target. Use the NoHexPrefix endpoint setting to enable migration of RAW data type columns without adding the '0x' prefix.",
+          "type": "boolean"
+        },
+        "PartitionIncludeSchemaTable": {
+          "description": "Prefixes schema and table names to partition values, when the partition type is primary-key-type.",
+          "type": "boolean"
+        },
+        "SaslPassword": {
+          "description": "The secure password that you created when you first set up your Amazon MSK cluster to validate a client identity and make an encrypted connection between server and client using SASL-SSL authentication.",
+          "type": "string"
+        },
+        "SaslUserName": {
+          "description": "The secure user name you created when you first set up your Amazon MSK cluster to validate a client identity and make an encrypted connection between server and client using SASL-SSL authentication.",
+          "type": "string"
+        },
+        "SecurityProtocol": {
+          "description": "Set secure connection to a Kafka target endpoint using Transport Layer Security (TLS). Options include ssl-encryption, ssl-authentication, and sasl-ssl. sasl-ssl requires SaslUsername and SaslPassword.",
+          "type": "string"
+        },
+        "SslCaCertificateArn": {
+          "description": "The Amazon Resource Name (ARN) for the private certificate authority (CA) cert that AWS DMS uses to securely connect to your Kafka target endpoint.",
+          "type": "string"
+        },
+        "SslClientCertificateArn": {
+          "description": "The Amazon Resource Name (ARN) of the client certificate used to securely connect to a Kafka target endpoint.",
+          "type": "string"
+        },
+        "SslClientKeyArn": {
+          "description": "The Amazon Resource Name (ARN) for the client private key used to securely connect to a Kafka target endpoint.",
+          "type": "string"
+        },
+        "SslClientKeyPassword": {
+          "description": "The password for the client private key used to securely connect to a Kafka target endpoint.",
+          "type": "string"
+        },
+        "Topic": {
+          "description": "The topic to which you migrate the data. If you don't specify a topic, AWS DMS specifies \"kafka-default-topic\" as the migration topic.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "KinesisSettings": {
+      "additionalProperties": false,
+      "description": "Provides information that describes an Amazon Kinesis Data Stream endpoint.",
+      "properties": {
+        "IncludeControlDetails": {
+          "description": "Shows detailed control information for table definition, column definition, and table and column changes in the Kinesis message output. The default is false.",
+          "type": "boolean"
+        },
+        "IncludeNullAndEmpty": {
+          "description": "Include NULL and empty columns for records migrated to the endpoint. The default is false.",
+          "type": "boolean"
+        },
+        "IncludePartitionValue": {
+          "description": "Shows the partition value within the Kinesis message output, unless the partition type is schema-table-type. The default is false.",
+          "type": "boolean"
+        },
+        "IncludeTableAlterOperations": {
+          "description": "Includes any data definition language (DDL) operations that change the table in the control data, such as rename-table, drop-table, add-column, drop-column, and rename-column. The default is false.",
+          "type": "boolean"
+        },
+        "IncludeTransactionDetails": {
+          "description": "Provides detailed transaction information from the source database.",
+          "type": "boolean"
+        },
+        "MessageFormat": {
+          "description": "The output format for the records created on the endpoint. The message format is JSON (default) or JSON_UNFORMATTED (a single line with no tab).",
+          "type": "string"
+        },
+        "NoHexPrefix": {
+          "description": "Set this optional parameter to true to avoid adding a '0x' prefix to raw data in hexadecimal format.",
+          "type": "boolean"
+        },
+        "PartitionIncludeSchemaTable": {
+          "description": "Prefixes schema and table names to partition values, when the partition type is primary-key-type.",
+          "type": "boolean"
+        },
+        "ServiceAccessRoleArn": {
+          "description": "The Amazon Resource Name (ARN) for the IAM role that AWS DMS uses to write to the Kinesis data stream. The role must allow the iam:PassRole action.",
+          "type": "string"
+        },
+        "StreamArn": {
+          "description": "The Amazon Resource Name (ARN) for the Amazon Kinesis Data Streams endpoint.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "MicrosoftSqlServerSettings": {
+      "additionalProperties": false,
+      "description": "Provides information that defines a Microsoft SQL Server endpoint.",
+      "properties": {
+        "BcpPacketSize": {
+          "description": "The maximum size of the packets (in bytes) used to transfer data using BCP.",
+          "type": "integer"
+        },
+        "ControlTablesFileGroup": {
+          "description": "Specifies a file group for the AWS DMS internal tables.",
+          "type": "string"
+        },
+        "DatabaseName": {
+          "description": "Database name for the endpoint.",
+          "type": "string"
+        },
+        "ForceLobLookup": {
+          "description": "Forces LOB lookup on inline LOB.",
+          "type": "boolean"
+        },
+        "Password": {
+          "description": "Endpoint connection password.",
+          "type": "string"
+        },
+        "Port": {
+          "description": "Endpoint TCP port.",
+          "type": "integer"
+        },
+        "QuerySingleAlwaysOnNode": {
+          "description": "Cleans and recreates table metadata information on the replication instance when a mismatch occurs. An example is a situation where running an alter DDL statement on a table might result in different information about the table cached in the replication instance.",
+          "type": "boolean"
+        },
+        "ReadBackupOnly": {
+          "description": "When this attribute is set to Y, AWS DMS only reads changes from transaction log backups and doesn't read from the active transaction log file during ongoing replication. Setting this parameter to Y enables you to control active transaction log file growth during full load and ongoing replication tasks. However, it can add some source latency to ongoing replication.",
+          "type": "boolean"
+        },
+        "SafeguardPolicy": {
+          "description": "Use this attribute to minimize the need to access the backup log and enable AWS DMS to prevent truncation using one of the following two methods.",
+          "type": "string"
+        },
+        "SecretsManagerAccessRoleArn": {
+          "description": "The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in SecretsManagerSecret",
+          "type": "string"
+        },
+        "SecretsManagerSecretId": {
+          "description": "The full ARN, partial ARN, or display name of the SecretsManagerSecret that contains the MicrosoftSQLServer endpoint connection details.",
+          "type": "string"
+        },
+        "ServerName": {
+          "description": "Fully qualified domain name of the endpoint. For an Amazon RDS SQL Server instance, this is the output of DescribeDBInstances, in the Endpoint.Address field.",
+          "type": "string"
+        },
+        "TlogAccessMode": {
+          "description": "Indicates the mode used to fetch CDC data.",
+          "type": "string"
+        },
+        "TrimSpaceInChar": {
+          "description": "Use the TrimSpaceInChar source endpoint setting to right-trim data on CHAR and NCHAR data types during migration. Setting TrimSpaceInChar does not left-trim data. The default value is true.",
+          "type": "boolean"
+        },
+        "UseBcpFullLoad": {
+          "description": "Use this to attribute to transfer data for full-load operations using BCP. When the target table contains an identity column that does not exist in the source table, you must disable the use BCP for loading table option.",
+          "type": "boolean"
+        },
+        "UseThirdPartyBackupDevice": {
+          "description": "When this attribute is set to Y, DMS processes third-party transaction log backups if they are created in native format.",
+          "type": "boolean"
+        },
+        "Username": {
+          "description": "Endpoint connection user name.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "MongoDbSettings": {
+      "additionalProperties": false,
+      "description": "Provides information that defines a MongoDB endpoint.",
+      "properties": {
+        "AuthMechanism": {
+          "description": "The authentication mechanism you use to access the MongoDB source endpoint.",
+          "type": "string"
+        },
+        "AuthSource": {
+          "description": "The MongoDB database name. This setting isn't used when AuthType is set to \"no\".",
+          "type": "string"
+        },
+        "AuthType": {
+          "description": "The authentication type you use to access the MongoDB source endpoint.",
+          "type": "string"
+        },
+        "DatabaseName": {
+          "description": "The database name on the MongoDB source endpoint.",
+          "type": "string"
+        },
+        "DocsToInvestigate": {
+          "description": "Indicates the number of documents to preview to determine the document organization. Use this setting when NestingLevel is set to \"one\".",
+          "type": "string"
+        },
+        "ExtractDocId": {
+          "description": "Specifies the document ID. Use this setting when NestingLevel is set to \"none\".",
+          "type": "string"
+        },
+        "NestingLevel": {
+          "description": "Specifies either document or table mode.",
+          "type": "string"
+        },
+        "Password": {
+          "description": "The password for the user account you use to access the MongoDB source endpoint.",
+          "type": "string"
+        },
+        "Port": {
+          "description": "The port value for the MongoDB source endpoint.",
+          "type": "integer"
+        },
+        "SecretsManagerAccessRoleArn": {
+          "description": "The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in SecretsManagerSecret",
+          "type": "string"
+        },
+        "SecretsManagerSecretId": {
+          "description": "The full ARN, partial ARN, or display name of the SecretsManagerSecret that contains the MongoDB endpoint connection details.",
+          "type": "string"
+        },
+        "ServerName": {
+          "description": "The name of the server on the MongoDB source endpoint.",
+          "type": "string"
+        },
+        "Username": {
+          "description": "The user name you use to access the MongoDB source endpoint.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "MySqlSettings": {
+      "additionalProperties": false,
+      "description": "Provides information that defines a MySQL endpoint.",
+      "properties": {
+        "AfterConnectScript": {
+          "description": "Specifies a script to run immediately after AWS DMS connects to the endpoint. The migration task continues running regardless if the SQL statement succeeds or fails.",
+          "type": "string"
+        },
+        "CleanSourceMetadataOnMismatch": {
+          "description": "Cleans and recreates table metadata information on the replication instance when a mismatch occurs.",
+          "type": "boolean"
+        },
+        "EventsPollInterval": {
+          "description": "Specifies how often to check the binary log for new changes/events when the database is idle. The default is five seconds.",
+          "type": "integer"
+        },
+        "MaxFileSize": {
+          "description": "Specifies the maximum size (in KB) of any .csv file used to transfer data to a MySQL-compatible database.",
+          "type": "integer"
+        },
+        "ParallelLoadThreads": {
+          "description": "Improves performance when loading data into the MySQL-compatible target database. Specifies how many threads to use to load the data into the MySQL-compatible target database.",
+          "type": "integer"
+        },
+        "SecretsManagerAccessRoleArn": {
+          "description": "The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in SecretsManagerSecret.",
+          "type": "string"
+        },
+        "SecretsManagerSecretId": {
+          "description": "The full ARN, partial ARN, or display name of the SecretsManagerSecret that contains the MySQL endpoint connection details.",
+          "type": "string"
+        },
+        "ServerTimezone": {
+          "description": "Specifies the time zone for the source MySQL database.",
+          "type": "string"
+        },
+        "TargetDbType": {
+          "description": "Specifies where to migrate source tables on the target, either to a single database or multiple databases.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "NeptuneSettings": {
+      "additionalProperties": false,
+      "description": "Provides information that defines an Amazon Neptune endpoint",
+      "properties": {
+        "ErrorRetryDuration": {
+          "description": "The number of milliseconds for AWS DMS to wait to retry a bulk-load of migrated graph data to the Neptune target database before raising an error. The default is 250.",
+          "type": "integer"
+        },
+        "IamAuthEnabled": {
+          "description": "If you want IAM authorization enabled for this endpoint, set this parameter to true.",
+          "type": "boolean"
+        },
+        "MaxFileSize": {
+          "description": "The maximum size in kilobytes of migrated graph data stored in a .csv file before AWS DMS bulk-loads the data to the Neptune target database.",
+          "type": "integer"
+        },
+        "MaxRetryCount": {
+          "description": "The number of times for AWS DMS to retry a bulk load of migrated graph data to the Neptune target database before raising an error. The default is 5.",
+          "type": "integer"
+        },
+        "S3BucketFolder": {
+          "description": "A folder path where you want AWS DMS to store migrated graph data in the S3 bucket specified by S3BucketName",
+          "type": "string"
+        },
+        "S3BucketName": {
+          "description": "The name of the Amazon S3 bucket where AWS DMS can temporarily store migrated graph data in .csv files before bulk-loading it to the Neptune target database.",
+          "type": "string"
+        },
+        "ServiceAccessRoleArn": {
+          "description": "The Amazon Resource Name (ARN) of the service role that you created for the Neptune target endpoint. The role must allow the iam:PassRole action.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OracleSettings": {
+      "additionalProperties": false,
+      "description": "Provides information that defines an Oracle endpoint",
+      "properties": {
+        "AccessAlternateDirectly": {
+          "description": "Set this attribute to false in order to use the Binary Reader to capture change data for an Amazon RDS for Oracle as the source.",
+          "type": "boolean"
+        },
+        "AddSupplementalLogging": {
+          "description": "Set this attribute to set up table-level supplemental logging for the Oracle database. This attribute enables PRIMARY KEY supplemental logging on all tables selected for a migration task.",
+          "type": "boolean"
+        },
+        "AdditionalArchivedLogDestId": {
+          "description": "Set this attribute with ArchivedLogDestId in a primary/ standby setup",
+          "type": "integer"
+        },
+        "AllowSelectNestedTables": {
+          "description": "Set this attribute to true to enable replication of Oracle tables containing columns that are nested tables or defined types.",
+          "type": "boolean"
+        },
+        "ArchivedLogDestId": {
+          "description": "Specifies the ID of the destination for the archived redo logs.",
+          "type": "integer"
+        },
+        "ArchivedLogsOnly": {
+          "description": "When this field is set to True, AWS DMS only accesses the archived redo logs",
+          "type": "boolean"
+        },
+        "AsmPassword": {
+          "description": "For an Oracle source endpoint, your Oracle Automatic Storage Management (ASM) password.",
+          "type": "string"
+        },
+        "AsmServer": {
+          "description": "For an Oracle source endpoint, your ASM server address.",
+          "type": "string"
+        },
+        "AsmUser": {
+          "description": "For an Oracle source endpoint, your ASM user name.",
+          "type": "string"
+        },
+        "CharLengthSemantics": {
+          "description": "Specifies whether the length of a character column is in bytes or in characters.",
+          "type": "string"
+        },
+        "DirectPathNoLog": {
+          "description": "When set to true, this attribute helps to increase the commit rate on the Oracle target database by writing directly to tables and not writing a trail to database logs.",
+          "type": "boolean"
+        },
+        "DirectPathParallelLoad": {
+          "description": "When set to true, this attribute specifies a parallel load when useDirectPathFullLoad is set to Y.",
+          "type": "boolean"
+        },
+        "EnableHomogenousTablespace": {
+          "description": "Set this attribute to enable homogenous tablespace replication and create existing tables or indexes under the same tablespace on the target.",
+          "type": "boolean"
+        },
+        "ExtraArchivedLogDestIds": {
+          "description": "Specifies the IDs of one more destinations for one or more archived redo logs.",
+          "items": {
+            "type": "integer"
+          },
+          "type": "array",
+          "uniqueItems": false
+        },
+        "FailTasksOnLobTruncation": {
+          "description": "When set to true, this attribute causes a task to fail if the actual size of an LOB column is greater than the specified LobMaxSize.",
+          "type": "boolean"
+        },
+        "NumberDatatypeScale": {
+          "description": "Specifies the number scale. You can select a scale up to 38, or you can select FLOAT. By default, the NUMBER data type is converted to precision 38, scale 10.",
+          "type": "integer"
+        },
+        "OraclePathPrefix": {
+          "description": "Set this string attribute to the required value in order to use the Binary Reader to capture change data for an Amazon RDS for Oracle as the source.",
+          "type": "string"
+        },
+        "ParallelAsmReadThreads": {
+          "description": "Set this attribute to change the number of threads that DMS configures to perform a change data capture (CDC) load using Oracle Automatic Storage Management (ASM).",
+          "type": "integer"
+        },
+        "ReadAheadBlocks": {
+          "description": "Set this attribute to change the number of read-ahead blocks that DMS configures to perform a change data capture (CDC) load using Oracle Automatic Storage Management (ASM).",
+          "type": "integer"
+        },
+        "ReadTableSpaceName": {
+          "description": "When set to true, this attribute supports tablespace replication.",
+          "type": "boolean"
+        },
+        "ReplacePathPrefix": {
+          "description": "Set this attribute to true in order to use the Binary Reader to capture change data for an Amazon RDS for Oracle as the source.",
+          "type": "boolean"
+        },
+        "RetryInterval": {
+          "description": "Specifies the number of seconds that the system waits before resending a query.",
+          "type": "integer"
+        },
+        "SecretsManagerAccessRoleArn": {
+          "description": "The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in SecretsManagerSecret.",
+          "type": "string"
+        },
+        "SecretsManagerOracleAsmAccessRoleArn": {
+          "description": "Required only if your Oracle endpoint uses Advanced Storage Manager (ASM).",
+          "type": "string"
+        },
+        "SecretsManagerOracleAsmSecretId": {
+          "description": "Required only if your Oracle endpoint uses Advanced Storage Manager (ASM).",
+          "type": "string"
+        },
+        "SecretsManagerSecretId": {
+          "description": "The full ARN, partial ARN, or display name of the SecretsManagerSecret that contains the Oracle endpoint connection details.",
+          "type": "string"
+        },
+        "SecurityDbEncryption": {
+          "description": "For an Oracle source endpoint, the transparent data encryption (TDE) password required by AWM DMS to access Oracle redo logs encrypted by TDE using Binary Reader.",
+          "type": "string"
+        },
+        "SecurityDbEncryptionName": {
+          "description": "For an Oracle source endpoint, the name of a key used for the transparent data encryption (TDE) of the columns and tablespaces in an Oracle source database that is encrypted using TDE.",
+          "type": "string"
+        },
+        "SpatialDataOptionToGeoJsonFunctionName": {
+          "description": "Use this attribute to convert SDO_GEOMETRY to GEOJSON format. By default, DMS calls the SDO2GEOJSON custom function if present and accessible. Or you can create your own custom function that mimics the operation of SDOGEOJSON and set SpatialDataOptionToGeoJsonFunctionName to call it instead.",
+          "type": "string"
+        },
+        "StandbyDelayTime": {
+          "description": "Use this attribute to specify a time in minutes for the delay in standby sync.",
+          "type": "integer"
+        },
+        "UseAlternateFolderForOnline": {
+          "description": "Set this attribute to true in order to use the Binary Reader to capture change data for an Amazon RDS for Oracle as the source",
+          "type": "boolean"
+        },
+        "UseBFile": {
+          "description": "Set this attribute to True to capture change data using the Binary Reader utility.",
+          "type": "boolean"
+        },
+        "UseDirectPathFullLoad": {
+          "description": "Set this attribute to True to have AWS DMS use a direct path full load.",
+          "type": "boolean"
+        },
+        "UseLogminerReader": {
+          "description": "Set this attribute to True to capture change data using the Oracle LogMiner utility (the default).",
+          "type": "boolean"
+        },
+        "UsePathPrefix": {
+          "description": "Set this string attribute to the required value in order to use the Binary Reader to capture change data for an Amazon RDS for Oracle as the source.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "PostgreSqlSettings": {
+      "description": "Provides information that defines a PostgreSQL endpoint",
+      "additionalProperties": false,
+      "properties": {
+        "AfterConnectScript": {
+          "description": "For use with change data capture (CDC) only, this attribute has AWS DMS bypass foreign keys and user triggers to reduce the time it takes to bulk load data.",
+          "type": "string"
+        },
+        "BabelfishDatabaseName": {
+          "description": "The Babelfish for Aurora PostgreSQL database name for the endpoint.",
+          "type": "string"
+        },
+        "CaptureDdls": {
+          "description": "To capture DDL events, AWS DMS creates various artifacts in the PostgreSQL database when the task starts. You can later remove these artifacts.",
+          "type": "boolean"
+        },
+        "DatabaseMode": {
+          "description": "Specifies the default behavior of the replication's handling of PostgreSQL- compatible endpoints that require some additional configuration, such as Babelfish endpoints.",
+          "type": "string"
+        },
+        "DdlArtifactsSchema": {
+          "description": "The schema in which the operational DDL database artifacts are created.",
+          "type": "string"
+        },
+        "ExecuteTimeout": {
+          "description": "Sets the client statement timeout for the PostgreSQL instance, in seconds. The default value is 60 seconds.",
+          "type": "integer"
+        },
+        "FailTasksOnLobTruncation": {
+          "description": "When set to true, this value causes a task to fail if the actual size of a LOB column is greater than the specified LobMaxSize.",
+          "type": "boolean"
+        },
+        "HeartbeatEnable": {
+          "description": "The write-ahead log (WAL) heartbeat feature mimics a dummy transaction.",
+          "type": "boolean"
+        },
+        "HeartbeatFrequency": {
+          "description": "Sets the WAL heartbeat frequency (in minutes).",
+          "type": "integer"
+        },
+        "HeartbeatSchema": {
+          "description": "Sets the schema in which the heartbeat artifacts are created.",
+          "type": "string"
+        },
+        "MapBooleanAsBoolean": {
+          "description": "When true, lets PostgreSQL migrate the boolean type as boolean.",
+          "type": "boolean"
+        },
+        "MaxFileSize": {
+          "description": "Specifies the maximum size (in KB) of any .csv file used to transfer data to PostgreSQL.",
+          "type": "integer"
+        },
+        "PluginName": {
+          "description": "Specifies the plugin to use to create a replication slot.",
+          "type": "string"
+        },
+        "SecretsManagerAccessRoleArn": {
+          "description": "The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in SecretsManagerSecret.",
+          "type": "string"
+        },
+        "SecretsManagerSecretId": {
+          "description": "The full ARN, partial ARN, or display name of the SecretsManagerSecret that contains the PostgreSQL endpoint connection details.",
+          "type": "string"
+        },
+        "SlotName": {
+          "description": "Sets the name of a previously created logical replication slot for a change data capture (CDC) load of the PostgreSQL source instance.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "RedisSettings": {
+      "description": "Provides information that defines a Redis target endpoint.",
+      "additionalProperties": false,
+      "properties": {
+        "AuthPassword": {
+          "description": "The password provided with the auth-role and auth-token options of the AuthType setting for a Redis target endpoint.",
+          "type": "string"
+        },
+        "AuthType": {
+          "description": "The type of authentication to perform when connecting to a Redis target.",
+          "type": "string"
+        },
+        "AuthUserName": {
+          "description": "The user name provided with the auth-role option of the AuthType setting for a Redis target endpoint.",
+          "type": "string"
+        },
+        "Port": {
+          "description": "Transmission Control Protocol (TCP) port for the endpoint.",
+          "type": "number"
+        },
+        "ServerName": {
+          "description": "Fully qualified domain name of the endpoint.",
+          "type": "string"
+        },
+        "SslCaCertificateArn": {
+          "description": "The Amazon Resource Name (ARN) for the certificate authority (CA) that DMS uses to connect to your Redis target endpoint.",
+          "type": "string"
+        },
+        "SslSecurityProtocol": {
+          "description": "The connection to a Redis target endpoint using Transport Layer Security (TLS). Valid values include plaintext and ssl-encryption.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "RedshiftSettings": {
+      "additionalProperties": false,
+      "description": "Provides information that defines an Amazon Redshift endpoint.",
+      "properties": {
+        "AcceptAnyDate": {
+          "description": "A value that indicates to allow any date format, including invalid formats such as 00/00/00 00:00:00, to be loaded without generating an error. You can choose true or false (the default).",
+          "type": "boolean"
+        },
+        "AfterConnectScript": {
+          "description": "Code to run after connecting. This parameter should contain the code itself, not the name of a file containing the code.",
+          "type": "string"
+        },
+        "BucketFolder": {
+          "description": "An S3 folder where the comma-separated-value (.csv) files are stored before being uploaded to the target Redshift cluster.",
+          "type": "string"
+        },
+        "BucketName": {
+          "description": "The name of the intermediate S3 bucket used to store .csv files before uploading data to Redshift.",
+          "type": "string"
+        },
+        "CaseSensitiveNames": {
+          "description": "If Amazon Redshift is configured to support case sensitive schema names, set CaseSensitiveNames to true. The default is false.",
+          "type": "boolean"
+        },
+        "CompUpdate": {
+          "description": "If you set CompUpdate to true Amazon Redshift applies automatic compression if the table is empty.",
+          "type": "boolean"
+        },
+        "ConnectionTimeout": {
+          "description": "A value that sets the amount of time to wait (in milliseconds) before timing out, beginning from when you initially establish a connection.",
+          "type": "integer"
+        },
+        "DateFormat": {
+          "description": "The date format that you are using.",
+          "type": "string"
+        },
+        "EmptyAsNull": {
+          "description": "A value that specifies whether AWS DMS should migrate empty CHAR and VARCHAR fields as NULL. A value of true sets empty CHAR and VARCHAR fields to null. The default is false.",
+          "type": "boolean"
+        },
+        "EncryptionMode": {
+          "description": "The type of server-side encryption that you want to use for your data.",
+          "type": "string"
+        },
+        "ExplicitIds": {
+          "description": "This setting is only valid for a full-load migration task. Set ExplicitIds to true to have tables with IDENTITY columns override their auto-generated values with explicit values loaded from the source data files used to populate the tables. The default is false.",
+          "type": "boolean"
+        },
+        "FileTransferUploadStreams": {
+          "description": "The number of threads used to upload a single file. This parameter accepts a value from 1 through 64. It defaults to 10.",
+          "type": "integer"
+        },
+        "LoadTimeout": {
+          "description": "The amount of time to wait (in milliseconds) before timing out of operations performed by AWS DMS on a Redshift cluster, such as Redshift COPY, INSERT, DELETE, and UPDATE.",
+          "type": "integer"
+        },
+        "MapBooleanAsBoolean": {
+          "description": "When true, lets Redshift migrate the boolean type as boolean. By default, Redshift migrates booleans as varchar(1). You must set this setting on both the source and target endpoints for it to take effect.",
+          "type": "boolean"
+        },
+        "MaxFileSize": {
+          "description": "The maximum size (in KB) of any .csv file used to load data on an S3 bucket and transfer data to Amazon Redshift. It defaults to 1048576KB (1 GB).",
+          "type": "integer"
+        },
+        "RemoveQuotes": {
+          "description": "A value that specifies to remove surrounding quotation marks from strings in the incoming data.",
+          "type": "boolean"
+        },
+        "ReplaceChars": {
+          "description": "A value that specifies to replaces the invalid characters specified in ReplaceInvalidChars, substituting the specified characters instead. The default is \"?\".",
+          "type": "string"
+        },
+        "ReplaceInvalidChars": {
+          "description": "A list of characters that you want to replace. Use with ReplaceChars.",
+          "type": "string"
+        },
+        "SecretsManagerAccessRoleArn": {
+          "description": "The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in SecretsManagerSecret.",
+          "type": "string"
+        },
+        "SecretsManagerSecretId": {
+          "description": "The full ARN, partial ARN, or display name of the SecretsManagerSecret that contains the Amazon Redshift endpoint connection details.",
+          "type": "string"
+        },
+        "ServerSideEncryptionKmsKeyId": {
+          "description": "The AWS KMS key ID. If you are using SSE_KMS for the EncryptionMode, provide this key ID.",
+          "type": "string"
+        },
+        "ServiceAccessRoleArn": {
+          "description": "The Amazon Resource Name (ARN) of the IAM role that has access to the Amazon Redshift service. The role must allow the iam:PassRole action.",
+          "type": "string"
+        },
+        "TimeFormat": {
+          "description": "The time format that you want to use. Valid values are auto (case-sensitive), 'timeformat_string', 'epochsecs', or 'epochmillisecs'.",
+          "type": "string"
+        },
+        "TrimBlanks": {
+          "description": "A value that specifies to remove the trailing white space characters from a VARCHAR string.",
+          "type": "boolean"
+        },
+        "TruncateColumns": {
+          "description": "A value that specifies to truncate data in columns to the appropriate number of characters, so that the data fits in the column.",
+          "type": "boolean"
+        },
+        "WriteBufferSize": {
+          "description": "The size (in KB) of the in-memory file write buffer used when generating .csv files on the local disk at the DMS replication instance. The default value is 1000 (buffer size is 1000KB).",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "S3Settings": {
+      "additionalProperties": false,
+      "description": "Provides information that defines an Amazon S3 endpoint.",
+      "properties": {
+        "AddColumnName": {
+          "description": "An optional parameter that, when set to true or y, you can use to add column name information to the .csv output file.",
+          "type": "boolean"
+        },
+        "AddTrailingPaddingCharacter": {
+          "description": "Use the S3 target endpoint setting AddTrailingPaddingCharacter to add padding on string data. The default value is false.",
+          "type": "boolean"
+        },
+        "BucketFolder": {
+          "description": "An optional parameter to set a folder name in the S3 bucket.",
+          "type": "string"
+        },
+        "BucketName": {
+          "description": "The name of the S3 bucket.",
+          "type": "string"
+        },
+        "CannedAclForObjects": {
+          "description": "A value that enables AWS DMS to specify a predefined (canned) access control list (ACL) for objects created in an Amazon S3 bucket as .csv or .parquet files.",
+          "type": "string"
+        },
+        "CdcInsertsAndUpdates": {
+          "description": "A value that enables a change data capture (CDC) load to write INSERT and UPDATE operations to .csv or .parquet (columnar storage) output files.",
+          "type": "boolean"
+        },
+        "CdcInsertsOnly": {
+          "description": "A value that enables a change data capture (CDC) load to write only INSERT operations to .csv or columnar storage (.parquet) output files. By default (the false setting), the first field in a .csv or .parquet record contains the letter I (INSERT), U (UPDATE), or D (DELETE). These values indicate whether the row was inserted, updated, or deleted at the source database for a CDC load to the target.",
+          "type": "boolean"
+        },
+        "CdcMaxBatchInterval": {
+          "description": "Maximum length of the interval, defined in seconds, after which to output a file to Amazon S3.",
+          "type": "integer"
+        },
+        "CdcMinFileSize": {
+          "description": "Minimum file size, defined in kilobytes, to reach for a file output to Amazon S3.",
+          "type": "integer"
+        },
+        "CdcPath": {
+          "description": "Specifies the folder path of CDC files. For an S3 source, this setting is required if a task captures change data; otherwise, it's optional.",
+          "type": "string"
+        },
+        "CompressionType": {
+          "description": "An optional parameter. When set to GZIP it enables the service to compress the target files.",
+          "type": "string"
+        },
+        "CsvDelimiter": {
+          "description": "The delimiter used to separate columns in the .csv file for both source and target. The default is a comma.",
+          "type": "string"
+        },
+        "CsvNoSupValue": {
+          "description": "This setting only applies if your Amazon S3 output files during a change data capture (CDC) load are written in .csv format.",
+          "type": "string"
+        },
+        "CsvNullValue": {
+          "description": "An optional parameter that specifies how AWS DMS treats null values.",
+          "type": "string"
+        },
+        "CsvRowDelimiter": {
+          "description": "The delimiter used to separate rows in the .csv file for both source and target.",
+          "type": "string"
+        },
+        "DataFormat": {
+          "description": "The format of the data that you want to use for output.",
+          "type": "string"
+        },
+        "DataPageSize": {
+          "description": "The size of one data page in bytes. This parameter defaults to 1024 * 1024 bytes (1 MiB). This number is used for .parquet file format only.",
+          "type": "integer"
+        },
+        "DatePartitionDelimiter": {
+          "description": "Specifies a date separating delimiter to use during folder partitioning. The default value is SLASH. Use this parameter when DatePartitionedEnabled is set to true.",
+          "type": "string"
+        },
+        "DatePartitionEnabled": {
+          "description": "When set to true, this parameter partitions S3 bucket folders based on transaction commit dates. The default value is false.",
+          "type": "boolean"
+        },
+        "DatePartitionSequence": {
+          "description": "Identifies the sequence of the date format to use during folder partitioning. The default value is YYYYMMDD. Use this parameter when DatePartitionedEnabled is set to true.",
+          "type": "string"
+        },
+        "DatePartitionTimezone": {
+          "description": "When creating an S3 target endpoint, set DatePartitionTimezone to convert the current UTC time into a specified time zone.",
+          "type": "string"
+        },
+        "DictPageSizeLimit": {
+          "description": "The maximum size of an encoded dictionary page of a column",
+          "type": "integer"
+        },
+        "EnableStatistics": {
+          "description": "A value that enables statistics for Parquet pages and row groups.",
+          "type": "boolean"
+        },
+        "EncodingType": {
+          "description": "The type of encoding that you're using.",
+          "type": "string"
+        },
+        "EncryptionMode": {
+          "description": "The type of server-side encryption that you want to use for your data.",
+          "type": "string"
+        },
+        "ExpectedBucketOwner": {
+          "description": "To specify a bucket owner and prevent sniping, you can use the ExpectedBucketOwner endpoint setting.",
+          "type": "string"
+        },
+        "ExternalTableDefinition": {
+          "description": "The external table definition.",
+          "type": "string"
+        },
+        "GlueCatalogGeneration": {
+          "description": "When true, allows AWS Glue to catalog your S3 bucket. Creating an AWS Glue catalog lets you use Athena to query your data.",
+          "type": "boolean"
+        },
+        "IgnoreHeaderRows": {
+          "description": "When this value is set to 1, AWS DMS ignores the first row header in a .csv file. A value of 1 turns on the feature; a value of 0 turns off the feature.",
+          "type": "integer"
+        },
+        "IncludeOpForFullLoad": {
+          "description": "A value that enables a full load to write INSERT operations to the comma-separated value (.csv) output files only to indicate how the rows were added to the source database.",
+          "type": "boolean"
+        },
+        "MaxFileSize": {
+          "description": "A value that specifies the maximum size (in KB) of any .csv file to be created while migrating to an S3 target during full load.",
+          "type": "integer"
+        },
+        "ParquetTimestampInMillisecond": {
+          "description": "A value that specifies the precision of any TIMESTAMP column values that are written to an Amazon S3 object file in .parquet format.",
+          "type": "boolean"
+        },
+        "ParquetVersion": {
+          "description": "The version of the Apache Parquet format that you want to use: parquet_1_0 (the default) or parquet_2_0.",
+          "type": "string"
+        },
+        "PreserveTransactions": {
+          "description": "If this setting is set to true, AWS DMS saves the transaction order for a change data capture (CDC) load on the Amazon S3 target specified by CdcPath.",
+          "type": "boolean"
+        },
+        "Rfc4180": {
+          "description": "For an S3 source, when this value is set to true or y, each leading double quotation mark has to be followed by an ending double quotation mark.",
+          "type": "boolean"
+        },
+        "RowGroupLength": {
+          "description": "The number of rows in a row group.",
+          "type": "integer"
+        },
+        "ServerSideEncryptionKmsKeyId": {
+          "description": "If you are using SSE_KMS for the EncryptionMode, provide the AWS KMS key ID. The key that you use needs an attached policy that enables IAM user permissions and allows use of the key.",
+          "type": "string"
+        },
+        "ServiceAccessRoleArn": {
+          "description": "A required parameter that specifies the Amazon Resource Name (ARN) used by the service to access the IAM role.",
+          "type": "string"
+        },
+        "TimestampColumnName": {
+          "description": "A value that when nonblank causes AWS DMS to add a column with timestamp information to the endpoint data for an Amazon S3 target.",
+          "type": "string"
+        },
+        "UseCsvNoSupValue": {
+          "description": "This setting applies if the S3 output files during a change data capture (CDC) load are written in .csv format. If this setting is set to true for columns not included in the supplemental log, AWS DMS uses the value specified by CsvNoSupValue. If this setting isn't set or is set to false, AWS DMS uses the null value for these columns.",
+          "type": "boolean"
+        },
+        "UseTaskStartTimeForFullLoadTimestamp": {
+          "description": "When set to true, this parameter uses the task start time as the timestamp column value instead of the time data is written to target",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "SybaseSettings": {
+      "additionalProperties": false,
+      "description": "Provides information that defines a SAP ASE endpoint.",
+      "properties": {
+        "SecretsManagerAccessRoleArn": {
+          "description": "The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in SecretsManagerSecret",
+          "type": "string"
+        },
+        "SecretsManagerSecretId": {
+          "description": "The full ARN, partial ARN, or display name of the SecretsManagerSecret that contains the SAP SAE endpoint connection details.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Tag": {
+      "additionalProperties": false,
+      "description": "A user-defined key-value pair that describes metadata added to an AWS DMS resource and that is used by operations.",
+      "properties": {
+        "Key": {
+          "description": "A key is the required name of the tag.",
+          "type": "string"
+        },
+        "Value": {
+          "description": "A value is the optional value of the tag.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "EndpointType",
+    "EngineName"
+  ],
+  "createOnlyProperties": [
+    "/properties/KmsKeyId",
+    "/properties/ResourceIdentifier",
+    "/properties/ElasticsearchSettings/EndpointUri",
+    "/properties/MongoDbSettings/AuthType"
+  ],
+  "writeOnlyProperties": [
+    "/properties/ExtraConnectionAttributes",
+    "/properties/Password",
+    "/properties/ResourceIdentifier",
+    "/properties/GcpMySQLSettings/Password",
+    "/properties/DocDbSettings/SecretsManagerSecretId",
+    "/properties/KafkaSettings/SaslPassword",
+    "/properties/KafkaSettings/SslClientKeyPassword",
+    "/properties/MicrosoftSqlServerSettings/Password",
+    "/properties/MongoDbSettings/Password",
+    "/properties/OracleSettings/AsmPassword",
+    "/properties/OracleSettings/SecurityDbEncryption",
+    "/properties/OracleSettings/SecurityDbEncryptionName",
+    "/properties/RedisSettings/AuthPassword",
+    "/properties/RedshiftSettings/TruncateColumns",
+    "/properties/RedshiftSettings/ServerSideEncryptionKmsKeyId",
+    "/properties/S3Settings/ServerSideEncryptionKmsKeyId"
+  ],
+  "primaryIdentifier": [
+    "/properties/EndpointArn"
+  ],
+  "readOnlyProperties": [
+    "/properties/EndpointArn",
+    "/properties/ExternalId"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "dms:AddTagsToResource",
+      "dms:ListTagsForResource",
+      "dms:RemoveTagsFromResource"
+    ]
+  },
+  "propertyTransform": {
+    "/properties/PostgreSqlSettings/PluginName": "$replace(PostgreSqlSettings.PluginName, '-', '_')",
+    "/properties/OracleSettings/CharLengthSemantics": "$uppercase(OracleSettings.CharLengthSemantics)",
+    "/properties/MongoDbSettings/AuthMechanism": "$replace(MongoDbSettings.AuthMechanism, '-', '_')",
+    "/properties/ExtraConnectionAttributes": "$join([\".*\",ExtraConnectionAttributes,\".*\"])",
+    "/properties/S3Settings/DatePartitionSequence": "$uppercase(S3Settings.DatePartitionSequence)"
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "dms:AddTagsToResource",
+        "dms:CreateEndpoint",
+        "dms:DescribeEndpoints",
+        "dms:ListTagsForResource",
+        "iam:GetRole",
+        "iam:PassRole",
+        "kms:CreateGrant",
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:Encrypt",
+        "kms:GenerateDataKey",
+        "kms:GenerateDataKeyPair",
+        "kms:GenerateDataKeyPairWithoutPlaintext",
+        "kms:GenerateDataKeyWithoutPlaintext",
+        "kms:ListGrants",
+        "kms:ReEncryptFrom",
+        "kms:ReEncryptTo",
+        "rds:DescribeDBClusters",
+        "redshift:DescribeClusters",
+        "redshift:ModifyClusterIamRoles",
+        "secretsmanager:DescribeSecret"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "dms:DescribeEndpoints",
+        "dms:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "dms:AddTagsToResource",
+        "dms:DescribeEndpoints",
+        "dms:ListTagsForResource",
+        "dms:ModifyEndpoint",
+        "dms:RemoveTagsFromResource",
+        "iam:GetRole",
+        "iam:PassRole",
+        "kms:CreateGrant",
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:Encrypt",
+        "kms:GenerateDataKey",
+        "kms:GenerateDataKeyPair",
+        "kms:GenerateDataKeyPairWithoutPlaintext",
+        "kms:GenerateDataKeyWithoutPlaintext",
+        "kms:ListGrants",
+        "kms:ReEncryptFrom",
+        "kms:ReEncryptTo",
+        "rds:DescribeDBClusters",
+        "redshift:DescribeClusters",
+        "redshift:ModifyClusterIamRoles",
+        "secretsmanager:DescribeSecret"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "dms:DeleteEndpoint",
+        "dms:DescribeEndpoints"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "dms:DescribeEndpoints"
+      ]
+    }
+  }
+}

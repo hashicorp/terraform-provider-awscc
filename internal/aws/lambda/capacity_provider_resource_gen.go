@@ -604,21 +604,21 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "",
+		//	  "description": "The telemetry configuration for the capacity provider, including logging settings.",
 		//	  "properties": {
 		//	    "LoggingConfig": {
 		//	      "additionalProperties": false,
-		//	      "description": "",
+		//	      "description": "The capacity provider's Amazon CloudWatch Logs configuration settings.",
 		//	      "properties": {
 		//	        "LogGroup": {
-		//	          "description": "",
+		//	          "description": "The name of the Amazon CloudWatch log group the capacity provider sends logs to. By default, Lambda capacity providers send logs to a default log group named ``/aws/lambda/capacity-provider/\u003ccapacity provider name\u003e``. To use a different log group, enter an existing log group or enter a new log group name.",
 		//	          "maxLength": 512,
 		//	          "minLength": 1,
 		//	          "pattern": "[\\.\\-_/#A-Za-z0-9]+",
 		//	          "type": "string"
 		//	        },
 		//	        "SystemLogLevel": {
-		//	          "description": "",
+		//	          "description": "Set this property to filter the system logs for your capacity provider that Lambda sends to CloudWatch. Lambda only sends system logs at the selected level of detail and lower, where ``DEBUG`` is the highest level and ``WARN`` is the lowest.",
 		//	          "enum": [
 		//	            "DEBUG",
 		//	            "INFO",
@@ -639,7 +639,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: LogGroup
 						"log_group": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "",
+							Description: "The name of the Amazon CloudWatch log group the capacity provider sends logs to. By default, Lambda capacity providers send logs to a default log group named ``/aws/lambda/capacity-provider/<capacity provider name>``. To use a different log group, enter an existing log group or enter a new log group name.",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
@@ -652,7 +652,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: SystemLogLevel
 						"system_log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "",
+							Description: "Set this property to filter the system logs for your capacity provider that Lambda sends to CloudWatch. Lambda only sends system logs at the selected level of detail and lower, where ``DEBUG`` is the highest level and ``WARN`` is the lowest.",
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
@@ -667,7 +667,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "",
+					Description: "The capacity provider's Amazon CloudWatch Logs configuration settings.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -675,7 +675,7 @@ func capacityProviderResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "",
+			Description: "The telemetry configuration for the capacity provider, including logging settings.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/

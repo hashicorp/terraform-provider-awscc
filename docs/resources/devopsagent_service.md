@@ -21,9 +21,12 @@ The AWS::DevOpsAgent::Service resource registers external services (like Dynatra
 
 ### Optional
 
+- `exchange_url_private_connection_name` (String) The name of the private connection to use for OAuth token exchange requests only. Cannot be specified when PrivateConnectionName is provided.
 - `kms_key_arn` (String) The ARN of the KMS key to use for encryption.
+- `private_connection_name` (String) The name of the private connection to use for VPC connectivity.
 - `service_details` (Attributes) Service-specific configuration details for create operation (see [below for nested schema](#nestedatt--service_details))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `target_url_private_connection_name` (String) The name of the private connection to use for API calls (target URL) only. Cannot be specified when PrivateConnectionName is provided.
 
 ### Read-Only
 

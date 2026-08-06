@@ -104,7 +104,8 @@ func exportResource(ctx context.Context) (resource.Resource, error) {
 		//	                "Compression": {
 		//	                  "enum": [
 		//	                    "GZIP",
-		//	                    "PARQUET"
+		//	                    "PARQUET",
+		//	                    "ZIP"
 		//	                  ],
 		//	                  "type": "string"
 		//	                },
@@ -276,6 +277,7 @@ func exportResource(ctx context.Context) (resource.Resource, error) {
 												stringvalidator.OneOf(
 													"GZIP",
 													"PARQUET",
+													"ZIP",
 												),
 											}, /*END VALIDATORS*/
 										}, /*END ATTRIBUTE*/

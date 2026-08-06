@@ -135,7 +135,7 @@ resource "awscc_lambda_capacity_provider" "example" {
 - `kms_key_arn` (String) The ARN of the KMS key used to encrypt the capacity provider's resources.
 - `propagate_tags` (Attributes) Configuration for tag propagation to managed resources launched by the capacity provider. (see [below for nested schema](#nestedatt--propagate_tags))
 - `tags` (Attributes Set) A key-value pair that provides metadata for the capacity provider. (see [below for nested schema](#nestedatt--tags))
-- `telemetry_config` (Attributes) (see [below for nested schema](#nestedatt--telemetry_config))
+- `telemetry_config` (Attributes) The telemetry configuration for the capacity provider, including logging settings. (see [below for nested schema](#nestedatt--telemetry_config))
 
 ### Read-Only
 
@@ -221,15 +221,15 @@ Optional:
 
 Optional:
 
-- `logging_config` (Attributes) (see [below for nested schema](#nestedatt--telemetry_config--logging_config))
+- `logging_config` (Attributes) The capacity provider's Amazon CloudWatch Logs configuration settings. (see [below for nested schema](#nestedatt--telemetry_config--logging_config))
 
 <a id="nestedatt--telemetry_config--logging_config"></a>
 ### Nested Schema for `telemetry_config.logging_config`
 
 Optional:
 
-- `log_group` (String)
-- `system_log_level` (String)
+- `log_group` (String) The name of the Amazon CloudWatch log group the capacity provider sends logs to. By default, Lambda capacity providers send logs to a default log group named ``/aws/lambda/capacity-provider/<capacity provider name>``. To use a different log group, enter an existing log group or enter a new log group name.
+- `system_log_level` (String) Set this property to filter the system logs for your capacity provider that Lambda sends to CloudWatch. Lambda only sends system logs at the selected level of detail and lower, where ``DEBUG`` is the highest level and ``WARN`` is the lowest.
 
 ## Import
 

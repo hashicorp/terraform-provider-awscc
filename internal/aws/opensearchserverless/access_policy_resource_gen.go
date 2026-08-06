@@ -120,7 +120,7 @@ func accessPolicyResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Amazon OpenSearchServerless access policy resource",
+		Description: "Resource Type definition for AWS::OpenSearchServerless::AccessPolicy",
 		Version:     1,
 		Attributes:  attributes,
 	}

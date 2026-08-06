@@ -6,7 +6,8 @@
       "type": "string",
       "enum": [
         "GZIP",
-        "PARQUET"
+        "PARQUET",
+        "ZIP"
       ]
     },
     "DataQuery": {

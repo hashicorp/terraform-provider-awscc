@@ -2,12 +2,12 @@
 page_title: "awscc_opensearchserverless_security_config Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Amazon OpenSearchServerless security config resource
+  Resource Type definition for AWS::OpenSearchServerless::SecurityConfig
 ---
 
 # awscc_opensearchserverless_security_config (Resource)
 
-Amazon OpenSearchServerless security config resource
+Resource Type definition for AWS::OpenSearchServerless::SecurityConfig
 
 ## Example Usage
 

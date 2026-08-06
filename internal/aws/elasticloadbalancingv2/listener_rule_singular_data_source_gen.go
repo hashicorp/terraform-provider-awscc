@@ -631,7 +631,7 @@ func listenerRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	    "description": "Specifies a condition for a listener rule.",
 		//	    "properties": {
 		//	      "Field": {
-		//	        "description": "The field in the HTTP request. The following are the possible values:\n  +   ``http-header`` \n  +   ``http-request-method`` \n  +   ``host-header`` \n  +   ``path-pattern`` \n  +   ``query-string`` \n  +   ``source-ip``",
+		//	        "description": "The name of the field. The possible values are:\n  +  ``http-header`` ? [ALB] Matches on an HTTP header field.\n  +  ``http-request-method`` ? [ALB] Matches on the HTTP request method.\n  +  ``host-header`` ? [ALB] Matches on the host header.\n  +  ``path-pattern`` ? [ALB] Matches on the URL path of the request.\n  +  ``query-string`` ? [ALB] Matches on a query string parameter.\n  +  ``source-ip`` ? [ALB, NLB] Matches on the source IP address. For ALB, use ``SourceIpConfig`` with ``Values`` to specify CIDR ranges. For NLB, use ``SourceIpConfig`` with ``IpAddressType`` to match the IP address type (``ipv4`` or ``ipv6``).",
 		//	        "type": "string"
 		//	      },
 		//	      "HostHeaderConfig": {
@@ -803,7 +803,7 @@ func listenerRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Field
 					"field": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The field in the HTTP request. The following are the possible values:\n  +   ``http-header`` \n  +   ``http-request-method`` \n  +   ``host-header`` \n  +   ``path-pattern`` \n  +   ``query-string`` \n  +   ``source-ip``",
+						Description: "The name of the field. The possible values are:\n  +  ``http-header`` ? [ALB] Matches on an HTTP header field.\n  +  ``http-request-method`` ? [ALB] Matches on the HTTP request method.\n  +  ``host-header`` ? [ALB] Matches on the host header.\n  +  ``path-pattern`` ? [ALB] Matches on the URL path of the request.\n  +  ``query-string`` ? [ALB] Matches on a query string parameter.\n  +  ``source-ip`` ? [ALB, NLB] Matches on the source IP address. For ALB, use ``SourceIpConfig`` with ``Values`` to specify CIDR ranges. For NLB, use ``SourceIpConfig`` with ``IpAddressType`` to match the IP address type (``ipv4`` or ``ipv6``).",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: HostHeaderConfig
@@ -991,12 +991,14 @@ func listenerRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
-		//	    "description": "",
+		//	    "description": "Information about a tag.",
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "The key of the tag.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "The value of the tag.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -1014,11 +1016,13 @@ func listenerRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "The key of the tag.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "The value of the tag.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
