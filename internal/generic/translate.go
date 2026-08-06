@@ -176,9 +176,30 @@ func (t toCloudControl) rawFromValue(ctx context.Context, schema typeAtTerraform
 	return nil, fmt.Errorf("unsupported value type: %s", typ)
 }
 
+// skippedProperty records a Cloud Control property that could not be mapped
+// into the Terraform schema and was therefore omitted from state.
+type skippedProperty struct {
+	// CloudFormation property name (e.g. "AndStatement").
+	PropertyName string
+	// Terraform attribute path of the object the property was found on.
+	ParentPath *tftypes.AttributePath
+}
+
 // Translates Cloud Control Properties to Terraform Value.
 type toTerraform struct {
 	cfToTfNameMap map[string]string
+	// If non-nil, properties skipped because they are absent from the
+	// Terraform schema are appended here instead of only being logged.
+	skipped *[]skippedProperty
+}
+
+func (t toTerraform) recordSkipped(propertyName string, parentPath *tftypes.AttributePath) {
+	if t.skipped != nil {
+		*t.skipped = append(*t.skipped, skippedProperty{
+			PropertyName: propertyName,
+			ParentPath:   parentPath,
+		})
+	}
 }
 
 // FromRaw returns the Terraform Value for the specified Cloud Control Properties (raw map[string]interface{}).
@@ -516,6 +537,7 @@ func (t toTerraform) valueFromRaw(ctx context.Context, schema typeAtTerraformPat
 					tflog.Info(ctx, "attribute name mapping not found", map[string]any{
 						"key": key,
 					})
+					t.recordSkipped(key, path)
 					continue
 				}
 				path = path.WithAttributeName(attributeName)
@@ -531,6 +553,7 @@ func (t toTerraform) valueFromRaw(ctx context.Context, schema typeAtTerraformPat
 						"error": err.Error(),
 					})
 					path = path.WithoutLastStep()
+					t.recordSkipped(key, path)
 					continue
 				}
 				return tftypes.Value{}, err

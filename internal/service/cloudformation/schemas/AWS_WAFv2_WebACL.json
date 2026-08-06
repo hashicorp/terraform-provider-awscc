@@ -71,7 +71,7 @@
         "Statements": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Statement"
+            "$ref": "#/definitions/StatementLevel2"
           }
         }
       },
@@ -373,7 +373,7 @@
           }
         },
         "ScopeDownStatement": {
-          "$ref": "#/definitions/Statement"
+          "$ref": "#/definitions/StatementLevel2"
         },
         "ManagedRuleGroupConfigs": {
           "description": "Collection of ManagedRuleGroupConfig.",
@@ -401,7 +401,7 @@
       "type": "object",
       "properties": {
         "Statement": {
-          "$ref": "#/definitions/Statement"
+          "$ref": "#/definitions/StatementLevel2"
         }
       },
       "required": [
@@ -415,7 +415,7 @@
         "Statements": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Statement"
+            "$ref": "#/definitions/StatementLevel2"
           }
         }
       },
@@ -480,7 +480,7 @@
           "maxItems": 5
         },
         "ScopeDownStatement": {
-          "$ref": "#/definitions/Statement"
+          "$ref": "#/definitions/StatementLevel2"
         },
         "ForwardedIPConfig": {
           "$ref": "#/definitions/ForwardedIPConfiguration"
@@ -1776,13 +1776,13 @@
         "PhoneNumberFields": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PhoneNumberField"
+            "$ref": "#/definitions/FieldIdentifier"
           }
         },
         "AddressFields": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AddressField"
+            "$ref": "#/definitions/FieldIdentifier"
           }
         }
       },
@@ -2376,6 +2376,313 @@
       "pattern": "^([1-9][0-9]?|100)$",
       "minLength": 1,
       "maxLength": 3
+    },
+    "AndStatementLevel2": {
+      "type": "object",
+      "properties": {
+        "Statements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StatementLevel3"
+          }
+        }
+      },
+      "required": [
+        "Statements"
+      ],
+      "additionalProperties": false
+    },
+    "ManagedRuleGroupStatementLevel2": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "$ref": "#/definitions/EntityName"
+        },
+        "VendorName": {
+          "type": "string"
+        },
+        "Version": {
+          "type": "string",
+          "pattern": "^[\\w#:\\.\\-/]+$",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "ExcludedRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExcludedRule"
+          }
+        },
+        "ScopeDownStatement": {
+          "$ref": "#/definitions/StatementLevel3"
+        },
+        "ManagedRuleGroupConfigs": {
+          "description": "Collection of ManagedRuleGroupConfig.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleGroupConfig"
+          }
+        },
+        "RuleActionOverrides": {
+          "description": "Action overrides for rules in the rule group.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RuleActionOverride"
+          },
+          "maxItems": 100
+        }
+      },
+      "required": [
+        "VendorName",
+        "Name"
+      ],
+      "additionalProperties": false
+    },
+    "ManagedRuleGroupStatementLevel3": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "$ref": "#/definitions/EntityName"
+        },
+        "VendorName": {
+          "type": "string"
+        },
+        "Version": {
+          "type": "string",
+          "pattern": "^[\\w#:\\.\\-/]+$",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "ExcludedRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExcludedRule"
+          }
+        },
+        "ManagedRuleGroupConfigs": {
+          "description": "Collection of ManagedRuleGroupConfig.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleGroupConfig"
+          }
+        },
+        "RuleActionOverrides": {
+          "description": "Action overrides for rules in the rule group.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RuleActionOverride"
+          },
+          "maxItems": 100
+        }
+      },
+      "required": [
+        "VendorName",
+        "Name"
+      ],
+      "additionalProperties": false
+    },
+    "NotStatementLevel2": {
+      "type": "object",
+      "properties": {
+        "Statement": {
+          "$ref": "#/definitions/StatementLevel3"
+        }
+      },
+      "required": [
+        "Statement"
+      ],
+      "additionalProperties": false
+    },
+    "OrStatementLevel2": {
+      "type": "object",
+      "properties": {
+        "Statements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StatementLevel3"
+          }
+        }
+      },
+      "required": [
+        "Statements"
+      ],
+      "additionalProperties": false
+    },
+    "RateBasedStatementLevel2": {
+      "type": "object",
+      "properties": {
+        "Limit": {
+          "$ref": "#/definitions/RateLimit"
+        },
+        "EvaluationWindowSec": {
+          "$ref": "#/definitions/EvaluationWindowSec"
+        },
+        "AggregateKeyType": {
+          "type": "string",
+          "enum": [
+            "CONSTANT",
+            "IP",
+            "FORWARDED_IP",
+            "CUSTOM_KEYS"
+          ]
+        },
+        "CustomKeys": {
+          "description": "Specifies the aggregate keys to use in a rate-base rule.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RateBasedStatementCustomKey"
+          },
+          "maxItems": 5
+        },
+        "ScopeDownStatement": {
+          "$ref": "#/definitions/StatementLevel3"
+        },
+        "ForwardedIPConfig": {
+          "$ref": "#/definitions/ForwardedIPConfiguration"
+        }
+      },
+      "required": [
+        "Limit",
+        "AggregateKeyType"
+      ],
+      "additionalProperties": false
+    },
+    "RateBasedStatementLevel3": {
+      "type": "object",
+      "properties": {
+        "Limit": {
+          "$ref": "#/definitions/RateLimit"
+        },
+        "EvaluationWindowSec": {
+          "$ref": "#/definitions/EvaluationWindowSec"
+        },
+        "AggregateKeyType": {
+          "type": "string",
+          "enum": [
+            "CONSTANT",
+            "IP",
+            "FORWARDED_IP",
+            "CUSTOM_KEYS"
+          ]
+        },
+        "CustomKeys": {
+          "description": "Specifies the aggregate keys to use in a rate-base rule.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RateBasedStatementCustomKey"
+          },
+          "maxItems": 5
+        },
+        "ForwardedIPConfig": {
+          "$ref": "#/definitions/ForwardedIPConfiguration"
+        }
+      },
+      "required": [
+        "Limit",
+        "AggregateKeyType"
+      ],
+      "additionalProperties": false
+    },
+    "StatementLevel2": {
+      "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
+      "type": "object",
+      "properties": {
+        "ByteMatchStatement": {
+          "$ref": "#/definitions/ByteMatchStatement"
+        },
+        "SqliMatchStatement": {
+          "$ref": "#/definitions/SqliMatchStatement"
+        },
+        "XssMatchStatement": {
+          "$ref": "#/definitions/XssMatchStatement"
+        },
+        "SizeConstraintStatement": {
+          "$ref": "#/definitions/SizeConstraintStatement"
+        },
+        "GeoMatchStatement": {
+          "$ref": "#/definitions/GeoMatchStatement"
+        },
+        "RuleGroupReferenceStatement": {
+          "$ref": "#/definitions/RuleGroupReferenceStatement"
+        },
+        "IPSetReferenceStatement": {
+          "$ref": "#/definitions/IPSetReferenceStatement"
+        },
+        "RegexPatternSetReferenceStatement": {
+          "$ref": "#/definitions/RegexPatternSetReferenceStatement"
+        },
+        "ManagedRuleGroupStatement": {
+          "$ref": "#/definitions/ManagedRuleGroupStatementLevel2"
+        },
+        "RateBasedStatement": {
+          "$ref": "#/definitions/RateBasedStatementLevel2"
+        },
+        "AndStatement": {
+          "$ref": "#/definitions/AndStatementLevel2"
+        },
+        "OrStatement": {
+          "$ref": "#/definitions/OrStatementLevel2"
+        },
+        "NotStatement": {
+          "$ref": "#/definitions/NotStatementLevel2"
+        },
+        "LabelMatchStatement": {
+          "$ref": "#/definitions/LabelMatchStatement"
+        },
+        "RegexMatchStatement": {
+          "$ref": "#/definitions/RegexMatchStatement"
+        },
+        "AsnMatchStatement": {
+          "$ref": "#/definitions/AsnMatchStatement"
+        }
+      },
+      "additionalProperties": false
+    },
+    "StatementLevel3": {
+      "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
+      "type": "object",
+      "properties": {
+        "ByteMatchStatement": {
+          "$ref": "#/definitions/ByteMatchStatement"
+        },
+        "SqliMatchStatement": {
+          "$ref": "#/definitions/SqliMatchStatement"
+        },
+        "XssMatchStatement": {
+          "$ref": "#/definitions/XssMatchStatement"
+        },
+        "SizeConstraintStatement": {
+          "$ref": "#/definitions/SizeConstraintStatement"
+        },
+        "GeoMatchStatement": {
+          "$ref": "#/definitions/GeoMatchStatement"
+        },
+        "RuleGroupReferenceStatement": {
+          "$ref": "#/definitions/RuleGroupReferenceStatement"
+        },
+        "IPSetReferenceStatement": {
+          "$ref": "#/definitions/IPSetReferenceStatement"
+        },
+        "RegexPatternSetReferenceStatement": {
+          "$ref": "#/definitions/RegexPatternSetReferenceStatement"
+        },
+        "ManagedRuleGroupStatement": {
+          "$ref": "#/definitions/ManagedRuleGroupStatementLevel3"
+        },
+        "RateBasedStatement": {
+          "$ref": "#/definitions/RateBasedStatementLevel3"
+        },
+        "LabelMatchStatement": {
+          "$ref": "#/definitions/LabelMatchStatement"
+        },
+        "RegexMatchStatement": {
+          "$ref": "#/definitions/RegexMatchStatement"
+        },
+        "AsnMatchStatement": {
+          "$ref": "#/definitions/AsnMatchStatement"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -2530,5 +2837,14 @@
         ]
       }
     }
+  },
+  "x-derecursed": {
+    "depth": 3,
+    "prunedProperties": [
+      "AndStatement",
+      "NotStatement",
+      "OrStatement",
+      "ScopeDownStatement"
+    ]
   }
 }
