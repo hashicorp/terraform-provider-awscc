@@ -1,3 +1,5 @@
+## 1.97.0 (Unreleased)
+
 ## 1.96.0 (August 6, 2026)
 
 BUG FIXES:
