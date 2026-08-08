@@ -25,6 +25,8 @@ func patchDocument(old, new string) (string, error) {
 
 	patch = replaceKeyValueArrayPatchesWithFullReplace(patch, new)
 
+	patch = resolveMutuallyExclusiveProperties(patch, old)
+
 	// Sort the patch operations to ensure remove operations are applied in reverse order
 	sortedPatch := sortPatchOperations(patch)
 
@@ -45,6 +47,72 @@ func patchDocument(old, new string) (string, error) {
 	}
 
 	return result, nil
+}
+
+// mutuallyExclusivePropertyPairs lists property pairs that Cloud Control API returns
+// together in a resource model but that the underlying service rejects when both are
+// present in an update ("You must only specify exactly one of ..."). The first member
+// of each pair is the derived/decoded form and is the one dropped when both are present.
+var mutuallyExclusivePropertyPairs = [][2]string{
+	{"SearchString", "SearchStringBase64"}, // AWS::WAFv2::WebACL / RuleGroup ByteMatchStatement
+}
+
+// resolveMutuallyExclusiveProperties appends remove operations for known mutually
+// exclusive property pairs when the current resource model contains both members of a
+// pair in the same object. Cloud Control API's GetResource can return both (e.g. a WAFv2
+// ByteMatchStatement created with SearchStringBase64 is returned with SearchString too),
+// and the service then fails ANY update whose resulting model still carries both — even
+// an update that doesn't touch them. If the patch already modifies one member of the
+// pair, the other member is the one removed.
+func resolveMutuallyExclusiveProperties(patch []jsonpatch.JsonPatchOperation, oldState string) []jsonpatch.JsonPatchOperation {
+	var oldDoc map[string]any
+	if err := json.Unmarshal([]byte(oldState), &oldDoc); err != nil {
+		return patch
+	}
+
+	patchedPaths := make(map[string]bool, len(patch))
+	for _, op := range patch {
+		patchedPaths[op.Path] = true
+	}
+
+	var walk func(node any, path string)
+	walk = func(node any, path string) {
+		switch v := node.(type) {
+		case map[string]any:
+			for _, pair := range mutuallyExclusivePropertyPairs {
+				derived, canonical := pair[0], pair[1]
+				if v[derived] == nil || v[canonical] == nil {
+					continue
+				}
+				derivedPath := path + "/" + derived
+				canonicalPath := path + "/" + canonical
+				switch {
+				case patchedPaths[derivedPath] && patchedPaths[canonicalPath]:
+					// Both explicitly changed; leave the conflict to the service.
+				case patchedPaths[derivedPath]:
+					patch = append(patch, jsonpatch.NewPatch("remove", canonicalPath, nil))
+				default:
+					patch = append(patch, jsonpatch.NewPatch("remove", derivedPath, nil))
+				}
+			}
+			for key, val := range v {
+				walk(val, path+"/"+escapeJSONPointerToken(key))
+			}
+		case []any:
+			for idx, val := range v {
+				walk(val, path+"/"+strconv.Itoa(idx))
+			}
+		}
+	}
+	walk(oldDoc, "")
+
+	return patch
+}
+
+// escapeJSONPointerToken escapes a single JSON Pointer reference token (RFC 6901).
+func escapeJSONPointerToken(s string) string {
+	s = strings.ReplaceAll(s, "~", "~0")
+	return strings.ReplaceAll(s, "/", "~1")
 }
 
 // replaceKeyValueArrayPatchesWithFullReplace replaces index-based patch operations targeting
