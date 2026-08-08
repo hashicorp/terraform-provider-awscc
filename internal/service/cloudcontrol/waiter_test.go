@@ -104,3 +104,42 @@ func TestRetryGetResourceRequestStatus_WithHookCompleteFailed(t *testing.T) {
 		}
 	}
 }
+
+func TestRetryGetResourceRequestStatus_ThrottlingError(t *testing.T) {
+	retryFunc := tfcloudcontrol.RetryGetResourceRequestStatus(nil)
+
+	output := &cloudcontrol.GetResourceRequestStatusOutput{
+		ProgressEvent: &types.ProgressEvent{
+			OperationStatus: types.OperationStatusFailed,
+			ErrorCode:       types.HandlerErrorCodeThrottling,
+			StatusMessage:   aws.String("Request throttled"),
+		},
+	}
+
+	retry, _ := retryFunc(context.Background(), nil, output, nil)
+
+	if !retry {
+		t.Error("Expected retry=true for throttling error, got false")
+	}
+}
+
+func TestRetryGetResourceRequestStatus_NonThrottlingError(t *testing.T) {
+	retryFunc := tfcloudcontrol.RetryGetResourceRequestStatus(nil)
+
+	output := &cloudcontrol.GetResourceRequestStatusOutput{
+		ProgressEvent: &types.ProgressEvent{
+			OperationStatus: types.OperationStatusFailed,
+			ErrorCode:       types.HandlerErrorCodeInvalidRequest,
+			StatusMessage:   aws.String("Invalid request"),
+		},
+	}
+
+	retry, err := retryFunc(context.Background(), nil, output, nil)
+
+	if retry {
+		t.Error("Expected retry=false for non-throttling error, got true")
+	}
+	if err == nil {
+		t.Error("Expected error to be returned, got nil")
+	}
+}
