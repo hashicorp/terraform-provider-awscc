@@ -465,6 +465,11 @@ func (t toTerraform) valueFromRaw(ctx context.Context, schema typeAtTerraformPat
 	//
 	case []any:
 		if len(v) == 0 {
+			// Return an empty list/set instead of nil to preserve empty collections in state.
+			// This prevents perpetual diffs when the config has [] but AWS returns an empty array.
+			if typ.Is(tftypes.List{}) || typ.Is(tftypes.Set{}) || typ.Is(tftypes.Tuple{}) {
+				return tftypes.NewValue(typ, []tftypes.Value{}), nil
+			}
 			return tftypes.NewValue(typ, nil), nil
 		}
 
@@ -544,10 +549,15 @@ func (t toTerraform) valueFromRaw(ctx context.Context, schema typeAtTerraformPat
 			path = path.WithoutLastStep()
 		}
 		if isObject {
-			// Set any missing attributes to Null.
+			// Set any missing attributes to Null, or empty list/set for collection types.
+			// This prevents perpetual diffs when the config has [] but AWS omits the field.
 			for k, t := range typ.(tftypes.Object).AttributeTypes {
 				if _, ok := vals[k]; !ok {
-					vals[k] = tftypes.NewValue(t, nil)
+					if t.Is(tftypes.List{}) || t.Is(tftypes.Set{}) {
+						vals[k] = tftypes.NewValue(t, []tftypes.Value{})
+					} else {
+						vals[k] = tftypes.NewValue(t, nil)
+					}
 				}
 			}
 		}
