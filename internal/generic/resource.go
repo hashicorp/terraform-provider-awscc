@@ -42,18 +42,16 @@ func resourceWithAttributeNameMap(v map[string]string) ResourceOptionsFunc {
 			v["id"] = "ID"
 		}
 
-		cfToTfNameMap := make(map[string]string, len(v))
+		cfToTfNameMap, rootCfToTfNameMap, rootTfToCfNameMap, err := invertAttributeNameMap(v)
 
-		for tfName, cfName := range v {
-			_, ok := cfToTfNameMap[cfName]
-			if ok {
-				return fmt.Errorf("duplicate attribute name mapping for CloudFormation property %s", cfName)
-			}
-			cfToTfNameMap[cfName] = tfName
+		if err != nil {
+			return err
 		}
 
 		o.tfToCfNameMap = v
 		o.cfToTfNameMap = cfToTfNameMap
+		o.rootCfToTfNameMap = rootCfToTfNameMap
+		o.rootTfToCfNameMap = rootTfToCfNameMap
 
 		return nil
 	}
@@ -348,7 +346,9 @@ type genericResource struct {
 	tfSchema                schema.Schema              // Terraform schema for the resource type
 	tfTypeName              string                     // Terraform type name for resource type
 	tfToCfNameMap           map[string]string          // Map of Terraform attribute name to CloudFormation property name
+	rootTfToCfNameMap       map[string]string          // Top-level attribute overrides for tfToCfNameMap
 	cfToTfNameMap           map[string]string          // Map of CloudFormation property name to Terraform attribute name
+	rootCfToTfNameMap       map[string]string          // Top-level property overrides for cfToTfNameMap
 	isImmutableType         bool                       // Resources cannot be updated and must be recreated
 	writeOnlyAttributePaths []*path.Path               // Paths to any write-only attributes
 	createTimeout           time.Duration              // Maximum wait time for resource creation
@@ -400,7 +400,7 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 		"value": hclog.Fmt("%v", request.Plan.Raw),
 	})
 
-	translator := toCloudControl{tfToCfNameMap: r.tfToCfNameMap}
+	translator := toCloudControl{tfToCfNameMap: r.tfToCfNameMap, rootTfToCfNameMap: r.rootTfToCfNameMap}
 	desiredState, err := translator.AsString(ctx, request.Plan.Schema, request.Plan.Raw)
 
 	if err != nil {
@@ -536,13 +536,13 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 		return
 	}
 
-	translator := toTerraform{cfToTfNameMap: r.cfToTfNameMap}
+	translator := toTerraform{cfToTfNameMap: r.cfToTfNameMap, rootCfToTfNameMap: r.rootCfToTfNameMap}
 	schema := currentState.Schema
 	// Reorder key-value lists (Tags, LoadBalancerAttributes, etc.) to match prior state
 	// so plan shows no diff regardless of user config order.
 	var priorMap map[string]any
 	if !currentState.Raw.IsNull() && currentState.Raw.IsKnown() {
-		toCC := toCloudControl{tfToCfNameMap: r.tfToCfNameMap}
+		toCC := toCloudControl{tfToCfNameMap: r.tfToCfNameMap, rootTfToCfNameMap: r.rootTfToCfNameMap}
 		var err error
 		priorMap, err = toCC.AsRaw(ctx, schema, currentState.Raw)
 		if err != nil {
@@ -644,7 +644,7 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 		}
 	}
 
-	translator := toCloudControl{tfToCfNameMap: r.tfToCfNameMap}
+	translator := toCloudControl{tfToCfNameMap: r.tfToCfNameMap, rootTfToCfNameMap: r.rootTfToCfNameMap}
 	currentDesiredState, err := translator.AsString(ctx, currentState.Schema, currentStateRaw)
 
 	if err != nil {
@@ -920,7 +920,7 @@ func (r *genericResource) populateUnknownValues(ctx context.Context, id string, 
 		return diags
 	}
 
-	err = SetUnknownValuesFromResourceModel(ctx, state, unknowns, aws.ToString(description.Properties), r.cfToTfNameMap)
+	err = SetUnknownValuesFromResourceModel(ctx, state, unknowns, aws.ToString(description.Properties), r.cfToTfNameMap, r.rootCfToTfNameMap)
 
 	if err != nil {
 		diags.AddError(
@@ -973,13 +973,13 @@ func (r *genericResource) propertyPathToAttributePath(propertyPath string) (*pat
 
 	attributePath := path.Empty()
 
-	for _, segment := range segments[2:] {
+	for i, segment := range segments[2:] {
 		switch segment {
 		case "", "*":
 			return nil, fmt.Errorf("invalid property path segment: %q", segment)
 
 		default:
-			attributeName, ok := r.cfToTfNameMap[segment]
+			attributeName, ok := terraformAttributeName(r.cfToTfNameMap, r.rootCfToTfNameMap, segment, i == 0)
 			if !ok {
 				return nil, fmt.Errorf("attribute name mapping not found: %s", segment)
 			}

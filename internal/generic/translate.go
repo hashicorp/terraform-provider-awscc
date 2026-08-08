@@ -15,11 +15,101 @@ import (
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	ccdiag "github.com/hashicorp/terraform-provider-awscc/internal/errs/diag"
+	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
 )
+
+// invertAttributeNameMap inverts a Terraform attribute name to CloudFormation property name map.
+// It returns a map of CloudFormation property name to Terraform attribute name that applies at
+// any nested level of a resource model and two maps (possibly nil) of overrides that apply only
+// at the top (root document) level, one per translation direction.
+// Two Terraform attribute names can map to the same CloudFormation property name when a resource
+// has a top-level property with a reserved Terraform attribute name (e.g. "Id", renamed by the
+// generator to "<type>_id") as well as a nested property of the same name (mapped to "id").
+// In that case the plain, naming-convention attribute name applies at nested levels and the
+// renamed attribute name applies only at the top level. The reserved top-level "id" attribute
+// then holds the Cloud Control resource identifier, not the CloudFormation property, so at the
+// top level it maps to the synthetic "ID" property name.
+func invertAttributeNameMap(tfToCfNameMap map[string]string) (map[string]string, map[string]string, map[string]string, error) {
+	cfToTfNameMap := make(map[string]string, len(tfToCfNameMap))
+	var rootCfToTfNameMap, rootTfToCfNameMap map[string]string
+
+	for tfName, cfName := range tfToCfNameMap {
+		otherTfName, ok := cfToTfNameMap[cfName]
+
+		if !ok {
+			cfToTfNameMap[cfName] = tfName
+			continue
+		}
+
+		var rootTfName string
+
+		// The naming-convention attribute name is the nested mapping;
+		// the other (renamed) attribute name is the top-level mapping.
+		conventionTfName := naming.CloudFormationPropertyToTerraformAttribute(cfName)
+		switch conventionTfName {
+		case tfName:
+			rootTfName = otherTfName
+			cfToTfNameMap[cfName] = tfName
+		case otherTfName:
+			rootTfName = tfName
+		default:
+			return nil, nil, nil, fmt.Errorf("duplicate attribute name mapping for CloudFormation property %s", cfName)
+		}
+
+		if rootCfToTfNameMap == nil {
+			rootCfToTfNameMap = make(map[string]string)
+		}
+		rootCfToTfNameMap[cfName] = rootTfName
+
+		if conventionTfName == "id" {
+			// At the top level "id" is the reserved resource identifier attribute.
+			if rootTfToCfNameMap == nil {
+				rootTfToCfNameMap = make(map[string]string)
+			}
+			rootTfToCfNameMap["id"] = "ID"
+		}
+	}
+
+	return cfToTfNameMap, rootCfToTfNameMap, rootTfToCfNameMap, nil
+}
+
+// terraformAttributeName returns the Terraform attribute name for the specified CloudFormation property name.
+// isRoot indicates whether the property is a top-level (root document) property.
+func terraformAttributeName(cfToTfNameMap, rootCfToTfNameMap map[string]string, propertyName string, isRoot bool) (string, bool) {
+	if isRoot {
+		if attributeName, ok := rootCfToTfNameMap[propertyName]; ok {
+			return attributeName, true
+		}
+	}
+
+	attributeName, ok := cfToTfNameMap[propertyName]
+
+	return attributeName, ok
+}
+
+// attributeName returns the Terraform attribute name for the specified CloudFormation property name.
+func (t toTerraform) attributeName(propertyName string, isRoot bool) (string, bool) {
+	return terraformAttributeName(t.cfToTfNameMap, t.rootCfToTfNameMap, propertyName, isRoot)
+}
 
 // Translates a Terraform Value to Cloud Control DesiredState.
 type toCloudControl struct {
-	tfToCfNameMap map[string]string
+	tfToCfNameMap     map[string]string
+	rootTfToCfNameMap map[string]string
+}
+
+// propertyName returns the CloudFormation property name for the specified Terraform attribute name.
+// isRoot indicates whether the attribute is a top-level (root document) attribute.
+func (t toCloudControl) propertyName(attributeName string, isRoot bool) (string, bool) {
+	if isRoot {
+		if propertyName, ok := t.rootTfToCfNameMap[attributeName]; ok {
+			return propertyName, true
+		}
+	}
+
+	propertyName, ok := t.tfToCfNameMap[attributeName]
+
+	return propertyName, ok
 }
 
 // AsRaw returns the raw map[string]interface{} representing Cloud Control DesiredState from a Terraform Value.
@@ -142,6 +232,7 @@ func (t toCloudControl) rawFromValue(ctx context.Context, schema typeAtTerraform
 		if err := val.As(&vals); err != nil {
 			return nil, err
 		}
+		isRoot := len(path.Steps()) == 0
 		vs := make(map[string]any)
 		for name, val := range vals {
 			if typ.Is(tftypes.Object{}) {
@@ -158,7 +249,7 @@ func (t toCloudControl) rawFromValue(ctx context.Context, schema typeAtTerraform
 				continue
 			}
 			if typ.Is(tftypes.Object{}) {
-				propertyName, ok := t.tfToCfNameMap[name]
+				propertyName, ok := t.propertyName(name, isRoot)
 				if !ok {
 					return nil, fmt.Errorf("attribute name mapping not found: %s", name)
 				}
@@ -178,7 +269,8 @@ func (t toCloudControl) rawFromValue(ctx context.Context, schema typeAtTerraform
 
 // Translates Cloud Control Properties to Terraform Value.
 type toTerraform struct {
-	cfToTfNameMap map[string]string
+	cfToTfNameMap     map[string]string
+	rootCfToTfNameMap map[string]string
 }
 
 // FromRaw returns the Terraform Value for the specified Cloud Control Properties (raw map[string]interface{}).
@@ -508,10 +600,13 @@ func (t toTerraform) valueFromRaw(ctx context.Context, schema typeAtTerraformPat
 		}
 
 		isObject := typ.Is(tftypes.Object{})
+		isRoot := len(path.Steps()) == 0
 		vals := make(map[string]tftypes.Value)
 		for key, v := range v {
+			var attributeName string
 			if isObject {
-				attributeName, ok := t.cfToTfNameMap[key]
+				var ok bool
+				attributeName, ok = t.attributeName(key, isRoot)
 				if !ok {
 					tflog.Info(ctx, "attribute name mapping not found", map[string]any{
 						"key": key,
@@ -536,8 +631,7 @@ func (t toTerraform) valueFromRaw(ctx context.Context, schema typeAtTerraformPat
 				return tftypes.Value{}, err
 			}
 			if isObject {
-				// Attribute name mapping assured above.
-				vals[t.cfToTfNameMap[key]] = val
+				vals[attributeName] = val
 			} else {
 				vals[key] = val
 			}

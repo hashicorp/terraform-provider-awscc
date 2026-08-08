@@ -84,7 +84,13 @@ resource_schema "aws_accessanalyzer_analyzer" {
 resource_schema "aws_amazonmq_broker" {
   cloudformation_type_name = "AWS::AmazonMQ::Broker"
 
-  # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
+  # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id.
+  # The schema has a top-level Id (renamed by the generator to <type>_id because
+  # Terraform reserves "id") and a nested property also named Id; both previously mapped
+  # through a single flat attribute name map, which collided at provider startup.
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/2311
+  # Path-aware name mapping resolves the collision; this resource remains suppressed
+  # pending schema regeneration and validation.
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
 }
@@ -1120,10 +1126,6 @@ resource_schema "aws_cloudformation_type_activation" {
 
 resource_schema "aws_cloudfront_anycast_ip_list" {
   cloudformation_type_name = "AWS::CloudFront::AnycastIpList"
-
-  # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
 }
 
 resource_schema "aws_cloudfront_cache_policy" {
@@ -1148,10 +1150,6 @@ resource_schema "aws_cloudfront_continuous_deployment_policy" {
 
 resource_schema "aws_cloudfront_distribution" {
   cloudformation_type_name = "AWS::CloudFront::Distribution"
-
-  # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
 }
 
 resource_schema "aws_cloudfront_distribution_tenant" {
@@ -2648,7 +2646,13 @@ resource_schema "aws_eks_identity_provider_config" {
 resource_schema "aws_eks_nodegroup" {
   cloudformation_type_name = "AWS::EKS::Nodegroup"
 
-  # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
+  # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id.
+  # The schema has a top-level Id (renamed by the generator to <type>_id because
+  # Terraform reserves "id") and a nested property also named Id; both previously mapped
+  # through a single flat attribute name map, which collided at provider startup.
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/2311
+  # Path-aware name mapping resolves the collision; this resource remains suppressed
+  # pending schema regeneration and validation.
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
@@ -2708,7 +2712,13 @@ resource_schema "aws_emrcontainers_endpoint" {
 resource_schema "aws_emrcontainers_security_configuration" {
   cloudformation_type_name = "AWS::EMRContainers::SecurityConfiguration"
 
-  # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
+  # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id.
+  # The schema has a top-level Id (renamed by the generator to <type>_id because
+  # Terraform reserves "id") and a nested property also named Id; both previously mapped
+  # through a single flat attribute name map, which collided at provider startup.
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/2311
+  # Path-aware name mapping resolves the collision; this resource remains suppressed
+  # pending schema regeneration and validation.
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
 }
@@ -2716,7 +2726,13 @@ resource_schema "aws_emrcontainers_security_configuration" {
 resource_schema "aws_emrcontainers_virtual_cluster" {
   cloudformation_type_name = "AWS::EMRContainers::VirtualCluster"
 
-  # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
+  # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id.
+  # The schema has a top-level Id (renamed by the generator to <type>_id because
+  # Terraform reserves "id") and a nested property also named Id; both previously mapped
+  # through a single flat attribute name map, which collided at provider startup.
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/2311
+  # Path-aware name mapping resolves the collision; this resource remains suppressed
+  # pending schema regeneration and validation.
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
 }
@@ -4272,7 +4288,13 @@ resource_schema "aws_mediapackage_asset" {
 resource_schema "aws_mediapackage_channel" {
   cloudformation_type_name = "AWS::MediaPackage::Channel"
 
-  # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
+  # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id.
+  # The schema has a top-level Id (renamed by the generator to <type>_id because
+  # Terraform reserves "id") and a nested property also named Id; both previously mapped
+  # through a single flat attribute name map, which collided at provider startup.
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/2311
+  # Path-aware name mapping resolves the collision; this resource remains suppressed
+  # pending schema regeneration and validation.
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
 }
@@ -4280,7 +4302,13 @@ resource_schema "aws_mediapackage_channel" {
 resource_schema "aws_mediapackage_origin_endpoint" {
   cloudformation_type_name = "AWS::MediaPackage::OriginEndpoint"
 
-  # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
+  # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id.
+  # The schema has a top-level Id (renamed by the generator to <type>_id because
+  # Terraform reserves "id") and a nested property also named Id; both previously mapped
+  # through a single flat attribute name map, which collided at provider startup.
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/2311
+  # Path-aware name mapping resolves the collision; this resource remains suppressed
+  # pending schema regeneration and validation.
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
 }
@@ -6490,7 +6518,13 @@ resource_schema "aws_vpclattice_service_network_vpc_association" {
 resource_schema "aws_vpclattice_target_group" {
   cloudformation_type_name = "AWS::VpcLattice::TargetGroup"
 
-  # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id
+  # Suppression Reason: duplicate attribute name mapping for CloudFormation property Id.
+  # The schema has a top-level Id (renamed by the generator to <type>_id because
+  # Terraform reserves "id") and a nested property also named Id; both previously mapped
+  # through a single flat attribute name map, which collided at provider startup.
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/2311
+  # Path-aware name mapping resolves the collision; this resource remains suppressed
+  # pending schema regeneration and validation.
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
 }
