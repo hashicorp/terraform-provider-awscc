@@ -8,6 +8,7 @@ package eks
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -67,6 +68,7 @@ func capabilityDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "The configuration settings for the capability. The structure of this object varies depending on the capability type. For Argo CD capabilities, you can configure IAM Identity Center integration, RBAC role mappings, and network access settings.",
 		//	  "properties": {
+		//	    "Ack": {},
 		//	    "ArgoCd": {
 		//	      "additionalProperties": false,
 		//	      "description": "Configuration settings for an Argo CD capability. This includes the Kubernetes namespace, IAM Identity Center integration, RBAC role mappings, and network access configuration.",
@@ -180,6 +182,11 @@ func capabilityDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Ack
+				"ack": schema.StringAttribute{ /*START ATTRIBUTE*/
+					CustomType: jsontypes.NormalizedType{},
+					Computed:   true,
+				}, /*END ATTRIBUTE*/
 				// Property: ArgoCd
 				"argo_cd": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -422,6 +429,7 @@ func capabilityDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::EKS::Capability").WithTerraformTypeName("awscc_eks_capability")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"ack":                         "Ack",
 		"argo_cd":                     "ArgoCd",
 		"arn":                         "Arn",
 		"aws_idc":                     "AwsIdc",

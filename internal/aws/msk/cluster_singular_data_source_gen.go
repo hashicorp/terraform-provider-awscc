@@ -578,6 +578,60 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "AuthorizerLogs": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "CloudWatchLogs": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Enabled": {
+		//	              "type": "boolean"
+		//	            },
+		//	            "LogGroup": {
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Enabled"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Firehose": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "DeliveryStream": {
+		//	              "type": "string"
+		//	            },
+		//	            "Enabled": {
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Enabled"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "S3": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Bucket": {
+		//	              "type": "string"
+		//	            },
+		//	            "Enabled": {
+		//	              "type": "boolean"
+		//	            },
+		//	            "Prefix": {
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Enabled"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "BrokerLogs": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -633,13 +687,62 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "object"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "BrokerLogs"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"logging_info": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AuthorizerLogs
+				"authorizer_logs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CloudWatchLogs
+						"cloudwatch_logs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Enabled
+								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: LogGroup
+								"log_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Firehose
+						"firehose": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DeliveryStream
+								"delivery_stream": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Enabled
+								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: S3
+						"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Bucket
+								"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Enabled
+								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Prefix
+								"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: BrokerLogs
 				"broker_logs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -878,6 +981,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                            "Arn",
+		"authorizer_logs":                "AuthorizerLogs",
 		"broker_az_distribution":         "BrokerAZDistribution",
 		"broker_logs":                    "BrokerLogs",
 		"broker_node_group_info":         "BrokerNodeGroupInfo",
