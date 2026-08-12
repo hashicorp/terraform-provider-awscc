@@ -1,3 +1,5 @@
+## 1.98.0 (Unreleased)
+
 ## 1.97.0 (August 12, 2026)
 
 FEATURES:
