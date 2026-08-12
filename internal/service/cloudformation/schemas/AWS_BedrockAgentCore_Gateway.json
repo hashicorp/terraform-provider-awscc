@@ -2,6 +2,21 @@
   "typeName": "AWS::BedrockAgentCore::Gateway",
   "description": "Definition of AWS::BedrockAgentCore::Gateway Resource Type",
   "definitions": {
+    "AdvertisedScopeMappingType": {
+      "type": "object",
+      "maxProperties": 50,
+      "minProperties": 1,
+      "description": "Maps an originalScope (from allowedScopes) to an advertisedScope\nexposed in WWW-Authenticate / Protected Resource Metadata.",
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[\\x21\\x23-\\x5B\\x5D-\\x7E]+$"
+        }
+      },
+      "additionalProperties": false
+    },
     "AuthorizerConfiguration": {
       "oneOf": [
         {
@@ -28,6 +43,93 @@
         "AUTHENTICATE_ONLY"
       ]
     },
+    "AuthorizingClaimMatchValueType": {
+      "type": "object",
+      "properties": {
+        "ClaimMatchValue": {
+          "$ref": "#/definitions/ClaimMatchValueType"
+        },
+        "ClaimMatchOperator": {
+          "$ref": "#/definitions/ClaimMatchOperatorType"
+        }
+      },
+      "required": [
+        "ClaimMatchOperator",
+        "ClaimMatchValue"
+      ],
+      "additionalProperties": false
+    },
+    "ClaimMatchOperatorType": {
+      "type": "string",
+      "enum": [
+        "EQUALS",
+        "CONTAINS",
+        "CONTAINS_ANY"
+      ]
+    },
+    "ClaimMatchValueType": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "MatchValueString",
+          "properties": {
+            "MatchValueString": {
+              "type": "string",
+              "maxLength": 255,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9_.:/-]+$"
+            }
+          },
+          "required": [
+            "MatchValueString"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "MatchValueStringList",
+          "properties": {
+            "MatchValueStringList": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 255,
+                "minLength": 1,
+                "pattern": "^[A-Za-z0-9_.:/-]+$"
+              },
+              "minItems": 1
+            }
+          },
+          "required": [
+            "MatchValueStringList"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "CustomClaimValidationType": {
+      "type": "object",
+      "properties": {
+        "InboundTokenClaimName": {
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.-:]+$"
+        },
+        "InboundTokenClaimValueType": {
+          "$ref": "#/definitions/InboundTokenClaimValueType"
+        },
+        "AuthorizingClaimMatchValue": {
+          "$ref": "#/definitions/AuthorizingClaimMatchValueType"
+        }
+      },
+      "required": [
+        "AuthorizingClaimMatchValue",
+        "InboundTokenClaimName",
+        "InboundTokenClaimValueType"
+      ],
+      "additionalProperties": false
+    },
     "CustomJWTAuthorizerConfiguration": {
       "type": "object",
       "properties": {
@@ -52,9 +154,15 @@
         "AllowedScopes": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AllowedScope"
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "^[\\x21\\x23-\\x5B\\x5D-\\x7E]+$"
           },
           "minItems": 1
+        },
+        "AdvertisedScopeMapping": {
+          "$ref": "#/definitions/AdvertisedScopeMappingType"
         },
         "CustomClaims": {
           "type": "array",
@@ -62,6 +170,9 @@
             "$ref": "#/definitions/CustomClaimValidationType"
           },
           "minItems": 1
+        },
+        "PrivateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint"
         }
       },
       "required": [
@@ -69,110 +180,12 @@
       ],
       "additionalProperties": false
     },
-    "AllowedScope": {
+    "EndpointIpAddressType": {
       "type": "string",
-      "pattern": "[\\x21\\x23-\\x5B\\x5D-\\x7E]+",
-      "description": "Allowed scope value"
-    },
-    "CustomClaimValidationType": {
-      "type": "object",
-      "description": "Required custom claim",
-      "properties": {
-        "AuthorizingClaimMatchValue": {
-          "$ref": "#/definitions/AuthorizingClaimMatchValueType"
-        },
-        "InboundTokenClaimName": {
-          "$ref": "#/definitions/InboundTokenClaimName"
-        },
-        "InboundTokenClaimValueType": {
-          "$ref": "#/definitions/InboundTokenClaimValueType"
-        }
-      },
-      "required": [
-        "AuthorizingClaimMatchValue",
-        "InboundTokenClaimName",
-        "InboundTokenClaimValueType"
-      ],
-      "additionalProperties": false
-    },
-    "InboundTokenClaimName": {
-      "type": "string",
-      "pattern": "[A-Za-z0-9_.-:]+",
-      "description": "The name of the custom claim to validate"
-    },
-    "InboundTokenClaimValueType": {
-      "type": "string",
-      "description": "Token claim data type",
       "enum": [
-        "STRING",
-        "STRING_ARRAY"
+        "IPV4",
+        "IPV6"
       ]
-    },
-    "AuthorizingClaimMatchValueType": {
-      "type": "object",
-      "description": "The value or values in the custom claim to match and relationship of match",
-      "properties": {
-        "ClaimMatchOperator": {
-          "$ref": "#/definitions/ClaimMatchOperator"
-        },
-        "ClaimMatchValue": {
-          "$ref": "#/definitions/ClaimMatchValueType"
-        }
-      },
-      "required": [
-        "ClaimMatchOperator",
-        "ClaimMatchValue"
-      ],
-      "additionalProperties": false
-    },
-    "ClaimMatchOperator": {
-      "type": "string",
-      "description": "The relationship between the claim field value and the value or values being matched",
-      "enum": [
-        "EQUALS",
-        "CONTAINS",
-        "CONTAINS_ANY"
-      ]
-    },
-    "ClaimMatchValueType": {
-      "type": "object",
-      "description": "The value or values in the custom claim to match for",
-      "oneOf": [
-        {
-          "required": [
-            "MatchValueString"
-          ]
-        },
-        {
-          "required": [
-            "MatchValueStringList"
-          ]
-        }
-      ],
-      "properties": {
-        "MatchValueString": {
-          "$ref": "#/definitions/MatchValueString"
-        },
-        "MatchValueStringList": {
-          "$ref": "#/definitions/MatchValueStringList"
-        }
-      },
-      "additionalProperties": false
-    },
-    "MatchValueString": {
-      "type": "string",
-      "pattern": "[A-Za-z0-9_.-]+",
-      "description": "The string value to match for"
-    },
-    "MatchValueStringList": {
-      "type": "array",
-      "description": "The list of strings to check for a match",
-      "minItems": 1,
-      "maxItems": 255,
-      "insertionOrder": false,
-      "items": {
-        "$ref": "#/definitions/MatchValueString"
-      }
     },
     "ExceptionLevel": {
       "type": "string",
@@ -198,81 +211,27 @@
           "items": {
             "$ref": "#/definitions/GatewayInterceptionPoint"
           },
-          "minItems": 1,
-          "maxItems": 2
+          "maxItems": 2,
+          "minItems": 1
         },
         "InputConfiguration": {
           "$ref": "#/definitions/InterceptorInputConfiguration"
         }
       },
       "required": [
-        "Interceptor",
-        "InterceptionPoints"
+        "InterceptionPoints",
+        "Interceptor"
       ],
       "additionalProperties": false
-    },
-    "InterceptorConfiguration": {
-      "oneOf": [
-        {
-          "type": "object",
-          "title": "Lambda",
-          "properties": {
-            "Lambda": {
-              "$ref": "#/definitions/LambdaInterceptorConfiguration"
-            }
-          },
-          "required": [
-            "Lambda"
-          ],
-          "additionalProperties": false
-        }
-      ]
-    },
-    "InterceptorInputConfiguration": {
-      "type": "object",
-      "properties": {
-        "PassRequestHeaders": {
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "PassRequestHeaders"
-      ],
-      "additionalProperties": false
-    },
-    "LambdaInterceptorConfiguration": {
-      "type": "object",
-      "properties": {
-        "Arn": {
-          "type": "string",
-          "maxLength": 170,
-          "minLength": 1,
-          "pattern": "^arn:[a-z0-9-]{1,20}:lambda:([a-z]{2}(-gov)?-[a-z]+-\\d{1}):(\\d{12}):function:([a-zA-Z0-9-_.]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"
-        }
-      },
-      "required": [
-        "Arn"
-      ],
-      "additionalProperties": false
-    },
-    "GatewayPolicyEngineMode": {
-      "type": "string",
-      "description": "The enforcement mode for the policy engine. LOG_ONLY - The policy engine evaluates each action against your policies and adds traces on whether tool calls would be allowed or denied, but does not enforce the decision. Use this mode to test and validate policies before enabling enforcement. ENFORCE - The policy engine evaluates actions against your policies and enforces decisions by allowing or denying agent operations. Test and validate policies in LOG_ONLY mode before enabling enforcement to avoid unintended denials or adversely affecting production traffic.",
-      "enum": [
-        "LOG_ONLY",
-        "ENFORCE"
-      ]
     },
     "GatewayPolicyEngineConfiguration": {
       "type": "object",
-      "description": "The configuration for a policy engine associated with a gateway. A policy engine is a collection of policies that evaluates and authorizes agent tool calls. When associated with a gateway, the policy engine intercepts all agent requests and determines whether to allow or deny each action based on the defined policies.",
       "properties": {
         "Arn": {
           "type": "string",
-          "description": "The ARN of the policy engine. The policy engine contains Cedar policies that define fine-grained authorization rules specifying who can perform what actions on which resources as agents interact through the gateway.",
           "maxLength": 170,
           "minLength": 1,
-          "pattern": "^arn:[a-z0-9-]{1,20}:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:policy-engine/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9_]{10}$"
+          "pattern": "^arn:aws:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:policy-engine\\/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9_]{10}$"
         },
         "Mode": {
           "$ref": "#/definitions/GatewayPolicyEngineMode"
@@ -283,6 +242,13 @@
         "Mode"
       ],
       "additionalProperties": false
+    },
+    "GatewayPolicyEngineMode": {
+      "type": "string",
+      "enum": [
+        "LOG_ONLY",
+        "ENFORCE"
+      ]
     },
     "GatewayProtocolConfiguration": {
       "oneOf": [
@@ -318,6 +284,100 @@
         "FAILED"
       ]
     },
+    "InboundTokenClaimValueType": {
+      "type": "string",
+      "enum": [
+        "STRING",
+        "STRING_ARRAY"
+      ]
+    },
+    "InterceptorConfiguration": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "Lambda",
+          "properties": {
+            "Lambda": {
+              "$ref": "#/definitions/LambdaInterceptorConfiguration"
+            }
+          },
+          "required": [
+            "Lambda"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "InterceptorInputConfiguration": {
+      "type": "object",
+      "properties": {
+        "PassRequestHeaders": {
+          "type": "boolean"
+        },
+        "PayloadFilter": {
+          "$ref": "#/definitions/InterceptorPayloadFilter"
+        }
+      },
+      "required": [
+        "PassRequestHeaders"
+      ],
+      "additionalProperties": false
+    },
+    "InterceptorPayloadExclusion": {
+      "type": "string",
+      "enum": [
+        "RESPONSE_BODY"
+      ]
+    },
+    "InterceptorPayloadExclusionSelector": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "Field",
+          "properties": {
+            "Field": {
+              "$ref": "#/definitions/InterceptorPayloadExclusion"
+            }
+          },
+          "required": [
+            "Field"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "InterceptorPayloadFilter": {
+      "type": "object",
+      "properties": {
+        "Exclude": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InterceptorPayloadExclusionSelector"
+          },
+          "maxItems": 1,
+          "minItems": 1
+        }
+      },
+      "required": [
+        "Exclude"
+      ],
+      "additionalProperties": false
+    },
+    "LambdaInterceptorConfiguration": {
+      "type": "object",
+      "properties": {
+        "Arn": {
+          "type": "string",
+          "maxLength": 170,
+          "minLength": 1,
+          "pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:([a-z]{2}(-gov)?-[a-z]+-\\d{1}):(\\d{12}):function:([a-zA-Z0-9-_.]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"
+        }
+      },
+      "required": [
+        "Arn"
+      ],
+      "additionalProperties": false
+    },
     "MCPGatewayConfiguration": {
       "type": "object",
       "properties": {
@@ -345,13 +405,108 @@
       },
       "additionalProperties": false
     },
+    "ManagedVpcResource": {
+      "type": "object",
+      "properties": {
+        "VpcIdentifier": {
+          "type": "string",
+          "pattern": "^vpc-(([0-9a-z]{8})|([0-9a-z]{17}))$"
+        },
+        "SubnetIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^subnet-[0-9a-zA-Z]{8,17}$"
+          }
+        },
+        "EndpointIpAddressType": {
+          "$ref": "#/definitions/EndpointIpAddressType"
+        },
+        "SecurityGroupIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^sg-(([0-9a-z]{8})|([0-9a-z]{17}))$"
+          },
+          "maxItems": 5,
+          "minItems": 0
+        },
+        "RoutingDomain": {
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 3
+        }
+      },
+      "required": [
+        "EndpointIpAddressType",
+        "SubnetIds",
+        "VpcIdentifier"
+      ],
+      "additionalProperties": false
+    },
+    "PrivateEndpoint": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "SelfManagedLatticeResource",
+          "properties": {
+            "SelfManagedLatticeResource": {
+              "$ref": "#/definitions/SelfManagedLatticeResource"
+            }
+          },
+          "required": [
+            "SelfManagedLatticeResource"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "ManagedVpcResource",
+          "properties": {
+            "ManagedVpcResource": {
+              "$ref": "#/definitions/ManagedVpcResource"
+            }
+          },
+          "required": [
+            "ManagedVpcResource"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "SearchType": {
+      "type": "string",
+      "enum": [
+        "SEMANTIC"
+      ]
+    },
+    "SelfManagedLatticeResource": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "ResourceConfigurationIdentifier",
+          "properties": {
+            "ResourceConfigurationIdentifier": {
+              "type": "string",
+              "maxLength": 2048,
+              "minLength": 20,
+              "pattern": "^((rcfg-[0-9a-z]{17})|(arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceconfiguration/rcfg-[0-9a-z]{17}))$"
+            }
+          },
+          "required": [
+            "ResourceConfigurationIdentifier"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
     "SessionConfiguration": {
       "type": "object",
       "properties": {
         "SessionTimeoutInSeconds": {
-          "type": "integer",
-          "minimum": 900,
-          "maximum": 28800
+          "type": "number",
+          "maximum": 28800,
+          "minimum": 900
         }
       },
       "additionalProperties": false
@@ -364,12 +519,6 @@
         }
       },
       "additionalProperties": false
-    },
-    "SearchType": {
-      "type": "string",
-      "enum": [
-        "SEMANTIC"
-      ]
     },
     "TagsMap": {
       "type": "object",
@@ -419,20 +568,9 @@
     "ExceptionLevel": {
       "$ref": "#/definitions/ExceptionLevel"
     },
-    "InterceptorConfigurations": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/GatewayInterceptorConfiguration"
-      },
-      "minItems": 1,
-      "maxItems": 2
-    },
-    "PolicyEngineConfiguration": {
-      "$ref": "#/definitions/GatewayPolicyEngineConfiguration"
-    },
     "GatewayArn": {
       "type": "string",
-      "pattern": "^arn:[a-z0-9-]{1,20}:bedrock-agentcore:[a-z0-9-]{1,20}:[0-9]{12}:gateway/([0-9a-z][-]?){1,100}-[a-z0-9]{10}$"
+      "pattern": "^arn:aws(|-cn|-us-gov):bedrock-agentcore:[a-z0-9-]{1,20}:[0-9]{12}:gateway/([0-9a-z][-]?){1,48}-[a-z0-9]{10}$"
     },
     "GatewayIdentifier": {
       "type": "string",
@@ -443,15 +581,26 @@
       "maxLength": 1024,
       "minLength": 1
     },
+    "InterceptorConfigurations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/GatewayInterceptorConfiguration"
+      },
+      "maxItems": 2,
+      "minItems": 1
+    },
     "KmsKeyArn": {
       "type": "string",
       "maxLength": 2048,
       "minLength": 1,
-      "pattern": "^arn:[a-z0-9-]{1,20}:kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$"
+      "pattern": "^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$"
     },
     "Name": {
       "type": "string",
-      "pattern": "^([0-9a-zA-Z][-]?){1,100}$"
+      "pattern": "^([0-9a-zA-Z][-]?){1,48}$"
+    },
+    "PolicyEngineConfiguration": {
+      "$ref": "#/definitions/GatewayPolicyEngineConfiguration"
     },
     "ProtocolConfiguration": {
       "$ref": "#/definitions/GatewayProtocolConfiguration"
@@ -470,7 +619,7 @@
       "type": "string",
       "maxLength": 2048,
       "minLength": 1,
-      "pattern": "^arn:[a-z0-9-]{1,20}:iam::([0-9]{12})?:role/.+$"
+      "pattern": "^arn:aws(-[^:]+)?:iam::([0-9]{12})?:role/.+$"
     },
     "Status": {
       "$ref": "#/definitions/GatewayStatus"
@@ -529,6 +678,18 @@
         "kms:GenerateDataKey"
       ]
     },
+    "delete": {
+      "permissions": [
+        "bedrock-agentcore:DeleteGateway",
+        "bedrock-agentcore:DeleteWorkloadIdentity",
+        "bedrock-agentcore:GetGateway"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "bedrock-agentcore:ListGateways"
+      ]
+    },
     "read": {
       "permissions": [
         "bedrock-agentcore:GetGateway",
@@ -547,18 +708,6 @@
         "kms:DescribeKey",
         "kms:GenerateDataKey",
         "kms:ListGrants"
-      ]
-    },
-    "delete": {
-      "permissions": [
-        "bedrock-agentcore:DeleteGateway",
-        "bedrock-agentcore:DeleteWorkloadIdentity",
-        "bedrock-agentcore:GetGateway"
-      ]
-    },
-    "list": {
-      "permissions": [
-        "bedrock-agentcore:ListGateways"
       ]
     }
   },

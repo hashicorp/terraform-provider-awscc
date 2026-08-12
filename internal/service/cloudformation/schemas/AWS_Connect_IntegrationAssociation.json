@@ -94,7 +94,8 @@
     "permissions": [
       "connect:TagResource",
       "connect:UntagResource",
-      "connect:ListTagsForResource"
+      "connect:ListTagsForResource",
+      "connect:ListIntegrationAssociations"
     ]
   },
   "additionalProperties": false,

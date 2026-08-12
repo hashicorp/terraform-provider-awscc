@@ -101,6 +101,16 @@
   ],
   "additionalProperties": false,
   "definitions": {
+    "NodeResourcesFitConfig": {
+      "description": "The NodeResourcesFit plugin configuration for the Kubernetes scheduler.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ScoringStrategy": {
+          "$ref": "#/definitions/ScoringStrategy"
+        }
+      }
+    },
     "AccessConfig": {
       "description": "An object representing the Access Config to use for the cluster.",
       "additionalProperties": false,
@@ -255,6 +265,36 @@
         }
       }
     },
+    "ServiceNodePortRange": {
+      "description": "The port range for Kubernetes NodePort services.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "MinPort": {
+          "description": "The minimum port number in the range.",
+          "type": "integer"
+        },
+        "MaxPort": {
+          "description": "The maximum port number in the range.",
+          "type": "integer"
+        }
+      }
+    },
+    "ResourceWeight": {
+      "description": "A resource weight entry for the scheduler scoring strategy.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Weight": {
+          "description": "The weight assigned to the resource for scoring. Must be between 1 and 100.",
+          "type": "integer"
+        },
+        "Name": {
+          "description": "The name of the resource (for example, cpu or memory).",
+          "type": "string"
+        }
+      }
+    },
     "OutpostConfig": {
       "description": "An object representing the Outpost configuration to use for AWS EKS outpost cluster.",
       "additionalProperties": false,
@@ -310,6 +350,17 @@
         "Cidrs"
       ]
     },
+    "HorizontalPodAutoscalerControllerConfig": {
+      "description": "The horizontal pod autoscaler controller configuration.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "HorizontalPodAutoscalerSyncPeriod": {
+          "description": "The interval between each sync of the horizontal pod autoscaler (e.g., 15s, 1m).",
+          "type": "string"
+        }
+      }
+    },
     "Logging": {
       "description": "Enable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs based on log types. By default, cluster control plane logs aren't exported to CloudWatch Logs.",
       "additionalProperties": false,
@@ -318,6 +369,24 @@
         "ClusterLogging": {
           "description": "The cluster control plane logging configuration for your cluster. ",
           "$ref": "#/definitions/ClusterLogging"
+        }
+      }
+    },
+    "ScoringStrategy": {
+      "description": "The scoring strategy configuration for the NodeResourcesFit scheduler plugin.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Type": {
+          "description": "The scoring strategy type (LeastAllocated or MostAllocated).",
+          "type": "string"
+        },
+        "Resources": {
+          "description": "The resource weights used for scoring nodes.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceWeight"
+          }
         }
       }
     },
@@ -384,6 +453,20 @@
         "$ref": "#/definitions/LoggingTypeConfig"
       }
     },
+    "KubeApiServerConfig": {
+      "description": "The configuration for the Kubernetes API server on an Amazon EKS cluster.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ServiceNodePortRange": {
+          "$ref": "#/definitions/ServiceNodePortRange"
+        },
+        "EventTtl": {
+          "description": "The duration that Kubernetes events are retained (e.g., 30m, 1h).",
+          "type": "string"
+        }
+      }
+    },
     "ControlPlanePlacement": {
       "description": "The placement configuration for all the control plane instances of your local Amazon EKS cluster on an AWS Outpost.",
       "additionalProperties": false,
@@ -421,6 +504,16 @@
         "KeyArn": {
           "description": "Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must be symmetric, created in the same region as the cluster, and if the KMS key was created in a different account, the user must have access to the KMS key.",
           "type": "string"
+        }
+      }
+    },
+    "KubeControllerManagerConfig": {
+      "description": "The configuration for the Kubernetes controller manager on an Amazon EKS cluster.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "HorizontalPodAutoscalerControllerConfig": {
+          "$ref": "#/definitions/HorizontalPodAutoscalerControllerConfig"
         }
       }
     },
@@ -470,6 +563,16 @@
             "STANDARD",
             "EXTENDED"
           ]
+        }
+      }
+    },
+    "KubeSchedulerConfig": {
+      "description": "The configuration for the Kubernetes scheduler on an Amazon EKS cluster.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "NodeResourcesFit": {
+          "$ref": "#/definitions/NodeResourcesFitConfig"
         }
       }
     },
@@ -625,6 +728,9 @@
       "description": "Set this value to false to avoid creating the default networking add-ons when the cluster is created.",
       "type": "boolean"
     },
+    "KubeApiServerConfig": {
+      "$ref": "#/definitions/KubeApiServerConfig"
+    },
     "EncryptionConfigKeyArn": {
       "description": "Amazon Resource Name (ARN) or alias of the customer master key (CMK).",
       "type": "string"
@@ -640,11 +746,17 @@
       "description": "The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes control plane to make calls to AWS API operations on your behalf.",
       "type": "string"
     },
+    "KubeControllerManagerConfig": {
+      "$ref": "#/definitions/KubeControllerManagerConfig"
+    },
     "UpgradePolicy": {
       "$ref": "#/definitions/UpgradePolicy"
     },
     "RemoteNetworkConfig": {
       "$ref": "#/definitions/RemoteNetworkConfig"
+    },
+    "KubeSchedulerConfig": {
+      "$ref": "#/definitions/KubeSchedulerConfig"
     },
     "Id": {
       "description": "The unique ID given to your cluster.",

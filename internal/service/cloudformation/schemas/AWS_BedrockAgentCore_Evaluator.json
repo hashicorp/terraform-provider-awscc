@@ -189,11 +189,70 @@
       "properties": {
         "BedrockEvaluatorModelConfig": {
           "$ref": "#/definitions/BedrockEvaluatorModelConfig"
+        },
+        "ResponsesEvaluatorModelConfig": {
+          "$ref": "#/definitions/OpenResponsesEvaluatorModelConfig"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "BedrockEvaluatorModelConfig"
+          ]
+        },
+        {
+          "required": [
+            "ResponsesEvaluatorModelConfig"
+          ]
+        }
+      ],
+      "additionalProperties": false
+    },
+    "OpenResponsesEvaluatorModelConfig": {
+      "type": "object",
+      "description": "The configuration for using OpenResponses-compatible models in evaluator assessments.",
+      "properties": {
+        "ModelId": {
+          "type": "string",
+          "description": "The identifier of the model to use for evaluation."
+        },
+        "MaxOutputTokens": {
+          "type": "integer",
+          "description": "The maximum number of output tokens to generate, including visible output and reasoning tokens.",
+          "minimum": 1
+        },
+        "Temperature": {
+          "type": "number",
+          "description": "The sampling temperature between 0 and 2.",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "TopP": {
+          "type": "number",
+          "description": "The nucleus sampling probability mass between 0 and 1.",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "Reasoning": {
+          "$ref": "#/definitions/ReasoningConfiguration"
         }
       },
       "required": [
-        "BedrockEvaluatorModelConfig"
+        "ModelId"
       ],
+      "additionalProperties": false
+    },
+    "ReasoningConfiguration": {
+      "type": "object",
+      "description": "The reasoning configuration for reasoning models.",
+      "properties": {
+        "Effort": {
+          "type": "string",
+          "description": "The level of reasoning effort the model applies.",
+          "minLength": 1,
+          "maxLength": 64
+        }
+      },
       "additionalProperties": false
     },
     "BedrockEvaluatorModelConfig": {
@@ -366,6 +425,8 @@
         "bedrock-agentcore:GetEvaluator",
         "bedrock-agentcore:TagResource",
         "bedrock:InvokeModel",
+        "bedrock-mantle:CreateInference",
+        "bedrock-mantle:CallWithBearerToken",
         "lambda:GetFunction",
         "lambda:InvokeFunction",
         "kms:DescribeKey",
@@ -388,6 +449,8 @@
         "bedrock-agentcore:UntagResource",
         "bedrock-agentcore:ListTagsForResource",
         "bedrock:InvokeModel",
+        "bedrock-mantle:CreateInference",
+        "bedrock-mantle:CallWithBearerToken",
         "lambda:GetFunction",
         "lambda:InvokeFunction",
         "kms:DescribeKey",

@@ -29,7 +29,7 @@
       "properties": {
         "Name": {
           "type": "string",
-          "pattern": "^[a-zA-Z0-9_-]+$",
+          "pattern": "^[a-zA-Z0-9_.-]+$",
           "minLength": 1,
           "maxLength": 64
         },
@@ -126,7 +126,8 @@
               "LOYALTY_TRANSACTION",
               "LOYALTY_PROMOTION",
               "WEB_ANALYTICS",
-              "DEVICE"
+              "DEVICE",
+              "COMMUNICATION_RECORD"
             ]
           }
         }
