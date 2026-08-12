@@ -1,0 +1,173 @@
+{
+  "typeName": "AWS::Transfer::HostKey",
+  "description": "Resource type definition for AWS::Transfer::HostKey",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The unique Amazon Resource Name (ARN) for the host key.",
+      "minLength": 20,
+      "maxLength": 1600,
+      "pattern": "^arn:\\S+$"
+    },
+    "ServerId": {
+      "type": "string",
+      "description": "The identifier of the server that contains the host key.",
+      "minLength": 19,
+      "maxLength": 19,
+      "pattern": "^s-([0-9a-f]{17})$"
+    },
+    "HostKeyId": {
+      "type": "string",
+      "description": "A unique identifier for the host key.",
+      "minLength": 25,
+      "maxLength": 25,
+      "pattern": "^hostkey-[0-9a-f]{17}$"
+    },
+    "HostKeyBody": {
+      "type": "string",
+      "description": "The private key portion of an SSH key pair. Transfer Family accepts RSA, ECDSA, and ED25519 keys.",
+      "maxLength": 4096
+    },
+    "Description": {
+      "type": "string",
+      "description": "The text description for this host key.",
+      "minLength": 0,
+      "maxLength": 200,
+      "pattern": ""
+    },
+    "HostKeyFingerprint": {
+      "type": "string",
+      "description": "The public key fingerprint, which is a short sequence of bytes used to identify the longer public key."
+    },
+    "Type": {
+      "type": "string",
+      "description": "The encryption algorithm that is used for the host key."
+    },
+    "DateImported": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date on which the host key was added to the server."
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Key-value pairs that can be used to group and search for host keys.",
+      "maxItems": 50,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The name assigned to the tag that you create.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "Contains one or more values that you assigned to the key name you create.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "ServerId"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/HostKeyId",
+    "/properties/HostKeyFingerprint",
+    "/properties/Type",
+    "/properties/DateImported"
+  ],
+  "createOnlyProperties": [
+    "/properties/ServerId",
+    "/properties/HostKeyBody"
+  ],
+  "writeOnlyProperties": [
+    "/properties/HostKeyBody"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/ServerId",
+      "/properties/HostKeyId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "transfer:TagResource",
+      "transfer:UntagResource",
+      "transfer:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "transfer:ImportHostKey",
+        "transfer:DescribeHostKey",
+        "transfer:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "transfer:DescribeHostKey",
+        "transfer:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "transfer:UpdateHostKey",
+        "transfer:DescribeHostKey",
+        "transfer:TagResource",
+        "transfer:UntagResource",
+        "transfer:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "transfer:DeleteHostKey",
+        "transfer:DescribeHostKey",
+        "transfer:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "ServerId": {
+            "type": "string",
+            "minLength": 19,
+            "maxLength": 19,
+            "pattern": "^s-([0-9a-f]{17})$"
+          }
+        },
+        "required": [
+          "ServerId"
+        ]
+      },
+      "permissions": [
+        "transfer:ListHostKeys"
+      ]
+    }
+  }
+}

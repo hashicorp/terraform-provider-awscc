@@ -1,0 +1,1 @@
+$ terraform import awscc_accessanalyzer_archive_rule.example "arn"

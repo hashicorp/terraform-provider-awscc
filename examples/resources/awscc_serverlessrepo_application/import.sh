@@ -1,0 +1,1 @@
+$ terraform import awscc_serverlessrepo_application.example "application_id"

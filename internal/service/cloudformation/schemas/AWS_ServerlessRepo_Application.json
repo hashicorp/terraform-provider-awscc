@@ -1,0 +1,140 @@
+{
+  "typeName": "AWS::ServerlessRepo::Application",
+  "description": "Resource type definition for an AWS Serverless Application Repository application.",
+  "properties": {
+    "ApplicationId": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the application."
+    },
+    "Author": {
+      "type": "string",
+      "description": "The name of the author publishing the app.",
+      "minLength": 1,
+      "maxLength": 127
+    },
+    "Description": {
+      "type": "string",
+      "description": "The description of the application.",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the application.",
+      "minLength": 1,
+      "maxLength": 140,
+      "pattern": "[a-zA-Z0-9\\-]+"
+    },
+    "HomePageUrl": {
+      "type": "string",
+      "description": "A URL with more information about the application."
+    },
+    "Labels": {
+      "type": "array",
+      "description": "Labels to improve discovery of apps in search results.",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 10
+    },
+    "LicenseBody": {
+      "type": "string",
+      "description": "A local text file that contains the license of the app."
+    },
+    "ReadmeBody": {
+      "type": "string",
+      "description": "A text readme file in Markdown language that contains a more detailed description of the application."
+    },
+    "SpdxLicenseId": {
+      "type": "string",
+      "description": "A valid identifier from https://spdx.org/licenses/."
+    },
+    "SemanticVersion": {
+      "type": "string",
+      "description": "The semantic version of the application."
+    },
+    "SourceCodeUrl": {
+      "type": "string",
+      "description": "A link to a public repository for the source code of your application."
+    },
+    "TemplateBody": {
+      "type": "string",
+      "description": "The local raw packaged AWS SAM template file of your application."
+    },
+    "CreationTime": {
+      "type": "string",
+      "description": "The date and time this resource was created."
+    },
+    "IsVerifiedAuthor": {
+      "type": "boolean",
+      "description": "Whether the author of this application has been verified."
+    }
+  },
+  "required": [
+    "Author",
+    "Description",
+    "Name"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/ApplicationId",
+    "/properties/CreationTime",
+    "/properties/IsVerifiedAuthor"
+  ],
+  "writeOnlyProperties": [
+    "/properties/LicenseBody",
+    "/properties/ReadmeBody",
+    "/properties/TemplateBody",
+    "/properties/SemanticVersion",
+    "/properties/SourceCodeUrl"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/SpdxLicenseId",
+    "/properties/LicenseBody",
+    "/properties/SemanticVersion",
+    "/properties/SourceCodeUrl",
+    "/properties/TemplateBody"
+  ],
+  "primaryIdentifier": [
+    "/properties/ApplicationId"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/Name"
+    ]
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "serverlessrepo:CreateApplication",
+        "serverlessrepo:GetApplication",
+        "serverlessrepo:ListApplications"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "serverlessrepo:GetApplication"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "serverlessrepo:UpdateApplication"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "serverlessrepo:DeleteApplication",
+        "serverlessrepo:ListApplications"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "serverlessrepo:ListApplications"
+      ]
+    }
+  }
+}

@@ -256,6 +256,25 @@ func privateVirtualInterfaceResource(ctx context.Context) (resource.Resource, er
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: RateLimit
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The rate limit (bandwidth allocation) for the virtual interface. The value must be one of the supported bandwidth values (e.g., 50Mbps, 1Gbps, 10Gbps) and cannot exceed the bandwidth of the parent connection or LAG.",
+		//	  "pattern": "^[0-9]+\\.?[0-9]*(Mbps|Gbps|Tbps)$",
+		//	  "type": "string"
+		//	}
+		"rate_limit": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The rate limit (bandwidth allocation) for the virtual interface. The value must be one of the supported bandwidth values (e.g., 50Mbps, 1Gbps, 10Gbps) and cannot exceed the bandwidth of the parent connection or LAG.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]+\\.?[0-9]*(Mbps|Gbps|Tbps)$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -456,6 +475,7 @@ func privateVirtualInterfaceResource(ctx context.Context) (resource.Resource, er
 		"enable_site_link":          "EnableSiteLink",
 		"key":                       "Key",
 		"mtu":                       "Mtu",
+		"rate_limit":                "RateLimit",
 		"tags":                      "Tags",
 		"value":                     "Value",
 		"virtual_gateway_id":        "VirtualGatewayId",

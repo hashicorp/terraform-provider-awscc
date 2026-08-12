@@ -114,58 +114,66 @@
   ],
   "definitions": {
     "VpcEncryptionControlExclusions": {
-      "description": "",
+      "description": "Describes the exclusion configurations for various resource types in VPC Encryption Control.\n For more information, see [Enforce VPC encryption in transit](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html) in the *Amazon VPC User Guide*.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "ElasticFileSystem": {
+          "description": "The exclusion configuration for Elastic File System traffic.",
           "$ref": "#/definitions/VpcEncryptionControlExclusion"
         },
         "VpcLattice": {
+          "description": "The exclusion configuration for VPC Lattice traffic.",
           "$ref": "#/definitions/VpcEncryptionControlExclusion"
         },
         "VpcPeering": {
+          "description": "The exclusion configuration for VPC peering connection traffic.",
           "$ref": "#/definitions/VpcEncryptionControlExclusion"
         },
         "InternetGateway": {
+          "description": "The exclusion configuration for internet gateway traffic.",
           "$ref": "#/definitions/VpcEncryptionControlExclusion"
         },
         "EgressOnlyInternetGateway": {
+          "description": "The exclusion configuration for egress-only internet gateway traffic.",
           "$ref": "#/definitions/VpcEncryptionControlExclusion"
         },
         "VirtualPrivateGateway": {
+          "description": "The exclusion configuration for virtual private gateway traffic.",
           "$ref": "#/definitions/VpcEncryptionControlExclusion"
         },
         "NatGateway": {
+          "description": "The exclusion configuration for NAT gateway traffic.",
           "$ref": "#/definitions/VpcEncryptionControlExclusion"
         },
         "Lambda": {
+          "description": "The exclusion configuration for Lambda function traffic.",
           "$ref": "#/definitions/VpcEncryptionControlExclusion"
         }
       }
     },
     "VpcEncryptionControlExclusion": {
-      "description": "",
+      "description": "Describes an exclusion configuration for VPC Encryption Control.\n For more information, see [Enforce VPC encryption in transit](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html) in the *Amazon VPC User Guide*.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "State": {
-          "description": "The exclusion state of the resource type.",
+          "description": "The current state of the exclusion configuration.",
           "type": "string"
         },
         "StateMessage": {
-          "description": "A message describing the exclusion state of the resource type.",
+          "description": "A message providing additional information about the exclusion state.",
           "type": "string"
         }
       }
     },
     "VpcEncryptionControl": {
-      "description": "",
+      "description": "Describes the configuration and state of VPC encryption controls.\n For more information, see [Enforce VPC encryption in transit](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html) in the *Amazon VPC User Guide*.",
       "additionalProperties": false,
       "type": "object",
       "properties": {
         "ElasticFileSystemExclusion": {
-          "description": "The desired exclusion mode for Elastic File System.",
+          "description": "",
           "type": "string",
           "enum": [
             "enable",
@@ -173,7 +181,7 @@
           ]
         },
         "VirtualPrivateGatewayExclusion": {
-          "description": "The desired exclusion mode for Virtual Private Gateways.",
+          "description": "",
           "type": "string",
           "enum": [
             "enable",
@@ -181,7 +189,7 @@
           ]
         },
         "Mode": {
-          "description": "The mode of the VPC encryption control.",
+          "description": "The encryption mode for the VPC Encryption Control configuration.",
           "type": "string",
           "enum": [
             "monitor",
@@ -189,11 +197,11 @@
           ]
         },
         "VpcEncryptionControlId": {
-          "description": "The ID of the VPC encryption control.",
+          "description": "The ID of the VPC Encryption Control configuration.",
           "type": "string"
         },
         "VpcLatticeExclusion": {
-          "description": "The desired exclusion mode for VPC Lattice.",
+          "description": "",
           "type": "string",
           "enum": [
             "enable",
@@ -201,15 +209,15 @@
           ]
         },
         "VpcId": {
-          "description": "The ID of the VPC.",
+          "description": "The ID of the VPC associated with the encryption control configuration.",
           "type": "string"
         },
         "State": {
-          "description": "The state of the VPC encryption control.",
+          "description": "The current state of the VPC Encryption Control configuration.",
           "type": "string"
         },
         "NatGatewayExclusion": {
-          "description": "The desired exclusion mode for NAT Gateways.",
+          "description": "",
           "type": "string",
           "enum": [
             "enable",
@@ -217,7 +225,7 @@
           ]
         },
         "EgressOnlyInternetGatewayExclusion": {
-          "description": "The desired exclusion mode for Egress-Only Internet Gateways.",
+          "description": "",
           "type": "string",
           "enum": [
             "enable",
@@ -225,11 +233,11 @@
           ]
         },
         "StateMessage": {
-          "description": "A message describing the state of the VPC encryption control.",
+          "description": "A message providing additional information about the encryption control state.",
           "type": "string"
         },
         "LambdaExclusion": {
-          "description": "The desired exclusion mode for Lambda.",
+          "description": "",
           "type": "string",
           "enum": [
             "enable",
@@ -237,10 +245,11 @@
           ]
         },
         "ResourceExclusions": {
+          "description": "Information about resource exclusions for the VPC Encryption Control configuration.",
           "$ref": "#/definitions/VpcEncryptionControlExclusions"
         },
         "InternetGatewayExclusion": {
-          "description": "The desired exclusion mode for Internet Gateways.",
+          "description": "",
           "type": "string",
           "enum": [
             "enable",
@@ -248,7 +257,7 @@
           ]
         },
         "VpcPeeringExclusion": {
-          "description": "The desired exclusion mode for VPC Peering.",
+          "description": "",
           "type": "string",
           "enum": [
             "enable",
@@ -308,7 +317,7 @@
       "type": "string"
     },
     "VpcEncryptionControl": {
-      "description": "",
+      "description": "Describes the configuration and state of VPC encryption controls.\n For more information, see [Enforce VPC encryption in transit](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html) in the *Amazon VPC User Guide*.",
       "$ref": "#/definitions/VpcEncryptionControl"
     },
     "DefaultNetworkAcl": {

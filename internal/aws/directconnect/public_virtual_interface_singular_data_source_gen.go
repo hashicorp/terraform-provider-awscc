@@ -141,6 +141,18 @@ func publicVirtualInterfaceDataSource(ctx context.Context) (datasource.DataSourc
 			Description: "The ID or ARN of the connection or LAG.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: RateLimit
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The rate limit (bandwidth allocation) for the virtual interface. The value must be one of the supported bandwidth values (e.g., 50Mbps, 1Gbps, 10Gbps) and cannot exceed the bandwidth of the parent connection or LAG.",
+		//	  "pattern": "^[0-9]+\\.?[0-9]*(Mbps|Gbps|Tbps)$",
+		//	  "type": "string"
+		//	}
+		"rate_limit": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The rate limit (bandwidth allocation) for the virtual interface. The value must be one of the supported bandwidth values (e.g., 50Mbps, 1Gbps, 10Gbps) and cannot exceed the bandwidth of the parent connection or LAG.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RouteFilterPrefixes
 		// CloudFormation resource type schema:
 		//
@@ -288,6 +300,7 @@ func publicVirtualInterfaceDataSource(ctx context.Context) (datasource.DataSourc
 		"connection_id":          "ConnectionId",
 		"customer_address":       "CustomerAddress",
 		"key":                    "Key",
+		"rate_limit":             "RateLimit",
 		"route_filter_prefixes":  "RouteFilterPrefixes",
 		"tags":                   "Tags",
 		"value":                  "Value",

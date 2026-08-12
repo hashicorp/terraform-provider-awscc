@@ -149,6 +149,16 @@
         }
       }
     },
+    "GresCustomSetting": {
+      "patternProperties": {
+        "": {
+          "type": "string"
+        }
+      },
+      "description": "A single Slurm gres.conf record, expressed as a map of gres.conf attribute names to their values (for example, {\"Name\": \"gpu\", \"Type\": \"a100\", \"File\": \"/dev/nvidia[0-7]\"} or {\"AutoDetect\": \"nvml\"}). AWS PCS adds the NodeName= prefix for the compute node group.",
+      "additionalProperties": false,
+      "type": "object"
+    },
     "InstanceConfig": {
       "description": "An EC2 instance configuration AWS PCS uses to launch compute nodes.",
       "additionalProperties": false,

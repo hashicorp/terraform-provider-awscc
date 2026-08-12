@@ -1,0 +1,113 @@
+{
+  "typeName": "AWS::SecurityAgent::Artifact",
+  "description": "Uploads an artifact to an agent space. Artifacts provide additional context for security testing, such as architecture diagrams, API specifications, or configuration files.",
+  "properties": {
+    "AgentSpaceId": {
+      "type": "string",
+      "description": "The unique identifier of the agent space to add the artifact to."
+    },
+    "ArtifactId": {
+      "type": "string",
+      "description": "The unique identifier assigned to the uploaded artifact."
+    },
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the artifact."
+    },
+    "ArtifactContent": {
+      "type": "string",
+      "description": "The binary content of the artifact to upload, encoded as a Base64 string."
+    },
+    "ArtifactType": {
+      "type": "string",
+      "description": "The file type of the artifact.",
+      "enum": [
+        "TXT",
+        "PNG",
+        "JPEG",
+        "MD",
+        "PDF",
+        "DOCX",
+        "DOC",
+        "JSON",
+        "YAML"
+      ]
+    },
+    "FileName": {
+      "type": "string",
+      "description": "The file name of the artifact."
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time the artifact was last updated, in ISO 8601 format."
+    }
+  },
+  "required": [
+    "AgentSpaceId",
+    "ArtifactType",
+    "FileName"
+  ],
+  "readOnlyProperties": [
+    "/properties/ArtifactId",
+    "/properties/Arn",
+    "/properties/UpdatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/AgentSpaceId",
+    "/properties/ArtifactContent",
+    "/properties/ArtifactType",
+    "/properties/FileName"
+  ],
+  "writeOnlyProperties": [
+    "/properties/ArtifactContent"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/AgentSpaceId",
+      "/properties/ArtifactId"
+    ]
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "additionalProperties": false,
+  "handlers": {
+    "create": {
+      "permissions": [
+        "securityagent:AddArtifact",
+        "securityagent:GetArtifact"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "securityagent:GetArtifact"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "securityagent:DeleteArtifact",
+        "securityagent:GetArtifact"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "AgentSpaceId": {
+            "type": "string",
+            "description": "The unique identifier of the agent space."
+          }
+        },
+        "required": [
+          "AgentSpaceId"
+        ]
+      },
+      "permissions": [
+        "securityagent:ListArtifacts"
+      ]
+    }
+  }
+}

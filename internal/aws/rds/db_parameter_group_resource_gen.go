@@ -33,6 +33,20 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::RDS::DBParameterGroup resource.
 func dBParameterGroupResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: DBParameterGroupArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "",
+		//	  "type": "string"
+		//	}
+		"db_parameter_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DBParameterGroupName
 		// CloudFormation resource type schema:
 		//
@@ -199,6 +213,7 @@ func dBParameterGroupResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"db_parameter_group_arn":  "DBParameterGroupArn",
 		"db_parameter_group_name": "DBParameterGroupName",
 		"description":             "Description",
 		"family":                  "Family",

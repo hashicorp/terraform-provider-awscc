@@ -237,7 +237,46 @@ Read-Only:
 
 Read-Only:
 
+- `authorizer_logs` (Attributes) (see [below for nested schema](#nestedatt--logging_info--authorizer_logs))
 - `broker_logs` (Attributes) (see [below for nested schema](#nestedatt--logging_info--broker_logs))
+
+<a id="nestedatt--logging_info--authorizer_logs"></a>
+### Nested Schema for `logging_info.authorizer_logs`
+
+Read-Only:
+
+- `cloudwatch_logs` (Attributes) (see [below for nested schema](#nestedatt--logging_info--authorizer_logs--cloudwatch_logs))
+- `firehose` (Attributes) (see [below for nested schema](#nestedatt--logging_info--authorizer_logs--firehose))
+- `s3` (Attributes) (see [below for nested schema](#nestedatt--logging_info--authorizer_logs--s3))
+
+<a id="nestedatt--logging_info--authorizer_logs--cloudwatch_logs"></a>
+### Nested Schema for `logging_info.authorizer_logs.cloudwatch_logs`
+
+Read-Only:
+
+- `enabled` (Boolean)
+- `log_group` (String)
+
+
+<a id="nestedatt--logging_info--authorizer_logs--firehose"></a>
+### Nested Schema for `logging_info.authorizer_logs.firehose`
+
+Read-Only:
+
+- `delivery_stream` (String)
+- `enabled` (Boolean)
+
+
+<a id="nestedatt--logging_info--authorizer_logs--s3"></a>
+### Nested Schema for `logging_info.authorizer_logs.s3`
+
+Read-Only:
+
+- `bucket` (String)
+- `enabled` (Boolean)
+- `prefix` (String)
+
+
 
 <a id="nestedatt--logging_info--broker_logs"></a>
 ### Nested Schema for `logging_info.broker_logs`

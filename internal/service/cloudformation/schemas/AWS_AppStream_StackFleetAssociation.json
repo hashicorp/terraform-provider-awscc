@@ -3,13 +3,13 @@
   "description": "Resource Type definition for AWS::AppStream::StackFleetAssociation",
   "additionalProperties": false,
   "properties": {
-    "Id": {
-      "type": "string"
-    },
     "FleetName": {
       "type": "string"
     },
     "StackName": {
+      "type": "string"
+    },
+    "Id": {
       "type": "string"
     }
   },

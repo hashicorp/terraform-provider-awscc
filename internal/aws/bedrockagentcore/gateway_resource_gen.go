@@ -10,13 +10,13 @@ import (
 	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
-	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -48,6 +48,19 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		//	    "CustomJWTAuthorizer": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
+		//	        "AdvertisedScopeMapping": {
+		//	          "additionalProperties": false,
+		//	          "description": "Maps an originalScope (from allowedScopes) to an advertisedScope\nexposed in WWW-Authenticate / Protected Resource Metadata.",
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "maxLength": 255,
+		//	              "minLength": 1,
+		//	              "pattern": "^[\\x21\\x23-\\x5B\\x5D-\\x7E]+$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "AllowedAudience": {
 		//	          "items": {
 		//	            "type": "string"
@@ -64,8 +77,9 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "AllowedScopes": {
 		//	          "items": {
-		//	            "description": "Allowed scope value",
-		//	            "pattern": "[\\x21\\x23-\\x5B\\x5D-\\x7E]+",
+		//	            "maxLength": 255,
+		//	            "minLength": 1,
+		//	            "pattern": "^[\\x21\\x23-\\x5B\\x5D-\\x7E]+$",
 		//	            "type": "string"
 		//	          },
 		//	          "minItems": 1,
@@ -74,14 +88,11 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		//	        "CustomClaims": {
 		//	          "items": {
 		//	            "additionalProperties": false,
-		//	            "description": "Required custom claim",
 		//	            "properties": {
 		//	              "AuthorizingClaimMatchValue": {
 		//	                "additionalProperties": false,
-		//	                "description": "The value or values in the custom claim to match and relationship of match",
 		//	                "properties": {
 		//	                  "ClaimMatchOperator": {
-		//	                    "description": "The relationship between the claim field value and the value or values being matched",
 		//	                    "enum": [
 		//	                      "EQUALS",
 		//	                      "CONTAINS",
@@ -90,35 +101,20 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "type": "string"
 		//	                  },
 		//	                  "ClaimMatchValue": {
-		//	                    "additionalProperties": false,
-		//	                    "description": "The value or values in the custom claim to match for",
-		//	                    "oneOf": [
-		//	                      {
-		//	                        "required": [
-		//	                          "MatchValueString"
-		//	                        ]
-		//	                      },
-		//	                      {
-		//	                        "required": [
-		//	                          "MatchValueStringList"
-		//	                        ]
-		//	                      }
-		//	                    ],
 		//	                    "properties": {
 		//	                      "MatchValueString": {
-		//	                        "description": "The string value to match for",
-		//	                        "pattern": "[A-Za-z0-9_.-]+",
+		//	                        "maxLength": 255,
+		//	                        "minLength": 1,
+		//	                        "pattern": "^[A-Za-z0-9_.:/-]+$",
 		//	                        "type": "string"
 		//	                      },
 		//	                      "MatchValueStringList": {
-		//	                        "description": "The list of strings to check for a match",
-		//	                        "insertionOrder": false,
 		//	                        "items": {
-		//	                          "description": "The string value to match for",
-		//	                          "pattern": "[A-Za-z0-9_.-]+",
+		//	                          "maxLength": 255,
+		//	                          "minLength": 1,
+		//	                          "pattern": "^[A-Za-z0-9_.:/-]+$",
 		//	                          "type": "string"
 		//	                        },
-		//	                        "maxItems": 255,
 		//	                        "minItems": 1,
 		//	                        "type": "array"
 		//	                      }
@@ -133,12 +129,12 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		//	                "type": "object"
 		//	              },
 		//	              "InboundTokenClaimName": {
-		//	                "description": "The name of the custom claim to validate",
-		//	                "pattern": "[A-Za-z0-9_.-:]+",
+		//	                "maxLength": 255,
+		//	                "minLength": 1,
+		//	                "pattern": "^[A-Za-z0-9_.-:]+$",
 		//	                "type": "string"
 		//	              },
 		//	              "InboundTokenClaimValueType": {
-		//	                "description": "Token claim data type",
 		//	                "enum": [
 		//	                  "STRING",
 		//	                  "STRING_ARRAY"
@@ -159,6 +155,65 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		//	        "DiscoveryUrl": {
 		//	          "pattern": "^.+/\\.well-known/openid-configuration$",
 		//	          "type": "string"
+		//	        },
+		//	        "PrivateEndpoint": {
+		//	          "properties": {
+		//	            "ManagedVpcResource": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "EndpointIpAddressType": {
+		//	                  "enum": [
+		//	                    "IPV4",
+		//	                    "IPV6"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "RoutingDomain": {
+		//	                  "maxLength": 255,
+		//	                  "minLength": 3,
+		//	                  "type": "string"
+		//	                },
+		//	                "SecurityGroupIds": {
+		//	                  "items": {
+		//	                    "pattern": "^sg-(([0-9a-z]{8})|([0-9a-z]{17}))$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "maxItems": 5,
+		//	                  "minItems": 0,
+		//	                  "type": "array"
+		//	                },
+		//	                "SubnetIds": {
+		//	                  "items": {
+		//	                    "pattern": "^subnet-[0-9a-zA-Z]{8,17}$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array"
+		//	                },
+		//	                "VpcIdentifier": {
+		//	                  "pattern": "^vpc-(([0-9a-z]{8})|([0-9a-z]{17}))$",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "EndpointIpAddressType",
+		//	                "SubnetIds",
+		//	                "VpcIdentifier"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "SelfManagedLatticeResource": {
+		//	              "properties": {
+		//	                "ResourceConfigurationIdentifier": {
+		//	                  "maxLength": 2048,
+		//	                  "minLength": 20,
+		//	                  "pattern": "^((rcfg-[0-9a-z]{17})|(arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceconfiguration/rcfg-[0-9a-z]{17}))$",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
 		//	        }
 		//	      },
 		//	      "required": [
@@ -174,6 +229,17 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 				// Property: CustomJWTAuthorizer
 				"custom_jwt_authorizer": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AdvertisedScopeMapping
+						"advertised_scope_mapping": // Pattern: ""
+						schema.MapAttribute{        /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "Maps an originalScope (from allowedScopes) to an advertisedScope\nexposed in WWW-Authenticate / Protected Resource Metadata.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+								mapplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: AllowedAudience
 						"allowed_audience": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
@@ -206,7 +272,8 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeAtLeast(1),
 								listvalidator.ValueStringsAre(
-									stringvalidator.RegexMatches(regexp.MustCompile("[\\x21\\x23-\\x5B\\x5D-\\x7E]+"), ""),
+									stringvalidator.LengthBetween(1, 255),
+									stringvalidator.RegexMatches(regexp.MustCompile("^[\\x21\\x23-\\x5B\\x5D-\\x7E]+$"), ""),
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
@@ -222,9 +289,8 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: ClaimMatchOperator
 											"claim_match_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The relationship between the claim field value and the value or values being matched",
-												Optional:    true,
-												Computed:    true,
+												Optional: true,
+												Computed: true,
 												Validators: []validator.String{ /*START VALIDATORS*/
 													stringvalidator.OneOf(
 														"EQUALS",
@@ -242,11 +308,11 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 													// Property: MatchValueString
 													"match_value_string": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "The string value to match for",
-														Optional:    true,
-														Computed:    true,
+														Optional: true,
+														Computed: true,
 														Validators: []validator.String{ /*START VALIDATORS*/
-															stringvalidator.RegexMatches(regexp.MustCompile("[A-Za-z0-9_.-]+"), ""),
+															stringvalidator.LengthBetween(1, 255),
+															stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9_.:/-]+$"), ""),
 														}, /*END VALIDATORS*/
 														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 															stringplanmodifier.UseStateForUnknown(),
@@ -255,24 +321,22 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 													// Property: MatchValueStringList
 													"match_value_string_list": schema.ListAttribute{ /*START ATTRIBUTE*/
 														ElementType: types.StringType,
-														Description: "The list of strings to check for a match",
 														Optional:    true,
 														Computed:    true,
 														Validators: []validator.List{ /*START VALIDATORS*/
-															listvalidator.SizeBetween(1, 255),
+															listvalidator.SizeAtLeast(1),
 															listvalidator.ValueStringsAre(
-																stringvalidator.RegexMatches(regexp.MustCompile("[A-Za-z0-9_.-]+"), ""),
+																stringvalidator.LengthBetween(1, 255),
+																stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9_.:/-]+$"), ""),
 															),
 														}, /*END VALIDATORS*/
 														PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-															generic.Multiset(),
 															listplanmodifier.UseStateForUnknown(),
 														}, /*END PLAN MODIFIERS*/
 													}, /*END ATTRIBUTE*/
 												}, /*END SCHEMA*/
-												Description: "The value or values in the custom claim to match for",
-												Optional:    true,
-												Computed:    true,
+												Optional: true,
+												Computed: true,
 												Validators: []validator.Object{ /*START VALIDATORS*/
 													fwvalidators.NotNullObject(),
 												}, /*END VALIDATORS*/
@@ -281,9 +345,8 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Description: "The value or values in the custom claim to match and relationship of match",
-										Optional:    true,
-										Computed:    true,
+										Optional: true,
+										Computed: true,
 										Validators: []validator.Object{ /*START VALIDATORS*/
 											fwvalidators.NotNullObject(),
 										}, /*END VALIDATORS*/
@@ -293,11 +356,11 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: InboundTokenClaimName
 									"inbound_token_claim_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The name of the custom claim to validate",
-										Optional:    true,
-										Computed:    true,
+										Optional: true,
+										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.RegexMatches(regexp.MustCompile("[A-Za-z0-9_.-:]+"), ""),
+											stringvalidator.LengthBetween(1, 255),
+											stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9_.-:]+$"), ""),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -306,9 +369,8 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END ATTRIBUTE*/
 									// Property: InboundTokenClaimValueType
 									"inbound_token_claim_value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Token claim data type",
-										Optional:    true,
-										Computed:    true,
+										Optional: true,
+										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.OneOf(
 												"STRING",
@@ -341,6 +403,116 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: PrivateEndpoint
+						"private_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ManagedVpcResource
+								"managed_vpc_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: EndpointIpAddressType
+										"endpoint_ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"IPV4",
+													"IPV6",
+												),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: RoutingDomain
+										"routing_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(3, 255),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: SecurityGroupIds
+										"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.SizeBetween(0, 5),
+												listvalidator.ValueStringsAre(
+													stringvalidator.RegexMatches(regexp.MustCompile("^sg-(([0-9a-z]{8})|([0-9a-z]{17}))$"), ""),
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: SubnetIds
+										"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.ValueStringsAre(
+													stringvalidator.RegexMatches(regexp.MustCompile("^subnet-[0-9a-zA-Z]{8,17}$"), ""),
+												),
+												fwvalidators.NotNullList(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: VpcIdentifier
+										"vpc_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.RegexMatches(regexp.MustCompile("^vpc-(([0-9a-z]{8})|([0-9a-z]{17}))$"), ""),
+												fwvalidators.NotNullString(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SelfManagedLatticeResource
+								"self_managed_lattice_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ResourceConfigurationIdentifier
+										"resource_configuration_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(20, 2048),
+												stringvalidator.RegexMatches(regexp.MustCompile("^((rcfg-[0-9a-z]{17})|(arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceconfiguration/rcfg-[0-9a-z]{17}))$"), ""),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -437,7 +609,7 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "pattern": "^arn:[a-z0-9-]{1,20}:bedrock-agentcore:[a-z0-9-]{1,20}:[0-9]{12}:gateway/([0-9a-z][-]?){1,100}-[a-z0-9]{10}$",
+		//	  "pattern": "^arn:aws(|-cn|-us-gov):bedrock-agentcore:[a-z0-9-]{1,20}:[0-9]{12}:gateway/([0-9a-z][-]?){1,48}-[a-z0-9]{10}$",
 		//	  "type": "string"
 		//	}
 		"gateway_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -485,6 +657,31 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		//	        "properties": {
 		//	          "PassRequestHeaders": {
 		//	            "type": "boolean"
+		//	          },
+		//	          "PayloadFilter": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Exclude": {
+		//	                "items": {
+		//	                  "properties": {
+		//	                    "Field": {
+		//	                      "enum": [
+		//	                        "RESPONSE_BODY"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "maxItems": 1,
+		//	                "minItems": 1,
+		//	                "type": "array"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Exclude"
+		//	            ],
+		//	            "type": "object"
 		//	          }
 		//	        },
 		//	        "required": [
@@ -512,7 +709,7 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		//	              "Arn": {
 		//	                "maxLength": 170,
 		//	                "minLength": 1,
-		//	                "pattern": "^arn:[a-z0-9-]{1,20}:lambda:([a-z]{2}(-gov)?-[a-z]+-\\d{1}):(\\d{12}):function:([a-zA-Z0-9-_.]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?$",
+		//	                "pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:([a-z]{2}(-gov)?-[a-z]+-\\d{1}):(\\d{12}):function:([a-zA-Z0-9-_.]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?$",
 		//	                "type": "string"
 		//	              }
 		//	            },
@@ -526,8 +723,8 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Interceptor",
-		//	      "InterceptionPoints"
+		//	      "InterceptionPoints",
+		//	      "Interceptor"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -550,6 +747,45 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 									boolplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: PayloadFilter
+							"payload_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Exclude
+									"exclude": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Field
+												"field": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.OneOf(
+															"RESPONSE_BODY",
+														),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											listvalidator.SizeBetween(1, 1),
+											fwvalidators.NotNullList(),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -590,7 +826,7 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 										Computed: true,
 										Validators: []validator.String{ /*START VALIDATORS*/
 											stringvalidator.LengthBetween(1, 170),
-											stringvalidator.RegexMatches(regexp.MustCompile("^arn:[a-z0-9-]{1,20}:lambda:([a-z]{2}(-gov)?-[a-z]+-\\d{1}):(\\d{12}):function:([a-zA-Z0-9-_.]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"), ""),
+											stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z-]*)?:lambda:([a-z]{2}(-gov)?-[a-z]+-\\d{1}):(\\d{12}):function:([a-zA-Z0-9-_.]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"), ""),
 											fwvalidators.NotNullString(),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -631,7 +867,7 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "maxLength": 2048,
 		//	  "minLength": 1,
-		//	  "pattern": "^arn:[a-z0-9-]{1,20}:kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$",
+		//	  "pattern": "^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$",
 		//	  "type": "string"
 		//	}
 		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -639,7 +875,7 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 2048),
-				stringvalidator.RegexMatches(regexp.MustCompile("^arn:[a-z0-9-]{1,20}:kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -649,13 +885,13 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "pattern": "^([0-9a-zA-Z][-]?){1,100}$",
+		//	  "pattern": "^([0-9a-zA-Z][-]?){1,48}$",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^([0-9a-zA-Z][-]?){1,100}$"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^([0-9a-zA-Z][-]?){1,48}$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: PolicyEngineConfiguration
@@ -663,17 +899,14 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The configuration for a policy engine associated with a gateway. A policy engine is a collection of policies that evaluates and authorizes agent tool calls. When associated with a gateway, the policy engine intercepts all agent requests and determines whether to allow or deny each action based on the defined policies.",
 		//	  "properties": {
 		//	    "Arn": {
-		//	      "description": "The ARN of the policy engine. The policy engine contains Cedar policies that define fine-grained authorization rules specifying who can perform what actions on which resources as agents interact through the gateway.",
 		//	      "maxLength": 170,
 		//	      "minLength": 1,
-		//	      "pattern": "^arn:[a-z0-9-]{1,20}:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:policy-engine/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9_]{10}$",
+		//	      "pattern": "^arn:aws:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:policy-engine\\/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9_]{10}$",
 		//	      "type": "string"
 		//	    },
 		//	    "Mode": {
-		//	      "description": "The enforcement mode for the policy engine. LOG_ONLY - The policy engine evaluates each action against your policies and adds traces on whether tool calls would be allowed or denied, but does not enforce the decision. Use this mode to test and validate policies before enabling enforcement. ENFORCE - The policy engine evaluates actions against your policies and enforces decisions by allowing or denying agent operations. Test and validate policies in LOG_ONLY mode before enabling enforcement to avoid unintended denials or adversely affecting production traffic.",
 		//	      "enum": [
 		//	        "LOG_ONLY",
 		//	        "ENFORCE"
@@ -691,12 +924,11 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: Arn
 				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the policy engine. The policy engine contains Cedar policies that define fine-grained authorization rules specifying who can perform what actions on which resources as agents interact through the gateway.",
-					Optional:    true,
-					Computed:    true,
+					Optional: true,
+					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(1, 170),
-						stringvalidator.RegexMatches(regexp.MustCompile("^arn:[a-z0-9-]{1,20}:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:policy-engine/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9_]{10}$"), ""),
+						stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:policy-engine\\/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9_]{10}$"), ""),
 						fwvalidators.NotNullString(),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -705,9 +937,8 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Mode
 				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The enforcement mode for the policy engine. LOG_ONLY - The policy engine evaluates each action against your policies and adds traces on whether tool calls would be allowed or denied, but does not enforce the decision. Use this mode to test and validate policies before enabling enforcement. ENFORCE - The policy engine evaluates actions against your policies and enforces decisions by allowing or denying agent operations. Test and validate policies in LOG_ONLY mode before enabling enforcement to avoid unintended denials or adversely affecting production traffic.",
-					Optional:    true,
-					Computed:    true,
+					Optional: true,
+					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"LOG_ONLY",
@@ -720,9 +951,8 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "The configuration for a policy engine associated with a gateway. A policy engine is a collection of policies that evaluates and authorizes agent tool calls. When associated with a gateway, the policy engine intercepts all agent requests and determines whether to allow or deny each action based on the defined policies.",
-			Optional:    true,
-			Computed:    true,
+			Optional: true,
+			Computed: true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -752,7 +982,7 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		//	            "SessionTimeoutInSeconds": {
 		//	              "maximum": 28800,
 		//	              "minimum": 900,
-		//	              "type": "integer"
+		//	              "type": "number"
 		//	            }
 		//	          },
 		//	          "type": "object"
@@ -812,14 +1042,14 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 						"session_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: SessionTimeoutInSeconds
-								"session_timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								"session_timeout_in_seconds": schema.Float64Attribute{ /*START ATTRIBUTE*/
 									Optional: true,
 									Computed: true,
-									Validators: []validator.Int64{ /*START VALIDATORS*/
-										int64validator.Between(900, 28800),
+									Validators: []validator.Float64{ /*START VALIDATORS*/
+										float64validator.Between(900.000000, 28800.000000),
 									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-										int64planmodifier.UseStateForUnknown(),
+									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+										float64planmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -892,14 +1122,14 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "maxLength": 2048,
 		//	  "minLength": 1,
-		//	  "pattern": "^arn:[a-z0-9-]{1,20}:iam::([0-9]{12})?:role/.+$",
+		//	  "pattern": "^arn:aws(-[^:]+)?:iam::([0-9]{12})?:role/.+$",
 		//	  "type": "string"
 		//	}
 		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 2048),
-				stringvalidator.RegexMatches(regexp.MustCompile("^arn:[a-z0-9-]{1,20}:iam::([0-9]{12})?:role/.+$"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:iam::([0-9]{12})?:role/.+$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Status
@@ -1035,55 +1265,68 @@ func gatewayResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"allowed_audience":               "AllowedAudience",
-		"allowed_clients":                "AllowedClients",
-		"allowed_scopes":                 "AllowedScopes",
-		"arn":                            "Arn",
-		"authorizer_configuration":       "AuthorizerConfiguration",
-		"authorizer_type":                "AuthorizerType",
-		"authorizing_claim_match_value":  "AuthorizingClaimMatchValue",
-		"claim_match_operator":           "ClaimMatchOperator",
-		"claim_match_value":              "ClaimMatchValue",
-		"created_at":                     "CreatedAt",
-		"custom_claims":                  "CustomClaims",
-		"custom_jwt_authorizer":          "CustomJWTAuthorizer",
-		"description":                    "Description",
-		"discovery_url":                  "DiscoveryUrl",
-		"enable_response_streaming":      "EnableResponseStreaming",
-		"exception_level":                "ExceptionLevel",
-		"gateway_arn":                    "GatewayArn",
-		"gateway_identifier":             "GatewayIdentifier",
-		"gateway_url":                    "GatewayUrl",
-		"inbound_token_claim_name":       "InboundTokenClaimName",
-		"inbound_token_claim_value_type": "InboundTokenClaimValueType",
-		"input_configuration":            "InputConfiguration",
-		"instructions":                   "Instructions",
-		"interception_points":            "InterceptionPoints",
-		"interceptor":                    "Interceptor",
-		"interceptor_configurations":     "InterceptorConfigurations",
-		"kms_key_arn":                    "KmsKeyArn",
-		"lambda":                         "Lambda",
-		"match_value_string":             "MatchValueString",
-		"match_value_string_list":        "MatchValueStringList",
-		"mcp":                            "Mcp",
-		"mode":                           "Mode",
-		"name":                           "Name",
-		"pass_request_headers":           "PassRequestHeaders",
-		"policy_engine_configuration":    "PolicyEngineConfiguration",
-		"protocol_configuration":         "ProtocolConfiguration",
-		"protocol_type":                  "ProtocolType",
-		"role_arn":                       "RoleArn",
-		"search_type":                    "SearchType",
-		"session_configuration":          "SessionConfiguration",
-		"session_timeout_in_seconds":     "SessionTimeoutInSeconds",
-		"status":                         "Status",
-		"status_reasons":                 "StatusReasons",
-		"streaming_configuration":        "StreamingConfiguration",
-		"supported_versions":             "SupportedVersions",
-		"tags":                           "Tags",
-		"updated_at":                     "UpdatedAt",
-		"workload_identity_arn":          "WorkloadIdentityArn",
-		"workload_identity_details":      "WorkloadIdentityDetails",
+		"advertised_scope_mapping":          "AdvertisedScopeMapping",
+		"allowed_audience":                  "AllowedAudience",
+		"allowed_clients":                   "AllowedClients",
+		"allowed_scopes":                    "AllowedScopes",
+		"arn":                               "Arn",
+		"authorizer_configuration":          "AuthorizerConfiguration",
+		"authorizer_type":                   "AuthorizerType",
+		"authorizing_claim_match_value":     "AuthorizingClaimMatchValue",
+		"claim_match_operator":              "ClaimMatchOperator",
+		"claim_match_value":                 "ClaimMatchValue",
+		"created_at":                        "CreatedAt",
+		"custom_claims":                     "CustomClaims",
+		"custom_jwt_authorizer":             "CustomJWTAuthorizer",
+		"description":                       "Description",
+		"discovery_url":                     "DiscoveryUrl",
+		"enable_response_streaming":         "EnableResponseStreaming",
+		"endpoint_ip_address_type":          "EndpointIpAddressType",
+		"exception_level":                   "ExceptionLevel",
+		"exclude":                           "Exclude",
+		"field":                             "Field",
+		"gateway_arn":                       "GatewayArn",
+		"gateway_identifier":                "GatewayIdentifier",
+		"gateway_url":                       "GatewayUrl",
+		"inbound_token_claim_name":          "InboundTokenClaimName",
+		"inbound_token_claim_value_type":    "InboundTokenClaimValueType",
+		"input_configuration":               "InputConfiguration",
+		"instructions":                      "Instructions",
+		"interception_points":               "InterceptionPoints",
+		"interceptor":                       "Interceptor",
+		"interceptor_configurations":        "InterceptorConfigurations",
+		"kms_key_arn":                       "KmsKeyArn",
+		"lambda":                            "Lambda",
+		"managed_vpc_resource":              "ManagedVpcResource",
+		"match_value_string":                "MatchValueString",
+		"match_value_string_list":           "MatchValueStringList",
+		"mcp":                               "Mcp",
+		"mode":                              "Mode",
+		"name":                              "Name",
+		"pass_request_headers":              "PassRequestHeaders",
+		"payload_filter":                    "PayloadFilter",
+		"policy_engine_configuration":       "PolicyEngineConfiguration",
+		"private_endpoint":                  "PrivateEndpoint",
+		"protocol_configuration":            "ProtocolConfiguration",
+		"protocol_type":                     "ProtocolType",
+		"resource_configuration_identifier": "ResourceConfigurationIdentifier",
+		"role_arn":                          "RoleArn",
+		"routing_domain":                    "RoutingDomain",
+		"search_type":                       "SearchType",
+		"security_group_ids":                "SecurityGroupIds",
+		"self_managed_lattice_resource":     "SelfManagedLatticeResource",
+		"session_configuration":             "SessionConfiguration",
+		"session_timeout_in_seconds":        "SessionTimeoutInSeconds",
+		"status":                            "Status",
+		"status_reasons":                    "StatusReasons",
+		"streaming_configuration":           "StreamingConfiguration",
+		"subnet_ids":                        "SubnetIds",
+		"supported_versions":                "SupportedVersions",
+		"tags":                              "Tags",
+		"updated_at":                        "UpdatedAt",
+		"vpc_identifier":                    "VpcIdentifier",
+		"workload_identity_arn":             "WorkloadIdentityArn",
+		"workload_identity_details":         "WorkloadIdentityDetails",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

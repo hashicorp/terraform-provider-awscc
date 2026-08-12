@@ -137,13 +137,175 @@
         "UpdateToLatestImageVersion": {
           "type": "boolean",
           "default": false
+        },
+        "ManagedInstancesProvider": {
+          "$ref": "#/definitions/ManagedInstancesProvider"
+        },
+        "CapacityTags": {
+          "type": "object",
+          "description": "Capacity-level tags for compute environments.",
+          "patternProperties": {
+            "": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "Type",
+        "MaxvCpus"
+      ]
+    },
+    "ManagedInstancesProvider": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "PropagateTags": {
+          "type": "string",
+          "enum": [
+            "CAPACITY_PROVIDER",
+            "NONE"
+          ]
+        },
+        "InfrastructureRoleArn": {
+          "type": "string"
+        },
+        "InstanceLaunchTemplate": {
+          "$ref": "#/definitions/InstanceLaunchTemplate"
+        },
+        "InfrastructureOptimization": {
+          "$ref": "#/definitions/InfrastructureOptimization"
+        }
+      },
+      "required": [
+        "InfrastructureRoleArn",
+        "InstanceLaunchTemplate"
+      ]
+    },
+    "InstanceLaunchTemplate": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Ec2InstanceProfileArn": {
+          "type": "string"
+        },
+        "NetworkConfiguration": {
+          "$ref": "#/definitions/ManagedInstancesNetworkConfiguration"
+        },
+        "InstanceRequirements": {
+          "$ref": "#/definitions/InstanceRequirements"
+        },
+        "CapacityOptionType": {
+          "type": "string",
+          "enum": [
+            "ON_DEMAND",
+            "SPOT",
+            "RESERVED"
+          ]
+        },
+        "StorageConfiguration": {
+          "$ref": "#/definitions/ManagedInstancesStorageConfiguration"
+        },
+        "Monitoring": {
+          "type": "string"
+        },
+        "FipsEnabled": {
+          "type": "boolean"
+        },
+        "CapacityReservations": {
+          "$ref": "#/definitions/CapacityReservations"
+        },
+        "InstanceMetadataTagsPropagation": {
+          "type": "boolean"
+        },
+        "LocalStorageConfiguration": {
+          "$ref": "#/definitions/ManagedInstancesLocalStorageConfiguration"
+        }
+      },
+      "required": [
+        "Ec2InstanceProfileArn",
+        "NetworkConfiguration"
+      ]
+    },
+    "ManagedInstancesNetworkConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Subnets": {
+          "type": "array",
+          "uniqueItems": false,
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "SecurityGroups": {
+          "type": "array",
+          "uniqueItems": false,
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": [
         "Subnets",
-        "Type",
-        "MaxvCpus"
+        "SecurityGroups"
       ]
+    },
+    "InstanceRequirements": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "AllowedInstanceTypes": {
+          "type": "array",
+          "uniqueItems": false,
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "InfrastructureOptimization": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ScaleInAfter": {
+          "type": "integer"
+        }
+      }
+    },
+    "ManagedInstancesStorageConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "StorageSizeGiB": {
+          "type": "integer"
+        }
+      }
+    },
+    "CapacityReservations": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ReservationGroupArn": {
+          "type": "string"
+        },
+        "ReservationPreference": {
+          "type": "string"
+        }
+      }
+    },
+    "ManagedInstancesLocalStorageConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "UseLocalStorage": {
+          "type": "boolean"
+        }
+      }
     },
     "ComputeScalingPolicy": {
       "type": "object",
@@ -287,7 +449,9 @@
     "/properties/ComputeEnvironmentName",
     "/properties/Tags",
     "/properties/Type",
-    "/properties/EksConfiguration"
+    "/properties/EksConfiguration",
+    "/properties/ComputeResources/ManagedInstancesProvider/InstanceLaunchTemplate/CapacityOptionType",
+    "/properties/ComputeResources/ManagedInstancesProvider/InstanceLaunchTemplate/FipsEnabled"
   ],
   "conditionalCreateOnlyProperties": [
     "/properties/ComputeResources/AllocationStrategy",
@@ -331,7 +495,8 @@
         "iam:CreateServiceLinkedRole",
         "Iam:PassRole",
         "Eks:DescribeCluster",
-        "ec2:DescribeLaunchTemplateVersions"
+        "ec2:DescribeLaunchTemplateVersions",
+        "Batch:SetCapacityTags"
       ]
     },
     "read": {
@@ -347,7 +512,8 @@
         "Batch:UnTagResource",
         "Iam:PassRole",
         "Eks:DescribeCluster",
-        "ec2:DescribeLaunchTemplateVersions"
+        "ec2:DescribeLaunchTemplateVersions",
+        "Batch:SetCapacityTags"
       ]
     },
     "delete": {

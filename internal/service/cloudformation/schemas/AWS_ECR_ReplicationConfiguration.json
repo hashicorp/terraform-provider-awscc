@@ -9,7 +9,7 @@
         "Rules": {
           "type": "array",
           "minItems": 0,
-          "maxItems": 10,
+          "maxItems": 25,
           "items": {
             "$ref": "#/definitions/ReplicationRule"
           },

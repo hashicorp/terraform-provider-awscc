@@ -81,6 +81,11 @@ resource_schema "aws_accessanalyzer_analyzer" {
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1528
 }
 
+resource_schema "aws_accessanalyzer_archive_rule" {
+  cloudformation_type_name               = "AWS::AccessAnalyzer::ArchiveRule"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_amazonmq_broker" {
   cloudformation_type_name = "AWS::AmazonMQ::Broker"
 
@@ -273,6 +278,10 @@ resource_schema "aws_apigatewayv2_model" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_apigatewayv2_portal_product" {
+  cloudformation_type_name = "AWS::ApiGatewayV2::PortalProduct"
+}
+
 resource_schema "aws_apigatewayv2_route" {
   cloudformation_type_name               = "AWS::ApiGatewayV2::Route"
   suppress_plural_data_source_generation = true
@@ -316,6 +325,11 @@ resource_schema "aws_appconfig_deployment_strategy" {
 
 resource_schema "aws_appconfig_environment" {
   cloudformation_type_name               = "AWS::AppConfig::Environment"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_appconfig_experiment_definition" {
+  cloudformation_type_name               = "AWS::AppConfig::ExperimentDefinition"
   suppress_plural_data_source_generation = true
 }
 
@@ -776,6 +790,10 @@ resource_schema "aws_bedrockagentcore_browser_profile" {
   cloudformation_type_name = "AWS::BedrockAgentCore::BrowserProfile"
 }
 
+resource_schema "aws_bedrockagentcore_capacity_provider" {
+  cloudformation_type_name = "AWS::BedrockAgentCore::CapacityProvider"
+}
+
 resource_schema "aws_bedrockagentcore_code_interpreter_custom" {
   cloudformation_type_name = "AWS::BedrockAgentCore::CodeInterpreterCustom"
 }
@@ -795,6 +813,30 @@ resource_schema "aws_bedrockagentcore_dataset" {
 
 resource_schema "aws_bedrockagentcore_evaluator" {
   cloudformation_type_name = "AWS::BedrockAgentCore::Evaluator"
+}
+
+resource_schema "aws_bedrockagentcore_gateway" {
+  cloudformation_type_name = "AWS::BedrockAgentCore::Gateway"
+}
+
+resource_schema "aws_bedrockagentcore_gateway_rate_limit" {
+  cloudformation_type_name               = "AWS::BedrockAgentCore::GatewayRateLimit"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_bedrockagentcore_gateway_rule" {
+  cloudformation_type_name               = "AWS::BedrockAgentCore::GatewayRule"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_bedrockagentcore_gateway_target" {
+  cloudformation_type_name = "AWS::BedrockAgentCore::GatewayTarget"
+
+  # Stack overflow
+  # Ref: https://github.com/hashicorp/terraform-provider-awscc/issues/2817
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_bedrockagentcore_harness" {
@@ -839,20 +881,6 @@ resource_schema "aws_bedrockagentcore_policy_engine" {
 resource_schema "aws_bedrockagentcore_resource_policy" {
   cloudformation_type_name               = "AWS::BedrockAgentCore::ResourcePolicy"
   suppress_plural_data_source_generation = true
-}
-
-resource_schema "aws_bedrockagentcore_gateway" {
-  cloudformation_type_name = "AWS::BedrockAgentCore::Gateway"
-}
-
-resource_schema "aws_bedrockagentcore_gateway_target" {
-  cloudformation_type_name = "AWS::BedrockAgentCore::GatewayTarget"
-
-  # Stack overflow
-  # Ref: https://github.com/hashicorp/terraform-provider-awscc/issues/2817
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_bedrockagentcore_memory" {
@@ -1202,6 +1230,10 @@ resource_schema "aws_cloudfront_trust_store" {
 resource_schema "aws_cloudfront_vpc_origin" {
   cloudformation_type_name               = "AWS::CloudFront::VpcOrigin"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_cloudhsm_cluster" {
+  cloudformation_type_name = "AWS::CloudHSM::Cluster"
 }
 
 resource_schema "aws_cloudtrail_channel" {
@@ -1806,6 +1838,10 @@ resource_schema "aws_databrew_ruleset" {
 
 resource_schema "aws_databrew_schedule" {
   cloudformation_type_name = "AWS::DataBrew::Schedule"
+}
+
+resource_schema "aws_dataexchange_data_set" {
+  cloudformation_type_name = "AWS::DataExchange::DataSet"
 }
 
 resource_schema "aws_datapipeline_pipeline" {
@@ -2750,6 +2786,10 @@ resource_schema "aws_elasticache_serverless_cache" {
   cloudformation_type_name = "AWS::ElastiCache::ServerlessCache"
 }
 
+resource_schema "aws_elasticache_serverless_cache_snapshot" {
+  cloudformation_type_name = "AWS::ElastiCache::ServerlessCacheSnapshot"
+}
+
 resource_schema "aws_elasticache_subnet_group" {
   cloudformation_type_name = "AWS::ElastiCache::SubnetGroup"
 }
@@ -3055,17 +3095,29 @@ resource_schema "aws_glue_catalog" {
   cloudformation_type_name = "AWS::Glue::Catalog"
 }
 
+resource_schema "aws_glue_classifier" {
+  cloudformation_type_name = "AWS::Glue::Classifier"
+}
+
 resource_schema "aws_glue_crawler" {
   cloudformation_type_name = "AWS::Glue::Crawler"
 }
 
-resource_schema "aws_glue_database" {
-  cloudformation_type_name = "AWS::Glue::Database"
+resource_schema "aws_glue_custom_entity_type" {
+  cloudformation_type_name = "AWS::Glue::CustomEntityType"
 }
 
 resource_schema "aws_glue_data_catalog_encryption_settings" {
   cloudformation_type_name               = "AWS::Glue::DataCatalogEncryptionSettings"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_glue_data_quality_ruleset" {
+  cloudformation_type_name = "AWS::Glue::DataQualityRuleset"
+}
+
+resource_schema "aws_glue_database" {
+  cloudformation_type_name = "AWS::Glue::Database"
 }
 
 resource_schema "aws_glue_identity_center_configuration" {
@@ -3100,6 +3152,15 @@ resource_schema "aws_glue_schema_version" {
 
 resource_schema "aws_glue_schema_version_metadata" {
   cloudformation_type_name               = "AWS::Glue::SchemaVersionMetadata"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_glue_security_configuration" {
+  cloudformation_type_name = "AWS::Glue::SecurityConfiguration"
+}
+
+resource_schema "aws_glue_table_optimizer" {
+  cloudformation_type_name               = "AWS::Glue::TableOptimizer"
   suppress_plural_data_source_generation = true
 }
 
@@ -3449,6 +3510,10 @@ resource_schema "aws_iot_encryption_configuration" {
 
 resource_schema "aws_iot_fleet_metric" {
   cloudformation_type_name = "AWS::IoT::FleetMetric"
+}
+
+resource_schema "aws_iot_job" {
+  cloudformation_type_name = "AWS::IoT::Job"
 }
 
 resource_schema "aws_iot_job_template" {
@@ -4326,6 +4391,10 @@ resource_schema "aws_mediatailor_channel_policy" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_mediatailor_function" {
+  cloudformation_type_name = "AWS::MediaTailor::Function"
+}
+
 resource_schema "aws_mediatailor_live_source" {
   cloudformation_type_name               = "AWS::MediaTailor::LiveSource"
   suppress_plural_data_source_generation = true
@@ -4714,6 +4783,11 @@ resource_schema "aws_omics_workflow_version" {
   cloudformation_type_name = "AWS::Omics::WorkflowVersion"
 }
 
+resource_schema "aws_opensearch_data_source" {
+  cloudformation_type_name               = "AWS::OpenSearch::DataSource"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_opensearchserverless_access_policy" {
   cloudformation_type_name               = "AWS::OpenSearchServerless::AccessPolicy"
   suppress_plural_data_source_generation = true
@@ -4873,6 +4947,10 @@ resource_schema "aws_personalize_dataset" {
 
 resource_schema "aws_personalize_dataset_group" {
   cloudformation_type_name = "AWS::Personalize::DatasetGroup"
+}
+
+resource_schema "aws_personalize_event_tracker" {
+  cloudformation_type_name = "AWS::Personalize::EventTracker"
 }
 
 resource_schema "aws_personalize_schema" {
@@ -5186,6 +5264,11 @@ resource_schema "aws_refactorspaces_service" {
 
 resource_schema "aws_rekognition_collection" {
   cloudformation_type_name = "AWS::Rekognition::Collection"
+}
+
+resource_schema "aws_rekognition_dataset" {
+  cloudformation_type_name               = "AWS::Rekognition::Dataset"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_rekognition_project" {
@@ -5743,6 +5826,10 @@ resource_schema "aws_ssm_association" {
   cloudformation_type_name = "AWS::SSM::Association"
 }
 
+resource_schema "aws_ssm_cloud_connector" {
+  cloudformation_type_name = "AWS::SSM::CloudConnector"
+}
+
 resource_schema "aws_ssm_document" {
   cloudformation_type_name = "AWS::SSM::Document"
 }
@@ -5866,6 +5953,10 @@ resource_schema "aws_sagemaker_app_image_config" {
   cloudformation_type_name = "AWS::SageMaker::AppImageConfig"
 }
 
+resource_schema "aws_sagemaker_artifact" {
+  cloudformation_type_name = "AWS::SageMaker::Artifact"
+}
+
 resource_schema "aws_sagemaker_cluster" {
   cloudformation_type_name = "AWS::SageMaker::Cluster"
 }
@@ -5914,6 +6005,10 @@ resource_schema "aws_sagemaker_feature_group" {
 
 resource_schema "aws_sagemaker_hub" {
   cloudformation_type_name = "AWS::SageMaker::Hub"
+}
+
+resource_schema "aws_sagemaker_human_task_ui" {
+  cloudformation_type_name = "AWS::SageMaker::HumanTaskUi"
 }
 
 resource_schema "aws_sagemaker_image" {
@@ -6016,6 +6111,10 @@ resource_schema "aws_sagemaker_user_profile" {
   cloudformation_type_name = "AWS::SageMaker::UserProfile"
 }
 
+resource_schema "aws_sagemaker_workforce" {
+  cloudformation_type_name = "AWS::SageMaker::Workforce"
+}
+
 resource_schema "aws_scheduler_schedule" {
   cloudformation_type_name = "AWS::Scheduler::Schedule"
 }
@@ -6046,6 +6145,11 @@ resource_schema "aws_securityagent_agent_space" {
 
 resource_schema "aws_securityagent_application" {
   cloudformation_type_name = "AWS::SecurityAgent::Application"
+}
+
+resource_schema "aws_securityagent_artifact" {
+  cloudformation_type_name               = "AWS::SecurityAgent::Artifact"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_securityagent_pentest" {
@@ -6152,6 +6256,10 @@ resource_schema "aws_securitylake_subscriber" {
 
 resource_schema "aws_securitylake_subscriber_notification" {
   cloudformation_type_name = "AWS::SecurityLake::SubscriberNotification"
+}
+
+resource_schema "aws_serverlessrepo_application" {
+  cloudformation_type_name = "AWS::ServerlessRepo::Application"
 }
 
 resource_schema "aws_servicecatalog_accepted_portfolio_share" {
@@ -6362,6 +6470,11 @@ resource_schema "aws_transfer_connector" {
   cloudformation_type_name = "AWS::Transfer::Connector"
 }
 
+resource_schema "aws_transfer_host_key" {
+  cloudformation_type_name               = "AWS::Transfer::HostKey"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_transfer_profile" {
   cloudformation_type_name = "AWS::Transfer::Profile"
 }
@@ -6544,6 +6657,10 @@ resource_schema "aws_wellarchitected_profile" {
 
 resource_schema "aws_wellarchitected_review_template" {
   cloudformation_type_name = "AWS::WellArchitected::ReviewTemplate"
+}
+
+resource_schema "aws_wickr_network" {
+  cloudformation_type_name = "AWS::Wickr::Network"
 }
 
 resource_schema "aws_wisdom_ai_agent" {

@@ -1,0 +1,1 @@
+$ terraform import awscc_glue_security_configuration.example "name"

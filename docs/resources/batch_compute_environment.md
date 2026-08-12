@@ -44,6 +44,7 @@ Optional:
 
 - `allocation_strategy` (String)
 - `bid_percentage` (Number)
+- `capacity_tags` (Map of String) Capacity-level tags for compute environments.
 - `desiredv_cpus` (Number)
 - `ec_2_configuration` (Attributes List) (see [below for nested schema](#nestedatt--compute_resources--ec_2_configuration))
 - `ec_2_key_pair` (String)
@@ -51,6 +52,7 @@ Optional:
 - `instance_role` (String)
 - `instance_types` (List of String)
 - `launch_template` (Attributes) (see [below for nested schema](#nestedatt--compute_resources--launch_template))
+- `managed_instances_provider` (Attributes) (see [below for nested schema](#nestedatt--compute_resources--managed_instances_provider))
 - `maxv_cpus` (Number)
 - `minv_cpus` (Number)
 - `placement_group` (String)
@@ -94,6 +96,84 @@ Optional:
 - `target_instance_types` (List of String)
 - `userdata_type` (String)
 - `version` (String)
+
+
+
+<a id="nestedatt--compute_resources--managed_instances_provider"></a>
+### Nested Schema for `compute_resources.managed_instances_provider`
+
+Optional:
+
+- `infrastructure_optimization` (Attributes) (see [below for nested schema](#nestedatt--compute_resources--managed_instances_provider--infrastructure_optimization))
+- `infrastructure_role_arn` (String)
+- `instance_launch_template` (Attributes) (see [below for nested schema](#nestedatt--compute_resources--managed_instances_provider--instance_launch_template))
+- `propagate_tags` (String)
+
+<a id="nestedatt--compute_resources--managed_instances_provider--infrastructure_optimization"></a>
+### Nested Schema for `compute_resources.managed_instances_provider.infrastructure_optimization`
+
+Optional:
+
+- `scale_in_after` (Number)
+
+
+<a id="nestedatt--compute_resources--managed_instances_provider--instance_launch_template"></a>
+### Nested Schema for `compute_resources.managed_instances_provider.instance_launch_template`
+
+Optional:
+
+- `capacity_option_type` (String)
+- `capacity_reservations` (Attributes) (see [below for nested schema](#nestedatt--compute_resources--managed_instances_provider--instance_launch_template--capacity_reservations))
+- `ec_2_instance_profile_arn` (String)
+- `fips_enabled` (Boolean)
+- `instance_metadata_tags_propagation` (Boolean)
+- `instance_requirements` (Attributes) (see [below for nested schema](#nestedatt--compute_resources--managed_instances_provider--instance_launch_template--instance_requirements))
+- `local_storage_configuration` (Attributes) (see [below for nested schema](#nestedatt--compute_resources--managed_instances_provider--instance_launch_template--local_storage_configuration))
+- `monitoring` (String)
+- `network_configuration` (Attributes) (see [below for nested schema](#nestedatt--compute_resources--managed_instances_provider--instance_launch_template--network_configuration))
+- `storage_configuration` (Attributes) (see [below for nested schema](#nestedatt--compute_resources--managed_instances_provider--instance_launch_template--storage_configuration))
+
+<a id="nestedatt--compute_resources--managed_instances_provider--instance_launch_template--capacity_reservations"></a>
+### Nested Schema for `compute_resources.managed_instances_provider.instance_launch_template.capacity_reservations`
+
+Optional:
+
+- `reservation_group_arn` (String)
+- `reservation_preference` (String)
+
+
+<a id="nestedatt--compute_resources--managed_instances_provider--instance_launch_template--instance_requirements"></a>
+### Nested Schema for `compute_resources.managed_instances_provider.instance_launch_template.instance_requirements`
+
+Optional:
+
+- `allowed_instance_types` (List of String)
+
+
+<a id="nestedatt--compute_resources--managed_instances_provider--instance_launch_template--local_storage_configuration"></a>
+### Nested Schema for `compute_resources.managed_instances_provider.instance_launch_template.local_storage_configuration`
+
+Optional:
+
+- `use_local_storage` (Boolean)
+
+
+<a id="nestedatt--compute_resources--managed_instances_provider--instance_launch_template--network_configuration"></a>
+### Nested Schema for `compute_resources.managed_instances_provider.instance_launch_template.network_configuration`
+
+Optional:
+
+- `security_groups` (List of String)
+- `subnets` (List of String)
+
+
+<a id="nestedatt--compute_resources--managed_instances_provider--instance_launch_template--storage_configuration"></a>
+### Nested Schema for `compute_resources.managed_instances_provider.instance_launch_template.storage_configuration`
+
+Optional:
+
+- `storage_size_gi_b` (Number)
+
 
 
 

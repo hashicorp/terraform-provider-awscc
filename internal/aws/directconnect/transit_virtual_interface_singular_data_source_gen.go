@@ -178,6 +178,18 @@ func transitVirtualInterfaceDataSource(ctx context.Context) (datasource.DataSour
 			Description: "The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 9001. The default value is 1500.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: RateLimit
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The rate limit (bandwidth allocation) for the virtual interface. The value must be one of the supported bandwidth values (e.g., 50Mbps, 1Gbps, 10Gbps) and cannot exceed the bandwidth of the parent connection or LAG.",
+		//	  "pattern": "^[0-9]+\\.?[0-9]*(Mbps|Gbps|Tbps)$",
+		//	  "type": "string"
+		//	}
+		"rate_limit": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The rate limit (bandwidth allocation) for the virtual interface. The value must be one of the supported bandwidth values (e.g., 50Mbps, 1Gbps, 10Gbps) and cannot exceed the bandwidth of the parent connection or LAG.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -308,6 +320,7 @@ func transitVirtualInterfaceDataSource(ctx context.Context) (datasource.DataSour
 		"enable_site_link":          "EnableSiteLink",
 		"key":                       "Key",
 		"mtu":                       "Mtu",
+		"rate_limit":                "RateLimit",
 		"tags":                      "Tags",
 		"value":                     "Value",
 		"virtual_interface_arn":     "VirtualInterfaceArn",

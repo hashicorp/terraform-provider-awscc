@@ -425,6 +425,253 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: KubeApiServerConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The configuration for the Kubernetes API server on an Amazon EKS cluster.",
+		//	  "properties": {
+		//	    "EventTtl": {
+		//	      "description": "The duration that Kubernetes events are retained (e.g., 30m, 1h).",
+		//	      "type": "string"
+		//	    },
+		//	    "ServiceNodePortRange": {
+		//	      "additionalProperties": false,
+		//	      "description": "The port range for Kubernetes NodePort services.",
+		//	      "properties": {
+		//	        "MaxPort": {
+		//	          "description": "The maximum port number in the range.",
+		//	          "type": "integer"
+		//	        },
+		//	        "MinPort": {
+		//	          "description": "The minimum port number in the range.",
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"kube_api_server_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EventTtl
+				"event_ttl": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The duration that Kubernetes events are retained (e.g., 30m, 1h).",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ServiceNodePortRange
+				"service_node_port_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MaxPort
+						"max_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The maximum port number in the range.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MinPort
+						"min_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The minimum port number in the range.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The port range for Kubernetes NodePort services.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration for the Kubernetes API server on an Amazon EKS cluster.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: KubeControllerManagerConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The configuration for the Kubernetes controller manager on an Amazon EKS cluster.",
+		//	  "properties": {
+		//	    "HorizontalPodAutoscalerControllerConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "The horizontal pod autoscaler controller configuration.",
+		//	      "properties": {
+		//	        "HorizontalPodAutoscalerSyncPeriod": {
+		//	          "description": "The interval between each sync of the horizontal pod autoscaler (e.g., 15s, 1m).",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"kube_controller_manager_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: HorizontalPodAutoscalerControllerConfig
+				"horizontal_pod_autoscaler_controller_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: HorizontalPodAutoscalerSyncPeriod
+						"horizontal_pod_autoscaler_sync_period": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The interval between each sync of the horizontal pod autoscaler (e.g., 15s, 1m).",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The horizontal pod autoscaler controller configuration.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration for the Kubernetes controller manager on an Amazon EKS cluster.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: KubeSchedulerConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The configuration for the Kubernetes scheduler on an Amazon EKS cluster.",
+		//	  "properties": {
+		//	    "NodeResourcesFit": {
+		//	      "additionalProperties": false,
+		//	      "description": "The NodeResourcesFit plugin configuration for the Kubernetes scheduler.",
+		//	      "properties": {
+		//	        "ScoringStrategy": {
+		//	          "additionalProperties": false,
+		//	          "description": "The scoring strategy configuration for the NodeResourcesFit scheduler plugin.",
+		//	          "properties": {
+		//	            "Resources": {
+		//	              "description": "The resource weights used for scoring nodes.",
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "description": "A resource weight entry for the scheduler scoring strategy.",
+		//	                "properties": {
+		//	                  "Name": {
+		//	                    "description": "The name of the resource (for example, cpu or memory).",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Weight": {
+		//	                    "description": "The weight assigned to the resource for scoring. Must be between 1 and 100.",
+		//	                    "type": "integer"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array"
+		//	            },
+		//	            "Type": {
+		//	              "description": "The scoring strategy type (LeastAllocated or MostAllocated).",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"kube_scheduler_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: NodeResourcesFit
+				"node_resources_fit": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ScoringStrategy
+						"scoring_strategy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Resources
+								"resources": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The name of the resource (for example, cpu or memory).",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Weight
+											"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Description: "The weight assigned to the resource for scoring. Must be between 1 and 100.",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "The resource weights used for scoring nodes.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Type
+								"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The scoring strategy type (LeastAllocated or MostAllocated).",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The scoring strategy configuration for the NodeResourcesFit scheduler plugin.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The NodeResourcesFit plugin configuration for the Kubernetes scheduler.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration for the Kubernetes scheduler on an Amazon EKS cluster.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: KubernetesNetworkConfig
 		// CloudFormation resource type schema:
 		//
@@ -1373,15 +1620,24 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"endpoint_public_access":                      "EndpointPublicAccess",
 		"etcd_instance_type":                          "EtcdInstanceType",
 		"etcd_placement":                              "EtcdPlacement",
+		"event_ttl":                                   "EventTtl",
 		"force":                                       "Force",
 		"group_name":                                  "GroupName",
+		"horizontal_pod_autoscaler_controller_config": "HorizontalPodAutoscalerControllerConfig",
+		"horizontal_pod_autoscaler_sync_period":       "HorizontalPodAutoscalerSyncPeriod",
 		"ip_family":                                   "IpFamily",
 		"key":                                         "Key",
 		"key_arn":                                     "KeyArn",
+		"kube_api_server_config":                      "KubeApiServerConfig",
+		"kube_controller_manager_config":              "KubeControllerManagerConfig",
+		"kube_scheduler_config":                       "KubeSchedulerConfig",
 		"kubernetes_network_config":                   "KubernetesNetworkConfig",
 		"logging":                                     "Logging",
+		"max_port":                                    "MaxPort",
+		"min_port":                                    "MinPort",
 		"name":                                        "Name",
 		"node_pools":                                  "NodePools",
+		"node_resources_fit":                          "NodeResourcesFit",
 		"node_role_arn":                               "NodeRoleArn",
 		"open_id_connect_issuer_url":                  "OpenIdConnectIssuerUrl",
 		"outpost_arns":                                "OutpostArns",
@@ -1395,9 +1651,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"resources_vpc_config":                        "ResourcesVpcConfig",
 		"role_arn":                                    "RoleArn",
 		"rollback_config":                             "RollbackConfig",
+		"scoring_strategy":                            "ScoringStrategy",
 		"security_group_ids":                          "SecurityGroupIds",
 		"service_ipv_4_cidr":                          "ServiceIpv4Cidr",
 		"service_ipv_6_cidr":                          "ServiceIpv6Cidr",
+		"service_node_port_range":                     "ServiceNodePortRange",
 		"spread_level":                                "SpreadLevel",
 		"storage_config":                              "StorageConfig",
 		"subnet_ids":                                  "SubnetIds",
@@ -1409,6 +1667,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"upgrade_policy":                              "UpgradePolicy",
 		"value":                                       "Value",
 		"version":                                     "Version",
+		"weight":                                      "Weight",
 		"zonal_shift_config":                          "ZonalShiftConfig",
 	})
 

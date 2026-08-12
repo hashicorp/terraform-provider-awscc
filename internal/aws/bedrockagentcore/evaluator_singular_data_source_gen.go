@@ -123,6 +123,18 @@ func evaluatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "ModelConfig": {
 		//	          "additionalProperties": false,
 		//	          "description": "The model configuration that specifies which foundation model to use for evaluation.",
+		//	          "oneOf": [
+		//	            {
+		//	              "required": [
+		//	                "BedrockEvaluatorModelConfig"
+		//	              ]
+		//	            },
+		//	            {
+		//	              "required": [
+		//	                "ResponsesEvaluatorModelConfig"
+		//	              ]
+		//	            }
+		//	          ],
 		//	          "properties": {
 		//	            "BedrockEvaluatorModelConfig": {
 		//	              "additionalProperties": false,
@@ -165,11 +177,52 @@ func evaluatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "ModelId"
 		//	              ],
 		//	              "type": "object"
+		//	            },
+		//	            "ResponsesEvaluatorModelConfig": {
+		//	              "additionalProperties": false,
+		//	              "description": "The configuration for using OpenResponses-compatible models in evaluator assessments.",
+		//	              "properties": {
+		//	                "MaxOutputTokens": {
+		//	                  "description": "The maximum number of output tokens to generate, including visible output and reasoning tokens.",
+		//	                  "minimum": 1,
+		//	                  "type": "integer"
+		//	                },
+		//	                "ModelId": {
+		//	                  "description": "The identifier of the model to use for evaluation.",
+		//	                  "type": "string"
+		//	                },
+		//	                "Reasoning": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "The reasoning configuration for reasoning models.",
+		//	                  "properties": {
+		//	                    "Effort": {
+		//	                      "description": "The level of reasoning effort the model applies.",
+		//	                      "maxLength": 64,
+		//	                      "minLength": 1,
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "Temperature": {
+		//	                  "description": "The sampling temperature between 0 and 2.",
+		//	                  "maximum": 2,
+		//	                  "minimum": 0,
+		//	                  "type": "number"
+		//	                },
+		//	                "TopP": {
+		//	                  "description": "The nucleus sampling probability mass between 0 and 1.",
+		//	                  "maximum": 1,
+		//	                  "minimum": 0,
+		//	                  "type": "number"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "ModelId"
+		//	              ],
+		//	              "type": "object"
 		//	            }
 		//	          },
-		//	          "required": [
-		//	            "BedrockEvaluatorModelConfig"
-		//	          ],
 		//	          "type": "object"
 		//	        },
 		//	        "RatingScale": {
@@ -333,6 +386,45 @@ func evaluatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "The configuration for using Amazon Bedrock models in evaluator assessments.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ResponsesEvaluatorModelConfig
+								"responses_evaluator_model_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: MaxOutputTokens
+										"max_output_tokens": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The maximum number of output tokens to generate, including visible output and reasoning tokens.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: ModelId
+										"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The identifier of the model to use for evaluation.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Reasoning
+										"reasoning": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Effort
+												"effort": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The level of reasoning effort the model applies.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "The reasoning configuration for reasoning models.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Temperature
+										"temperature": schema.Float64Attribute{ /*START ATTRIBUTE*/
+											Description: "The sampling temperature between 0 and 2.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: TopP
+										"top_p": schema.Float64Attribute{ /*START ATTRIBUTE*/
+											Description: "The nucleus sampling probability mass between 0 and 1.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The configuration for using OpenResponses-compatible models in evaluator assessments.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -543,38 +635,42 @@ func evaluatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::BedrockAgentCore::Evaluator").WithTerraformTypeName("awscc_bedrockagentcore_evaluator")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"additional_model_request_fields": "AdditionalModelRequestFields",
-		"bedrock_evaluator_model_config":  "BedrockEvaluatorModelConfig",
-		"categorical":                     "Categorical",
-		"code_based":                      "CodeBased",
-		"created_at":                      "CreatedAt",
-		"definition":                      "Definition",
-		"description":                     "Description",
-		"evaluator_arn":                   "EvaluatorArn",
-		"evaluator_config":                "EvaluatorConfig",
-		"evaluator_id":                    "EvaluatorId",
-		"evaluator_name":                  "EvaluatorName",
-		"inference_config":                "InferenceConfig",
-		"instructions":                    "Instructions",
-		"key":                             "Key",
-		"kms_key_arn":                     "KmsKeyArn",
-		"label":                           "Label",
-		"lambda_arn":                      "LambdaArn",
-		"lambda_config":                   "LambdaConfig",
-		"lambda_timeout_in_seconds":       "LambdaTimeoutInSeconds",
-		"level":                           "Level",
-		"llm_as_a_judge":                  "LlmAsAJudge",
-		"max_tokens":                      "MaxTokens",
-		"model_config":                    "ModelConfig",
-		"model_id":                        "ModelId",
-		"numerical":                       "Numerical",
-		"rating_scale":                    "RatingScale",
-		"status":                          "Status",
-		"tags":                            "Tags",
-		"temperature":                     "Temperature",
-		"top_p":                           "TopP",
-		"updated_at":                      "UpdatedAt",
-		"value":                           "Value",
+		"additional_model_request_fields":  "AdditionalModelRequestFields",
+		"bedrock_evaluator_model_config":   "BedrockEvaluatorModelConfig",
+		"categorical":                      "Categorical",
+		"code_based":                       "CodeBased",
+		"created_at":                       "CreatedAt",
+		"definition":                       "Definition",
+		"description":                      "Description",
+		"effort":                           "Effort",
+		"evaluator_arn":                    "EvaluatorArn",
+		"evaluator_config":                 "EvaluatorConfig",
+		"evaluator_id":                     "EvaluatorId",
+		"evaluator_name":                   "EvaluatorName",
+		"inference_config":                 "InferenceConfig",
+		"instructions":                     "Instructions",
+		"key":                              "Key",
+		"kms_key_arn":                      "KmsKeyArn",
+		"label":                            "Label",
+		"lambda_arn":                       "LambdaArn",
+		"lambda_config":                    "LambdaConfig",
+		"lambda_timeout_in_seconds":        "LambdaTimeoutInSeconds",
+		"level":                            "Level",
+		"llm_as_a_judge":                   "LlmAsAJudge",
+		"max_output_tokens":                "MaxOutputTokens",
+		"max_tokens":                       "MaxTokens",
+		"model_config":                     "ModelConfig",
+		"model_id":                         "ModelId",
+		"numerical":                        "Numerical",
+		"rating_scale":                     "RatingScale",
+		"reasoning":                        "Reasoning",
+		"responses_evaluator_model_config": "ResponsesEvaluatorModelConfig",
+		"status":                           "Status",
+		"tags":                             "Tags",
+		"temperature":                      "Temperature",
+		"top_p":                            "TopP",
+		"updated_at":                       "UpdatedAt",
+		"value":                            "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

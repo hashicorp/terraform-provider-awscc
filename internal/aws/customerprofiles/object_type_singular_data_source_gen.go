@@ -110,7 +110,7 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "Name": {
 		//	        "maxLength": 64,
 		//	        "minLength": 1,
-		//	        "pattern": "^[a-zA-Z0-9_-]+$",
+		//	        "pattern": "^[a-zA-Z0-9_.-]+$",
 		//	        "type": "string"
 		//	      },
 		//	      "ObjectTypeField": {
@@ -235,7 +235,8 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                  "LOYALTY_TRANSACTION",
 		//	                  "LOYALTY_PROMOTION",
 		//	                  "WEB_ANALYTICS",
-		//	                  "DEVICE"
+		//	                  "DEVICE",
+		//	                  "COMMUNICATION_RECORD"
 		//	                ],
 		//	                "type": "string"
 		//	              },

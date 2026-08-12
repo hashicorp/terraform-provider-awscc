@@ -1,0 +1,147 @@
+{
+  "typeName": "AWS::AccessAnalyzer::ArchiveRule",
+  "description": "Creates an archive rule for the specified analyzer. Archive rules automatically archive new findings that meet the criteria you define when you create the rule.",
+  "properties": {
+    "AnalyzerName": {
+      "type": "string",
+      "description": "The name of the analyzer for the archive rule.",
+      "minLength": 1,
+      "maxLength": 255,
+      "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$"
+    },
+    "RuleName": {
+      "type": "string",
+      "description": "The name of the archive rule.",
+      "minLength": 1,
+      "maxLength": 255,
+      "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$"
+    },
+    "Filter": {
+      "type": "object",
+      "description": "The criteria for the archive rule. A map of filter criteria property names to their criterion values.",
+      "patternProperties": {
+        "": {
+          "type": "object",
+          "properties": {
+            "Eq": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 20,
+              "insertionOrder": false
+            },
+            "Neq": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 20,
+              "insertionOrder": false
+            },
+            "Contains": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "maxItems": 20,
+              "insertionOrder": false
+            },
+            "Exists": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "Arn": {
+      "type": "string",
+      "description": "The ARN of the archive rule."
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The time at which the archive rule was created.",
+      "format": "date-time"
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "The time at which the archive rule was last updated.",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "AnalyzerName",
+    "RuleName",
+    "Filter"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/AnalyzerName",
+    "/properties/RuleName"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/AnalyzerName",
+      "/properties/RuleName"
+    ]
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "access-analyzer:CreateArchiveRule",
+        "access-analyzer:GetArchiveRule"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "access-analyzer:GetArchiveRule"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "access-analyzer:UpdateArchiveRule",
+        "access-analyzer:GetArchiveRule"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "access-analyzer:DeleteArchiveRule",
+        "access-analyzer:GetArchiveRule"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "AnalyzerName": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "pattern": "^[A-Za-z][A-Za-z0-9_.-]*$"
+          }
+        },
+        "required": [
+          "AnalyzerName"
+        ]
+      },
+      "permissions": [
+        "access-analyzer:ListArchiveRules"
+      ]
+    }
+  }
+}

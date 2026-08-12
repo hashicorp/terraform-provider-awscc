@@ -202,6 +202,25 @@ func publicVirtualInterfaceResource(ctx context.Context) (resource.Resource, err
 				stringvalidator.RegexMatches(regexp.MustCompile("^((arn:aws[a-z-]*:directconnect:[a-z0-9-]+:[0-9]{12}:(dxcon/dxcon|dxlag/dxlag))|dx(con|lag))-[a-z0-9A-Z]{8,21}$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
+		// Property: RateLimit
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The rate limit (bandwidth allocation) for the virtual interface. The value must be one of the supported bandwidth values (e.g., 50Mbps, 1Gbps, 10Gbps) and cannot exceed the bandwidth of the parent connection or LAG.",
+		//	  "pattern": "^[0-9]+\\.?[0-9]*(Mbps|Gbps|Tbps)$",
+		//	  "type": "string"
+		//	}
+		"rate_limit": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The rate limit (bandwidth allocation) for the virtual interface. The value must be one of the supported bandwidth values (e.g., 50Mbps, 1Gbps, 10Gbps) and cannot exceed the bandwidth of the parent connection or LAG.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]+\\.?[0-9]*(Mbps|Gbps|Tbps)$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RouteFilterPrefixes
 		// CloudFormation resource type schema:
 		//
@@ -410,6 +429,7 @@ func publicVirtualInterfaceResource(ctx context.Context) (resource.Resource, err
 		"connection_id":          "ConnectionId",
 		"customer_address":       "CustomerAddress",
 		"key":                    "Key",
+		"rate_limit":             "RateLimit",
 		"route_filter_prefixes":  "RouteFilterPrefixes",
 		"tags":                   "Tags",
 		"value":                  "Value",

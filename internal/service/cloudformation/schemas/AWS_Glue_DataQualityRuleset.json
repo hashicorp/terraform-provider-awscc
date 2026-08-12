@@ -1,0 +1,119 @@
+{
+  "typeName": "AWS::Glue::DataQualityRuleset",
+  "description": "Resource Type definition for AWS::Glue::DataQualityRuleset",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-glue.git",
+  "definitions": {
+    "DataQualityTargetTable": {
+      "type": "object",
+      "description": "An object representing an AWS Glue table.",
+      "additionalProperties": false,
+      "properties": {
+        "DatabaseName": {
+          "type": "string",
+          "description": "The name of the database where the AWS Glue table exists."
+        },
+        "TableName": {
+          "type": "string",
+          "description": "The name of the AWS Glue table."
+        }
+      },
+      "required": [
+        "DatabaseName",
+        "TableName"
+      ]
+    }
+  },
+  "properties": {
+    "Name": {
+      "type": "string",
+      "description": "A unique name for the data quality ruleset."
+    },
+    "Description": {
+      "type": "string",
+      "description": "A description of the data quality ruleset."
+    },
+    "Ruleset": {
+      "type": "string",
+      "description": "A Data Quality Definition Language (DQDL) ruleset."
+    },
+    "TargetTable": {
+      "$ref": "#/definitions/DataQualityTargetTable",
+      "description": "An object representing an AWS Glue table."
+    },
+    "ClientToken": {
+      "type": "string",
+      "description": "A unique token for idempotency."
+    },
+    "Tags": {
+      "type": "object",
+      "description": "A map of key-value pairs to apply to this resource.",
+      "patternProperties": {
+        "": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "Name"
+  ],
+  "primaryIdentifier": [
+    "/properties/Name"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name"
+  ],
+  "writeOnlyProperties": [
+    "/properties/ClientToken"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "glue:TagResource",
+      "glue:UntagResource",
+      "glue:GetTags"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "glue:CreateDataQualityRuleset",
+        "glue:GetDataQualityRuleset",
+        "glue:GetTable",
+        "glue:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "glue:GetDataQualityRuleset",
+        "glue:GetTags"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "glue:UpdateDataQualityRuleset",
+        "glue:GetDataQualityRuleset",
+        "glue:GetTable",
+        "glue:TagResource",
+        "glue:UntagResource",
+        "glue:GetTags"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "glue:DeleteDataQualityRuleset",
+        "glue:GetDataQualityRuleset"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "glue:ListDataQualityRulesets"
+      ]
+    }
+  }
+}

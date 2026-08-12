@@ -76,6 +76,16 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 		//	    "BidPercentage": {
 		//	      "type": "integer"
 		//	    },
+		//	    "CapacityTags": {
+		//	      "additionalProperties": false,
+		//	      "description": "Capacity-level tags for compute environments.",
+		//	      "patternProperties": {
+		//	        "": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "DesiredvCpus": {
 		//	      "type": "integer"
 		//	    },
@@ -179,6 +189,135 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 		//	      },
 		//	      "type": "object"
 		//	    },
+		//	    "ManagedInstancesProvider": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "InfrastructureOptimization": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "ScaleInAfter": {
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "InfrastructureRoleArn": {
+		//	          "type": "string"
+		//	        },
+		//	        "InstanceLaunchTemplate": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "CapacityOptionType": {
+		//	              "enum": [
+		//	                "ON_DEMAND",
+		//	                "SPOT",
+		//	                "RESERVED"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "CapacityReservations": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "ReservationGroupArn": {
+		//	                  "type": "string"
+		//	                },
+		//	                "ReservationPreference": {
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "Ec2InstanceProfileArn": {
+		//	              "type": "string"
+		//	            },
+		//	            "FipsEnabled": {
+		//	              "type": "boolean"
+		//	            },
+		//	            "InstanceMetadataTagsPropagation": {
+		//	              "type": "boolean"
+		//	            },
+		//	            "InstanceRequirements": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "AllowedInstanceTypes": {
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": false
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "LocalStorageConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "UseLocalStorage": {
+		//	                  "type": "boolean"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "Monitoring": {
+		//	              "type": "string"
+		//	            },
+		//	            "NetworkConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "SecurityGroups": {
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": false
+		//	                },
+		//	                "Subnets": {
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": false
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Subnets",
+		//	                "SecurityGroups"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "StorageConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "StorageSizeGiB": {
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Ec2InstanceProfileArn",
+		//	            "NetworkConfiguration"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "PropagateTags": {
+		//	          "enum": [
+		//	            "CAPACITY_PROVIDER",
+		//	            "NONE"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "InfrastructureRoleArn",
+		//	        "InstanceLaunchTemplate"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "MaxvCpus": {
 		//	      "type": "integer"
 		//	    },
@@ -235,7 +374,6 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 		//	    }
 		//	  },
 		//	  "required": [
-		//	    "Subnets",
 		//	    "Type",
 		//	    "MaxvCpus"
 		//	  ],
@@ -257,6 +395,17 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 					Computed: true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CapacityTags
+				"capacity_tags":     // Pattern: ""
+				schema.MapAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Capacity-level tags for compute environments.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+						mapplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: DesiredvCpus
@@ -458,6 +607,245 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: ManagedInstancesProvider
+				"managed_instances_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: InfrastructureOptimization
+						"infrastructure_optimization": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ScaleInAfter
+								"scale_in_after": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: InfrastructureRoleArn
+						"infrastructure_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								fwvalidators.NotNullString(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: InstanceLaunchTemplate
+						"instance_launch_template": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CapacityOptionType
+								"capacity_option_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"ON_DEMAND",
+											"SPOT",
+											"RESERVED",
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+										stringplanmodifier.RequiresReplaceIfConfigured(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: CapacityReservations
+								"capacity_reservations": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ReservationGroupArn
+										"reservation_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: ReservationPreference
+										"reservation_preference": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Ec2InstanceProfileArn
+								"ec_2_instance_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										fwvalidators.NotNullString(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: FipsEnabled
+								"fips_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+										boolplanmodifier.RequiresReplaceIfConfigured(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: InstanceMetadataTagsPropagation
+								"instance_metadata_tags_propagation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: InstanceRequirements
+								"instance_requirements": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AllowedInstanceTypes
+										"allowed_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												generic.Multiset(),
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: LocalStorageConfiguration
+								"local_storage_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: UseLocalStorage
+										"use_local_storage": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+												boolplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Monitoring
+								"monitoring": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: NetworkConfiguration
+								"network_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: SecurityGroups
+										"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												fwvalidators.NotNullList(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												generic.Multiset(),
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Subnets
+										"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												fwvalidators.NotNullList(),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												generic.Multiset(),
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Object{ /*START VALIDATORS*/
+										fwvalidators.NotNullObject(),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: StorageConfiguration
+								"storage_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: StorageSizeGiB
+										"storage_size_gi_b": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Object{ /*START VALIDATORS*/
+								fwvalidators.NotNullObject(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: PropagateTags
+						"propagate_tags": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"CAPACITY_PROVIDER",
+									"NONE",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: MaxvCpus
 				"maxv_cpus": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Optional: true,
@@ -527,9 +915,6 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 					ElementType: types.StringType,
 					Optional:    true,
 					Computed:    true,
-					Validators: []validator.List{ /*START VALIDATORS*/
-						fwvalidators.NotNullList(),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
@@ -800,50 +1185,73 @@ func computeEnvironmentResource(ctx context.Context) (resource.Resource, error) 
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"allocation_strategy":            "AllocationStrategy",
-		"batch_image_status":             "BatchImageStatus",
-		"bid_percentage":                 "BidPercentage",
-		"compute_environment_arn":        "ComputeEnvironmentArn",
-		"compute_environment_name":       "ComputeEnvironmentName",
-		"compute_resources":              "ComputeResources",
-		"context":                        "Context",
-		"desiredv_cpus":                  "DesiredvCpus",
-		"ec_2_configuration":             "Ec2Configuration",
-		"ec_2_key_pair":                  "Ec2KeyPair",
-		"eks_cluster_arn":                "EksClusterArn",
-		"eks_configuration":              "EksConfiguration",
-		"image_id":                       "ImageId",
-		"image_id_override":              "ImageIdOverride",
-		"image_kubernetes_version":       "ImageKubernetesVersion",
-		"image_type":                     "ImageType",
-		"instance_role":                  "InstanceRole",
-		"instance_types":                 "InstanceTypes",
-		"job_execution_timeout_minutes":  "JobExecutionTimeoutMinutes",
-		"kubernetes_namespace":           "KubernetesNamespace",
-		"launch_template":                "LaunchTemplate",
-		"launch_template_id":             "LaunchTemplateId",
-		"launch_template_name":           "LaunchTemplateName",
-		"maxv_cpus":                      "MaxvCpus",
-		"min_scale_down_delay_minutes":   "MinScaleDownDelayMinutes",
-		"minv_cpus":                      "MinvCpus",
-		"overrides":                      "Overrides",
-		"placement_group":                "PlacementGroup",
-		"replace_compute_environment":    "ReplaceComputeEnvironment",
-		"scaling_policy":                 "ScalingPolicy",
-		"security_group_ids":             "SecurityGroupIds",
-		"service_role":                   "ServiceRole",
-		"spot_iam_fleet_role":            "SpotIamFleetRole",
-		"state":                          "State",
-		"subnets":                        "Subnets",
-		"tags":                           "Tags",
-		"target_instance_types":          "TargetInstanceTypes",
-		"terminate_jobs_on_update":       "TerminateJobsOnUpdate",
-		"type":                           "Type",
-		"unmanagedv_cpus":                "UnmanagedvCpus",
-		"update_policy":                  "UpdatePolicy",
-		"update_to_latest_image_version": "UpdateToLatestImageVersion",
-		"userdata_type":                  "UserdataType",
-		"version":                        "Version",
+		"allocation_strategy":                "AllocationStrategy",
+		"allowed_instance_types":             "AllowedInstanceTypes",
+		"batch_image_status":                 "BatchImageStatus",
+		"bid_percentage":                     "BidPercentage",
+		"capacity_option_type":               "CapacityOptionType",
+		"capacity_reservations":              "CapacityReservations",
+		"capacity_tags":                      "CapacityTags",
+		"compute_environment_arn":            "ComputeEnvironmentArn",
+		"compute_environment_name":           "ComputeEnvironmentName",
+		"compute_resources":                  "ComputeResources",
+		"context":                            "Context",
+		"desiredv_cpus":                      "DesiredvCpus",
+		"ec_2_configuration":                 "Ec2Configuration",
+		"ec_2_instance_profile_arn":          "Ec2InstanceProfileArn",
+		"ec_2_key_pair":                      "Ec2KeyPair",
+		"eks_cluster_arn":                    "EksClusterArn",
+		"eks_configuration":                  "EksConfiguration",
+		"fips_enabled":                       "FipsEnabled",
+		"image_id":                           "ImageId",
+		"image_id_override":                  "ImageIdOverride",
+		"image_kubernetes_version":           "ImageKubernetesVersion",
+		"image_type":                         "ImageType",
+		"infrastructure_optimization":        "InfrastructureOptimization",
+		"infrastructure_role_arn":            "InfrastructureRoleArn",
+		"instance_launch_template":           "InstanceLaunchTemplate",
+		"instance_metadata_tags_propagation": "InstanceMetadataTagsPropagation",
+		"instance_requirements":              "InstanceRequirements",
+		"instance_role":                      "InstanceRole",
+		"instance_types":                     "InstanceTypes",
+		"job_execution_timeout_minutes":      "JobExecutionTimeoutMinutes",
+		"kubernetes_namespace":               "KubernetesNamespace",
+		"launch_template":                    "LaunchTemplate",
+		"launch_template_id":                 "LaunchTemplateId",
+		"launch_template_name":               "LaunchTemplateName",
+		"local_storage_configuration":        "LocalStorageConfiguration",
+		"managed_instances_provider":         "ManagedInstancesProvider",
+		"maxv_cpus":                          "MaxvCpus",
+		"min_scale_down_delay_minutes":       "MinScaleDownDelayMinutes",
+		"minv_cpus":                          "MinvCpus",
+		"monitoring":                         "Monitoring",
+		"network_configuration":              "NetworkConfiguration",
+		"overrides":                          "Overrides",
+		"placement_group":                    "PlacementGroup",
+		"propagate_tags":                     "PropagateTags",
+		"replace_compute_environment":        "ReplaceComputeEnvironment",
+		"reservation_group_arn":              "ReservationGroupArn",
+		"reservation_preference":             "ReservationPreference",
+		"scale_in_after":                     "ScaleInAfter",
+		"scaling_policy":                     "ScalingPolicy",
+		"security_group_ids":                 "SecurityGroupIds",
+		"security_groups":                    "SecurityGroups",
+		"service_role":                       "ServiceRole",
+		"spot_iam_fleet_role":                "SpotIamFleetRole",
+		"state":                              "State",
+		"storage_configuration":              "StorageConfiguration",
+		"storage_size_gi_b":                  "StorageSizeGiB",
+		"subnets":                            "Subnets",
+		"tags":                               "Tags",
+		"target_instance_types":              "TargetInstanceTypes",
+		"terminate_jobs_on_update":           "TerminateJobsOnUpdate",
+		"type":                               "Type",
+		"unmanagedv_cpus":                    "UnmanagedvCpus",
+		"update_policy":                      "UpdatePolicy",
+		"update_to_latest_image_version":     "UpdateToLatestImageVersion",
+		"use_local_storage":                  "UseLocalStorage",
+		"userdata_type":                      "UserdataType",
+		"version":                            "Version",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

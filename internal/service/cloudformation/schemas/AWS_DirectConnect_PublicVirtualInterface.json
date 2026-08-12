@@ -150,6 +150,11 @@
   },
   "replacementStrategy": "delete_then_create",
   "properties": {
+    "RateLimit": {
+      "pattern": "^[0-9]+\\.?[0-9]*(Mbps|Gbps|Tbps)$",
+      "description": "The rate limit (bandwidth allocation) for the virtual interface. The value must be one of the supported bandwidth values (e.g., 50Mbps, 1Gbps, 10Gbps) and cannot exceed the bandwidth of the parent connection or LAG.",
+      "type": "string"
+    },
     "BgpPeers": {
       "minItems": 1,
       "maxItems": 2,

@@ -1,0 +1,215 @@
+{
+  "typeName": "AWS::BedrockAgentCore::GatewayRateLimit",
+  "description": "Definition of AWS::BedrockAgentCore::GatewayRateLimit Resource Type",
+  "definitions": {
+    "Dimensions": {
+      "type": "object",
+      "maxProperties": 10,
+      "minProperties": 1,
+      "description": "Map of dimension name to dimension value for a rule entry",
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 1,
+          "description": "A dimension value in a rule entry (exact value or \"*\" wildcard)"
+        }
+      },
+      "additionalProperties": false
+    },
+    "GatewayRateLimitStatus": {
+      "type": "string",
+      "description": "Status of a gateway limit",
+      "enum": [
+        "CREATING",
+        "ACTIVE",
+        "UPDATING",
+        "DELETING"
+      ]
+    },
+    "LimitEntry": {
+      "type": "object",
+      "description": "A single rule entry within a limit, mapping dimension values to rate configurations",
+      "properties": {
+        "Dimensions": {
+          "$ref": "#/definitions/Dimensions"
+        },
+        "Requests": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RateConfig"
+          },
+          "maxItems": 1,
+          "minItems": 1,
+          "description": "Request rate limits (RPS or RPM). Limited to 1 entry for now."
+        },
+        "Tokens": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RateConfig"
+          },
+          "maxItems": 1,
+          "minItems": 1,
+          "description": "Token rate limits (TPM). Limited to 1 entry for now. \u2014 P1"
+        },
+        "Connections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RateConfig"
+          },
+          "maxItems": 1,
+          "minItems": 1,
+          "description": "Connection rate limits (per second only). Limited to 1 entry for now. \u2014 P2"
+        }
+      },
+      "required": [
+        "Dimensions"
+      ],
+      "additionalProperties": false
+    },
+    "Period": {
+      "type": "string",
+      "description": "Time period for rate limiting",
+      "enum": [
+        "second",
+        "minute"
+      ]
+    },
+    "RateConfig": {
+      "type": "object",
+      "description": "Rate configuration for a metric (requests or tokens)",
+      "properties": {
+        "Rate": {
+          "type": "number",
+          "maximum": 10000000,
+          "minimum": 0
+        },
+        "Period": {
+          "$ref": "#/definitions/Period"
+        }
+      },
+      "required": [
+        "Period",
+        "Rate"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "CreatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "Description": {
+      "type": "string",
+      "maxLength": 512,
+      "minLength": 0,
+      "description": "Optional human-readable description for this limit."
+    },
+    "DimensionKeys": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 80,
+        "minLength": 1,
+        "pattern": "^(targetName|toolName|qualifiedModelId|\\$\\.context\\.iam\\.principal|\\$\\.context\\.iam\\.sourceIdentity|\\$\\.context\\.jwt\\.[a-zA-Z_][a-zA-Z0-9_\\-\\.]{0,61}[a-zA-Z0-9_])$",
+        "description": "A dimension key specifying the scope dimension for rate limiting.\nAllowed values: \"targetName\", \"toolName\", \"qualifiedModelId\",\nor context-path expressions: \"$.context.iam.principal\", \"$.context.iam.sourceIdentity\",\n\"$.context.jwt.<claim>\" where <claim> is a JWT claim name (e.g., \"$.context.jwt.sub\").\nValidated server-side to enforce allowed prefixes and patterns."
+      },
+      "maxItems": 10,
+      "minItems": 1,
+      "description": "Ordered list of dimension names defining the scope of this limit.\nUnique per gateway \u2014 no two limits can share the same dimensionKeys."
+    },
+    "Entries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/LimitEntry"
+      },
+      "maxItems": 1000,
+      "minItems": 1,
+      "description": "Rule entries mapping dimension values to rate configurations."
+    },
+    "GatewayIdentifier": {
+      "type": "string",
+      "pattern": "^([0-9a-z][-]?){1,100}-[0-9a-z]{10}$"
+    },
+    "RateLimitId": {
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 2,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_\\.]{0,62}[a-zA-Z0-9]$",
+      "description": "Limit identifier. Optional on Create (system-generates if not provided by customer).\nAlways present in responses."
+    },
+    "Status": {
+      "$ref": "#/definitions/GatewayRateLimitStatus"
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "DimensionKeys",
+    "Entries"
+  ],
+  "readOnlyProperties": [
+    "/properties/CreatedAt",
+    "/properties/Status",
+    "/properties/UpdatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/DimensionKeys",
+    "/properties/GatewayIdentifier",
+    "/properties/RateLimitId"
+  ],
+  "primaryIdentifier": [
+    "/properties/GatewayIdentifier",
+    "/properties/RateLimitId"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "bedrock-agentcore:CreateGatewayRateLimit",
+        "bedrock-agentcore:GetGatewayRateLimit"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "bedrock-agentcore:DeleteGatewayRateLimit",
+        "bedrock-agentcore:GetGatewayRateLimit"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "bedrock-agentcore:ListGatewayRateLimits"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "GatewayIdentifier": {
+            "$ref": "resource-schema.json#/properties/GatewayIdentifier"
+          }
+        },
+        "required": [
+          "GatewayIdentifier"
+        ]
+      }
+    },
+    "read": {
+      "permissions": [
+        "bedrock-agentcore:GetGatewayRateLimit"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "bedrock-agentcore:GetGatewayRateLimit",
+        "bedrock-agentcore:UpdateGatewayRateLimit"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  }
+}

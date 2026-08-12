@@ -1,0 +1,98 @@
+{
+  "typeName": "AWS::Wickr::Network",
+  "description": "Resource Type definition for AWS::Wickr::Network. Creates and manages an AWS Wickr network for secure enterprise communications.",
+  "properties": {
+    "NetworkArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the network.",
+      "pattern": "^arn:aws[a-zA-Z-]*:wickr:[a-z0-9-]+:[0-9]{12}:network/[0-9]{8}$"
+    },
+    "NetworkId": {
+      "type": "string",
+      "description": "The unique identifier of the network.",
+      "minLength": 8,
+      "maxLength": 8,
+      "pattern": "^[0-9]{8}$"
+    },
+    "NetworkName": {
+      "type": "string",
+      "description": "The name of the network. Must be between 1 and 20 characters."
+    },
+    "AccessLevel": {
+      "type": "string",
+      "description": "The access level of the network, which determines available features and capabilities.",
+      "enum": [
+        "STANDARD",
+        "PREMIUM"
+      ]
+    },
+    "AwsAccountId": {
+      "type": "string",
+      "description": "The AWS account ID that owns the network."
+    },
+    "Standing": {
+      "type": "integer",
+      "description": "The current standing or status of the network."
+    },
+    "MigrationState": {
+      "type": "integer",
+      "description": "The SSO redirect URI migration state. Values: 0 (not started), 1 (in progress), or 2 (completed)."
+    }
+  },
+  "required": [
+    "NetworkName",
+    "AccessLevel"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/NetworkArn",
+    "/properties/NetworkId",
+    "/properties/AwsAccountId",
+    "/properties/Standing",
+    "/properties/MigrationState"
+  ],
+  "createOnlyProperties": [
+    "/properties/AccessLevel"
+  ],
+  "primaryIdentifier": [
+    "/properties/NetworkArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/NetworkId"
+    ]
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "wickr:CreateNetwork",
+        "wickr:GetNetwork"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "wickr:GetNetwork"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "wickr:UpdateNetwork",
+        "wickr:GetNetwork"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "wickr:DeleteNetwork",
+        "wickr:GetNetwork"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "wickr:ListNetworks"
+      ]
+    }
+  }
+}

@@ -1,0 +1,1 @@
+$ terraform import awscc_cloudhsm_cluster.example "arn"

@@ -1,0 +1,1 @@
+$ terraform import awscc_glue_custom_entity_type.example "name"

@@ -1030,6 +1030,9 @@
         },
         "EnableExecuteCommand": {
           "type": "boolean"
+        },
+        "NetworkMode": {
+          "type": "string"
         }
       }
     },

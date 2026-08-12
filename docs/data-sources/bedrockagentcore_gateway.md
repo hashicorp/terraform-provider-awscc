@@ -32,7 +32,7 @@ Data Source schema for AWS::BedrockAgentCore::Gateway
 - `interceptor_configurations` (Attributes List) (see [below for nested schema](#nestedatt--interceptor_configurations))
 - `kms_key_arn` (String)
 - `name` (String)
-- `policy_engine_configuration` (Attributes) The configuration for a policy engine associated with a gateway. A policy engine is a collection of policies that evaluates and authorizes agent tool calls. When associated with a gateway, the policy engine intercepts all agent requests and determines whether to allow or deny each action based on the defined policies. (see [below for nested schema](#nestedatt--policy_engine_configuration))
+- `policy_engine_configuration` (Attributes) (see [below for nested schema](#nestedatt--policy_engine_configuration))
 - `protocol_configuration` (Attributes) (see [below for nested schema](#nestedatt--protocol_configuration))
 - `protocol_type` (String)
 - `role_arn` (String)
@@ -54,37 +54,69 @@ Read-Only:
 
 Read-Only:
 
+- `advertised_scope_mapping` (Map of String) Maps an originalScope (from allowedScopes) to an advertisedScope
+exposed in WWW-Authenticate / Protected Resource Metadata.
 - `allowed_audience` (List of String)
 - `allowed_clients` (List of String)
 - `allowed_scopes` (List of String)
 - `custom_claims` (Attributes List) (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--custom_claims))
 - `discovery_url` (String)
+- `private_endpoint` (Attributes) (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint))
 
 <a id="nestedatt--authorizer_configuration--custom_jwt_authorizer--custom_claims"></a>
 ### Nested Schema for `authorizer_configuration.custom_jwt_authorizer.custom_claims`
 
 Read-Only:
 
-- `authorizing_claim_match_value` (Attributes) The value or values in the custom claim to match and relationship of match (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--custom_claims--authorizing_claim_match_value))
-- `inbound_token_claim_name` (String) The name of the custom claim to validate
-- `inbound_token_claim_value_type` (String) Token claim data type
+- `authorizing_claim_match_value` (Attributes) (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--custom_claims--authorizing_claim_match_value))
+- `inbound_token_claim_name` (String)
+- `inbound_token_claim_value_type` (String)
 
 <a id="nestedatt--authorizer_configuration--custom_jwt_authorizer--custom_claims--authorizing_claim_match_value"></a>
 ### Nested Schema for `authorizer_configuration.custom_jwt_authorizer.custom_claims.authorizing_claim_match_value`
 
 Read-Only:
 
-- `claim_match_operator` (String) The relationship between the claim field value and the value or values being matched
-- `claim_match_value` (Attributes) The value or values in the custom claim to match for (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--custom_claims--authorizing_claim_match_value--claim_match_value))
+- `claim_match_operator` (String)
+- `claim_match_value` (Attributes) (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--custom_claims--authorizing_claim_match_value--claim_match_value))
 
 <a id="nestedatt--authorizer_configuration--custom_jwt_authorizer--custom_claims--authorizing_claim_match_value--claim_match_value"></a>
 ### Nested Schema for `authorizer_configuration.custom_jwt_authorizer.custom_claims.authorizing_claim_match_value.claim_match_value`
 
 Read-Only:
 
-- `match_value_string` (String) The string value to match for
-- `match_value_string_list` (List of String) The list of strings to check for a match
+- `match_value_string` (String)
+- `match_value_string_list` (List of String)
 
+
+
+
+<a id="nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint"></a>
+### Nested Schema for `authorizer_configuration.custom_jwt_authorizer.private_endpoint`
+
+Read-Only:
+
+- `managed_vpc_resource` (Attributes) (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint--managed_vpc_resource))
+- `self_managed_lattice_resource` (Attributes) (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint--self_managed_lattice_resource))
+
+<a id="nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint--managed_vpc_resource"></a>
+### Nested Schema for `authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource`
+
+Read-Only:
+
+- `endpoint_ip_address_type` (String)
+- `routing_domain` (String)
+- `security_group_ids` (List of String)
+- `subnet_ids` (List of String)
+- `vpc_identifier` (String)
+
+
+<a id="nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint--self_managed_lattice_resource"></a>
+### Nested Schema for `authorizer_configuration.custom_jwt_authorizer.private_endpoint.self_managed_lattice_resource`
+
+Read-Only:
+
+- `resource_configuration_identifier` (String)
 
 
 
@@ -105,6 +137,23 @@ Read-Only:
 Read-Only:
 
 - `pass_request_headers` (Boolean)
+- `payload_filter` (Attributes) (see [below for nested schema](#nestedatt--interceptor_configurations--input_configuration--payload_filter))
+
+<a id="nestedatt--interceptor_configurations--input_configuration--payload_filter"></a>
+### Nested Schema for `interceptor_configurations.input_configuration.payload_filter`
+
+Read-Only:
+
+- `exclude` (Attributes List) (see [below for nested schema](#nestedatt--interceptor_configurations--input_configuration--payload_filter--exclude))
+
+<a id="nestedatt--interceptor_configurations--input_configuration--payload_filter--exclude"></a>
+### Nested Schema for `interceptor_configurations.input_configuration.payload_filter.exclude`
+
+Read-Only:
+
+- `field` (String)
+
+
 
 
 <a id="nestedatt--interceptor_configurations--interceptor"></a>
@@ -129,8 +178,8 @@ Read-Only:
 
 Read-Only:
 
-- `arn` (String) The ARN of the policy engine. The policy engine contains Cedar policies that define fine-grained authorization rules specifying who can perform what actions on which resources as agents interact through the gateway.
-- `mode` (String) The enforcement mode for the policy engine. LOG_ONLY - The policy engine evaluates each action against your policies and adds traces on whether tool calls would be allowed or denied, but does not enforce the decision. Use this mode to test and validate policies before enabling enforcement. ENFORCE - The policy engine evaluates actions against your policies and enforces decisions by allowing or denying agent operations. Test and validate policies in LOG_ONLY mode before enabling enforcement to avoid unintended denials or adversely affecting production traffic.
+- `arn` (String)
+- `mode` (String)
 
 
 <a id="nestedatt--protocol_configuration"></a>

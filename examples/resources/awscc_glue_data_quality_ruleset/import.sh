@@ -1,0 +1,1 @@
+$ terraform import awscc_glue_data_quality_ruleset.example "name"

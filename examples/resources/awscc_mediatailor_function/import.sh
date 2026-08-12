@@ -1,0 +1,1 @@
+$ terraform import awscc_mediatailor_function.example "function_id"

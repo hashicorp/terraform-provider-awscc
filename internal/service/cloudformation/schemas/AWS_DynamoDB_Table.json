@@ -262,6 +262,17 @@
         "StreamArn"
       ]
     },
+    "InputFormatOptions": {
+      "description": "The format options for the data that was imported into the target table. There is one value, CsvOption.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Csv": {
+          "description": "The options for imported source files in CSV format. The values are Delimiter and HeaderList.",
+          "$ref": "#/definitions/Csv"
+        }
+      }
+    },
     "StreamSpecification": {
       "description": "Represents the DynamoDB Streams configuration for a table in DynamoDB.",
       "additionalProperties": false,
@@ -301,17 +312,6 @@
       "required": [
         "Enabled"
       ]
-    },
-    "InputFormatOptions": {
-      "description": "The format options for the data that was imported into the target table. There is one value, CsvOption.",
-      "additionalProperties": false,
-      "type": "object",
-      "properties": {
-        "Csv": {
-          "description": "The options for imported source files in CSV format. The values are Delimiter and HeaderList.",
-          "$ref": "#/definitions/Csv"
-        }
-      }
     },
     "Csv": {
       "description": "The options for imported source files in CSV format. The values are Delimiter and HeaderList.",

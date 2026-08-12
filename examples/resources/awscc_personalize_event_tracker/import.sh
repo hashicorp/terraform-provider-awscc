@@ -1,0 +1,1 @@
+$ terraform import awscc_personalize_event_tracker.example "event_tracker_arn"

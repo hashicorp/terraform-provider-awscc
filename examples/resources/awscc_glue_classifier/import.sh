@@ -1,0 +1,1 @@
+$ terraform import awscc_glue_classifier.example "name"

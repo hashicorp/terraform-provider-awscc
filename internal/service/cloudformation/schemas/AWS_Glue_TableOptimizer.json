@@ -1,0 +1,234 @@
+{
+  "typeName": "AWS::Glue::TableOptimizer",
+  "description": "Resource Type definition for AWS::Glue::TableOptimizer",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-glue/tree/master/aws-glue-tableoptimizer.git",
+  "additionalProperties": false,
+  "properties": {
+    "DatabaseName": {
+      "description": "The name of the database. For Hive compatibility, this is folded to lowercase when it is stored.",
+      "type": "string"
+    },
+    "TableName": {
+      "description": "The table name. For Hive compatibility, this must be entirely lowercase.",
+      "type": "string"
+    },
+    "Type": {
+      "description": "The type of table optimizer.",
+      "type": "string"
+    },
+    "TableOptimizerConfiguration": {
+      "description": "Specifies configuration details of a table optimizer.",
+      "$ref": "#/definitions/TableOptimizerConfiguration"
+    },
+    "CatalogId": {
+      "description": "The catalog ID of the table",
+      "type": "string"
+    }
+  },
+  "definitions": {
+    "IcebergRetentionConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "SnapshotRetentionPeriodInDays": {
+          "type": "integer"
+        },
+        "NumberOfSnapshotsToRetain": {
+          "type": "integer"
+        },
+        "CleanExpiredFiles": {
+          "type": "boolean"
+        }
+      }
+    },
+    "RetentionConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "IcebergConfiguration": {
+          "description": "The configuration for an Iceberg snapshot retention optimizer.",
+          "$ref": "#/definitions/IcebergRetentionConfiguration"
+        }
+      }
+    },
+    "OrphanFileDeletionConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "IcebergConfiguration": {
+          "description": "The IcebergConfiguration property helps optimize your Iceberg tables in AWS Glue by allowing you to specify format-specific settings that control how data is stored, compressed, and managed.",
+          "$ref": "#/definitions/IcebergConfiguration"
+        }
+      }
+    },
+    "TableOptimizerConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Enabled": {
+          "description": "Whether the table optimization is enabled.",
+          "type": "boolean"
+        },
+        "RetentionConfiguration": {
+          "description": "The configuration for a snapshot retention optimizer for Apache Iceberg tables.",
+          "$ref": "#/definitions/RetentionConfiguration"
+        },
+        "VpcConfiguration": {
+          "description": "An object that describes the VPC configuration for a table optimizer. This configuration is necessary to perform optimization on tables that are in a customer VPC.",
+          "$ref": "#/definitions/VpcConfiguration"
+        },
+        "RoleArn": {
+          "description": "A role passed by the caller which gives the service permission to update the resources associated with the optimizer on the caller's behalf.",
+          "type": "string"
+        },
+        "OrphanFileDeletionConfiguration": {
+          "description": "OrphanFileDeletionConfiguration is a property that can be included within the TableOptimizer resource. It controls the automatic deletion of orphaned files - files that are not tracked by the table metadata, and older than the configured age limit.",
+          "$ref": "#/definitions/OrphanFileDeletionConfiguration"
+        },
+        "CompactionConfiguration": {
+          "description": "The configuration for a compaction optimizer. This configuration defines how data files in your table will be compacted to improve query performance and reduce storage costs.",
+          "$ref": "#/definitions/CompactionConfiguration"
+        }
+      },
+      "required": [
+        "Enabled",
+        "RoleArn"
+      ]
+    },
+    "VpcConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "GlueConnectionName": {
+          "description": "The name of the AWS Glue connection used for the VPC for the table optimizer.",
+          "type": "string"
+        }
+      }
+    },
+    "IcebergConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "OrphanFileRetentionPeriodInDays": {
+          "description": "The specific number of days you want to keep the orphan files.",
+          "type": "integer"
+        },
+        "Location": {
+          "description": "Specifies a directory in which to look for orphan files (defaults to the table's location). You may choose a sub-directory rather than the top-level table location.",
+          "type": "string"
+        }
+      }
+    },
+    "IcebergCompactionConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Strategy": {
+          "description": "The compaction strategy to use. Valid values are binpack, sort, and z-order.",
+          "type": "string"
+        },
+        "MinInputFiles": {
+          "description": "The minimum number of input files before compaction is triggered.",
+          "type": "integer"
+        },
+        "DeleteFileThreshold": {
+          "description": "The minimum number of deletes in a data file to make it eligible for compaction.",
+          "type": "integer"
+        }
+      }
+    },
+    "CompactionConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "IcebergConfiguration": {
+          "description": "The configuration for an Iceberg compaction optimizer.",
+          "$ref": "#/definitions/IcebergCompactionConfiguration"
+        }
+      }
+    }
+  },
+  "required": [
+    "TableName",
+    "Type",
+    "DatabaseName",
+    "TableOptimizerConfiguration",
+    "CatalogId"
+  ],
+  "createOnlyProperties": [
+    "/properties/TableName",
+    "/properties/DatabaseName",
+    "/properties/Type",
+    "/properties/CatalogId"
+  ],
+  "primaryIdentifier": [
+    "/properties/TableName",
+    "/properties/DatabaseName",
+    "/properties/Type",
+    "/properties/CatalogId"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "glue:CreateTableOptimizer",
+        "glue:PassConnection",
+        "glue:GetConnection",
+        "glue:GetTable",
+        "iam:PassRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "glue:GetTableOptimizer",
+        "glue:GetTable"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "glue:UpdateTableOptimizer",
+        "glue:GetTable",
+        "glue:PassConnection",
+        "glue:GetConnection",
+        "iam:PassRole"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "glue:DeleteTableOptimizer",
+        "glue:GetTable",
+        "iam:PassRole"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "CatalogId": {
+            "$ref": "resource-schema.json#/properties/CatalogId"
+          },
+          "DatabaseName": {
+            "$ref": "resource-schema.json#/properties/DatabaseName"
+          },
+          "TableName": {
+            "$ref": "resource-schema.json#/properties/TableName"
+          },
+          "Type": {
+            "$ref": "resource-schema.json#/properties/Type"
+          }
+        },
+        "required": [
+          "CatalogId",
+          "DatabaseName",
+          "TableName",
+          "Type"
+        ]
+      },
+      "permissions": [
+        "glue:BatchGetTableOptimizer",
+        "glue:GetTable"
+      ]
+    }
+  }
+}

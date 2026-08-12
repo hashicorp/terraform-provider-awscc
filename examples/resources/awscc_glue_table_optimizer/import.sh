@@ -1,0 +1,1 @@
+$ terraform import awscc_glue_table_optimizer.example "table_name|database_name|type|catalog_id"

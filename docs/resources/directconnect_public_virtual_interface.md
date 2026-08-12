@@ -25,6 +25,7 @@ Resource Type definition for AWS::DirectConnect::PublicVirtualInterface
 ### Optional
 
 - `allocate_public_virtual_interface_role_arn` (String) The Amazon Resource Name (ARN) of the role to allocate the public virtual interface. Needs directconnect:AllocatePublicVirtualInterface permissions and tag permissions if applicable.
+- `rate_limit` (String) The rate limit (bandwidth allocation) for the virtual interface. The value must be one of the supported bandwidth values (e.g., 50Mbps, 1Gbps, 10Gbps) and cannot exceed the bandwidth of the parent connection or LAG.
 - `route_filter_prefixes` (Set of String) The routes to be advertised to the AWS network in this region.
 - `tags` (Attributes Set) The tags associated with the public virtual interface. (see [below for nested schema](#nestedatt--tags))
 

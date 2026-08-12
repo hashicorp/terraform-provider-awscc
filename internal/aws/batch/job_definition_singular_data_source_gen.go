@@ -1192,6 +1192,9 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	            },
 		//	            "type": "object"
 		//	          },
+		//	          "NetworkMode": {
+		//	            "type": "string"
+		//	          },
 		//	          "PidMode": {
 		//	            "type": "string"
 		//	          },
@@ -1609,6 +1612,10 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 										Computed: true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: NetworkMode
+							"network_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Computed: true,
 							}, /*END ATTRIBUTE*/
 							// Property: PidMode
@@ -5202,6 +5209,7 @@ func jobDefinitionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"name":                           "Name",
 		"namespace":                      "Namespace",
 		"network_configuration":          "NetworkConfiguration",
+		"network_mode":                   "NetworkMode",
 		"node_properties":                "NodeProperties",
 		"node_range_properties":          "NodeRangeProperties",
 		"num_nodes":                      "NumNodes",

@@ -154,7 +154,7 @@ func objectTypeResource(ctx context.Context) (resource.Resource, error) {
 		//	      "Name": {
 		//	        "maxLength": 64,
 		//	        "minLength": 1,
-		//	        "pattern": "^[a-zA-Z0-9_-]+$",
+		//	        "pattern": "^[a-zA-Z0-9_.-]+$",
 		//	        "type": "string"
 		//	      },
 		//	      "ObjectTypeField": {
@@ -201,7 +201,7 @@ func objectTypeResource(ctx context.Context) (resource.Resource, error) {
 						Computed: true,
 						Validators: []validator.String{ /*START VALIDATORS*/
 							stringvalidator.LengthBetween(1, 64),
-							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_.-]+$"), ""),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -323,7 +323,8 @@ func objectTypeResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "LOYALTY_TRANSACTION",
 		//	                  "LOYALTY_PROMOTION",
 		//	                  "WEB_ANALYTICS",
-		//	                  "DEVICE"
+		//	                  "DEVICE",
+		//	                  "COMMUNICATION_RECORD"
 		//	                ],
 		//	                "type": "string"
 		//	              },
@@ -402,6 +403,7 @@ func objectTypeResource(ctx context.Context) (resource.Resource, error) {
 												"LOYALTY_PROMOTION",
 												"WEB_ANALYTICS",
 												"DEVICE",
+												"COMMUNICATION_RECORD",
 											),
 										),
 									}, /*END VALIDATORS*/

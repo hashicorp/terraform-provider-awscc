@@ -1,4 +1,97 @@
-## 1.97.0 (Unreleased)
+## 1.97.0 (August 12, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_accessanalyzer_archive_rule`
+* **New Data Source:** `awscc_apigatewayv2_portal_product`
+* **New Data Source:** `awscc_apigatewayv2_portal_products`
+* **New Data Source:** `awscc_appconfig_experiment_definition`
+* **New Data Source:** `awscc_bedrockagentcore_capacity_provider`
+* **New Data Source:** `awscc_bedrockagentcore_capacity_providers`
+* **New Data Source:** `awscc_bedrockagentcore_gateway_rate_limit`
+* **New Data Source:** `awscc_bedrockagentcore_gateway_rule`
+* **New Data Source:** `awscc_cloudhsm_cluster`
+* **New Data Source:** `awscc_cloudhsm_clusters`
+* **New Data Source:** `awscc_dataexchange_data_set`
+* **New Data Source:** `awscc_dataexchange_data_sets`
+* **New Data Source:** `awscc_elasticache_serverless_cache_snapshot`
+* **New Data Source:** `awscc_elasticache_serverless_cache_snapshots`
+* **New Data Source:** `awscc_glue_classifier`
+* **New Data Source:** `awscc_glue_classifiers`
+* **New Data Source:** `awscc_glue_custom_entity_type`
+* **New Data Source:** `awscc_glue_custom_entity_types`
+* **New Data Source:** `awscc_glue_data_quality_ruleset`
+* **New Data Source:** `awscc_glue_data_quality_rulesets`
+* **New Data Source:** `awscc_glue_security_configuration`
+* **New Data Source:** `awscc_glue_security_configurations`
+* **New Data Source:** `awscc_glue_table_optimizer`
+* **New Data Source:** `awscc_iot_job`
+* **New Data Source:** `awscc_iot_jobs`
+* **New Data Source:** `awscc_mediatailor_function`
+* **New Data Source:** `awscc_mediatailor_functions`
+* **New Data Source:** `awscc_opensearch_data_source`
+* **New Data Source:** `awscc_personalize_event_tracker`
+* **New Data Source:** `awscc_personalize_event_trackers`
+* **New Data Source:** `awscc_rekognition_dataset`
+* **New Data Source:** `awscc_sagemaker_artifact`
+* **New Data Source:** `awscc_sagemaker_artifacts`
+* **New Data Source:** `awscc_sagemaker_human_task_ui`
+* **New Data Source:** `awscc_sagemaker_human_task_uis`
+* **New Data Source:** `awscc_sagemaker_workforce`
+* **New Data Source:** `awscc_sagemaker_workforces`
+* **New Data Source:** `awscc_securityagent_artifact`
+* **New Data Source:** `awscc_serverlessrepo_application`
+* **New Data Source:** `awscc_serverlessrepo_applications`
+* **New Data Source:** `awscc_ssm_cloud_connector`
+* **New Data Source:** `awscc_ssm_cloud_connectors`
+* **New Data Source:** `awscc_transfer_host_key`
+* **New Data Source:** `awscc_wickr_network`
+* **New Data Source:** `awscc_wickr_networks`
+* **New List Resource:** `awscc_apigatewayv2_portal_product`
+* **New List Resource:** `awscc_bedrockagentcore_capacity_provider`
+* **New List Resource:** `awscc_cloudhsm_cluster`
+* **New List Resource:** `awscc_dataexchange_data_set`
+* **New List Resource:** `awscc_elasticache_serverless_cache_snapshot`
+* **New List Resource:** `awscc_glue_classifier`
+* **New List Resource:** `awscc_glue_custom_entity_type`
+* **New List Resource:** `awscc_glue_data_quality_ruleset`
+* **New List Resource:** `awscc_glue_security_configuration`
+* **New List Resource:** `awscc_iot_job`
+* **New List Resource:** `awscc_mediatailor_function`
+* **New List Resource:** `awscc_personalize_event_tracker`
+* **New List Resource:** `awscc_sagemaker_artifact`
+* **New List Resource:** `awscc_sagemaker_human_task_ui`
+* **New List Resource:** `awscc_sagemaker_workforce`
+* **New List Resource:** `awscc_serverlessrepo_application`
+* **New List Resource:** `awscc_ssm_cloud_connector`
+* **New List Resource:** `awscc_wickr_network`
+* **New Resource:** `awscc_accessanalyzer_archive_rule`
+* **New Resource:** `awscc_apigatewayv2_portal_product`
+* **New Resource:** `awscc_appconfig_experiment_definition`
+* **New Resource:** `awscc_bedrockagentcore_capacity_provider`
+* **New Resource:** `awscc_bedrockagentcore_gateway_rate_limit`
+* **New Resource:** `awscc_bedrockagentcore_gateway_rule`
+* **New Resource:** `awscc_cloudhsm_cluster`
+* **New Resource:** `awscc_dataexchange_data_set`
+* **New Resource:** `awscc_elasticache_serverless_cache_snapshot`
+* **New Resource:** `awscc_glue_classifier`
+* **New Resource:** `awscc_glue_custom_entity_type`
+* **New Resource:** `awscc_glue_data_quality_ruleset`
+* **New Resource:** `awscc_glue_security_configuration`
+* **New Resource:** `awscc_glue_table_optimizer`
+* **New Resource:** `awscc_iot_job`
+* **New Resource:** `awscc_mediatailor_function`
+* **New Resource:** `awscc_opensearch_data_source`
+* **New Resource:** `awscc_personalize_event_tracker`
+* **New Resource:** `awscc_rekognition_dataset`
+* **New Resource:** `awscc_sagemaker_artifact`
+* **New Resource:** `awscc_sagemaker_human_task_ui`
+* **New Resource:** `awscc_sagemaker_workforce`
+* **New Resource:** `awscc_securityagent_artifact`
+* **New Resource:** `awscc_serverlessrepo_application`
+* **New Resource:** `awscc_ssm_cloud_connector`
+* **New Resource:** `awscc_transfer_host_key`
+* **New Resource:** `awscc_wickr_network`
 
 ## 1.96.0 (August 6, 2026)
 

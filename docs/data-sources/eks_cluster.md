@@ -34,6 +34,9 @@ Data Source schema for AWS::EKS::Cluster
 - `encryption_config_key_arn` (String) Amazon Resource Name (ARN) or alias of the customer master key (CMK).
 - `endpoint` (String) The endpoint for your Kubernetes API server, such as https://5E1D0CEXAMPLEA591B746AFC5AB30262.yl4.us-west-2.eks.amazonaws.com.
 - `force` (Boolean) Force cluster version update
+- `kube_api_server_config` (Attributes) The configuration for the Kubernetes API server on an Amazon EKS cluster. (see [below for nested schema](#nestedatt--kube_api_server_config))
+- `kube_controller_manager_config` (Attributes) The configuration for the Kubernetes controller manager on an Amazon EKS cluster. (see [below for nested schema](#nestedatt--kube_controller_manager_config))
+- `kube_scheduler_config` (Attributes) The configuration for the Kubernetes scheduler on an Amazon EKS cluster. (see [below for nested schema](#nestedatt--kube_scheduler_config))
 - `kubernetes_network_config` (Attributes) The Kubernetes network configuration for the cluster. (see [below for nested schema](#nestedatt--kubernetes_network_config))
 - `logging` (Attributes) Enable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs based on log types. By default, cluster control plane logs aren't exported to CloudWatch Logs. (see [below for nested schema](#nestedatt--logging))
 - `name` (String) The unique name to give to your cluster.
@@ -90,6 +93,74 @@ Read-Only:
 Read-Only:
 
 - `key_arn` (String) Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must be symmetric, created in the same region as the cluster, and if the KMS key was created in a different account, the user must have access to the KMS key.
+
+
+
+<a id="nestedatt--kube_api_server_config"></a>
+### Nested Schema for `kube_api_server_config`
+
+Read-Only:
+
+- `event_ttl` (String) The duration that Kubernetes events are retained (e.g., 30m, 1h).
+- `service_node_port_range` (Attributes) The port range for Kubernetes NodePort services. (see [below for nested schema](#nestedatt--kube_api_server_config--service_node_port_range))
+
+<a id="nestedatt--kube_api_server_config--service_node_port_range"></a>
+### Nested Schema for `kube_api_server_config.service_node_port_range`
+
+Read-Only:
+
+- `max_port` (Number) The maximum port number in the range.
+- `min_port` (Number) The minimum port number in the range.
+
+
+
+<a id="nestedatt--kube_controller_manager_config"></a>
+### Nested Schema for `kube_controller_manager_config`
+
+Read-Only:
+
+- `horizontal_pod_autoscaler_controller_config` (Attributes) The horizontal pod autoscaler controller configuration. (see [below for nested schema](#nestedatt--kube_controller_manager_config--horizontal_pod_autoscaler_controller_config))
+
+<a id="nestedatt--kube_controller_manager_config--horizontal_pod_autoscaler_controller_config"></a>
+### Nested Schema for `kube_controller_manager_config.horizontal_pod_autoscaler_controller_config`
+
+Read-Only:
+
+- `horizontal_pod_autoscaler_sync_period` (String) The interval between each sync of the horizontal pod autoscaler (e.g., 15s, 1m).
+
+
+
+<a id="nestedatt--kube_scheduler_config"></a>
+### Nested Schema for `kube_scheduler_config`
+
+Read-Only:
+
+- `node_resources_fit` (Attributes) The NodeResourcesFit plugin configuration for the Kubernetes scheduler. (see [below for nested schema](#nestedatt--kube_scheduler_config--node_resources_fit))
+
+<a id="nestedatt--kube_scheduler_config--node_resources_fit"></a>
+### Nested Schema for `kube_scheduler_config.node_resources_fit`
+
+Read-Only:
+
+- `scoring_strategy` (Attributes) The scoring strategy configuration for the NodeResourcesFit scheduler plugin. (see [below for nested schema](#nestedatt--kube_scheduler_config--node_resources_fit--scoring_strategy))
+
+<a id="nestedatt--kube_scheduler_config--node_resources_fit--scoring_strategy"></a>
+### Nested Schema for `kube_scheduler_config.node_resources_fit.scoring_strategy`
+
+Read-Only:
+
+- `resources` (Attributes List) The resource weights used for scoring nodes. (see [below for nested schema](#nestedatt--kube_scheduler_config--node_resources_fit--scoring_strategy--resources))
+- `type` (String) The scoring strategy type (LeastAllocated or MostAllocated).
+
+<a id="nestedatt--kube_scheduler_config--node_resources_fit--scoring_strategy--resources"></a>
+### Nested Schema for `kube_scheduler_config.node_resources_fit.scoring_strategy.resources`
+
+Read-Only:
+
+- `name` (String) The name of the resource (for example, cpu or memory).
+- `weight` (Number) The weight assigned to the resource for scoring. Must be between 1 and 100.
+
+
 
 
 
