@@ -121,7 +121,7 @@ func replicationConfigurationResource(ctx context.Context) (resource.Resource, e
 		//	        ],
 		//	        "type": "object"
 		//	      },
-		//	      "maxItems": 10,
+		//	      "maxItems": 25,
 		//	      "minItems": 0,
 		//	      "type": "array"
 		//	    }
@@ -214,7 +214,7 @@ func replicationConfigurationResource(ctx context.Context) (resource.Resource, e
 					Description: "An array of objects representing the replication destinations and repository filters for a replication configuration.",
 					Required:    true,
 					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.SizeBetween(0, 10),
+						listvalidator.SizeBetween(0, 25),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/

@@ -1587,6 +1587,9 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	            },
 		//	            "type": "object"
 		//	          },
+		//	          "NetworkMode": {
+		//	            "type": "string"
+		//	          },
 		//	          "PidMode": {
 		//	            "type": "string"
 		//	          },
@@ -2307,6 +2310,14 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 								Computed: true,
 								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: NetworkMode
+							"network_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: PidMode
@@ -7532,6 +7543,7 @@ func jobDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		"name":                           "Name",
 		"namespace":                      "Namespace",
 		"network_configuration":          "NetworkConfiguration",
+		"network_mode":                   "NetworkMode",
 		"node_properties":                "NodeProperties",
 		"node_range_properties":          "NodeRangeProperties",
 		"num_nodes":                      "NumNodes",

@@ -271,10 +271,10 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "",
+		//	  "description": "Describes the configuration and state of VPC encryption controls.\n For more information, see [Enforce VPC encryption in transit](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html) in the *Amazon VPC User Guide*.",
 		//	  "properties": {
 		//	    "EgressOnlyInternetGatewayExclusion": {
-		//	      "description": "The desired exclusion mode for Egress-Only Internet Gateways.",
+		//	      "description": "",
 		//	      "enum": [
 		//	        "enable",
 		//	        "disable"
@@ -282,7 +282,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "ElasticFileSystemExclusion": {
-		//	      "description": "The desired exclusion mode for Elastic File System.",
+		//	      "description": "",
 		//	      "enum": [
 		//	        "enable",
 		//	        "disable"
@@ -290,7 +290,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "InternetGatewayExclusion": {
-		//	      "description": "The desired exclusion mode for Internet Gateways.",
+		//	      "description": "",
 		//	      "enum": [
 		//	        "enable",
 		//	        "disable"
@@ -298,7 +298,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "LambdaExclusion": {
-		//	      "description": "The desired exclusion mode for Lambda.",
+		//	      "description": "",
 		//	      "enum": [
 		//	        "enable",
 		//	        "disable"
@@ -306,7 +306,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "Mode": {
-		//	      "description": "The mode of the VPC encryption control.",
+		//	      "description": "The encryption mode for the VPC Encryption Control configuration.",
 		//	      "enum": [
 		//	        "monitor",
 		//	        "enforce"
@@ -314,7 +314,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "NatGatewayExclusion": {
-		//	      "description": "The desired exclusion mode for NAT Gateways.",
+		//	      "description": "",
 		//	      "enum": [
 		//	        "enable",
 		//	        "disable"
@@ -323,18 +323,18 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "ResourceExclusions": {
 		//	      "additionalProperties": false,
-		//	      "description": "",
+		//	      "description": "Information about resource exclusions for the VPC Encryption Control configuration.",
 		//	      "properties": {
 		//	        "EgressOnlyInternetGateway": {
 		//	          "additionalProperties": false,
-		//	          "description": "",
+		//	          "description": "The exclusion configuration for egress-only internet gateway traffic.",
 		//	          "properties": {
 		//	            "State": {
-		//	              "description": "The exclusion state of the resource type.",
+		//	              "description": "The current state of the exclusion configuration.",
 		//	              "type": "string"
 		//	            },
 		//	            "StateMessage": {
-		//	              "description": "A message describing the exclusion state of the resource type.",
+		//	              "description": "A message providing additional information about the exclusion state.",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -342,14 +342,14 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "ElasticFileSystem": {
 		//	          "additionalProperties": false,
-		//	          "description": "",
+		//	          "description": "The exclusion configuration for Elastic File System traffic.",
 		//	          "properties": {
 		//	            "State": {
-		//	              "description": "The exclusion state of the resource type.",
+		//	              "description": "The current state of the exclusion configuration.",
 		//	              "type": "string"
 		//	            },
 		//	            "StateMessage": {
-		//	              "description": "A message describing the exclusion state of the resource type.",
+		//	              "description": "A message providing additional information about the exclusion state.",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -357,14 +357,14 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "InternetGateway": {
 		//	          "additionalProperties": false,
-		//	          "description": "",
+		//	          "description": "The exclusion configuration for internet gateway traffic.",
 		//	          "properties": {
 		//	            "State": {
-		//	              "description": "The exclusion state of the resource type.",
+		//	              "description": "The current state of the exclusion configuration.",
 		//	              "type": "string"
 		//	            },
 		//	            "StateMessage": {
-		//	              "description": "A message describing the exclusion state of the resource type.",
+		//	              "description": "A message providing additional information about the exclusion state.",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -372,14 +372,14 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "Lambda": {
 		//	          "additionalProperties": false,
-		//	          "description": "",
+		//	          "description": "The exclusion configuration for Lambda function traffic.",
 		//	          "properties": {
 		//	            "State": {
-		//	              "description": "The exclusion state of the resource type.",
+		//	              "description": "The current state of the exclusion configuration.",
 		//	              "type": "string"
 		//	            },
 		//	            "StateMessage": {
-		//	              "description": "A message describing the exclusion state of the resource type.",
+		//	              "description": "A message providing additional information about the exclusion state.",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -387,14 +387,14 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "NatGateway": {
 		//	          "additionalProperties": false,
-		//	          "description": "",
+		//	          "description": "The exclusion configuration for NAT gateway traffic.",
 		//	          "properties": {
 		//	            "State": {
-		//	              "description": "The exclusion state of the resource type.",
+		//	              "description": "The current state of the exclusion configuration.",
 		//	              "type": "string"
 		//	            },
 		//	            "StateMessage": {
-		//	              "description": "A message describing the exclusion state of the resource type.",
+		//	              "description": "A message providing additional information about the exclusion state.",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -402,14 +402,14 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "VirtualPrivateGateway": {
 		//	          "additionalProperties": false,
-		//	          "description": "",
+		//	          "description": "The exclusion configuration for virtual private gateway traffic.",
 		//	          "properties": {
 		//	            "State": {
-		//	              "description": "The exclusion state of the resource type.",
+		//	              "description": "The current state of the exclusion configuration.",
 		//	              "type": "string"
 		//	            },
 		//	            "StateMessage": {
-		//	              "description": "A message describing the exclusion state of the resource type.",
+		//	              "description": "A message providing additional information about the exclusion state.",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -417,14 +417,14 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "VpcLattice": {
 		//	          "additionalProperties": false,
-		//	          "description": "",
+		//	          "description": "The exclusion configuration for VPC Lattice traffic.",
 		//	          "properties": {
 		//	            "State": {
-		//	              "description": "The exclusion state of the resource type.",
+		//	              "description": "The current state of the exclusion configuration.",
 		//	              "type": "string"
 		//	            },
 		//	            "StateMessage": {
-		//	              "description": "A message describing the exclusion state of the resource type.",
+		//	              "description": "A message providing additional information about the exclusion state.",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -432,14 +432,14 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		//	        },
 		//	        "VpcPeering": {
 		//	          "additionalProperties": false,
-		//	          "description": "",
+		//	          "description": "The exclusion configuration for VPC peering connection traffic.",
 		//	          "properties": {
 		//	            "State": {
-		//	              "description": "The exclusion state of the resource type.",
+		//	              "description": "The current state of the exclusion configuration.",
 		//	              "type": "string"
 		//	            },
 		//	            "StateMessage": {
-		//	              "description": "A message describing the exclusion state of the resource type.",
+		//	              "description": "A message providing additional information about the exclusion state.",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -449,15 +449,15 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    },
 		//	    "State": {
-		//	      "description": "The state of the VPC encryption control.",
+		//	      "description": "The current state of the VPC Encryption Control configuration.",
 		//	      "type": "string"
 		//	    },
 		//	    "StateMessage": {
-		//	      "description": "A message describing the state of the VPC encryption control.",
+		//	      "description": "A message providing additional information about the encryption control state.",
 		//	      "type": "string"
 		//	    },
 		//	    "VirtualPrivateGatewayExclusion": {
-		//	      "description": "The desired exclusion mode for Virtual Private Gateways.",
+		//	      "description": "",
 		//	      "enum": [
 		//	        "enable",
 		//	        "disable"
@@ -465,15 +465,15 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "VpcEncryptionControlId": {
-		//	      "description": "The ID of the VPC encryption control.",
+		//	      "description": "The ID of the VPC Encryption Control configuration.",
 		//	      "type": "string"
 		//	    },
 		//	    "VpcId": {
-		//	      "description": "The ID of the VPC.",
+		//	      "description": "The ID of the VPC associated with the encryption control configuration.",
 		//	      "type": "string"
 		//	    },
 		//	    "VpcLatticeExclusion": {
-		//	      "description": "The desired exclusion mode for VPC Lattice.",
+		//	      "description": "",
 		//	      "enum": [
 		//	        "enable",
 		//	        "disable"
@@ -481,7 +481,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    },
 		//	    "VpcPeeringExclusion": {
-		//	      "description": "The desired exclusion mode for VPC Peering.",
+		//	      "description": "",
 		//	      "enum": [
 		//	        "enable",
 		//	        "disable"
@@ -495,7 +495,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: EgressOnlyInternetGatewayExclusion
 				"egress_only_internet_gateway_exclusion": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The desired exclusion mode for Egress-Only Internet Gateways.",
+					Description: "",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -511,7 +511,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: ElasticFileSystemExclusion
 				"elastic_file_system_exclusion": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The desired exclusion mode for Elastic File System.",
+					Description: "",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -527,7 +527,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: InternetGatewayExclusion
 				"internet_gateway_exclusion": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The desired exclusion mode for Internet Gateways.",
+					Description: "",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -543,7 +543,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: LambdaExclusion
 				"lambda_exclusion": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The desired exclusion mode for Lambda.",
+					Description: "",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -559,7 +559,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Mode
 				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The mode of the VPC encryption control.",
+					Description: "The encryption mode for the VPC Encryption Control configuration.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -574,7 +574,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: NatGatewayExclusion
 				"nat_gateway_exclusion": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The desired exclusion mode for NAT Gateways.",
+					Description: "",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -596,16 +596,16 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: State
 								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The exclusion state of the resource type.",
+									Description: "The current state of the exclusion configuration.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: StateMessage
 								"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "A message describing the exclusion state of the resource type.",
+									Description: "A message providing additional information about the exclusion state.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "",
+							Description: "The exclusion configuration for egress-only internet gateway traffic.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: ElasticFileSystem
@@ -613,16 +613,16 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: State
 								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The exclusion state of the resource type.",
+									Description: "The current state of the exclusion configuration.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: StateMessage
 								"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "A message describing the exclusion state of the resource type.",
+									Description: "A message providing additional information about the exclusion state.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "",
+							Description: "The exclusion configuration for Elastic File System traffic.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: InternetGateway
@@ -630,16 +630,16 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: State
 								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The exclusion state of the resource type.",
+									Description: "The current state of the exclusion configuration.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: StateMessage
 								"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "A message describing the exclusion state of the resource type.",
+									Description: "A message providing additional information about the exclusion state.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "",
+							Description: "The exclusion configuration for internet gateway traffic.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Lambda
@@ -647,16 +647,16 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: State
 								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The exclusion state of the resource type.",
+									Description: "The current state of the exclusion configuration.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: StateMessage
 								"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "A message describing the exclusion state of the resource type.",
+									Description: "A message providing additional information about the exclusion state.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "",
+							Description: "The exclusion configuration for Lambda function traffic.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: NatGateway
@@ -664,16 +664,16 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: State
 								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The exclusion state of the resource type.",
+									Description: "The current state of the exclusion configuration.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: StateMessage
 								"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "A message describing the exclusion state of the resource type.",
+									Description: "A message providing additional information about the exclusion state.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "",
+							Description: "The exclusion configuration for NAT gateway traffic.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: VirtualPrivateGateway
@@ -681,16 +681,16 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: State
 								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The exclusion state of the resource type.",
+									Description: "The current state of the exclusion configuration.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: StateMessage
 								"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "A message describing the exclusion state of the resource type.",
+									Description: "A message providing additional information about the exclusion state.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "",
+							Description: "The exclusion configuration for virtual private gateway traffic.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: VpcLattice
@@ -698,16 +698,16 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: State
 								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The exclusion state of the resource type.",
+									Description: "The current state of the exclusion configuration.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: StateMessage
 								"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "A message describing the exclusion state of the resource type.",
+									Description: "A message providing additional information about the exclusion state.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "",
+							Description: "The exclusion configuration for VPC Lattice traffic.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: VpcPeering
@@ -715,20 +715,20 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: State
 								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The exclusion state of the resource type.",
+									Description: "The current state of the exclusion configuration.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: StateMessage
 								"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "A message describing the exclusion state of the resource type.",
+									Description: "A message providing additional information about the exclusion state.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
-							Description: "",
+							Description: "The exclusion configuration for VPC peering connection traffic.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "",
+					Description: "Information about resource exclusions for the VPC Encryption Control configuration.",
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
@@ -736,7 +736,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: State
 				"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The state of the VPC encryption control.",
+					Description: "The current state of the VPC Encryption Control configuration.",
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -744,7 +744,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: StateMessage
 				"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A message describing the state of the VPC encryption control.",
+					Description: "A message providing additional information about the encryption control state.",
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -752,7 +752,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: VirtualPrivateGatewayExclusion
 				"virtual_private_gateway_exclusion": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The desired exclusion mode for Virtual Private Gateways.",
+					Description: "",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -768,7 +768,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: VpcEncryptionControlId
 				"vpc_encryption_control_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ID of the VPC encryption control.",
+					Description: "The ID of the VPC Encryption Control configuration.",
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -776,7 +776,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: VpcId
 				"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ID of the VPC.",
+					Description: "The ID of the VPC associated with the encryption control configuration.",
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -784,7 +784,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: VpcLatticeExclusion
 				"vpc_lattice_exclusion": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The desired exclusion mode for VPC Lattice.",
+					Description: "",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -800,7 +800,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: VpcPeeringExclusion
 				"vpc_peering_exclusion": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The desired exclusion mode for VPC Peering.",
+					Description: "",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -815,7 +815,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 					// VpcPeeringExclusion is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "",
+			Description: "Describes the configuration and state of VPC encryption controls.\n For more information, see [Enforce VPC encryption in transit](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html) in the *Amazon VPC User Guide*.",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/

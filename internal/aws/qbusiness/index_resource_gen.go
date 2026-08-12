@@ -486,7 +486,7 @@ func indexResource(ctx context.Context) (resource.Resource, error) {
 		"value":                             "Value",
 	})
 
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(180).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
