@@ -27,6 +27,7 @@ Data Source schema for AWS::DirectConnect::TransitVirtualInterface
 - `direct_connect_gateway_id` (String) The ID or ARN of the Direct Connect gateway.
 - `enable_site_link` (Boolean) Indicates whether to enable or disable SiteLink.
 - `mtu` (Number) The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 9001. The default value is 1500.
+- `rate_limit` (String) The rate limit (bandwidth allocation) for the virtual interface. The value must be one of the supported bandwidth values (e.g., 50Mbps, 1Gbps, 10Gbps) and cannot exceed the bandwidth of the parent connection or LAG.
 - `tags` (Attributes Set) The tags associated with the private virtual interface. (see [below for nested schema](#nestedatt--tags))
 - `virtual_interface_arn` (String) The ARN of the virtual interface.
 - `virtual_interface_id` (String) The ID of the virtual interface.

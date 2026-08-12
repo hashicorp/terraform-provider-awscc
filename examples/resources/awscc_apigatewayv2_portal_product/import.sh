@@ -1,0 +1,1 @@
+$ terraform import awscc_apigatewayv2_portal_product.example "portal_product_arn"

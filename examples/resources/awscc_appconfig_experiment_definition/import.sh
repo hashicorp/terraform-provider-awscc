@@ -1,0 +1,1 @@
+$ terraform import awscc_appconfig_experiment_definition.example "application_id|id"

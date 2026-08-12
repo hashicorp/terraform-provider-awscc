@@ -39,6 +39,7 @@ Data Source schema for AWS::EKS::Capability
 
 Read-Only:
 
+- `ack` (String)
 - `argo_cd` (Attributes) Configuration settings for an Argo CD capability. This includes the Kubernetes namespace, IAM Identity Center integration, RBAC role mappings, and network access configuration. (see [below for nested schema](#nestedatt--configuration--argo_cd))
 
 <a id="nestedatt--configuration--argo_cd"></a>

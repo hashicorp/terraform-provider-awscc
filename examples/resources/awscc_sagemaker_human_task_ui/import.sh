@@ -1,0 +1,1 @@
+$ terraform import awscc_sagemaker_human_task_ui.example "human_task_ui_arn"

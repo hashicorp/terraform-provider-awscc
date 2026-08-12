@@ -76,6 +76,7 @@ Optional:
 Optional:
 
 - `bedrock_evaluator_model_config` (Attributes) The configuration for using Amazon Bedrock models in evaluator assessments. (see [below for nested schema](#nestedatt--evaluator_config--llm_as_a_judge--model_config--bedrock_evaluator_model_config))
+- `responses_evaluator_model_config` (Attributes) The configuration for using OpenResponses-compatible models in evaluator assessments. (see [below for nested schema](#nestedatt--evaluator_config--llm_as_a_judge--model_config--responses_evaluator_model_config))
 
 <a id="nestedatt--evaluator_config--llm_as_a_judge--model_config--bedrock_evaluator_model_config"></a>
 ### Nested Schema for `evaluator_config.llm_as_a_judge.model_config.bedrock_evaluator_model_config`
@@ -94,6 +95,26 @@ Optional:
 - `max_tokens` (Number) The maximum number of tokens to generate in the model response.
 - `temperature` (Number) The temperature value that controls randomness in the model's responses.
 - `top_p` (Number) The top-p sampling parameter that controls the diversity of the model's responses.
+
+
+
+<a id="nestedatt--evaluator_config--llm_as_a_judge--model_config--responses_evaluator_model_config"></a>
+### Nested Schema for `evaluator_config.llm_as_a_judge.model_config.responses_evaluator_model_config`
+
+Optional:
+
+- `max_output_tokens` (Number) The maximum number of output tokens to generate, including visible output and reasoning tokens.
+- `model_id` (String) The identifier of the model to use for evaluation.
+- `reasoning` (Attributes) The reasoning configuration for reasoning models. (see [below for nested schema](#nestedatt--evaluator_config--llm_as_a_judge--model_config--responses_evaluator_model_config--reasoning))
+- `temperature` (Number) The sampling temperature between 0 and 2.
+- `top_p` (Number) The nucleus sampling probability mass between 0 and 1.
+
+<a id="nestedatt--evaluator_config--llm_as_a_judge--model_config--responses_evaluator_model_config--reasoning"></a>
+### Nested Schema for `evaluator_config.llm_as_a_judge.model_config.responses_evaluator_model_config.reasoning`
+
+Optional:
+
+- `effort` (String) The level of reasoning effort the model applies.
 
 
 

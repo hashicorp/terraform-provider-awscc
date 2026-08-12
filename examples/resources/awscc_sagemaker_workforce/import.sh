@@ -1,0 +1,1 @@
+$ terraform import awscc_sagemaker_workforce.example "workforce_arn"

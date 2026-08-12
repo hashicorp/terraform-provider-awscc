@@ -1,0 +1,1 @@
+$ terraform import awscc_bedrockagentcore_gateway_rate_limit.example "gateway_identifier|rate_limit_id"

@@ -28,6 +28,7 @@ Resource Type definition for AWS::DirectConnect::TransitVirtualInterface
 - `allocate_transit_virtual_interface_role_arn` (String) The Amazon Resource Name (ARN) of the role to allocate the TransitVifAllocation. Needs directconnect:AllocateTransitVirtualInterface permissions and tag permissions if applicable.
 - `enable_site_link` (Boolean) Indicates whether to enable or disable SiteLink.
 - `mtu` (Number) The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 9001. The default value is 1500.
+- `rate_limit` (String) The rate limit (bandwidth allocation) for the virtual interface. The value must be one of the supported bandwidth values (e.g., 50Mbps, 1Gbps, 10Gbps) and cannot exceed the bandwidth of the parent connection or LAG.
 - `tags` (Attributes Set) The tags associated with the private virtual interface. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

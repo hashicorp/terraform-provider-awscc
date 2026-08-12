@@ -1,0 +1,1 @@
+$ terraform import awscc_rekognition_dataset.example "dataset_arn"

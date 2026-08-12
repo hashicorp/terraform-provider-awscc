@@ -364,6 +364,7 @@ Optional:
 - `execution_role_arn` (String)
 - `ipc_mode` (String)
 - `network_configuration` (Attributes) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--network_configuration))
+- `network_mode` (String)
 - `pid_mode` (String)
 - `platform_version` (String)
 - `runtime_platform` (Attributes) (see [below for nested schema](#nestedatt--ecs_properties--task_properties--runtime_platform))

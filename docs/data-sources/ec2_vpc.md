@@ -39,7 +39,8 @@ Data Source schema for AWS::EC2::VPC
 - `ipv_4_netmask_length` (Number) The netmask length of the IPv4 CIDR you want to allocate to this VPC from an Amazon VPC IP Address Manager (IPAM) pool. For more information about IPAM, see [What is IPAM?](https://docs.aws.amazon.com//vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC IPAM User Guide*.
 - `ipv_6_cidr_blocks` (List of String)
 - `tags` (Attributes List) The tags for the VPC. (see [below for nested schema](#nestedatt--tags))
-- `vpc_encryption_control` (Attributes) (see [below for nested schema](#nestedatt--vpc_encryption_control))
+- `vpc_encryption_control` (Attributes) Describes the configuration and state of VPC encryption controls.
+ For more information, see [Enforce VPC encryption in transit](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html) in the *Amazon VPC User Guide*. (see [below for nested schema](#nestedatt--vpc_encryption_control))
 - `vpc_id` (String)
 
 <a id="nestedatt--tags"></a>
@@ -56,42 +57,42 @@ Read-Only:
 
 Read-Only:
 
-- `egress_only_internet_gateway_exclusion` (String) The desired exclusion mode for Egress-Only Internet Gateways.
-- `elastic_file_system_exclusion` (String) The desired exclusion mode for Elastic File System.
-- `internet_gateway_exclusion` (String) The desired exclusion mode for Internet Gateways.
-- `lambda_exclusion` (String) The desired exclusion mode for Lambda.
-- `mode` (String) The mode of the VPC encryption control.
-- `nat_gateway_exclusion` (String) The desired exclusion mode for NAT Gateways.
-- `resource_exclusions` (Attributes) (see [below for nested schema](#nestedatt--vpc_encryption_control--resource_exclusions))
-- `state` (String) The state of the VPC encryption control.
-- `state_message` (String) A message describing the state of the VPC encryption control.
-- `virtual_private_gateway_exclusion` (String) The desired exclusion mode for Virtual Private Gateways.
-- `vpc_encryption_control_id` (String) The ID of the VPC encryption control.
-- `vpc_id` (String) The ID of the VPC.
-- `vpc_lattice_exclusion` (String) The desired exclusion mode for VPC Lattice.
-- `vpc_peering_exclusion` (String) The desired exclusion mode for VPC Peering.
+- `egress_only_internet_gateway_exclusion` (String)
+- `elastic_file_system_exclusion` (String)
+- `internet_gateway_exclusion` (String)
+- `lambda_exclusion` (String)
+- `mode` (String) The encryption mode for the VPC Encryption Control configuration.
+- `nat_gateway_exclusion` (String)
+- `resource_exclusions` (Attributes) Information about resource exclusions for the VPC Encryption Control configuration. (see [below for nested schema](#nestedatt--vpc_encryption_control--resource_exclusions))
+- `state` (String) The current state of the VPC Encryption Control configuration.
+- `state_message` (String) A message providing additional information about the encryption control state.
+- `virtual_private_gateway_exclusion` (String)
+- `vpc_encryption_control_id` (String) The ID of the VPC Encryption Control configuration.
+- `vpc_id` (String) The ID of the VPC associated with the encryption control configuration.
+- `vpc_lattice_exclusion` (String)
+- `vpc_peering_exclusion` (String)
 
 <a id="nestedatt--vpc_encryption_control--resource_exclusions"></a>
 ### Nested Schema for `vpc_encryption_control.resource_exclusions`
 
 Read-Only:
 
-- `egress_only_internet_gateway` (Attributes) (see [below for nested schema](#nestedatt--vpc_encryption_control--resource_exclusions--egress_only_internet_gateway))
-- `elastic_file_system` (Attributes) (see [below for nested schema](#nestedatt--vpc_encryption_control--resource_exclusions--elastic_file_system))
-- `internet_gateway` (Attributes) (see [below for nested schema](#nestedatt--vpc_encryption_control--resource_exclusions--internet_gateway))
-- `lambda` (Attributes) (see [below for nested schema](#nestedatt--vpc_encryption_control--resource_exclusions--lambda))
-- `nat_gateway` (Attributes) (see [below for nested schema](#nestedatt--vpc_encryption_control--resource_exclusions--nat_gateway))
-- `virtual_private_gateway` (Attributes) (see [below for nested schema](#nestedatt--vpc_encryption_control--resource_exclusions--virtual_private_gateway))
-- `vpc_lattice` (Attributes) (see [below for nested schema](#nestedatt--vpc_encryption_control--resource_exclusions--vpc_lattice))
-- `vpc_peering` (Attributes) (see [below for nested schema](#nestedatt--vpc_encryption_control--resource_exclusions--vpc_peering))
+- `egress_only_internet_gateway` (Attributes) The exclusion configuration for egress-only internet gateway traffic. (see [below for nested schema](#nestedatt--vpc_encryption_control--resource_exclusions--egress_only_internet_gateway))
+- `elastic_file_system` (Attributes) The exclusion configuration for Elastic File System traffic. (see [below for nested schema](#nestedatt--vpc_encryption_control--resource_exclusions--elastic_file_system))
+- `internet_gateway` (Attributes) The exclusion configuration for internet gateway traffic. (see [below for nested schema](#nestedatt--vpc_encryption_control--resource_exclusions--internet_gateway))
+- `lambda` (Attributes) The exclusion configuration for Lambda function traffic. (see [below for nested schema](#nestedatt--vpc_encryption_control--resource_exclusions--lambda))
+- `nat_gateway` (Attributes) The exclusion configuration for NAT gateway traffic. (see [below for nested schema](#nestedatt--vpc_encryption_control--resource_exclusions--nat_gateway))
+- `virtual_private_gateway` (Attributes) The exclusion configuration for virtual private gateway traffic. (see [below for nested schema](#nestedatt--vpc_encryption_control--resource_exclusions--virtual_private_gateway))
+- `vpc_lattice` (Attributes) The exclusion configuration for VPC Lattice traffic. (see [below for nested schema](#nestedatt--vpc_encryption_control--resource_exclusions--vpc_lattice))
+- `vpc_peering` (Attributes) The exclusion configuration for VPC peering connection traffic. (see [below for nested schema](#nestedatt--vpc_encryption_control--resource_exclusions--vpc_peering))
 
 <a id="nestedatt--vpc_encryption_control--resource_exclusions--egress_only_internet_gateway"></a>
 ### Nested Schema for `vpc_encryption_control.resource_exclusions.egress_only_internet_gateway`
 
 Read-Only:
 
-- `state` (String) The exclusion state of the resource type.
-- `state_message` (String) A message describing the exclusion state of the resource type.
+- `state` (String) The current state of the exclusion configuration.
+- `state_message` (String) A message providing additional information about the exclusion state.
 
 
 <a id="nestedatt--vpc_encryption_control--resource_exclusions--elastic_file_system"></a>
@@ -99,8 +100,8 @@ Read-Only:
 
 Read-Only:
 
-- `state` (String) The exclusion state of the resource type.
-- `state_message` (String) A message describing the exclusion state of the resource type.
+- `state` (String) The current state of the exclusion configuration.
+- `state_message` (String) A message providing additional information about the exclusion state.
 
 
 <a id="nestedatt--vpc_encryption_control--resource_exclusions--internet_gateway"></a>
@@ -108,8 +109,8 @@ Read-Only:
 
 Read-Only:
 
-- `state` (String) The exclusion state of the resource type.
-- `state_message` (String) A message describing the exclusion state of the resource type.
+- `state` (String) The current state of the exclusion configuration.
+- `state_message` (String) A message providing additional information about the exclusion state.
 
 
 <a id="nestedatt--vpc_encryption_control--resource_exclusions--lambda"></a>
@@ -117,8 +118,8 @@ Read-Only:
 
 Read-Only:
 
-- `state` (String) The exclusion state of the resource type.
-- `state_message` (String) A message describing the exclusion state of the resource type.
+- `state` (String) The current state of the exclusion configuration.
+- `state_message` (String) A message providing additional information about the exclusion state.
 
 
 <a id="nestedatt--vpc_encryption_control--resource_exclusions--nat_gateway"></a>
@@ -126,8 +127,8 @@ Read-Only:
 
 Read-Only:
 
-- `state` (String) The exclusion state of the resource type.
-- `state_message` (String) A message describing the exclusion state of the resource type.
+- `state` (String) The current state of the exclusion configuration.
+- `state_message` (String) A message providing additional information about the exclusion state.
 
 
 <a id="nestedatt--vpc_encryption_control--resource_exclusions--virtual_private_gateway"></a>
@@ -135,8 +136,8 @@ Read-Only:
 
 Read-Only:
 
-- `state` (String) The exclusion state of the resource type.
-- `state_message` (String) A message describing the exclusion state of the resource type.
+- `state` (String) The current state of the exclusion configuration.
+- `state_message` (String) A message providing additional information about the exclusion state.
 
 
 <a id="nestedatt--vpc_encryption_control--resource_exclusions--vpc_lattice"></a>
@@ -144,8 +145,8 @@ Read-Only:
 
 Read-Only:
 
-- `state` (String) The exclusion state of the resource type.
-- `state_message` (String) A message describing the exclusion state of the resource type.
+- `state` (String) The current state of the exclusion configuration.
+- `state_message` (String) A message providing additional information about the exclusion state.
 
 
 <a id="nestedatt--vpc_encryption_control--resource_exclusions--vpc_peering"></a>
@@ -153,5 +154,5 @@ Read-Only:
 
 Read-Only:
 
-- `state` (String) The exclusion state of the resource type.
-- `state_message` (String) A message describing the exclusion state of the resource type.
+- `state` (String) The current state of the exclusion configuration.
+- `state_message` (String) A message providing additional information about the exclusion state.

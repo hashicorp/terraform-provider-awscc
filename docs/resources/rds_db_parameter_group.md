@@ -116,6 +116,7 @@ resource "awscc_rds_db_parameter_group" "this" {
 
 ### Read-Only
 
+- `db_parameter_group_arn` (String)
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--tags"></a>
