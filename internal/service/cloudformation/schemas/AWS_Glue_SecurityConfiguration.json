@@ -1,0 +1,112 @@
+{
+  "typeName": "AWS::Glue::SecurityConfiguration",
+  "description": "Resource Type definition for AWS::Glue::SecurityConfiguration",
+  "additionalProperties": false,
+  "properties": {
+    "EncryptionConfiguration": {
+      "$ref": "#/definitions/EncryptionConfiguration"
+    },
+    "Name": {
+      "description": "The name for the security configuration.",
+      "type": "string"
+    }
+  },
+  "definitions": {
+    "S3Encryption": {
+      "description": "Specifies how Amazon Simple Storage Service (Amazon S3) data should be encrypted.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "KmsKeyArn": {
+          "type": "string"
+        },
+        "S3EncryptionMode": {
+          "type": "string"
+        }
+      }
+    },
+    "EncryptionConfiguration": {
+      "description": "The encryption configuration for the security configuration.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "S3Encryptions": {
+          "description": "The encryption configuration for Amazon Simple Storage Service (Amazon S3) data.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/S3Encryption"
+          },
+          "insertionOrder": false
+        },
+        "JobBookmarksEncryption": {
+          "$ref": "#/definitions/JobBookmarksEncryption"
+        },
+        "CloudWatchEncryption": {
+          "$ref": "#/definitions/CloudWatchEncryption"
+        }
+      }
+    },
+    "CloudWatchEncryption": {
+      "description": "The encryption configuration for Amazon CloudWatch.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "KmsKeyArn": {
+          "type": "string"
+        },
+        "CloudWatchEncryptionMode": {
+          "type": "string"
+        }
+      }
+    },
+    "JobBookmarksEncryption": {
+      "description": "The encryption configuration for job bookmarks.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "KmsKeyArn": {
+          "type": "string"
+        },
+        "JobBookmarksEncryptionMode": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "required": [
+    "EncryptionConfiguration",
+    "Name"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name"
+  ],
+  "primaryIdentifier": [
+    "/properties/Name"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "glue:CreateSecurityConfiguration",
+        "glue:GetSecurityConfiguration"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "glue:GetSecurityConfiguration"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "glue:GetSecurityConfigurations"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "glue:DeleteSecurityConfiguration"
+      ]
+    }
+  }
+}

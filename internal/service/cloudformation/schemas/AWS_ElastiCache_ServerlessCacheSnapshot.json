@@ -1,0 +1,177 @@
+{
+  "typeName": "AWS::ElastiCache::ServerlessCacheSnapshot",
+  "description": "Resource Type definition for AWS::ElastiCache::ServerlessCacheSnapshot. A serverless cache snapshot is a point-in-time backup of an ElastiCache serverless cache. Available for Valkey, Redis OSS and Serverless Memcached only.",
+  "properties": {
+    "ARN": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the serverless cache snapshot.",
+      "pattern": "^arn:aws(-[a-z]+)*:elasticache:[a-z0-9-]+:[0-9]{12}:serverlesscachesnapshot:.+$"
+    },
+    "ServerlessCacheSnapshotName": {
+      "type": "string",
+      "description": "The name of the serverless cache snapshot. Must be unique for the customer account. This value is stored as a lowercase string.",
+      "minLength": 1,
+      "maxLength": 255,
+      "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"
+    },
+    "ServerlessCacheName": {
+      "type": "string",
+      "description": "The name of an existing serverless cache. The snapshot is created from this cache.",
+      "minLength": 1,
+      "maxLength": 255,
+      "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"
+    },
+    "KmsKeyId": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the AWS KMS key used to encrypt the snapshot. Provide the key ARN: the resource returns the key ARN on read, so supplying a bare key ID or alias for this createOnly property may be reported as drift by CloudFormation.",
+      "maxLength": 2048
+    },
+    "SnapshotType": {
+      "type": "string",
+      "description": "The type of snapshot of the serverless cache."
+    },
+    "Status": {
+      "type": "string",
+      "description": "The current status of the serverless cache snapshot."
+    },
+    "CreateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time that the source serverless cache's metadata and cache data set was obtained for the snapshot."
+    },
+    "BytesUsedForCache": {
+      "type": "string",
+      "description": "The total size of the serverless cache snapshot, in bytes."
+    },
+    "ServerlessCacheConfiguration": {
+      "description": "The configuration of the serverless cache, at the time the snapshot was taken.",
+      "$ref": "#/definitions/ServerlessCacheConfiguration"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "A list of tags to be added to the serverless cache snapshot resource.",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "definitions": {
+    "ServerlessCacheConfiguration": {
+      "type": "object",
+      "properties": {
+        "ServerlessCacheName": {
+          "type": "string",
+          "description": "The identifier of the serverless cache."
+        },
+        "Engine": {
+          "type": "string",
+          "description": "The engine that the serverless cache is configured with."
+        },
+        "MajorEngineVersion": {
+          "type": "string",
+          "description": "The engine version number that the serverless cache is configured with."
+        }
+      },
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key for the tag. May not be null.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The tag's value. May be null.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "ServerlessCacheSnapshotName",
+    "ServerlessCacheName"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/ARN",
+    "/properties/SnapshotType",
+    "/properties/Status",
+    "/properties/CreateTime",
+    "/properties/BytesUsedForCache",
+    "/properties/ServerlessCacheConfiguration"
+  ],
+  "createOnlyProperties": [
+    "/properties/ServerlessCacheSnapshotName",
+    "/properties/ServerlessCacheName",
+    "/properties/KmsKeyId"
+  ],
+  "primaryIdentifier": [
+    "/properties/ARN"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/ServerlessCacheSnapshotName"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "elasticache:AddTagsToResource",
+      "elasticache:RemoveTagsFromResource",
+      "elasticache:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "elasticache:CreateServerlessCacheSnapshot",
+        "elasticache:DescribeServerlessCacheSnapshots",
+        "elasticache:AddTagsToResource",
+        "elasticache:ListTagsForResource",
+        "kms:DescribeKey",
+        "kms:CreateGrant"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "elasticache:DescribeServerlessCacheSnapshots",
+        "elasticache:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "elasticache:AddTagsToResource",
+        "elasticache:RemoveTagsFromResource",
+        "elasticache:ListTagsForResource",
+        "elasticache:DescribeServerlessCacheSnapshots"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "elasticache:DeleteServerlessCacheSnapshot",
+        "elasticache:DescribeServerlessCacheSnapshots"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "elasticache:DescribeServerlessCacheSnapshots"
+      ]
+    }
+  }
+}

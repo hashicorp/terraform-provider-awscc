@@ -1,0 +1,492 @@
+{
+  "typeName": "AWS::BedrockAgentCore::GatewayRule",
+  "description": "Resource Type definition for AWS::BedrockAgentCore::GatewayRule",
+  "definitions": {
+    "Action": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "ConfigurationBundle",
+          "properties": {
+            "ConfigurationBundle": {
+              "$ref": "#/definitions/ConfigurationBundleAction"
+            }
+          },
+          "required": [
+            "ConfigurationBundle"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "RouteToTarget",
+          "properties": {
+            "RouteToTarget": {
+              "$ref": "#/definitions/RouteToTargetAction"
+            }
+          },
+          "required": [
+            "RouteToTarget"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Condition": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "MatchPrincipals",
+          "properties": {
+            "MatchPrincipals": {
+              "$ref": "#/definitions/MatchPrincipals"
+            }
+          },
+          "required": [
+            "MatchPrincipals"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "MatchPaths",
+          "properties": {
+            "MatchPaths": {
+              "$ref": "#/definitions/MatchPaths"
+            }
+          },
+          "required": [
+            "MatchPaths"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "ConfigurationBundleAction": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "StaticOverride",
+          "properties": {
+            "StaticOverride": {
+              "$ref": "#/definitions/StaticOverride"
+            }
+          },
+          "required": [
+            "StaticOverride"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "WeightedOverride",
+          "properties": {
+            "WeightedOverride": {
+              "$ref": "#/definitions/WeightedOverride"
+            }
+          },
+          "required": [
+            "WeightedOverride"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "ConfigurationBundleReference": {
+      "type": "object",
+      "properties": {
+        "BundleArn": {
+          "type": "string",
+          "pattern": "^arn:aws[a-zA-Z-]*:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:configuration-bundle/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$"
+        },
+        "BundleVersion": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+        }
+      },
+      "required": [
+        "BundleArn",
+        "BundleVersion"
+      ],
+      "additionalProperties": false
+    },
+    "GatewayRuleStatus": {
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "ACTIVE",
+        "UPDATING",
+        "DELETING"
+      ]
+    },
+    "IamPrincipal": {
+      "type": "object",
+      "properties": {
+        "Arn": {
+          "type": "string",
+          "maxLength": 2048,
+          "pattern": "^(arn:aws[a-zA-Z-]*:iam::(\\d{12}|\\*):(user|role)/[\\w+=,.@*?/-]+|arn:aws[a-zA-Z-]*:sts::(\\d{12}|\\*):assumed-role/[\\w+=,.@*?/-]+)$"
+        },
+        "Operator": {
+          "$ref": "#/definitions/PrincipalMatchOperator"
+        }
+      },
+      "required": [
+        "Arn"
+      ],
+      "additionalProperties": false
+    },
+    "MatchPaths": {
+      "type": "object",
+      "properties": {
+        "AnyOf": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 512,
+            "pattern": "^/[\\w\\-.]+/\\*$"
+          },
+          "maxItems": 10,
+          "minItems": 1
+        }
+      },
+      "required": [
+        "AnyOf"
+      ],
+      "additionalProperties": false
+    },
+    "MatchPrincipalEntry": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "IamPrincipal",
+          "properties": {
+            "IamPrincipal": {
+              "$ref": "#/definitions/IamPrincipal"
+            }
+          },
+          "required": [
+            "IamPrincipal"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "MatchPrincipals": {
+      "type": "object",
+      "properties": {
+        "AnyOf": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MatchPrincipalEntry"
+          },
+          "maxItems": 100,
+          "minItems": 1
+        }
+      },
+      "required": [
+        "AnyOf"
+      ],
+      "additionalProperties": false
+    },
+    "PrincipalMatchOperator": {
+      "type": "string",
+      "enum": [
+        "StringEquals",
+        "StringLike"
+      ]
+    },
+    "RouteToTargetAction": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "StaticRoute",
+          "properties": {
+            "StaticRoute": {
+              "$ref": "#/definitions/StaticRoute"
+            }
+          },
+          "required": [
+            "StaticRoute"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "WeightedRoute",
+          "properties": {
+            "WeightedRoute": {
+              "$ref": "#/definitions/WeightedRoute"
+            }
+          },
+          "required": [
+            "WeightedRoute"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "StaticOverride": {
+      "type": "object",
+      "properties": {
+        "BundleArn": {
+          "type": "string",
+          "pattern": "^arn:aws[a-zA-Z-]*:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:configuration-bundle/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$"
+        },
+        "BundleVersion": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+        }
+      },
+      "required": [
+        "BundleArn",
+        "BundleVersion"
+      ],
+      "additionalProperties": false
+    },
+    "StaticRoute": {
+      "type": "object",
+      "properties": {
+        "TargetName": {
+          "type": "string",
+          "pattern": "^([0-9a-zA-Z][-]?){1,100}$"
+        }
+      },
+      "required": [
+        "TargetName"
+      ],
+      "additionalProperties": false
+    },
+    "TargetTrafficSplitEntry": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "maxLength": 64,
+          "minLength": 1,
+          "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-]{0,62}[a-zA-Z0-9])?$"
+        },
+        "Weight": {
+          "type": "number",
+          "maximum": 99,
+          "minimum": 1
+        },
+        "TargetName": {
+          "type": "string",
+          "pattern": "^([0-9a-zA-Z][-]?){1,100}$"
+        },
+        "Description": {
+          "type": "string",
+          "maxLength": 200,
+          "minLength": 1
+        },
+        "Metadata": {
+          "$ref": "#/definitions/TrafficSplitMetadataMap"
+        }
+      },
+      "required": [
+        "Name",
+        "TargetName",
+        "Weight"
+      ],
+      "additionalProperties": false
+    },
+    "TrafficSplitEntry": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "maxLength": 64,
+          "minLength": 1,
+          "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-]{0,62}[a-zA-Z0-9])?$"
+        },
+        "Weight": {
+          "type": "number",
+          "maximum": 99,
+          "minimum": 1
+        },
+        "ConfigurationBundle": {
+          "$ref": "#/definitions/ConfigurationBundleReference"
+        },
+        "Description": {
+          "type": "string",
+          "maxLength": 200,
+          "minLength": 1
+        },
+        "Metadata": {
+          "$ref": "#/definitions/TrafficSplitMetadataMap"
+        }
+      },
+      "required": [
+        "ConfigurationBundle",
+        "Name",
+        "Weight"
+      ],
+      "additionalProperties": false
+    },
+    "TrafficSplitMetadataMap": {
+      "type": "object",
+      "maxProperties": 25,
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "WeightedOverride": {
+      "type": "object",
+      "properties": {
+        "TrafficSplit": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrafficSplitEntry"
+          },
+          "maxItems": 2,
+          "minItems": 2
+        }
+      },
+      "required": [
+        "TrafficSplit"
+      ],
+      "additionalProperties": false
+    },
+    "WeightedRoute": {
+      "type": "object",
+      "properties": {
+        "TrafficSplit": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TargetTrafficSplitEntry"
+          },
+          "maxItems": 2,
+          "minItems": 2
+        }
+      },
+      "required": [
+        "TrafficSplit"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Actions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Action"
+      },
+      "maxItems": 2,
+      "minItems": 1
+    },
+    "Conditions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Condition"
+      },
+      "maxItems": 2,
+      "minItems": 0
+    },
+    "CreatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "Description": {
+      "type": "string",
+      "maxLength": 256,
+      "minLength": 1
+    },
+    "GatewayArn": {
+      "type": "string",
+      "pattern": "^arn:aws(|-cn|-us-gov):bedrock-agentcore:[a-z0-9-]{1,20}:[0-9]{12}:gateway/([0-9a-z][-]?){1,48}-[a-z0-9]{10}$"
+    },
+    "GatewayIdentifier": {
+      "type": "string",
+      "pattern": "^([0-9a-z][-]?){1,100}-[0-9a-z]{10}$"
+    },
+    "Priority": {
+      "type": "number",
+      "maximum": 1000000,
+      "minimum": 1
+    },
+    "RuleId": {
+      "type": "string",
+      "maxLength": 36,
+      "minLength": 36,
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "Status": {
+      "$ref": "#/definitions/GatewayRuleStatus"
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "Actions",
+    "Priority"
+  ],
+  "readOnlyProperties": [
+    "/properties/CreatedAt",
+    "/properties/GatewayArn",
+    "/properties/RuleId",
+    "/properties/Status",
+    "/properties/UpdatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/GatewayIdentifier"
+  ],
+  "primaryIdentifier": [
+    "/properties/GatewayIdentifier",
+    "/properties/RuleId"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "bedrock-agentcore:CreateGatewayRule",
+        "bedrock-agentcore:GetGatewayRule"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "bedrock-agentcore:DeleteGatewayRule",
+        "bedrock-agentcore:GetGatewayRule"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "bedrock-agentcore:ListGatewayRules"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "GatewayIdentifier": {
+            "$ref": "resource-schema.json#/properties/GatewayIdentifier"
+          }
+        },
+        "required": [
+          "GatewayIdentifier"
+        ]
+      }
+    },
+    "read": {
+      "permissions": [
+        "bedrock-agentcore:GetGatewayRule"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "bedrock-agentcore:UpdateGatewayRule",
+        "bedrock-agentcore:GetGatewayRule"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
+  "additionalProperties": false
+}

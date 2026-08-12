@@ -1,0 +1,127 @@
+{
+  "typeName": "AWS::Personalize::EventTracker",
+  "description": "Resource schema for AWS::Personalize::EventTracker",
+  "properties": {
+    "EventTrackerArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the event tracker.",
+      "maxLength": 256,
+      "pattern": "^arn:([a-z\\d-]+):personalize:.*:.*:.+$"
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name for the event tracker.",
+      "minLength": 1,
+      "maxLength": 63,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*$"
+    },
+    "DatasetGroupArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the dataset group that receives the event data.",
+      "maxLength": 256,
+      "pattern": "^arn:([a-z\\d-]+):personalize:.*:.*:.+$"
+    },
+    "TrackingId": {
+      "type": "string",
+      "description": "The ID of the event tracker. Include this ID in requests to the PutEvents API.",
+      "maxLength": 256
+    },
+    "Tags": {
+      "type": "array",
+      "description": "A list of tags to apply to the event tracker.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "minItems": 0,
+      "maxItems": 200,
+      "insertionOrder": false
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with a resource.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "Name",
+    "DatasetGroupArn"
+  ],
+  "readOnlyProperties": [
+    "/properties/EventTrackerArn",
+    "/properties/TrackingId"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/DatasetGroupArn"
+  ],
+  "primaryIdentifier": [
+    "/properties/EventTrackerArn"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "personalize:TagResource",
+      "personalize:UntagResource",
+      "personalize:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "personalize:CreateEventTracker",
+        "personalize:DescribeEventTracker",
+        "personalize:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "personalize:DescribeEventTracker",
+        "personalize:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "personalize:DescribeEventTracker",
+        "personalize:TagResource",
+        "personalize:UntagResource",
+        "personalize:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "personalize:DescribeEventTracker",
+        "personalize:DeleteEventTracker"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "personalize:ListEventTrackers"
+      ]
+    }
+  },
+  "additionalProperties": false
+}
