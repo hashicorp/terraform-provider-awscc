@@ -661,7 +661,9 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 		return
 	}
 
-	patchDocument, err := patchDocument(currentDesiredState, plannedDesiredState)
+	unorderedPaths := unorderedArrayPaths(r.tfSchema.Attributes, r.tfToCfNameMap)
+
+	patchDocument, err := patchDocument(currentDesiredState, plannedDesiredState, unorderedPaths)
 
 	if err != nil {
 		response.Diagnostics.AddError(
