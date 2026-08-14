@@ -11,6 +11,8 @@ import (
 	cctypes "github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
 )
 
+func TestProvider(t *testing.T) {}
+
 func TestThrottlingErrRetryableFunc(t *testing.T) {
 	tests := []struct {
 		name        string
