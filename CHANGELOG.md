@@ -1,5 +1,13 @@
 ## 1.98.0 (Unreleased)
 
+NOTES:
+
+* provider: The provider level retry handling added for `ThrottlingException` errors is a temporary measure to work around the absence of retry handling in the upstream AWS service SDK. This is being tracked in an [upstream Go SDK issue](https://github.com/aws/aws-sdk-go-v2/issues/3248). Once this addressed upstream, the provider retry handling will be reverted.
+
+BUG FIXES:
+
+* provider: Add retry handling for CloudControl `ThrottlingException` errors
+
 ## 1.97.0 (August 12, 2026)
 
 FEATURES:
