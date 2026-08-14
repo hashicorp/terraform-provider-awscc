@@ -71,6 +71,7 @@ Read-Only:
 - `redshift_parameters` (Attributes) <p>The parameters for Amazon Redshift. The <code>ClusterId</code> field can be blank if
             <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--redshift_parameters))
 - `s3_parameters` (Attributes) <p>The parameters for S3.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--s3_parameters))
+- `s3_tables_parameters` (Attributes) (see [below for nested schema](#nestedatt--alternate_data_source_parameters--s3_tables_parameters))
 - `snowflake_parameters` (Attributes) <p>The parameters for Snowflake.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--snowflake_parameters))
 - `spark_parameters` (Attributes) <p>The parameters for Spark.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--spark_parameters))
 - `sql_server_parameters` (Attributes) <p>The parameters for SQL Server.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--sql_server_parameters))
@@ -255,6 +256,14 @@ Read-Only:
 
 
 
+<a id="nestedatt--alternate_data_source_parameters--s3_tables_parameters"></a>
+### Nested Schema for `alternate_data_source_parameters.s3_tables_parameters`
+
+Read-Only:
+
+- `table_bucket_arn` (String)
+
+
 <a id="nestedatt--alternate_data_source_parameters--snowflake_parameters"></a>
 ### Nested Schema for `alternate_data_source_parameters.snowflake_parameters`
 
@@ -370,6 +379,7 @@ Read-Only:
             data source in the ARN is used as the credentials for the
             <code>DataSourceCredentials</code> structure.</p>
 - `credential_pair` (Attributes) <p>The combination of user name and password that are used as credentials.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair))
+- `key_pair_credentials` (Attributes) (see [below for nested schema](#nestedatt--credentials--key_pair_credentials))
 - `secret_arn` (String) <p>The Amazon Resource Name (ARN) of the secret associated with the data source in Amazon Secrets Manager.</p>
 
 <a id="nestedatt--credentials--credential_pair"></a>
@@ -409,6 +419,7 @@ Read-Only:
 - `redshift_parameters` (Attributes) <p>The parameters for Amazon Redshift. The <code>ClusterId</code> field can be blank if
             <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--redshift_parameters))
 - `s3_parameters` (Attributes) <p>The parameters for S3.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--s3_parameters))
+- `s3_tables_parameters` (Attributes) (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--s3_tables_parameters))
 - `snowflake_parameters` (Attributes) <p>The parameters for Snowflake.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--snowflake_parameters))
 - `spark_parameters` (Attributes) <p>The parameters for Spark.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--spark_parameters))
 - `sql_server_parameters` (Attributes) <p>The parameters for SQL Server.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--sql_server_parameters))
@@ -593,6 +604,14 @@ Read-Only:
 
 
 
+<a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--s3_tables_parameters"></a>
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.s3_tables_parameters`
+
+Read-Only:
+
+- `table_bucket_arn` (String)
+
+
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--snowflake_parameters"></a>
 ### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.snowflake_parameters`
 
@@ -699,6 +718,16 @@ Read-Only:
 
 
 
+<a id="nestedatt--credentials--key_pair_credentials"></a>
+### Nested Schema for `credentials.key_pair_credentials`
+
+Read-Only:
+
+- `key_pair_username` (String)
+- `private_key` (String)
+- `private_key_passphrase` (String)
+
+
 
 <a id="nestedatt--data_source_parameters"></a>
 ### Nested Schema for `data_source_parameters`
@@ -720,6 +749,7 @@ Read-Only:
 - `redshift_parameters` (Attributes) <p>The parameters for Amazon Redshift. The <code>ClusterId</code> field can be blank if
             <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p> (see [below for nested schema](#nestedatt--data_source_parameters--redshift_parameters))
 - `s3_parameters` (Attributes) <p>The parameters for S3.</p> (see [below for nested schema](#nestedatt--data_source_parameters--s3_parameters))
+- `s3_tables_parameters` (Attributes) (see [below for nested schema](#nestedatt--data_source_parameters--s3_tables_parameters))
 - `snowflake_parameters` (Attributes) <p>The parameters for Snowflake.</p> (see [below for nested schema](#nestedatt--data_source_parameters--snowflake_parameters))
 - `spark_parameters` (Attributes) <p>The parameters for Spark.</p> (see [below for nested schema](#nestedatt--data_source_parameters--spark_parameters))
 - `sql_server_parameters` (Attributes) <p>The parameters for SQL Server.</p> (see [below for nested schema](#nestedatt--data_source_parameters--sql_server_parameters))
@@ -902,6 +932,14 @@ Read-Only:
 - `bucket` (String) <p>Amazon S3 bucket.</p>
 - `key` (String) <p>Amazon S3 key that identifies an object.</p>
 
+
+
+<a id="nestedatt--data_source_parameters--s3_tables_parameters"></a>
+### Nested Schema for `data_source_parameters.s3_tables_parameters`
+
+Read-Only:
+
+- `table_bucket_arn` (String)
 
 
 <a id="nestedatt--data_source_parameters--snowflake_parameters"></a>

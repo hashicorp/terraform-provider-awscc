@@ -1,6 +1,6 @@
 {
   "typeName": "AWS::Deadline::Farm",
-  "description": "Definition of AWS::Deadline::Farm Resource Type",
+  "description": "Resource Type definition for AWS::Deadline::Farm",
   "definitions": {
     "Tag": {
       "description": "A key-value pair to associate with a resource.",
@@ -41,6 +41,12 @@
     "FarmId": {
       "type": "string",
       "pattern": "^farm-[0-9a-f]{32}$"
+    },
+    "CostScaleFactor": {
+      "type": "number",
+      "default": 1,
+      "minimum": 0,
+      "maximum": 100
     },
     "KmsKeyArn": {
       "type": "string",

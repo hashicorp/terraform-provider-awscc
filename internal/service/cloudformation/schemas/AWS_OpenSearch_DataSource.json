@@ -1,0 +1,142 @@
+{
+  "typeName": "AWS::OpenSearch::DataSource",
+  "description": "Creates a data source for an Amazon OpenSearch Service domain.",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the data source.",
+      "pattern": "^arn:aws[a-z\\-]*:es:[a-z0-9\\-]*:[0-9]{12}:domain/.+/datasource/.+$"
+    },
+    "DomainName": {
+      "type": "string",
+      "description": "The name of the OpenSearch Service domain.",
+      "minLength": 3,
+      "maxLength": 28,
+      "pattern": "^[a-z][a-z0-9\\-]+$"
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the data source.",
+      "minLength": 3,
+      "maxLength": 80,
+      "pattern": "^[a-z][a-z0-9_]+$"
+    },
+    "DataSourceType": {
+      "$ref": "#/definitions/DataSourceType"
+    },
+    "Description": {
+      "type": "string",
+      "description": "A description of the data source.",
+      "maxLength": 1000
+    },
+    "Status": {
+      "type": "string",
+      "description": "The status of the data source.",
+      "enum": [
+        "ACTIVE",
+        "DISABLED"
+      ]
+    }
+  },
+  "definitions": {
+    "DataSourceType": {
+      "type": "object",
+      "description": "The type of data source.",
+      "properties": {
+        "S3GlueDataCatalog": {
+          "$ref": "#/definitions/S3GlueDataCatalog"
+        }
+      },
+      "additionalProperties": false
+    },
+    "S3GlueDataCatalog": {
+      "type": "object",
+      "description": "Configuration for an S3 Glue Data Catalog data source.",
+      "properties": {
+        "RoleArn": {
+          "type": "string",
+          "description": "The ARN of the IAM role that grants OpenSearch Service permission to access the Glue Data Catalog.",
+          "minLength": 20,
+          "maxLength": 2048,
+          "pattern": "^arn:.*:iam::\\d{12}:role/.+$"
+        }
+      },
+      "required": [
+        "RoleArn"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "DomainName",
+    "Name",
+    "DataSourceType"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/Status"
+  ],
+  "createOnlyProperties": [
+    "/properties/DomainName",
+    "/properties/Name"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/DomainName",
+      "/properties/Name"
+    ]
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "es:AddDataSource",
+        "es:GetDataSource",
+        "iam:PassRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "es:GetDataSource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "es:UpdateDataSource",
+        "es:GetDataSource",
+        "iam:PassRole"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "es:DeleteDataSource",
+        "es:GetDataSource"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "DomainName": {
+            "type": "string",
+            "description": "The name of the OpenSearch Service domain.",
+            "minLength": 3,
+            "maxLength": 28,
+            "pattern": "^[a-z][a-z0-9\\-]+$"
+          }
+        },
+        "required": [
+          "DomainName"
+        ]
+      },
+      "permissions": [
+        "es:ListDataSources"
+      ]
+    }
+  }
+}

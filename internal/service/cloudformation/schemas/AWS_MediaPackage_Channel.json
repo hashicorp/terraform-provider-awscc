@@ -75,13 +75,7 @@
           "description": "The ingest URL to which the source stream should be sent.",
           "type": "string"
         }
-      },
-      "required": [
-        "Id",
-        "Username",
-        "Password",
-        "Url"
-      ]
+      }
     },
     "Tag": {
       "type": "object",

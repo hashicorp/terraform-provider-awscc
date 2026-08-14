@@ -2,12 +2,12 @@
 page_title: "awscc_opensearchserverless_lifecycle_policy Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Amazon OpenSearchServerless lifecycle policy resource
+  Resource Type definition for AWS::OpenSearchServerless::LifecyclePolicy
 ---
 
 # awscc_opensearchserverless_lifecycle_policy (Resource)
 
-Amazon OpenSearchServerless lifecycle policy resource
+Resource Type definition for AWS::OpenSearchServerless::LifecyclePolicy
 
 ## Example Usage
 

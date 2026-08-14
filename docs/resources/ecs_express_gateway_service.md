@@ -17,37 +17,45 @@ Resource Type definition for AWS::ECS::ExpressGatewayService
 
 ### Required
 
-- `execution_role_arn` (String)
 - `infrastructure_role_arn` (String)
-- `primary_container` (Attributes) (see [below for nested schema](#nestedatt--primary_container))
 
 ### Optional
 
 - `cluster` (String)
 - `cpu` (String)
+- `execution_role_arn` (String)
 - `health_check_path` (String)
 - `memory` (String)
 - `network_configuration` (Attributes) (see [below for nested schema](#nestedatt--network_configuration))
+- `primary_container` (Attributes) (see [below for nested schema](#nestedatt--primary_container))
 - `scaling_target` (Attributes) (see [below for nested schema](#nestedatt--scaling_target))
 - `service_name` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `task_definition_arn` (String)
 - `task_role_arn` (String)
 
 ### Read-Only
 
 - `active_configurations` (Attributes List) (see [below for nested schema](#nestedatt--active_configurations))
 - `created_at` (String)
+- `ecs_managed_resource_arns` (Attributes) (see [below for nested schema](#nestedatt--ecs_managed_resource_arns))
+- `endpoint` (String)
 - `id` (String) Uniquely identifies the resource.
 - `service_arn` (String)
 - `status` (Attributes) (see [below for nested schema](#nestedatt--status))
 - `updated_at` (String)
 
+<a id="nestedatt--network_configuration"></a>
+### Nested Schema for `network_configuration`
+
+Optional:
+
+- `security_groups` (List of String)
+- `subnets` (List of String)
+
+
 <a id="nestedatt--primary_container"></a>
 ### Nested Schema for `primary_container`
-
-Required:
-
-- `image` (String)
 
 Optional:
 
@@ -55,6 +63,7 @@ Optional:
 - `command` (List of String)
 - `container_port` (Number)
 - `environment` (Attributes List) (see [below for nested schema](#nestedatt--primary_container--environment))
+- `image` (String)
 - `repository_credentials` (Attributes) (see [below for nested schema](#nestedatt--primary_container--repository_credentials))
 - `secrets` (Attributes List) (see [below for nested schema](#nestedatt--primary_container--secrets))
 
@@ -94,15 +103,6 @@ Optional:
 
 
 
-<a id="nestedatt--network_configuration"></a>
-### Nested Schema for `network_configuration`
-
-Optional:
-
-- `security_groups` (List of String)
-- `subnets` (List of String)
-
-
 <a id="nestedatt--scaling_target"></a>
 ### Nested Schema for `scaling_target`
 
@@ -138,6 +138,7 @@ Read-Only:
 - `primary_container` (Attributes) (see [below for nested schema](#nestedatt--active_configurations--primary_container))
 - `scaling_target` (Attributes) (see [below for nested schema](#nestedatt--active_configurations--scaling_target))
 - `service_revision_arn` (String)
+- `task_definition_arn` (String)
 - `task_role_arn` (String)
 
 <a id="nestedatt--active_configurations--ingress_paths"></a>
@@ -216,6 +217,40 @@ Read-Only:
 - `auto_scaling_target_value` (Number)
 - `max_task_count` (Number)
 - `min_task_count` (Number)
+
+
+
+<a id="nestedatt--ecs_managed_resource_arns"></a>
+### Nested Schema for `ecs_managed_resource_arns`
+
+Read-Only:
+
+- `auto_scaling` (Attributes) (see [below for nested schema](#nestedatt--ecs_managed_resource_arns--auto_scaling))
+- `ingress_path` (Attributes) (see [below for nested schema](#nestedatt--ecs_managed_resource_arns--ingress_path))
+- `log_groups` (List of String)
+- `metric_alarms` (List of String)
+- `service_security_groups` (List of String)
+
+<a id="nestedatt--ecs_managed_resource_arns--auto_scaling"></a>
+### Nested Schema for `ecs_managed_resource_arns.auto_scaling`
+
+Read-Only:
+
+- `application_auto_scaling_policies` (List of String)
+- `scalable_target` (String)
+
+
+<a id="nestedatt--ecs_managed_resource_arns--ingress_path"></a>
+### Nested Schema for `ecs_managed_resource_arns.ingress_path`
+
+Read-Only:
+
+- `certificate_arn` (String)
+- `listener_arn` (String)
+- `listener_rule_arn` (String)
+- `load_balancer_arn` (String)
+- `load_balancer_security_groups` (List of String)
+- `target_group_arns` (List of String)
 
 
 

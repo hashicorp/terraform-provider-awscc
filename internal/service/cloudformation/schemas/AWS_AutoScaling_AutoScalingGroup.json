@@ -89,6 +89,8 @@
         "autoscaling:DetachTrafficSources",
         "autoscaling:DeleteLifecycleHook",
         "autoscaling:PutLifecycleHook",
+        "autoscaling:StartInstanceRefresh",
+        "autoscaling:CancelInstanceRefresh",
         "cloudwatch:PutMetricAlarm",
         "ec2:Describe*",
         "ec2:Get*",
@@ -106,7 +108,7 @@
         "vpc-lattice:ListTargets",
         "vpc-lattice:RegisterTargets"
       ],
-      "timeoutInMinutes": 660
+      "timeoutInMinutes": 2160
     },
     "list": {
       "permissions": [
@@ -204,6 +206,17 @@
         "Max": {
           "description": "The memory maximum in GiB.",
           "type": "number"
+        }
+      }
+    },
+    "InstanceLifecyclePolicy": {
+      "description": "The instance lifecycle policy for the Auto Scaling group. This policy controls instance behavior when an instance transitions through its lifecycle states. Configure retention triggers to specify when instances should move to a ``Retained`` state instead of automatic termination. \n For more information, see [Control instance retention with instance lifecycle policies](https://docs.aws.amazon.com/autoscaling/ec2/userguide/instance-lifecycle-policy.html) in the *Amazon EC2 Auto Scaling User Guide*.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "RetentionTriggers": {
+          "description": "Specifies the conditions that trigger instance retention behavior. These triggers determine when instances should move to a ``Retained`` state instead of automatic termination. This allows you to maintain control over instance management when lifecycles transition and operations fail.",
+          "$ref": "#/definitions/RetentionTriggers"
         }
       }
     },
@@ -327,6 +340,10 @@
         },
         "WeightedCapacity": {
           "description": "If you provide a list of instance types to use, you can specify the number of capacity units provided by each instance type in terms of virtual CPUs, memory, storage, throughput, or other relative performance characteristic. When a Spot or On-Demand Instance is launched, the capacity units count toward the desired capacity. Amazon EC2 Auto Scaling launches instances until the desired capacity is totally fulfilled, even if this results in an overage. For example, if there are two units remaining to fulfill capacity, and Amazon EC2 Auto Scaling can only launch an instance with a ``WeightedCapacity`` of five units, the instance is launched, and the desired capacity is exceeded by three units. For more information, see [Configure instance weighting for Amazon EC2 Auto Scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups-instance-weighting.html) in the *Amazon EC2 Auto Scaling User Guide*. Value must be in the range of 1-999. \n If you specify a value for ``WeightedCapacity`` for one instance type, you must specify a value for ``WeightedCapacity`` for all of them.\n  Every Auto Scaling group has three size parameters (``DesiredCapacity``, ``MaxSize``, and ``MinSize``). Usually, you set these sizes based on a specific number of instances. However, if you configure a mixed instances policy that defines weights for the instance types, you must specify these sizes with the same units that you use for weighting instances.",
+          "type": "string"
+        },
+        "ImageId": {
+          "description": "The ID of the Amazon Machine Image (AMI) to use for instances launched with this override. When using Instance Refresh with ``ReplaceRootVolume`` strategy, this specifies the AMI for root volume replacement operations. \n  For ``ReplaceRootVolume`` operations: \n  +  All overrides in the ``MixedInstancesPolicy`` must specify an ImageId\n  +  The AMI must contain only a single root volume\n  +  Root volume replacement doesn't support multi-volume AMIs",
           "type": "string"
         },
         "InstanceRequirements": {
@@ -482,11 +499,12 @@
       "type": "object",
       "properties": {
         "CapacityDistributionStrategy": {
-          "description": "If launches fail in an Availability Zone, the following strategies are available. The default is ``balanced-best-effort``. \n  +  ``balanced-only`` - If launches fail in an Availability Zone, Auto Scaling will continue to attempt to launch in the unhealthy zone to preserve a balanced distribution.\n  +  ``balanced-best-effort`` - If launches fail in an Availability Zone, Auto Scaling will attempt to launch in another healthy Availability Zone instead.",
+          "description": "If launches fail in an Availability Zone, the following strategies are available. The default is ``balanced-best-effort``. \n  +  ``balanced-only`` - If launches fail in an Availability Zone, Auto Scaling will continue to attempt to launch in the unhealthy zone to preserve a balanced distribution.\n  +  ``balanced-best-effort`` - If launches fail in an Availability Zone, Auto Scaling will attempt to launch in another healthy Availability Zone instead.\n  +  ``reservations-then-balanced`` - Auto Scaling will first attempt to launch into your Capacity Reservations, and then balance any remaining capacity across healthy Availability Zones.",
           "type": "string",
           "enum": [
             "balanced-best-effort",
-            "balanced-only"
+            "balanced-only",
+            "reservations-then-balanced"
           ]
         }
       }
@@ -598,6 +616,17 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/PerformanceFactorReferenceRequest"
+      }
+    },
+    "RetentionTriggers": {
+      "description": "Defines the specific triggers that cause instances to be retained in a Retained state rather than terminated. Each trigger corresponds to a different failure scenario during the instance lifecycle. This allows fine-grained control over when to preserve instances for manual intervention.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "TerminateHookAbandon": {
+          "description": "Specifies the action when a termination lifecycle hook is abandoned due to failure, timeout, or explicit abandonment (calling CompleteLifecycleAction). \n  Set to ``retain`` to move instances to a retained state. Set to ``terminate`` for default termination behavior. \n  Retained instances don't count toward desired capacity and remain until you call ``TerminateInstanceInAutoScalingGroup``.",
+          "type": "string"
+        }
       }
     },
     "AcceleratorTotalMemoryMiBRequest": {
@@ -847,12 +876,21 @@
       "type": "string"
     },
     "AvailabilityZoneImpairmentPolicy": {
-      "description": "The Availability Zone impairment policy.",
+      "description": "The Availability Zone impairment policy for the Auto Scaling group.",
       "$ref": "#/definitions/AvailabilityZoneImpairmentPolicy"
     },
     "TargetGroupARNs": {
       "uniqueItems": false,
       "description": "The Amazon Resource Names (ARN) of the Elastic Load Balancing target groups to associate with the Auto Scaling group. Instances are registered as targets with the target groups. The target groups receive incoming traffic and route requests to one or more registered targets. For more information, see [Use Elastic Load Balancing to distribute traffic across the instances in your Auto Scaling group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html) in the *Amazon EC2 Auto Scaling User Guide*.",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "AvailabilityZoneIds": {
+      "uniqueItems": true,
+      "description": "The Availability Zone IDs where the Auto Scaling group can launch instances.",
       "insertionOrder": false,
       "type": "array",
       "items": {
@@ -881,6 +919,10 @@
       "description": "The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before checking the health status of an EC2 instance that has come into service and marking it unhealthy due to a failed health check. This is useful if your instances do not immediately pass their health checks after they enter the ``InService`` state. For more information, see [Set the health check grace period for an Auto Scaling group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/health-check-grace-period.html) in the *Amazon EC2 Auto Scaling User Guide*.\n Default: ``0`` seconds",
       "type": "integer"
     },
+    "InstanceLifecyclePolicy": {
+      "description": "The instance lifecycle policy for the Auto Scaling group.",
+      "$ref": "#/definitions/InstanceLifecyclePolicy"
+    },
     "DefaultInstanceWarmup": {
       "description": "The amount of time, in seconds, until a new instance is considered to have finished initializing and resource consumption to become stable after it enters the ``InService`` state. \n During an instance refresh, Amazon EC2 Auto Scaling waits for the warm-up period after it replaces an instance before it moves on to replacing the next instance. Amazon EC2 Auto Scaling also waits for the warm-up period before aggregating the metrics for new instances with existing instances in the Amazon CloudWatch metrics that are used for scaling, resulting in more reliable usage data. For more information, see [Set the default instance warmup for an Auto Scaling group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-default-instance-warmup.html) in the *Amazon EC2 Auto Scaling User Guide*.\n  To manage various warm-up settings at the group level, we recommend that you set the default instance warmup, *even if it is set to 0 seconds*. To remove a value that you previously set, include the property but specify ``-1`` for the value. However, we strongly recommend keeping the default instance warmup enabled by specifying a value of ``0`` or other nominal value.\n  Default: None",
       "type": "integer"
@@ -903,7 +945,7 @@
     },
     "VPCZoneIdentifier": {
       "uniqueItems": false,
-      "description": "A list of subnet IDs for a virtual private cloud (VPC) where instances in the Auto Scaling group can be created.\n If this resource specifies public subnets and is also in a VPC that is defined in the same stack template, you must use the [DependsOn attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-dependson.html) to declare a dependency on the [VPC-gateway attachment](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpc-gateway-attachment.html).\n  When you update ``VPCZoneIdentifier``, this retains the same Auto Scaling group and replaces old instances with new ones, according to the specified subnets. You can optionally specify how CloudFormation handles these updates by using an [UpdatePolicy attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-updatepolicy.html).\n  Required to launch instances into a nondefault VPC. If you specify ``VPCZoneIdentifier`` with ``AvailabilityZones``, the subnets that you specify for this property must reside in those Availability Zones.",
+      "description": "A list of subnet IDs for a virtual private cloud (VPC) where instances in the Auto Scaling group can be created.\n If this resource specifies public subnets and is also in a VPC that is defined in the same stack template, you must use the [DependsOn attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-dependson.html) to declare a dependency on the [VPC-gateway attachment](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpc-gateway-attachment.html).\n  When you update ``VPCZoneIdentifier``, this retains the same Auto Scaling group and replaces old instances with new ones, according to the specified subnets. To control how CloudFormation replaces the instances, add an [UpdatePolicy attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-updatepolicy.html) to your stack. Set the update policy to ``AutoScalingInstanceRefresh``. For more information, see the [AutoScalingInstanceRefresh policy](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-updatepolicy.html#cfn-attributes-updatepolicy-instancerefresh).\n  Required to launch instances into a nondefault VPC. If you specify ``VPCZoneIdentifier`` with ``AvailabilityZones``, the subnets that you specify for this property must reside in those Availability Zones.",
       "insertionOrder": false,
       "type": "array",
       "items": {
@@ -948,7 +990,7 @@
       "$ref": "#/definitions/NotificationConfiguration"
     },
     "AvailabilityZoneDistribution": {
-      "description": "The instance capacity distribution across Availability Zones.",
+      "description": "The EC2 instance capacity distribution across Availability Zones for the Auto Scaling group.",
       "$ref": "#/definitions/AvailabilityZoneDistribution"
     },
     "MetricsCollection": {
@@ -959,6 +1001,10 @@
       "items": {
         "$ref": "#/definitions/MetricsCollection"
       }
+    },
+    "DeletionProtection": {
+      "description": "The deletion protection setting for the Auto Scaling group.",
+      "type": "string"
     },
     "InstanceMaintenancePolicy": {
       "description": "An instance maintenance policy. For more information, see [Set instance maintenance policy](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-maintenance-policy.html) in the *Amazon EC2 Auto Scaling User Guide*.",
@@ -1005,7 +1051,7 @@
       "type": "string"
     },
     "CapacityReservationSpecification": {
-      "description": "The capacity reservation specification.",
+      "description": "The capacity reservation specification for the Auto Scaling group.",
       "$ref": "#/definitions/CapacityReservationSpecification"
     },
     "HealthCheckType": {

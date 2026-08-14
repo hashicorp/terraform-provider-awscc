@@ -176,10 +176,11 @@ importlint: ## Run importlint
 	@impi --local . --scheme stdThirdPartyLocal --ignore-generated=true ./...
 
 tools: prereq-go ## Install tools
-	cd tools && $(GO_VER) install github.com/golangci/golangci-lint/cmd/golangci-lint
+	cd tools && $(GO_VER) install github.com/golangci/golangci-lint/v2/cmd/golangci-lint
 	cd tools && $(GO_VER) install github.com/pavius/impi/cmd/impi
 	cd tools && $(GO_VER) install github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs
 	cd tools && $(GO_VER) install golang.org/x/tools/cmd/goimports@latest
+	cd tools && $(GO_VER) install github.com/YakDriver/copyplop
 
 docs-all: docs-import docs-fmt docs ## Generate all documentation
 
@@ -211,34 +212,51 @@ update: prereq-go ## Update Schema
 	echo "==> Updating Schema..."
 	$(GO_VER) run $$(find internal/update -name "*.go" -not -name "*_test.go")
 
+check-startup-errors: prereq-go ## Build with writeerrors tag and run terraform plan against a minimal data source config
+	@echo "==> Installing provider with writeerrors tag..."
+	$(GO_VER) install -tags writeerrors .
+	@GOBIN="$$($(GO_VER) env GOPATH)/bin"; \
+	REPO_ROOT="$$(pwd)"; \
+	LOG_FILE="$$REPO_ROOT/.make-startup-errors.log"; \
+	WORK_DIR=$$(mktemp -d); \
+	trap 'rm -rf "$$WORK_DIR"' EXIT; \
+	echo "==> Writing Terraform config to $$WORK_DIR"; \
+	printf 'terraform {\n  required_providers {\n    awscc = {\n      source = "hashicorp/awscc"\n    }\n  }\n}\n\nprovider "awscc" {\n  region = "us-east-1"\n}\n\ndata "awscc_s3_bucket" "example" {\n  id = "my-example-bucket"\n}\n' > "$$WORK_DIR/main.tf"; \
+	printf 'provider_installation {\n  dev_overrides {\n    "hashicorp/awscc" = "%s"\n  }\n  direct {}\n}\n' "$$GOBIN" > "$$WORK_DIR/terraform.rc"; \
+	echo "==> Running terraform plan (errors logged to $$LOG_FILE)..."; \
+	: > "$$LOG_FILE"; \
+	cd "$$WORK_DIR" && RESOURCE_ERROR_LOG="$$LOG_FILE" TF_CLI_CONFIG_FILE="$$WORK_DIR/terraform.rc" terraform plan; \
+	echo "==> resource_errors.log (if any):"; \
+	cat "$$LOG_FILE" 2>/dev/null || echo "(no errors logged)"
+
 smoke: prereq-go ## Run smoke tests
 	@echo "make: Running smoke tests..."
 	@echo "make: NOTE: All tests should pass. Error output for sdk.proto, \"Response contains error diagnostic\" can be ignored."
 	@TF_LOG=ERROR make testacc PKG_NAME=internal/aws/logs TESTARGS='-run=TestAccAWSLogsLogGroup_\|TestAccAWSLogsLogGroupDataSource_' ACCTEST_PARALLELISM=3
 
 commitdatas: ## Commit data source changes
-	@git add -A && git commit -m "$$(date -I) CloudFormation schemas in us-east-1; Generate Terraform data source schemas"
+	@git add -A && git commit -m "$$(date -u -I) CloudFormation schemas in us-east-1; Generate Terraform data source schemas"
 
 commitresources: ## Commit resource changes
-	@git add -A && git commit -m "$$(date -I) CloudFormation schemas in us-east-1; Generate Terraform resource schemas"
+	@git add -A && git commit -m "$$(date -u -I) CloudFormation schemas in us-east-1; Generate Terraform resource schemas"
 
 commitschemas: ## Commit schema changes
-	@git add -A && git commit -m "$$(date -I) CloudFormation schemas in us-east-1; New schemas"
+	@git add -A && git commit -m "$$(date -u -I) CloudFormation schemas in us-east-1; New schemas"
 
 commitrefresh: ## Commit schema refresh changes
-	@git add -A && git commit -m "$$(date -I) CloudFormation schemas in us-east-1; Refresh existing schemas"
+	@git add -A && git commit -m "$$(date -u -I) CloudFormation schemas in us-east-1; Refresh existing schemas"
 
 commitdocs: ## Commit documentation changes
-	@git add -A && git commit -m "$$(date -I) Documentation; Update generated documentation"
+	@git add -A && git commit -m "$$(date -u -I) Documentation; Update generated documentation"
 
 bigdiffer: ## Show big diff between current branch and main
 	@echo "==> Showing big diff between this schema generation and last"
 	@echo "==> Manually add each new resource/data source type to internal/provider/all_schemas.hcl"
-	@LAST_VERSION_DATE=$$(git log -1 --format=%cd --date=format:%Y-%m-%d version/VERSION); \
-	diff internal/provider/generators/allschemas/available_schemas.$$LAST_VERSION_DATE.hcl internal/provider/generators/allschemas/available_schemas.$$(date -I).hcl || true
+	@LAST_VERSION_DATE=$$(TZ=UTC git log -1 --format=%cd --date=format-local:%Y-%m-%d version/VERSION); \
+	diff internal/provider/generators/allschemas/available_schemas.$$LAST_VERSION_DATE.hcl internal/provider/generators/allschemas/available_schemas.$$(date -u -I).hcl || true
 
 newbranch: ## Create a new branch for schema updates
-	@NEW_BRANCH="$$(date -I)-schema-updates"; \
+	@NEW_BRANCH="$$(date -u -I)-schema-updates"; \
 	echo "==> Creating and switching to new branch $$NEW_BRANCH"; \
 	git checkout -b $$NEW_BRANCH
 
@@ -261,14 +279,13 @@ suppressions: ## Checkout suppressed schema files
 
 biglister: prereq-go ## List all resources and data sources
 	@echo "==> Listing all currently available resources and data sources..."
-	@OUTPUT_FILE="internal/provider/generators/allschemas/available_schemas.$$(date -I).hcl"; \
+	@OUTPUT_FILE="internal/provider/generators/allschemas/available_schemas.$$(date -u -I).hcl"; \
 	( \
 		SECONDS=0; \
 		while sleep 1; do \
 			MINS=$$((SECONDS / 60)); \
 			SECS=$$((SECONDS % 60)); \
 			printf "\r==> Elapsed time: %02d:%02d " $$MINS $$SECS; \
-			SECONDS=$$((SECONDS + 1)); \
 		done \
 	) & TIMER_PID=$$!; \
 	$(GO_VER) run internal/provider/generators/allschemas/manual_allschemas/main.go > $$OUTPUT_FILE 2>&1; \
@@ -287,6 +304,7 @@ biglister: prereq-go ## List all resources and data sources
 .PHONY: bigdiffer
 .PHONY: biglister
 .PHONY: build
+.PHONY: check-startup-error
 .PHONY: cleanschemas
 .PHONY: commitdatas
 .PHONY: commitdocs

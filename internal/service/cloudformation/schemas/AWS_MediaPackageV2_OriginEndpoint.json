@@ -31,6 +31,43 @@
         "ISM"
       ]
     },
+    "CustomAdType": {
+      "type": "string",
+      "enum": [
+        "PROGRAM",
+        "CHAPTER",
+        "UNSCHEDULED_EVENT",
+        "ALTERNATE_CONTENT_OPPORTUNITY",
+        "NETWORK"
+      ]
+    },
+    "DashAudioTimelinePattern": {
+      "type": "string",
+      "enum": [
+        "NONE",
+        "PATTERNED"
+      ]
+    },
+    "DashAvailabilityStartTimeConfiguration": {
+      "description": "<p>The configuration for the DASH <code>availabilityStartTime</code> attribute of the Media Presentation Description (MPD). Use this configuration to set a custom availability start time for your DASH manifest.</p>",
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "FixedAvailabilityStartTime",
+          "properties": {
+            "FixedAvailabilityStartTime": {
+              "type": "string",
+              "description": "<p>The fixed availability start time for the DASH manifest, in ISO 8601 date-time format. The value must have hourly granularity, meaning that the minutes, seconds, and fractional seconds must be zero. The value must be on or after <code>2024-01-01T00:00:00Z</code> and must be at least 14 days before the current time.</p>",
+              "format": "date-time"
+            }
+          },
+          "required": [
+            "FixedAvailabilityStartTime"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
     "DashBaseUrl": {
       "type": "object",
       "description": "<p>The base URLs to use for retrieving segments. You can specify multiple locations and indicate the priority and weight for when each should be used, for use in mutli-CDN workflows.</p>",
@@ -357,6 +394,12 @@
           "minLength": 1,
           "description": "<p>Optionally specify one or more manifest filters for all of your manifest egress requests. When you include a manifest filter, note that you cannot use an identical manifest filter query parameter for this manifest's endpoint URL.</p>"
         },
+        "DrmSettings": {
+          "type": "string",
+          "maxLength": 1024,
+          "minLength": 1,
+          "description": "<p>Optionally specify one or more DRM settings for all of your manifest egress requests. When you include a DRM setting, note that you cannot use an identical DRM setting query parameter for this manifest's endpoint URL.</p>"
+        },
         "Start": {
           "type": "string",
           "description": "<p>Optionally specify the start time for all of your manifest egress requests. When you include start time, note that you cannot use start time query parameters for this manifest's endpoint URL.</p>",
@@ -473,8 +516,17 @@
         "Compactness": {
           "$ref": "#/definitions/DashCompactness"
         },
+        "AudioTimelinePattern": {
+          "$ref": "#/definitions/DashAudioTimelinePattern"
+        },
         "SubtitleConfiguration": {
           "$ref": "#/definitions/DashSubtitleConfiguration"
+        },
+        "UriPathType": {
+          "$ref": "#/definitions/UriPathType"
+        },
+        "AvailabilityStartTimeConfiguration": {
+          "$ref": "#/definitions/DashAvailabilityStartTimeConfiguration"
         }
       },
       "required": [
@@ -524,6 +576,9 @@
         "UrlEncodeChildManifest": {
           "type": "boolean",
           "description": "<p>When enabled, MediaPackage URL-encodes the query string for API requests for HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html\">Amazon Web Services Signature Version 4 for API requests</a> in <i>Identity and Access Management User Guide</i>.</p>"
+        },
+        "UriPathType": {
+          "$ref": "#/definitions/UriPathType"
         }
       },
       "required": [
@@ -573,6 +628,9 @@
         "UrlEncodeChildManifest": {
           "type": "boolean",
           "description": "<p>When enabled, MediaPackage URL-encodes the query string for API requests for LL-HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html\">Amazon Web Services Signature Version 4 for API requests</a> in <i>Identity and Access Management User Guide</i>.</p>"
+        },
+        "UriPathType": {
+          "$ref": "#/definitions/UriPathType"
         }
       },
       "required": [
@@ -620,6 +678,13 @@
         "COMPACT"
       ]
     },
+    "OutputTimestampMode": {
+      "type": "string",
+      "enum": [
+        "PASSTHROUGH",
+        "REBASED_TO_CHANNEL_START"
+      ]
+    },
     "PresetSpeke20Audio": {
       "type": "string",
       "enum": [
@@ -657,6 +722,18 @@
           "maxItems": 100,
           "minItems": 0,
           "description": "<p>The SCTE-35 message types that you want to be treated as ad markers in the output.</p>"
+        },
+        "ScteInSegments": {
+          "$ref": "#/definitions/ScteInSegments"
+        },
+        "CustomAdTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomAdType"
+          },
+          "maxItems": 25,
+          "minItems": 0,
+          "description": "<p>A list of additional non-Ad SCTE-35 event types to treat as advertisements. When configured, events matching these types produce ad markers (such as <code>SCTE35-OUT</code> and <code>SCTE35-IN</code> in HLS DATERANGE tags) in manifests.</p> <p>Valid values: <code>PROGRAM</code> | <code>CHAPTER</code> | <code>UNSCHEDULED_EVENT</code> | <code>ALTERNATE_CONTENT_OPPORTUNITY</code> | <code>NETWORK</code> </p> <p>If you don't specify any values, the default is empty (only default ad types are used).</p>"
         }
       },
       "additionalProperties": false
@@ -667,6 +744,9 @@
       "properties": {
         "AdMarkerDash": {
           "$ref": "#/definitions/AdMarkerDash"
+        },
+        "ScteInManifests": {
+          "$ref": "#/definitions/ScteInManifests"
         }
       },
       "additionalProperties": false
@@ -682,7 +762,17 @@
         "DISTRIBUTOR_PLACEMENT_OPPORTUNITY",
         "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY",
         "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY",
-        "PROGRAM"
+        "PROGRAM",
+        "CHAPTER",
+        "UNSCHEDULED_EVENT",
+        "ALTERNATE_CONTENT_OPPORTUNITY",
+        "NETWORK",
+        "PROVIDER_PROMO",
+        "DISTRIBUTOR_PROMO",
+        "PROVIDER_AD_BLOCK",
+        "DISTRIBUTOR_AD_BLOCK",
+        "CONTENT_IDENTIFICATION",
+        "CALL_AD_SERVER"
       ]
     },
     "ScteHls": {
@@ -691,9 +781,27 @@
       "properties": {
         "AdMarkerHls": {
           "$ref": "#/definitions/AdMarkerHls"
+        },
+        "ScteInManifests": {
+          "$ref": "#/definitions/ScteInManifests"
         }
       },
       "additionalProperties": false
+    },
+    "ScteInManifests": {
+      "type": "string",
+      "enum": [
+        "ALL",
+        "MATCHES_FILTER"
+      ]
+    },
+    "ScteInSegments": {
+      "type": "string",
+      "enum": [
+        "NONE",
+        "ALL",
+        "MATCHES_FILTER"
+      ]
     },
     "Segment": {
       "type": "object",
@@ -729,6 +837,9 @@
         },
         "Encryption": {
           "$ref": "#/definitions/Encryption"
+        },
+        "OutputTimestampMode": {
+          "$ref": "#/definitions/OutputTimestampMode"
         }
       },
       "additionalProperties": false
@@ -767,6 +878,13 @@
           "maxLength": 1024,
           "minLength": 1,
           "description": "<p>The URL of the API Gateway proxy that you set up to talk to your key server. The API Gateway proxy must reside in the same AWS Region as MediaPackage and must start with https://.</p> <p>The following example shows a URL: <code>https://1wm2dx1f33.execute-api.us-west-2.amazonaws.com/SpekeSample/copyProtection</code> </p>"
+        },
+        "CertificateArn": {
+          "type": "string",
+          "maxLength": 2048,
+          "minLength": 20,
+          "pattern": "^arn:([^:\\n]+):acm:([^:\\n]+):([0-9]+):certificate/[a-zA-Z0-9-_]+$",
+          "description": "<p>The ARN for the certificate that you imported to Amazon Web Services Certificate Manager to add content key encryption to this endpoint. For this feature to work, your DRM key provider must support content key encryption.</p>"
         }
       },
       "required": [
@@ -801,6 +919,20 @@
       "enum": [
         "AES_128",
         "SAMPLE_AES"
+      ]
+    },
+    "UriPathType": {
+      "type": "string",
+      "enum": [
+        "LEAF",
+        "ROOT"
+      ]
+    },
+    "UriSeparator": {
+      "type": "string",
+      "enum": [
+        "UNDERSCORE",
+        "HYPHEN"
       ]
     },
     "Tag": {
@@ -895,8 +1027,11 @@
     "StartoverWindowSeconds": {
       "type": "integer",
       "maximum": 1209600,
-      "minimum": 60,
+      "minimum": 0,
       "description": "<p>The size of the window (in seconds) to create a window of the live stream that's available for on-demand viewing. Viewers can start-over or catch-up on content that falls within the window. The maximum startover window is 1,209,600 seconds (14 days).</p>"
+    },
+    "UriSeparator": {
+      "$ref": "#/definitions/UriSeparator"
     },
     "DashManifestUrls": {
       "type": "array",
@@ -960,7 +1095,8 @@
       "permissions": [
         "mediapackagev2:TagResource",
         "mediapackagev2:CreateOriginEndpoint",
-        "iam:PassRole"
+        "iam:PassRole",
+        "acm:DescribeCertificate"
       ]
     },
     "read": {
@@ -974,7 +1110,8 @@
         "mediapackagev2:UntagResource",
         "mediapackagev2:ListTagsForResource",
         "mediapackagev2:UpdateOriginEndpoint",
-        "iam:PassRole"
+        "iam:PassRole",
+        "acm:DescribeCertificate"
       ]
     },
     "delete": {
@@ -1007,7 +1144,7 @@
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": false,
+    "cloudFormationSystemTags": true,
     "tagProperty": "/properties/Tags",
     "permissions": [
       "mediapackagev2:TagResource",

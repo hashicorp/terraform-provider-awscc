@@ -49,6 +49,24 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "MetricsConfigurations": {
+      "description": "Specifies the metrics configurations for the Amazon S3 Express bucket.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": true,
+      "items": {
+        "$ref": "#/definitions/MetricsConfiguration"
+      }
+    },
+    "InventoryConfigurations": {
+      "description": "The inventory configuration for an Amazon S3 Express bucket.",
+      "items": {
+        "$ref": "#/definitions/InventoryConfiguration"
+      },
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": true
     }
   },
   "definitions": {
@@ -218,6 +236,125 @@
         "Key",
         "Value"
       ]
+    },
+    "MetricsConfiguration": {
+      "description": "Specifies a metrics configuration for the CloudWatch request metrics from an Amazon S3 Express bucket.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Id": {
+          "description": "The ID used to identify the metrics configuration.",
+          "type": "string"
+        },
+        "Prefix": {
+          "description": "The prefix used when evaluating a metrics filter.",
+          "type": "string"
+        },
+        "AccessPointArn": {
+          "description": "The access point ARN used when evaluating a metrics filter.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Id"
+      ]
+    },
+    "InventoryConfiguration": {
+      "description": "Specifies an inventory configuration for an Amazon S3 Express bucket",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Destination": {
+          "$ref": "#/definitions/Destination"
+        },
+        "Enabled": {
+          "description": "Specifies whether the inventory is enabled or disabled.",
+          "type": "boolean"
+        },
+        "Id": {
+          "description": "The ID used to identify the inventory configuration.",
+          "type": "string"
+        },
+        "IncludedObjectVersions": {
+          "description": "Object versions to include in the inventory list.",
+          "type": "string",
+          "enum": [
+            "All",
+            "Current"
+          ]
+        },
+        "OptionalFields": {
+          "description": "Contains the optional fields that are included in the inventory results.",
+          "type": "array",
+          "uniqueItems": true,
+          "insertionOrder": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "Size",
+              "LastModifiedDate",
+              "StorageClass",
+              "ETag",
+              "IsMultipartUploaded",
+              "EncryptionStatus",
+              "BucketKeyStatus",
+              "ChecksumAlgorithm",
+              "LifecycleExpirationDate"
+            ]
+          }
+        },
+        "Prefix": {
+          "description": "The prefix that is prepended to all inventory results.",
+          "type": "string"
+        },
+        "ScheduleFrequency": {
+          "description": "Specifies the schedule for generating inventory results.",
+          "type": "string",
+          "enum": [
+            "Daily",
+            "Weekly"
+          ]
+        }
+      },
+      "required": [
+        "Destination",
+        "Enabled",
+        "Id",
+        "IncludedObjectVersions",
+        "ScheduleFrequency"
+      ]
+    },
+    "Destination": {
+      "description": "Specifies information about where to publish inventory reports for an Amazon S3 Express bucket.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "BucketArn": {
+          "description": "The Amazon Resource Name (ARN) of the destination Amazon S3 bucket to which data is exported.",
+          "type": "string"
+        },
+        "BucketAccountId": {
+          "description": "The account ID that owns the destination S3 bucket. ",
+          "type": "string"
+        },
+        "Format": {
+          "description": "Specifies the file format used when exporting data to Amazon S3.",
+          "type": "string",
+          "enum": [
+            "CSV",
+            "ORC",
+            "Parquet"
+          ]
+        },
+        "Prefix": {
+          "description": "The prefix to use when exporting data. The prefix is prepended to all results.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "BucketArn",
+        "Format"
+      ]
     }
   },
   "createOnlyProperties": [
@@ -256,6 +393,8 @@
         "s3express:ListAllMyDirectoryBuckets",
         "s3express:PutEncryptionConfiguration",
         "s3express:PutLifecycleConfiguration",
+        "s3express:PutMetricsConfiguration",
+        "s3express:PutInventoryConfiguration",
         "s3express:TagResource"
       ]
     },
@@ -265,6 +404,8 @@
         "ec2:DescribeAvailabilityZones",
         "s3express:GetEncryptionConfiguration",
         "s3express:GetLifecycleConfiguration",
+        "s3express:GetMetricsConfiguration",
+        "s3express:GetInventoryConfiguration",
         "s3express:ListTagsForResource"
       ]
     },
@@ -274,6 +415,8 @@
         "kms:Decrypt",
         "s3express:PutEncryptionConfiguration",
         "s3express:PutLifecycleConfiguration",
+        "s3express:PutMetricsConfiguration",
+        "s3express:PutInventoryConfiguration",
         "s3express:TagResource",
         "s3express:UntagResource"
       ]

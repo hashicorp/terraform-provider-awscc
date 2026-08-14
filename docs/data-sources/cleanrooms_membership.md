@@ -27,6 +27,7 @@ Data Source schema for AWS::CleanRooms::Membership
 - `collaboration_identifier` (String)
 - `default_job_result_configuration` (Attributes) (see [below for nested schema](#nestedatt--default_job_result_configuration))
 - `default_result_configuration` (Attributes) (see [below for nested schema](#nestedatt--default_result_configuration))
+- `is_metrics_enabled` (Boolean)
 - `job_log_status` (String)
 - `membership_identifier` (String)
 - `payment_configuration` (Attributes) (see [below for nested schema](#nestedatt--payment_configuration))
@@ -111,6 +112,7 @@ Read-Only:
 
 - `model_inference` (Attributes) (see [below for nested schema](#nestedatt--payment_configuration--machine_learning--model_inference))
 - `model_training` (Attributes) (see [below for nested schema](#nestedatt--payment_configuration--machine_learning--model_training))
+- `synthetic_data_generation` (Attributes) (see [below for nested schema](#nestedatt--payment_configuration--machine_learning--synthetic_data_generation))
 
 <a id="nestedatt--payment_configuration--machine_learning--model_inference"></a>
 ### Nested Schema for `payment_configuration.machine_learning.model_inference`
@@ -122,6 +124,14 @@ Read-Only:
 
 <a id="nestedatt--payment_configuration--machine_learning--model_training"></a>
 ### Nested Schema for `payment_configuration.machine_learning.model_training`
+
+Read-Only:
+
+- `is_responsible` (Boolean)
+
+
+<a id="nestedatt--payment_configuration--machine_learning--synthetic_data_generation"></a>
+### Nested Schema for `payment_configuration.machine_learning.synthetic_data_generation`
 
 Read-Only:
 

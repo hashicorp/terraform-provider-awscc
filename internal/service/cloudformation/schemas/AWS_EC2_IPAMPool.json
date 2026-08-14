@@ -111,7 +111,8 @@
       "description": "Limits which service in Amazon Web Services that the pool can be used in.",
       "type": "string",
       "enum": [
-        "ec2"
+        "ec2",
+        "global-services"
       ]
     },
     "Description": {

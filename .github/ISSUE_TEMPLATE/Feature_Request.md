@@ -3,6 +3,8 @@ name: 🚀 Feature Request
 about: I have a suggestion (and might want to implement myself 🙂)!
 labels: enhancement
 ---
+<!-- Copyright IBM Corp. 2021, 2026 -->
+<!-- SPDX-License-Identifier: MPL-2.0 -->
 
 <!--- Please keep this note for the community --->
 

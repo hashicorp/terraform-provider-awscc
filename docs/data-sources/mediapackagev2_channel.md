@@ -32,6 +32,7 @@ Data Source schema for AWS::MediaPackageV2::Channel
 - `input_type` (String)
 - `modified_at` (String) <p>The date and time the channel was modified.</p>
 - `output_header_configuration` (Attributes) <p>The settings for what common media server data (CMSD) headers AWS Elemental MediaPackage includes in responses to the CDN.</p> (see [below for nested schema](#nestedatt--output_header_configuration))
+- `output_locking_mode` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--ingest_endpoints"></a>
@@ -48,8 +49,8 @@ Read-Only:
 
 Read-Only:
 
-- `mqcs_input_switching` (Boolean) <p>When true, AWS Elemental MediaPackage performs input switching based on the MQCS. Default is true. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>
-- `preferred_input` (Number)
+- `mqcs_input_switching` (Boolean) <p>When true, AWS Elemental MediaPackage performs input switching based on the MQCS. Default is false. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>
+- `preferred_input` (Number) <p>For CMAF inputs, indicates which input MediaPackage should prefer when both inputs have equal MQCS scores. Select <code>1</code> to prefer the first ingest endpoint, or <code>2</code> to prefer the second ingest endpoint. If you don't specify a preferred input, MediaPackage uses its default switching behavior when MQCS scores are equal.</p>
 
 
 <a id="nestedatt--output_header_configuration"></a>

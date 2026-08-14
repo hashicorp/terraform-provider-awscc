@@ -76,6 +76,14 @@
         "mongodb_cr",
         "scram_sha_1"
       ]
+    },
+    "SybaseSslModeValue": {
+      "type": "string",
+      "enum": [
+        "none",
+        "require",
+        "verify-ca"
+      ]
     }
   },
   "properties": {
@@ -124,7 +132,8 @@
         "mongodb",
         "docdb",
         "db2",
-        "db2_zos"
+        "db2_zos",
+        "sybase"
       ]
     },
     "ExactSettings": {
@@ -421,6 +430,36 @@
             "DatabaseName"
           ],
           "additionalProperties": false
+        },
+        "SybaseAseSettings": {
+          "description": "SybaseAseSettings property identifier.",
+          "type": "object",
+          "properties": {
+            "ServerName": {
+              "type": "string"
+            },
+            "Port": {
+              "type": "integer"
+            },
+            "DatabaseName": {
+              "type": "string"
+            },
+            "EncryptPassword": {
+              "type": "boolean"
+            },
+            "SslMode": {
+              "$ref": "#/definitions/SybaseSslModeValue"
+            },
+            "CertificateArn": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "ServerName",
+            "Port",
+            "SslMode"
+          ],
+          "additionalProperties": false
         }
       },
       "anyOf": [
@@ -472,6 +511,11 @@
         {
           "required": [
             "IbmDb2zOsSettings"
+          ]
+        },
+        {
+          "required": [
+            "SybaseAseSettings"
           ]
         }
       ],

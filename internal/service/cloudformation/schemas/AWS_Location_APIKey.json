@@ -114,10 +114,6 @@
       },
       "additionalProperties": false
     },
-    "Unit": {
-      "type": "object",
-      "additionalProperties": false
-    },
     "Tag": {
       "description": "A key-value pair to associate with a resource.",
       "type": "object",
@@ -312,7 +308,7 @@
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": false,
+    "cloudFormationSystemTags": true,
     "tagProperty": "/properties/Tags",
     "permissions": [
       "geo:TagResource",

@@ -27,6 +27,7 @@ Data Source schema for AWS::OpenSearchService::Application
 - `data_sources` (Attributes List) List of data sources. (see [below for nested schema](#nestedatt--data_sources))
 - `endpoint` (String) The endpoint for the application.
 - `iam_identity_center_options` (Attributes) Options for configuring IAM Identity Center (see [below for nested schema](#nestedatt--iam_identity_center_options))
+- `kms_key_arn` (String) The ARN of the KMS key used to encrypt the application.
 - `name` (String) The name of the application.
 - `tags` (Attributes List) An arbitrary set of tags (key-value pairs) for this application. (see [below for nested schema](#nestedatt--tags))
 

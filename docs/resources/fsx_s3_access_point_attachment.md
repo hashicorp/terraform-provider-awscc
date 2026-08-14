@@ -180,52 +180,85 @@ resource "awscc_fsx_s3_access_point_attachment" "example" {
 
 ### Required
 
-- `name` (String) The Name of the S3AccessPointAttachment
-- `open_zfs_configuration` (Attributes) (see [below for nested schema](#nestedatt--open_zfs_configuration))
-- `type` (String)
+- `name` (String) The name of the S3 access point attachment; also used for the name of the S3 access point.
+- `type` (String) The type of Amazon FSx volume that the S3 access point is attached to.
 
 ### Optional
 
-- `s3_access_point` (Attributes) (see [below for nested schema](#nestedatt--s3_access_point))
+- `ontap_configuration` (Attributes) The OntapConfiguration of the S3 access point attachment. (see [below for nested schema](#nestedatt--ontap_configuration))
+- `open_zfs_configuration` (Attributes) The OpenZFSConfiguration of the S3 access point attachment. (see [below for nested schema](#nestedatt--open_zfs_configuration))
+- `s3_access_point` (Attributes) The S3 access point configuration of the S3 access point attachment. (see [below for nested schema](#nestedatt--s3_access_point))
 
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
 
+<a id="nestedatt--ontap_configuration"></a>
+### Nested Schema for `ontap_configuration`
+
+Optional:
+
+- `file_system_identity` (Attributes) The file system identity used to authorize file access requests made using the S3 access point. (see [below for nested schema](#nestedatt--ontap_configuration--file_system_identity))
+- `volume_id` (String) The ID of the FSx for ONTAP volume that the S3 access point is attached to.
+
+<a id="nestedatt--ontap_configuration--file_system_identity"></a>
+### Nested Schema for `ontap_configuration.file_system_identity`
+
+Optional:
+
+- `type` (String) Specifies the FSx for ONTAP user identity type, accepts either UNIX or WINDOWS.
+- `unix_user` (Attributes) Specifies the properties of the file system UNIX user. (see [below for nested schema](#nestedatt--ontap_configuration--file_system_identity--unix_user))
+- `windows_user` (Attributes) Specifies the properties of the file system Windows user. (see [below for nested schema](#nestedatt--ontap_configuration--file_system_identity--windows_user))
+
+<a id="nestedatt--ontap_configuration--file_system_identity--unix_user"></a>
+### Nested Schema for `ontap_configuration.file_system_identity.unix_user`
+
+Optional:
+
+- `name` (String) The name of the UNIX user.
+
+
+<a id="nestedatt--ontap_configuration--file_system_identity--windows_user"></a>
+### Nested Schema for `ontap_configuration.file_system_identity.windows_user`
+
+Optional:
+
+- `name` (String) The name of the Windows user.
+
+
+
+
 <a id="nestedatt--open_zfs_configuration"></a>
 ### Nested Schema for `open_zfs_configuration`
 
-Required:
+Optional:
 
-- `file_system_identity` (Attributes) (see [below for nested schema](#nestedatt--open_zfs_configuration--file_system_identity))
-- `volume_id` (String)
+- `file_system_identity` (Attributes) The file system identity used to authorize file access requests made using the S3 access point. (see [below for nested schema](#nestedatt--open_zfs_configuration--file_system_identity))
+- `volume_id` (String) The ID of the FSx for OpenZFS volume that the S3 access point is attached to.
 
 <a id="nestedatt--open_zfs_configuration--file_system_identity"></a>
 ### Nested Schema for `open_zfs_configuration.file_system_identity`
 
-Required:
+Optional:
 
-- `posix_user` (Attributes) (see [below for nested schema](#nestedatt--open_zfs_configuration--file_system_identity--posix_user))
-- `type` (String)
+- `posix_user` (Attributes) Specifies the UID and GIDs of the file system POSIX user. (see [below for nested schema](#nestedatt--open_zfs_configuration--file_system_identity--posix_user))
+- `type` (String) Specifies the FSx for OpenZFS user identity type, accepts only POSIX.
 
 <a id="nestedatt--open_zfs_configuration--file_system_identity--posix_user"></a>
 ### Nested Schema for `open_zfs_configuration.file_system_identity.posix_user`
 
-Required:
-
-- `gid` (Number)
-- `uid` (Number)
-
 Optional:
 
-- `secondary_gids` (Attributes List) (see [below for nested schema](#nestedatt--open_zfs_configuration--file_system_identity--posix_user--secondary_gids))
+- `gid` (Number) The GID of the file system user.
+- `secondary_gids` (Attributes List) The list of secondary GIDs for the file system user. (see [below for nested schema](#nestedatt--open_zfs_configuration--file_system_identity--posix_user--secondary_gids))
+- `uid` (Number) The UID of the file system user.
 
 <a id="nestedatt--open_zfs_configuration--file_system_identity--posix_user--secondary_gids"></a>
 ### Nested Schema for `open_zfs_configuration.file_system_identity.posix_user.secondary_gids`
 
 Optional:
 
-- `gid` (Number)
+- `gid` (Number) The GID of the file system user.
 
 
 
@@ -236,20 +269,20 @@ Optional:
 
 Optional:
 
-- `policy` (String)
-- `vpc_configuration` (Attributes) (see [below for nested schema](#nestedatt--s3_access_point--vpc_configuration))
+- `policy` (String) The S3 access point's policy.
+- `vpc_configuration` (Attributes) The S3 access point's virtual private cloud (VPC) configuration. (see [below for nested schema](#nestedatt--s3_access_point--vpc_configuration))
 
 Read-Only:
 
-- `alias` (String)
-- `resource_arn` (String)
+- `alias` (String) The S3 access point's alias.
+- `resource_arn` (String) The S3 access point's ARN.
 
 <a id="nestedatt--s3_access_point--vpc_configuration"></a>
 ### Nested Schema for `s3_access_point.vpc_configuration`
 
 Optional:
 
-- `vpc_id` (String)
+- `vpc_id` (String) Specifies the virtual private cloud (VPC) for the S3 access point VPC configuration, if one exists.
 
 ## Import
 
@@ -271,7 +304,7 @@ import {
 
 #### Required
 
-- `name` (String) The Name of the S3AccessPointAttachment
+- `name` (String) The name of the S3 access point attachment; also used for the name of the S3 access point
 
 #### Optional
 

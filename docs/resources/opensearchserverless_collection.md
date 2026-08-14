@@ -51,14 +51,18 @@ The name must meet the following criteria:
 Unique to your account and AWS Region
 Starts with a lowercase letter
 Contains only lowercase letters a-z, the numbers 0-9 and the hyphen (-)
-Contains between 3 and 32 characters
+Contains between 3 and 64 characters
 
 ### Optional
 
+- `collection_group_name` (String) The name of the collection group to associate with the collection.
+- `deletion_protection` (String) The deletion protection state of the collection
 - `description` (String) The description of the collection
+- `encryption_config` (Attributes) Encryption settings for the collection (see [below for nested schema](#nestedatt--encryption_config))
 - `standby_replicas` (String) The possible standby replicas for the collection
 - `tags` (Attributes List) List of tags to be added to the resource (see [below for nested schema](#nestedatt--tags))
 - `type` (String) The possible types for the collection
+- `vector_options` (Attributes) Vector search configuration options for the collection (see [below for nested schema](#nestedatt--vector_options))
 
 ### Read-Only
 
@@ -66,8 +70,18 @@ Contains between 3 and 32 characters
 - `collection_endpoint` (String) The endpoint for the collection.
 - `collection_id` (String) The identifier of the collection
 - `dashboard_endpoint` (String) The OpenSearch Dashboards endpoint for the collection.
+- `fips_endpoints` (Attributes) (see [below for nested schema](#nestedatt--fips_endpoints))
 - `id` (String) Uniquely identifies the resource.
-- `kms_key_arn` (String) The ARN of the AWS KMS key used to encrypt the collection.
+- `kms_key_arn` (String) Key Management Service key used to encrypt the collection.
+
+<a id="nestedatt--encryption_config"></a>
+### Nested Schema for `encryption_config`
+
+Optional:
+
+- `aws_owned_key` (Boolean) Indicates whether to use an AWS owned key for encryption.
+- `kms_key_arn` (String) Key Management Service key used to encrypt the collection.
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
@@ -76,6 +90,23 @@ Optional:
 
 - `key` (String) The key in the key-value pair
 - `value` (String) The value in the key-value pair
+
+
+<a id="nestedatt--vector_options"></a>
+### Nested Schema for `vector_options`
+
+Optional:
+
+- `serverless_vector_acceleration` (String) Indicates whether GPU acceleration is enabled for vector indexing
+
+
+<a id="nestedatt--fips_endpoints"></a>
+### Nested Schema for `fips_endpoints`
+
+Read-Only:
+
+- `collection_endpoint` (String)
+- `dashboard_endpoint` (String)
 
 ## Import
 

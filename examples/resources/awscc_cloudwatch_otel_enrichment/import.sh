@@ -1,0 +1,1 @@
+$ terraform import awscc_cloudwatch_otel_enrichment.example "account_id"

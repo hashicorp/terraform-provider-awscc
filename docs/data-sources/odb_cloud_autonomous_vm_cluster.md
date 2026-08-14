@@ -42,6 +42,7 @@ Data Source schema for AWS::ODB::CloudAutonomousVmCluster
 - `domain` (String) The domain name for the Autonomous VM cluster.
 - `exadata_storage_in_t_bs_lowest_scaled_value` (Number) The minimum value to which you can scale down the Exadata storage, in TB.
 - `hostname` (String) The hostname for the Autonomous VM cluster.
+- `iam_roles` (Attributes Set) The AWS Identity and Access Management (IAM) service roles associated with the Autonomous VM cluster. (see [below for nested schema](#nestedatt--iam_roles))
 - `is_mtls_enabled_vm_cluster` (Boolean) Indicates whether mutual TLS (mTLS) authentication is enabled for the Autonomous VM cluster.
 - `license_model` (String) The Oracle license model that applies to the Autonomous VM cluster. Valid values are LICENSE_INCLUDED or BRING_YOUR_OWN_LICENSE.
 - `maintenance_window` (Attributes) The scheduling details for the maintenance window. Patching and system updates take place during the maintenance window. (see [below for nested schema](#nestedatt--maintenance_window))
@@ -65,6 +66,16 @@ Data Source schema for AWS::ODB::CloudAutonomousVmCluster
 - `tags` (Attributes List) The tags associated with the Autonomous VM cluster. (see [below for nested schema](#nestedatt--tags))
 - `time_zone` (String) The time zone of the Autonomous VM cluster.
 - `total_container_databases` (Number) The total number of Autonomous Container Databases that can be created with the allocated local storage.
+
+<a id="nestedatt--iam_roles"></a>
+### Nested Schema for `iam_roles`
+
+Read-Only:
+
+- `aws_integration` (String) The AWS integration configuration settings for the AWS Identity and Access Management (IAM) service role.
+- `iam_role_arn` (String) The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) service role.
+- `status` (String) The current status of the AWS Identity and Access Management (IAM) service role.
+
 
 <a id="nestedatt--maintenance_window"></a>
 ### Nested Schema for `maintenance_window`

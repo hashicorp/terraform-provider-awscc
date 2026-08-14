@@ -105,6 +105,7 @@ resource "awscc_ssm_parameter" "example" {
 
 ### Read-Only
 
+- `arn` (String)
 - `id` (String) Uniquely identifies the resource.
 
 ## Import

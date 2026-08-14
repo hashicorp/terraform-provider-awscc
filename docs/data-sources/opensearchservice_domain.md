@@ -26,8 +26,10 @@ Data Source schema for AWS::OpenSearchService::Domain
 - `advanced_security_options` (Attributes) (see [below for nested schema](#nestedatt--advanced_security_options))
 - `aiml_options` (Attributes) (see [below for nested schema](#nestedatt--aiml_options))
 - `arn` (String)
+- `automated_snapshot_pause_options` (Attributes) (see [below for nested schema](#nestedatt--automated_snapshot_pause_options))
 - `cluster_config` (Attributes) (see [below for nested schema](#nestedatt--cluster_config))
 - `cognito_options` (Attributes) (see [below for nested schema](#nestedatt--cognito_options))
+- `deployment_strategy_options` (Attributes) (see [below for nested schema](#nestedatt--deployment_strategy_options))
 - `domain_arn` (String)
 - `domain_endpoint` (String)
 - `domain_endpoint_options` (Attributes) (see [below for nested schema](#nestedatt--domain_endpoint_options))
@@ -37,6 +39,7 @@ Data Source schema for AWS::OpenSearchService::Domain
 - `domain_name` (String)
 - `ebs_options` (Attributes) (see [below for nested schema](#nestedatt--ebs_options))
 - `encryption_at_rest_options` (Attributes) (see [below for nested schema](#nestedatt--encryption_at_rest_options))
+- `engine_mode` (String) The engine mode of the domain. Determines whether the domain runs the standard (GENERAL) engine or the optimized multi-engine (OPTIMIZED) engine. This value cannot be changed after the domain is created.
 - `engine_version` (String)
 - `identity_center_options` (Attributes) Options for configuring Identity Center (see [below for nested schema](#nestedatt--identity_center_options))
 - `ip_address_type` (String)
@@ -48,6 +51,7 @@ Data Source schema for AWS::OpenSearchService::Domain
 - `snapshot_options` (Attributes) (see [below for nested schema](#nestedatt--snapshot_options))
 - `software_update_options` (Attributes) (see [below for nested schema](#nestedatt--software_update_options))
 - `tags` (Attributes List) An arbitrary set of tags (key-value pairs) for this Domain. (see [below for nested schema](#nestedatt--tags))
+- `use_case` (String) The primary use case of the domain. Determines the default configuration tuned for the workload. For GENERAL engine-mode domains, this value can be changed after creation. For OPTIMIZED engine-mode domains, this value cannot be changed after creation.
 - `vpc_options` (Attributes) (see [below for nested schema](#nestedatt--vpc_options))
 
 <a id="nestedatt--advanced_security_options"></a>
@@ -125,6 +129,7 @@ Read-Only:
 Read-Only:
 
 - `s3_vectors_engine` (Attributes) (see [below for nested schema](#nestedatt--aiml_options--s3_vectors_engine))
+- `serverless_vector_acceleration` (Attributes) (see [below for nested schema](#nestedatt--aiml_options--serverless_vector_acceleration))
 
 <a id="nestedatt--aiml_options--s3_vectors_engine"></a>
 ### Nested Schema for `aiml_options.s3_vectors_engine`
@@ -133,6 +138,24 @@ Read-Only:
 
 - `enabled` (Boolean) Whether to enable S3 vectors engine.
 
+
+<a id="nestedatt--aiml_options--serverless_vector_acceleration"></a>
+### Nested Schema for `aiml_options.serverless_vector_acceleration`
+
+Read-Only:
+
+- `enabled` (Boolean) Whether to enable serverless vector acceleration.
+
+
+
+<a id="nestedatt--automated_snapshot_pause_options"></a>
+### Nested Schema for `automated_snapshot_pause_options`
+
+Read-Only:
+
+- `enabled` (Boolean)
+- `end_time` (String)
+- `start_time` (String)
 
 
 <a id="nestedatt--cluster_config"></a>
@@ -199,6 +222,14 @@ Read-Only:
 - `identity_pool_id` (String)
 - `role_arn` (String)
 - `user_pool_id` (String)
+
+
+<a id="nestedatt--deployment_strategy_options"></a>
+### Nested Schema for `deployment_strategy_options`
+
+Read-Only:
+
+- `deployment_strategy` (String)
 
 
 <a id="nestedatt--domain_endpoint_options"></a>
@@ -335,5 +366,6 @@ Read-Only:
 
 Read-Only:
 
+- `egress_enabled` (Boolean) Controls whether egress traffic from the domain is routed through the customer VPC.
 - `security_group_ids` (List of String)
 - `subnet_ids` (List of String)

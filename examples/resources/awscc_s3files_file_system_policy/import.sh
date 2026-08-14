@@ -1,0 +1,1 @@
+$ terraform import awscc_s3files_file_system_policy.example "file_system_id"

@@ -118,6 +118,7 @@ resource "awscc_s3_bucket_policy" "allow_ssm" {
 ### Optional
 
 - `apply_only_at_cron_interval` (Boolean)
+- `association_dispatch_assume_role` (String) A role used by association to take actions on your behalf.
 - `association_name` (String) The name of the association.
 - `automation_target_parameter_name` (String)
 - `calendar_names` (List of String)
@@ -131,6 +132,7 @@ resource "awscc_s3_bucket_policy" "allow_ssm" {
 - `schedule_expression` (String) A Cron or Rate expression that specifies when the association is applied to the target.
 - `schedule_offset` (Number)
 - `sync_compliance` (String)
+- `tags` (Attributes List) A key-value pair to associate with a resource. (see [below for nested schema](#nestedatt--tags))
 - `targets` (Attributes List) The targets that the SSM document sends commands to. (see [below for nested schema](#nestedatt--targets))
 - `wait_for_success_timeout_seconds` (Number)
 
@@ -155,6 +157,15 @@ Optional:
 - `output_s3_key_prefix` (String)
 - `output_s3_region` (String)
 
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String) The name of the tag.
+- `value` (String) The value of the tag.
 
 
 <a id="nestedatt--targets"></a>

@@ -1,10 +1,5 @@
 {
   "additionalProperties": false,
-  "createOnlyProperties": [
-    "/properties/IpCount",
-    "/properties/Name",
-    "/properties/Tags"
-  ],
   "definitions": {
     "AnycastIpList": {
       "additionalProperties": false,
@@ -30,7 +25,11 @@
         },
         "IpAddressType": {
           "$ref": "#/definitions/IpAddressType",
-          "description": ""
+          "description": "The IP address type for the Anycast static IP list."
+        },
+        "IpamCidrConfigResults": {
+          "$ref": "#/definitions/IpamCidrConfigResults",
+          "description": "The results for the IPAM CIDRs that defines a specific IP address range, IPAM pool, and associated Anycast IP address."
         },
         "LastModifiedTime": {
           "format": "date-time",
@@ -105,6 +104,64 @@
         "dualstack"
       ],
       "type": "string"
+    },
+    "IpamCidrConfigResult": {
+      "additionalProperties": false,
+      "properties": {
+        "Cidr": {
+          "type": "string",
+          "description": "The CIDR that specifies the IP address range for this IPAM configuration."
+        },
+        "IpamPoolArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the IPAM pool that the CIDR block is assigned to."
+        },
+        "AnycastIp": {
+          "type": "string",
+          "description": "The specified Anycast IP address allocated from the IPAM pool for this CIDR configuration."
+        },
+        "Status": {
+          "type": "string",
+          "description": "The current status of the IPAM CIDR configuration."
+        }
+      },
+      "type": "object",
+      "description": "The result for the IPAM CIDR that defines a specific IP address range, IPAM pool, and associated Anycast IP address."
+    },
+    "IpamCidrConfigResults": {
+      "additionalProperties": false,
+      "items": {
+        "$ref": "#/definitions/IpamCidrConfigResult"
+      },
+      "type": "array",
+      "uniqueItems": false
+    },
+    "IpamCidrConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "Cidr": {
+          "type": "string",
+          "description": "The CIDR that specifies the IP address range for this IPAM configuration."
+        },
+        "IpamPoolArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the IPAM pool that the CIDR block is assigned to."
+        }
+      },
+      "required": [
+        "Cidr",
+        "IpamPoolArn"
+      ],
+      "type": "object",
+      "description": "Configuration for an IPAM CIDR that defines a specific IP address range, IPAM pool, and associated Anycast IP address."
+    },
+    "IpamCidrConfigs": {
+      "additionalProperties": false,
+      "items": {
+        "$ref": "#/definitions/IpamCidrConfig"
+      },
+      "type": "array",
+      "uniqueItems": false
     }
   },
   "description": "An Anycast static IP list. For more information, see [Request Anycast static IPs to use for allowlisting](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/request-static-ips.html) in the *Amazon CloudFront Developer Guide*.",
@@ -164,6 +221,14 @@
     },
     "IpAddressType": {
       "$ref": "#/definitions/IpAddressType",
+      "description": "The IP address type for the Anycast static IP list."
+    },
+    "IpamCidrConfigs": {
+      "$ref": "#/definitions/IpamCidrConfigs",
+      "description": "A list of IPAM CIDR configurations that define the IP address ranges, IPAM pools, and associated Anycast IP addresses."
+    },
+    "IpamCidrConfigResults": {
+      "$ref": "#/definitions/IpamCidrConfigResults",
       "description": ""
     },
     "Name": {
@@ -178,10 +243,19 @@
       "description": "A complex type that contains zero or more ``Tag`` elements."
     }
   },
+  "createOnlyProperties": [
+    "/properties/IpCount",
+    "/properties/Name",
+    "/properties/Tags"
+  ],
   "readOnlyProperties": [
     "/properties/AnycastIpList",
     "/properties/ETag",
-    "/properties/Id"
+    "/properties/Id",
+    "/properties/IpamCidrConfigResults"
+  ],
+  "writeOnlyProperties": [
+    "/properties/IpamCidrConfigs"
   ],
   "required": [
     "IpCount",
@@ -196,7 +270,7 @@
     ],
     "tagOnCreate": true,
     "tagProperty": "/properties/Tags",
-    "tagUpdatable": false,
+    "tagUpdatable": true,
     "taggable": true
   },
   "typeName": "AWS::CloudFront::AnycastIpList"

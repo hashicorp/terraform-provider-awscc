@@ -28,13 +28,14 @@ Data Source schema for AWS::CloudFront::Function
 - `function_metadata` (Attributes) Contains metadata about a CloudFront function. (see [below for nested schema](#nestedatt--function_metadata))
 - `name` (String) A name to identify the function.
 - `stage` (String)
+- `tags` (Attributes List) A complex type that contains zero or more ``Tag`` elements. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--function_config"></a>
 ### Nested Schema for `function_config`
 
 Read-Only:
 
-- `comment` (String) A comment to describe the function.
+- `comment` (String) A comment to describe the function. The comment cannot be longer than 128 characters.
 - `key_value_store_associations` (Attributes List) The configuration for the key value store associations. (see [below for nested schema](#nestedatt--function_config--key_value_store_associations))
 - `runtime` (String) The function's runtime environment version.
 
@@ -53,3 +54,14 @@ Read-Only:
 Read-Only:
 
 - `function_arn` (String) The Amazon Resource Name (ARN) of the function. The ARN uniquely identifies the function.
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String) A string that contains ``Tag`` key.
+ The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.
+- `value` (String) A string that contains an optional ``Tag`` value.
+ The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.

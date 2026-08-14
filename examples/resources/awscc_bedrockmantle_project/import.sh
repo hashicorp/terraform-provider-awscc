@@ -1,0 +1,1 @@
+$ terraform import awscc_bedrockmantle_project.example "arn"

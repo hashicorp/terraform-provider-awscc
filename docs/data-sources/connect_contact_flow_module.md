@@ -24,11 +24,21 @@ Data Source schema for AWS::Connect::ContactFlowModule
 - `contact_flow_module_arn` (String) The identifier of the contact flow module (ARN).
 - `content` (String) The content of the contact flow module in JSON format.
 - `description` (String) The description of the contact flow module.
+- `external_invocation_configuration` (Attributes) Defines the external invocation configuration of the flow module resource (see [below for nested schema](#nestedatt--external_invocation_configuration))
 - `instance_arn` (String) The identifier of the Amazon Connect instance (ARN).
 - `name` (String) The name of the contact flow module.
+- `settings` (String) The schema of the settings for contact flow module in JSON Schema V4 format.
 - `state` (String) The state of the contact flow module.
 - `status` (String) The status of the contact flow module.
 - `tags` (Attributes Set) One or more tags. (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--external_invocation_configuration"></a>
+### Nested Schema for `external_invocation_configuration`
+
+Read-Only:
+
+- `enabled` (Boolean) Specifies whether the flow module resource is enabled for external invocation
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

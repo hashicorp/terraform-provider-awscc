@@ -1,4 +1,4 @@
-// Copyright (c) HashiCorp, Inc.
+// Copyright IBM Corp. 2021, 2026
 // SPDX-License-Identifier: MPL-2.0
 
 package generic
@@ -65,7 +65,7 @@ func SetUnknownValuesFromResourceModel(ctx context.Context, state *tfsdk.State, 
 	// Get the Terraform Value of the ResourceModel.
 	translator := toTerraform{cfToTfNameMap: cfToTfNameMap}
 	schema := state.Schema
-	val, err := translator.FromString(ctx, schema, resourceModel)
+	val, err := translator.FromString(ctx, schema, resourceModel, nil)
 
 	if err != nil {
 		return err

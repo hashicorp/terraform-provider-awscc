@@ -25,6 +25,9 @@ Data Source schema for AWS::GlobalAccelerator::Accelerator
 - `dns_name` (String) The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IPv4 addresses.
 - `dual_stack_dns_name` (String) The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IPv4 and IPv6 addresses.
 - `enabled` (Boolean) Indicates whether an accelerator is enabled. The value is true or false.
+- `flow_logs_enabled` (Boolean) Indicates whether flow logs are enabled for the accelerator.
+- `flow_logs_s3_bucket` (String) The name of the Amazon S3 bucket for the flow logs.
+- `flow_logs_s3_prefix` (String) The prefix for the location in the Amazon S3 bucket for the flow logs.
 - `ip_address_type` (String) IP Address type.
 - `ip_addresses` (List of String) The IP addresses from BYOIP Prefix pool.
 - `ipv_4_addresses` (List of String) The IPv4 addresses assigned to the accelerator.

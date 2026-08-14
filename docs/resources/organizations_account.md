@@ -53,6 +53,7 @@ resource "awscc_organizations_account" "example" {
 - `id` (String) Uniquely identifies the resource.
 - `joined_method` (String) The method by which the account joined the organization.
 - `joined_timestamp` (String) The date the account became a part of the organization.
+- `paths` (List of String) The paths in the organization where the account exists.
 - `state` (String) The state of the account in the organization.
 - `status` (String) The status of the account in the organization.
 

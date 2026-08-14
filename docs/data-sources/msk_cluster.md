@@ -36,6 +36,7 @@ Data Source schema for AWS::MSK::Cluster
 - `rebalancing` (Attributes) (see [below for nested schema](#nestedatt--rebalancing))
 - `storage_mode` (String)
 - `tags` (Map of String) A key-value pair to associate with a resource.
+- `zookeeper_access` (Attributes) (see [below for nested schema](#nestedatt--zookeeper_access))
 
 <a id="nestedatt--broker_node_group_info"></a>
 ### Nested Schema for `broker_node_group_info`
@@ -54,6 +55,7 @@ Read-Only:
 
 Read-Only:
 
+- `network_type` (String)
 - `public_access` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--connectivity_info--public_access))
 - `vpc_connectivity` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--connectivity_info--vpc_connectivity))
 
@@ -235,7 +237,46 @@ Read-Only:
 
 Read-Only:
 
+- `authorizer_logs` (Attributes) (see [below for nested schema](#nestedatt--logging_info--authorizer_logs))
 - `broker_logs` (Attributes) (see [below for nested schema](#nestedatt--logging_info--broker_logs))
+
+<a id="nestedatt--logging_info--authorizer_logs"></a>
+### Nested Schema for `logging_info.authorizer_logs`
+
+Read-Only:
+
+- `cloudwatch_logs` (Attributes) (see [below for nested schema](#nestedatt--logging_info--authorizer_logs--cloudwatch_logs))
+- `firehose` (Attributes) (see [below for nested schema](#nestedatt--logging_info--authorizer_logs--firehose))
+- `s3` (Attributes) (see [below for nested schema](#nestedatt--logging_info--authorizer_logs--s3))
+
+<a id="nestedatt--logging_info--authorizer_logs--cloudwatch_logs"></a>
+### Nested Schema for `logging_info.authorizer_logs.cloudwatch_logs`
+
+Read-Only:
+
+- `enabled` (Boolean)
+- `log_group` (String)
+
+
+<a id="nestedatt--logging_info--authorizer_logs--firehose"></a>
+### Nested Schema for `logging_info.authorizer_logs.firehose`
+
+Read-Only:
+
+- `delivery_stream` (String)
+- `enabled` (Boolean)
+
+
+<a id="nestedatt--logging_info--authorizer_logs--s3"></a>
+### Nested Schema for `logging_info.authorizer_logs.s3`
+
+Read-Only:
+
+- `bucket` (String)
+- `enabled` (Boolean)
+- `prefix` (String)
+
+
 
 <a id="nestedatt--logging_info--broker_logs"></a>
 ### Nested Schema for `logging_info.broker_logs`
@@ -315,3 +356,11 @@ Read-Only:
 Read-Only:
 
 - `status` (String)
+
+
+<a id="nestedatt--zookeeper_access"></a>
+### Nested Schema for `zookeeper_access`
+
+Read-Only:
+
+- `enabled` (Boolean)

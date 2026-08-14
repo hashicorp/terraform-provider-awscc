@@ -34,6 +34,7 @@ Data Source schema for AWS::NetworkManager::SiteToSiteVpnAttachment
 - `proposed_network_function_group_change` (Attributes) The attachment to move from one network function group to another. (see [below for nested schema](#nestedatt--proposed_network_function_group_change))
 - `proposed_segment_change` (Attributes) The attachment to move from one segment to another. (see [below for nested schema](#nestedatt--proposed_segment_change))
 - `resource_arn` (String) The ARN of the Resource.
+- `routing_policy_label` (String) Routing policy label
 - `segment_name` (String) The name of the segment that attachment is in.
 - `state` (String) The state of the attachment.
 - `tags` (Attributes Set) Tags for the attachment. (see [below for nested schema](#nestedatt--tags))

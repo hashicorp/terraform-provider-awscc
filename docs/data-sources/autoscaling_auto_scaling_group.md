@@ -25,11 +25,12 @@ Data Source schema for AWS::AutoScaling::AutoScalingGroup
 - `auto_scaling_group_name` (String) The name of the Auto Scaling group. This name must be unique per Region per account.
  The name can contain any ASCII character 33 to 126 including most punctuation characters, digits, and upper and lowercased letters.
   You cannot use a colon (:) in the name.
-- `availability_zone_distribution` (Attributes) The instance capacity distribution across Availability Zones. (see [below for nested schema](#nestedatt--availability_zone_distribution))
-- `availability_zone_impairment_policy` (Attributes) The Availability Zone impairment policy. (see [below for nested schema](#nestedatt--availability_zone_impairment_policy))
+- `availability_zone_distribution` (Attributes) The EC2 instance capacity distribution across Availability Zones for the Auto Scaling group. (see [below for nested schema](#nestedatt--availability_zone_distribution))
+- `availability_zone_ids` (Set of String) The Availability Zone IDs where the Auto Scaling group can launch instances.
+- `availability_zone_impairment_policy` (Attributes) The Availability Zone impairment policy for the Auto Scaling group. (see [below for nested schema](#nestedatt--availability_zone_impairment_policy))
 - `availability_zones` (List of String) A list of Availability Zones where instances in the Auto Scaling group can be created. Used for launching into the default VPC subnet in each Availability Zone when not using the ``VPCZoneIdentifier`` property, or for attaching a network interface when an existing network interface ID is specified in a launch template.
 - `capacity_rebalance` (Boolean) Indicates whether Capacity Rebalancing is enabled. Otherwise, Capacity Rebalancing is disabled. When you turn on Capacity Rebalancing, Amazon EC2 Auto Scaling attempts to launch a Spot Instance whenever Amazon EC2 notifies that a Spot Instance is at an elevated risk of interruption. After launching a new instance, it then terminates an old instance. For more information, see [Use Capacity Rebalancing to handle Amazon EC2 Spot Interruptions](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-capacity-rebalancing.html) in the in the *Amazon EC2 Auto Scaling User Guide*.
-- `capacity_reservation_specification` (Attributes) The capacity reservation specification. (see [below for nested schema](#nestedatt--capacity_reservation_specification))
+- `capacity_reservation_specification` (Attributes) The capacity reservation specification for the Auto Scaling group. (see [below for nested schema](#nestedatt--capacity_reservation_specification))
 - `context` (String) Reserved.
 - `cooldown` (String) *Only needed if you use simple scaling policies.* 
  The amount of time, in seconds, between one scaling activity ending and another one starting due to simple scaling policies. For more information, see [Scaling cooldowns for Amazon EC2 Auto Scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scaling-cooldowns.html) in the *Amazon EC2 Auto Scaling User Guide*.
@@ -38,6 +39,7 @@ Data Source schema for AWS::AutoScaling::AutoScalingGroup
  During an instance refresh, Amazon EC2 Auto Scaling waits for the warm-up period after it replaces an instance before it moves on to replacing the next instance. Amazon EC2 Auto Scaling also waits for the warm-up period before aggregating the metrics for new instances with existing instances in the Amazon CloudWatch metrics that are used for scaling, resulting in more reliable usage data. For more information, see [Set the default instance warmup for an Auto Scaling group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-default-instance-warmup.html) in the *Amazon EC2 Auto Scaling User Guide*.
   To manage various warm-up settings at the group level, we recommend that you set the default instance warmup, *even if it is set to 0 seconds*. To remove a value that you previously set, include the property but specify ``-1`` for the value. However, we strongly recommend keeping the default instance warmup enabled by specifying a value of ``0`` or other nominal value.
   Default: None
+- `deletion_protection` (String) The deletion protection setting for the Auto Scaling group.
 - `desired_capacity` (String) The desired capacity is the initial capacity of the Auto Scaling group at the time of its creation and the capacity it attempts to maintain. It can scale beyond this capacity if you configure automatic scaling.
  The number must be greater than or equal to the minimum size of the group and less than or equal to the maximum size of the group. If you do not specify a desired capacity when creating the stack, the default is the minimum size of the group.
  CloudFormation marks the Auto Scaling group as successful (by setting its status to CREATE_COMPLETE) when the desired capacity is reached. However, if a maximum Spot price is set in the launch template or launch configuration that you specified, then desired capacity is not used as a criteria for success. Whether your request is fulfilled depends on Spot Instance capacity and your maximum price.
@@ -51,6 +53,7 @@ Data Source schema for AWS::AutoScaling::AutoScalingGroup
  Only specify ``EC2`` if you must clear a value that was previously set.
 - `instance_id` (String) The ID of the instance used to base the launch configuration on. For more information, see [Create an Auto Scaling group using an EC2 instance](https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-from-instance.html) in the *Amazon EC2 Auto Scaling User Guide*.
  If you specify ``LaunchTemplate``, ``MixedInstancesPolicy``, or ``LaunchConfigurationName``, don't specify ``InstanceId``.
+- `instance_lifecycle_policy` (Attributes) The instance lifecycle policy for the Auto Scaling group. (see [below for nested schema](#nestedatt--instance_lifecycle_policy))
 - `instance_maintenance_policy` (Attributes) An instance maintenance policy. For more information, see [Set instance maintenance policy](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-maintenance-policy.html) in the *Amazon EC2 Auto Scaling User Guide*. (see [below for nested schema](#nestedatt--instance_maintenance_policy))
 - `launch_configuration_name` (String) The name of the launch configuration to use to launch instances.
  Required only if you don't specify ``LaunchTemplate``, ``MixedInstancesPolicy``, or ``InstanceId``.
@@ -82,7 +85,7 @@ Data Source schema for AWS::AutoScaling::AutoScalingGroup
 - `traffic_sources` (Attributes Set) The traffic sources associated with this Auto Scaling group. (see [below for nested schema](#nestedatt--traffic_sources))
 - `vpc_zone_identifier` (List of String) A list of subnet IDs for a virtual private cloud (VPC) where instances in the Auto Scaling group can be created.
  If this resource specifies public subnets and is also in a VPC that is defined in the same stack template, you must use the [DependsOn attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-dependson.html) to declare a dependency on the [VPC-gateway attachment](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpc-gateway-attachment.html).
-  When you update ``VPCZoneIdentifier``, this retains the same Auto Scaling group and replaces old instances with new ones, according to the specified subnets. You can optionally specify how CloudFormation handles these updates by using an [UpdatePolicy attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-updatepolicy.html).
+  When you update ``VPCZoneIdentifier``, this retains the same Auto Scaling group and replaces old instances with new ones, according to the specified subnets. To control how CloudFormation replaces the instances, add an [UpdatePolicy attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-updatepolicy.html) to your stack. Set the update policy to ``AutoScalingInstanceRefresh``. For more information, see the [AutoScalingInstanceRefresh policy](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-updatepolicy.html#cfn-attributes-updatepolicy-instancerefresh).
   Required to launch instances into a nondefault VPC. If you specify ``VPCZoneIdentifier`` with ``AvailabilityZones``, the subnets that you specify for this property must reside in those Availability Zones.
 
 <a id="nestedatt--availability_zone_distribution"></a>
@@ -93,6 +96,7 @@ Read-Only:
 - `capacity_distribution_strategy` (String) If launches fail in an Availability Zone, the following strategies are available. The default is ``balanced-best-effort``. 
   +  ``balanced-only`` - If launches fail in an Availability Zone, Auto Scaling will continue to attempt to launch in the unhealthy zone to preserve a balanced distribution.
   +  ``balanced-best-effort`` - If launches fail in an Availability Zone, Auto Scaling will attempt to launch in another healthy Availability Zone instead.
+  +  ``reservations-then-balanced`` - Auto Scaling will first attempt to launch into your Capacity Reservations, and then balance any remaining capacity across healthy Availability Zones.
 
 
 <a id="nestedatt--availability_zone_impairment_policy"></a>
@@ -123,6 +127,24 @@ Read-Only:
 
 - `capacity_reservation_ids` (List of String) The Capacity Reservation IDs to launch instances into.
 - `capacity_reservation_resource_group_arns` (List of String) The resource group ARNs of the Capacity Reservation to launch instances into.
+
+
+
+<a id="nestedatt--instance_lifecycle_policy"></a>
+### Nested Schema for `instance_lifecycle_policy`
+
+Read-Only:
+
+- `retention_triggers` (Attributes) Specifies the conditions that trigger instance retention behavior. These triggers determine when instances should move to a ``Retained`` state instead of automatic termination. This allows you to maintain control over instance management when lifecycles transition and operations fail. (see [below for nested schema](#nestedatt--instance_lifecycle_policy--retention_triggers))
+
+<a id="nestedatt--instance_lifecycle_policy--retention_triggers"></a>
+### Nested Schema for `instance_lifecycle_policy.retention_triggers`
+
+Read-Only:
+
+- `terminate_hook_abandon` (String) Specifies the action when a termination lifecycle hook is abandoned due to failure, timeout, or explicit abandonment (calling CompleteLifecycleAction). 
+  Set to ``retain`` to move instances to a retained state. Set to ``terminate`` for default termination behavior. 
+  Retained instances don't count toward desired capacity and remain until you call ``TerminateInstanceInAutoScalingGroup``.
 
 
 
@@ -261,6 +283,11 @@ Read-Only:
 
 Read-Only:
 
+- `image_id` (String) The ID of the Amazon Machine Image (AMI) to use for instances launched with this override. When using Instance Refresh with ``ReplaceRootVolume`` strategy, this specifies the AMI for root volume replacement operations. 
+  For ``ReplaceRootVolume`` operations: 
+  +  All overrides in the ``MixedInstancesPolicy`` must specify an ImageId
+  +  The AMI must contain only a single root volume
+  +  Root volume replacement doesn't support multi-volume AMIs
 - `instance_requirements` (Attributes) The instance requirements. Amazon EC2 Auto Scaling uses your specified requirements to identify instance types. Then, it uses your On-Demand and Spot allocation strategies to launch instances from these instance types.
  You can specify up to four separate sets of instance requirements per Auto Scaling group. This is useful for provisioning instances from different Amazon Machine Images (AMIs) in the same Auto Scaling group. To do this, create the AMIs and create a new launch template for each AMI. Then, create a compatible set of instance requirements for each launch template. 
   If you specify ``InstanceRequirements``, you can't specify ``InstanceType``. (see [below for nested schema](#nestedatt--mixed_instances_policy--launch_template--overrides--instance_requirements))

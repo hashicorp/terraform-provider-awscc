@@ -21,6 +21,7 @@ Data Source schema for AWS::RDS::DBInstance
 
 ### Read-Only
 
+- `additional_storage_volumes` (Attributes List) The additional storage volumes associated with the DB instance. RDS supports additional storage volumes for RDS for Oracle and RDS for SQL Server. (see [below for nested schema](#nestedatt--additional_storage_volumes))
 - `allocated_storage` (String) The amount of storage in gibibytes (GiB) to be initially allocated for the database instance.
   If any value is set in the ``Iops`` parameter, ``AllocatedStorage`` must be at least 100 GiB, which corresponds to the minimum Iops value of 1,000. If you increase the ``Iops`` value (in 1,000 IOPS increments), then you must also increase the ``AllocatedStorage`` value (in 100-GiB increments). 
    *Amazon Aurora* 
@@ -218,7 +219,7 @@ Data Source schema for AWS::RDS::DBInstance
 - `db_snapshot_identifier` (String) The name or Amazon Resource Name (ARN) of the DB snapshot that's used to restore the DB instance. If you're restoring from a shared manual DB snapshot, you must specify the ARN of the snapshot.
  By specifying this property, you can create a DB instance from the specified DB snapshot. If the ``DBSnapshotIdentifier`` property is an empty string or the ``AWS::RDS::DBInstance`` declaration has no ``DBSnapshotIdentifier`` property, AWS CloudFormation creates a new database. If the property contains a value (other than an empty string), AWS CloudFormation creates a database from the specified snapshot. If a snapshot with the specified name doesn't exist, AWS CloudFormation can't create the database and it rolls back the stack.
  Some DB instance properties aren't valid when you restore from a snapshot, such as the ``MasterUsername`` and ``MasterUserPassword`` properties, and the point-in-time recovery properties ``RestoreTime`` and ``UseLatestRestorableTime``. For information about the properties that you can specify, see the [RestoreDBInstanceFromDBSnapshot](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_RestoreDBInstanceFromDBSnapshot.html) action in the *Amazon RDS API Reference*.
- After you restore a DB instance with a ``DBSnapshotIdentifier`` property, you must specify the same ``DBSnapshotIdentifier`` property for any future updates to the DB instance. When you specify this property for an update, the DB instance is not restored from the DB snapshot again, and the data in the database is not changed. However, if you don't specify the ``DBSnapshotIdentifier`` property, an empty DB instance is created, and the original DB instance is deleted. If you specify a property that is different from the previous snapshot restore property, a new DB instance is restored from the specified ``DBSnapshotIdentifier`` property, and the original DB instance is deleted.
+ When you specify the same ``DBSnapshotIdentifier`` property value for an update, the DB instance is not restored from the DB snapshot again, and the data in the database is not changed. If you specify a different ``DBSnapshotIdentifier`` value, a new DB instance is restored from the specified snapshot, and the original DB instance is deleted.
  If you specify the ``DBSnapshotIdentifier`` property to restore a DB instance (as opposed to specifying it for DB instance updates), then don't specify the following properties:
   +   ``CharacterSetName`` 
   +   ``DBClusterIdentifier`` 
@@ -321,9 +322,9 @@ Data Source schema for AWS::RDS::DBInstance
   +   ``sqlserver-se`` 
   +   ``sqlserver-ex`` 
   +   ``sqlserver-web``
-- `engine_lifecycle_support` (String) The life cycle type for this DB instance.
+- `engine_lifecycle_support` (String) The lifecycle type for this DB instance.
   By default, this value is set to ``open-source-rds-extended-support``, which enrolls your DB instance into Amazon RDS Extended Support. At the end of standard support, you can avoid charges for Extended Support by setting the value to ``open-source-rds-extended-support-disabled``. In this case, creating the DB instance will fail if the DB major version is past its end of standard support date.
-  This setting applies only to RDS for MySQL and RDS for PostgreSQL. For Amazon Aurora DB instances, the life cycle type is managed by the DB cluster.
+  This setting applies only to RDS for MySQL and RDS for PostgreSQL. For Amazon Aurora DB instances, the engine lifecycle support is managed by the DB cluster.
  You can use this setting to enroll your DB instance into Amazon RDS Extended Support. With RDS Extended Support, you can run the selected major engine version on your DB instance past the end of standard support for that engine version. For more information, see [Amazon RDS Extended Support with Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html) in the *Amazon RDS User Guide*.
  Valid Values: ``open-source-rds-extended-support | open-source-rds-extended-support-disabled``
  Default: ``open-source-rds-extended-support``
@@ -367,7 +368,7 @@ Data Source schema for AWS::RDS::DBInstance
   +  Aurora PostgreSQL - ``postgresql-license``
   +  RDS for Db2 - ``bring-your-own-license``. For more information about RDS for Db2 licensing, see [](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html) in the *Amazon RDS User Guide.*
   +  RDS for MariaDB - ``general-public-license``
-  +  RDS for Microsoft SQL Server - ``license-included``
+  +  RDS for Microsoft SQL Server - ``license-included`` or ``bring-your-own-media``
   +  RDS for MySQL - ``general-public-license``
   +  RDS for Oracle - ``bring-your-own-license`` or ``license-included``
   +  RDS for PostgreSQL - ``postgresql-license``
@@ -475,7 +476,14 @@ Data Source schema for AWS::RDS::DBInstance
 - `performance_insights_kms_key_id` (String) The AWS KMS key identifier for encryption of Performance Insights data.
  The KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.
  If you do not specify a value for ``PerformanceInsightsKMSKeyId``, then Amazon RDS uses your default KMS key. There is a default KMS key for your AWS account. Your AWS account has a different default KMS key for each AWS Region.
- For information about enabling Performance Insights, see [EnablePerformanceInsights](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-enableperformanceinsights).
+  *Update behavior:* Once Performance Insights is enabled with a KMS key, you cannot change to a different physical KMS key without replacing the DB instance. However, the following updates do not require replacement:
+  +  Enabling or disabling Performance Insights using the ``EnablePerformanceInsights`` property
+  +  Changing between different identifier formats (key ARN, key ID, alias ARN, alias name) of the same physical KMS key
+  +  Removing the ``PerformanceInsightsKMSKeyId`` property from your template
+  
+   *Drift behavior:* If you specify ``PerformanceInsightsKMSKeyId`` while ``EnablePerformanceInsights`` is set to ``false``, CloudFormation will report drift. This occurs because the RDS API does not allow setting a KMS key when Performance Insights is disabled. CloudFormation ignores the ``PerformanceInsightsKMSKeyId`` value during instance creation to avoid API errors, resulting in a mismatch between your template and the actual instance configuration.
+ To avoid drift, omit both ``EnablePerformanceInsights`` and ``PerformanceInsightsKMSKeyId`` during initial instance creation, then set both properties together when you're ready to enable Performance Insights.
+  For information about enabling Performance Insights, see [EnablePerformanceInsights](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-enableperformanceinsights).
 - `performance_insights_retention_period` (Number) The number of days to retain Performance Insights data. When creating a DB instance without enabling Performance Insights, you can't specify the parameter ``PerformanceInsightsRetentionPeriod``.
  This setting doesn't apply to RDS Custom DB instances.
  Valid Values:
@@ -590,6 +598,21 @@ Data Source schema for AWS::RDS::DBInstance
   To avoid this situation, migrate your DB instance to using VPC security groups only when that is the only change in your stack template. 
   *Amazon Aurora* 
  Not applicable. The associated list of EC2 VPC security groups is managed by the DB cluster. If specified, the setting must match the DB cluster setting.
+
+<a id="nestedatt--additional_storage_volumes"></a>
+### Nested Schema for `additional_storage_volumes`
+
+Read-Only:
+
+- `allocated_storage` (String) The amount of storage allocated for the additional storage volume, in gibibytes (GiB). The minimum is 20 GiB. The maximum is 65,536 GiB (64 TiB).
+- `iops` (Number) The number of I/O operations per second (IOPS) provisioned for the additional storage volume.
+- `max_allocated_storage` (Number) The upper limit in gibibytes (GiB) to which RDS can automatically scale the storage of the additional storage volume.
+- `storage_throughput` (Number) The storage throughput value for the additional storage volume, in mebibytes per second (MiBps). This setting applies only to the General Purpose SSD (``gp3``) storage type.
+- `storage_type` (String) The storage type for the additional storage volume.
+ Valid Values: ``GP3 | IO2``
+- `volume_name` (String) The name of the additional storage volume.
+ Valid Values: ``RDSDBDATA2 | RDSDBDATA3 | RDSDBDATA4``
+
 
 <a id="nestedatt--associated_roles"></a>
 ### Nested Schema for `associated_roles`

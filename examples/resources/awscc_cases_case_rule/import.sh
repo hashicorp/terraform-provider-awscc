@@ -1,0 +1,1 @@
+$ terraform import awscc_cases_case_rule.example "case_rule_arn"

@@ -43,11 +43,11 @@ Data Source schema for AWS::EC2::VPNConnection
  You must specify either ``TransitGatewayId`` or ``VpnGatewayId``, but not both.
 - `transport_transit_gateway_attachment_id` (String) The transit gateway attachment ID to use for the VPN tunnel.
  Required if ``OutsideIpAddressType`` is set to ``PrivateIpv4``.
-- `tunnel_bandwidth` (String)
+- `tunnel_bandwidth` (String) The desired bandwidth specification for the VPN tunnel, used when creating or modifying VPN connection options to set the tunnel's throughput capacity. ``standard`` supports up to 1.25 Gbps per tunnel, while ``large`` supports up to 5 Gbps per tunnel. The default value is ``standard``. Existing VPN connections without a bandwidth setting will automatically default to ``standard``.
 - `tunnel_inside_ip_version` (String) Indicate whether the VPN tunnels process IPv4 or IPv6 traffic.
  Default: ``ipv4``
 - `type` (String) The type of VPN connection.
-- `vpn_concentrator_id` (String)
+- `vpn_concentrator_id` (String) The ID of the VPN concentrator to associate with the VPN connection.
 - `vpn_connection_id` (String)
 - `vpn_gateway_id` (String) The ID of the virtual private gateway at the AWS side of the VPN connection.
  You must specify either ``TransitGatewayId`` or ``VpnGatewayId``, but not both.
@@ -141,9 +141,11 @@ Read-Only:
 
 Read-Only:
 
-- `bgp_log_enabled` (Boolean)
-- `bgp_log_group_arn` (String)
-- `bgp_log_output_format` (String)
+- `bgp_log_enabled` (Boolean) Specifies whether to enable BGP logging for the VPN connection. Default value is ``False``.
+ Valid values: ``True`` | ``False``
+- `bgp_log_group_arn` (String) The Amazon Resource Name (ARN) of the CloudWatch log group where BGP logs will be sent.
+- `bgp_log_output_format` (String) The desired output format for BGP logs to be sent to CloudWatch. Default format is ``json``.
+ Valid values: ``json`` | ``text``
 - `log_enabled` (Boolean) Enable or disable VPN tunnel logging feature. Default value is ``False``.
  Valid values: ``True`` | ``False``
 - `log_group_arn` (String) The Amazon Resource Name (ARN) of the CloudWatch log group to send logs to.

@@ -1,0 +1,1 @@
+$ terraform import awscc_opensearchserverless_collection_index.example "id|index_name"

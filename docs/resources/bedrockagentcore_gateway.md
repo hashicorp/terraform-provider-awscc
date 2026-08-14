@@ -19,7 +19,6 @@ Definition of AWS::BedrockAgentCore::Gateway Resource Type
 
 - `authorizer_type` (String)
 - `name` (String)
-- `protocol_type` (String)
 - `role_arn` (String)
 
 ### Optional
@@ -27,8 +26,11 @@ Definition of AWS::BedrockAgentCore::Gateway Resource Type
 - `authorizer_configuration` (Attributes) (see [below for nested schema](#nestedatt--authorizer_configuration))
 - `description` (String)
 - `exception_level` (String)
+- `interceptor_configurations` (Attributes List) (see [below for nested schema](#nestedatt--interceptor_configurations))
 - `kms_key_arn` (String)
+- `policy_engine_configuration` (Attributes) (see [below for nested schema](#nestedatt--policy_engine_configuration))
 - `protocol_configuration` (Attributes) (see [below for nested schema](#nestedatt--protocol_configuration))
+- `protocol_type` (String)
 - `tags` (Map of String)
 
 ### Read-Only
@@ -55,10 +57,132 @@ Optional:
 
 Optional:
 
+- `advertised_scope_mapping` (Map of String) Maps an originalScope (from allowedScopes) to an advertisedScope
+exposed in WWW-Authenticate / Protected Resource Metadata.
 - `allowed_audience` (List of String)
 - `allowed_clients` (List of String)
+- `allowed_scopes` (List of String)
+- `custom_claims` (Attributes List) (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--custom_claims))
 - `discovery_url` (String)
+- `private_endpoint` (Attributes) (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint))
 
+<a id="nestedatt--authorizer_configuration--custom_jwt_authorizer--custom_claims"></a>
+### Nested Schema for `authorizer_configuration.custom_jwt_authorizer.custom_claims`
+
+Optional:
+
+- `authorizing_claim_match_value` (Attributes) (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--custom_claims--authorizing_claim_match_value))
+- `inbound_token_claim_name` (String)
+- `inbound_token_claim_value_type` (String)
+
+<a id="nestedatt--authorizer_configuration--custom_jwt_authorizer--custom_claims--authorizing_claim_match_value"></a>
+### Nested Schema for `authorizer_configuration.custom_jwt_authorizer.custom_claims.authorizing_claim_match_value`
+
+Optional:
+
+- `claim_match_operator` (String)
+- `claim_match_value` (Attributes) (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--custom_claims--authorizing_claim_match_value--claim_match_value))
+
+<a id="nestedatt--authorizer_configuration--custom_jwt_authorizer--custom_claims--authorizing_claim_match_value--claim_match_value"></a>
+### Nested Schema for `authorizer_configuration.custom_jwt_authorizer.custom_claims.authorizing_claim_match_value.claim_match_value`
+
+Optional:
+
+- `match_value_string` (String)
+- `match_value_string_list` (List of String)
+
+
+
+
+<a id="nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint"></a>
+### Nested Schema for `authorizer_configuration.custom_jwt_authorizer.private_endpoint`
+
+Optional:
+
+- `managed_vpc_resource` (Attributes) (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint--managed_vpc_resource))
+- `self_managed_lattice_resource` (Attributes) (see [below for nested schema](#nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint--self_managed_lattice_resource))
+
+<a id="nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint--managed_vpc_resource"></a>
+### Nested Schema for `authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource`
+
+Optional:
+
+- `endpoint_ip_address_type` (String)
+- `routing_domain` (String)
+- `security_group_ids` (List of String)
+- `subnet_ids` (List of String)
+- `vpc_identifier` (String)
+
+
+<a id="nestedatt--authorizer_configuration--custom_jwt_authorizer--private_endpoint--self_managed_lattice_resource"></a>
+### Nested Schema for `authorizer_configuration.custom_jwt_authorizer.private_endpoint.self_managed_lattice_resource`
+
+Optional:
+
+- `resource_configuration_identifier` (String)
+
+
+
+
+
+<a id="nestedatt--interceptor_configurations"></a>
+### Nested Schema for `interceptor_configurations`
+
+Optional:
+
+- `input_configuration` (Attributes) (see [below for nested schema](#nestedatt--interceptor_configurations--input_configuration))
+- `interception_points` (List of String)
+- `interceptor` (Attributes) (see [below for nested schema](#nestedatt--interceptor_configurations--interceptor))
+
+<a id="nestedatt--interceptor_configurations--input_configuration"></a>
+### Nested Schema for `interceptor_configurations.input_configuration`
+
+Optional:
+
+- `pass_request_headers` (Boolean)
+- `payload_filter` (Attributes) (see [below for nested schema](#nestedatt--interceptor_configurations--input_configuration--payload_filter))
+
+<a id="nestedatt--interceptor_configurations--input_configuration--payload_filter"></a>
+### Nested Schema for `interceptor_configurations.input_configuration.payload_filter`
+
+Optional:
+
+- `exclude` (Attributes List) (see [below for nested schema](#nestedatt--interceptor_configurations--input_configuration--payload_filter--exclude))
+
+<a id="nestedatt--interceptor_configurations--input_configuration--payload_filter--exclude"></a>
+### Nested Schema for `interceptor_configurations.input_configuration.payload_filter.exclude`
+
+Optional:
+
+- `field` (String)
+
+
+
+
+<a id="nestedatt--interceptor_configurations--interceptor"></a>
+### Nested Schema for `interceptor_configurations.interceptor`
+
+Optional:
+
+- `lambda` (Attributes) (see [below for nested schema](#nestedatt--interceptor_configurations--interceptor--lambda))
+
+<a id="nestedatt--interceptor_configurations--interceptor--lambda"></a>
+### Nested Schema for `interceptor_configurations.interceptor.lambda`
+
+Optional:
+
+- `arn` (String)
+
+
+
+
+<a id="nestedatt--policy_engine_configuration"></a>
+### Nested Schema for `policy_engine_configuration`
+
+Optional:
+
+- `arn` (String)
+- `mode` (String)
 
 
 <a id="nestedatt--protocol_configuration"></a>
@@ -75,7 +199,25 @@ Optional:
 
 - `instructions` (String)
 - `search_type` (String)
+- `session_configuration` (Attributes) (see [below for nested schema](#nestedatt--protocol_configuration--mcp--session_configuration))
+- `streaming_configuration` (Attributes) (see [below for nested schema](#nestedatt--protocol_configuration--mcp--streaming_configuration))
 - `supported_versions` (List of String)
+
+<a id="nestedatt--protocol_configuration--mcp--session_configuration"></a>
+### Nested Schema for `protocol_configuration.mcp.session_configuration`
+
+Optional:
+
+- `session_timeout_in_seconds` (Number)
+
+
+<a id="nestedatt--protocol_configuration--mcp--streaming_configuration"></a>
+### Nested Schema for `protocol_configuration.mcp.streaming_configuration`
+
+Optional:
+
+- `enable_response_streaming` (Boolean)
+
 
 
 

@@ -2,12 +2,12 @@
 page_title: "awscc_opensearchserverless_access_policy Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Amazon OpenSearchServerless access policy resource
+  Resource Type definition for AWS::OpenSearchServerless::AccessPolicy
 ---
 
 # awscc_opensearchserverless_access_policy (Resource)
 
-Amazon OpenSearchServerless access policy resource
+Resource Type definition for AWS::OpenSearchServerless::AccessPolicy
 
 ## Example Usage
 

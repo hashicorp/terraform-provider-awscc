@@ -55,7 +55,10 @@
       }
     }
   },
-  "required": [],
+  "required": [
+    "IamRoleArn",
+    "LocationScope"
+  ],
   "readOnlyProperties": [
     "/properties/AccessGrantsLocationArn",
     "/properties/AccessGrantsLocationId"

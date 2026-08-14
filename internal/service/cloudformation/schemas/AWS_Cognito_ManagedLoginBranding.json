@@ -139,7 +139,8 @@
   "handlers": {
     "create": {
       "permissions": [
-        "cognito-idp:CreateManagedLoginBranding"
+        "cognito-idp:CreateManagedLoginBranding",
+        "cognito-idp:DescribeManagedLoginBrandingByClient"
       ],
       "timeoutInMinutes": 2
     },

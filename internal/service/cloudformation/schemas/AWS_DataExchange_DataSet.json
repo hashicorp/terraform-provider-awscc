@@ -1,0 +1,149 @@
+{
+  "typeName": "AWS::DataExchange::DataSet",
+  "description": "Definition of AWS::DataExchange::DataSet Resource Type",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The ARN for the data set."
+    },
+    "AssetType": {
+      "type": "string",
+      "description": "The type of asset that is added to a data set.",
+      "enum": [
+        "S3_SNAPSHOT",
+        "REDSHIFT_DATA_SHARE",
+        "API_GATEWAY_API",
+        "S3_DATA_ACCESS",
+        "LAKE_FORMATION_DATA_PERMISSION"
+      ]
+    },
+    "CreatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time that the data set was created, in ISO 8601 format."
+    },
+    "Description": {
+      "type": "string",
+      "description": "A description for the data set."
+    },
+    "Id": {
+      "type": "string",
+      "description": "The unique identifier for the data set."
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the data set."
+    },
+    "Origin": {
+      "type": "string",
+      "description": "A property that defines the data set as OWNED by the account (for providers) or ENTITLED to the account (for subscribers).",
+      "enum": [
+        "OWNED",
+        "ENTITLED"
+      ]
+    },
+    "Tags": {
+      "description": "Tags for the data set.",
+      "type": "array",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time that the data set was last updated, in ISO 8601 format."
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "AssetType",
+    "Description",
+    "Name"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/Id",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt",
+    "/properties/Origin"
+  ],
+  "createOnlyProperties": [
+    "/properties/AssetType"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/Id"
+    ]
+  ],
+  "additionalProperties": false,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "dataexchange:TagResource",
+      "dataexchange:UntagResource",
+      "dataexchange:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "dataexchange:CreateDataSet",
+        "dataexchange:GetDataSet",
+        "dataexchange:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "dataexchange:GetDataSet",
+        "dataexchange:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "dataexchange:UpdateDataSet",
+        "dataexchange:GetDataSet",
+        "dataexchange:TagResource",
+        "dataexchange:UntagResource",
+        "dataexchange:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "dataexchange:DeleteDataSet",
+        "dataexchange:GetDataSet"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "dataexchange:ListDataSets"
+      ]
+    }
+  }
+}

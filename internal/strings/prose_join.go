@@ -1,4 +1,4 @@
-// Copyright (c) HashiCorp, Inc.
+// Copyright IBM Corp. 2021, 2026
 // SPDX-License-Identifier: MPL-2.0
 
 package strings
@@ -36,7 +36,7 @@ func ProseJoin(elems []string) string {
 	}
 
 	size := (len(elems)-2)*lenComma + lenCommaAnd //nolint:mnd
-	for i := 0; i < len(elems); i++ {
+	for i := range elems {
 		size += len(elems[i])
 	}
 	var b strings.Builder

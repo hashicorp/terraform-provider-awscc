@@ -22,6 +22,7 @@ A user profile represents Amazon DataZone users. Amazon DataZone supports both I
 
 ### Optional
 
+- `session_name` (String) The session name of the user profile.
 - `status` (String) The status of the user profile.
 - `user_type` (String) The type of the user.
 
@@ -47,6 +48,8 @@ Read-Only:
 Read-Only:
 
 - `arn` (String) The ARN of the IAM User Profile.
+- `group_profile_id` (String) The group profile ID of the IAM User Profile.
+- `session_name` (String) The session name of the IAM User Profile.
 
 
 <a id="nestedatt--details--sso"></a>

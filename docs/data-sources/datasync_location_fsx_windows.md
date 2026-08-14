@@ -21,15 +21,44 @@ Data Source schema for AWS::DataSync::LocationFSxWindows
 
 ### Read-Only
 
+- `cmk_secret_config` (Attributes) Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and a customer-managed AWS KMS key. (see [below for nested schema](#nestedatt--cmk_secret_config))
+- `custom_secret_config` (Attributes) Specifies configuration information for a customer-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and an IAM role that DataSync can assume and access the customer-managed secret. (see [below for nested schema](#nestedatt--custom_secret_config))
 - `domain` (String) The name of the Windows domain that the FSx for Windows server belongs to.
 - `fsx_filesystem_arn` (String) The Amazon Resource Name (ARN) for the FSx for Windows file system.
 - `location_arn` (String) The Amazon Resource Name (ARN) of the Amazon FSx for Windows file system location that is created.
 - `location_uri` (String) The URL of the FSx for Windows location that was described.
+- `managed_secret_config` (Attributes) Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location. DataSync uses the default AWS-managed KMS key to encrypt this secret in AWS Secrets Manager. (see [below for nested schema](#nestedatt--managed_secret_config))
 - `password` (String) The password of the user who has the permissions to access files and folders in the FSx for Windows file system.
 - `security_group_arns` (List of String) The ARNs of the security groups that are to use to configure the FSx for Windows file system.
 - `subdirectory` (String) A subdirectory in the location's path.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `user` (String) The user who has the permissions to access files and folders in the FSx for Windows file system.
+
+<a id="nestedatt--cmk_secret_config"></a>
+### Nested Schema for `cmk_secret_config`
+
+Read-Only:
+
+- `kms_key_arn` (String) Specifies the ARN for the customer-managed AWS KMS key used to encrypt the secret specified for SecretArn. DataSync provides this key to AWS Secrets Manager.
+- `secret_arn` (String) Specifies the ARN for an AWS Secrets Manager secret, managed by DataSync.
+
+
+<a id="nestedatt--custom_secret_config"></a>
+### Nested Schema for `custom_secret_config`
+
+Read-Only:
+
+- `secret_access_role_arn` (String) Specifies the ARN for the AWS Identity and Access Management role that DataSync uses to access the secret specified for SecretArn.
+- `secret_arn` (String) Specifies the ARN for a customer created AWS Secrets Manager secret.
+
+
+<a id="nestedatt--managed_secret_config"></a>
+### Nested Schema for `managed_secret_config`
+
+Read-Only:
+
+- `secret_arn` (String) Specifies the ARN for an AWS Secrets Manager secret.
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

@@ -1,0 +1,1 @@
+$ terraform import awscc_ecs_daemon.example "daemon_arn"

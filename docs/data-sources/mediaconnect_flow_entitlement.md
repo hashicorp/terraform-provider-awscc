@@ -29,6 +29,7 @@ Data Source schema for AWS::MediaConnect::FlowEntitlement
 - `flow_arn` (String) The ARN of the flow.
 - `name` (String) The name of the entitlement.
 - `subscribers` (List of String) The AWS account IDs that you want to share your content with. The receiving accounts (subscribers) will be allowed to create their own flow using your content as the source.
+- `tags` (Attributes Set) Key-value pairs that can be used to tag and organize this flow entitlement. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--encryption"></a>
 ### Nested Schema for `encryption`
@@ -44,3 +45,12 @@ Read-Only:
 - `role_arn` (String) The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).
 - `secret_arn` (String) The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.
 - `url` (String) The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)

@@ -115,6 +115,16 @@
         "SqlEndpointPath"
       ]
     },
+    "S3TablesParameters": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "TableBucketArn": {
+          "pattern": "^(arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:bucket/[a-zA-Z0-9-_]{3,63})$",
+          "type": "string"
+        }
+      }
+    },
     "AuroraPostgreSqlParameters": {
       "description": "<p>Parameters for Amazon Aurora PostgreSQL-Compatible Edition.<\/p>",
       "additionalProperties": false,
@@ -165,8 +175,37 @@
         },
         "CredentialPair": {
           "$ref": "#/definitions/CredentialPair"
+        },
+        "KeyPairCredentials": {
+          "$ref": "#/definitions/KeyPairCredentials"
         }
       }
+    },
+    "KeyPairCredentials": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "KeyPairUsername": {
+          "minLength": 1,
+          "type": "string",
+          "maxLength": 64
+        },
+        "PrivateKey": {
+          "minLength": 1600,
+          "pattern": "",
+          "type": "string",
+          "maxLength": 8000
+        },
+        "PrivateKeyPassphrase": {
+          "minLength": 0,
+          "type": "string",
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "KeyPairUsername",
+        "PrivateKey"
+      ]
     },
     "ManifestFileLocation": {
       "description": "<p>Amazon S3 manifest file location.<\/p>",
@@ -350,6 +389,7 @@
         "DB2_AS400",
         "EXASOL",
         "FILE",
+        "FULLY_MANAGED_KNOWLEDGE_BASE",
         "GITHUB",
         "INTERNATIONAL_DATA_CORPORATION",
         "JIRA",
@@ -386,7 +426,9 @@
         "CONFLUENCE",
         "SHAREPOINT",
         "ONE_DRIVE",
-        "WEB_CRAWLER"
+        "WEB_CRAWLER",
+        "BOX",
+        "GOOGLESHEETS"
       ]
     },
     "OAuthParameters": {
@@ -555,7 +597,7 @@
       "properties": {
         "Actions": {
           "minItems": 1,
-          "maxItems": 20,
+          "maxItems": 30,
           "description": "<p>The IAM action to grant or revoke permissions on.<\/p>",
           "type": "array",
           "items": {
@@ -582,7 +624,8 @@
       "enum": [
         "PASSWORD",
         "TOKEN",
-        "X509"
+        "X509",
+        "KEYPAIR"
       ]
     },
     "DataSourceErrorInfo": {
@@ -824,6 +867,9 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
+        "S3TablesParameters": {
+          "$ref": "#/definitions/S3TablesParameters"
+        },
         "AuroraPostgreSqlParameters": {
           "$ref": "#/definitions/AuroraPostgreSqlParameters"
         },

@@ -28,4 +28,13 @@ Data Source schema for AWS::LicenseManager::Grant
 - `license_arn` (String) License Arn for the grant.
 - `principals` (List of String)
 - `status` (String)
+- `tags` (Attributes List) A list of tags to attach. (see [below for nested schema](#nestedatt--tags))
 - `version` (String) The version of the grant.
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String) The key name of the tag.
+- `value` (String) The value for the tag.

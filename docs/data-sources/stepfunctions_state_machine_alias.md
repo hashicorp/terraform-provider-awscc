@@ -26,6 +26,7 @@ Data Source schema for AWS::StepFunctions::StateMachineAlias
 - `description` (String) An optional description of the alias.
 - `name` (String) The alias name.
 - `routing_configuration` (Attributes Set) The routing configuration of the alias. One or two versions can be mapped to an alias to split StartExecution requests of the same state machine. (see [below for nested schema](#nestedatt--routing_configuration))
+- `state_machine_arn` (String)
 
 <a id="nestedatt--deployment_preference"></a>
 ### Nested Schema for `deployment_preference`

@@ -11,13 +11,54 @@
     "DashboardBody": {
       "type": "string",
       "description": "The detailed information about the dashboard in JSON format, including the widgets to include and their location on the dashboard"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "A list of key-value pairs to associate with the cloudwatch dashboard. You can associate up to 50 tags with a dashboard",
+      "maxItems": 50,
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "description": "Metadata that you can assign to a cloudwatch dashboard. Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "description": "A unique identifier for the tag. The combination of tag keys and values can help you organize and categorize your resources.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "description": "The value for the specified tag key.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
     }
   },
   "tagging": {
-    "taggable": false,
-    "tagOnCreate": false,
-    "tagUpdatable": false,
-    "cloudFormationSystemTags": false
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "cloudwatch:TagResource",
+      "cloudwatch:UntagResource",
+      "cloudwatch:ListTagsForResource"
+    ]
   },
   "required": [
     "DashboardBody"
@@ -32,17 +73,22 @@
     "create": {
       "permissions": [
         "cloudwatch:PutDashboard",
-        "cloudwatch:GetDashboard"
+        "cloudwatch:GetDashboard",
+        "cloudwatch:TagResource"
       ]
     },
     "read": {
       "permissions": [
-        "cloudwatch:GetDashboard"
+        "cloudwatch:GetDashboard",
+        "cloudwatch:ListTagsForResource"
       ]
     },
     "update": {
       "permissions": [
-        "cloudwatch:PutDashboard"
+        "cloudwatch:PutDashboard",
+        "cloudwatch:TagResource",
+        "cloudwatch:UntagResource",
+        "cloudwatch:ListTagsForResource"
       ]
     },
     "delete": {

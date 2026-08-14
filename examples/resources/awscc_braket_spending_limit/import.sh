@@ -1,0 +1,1 @@
+$ terraform import awscc_braket_spending_limit.example "spending_limit_arn"

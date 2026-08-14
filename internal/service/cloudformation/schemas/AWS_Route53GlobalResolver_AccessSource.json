@@ -1,0 +1,198 @@
+{
+  "typeName": "AWS::Route53GlobalResolver::AccessSource",
+  "description": "Resource schema for AWS::Route53GlobalResolver::AccessSource",
+  "primaryIdentifier": [
+    "/properties/AccessSourceId"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/Arn"
+    ]
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/AccessSourceId",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt",
+    "/properties/Status"
+  ],
+  "createOnlyProperties": [
+    "/properties/DnsViewId",
+    "/properties/ClientToken"
+  ],
+  "writeOnlyProperties": [
+    "/properties/ClientToken"
+  ],
+  "required": [
+    "Cidr",
+    "DnsViewId",
+    "Protocol"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "Cidr": {
+      "type": "string",
+      "maxLength": 42,
+      "minLength": 1
+    },
+    "IpAddressType": {
+      "type": "string",
+      "enum": [
+        "IPV4",
+        "IPV6"
+      ]
+    },
+    "DnsProtocol": {
+      "type": "string",
+      "enum": [
+        "DO53",
+        "DOH",
+        "DOT"
+      ]
+    },
+    "ResourceName": {
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": ""
+    },
+    "CRResourceStatus": {
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "OPERATIONAL",
+        "UPDATING",
+        "DELETING"
+      ]
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        },
+        "Value": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 0
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "AccessSourceId": {
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 1
+    },
+    "Arn": {
+      "type": "string",
+      "maxLength": 2048,
+      "minLength": 1
+    },
+    "Cidr": {
+      "$ref": "#/definitions/Cidr"
+    },
+    "IpAddressType": {
+      "$ref": "#/definitions/IpAddressType"
+    },
+    "Name": {
+      "$ref": "#/definitions/ResourceName"
+    },
+    "DnsViewId": {
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 1
+    },
+    "Protocol": {
+      "$ref": "#/definitions/DnsProtocol"
+    },
+    "Status": {
+      "$ref": "#/definitions/CRResourceStatus"
+    },
+    "CreatedAt": {
+      "type": "string"
+    },
+    "UpdatedAt": {
+      "type": "string"
+    },
+    "ClientToken": {
+      "type": "string",
+      "maxLength": 256,
+      "minLength": 1
+    },
+    "Tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50
+    }
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "route53globalresolver:CreateAccessSource",
+        "route53globalresolver:GetAccessSource",
+        "route53globalresolver:TagResource",
+        "route53globalresolver:UntagResource",
+        "route53globalresolver:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "route53globalresolver:GetAccessSource",
+        "route53globalresolver:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "route53globalresolver:UpdateAccessSource",
+        "route53globalresolver:GetAccessSource",
+        "route53globalresolver:TagResource",
+        "route53globalresolver:UntagResource",
+        "route53globalresolver:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "route53globalresolver:DeleteAccessSource",
+        "route53globalresolver:GetAccessSource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "route53globalresolver:ListAccessSources"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "DnsViewId": {
+            "$ref": "resource-schema.json#/properties/DnsViewId"
+          }
+        },
+        "required": [
+          "DnsViewId"
+        ]
+      }
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "route53globalresolver:TagResource",
+      "route53globalresolver:UntagResource",
+      "route53globalresolver:ListTagsForResource"
+    ]
+  }
+}

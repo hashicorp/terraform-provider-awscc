@@ -1,0 +1,271 @@
+{
+  "typeName": "AWS::MediaLive::Node",
+  "description": "Definition of AWS::MediaLive::Node Resource Type",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-medialive",
+  "additionalProperties": false,
+  "definitions": {
+    "NodeRole": {
+      "type": "string",
+      "description": "The role of the Node in the Cluster. ACTIVE means the Node is available for encoding. BACKUP means the Node is a redundant Node and might get used if an ACTIVE Node fails.",
+      "enum": [
+        "BACKUP",
+        "ACTIVE"
+      ]
+    },
+    "NodeState": {
+      "type": "string",
+      "description": "The current state of the Node.",
+      "enum": [
+        "CREATED",
+        "REGISTERING",
+        "READY_TO_ACTIVATE",
+        "REGISTRATION_FAILED",
+        "ACTIVATION_FAILED",
+        "ACTIVE",
+        "READY",
+        "IN_USE",
+        "DEREGISTERING",
+        "DRAINING",
+        "DEREGISTRATION_FAILED",
+        "DEREGISTERED"
+      ]
+    },
+    "NodeConnectionState": {
+      "type": "string",
+      "description": "The current connection state of the Node.",
+      "enum": [
+        "CONNECTED",
+        "DISCONNECTED"
+      ]
+    },
+    "NodeInterfaceMappingCreateRequest": {
+      "type": "object",
+      "description": "Node interface mapping create request.",
+      "properties": {
+        "LogicalInterfaceName": {
+          "type": "string",
+          "description": "The logical name for this interface."
+        },
+        "NetworkInterfaceMode": {
+          "type": "string",
+          "description": "The network interface mode.",
+          "enum": [
+            "NAT",
+            "BRIDGE"
+          ]
+        },
+        "PhysicalInterfaceName": {
+          "type": "string",
+          "description": "The physical interface name."
+        }
+      },
+      "additionalProperties": false
+    },
+    "NodeInterfaceMapping": {
+      "type": "object",
+      "description": "Node interface mapping.",
+      "properties": {
+        "LogicalInterfaceName": {
+          "type": "string",
+          "description": "The logical name for this interface."
+        },
+        "NetworkInterfaceMode": {
+          "type": "string",
+          "description": "The network interface mode.",
+          "enum": [
+            "NAT",
+            "BRIDGE"
+          ]
+        },
+        "PhysicalInterfaceName": {
+          "type": "string",
+          "description": "The physical interface name."
+        }
+      },
+      "additionalProperties": false
+    },
+    "SdiSourceMapping": {
+      "type": "object",
+      "description": "SDI source mapping.",
+      "properties": {
+        "CardNumber": {
+          "type": "integer",
+          "description": "The card number."
+        },
+        "ChannelNumber": {
+          "type": "integer",
+          "description": "The channel number."
+        },
+        "SdiSource": {
+          "type": "string",
+          "description": "The SDI source."
+        }
+      },
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with the resource.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag."
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag."
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The ARN of the Node. It is automatically assigned when the Node is created."
+    },
+    "ChannelPlacementGroups": {
+      "type": "array",
+      "description": "An array of IDs. Each ID is one ChannelPlacementGroup that is associated with this Node.",
+      "items": {
+        "type": "string"
+      },
+      "insertionOrder": false
+    },
+    "ClusterId": {
+      "type": "string",
+      "description": "The ID of the Cluster that the Node belongs to."
+    },
+    "ConnectionState": {
+      "$ref": "#/definitions/NodeConnectionState"
+    },
+    "Id": {
+      "type": "string",
+      "description": "The unique ID of the Node. Unique in the Cluster. The ID is the resource-id portion of the ARN."
+    },
+    "InstanceArn": {
+      "type": "string",
+      "description": "The ARN of the EC2 instance hosting the Node."
+    },
+    "Name": {
+      "type": "string",
+      "description": "The user-specified name of the Node."
+    },
+    "NodeInterfaceMappings": {
+      "type": "array",
+      "description": "An array of interface mappings for the Node.",
+      "items": {
+        "$ref": "#/definitions/NodeInterfaceMapping"
+      },
+      "insertionOrder": false
+    },
+    "Role": {
+      "$ref": "#/definitions/NodeRole"
+    },
+    "State": {
+      "$ref": "#/definitions/NodeState"
+    },
+    "SdiSourceMappings": {
+      "type": "array",
+      "description": "An array of SDI source mappings.",
+      "items": {
+        "$ref": "#/definitions/SdiSourceMapping"
+      },
+      "insertionOrder": false
+    },
+    "Tags": {
+      "type": "array",
+      "description": "A collection of key-value pairs.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "insertionOrder": false
+    }
+  },
+  "required": [
+    "ClusterId"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/Id",
+    "/properties/State",
+    "/properties/ConnectionState",
+    "/properties/InstanceArn",
+    "/properties/ChannelPlacementGroups"
+  ],
+  "createOnlyProperties": [
+    "/properties/ClusterId",
+    "/properties/NodeInterfaceMappings"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/ClusterId",
+      "/properties/Id"
+    ]
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "medialive:CreateNode",
+        "medialive:UpdateNode",
+        "medialive:DescribeNode",
+        "medialive:CreateTags"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "medialive:DescribeNode",
+        "medialive:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "medialive:UpdateNode",
+        "medialive:DescribeNode",
+        "medialive:CreateTags",
+        "medialive:DeleteTags",
+        "medialive:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "medialive:DeleteNode",
+        "medialive:DescribeNode"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "medialive:ListNodes"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "ClusterId": {
+            "$ref": "resource-schema.json#/properties/ClusterId"
+          }
+        },
+        "required": [
+          "ClusterId"
+        ]
+      }
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "medialive:CreateTags",
+      "medialive:DeleteTags",
+      "medialive:ListTagsForResource"
+    ]
+  }
+}

@@ -25,6 +25,13 @@
       ],
       "additionalProperties": false
     },
+    "ServerId": {
+      "description": "A unique identifier for the server.",
+      "type": "string",
+      "pattern": "^s-([0-9a-f]{17})$",
+      "minLength": 19,
+      "maxLength": 19
+    },
     "SftpConnectorTrustedHostKey": {
       "description": "The public host key for the external server to which you are connecting.",
       "type": "string",
@@ -78,6 +85,38 @@
         "ACTIVE",
         "PENDING",
         "ERRORED"
+      ]
+    },
+    "ConnectorAsyncMdnConfig": {
+      "type": "object",
+      "properties": {
+        "Url": {
+          "type": "string",
+          "description": "URL of the server to receive the MDN response on"
+        },
+        "ServerIds": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 10,
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/ServerId"
+          }
+        }
+      },
+      "required": [
+        "Url",
+        "ServerIds"
+      ],
+      "additionalProperties": false
+    },
+    "IpAddressType": {
+      "type": "string",
+      "description": "IP address type for Connector",
+      "enum": [
+        "IPV4",
+        "DUALSTACK"
       ]
     }
   },
@@ -161,6 +200,7 @@
           "description": "MDN Response setting for this AS2 connector configuration.",
           "enum": [
             "SYNC",
+            "ASYNC",
             "NONE"
           ]
         },
@@ -177,6 +217,10 @@
             "ENABLED",
             "DISABLED"
           ]
+        },
+        "AsyncMdnConfig": {
+          "description": "Configuration for an AS2 connector with ASYNC MDN Response",
+          "$ref": "#/definitions/ConnectorAsyncMdnConfig"
         }
       },
       "additionalProperties": false
@@ -272,6 +316,14 @@
       "type": "string",
       "pattern": "TransferSFTPConnectorSecurityPolicy-[A-Za-z0-9-]+",
       "maxLength": 50
+    },
+    "ErrorMessage": {
+      "description": "Detailed error message when Connector in ERRORED status",
+      "type": "string",
+      "maxLength": 2048
+    },
+    "IpAddressType": {
+      "$ref": "#/definitions/IpAddressType"
     }
   },
   "additionalProperties": false,
@@ -282,7 +334,8 @@
     "/properties/Arn",
     "/properties/ConnectorId",
     "/properties/ServiceManagedEgressIpAddresses",
-    "/properties/Status"
+    "/properties/Status",
+    "/properties/ErrorMessage"
   ],
   "primaryIdentifier": [
     "/properties/ConnectorId"

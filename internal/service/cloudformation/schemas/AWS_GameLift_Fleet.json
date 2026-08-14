@@ -111,11 +111,14 @@
           "description": "The maximum value that is allowed for the fleet's instance count for a location. When creating a new fleet, GameLift automatically sets this value to \"1\". Once the fleet is active, you can change this value.",
           "type": "integer",
           "minimum": 0
+        },
+        "ManagedCapacityConfiguration": {
+          "description": "Configuration options for Amazon GameLift Servers-managed capacity behavior.",
+          "$ref": "#/definitions/ManagedCapacityConfiguration"
         }
       },
       "additionalProperties": false,
       "required": [
-        "MinSize",
         "MaxSize"
       ]
     },
@@ -128,12 +131,59 @@
         },
         "LocationCapacity": {
           "$ref": "#/definitions/LocationCapacity"
+        },
+        "PlayerGatewayStatus": {
+          "description": "The player gateway status for the location.",
+          "type": "string",
+          "enum": [
+            "DISABLED",
+            "ENABLED"
+          ]
         }
       },
       "additionalProperties": false,
       "required": [
         "Location"
       ]
+    },
+    "ManagedCapacityConfiguration": {
+      "description": "Configuration options for Amazon GameLift Servers-managed capacity behavior.",
+      "type": "object",
+      "properties": {
+        "ZeroCapacityStrategy": {
+          "description": "The strategy Amazon GameLift Servers will use to automatically scale your capacity to and from zero in response to game session activity. Game session activity refers to any active running sessions or game session requests. When set to SCALE_TO_AND_FROM_ZERO, MinSize must not be specified and will be managed automatically. When set to MANUAL, MinSize is required.",
+          "type": "string",
+          "enum": [
+            "SCALE_TO_AND_FROM_ZERO",
+            "MANUAL"
+          ]
+        },
+        "ScaleInAfterInactivityMinutes": {
+          "description": "Length of time, in minutes, that Amazon GameLift Servers will wait before scaling in your MinSize and DesiredInstances to 0 after a period with no game session activity.",
+          "type": "integer",
+          "minimum": 5,
+          "maximum": 1440
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "ZeroCapacityStrategy"
+      ]
+    },
+    "PlayerGatewayConfiguration": {
+      "description": "Configuration for player gateway.",
+      "type": "object",
+      "properties": {
+        "GameServerIpProtocolSupported": {
+          "description": "The IP protocol supported by the game server.",
+          "type": "string",
+          "enum": [
+            "IPv4",
+            "DUAL_STACK"
+          ]
+        }
+      },
+      "additionalProperties": false
     },
     "ResourceCreationLimitPolicy": {
       "description": "A policy that limits the number of game sessions a player can create on the same fleet. This optional policy gives game owners control over how players can consume available game server resources. A resource creation policy makes the following statement: \"An individual player can create a maximum number of new game sessions within a specified time period\".\n\nThe policy is evaluated when a player tries to create a new game session. For example, assume you have a policy of 10 new game sessions and a time period of 60 minutes. On receiving a CreateGameSession request, Amazon GameLift checks that the player (identified by CreatorId) has created fewer than 10 game sessions in the past 60 minutes.",
@@ -494,6 +544,10 @@
       "maxLength": 1024,
       "pattern": "^vpc-\\S+"
     },
+    "PlayerGatewayConfiguration": {
+      "description": "Configuration for player gateway.",
+      "$ref": "#/definitions/PlayerGatewayConfiguration"
+    },
     "ResourceCreationLimitPolicy": {
       "description": "A policy that limits the number of game sessions an individual player can create over a span of time for this fleet.",
       "$ref": "#/definitions/ResourceCreationLimitPolicy"
@@ -543,6 +597,15 @@
       "description": "The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift Servers Fleet resource and uniquely identifies it. ARNs are unique across all Regions. In a GameLift Fleet ARN, the resource ID matches the FleetId value.",
       "pattern": "^arn:.*:fleet\/[a-z]*fleet-[a-zA-Z0-9\\-]+$",
       "type": "string"
+    },
+    "PlayerGatewayMode": {
+      "description": "The player gateway mode for the fleet.",
+      "type": "string",
+      "enum": [
+        "DISABLED",
+        "ENABLED",
+        "REQUIRED"
+      ]
     }
   },
   "required": [
@@ -562,7 +625,9 @@
     "/properties/ScriptId",
     "/properties/ServerLaunchParameters",
     "/properties/ServerLaunchPath",
-    "/properties/ComputeType"
+    "/properties/ComputeType",
+    "/properties/PlayerGatewayMode",
+    "/properties/PlayerGatewayConfiguration"
   ],
   "deprecatedProperties": [
     "/properties/LogPaths",
@@ -574,7 +639,8 @@
   ],
   "readOnlyProperties": [
     "/properties/FleetId",
-    "/properties/FleetArn"
+    "/properties/FleetArn",
+    "/properties/Locations/*/PlayerGatewayStatus"
   ],
   "writeOnlyProperties": [
     "/properties/ApplyCapacity"

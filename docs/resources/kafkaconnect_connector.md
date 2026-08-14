@@ -31,6 +31,7 @@ Resource Type definition for AWS::KafkaConnect::Connector
 
 - `connector_description` (String) A summary description of the connector.
 - `log_delivery` (Attributes) Details of what logs are delivered and where they are delivered. (see [below for nested schema](#nestedatt--log_delivery))
+- `network_type` (String) The network type of the Connector.
 - `tags` (Attributes Set) A collection of tags associated with a resource (see [below for nested schema](#nestedatt--tags))
 - `worker_configuration` (Attributes) Specifies the worker configuration to use with the connector. (see [below for nested schema](#nestedatt--worker_configuration))
 
@@ -52,6 +53,7 @@ Optional:
 
 Optional:
 
+- `max_autoscaling_task_count` (Number) The maximum number of tasks allocated to the connector during autoscaling operations.
 - `max_worker_count` (Number) The maximum number of workers for a connector.
 - `mcu_count` (Number) Specifies how many MSK Connect Units (MCU) as the minimum scaling unit.
 - `min_worker_count` (Number) The minimum number of workers for a connector.

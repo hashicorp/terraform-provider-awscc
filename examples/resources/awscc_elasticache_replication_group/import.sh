@@ -1,0 +1,1 @@
+$ terraform import awscc_elasticache_replication_group.example "replication_group_id"

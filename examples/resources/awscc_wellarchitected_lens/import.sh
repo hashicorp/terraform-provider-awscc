@@ -1,0 +1,1 @@
+$ terraform import awscc_wellarchitected_lens.example "lens_arn"

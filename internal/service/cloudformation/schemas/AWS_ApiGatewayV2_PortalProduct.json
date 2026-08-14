@@ -1,0 +1,144 @@
+{
+  "typeName": "AWS::ApiGatewayV2::PortalProduct",
+  "description": "Represents a portal product in Amazon API Gateway V2, which is a logical grouping of APIs that can be published in a developer portal.",
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with a resource.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "PortalProductArn": {
+      "type": "string",
+      "description": "The ARN of the portal product.",
+      "minLength": 20,
+      "maxLength": 2048
+    },
+    "PortalProductId": {
+      "type": "string",
+      "description": "The portal product identifier.",
+      "minLength": 10,
+      "maxLength": 30,
+      "pattern": "^[a-z0-9]+$"
+    },
+    "DisplayName": {
+      "type": "string",
+      "description": "The name of the portal product as it appears in a published portal.",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "Description": {
+      "type": "string",
+      "description": "A description of the portal product.",
+      "minLength": 0,
+      "maxLength": 1024
+    },
+    "LastModified": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the portal product was last modified."
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The collection of tags associated with the portal product.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "insertionOrder": false
+    }
+  },
+  "required": [
+    "DisplayName"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/PortalProductArn",
+    "/properties/PortalProductId",
+    "/properties/LastModified"
+  ],
+  "primaryIdentifier": [
+    "/properties/PortalProductArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/PortalProductId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "apigateway:TagResource",
+      "apigateway:UntagResource",
+      "apigateway:GetTags",
+      "apigateway:POST",
+      "apigateway:PATCH",
+      "apigateway:DELETE",
+      "apigateway:GET"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "apigateway:CreatePortalProduct",
+        "apigateway:TagResource",
+        "apigateway:POST"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "apigateway:GetPortalProduct",
+        "apigateway:GetTags",
+        "apigateway:GET"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "apigateway:UpdatePortalProduct",
+        "apigateway:GetPortalProduct",
+        "apigateway:TagResource",
+        "apigateway:UntagResource",
+        "apigateway:GetTags",
+        "apigateway:GET",
+        "apigateway:POST",
+        "apigateway:PATCH",
+        "apigateway:DELETE"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "apigateway:GetPortalProduct",
+        "apigateway:DeletePortalProduct",
+        "apigateway:GET"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "apigateway:ListPortalProducts",
+        "apigateway:GET"
+      ]
+    }
+  }
+}

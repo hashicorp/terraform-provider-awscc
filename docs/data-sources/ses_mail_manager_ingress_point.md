@@ -31,6 +31,7 @@ Data Source schema for AWS::SES::MailManagerIngressPoint
 - `status` (String)
 - `status_to_update` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `tls_policy` (String)
 - `traffic_policy_id` (String)
 - `type` (String)
 
@@ -41,6 +42,25 @@ Read-Only:
 
 - `secret_arn` (String)
 - `smtp_password` (String)
+- `tls_auth_configuration` (Attributes) (see [below for nested schema](#nestedatt--ingress_point_configuration--tls_auth_configuration))
+
+<a id="nestedatt--ingress_point_configuration--tls_auth_configuration"></a>
+### Nested Schema for `ingress_point_configuration.tls_auth_configuration`
+
+Read-Only:
+
+- `trust_store` (Attributes) (see [below for nested schema](#nestedatt--ingress_point_configuration--tls_auth_configuration--trust_store))
+
+<a id="nestedatt--ingress_point_configuration--tls_auth_configuration--trust_store"></a>
+### Nested Schema for `ingress_point_configuration.tls_auth_configuration.trust_store`
+
+Read-Only:
+
+- `ca_content` (String)
+- `crl_content` (String)
+- `kms_key_arn` (String)
+
+
 
 
 <a id="nestedatt--network_configuration"></a>

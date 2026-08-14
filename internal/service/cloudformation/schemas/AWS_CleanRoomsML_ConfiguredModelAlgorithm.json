@@ -1,0 +1,218 @@
+{
+  "typeName": "AWS::CleanRoomsML::ConfiguredModelAlgorithm",
+  "description": "Definition of AWS::CleanRoomsML::ConfiguredModelAlgorithm Resource Type",
+  "definitions": {
+    "ContainerConfig": {
+      "type": "object",
+      "properties": {
+        "ImageUri": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255,
+          "pattern": "^.*$"
+        },
+        "Entrypoint": {
+          "type": "array",
+          "insertionOrder": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "pattern": "^.*$"
+          },
+          "minItems": 1,
+          "maxItems": 100
+        },
+        "Arguments": {
+          "type": "array",
+          "insertionOrder": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "pattern": "^.*$"
+          },
+          "minItems": 1,
+          "maxItems": 100
+        },
+        "MetricDefinitions": {
+          "type": "array",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/MetricDefinition"
+          },
+          "minItems": 0,
+          "maxItems": 40
+        }
+      },
+      "required": [
+        "ImageUri"
+      ],
+      "additionalProperties": false
+    },
+    "InferenceContainerConfig": {
+      "type": "object",
+      "properties": {
+        "ImageUri": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255,
+          "pattern": "^.*$"
+        }
+      },
+      "required": [
+        "ImageUri"
+      ],
+      "additionalProperties": false
+    },
+    "MetricDefinition": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255,
+          "pattern": "^.+$"
+        },
+        "Regex": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500,
+          "pattern": "^.+$"
+        }
+      },
+      "required": [
+        "Name",
+        "Regex"
+      ],
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Value",
+        "Key"
+      ]
+    }
+  },
+  "properties": {
+    "ConfiguredModelAlgorithmArn": {
+      "type": "string",
+      "maxLength": 2048,
+      "minLength": 20,
+      "pattern": "^arn:aws[-a-z]*:cleanrooms-ml:[-a-z0-9]+:[0-9]{12}:configured-model-algorithm/[-a-zA-Z0-9_/.]+$"
+    },
+    "Name": {
+      "type": "string",
+      "maxLength": 63,
+      "minLength": 1,
+      "pattern": ""
+    },
+    "Description": {
+      "type": "string",
+      "maxLength": 255,
+      "pattern": ""
+    },
+    "RoleArn": {
+      "type": "string",
+      "maxLength": 2048,
+      "minLength": 20,
+      "pattern": "^arn:aws[-a-z]*:iam::[0-9]{12}:role/.+$"
+    },
+    "TrainingContainerConfig": {
+      "$ref": "#/definitions/ContainerConfig"
+    },
+    "InferenceContainerConfig": {
+      "$ref": "#/definitions/InferenceContainerConfig"
+    },
+    "KmsKeyArn": {
+      "type": "string",
+      "maxLength": 2048,
+      "minLength": 20,
+      "pattern": "^arn:aws[-a-z]*:kms:[-a-z0-9]+:[0-9]{12}:key/.+$"
+    },
+    "Tags": {
+      "description": "An arbitrary set of tags (key-value pairs) for this cleanrooms-ml configured model algorithm.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "uniqueItems": true,
+      "type": "array"
+    }
+  },
+  "required": [
+    "Name",
+    "RoleArn"
+  ],
+  "readOnlyProperties": [
+    "/properties/ConfiguredModelAlgorithmArn"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/Description",
+    "/properties/RoleArn",
+    "/properties/TrainingContainerConfig",
+    "/properties/InferenceContainerConfig",
+    "/properties/KmsKeyArn"
+  ],
+  "primaryIdentifier": [
+    "/properties/ConfiguredModelAlgorithmArn"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "cleanrooms-ml:TagResource",
+      "cleanrooms-ml:UntagResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cleanrooms-ml:CreateConfiguredModelAlgorithm",
+        "cleanrooms-ml:GetConfiguredModelAlgorithm",
+        "cleanrooms-ml:TagResource",
+        "iam:PassRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cleanrooms-ml:GetConfiguredModelAlgorithm"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cleanrooms-ml:DeleteConfiguredModelAlgorithm"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cleanrooms-ml:ListConfiguredModelAlgorithms"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cleanrooms-ml:TagResource",
+        "cleanrooms-ml:UntagResource"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

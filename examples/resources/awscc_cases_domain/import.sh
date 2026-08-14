@@ -1,0 +1,1 @@
+$ terraform import awscc_cases_domain.example "domain_arn"

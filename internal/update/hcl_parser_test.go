@@ -1,4 +1,4 @@
-// Copyright (c) HashiCorp, Inc.
+// Copyright IBM Corp. 2021, 2026
 // SPDX-License-Identifier: MPL-2.0
 
 package main
@@ -464,7 +464,7 @@ func TestWriteSchemasToHCLFile(t *testing.T) {
 		}
 
 		contentStr := string(content)
-		if !strings.Contains(contentStr, "Copyright (c) HashiCorp, Inc.") {
+		if !strings.Contains(contentStr, "Copyright IBM Corp.") {
 			t.Error("expected copyright header")
 		}
 		if !strings.Contains(contentStr, `resource_schema "aws_s3_bucket" {`) {
@@ -478,7 +478,9 @@ func TestTrimAllSchemas_RemovesDefaultEntries(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to create temp file: %v", err)
 	}
-	defer os.Remove(tempFile.Name())
+	defer func() {
+		_ = os.Remove(tempFile.Name())
+	}()
 
 	input :=
 		`resource "foo" {
@@ -496,7 +498,9 @@ func TestTrimAllSchemas_RemovesDefaultEntries(t *testing.T) {
 	if _, err := tempFile.WriteString(input); err != nil {
 		t.Fatalf("failed to write to temp file: %v", err)
 	}
-	tempFile.Close()
+	if err := tempFile.Close(); err != nil {
+		t.Fatalf("failed to close temp file: %v", err)
+	}
 
 	filePaths := &UpdateFilePaths{AllSchemasHCL: tempFile.Name()}
 	err = trimAllSchemas(filePaths)

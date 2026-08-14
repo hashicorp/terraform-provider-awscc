@@ -27,3 +27,12 @@ Data Source schema for AWS::MediaConnect::FlowVpcInterface
 - `role_arn` (String) Role Arn MediaConnect can assume to create ENIs in customer's account.
 - `security_group_ids` (List of String) Security Group IDs to be used on ENI.
 - `subnet_id` (String) Subnet must be in the AZ of the Flow
+- `tags` (Attributes Set) Key-value pairs that can be used to tag and organize this VPC network interface. (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)

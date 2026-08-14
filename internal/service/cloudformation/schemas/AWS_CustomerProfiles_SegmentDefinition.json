@@ -482,6 +482,77 @@
         "ACCOUNT_PROFILE",
         "PROFILE"
       ]
+    },
+    "SegmentSort": {
+      "description": "Defines how segments should be sorted and ordered in the results.",
+      "type": "object",
+      "properties": {
+        "Attributes": {
+          "description": "A list of attributes used to sort the segments and their ordering preferences.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SortAttribute"
+          },
+          "minItems": 1,
+          "maxItems": 10
+        }
+      },
+      "required": [
+        "Attributes"
+      ],
+      "additionalProperties": false
+    },
+    "SortAttribute": {
+      "description": "Defines the characteristics and rules for sorting by a specific attribute.",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "description": "The name of the attribute to sort by.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "Order": {
+          "$ref": "#/definitions/SegmentSortOrder"
+        },
+        "DataType": {
+          "$ref": "#/definitions/SegmentSortDataType"
+        },
+        "Type": {
+          "$ref": "#/definitions/SortAttributeType",
+          "default": "PROFILE"
+        }
+      },
+      "required": [
+        "Name",
+        "Order"
+      ],
+      "additionalProperties": false
+    },
+    "SegmentSortOrder": {
+      "description": "The sort order for the attribute (ascending or descending).",
+      "type": "string",
+      "enum": [
+        "ASC",
+        "DESC"
+      ]
+    },
+    "SegmentSortDataType": {
+      "description": "The data type of the sort attribute (e.g., string, number, date).",
+      "type": "string",
+      "enum": [
+        "STRING",
+        "NUMBER",
+        "DATE"
+      ]
+    },
+    "SortAttributeType": {
+      "description": "The type of attribute (e.g., profile, calculated).",
+      "type": "string",
+      "enum": [
+        "PROFILE",
+        "CALCULATED"
+      ]
     }
   },
   "properties": {
@@ -550,6 +621,10 @@
       },
       "minItems": 0,
       "maxItems": 50
+    },
+    "SegmentSort": {
+      "description": "The segment sort configuration for ordering segment results.",
+      "$ref": "#/definitions/SegmentSort"
     }
   },
   "required": [
@@ -589,6 +664,7 @@
     "read": {
       "permissions": [
         "profile:GetSegmentDefinition",
+        "profile:ListTagsForResource",
         "kms:CreateGrant",
         "kms:DescribeKey",
         "kms:GetKeyPolicy",
@@ -600,6 +676,7 @@
     "update": {
       "permissions": [
         "profile:GetSegmentDefinition",
+        "profile:ListTagsForResource",
         "profile:UntagResource",
         "profile:TagResource",
         "kms:CreateGrant",

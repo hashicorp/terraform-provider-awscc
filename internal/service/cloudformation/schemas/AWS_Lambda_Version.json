@@ -131,7 +131,8 @@
         "lambda:GetProvisionedConcurrencyConfig",
         "lambda:PutRuntimeManagementConfig",
         "lambda:GetRuntimeManagementConfig",
-        "lambda:PutFunctionScalingConfig"
+        "lambda:PutFunctionScalingConfig",
+        "lambda:ListVersionsByFunction"
       ],
       "timeoutInMinutes": 180
     },

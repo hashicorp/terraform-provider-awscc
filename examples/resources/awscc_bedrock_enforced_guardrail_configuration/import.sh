@@ -1,0 +1,1 @@
+$ terraform import awscc_bedrock_enforced_guardrail_configuration.example "config_id"

@@ -3,12 +3,12 @@
 page_title: "awscc_imagebuilder_image Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource schema for AWS::ImageBuilder::Image
+  Resource Type definition for AWS::ImageBuilder::Image
 ---
 
 # awscc_imagebuilder_image (Resource)
 
-Resource schema for AWS::ImageBuilder::Image
+Resource Type definition for AWS::ImageBuilder::Image
 
 
 

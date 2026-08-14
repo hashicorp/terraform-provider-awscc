@@ -7,6 +7,19 @@
       "description": "ARN of the Scheduling Policy.",
       "type": "string"
     },
+    "QuotaSharePolicy": {
+      "description": "Quota Share Policy for the Job Queue.",
+      "type": "object",
+      "properties": {
+        "IdleResourceAssignmentStrategy": {
+          "type": "string",
+          "enum": [
+            "FIFO"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
     "FairsharePolicy": {
       "description": "Fair Share Policy for the Job Queue.",
       "type": "object",
@@ -61,6 +74,9 @@
     "FairsharePolicy": {
       "$ref": "#/definitions/FairsharePolicy"
     },
+    "QuotaSharePolicy": {
+      "$ref": "#/definitions/QuotaSharePolicy"
+    },
     "Tags": {
       "type": "object",
       "description": "A key-value pair to associate with a resource.",
@@ -76,8 +92,8 @@
   "tagging": {
     "taggable": true,
     "tagOnCreate": true,
-    "tagUpdatable": false,
-    "cloudFormationSystemTags": false,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
     "tagProperty": "/properties/Tags",
     "permissions": [
       "Batch:TagResource",
@@ -88,8 +104,7 @@
     "/properties/Arn"
   ],
   "createOnlyProperties": [
-    "/properties/Name",
-    "/properties/Tags"
+    "/properties/Name"
   ],
   "readOnlyProperties": [
     "/properties/Arn"
@@ -110,7 +125,7 @@
       "permissions": [
         "Batch:UpdateSchedulingPolicy",
         "Batch:TagResource",
-        "Batch:UnTagResource"
+        "Batch:UntagResource"
       ]
     },
     "delete": {

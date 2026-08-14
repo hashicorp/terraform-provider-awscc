@@ -1,0 +1,1 @@
+$ terraform import awscc_cases_layout.example "layout_arn"

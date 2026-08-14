@@ -1,0 +1,1 @@
+$ terraform import awscc_networkmanager_core_network_prefix_list_association.example "core_network_id|prefix_list_arn"

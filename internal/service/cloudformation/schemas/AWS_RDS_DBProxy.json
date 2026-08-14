@@ -173,6 +173,9 @@
     "RoleArn",
     "VpcSubnetIds"
   ],
+  "propertyTransform": {
+    "/properties/DBProxyName": "$lowercase(DBProxyName)"
+  },
   "readOnlyProperties": [
     "/properties/DBProxyArn",
     "/properties/Endpoint",
@@ -189,7 +192,7 @@
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": false,
+    "cloudFormationSystemTags": true,
     "tagProperty": "/properties/Tags",
     "permissions": [
       "rds:AddTagsToResource",
@@ -205,17 +208,20 @@
       "permissions": [
         "rds:CreateDBProxy",
         "rds:DescribeDBProxies",
+        "rds:AddTagsToResource",
         "iam:PassRole"
       ]
     },
     "read": {
       "permissions": [
-        "rds:DescribeDBProxies"
+        "rds:DescribeDBProxies",
+        "rds:ListTagsForResource"
       ]
     },
     "update": {
       "permissions": [
         "rds:ModifyDBProxy",
+        "rds:DescribeDBProxies",
         "rds:AddTagsToResource",
         "rds:RemoveTagsFromResource",
         "iam:PassRole"

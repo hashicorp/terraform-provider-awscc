@@ -79,6 +79,7 @@ resource "awscc_customerprofiles_segment_definition" "example" {
 
 - `description` (String) The description of the segment definition.
 - `segment_groups` (Attributes) An array that defines the set of segment criteria to evaluate when handling segment groups for the segment. (see [below for nested schema](#nestedatt--segment_groups))
+- `segment_sort` (Attributes) The segment sort configuration for ordering segment results. (see [below for nested schema](#nestedatt--segment_sort))
 - `segment_sql_query` (String) The SQL query that defines the segment criteria.
 - `tags` (Attributes Set) The tags used to organize, track, or control access for this resource. (see [below for nested schema](#nestedatt--tags))
 
@@ -610,6 +611,25 @@ Optional:
 
 - `segment_definition_name` (String)
 
+
+
+
+<a id="nestedatt--segment_sort"></a>
+### Nested Schema for `segment_sort`
+
+Optional:
+
+- `attributes` (Attributes List) A list of attributes used to sort the segments and their ordering preferences. (see [below for nested schema](#nestedatt--segment_sort--attributes))
+
+<a id="nestedatt--segment_sort--attributes"></a>
+### Nested Schema for `segment_sort.attributes`
+
+Optional:
+
+- `data_type` (String) The data type of the sort attribute (e.g., string, number, date).
+- `name` (String) The name of the attribute to sort by.
+- `order` (String) The sort order for the attribute (ascending or descending).
+- `type` (String) The type of attribute (e.g., profile, calculated).
 
 
 

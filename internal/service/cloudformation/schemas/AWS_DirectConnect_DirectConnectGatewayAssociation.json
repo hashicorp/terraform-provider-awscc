@@ -1,0 +1,154 @@
+{
+  "tagging": {
+    "taggable": false
+  },
+  "typeName": "AWS::DirectConnect::DirectConnectGatewayAssociation",
+  "readOnlyProperties": [
+    "/properties/AssociationId"
+  ],
+  "description": "Resource Type definition for AWS::DirectConnect::DirectConnectGatewayAssociation",
+  "createOnlyProperties": [
+    "/properties/AcceptDirectConnectGatewayAssociationProposalRoleArn",
+    "/properties/AssociatedGatewayId",
+    "/properties/DirectConnectGatewayId"
+  ],
+  "primaryIdentifier": [
+    "/properties/AssociationId"
+  ],
+  "required": [
+    "DirectConnectGatewayId",
+    "AssociatedGatewayId"
+  ],
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-directconnect",
+  "propertyTransform": {
+    "/properties/AssociatedGatewayId": "$lowercase($substringAfter(AssociatedGatewayId, \"/\"))",
+    "/properties/DirectConnectGatewayId": "$substringAfter(DirectConnectGatewayId, \"/\")"
+  },
+  "handlers": {
+    "read": {
+      "permissions": [
+        "directconnect:DescribeDirectConnectGatewayAssociations"
+      ]
+    },
+    "create": {
+      "permissions": [
+        "directconnect:CreateDirectConnectGatewayAssociationProposal",
+        "directconnect:CreateDirectConnectGatewayAssociation",
+        "directconnect:DescribeDirectConnectGatewayAssociations",
+        "sts:AssumeRole"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "directconnect:DescribeDirectConnectGatewayAssociations",
+        "directconnect:UpdateDirectConnectGatewayAssociation",
+        "sts:AssumeRole"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "directconnect:DescribeDirectConnectGatewayAssociations"
+      ],
+      "handlerSchema": {
+        "oneOf": [
+          {
+            "required": [
+              "AssociatedGatewayId"
+            ]
+          },
+          {
+            "required": [
+              "DirectConnectGatewayId"
+            ]
+          }
+        ],
+        "properties": {
+          "DirectConnectGatewayId": {
+            "$ref": "resource-schema.json#/properties/DirectConnectGatewayId"
+          },
+          "AssociatedGatewayId": {
+            "$ref": "resource-schema.json#/properties/AssociatedGatewayId"
+          }
+        }
+      }
+    },
+    "delete": {
+      "permissions": [
+        "directconnect:DeleteDirectConnectGatewayAssociation",
+        "directconnect:DescribeDirectConnectGatewayAssociations"
+      ]
+    }
+  },
+  "writeOnlyProperties": [
+    "/properties/AcceptDirectConnectGatewayAssociationProposalRoleArn"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "AcceptDirectConnectGatewayAssociationProposalRoleArn": {
+      "pattern": "^arn:aws[a-z-]*:iam::[0-9]{12}:role/.+$",
+      "description": "The Amazon Resource Name (ARN) of the role to accept the Direct Connect Gateway association proposal. Needs directconnect:AcceptDirectConnectGatewayAssociationProposal permissions.",
+      "type": "string"
+    },
+    "DirectConnectGatewayId": {
+      "pattern": "^(arn:aws[a-z-]*:directconnect::[0-9]{12}:dx-gateway/)?[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+      "description": "The ID or ARN of the Direct Connect gateway.",
+      "anyOf": [
+        {
+          "relationshipRef": {
+            "typeName": "AWS::DirectConnect::DirectConnectGateway",
+            "propertyPath": "/properties/DirectConnectGatewayId"
+          }
+        },
+        {
+          "relationshipRef": {
+            "typeName": "AWS::DirectConnect::DirectConnectGateway",
+            "propertyPath": "/properties/DirectConnectGatewayArn"
+          }
+        }
+      ],
+      "type": "string"
+    },
+    "AssociatedGatewayId": {
+      "pattern": "^((arn:aws[a-z-]*:ec2:[a-z0-9-]+:[0-9]{12}:(vpn-gateway/vgw|transit-gateway/tgw))|(vgw|tgw))-[a-zA-Z0-9]{8,32}$",
+      "description": "The ID or ARN of the virtual private gateway or transit gateway.",
+      "anyOf": [
+        {
+          "relationshipRef": {
+            "typeName": "AWS::EC2::VPNGateway",
+            "propertyPath": "/properties/VPNGatewayId"
+          }
+        },
+        {
+          "relationshipRef": {
+            "typeName": "AWS::EC2::TransitGateway",
+            "propertyPath": "/properties/Id"
+          }
+        },
+        {
+          "relationshipRef": {
+            "typeName": "AWS::EC2::TransitGateway",
+            "propertyPath": "/properties/TransitGatewayArn"
+          }
+        }
+      ],
+      "type": "string"
+    },
+    "AllowedPrefixesToDirectConnectGateway": {
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "The Amazon VPC prefixes to advertise to the Direct Connect gateway. This parameter is required when you create an association to a transit gateway.",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "pattern": "^[0-9a-fA-F:.]+/[0-9]+$",
+        "description": "A CIDR block for the advertised route. An IPv6 CIDR must use /64 or shorter.",
+        "type": "string"
+      }
+    },
+    "AssociationId": {
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+      "description": "The ID of the Direct Connect gateway association.",
+      "type": "string"
+    }
+  }
+}

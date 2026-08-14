@@ -6,7 +6,7 @@
     "AgentRuntimeArn": {
       "type": "string",
       "maxLength": 2048,
-      "pattern": "arn:(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:agent/[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}:([0-9]{0,4}[1-9][0-9]{0,4})"
+      "pattern": "^arn:(aws(?:-cn|-us-gov|-iso(?:-[bef])?)?):bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:runtime/[a-zA-Z][a-zA-Z0-9_]{0,99}-[a-zA-Z0-9]{10}$"
     },
     "AgentRuntimeId": {
       "type": "string",
@@ -125,7 +125,8 @@
       "enum": [
         "MCP",
         "HTTP",
-        "A2A"
+        "A2A",
+        "AGUI"
       ]
     },
     "AuthorizerConfiguration": {
@@ -150,12 +151,82 @@
         },
         "AllowedClients": {
           "$ref": "#/definitions/AllowedClientsList"
+        },
+        "AllowedScopes": {
+          "$ref": "#/definitions/AllowedScopesList"
+        },
+        "CustomClaims": {
+          "$ref": "#/definitions/CustomClaimsList"
+        },
+        "AllowedWorkloadConfiguration": {
+          "$ref": "#/definitions/AllowedWorkloadConfiguration"
+        },
+        "PrivateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint"
+        },
+        "PrivateEndpointOverrides": {
+          "$ref": "#/definitions/PrivateEndpointOverridesList"
         }
       },
       "required": [
         "DiscoveryUrl"
       ],
       "additionalProperties": false
+    },
+    "AllowedWorkloadConfiguration": {
+      "type": "object",
+      "description": "Allow-list of upstream workloads permitted to reach this resource via the workload identity chain. When set, the data plane enforces that the introspected workload chain's caller matches one of the configured hosting environments or workload identities; absent means no chain enforcement.",
+      "properties": {
+        "HostingEnvironments": {
+          "$ref": "#/definitions/HostingEnvironmentsList"
+        },
+        "WorkloadIdentities": {
+          "$ref": "#/definitions/WorkloadIdentitiesList"
+        }
+      },
+      "additionalProperties": false
+    },
+    "HostingEnvironmentsList": {
+      "type": "array",
+      "description": "List of allow-listed hosting environments",
+      "minItems": 1,
+      "maxItems": 10,
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/HostingEnvironment"
+      }
+    },
+    "HostingEnvironment": {
+      "type": "object",
+      "description": "An upstream workload identified by the ARN of its hosting environment (for example a Gateway or Runtime ARN)",
+      "properties": {
+        "Arn": {
+          "type": "string",
+          "description": "The ARN of the bedrock-agentcore hosting environment",
+          "minLength": 20,
+          "maxLength": 1011
+        }
+      },
+      "required": [
+        "Arn"
+      ],
+      "additionalProperties": false
+    },
+    "WorkloadIdentitiesList": {
+      "type": "array",
+      "description": "List of allow-listed workload identity names",
+      "minItems": 1,
+      "maxItems": 10,
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "type": "string",
+        "description": "Allowed workload identity name",
+        "minLength": 3,
+        "maxLength": 255,
+        "pattern": "^[A-Za-z0-9_.-]+$"
+      }
     },
     "DiscoveryUrl": {
       "type": "string",
@@ -187,6 +258,117 @@
     "AllowedClient": {
       "type": "string",
       "description": "Allowed client value"
+    },
+    "AllowedScopesList": {
+      "type": "array",
+      "description": "List of allowed scopes",
+      "minItems": 1,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/AllowedScope"
+      }
+    },
+    "AllowedScope": {
+      "type": "string",
+      "pattern": "[\\x21\\x23-\\x5B\\x5D-\\x7E]+",
+      "description": "Allowed scope value"
+    },
+    "CustomClaimsList": {
+      "type": "array",
+      "description": "List of required custom claims",
+      "minItems": 1,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/CustomClaimValidationType"
+      }
+    },
+    "CustomClaimValidationType": {
+      "type": "object",
+      "description": "Required custom claim",
+      "properties": {
+        "AuthorizingClaimMatchValue": {
+          "$ref": "#/definitions/AuthorizingClaimMatchValueType"
+        },
+        "InboundTokenClaimName": {
+          "$ref": "#/definitions/InboundTokenClaimName"
+        },
+        "InboundTokenClaimValueType": {
+          "$ref": "#/definitions/InboundTokenClaimValueType"
+        }
+      },
+      "required": [
+        "AuthorizingClaimMatchValue",
+        "InboundTokenClaimName",
+        "InboundTokenClaimValueType"
+      ],
+      "additionalProperties": false
+    },
+    "InboundTokenClaimName": {
+      "type": "string",
+      "pattern": "[A-Za-z0-9_.-:]+",
+      "description": "The name of the custom claim to validate"
+    },
+    "InboundTokenClaimValueType": {
+      "type": "string",
+      "description": "Token claim data type",
+      "enum": [
+        "STRING",
+        "STRING_ARRAY"
+      ]
+    },
+    "AuthorizingClaimMatchValueType": {
+      "type": "object",
+      "description": "The value or values in the custom claim to match and relationship of match",
+      "properties": {
+        "ClaimMatchOperator": {
+          "$ref": "#/definitions/ClaimMatchOperator"
+        },
+        "ClaimMatchValue": {
+          "$ref": "#/definitions/ClaimMatchValueType"
+        }
+      },
+      "required": [
+        "ClaimMatchOperator",
+        "ClaimMatchValue"
+      ],
+      "additionalProperties": false
+    },
+    "ClaimMatchOperator": {
+      "type": "string",
+      "description": "The relationship between the claim field value and the value or values being matched",
+      "enum": [
+        "EQUALS",
+        "CONTAINS",
+        "CONTAINS_ANY"
+      ]
+    },
+    "ClaimMatchValueType": {
+      "type": "object",
+      "description": "The value or values in the custom claim to match for",
+      "properties": {
+        "MatchValueString": {
+          "$ref": "#/definitions/MatchValueString"
+        },
+        "MatchValueStringList": {
+          "$ref": "#/definitions/MatchValueStringList"
+        }
+      },
+      "additionalProperties": false
+    },
+    "MatchValueString": {
+      "type": "string",
+      "pattern": "[A-Za-z0-9_.-]+",
+      "description": "The string value to match for"
+    },
+    "MatchValueStringList": {
+      "type": "array",
+      "description": "The list of strings to check for a match",
+      "minItems": 1,
+      "maxItems": 255,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/MatchValueString"
+      }
     },
     "WorkloadIdentityDetails": {
       "type": "object",
@@ -285,7 +467,9 @@
         "PYTHON_3_10",
         "PYTHON_3_11",
         "PYTHON_3_12",
-        "PYTHON_3_13"
+        "PYTHON_3_13",
+        "PYTHON_3_14",
+        "NODE_22"
       ]
     },
     "EntryPoints": {
@@ -406,7 +590,230 @@
       "description": "HTTP header name",
       "minLength": 1,
       "maxLength": 256,
-      "pattern": "^(Authorization|X-Amzn-Bedrock-AgentCore-Runtime-Custom-[a-zA-Z0-9_-]+)$"
+      "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,255}$"
+    },
+    "MountPath": {
+      "type": "string",
+      "description": "Mount path for filesystem configuration",
+      "minLength": 6,
+      "maxLength": 200,
+      "pattern": "^/mnt/[a-zA-Z0-9._-]+/?$"
+    },
+    "EfsAccessPointArn": {
+      "type": "string",
+      "description": "ARN of the EFS access point",
+      "maxLength": 128,
+      "pattern": "^arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:access-point/fsap-[0-9a-f]{8,40}$"
+    },
+    "S3FilesAccessPointArn": {
+      "type": "string",
+      "description": "ARN of the S3 Files access point",
+      "maxLength": 256,
+      "pattern": "^arn:aws[-a-z]*:s3files:[0-9a-z-:]+:file-system/fs-[0-9a-f]{17,40}/access-point/fsap-[0-9a-f]{17,40}$"
+    },
+    "SessionStorageConfiguration": {
+      "type": "object",
+      "description": "Configuration for session storage",
+      "properties": {
+        "MountPath": {
+          "$ref": "#/definitions/MountPath"
+        }
+      },
+      "required": [
+        "MountPath"
+      ],
+      "additionalProperties": false
+    },
+    "EfsAccessPointConfiguration": {
+      "type": "object",
+      "description": "Configuration for EFS access point filesystem",
+      "properties": {
+        "AccessPointArn": {
+          "$ref": "#/definitions/EfsAccessPointArn"
+        },
+        "MountPath": {
+          "$ref": "#/definitions/MountPath"
+        }
+      },
+      "required": [
+        "AccessPointArn",
+        "MountPath"
+      ],
+      "additionalProperties": false
+    },
+    "S3FilesAccessPointConfiguration": {
+      "type": "object",
+      "description": "Configuration for S3 Files access point filesystem",
+      "properties": {
+        "AccessPointArn": {
+          "$ref": "#/definitions/S3FilesAccessPointArn"
+        },
+        "MountPath": {
+          "$ref": "#/definitions/MountPath"
+        }
+      },
+      "required": [
+        "AccessPointArn",
+        "MountPath"
+      ],
+      "additionalProperties": false
+    },
+    "FilesystemConfiguration": {
+      "type": "object",
+      "description": "Filesystem configuration for the runtime",
+      "properties": {
+        "SessionStorage": {
+          "$ref": "#/definitions/SessionStorageConfiguration"
+        },
+        "EfsAccessPoint": {
+          "$ref": "#/definitions/EfsAccessPointConfiguration"
+        },
+        "S3FilesAccessPoint": {
+          "$ref": "#/definitions/S3FilesAccessPointConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "FilesystemConfigurations": {
+      "type": "array",
+      "description": "List of filesystem configurations",
+      "items": {
+        "$ref": "#/definitions/FilesystemConfiguration"
+      },
+      "minItems": 0,
+      "maxItems": 5,
+      "insertionOrder": false
+    },
+    "PrivateEndpoint": {
+      "type": "object",
+      "description": "Private endpoint configuration. Exactly one of SelfManagedLatticeResource or ManagedVpcResource must be specified.",
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "SelfManagedLatticeResource",
+          "properties": {
+            "SelfManagedLatticeResource": {
+              "$ref": "#/definitions/SelfManagedLatticeResource"
+            }
+          },
+          "required": [
+            "SelfManagedLatticeResource"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "ManagedVpcResource",
+          "properties": {
+            "ManagedVpcResource": {
+              "$ref": "#/definitions/ManagedVpcResource"
+            }
+          },
+          "required": [
+            "ManagedVpcResource"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "SelfManagedLatticeResource": {
+      "type": "object",
+      "description": "Self-managed VPC Lattice resource configuration",
+      "properties": {
+        "ResourceConfigurationIdentifier": {
+          "type": "string",
+          "description": "The identifier of the VPC Lattice resource configuration"
+        }
+      },
+      "required": [
+        "ResourceConfigurationIdentifier"
+      ],
+      "additionalProperties": false
+    },
+    "ManagedVpcResource": {
+      "type": "object",
+      "description": "Managed VPC resource configuration",
+      "properties": {
+        "VpcIdentifier": {
+          "type": "string",
+          "description": "The VPC identifier"
+        },
+        "SubnetIds": {
+          "type": "array",
+          "description": "The subnet IDs",
+          "minItems": 1,
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "EndpointIpAddressType": {
+          "type": "string",
+          "description": "The IP address type for the endpoint",
+          "enum": [
+            "IPV4",
+            "IPV6"
+          ]
+        },
+        "SecurityGroupIds": {
+          "type": "array",
+          "description": "The security group IDs",
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "RoutingDomain": {
+          "type": "string",
+          "description": "An intermediate domain to use as the resource configuration endpoint instead of the actual target domain"
+        },
+        "Tags": {
+          "type": "object",
+          "description": "Tags to apply to the managed VPC Lattice resource gateway",
+          "additionalProperties": false,
+          "patternProperties": {
+            "": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "required": [
+        "VpcIdentifier",
+        "SubnetIds",
+        "EndpointIpAddressType"
+      ],
+      "additionalProperties": false
+    },
+    "PrivateEndpointOverride": {
+      "type": "object",
+      "description": "Override mapping of a domain to a private endpoint",
+      "properties": {
+        "Domain": {
+          "type": "string",
+          "description": "The domain to override",
+          "minLength": 1,
+          "maxLength": 253
+        },
+        "PrivateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint"
+        }
+      },
+      "required": [
+        "Domain",
+        "PrivateEndpoint"
+      ],
+      "additionalProperties": false
+    },
+    "PrivateEndpointOverridesList": {
+      "type": "array",
+      "description": "List of private endpoint overrides",
+      "minItems": 0,
+      "maxItems": 5,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/PrivateEndpointOverride"
+      }
     }
   },
   "properties": {
@@ -458,6 +865,10 @@
       "$ref": "#/definitions/RequestHeaderConfiguration",
       "description": "Configuration for HTTP request headers"
     },
+    "FilesystemConfigurations": {
+      "$ref": "#/definitions/FilesystemConfigurations",
+      "description": "Filesystem configurations for the agent runtime"
+    },
     "AgentRuntimeVersion": {
       "$ref": "#/definitions/AgentRuntimeVersion",
       "description": "Version of the Agent"
@@ -480,6 +891,10 @@
     },
     "Tags": {
       "$ref": "#/definitions/TagsMap"
+    },
+    "FailureReason": {
+      "type": "string",
+      "description": "The reason for failure if the agent is in a failed state."
     }
   },
   "primaryIdentifier": [
@@ -501,7 +916,8 @@
     "/properties/Status",
     "/properties/CreatedAt",
     "/properties/LastUpdatedAt",
-    "/properties/WorkloadIdentityDetails"
+    "/properties/WorkloadIdentityDetails",
+    "/properties/FailureReason"
   ],
   "replacementStrategy": "create_then_delete",
   "handlers": {
@@ -518,7 +934,16 @@
         "iam:PassRole",
         "s3:GetObject",
         "s3:GetObjectVersion",
-        "kms:Decrypt"
+        "kms:Decrypt",
+        "vpc-lattice:GetResourceConfiguration",
+        "vpc-lattice:CreateServiceNetworkResourceAssociation",
+        "vpc-lattice:GetServiceNetworkResourceAssociation",
+        "vpc-lattice:ListServiceNetworkResourceAssociations",
+        "vpc-lattice:AssociateViaAWSService",
+        "ec2:DescribeVpcs",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeSecurityGroups",
+        "ec2:CreateNetworkInterface"
       ]
     },
     "read": {
@@ -541,13 +966,23 @@
         "iam:PassRole",
         "s3:GetObject",
         "s3:GetObjectVersion",
-        "kms:Decrypt"
+        "kms:Decrypt",
+        "vpc-lattice:GetResourceConfiguration",
+        "vpc-lattice:CreateServiceNetworkResourceAssociation",
+        "vpc-lattice:GetServiceNetworkResourceAssociation",
+        "vpc-lattice:ListServiceNetworkResourceAssociations",
+        "vpc-lattice:AssociateViaAWSService",
+        "ec2:DescribeVpcs",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeSecurityGroups",
+        "ec2:CreateNetworkInterface"
       ]
     },
     "delete": {
       "permissions": [
         "bedrock-agentcore:DeleteAgentRuntime",
         "bedrock-agentcore:DeleteAgentRuntimeEndpoint",
+        "bedrock-agentcore:DeleteWorkloadIdentity",
         "bedrock-agentcore:GetAgentRuntime",
         "bedrock-agentcore:GetAgentRuntimeEndpoint"
       ]
@@ -560,7 +995,7 @@
     }
   },
   "tagging": {
-    "cloudFormationSystemTags": false,
+    "cloudFormationSystemTags": true,
     "tagOnCreate": true,
     "tagProperty": "/properties/Tags",
     "tagUpdatable": true,

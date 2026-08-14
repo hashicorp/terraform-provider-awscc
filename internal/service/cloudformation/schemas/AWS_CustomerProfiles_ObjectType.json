@@ -29,7 +29,7 @@
       "properties": {
         "Name": {
           "type": "string",
-          "pattern": "^[a-zA-Z0-9_-]+$",
+          "pattern": "^[a-zA-Z0-9_.-]+$",
           "minLength": 1,
           "maxLength": 64
         },
@@ -124,7 +124,10 @@
               "HOTEL_RESERVATION",
               "LOYALTY",
               "LOYALTY_TRANSACTION",
-              "LOYALTY_PROMOTION"
+              "LOYALTY_PROMOTION",
+              "WEB_ANALYTICS",
+              "DEVICE",
+              "COMMUNICATION_RECORD"
             ]
           }
         }
@@ -224,6 +227,11 @@
       "description": "The maximum available number of profile objects",
       "type": "integer",
       "minimum": 0
+    },
+    "SourcePriority": {
+      "description": "Defines the priority order of object types. Lower value indicates higher priority.",
+      "type": "integer",
+      "minimum": 1
     }
   },
   "additionalProperties": false,
@@ -270,6 +278,7 @@
     "read": {
       "permissions": [
         "profile:GetProfileObjectType",
+        "profile:ListTagsForResource",
         "kms:GenerateDataKey",
         "kms:Decrypt"
       ]
@@ -280,6 +289,7 @@
         "profile:PutProfileObjectType",
         "profile:UntagResource",
         "profile:TagResource",
+        "profile:ListTagsForResource",
         "kms:GenerateDataKey",
         "kms:Decrypt"
       ]

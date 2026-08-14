@@ -35,6 +35,7 @@ Read-Only:
 - `advanced_backup_settings` (Attributes List) (see [below for nested schema](#nestedatt--backup_plan--advanced_backup_settings))
 - `backup_plan_name` (String)
 - `backup_plan_rule` (Attributes List) (see [below for nested schema](#nestedatt--backup_plan--backup_plan_rule))
+- `scan_settings` (Attributes List) (see [below for nested schema](#nestedatt--backup_plan--scan_settings))
 
 <a id="nestedatt--backup_plan--advanced_backup_settings"></a>
 ### Nested Schema for `backup_plan.advanced_backup_settings`
@@ -57,6 +58,7 @@ Read-Only:
 - `lifecycle` (Attributes) (see [below for nested schema](#nestedatt--backup_plan--backup_plan_rule--lifecycle))
 - `recovery_point_tags` (Map of String)
 - `rule_name` (String)
+- `scan_actions` (Attributes List) (see [below for nested schema](#nestedatt--backup_plan--backup_plan_rule--scan_actions))
 - `schedule_expression` (String)
 - `schedule_expression_timezone` (String)
 - `start_window_minutes` (Number)
@@ -98,3 +100,23 @@ Read-Only:
 - `delete_after_days` (Number)
 - `move_to_cold_storage_after_days` (Number)
 - `opt_in_to_archive_for_supported_resources` (Boolean)
+
+
+<a id="nestedatt--backup_plan--backup_plan_rule--scan_actions"></a>
+### Nested Schema for `backup_plan.backup_plan_rule.scan_actions`
+
+Read-Only:
+
+- `malware_scanner` (String)
+- `scan_mode` (String)
+
+
+
+<a id="nestedatt--backup_plan--scan_settings"></a>
+### Nested Schema for `backup_plan.scan_settings`
+
+Read-Only:
+
+- `malware_scanner` (String)
+- `resource_types` (List of String)
+- `scanner_role_arn` (String)

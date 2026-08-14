@@ -24,6 +24,7 @@ Data Source schema for AWS::DataZone::UserProfile
 - `details` (Attributes) (see [below for nested schema](#nestedatt--details))
 - `domain_id` (String) The identifier of the Amazon DataZone domain in which the user profile is created.
 - `domain_identifier` (String) The identifier of the Amazon DataZone domain in which the user profile would be created.
+- `session_name` (String) The session name of the user profile.
 - `status` (String) The status of the user profile.
 - `type` (String) The type of the user profile.
 - `user_identifier` (String) The ID of the user.
@@ -44,6 +45,8 @@ Read-Only:
 Read-Only:
 
 - `arn` (String) The ARN of the IAM User Profile.
+- `group_profile_id` (String) The group profile ID of the IAM User Profile.
+- `session_name` (String) The session name of the IAM User Profile.
 
 
 <a id="nestedatt--details--sso"></a>

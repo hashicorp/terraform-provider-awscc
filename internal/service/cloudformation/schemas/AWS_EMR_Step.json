@@ -65,6 +65,14 @@
     "Name": {
       "description": "The name of the cluster step.",
       "type": "string"
+    },
+    "LogUri": {
+      "description": "The Amazon S3 destination URI for log publishing. When omitted, EMR falls back to cluster-level logging behavior.",
+      "type": "string"
+    },
+    "EncryptionKeyArn": {
+      "description": "The KMS key ARN to encrypt the logs published to the given Amazon S3 destination. When omitted, EMR falls back to cluster-level logging behavior.",
+      "type": "string"
     }
   },
   "additionalProperties": false,
@@ -81,7 +89,9 @@
     "/properties/JobFlowId",
     "/properties/HadoopJarStep",
     "/properties/Name",
-    "/properties/ActionOnFailure"
+    "/properties/ActionOnFailure",
+    "/properties/LogUri",
+    "/properties/EncryptionKeyArn"
   ],
   "primaryIdentifier": [
     "/properties/Id"

@@ -171,6 +171,10 @@ resource "awscc_verifiedpermissions_policy_store" "example" {
 - `definition` (Attributes) (see [below for nested schema](#nestedatt--definition))
 - `policy_store_id` (String)
 
+### Optional
+
+- `name` (String)
+
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.

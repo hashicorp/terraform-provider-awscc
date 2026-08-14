@@ -174,23 +174,23 @@ resource "awscc_evs_environment" "example" {
 
 ### Required
 
-- `connectivity_info` (Attributes) (see [below for nested schema](#nestedatt--connectivity_info))
-- `license_info` (Attributes) The license information for an EVS environment (see [below for nested schema](#nestedatt--license_info))
 - `service_access_subnet_id` (String)
-- `site_id` (String)
 - `terms_accepted` (Boolean)
-- `vcf_hostnames` (Attributes) (see [below for nested schema](#nestedatt--vcf_hostnames))
 - `vcf_version` (String)
 - `vpc_id` (String)
 
 ### Optional
 
+- `connectivity_info` (Attributes) (see [below for nested schema](#nestedatt--connectivity_info))
 - `environment_name` (String) The name of an EVS environment
 - `hosts` (Attributes List) The initial hosts for environment only required upon creation. Modification after creation will have no effect (see [below for nested schema](#nestedatt--hosts))
 - `initial_vlans` (Attributes) The initial Vlan configuration only required upon creation. Modification after creation will have no effect (see [below for nested schema](#nestedatt--initial_vlans))
 - `kms_key_id` (String)
+- `license_info` (Attributes) The license information for an EVS environment (see [below for nested schema](#nestedatt--license_info))
 - `service_access_security_groups` (Attributes) (see [below for nested schema](#nestedatt--service_access_security_groups))
+- `site_id` (String)
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `vcf_hostnames` (Attributes) (see [below for nested schema](#nestedatt--vcf_hostnames))
 
 ### Read-Only
 
@@ -207,34 +207,9 @@ resource "awscc_evs_environment" "example" {
 <a id="nestedatt--connectivity_info"></a>
 ### Nested Schema for `connectivity_info`
 
-Required:
+Optional:
 
 - `private_route_server_peerings` (List of String)
-
-
-<a id="nestedatt--license_info"></a>
-### Nested Schema for `license_info`
-
-Required:
-
-- `solution_key` (String)
-- `vsan_key` (String)
-
-
-<a id="nestedatt--vcf_hostnames"></a>
-### Nested Schema for `vcf_hostnames`
-
-Required:
-
-- `cloud_builder` (String)
-- `nsx` (String)
-- `nsx_edge_1` (String)
-- `nsx_edge_2` (String)
-- `nsx_manager_1` (String)
-- `nsx_manager_2` (String)
-- `nsx_manager_3` (String)
-- `sddc_manager` (String)
-- `v_center` (String)
 
 
 <a id="nestedatt--hosts"></a>
@@ -348,6 +323,15 @@ Optional:
 
 
 
+<a id="nestedatt--license_info"></a>
+### Nested Schema for `license_info`
+
+Optional:
+
+- `solution_key` (String)
+- `vsan_key` (String)
+
+
 <a id="nestedatt--service_access_security_groups"></a>
 ### Nested Schema for `service_access_security_groups`
 
@@ -363,6 +347,22 @@ Optional:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+
+
+<a id="nestedatt--vcf_hostnames"></a>
+### Nested Schema for `vcf_hostnames`
+
+Optional:
+
+- `cloud_builder` (String)
+- `nsx` (String)
+- `nsx_edge_1` (String)
+- `nsx_edge_2` (String)
+- `nsx_manager_1` (String)
+- `nsx_manager_2` (String)
+- `nsx_manager_3` (String)
+- `sddc_manager` (String)
+- `v_center` (String)
 
 
 <a id="nestedatt--checks"></a>

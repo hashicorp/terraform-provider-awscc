@@ -43,6 +43,7 @@ resource "awscc_connect_queue" "example" {
 
 ### Optional
 
+- `additional_email_addresses` (Attributes List) The email addresses that agents can use when replying to or initiating email contacts (see [below for nested schema](#nestedatt--additional_email_addresses))
 - `description` (String) The description of the queue.
 - `max_contacts` (Number) The maximum number of contacts that can be in the queue before it is considered full.
 - `outbound_caller_config` (Attributes) The outbound caller ID name, number, and outbound whisper flow. (see [below for nested schema](#nestedatt--outbound_caller_config))
@@ -56,6 +57,14 @@ resource "awscc_connect_queue" "example" {
 - `id` (String) Uniquely identifies the resource.
 - `queue_arn` (String) The Amazon Resource Name (ARN) for the queue.
 - `type` (String) The type of queue.
+
+<a id="nestedatt--additional_email_addresses"></a>
+### Nested Schema for `additional_email_addresses`
+
+Optional:
+
+- `email_address_arn` (String) The Amazon Resource Name (ARN) of the email address
+
 
 <a id="nestedatt--outbound_caller_config"></a>
 ### Nested Schema for `outbound_caller_config`

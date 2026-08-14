@@ -1,12 +1,22 @@
 {
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ssm",
   "tagging": {
-    "taggable": false
+    "permissions": [
+      "ssm:AddTagsToResource",
+      "ssm:ListTagsForResource",
+      "ssm:RemoveTagsFromResource"
+    ],
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "tagProperty": "/properties/Tags",
+    "cloudFormationSystemTags": true
   },
   "handlers": {
     "read": {
       "permissions": [
         "ssm:DescribeAssociation",
+        "ssm:ListTagsForResource",
         "resource-groups:GetGroupQuery",
         "resource-groups:ListGroups",
         "resource-groups:ListGroupResources"
@@ -19,14 +29,19 @@
         "iam:CreateServiceLinkedRole",
         "ssm:CreateAssociation",
         "ssm:DescribeAssociation",
-        "ssm:GetCalendarState"
+        "ssm:GetCalendarState",
+        "ssm:AddTagsToResource",
+        "ssm:ListTagsForResource"
       ]
     },
     "update": {
       "permissions": [
         "iam:PassRole",
         "ssm:UpdateAssociation",
-        "ssm:GetCalendarState"
+        "ssm:GetCalendarState",
+        "ssm:AddTagsToResource",
+        "ssm:RemoveTagsFromResource",
+        "ssm:ListTagsForResource"
       ]
     },
     "list": {
@@ -125,6 +140,31 @@
         }
       }
     },
+    "Tag": {
+      "description": "Metadata that you assign to your AWS resources.",
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Value": {
+          "minLength": 0,
+          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+          "description": "The value of the tag.",
+          "type": "string",
+          "maxLength": 256
+        },
+        "Key": {
+          "minLength": 1,
+          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+          "description": "The name of the tag.",
+          "type": "string",
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    },
     "ParameterValues": {
       "type": "array",
       "items": {
@@ -193,6 +233,16 @@
       "pattern": "(^i-(\\w{8}|\\w{17})$)|(^mi-\\w{17}$)",
       "description": "The ID of the instance that the SSM document is associated with.",
       "type": "string"
+    },
+    "AssociationDispatchAssumeRole": {
+      "examples": [
+        "arn:aws:iam::123456789012:role/myAssociationDispatchAssumeRole"
+      ],
+      "minLength": 1,
+      "pattern": "arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+",
+      "description": "A role used by association to take actions on your behalf.",
+      "type": "string",
+      "maxLength": 512
     },
     "WaitForSuccessTimeoutSeconds": {
       "maximum": 172800,
@@ -273,6 +323,17 @@
       "minLength": 1,
       "type": "string",
       "maxLength": 50
+    },
+    "Tags": {
+      "minItems": 0,
+      "maxItems": 1000,
+      "uniqueItems": false,
+      "description": "A key-value pair to associate with a resource.",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
     }
   },
   "required": [

@@ -1,0 +1,1 @@
+$ terraform import awscc_s3files_mount_target.example "mount_target_id"

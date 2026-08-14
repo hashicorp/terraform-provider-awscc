@@ -1,0 +1,1 @@
+$ terraform import awscc_resiliencehubv2_system.example "system_arn"

@@ -91,19 +91,29 @@ resource "awscc_ec2_instance_connect_endpoint" "example" {
 
 ### Required
 
-- `subnet_id` (String) The subnet id of the instance connect endpoint
+- `subnet_id` (String) The ID of the subnet in which the EC2 Instance Connect Endpoint was created.
 
 ### Optional
 
 - `client_token` (String) The client token of the instance connect endpoint.
-- `preserve_client_ip` (Boolean) If true, the address of the instance connect endpoint client is preserved when connecting to the end resource
-- `security_group_ids` (Set of String) The security group IDs of the instance connect endpoint.
-- `tags` (Attributes List) The tags of the instance connect endpoint. (see [below for nested schema](#nestedatt--tags))
+- `preserve_client_ip` (Boolean) Indicates whether your client's IP address is preserved as the source when you connect to a resource.
+- `security_group_ids` (Set of String) The security groups associated with the endpoint.
+- `tags` (Attributes List) The tags assigned to the EC2 Instance Connect Endpoint. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
+- `availability_zone` (String) The Availability Zone of the EC2 Instance Connect Endpoint
+- `availability_zone_id` (String) The ID of the Availability Zone of the EC2 Instance Connect Endpoint
+- `created_at` (String) The date and time that the EC2 Instance Connect Endpoint was created
 - `id` (String) Uniquely identifies the resource.
-- `instance_connect_endpoint_id` (String) The id of the instance connect endpoint
+- `instance_connect_endpoint_arn` (String) The Amazon Resource Name (ARN) of the EC2 Instance Connect Endpoint
+- `instance_connect_endpoint_id` (String) The ID of the EC2 Instance Connect Endpoint.
+- `network_interface_ids` (List of String) The ID of the elastic network interface that Amazon EC2 automatically created when creating the EC2 Instance Connect Endpoint
+- `owner_id` (String) The ID of the AWS account that created the EC2 Instance Connect Endpoint
+- `public_dns_names` (Attributes) The public DNS names of the endpoint (see [below for nested schema](#nestedatt--public_dns_names))
+- `state` (String) The current state of the EC2 Instance Connect Endpoint
+- `state_message` (String) The message for the current state of the EC2 Instance Connect Endpoint. Can include a failure message
+- `vpc_id` (String) The ID of the VPC in which the EC2 Instance Connect Endpoint was created
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
@@ -112,6 +122,32 @@ Optional:
 
 - `key` (String)
 - `value` (String)
+
+
+<a id="nestedatt--public_dns_names"></a>
+### Nested Schema for `public_dns_names`
+
+Read-Only:
+
+- `dualstack` (Attributes) The dualstack DNS name of the EC2 Instance Connect Endpoint. A dualstack DNS name supports connections from both IPv4 and IPv6 clients. (see [below for nested schema](#nestedatt--public_dns_names--dualstack))
+- `ipv_4` (Attributes) The IPv4-only DNS name of the EC2 Instance Connect Endpoint. (see [below for nested schema](#nestedatt--public_dns_names--ipv_4))
+
+<a id="nestedatt--public_dns_names--dualstack"></a>
+### Nested Schema for `public_dns_names.dualstack`
+
+Read-Only:
+
+- `dns_name` (String) The DNS name of the EC2 Instance Connect Endpoint.
+- `fips_dns_name` (String) The Federal Information Processing Standards (FIPS) compliant DNS name of the EC2 Instance Connect Endpoint.
+
+
+<a id="nestedatt--public_dns_names--ipv_4"></a>
+### Nested Schema for `public_dns_names.ipv_4`
+
+Read-Only:
+
+- `dns_name` (String) The DNS name of the EC2 Instance Connect Endpoint.
+- `fips_dns_name` (String) The Federal Information Processing Standards (FIPS) compliant DNS name of the EC2 Instance Connect Endpoint.
 
 ## Import
 
@@ -133,7 +169,7 @@ import {
 
 #### Required
 
-- `id` (String) The id of the instance connect endpoint
+- `id` (String) The ID of the EC2 Instance Connect Endpoint
 
 #### Optional
 

@@ -1,0 +1,676 @@
+{
+  "typeName": "AWS::BedrockAgentCore::CapacityProvider",
+  "description": "Resource Type definition for AWS::BedrockAgentCore::CapacityProvider. A capacity provider defines the compute resources (EC2) used to run Amazon Bedrock AgentCore agent runtimes.",
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with the capacity provider.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The tag key.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The tag value.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "PermissionsConfiguration": {
+      "type": "object",
+      "description": "Configuration for permissions associated with a capacity provider.",
+      "properties": {
+        "CapacityProviderOperatorRoleArn": {
+          "type": "string",
+          "description": "The ARN of the IAM role that operators use to manage the capacity provider.",
+          "minLength": 1,
+          "maxLength": 2048,
+          "pattern": "^arn:aws(-[^:]+)?:iam::([0-9]{12})?:role/.+$"
+        }
+      },
+      "required": [
+        "CapacityProviderOperatorRoleArn"
+      ],
+      "additionalProperties": false
+    },
+    "ComputeConfiguration": {
+      "type": "object",
+      "description": "The capacity configuration for the capacity provider. Defines the compute resources for this capacity provider.",
+      "properties": {
+        "Ec2Configuration": {
+          "$ref": "#/definitions/Ec2Configuration"
+        }
+      },
+      "required": [
+        "Ec2Configuration"
+      ],
+      "additionalProperties": false
+    },
+    "Ec2Configuration": {
+      "type": "object",
+      "description": "Configuration for EC2-based capacity.",
+      "properties": {
+        "LaunchTemplateSource": {
+          "$ref": "#/definitions/LaunchTemplateSource"
+        },
+        "VpcConfiguration": {
+          "$ref": "#/definitions/VpcConfiguration"
+        },
+        "Volumes": {
+          "type": "array",
+          "description": "Named persistent EBS volumes for this capacity provider.",
+          "maxItems": 5,
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/VolumeConfiguration"
+          }
+        },
+        "RootVolume": {
+          "$ref": "#/definitions/RootVolumeConfiguration"
+        },
+        "LifecycleConfiguration": {
+          "$ref": "#/definitions/InstanceLifecycleConfiguration"
+        }
+      },
+      "required": [
+        "LaunchTemplateSource",
+        "VpcConfiguration"
+      ],
+      "additionalProperties": false
+    },
+    "LaunchTemplateSource": {
+      "type": "object",
+      "description": "How the launch template is specified.",
+      "properties": {
+        "LaunchParameters": {
+          "$ref": "#/definitions/LaunchParameters"
+        }
+      },
+      "required": [
+        "LaunchParameters"
+      ],
+      "additionalProperties": false
+    },
+    "LaunchParameters": {
+      "type": "object",
+      "description": "Parameters for launching EC2 instances.",
+      "properties": {
+        "OperatingSystem": {
+          "type": "string",
+          "description": "The operating system and CPU architecture for the instances.",
+          "enum": [
+            "LINUX_X86_64",
+            "LINUX_ARM64",
+            "MAC_ARM64",
+            "WINDOWS_X86_64"
+          ]
+        },
+        "InstanceRequirements": {
+          "$ref": "#/definitions/InstanceRequirements"
+        },
+        "EphemeralVolumes": {
+          "type": "array",
+          "description": "The block device mapping for ephemeral (instance store) volumes.",
+          "maxItems": 5,
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/EphemeralBlockDeviceMapping"
+          }
+        },
+        "Monitoring": {
+          "type": "string",
+          "description": "The monitoring level for the instance.",
+          "enum": [
+            "BASIC",
+            "DETAILED"
+          ]
+        },
+        "LicenseSpecifications": {
+          "type": "array",
+          "description": "The license configurations.",
+          "maxItems": 5,
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/LicenseSpecification"
+          }
+        },
+        "CapacityReservationSpecification": {
+          "$ref": "#/definitions/CapacityReservationSpecification"
+        },
+        "SshKeyName": {
+          "type": "string",
+          "description": "The name of the SSH key pair to configure on instances for SSH connectivity.",
+          "minLength": 1,
+          "maxLength": 255,
+          "pattern": "^[!-~][ -~]*[!-~]$|^[!-~]$"
+        },
+        "InstanceProfileArn": {
+          "type": "string",
+          "description": "The ARN of the IAM instance profile to associate with launched instances.",
+          "minLength": 1,
+          "maxLength": 2048,
+          "pattern": "^arn:aws(-[^:]+)?:iam::[0-9]{12}:instance-profile/([!-~]{1,510}/)?([\\w+=,.@-]{1,128})$"
+        },
+        "PropagatedTags": {
+          "type": "object",
+          "description": "Tags to apply to all EC2 resources (instances, volumes, and network interfaces) created by this capacity provider.",
+          "patternProperties": {
+            "": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "OperatingSystem",
+        "InstanceRequirements"
+      ],
+      "additionalProperties": false
+    },
+    "InstanceRequirements": {
+      "type": "object",
+      "description": "Requirements for EC2 instance types.",
+      "properties": {
+        "AllowedInstanceTypes": {
+          "type": "array",
+          "description": "List of allowed instance types.",
+          "minItems": 1,
+          "maxItems": 30,
+          "insertionOrder": false,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          }
+        }
+      },
+      "required": [
+        "AllowedInstanceTypes"
+      ],
+      "additionalProperties": false
+    },
+    "EphemeralBlockDeviceMapping": {
+      "type": "object",
+      "description": "Describes an ephemeral block device mapping.",
+      "properties": {
+        "DeviceName": {
+          "type": "string",
+          "description": "The device name (for example, /dev/sdh or xvdh).",
+          "minLength": 1,
+          "maxLength": 255,
+          "pattern": "^[a-zA-Z0-9/._-]+$"
+        },
+        "VirtualName": {
+          "type": "string",
+          "description": "The virtual device name (ephemeralN).",
+          "minLength": 1,
+          "maxLength": 255,
+          "pattern": "^ephemeral[0-9]+$"
+        },
+        "Ebs": {
+          "$ref": "#/definitions/EphemeralEBSVolumeConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "EphemeralEBSVolumeConfiguration": {
+      "type": "object",
+      "description": "Parameters used to automatically set up EBS volumes when the instance is launched.",
+      "properties": {
+        "Encrypted": {
+          "type": "boolean",
+          "description": "Indicates whether the EBS volume is encrypted."
+        },
+        "Iops": {
+          "type": "integer",
+          "description": "The number of I/O operations per second (IOPS).",
+          "minimum": 100,
+          "maximum": 256000
+        },
+        "KmsKeyId": {
+          "type": "string",
+          "description": "Identifier of the customer managed KMS key to use for EBS encryption.",
+          "minLength": 20,
+          "maxLength": 2048,
+          "pattern": "^arn:aws(-[^:]+)?:kms:[a-z0-9-]+:[0-9]{12}:key/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+        },
+        "SnapshotId": {
+          "type": "string",
+          "description": "The ID of the snapshot.",
+          "minLength": 13,
+          "maxLength": 64,
+          "pattern": "^snap-[a-f0-9]{8,17}$"
+        },
+        "VolumeSize": {
+          "type": "integer",
+          "description": "The size of the volume, in GiBs.",
+          "minimum": 1,
+          "maximum": 65536
+        },
+        "VolumeType": {
+          "type": "string",
+          "description": "The volume type. Defaults to gp3 if not specified.",
+          "enum": [
+            "standard",
+            "io1",
+            "io2",
+            "gp2",
+            "sc1",
+            "st1",
+            "gp3"
+          ]
+        },
+        "Throughput": {
+          "type": "integer",
+          "description": "The throughput to provision for a gp3 volume, in MiB/s.",
+          "minimum": 125,
+          "maximum": 2000
+        },
+        "VolumeInitializationRate": {
+          "type": "integer",
+          "description": "The rate at which the volume is initialized after creation, in MiB/s. Supported only for volumes created from snapshots. If the snapshot is enabled for fast snapshot restore and a volume initialization rate is also specified, the volume is initialized at the specified rate instead of by fast snapshot restore. Valid range: 100-300 MiB/s.",
+          "minimum": 100,
+          "maximum": 300
+        },
+        "EbsCardIndex": {
+          "type": "integer",
+          "description": "The index of the EBS card. Applies to instances with multiple EBS cards.",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "LicenseSpecification": {
+      "type": "object",
+      "description": "Describes a license configuration.",
+      "properties": {
+        "LicenseConfigurationArn": {
+          "type": "string",
+          "description": "The ARN of the license configuration.",
+          "minLength": 1,
+          "maxLength": 2048,
+          "pattern": "^arn:aws(-[^:]+)?:license-manager:[a-z0-9-]+:[0-9]{12}:license-configuration:[a-zA-Z0-9_-]+$"
+        }
+      },
+      "required": [
+        "LicenseConfigurationArn"
+      ],
+      "additionalProperties": false
+    },
+    "CapacityReservationSpecification": {
+      "type": "object",
+      "description": "The Capacity Reservation targeting option.",
+      "properties": {
+        "CapacityReservationPreference": {
+          "type": "string",
+          "description": "Indicates the instance's Capacity Reservation preferences.",
+          "enum": [
+            "capacity-reservations-only",
+            "open",
+            "none"
+          ]
+        },
+        "CapacityReservationTarget": {
+          "$ref": "#/definitions/CapacityReservationTarget"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CapacityReservationTarget": {
+      "type": "object",
+      "description": "Information about the target Capacity Reservation or Capacity Reservation group.",
+      "properties": {
+        "CapacityReservationId": {
+          "type": "string",
+          "description": "The ID of the Capacity Reservation in which to run the instance.",
+          "minLength": 1,
+          "maxLength": 255,
+          "pattern": "^cr-[0-9a-z]+$"
+        },
+        "CapacityReservationResourceGroupArn": {
+          "type": "string",
+          "description": "The ARN of the Capacity Reservation resource group in which to run the instance.",
+          "minLength": 1,
+          "maxLength": 2048,
+          "pattern": "^arn:aws(-[^:]+)?:resource-groups:[a-z0-9-]+:[0-9]{12}:group/[a-zA-Z0-9_-]+$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "VpcConfiguration": {
+      "type": "object",
+      "description": "VPC configuration for launching EC2 instances.",
+      "properties": {
+        "Subnets": {
+          "type": "array",
+          "description": "The IDs of the subnets in which to launch instances.",
+          "minItems": 1,
+          "maxItems": 16,
+          "insertionOrder": false,
+          "items": {
+            "type": "string",
+            "pattern": "^subnet-[0-9a-zA-Z]{8,17}$"
+          }
+        },
+        "SecurityGroups": {
+          "type": "array",
+          "description": "The IDs of the security groups to associate with the instances.",
+          "minItems": 1,
+          "maxItems": 16,
+          "insertionOrder": false,
+          "items": {
+            "type": "string",
+            "pattern": "^sg-[0-9a-zA-Z]{8,17}$"
+          }
+        }
+      },
+      "required": [
+        "Subnets",
+        "SecurityGroups"
+      ],
+      "additionalProperties": false
+    },
+    "VolumeConfiguration": {
+      "type": "object",
+      "description": "Configuration for a persistent volume attached to a capacity provider session.",
+      "properties": {
+        "EbsConfiguration": {
+          "$ref": "#/definitions/EbsVolumeConfiguration"
+        }
+      },
+      "required": [
+        "EbsConfiguration"
+      ],
+      "additionalProperties": false
+    },
+    "EbsVolumeConfiguration": {
+      "type": "object",
+      "description": "Configuration for an EBS-backed persistent volume.",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "The logical name of the volume, used to reference it when mounting.",
+          "minLength": 1,
+          "maxLength": 48,
+          "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,47}$"
+        },
+        "SizeGiB": {
+          "type": "integer",
+          "description": "The size of the volume in GiB.",
+          "minimum": 1,
+          "maximum": 65536
+        },
+        "VolumeType": {
+          "type": "string",
+          "description": "The EBS volume type. Defaults to gp3 if not specified.",
+          "enum": [
+            "standard",
+            "io1",
+            "io2",
+            "gp2",
+            "sc1",
+            "st1",
+            "gp3"
+          ]
+        },
+        "Iops": {
+          "type": "integer",
+          "description": "The number of IOPS to provision. Only valid for gp3, io1, and io2 volumes.",
+          "minimum": 100,
+          "maximum": 256000
+        },
+        "Throughput": {
+          "type": "integer",
+          "description": "The throughput in MiB/s. Only valid for gp3 volumes.",
+          "minimum": 125,
+          "maximum": 2000
+        },
+        "Encrypted": {
+          "type": "boolean",
+          "description": "Whether to encrypt the volume. Defaults to true."
+        },
+        "KmsKeyId": {
+          "type": "string",
+          "description": "Identifier of the KMS key to use for encryption.",
+          "minLength": 20,
+          "maxLength": 2048,
+          "pattern": "^arn:aws(-[^:]+)?:kms:[a-z0-9-]+:[0-9]{12}:key/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+        },
+        "SnapshotId": {
+          "type": "string",
+          "description": "Optional EBS snapshot ID to initialize the volume from.",
+          "minLength": 13,
+          "maxLength": 64,
+          "pattern": "^snap-[a-f0-9]{8,17}$"
+        }
+      },
+      "required": [
+        "Name",
+        "SizeGiB"
+      ],
+      "additionalProperties": false
+    },
+    "InstanceLifecycleConfiguration": {
+      "type": "object",
+      "description": "Configuration for managing the lifecycle of instances in a capacity provider.",
+      "properties": {
+        "IdleInstanceTimeout": {
+          "type": "integer",
+          "description": "The number of seconds an instance can remain idle before it is stopped.",
+          "minimum": 60,
+          "maximum": 1209600
+        },
+        "MaxLifetime": {
+          "type": "integer",
+          "description": "Maximum lifetime for the instance in seconds. Once reached, instances will be automatically terminated regardless of activity. Default: 28800 seconds (8 hours). Maximum: 1209600 seconds (14 days).",
+          "minimum": 60,
+          "maximum": 1209600
+        }
+      },
+      "additionalProperties": false
+    },
+    "RootVolumeConfiguration": {
+      "type": "object",
+      "description": "Customer-facing configuration for the (service-managed) root volume. The service provisions the root volume at its own AMI size estimate plus FreeSpaceGiB, and pins the visible free space to FreeSpaceGiB with a filler file, so the space you are guaranteed does not change as the underlying AMI grows. The device name and the delete-on-termination behavior are service-owned and are not configurable.",
+      "properties": {
+        "FreeSpaceGiB": {
+          "type": "integer",
+          "description": "The free space guaranteed on the root volume, in GiB. The service adds the operating system overhead on top of this value. Defaults to 8 GiB. The maximum is below the 65,536 GiB gp3 ceiling because the service adds the AMI size bucket on top of this value, and the resulting total must still be a provisionable gp3 volume.",
+          "minimum": 2,
+          "maximum": 65000
+        },
+        "VolumeType": {
+          "type": "string",
+          "description": "The EBS volume type. Defaults to gp3 if not specified.",
+          "enum": [
+            "standard",
+            "io1",
+            "io2",
+            "gp2",
+            "sc1",
+            "st1",
+            "gp3"
+          ]
+        },
+        "Iops": {
+          "type": "integer",
+          "description": "The number of IOPS to provision. Only valid for gp3, io1, and io2 volumes.",
+          "minimum": 100,
+          "maximum": 256000
+        },
+        "Throughput": {
+          "type": "integer",
+          "description": "The throughput to provision for a gp3 volume, in MiB/s. Valid range: 125-2000 MiB/s.",
+          "minimum": 125,
+          "maximum": 2000
+        },
+        "Encrypted": {
+          "type": "boolean",
+          "description": "Indicates whether the EBS volume is encrypted. Encrypted volumes can only be attached to instances that support Amazon EBS encryption. If you are creating a volume from a snapshot, you can't specify an encryption value."
+        },
+        "KmsKeyId": {
+          "type": "string",
+          "description": "Identifier of the customer managed KMS key to use for EBS encryption.",
+          "minLength": 20,
+          "maxLength": 2048,
+          "pattern": "^arn:aws(-[^:]+)?:kms:[a-z0-9-]+:[0-9]{12}:key/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Name": {
+      "type": "string",
+      "description": "The name of the capacity provider.",
+      "minLength": 1,
+      "maxLength": 48,
+      "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$"
+    },
+    "Description": {
+      "type": "string",
+      "description": "An optional description of the capacity provider.",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "PermissionsConfiguration": {
+      "$ref": "#/definitions/PermissionsConfiguration"
+    },
+    "ComputeConfiguration": {
+      "$ref": "#/definitions/ComputeConfiguration"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "An array of key-value pairs to apply to the capacity provider.",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
+    "CapacityProviderId": {
+      "type": "string",
+      "description": "The unique identifier of the capacity provider.",
+      "minLength": 12,
+      "maxLength": 59,
+      "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10}$"
+    },
+    "Arn": {
+      "type": "string",
+      "description": "The ARN of the capacity provider.",
+      "pattern": "^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:capacity-provider/[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10}$"
+    },
+    "Status": {
+      "type": "string",
+      "description": "The current status of the capacity provider.",
+      "enum": [
+        "CREATING",
+        "CREATE_FAILED",
+        "UPDATING",
+        "UPDATE_FAILED",
+        "READY",
+        "DELETING"
+      ]
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The timestamp when the capacity provider was created.",
+      "format": "date-time"
+    },
+    "LastUpdatedAt": {
+      "type": "string",
+      "description": "The timestamp when the capacity provider was last updated.",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "Name",
+    "PermissionsConfiguration",
+    "ComputeConfiguration"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/CapacityProviderId",
+    "/properties/Status",
+    "/properties/CreatedAt",
+    "/properties/LastUpdatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/PermissionsConfiguration",
+    "/properties/ComputeConfiguration"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/CapacityProviderId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "bedrock-agentcore:TagResource",
+      "bedrock-agentcore:UntagResource",
+      "bedrock-agentcore:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "bedrock-agentcore:CreateCapacityProvider",
+        "bedrock-agentcore:GetCapacityProvider",
+        "bedrock-agentcore:TagResource",
+        "bedrock-agentcore:ListTagsForResource",
+        "iam:PassRole",
+        "iam:GetInstanceProfile",
+        "iam:CreateServiceLinkedRole",
+        "kms:DescribeKey",
+        "ec2:DescribeSnapshots"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "bedrock-agentcore:GetCapacityProvider",
+        "bedrock-agentcore:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "bedrock-agentcore:UpdateCapacityProvider",
+        "bedrock-agentcore:GetCapacityProvider",
+        "bedrock-agentcore:TagResource",
+        "bedrock-agentcore:UntagResource",
+        "bedrock-agentcore:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "bedrock-agentcore:DeleteCapacityProvider",
+        "bedrock-agentcore:GetCapacityProvider",
+        "bedrock-agentcore:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "bedrock-agentcore:ListCapacityProviders"
+      ]
+    }
+  }
+}

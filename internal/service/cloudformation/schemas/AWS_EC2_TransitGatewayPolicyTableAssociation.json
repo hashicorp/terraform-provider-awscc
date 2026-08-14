@@ -1,0 +1,72 @@
+{
+  "typeName": "AWS::EC2::TransitGatewayPolicyTableAssociation",
+  "description": "AWS::EC2::TransitGatewayPolicyTableAssociation Resource Definition",
+  "properties": {
+    "TransitGatewayPolicyTableId": {
+      "description": "The ID of transit gateway policy table.",
+      "type": "string"
+    },
+    "TransitGatewayAttachmentId": {
+      "description": "The ID of transit gateway attachment.",
+      "type": "string"
+    },
+    "State": {
+      "description": "The state of the transit gateway policy table association.",
+      "type": "string"
+    }
+  },
+  "tagging": {
+    "taggable": false
+  },
+  "definitions": {},
+  "additionalProperties": false,
+  "required": [
+    "TransitGatewayPolicyTableId",
+    "TransitGatewayAttachmentId"
+  ],
+  "createOnlyProperties": [
+    "/properties/TransitGatewayAttachmentId",
+    "/properties/TransitGatewayPolicyTableId"
+  ],
+  "readOnlyProperties": [
+    "/properties/State"
+  ],
+  "primaryIdentifier": [
+    "/properties/TransitGatewayPolicyTableId",
+    "/properties/TransitGatewayAttachmentId"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ec2:GetTransitGatewayPolicyTableAssociations",
+        "ec2:AssociateTransitGatewayPolicyTable"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ec2:GetTransitGatewayPolicyTableAssociations"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ec2:GetTransitGatewayPolicyTableAssociations",
+        "ec2:DisassociateTransitGatewayPolicyTable"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ec2:GetTransitGatewayPolicyTableAssociations"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "TransitGatewayPolicyTableId": {
+            "$ref": "resource-schema.json#/properties/TransitGatewayPolicyTableId"
+          }
+        },
+        "required": [
+          "TransitGatewayPolicyTableId"
+        ]
+      }
+    }
+  }
+}

@@ -6,7 +6,7 @@
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": false,
+    "cloudFormationSystemTags": true,
     "tagProperty": "/properties/UserPoolTags",
     "permissions": [
       "cognito-idp:ListTagsForResource",
@@ -189,6 +189,18 @@
       },
       "additionalProperties": false
     },
+    "InboundFederation": {
+      "type": "object",
+      "properties": {
+        "LambdaVersion": {
+          "type": "string"
+        },
+        "LambdaArn": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
     "LambdaConfig": {
       "type": "object",
       "properties": {
@@ -233,6 +245,9 @@
         },
         "PreTokenGenerationConfig": {
           "$ref": "#/definitions/PreTokenGenerationConfig"
+        },
+        "InboundFederation": {
+          "$ref": "#/definitions/InboundFederation"
         }
       },
       "additionalProperties": false
@@ -248,8 +263,41 @@
         },
         "SnsRegion": {
           "type": "string"
+        },
+        "EumsSms": {
+          "$ref": "#/definitions/EumsSmsConfiguration"
         }
       },
+      "additionalProperties": false
+    },
+    "EumsSmsConfiguration": {
+      "type": "object",
+      "properties": {
+        "CallerArn": {
+          "type": "string"
+        },
+        "ExternalId": {
+          "type": "string"
+        },
+        "OriginationIdentity": {
+          "type": "string"
+        },
+        "ConfigurationSetName": {
+          "type": "string"
+        },
+        "InEntityId": {
+          "type": "string"
+        },
+        "InTemplateId": {
+          "type": "string"
+        },
+        "Region": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "CallerArn"
+      ],
       "additionalProperties": false
     },
     "StringAttributeConstraints": {
@@ -371,6 +419,42 @@
         }
       },
       "additionalProperties": false
+    },
+    "EncryptionKeyType": {
+      "type": "string",
+      "enum": [
+        "AWS_OWNED_KEY",
+        "CUSTOMER_MANAGED_KEY"
+      ]
+    },
+    "EncryptionKeyArnType": {
+      "type": "string",
+      "pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:([\\w+=/,.@-]*)?:[0-9]+:[\\w+=/,.@-]+(:[\\w+=/,.@-]+)?(:[\\w+=/,.@-]+)?"
+    },
+    "KeyConfiguration": {
+      "type": "object",
+      "properties": {
+        "KeyType": {
+          "$ref": "#/definitions/EncryptionKeyType"
+        },
+        "KmsKeyArn": {
+          "$ref": "#/definitions/EncryptionKeyArnType"
+        }
+      },
+      "additionalProperties": false
+    },
+    "IssuerConfiguration": {
+      "type": "object",
+      "properties": {
+        "Type": {
+          "type": "string",
+          "enum": [
+            "ORIGINAL",
+            "UPDATED"
+          ]
+        }
+      },
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -460,6 +544,9 @@
       "minLength": 6,
       "maxLength": 140
     },
+    "KeyConfiguration": {
+      "$ref": "#/definitions/KeyConfiguration"
+    },
     "WebAuthnRelyingPartyID": {
       "type": "string",
       "minLength": 1,
@@ -469,6 +556,13 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 9
+    },
+    "WebAuthnFactorConfiguration": {
+      "type": "string",
+      "enum": [
+        "SINGLE_FACTOR",
+        "MULTI_FACTOR_WITH_USER_VERIFICATION"
+      ]
     },
     "Schema": {
       "type": "array",
@@ -516,6 +610,9 @@
         "ESSENTIALS",
         "PLUS"
       ]
+    },
+    "IssuerConfiguration": {
+      "$ref": "#/definitions/IssuerConfiguration"
     }
   },
   "additionalProperties": false,
@@ -542,6 +639,13 @@
         "cognito-idp:SetUserPoolMfaConfig",
         "cognito-idp:DescribeUserPool",
         "kms:CreateGrant",
+        "kms:DescribeKey",
+        "kms:Encrypt",
+        "kms:Decrypt",
+        "kms:GenerateDataKey",
+        "kms:GenerateDataKeyWithoutPlaintext",
+        "kms:ReEncryptFrom",
+        "kms:ReEncryptTo",
         "iam:CreateServiceLinkedRole",
         "cognito-idp:TagResource"
       ],
@@ -550,7 +654,9 @@
     "read": {
       "permissions": [
         "cognito-idp:DescribeUserPool",
-        "cognito-idp:GetUserPoolMfaConfig"
+        "cognito-idp:GetUserPoolMfaConfig",
+        "kms:Decrypt",
+        "kms:DescribeKey"
       ]
     },
     "update": {
@@ -563,7 +669,15 @@
         "cognito-idp:AddCustomAttributes",
         "cognito-idp:DescribeUserPool",
         "cognito-idp:GetUserPoolMfaConfig",
-        "iam:PassRole"
+        "iam:PassRole",
+        "kms:CreateGrant",
+        "kms:DescribeKey",
+        "kms:Encrypt",
+        "kms:Decrypt",
+        "kms:GenerateDataKey",
+        "kms:GenerateDataKeyWithoutPlaintext",
+        "kms:ReEncryptFrom",
+        "kms:ReEncryptTo"
       ],
       "timeoutInMinutes": 2
     },

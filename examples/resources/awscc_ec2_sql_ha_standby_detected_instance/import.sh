@@ -1,0 +1,1 @@
+$ terraform import awscc_ec2_sql_ha_standby_detected_instance.example "instance_id"

@@ -1,0 +1,1 @@
+$ terraform import awscc_wickr_network.example "network_arn"

@@ -1,0 +1,577 @@
+{
+  "typeName": "AWS::ResilienceHubV2::Service",
+  "description": "Creates a resilience-managed service with associated systems, input sources, assertions, and service functions.",
+  "additionalProperties": false,
+  "properties": {
+    "ServiceArn": {
+      "type": "string",
+      "description": "The ARN of the service.",
+      "pattern": ""
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the service.",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$"
+    },
+    "Description": {
+      "type": "string",
+      "description": "The description of the service.",
+      "maxLength": 615
+    },
+    "Regions": {
+      "type": "array",
+      "description": "AWS regions for the service.",
+      "minItems": 1,
+      "maxItems": 10,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z]{2}-((iso[a-z]{0,1}-)|(gov-)){0,1}[a-z]+-[0-9]$"
+      },
+      "insertionOrder": false
+    },
+    "AssociatedSystems": {
+      "type": "array",
+      "description": "Systems associated with this service.",
+      "maxItems": 1000,
+      "items": {
+        "$ref": "#/definitions/AssociatedSystem"
+      },
+      "insertionOrder": false
+    },
+    "PolicyArn": {
+      "type": "string",
+      "description": "The ARN of the resilience policy to associate.",
+      "pattern": ""
+    },
+    "PermissionModel": {
+      "$ref": "#/definitions/PermissionModel"
+    },
+    "DependencyDiscovery": {
+      "type": "string",
+      "description": "Dependency discovery state.",
+      "enum": [
+        "ENABLED",
+        "DISABLED",
+        "INITIALIZING"
+      ]
+    },
+    "ReportConfiguration": {
+      "$ref": "#/definitions/ServiceReportConfiguration"
+    },
+    "InputSources": {
+      "type": "array",
+      "maxItems": 20,
+      "description": "Input sources for this service.",
+      "items": {
+        "$ref": "#/definitions/InputSourceDefinition"
+      },
+      "insertionOrder": false
+    },
+    "Assertions": {
+      "type": "array",
+      "maxItems": 20,
+      "description": "Assertions associated with this service.",
+      "items": {
+        "$ref": "#/definitions/AssertionDefinition"
+      },
+      "insertionOrder": false
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Tags assigned to the service.",
+      "uniqueItems": true,
+      "maxItems": 50,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "insertionOrder": false
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The timestamp when the service was created.",
+      "format": "date-time"
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "The timestamp when the service was last updated.",
+      "format": "date-time"
+    },
+    "EffectivePolicyValues": {
+      "$ref": "#/definitions/EffectivePolicyValues"
+    },
+    "KmsKeyId": {
+      "type": "string",
+      "description": "The KMS key ID for encrypting service data.",
+      "minLength": 1,
+      "maxLength": 2048,
+      "pattern": "^((arn:aws(-[^:]+)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:((key/[a-zA-Z0-9-]{36})|(alias/[a-zA-Z0-9-_/]+)))|([a-zA-Z0-9-]{36})|(alias/[a-zA-Z0-9-_/]+))$"
+    }
+  },
+  "definitions": {
+    "AssociatedSystem": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "SystemArn": {
+          "type": "string",
+          "description": "The system ARN.",
+          "pattern": ""
+        },
+        "UserJourneyIds": {
+          "type": "array",
+          "description": "User journey IDs associated with this system.",
+          "maxItems": 50,
+          "items": {
+            "type": "string",
+            "pattern": "^\\S{1,255}$"
+          },
+          "insertionOrder": false
+        }
+      },
+      "required": [
+        "SystemArn"
+      ]
+    },
+    "CrossAccountRoleConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "CrossAccountRoleArn": {
+          "type": "string",
+          "description": "ARN of the cross-account IAM role.",
+          "minLength": 20,
+          "maxLength": 2048,
+          "pattern": "^arn:(aws|aws-cn|aws-iso|aws-iso-[a-z]{1}|aws-us-gov):iam::[0-9]{12}:role\\/(([^\\/][\\x21-\\x7E]+\\/){1,511})?[A-Za-z0-9_+=,.@-]{1,64}$"
+        },
+        "ExternalId": {
+          "type": "string",
+          "description": "External ID for cross-account access."
+        }
+      },
+      "required": [
+        "CrossAccountRoleArn"
+      ]
+    },
+    "PermissionModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "InvokerRoleName": {
+          "type": "string",
+          "description": "Name of the invoker IAM role.",
+          "pattern": "^[A-Za-z0-9_+=,.@\\-]{1,64}$"
+        },
+        "CrossAccountRoleArns": {
+          "type": "array",
+          "description": "Cross-account role ARNs.",
+          "maxItems": 10,
+          "items": {
+            "$ref": "#/definitions/CrossAccountRoleConfiguration"
+          },
+          "insertionOrder": false
+        }
+      },
+      "required": [
+        "InvokerRoleName"
+      ]
+    },
+    "ServiceReportConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Configuration for automatic report generation on a Service.",
+      "properties": {
+        "ReportOutput": {
+          "type": "array",
+          "description": "Output destinations for generated reports.",
+          "minItems": 1,
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/definitions/ReportOutputConfiguration"
+          },
+          "insertionOrder": false
+        }
+      },
+      "required": [
+        "ReportOutput"
+      ]
+    },
+    "ReportOutputConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Configuration for a report output destination.",
+      "properties": {
+        "S3": {
+          "$ref": "#/definitions/S3ReportOutputConfiguration"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "S3"
+          ]
+        }
+      ]
+    },
+    "S3ReportOutputConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "S3 configuration for report output.",
+      "properties": {
+        "BucketPath": {
+          "type": "string",
+          "description": "S3 bucket path where reports will be written.",
+          "minLength": 3,
+          "maxLength": 512,
+          "pattern": "^(s3://)?[a-z0-9][a-z0-9.-]{1,61}[a-z0-9](/.*)?$"
+        },
+        "BucketOwner": {
+          "type": "string",
+          "description": "Account ID of the bucket owner.",
+          "pattern": "^\\d{12}$"
+        }
+      },
+      "required": [
+        "BucketPath",
+        "BucketOwner"
+      ]
+    },
+    "InputSourceDefinition": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "An input source for the service.",
+      "properties": {
+        "ResourceConfiguration": {
+          "$ref": "#/definitions/ResourceConfiguration"
+        }
+      },
+      "required": [
+        "ResourceConfiguration"
+      ]
+    },
+    "ResourceConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Resource configuration for an input source. Provide exactly one field.",
+      "properties": {
+        "ResourceTags": {
+          "type": "array",
+          "description": "Resource tags to discover resources.",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "$ref": "#/definitions/ResourceTag"
+          },
+          "insertionOrder": false
+        },
+        "CfnStackArn": {
+          "type": "string",
+          "description": "ARN of a CloudFormation stack.",
+          "pattern": ""
+        },
+        "TfStateFileUrl": {
+          "type": "string",
+          "description": "URL of a Terraform state file."
+        },
+        "Eks": {
+          "$ref": "#/definitions/EksSource"
+        },
+        "DesignFileS3Url": {
+          "type": "string",
+          "description": "S3 URL of a design file."
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "ResourceTags"
+          ]
+        },
+        {
+          "required": [
+            "CfnStackArn"
+          ]
+        },
+        {
+          "required": [
+            "TfStateFileUrl"
+          ]
+        },
+        {
+          "required": [
+            "Eks"
+          ]
+        },
+        {
+          "required": [
+            "DesignFileS3Url"
+          ]
+        }
+      ]
+    },
+    "ResourceTag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "Tag key.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Values": {
+          "type": "array",
+          "description": "Tag values.",
+          "minItems": 0,
+          "maxItems": 10,
+          "items": {
+            "type": "string"
+          },
+          "insertionOrder": false
+        }
+      },
+      "required": [
+        "Key",
+        "Values"
+      ]
+    },
+    "EksSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ClusterArn": {
+          "type": "string",
+          "description": "ARN of the EKS cluster.",
+          "pattern": ""
+        },
+        "Namespaces": {
+          "type": "array",
+          "description": "EKS namespaces.",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "type": "string"
+          },
+          "insertionOrder": false
+        }
+      },
+      "required": [
+        "ClusterArn",
+        "Namespaces"
+      ]
+    },
+    "AssertionDefinition": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "An assertion about the service's resilience posture.",
+      "properties": {
+        "Text": {
+          "type": "string",
+          "description": "The text of the assertion.",
+          "minLength": 1,
+          "maxLength": 1000
+        }
+      },
+      "required": [
+        "Text"
+      ]
+    },
+    "EffectivePolicyValues": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Effective policy values computed from the associated policy.",
+      "properties": {
+        "AvailabilitySlo": {
+          "$ref": "#/definitions/SloSource"
+        },
+        "MultiAzRto": {
+          "$ref": "#/definitions/TargetSource"
+        },
+        "MultiAzRpo": {
+          "$ref": "#/definitions/TargetSource"
+        },
+        "MultiAzDrApproach": {
+          "$ref": "#/definitions/DisasterRecoverySource"
+        },
+        "MultiRegionRto": {
+          "$ref": "#/definitions/TargetSource"
+        },
+        "MultiRegionRpo": {
+          "$ref": "#/definitions/TargetSource"
+        },
+        "MultiRegionDrApproach": {
+          "$ref": "#/definitions/DisasterRecoverySource"
+        }
+      }
+    },
+    "SloSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Value": {
+          "type": "number"
+        },
+        "PolicyName": {
+          "type": "string"
+        }
+      }
+    },
+    "TargetSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Value": {
+          "type": "integer"
+        },
+        "PolicyName": {
+          "type": "string"
+        }
+      }
+    },
+    "DisasterRecoverySource": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Value": {
+          "type": "string"
+        },
+        "PolicyName": {
+          "type": "string"
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The tag key.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The tag value.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "required": [
+    "Name",
+    "Regions"
+  ],
+  "primaryIdentifier": [
+    "/properties/ServiceArn"
+  ],
+  "readOnlyProperties": [
+    "/properties/ServiceArn",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt",
+    "/properties/EffectivePolicyValues"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/Regions",
+    "/properties/KmsKeyId"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "resiliencehub:TagResource",
+      "resiliencehub:UntagResource",
+      "resiliencehub:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "resiliencehub:CreateService",
+        "resiliencehub:GetService",
+        "resiliencehub:CreateInputSource",
+        "resiliencehub:ListInputSources",
+        "resiliencehub:CreateAssertion",
+        "resiliencehub:ListAssertions",
+        "resiliencehub:TagResource",
+        "resiliencehub:ListTagsForResource",
+        "iam:PassRole",
+        "kms:DescribeKey",
+        "kms:GenerateDataKey",
+        "kms:Decrypt",
+        "kms:Encrypt",
+        "kms:CreateGrant",
+        "kms:RetireGrant"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "resiliencehub:GetService",
+        "resiliencehub:ListInputSources",
+        "resiliencehub:ListAssertions",
+        "resiliencehub:ListTagsForResource",
+        "kms:DescribeKey",
+        "kms:Decrypt",
+        "kms:GenerateDataKey",
+        "kms:Encrypt",
+        "kms:CreateGrant",
+        "kms:RetireGrant"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "resiliencehub:GetService",
+        "resiliencehub:UpdateService",
+        "resiliencehub:CreateInputSource",
+        "resiliencehub:DeleteInputSource",
+        "resiliencehub:ListInputSources",
+        "resiliencehub:CreateAssertion",
+        "resiliencehub:UpdateAssertion",
+        "resiliencehub:DeleteAssertion",
+        "resiliencehub:ListAssertions",
+        "resiliencehub:TagResource",
+        "resiliencehub:UntagResource",
+        "resiliencehub:ListTagsForResource",
+        "iam:PassRole",
+        "kms:DescribeKey",
+        "kms:GenerateDataKey",
+        "kms:Decrypt",
+        "kms:Encrypt",
+        "kms:CreateGrant",
+        "kms:RetireGrant"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "resiliencehub:DeleteService",
+        "resiliencehub:GetService",
+        "resiliencehub:DeleteInputSource",
+        "resiliencehub:ListInputSources",
+        "resiliencehub:DeleteAssertion",
+        "resiliencehub:ListAssertions",
+        "kms:DescribeKey",
+        "kms:Decrypt",
+        "kms:RetireGrant",
+        "kms:GenerateDataKey",
+        "kms:Encrypt",
+        "kms:CreateGrant"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "resiliencehub:ListServices"
+      ]
+    }
+  },
+  "writeOnlyProperties": [
+    "/properties/KmsKeyId"
+  ]
+}

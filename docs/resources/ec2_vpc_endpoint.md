@@ -162,8 +162,8 @@ Optional:
 
 - `dns_record_ip_type` (String) The DNS records created for the endpoint.
 - `private_dns_only_for_inbound_resolver_endpoint` (String) Indicates whether to enable private DNS only for inbound endpoints. This option is available only for services that support both gateway and interface endpoints. It routes traffic that originates from the VPC to the gateway endpoint and traffic that originates from on-premises to the interface endpoint.
-- `private_dns_preference` (String)
-- `private_dns_specified_domains` (List of String)
+- `private_dns_preference` (String) The preference for which private domains have a private hosted zone created for and associated with the specified VPC. Only supported when private DNS is enabled and when the VPC endpoint type is ServiceNetwork or Resource.
+- `private_dns_specified_domains` (List of String) Indicates which of the private domains to create private hosted zones for and associate with the specified VPC. Only supported when private DNS is enabled and the private DNS preference is ``VERIFIED_DOMAINS_AND_SPECIFIED_DOMAINS`` or ``SPECIFIED_DOMAINS_ONLY``.
 
 
 <a id="nestedatt--tags"></a>

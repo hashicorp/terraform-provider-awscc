@@ -1,0 +1,138 @@
+{
+  "typeName": "AWS::WellArchitected::Lens",
+  "description": "Definition of AWS::WellArchitected::Lens Resource Type",
+  "properties": {
+    "LensArn": {
+      "type": "string",
+      "description": "The ARN of the lens."
+    },
+    "LensId": {
+      "type": "string",
+      "description": "The unique identifier of the lens."
+    },
+    "JSONString": {
+      "type": "string",
+      "description": "The JSON representation of a lens.",
+      "minLength": 2,
+      "maxLength": 500000
+    },
+    "LensVersion": {
+      "type": "string",
+      "description": "The version of the lens.",
+      "minLength": 1,
+      "maxLength": 32
+    },
+    "Name": {
+      "type": "string",
+      "description": "The full name of the lens.",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "Description": {
+      "type": "string",
+      "description": "The description of the lens.",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "Owner": {
+      "type": "string",
+      "description": "The Amazon Web Services account ID that owns the lens."
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags assigned to the lens.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Key": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "Value": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 256
+          }
+        },
+        "required": [
+          "Key",
+          "Value"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 50
+    }
+  },
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/LensArn",
+    "/properties/LensId",
+    "/properties/Name",
+    "/properties/Description",
+    "/properties/Owner"
+  ],
+  "writeOnlyProperties": [
+    "/properties/JSONString"
+  ],
+  "createOnlyProperties": [
+    "/properties/JSONString",
+    "/properties/LensVersion"
+  ],
+  "primaryIdentifier": [
+    "/properties/LensArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/LensId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "wellarchitected:TagResource",
+      "wellarchitected:UntagResource",
+      "wellarchitected:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "wellarchitected:ImportLens",
+        "wellarchitected:CreateLensVersion",
+        "wellarchitected:GetLens",
+        "wellarchitected:TagResource",
+        "wellarchitected:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "wellarchitected:GetLens",
+        "wellarchitected:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "wellarchitected:GetLens",
+        "wellarchitected:TagResource",
+        "wellarchitected:UntagResource",
+        "wellarchitected:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "wellarchitected:DeleteLens",
+        "wellarchitected:GetLens"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "wellarchitected:ListLenses"
+      ]
+    }
+  }
+}

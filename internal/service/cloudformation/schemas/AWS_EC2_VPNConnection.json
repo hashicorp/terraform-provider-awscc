@@ -8,7 +8,7 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "tagProperty": "/properties/Tags",
-    "cloudFormationSystemTags": false
+    "cloudFormationSystemTags": true
   },
   "$schema": "https://raw.githubusercontent.com/aws-cloudformation/cloudformation-resource-schema/blob/master/src/main/resources/schema/provider.definition.schema.v1.json",
   "typeName": "AWS::EC2::VPNConnection",
@@ -18,10 +18,7 @@
   "description": "Specifies a VPN connection between a virtual private gateway and a VPN customer gateway or a transit gateway and a VPN customer gateway.\n To specify a VPN connection between a transit gateway and customer gateway, use the ``TransitGatewayId`` and ``CustomerGatewayId`` properties.\n To specify a VPN connection between a virtual private gateway and customer gateway, use the ``VpnGatewayId`` and ``CustomerGatewayId`` properties.\n For more information, see [](https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html) in the *User Guide*.",
   "createOnlyProperties": [
     "/properties/Type",
-    "/properties/CustomerGatewayId",
-    "/properties/VpnGatewayId",
     "/properties/VpnConcentratorId",
-    "/properties/TransitGatewayId",
     "/properties/EnableAcceleration",
     "/properties/LocalIpv4NetworkCidr",
     "/properties/LocalIpv6NetworkCidr",
@@ -31,9 +28,7 @@
     "/properties/StaticRoutesOnly",
     "/properties/TransportTransitGatewayAttachmentId",
     "/properties/TunnelInsideIpVersion",
-    "/properties/PreSharedKeyStorage",
-    "/properties/TunnelBandwidth",
-    "/properties/VpnTunnelOptionsSpecifications"
+    "/properties/PreSharedKeyStorage"
   ],
   "primaryIdentifier": [
     "/properties/VpnConnectionId"
@@ -52,14 +47,33 @@
       "permissions": [
         "ec2:DescribeVpnConnections",
         "ec2:CreateVpnConnection",
-        "ec2:CreateTags"
+        "ec2:CreateTags",
+        "logs:CreateLogDelivery",
+        "logs:GetLogDelivery",
+        "logs:UpdateLogDelivery",
+        "logs:DeleteLogDelivery",
+        "logs:ListLogDeliveries",
+        "logs:PutResourcePolicy",
+        "logs:DescribeResourcePolicies",
+        "logs:DescribeLogGroups"
       ]
     },
     "update": {
       "permissions": [
         "ec2:DescribeVpnConnections",
+        "ec2:ModifyVpnConnection",
+        "ec2:ModifyVpnConnectionOptions",
+        "ec2:ModifyVpnTunnelOptions",
         "ec2:CreateTags",
-        "ec2:DeleteTags"
+        "ec2:DeleteTags",
+        "logs:CreateLogDelivery",
+        "logs:GetLogDelivery",
+        "logs:UpdateLogDelivery",
+        "logs:DeleteLogDelivery",
+        "logs:ListLogDeliveries",
+        "logs:PutResourcePolicy",
+        "logs:DescribeResourcePolicies",
+        "logs:DescribeLogGroups"
       ]
     },
     "list": {
@@ -86,7 +100,7 @@
       "type": "object",
       "properties": {
         "BgpLogEnabled": {
-          "description": "",
+          "description": "Specifies whether to enable BGP logging for the VPN connection. Default value is ``False``.\n Valid values: ``True`` | ``False``",
           "type": "boolean"
         },
         "LogEnabled": {
@@ -102,7 +116,7 @@
           ]
         },
         "BgpLogGroupArn": {
-          "description": "",
+          "description": "The Amazon Resource Name (ARN) of the CloudWatch log group where BGP logs will be sent.",
           "type": "string"
         },
         "LogGroupArn": {
@@ -110,7 +124,7 @@
           "type": "string"
         },
         "BgpLogOutputFormat": {
-          "description": "",
+          "description": "The desired output format for BGP logs to be sent to CloudWatch. Default format is ``json``.\n Valid values: ``json`` | ``text``",
           "type": "string",
           "enum": [
             "json",
@@ -470,7 +484,7 @@
     },
     "TunnelBandwidth": {
       "default": "standard",
-      "description": "",
+      "description": "The desired bandwidth specification for the VPN tunnel, used when creating or modifying VPN connection options to set the tunnel's throughput capacity. ``standard`` supports up to 1.25 Gbps per tunnel, while ``large`` supports up to 5 Gbps per tunnel. The default value is ``standard``. Existing VPN connections without a bandwidth setting will automatically default to ``standard``.",
       "type": "string",
       "enum": [
         "standard",
@@ -486,7 +500,7 @@
       "type": "string"
     },
     "VpnConcentratorId": {
-      "description": "",
+      "description": "The ID of the VPN concentrator to associate with the VPN connection.",
       "type": "string"
     },
     "PreSharedKeyStorage": {

@@ -1,0 +1,230 @@
+{
+  "typeName": "AWS::CustomerProfiles::DomainObjectType",
+  "description": "Resource Type definition for AWS::CustomerProfiles::DomainObjectType",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-customer-profiles",
+  "definitions": {
+    "DomainName": {
+      "description": "The unique name of the domain.",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_-]+$",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "ObjectTypeName": {
+      "description": "The name of the domain object type.",
+      "type": "string",
+      "pattern": "^[a-zA-Z_][a-zA-Z_0-9-]*$",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "Description": {
+      "description": "Description of the domain object type.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 10000
+    },
+    "EncryptionKey": {
+      "description": "The default encryption key",
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 255
+    },
+    "DomainObjectTypeField": {
+      "description": "Represents a field in a DomainObjectType.",
+      "type": "object",
+      "properties": {
+        "Source": {
+          "description": "The source field name.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "Target": {
+          "description": "The target field name.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "ContentType": {
+          "description": "The content type of the field.",
+          "type": "string",
+          "enum": [
+            "STRING",
+            "NUMBER"
+          ]
+        },
+        "FeatureType": {
+          "description": "The feature type of the field.",
+          "type": "string",
+          "enum": [
+            "TEXTUAL",
+            "CATEGORICAL"
+          ]
+        }
+      },
+      "required": [
+        "Source",
+        "Target"
+      ],
+      "additionalProperties": false
+    },
+    "DomainObjectTypeFields": {
+      "description": "A map of the name and ObjectType field.",
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "$ref": "#/definitions/DomainObjectTypeField"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to this resource.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "minItems": 0,
+      "maxItems": 50
+    }
+  },
+  "properties": {
+    "DomainName": {
+      "$ref": "#/definitions/DomainName"
+    },
+    "ObjectTypeName": {
+      "$ref": "#/definitions/ObjectTypeName"
+    },
+    "Description": {
+      "$ref": "#/definitions/Description"
+    },
+    "EncryptionKey": {
+      "$ref": "#/definitions/EncryptionKey"
+    },
+    "Fields": {
+      "$ref": "#/definitions/DomainObjectTypeFields"
+    },
+    "CreatedAt": {
+      "description": "The timestamp of when the domain object type was created.",
+      "type": "string"
+    },
+    "LastUpdatedAt": {
+      "description": "The timestamp of when the domain object type was most recently edited.",
+      "type": "string"
+    },
+    "Tags": {
+      "$ref": "#/definitions/Tags"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "DomainName",
+    "ObjectTypeName",
+    "Fields"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "profile:TagResource",
+      "profile:UntagResource",
+      "profile:ListTagsForResource"
+    ]
+  },
+  "createOnlyProperties": [
+    "/properties/DomainName",
+    "/properties/ObjectTypeName",
+    "/properties/Fields"
+  ],
+  "readOnlyProperties": [
+    "/properties/CreatedAt",
+    "/properties/LastUpdatedAt"
+  ],
+  "primaryIdentifier": [
+    "/properties/DomainName",
+    "/properties/ObjectTypeName"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "profile:GetDomain",
+        "profile:GetDomainObjectType",
+        "profile:PutDomainObjectType",
+        "profile:TagResource",
+        "kms:GenerateDataKey",
+        "kms:Decrypt",
+        "kms:CreateGrant",
+        "kms:DescribeKey"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "profile:GetDomainObjectType",
+        "profile:ListTagsForResource",
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "profile:GetDomainObjectType",
+        "profile:PutDomainObjectType",
+        "profile:UntagResource",
+        "profile:TagResource",
+        "profile:ListTagsForResource",
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "profile:DeleteDomainObjectType"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "DomainName": {
+            "$ref": "resource-schema.json#/properties/DomainName"
+          }
+        },
+        "required": [
+          "DomainName"
+        ]
+      },
+      "permissions": [
+        "profile:ListDomainObjectTypes",
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
+      ]
+    }
+  }
+}

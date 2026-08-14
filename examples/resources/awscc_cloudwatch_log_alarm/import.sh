@@ -1,0 +1,1 @@
+$ terraform import awscc_cloudwatch_log_alarm.example "alarm_name"

@@ -27,6 +27,8 @@ Data Source schema for AWS::Transfer::Connector
 - `connector_id` (String) A unique identifier for the connector.
 - `egress_config` (Attributes) Egress configuration for the connector. (see [below for nested schema](#nestedatt--egress_config))
 - `egress_type` (String) Specifies the egress type for the connector.
+- `error_message` (String) Detailed error message when Connector in ERRORED status
+- `ip_address_type` (String) IP address type for Connector
 - `logging_role` (String) Specifies the logging role for the connector.
 - `security_policy_name` (String) Security policy for SFTP Connector
 - `service_managed_egress_ip_addresses` (List of String) The list of egress IP addresses of this connector. These IP addresses are assigned automatically when you create the connector.
@@ -40,6 +42,7 @@ Data Source schema for AWS::Transfer::Connector
 
 Read-Only:
 
+- `async_mdn_config` (Attributes) Configuration for an AS2 connector with ASYNC MDN Response (see [below for nested schema](#nestedatt--as_2_config--async_mdn_config))
 - `basic_auth_secret_id` (String) ARN or name of the secret in AWS Secrets Manager which contains the credentials for Basic authentication. If empty, Basic authentication is disabled for the AS2 connector
 - `compression` (String) Compression setting for this AS2 connector configuration.
 - `encryption_algorithm` (String) Encryption algorithm for this AS2 connector configuration.
@@ -50,6 +53,15 @@ Read-Only:
 - `partner_profile_id` (String) A unique identifier for the partner profile.
 - `preserve_content_type` (String) Specifies whether to use the AWS S3 object content-type as the content-type for the AS2 message.
 - `signing_algorithm` (String) Signing algorithm for this AS2 connector configuration.
+
+<a id="nestedatt--as_2_config--async_mdn_config"></a>
+### Nested Schema for `as_2_config.async_mdn_config`
+
+Read-Only:
+
+- `server_ids` (Set of String)
+- `url` (String) URL of the server to receive the MDN response on
+
 
 
 <a id="nestedatt--egress_config"></a>

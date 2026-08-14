@@ -1,7 +1,4 @@
 {
-  "propertyTransform": {
-    "/properties/AutoScalingGroupProvider/AutoScalingGroupArn": "$split(AutoScalingGroupProvider.AutoScalingGroupArn, \"autoScalingGroupName/\")[-1] $OR $split(AutoScalingGroupArn, \"autoScalingGroupName/\")[-1]"
-  },
   "tagging": {
     "permissions": [
       "ecs:TagResource",
@@ -13,6 +10,9 @@
     "tagUpdatable": true,
     "tagProperty": "/properties/Tags",
     "cloudFormationSystemTags": true
+  },
+  "propertyTransform": {
+    "/properties/AutoScalingGroupProvider/AutoScalingGroupArn": "$split(AutoScalingGroupProvider.AutoScalingGroupArn, \"autoScalingGroupName/\")[-1] $OR $split(AutoScalingGroupArn, \"autoScalingGroupName/\")[-1]"
   },
   "handlers": {
     "read": {
@@ -59,6 +59,7 @@
   "description": "Resource Type definition for AWS::ECS::CapacityProvider.",
   "createOnlyProperties": [
     "/properties/AutoScalingGroupProvider/AutoScalingGroupArn",
+    "/properties/ManagedInstancesProvider/InstanceLaunchTemplate/FipsEnabled",
     "/properties/Name",
     "/properties/ClusterName"
   ],
@@ -67,6 +68,23 @@
     "/properties/Name"
   ],
   "definitions": {
+    "CapacityReservationRequest": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ReservationGroupArn": {
+          "type": "string"
+        },
+        "ReservationPreference": {
+          "type": "string",
+          "enum": [
+            "RESERVATIONS_ONLY",
+            "RESERVATIONS_FIRST",
+            "RESERVATIONS_EXCLUDED"
+          ]
+        }
+      }
+    },
     "AutoScalingGroupProvider": {
       "additionalProperties": false,
       "type": "object",
@@ -108,6 +126,19 @@
         }
       }
     },
+    "AutoRepairConfiguration": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ActionsStatus": {
+          "type": "string",
+          "enum": [
+            "ENABLED",
+            "DISABLED"
+          ]
+        }
+      }
+    },
     "MemoryGiBPerVCpuRequest": {
       "additionalProperties": false,
       "type": "object",
@@ -138,6 +169,7 @@
         }
       },
       "required": [
+        "SecurityGroups",
         "Subnets"
       ]
     },
@@ -289,7 +321,13 @@
               "t4g",
               "vu9p",
               "v100",
-              "l40s"
+              "l40s",
+              "l4",
+              "gaudi-hl-205",
+              "inferentia2",
+              "trainium",
+              "trainium2",
+              "u30"
             ]
           }
         },
@@ -427,6 +465,15 @@
         }
       }
     },
+    "ManagedInstancesLocalStorageConfiguration": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "UseLocalStorage": {
+          "type": "boolean"
+        }
+      }
+    },
     "ManagedInstancesStorageConfiguration": {
       "additionalProperties": false,
       "type": "object",
@@ -472,6 +519,20 @@
         "Ec2InstanceProfileArn": {
           "type": "string"
         },
+        "CapacityOptionType": {
+          "type": "string",
+          "enum": [
+            "ON_DEMAND",
+            "SPOT",
+            "RESERVED"
+          ]
+        },
+        "FipsEnabled": {
+          "type": "boolean"
+        },
+        "InstanceMetadataTagsPropagation": {
+          "type": "boolean"
+        },
         "StorageConfiguration": {
           "$ref": "#/definitions/ManagedInstancesStorageConfiguration"
         },
@@ -480,6 +541,12 @@
         },
         "InstanceRequirements": {
           "$ref": "#/definitions/InstanceRequirementsRequest"
+        },
+        "CapacityReservations": {
+          "$ref": "#/definitions/CapacityReservationRequest"
+        },
+        "LocalStorageConfiguration": {
+          "$ref": "#/definitions/ManagedInstancesLocalStorageConfiguration"
         },
         "Monitoring": {
           "$ref": "#/definitions/ManagedInstancesMonitoringOptions"
@@ -496,6 +563,9 @@
       "properties": {
         "InfrastructureRoleArn": {
           "type": "string"
+        },
+        "AutoRepairConfiguration": {
+          "$ref": "#/definitions/AutoRepairConfiguration"
         },
         "PropagateTags": {
           "type": "string",
@@ -527,6 +597,9 @@
       ]
     }
   },
+  "conditionalCreateOnlyProperties": [
+    "/properties/ManagedInstancesProvider/InstanceLaunchTemplate/CapacityOptionType"
+  ],
   "properties": {
     "AutoScalingGroupProvider": {
       "$ref": "#/definitions/AutoScalingGroupProvider"
@@ -546,8 +619,5 @@
     "ManagedInstancesProvider": {
       "$ref": "#/definitions/ManagedInstancesProvider"
     }
-  },
-  "conditionalCreateOnlyProperties": [
-    "/properties/ManagedInstancesProvider/InstanceLaunchTemplate/CapacityOptionType"
-  ]
+  }
 }

@@ -1,0 +1,204 @@
+{
+  "typeName": "AWS::CertificateManager::AcmeDomainValidation",
+  "description": "Resource Type definition for AWS::CertificateManager::AcmeDomainValidation",
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "description": "The key name of the tag.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "description": "The value for the tag.",
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "DomainScope": {
+      "description": "Controls which certificate types are authorized to be issued for the domain via the ACME endpoint.",
+      "type": "object",
+      "properties": {
+        "ExactDomain": {
+          "description": "Whether certificates may be issued for the exact domain.",
+          "type": "string"
+        },
+        "Subdomains": {
+          "description": "Whether certificates may be issued for subdomains of the domain.",
+          "type": "string"
+        },
+        "Wildcards": {
+          "description": "Whether wildcard certificates may be issued for the domain.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DnsPrevalidationOptions": {
+      "description": "DNS-based prevalidation options for the domain validation.",
+      "type": "object",
+      "properties": {
+        "DomainScope": {
+          "$ref": "#/definitions/DomainScope"
+        },
+        "HostedZoneId": {
+          "description": "The Route 53 hosted zone ID for automatic DNS record management. When provided, the service creates the validation DNS record on the customer's behalf.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PrevalidationOptions": {
+      "description": "Prevalidation method configuration. Currently only DNS-based prevalidation is supported.",
+      "type": "object",
+      "properties": {
+        "DnsPrevalidation": {
+          "$ref": "#/definitions/DnsPrevalidationOptions"
+        }
+      },
+      "required": [
+        "DnsPrevalidation"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "description": "The Amazon Resource Name (ARN) of the domain validation.",
+      "type": "string"
+    },
+    "AcmeEndpointArn": {
+      "description": "The ARN of the ACME endpoint this domain validation is associated with.",
+      "type": "string"
+    },
+    "DomainName": {
+      "description": "The domain name to validate.",
+      "type": "string"
+    },
+    "PrevalidationOptions": {
+      "$ref": "#/definitions/PrevalidationOptions"
+    },
+    "Tags": {
+      "description": "Tags associated with the domain validation.",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "type": "object",
+        "properties": {
+          "Key": {
+            "description": "The key name of the tag.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "Value": {
+            "description": "The value for the tag.",
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 256
+          }
+        },
+        "required": [
+          "Key",
+          "Value"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 50
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "AcmeEndpointArn",
+    "DomainName",
+    "PrevalidationOptions"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn"
+  ],
+  "createOnlyProperties": [
+    "/properties/AcmeEndpointArn",
+    "/properties/DomainName",
+    "/properties/PrevalidationOptions/DnsPrevalidation/HostedZoneId"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "acm:TagResource",
+      "acm:UntagResource",
+      "acm:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "acm:CreateAcmeDomainValidation",
+        "acm:DescribeAcmeDomainValidation",
+        "acm:TagResource",
+        "acm:ListTagsForResource",
+        "route53:ChangeResourceRecordSets",
+        "route53:GetHostedZone",
+        "route53:GetChange"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "acm:DescribeAcmeDomainValidation",
+        "acm:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "acm:UpdateAcmeDomainValidation",
+        "acm:DescribeAcmeDomainValidation",
+        "acm:TagResource",
+        "acm:UntagResource",
+        "acm:ListTagsForResource",
+        "route53:ChangeResourceRecordSets",
+        "route53:GetHostedZone",
+        "route53:GetChange"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "acm:DeleteAcmeDomainValidation",
+        "acm:DescribeAcmeDomainValidation",
+        "route53:ChangeResourceRecordSets",
+        "route53:GetHostedZone",
+        "route53:GetChange"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "AcmeEndpointArn": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "AcmeEndpointArn"
+        ]
+      },
+      "permissions": [
+        "acm:ListAcmeDomainValidations"
+      ]
+    }
+  }
+}

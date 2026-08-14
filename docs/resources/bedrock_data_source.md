@@ -75,6 +75,7 @@ Required:
 Optional:
 
 - `confluence_configuration` (Attributes) The configuration information to connect to Confluence as your data source. (see [below for nested schema](#nestedatt--data_source_configuration--confluence_configuration))
+- `managed_knowledge_base_connector_configuration` (Attributes) Configuration for managed knowledge base connector data sources. (see [below for nested schema](#nestedatt--data_source_configuration--managed_knowledge_base_connector_configuration))
 - `s3_configuration` (Attributes) The configuration information to connect to Amazon S3 as your data source. (see [below for nested schema](#nestedatt--data_source_configuration--s3_configuration))
 - `salesforce_configuration` (Attributes) The configuration information to connect to Salesforce as your data source. (see [below for nested schema](#nestedatt--data_source_configuration--salesforce_configuration))
 - `share_point_configuration` (Attributes) The configuration information to connect to SharePoint as your data source. (see [below for nested schema](#nestedatt--data_source_configuration--share_point_configuration))
@@ -132,6 +133,59 @@ Optional:
 - `credentials_secret_arn` (String) The Amazon Resource Name of an AWS Secrets Manager secret that stores your authentication credentials for your Confluence instance URL. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see Confluence connection configuration.
 - `host_type` (String) The supported host type, whether online/cloud or server/on-premises.
 - `host_url` (String) The Confluence host URL or instance URL.
+
+
+
+<a id="nestedatt--data_source_configuration--managed_knowledge_base_connector_configuration"></a>
+### Nested Schema for `data_source_configuration.managed_knowledge_base_connector_configuration`
+
+Optional:
+
+- `connector_parameters` (String) Connector-specific parameters.
+- `deletion_protection_configuration` (Attributes) Configuration for deletion protection. (see [below for nested schema](#nestedatt--data_source_configuration--managed_knowledge_base_connector_configuration--deletion_protection_configuration))
+- `media_extraction_configuration` (Attributes) Configuration for media extraction settings. (see [below for nested schema](#nestedatt--data_source_configuration--managed_knowledge_base_connector_configuration--media_extraction_configuration))
+
+<a id="nestedatt--data_source_configuration--managed_knowledge_base_connector_configuration--deletion_protection_configuration"></a>
+### Nested Schema for `data_source_configuration.managed_knowledge_base_connector_configuration.deletion_protection_configuration`
+
+Optional:
+
+- `deletion_protection_status` (String) Indicates whether a feature is enabled or disabled.
+- `deletion_protection_threshold` (Number) Threshold for deletion protection.
+
+
+<a id="nestedatt--data_source_configuration--managed_knowledge_base_connector_configuration--media_extraction_configuration"></a>
+### Nested Schema for `data_source_configuration.managed_knowledge_base_connector_configuration.media_extraction_configuration`
+
+Optional:
+
+- `audio_extraction_configuration` (Attributes) Configuration for audio extraction. (see [below for nested schema](#nestedatt--data_source_configuration--managed_knowledge_base_connector_configuration--media_extraction_configuration--audio_extraction_configuration))
+- `image_extraction_configuration` (Attributes) Configuration for image extraction. (see [below for nested schema](#nestedatt--data_source_configuration--managed_knowledge_base_connector_configuration--media_extraction_configuration--image_extraction_configuration))
+- `video_extraction_configuration` (Attributes) Configuration for video extraction. (see [below for nested schema](#nestedatt--data_source_configuration--managed_knowledge_base_connector_configuration--media_extraction_configuration--video_extraction_configuration))
+
+<a id="nestedatt--data_source_configuration--managed_knowledge_base_connector_configuration--media_extraction_configuration--audio_extraction_configuration"></a>
+### Nested Schema for `data_source_configuration.managed_knowledge_base_connector_configuration.media_extraction_configuration.audio_extraction_configuration`
+
+Optional:
+
+- `audio_extraction_status` (String) Indicates whether a feature is enabled or disabled.
+
+
+<a id="nestedatt--data_source_configuration--managed_knowledge_base_connector_configuration--media_extraction_configuration--image_extraction_configuration"></a>
+### Nested Schema for `data_source_configuration.managed_knowledge_base_connector_configuration.media_extraction_configuration.image_extraction_configuration`
+
+Optional:
+
+- `image_extraction_status` (String) Indicates whether a feature is enabled or disabled.
+
+
+<a id="nestedatt--data_source_configuration--managed_knowledge_base_connector_configuration--media_extraction_configuration--video_extraction_configuration"></a>
+### Nested Schema for `data_source_configuration.managed_knowledge_base_connector_configuration.media_extraction_configuration.video_extraction_configuration`
+
+Optional:
+
+- `video_extraction_status` (String) Indicates whether a feature is enabled or disabled.
+
 
 
 

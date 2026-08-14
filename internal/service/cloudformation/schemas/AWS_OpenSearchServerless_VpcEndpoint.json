@@ -1,6 +1,6 @@
 {
   "typeName": "AWS::OpenSearchServerless::VpcEndpoint",
-  "description": "Amazon OpenSearchServerless vpc endpoint resource",
+  "description": "Resource Type definition for AWS::OpenSearchServerless::VpcEndpoint",
   "tagging": {
     "taggable": false,
     "tagOnCreate": false,
@@ -76,6 +76,7 @@
       "/properties/Name"
     ]
   ],
+  "replacementStrategy": "delete_then_create",
   "handlers": {
     "create": {
       "permissions": [

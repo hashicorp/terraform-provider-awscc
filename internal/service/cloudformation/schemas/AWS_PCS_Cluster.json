@@ -16,7 +16,7 @@
         },
         "Mode": {
           "type": "string",
-          "description": "The default value is `STANDARD`. A value of `STANDARD` means that Slurm accounting is enabled.",
+          "description": "The default value is `NONE`. A value of `STANDARD` means that Slurm accounting is enabled.",
           "default": "NONE",
           "enum": [
             "STANDARD",
@@ -34,7 +34,7 @@
       "properties": {
         "Mode": {
           "type": "string",
-          "description": "The default value is `STANDARD`. A value of `STANDARD` means that Slurm Rest is enabled.",
+          "description": "The default value is `NONE`. A value of `STANDARD` means that Slurm Rest is enabled.",
           "default": "NONE",
           "enum": [
             "STANDARD",
@@ -150,6 +150,44 @@
     "SecurityGroupId": {
       "type": "string",
       "description": "A VPC security group ID."
+    },
+    "CgroupCustomSetting": {
+      "type": "object",
+      "description": "Additional cgroup configuration settings.",
+      "properties": {
+        "ParameterName": {
+          "type": "string",
+          "description": "The cgroup.conf parameter name."
+        },
+        "ParameterValue": {
+          "type": "string",
+          "description": "The value for the cgroup.conf parameter."
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "ParameterName",
+        "ParameterValue"
+      ]
+    },
+    "SlurmdbdCustomSetting": {
+      "type": "object",
+      "description": "Additional slurmdbd configuration settings.",
+      "properties": {
+        "ParameterName": {
+          "type": "string",
+          "description": "The slurmdbd.conf parameter name."
+        },
+        "ParameterValue": {
+          "type": "string",
+          "description": "The value for the slurmdbd.conf parameter."
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "ParameterName",
+        "ParameterValue"
+      ]
     },
     "SlurmCustomSetting": {
       "type": "object",
@@ -318,6 +356,22 @@
           "items": {
             "$ref": "#/definitions/SlurmCustomSetting"
           }
+        },
+        "CgroupCustomSettings": {
+          "type": "array",
+          "description": "Additional cgroup-specific configuration that directly maps to cgroup.conf settings.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/CgroupCustomSetting"
+          }
+        },
+        "SlurmdbdCustomSettings": {
+          "type": "array",
+          "description": "Additional slurmdbd-specific configuration that directly maps to slurmdbd.conf settings.",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/SlurmdbdCustomSetting"
+          }
         }
       },
       "additionalProperties": false
@@ -357,7 +411,6 @@
   "createOnlyProperties": [
     "/properties/Name",
     "/properties/Networking",
-    "/properties/Scheduler",
     "/properties/Size"
   ],
   "readOnlyProperties": [
@@ -383,7 +436,7 @@
         "pcs:ListTagsForResource",
         "pcs:TagResource"
       ],
-      "timeoutInMinutes": 60
+      "timeoutInMinutes": 130
     },
     "read": {
       "permissions": [
@@ -399,14 +452,14 @@
         "pcs:TagResource",
         "pcs:UntagResource"
       ],
-      "timeoutInMinutes": 60
+      "timeoutInMinutes": 130
     },
     "delete": {
       "permissions": [
         "pcs:DeleteCluster",
         "pcs:GetCluster"
       ],
-      "timeoutInMinutes": 60
+      "timeoutInMinutes": 130
     },
     "list": {
       "permissions": [

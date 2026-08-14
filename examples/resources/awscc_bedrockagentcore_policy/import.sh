@@ -1,0 +1,1 @@
+$ terraform import awscc_bedrockagentcore_policy.example "policy_arn"

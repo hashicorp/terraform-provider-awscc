@@ -1,0 +1,211 @@
+{
+  "typeName": "AWS::CloudWatch::AlarmMuteRule",
+  "description": "Resource Type definition for AWS::CloudWatch::AlarmMuteRule that allows defining a rule and targeting alarms to mute their actions during the specified window.",
+  "additionalProperties": false,
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-cloudwatch.git",
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "cloudwatch:TagResource",
+      "cloudwatch:UntagResource",
+      "cloudwatch:ListTagsForResource"
+    ]
+  },
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "AlarmName": {
+      "type": "string",
+      "description": "Name of an alarm",
+      "minLength": 1,
+      "maxLength": 255
+    }
+  },
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "Amazon Resource Name (ARN) of the AlarmMuteRule",
+      "minLength": 1,
+      "maxLength": 1600
+    },
+    "Name": {
+      "description": "The name of the AlarmMuteRule",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "Description": {
+      "type": "string",
+      "description": "The description of the AlarmMuteRule",
+      "minLength": 0,
+      "maxLength": 1024
+    },
+    "Rule": {
+      "type": "object",
+      "description": "The rule for the mute",
+      "properties": {
+        "Schedule": {
+          "type": "object",
+          "description": "Schedule for the mute to be active",
+          "properties": {
+            "Expression": {
+              "type": "string",
+              "description": "The expression of the schedule",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "Duration": {
+              "type": "string",
+              "description": "The duration of the schedule when it triggers",
+              "minLength": 1,
+              "maxLength": 50
+            },
+            "Timezone": {
+              "type": "string",
+              "description": "The timezone of the schedule",
+              "minLength": 1,
+              "maxLength": 50
+            }
+          },
+          "required": [
+            "Duration",
+            "Expression"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "Schedule"
+      ],
+      "additionalProperties": false
+    },
+    "MuteTargets": {
+      "type": "object",
+      "description": "Targets to be muted",
+      "properties": {
+        "AlarmNames": {
+          "type": "array",
+          "description": "The alarm names to be mute by the AlarmMuteRule",
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "maxItems": 500,
+          "items": {
+            "$ref": "#/definitions/AlarmName"
+          }
+        }
+      },
+      "required": [
+        "AlarmNames"
+      ],
+      "additionalProperties": false
+    },
+    "StartDate": {
+      "type": "string",
+      "description": "The date, with the same timezone offset as \"ScheduleTimezone\", after which the alarm mute rule will become active."
+    },
+    "ExpireDate": {
+      "type": "string",
+      "description": "The date, with the same timezone offset as \"ScheduleTimezone\" after which the alarm mute rule will be expired."
+    },
+    "Status": {
+      "type": "string",
+      "description": "The current status of the AlarmMuteRule",
+      "enum": [
+        "SCHEDULED",
+        "ACTIVE",
+        "EXPIRED"
+      ]
+    },
+    "LastUpdatedTimestamp": {
+      "type": "string",
+      "description": "The last update timestamp of the alarm mute schedule"
+    },
+    "MuteType": {
+      "type": "string",
+      "description": "The mute type of the alarm mute "
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to this resource.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "required": [
+    "Rule"
+  ],
+  "readOnlyProperties": [
+    "/properties/Status",
+    "/properties/LastUpdatedTimestamp",
+    "/properties/MuteType",
+    "/properties/Arn"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "cloudwatch:PutAlarmMuteRule",
+        "cloudwatch:GetAlarmMuteRule",
+        "cloudwatch:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "cloudwatch:GetAlarmMuteRule",
+        "cloudwatch:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "cloudwatch:GetAlarmMuteRule",
+        "cloudwatch:PutAlarmMuteRule",
+        "cloudwatch:TagResource",
+        "cloudwatch:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "cloudwatch:GetAlarmMuteRule",
+        "cloudwatch:DeleteAlarmMuteRule"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "cloudwatch:ListAlarmMuteRules"
+      ]
+    }
+  }
+}

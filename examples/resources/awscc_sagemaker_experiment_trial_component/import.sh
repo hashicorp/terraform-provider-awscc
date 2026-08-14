@@ -1,0 +1,1 @@
+$ terraform import awscc_sagemaker_experiment_trial_component.example "arn"

@@ -60,6 +60,11 @@
   "primaryIdentifier": [
     "/properties/ApplicationId"
   ],
+  "additionalIdentifiers": [
+    [
+      "/properties/Name"
+    ]
+  ],
   "handlers": {
     "create": {
       "permissions": [

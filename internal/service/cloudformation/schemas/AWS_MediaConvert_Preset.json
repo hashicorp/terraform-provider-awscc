@@ -1,0 +1,89 @@
+{
+  "typeName": "AWS::MediaConvert::Preset",
+  "description": "Resource Type definition for AWS::MediaConvert::Preset",
+  "additionalProperties": false,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "mediaconvert:ListTagsForResource",
+      "mediaconvert:TagResource",
+      "mediaconvert:UntagResource"
+    ]
+  },
+  "properties": {
+    "Category": {
+      "type": "string",
+      "description": "The new category for the preset, if you are changing it."
+    },
+    "Description": {
+      "type": "string",
+      "description": "The new description for the preset, if you are changing it."
+    },
+    "SettingsJson": {
+      "type": "object",
+      "description": "Specify, in JSON format, the transcoding job settings for this output preset. This specification must conform to the AWS Elemental MediaConvert job validation. For information about forming this specification, see the Remarks section later in this topic."
+    },
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the output preset, such as arn:aws:mediaconvert:us-west-2:123456789012"
+    },
+    "Tags": {
+      "type": "object"
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the preset that you are modifying."
+    }
+  },
+  "required": [
+    "SettingsJson"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name"
+  ],
+  "primaryIdentifier": [
+    "/properties/Name"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "mediaconvert:GetPreset",
+        "mediaconvert:CreatePreset",
+        "mediaconvert:TagResource",
+        "mediaconvert:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "mediaconvert:GetPreset",
+        "mediaconvert:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "mediaconvert:UpdatePreset",
+        "mediaconvert:ListTagsForResource",
+        "mediaconvert:TagResource",
+        "mediaconvert:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "mediaconvert:GetPreset",
+        "mediaconvert:DeletePreset"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "mediaconvert:ListPresets"
+      ]
+    }
+  }
+}

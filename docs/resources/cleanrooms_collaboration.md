@@ -63,6 +63,7 @@ resource "awscc_cleanrooms_collaboration" "example" {
 - `creator_ml_member_abilities` (Attributes) (see [below for nested schema](#nestedatt--creator_ml_member_abilities))
 - `creator_payment_configuration` (Attributes) (see [below for nested schema](#nestedatt--creator_payment_configuration))
 - `data_encryption_metadata` (Attributes) (see [below for nested schema](#nestedatt--data_encryption_metadata))
+- `is_metrics_enabled` (Boolean)
 - `job_log_status` (String)
 - `members` (Attributes List) (see [below for nested schema](#nestedatt--members))
 - `tags` (Attributes Set) An arbitrary set of tags (key-value pairs) for this cleanrooms collaboration. (see [below for nested schema](#nestedatt--tags))
@@ -105,6 +106,7 @@ Optional:
 
 - `model_inference` (Attributes) (see [below for nested schema](#nestedatt--creator_payment_configuration--machine_learning--model_inference))
 - `model_training` (Attributes) (see [below for nested schema](#nestedatt--creator_payment_configuration--machine_learning--model_training))
+- `synthetic_data_generation` (Attributes) (see [below for nested schema](#nestedatt--creator_payment_configuration--machine_learning--synthetic_data_generation))
 
 <a id="nestedatt--creator_payment_configuration--machine_learning--model_inference"></a>
 ### Nested Schema for `creator_payment_configuration.machine_learning.model_inference`
@@ -116,6 +118,14 @@ Optional:
 
 <a id="nestedatt--creator_payment_configuration--machine_learning--model_training"></a>
 ### Nested Schema for `creator_payment_configuration.machine_learning.model_training`
+
+Optional:
+
+- `is_responsible` (Boolean)
+
+
+<a id="nestedatt--creator_payment_configuration--machine_learning--synthetic_data_generation"></a>
+### Nested Schema for `creator_payment_configuration.machine_learning.synthetic_data_generation`
 
 Optional:
 
@@ -186,6 +196,7 @@ Optional:
 
 - `model_inference` (Attributes) (see [below for nested schema](#nestedatt--members--payment_configuration--machine_learning--model_inference))
 - `model_training` (Attributes) (see [below for nested schema](#nestedatt--members--payment_configuration--machine_learning--model_training))
+- `synthetic_data_generation` (Attributes) (see [below for nested schema](#nestedatt--members--payment_configuration--machine_learning--synthetic_data_generation))
 
 <a id="nestedatt--members--payment_configuration--machine_learning--model_inference"></a>
 ### Nested Schema for `members.payment_configuration.machine_learning.model_inference`
@@ -197,6 +208,14 @@ Optional:
 
 <a id="nestedatt--members--payment_configuration--machine_learning--model_training"></a>
 ### Nested Schema for `members.payment_configuration.machine_learning.model_training`
+
+Optional:
+
+- `is_responsible` (Boolean)
+
+
+<a id="nestedatt--members--payment_configuration--machine_learning--synthetic_data_generation"></a>
+### Nested Schema for `members.payment_configuration.machine_learning.synthetic_data_generation`
 
 Optional:
 

@@ -24,6 +24,12 @@
         },
         "Description": {
           "$ref": "#/definitions/CommandParameterDescription"
+        },
+        "Type": {
+          "$ref": "#/definitions/CommandParameterType"
+        },
+        "ValueConditions": {
+          "$ref": "#/definitions/CommandParameterValueConditionList"
         }
       },
       "required": [
@@ -75,6 +81,104 @@
       },
       "additionalProperties": false
     },
+    "CommandParameterType": {
+      "type": "string",
+      "enum": [
+        "STRING",
+        "INTEGER",
+        "DOUBLE",
+        "LONG",
+        "UNSIGNEDLONG",
+        "BOOLEAN",
+        "BINARY"
+      ]
+    },
+    "CommandParameterValueConditionList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/CommandParameterValueCondition"
+      },
+      "minItems": 1,
+      "insertionOrder": true
+    },
+    "CommandParameterValueCondition": {
+      "type": "object",
+      "properties": {
+        "ComparisonOperator": {
+          "$ref": "#/definitions/CommandParameterValueComparisonOperator"
+        },
+        "Operand": {
+          "$ref": "#/definitions/CommandParameterValueComparisonOperand"
+        }
+      },
+      "required": [
+        "ComparisonOperator",
+        "Operand"
+      ],
+      "additionalProperties": false
+    },
+    "CommandParameterValueComparisonOperator": {
+      "type": "string",
+      "enum": [
+        "EQUALS",
+        "NOT_EQUALS",
+        "LESS_THAN",
+        "LESS_THAN_EQUALS",
+        "GREATER_THAN",
+        "GREATER_THAN_EQUALS",
+        "IN_SET",
+        "NOT_IN_SET",
+        "IN_RANGE",
+        "NOT_IN_RANGE"
+      ]
+    },
+    "CommandParameterValueComparisonOperand": {
+      "type": "object",
+      "properties": {
+        "Number": {
+          "type": "string"
+        },
+        "Numbers": {
+          "$ref": "#/definitions/CommandParameterValueStringList"
+        },
+        "String": {
+          "type": "string"
+        },
+        "Strings": {
+          "$ref": "#/definitions/CommandParameterValueStringList"
+        },
+        "NumberRange": {
+          "$ref": "#/definitions/CommandParameterValueNumberRange"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CommandParameterValueNumberRange": {
+      "type": "object",
+      "properties": {
+        "Min": {
+          "type": "string",
+          "minLength": 1
+        },
+        "Max": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "Min",
+        "Max"
+      ],
+      "additionalProperties": false
+    },
+    "CommandParameterValueStringList": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "maxItems": 10
+    },
     "MimeType": {
       "type": "string",
       "minLength": 1
@@ -90,6 +194,34 @@
         },
         "ContentType": {
           "$ref": "#/definitions/MimeType"
+        }
+      },
+      "additionalProperties": false
+    },
+    "OutputFormat": {
+      "type": "string",
+      "enum": [
+        "JSON",
+        "CBOR"
+      ]
+    },
+    "AwsJsonSubstitutionCommandPreprocessorConfig": {
+      "type": "object",
+      "properties": {
+        "OutputFormat": {
+          "$ref": "#/definitions/OutputFormat"
+        }
+      },
+      "required": [
+        "OutputFormat"
+      ],
+      "additionalProperties": false
+    },
+    "CommandPreprocessor": {
+      "type": "object",
+      "properties": {
+        "AwsJsonSubstitution": {
+          "$ref": "#/definitions/AwsJsonSubstitutionCommandPreprocessorConfig"
         }
       },
       "additionalProperties": false
@@ -173,6 +305,15 @@
       "$ref": "#/definitions/CommandPayload",
       "description": "The payload associated with the command."
     },
+    "PayloadTemplate": {
+      "type": "string",
+      "maxLength": 32768,
+      "description": "The payload template associated with the command."
+    },
+    "Preprocessor": {
+      "$ref": "#/definitions/CommandPreprocessor",
+      "description": "The command preprocessor configuration."
+    },
     "PendingDeletion": {
       "type": "boolean",
       "description": "A flag indicating whether the command is pending deletion."
@@ -190,7 +331,9 @@
     "CommandId"
   ],
   "createOnlyProperties": [
-    "/properties/CommandId"
+    "/properties/CommandId",
+    "/properties/PayloadTemplate",
+    "/properties/Preprocessor"
   ],
   "readOnlyProperties": [
     "/properties/CommandArn"

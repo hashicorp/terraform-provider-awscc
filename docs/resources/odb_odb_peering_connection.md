@@ -17,9 +17,11 @@ Resource Type definition for AWS::ODB::OdbPeeringConnection.
 
 ### Optional
 
+- `additional_peer_network_cidrs` (List of String) The additional CIDR blocks for the ODB peering connection.
 - `display_name` (String) The name of the ODB peering connection.
 - `odb_network_id` (String) The unique identifier of the ODB network.
 - `peer_network_id` (String) The unique identifier of the peer network.
+- `peer_network_route_table_ids` (List of String) The unique identifier of the VPC route table for which a route to the ODB network is automatically created during peering connection establishment.
 - `tags` (Attributes List) Tags to assign to the Odb peering connection. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -29,6 +31,7 @@ Resource Type definition for AWS::ODB::OdbPeeringConnection.
 - `odb_peering_connection_arn` (String) The Amazon Resource Name (ARN) of the ODB peering connection.
 - `odb_peering_connection_id` (String) The unique identifier of the ODB peering connection.
 - `peer_network_arn` (String) The Amazon Resource Name (ARN) of the peer network.
+- `peer_network_cidrs` (List of String) The CIDR blocks for the ODB peering connection.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

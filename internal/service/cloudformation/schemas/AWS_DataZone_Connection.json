@@ -246,6 +246,58 @@
             "S3Properties"
           ],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "MlflowProperties",
+          "properties": {
+            "MlflowProperties": {
+              "$ref": "#/definitions/MlflowPropertiesInput"
+            }
+          },
+          "required": [
+            "MlflowProperties"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "WorkflowsMwaaProperties",
+          "properties": {
+            "WorkflowsMwaaProperties": {
+              "$ref": "#/definitions/WorkflowsMwaaPropertiesInput"
+            }
+          },
+          "required": [
+            "WorkflowsMwaaProperties"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "WorkflowsServerlessProperties",
+          "properties": {
+            "WorkflowsServerlessProperties": {
+              "$ref": "#/definitions/WorkflowsServerlessPropertiesInput"
+            }
+          },
+          "required": [
+            "WorkflowsServerlessProperties"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "LakehouseProperties",
+          "properties": {
+            "LakehouseProperties": {
+              "$ref": "#/definitions/LakehousePropertiesInput"
+            }
+          },
+          "required": [
+            "LakehouseProperties"
+          ],
+          "additionalProperties": false
         }
       ]
     },
@@ -638,7 +690,7 @@
         "ComputeArn": {
           "type": "string",
           "maxLength": 2048,
-          "pattern": "^arn:aws(-(cn|us-gov|iso(-[bef])?))?:(elasticmapreduce|emr-serverless):.*"
+          "pattern": "^arn:aws(-(cn|us-gov|iso(-[bef])?))?:(elasticmapreduce|emr-serverless|emr-containers):.*"
         },
         "InstanceProfileArn": {
           "type": "string",
@@ -669,6 +721,10 @@
           "type": "string",
           "maxLength": 2048,
           "pattern": "^s3://.+$"
+        },
+        "ManagedEndpointArn": {
+          "type": "string",
+          "maxLength": 2048
         }
       },
       "additionalProperties": false
@@ -805,17 +861,83 @@
           "maxLength": 64,
           "minLength": 0,
           "pattern": "[a-zA-Z0-9\\-]+"
+        },
+        "RegisterS3AccessGrantLocation": {
+          "type": "boolean",
+          "description": "Specifies whether to register the S3 Access Grant location."
         }
       },
       "required": [
         "S3Uri"
       ],
       "additionalProperties": false
+    },
+    "LakehousePropertiesInput": {
+      "type": "object",
+      "description": "Lakehouse Properties Input",
+      "properties": {
+        "GlueLineageSyncEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether Glue lineage sync is enabled for the lakehouse connection."
+        }
+      },
+      "additionalProperties": false
+    },
+    "MlflowPropertiesInput": {
+      "type": "object",
+      "description": "MLflow Properties Input",
+      "properties": {
+        "TrackingServerArn": {
+          "type": "string",
+          "description": "The ARN of the MLflow tracking server"
+        }
+      },
+      "additionalProperties": false
+    },
+    "WorkflowsMwaaPropertiesInput": {
+      "type": "object",
+      "description": "Workflows MWAA Properties Input",
+      "properties": {
+        "MwaaEnvironmentName": {
+          "type": "string",
+          "description": "The name of the MWAA environment."
+        }
+      },
+      "additionalProperties": false
+    },
+    "WorkflowsServerlessPropertiesInput": {
+      "type": "object",
+      "description": "Workflows Serverless Properties Input",
+      "additionalProperties": false
+    },
+    "ConnectionConfiguration": {
+      "type": "object",
+      "description": "A configuration of the connection.",
+      "properties": {
+        "Classification": {
+          "type": "string",
+          "description": "The classification of the connection configuration.",
+          "maxLength": 64,
+          "pattern": "^[\\w][\\w\\.\\-\\_]*$"
+        },
+        "Properties": {
+          "$ref": "#/definitions/PropertyMap"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "properties": {
     "AwsLocation": {
       "$ref": "#/definitions/AwsLocation"
+    },
+    "Configurations": {
+      "type": "array",
+      "description": "The configurations of the connection.",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/ConnectionConfiguration"
+      }
     },
     "ConnectionId": {
       "type": "string",
@@ -908,6 +1030,7 @@
   ],
   "writeOnlyProperties": [
     "/properties/AwsLocation",
+    "/properties/Configurations",
     "/properties/DomainIdentifier",
     "/properties/EnableTrustedIdentityPropagation",
     "/properties/EnvironmentIdentifier",

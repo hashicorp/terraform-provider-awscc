@@ -125,12 +125,41 @@ Read-Only:
 
 Read-Only:
 
+- `composite_sli_config` (Attributes) (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric--composite_sli_config))
 - `dependency_config` (Attributes) Configuration for identifying a dependency and its operation (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric--dependency_config))
 - `key_attributes` (Map of String) This is a string-to-string map that contains information about the type of object that this SLO is related to.
+- `metric_name` (String) The name of the metric for non-Application Signals services
+- `metric_source` (Attributes) Configuration for identifying the source of metrics for non-Application Signals services (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric--metric_source))
 - `metric_type` (String) If the SLO monitors either the LATENCY or AVAILABILITY metric that Application Signals collects, this field displays which of those metrics is used.
 - `monitored_request_count_metric` (Attributes) This structure defines the metric that is used as the "good request" or "bad request" value for a request-based SLO. This value observed for the metric defined in `TotalRequestCountMetric` is divided by the number found for `MonitoredRequestCountMetric` to determine the percentage of successful requests that this SLO tracks. (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric))
 - `operation_name` (String) If the SLO monitors a specific operation of the service, this field displays that operation name.
 - `total_request_count_metric` (Attributes List) This structure defines the metric that is used as the "total requests" number for a request-based SLO. The number observed for this metric is divided by the number of "good requests" or "bad requests" that is observed for the metric defined in `MonitoredRequestCountMetric`. (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric--total_request_count_metric))
+
+<a id="nestedatt--request_based_sli--request_based_sli_metric--composite_sli_config"></a>
+### Nested Schema for `request_based_sli.request_based_sli_metric.composite_sli_config`
+
+Read-Only:
+
+- `composite_sli_components` (Attributes List) (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric--composite_sli_config--composite_sli_components))
+- `selection_config` (Attributes) (see [below for nested schema](#nestedatt--request_based_sli--request_based_sli_metric--composite_sli_config--selection_config))
+
+<a id="nestedatt--request_based_sli--request_based_sli_metric--composite_sli_config--composite_sli_components"></a>
+### Nested Schema for `request_based_sli.request_based_sli_metric.composite_sli_config.composite_sli_components`
+
+Read-Only:
+
+- `operation_name` (String)
+
+
+<a id="nestedatt--request_based_sli--request_based_sli_metric--composite_sli_config--selection_config"></a>
+### Nested Schema for `request_based_sli.request_based_sli_metric.composite_sli_config.selection_config`
+
+Read-Only:
+
+- `pattern` (String)
+- `type` (String)
+
+
 
 <a id="nestedatt--request_based_sli--request_based_sli_metric--dependency_config"></a>
 ### Nested Schema for `request_based_sli.request_based_sli_metric.dependency_config`
@@ -139,6 +168,15 @@ Read-Only:
 
 - `dependency_key_attributes` (Map of String) If this SLO is related to a metric collected by Application Signals, you must use this field to specify which dependency the SLO metric is related to.
 - `dependency_operation_name` (String) When the SLO monitors a specific operation of the dependency, this field specifies the name of that operation in the dependency.
+
+
+<a id="nestedatt--request_based_sli--request_based_sli_metric--metric_source"></a>
+### Nested Schema for `request_based_sli.request_based_sli_metric.metric_source`
+
+Read-Only:
+
+- `metric_source_attributes` (Map of String) Optional additional attributes for the metric source
+- `metric_source_key_attributes` (Map of String) Required attributes that identify the metric source
 
 
 <a id="nestedatt--request_based_sli--request_based_sli_metric--monitored_request_count_metric"></a>
@@ -292,13 +330,42 @@ Read-Only:
 
 Read-Only:
 
+- `composite_sli_config` (Attributes) (see [below for nested schema](#nestedatt--sli--sli_metric--composite_sli_config))
 - `dependency_config` (Attributes) Configuration for identifying a dependency and its operation (see [below for nested schema](#nestedatt--sli--sli_metric--dependency_config))
 - `key_attributes` (Map of String) This is a string-to-string map that contains information about the type of object that this SLO is related to.
 - `metric_data_queries` (Attributes List) If this SLO monitors a CloudWatch metric or the result of a CloudWatch metric math expression, this structure includes the information about that metric or expression. (see [below for nested schema](#nestedatt--sli--sli_metric--metric_data_queries))
+- `metric_name` (String) The name of the metric for non-Application Signals services
+- `metric_source` (Attributes) Configuration for identifying the source of metrics for non-Application Signals services (see [below for nested schema](#nestedatt--sli--sli_metric--metric_source))
 - `metric_type` (String) If the SLO monitors either the LATENCY or AVAILABILITY metric that Application Signals collects, this field displays which of those metrics is used.
 - `operation_name` (String) If the SLO monitors a specific operation of the service, this field displays that operation name.
 - `period_seconds` (Number) The number of seconds to use as the period for SLO evaluation. Your application's performance is compared to the SLI during each period. For each period, the application is determined to have either achieved or not achieved the necessary performance.
 - `statistic` (String) The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic
+
+<a id="nestedatt--sli--sli_metric--composite_sli_config"></a>
+### Nested Schema for `sli.sli_metric.composite_sli_config`
+
+Read-Only:
+
+- `composite_sli_components` (Attributes List) (see [below for nested schema](#nestedatt--sli--sli_metric--composite_sli_config--composite_sli_components))
+- `selection_config` (Attributes) (see [below for nested schema](#nestedatt--sli--sli_metric--composite_sli_config--selection_config))
+
+<a id="nestedatt--sli--sli_metric--composite_sli_config--composite_sli_components"></a>
+### Nested Schema for `sli.sli_metric.composite_sli_config.composite_sli_components`
+
+Read-Only:
+
+- `operation_name` (String)
+
+
+<a id="nestedatt--sli--sli_metric--composite_sli_config--selection_config"></a>
+### Nested Schema for `sli.sli_metric.composite_sli_config.selection_config`
+
+Read-Only:
+
+- `pattern` (String)
+- `type` (String)
+
+
 
 <a id="nestedatt--sli--sli_metric--dependency_config"></a>
 ### Nested Schema for `sli.sli_metric.dependency_config`
@@ -349,6 +416,15 @@ Read-Only:
 
 
 
+
+
+<a id="nestedatt--sli--sli_metric--metric_source"></a>
+### Nested Schema for `sli.sli_metric.metric_source`
+
+Read-Only:
+
+- `metric_source_attributes` (Map of String) Optional additional attributes for the metric source
+- `metric_source_key_attributes` (Map of String) Required attributes that identify the metric source
 
 
 

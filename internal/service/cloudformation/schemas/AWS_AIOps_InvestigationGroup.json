@@ -204,6 +204,7 @@
         "aiops:GetInvestigationGroup",
         "aiops:GetInvestigationGroupPolicy",
         "aiops:PutInvestigationGroupPolicy",
+        "aiops:ListInvestigationGroups",
         "aiops:TagResource",
         "aiops:ListTagsForResource",
         "iam:PassRole",
@@ -218,6 +219,7 @@
       "permissions": [
         "aiops:GetInvestigationGroup",
         "aiops:GetInvestigationGroupPolicy",
+        "aiops:ListInvestigationGroups",
         "aiops:ListTagsForResource",
         "kms:DescribeKey",
         "kms:ListAliases",
@@ -229,6 +231,7 @@
       "permissions": [
         "aiops:GetInvestigationGroup",
         "aiops:UpdateInvestigationGroup",
+        "aiops:ListInvestigationGroups",
         "aiops:GetInvestigationGroupPolicy",
         "aiops:PutInvestigationGroupPolicy",
         "aiops:DeleteInvestigationGroupPolicy",

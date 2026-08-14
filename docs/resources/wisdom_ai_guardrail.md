@@ -138,6 +138,7 @@ resource "awscc_wisdom_ai_guardrail" "example" {
 - `ai_guardrail_id` (String)
 - `assistant_arn` (String)
 - `id` (String) Uniquely identifies the resource.
+- `modified_time_seconds` (Number)
 
 <a id="nestedatt--content_policy_config"></a>
 ### Nested Schema for `content_policy_config`

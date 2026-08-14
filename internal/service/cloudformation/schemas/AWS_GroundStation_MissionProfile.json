@@ -95,6 +95,11 @@
       "description": "The ARN of the KMS Key or Alias Key role used to define permissions on KMS Key usage.",
       "type": "string"
     },
+    "TelemetrySinkConfigArn": {
+      "description": "ARN of a Config resource of type TelemetrySinkConfig used for telemetry data sink configuration.",
+      "type": "string",
+      "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$"
+    },
     "DataflowEdges": {
       "description": "",
       "type": "array",

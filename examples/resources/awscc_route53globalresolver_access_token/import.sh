@@ -1,0 +1,1 @@
+$ terraform import awscc_route53globalresolver_access_token.example "access_token_id"

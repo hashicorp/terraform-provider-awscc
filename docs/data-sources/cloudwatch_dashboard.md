@@ -23,3 +23,12 @@ Data Source schema for AWS::CloudWatch::Dashboard
 
 - `dashboard_body` (String) The detailed information about the dashboard in JSON format, including the widgets to include and their location on the dashboard
 - `dashboard_name` (String) The name of the dashboard. The name must be between 1 and 255 characters. If you do not specify a name, one will be generated automatically.
+- `tags` (Attributes Set) A list of key-value pairs to associate with the cloudwatch dashboard. You can associate up to 50 tags with a dashboard (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String) A unique identifier for the tag. The combination of tag keys and values can help you organize and categorize your resources.
+- `value` (String) The value for the specified tag key.

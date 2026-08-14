@@ -29,6 +29,16 @@
       "type": "string",
       "pattern": "^arn:(aws|aws-us-gov|aws-cn):kms:.*:[0-9]+:.*$"
     },
+    "CustomerProfilesDomainArn": {
+      "description": "The Amazon Resource Name (ARN) of the Customer Profiles domain",
+      "type": "string",
+      "pattern": "^arn:(aws|aws-us-gov|aws-cn):profile:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(domains/[a-zA-Z_0-9-]{1,255})$"
+    },
+    "CustomerProfilesObjectTypeArn": {
+      "description": "The Amazon Resource Name (ARN) of the Customer Profiles object type",
+      "type": "string",
+      "pattern": "^arn:(aws|aws-us-gov|aws-cn):profile:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(domains/[a-zA-Z_0-9-]{1,255}/object-types/[a-zA-Z_0-9-]{1,255})$"
+    },
     "MatchingWorkflowArn": {
       "description": "The default MatchingWorkflow arn",
       "type": "string",
@@ -86,11 +96,13 @@
         },
         "ApplyNormalization": {
           "type": "boolean"
+        },
+        "CustomerProfilesIntegrationConfig": {
+          "$ref": "#/definitions/CustomerProfilesIntegrationConfig"
         }
       },
       "required": [
-        "Output",
-        "OutputS3Path"
+        "Output"
       ],
       "additionalProperties": false
     },
@@ -131,6 +143,10 @@
         },
         "ProviderProperties": {
           "$ref": "#/definitions/ProviderProperties"
+        },
+        "EnableRealTimeMatching": {
+          "type": "boolean",
+          "description": "Enables the workflow to use real-time matching. Can only be set on creation for RULE_MATCHING workflows that define RuleConditionProperties."
         }
       },
       "additionalProperties": false
@@ -194,6 +210,9 @@
           "items": {
             "$ref": "#/definitions/RuleCondition"
           }
+        },
+        "MatchingConfig": {
+          "$ref": "#/definitions/MatchingConfig"
         }
       },
       "required": [
@@ -209,6 +228,17 @@
         },
         "Condition": {
           "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "MatchingConfig": {
+      "type": "object",
+      "description": "Configuration for matching behavior within rule condition properties",
+      "properties": {
+        "EnableTransitiveMatching": {
+          "type": "boolean",
+          "description": "Enables transitive matching to process records across all rule levels and connect unmatched records to existing match groups"
         }
       },
       "additionalProperties": false
@@ -274,6 +304,23 @@
       },
       "required": [
         "IntermediateS3Path"
+      ],
+      "additionalProperties": false
+    },
+    "CustomerProfilesIntegrationConfig": {
+      "type": "object",
+      "description": "The Customer Profiles integration configuration for the output source",
+      "properties": {
+        "DomainArn": {
+          "$ref": "#/definitions/CustomerProfilesDomainArn"
+        },
+        "ObjectTypeArn": {
+          "$ref": "#/definitions/CustomerProfilesObjectTypeArn"
+        }
+      },
+      "required": [
+        "DomainArn",
+        "ObjectTypeArn"
       ],
       "additionalProperties": false
     },
@@ -359,7 +406,8 @@
     }
   },
   "createOnlyProperties": [
-    "/properties/WorkflowName"
+    "/properties/WorkflowName",
+    "/properties/ResolutionTechniques/EnableRealTimeMatching"
   ],
   "readOnlyProperties": [
     "/properties/WorkflowArn",
@@ -393,7 +441,8 @@
         "events:PutRule",
         "events:DeleteRule",
         "events:PutTargets",
-        "events:ListTargetsByRule"
+        "events:ListTargetsByRule",
+        "profile:PutIntegration"
       ]
     },
     "read": {
@@ -411,7 +460,8 @@
         "events:DeleteRule",
         "events:PutTargets",
         "events:RemoveTargets",
-        "events:ListTargetsByRule"
+        "events:ListTargetsByRule",
+        "profile:DeleteIntegration"
       ]
     },
     "list": {

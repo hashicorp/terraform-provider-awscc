@@ -40,6 +40,7 @@ resource "awscc_vpclattice_service" "example" {
 - `certificate_arn` (String)
 - `custom_domain_name` (String)
 - `dns_entry` (Attributes) (see [below for nested schema](#nestedatt--dns_entry))
+- `idle_timeout_seconds` (Number)
 - `name` (String)
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 

@@ -1,0 +1,58 @@
+{
+  "typeName": "AWS::Bedrock::ResourcePolicy",
+  "description": "Definition of AWS::Bedrock::ResourcePolicy Resource Type",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {},
+  "properties": {
+    "ResourceArn": {
+      "type": "string",
+      "description": "The ARN of the Bedrock Guardrail or Guardrail Profile resource",
+      "pattern": "^arn:aws(-[a-z]+)*:bedrock:[a-z0-9-]+:[0-9]{12}:(guardrail|guardrail-profile)/[a-z0-9]+$",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "PolicyDocument": {
+      "type": "object",
+      "description": "The IAM policy document defining access permissions for the guardrail and guardrail profile resources"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "ResourceArn",
+    "PolicyDocument"
+  ],
+  "createOnlyProperties": [
+    "/properties/ResourceArn"
+  ],
+  "primaryIdentifier": [
+    "/properties/ResourceArn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "bedrock:PutResourcePolicy",
+        "bedrock:GetResourcePolicy"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "bedrock:GetResourcePolicy"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "bedrock:PutResourcePolicy",
+        "bedrock:GetResourcePolicy"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "bedrock:DeleteResourcePolicy",
+        "bedrock:GetResourcePolicy"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": false
+  }
+}

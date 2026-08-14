@@ -118,7 +118,7 @@ Data Source schema for AWS::RDS::DBCluster
   +   ``postgres`` 
   
  Valid for: Aurora DB clusters and Multi-AZ DB clusters
-- `engine_lifecycle_support` (String) The life cycle type for this DB cluster.
+- `engine_lifecycle_support` (String) The lifecycle type for this DB cluster.
   By default, this value is set to ``open-source-rds-extended-support``, which enrolls your DB cluster into Amazon RDS Extended Support. At the end of standard support, you can avoid charges for Extended Support by setting the value to ``open-source-rds-extended-support-disabled``. In this case, creating the DB cluster will fail if the DB major version is past its end of standard support date.
   You can use this setting to enroll your DB cluster into Amazon RDS Extended Support. With RDS Extended Support, you can run the selected major engine version on your DB cluster past the end of standard support for that engine version. For more information, see the following sections:
   +  Amazon Aurora - [Amazon RDS Extended Support with Amazon Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html) in the *Amazon Aurora User Guide*
@@ -135,7 +135,8 @@ Data Source schema for AWS::RDS::DBCluster
   
  Valid for Cluster Type: Aurora DB clusters only
 - `engine_version` (String) The version number of the database engine to use.
- To list all of the available engine versions for Aurora MySQL version 2 (5.7-compatible) and version 3 (8.0-compatible), use the following command:
+  Don't use this property if your DB cluster is a member of a global database cluster. Instead, specify the ``EngineVersion`` property on the [AWS::RDS::GlobalCluster](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-globalcluster.html) resource. Major version upgrades aren't supported for individual members of a global cluster. Use ``ModifyGlobalCluster`` to upgrade all members of the global cluster.
+  To list all of the available engine versions for Aurora MySQL version 2 (5.7-compatible) and version 3 (8.0-compatible), use the following command:
   ``aws rds describe-db-engine-versions --engine aurora-mysql --query "DBEngineVersions[].EngineVersion"`` 
  You can supply either ``5.7`` or ``8.0`` to use the default engine version for Aurora MySQL version 2 or version 3, respectively.
  To list all of the available engine versions for Aurora PostgreSQL, use the following command:
@@ -223,11 +224,8 @@ Data Source schema for AWS::RDS::DBCluster
  If you specify a retention period that isn't valid, such as ``94``, Amazon RDS issues an error.
 - `port` (Number) The port number on which the DB instances in the DB cluster accept connections.
  Default:
-  +  When ``EngineMode`` is ``provisioned``, ``3306`` (for both Aurora MySQL and Aurora PostgreSQL)
-  +  When ``EngineMode`` is ``serverless``:
-  +  ``3306`` when ``Engine`` is ``aurora`` or ``aurora-mysql``
-  +  ``5432`` when ``Engine`` is ``aurora-postgresql``
-  
+  +  RDS for MySQL and Aurora MySQL - ``3306``
+  +  RDS for PostgreSQL and Aurora PostgreSQL - ``5432``
   
   The ``No interruption`` on update behavior only applies to DB clusters. If you are updating a DB instance, see [Port](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-port) for the AWS::RDS::DBInstance resource.
   Valid for: Aurora DB clusters and Multi-AZ DB clusters
@@ -316,6 +314,7 @@ Data Source schema for AWS::RDS::DBCluster
  If you specify the ``SnapshotIdentifier`` and the specified snapshot isn't encrypted, you can use this property to specify that the restored DB cluster is encrypted. Specify the ``KmsKeyId`` property for the KMS key to use for encryption. If you don't want the restored DB cluster to be encrypted, then don't set this property or set it to ``false``.
   If you specify both the ``StorageEncrypted`` and ``SnapshotIdentifier`` properties without specifying the ``KmsKeyId`` property, then the restored DB cluster inherits the encryption settings from the DB snapshot that provide.
   Valid for: Aurora DB clusters and Multi-AZ DB clusters
+- `storage_encryption_type` (String)
 - `storage_throughput` (Number)
 - `storage_type` (String) The storage type to associate with the DB cluster.
  For information on storage types for Aurora DB clusters, see [Storage configurations for Amazon Aurora DB clusters](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Overview.StorageReliability.html#aurora-storage-type). For information on storage types for Multi-AZ DB clusters, see [Settings for creating Multi-AZ DB clusters](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/create-multi-az-db-cluster.html#create-multi-az-db-cluster-settings).

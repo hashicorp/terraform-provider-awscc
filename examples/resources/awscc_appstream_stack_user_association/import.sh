@@ -1,0 +1,1 @@
+$ terraform import awscc_appstream_stack_user_association.example "stack_name|user_name|authentication_type"

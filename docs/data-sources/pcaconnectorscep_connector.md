@@ -28,6 +28,7 @@ Data Source schema for AWS::PCAConnectorSCEP::Connector
 - `open_id_configuration` (Attributes) (see [below for nested schema](#nestedatt--open_id_configuration))
 - `tags` (Map of String)
 - `type` (String)
+- `vpc_endpoint_id` (String)
 
 <a id="nestedatt--mobile_device_management"></a>
 ### Nested Schema for `mobile_device_management`

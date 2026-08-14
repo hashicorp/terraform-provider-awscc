@@ -46,6 +46,7 @@ Read-Only:
 - `oracle_settings` (Attributes) OracleSettings property identifier. (see [below for nested schema](#nestedatt--settings--oracle_settings))
 - `postgre_sql_settings` (Attributes) PostgreSqlSettings property identifier. (see [below for nested schema](#nestedatt--settings--postgre_sql_settings))
 - `redshift_settings` (Attributes) RedshiftSettings property identifier. (see [below for nested schema](#nestedatt--settings--redshift_settings))
+- `sybase_ase_settings` (Attributes) SybaseAseSettings property identifier. (see [below for nested schema](#nestedatt--settings--sybase_ase_settings))
 
 <a id="nestedatt--settings--doc_db_settings"></a>
 ### Nested Schema for `settings.doc_db_settings`
@@ -169,6 +170,19 @@ Read-Only:
 - `database_name` (String)
 - `port` (Number)
 - `server_name` (String)
+
+
+<a id="nestedatt--settings--sybase_ase_settings"></a>
+### Nested Schema for `settings.sybase_ase_settings`
+
+Read-Only:
+
+- `certificate_arn` (String)
+- `database_name` (String)
+- `encrypt_password` (Boolean)
+- `port` (Number)
+- `server_name` (String)
+- `ssl_mode` (String)
 
 
 

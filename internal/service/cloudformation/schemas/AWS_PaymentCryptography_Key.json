@@ -138,6 +138,16 @@
         "AWS_PAYMENT_CRYPTOGRAPHY"
       ]
     },
+    "KeyReplicationState": {
+      "type": "string",
+      "description": "Defines the replication state of a key",
+      "enum": [
+        "IN_PROGRESS",
+        "DELETE_IN_PROGRESS",
+        "FAILED",
+        "SYNCHRONIZED"
+      ]
+    },
     "KeyState": {
       "type": "string",
       "description": "Defines the state of a key",
@@ -164,6 +174,7 @@
         "TR31_K0_KEY_ENCRYPTION_KEY",
         "TR31_K1_KEY_BLOCK_PROTECTION_KEY",
         "TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT",
+        "TR31_M0_ISO_16609_MAC_KEY",
         "TR31_M3_ISO_9797_3_MAC_KEY",
         "TR31_M1_ISO_9797_1_MAC_KEY",
         "TR31_M6_ISO_9797_5_CMAC_KEY",
@@ -175,6 +186,30 @@
         "TR31_V2_VISA_PIN_VERIFICATION_KEY",
         "TR31_K2_TR34_ASYMMETRIC_KEY"
       ]
+    },
+    "ReplicationStatus": {
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "$ref": "#/definitions/ReplicationStatusType"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ReplicationStatusType": {
+      "type": "object",
+      "properties": {
+        "Status": {
+          "$ref": "#/definitions/KeyReplicationState"
+        },
+        "StatusMessage": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Status"
+      ],
+      "additionalProperties": false
     },
     "Tag": {
       "type": "object",
@@ -225,6 +260,23 @@
     "KeyState": {
       "$ref": "#/definitions/KeyState"
     },
+    "Policy": {
+      "type": "string",
+      "maxLength": 20480,
+      "minLength": 1,
+      "pattern": "",
+      "description": "The resource-based policy attached to the key, in JSON format."
+    },
+    "ReplicationRegions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z]{2}-[a-z]{1,16}-[0-9]+$"
+      }
+    },
+    "ReplicationStatus": {
+      "$ref": "#/definitions/ReplicationStatus"
+    },
     "Tags": {
       "type": "array",
       "items": {
@@ -242,7 +294,11 @@
   "readOnlyProperties": [
     "/properties/KeyIdentifier",
     "/properties/KeyOrigin",
-    "/properties/KeyState"
+    "/properties/KeyState",
+    "/properties/ReplicationStatus"
+  ],
+  "writeOnlyProperties": [
+    "/properties/ReplicationRegions"
   ],
   "primaryIdentifier": [
     "/properties/KeyIdentifier"
@@ -252,13 +308,15 @@
       "permissions": [
         "payment-cryptography:GetKey",
         "payment-cryptography:CreateKey",
-        "payment-cryptography:TagResource"
+        "payment-cryptography:TagResource",
+        "payment-cryptography:PutResourcePolicy"
       ]
     },
     "read": {
       "permissions": [
         "payment-cryptography:GetKey",
-        "payment-cryptography:ListTagsForResource"
+        "payment-cryptography:ListTagsForResource",
+        "payment-cryptography:GetResourcePolicy"
       ]
     },
     "update": {
@@ -268,7 +326,11 @@
         "payment-cryptography:TagResource",
         "payment-cryptography:UntagResource",
         "payment-cryptography:StartKeyUsage",
-        "payment-cryptography:StopKeyUsage"
+        "payment-cryptography:StopKeyUsage",
+        "payment-cryptography:AddKeyReplicationRegions",
+        "payment-cryptography:RemoveKeyReplicationRegions",
+        "payment-cryptography:PutResourcePolicy",
+        "payment-cryptography:DeleteResourcePolicy"
       ]
     },
     "delete": {

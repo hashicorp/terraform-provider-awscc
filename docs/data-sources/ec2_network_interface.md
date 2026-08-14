@@ -37,6 +37,8 @@ Data Source schema for AWS::EC2::NetworkInterface
 - `primary_private_ip_address` (String) Returns the primary private IP address of the network interface.
 - `private_ip_address` (String) Assigns a single private IP address to the network interface, which is used as the primary private IP address. If you want to specify multiple private IP address, use the PrivateIpAddresses property.
 - `private_ip_addresses` (Attributes List) Assigns a list of private IP addresses to the network interface. You can specify a primary private IP address by setting the value of the Primary property to true in the PrivateIpAddressSpecification property. If you want EC2 to automatically assign private IP addresses, use the SecondaryPrivateIpAddressCount property and do not specify this property. (see [below for nested schema](#nestedatt--private_ip_addresses))
+- `public_ip_dns_hostname_type_specification` (String) Public IP DNS hostname type
+- `public_ip_dns_name_options` (Attributes) Describes the public hostname type options, including public hostname type, IPv4-enabled public hostname, IPv6-enabled public hostname, and dual-stack public hostname. (see [below for nested schema](#nestedatt--public_ip_dns_name_options))
 - `secondary_private_ip_address_count` (Number) The number of secondary private IPv4 addresses to assign to a network interface. When you specify a number of secondary IPv4 addresses, Amazon EC2 selects these IP addresses within the subnet's IPv4 CIDR range. You can't specify this option and specify more than one private IP address using privateIpAddresses
 - `secondary_private_ip_addresses` (List of String) Returns the secondary private IP addresses of the network interface.
 - `source_dest_check` (Boolean) Indicates whether traffic to or from the instance is validated.
@@ -85,6 +87,17 @@ Read-Only:
 
 - `primary` (Boolean)
 - `private_ip_address` (String)
+
+
+<a id="nestedatt--public_ip_dns_name_options"></a>
+### Nested Schema for `public_ip_dns_name_options`
+
+Read-Only:
+
+- `dns_hostname_type` (String)
+- `public_dual_stack_dns_name` (String)
+- `public_ipv_4_dns_name` (String)
+- `public_ipv_6_dns_name` (String)
 
 
 <a id="nestedatt--tags"></a>

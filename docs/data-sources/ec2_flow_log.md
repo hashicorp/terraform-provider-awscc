@@ -32,6 +32,7 @@ Data Source schema for AWS::EC2::FlowLog
 - `max_aggregation_interval` (Number) The maximum interval of time during which a flow of packets is captured and aggregated into a flow log record. You can specify 60 seconds (1 minute) or 600 seconds (10 minutes).
 - `resource_id` (String) The ID of the subnet, network interface, or VPC for which you want to create a flow log.
 - `resource_type` (String) The type of resource for which to create the flow log. For example, if you specified a VPC ID for the ResourceId property, specify VPC for this property.
+- `tag_field_specifications` (Attributes List) The resource types and associated tags for EC2 resources associated with the EC2 Tags feature for log enrichment. (see [below for nested schema](#nestedatt--tag_field_specifications))
 - `tags` (Attributes List) The tags to apply to the flow logs. (see [below for nested schema](#nestedatt--tags))
 - `traffic_type` (String) The type of traffic to log. You can log traffic that the resource accepts or rejects, or all traffic.
 
@@ -43,6 +44,15 @@ Read-Only:
 - `file_format` (String)
 - `hive_compatible_partitions` (Boolean)
 - `per_hour_partition` (Boolean)
+
+
+<a id="nestedatt--tag_field_specifications"></a>
+### Nested Schema for `tag_field_specifications`
+
+Read-Only:
+
+- `resource_type` (String)
+- `tag_keys` (List of String)
 
 
 <a id="nestedatt--tags"></a>

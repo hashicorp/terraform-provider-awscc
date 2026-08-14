@@ -40,7 +40,7 @@ resource "awscc_apigatewayv2_api" "example" {
 
 ### Required
 
-- `api_id` (String) The identifier of the API.
+- `api_id` (String) The API identifier.
 - `domain_name` (String) The domain name.
 - `stage` (String) The API stage.
 

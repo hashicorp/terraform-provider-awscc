@@ -1,0 +1,123 @@
+{
+  "typeName": "AWS::ServiceCatalog::StackSetConstraint",
+  "description": "Resource Type definition for AWS::ServiceCatalog::StackSetConstraint",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-servicecatalog/tree/master/aws-servicecatalog-stacksetconstraint.git",
+  "additionalProperties": false,
+  "properties": {
+    "Id": {
+      "type": "string",
+      "description": "Unique identifier for the constraint"
+    },
+    "Description": {
+      "type": "string",
+      "description": "The description of the constraint."
+    },
+    "StackInstanceControl": {
+      "type": "string",
+      "description": "Permission to create, update, and delete stack instances. Choose from ALLOWED and NOT_ALLOWED."
+    },
+    "AcceptLanguage": {
+      "type": "string",
+      "description": "The language code."
+    },
+    "PortfolioId": {
+      "type": "string",
+      "description": "The portfolio identifier."
+    },
+    "ProductId": {
+      "type": "string",
+      "description": "The product identifier."
+    },
+    "RegionList": {
+      "type": "array",
+      "description": "One or more AWS Regions where the provisioned product will be available.",
+      "uniqueItems": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "AdminRole": {
+      "type": "string",
+      "description": "AdminRole ARN."
+    },
+    "AccountList": {
+      "type": "array",
+      "description": "One or more AWS accounts that will have access to the provisioned product.",
+      "uniqueItems": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "ExecutionRole": {
+      "type": "string",
+      "description": "ExecutionRole name."
+    }
+  },
+  "required": [
+    "Description",
+    "StackInstanceControl",
+    "PortfolioId",
+    "ProductId",
+    "RegionList",
+    "AdminRole",
+    "AccountList",
+    "ExecutionRole"
+  ],
+  "createOnlyProperties": [
+    "/properties/PortfolioId",
+    "/properties/ProductId"
+  ],
+  "readOnlyProperties": [
+    "/properties/Id"
+  ],
+  "primaryIdentifier": [
+    "/properties/Id"
+  ],
+  "writeOnlyProperties": [
+    "/properties/AcceptLanguage"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "read": {
+      "permissions": [
+        "servicecatalog:DescribeConstraint"
+      ]
+    },
+    "create": {
+      "permissions": [
+        "servicecatalog:CreateConstraint",
+        "servicecatalog:DescribeConstraint",
+        "iam:GetRole"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "PortfolioId": {
+            "$ref": "resource-schema.json#/properties/PortfolioId"
+          }
+        },
+        "required": [
+          "PortfolioId"
+        ]
+      },
+      "permissions": [
+        "servicecatalog:ListConstraintsForPortfolio"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "servicecatalog:UpdateConstraint",
+        "servicecatalog:DescribeConstraint",
+        "iam:GetRole"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "servicecatalog:DeleteConstraint"
+      ]
+    }
+  }
+}

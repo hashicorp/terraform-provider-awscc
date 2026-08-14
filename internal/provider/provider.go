@@ -1,4 +1,4 @@
-// Copyright (c) HashiCorp, Inc.
+// Copyright IBM Corp. 2021, 2026
 // SPDX-License-Identifier: MPL-2.0
 
 package provider
@@ -23,13 +23,14 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/list"
 	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/provider/metaschema"
 	"github.com/hashicorp/terraform-plugin-framework/provider/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/flex"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	cctypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
+	inttypes "github.com/hashicorp/terraform-provider-awscc/internal/types"
 )
 
 const (
@@ -72,6 +73,10 @@ func (p *providerData) RoleARN(_ context.Context) string {
 	return p.roleARN
 }
 
+var _ provider.Provider = &ccProvider{}
+var _ provider.ProviderWithMetaSchema = &ccProvider{}
+var _ provider.ProviderWithListResources = &ccProvider{}
+
 type ccProvider struct {
 	providerData *providerData // Used in acceptance tests.
 }
@@ -100,7 +105,7 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 			"assume_role": schema.SingleNestedAttribute{
 				Attributes: map[string]schema.Attribute{
 					"duration": schema.StringAttribute{
-						CustomType:  cctypes.DurationType,
+						CustomType:  inttypes.DurationType,
 						Description: "The duration, between 15 minutes and 12 hours, of the role session. Valid time units are ns, us (or µs), ms, s, h, or m.",
 						Optional:    true,
 					},
@@ -114,12 +119,12 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 						Optional:    true,
 					},
 					"policy_arns": schema.ListAttribute{
-						ElementType: cctypes.ARNType,
+						ElementType: inttypes.ARNType,
 						Description: "Amazon Resource Names (ARNs) of IAM Policies to use as managed session policies. The effective permissions for the session will be the intersection between these polcy and the role's policies.",
 						Optional:    true,
 					},
 					"role_arn": schema.StringAttribute{
-						CustomType:  cctypes.ARNType,
+						CustomType:  inttypes.ARNType,
 						Description: "Amazon Resource Name (ARN) of the IAM Role to assume.",
 						Required:    true,
 					},
@@ -144,7 +149,7 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 			"assume_role_with_web_identity": schema.SingleNestedAttribute{
 				Attributes: map[string]schema.Attribute{
 					"duration": schema.StringAttribute{
-						CustomType:  cctypes.DurationType,
+						CustomType:  inttypes.DurationType,
 						Description: "The duration, between 15 minutes and 12 hours, of the role session. Valid time units are ns, us (or µs), ms, s, h, or m.",
 						Optional:    true,
 					},
@@ -154,12 +159,12 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 						Optional:    true,
 					},
 					"policy_arns": schema.ListAttribute{
-						ElementType: cctypes.ARNType,
+						ElementType: inttypes.ARNType,
 						Description: "Amazon Resource Names (ARNs) of IAM Policies to use as managed session policies. The effective permissions for the session will be the intersection between these polcy and the role's policies.",
 						Optional:    true,
 					},
 					"role_arn": schema.StringAttribute{
-						CustomType:  cctypes.ARNType,
+						CustomType:  inttypes.ARNType,
 						Description: "Amazon Resource Name (ARN) of the IAM Role to assume. Can also be set with the environment variable `AWS_ROLE_ARN`.",
 						Required:    true,
 					},
@@ -233,7 +238,7 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 				Optional:    true,
 			},
 			"role_arn": schema.StringAttribute{
-				CustomType:  cctypes.ARNType,
+				CustomType:  inttypes.ARNType,
 				Description: "Amazon Resource Name of the AWS CloudFormation service role that is used on your behalf to perform operations.",
 				Optional:    true,
 			},
@@ -268,11 +273,11 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"comment": schema.StringAttribute{
-							Description: "User-Agent comment. At least one of `comment` or `product_name` must be set.",
+							Description: "Comment describing any additional product details.",
 							Optional:    true,
 						},
 						"product_name": schema.StringAttribute{
-							Description: "Product name. At least one of `product_name` or `comment` must be set.",
+							Description: "Product name.",
 							Required:    true,
 						},
 						"product_version": schema.StringAttribute{
@@ -281,8 +286,20 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 						},
 					},
 				},
-				Description: "Product details to append to User-Agent string in all AWS API calls.",
+				Description: "Product details to append to the User-Agent string sent in all AWS API calls.",
 				Optional:    true,
+			},
+		},
+	}
+}
+
+func (p *ccProvider) MetaSchema(ctx context.Context, req provider.MetaSchemaRequest, resp *provider.MetaSchemaResponse) {
+	resp.Schema = metaschema.Schema{
+		Attributes: map[string]metaschema.Attribute{
+			"user_agent": schema.ListAttribute{
+				ElementType: types.StringType,
+				Optional:    true,
+				Description: "Product details to append to the User-Agent string sent in all AWS API calls.",
 			},
 		},
 	}
@@ -300,33 +317,27 @@ type configModel struct {
 	NoProxy                   types.String                   `tfsdk:"no_proxy"`
 	Profile                   types.String                   `tfsdk:"profile"`
 	Region                    types.String                   `tfsdk:"region"`
-	RoleARN                   cctypes.ARN                    `tfsdk:"role_arn"`
+	RoleARN                   inttypes.ARN                   `tfsdk:"role_arn"`
 	SecretKey                 types.String                   `tfsdk:"secret_key"`
 	SharedConfigFiles         types.List                     `tfsdk:"shared_config_files"`
 	SharedCredentialsFiles    types.List                     `tfsdk:"shared_credentials_files"`
 	SkipMedatadataApiCheck    types.Bool                     `tfsdk:"skip_medatadata_api_check"`
 	SkipMetadataApiCheck      types.Bool                     `tfsdk:"skip_metadata_api_check"`
 	Token                     types.String                   `tfsdk:"token"`
-	UserAgent                 []userAgentProduct             `tfsdk:"user_agent"`
+	UserAgent                 inttypes.UserAgentProducts     `tfsdk:"user_agent"`
 
 	terraformVersion string
 }
 
-type userAgentProduct struct {
-	Comment        types.String `tfsdk:"comment"`
-	ProductName    types.String `tfsdk:"product_name"`
-	ProductVersion types.String `tfsdk:"product_version"`
-}
-
 type assumeRoleModel struct {
-	Duration          cctypes.Duration `tfsdk:"duration"`
-	ExternalID        types.String     `tfsdk:"external_id"`
-	Policy            jsontypes.Exact  `tfsdk:"policy"`
-	PolicyARNs        types.List       `tfsdk:"policy_arns"`
-	RoleARN           cctypes.ARN      `tfsdk:"role_arn"`
-	SessionName       types.String     `tfsdk:"session_name"`
-	Tags              types.Map        `tfsdk:"tags"`
-	TransitiveTagKeys types.Set        `tfsdk:"transitive_tag_keys"`
+	Duration          inttypes.Duration `tfsdk:"duration"`
+	ExternalID        types.String      `tfsdk:"external_id"`
+	Policy            jsontypes.Exact   `tfsdk:"policy"`
+	PolicyARNs        types.List        `tfsdk:"policy_arns"`
+	RoleARN           inttypes.ARN      `tfsdk:"role_arn"`
+	SessionName       types.String      `tfsdk:"session_name"`
+	Tags              types.Map         `tfsdk:"tags"`
+	TransitiveTagKeys types.Set         `tfsdk:"transitive_tag_keys"`
 }
 
 func (a assumeRoleModel) Config() awsbase.AssumeRole {
@@ -370,13 +381,13 @@ type endpointData struct {
 }
 
 type assumeRoleWithWebIdentityData struct {
-	Duration             cctypes.Duration `tfsdk:"duration"`
-	Policy               jsontypes.Exact  `tfsdk:"policy"`
-	PolicyARNs           types.List       `tfsdk:"policy_arns"`
-	RoleARN              cctypes.ARN      `tfsdk:"role_arn"`
-	SessionName          types.String     `tfsdk:"session_name"`
-	WebIdentityToken     types.String     `tfsdk:"web_identity_token"`
-	WebIdentityTokenFile types.String     `tfsdk:"web_identity_token_file"`
+	Duration             inttypes.Duration `tfsdk:"duration"`
+	Policy               jsontypes.Exact   `tfsdk:"policy"`
+	PolicyARNs           types.List        `tfsdk:"policy_arns"`
+	RoleARN              inttypes.ARN      `tfsdk:"role_arn"`
+	SessionName          types.String      `tfsdk:"session_name"`
+	WebIdentityToken     types.String      `tfsdk:"web_identity_token"`
+	WebIdentityTokenFile types.String      `tfsdk:"web_identity_token_file"`
 }
 
 func (a assumeRoleWithWebIdentityData) Config() *awsbase.AssumeRoleWithWebIdentity {
@@ -438,6 +449,8 @@ func (p *ccProvider) Resources(ctx context.Context) []func() resource.Resource {
 				fmt.Sprintf("Error getting the %s Resource, this is an error in the provider.\n%s\n", name, err),
 			)
 
+			writeProviderError("resource", name, err)
+
 			continue
 		}
 
@@ -461,6 +474,8 @@ func (p *ccProvider) DataSources(ctx context.Context) []func() datasource.DataSo
 				"Error getting Data Source",
 				fmt.Sprintf("Error getting the %s Data Source, this is an error in the provider.\n%s\n", name, err),
 			)
+
+			writeProviderError("data source", name, err)
 
 			continue
 		}
@@ -524,7 +539,8 @@ func newProviderData(ctx context.Context, c *configModel) (*providerData, diag.D
 			},
 		},
 	}
-	awsbaseConfig.UserAgent = userAgentProducts(c.UserAgent)
+
+	awsbaseConfig.UserAgent = c.UserAgent.UserAgentProducts()
 	if c.MaxRetries.IsNull() {
 		awsbaseConfig.MaxRetries = defaultMaxRetries
 	} else {
@@ -627,16 +643,4 @@ func newProviderData(ctx context.Context, c *configModel) (*providerData, diag.D
 	}
 
 	return providerData, diags
-}
-
-func userAgentProducts(products []userAgentProduct) []awsbase.UserAgentProduct {
-	results := make([]awsbase.UserAgentProduct, len(products))
-	for i, p := range products {
-		results[i] = awsbase.UserAgentProduct{
-			Name:    p.ProductName.ValueString(),
-			Version: p.ProductVersion.ValueString(),
-			Comment: p.Comment.ValueString(),
-		}
-	}
-	return results
 }

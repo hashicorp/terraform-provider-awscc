@@ -1,0 +1,112 @@
+{
+  "typeName": "AWS::ServiceCatalog::LaunchRoleConstraint",
+  "description": "Resource Type definition for AWS::ServiceCatalog::LaunchRoleConstraint",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-servicecatalog/tree/master/aws-servicecatalog-launchroleconstraint.git",
+  "additionalProperties": false,
+  "properties": {
+    "Description": {
+      "type": "string",
+      "description": "The description of the launch role constraint."
+    },
+    "AcceptLanguage": {
+      "type": "string",
+      "description": "The language code for the constraint."
+    },
+    "PortfolioId": {
+      "type": "string",
+      "description": "The ID of the portfolio to which this launch role constraint applies."
+    },
+    "ProductId": {
+      "type": "string",
+      "description": "The ID of the product to which this launch role constraint applies."
+    },
+    "Id": {
+      "type": "string",
+      "description": "The unique identifier for the launch role constraint."
+    },
+    "LocalRoleName": {
+      "type": "string",
+      "description": "The local IAM role name to use in the launch constraint."
+    },
+    "RoleArn": {
+      "type": "string",
+      "description": "The ARN of the IAM role used for the launch constraint.",
+      "pattern": "arn:(aws|aws-cn|aws-us-gov):iam::[0-9]*:(role)\\/.*"
+    }
+  },
+  "required": [
+    "PortfolioId",
+    "ProductId"
+  ],
+  "oneOf": [
+    {
+      "required": [
+        "LocalRoleName"
+      ]
+    },
+    {
+      "required": [
+        "RoleArn"
+      ]
+    }
+  ],
+  "createOnlyProperties": [
+    "/properties/PortfolioId",
+    "/properties/ProductId"
+  ],
+  "primaryIdentifier": [
+    "/properties/Id"
+  ],
+  "readOnlyProperties": [
+    "/properties/Id"
+  ],
+  "writeOnlyProperties": [
+    "/properties/AcceptLanguage"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "servicecatalog:CreateConstraint",
+        "servicecatalog:DescribeConstraint",
+        "iam:GetRole",
+        "iam:PassRole"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "servicecatalog:DescribeConstraint"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "servicecatalog:UpdateConstraint",
+        "servicecatalog:DescribeConstraint",
+        "iam:GetRole",
+        "iam:PassRole"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "servicecatalog:DeleteConstraint"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "PortfolioId": {
+            "$ref": "resource-schema.json#/properties/PortfolioId"
+          }
+        },
+        "required": [
+          "PortfolioId"
+        ]
+      },
+      "permissions": [
+        "servicecatalog:ListConstraintsForPortfolio"
+      ]
+    }
+  }
+}

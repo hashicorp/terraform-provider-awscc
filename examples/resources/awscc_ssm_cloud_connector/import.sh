@@ -1,0 +1,1 @@
+$ terraform import awscc_ssm_cloud_connector.example "cloud_connector_arn"

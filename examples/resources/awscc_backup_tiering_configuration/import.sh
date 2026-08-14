@@ -1,0 +1,1 @@
+$ terraform import awscc_backup_tiering_configuration.example "tiering_configuration_name"

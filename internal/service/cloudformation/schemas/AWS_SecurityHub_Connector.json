@@ -1,0 +1,267 @@
+{
+  "typeName": "AWS::SecurityHub::Connector",
+  "description": "Creates a connector to a third-party cloud provider in Security Hub CSPM. A connector establishes a connection between Security Hub CSPM and a third-party cloud provider, enabling Security Hub CSPM to ingest security findings and resource data from the connected environment.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-securityhub",
+  "definitions": {
+    "Tags": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      }
+    },
+    "ISO8601DateString": {
+      "description": "The timestamp formatted in ISO8601",
+      "type": "string",
+      "pattern": "^(\\d\\d\\d\\d)-([0][1-9]|[1][0-2])-([0][1-9]|[1-2](\\d)|[3][0-1])[T](?:([0-1](\\d)|[2][0-3]):[0-5](\\d):[0-5](\\d)|23:59:60)(?:\\.(\\d)+)?([Z]|[+-](\\d\\d)(:?(\\d\\d))?)$"
+    },
+    "AzureScopeConfiguration": {
+      "type": "object",
+      "description": "The scope configuration for an Azure connector, defining the tenant or subscription scope.",
+      "properties": {
+        "ScopeType": {
+          "description": "The type of scope. Valid values are ``tenant`` and ``subscription``.",
+          "type": "string",
+          "enum": [
+            "TENANT",
+            "SUBSCRIPTION"
+          ]
+        },
+        "ScopeValues": {
+          "description": "The list of scope values, such as subscription IDs, when the scope type is ``subscription``.",
+          "insertionOrder": false,
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        }
+      },
+      "required": [
+        "ScopeType"
+      ],
+      "additionalProperties": false
+    },
+    "AzureProviderConfiguration": {
+      "type": "object",
+      "description": "The configuration for connecting to an Azure environment.",
+      "properties": {
+        "AWSConfigConnectorArn": {
+          "description": "The ARN of the multi-cloud configuration connector used to establish the connection to Azure.",
+          "type": "string"
+        },
+        "ScopeConfiguration": {
+          "$ref": "#/definitions/AzureScopeConfiguration",
+          "description": "The scope configuration that defines which Azure resources are monitored."
+        },
+        "AzureRegions": {
+          "description": "The list of Azure regions to monitor.",
+          "type": "array",
+          "insertionOrder": false,
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "maxItems": 100
+        }
+      },
+      "required": [
+        "AWSConfigConnectorArn",
+        "ScopeConfiguration",
+        "AzureRegions"
+      ],
+      "additionalProperties": false
+    },
+    "Provider": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "Azure": {
+          "$ref": "#/definitions/AzureProviderConfiguration",
+          "description": ""
+        }
+      },
+      "required": [
+        "Azure"
+      ],
+      "additionalProperties": false
+    },
+    "ConnectorStatus": {
+      "description": "The status of the connector",
+      "type": "string"
+    },
+    "HealthIssueCode": {
+      "description": "The code identifying the type of health issue",
+      "type": "string"
+    },
+    "HealthIssue": {
+      "description": "Represents a specific health issue detected for a connector.",
+      "type": "object",
+      "properties": {
+        "Code": {
+          "description": "The error code that identifies the type of health issue.",
+          "$ref": "#/definitions/HealthIssueCode"
+        },
+        "Message": {
+          "description": "A human-readable message that describes the health issue.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Code",
+        "Message"
+      ],
+      "additionalProperties": false
+    },
+    "EnablementStatus": {
+      "description": "The enablement status of the connector",
+      "type": "string"
+    }
+  },
+  "properties": {
+    "Name": {
+      "description": "The name of the connector.",
+      "type": "string"
+    },
+    "Description": {
+      "description": "The description of the connector.",
+      "type": "string"
+    },
+    "Provider": {
+      "$ref": "#/definitions/Provider",
+      "description": ""
+    },
+    "Tags": {
+      "$ref": "#/definitions/Tags",
+      "description": ""
+    },
+    "ConnectorArn": {
+      "description": "",
+      "type": "string",
+      "pattern": "^arn:aws\\S*:securityhub:[a-z0-9-]+:[0-9]{12}:connector/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "ConnectorId": {
+      "description": "",
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    },
+    "ConnectorStatus": {
+      "$ref": "#/definitions/ConnectorStatus",
+      "description": ""
+    },
+    "Message": {
+      "description": "",
+      "type": "string"
+    },
+    "LastCheckedAt": {
+      "description": "",
+      "$ref": "#/definitions/ISO8601DateString"
+    },
+    "CreatedAt": {
+      "description": "",
+      "$ref": "#/definitions/ISO8601DateString"
+    },
+    "LastUpdatedAt": {
+      "description": "",
+      "$ref": "#/definitions/ISO8601DateString"
+    },
+    "CreatedBy": {
+      "description": "",
+      "type": "string"
+    },
+    "EnablementStatus": {
+      "description": "",
+      "$ref": "#/definitions/EnablementStatus"
+    },
+    "Issues": {
+      "description": "",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/HealthIssue"
+      }
+    }
+  },
+  "required": [
+    "Name",
+    "Provider"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/Provider/Azure/AWSConfigConnectorArn"
+  ],
+  "readOnlyProperties": [
+    "/properties/ConnectorArn",
+    "/properties/ConnectorId",
+    "/properties/ConnectorStatus",
+    "/properties/Message",
+    "/properties/LastCheckedAt",
+    "/properties/CreatedAt",
+    "/properties/LastUpdatedAt",
+    "/properties/CreatedBy",
+    "/properties/EnablementStatus",
+    "/properties/Issues"
+  ],
+  "primaryIdentifier": [
+    "/properties/ConnectorArn"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "securityhub:ListTagsForResource",
+      "securityhub:TagResource",
+      "securityhub:UntagResource"
+    ]
+  },
+  "additionalProperties": false,
+  "handlers": {
+    "create": {
+      "permissions": [
+        "securityhub:CreateConnector",
+        "securityhub:GetConnector",
+        "securityhub:TagResource",
+        "securityhub:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "securityhub:GetConnector",
+        "securityhub:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "securityhub:UpdateConnector",
+        "securityhub:GetConnector",
+        "securityhub:TagResource",
+        "securityhub:UntagResource",
+        "securityhub:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "securityhub:GetConnector",
+        "securityhub:DeleteConnector"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "securityhub:ListConnectors",
+        "securityhub:ListTagsForResource"
+      ]
+    }
+  }
+}

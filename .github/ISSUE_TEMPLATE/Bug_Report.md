@@ -3,6 +3,8 @@ name: 🐛 Bug Report
 about: If something isn't working as expected 🤔.
 labels: ["bug"]
 ---
+<!-- Copyright IBM Corp. 2021, 2026 -->
+<!-- SPDX-License-Identifier: MPL-2.0 -->
 
 <!---
 Please note the following potential times when an issue might be in Terraform core:

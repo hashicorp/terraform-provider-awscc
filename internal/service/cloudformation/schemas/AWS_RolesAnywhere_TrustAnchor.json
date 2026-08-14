@@ -211,5 +211,8 @@
       ]
     }
   },
-  "additionalProperties": false
+  "additionalProperties": false,
+  "propertyTransform": {
+    "/properties/Source/SourceData/X509CertificateData": "$replace(X509CertificateData, /\\s+$/, '')"
+  }
 }

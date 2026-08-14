@@ -1,0 +1,1 @@
+$ terraform import awscc_healthlake_data_transformation_profile.example "arn"

@@ -8,7 +8,7 @@
     "tagOnCreate": true,
     "tagUpdatable": true,
     "tagProperty": "/properties/Tags",
-    "cloudFormationSystemTags": true
+    "cloudFormationSystemTags": false
   },
   "typeName": "AWS::ImageBuilder::Image",
   "readOnlyProperties": [
@@ -22,7 +22,7 @@
     "/properties/LatestVersion/Minor",
     "/properties/LatestVersion/Patch"
   ],
-  "description": "Resource schema for AWS::ImageBuilder::Image",
+  "description": "Resource Type definition for AWS::ImageBuilder::Image",
   "createOnlyProperties": [
     "/properties/ImageRecipeArn",
     "/properties/ContainerRecipeArn",
@@ -72,11 +72,13 @@
         "iam:PassRole",
         "iam:CreateServiceLinkedRole",
         "imagebuilder:GetImageRecipe",
+        "imagebuilder:GetContainerRecipe",
         "imagebuilder:GetInfrastructureConfiguration",
         "imagebuilder:GetDistributionConfiguration",
         "imagebuilder:GetWorkflow",
         "imagebuilder:GetImage",
         "imagebuilder:CreateImage",
+        "imagebuilder:StartImagePipelineExecution",
         "imagebuilder:TagResource",
         "inspector2:BatchGetAccountStatus"
       ],
@@ -396,6 +398,7 @@
       "$ref": "#/definitions/ImageTestsConfiguration"
     },
     "Arn": {
+      "pattern": "^arn:[^:]+:imagebuilder:[^:]+:[^:]+:image/.+$",
       "description": "The Amazon Resource Name (ARN) of the image.",
       "type": "string"
     },

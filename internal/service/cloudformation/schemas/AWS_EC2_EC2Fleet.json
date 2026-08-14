@@ -1,8 +1,34 @@
 {
-  "sourceUrl": "https://github.com/aws-cloudformation",
   "tagging": {
     "taggable": false
   },
+  "typeName": "AWS::EC2::EC2Fleet",
+  "readOnlyProperties": [
+    "/properties/FleetId"
+  ],
+  "description": "Resource Type definition for AWS::EC2::EC2Fleet",
+  "createOnlyProperties": [
+    "/properties/LaunchTemplateConfigs",
+    "/properties/OnDemandOptions",
+    "/properties/ReservedCapacityOptions",
+    "/properties/ReplaceUnhealthyInstances",
+    "/properties/SpotOptions",
+    "/properties/TagSpecifications",
+    "/properties/TerminateInstancesWithExpiration",
+    "/properties/Type",
+    "/properties/ValidFrom",
+    "/properties/ValidUntil",
+    "/properties/TargetCapacitySpecification/TargetCapacityUnitType",
+    "/properties/TargetCapacitySpecification/DefaultTargetCapacityType"
+  ],
+  "primaryIdentifier": [
+    "/properties/FleetId"
+  ],
+  "required": [
+    "TargetCapacitySpecification",
+    "LaunchTemplateConfigs"
+  ],
+  "sourceUrl": "https://github.com/aws-cloudformation",
   "handlers": {
     "read": {
       "permissions": [
@@ -12,7 +38,11 @@
     "create": {
       "permissions": [
         "ec2:CreateFleet",
-        "ec2:DescribeFleets"
+        "ec2:DescribeFleets",
+        "ec2:CreateTags",
+        "ec2:RunInstances",
+        "iam:PassRole",
+        "ec2:DescribeCapacityReservations"
       ]
     },
     "update": {
@@ -36,30 +66,24 @@
     "delete": {
       "permissions": [
         "ec2:DescribeFleets",
-        "ec2:DeleteFleets"
-      ]
+        "ec2:DescribeFleetInstances",
+        "ec2:DescribeInstanceStatus",
+        "ec2:DeleteFleets",
+        "ec2:TerminateInstances"
+      ],
+      "timeoutInMinutes": 40
     }
   },
-  "typeName": "AWS::EC2::EC2Fleet",
-  "readOnlyProperties": [
-    "/properties/FleetId"
-  ],
-  "description": "Resource Type definition for AWS::EC2::EC2Fleet",
-  "createOnlyProperties": [
-    "/properties/LaunchTemplateConfigs",
-    "/properties/OnDemandOptions",
-    "/properties/ReplaceUnhealthyInstances",
-    "/properties/SpotOptions",
-    "/properties/TagSpecifications",
-    "/properties/TerminateInstancesWithExpiration",
-    "/properties/Type",
-    "/properties/ValidFrom",
-    "/properties/ValidUntil"
+  "writeOnlyProperties": [
+    "/properties/LaunchTemplateConfigs/*/Overrides/*/Placement/HostResourceGroupArn",
+    "/properties/LaunchTemplateConfigs/*/Overrides/*/Placement/Affinity",
+    "/properties/LaunchTemplateConfigs/*/Overrides/*/Placement/SpreadDomain",
+    "/properties/LaunchTemplateConfigs/*/Overrides/*/Placement/AvailabilityZone",
+    "/properties/LaunchTemplateConfigs/*/Overrides/*/Placement/PartitionNumber",
+    "/properties/LaunchTemplateConfigs/*/Overrides/*/Placement/HostId",
+    "/properties/LaunchTemplateConfigs/*/Overrides/*/Placement/Tenancy"
   ],
   "additionalProperties": false,
-  "primaryIdentifier": [
-    "/properties/FleetId"
-  ],
   "definitions": {
     "TargetCapacitySpecificationRequest": {
       "additionalProperties": false,
@@ -69,7 +93,9 @@
           "type": "string",
           "enum": [
             "on-demand",
-            "spot"
+            "spot",
+            "capacity-block",
+            "reserved-capacity"
           ]
         },
         "TotalTargetCapacity": {
@@ -108,6 +134,10 @@
           "type": "string"
         },
         "LaunchTemplateId": {
+          "type": "string"
+        },
+        "LaunchTemplateSpecificationUserData": {
+          "format": "password",
           "type": "string"
         }
       },
@@ -348,6 +378,82 @@
         }
       }
     },
+    "NetworkInterfaceSpecificationRequest": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Description": {
+          "type": "string"
+        },
+        "PrivateIpAddress": {
+          "type": "string"
+        },
+        "PrivateIpAddresses": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateIpAddressSpecificationRequest"
+          }
+        },
+        "SecondaryPrivateIpAddressCount": {
+          "type": "integer"
+        },
+        "DeviceIndex": {
+          "type": "integer"
+        },
+        "Ipv6Addresses": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Ipv6AddressRequest"
+          }
+        },
+        "SubnetId": {
+          "type": "string"
+        },
+        "AssociatePublicIpAddress": {
+          "type": "boolean"
+        },
+        "NetworkCardIndex": {
+          "type": "integer"
+        },
+        "NetworkInterfaceId": {
+          "type": "string"
+        },
+        "InterfaceType": {
+          "type": "string"
+        },
+        "Groups": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Ipv6AddressCount": {
+          "type": "integer"
+        },
+        "DeleteOnTermination": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ReservedCapacityOptionsRequest": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "ReservationTypes": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "interruptible-capacity-reservation"
+            ]
+          }
+        }
+      }
+    },
     "AcceleratorCountRequest": {
       "additionalProperties": false,
       "type": "object",
@@ -376,6 +482,18 @@
         }
       }
     },
+    "IamInstanceProfileSpecification": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Arn": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        }
+      }
+    },
     "FleetLaunchTemplateConfigRequest": {
       "additionalProperties": false,
       "type": "object",
@@ -396,14 +514,14 @@
       "additionalProperties": false,
       "type": "object",
       "properties": {
-        "WeightedCapacity": {
-          "type": "number"
-        },
-        "Placement": {
-          "$ref": "#/definitions/Placement"
+        "MetadataOptions": {
+          "$ref": "#/definitions/InstanceMetadataOptionsRequest"
         },
         "Priority": {
           "type": "number"
+        },
+        "AvailabilityZoneId": {
+          "type": "string"
         },
         "BlockDeviceMappings": {
           "uniqueItems": true,
@@ -415,8 +533,27 @@
         "AvailabilityZone": {
           "type": "string"
         },
+        "IamInstanceProfile": {
+          "$ref": "#/definitions/IamInstanceProfileSpecification"
+        },
         "SubnetId": {
           "type": "string"
+        },
+        "KeyName": {
+          "type": "string"
+        },
+        "WeightedCapacity": {
+          "type": "number"
+        },
+        "Placement": {
+          "$ref": "#/definitions/Placement"
+        },
+        "NetworkInterfaces": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkInterfaceSpecificationRequest"
+          }
         },
         "InstanceRequirements": {
           "$ref": "#/definitions/InstanceRequirementsRequest"
@@ -443,6 +580,9 @@
               "previous"
             ]
           }
+        },
+        "RequireEncryptionInTransit": {
+          "type": "boolean"
         },
         "MemoryGiBPerVCpu": {
           "$ref": "#/definitions/MemoryGiBPerVCpuRequest"
@@ -697,6 +837,15 @@
         }
       }
     },
+    "Ipv6AddressRequest": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Ipv6Address": {
+          "type": "string"
+        }
+      }
+    },
     "AcceleratorTotalMemoryMiBRequest": {
       "additionalProperties": false,
       "type": "object",
@@ -745,6 +894,41 @@
         }
       }
     },
+    "InstanceMetadataOptionsRequest": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "HttpPutResponseHopLimit": {
+          "type": "integer"
+        },
+        "HttpTokens": {
+          "type": "string",
+          "enum": [
+            "optional",
+            "required"
+          ]
+        },
+        "HttpEndpoint": {
+          "type": "string",
+          "enum": [
+            "disabled",
+            "enabled"
+          ]
+        }
+      }
+    },
+    "PrivateIpAddressSpecificationRequest": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "PrivateIpAddress": {
+          "type": "string"
+        },
+        "Primary": {
+          "type": "boolean"
+        }
+      }
+    },
     "Tag": {
       "additionalProperties": false,
       "type": "object",
@@ -762,10 +946,6 @@
       ]
     }
   },
-  "required": [
-    "TargetCapacitySpecification",
-    "LaunchTemplateConfigs"
-  ],
   "properties": {
     "Context": {
       "type": "string"
@@ -814,6 +994,9 @@
         "request",
         "instant"
       ]
+    },
+    "ReservedCapacityOptions": {
+      "$ref": "#/definitions/ReservedCapacityOptionsRequest"
     },
     "FleetId": {
       "type": "string"

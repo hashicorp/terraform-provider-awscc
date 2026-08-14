@@ -23,6 +23,7 @@ Data Source schema for AWS::RTBFabric::InboundExternalLink
 
 - `arn` (String)
 - `created_timestamp` (String)
+- `domain_name` (String)
 - `gateway_id` (String)
 - `link_attributes` (Attributes) (see [below for nested schema](#nestedatt--link_attributes))
 - `link_id` (String)

@@ -1,0 +1,1 @@
+$ terraform import awscc_dataexchange_data_set.example "arn"

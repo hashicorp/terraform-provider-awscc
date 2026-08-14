@@ -1,0 +1,1 @@
+$ terraform import awscc_bedrockagentcore_configuration_bundle.example "bundle_arn"

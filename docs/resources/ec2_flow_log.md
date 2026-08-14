@@ -241,6 +241,7 @@ resource "awscc_s3_bucket" "example" {
 - `log_format` (String) The fields to include in the flow log record, in the order in which they should appear.
 - `log_group_name` (String) The name of a new or existing CloudWatch Logs log group where Amazon EC2 publishes your flow logs. If you specify LogDestinationType as s3 or kinesis-data-firehose, do not specify DeliverLogsPermissionArn or LogGroupName.
 - `max_aggregation_interval` (Number) The maximum interval of time during which a flow of packets is captured and aggregated into a flow log record. You can specify 60 seconds (1 minute) or 600 seconds (10 minutes).
+- `tag_field_specifications` (Attributes List) The resource types and associated tags for EC2 resources associated with the EC2 Tags feature for log enrichment. (see [below for nested schema](#nestedatt--tag_field_specifications))
 - `tags` (Attributes List) The tags to apply to the flow logs. (see [below for nested schema](#nestedatt--tags))
 - `traffic_type` (String) The type of traffic to log. You can log traffic that the resource accepts or rejects, or all traffic.
 
@@ -257,6 +258,15 @@ Optional:
 - `file_format` (String)
 - `hive_compatible_partitions` (Boolean)
 - `per_hour_partition` (Boolean)
+
+
+<a id="nestedatt--tag_field_specifications"></a>
+### Nested Schema for `tag_field_specifications`
+
+Optional:
+
+- `resource_type` (String)
+- `tag_keys` (List of String)
 
 
 <a id="nestedatt--tags"></a>

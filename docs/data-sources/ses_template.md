@@ -21,8 +21,18 @@ Data Source schema for AWS::SES::Template
 
 ### Read-Only
 
+- `tags` (Attributes List) The tags (keys and values) associated with the email template. (see [below for nested schema](#nestedatt--tags))
 - `template` (Attributes) The content of the email, composed of a subject line, an HTML part, and a text-only part (see [below for nested schema](#nestedatt--template))
 - `template_id` (String)
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
+
 
 <a id="nestedatt--template"></a>
 ### Nested Schema for `template`

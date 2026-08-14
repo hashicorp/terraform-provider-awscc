@@ -150,7 +150,7 @@ resource "awscc_rds_db_cluster" "example_db_cluster" {
   +   ``postgres`` 
   
  Valid for: Aurora DB clusters and Multi-AZ DB clusters
-- `engine_lifecycle_support` (String) The life cycle type for this DB cluster.
+- `engine_lifecycle_support` (String) The lifecycle type for this DB cluster.
   By default, this value is set to ``open-source-rds-extended-support``, which enrolls your DB cluster into Amazon RDS Extended Support. At the end of standard support, you can avoid charges for Extended Support by setting the value to ``open-source-rds-extended-support-disabled``. In this case, creating the DB cluster will fail if the DB major version is past its end of standard support date.
   You can use this setting to enroll your DB cluster into Amazon RDS Extended Support. With RDS Extended Support, you can run the selected major engine version on your DB cluster past the end of standard support for that engine version. For more information, see the following sections:
   +  Amazon Aurora - [Amazon RDS Extended Support with Amazon Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html) in the *Amazon Aurora User Guide*
@@ -167,7 +167,8 @@ resource "awscc_rds_db_cluster" "example_db_cluster" {
   
  Valid for Cluster Type: Aurora DB clusters only
 - `engine_version` (String) The version number of the database engine to use.
- To list all of the available engine versions for Aurora MySQL version 2 (5.7-compatible) and version 3 (8.0-compatible), use the following command:
+  Don't use this property if your DB cluster is a member of a global database cluster. Instead, specify the ``EngineVersion`` property on the [AWS::RDS::GlobalCluster](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-rds-globalcluster.html) resource. Major version upgrades aren't supported for individual members of a global cluster. Use ``ModifyGlobalCluster`` to upgrade all members of the global cluster.
+  To list all of the available engine versions for Aurora MySQL version 2 (5.7-compatible) and version 3 (8.0-compatible), use the following command:
   ``aws rds describe-db-engine-versions --engine aurora-mysql --query "DBEngineVersions[].EngineVersion"`` 
  You can supply either ``5.7`` or ``8.0`` to use the default engine version for Aurora MySQL version 2 or version 3, respectively.
  To list all of the available engine versions for Aurora PostgreSQL, use the following command:
@@ -255,11 +256,8 @@ resource "awscc_rds_db_cluster" "example_db_cluster" {
  If you specify a retention period that isn't valid, such as ``94``, Amazon RDS issues an error.
 - `port` (Number) The port number on which the DB instances in the DB cluster accept connections.
  Default:
-  +  When ``EngineMode`` is ``provisioned``, ``3306`` (for both Aurora MySQL and Aurora PostgreSQL)
-  +  When ``EngineMode`` is ``serverless``:
-  +  ``3306`` when ``Engine`` is ``aurora`` or ``aurora-mysql``
-  +  ``5432`` when ``Engine`` is ``aurora-postgresql``
-  
+  +  RDS for MySQL and Aurora MySQL - ``3306``
+  +  RDS for PostgreSQL and Aurora PostgreSQL - ``5432``
   
   The ``No interruption`` on update behavior only applies to DB clusters. If you are updating a DB instance, see [Port](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-rds-database-instance.html#cfn-rds-dbinstance-port) for the AWS::RDS::DBInstance resource.
   Valid for: Aurora DB clusters and Multi-AZ DB clusters
@@ -376,6 +374,7 @@ resource "awscc_rds_db_cluster" "example_db_cluster" {
  The reader endpoint for a DB cluster load-balances connections across the Aurora Replicas that are available in a DB cluster. As clients request new connections to the reader endpoint, Aurora distributes the connection requests among the Aurora Replicas in the DB cluster. This functionality can help balance your read workload across multiple Aurora Replicas in your DB cluster.
  If a failover occurs, and the Aurora Replica that you are connected to is promoted to be the primary instance, your connection is dropped. To continue sending your read workload to other Aurora Replicas in the cluster, you can then reconnect to the reader endpoint.
  For more information about Aurora endpoints, see [Amazon Aurora connection management](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Overview.Endpoints.html) in the *Amazon Aurora User Guide*. (see [below for nested schema](#nestedatt--read_endpoint))
+- `storage_encryption_type` (String)
 - `storage_throughput` (Number)
 
 <a id="nestedatt--associated_roles"></a>

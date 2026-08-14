@@ -1,0 +1,283 @@
+{
+  "description": "Resource Type definition for AWS::MWAAServerless::Workflow resource",
+  "typeName": "AWS::MWAAServerless::Workflow",
+  "additionalProperties": false,
+  "definitions": {
+    "Arn": {
+      "type": "string",
+      "pattern": "^arn:aws(?:-(?:cn|us-gov|iso|iso-b|iso-e|iso-f))?:airflow-serverless:([a-z]{2}-[a-z]+-[0-9]{1}):([0-9]{12}):workflow\/([a-zA-Z0-9][a-zA-Z0-9\\.\\-_]{0,254}-[a-zA-z0-9]{10})$",
+      "maxLength": 2048,
+      "minLength": 1
+    },
+    "RoleArn": {
+      "type": "string",
+      "pattern": "^arn:aws(?:-(?:cn|us-gov|iso|iso-b|iso-e|iso-f))?:iam::[0-9]{12}:role(/[a-zA-Z0-9+=,.@_-]{1,512})*?/[a-zA-Z0-9+=,.@_-]{1,64}$",
+      "maxLength": 2048,
+      "minLength": 1
+    },
+    "Name": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]+[a-zA-Z0-9\\.\\-_]*$",
+      "maxLength": 255,
+      "minLength": 1
+    },
+    "Description": {
+      "type": "string",
+      "pattern": "^.+$",
+      "maxLength": 1024,
+      "minLength": 1
+    },
+    "S3Location": {
+      "type": "object",
+      "required": [
+        "Bucket",
+        "ObjectKey"
+      ],
+      "properties": {
+        "Bucket": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ObjectKey": {
+          "type": "string",
+          "minLength": 1
+        },
+        "VersionId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "EncryptionConfiguration": {
+      "type": "object",
+      "required": [
+        "Type"
+      ],
+      "properties": {
+        "Type": {
+          "type": "string",
+          "enum": [
+            "AWS_MANAGED_KEY",
+            "CUSTOMER_MANAGED_KEY"
+          ]
+        },
+        "KmsKeyId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "LoggingConfiguration": {
+      "type": "object",
+      "required": [
+        "LogGroupName"
+      ],
+      "properties": {
+        "LogGroupName": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "NetworkConfiguration": {
+      "type": "object",
+      "properties": {
+        "SecurityGroupIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "SubnetIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "WorkflowVersion": {
+      "type": "string",
+      "pattern": "^[a-z0-9]{32}$",
+      "maxLength": 32,
+      "minLength": 32
+    },
+    "Tags": {
+      "type": "object",
+      "description": "A map of key-value pairs to be applied as tags",
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "description": "Tag value",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "maxProperties": 50,
+      "additionalProperties": false
+    },
+    "TriggerMode": {
+      "type": "string",
+      "maxLength": 255,
+      "minLength": 1
+    },
+    "ScheduleConfiguration": {
+      "type": "object",
+      "properties": {
+        "CronExpression": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "WorkflowStatus": {
+      "type": "string",
+      "enum": [
+        "READY",
+        "DELETING"
+      ]
+    },
+    "Timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "properties": {
+    "WorkflowArn": {
+      "$ref": "#/definitions/Arn"
+    },
+    "Name": {
+      "$ref": "#/definitions/Name"
+    },
+    "Description": {
+      "$ref": "#/definitions/Description"
+    },
+    "DefinitionS3Location": {
+      "$ref": "#/definitions/S3Location"
+    },
+    "RoleArn": {
+      "$ref": "#/definitions/RoleArn"
+    },
+    "EncryptionConfiguration": {
+      "$ref": "#/definitions/EncryptionConfiguration"
+    },
+    "LoggingConfiguration": {
+      "$ref": "#/definitions/LoggingConfiguration"
+    },
+    "NetworkConfiguration": {
+      "$ref": "#/definitions/NetworkConfiguration"
+    },
+    "WorkflowVersion": {
+      "$ref": "#/definitions/WorkflowVersion"
+    },
+    "Tags": {
+      "$ref": "#/definitions/Tags"
+    },
+    "TriggerMode": {
+      "$ref": "#/definitions/TriggerMode"
+    },
+    "ScheduleConfiguration": {
+      "$ref": "#/definitions/ScheduleConfiguration"
+    },
+    "WorkflowStatus": {
+      "$ref": "#/definitions/WorkflowStatus"
+    },
+    "CreatedAt": {
+      "$ref": "#/definitions/Timestamp"
+    },
+    "ModifiedAt": {
+      "$ref": "#/definitions/Timestamp"
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/WorkflowArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/Name"
+    ]
+  ],
+  "readOnlyProperties": [
+    "/properties/WorkflowArn",
+    "/properties/WorkflowVersion",
+    "/properties/CreatedAt",
+    "/properties/ModifiedAt",
+    "/properties/WorkflowStatus",
+    "/properties/ScheduleConfiguration"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/EncryptionConfiguration"
+  ],
+  "required": [
+    "DefinitionS3Location",
+    "RoleArn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "s3:GetObject",
+        "s3:GetObjectVersion",
+        "logs:CreateLogGroup",
+        "logs:DescribeLogGroups",
+        "iam:GetRole",
+        "iam:PassRole",
+        "airflow-serverless:CreateWorkflow",
+        "airflow-serverless:GetWorkflow",
+        "airflow-serverless:TagResource",
+        "iam:CreateServiceLinkedRole",
+        "kms:CreateGrant",
+        "kms:GenerateDataKey"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "airflow-serverless:GetWorkflow",
+        "airflow-serverless:ListTagsForResource",
+        "kms:Decrypt"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "s3:GetObject",
+        "s3:GetObjectVersion",
+        "logs:CreateLogGroup",
+        "logs:DescribeLogGroups",
+        "iam:GetRole",
+        "iam:PassRole",
+        "airflow-serverless:UpdateWorkflow",
+        "airflow-serverless:TagResource",
+        "airflow-serverless:UntagResource",
+        "kms:CreateGrant",
+        "kms:GenerateDataKey"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "airflow-serverless:GetWorkflow",
+        "airflow-serverless:DeleteWorkflow",
+        "airflow-serverless:UntagResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "airflow-serverless:ListWorkflows",
+        "airflow-serverless:ListTagsForResource"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "airflow-serverless:TagResource",
+      "airflow-serverless:UntagResource",
+      "airflow-serverless:ListTagsForResource"
+    ]
+  }
+}

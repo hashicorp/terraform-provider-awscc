@@ -137,6 +137,7 @@ resource "awscc_elasticloadbalancingv2_listener_rule" "example" {
 ### Optional
 
 - `listener_arn` (String) The Amazon Resource Name (ARN) of the listener.
+- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `transforms` (Attributes Set) (see [below for nested schema](#nestedatt--transforms))
 
 ### Read-Only
@@ -159,7 +160,7 @@ Optional:
 - `fixed_response_config` (Attributes) [Application Load Balancer] Information for creating an action that returns a custom HTTP response. Specify only when ``Type`` is ``fixed-response``. (see [below for nested schema](#nestedatt--actions--fixed_response_config))
 - `forward_config` (Attributes) Information for creating an action that distributes requests among multiple target groups. Specify only when ``Type`` is ``forward``.
  If you specify both ``ForwardConfig`` and ``TargetGroupArn``, you can specify only one target group using ``ForwardConfig`` and it must be the same target group specified in ``TargetGroupArn``. (see [below for nested schema](#nestedatt--actions--forward_config))
-- `jwt_validation_config` (Attributes) (see [below for nested schema](#nestedatt--actions--jwt_validation_config))
+- `jwt_validation_config` (Attributes) [HTTPS listeners] Information for validating JWT access tokens in client requests. Specify only when ``Type`` is ``jwt-validation``. (see [below for nested schema](#nestedatt--actions--jwt_validation_config))
 - `order` (Number) The order for the action. This value is required for rules with multiple actions. The action with the lowest value for order is performed first.
 - `redirect_config` (Attributes) [Application Load Balancer] Information for creating a redirect action. Specify only when ``Type`` is ``redirect``. (see [below for nested schema](#nestedatt--actions--redirect_config))
 - `target_group_arn` (String) The Amazon Resource Name (ARN) of the target group. Specify only when ``Type`` is ``forward`` and you want to route to a single target group. To route to multiple target groups, you must use ``ForwardConfig`` instead.
@@ -258,9 +259,9 @@ Optional:
 
 Optional:
 
-- `format` (String)
-- `name` (String)
-- `values` (List of String)
+- `format` (String) The format of the claim value.
+- `name` (String) The name of the claim. You can't specify ``exp``, ``iss``, ``nbf``, or ``iat`` because we validate them by default.
+- `values` (List of String) The claim value. The maximum size of the list is 10. Each value can be up to 256 characters in length. If the format is ``space-separated-values``, the values can't include spaces.
 
 
 
@@ -283,13 +284,13 @@ Optional:
 
 Optional:
 
-- `field` (String) The field in the HTTP request. The following are the possible values:
-  +   ``http-header`` 
-  +   ``http-request-method`` 
-  +   ``host-header`` 
-  +   ``path-pattern`` 
-  +   ``query-string`` 
-  +   ``source-ip``
+- `field` (String) The name of the field. The possible values are:
+  +  ``http-header`` ? [ALB] Matches on an HTTP header field.
+  +  ``http-request-method`` ? [ALB] Matches on the HTTP request method.
+  +  ``host-header`` ? [ALB] Matches on the host header.
+  +  ``path-pattern`` ? [ALB] Matches on the URL path of the request.
+  +  ``query-string`` ? [ALB] Matches on a query string parameter.
+  +  ``source-ip`` ? [ALB, NLB] Matches on the source IP address. For ALB, use ``SourceIpConfig`` with ``Values`` to specify CIDR ranges. For NLB, use ``SourceIpConfig`` with ``IpAddressType`` to match the IP address type (``ipv4`` or ``ipv6``).
 - `host_header_config` (Attributes) Information for a host header condition. Specify only when ``Field`` is ``host-header``. (see [below for nested schema](#nestedatt--conditions--host_header_config))
 - `http_header_config` (Attributes) Information for an HTTP header condition. Specify only when ``Field`` is ``http-header``. (see [below for nested schema](#nestedatt--conditions--http_header_config))
 - `http_request_method_config` (Attributes) Information for an HTTP method condition. Specify only when ``Field`` is ``http-request-method``. (see [below for nested schema](#nestedatt--conditions--http_request_method_config))
@@ -375,9 +376,19 @@ Optional:
 
 Optional:
 
+- `ip_address_type` (String)
 - `values` (Set of String) The source IP addresses, in CIDR format. You can use both IPv4 and IPv6 addresses. Wildcards are not supported.
  If you specify multiple addresses, the condition is satisfied if the source IP address of the request matches one of the CIDR blocks. This condition is not satisfied by the addresses in the X-Forwarded-For header.
 
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String) The key of the tag.
+- `value` (String) The value of the tag.
 
 
 <a id="nestedatt--transforms"></a>

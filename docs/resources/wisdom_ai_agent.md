@@ -41,10 +41,13 @@ Definition of AWS::Wisdom::AIAgent Resource Type
 Optional:
 
 - `answer_recommendation_ai_agent_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--answer_recommendation_ai_agent_configuration))
+- `case_summarization_ai_agent_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--case_summarization_ai_agent_configuration))
 - `email_generative_answer_ai_agent_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--email_generative_answer_ai_agent_configuration))
 - `email_overview_ai_agent_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--email_overview_ai_agent_configuration))
 - `email_response_ai_agent_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--email_response_ai_agent_configuration))
 - `manual_search_ai_agent_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--manual_search_ai_agent_configuration))
+- `note_taking_ai_agent_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--note_taking_ai_agent_configuration))
+- `orchestration_ai_agent_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--orchestration_ai_agent_configuration))
 - `self_service_ai_agent_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--self_service_ai_agent_configuration))
 
 <a id="nestedatt--configuration--answer_recommendation_ai_agent_configuration"></a>
@@ -141,6 +144,16 @@ Optional:
 
 
 
+
+
+<a id="nestedatt--configuration--case_summarization_ai_agent_configuration"></a>
+### Nested Schema for `configuration.case_summarization_ai_agent_configuration`
+
+Optional:
+
+- `case_summarization_ai_guardrail_id` (String)
+- `case_summarization_ai_prompt_id` (String)
+- `locale` (String)
 
 
 <a id="nestedatt--configuration--email_generative_answer_ai_agent_configuration"></a>
@@ -430,6 +443,108 @@ Optional:
 
 
 
+
+
+
+
+<a id="nestedatt--configuration--note_taking_ai_agent_configuration"></a>
+### Nested Schema for `configuration.note_taking_ai_agent_configuration`
+
+Optional:
+
+- `locale` (String)
+- `note_taking_ai_guardrail_id` (String)
+- `note_taking_ai_prompt_id` (String)
+
+
+<a id="nestedatt--configuration--orchestration_ai_agent_configuration"></a>
+### Nested Schema for `configuration.orchestration_ai_agent_configuration`
+
+Optional:
+
+- `connect_instance_arn` (String)
+- `locale` (String)
+- `orchestration_ai_guardrail_id` (String)
+- `orchestration_ai_prompt_id` (String)
+- `tool_configurations` (Attributes List) (see [below for nested schema](#nestedatt--configuration--orchestration_ai_agent_configuration--tool_configurations))
+
+<a id="nestedatt--configuration--orchestration_ai_agent_configuration--tool_configurations"></a>
+### Nested Schema for `configuration.orchestration_ai_agent_configuration.tool_configurations`
+
+Optional:
+
+- `annotations` (String)
+- `description` (String)
+- `input_schema` (String)
+- `instruction` (Attributes) (see [below for nested schema](#nestedatt--configuration--orchestration_ai_agent_configuration--tool_configurations--instruction))
+- `output_filters` (Attributes List) (see [below for nested schema](#nestedatt--configuration--orchestration_ai_agent_configuration--tool_configurations--output_filters))
+- `output_schema` (String)
+- `override_input_values` (Attributes List) (see [below for nested schema](#nestedatt--configuration--orchestration_ai_agent_configuration--tool_configurations--override_input_values))
+- `title` (String)
+- `tool_id` (String)
+- `tool_name` (String)
+- `tool_type` (String)
+- `user_interaction_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--orchestration_ai_agent_configuration--tool_configurations--user_interaction_configuration))
+
+<a id="nestedatt--configuration--orchestration_ai_agent_configuration--tool_configurations--instruction"></a>
+### Nested Schema for `configuration.orchestration_ai_agent_configuration.tool_configurations.instruction`
+
+Optional:
+
+- `examples` (List of String)
+- `instruction` (String)
+
+
+<a id="nestedatt--configuration--orchestration_ai_agent_configuration--tool_configurations--output_filters"></a>
+### Nested Schema for `configuration.orchestration_ai_agent_configuration.tool_configurations.output_filters`
+
+Optional:
+
+- `json_path` (String)
+- `output_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--orchestration_ai_agent_configuration--tool_configurations--output_filters--output_configuration))
+
+<a id="nestedatt--configuration--orchestration_ai_agent_configuration--tool_configurations--output_filters--output_configuration"></a>
+### Nested Schema for `configuration.orchestration_ai_agent_configuration.tool_configurations.output_filters.output_configuration`
+
+Optional:
+
+- `output_variable_name_override` (String)
+- `session_data_namespace` (String)
+
+
+
+<a id="nestedatt--configuration--orchestration_ai_agent_configuration--tool_configurations--override_input_values"></a>
+### Nested Schema for `configuration.orchestration_ai_agent_configuration.tool_configurations.override_input_values`
+
+Optional:
+
+- `json_path` (String)
+- `value` (Attributes) (see [below for nested schema](#nestedatt--configuration--orchestration_ai_agent_configuration--tool_configurations--override_input_values--value))
+
+<a id="nestedatt--configuration--orchestration_ai_agent_configuration--tool_configurations--override_input_values--value"></a>
+### Nested Schema for `configuration.orchestration_ai_agent_configuration.tool_configurations.override_input_values.value`
+
+Optional:
+
+- `constant` (Attributes) (see [below for nested schema](#nestedatt--configuration--orchestration_ai_agent_configuration--tool_configurations--override_input_values--value--constant))
+
+<a id="nestedatt--configuration--orchestration_ai_agent_configuration--tool_configurations--override_input_values--value--constant"></a>
+### Nested Schema for `configuration.orchestration_ai_agent_configuration.tool_configurations.override_input_values.value.constant`
+
+Optional:
+
+- `type` (String)
+- `value` (String)
+
+
+
+
+<a id="nestedatt--configuration--orchestration_ai_agent_configuration--tool_configurations--user_interaction_configuration"></a>
+### Nested Schema for `configuration.orchestration_ai_agent_configuration.tool_configurations.user_interaction_configuration`
+
+Optional:
+
+- `is_user_confirmation_required` (Boolean)
 
 
 

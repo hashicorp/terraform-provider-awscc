@@ -1,24 +1,24 @@
 {
   "typeName": "AWS::EC2::VPNConcentrator",
   "$schema": "https://raw.githubusercontent.com/aws-cloudformation/cloudformation-resource-schema/blob/master/src/main/resources/schema/provider.definition.schema.v1.json",
-  "description": "Resource Type definition for AWS::EC2::VPNConcentrator",
+  "description": "Describes a VPN concentrator.",
   "additionalProperties": false,
   "replacementStrategy": "delete_then_create",
   "properties": {
     "VpnConcentratorId": {
-      "description": "The provider-assigned unique ID for this managed resource",
+      "description": "",
       "type": "string"
     },
     "TransitGatewayId": {
-      "description": "The ID of the transit gateway",
+      "description": "The ID of the transit gateway associated with the VPN concentrator.",
       "type": "string"
     },
     "TransitGatewayAttachmentId": {
-      "description": "The ID of the transit gateway attachment",
+      "description": "",
       "type": "string"
     },
     "Type": {
-      "description": "The type of VPN concentrator",
+      "description": "The type of VPN concentrator.",
       "type": "string"
     },
     "Tags": {
@@ -45,16 +45,19 @@
       "additionalProperties": false,
       "properties": {
         "Key": {
-          "type": "string"
+          "type": "string",
+          "description": "The key of the tag.\n Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with ``aws:``."
         },
         "Value": {
-          "type": "string"
+          "type": "string",
+          "description": "The value of the tag.\n Constraints: Tag values are case-sensitive and accept a maximum of 256 Unicode characters."
         }
       },
       "required": [
         "Value",
         "Key"
-      ]
+      ],
+      "description": "Describes a tag."
     }
   },
   "readOnlyProperties": [

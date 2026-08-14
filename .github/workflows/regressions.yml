@@ -1,3 +1,6 @@
+# Copyright IBM Corp. 2021, 2026
+# "SPDX-License-Identifier: MPL-2.0"
+
 name: Handle Label Notifications
 permissions: {}
 
@@ -21,7 +24,7 @@ jobs:
 
     steps:
       - name: Send Slack Notification
-        uses: slackapi/slack-github-action@91efab103c0de0a537f72a35f6b8cda0ee76bf0a # v2.1.1
+        uses: slackapi/slack-github-action@dcb1066f776dd043e64d0e8ba94ca15cc7e1875d # v4.0.0
         env:
           ISSUE_TITLE: ${{ toJSON(github.event.issue.title || github.event.pull_request.title) }}
         with:
@@ -50,7 +53,7 @@ jobs:
 
       - name: Generate GitHub App Token
         id: token
-        uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
         with:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PEM }}

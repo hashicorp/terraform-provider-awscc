@@ -32,6 +32,7 @@ _Default_: If not specified, the default value is true.
 If you don't specify a name, we generate a unique Graph Name using a combination of Stack Name and a UUID comprising of 4 characters.
 
 _Important_: If you specify a name, you cannot perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you must replace the resource, specify a new name.
+- `kms_key_identifier` (String) The ARN of the KMS key used to encrypt data in the Neptune Analytics graph. If not specified, the graph is encrypted with an AWS managed key.
 - `provisioned_memory` (Number) Memory for the Graph.
 - `public_connectivity` (Boolean) Specifies whether the Graph can be reached over the internet. Access to all graphs requires IAM authentication.
 

@@ -165,12 +165,14 @@ resource "awscc_verifiedpermissions_policy_store" "example" {
 
 - `deletion_protection` (Attributes) (see [below for nested schema](#nestedatt--deletion_protection))
 - `description` (String)
+- `encryption_settings` (Attributes) (see [below for nested schema](#nestedatt--encryption_settings))
 - `schema` (Attributes) (see [below for nested schema](#nestedatt--schema))
 - `tags` (Attributes List) The tags to add to the policy store (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `arn` (String)
+- `encryption_state` (Attributes) (see [below for nested schema](#nestedatt--encryption_state))
 - `id` (String) Uniquely identifies the resource.
 - `policy_store_id` (String)
 
@@ -190,12 +192,29 @@ Optional:
 - `mode` (String)
 
 
+<a id="nestedatt--encryption_settings"></a>
+### Nested Schema for `encryption_settings`
+
+Optional:
+
+- `default` (String)
+- `kms_encryption_settings` (Attributes) (see [below for nested schema](#nestedatt--encryption_settings--kms_encryption_settings))
+
+<a id="nestedatt--encryption_settings--kms_encryption_settings"></a>
+### Nested Schema for `encryption_settings.kms_encryption_settings`
+
+Optional:
+
+- `encryption_context` (Map of String)
+- `key` (String)
+
+
+
 <a id="nestedatt--schema"></a>
 ### Nested Schema for `schema`
 
 Optional:
 
-- `cedar_format` (String)
 - `cedar_json` (String)
 
 
@@ -206,6 +225,23 @@ Optional:
 
 - `key` (String)
 - `value` (String)
+
+
+<a id="nestedatt--encryption_state"></a>
+### Nested Schema for `encryption_state`
+
+Read-Only:
+
+- `default` (String)
+- `kms_encryption_state` (Attributes) (see [below for nested schema](#nestedatt--encryption_state--kms_encryption_state))
+
+<a id="nestedatt--encryption_state--kms_encryption_state"></a>
+### Nested Schema for `encryption_state.kms_encryption_state`
+
+Read-Only:
+
+- `encryption_context` (Map of String)
+- `key` (String)
 
 ## Import
 

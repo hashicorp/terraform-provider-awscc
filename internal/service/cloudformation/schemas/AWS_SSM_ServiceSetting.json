@@ -1,0 +1,102 @@
+{
+  "typeName": "AWS::SSM::ServiceSetting",
+  "description": "Resource Type definition for AWS::SSM::ServiceSetting. ServiceSetting is an account-level setting for an AWS service that defines how a user interacts with or uses a service or feature.",
+  "properties": {
+    "SettingId": {
+      "type": "string",
+      "description": "The ID of the service setting, such as /ssm/parameter-store/high-throughput-enabled.",
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "SettingValue": {
+      "type": "string",
+      "description": "The value of the service setting.",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "Status": {
+      "type": "string",
+      "description": "The status of the service setting. The value can be Default, Customized or PendingUpdate."
+    },
+    "LastModifiedDate": {
+      "type": "string",
+      "description": "The last time the service setting was modified.",
+      "format": "date-time"
+    },
+    "LastModifiedUser": {
+      "type": "string",
+      "description": "The ARN of the last modified user."
+    },
+    "Arn": {
+      "type": "string",
+      "description": "The ARN of the service setting."
+    }
+  },
+  "required": [
+    "SettingId",
+    "SettingValue"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Status",
+    "/properties/LastModifiedDate",
+    "/properties/LastModifiedUser",
+    "/properties/Arn"
+  ],
+  "createOnlyProperties": [
+    "/properties/SettingId"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/SettingId"
+    ]
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ssm:UpdateServiceSetting",
+        "ssm:GetServiceSetting"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ssm:GetServiceSetting"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ssm:UpdateServiceSetting",
+        "ssm:GetServiceSetting"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ssm:ResetServiceSetting",
+        "ssm:GetServiceSetting"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "SettingId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          }
+        },
+        "required": [
+          "SettingId"
+        ]
+      },
+      "permissions": [
+        "ssm:GetServiceSetting"
+      ]
+    }
+  }
+}

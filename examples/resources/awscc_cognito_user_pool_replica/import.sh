@@ -1,0 +1,1 @@
+$ terraform import awscc_cognito_user_pool_replica.example "user_pool_id|region_name"

@@ -2,7 +2,90 @@
   "typeName": "AWS::DevOpsAgent::AgentSpace",
   "description": "Resource Type definition for AWS::DevOpsAgent::AgentSpace",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
-  "definitions": {},
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    },
+    "OperatorApp": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Iam": {
+          "$ref": "#/definitions/IamAuthConfiguration"
+        },
+        "Idc": {
+          "$ref": "#/definitions/IdcAuthConfiguration"
+        }
+      }
+    },
+    "IamAuthConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "OperatorAppRoleArn": {
+          "type": "string"
+        },
+        "CreatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "UpdatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "OperatorAppRoleArn"
+      ]
+    },
+    "IdcAuthConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "OperatorAppRoleArn": {
+          "type": "string"
+        },
+        "IdcInstanceArn": {
+          "type": "string"
+        },
+        "IdcApplicationArn": {
+          "type": "string"
+        },
+        "CreatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "UpdatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "OperatorAppRoleArn",
+        "IdcInstanceArn"
+      ]
+    }
+  },
   "properties": {
     "AgentSpaceId": {
       "description": "The unique identifier of the AgentSpace",
@@ -22,6 +105,31 @@
       "minLength": 1,
       "maxLength": 1000
     },
+    "KmsKeyArn": {
+      "description": "The ARN of the KMS key to use for encryption.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "Locale": {
+      "description": "The locale for the AgentSpace, which determines the language used in agent responses.",
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 35,
+      "pattern": "^[a-zA-Z]{2,3}(-[a-zA-Z0-9]{2,8})*$"
+    },
+    "OperatorApp": {
+      "$ref": "#/definitions/OperatorApp"
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to this resource.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    },
     "CreatedAt": {
       "description": "The timestamp when the resource was created.",
       "type": "string",
@@ -39,7 +147,16 @@
   },
   "additionalProperties": false,
   "tagging": {
-    "taggable": false
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "aidevops:TagResource",
+      "aidevops:UntagResource",
+      "aidevops:ListTagsForResource"
+    ]
   },
   "required": [
     "Name"
@@ -48,7 +165,15 @@
     "/properties/AgentSpaceId",
     "/properties/CreatedAt",
     "/properties/UpdatedAt",
-    "/properties/Arn"
+    "/properties/Arn",
+    "/properties/OperatorApp/Iam/CreatedAt",
+    "/properties/OperatorApp/Iam/UpdatedAt",
+    "/properties/OperatorApp/Idc/IdcApplicationArn",
+    "/properties/OperatorApp/Idc/CreatedAt",
+    "/properties/OperatorApp/Idc/UpdatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/KmsKeyArn"
   ],
   "primaryIdentifier": [
     "/properties/AgentSpaceId"
@@ -57,29 +182,91 @@
     "create": {
       "permissions": [
         "aidevops:CreateAgentSpace",
-        "aidevops:GetAgentSpace"
+        "aidevops:GetAgentSpace",
+        "aidevops:EnableOperatorApp",
+        "aidevops:GetOperatorAppTeams",
+        "aidevops:TagResource",
+        "aidevops:ListTagsForResource",
+        "iam:CreateServiceLinkedRole",
+        "iam:PassRole",
+        "kms:CreateGrant",
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:Encrypt",
+        "kms:GenerateDataKey",
+        "kms:GenerateDataKeyPair",
+        "kms:GenerateDataKeyPairWithoutPlaintext",
+        "kms:GenerateDataKeyWithoutPlaintext",
+        "kms:ReEncryptFrom",
+        "kms:ReEncryptTo",
+        "kms:RetireGrant",
+        "sso:CreateApplication",
+        "sso:DeleteApplication",
+        "sso:PutApplicationAccessScope",
+        "sso:PutApplicationGrant",
+        "sso:PutApplicationAuthenticationMethod",
+        "sso:PutApplicationAssignmentConfiguration",
+        "sso:DeleteApplicationAccessScope",
+        "sso:DeleteApplicationAuthenticationMethod",
+        "sso:DeleteApplicationGrant"
       ]
     },
     "read": {
       "permissions": [
-        "aidevops:GetAgentSpace"
+        "aidevops:GetAgentSpace",
+        "aidevops:GetOperatorAppTeams",
+        "aidevops:ListTagsForResource",
+        "kms:Decrypt"
       ]
     },
     "update": {
       "permissions": [
         "aidevops:UpdateAgentSpace",
-        "aidevops:GetAgentSpace"
+        "aidevops:GetAgentSpace",
+        "aidevops:EnableOperatorApp",
+        "aidevops:DisableOperatorApp",
+        "aidevops:GetOperatorAppTeams",
+        "aidevops:TagResource",
+        "aidevops:UntagResource",
+        "aidevops:ListTagsForResource",
+        "iam:PassRole",
+        "kms:CreateGrant",
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:Encrypt",
+        "kms:GenerateDataKey",
+        "kms:GenerateDataKeyPair",
+        "kms:GenerateDataKeyPairWithoutPlaintext",
+        "kms:GenerateDataKeyWithoutPlaintext",
+        "kms:ReEncryptFrom",
+        "kms:ReEncryptTo",
+        "kms:RetireGrant",
+        "sso:CreateApplication",
+        "sso:DeleteApplication",
+        "sso:PutApplicationAccessScope",
+        "sso:PutApplicationGrant",
+        "sso:PutApplicationAuthenticationMethod",
+        "sso:PutApplicationAssignmentConfiguration",
+        "sso:DeleteApplicationAccessScope",
+        "sso:DeleteApplicationAuthenticationMethod",
+        "sso:DeleteApplicationGrant"
       ]
     },
     "delete": {
       "permissions": [
         "aidevops:DeleteAgentSpace",
-        "aidevops:GetAgentSpace"
+        "aidevops:GetAgentSpace",
+        "aidevops:DisableOperatorApp",
+        "sso:DeleteApplication",
+        "sso:DeleteApplicationAccessScope",
+        "sso:DeleteApplicationAuthenticationMethod",
+        "sso:DeleteApplicationGrant"
       ]
     },
     "list": {
       "permissions": [
-        "aidevops:ListAgentSpaces"
+        "aidevops:ListAgentSpaces",
+        "kms:Decrypt"
       ]
     }
   }

@@ -27,6 +27,101 @@
       "minimum": 0,
       "maximum": 10
     },
+    "PointValue": {
+      "description": "The point value for scoring.",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "QuestionPointsConfiguration": {
+      "description": "Information about the points configuration for a question.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MaxPointValue": {
+          "description": "The maximum point value.",
+          "$ref": "#/definitions/PointValue"
+        },
+        "MinPointValue": {
+          "description": "The minimum point value.",
+          "$ref": "#/definitions/PointValue"
+        },
+        "IsBonus": {
+          "description": "The flag to mark the question as a bonus question.",
+          "type": "boolean"
+        }
+      }
+    },
+    "QuestionOptionPointsConfiguration": {
+      "description": "Information about the points configuration for an answer option.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "PointValue": {
+          "description": "The point value assigned to the answer option.",
+          "$ref": "#/definitions/PointValue"
+        },
+        "IsBonus": {
+          "description": "The flag to mark the option as a bonus option.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "PointValue"
+      ]
+    },
+    "EvaluationFormScoreThreshold": {
+      "description": "Information about a score threshold for a performance category.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "PerformanceCategory": {
+          "description": "The performance category name.",
+          "type": "string",
+          "enum": [
+            "NEEDS_IMPROVEMENT",
+            "EXCEEDS_EXPECTATIONS"
+          ]
+        },
+        "MinScorePercentage": {
+          "description": "The minimum score percentage for the performance category.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "MaxScorePercentage": {
+          "description": "The maximum score percentage for the performance category.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        }
+      },
+      "required": [
+        "PerformanceCategory"
+      ]
+    },
+    "EvaluationFormQuestionScoringConfiguration": {
+      "description": "Scoring configuration for a question in an evaluation form.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "PointsConfiguration": {
+          "description": "The points configuration for point-based scoring.",
+          "$ref": "#/definitions/QuestionPointsConfiguration"
+        },
+        "IsExcludedFromScoring": {
+          "description": "The flag to exclude the question from scoring.",
+          "type": "boolean"
+        },
+        "ScoreThresholds": {
+          "description": "The score thresholds for performance categories.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EvaluationFormScoreThreshold"
+          }
+        }
+      }
+    },
     "AutomaticFailConfiguration": {
       "description": "Information about automatic fail configuration for an evaluation form.",
       "type": "object",
@@ -40,16 +135,17 @@
       }
     },
     "EvaluationFormTargetConfiguration": {
-      "description": "",
+      "description": "Configuration that specifies the target for an evaluation form.",
       "type": "object",
       "additionalProperties": false,
       "properties": {
         "ContactInteractionType": {
-          "description": "The interaction type of a contact",
+          "description": "The contact interaction type for this evaluation form.",
           "type": "string",
           "enum": [
             "AGENT",
-            "AUTOMATED"
+            "AUTOMATED",
+            "CUSTOMER"
           ]
         }
       },
@@ -58,12 +154,12 @@
       ]
     },
     "EvaluationFormLanguageConfiguration": {
-      "description": "",
+      "description": "Language configuration for an evaluation form.",
       "type": "object",
       "additionalProperties": false,
       "properties": {
         "FormLanguage": {
-          "description": "The language of the form",
+          "description": "The language for the evaluation form.",
           "type": "string",
           "enum": [
             "de-DE",
@@ -71,10 +167,70 @@
             "es-ES",
             "fr-FR",
             "it-IT",
-            "pt-BR"
+            "pt-BR",
+            "ja-JP",
+            "ko-KR",
+            "zh-CN",
+            "ms-MY"
           ]
         }
       }
+    },
+    "EvaluationReviewNotificationRecipientValue": {
+      "description": "The value information for an evaluation review notification recipient.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "UserId": {
+          "description": "The user identifier for the notification recipient.",
+          "type": "string"
+        }
+      }
+    },
+    "EvaluationReviewNotificationRecipient": {
+      "description": "Information about a recipient who should be notified when an evaluation review is requested.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Type": {
+          "description": "The type of notification recipient.",
+          "type": "string",
+          "enum": [
+            "USER_ID"
+          ]
+        },
+        "Value": {
+          "description": "The value associated with the notification recipient type.",
+          "$ref": "#/definitions/EvaluationReviewNotificationRecipientValue"
+        }
+      },
+      "required": [
+        "Type",
+        "Value"
+      ]
+    },
+    "EvaluationReviewConfiguration": {
+      "description": "Configuration settings for evaluation reviews.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ReviewNotificationRecipients": {
+          "description": "List of recipients who should be notified when a review is requested.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EvaluationReviewNotificationRecipient"
+          }
+        },
+        "EligibilityDays": {
+          "description": "Number of days during which a request for review can be submitted for evaluations created from this form.",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 90
+        }
+      },
+      "required": [
+        "ReviewNotificationRecipients"
+      ]
     },
     "EvaluationFormBaseItem": {
       "description": "An item at the root level. All items must be sections.",
@@ -138,6 +294,17 @@
         "Weight": {
           "description": "The scoring weight of the section.\n *Minimum*: 0 \n *Maximum*: 100",
           "$ref": "#/definitions/Weight"
+        },
+        "IsExcludedFromScoring": {
+          "description": "The flag to exclude the section from scoring.",
+          "type": "boolean"
+        },
+        "ScoreThresholds": {
+          "description": "The score thresholds for performance categories.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EvaluationFormScoreThreshold"
+          }
         }
       },
       "required": [
@@ -312,6 +479,10 @@
         "AutomaticFailConfiguration": {
           "description": "A configuration for automatic fail.",
           "$ref": "#/definitions/AutomaticFailConfiguration"
+        },
+        "PointsConfiguration": {
+          "description": "The points configuration for point-based scoring.",
+          "$ref": "#/definitions/QuestionOptionPointsConfiguration"
         }
       },
       "required": [
@@ -463,10 +634,7 @@
           "description": "Automation answer source.",
           "$ref": "#/definitions/EvaluationFormQuestionAutomationAnswerSource"
         }
-      },
-      "required": [
-        "Options"
-      ]
+      }
     },
     "EvaluationFormSingleSelectQuestionOption": {
       "description": "Information about the automation configuration in single select questions.",
@@ -494,6 +662,10 @@
         "AutomaticFailConfiguration": {
           "description": "Whether automatic fail is configured on a single select question.",
           "$ref": "#/definitions/AutomaticFailConfiguration"
+        },
+        "PointsConfiguration": {
+          "description": "The points configuration for point-based scoring.",
+          "$ref": "#/definitions/QuestionOptionPointsConfiguration"
         }
       },
       "required": [
@@ -574,12 +746,12 @@
       }
     },
     "EvaluationFormMultiSelectQuestionAutomationOption": {
-      "description": "",
+      "description": "An automation option for a multi-select question.",
       "type": "object",
       "additionalProperties": false,
       "properties": {
         "RuleCategory": {
-          "description": "The automation option based on Rules categories.",
+          "description": "Rule category configuration for this automation option.",
           "$ref": "#/definitions/MultiSelectQuestionRuleCategoryAutomation"
         }
       },
@@ -588,18 +760,18 @@
       ]
     },
     "MultiSelectQuestionRuleCategoryAutomation": {
-      "description": "",
+      "description": "Automation rule for multi-select questions based on rule categories.",
       "type": "object",
       "additionalProperties": false,
       "properties": {
         "Category": {
-          "description": "The category name as defined in Rules.",
+          "description": "The category name for this automation rule.",
           "type": "string",
           "minLength": 1,
           "maxLength": 50
         },
         "Condition": {
-          "description": "The automation condition applied on contact categories.",
+          "description": "The condition for this automation rule.",
           "type": "string",
           "enum": [
             "PRESENT",
@@ -607,7 +779,7 @@
           ]
         },
         "OptionRefIds": {
-          "description": "The option identifiers referencing the options to be selected when the automation option is triggered.",
+          "description": "Reference IDs of options for this automation rule.",
           "$ref": "#/definitions/ReferenceIdList"
         }
       },
@@ -618,12 +790,12 @@
       ]
     },
     "EvaluationFormMultiSelectQuestionAutomation": {
-      "description": "",
+      "description": "Automation configuration for multi-select questions.",
       "type": "object",
       "additionalProperties": false,
       "properties": {
         "Options": {
-          "description": "The answer options for the automation.",
+          "description": "Automation options for the multi-select question.",
           "type": "array",
           "insertionOrder": true,
           "minItems": 1,
@@ -633,32 +805,45 @@
           }
         },
         "DefaultOptionRefIds": {
-          "description": "The option reference identifiers of the default answers.",
+          "description": "Reference IDs of default options.",
           "$ref": "#/definitions/ReferenceIdList"
         },
         "AnswerSource": {
-          "description": "The source of automation answer of the question.",
+          "description": "",
           "$ref": "#/definitions/EvaluationFormQuestionAutomationAnswerSource"
         }
-      },
-      "required": [
-        "Options"
-      ]
+      }
     },
     "EvaluationFormMultiSelectQuestionOption": {
-      "description": "",
+      "description": "An option for a multi-select question in an evaluation form.",
       "type": "object",
       "additionalProperties": false,
       "properties": {
         "RefId": {
-          "description": "The identifier used to reference the option.",
+          "description": "Reference identifier for this option.",
           "$ref": "#/definitions/RefId"
         },
         "Text": {
-          "description": "The title of the option.",
+          "description": "Display text for this option.",
           "type": "string",
           "minLength": 1,
           "maxLength": 128
+        },
+        "Score": {
+          "description": "The score assigned to the answer option.",
+          "$ref": "#/definitions/Score"
+        },
+        "AutomaticFail": {
+          "description": "The flag to mark the option as automatic fail. If an automatic fail answer is provided, the overall evaluation gets a score of 0.",
+          "type": "boolean"
+        },
+        "AutomaticFailConfiguration": {
+          "description": "",
+          "$ref": "#/definitions/AutomaticFailConfiguration"
+        },
+        "PointsConfiguration": {
+          "description": "The points configuration for point-based scoring.",
+          "$ref": "#/definitions/QuestionOptionPointsConfiguration"
         }
       },
       "required": [
@@ -667,12 +852,12 @@
       ]
     },
     "EvaluationFormMultiSelectQuestionProperties": {
-      "description": "",
+      "description": "Properties for a multi-select question in an evaluation form.",
       "type": "object",
       "additionalProperties": false,
       "properties": {
         "Options": {
-          "description": "The list of options for the question.",
+          "description": "Options available for this multi-select question.",
           "type": "array",
           "insertionOrder": true,
           "minItems": 2,
@@ -682,7 +867,7 @@
           }
         },
         "DisplayAs": {
-          "description": "The display mode of the multi-select question.",
+          "description": "Display format for the multi-select question.",
           "type": "string",
           "enum": [
             "DROPDOWN",
@@ -690,7 +875,7 @@
           ]
         },
         "Automation": {
-          "description": "The automation properties for the multi-select question.",
+          "description": "Automation configuration for this multi-select question.",
           "$ref": "#/definitions/EvaluationFormMultiSelectQuestionAutomation"
         }
       },
@@ -716,7 +901,7 @@
           "$ref": "#/definitions/EvaluationFormTextQuestionProperties"
         },
         "MultiSelect": {
-          "description": "",
+          "description": "Properties for multi-select question types.",
           "$ref": "#/definitions/EvaluationFormMultiSelectQuestionProperties"
         }
       }
@@ -764,6 +949,10 @@
           "description": "The scoring weight of the section.\n *Minimum*: 0\n *Maximum*: 100",
           "$ref": "#/definitions/Weight"
         },
+        "ScoringConfiguration": {
+          "description": "The scoring configuration of the question.",
+          "$ref": "#/definitions/EvaluationFormQuestionScoringConfiguration"
+        },
         "Enablement": {
           "description": "A question conditional enablement.",
           "$ref": "#/definitions/EvaluationFormItemEnablementConfiguration"
@@ -785,7 +974,8 @@
           "type": "string",
           "enum": [
             "QUESTION_ONLY",
-            "SECTION_ONLY"
+            "SECTION_ONLY",
+            "POINTS_BASED"
           ]
         },
         "Status": {
@@ -795,6 +985,13 @@
             "ENABLED",
             "DISABLED"
           ]
+        },
+        "ScoreThresholds": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EvaluationFormScoreThreshold"
+          }
         }
       },
       "required": [
@@ -887,12 +1084,16 @@
       ]
     },
     "TargetConfiguration": {
-      "description": "",
+      "description": "Configuration that specifies the target for this evaluation form.",
       "$ref": "#/definitions/EvaluationFormTargetConfiguration"
     },
     "LanguageConfiguration": {
-      "description": "",
+      "description": "Configuration for language settings of this evaluation form.",
       "$ref": "#/definitions/EvaluationFormLanguageConfiguration"
+    },
+    "ReviewConfiguration": {
+      "description": "Configuration for evaluation review settings of this evaluation form.",
+      "$ref": "#/definitions/EvaluationReviewConfiguration"
     },
     "Tags": {
       "description": "The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.",

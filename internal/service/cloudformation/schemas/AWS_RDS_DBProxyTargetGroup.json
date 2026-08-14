@@ -75,6 +75,10 @@
     }
   },
   "additionalProperties": false,
+  "propertyTransform": {
+    "/properties/DBProxyName": "$lowercase(DBProxyName)",
+    "/properties/TargetGroupName": "$lowercase(TargetGroupName)"
+  },
   "required": [
     "DBProxyName",
     "TargetGroupName"
@@ -95,11 +99,18 @@
   "primaryIdentifier": [
     "/properties/TargetGroupArn"
   ],
+  "additionalIdentifiers": [
+    [
+      "/properties/DBProxyName",
+      "/properties/TargetGroupName"
+    ]
+  ],
   "handlers": {
     "create": {
       "permissions": [
         "rds:DescribeDBProxies",
         "rds:DescribeDBProxyTargetGroups",
+        "rds:DescribeDBProxyTargets",
         "rds:ModifyDBProxyTargetGroup",
         "rds:RegisterDBProxyTargets"
       ]
@@ -113,6 +124,7 @@
     "update": {
       "permissions": [
         "rds:DescribeDBProxyTargetGroups",
+        "rds:DescribeDBProxyTargets",
         "rds:ModifyDBProxyTargetGroup",
         "rds:RegisterDBProxyTargets",
         "rds:DeregisterDBProxyTargets"

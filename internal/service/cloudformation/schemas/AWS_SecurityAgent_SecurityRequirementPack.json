@@ -1,0 +1,198 @@
+{
+  "typeName": "AWS::SecurityAgent::SecurityRequirementPack",
+  "description": "Resource Type definition for AWS::SecurityAgent::SecurityRequirementPack",
+  "additionalProperties": false,
+  "properties": {
+    "PackId": {
+      "type": "string",
+      "description": "Unique identifier of the security requirement pack",
+      "pattern": "^(srp)-(am|cm)-[a-zA-Z0-9\\-]+$",
+      "minLength": 8,
+      "maxLength": 64
+    },
+    "Name": {
+      "type": "string",
+      "description": "Name of the security requirement pack",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "Description": {
+      "type": "string",
+      "description": "Description of the pack",
+      "maxLength": 500
+    },
+    "Status": {
+      "type": "string",
+      "description": "Whether the pack is enabled or disabled",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "KmsKeyId": {
+      "type": "string",
+      "description": "KMS key for client-side encryption of pack contents",
+      "maxLength": 2048
+    },
+    "SecurityRequirements": {
+      "type": "array",
+      "description": "Security requirements within this pack",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/SecurityRequirement"
+      }
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Tags for the security requirement pack",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "definitions": {
+    "SecurityRequirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "Name of the security requirement",
+          "maxLength": 80
+        },
+        "Description": {
+          "type": "string",
+          "description": "Description of the security requirement",
+          "maxLength": 500
+        },
+        "Domain": {
+          "type": "string",
+          "description": "Security domain this requirement belongs to",
+          "maxLength": 10000
+        },
+        "Evaluation": {
+          "type": "string",
+          "description": "How to evaluate compliance with this requirement",
+          "maxLength": 10000
+        },
+        "Remediation": {
+          "type": "string",
+          "description": "How to remediate non-compliance",
+          "maxLength": 10000
+        }
+      },
+      "required": [
+        "Name",
+        "Description",
+        "Domain",
+        "Evaluation"
+      ]
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A key-value pair to associate with a resource",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "required": [
+    "Name"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "securityagent:TagResource",
+      "securityagent:UntagResource",
+      "securityagent:ListTagsForResource"
+    ]
+  },
+  "createOnlyProperties": [
+    "/properties/KmsKeyId"
+  ],
+  "primaryIdentifier": [
+    "/properties/PackId"
+  ],
+  "readOnlyProperties": [
+    "/properties/PackId"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "securityagent:CreateSecurityRequirementPack",
+        "securityagent:GetSecurityRequirementPack",
+        "securityagent:BatchCreateSecurityRequirements",
+        "securityagent:BatchGetSecurityRequirements",
+        "securityagent:ListSecurityRequirements",
+        "securityagent:TagResource",
+        "securityagent:ListTagsForResource",
+        "kms:DescribeKey",
+        "kms:Encrypt",
+        "kms:GenerateDataKeyWithoutPlaintext",
+        "kms:Decrypt",
+        "kms:ReEncryptFrom",
+        "kms:ReEncryptTo"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "securityagent:GetSecurityRequirementPack",
+        "securityagent:ListSecurityRequirements",
+        "securityagent:BatchGetSecurityRequirements",
+        "securityagent:ListTagsForResource",
+        "kms:Decrypt"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "securityagent:UpdateSecurityRequirementPack",
+        "securityagent:GetSecurityRequirementPack",
+        "securityagent:BatchCreateSecurityRequirements",
+        "securityagent:BatchGetSecurityRequirements",
+        "securityagent:BatchUpdateSecurityRequirements",
+        "securityagent:BatchDeleteSecurityRequirements",
+        "securityagent:ListSecurityRequirements",
+        "securityagent:TagResource",
+        "securityagent:UntagResource",
+        "securityagent:ListTagsForResource",
+        "kms:Decrypt"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "securityagent:GetSecurityRequirementPack",
+        "securityagent:ListSecurityRequirements",
+        "securityagent:BatchDeleteSecurityRequirements",
+        "kms:Decrypt",
+        "securityagent:DeleteSecurityRequirementPack"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "securityagent:ListSecurityRequirementPacks"
+      ]
+    }
+  }
+}

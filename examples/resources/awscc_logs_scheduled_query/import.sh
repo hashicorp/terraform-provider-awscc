@@ -1,0 +1,1 @@
+$ terraform import awscc_logs_scheduled_query.example "scheduled_query_arn"

@@ -46,6 +46,7 @@ Data Source schema for AWS::ECS::Service
   If you want to use Managed Instances, you must use the ``capacityProviderStrategy`` request parameter
 - `load_balancers` (Attributes List) A list of load balancer objects to associate with the service. If you specify the ``Role`` property, ``LoadBalancers`` must be specified as well. For information about the number of load balancers that you can specify per service, see [Service Load Balancing](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html) in the *Amazon Elastic Container Service Developer Guide*.
   To remove this property from your service resource, specify an empty ``LoadBalancer`` array. (see [below for nested schema](#nestedatt--load_balancers))
+- `monitoring` (Attributes) The optional monitoring configuration for the service, which defines the resolution for the service-level ``CPUUtilization`` and ``MemoryUtilization`` Amazon CloudWatch metrics. When not specified, Amazon ECS uses the default resolution of ``60`` seconds. (see [below for nested schema](#nestedatt--monitoring))
 - `name` (String)
 - `network_configuration` (Attributes) The network configuration for the service. This parameter is required for task definitions that use the ``awsvpc`` network mode to receive their own elastic network interface, and it is not supported for other network modes. For more information, see [Task Networking](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html) in the *Amazon Elastic Container Service Developer Guide*. (see [below for nested schema](#nestedatt--network_configuration))
 - `placement_constraints` (Attributes List) An array of placement constraint objects to use for tasks in your service. You can specify a maximum of 10 constraints for each task. This limit includes constraints in the task definition and those specified at runtime.
@@ -124,15 +125,17 @@ Read-Only:
 Read-Only:
 
 - `alarms` (Attributes) Information about the CloudWatch alarms. (see [below for nested schema](#nestedatt--deployment_configuration--alarms))
-- `bake_time_in_minutes` (Number) The duration when both blue and green service revisions are running simultaneously after the production traffic has shifted.
+- `bake_time_in_minutes` (Number) The duration waiting before terminating the previous service revision and marking a deployment complete.
  The following rules apply when you don't specify a value:
-  +  For rolling deployments, the value is set to 3 hours (180 minutes).
-  +  When you use an external deployment controller (``EXTERNAL``), or the ACD blue/green deployment controller (``CODE_DEPLOY``), the value is set to 3 hours (180 minutes).
-  +  For all other cases, the value is set to 36 hours (2160 minutes).
+  +  For blue/green, linear, and canary deployments, the value is set to 15 minutes.
+  +  For rolling deployments, there is no bake time set by default.
+  +  The external deployment controller (``EXTERNAL``) and the ACD blue/green deployment controller (``CODE_DEPLOY``) do not support the ``BakeTimeInMinutes`` parameter.
+  
+  If you provide a bake time for a rolling deployment, the CloudFormation handler timeout is increased to the maximum of 36 hours, matching the timeout for blue/green, linear, and canary deployments.
 - `canary_configuration` (Attributes) Configuration for canary deployment strategy. Only valid when the deployment strategy is ``CANARY``. This configuration enables shifting a fixed percentage of traffic for testing, followed by shifting the remaining traffic after a bake period. (see [below for nested schema](#nestedatt--deployment_configuration--canary_configuration))
 - `deployment_circuit_breaker` (Attributes) The deployment circuit breaker can only be used for services using the rolling update (``ECS``) deployment type.
   The *deployment circuit breaker* determines whether a service deployment will fail if the service can't reach a steady state. If you use the deployment circuit breaker, a service deployment will transition to a failed state and stop launching new tasks. If you use the rollback option, when a service deployment fails, the service is rolled back to the last deployment that completed successfully. For more information, see [Rolling update](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html) in the *Amazon Elastic Container Service Developer Guide* (see [below for nested schema](#nestedatt--deployment_configuration--deployment_circuit_breaker))
-- `lifecycle_hooks` (Attributes List) An array of deployment lifecycle hook objects to run custom logic at specific stages of the deployment lifecycle. (see [below for nested schema](#nestedatt--deployment_configuration--lifecycle_hooks))
+- `lifecycle_hooks` (Attributes List) An array of deployment lifecycle hook objects to run custom logic or pause the deployment at specific stages of the deployment lifecycle. (see [below for nested schema](#nestedatt--deployment_configuration--lifecycle_hooks))
 - `linear_configuration` (Attributes) Configuration for linear deployment strategy. Only valid when the deployment strategy is ``LINEAR``. This configuration enables progressive traffic shifting in equal percentage increments with configurable bake times between each step. (see [below for nested schema](#nestedatt--deployment_configuration--linear_configuration))
 - `maximum_percent` (Number) If a service is using the rolling update (``ECS``) deployment type, the ``maximumPercent`` parameter represents an upper limit on the number of your service's tasks that are allowed in the ``RUNNING`` or ``PENDING`` state during a deployment, as a percentage of the ``desiredCount`` (rounded down to the nearest integer). This parameter enables you to define the deployment batch size. For example, if your service is using the ``REPLICA`` service scheduler and has a ``desiredCount`` of four tasks and a ``maximumPercent`` value of 200%, the scheduler may start four new tasks before stopping the four older tasks (provided that the cluster resources required to do this are available). The default ``maximumPercent`` value for a service using the ``REPLICA`` service scheduler is 200%.
  The Amazon ECS scheduler uses this parameter to replace unhealthy tasks by starting replacement tasks first and then stopping the unhealthy tasks, as long as cluster resources for starting replacement tasks are available. For more information about how the scheduler replaces unhealthy tasks, see [Amazon ECS services](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html).
@@ -158,6 +161,8 @@ Read-Only:
 - `strategy` (String) The deployment strategy for the service. Choose from these valid values:
   +  ``ROLLING`` - When you create a service which uses the rolling update (``ROLLING``) deployment strategy, the Amazon ECS service scheduler replaces the currently running tasks with new tasks. The number of tasks that Amazon ECS adds or removes from the service during a rolling update is controlled by the service deployment configuration.
   +  ``BLUE_GREEN`` - A blue/green deployment strategy (``BLUE_GREEN``) is a release methodology that reduces downtime and risk by running two identical production environments called blue and green. With Amazon ECS blue/green deployments, you can validate new service revisions before directing production traffic to them. This approach provides a safer way to deploy changes with the ability to quickly roll back if needed.
+  +  ``LINEAR`` - A *linear* deployment strategy (``LINEAR``) gradually shifts traffic from the current production environment to a new environment in equal percentages over time. With Amazon ECS linear deployments, you can control the pace of traffic shifting and validate new service revisions with increasing amounts of production traffic.
+  +  ``CANARY`` - A *canary* deployment strategy (``CANARY``) shifts a small percentage of traffic to the new service revision first, then shifts the remaining traffic all at once after a specified time period. This allows you to test the new version with a subset of users before full deployment.
 
 <a id="nestedatt--deployment_configuration--alarms"></a>
 ### Nested Schema for `deployment_configuration.alarms`
@@ -184,7 +189,18 @@ Read-Only:
 Read-Only:
 
 - `enable` (Boolean) Determines whether to use the deployment circuit breaker logic for the service.
+- `reset_on_healthy_task` (Boolean) Specifies whether the deployment circuit breaker resets its failure count when a task reaches a healthy state. When set to ``true``, a task that reaches a healthy state resets the failure count to ``0``. When set to ``false``, Amazon ECS does not reset the failure count. The default is ``true``.
 - `rollback` (Boolean) Determines whether to configure Amazon ECS to roll back the service if a service deployment fails. If rollback is on, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.
+- `threshold_configuration` (Attributes) The threshold configuration that controls when the deployment circuit breaker triggers. The ``type`` and ``value`` together determine how many task failures are tolerated before the circuit breaker activates. (see [below for nested schema](#nestedatt--deployment_configuration--deployment_circuit_breaker--threshold_configuration))
+
+<a id="nestedatt--deployment_configuration--deployment_circuit_breaker--threshold_configuration"></a>
+### Nested Schema for `deployment_configuration.deployment_circuit_breaker.threshold_configuration`
+
+Read-Only:
+
+- `type` (String) Determines how Amazon ECS uses ``value`` to calculate the failure threshold. For the percentage types (``BOUNDED_PERCENT`` and ``UNBOUNDED_PERCENT``), Amazon ECS multiplies ``value`` by the latest service desired count. For ``COUNT``, Amazon ECS uses ``value`` directly as the threshold. The default is ``BOUNDED_PERCENT``.
+- `value` (Number) Specifies the integer that Amazon ECS uses to calculate the failure threshold. When ``type`` is ``COUNT``, this value is the failure threshold itself. When ``type`` is a percentage type, Amazon ECS multiplies this value by the latest service desired count to produce the failure threshold. The default is ``50``.
+
 
 
 <a id="nestedatt--deployment_configuration--lifecycle_hooks"></a>
@@ -194,8 +210,8 @@ Read-Only:
 
 - `hook_details` (String) Use this field to specify custom parameters that ECS passes to your hook target invocations (such as a Lambda function).
  This field must be a JSON object as a string.
-- `hook_target_arn` (String) The Amazon Resource Name (ARN) of the hook target. Currently, only Lambda function ARNs are supported.
- You must provide this parameter when configuring a deployment lifecycle hook.
+- `hook_target_arn` (String) The Amazon Resource Name (ARN) of the hook target. For ``AWS_LAMBDA`` hooks, this is the Lambda function ARN. This field is not applicable for ``PAUSE`` hooks.
+ You must provide this parameter when configuring an ``AWS_LAMBDA`` lifecycle hook.
 - `lifecycle_stages` (List of String) The lifecycle stages at which to run the hook. Choose from these valid values:
   +  RECONCILE_SERVICE
  The reconciliation stage that only happens when you start a new service deployment with more than 1 service revision in an ACTIVE state.
@@ -212,16 +228,35 @@ Read-Only:
   +  POST_TEST_TRAFFIC_SHIFT
  The test traffic shift is complete. The green service revision handles 100% of the test traffic.
  You can use a lifecycle hook for this stage.
+  +  PRE_PRODUCTION_TRAFFIC_SHIFT
+ Occurs before production traffic shift. For linear and canary deployments, this stage is invoked before every traffic shift step.
+ You can use a lifecycle hook for this stage.
   +  PRODUCTION_TRAFFIC_SHIFT
- Production traffic is shifting to the green service revision. The green service revision is migrating from 0% to 100% of production traffic.
+ Production traffic is shifting to the green service revision. The green service revision is migrating from 0% to 100% of production traffic. For linear and canary deployments, this stage is invoked at every traffic shift step.
  You can use a lifecycle hook for this stage.
   +  POST_PRODUCTION_TRAFFIC_SHIFT
  The production traffic shift is complete.
  You can use a lifecycle hook for this stage.
   
- You must provide this parameter when configuring a deployment lifecycle hook.
+  ``PAUSE`` hooks cannot be configured at ``TEST_TRAFFIC_SHIFT`` or ``PRODUCTION_TRAFFIC_SHIFT`` stages. These stages are only valid for ``AWS_LAMBDA`` hooks.
+  You must provide this parameter when configuring a deployment lifecycle hook.
 - `role_arn` (String) The Amazon Resource Name (ARN) of the IAM role that grants Amazon ECS permission to call Lambda functions on your behalf.
  For more information, see [Permissions required for Lambda functions in Amazon ECS blue/green deployments](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/blue-green-permissions.html) in the *Amazon Elastic Container Service Developer Guide*.
+- `target_type` (String) The type of action the lifecycle hook performs. Valid values are:
+  +  ``AWS_LAMBDA`` - Invokes a Lambda function at the specified lifecycle stage. This is the default value.
+  +  ``PAUSE`` - Pauses the deployment at the specified lifecycle stage until you call ``ContinueServiceDeployment`` to continue or roll back.
+  
+ This field is optional. If not specified, the default value is ``AWS_LAMBDA``.
+- `timeout_configuration` (Attributes) The timeout configuration for the lifecycle hook. This specifies how long Amazon ECS waits before taking the timeout action if the hook is not resolved. (see [below for nested schema](#nestedatt--deployment_configuration--lifecycle_hooks--timeout_configuration))
+
+<a id="nestedatt--deployment_configuration--lifecycle_hooks--timeout_configuration"></a>
+### Nested Schema for `deployment_configuration.lifecycle_hooks.timeout_configuration`
+
+Read-Only:
+
+- `action` (String)
+- `timeout_in_minutes` (Number)
+
 
 
 <a id="nestedatt--deployment_configuration--linear_configuration"></a>
@@ -310,6 +345,23 @@ Read-Only:
 - `production_listener_rule` (String) The Amazon Resource Name (ARN) that that identifies the production listener rule (in the case of an Application Load Balancer) or listener (in the case for an Network Load Balancer) for routing production traffic.
 - `role_arn` (String) The Amazon Resource Name (ARN) of the IAM role that grants Amazon ECS permission to call the Elastic Load Balancing APIs for you.
 - `test_listener_rule` (String) The Amazon Resource Name (ARN) that identifies ) that identifies the test listener rule (in the case of an Application Load Balancer) or listener (in the case for an Network Load Balancer) for routing test traffic.
+
+
+
+<a id="nestedatt--monitoring"></a>
+### Nested Schema for `monitoring`
+
+Read-Only:
+
+- `metric_configurations` (Attributes List) The list of metric configurations for the service monitoring. (see [below for nested schema](#nestedatt--monitoring--metric_configurations))
+
+<a id="nestedatt--monitoring--metric_configurations"></a>
+### Nested Schema for `monitoring.metric_configurations`
+
+Read-Only:
+
+- `metric_names` (List of String) The list of metric names to configure. The supported metric names are ``CPUUtilization`` and ``MemoryUtilization``.
+- `resolution_seconds` (Number) The resolution, in seconds, at which to collect the metrics. The valid values are ``20`` and ``60``.
 
 
 
@@ -546,7 +598,7 @@ Read-Only:
 
 - `encrypted` (Boolean) Indicates whether the volume should be encrypted. If you turn on Region-level Amazon EBS encryption by default but set this value as ``false``, the setting is overridden and the volume is encrypted with the KMS key specified for Amazon EBS encryption by default. This parameter maps 1:1 with the ``Encrypted`` parameter of the [CreateVolume API](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateVolume.html) in the *Amazon EC2 API Reference*.
 - `filesystem_type` (String) The filesystem type for the volume. For volumes created from a snapshot, you must specify the same filesystem type that the volume was using when the snapshot was created. If there is a filesystem type mismatch, the tasks will fail to start.
- The available Linux filesystem types are  ``ext3``, ``ext4``, and ``xfs``. If no value is specified, the ``xfs`` filesystem type is used by default.
+ The available Linux filesystem types are ``ext3``, ``ext4``, and ``xfs``. If no value is specified, the ``xfs`` filesystem type is used by default.
  The available Windows filesystem types are ``NTFS``.
 - `iops` (Number) The number of I/O operations per second (IOPS). For ``gp3``, ``io1``, and ``io2`` volumes, this represents the number of IOPS that are provisioned for the volume. For ``gp2`` volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting.
  The following are the supported values for each volume type.
@@ -584,7 +636,7 @@ Read-Only:
 
 Read-Only:
 
-- `propagate_tags` (String) Determines whether to propagate the tags from the task definition to  the Amazon EBS volume. Tags can only propagate to a ``SERVICE`` specified in  ``ServiceVolumeConfiguration``. If no value is specified, the tags aren't  propagated.
+- `propagate_tags` (String) Determines whether to propagate the tags from the task definition to the Amazon EBS volume. Tags can only propagate to a ``SERVICE`` specified in ``ServiceVolumeConfiguration``. If no value is specified, the tags aren't propagated.
 - `resource_type` (String) The type of volume resource.
 - `tags` (Attributes List) The tags applied to this Amazon EBS volume. ``AmazonECSCreated`` and ``AmazonECSManaged`` are reserved tags that can't be used. (see [below for nested schema](#nestedatt--volume_configurations--managed_ebs_volume--tag_specifications--tags))
 
@@ -606,5 +658,5 @@ Read-Only:
 Read-Only:
 
 - `port_name` (String) The name of the port mapping to register in the VPC Lattice target group. This is the name of the ``portMapping`` you defined in your task definition.
-- `role_arn` (String) The ARN of the IAM role to associate with this VPC Lattice configuration. This is the Amazon ECS  infrastructure IAM role that is used to manage your VPC Lattice infrastructure.
+- `role_arn` (String) The ARN of the IAM role to associate with this VPC Lattice configuration. This is the Amazon ECS infrastructure IAM role that is used to manage your VPC Lattice infrastructure.
 - `target_group_arn` (String) The full Amazon Resource Name (ARN) of the target group or groups associated with the VPC Lattice configuration that the Amazon ECS tasks will be registered to.

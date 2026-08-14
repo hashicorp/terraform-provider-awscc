@@ -22,6 +22,7 @@ Data Source schema for AWS::SSM::Parameter
 ### Read-Only
 
 - `allowed_pattern` (String) A regular expression used to validate the parameter value. For example, for ``String`` types with values restricted to numbers, you can specify the following: ``AllowedPattern=^\d+$``
+- `arn` (String)
 - `data_type` (String) The data type of the parameter, such as ``text`` or ``aws:ec2:image``. The default is ``text``.
 - `description` (String) Information about the parameter.
 - `name` (String) The name of the parameter.

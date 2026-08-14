@@ -1,4 +1,4 @@
-// Copyright (c) HashiCorp, Inc.
+// Copyright IBM Corp. 2021, 2026
 // SPDX-License-Identifier: MPL-2.0
 
 package generic
@@ -84,7 +84,7 @@ func (pd *genericPluralDataSource) Read(ctx context.Context, _ datasource.ReadRe
 		Raw:    val,
 	}
 
-	tflog.Debug(ctx, "Response.State.Raw", map[string]interface{}{
+	tflog.Debug(ctx, "Response.State.Raw", map[string]any{
 		"value": hclog.Fmt("%v", response.State.Raw),
 	})
 

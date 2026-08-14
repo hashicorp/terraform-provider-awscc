@@ -1,0 +1,1 @@
+$ terraform import awscc_bedrockagentcore_harness_endpoint.example "arn"

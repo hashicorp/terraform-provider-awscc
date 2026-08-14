@@ -107,5 +107,8 @@
       ]
     }
   },
-  "additionalProperties": false
+  "additionalProperties": false,
+  "propertyTransform": {
+    "/properties/CrlData": "$replace(CrlData, /\\s+$/, '')"
+  }
 }

@@ -1,0 +1,1 @@
+$ terraform import awscc_ssm_maintenance_window.example "window_id"

@@ -68,10 +68,20 @@ Optional:
 - `resource_arn` (String) Matches the ARN of the AWS resource on which the service runs.
 - `rule_arn` (String) The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.
 - `rule_name` (String) The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.
+- `sampling_rate_boost` (Attributes) (see [below for nested schema](#nestedatt--sampling_rule--sampling_rate_boost))
 - `service_name` (String) Matches the name that the service uses to identify itself in segments.
 - `service_type` (String) Matches the origin that the service uses to identify its type in segments.
 - `url_path` (String) Matches the path from a request URL.
 - `version` (Number) The version of the sampling rule format (1)
+
+<a id="nestedatt--sampling_rule--sampling_rate_boost"></a>
+### Nested Schema for `sampling_rule.sampling_rate_boost`
+
+Optional:
+
+- `cooldown_window_minutes` (Number) Time window (in minutes) in which only one sampling rate boost can be triggered. After a boost occurs, no further boosts are allowed until the next window.
+- `max_rate` (Number) The maximum sampling rate X-Ray will apply when it detects anomalies. X-Ray determines the appropriate rate between your baseline and the maximum, depending on anomaly activity.
+
 
 
 <a id="nestedatt--sampling_rule_record"></a>
@@ -97,10 +107,20 @@ Optional:
 - `resource_arn` (String) Matches the ARN of the AWS resource on which the service runs.
 - `rule_arn` (String) The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.
 - `rule_name` (String) The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.
+- `sampling_rate_boost` (Attributes) (see [below for nested schema](#nestedatt--sampling_rule_record--sampling_rule--sampling_rate_boost))
 - `service_name` (String) Matches the name that the service uses to identify itself in segments.
 - `service_type` (String) Matches the origin that the service uses to identify its type in segments.
 - `url_path` (String) Matches the path from a request URL.
 - `version` (Number) The version of the sampling rule format (1)
+
+<a id="nestedatt--sampling_rule_record--sampling_rule--sampling_rate_boost"></a>
+### Nested Schema for `sampling_rule_record.sampling_rule.sampling_rate_boost`
+
+Optional:
+
+- `cooldown_window_minutes` (Number) Time window (in minutes) in which only one sampling rate boost can be triggered. After a boost occurs, no further boosts are allowed until the next window.
+- `max_rate` (Number) The maximum sampling rate X-Ray will apply when it detects anomalies. X-Ray determines the appropriate rate between your baseline and the maximum, depending on anomaly activity.
+
 
 
 
@@ -118,9 +138,19 @@ Optional:
 - `resource_arn` (String) Matches the ARN of the AWS resource on which the service runs.
 - `rule_arn` (String) The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.
 - `rule_name` (String) The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.
+- `sampling_rate_boost` (Attributes) (see [below for nested schema](#nestedatt--sampling_rule_update--sampling_rate_boost))
 - `service_name` (String) Matches the name that the service uses to identify itself in segments.
 - `service_type` (String) Matches the origin that the service uses to identify its type in segments.
 - `url_path` (String) Matches the path from a request URL.
+
+<a id="nestedatt--sampling_rule_update--sampling_rate_boost"></a>
+### Nested Schema for `sampling_rule_update.sampling_rate_boost`
+
+Optional:
+
+- `cooldown_window_minutes` (Number) Time window (in minutes) in which only one sampling rate boost can be triggered. After a boost occurs, no further boosts are allowed until the next window.
+- `max_rate` (Number) The maximum sampling rate X-Ray will apply when it detects anomalies. X-Ray determines the appropriate rate between your baseline and the maximum, depending on anomaly activity.
+
 
 
 <a id="nestedatt--tags"></a>

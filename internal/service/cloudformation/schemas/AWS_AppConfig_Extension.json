@@ -166,6 +166,7 @@
       "permissions": [
         "appconfig:CreateExtension",
         "appconfig:TagResource",
+        "appconfig:GetExtension",
         "iam:PassRole"
       ]
     },

@@ -49,7 +49,6 @@
     "/properties/VpcEndpointId"
   ],
   "writeOnlyProperties": [
-    "/properties/GraphIdentifier",
     "/properties/SecurityGroupIds"
   ],
   "createOnlyProperties": [

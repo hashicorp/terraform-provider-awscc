@@ -1,0 +1,1 @@
+$ terraform import awscc_bedrockagentcore_gateway_rule.example "gateway_identifier|rule_id"

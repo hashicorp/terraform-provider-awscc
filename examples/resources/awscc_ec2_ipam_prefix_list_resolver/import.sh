@@ -1,0 +1,1 @@
+$ terraform import awscc_ec2_ipam_prefix_list_resolver.example "ipam_prefix_list_resolver_id"

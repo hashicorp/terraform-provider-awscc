@@ -44,10 +44,22 @@ resource "awscc_connect_integration_association" "this" {
 - `integration_arn` (String) ARN of Integration being associated with the instance
 - `integration_type` (String) Specifies the integration type to be associated with the instance
 
+### Optional
+
+- `tags` (Attributes List) The tags used to organize, track, or control access for this resource. (see [below for nested schema](#nestedatt--tags))
+
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
 - `integration_association_id` (String) Identifier of the association with Connect Instance
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String) The key name of the tag.
+- `value` (String) The value for the tag.
 
 ## Import
 

@@ -164,7 +164,8 @@
   "handlers": {
     "create": {
       "permissions": [
-        "connect:CreateDataTableAttribute"
+        "connect:CreateDataTableAttribute",
+        "connect:ListDataTableAttributes"
       ]
     },
     "read": {
@@ -219,6 +220,12 @@
   "tagging": {
     "taggable": false
   },
+  "required": [
+    "InstanceArn",
+    "DataTableArn",
+    "Name",
+    "ValueType"
+  ],
   "primaryIdentifier": [
     "/properties/InstanceArn",
     "/properties/DataTableArn",

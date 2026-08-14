@@ -27,7 +27,7 @@
       "properties": {
         "ApplicationPermissions": {
           "type": "array",
-          "maxItems": 10,
+          "maxItems": 50,
           "uniqueItems": true,
           "insertionOrder": false,
           "description": "The permissions that the agent is granted on the application",
@@ -40,12 +40,35 @@
           "description": "Namespace of the application that you want to give access to.",
           "minLength": 1,
           "maxLength": 128
+        },
+        "Type": {
+          "type": "string",
+          "description": "The type of the application.",
+          "enum": [
+            "MCP",
+            "THIRD_PARTY_APPLICATION"
+          ]
         }
       },
-      "required": [
-        "ApplicationPermissions",
-        "Namespace"
-      ],
+      "additionalProperties": false
+    },
+    "FlowModule": {
+      "description": "A first-party application's metadata.",
+      "type": "object",
+      "properties": {
+        "Type": {
+          "type": "string",
+          "description": "The type of the first-party application",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "FlowModuleId": {
+          "type": "string",
+          "description": "The identifier of the application that you want to give access to.",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
       "additionalProperties": false
     },
     "Tag": {
@@ -97,9 +120,6 @@
           "uniqueItems": true
         }
       },
-      "required": [
-        "PrimaryAttributeValues"
-      ],
       "additionalProperties": false
     },
     "PrimaryAttributeValue": {
@@ -134,18 +154,13 @@
           "uniqueItems": true
         }
       },
-      "required": [
-        "AccessType",
-        "AttributeName",
-        "Values"
-      ],
       "additionalProperties": false
     }
   },
   "properties": {
     "AllowedAccessControlTags": {
       "type": "array",
-      "maxItems": 2,
+      "maxItems": 4,
       "uniqueItems": true,
       "insertionOrder": false,
       "description": "The list of tags that a security profile uses to restrict access to resources in Amazon Connect.",
@@ -223,6 +238,16 @@
         "$ref": "#/definitions/Application"
       }
     },
+    "AllowedFlowModules": {
+      "type": "array",
+      "maxItems": 10,
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "description": "The list of flow-module resources to be linked to a security profile in Amazon Connect.",
+      "items": {
+        "$ref": "#/definitions/FlowModule"
+      }
+    },
     "Tags": {
       "type": "array",
       "maxItems": 50,
@@ -257,7 +282,7 @@
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": true,
+    "cloudFormationSystemTags": false,
     "tagProperty": "/properties/Tags",
     "permissions": [
       "connect:TagResource",
@@ -291,6 +316,7 @@
       "permissions": [
         "connect:DescribeSecurityProfile",
         "connect:ListSecurityProfileApplications",
+        "connect:ListSecurityProfileFlowModules",
         "connect:ListSecurityProfilePermissions"
       ]
     },

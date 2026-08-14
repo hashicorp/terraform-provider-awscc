@@ -1,0 +1,1 @@
+$ terraform import awscc_cleanrooms_intermediate_table.example "intermediate_table_identifier|membership_identifier"

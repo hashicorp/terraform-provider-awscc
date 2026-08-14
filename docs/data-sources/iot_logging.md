@@ -23,4 +23,14 @@ Data Source schema for AWS::IoT::Logging
 
 - `account_id` (String) Your 12-digit account ID (used as the primary identifier for the CloudFormation resource).
 - `default_log_level` (String) The log level to use. Valid values are: ERROR, WARN, INFO, DEBUG, or DISABLED.
+- `event_configurations` (Attributes List) Configurations for event-based logging that specifies which event types to log and their logging settings. Overrides account-level logging for the specified event (see [below for nested schema](#nestedatt--event_configurations))
 - `role_arn` (String) The ARN of the role that allows IoT to write to Cloudwatch logs.
+
+<a id="nestedatt--event_configurations"></a>
+### Nested Schema for `event_configurations`
+
+Read-Only:
+
+- `event_type` (String) The type of event to log. These include event types like Connect, Publish, and Disconnect.
+- `log_destination` (String) CloudWatch Log Group for event-based logging. Specifies where log events should be sent. The log destination for event-based logging overrides default Log Group for the specified event type and applies to all resources associated with that event.
+- `log_level` (String) The logging level for the specified event type. Determines the verbosity of log messages generated for this event type.

@@ -94,6 +94,11 @@
       "maxLength": 2048,
       "description": "The ARN of the alias."
     },
+    "StateMachineArn": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
     "Name": {
       "type": "string",
       "description": "The alias name.",
@@ -173,12 +178,12 @@
       ],
       "handlerSchema": {
         "properties": {
-          "RoutingConfiguration": {
-            "$ref": "resource-schema.json#/properties/RoutingConfiguration"
+          "StateMachineArn": {
+            "$ref": "resource-schema.json#/properties/StateMachineArn"
           }
         },
         "required": [
-          "RoutingConfiguration"
+          "StateMachineArn"
         ]
       }
     }

@@ -1,11 +1,12 @@
 {
   "typeName": "AWS::ImageBuilder::ImageRecipe",
-  "description": "Resource schema for AWS::ImageBuilder::ImageRecipe",
+  "description": "Resource Type definition for AWS::ImageBuilder::ImageRecipe",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-imagebuilder.git",
   "properties": {
     "Arn": {
       "description": "The Amazon Resource Name (ARN) of the image recipe.",
-      "type": "string"
+      "type": "string",
+      "pattern": "^arn:[^:]+:imagebuilder:[^:]+:[^:]+:image-recipe/.+$"
     },
     "Name": {
       "description": "The name of the image recipe.",
@@ -55,6 +56,19 @@
         "": {
           "type": "string"
         }
+      }
+    },
+    "AmiWatermarks": {
+      "description": "The AMI watermark names to attach to the output AMI from this recipe. AMI watermarks are lineage markers that automatically propagate to derivative AMIs when the source AMI is copied or distributed.",
+      "type": "array",
+      "insertionOrder": false,
+      "minItems": 1,
+      "maxItems": 5,
+      "items": {
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 128,
+        "pattern": "^[A-Za-z0-9()\\[\\]./'@_\\-][A-Za-z0-9 ()\\[\\]./'@_\\-]{1,126}[A-Za-z0-9()\\[\\]./'@_\\-]$"
       }
     },
     "Tags": {
@@ -155,8 +169,10 @@
             "standard",
             "io1",
             "io2",
+            "io2a",
             "gp2",
             "gp3",
+            "gp3a",
             "sc1",
             "st1"
           ]
@@ -260,13 +276,19 @@
     "/properties/ParentImage",
     "/properties/Description",
     "/properties/BlockDeviceMappings",
-    "/properties/WorkingDirectory"
+    "/properties/WorkingDirectory",
+    "/properties/AdditionalInstanceConfiguration",
+    "/properties/AmiTags",
+    "/properties/AmiWatermarks"
   ],
+  "propertyTransform": {
+    "/properties/Version": "$join([\"^\", $replace($replace(Version, \".\", \"\\\\.\"), \"x\", \"[0-9]+\"), \"$\"])"
+  },
   "tagging": {
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": true,
+    "cloudFormationSystemTags": false,
     "tagProperty": "/properties/Tags",
     "permissions": [
       "imagebuilder:TagResource",

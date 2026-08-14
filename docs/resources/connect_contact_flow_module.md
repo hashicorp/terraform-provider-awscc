@@ -80,6 +80,8 @@ resource "awscc_connect_contact_flow_module" "example" {
 ### Optional
 
 - `description` (String) The description of the contact flow module.
+- `external_invocation_configuration` (Attributes) Defines the external invocation configuration of the flow module resource (see [below for nested schema](#nestedatt--external_invocation_configuration))
+- `settings` (String) The schema of the settings for contact flow module in JSON Schema V4 format.
 - `state` (String) The state of the contact flow module.
 - `tags` (Attributes Set) One or more tags. (see [below for nested schema](#nestedatt--tags))
 
@@ -88,6 +90,14 @@ resource "awscc_connect_contact_flow_module" "example" {
 - `contact_flow_module_arn` (String) The identifier of the contact flow module (ARN).
 - `id` (String) Uniquely identifies the resource.
 - `status` (String) The status of the contact flow module.
+
+<a id="nestedatt--external_invocation_configuration"></a>
+### Nested Schema for `external_invocation_configuration`
+
+Optional:
+
+- `enabled` (Boolean) Specifies whether the flow module resource is enabled for external invocation
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

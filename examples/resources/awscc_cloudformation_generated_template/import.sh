@@ -1,0 +1,1 @@
+$ terraform import awscc_cloudformation_generated_template.example "generated_template_id"

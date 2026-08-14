@@ -1,3 +1,6 @@
+# Copyright IBM Corp. 2021, 2026
+# "SPDX-License-Identifier: MPL-2.0"
+
 # provider-release is a convenient way to request a promotion of artifacts to
 # the staging or production release channel via Common Release Tooling (CRT).
 #
@@ -32,6 +35,8 @@ on:
           - "staging"
           - "production"
         default: "staging"
+
+permissions: {} # Workflow uses BOB_GITHUB_TOKEN secret
 
 env:
   slack_channel: "C09L3G3V55J" # #feed-tf-aws

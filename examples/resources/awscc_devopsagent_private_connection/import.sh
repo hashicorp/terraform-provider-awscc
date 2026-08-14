@@ -1,0 +1,1 @@
+$ terraform import awscc_devopsagent_private_connection.example "name"

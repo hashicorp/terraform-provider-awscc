@@ -40,6 +40,7 @@ Data Source schema for AWS::MediaConnect::FlowSource
 - `source_listener_address` (String) Source IP or domain name for SRT-caller protocol.
 - `source_listener_port` (Number) Source port for SRT-caller protocol.
 - `stream_id` (String) The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
+- `tags` (Attributes List) Key-value pairs that can be used to tag and organize this flow source. (see [below for nested schema](#nestedatt--tags))
 - `vpc_interface_name` (String) The name of the VPC Interface this Source is configured with.
 - `whitelist_cidr` (String) The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
 
@@ -73,3 +74,13 @@ Read-Only:
 Read-Only:
 
 - `vpc_interface_name` (String) The name of the VPC interface to use for this resource.
+
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)

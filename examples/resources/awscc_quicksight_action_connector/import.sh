@@ -1,0 +1,1 @@
+$ terraform import awscc_quicksight_action_connector.example "action_connector_id|aws_account_id"

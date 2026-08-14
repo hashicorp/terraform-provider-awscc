@@ -1,0 +1,1 @@
+$ terraform import awscc_bedrock_data_automation_library.example "library_arn"

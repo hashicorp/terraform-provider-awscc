@@ -197,7 +197,7 @@ Optional:
 - `platform_version` (String) Specifies the platform version for the task. Specify only the numeric portion of the platform version, such as 1.1.0.
 - `propagate_tags` (String) Specifies whether to propagate the tags from the task definition to the task. If no value is specified, the tags are not propagated. Tags can only be propagated to the task during task creation. To add tags to a task after task creation, use the TagResource API action.
 - `reference_id` (String) The reference ID to use for the task.
-- `tags` (List of List of String) The metadata that you apply to the task to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. To learn more, see RunTask in the Amazon ECS API Reference.
+- `tags` (List of Map of String) The metadata that you apply to the task to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. To learn more, see RunTask in the Amazon ECS API Reference.
 - `task_count` (Number) The number of tasks to create based on TaskDefinition. The default is 1.
 - `task_definition_arn` (String) The ARN of the task definition to use if the event target is an Amazon ECS task.
 

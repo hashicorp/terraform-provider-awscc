@@ -32,8 +32,11 @@ Data Source schema for AWS::CloudWatch::Alarm
  If you omit this parameter, CW uses the same value here that you set for ``EvaluationPeriods``, and the alarm goes to alarm state if that many consecutive periods are breaching.
 - `dimensions` (Attributes List) The dimensions for the metric associated with the alarm. For an alarm based on a math expression, you can't specify ``Dimensions``. Instead, you use ``Metrics``. (see [below for nested schema](#nestedatt--dimensions))
 - `evaluate_low_sample_count_percentile` (String) Used only for alarms based on percentiles. If ``ignore``, the alarm state does not change during periods with too few data points to be statistically significant. If ``evaluate`` or this parameter is not used, the alarm is always evaluated and possibly changes state no matter how many data points are available.
+- `evaluation_criteria` (Attributes) The evaluation criteria for the alarm. (see [below for nested schema](#nestedatt--evaluation_criteria))
+- `evaluation_interval` (Number) The frequency, in seconds, at which the alarm is evaluated.
 - `evaluation_periods` (Number) The number of periods over which data is compared to the specified threshold. If you are setting an alarm that requires that a number of consecutive data points be breaching to trigger the alarm, this value specifies that number. If you are setting an "M out of N" alarm, this value is the N, and ``DatapointsToAlarm`` is the M.
  For more information, see [Evaluating an Alarm](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation) in the *User Guide*.
+- `evaluation_window` (Attributes) (see [below for nested schema](#nestedatt--evaluation_window))
 - `extended_statistic` (String) The percentile statistic for the metric associated with the alarm. Specify a value between p0.0 and p100.
  For an alarm based on a metric, you must specify either ``Statistic`` or ``ExtendedStatistic`` but not both.
  For an alarm based on a math expression, you can't specify ``ExtendedStatistic``. Instead, you use ``Metrics``.
@@ -64,8 +67,43 @@ Data Source schema for AWS::CloudWatch::Alarm
 
 Read-Only:
 
-- `name` (String) The name of the dimension, from 1?255 characters in length. This dimension name must have been included when the metric was published.
-- `value` (String) The value for the dimension, from 1?255 characters in length.
+- `name` (String) The name of the dimension, from 1–255 characters in length. This dimension name must have been included when the metric was published.
+- `value` (String) The value for the dimension, from 1–255 characters in length.
+
+
+<a id="nestedatt--evaluation_criteria"></a>
+### Nested Schema for `evaluation_criteria`
+
+Read-Only:
+
+- `prom_ql_criteria` (Attributes) The PromQL criteria for the alarm evaluation. (see [below for nested schema](#nestedatt--evaluation_criteria--prom_ql_criteria))
+
+<a id="nestedatt--evaluation_criteria--prom_ql_criteria"></a>
+### Nested Schema for `evaluation_criteria.prom_ql_criteria`
+
+Read-Only:
+
+- `pending_period` (Number) The duration, in seconds, that a contributor must be continuously breaching before it transitions to the ``ALARM`` state.
+- `query` (String) The PromQL query that the alarm evaluates. The query must return a result of vector type. Each entry in the vector result represents an alarm contributor.
+- `recovery_period` (Number) The duration, in seconds, that a contributor must continuously not be breaching before it transitions back to the ``OK`` state.
+
+
+
+<a id="nestedatt--evaluation_window"></a>
+### Nested Schema for `evaluation_window`
+
+Read-Only:
+
+- `sliding_window` (String) Configuration for sliding evaluation window (default behavior).
+- `wall_clock_window` (Attributes) Configuration for wall clock based evaluation window. (see [below for nested schema](#nestedatt--evaluation_window--wall_clock_window))
+
+<a id="nestedatt--evaluation_window--wall_clock_window"></a>
+### Nested Schema for `evaluation_window.wall_clock_window`
+
+Read-Only:
+
+- `timezone` (String) The timezone for wall clock evaluation, in IANA time zone format (e.g., America/New_York, UTC).
+
 
 
 <a id="nestedatt--metrics"></a>
@@ -114,8 +152,8 @@ Read-Only:
 
 Read-Only:
 
-- `name` (String) The name of the dimension, from 1?255 characters in length. This dimension name must have been included when the metric was published.
-- `value` (String) The value for the dimension, from 1?255 characters in length.
+- `name` (String) The name of the dimension, from 1–255 characters in length. This dimension name must have been included when the metric was published.
+- `value` (String) The value for the dimension, from 1–255 characters in length.
 
 
 

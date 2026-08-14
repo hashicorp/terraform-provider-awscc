@@ -26,17 +26,21 @@ Data Source schema for AWS::Route53Resolver::ResolverEndpoint
 - INBOUND: allows DNS queries to your VPC from your network 
 - OUTBOUND: allows DNS queries from your VPC to your network 
 - INBOUND_DELEGATION: allows DNS queries to your VPC from your network with authoritative answers from private hosted zones
+- `dns_64_enabled` (Boolean) Specifies whether DNS64 is enabled for the Inbound Resolver Endpoint. When set to true, if a DNS AAAA query is made for a domain that has only an A (IPv4) record, the resolver automatically synthesizes an AAAA (IPv6) response by embedding the IPv4 address into the well-known prefix 64:ff9b::/96. Default is false.
 - `host_vpc_id` (String) The ID of the VPC that you want to create the resolver endpoint in.
 - `ip_address_count` (String) The number of IP addresses that the resolver endpoint can use for DNS queries.
 - `ip_addresses` (Attributes List) The subnets and IP addresses in your VPC that DNS queries originate from (for outbound endpoints) or that you forward DNS queries to (for inbound endpoints). The subnet ID uniquely identifies a VPC. (see [below for nested schema](#nestedatt--ip_addresses))
+- `ipv_6_internet_access_enabled` (Boolean) Specifies whether IPv6 Internet Gateway access is enabled through the Outbound Resolver Endpoint. When set to true, this property allows your Endpoint ENIs to reach public IPv6 target nameservers through an internet gateway. Default is false.
 - `name` (String) A friendly name that lets you easily find a configuration in the Resolver dashboard in the Route 53 console.
 - `outpost_arn` (String) The ARN (Amazon Resource Name) for the Outpost.
 - `preferred_instance_type` (String) The Amazon EC2 instance type.
 - `protocols` (List of String) Protocols used for the endpoint. DoH-FIPS is applicable for inbound endpoints only.
 - `resolver_endpoint_id` (String) The ID of the resolver endpoint.
 - `resolver_endpoint_type` (String) The Resolver endpoint IP address type.
+- `rni_enhanced_metrics_enabled` (Boolean) Specifies whether RNI enhanced metrics are enabled for the Resolver Endpoints. When set to true, one-minute granular metrics are published in CloudWatch for each RNI associated with this endpoint. When set to false, metrics are not published. Default is false.
 - `security_group_ids` (List of String) The ID of one or more security groups that control access to this VPC. The security group must include one or more inbound rules (for inbound endpoints) or outbound rules (for outbound endpoints). Inbound and outbound rules must allow TCP and UDP access. For inbound access, open port 53. For outbound access, open the port that you're using for DNS queries on your network.
 - `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `target_name_server_metrics_enabled` (Boolean) Specifies whether target name server metrics are enabled for the Outbound Resolver Endpoint. When set to true, one-minute granular metrics are published in CloudWatch for each target name server associated with this endpoint. When set to false, metrics are not published. Default is false.
 
 <a id="nestedatt--ip_addresses"></a>
 ### Nested Schema for `ip_addresses`

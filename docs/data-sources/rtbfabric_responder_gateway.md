@@ -21,11 +21,16 @@ Data Source schema for AWS::RTBFabric::ResponderGateway
 
 ### Read-Only
 
+- `acm_certificate_arn` (String)
 - `arn` (String)
+- `certificate_association_status` (String)
 - `created_timestamp` (String)
 - `description` (String)
 - `domain_name` (String)
+- `external_inbound_endpoint` (String)
 - `gateway_id` (String)
+- `gateway_type` (String)
+- `listener_config` (Attributes) (see [below for nested schema](#nestedatt--listener_config))
 - `managed_endpoint_configuration` (Attributes) (see [below for nested schema](#nestedatt--managed_endpoint_configuration))
 - `port` (Number)
 - `protocol` (String)
@@ -36,6 +41,14 @@ Data Source schema for AWS::RTBFabric::ResponderGateway
 - `trust_store_configuration` (Attributes) (see [below for nested schema](#nestedatt--trust_store_configuration))
 - `updated_timestamp` (String)
 - `vpc_id` (String)
+
+<a id="nestedatt--listener_config"></a>
+### Nested Schema for `listener_config`
+
+Read-Only:
+
+- `protocols` (List of String)
+
 
 <a id="nestedatt--managed_endpoint_configuration"></a>
 ### Nested Schema for `managed_endpoint_configuration`
@@ -51,7 +64,23 @@ Read-Only:
 Read-Only:
 
 - `auto_scaling_group_name_list` (Set of String)
+- `health_check_config` (Attributes) (see [below for nested schema](#nestedatt--managed_endpoint_configuration--auto_scaling_groups_configuration--health_check_config))
 - `role_arn` (String)
+
+<a id="nestedatt--managed_endpoint_configuration--auto_scaling_groups_configuration--health_check_config"></a>
+### Nested Schema for `managed_endpoint_configuration.auto_scaling_groups_configuration.health_check_config`
+
+Read-Only:
+
+- `healthy_threshold_count` (Number)
+- `interval_seconds` (Number)
+- `path` (String)
+- `port` (Number)
+- `protocol` (String)
+- `status_code_matcher` (String)
+- `timeout_ms` (Number)
+- `unhealthy_threshold_count` (Number)
+
 
 
 <a id="nestedatt--managed_endpoint_configuration--eks_endpoints_configuration"></a>

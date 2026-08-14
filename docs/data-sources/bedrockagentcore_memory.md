@@ -26,14 +26,25 @@ Data Source schema for AWS::BedrockAgentCore::Memory
 - `encryption_key_arn` (String) ARN format
 - `event_expiry_duration` (Number) Duration in days until memory events expire
 - `failure_reason` (String)
+- `indexed_keys` (Attributes List) List of indexed keys for the memory (see [below for nested schema](#nestedatt--indexed_keys))
 - `memory_arn` (String) ARN of the Memory resource
 - `memory_execution_role_arn` (String) ARN format
 - `memory_id` (String) Unique identifier for the Memory resource
 - `memory_strategies` (Attributes List) List of memory strategies attached to this memory (see [below for nested schema](#nestedatt--memory_strategies))
 - `name` (String) Name of the Memory resource
 - `status` (String) Status of the Memory resource
+- `stream_delivery_resources` (Attributes) (see [below for nested schema](#nestedatt--stream_delivery_resources))
 - `tags` (Map of String) A map of tag keys and values
 - `updated_at` (String)
+
+<a id="nestedatt--indexed_keys"></a>
+### Nested Schema for `indexed_keys`
+
+Read-Only:
+
+- `key` (String) Key name for metadata fields
+- `type` (String) Supported data types for metadata values
+
 
 <a id="nestedatt--memory_strategies"></a>
 ### Nested Schema for `memory_strategies`
@@ -41,6 +52,7 @@ Data Source schema for AWS::BedrockAgentCore::Memory
 Read-Only:
 
 - `custom_memory_strategy` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy))
+- `episodic_memory_strategy` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--episodic_memory_strategy))
 - `semantic_memory_strategy` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--semantic_memory_strategy))
 - `summary_memory_strategy` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--summary_memory_strategy))
 - `user_preference_memory_strategy` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--user_preference_memory_strategy))
@@ -53,7 +65,9 @@ Read-Only:
 - `configuration` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration))
 - `created_at` (String) Creation timestamp of the memory strategy
 - `description` (String) Description of the Memory resource
+- `memory_record_schema` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--memory_record_schema))
 - `name` (String) Name of the Memory resource
+- `namespace_templates` (List of String) List of namespaces for memory strategy
 - `namespaces` (List of String) List of namespaces for memory strategy
 - `status` (String) Status of the memory strategy
 - `strategy_id` (String) Unique identifier for the memory strategy
@@ -65,10 +79,123 @@ Read-Only:
 
 Read-Only:
 
+- `episodic_override` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration--episodic_override))
 - `self_managed_configuration` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration--self_managed_configuration))
 - `semantic_override` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration--semantic_override))
 - `summary_override` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration--summary_override))
 - `user_preference_override` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration--user_preference_override))
+
+<a id="nestedatt--memory_strategies--custom_memory_strategy--configuration--episodic_override"></a>
+### Nested Schema for `memory_strategies.custom_memory_strategy.configuration.episodic_override`
+
+Read-Only:
+
+- `consolidation` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration--episodic_override--consolidation))
+- `extraction` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration--episodic_override--extraction))
+- `reflection` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration--episodic_override--reflection))
+
+<a id="nestedatt--memory_strategies--custom_memory_strategy--configuration--episodic_override--consolidation"></a>
+### Nested Schema for `memory_strategies.custom_memory_strategy.configuration.episodic_override.consolidation`
+
+Read-Only:
+
+- `append_to_prompt` (String) Text prompt for model instructions
+- `model_id` (String)
+
+
+<a id="nestedatt--memory_strategies--custom_memory_strategy--configuration--episodic_override--extraction"></a>
+### Nested Schema for `memory_strategies.custom_memory_strategy.configuration.episodic_override.extraction`
+
+Read-Only:
+
+- `append_to_prompt` (String) Text prompt for model instructions
+- `model_id` (String)
+
+
+<a id="nestedatt--memory_strategies--custom_memory_strategy--configuration--episodic_override--reflection"></a>
+### Nested Schema for `memory_strategies.custom_memory_strategy.configuration.episodic_override.reflection`
+
+Read-Only:
+
+- `append_to_prompt` (String) Text prompt for model instructions
+- `memory_record_schema` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration--episodic_override--reflection--memory_record_schema))
+- `model_id` (String)
+- `namespace_templates` (List of String) List of namespaces for memory strategy
+- `namespaces` (List of String) List of namespaces for memory strategy
+
+<a id="nestedatt--memory_strategies--custom_memory_strategy--configuration--episodic_override--reflection--memory_record_schema"></a>
+### Nested Schema for `memory_strategies.custom_memory_strategy.configuration.episodic_override.reflection.memory_record_schema`
+
+Read-Only:
+
+- `metadata_schema` (Attributes List) List of metadata schema entries (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration--episodic_override--reflection--memory_record_schema--metadata_schema))
+
+<a id="nestedatt--memory_strategies--custom_memory_strategy--configuration--episodic_override--reflection--memory_record_schema--metadata_schema"></a>
+### Nested Schema for `memory_strategies.custom_memory_strategy.configuration.episodic_override.reflection.memory_record_schema.metadata_schema`
+
+Read-Only:
+
+- `extraction_config` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration--episodic_override--reflection--memory_record_schema--metadata_schema--extraction_config))
+- `key` (String) Key name for metadata fields
+- `type` (String) Supported data types for metadata values
+
+<a id="nestedatt--memory_strategies--custom_memory_strategy--configuration--episodic_override--reflection--memory_record_schema--metadata_schema--extraction_config"></a>
+### Nested Schema for `memory_strategies.custom_memory_strategy.configuration.episodic_override.reflection.memory_record_schema.metadata_schema.extraction_config`
+
+Read-Only:
+
+- `llm_extraction_config` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration--episodic_override--reflection--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config))
+
+<a id="nestedatt--memory_strategies--custom_memory_strategy--configuration--episodic_override--reflection--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config"></a>
+### Nested Schema for `memory_strategies.custom_memory_strategy.configuration.episodic_override.reflection.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config`
+
+Read-Only:
+
+- `definition` (String) Definition for the metadata schema entry
+- `llm_extraction_instruction` (String) LLM extraction instruction
+- `validation` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration--episodic_override--reflection--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation))
+
+<a id="nestedatt--memory_strategies--custom_memory_strategy--configuration--episodic_override--reflection--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation"></a>
+### Nested Schema for `memory_strategies.custom_memory_strategy.configuration.episodic_override.reflection.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config.validation`
+
+Read-Only:
+
+- `number_validation` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration--episodic_override--reflection--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--number_validation))
+- `string_list_validation` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration--episodic_override--reflection--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--string_list_validation))
+- `string_validation` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration--episodic_override--reflection--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--string_validation))
+
+<a id="nestedatt--memory_strategies--custom_memory_strategy--configuration--episodic_override--reflection--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--number_validation"></a>
+### Nested Schema for `memory_strategies.custom_memory_strategy.configuration.episodic_override.reflection.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config.validation.number_validation`
+
+Read-Only:
+
+- `max_value` (Number)
+- `min_value` (Number)
+
+
+<a id="nestedatt--memory_strategies--custom_memory_strategy--configuration--episodic_override--reflection--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--string_list_validation"></a>
+### Nested Schema for `memory_strategies.custom_memory_strategy.configuration.episodic_override.reflection.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config.validation.string_list_validation`
+
+Read-Only:
+
+- `allowed_values` (List of String)
+- `max_items` (Number)
+
+
+<a id="nestedatt--memory_strategies--custom_memory_strategy--configuration--episodic_override--reflection--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--string_validation"></a>
+### Nested Schema for `memory_strategies.custom_memory_strategy.configuration.episodic_override.reflection.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config.validation.string_validation`
+
+Read-Only:
+
+- `allowed_values` (List of String)
+
+
+
+
+
+
+
+
 
 <a id="nestedatt--memory_strategies--custom_memory_strategy--configuration--self_managed_configuration"></a>
 ### Nested Schema for `memory_strategies.custom_memory_strategy.configuration.self_managed_configuration`
@@ -195,6 +322,250 @@ Read-Only:
 
 
 
+<a id="nestedatt--memory_strategies--custom_memory_strategy--memory_record_schema"></a>
+### Nested Schema for `memory_strategies.custom_memory_strategy.memory_record_schema`
+
+Read-Only:
+
+- `metadata_schema` (Attributes List) List of metadata schema entries (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--memory_record_schema--metadata_schema))
+
+<a id="nestedatt--memory_strategies--custom_memory_strategy--memory_record_schema--metadata_schema"></a>
+### Nested Schema for `memory_strategies.custom_memory_strategy.memory_record_schema.metadata_schema`
+
+Read-Only:
+
+- `extraction_config` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--memory_record_schema--metadata_schema--extraction_config))
+- `key` (String) Key name for metadata fields
+- `type` (String) Supported data types for metadata values
+
+<a id="nestedatt--memory_strategies--custom_memory_strategy--memory_record_schema--metadata_schema--extraction_config"></a>
+### Nested Schema for `memory_strategies.custom_memory_strategy.memory_record_schema.metadata_schema.extraction_config`
+
+Read-Only:
+
+- `llm_extraction_config` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config))
+
+<a id="nestedatt--memory_strategies--custom_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config"></a>
+### Nested Schema for `memory_strategies.custom_memory_strategy.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config`
+
+Read-Only:
+
+- `definition` (String) Definition for the metadata schema entry
+- `llm_extraction_instruction` (String) LLM extraction instruction
+- `validation` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation))
+
+<a id="nestedatt--memory_strategies--custom_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation"></a>
+### Nested Schema for `memory_strategies.custom_memory_strategy.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config.validation`
+
+Read-Only:
+
+- `number_validation` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--number_validation))
+- `string_list_validation` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--string_list_validation))
+- `string_validation` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--string_validation))
+
+<a id="nestedatt--memory_strategies--custom_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--number_validation"></a>
+### Nested Schema for `memory_strategies.custom_memory_strategy.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config.validation.number_validation`
+
+Read-Only:
+
+- `max_value` (Number)
+- `min_value` (Number)
+
+
+<a id="nestedatt--memory_strategies--custom_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--string_list_validation"></a>
+### Nested Schema for `memory_strategies.custom_memory_strategy.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config.validation.string_list_validation`
+
+Read-Only:
+
+- `allowed_values` (List of String)
+- `max_items` (Number)
+
+
+<a id="nestedatt--memory_strategies--custom_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--string_validation"></a>
+### Nested Schema for `memory_strategies.custom_memory_strategy.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config.validation.string_validation`
+
+Read-Only:
+
+- `allowed_values` (List of String)
+
+
+
+
+
+
+
+
+<a id="nestedatt--memory_strategies--episodic_memory_strategy"></a>
+### Nested Schema for `memory_strategies.episodic_memory_strategy`
+
+Read-Only:
+
+- `created_at` (String) Creation timestamp of the memory strategy
+- `description` (String) Description of the Memory resource
+- `memory_record_schema` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--episodic_memory_strategy--memory_record_schema))
+- `name` (String) Name of the Memory resource
+- `namespace_templates` (List of String) List of namespaces for memory strategy
+- `namespaces` (List of String) List of namespaces for memory strategy
+- `reflection_configuration` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--episodic_memory_strategy--reflection_configuration))
+- `status` (String) Status of the memory strategy
+- `strategy_id` (String) Unique identifier for the memory strategy
+- `type` (String) Type of memory strategy
+- `updated_at` (String) Last update timestamp of the memory strategy
+
+<a id="nestedatt--memory_strategies--episodic_memory_strategy--memory_record_schema"></a>
+### Nested Schema for `memory_strategies.episodic_memory_strategy.memory_record_schema`
+
+Read-Only:
+
+- `metadata_schema` (Attributes List) List of metadata schema entries (see [below for nested schema](#nestedatt--memory_strategies--episodic_memory_strategy--memory_record_schema--metadata_schema))
+
+<a id="nestedatt--memory_strategies--episodic_memory_strategy--memory_record_schema--metadata_schema"></a>
+### Nested Schema for `memory_strategies.episodic_memory_strategy.memory_record_schema.metadata_schema`
+
+Read-Only:
+
+- `extraction_config` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--episodic_memory_strategy--memory_record_schema--metadata_schema--extraction_config))
+- `key` (String) Key name for metadata fields
+- `type` (String) Supported data types for metadata values
+
+<a id="nestedatt--memory_strategies--episodic_memory_strategy--memory_record_schema--metadata_schema--extraction_config"></a>
+### Nested Schema for `memory_strategies.episodic_memory_strategy.memory_record_schema.metadata_schema.extraction_config`
+
+Read-Only:
+
+- `llm_extraction_config` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--episodic_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config))
+
+<a id="nestedatt--memory_strategies--episodic_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config"></a>
+### Nested Schema for `memory_strategies.episodic_memory_strategy.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config`
+
+Read-Only:
+
+- `definition` (String) Definition for the metadata schema entry
+- `llm_extraction_instruction` (String) LLM extraction instruction
+- `validation` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--episodic_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation))
+
+<a id="nestedatt--memory_strategies--episodic_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation"></a>
+### Nested Schema for `memory_strategies.episodic_memory_strategy.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config.validation`
+
+Read-Only:
+
+- `number_validation` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--episodic_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--number_validation))
+- `string_list_validation` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--episodic_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--string_list_validation))
+- `string_validation` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--episodic_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--string_validation))
+
+<a id="nestedatt--memory_strategies--episodic_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--number_validation"></a>
+### Nested Schema for `memory_strategies.episodic_memory_strategy.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config.validation.number_validation`
+
+Read-Only:
+
+- `max_value` (Number)
+- `min_value` (Number)
+
+
+<a id="nestedatt--memory_strategies--episodic_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--string_list_validation"></a>
+### Nested Schema for `memory_strategies.episodic_memory_strategy.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config.validation.string_list_validation`
+
+Read-Only:
+
+- `allowed_values` (List of String)
+- `max_items` (Number)
+
+
+<a id="nestedatt--memory_strategies--episodic_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--string_validation"></a>
+### Nested Schema for `memory_strategies.episodic_memory_strategy.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config.validation.string_validation`
+
+Read-Only:
+
+- `allowed_values` (List of String)
+
+
+
+
+
+
+
+<a id="nestedatt--memory_strategies--episodic_memory_strategy--reflection_configuration"></a>
+### Nested Schema for `memory_strategies.episodic_memory_strategy.reflection_configuration`
+
+Read-Only:
+
+- `memory_record_schema` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--episodic_memory_strategy--reflection_configuration--memory_record_schema))
+- `namespace_templates` (List of String) List of namespaces for memory strategy
+- `namespaces` (List of String) List of namespaces for memory strategy
+
+<a id="nestedatt--memory_strategies--episodic_memory_strategy--reflection_configuration--memory_record_schema"></a>
+### Nested Schema for `memory_strategies.episodic_memory_strategy.reflection_configuration.memory_record_schema`
+
+Read-Only:
+
+- `metadata_schema` (Attributes List) List of metadata schema entries (see [below for nested schema](#nestedatt--memory_strategies--episodic_memory_strategy--reflection_configuration--memory_record_schema--metadata_schema))
+
+<a id="nestedatt--memory_strategies--episodic_memory_strategy--reflection_configuration--memory_record_schema--metadata_schema"></a>
+### Nested Schema for `memory_strategies.episodic_memory_strategy.reflection_configuration.memory_record_schema.metadata_schema`
+
+Read-Only:
+
+- `extraction_config` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--episodic_memory_strategy--reflection_configuration--memory_record_schema--metadata_schema--extraction_config))
+- `key` (String) Key name for metadata fields
+- `type` (String) Supported data types for metadata values
+
+<a id="nestedatt--memory_strategies--episodic_memory_strategy--reflection_configuration--memory_record_schema--metadata_schema--extraction_config"></a>
+### Nested Schema for `memory_strategies.episodic_memory_strategy.reflection_configuration.memory_record_schema.metadata_schema.extraction_config`
+
+Read-Only:
+
+- `llm_extraction_config` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--episodic_memory_strategy--reflection_configuration--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config))
+
+<a id="nestedatt--memory_strategies--episodic_memory_strategy--reflection_configuration--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config"></a>
+### Nested Schema for `memory_strategies.episodic_memory_strategy.reflection_configuration.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config`
+
+Read-Only:
+
+- `definition` (String) Definition for the metadata schema entry
+- `llm_extraction_instruction` (String) LLM extraction instruction
+- `validation` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--episodic_memory_strategy--reflection_configuration--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation))
+
+<a id="nestedatt--memory_strategies--episodic_memory_strategy--reflection_configuration--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation"></a>
+### Nested Schema for `memory_strategies.episodic_memory_strategy.reflection_configuration.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config.validation`
+
+Read-Only:
+
+- `number_validation` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--episodic_memory_strategy--reflection_configuration--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--number_validation))
+- `string_list_validation` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--episodic_memory_strategy--reflection_configuration--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--string_list_validation))
+- `string_validation` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--episodic_memory_strategy--reflection_configuration--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--string_validation))
+
+<a id="nestedatt--memory_strategies--episodic_memory_strategy--reflection_configuration--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--number_validation"></a>
+### Nested Schema for `memory_strategies.episodic_memory_strategy.reflection_configuration.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config.validation.number_validation`
+
+Read-Only:
+
+- `max_value` (Number)
+- `min_value` (Number)
+
+
+<a id="nestedatt--memory_strategies--episodic_memory_strategy--reflection_configuration--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--string_list_validation"></a>
+### Nested Schema for `memory_strategies.episodic_memory_strategy.reflection_configuration.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config.validation.string_list_validation`
+
+Read-Only:
+
+- `allowed_values` (List of String)
+- `max_items` (Number)
+
+
+<a id="nestedatt--memory_strategies--episodic_memory_strategy--reflection_configuration--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--string_validation"></a>
+### Nested Schema for `memory_strategies.episodic_memory_strategy.reflection_configuration.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config.validation.string_validation`
+
+Read-Only:
+
+- `allowed_values` (List of String)
+
+
+
+
+
+
+
+
 
 <a id="nestedatt--memory_strategies--semantic_memory_strategy"></a>
 ### Nested Schema for `memory_strategies.semantic_memory_strategy`
@@ -203,12 +574,86 @@ Read-Only:
 
 - `created_at` (String) Creation timestamp of the memory strategy
 - `description` (String) Description of the Memory resource
+- `memory_record_schema` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--semantic_memory_strategy--memory_record_schema))
 - `name` (String) Name of the Memory resource
+- `namespace_templates` (List of String) List of namespaces for memory strategy
 - `namespaces` (List of String) List of namespaces for memory strategy
 - `status` (String) Status of the memory strategy
 - `strategy_id` (String) Unique identifier for the memory strategy
 - `type` (String) Type of memory strategy
 - `updated_at` (String) Last update timestamp of the memory strategy
+
+<a id="nestedatt--memory_strategies--semantic_memory_strategy--memory_record_schema"></a>
+### Nested Schema for `memory_strategies.semantic_memory_strategy.memory_record_schema`
+
+Read-Only:
+
+- `metadata_schema` (Attributes List) List of metadata schema entries (see [below for nested schema](#nestedatt--memory_strategies--semantic_memory_strategy--memory_record_schema--metadata_schema))
+
+<a id="nestedatt--memory_strategies--semantic_memory_strategy--memory_record_schema--metadata_schema"></a>
+### Nested Schema for `memory_strategies.semantic_memory_strategy.memory_record_schema.metadata_schema`
+
+Read-Only:
+
+- `extraction_config` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--semantic_memory_strategy--memory_record_schema--metadata_schema--extraction_config))
+- `key` (String) Key name for metadata fields
+- `type` (String) Supported data types for metadata values
+
+<a id="nestedatt--memory_strategies--semantic_memory_strategy--memory_record_schema--metadata_schema--extraction_config"></a>
+### Nested Schema for `memory_strategies.semantic_memory_strategy.memory_record_schema.metadata_schema.extraction_config`
+
+Read-Only:
+
+- `llm_extraction_config` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--semantic_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config))
+
+<a id="nestedatt--memory_strategies--semantic_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config"></a>
+### Nested Schema for `memory_strategies.semantic_memory_strategy.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config`
+
+Read-Only:
+
+- `definition` (String) Definition for the metadata schema entry
+- `llm_extraction_instruction` (String) LLM extraction instruction
+- `validation` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--semantic_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation))
+
+<a id="nestedatt--memory_strategies--semantic_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation"></a>
+### Nested Schema for `memory_strategies.semantic_memory_strategy.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config.validation`
+
+Read-Only:
+
+- `number_validation` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--semantic_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--number_validation))
+- `string_list_validation` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--semantic_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--string_list_validation))
+- `string_validation` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--semantic_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--string_validation))
+
+<a id="nestedatt--memory_strategies--semantic_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--number_validation"></a>
+### Nested Schema for `memory_strategies.semantic_memory_strategy.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config.validation.number_validation`
+
+Read-Only:
+
+- `max_value` (Number)
+- `min_value` (Number)
+
+
+<a id="nestedatt--memory_strategies--semantic_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--string_list_validation"></a>
+### Nested Schema for `memory_strategies.semantic_memory_strategy.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config.validation.string_list_validation`
+
+Read-Only:
+
+- `allowed_values` (List of String)
+- `max_items` (Number)
+
+
+<a id="nestedatt--memory_strategies--semantic_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--string_validation"></a>
+### Nested Schema for `memory_strategies.semantic_memory_strategy.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config.validation.string_validation`
+
+Read-Only:
+
+- `allowed_values` (List of String)
+
+
+
+
+
+
 
 
 <a id="nestedatt--memory_strategies--summary_memory_strategy"></a>
@@ -218,12 +663,86 @@ Read-Only:
 
 - `created_at` (String) Creation timestamp of the memory strategy
 - `description` (String) Description of the Memory resource
+- `memory_record_schema` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--summary_memory_strategy--memory_record_schema))
 - `name` (String) Name of the Memory resource
+- `namespace_templates` (List of String) List of namespaces for memory strategy
 - `namespaces` (List of String) List of namespaces for memory strategy
 - `status` (String) Status of the memory strategy
 - `strategy_id` (String) Unique identifier for the memory strategy
 - `type` (String) Type of memory strategy
 - `updated_at` (String) Last update timestamp of the memory strategy
+
+<a id="nestedatt--memory_strategies--summary_memory_strategy--memory_record_schema"></a>
+### Nested Schema for `memory_strategies.summary_memory_strategy.memory_record_schema`
+
+Read-Only:
+
+- `metadata_schema` (Attributes List) List of metadata schema entries (see [below for nested schema](#nestedatt--memory_strategies--summary_memory_strategy--memory_record_schema--metadata_schema))
+
+<a id="nestedatt--memory_strategies--summary_memory_strategy--memory_record_schema--metadata_schema"></a>
+### Nested Schema for `memory_strategies.summary_memory_strategy.memory_record_schema.metadata_schema`
+
+Read-Only:
+
+- `extraction_config` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--summary_memory_strategy--memory_record_schema--metadata_schema--extraction_config))
+- `key` (String) Key name for metadata fields
+- `type` (String) Supported data types for metadata values
+
+<a id="nestedatt--memory_strategies--summary_memory_strategy--memory_record_schema--metadata_schema--extraction_config"></a>
+### Nested Schema for `memory_strategies.summary_memory_strategy.memory_record_schema.metadata_schema.extraction_config`
+
+Read-Only:
+
+- `llm_extraction_config` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--summary_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config))
+
+<a id="nestedatt--memory_strategies--summary_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config"></a>
+### Nested Schema for `memory_strategies.summary_memory_strategy.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config`
+
+Read-Only:
+
+- `definition` (String) Definition for the metadata schema entry
+- `llm_extraction_instruction` (String) LLM extraction instruction
+- `validation` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--summary_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation))
+
+<a id="nestedatt--memory_strategies--summary_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation"></a>
+### Nested Schema for `memory_strategies.summary_memory_strategy.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config.validation`
+
+Read-Only:
+
+- `number_validation` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--summary_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--number_validation))
+- `string_list_validation` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--summary_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--string_list_validation))
+- `string_validation` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--summary_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--string_validation))
+
+<a id="nestedatt--memory_strategies--summary_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--number_validation"></a>
+### Nested Schema for `memory_strategies.summary_memory_strategy.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config.validation.number_validation`
+
+Read-Only:
+
+- `max_value` (Number)
+- `min_value` (Number)
+
+
+<a id="nestedatt--memory_strategies--summary_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--string_list_validation"></a>
+### Nested Schema for `memory_strategies.summary_memory_strategy.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config.validation.string_list_validation`
+
+Read-Only:
+
+- `allowed_values` (List of String)
+- `max_items` (Number)
+
+
+<a id="nestedatt--memory_strategies--summary_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--string_validation"></a>
+### Nested Schema for `memory_strategies.summary_memory_strategy.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config.validation.string_validation`
+
+Read-Only:
+
+- `allowed_values` (List of String)
+
+
+
+
+
+
 
 
 <a id="nestedatt--memory_strategies--user_preference_memory_strategy"></a>
@@ -233,9 +752,115 @@ Read-Only:
 
 - `created_at` (String) Creation timestamp of the memory strategy
 - `description` (String) Description of the Memory resource
+- `memory_record_schema` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--user_preference_memory_strategy--memory_record_schema))
 - `name` (String) Name of the Memory resource
+- `namespace_templates` (List of String) List of namespaces for memory strategy
 - `namespaces` (List of String) List of namespaces for memory strategy
 - `status` (String) Status of the memory strategy
 - `strategy_id` (String) Unique identifier for the memory strategy
 - `type` (String) Type of memory strategy
 - `updated_at` (String) Last update timestamp of the memory strategy
+
+<a id="nestedatt--memory_strategies--user_preference_memory_strategy--memory_record_schema"></a>
+### Nested Schema for `memory_strategies.user_preference_memory_strategy.memory_record_schema`
+
+Read-Only:
+
+- `metadata_schema` (Attributes List) List of metadata schema entries (see [below for nested schema](#nestedatt--memory_strategies--user_preference_memory_strategy--memory_record_schema--metadata_schema))
+
+<a id="nestedatt--memory_strategies--user_preference_memory_strategy--memory_record_schema--metadata_schema"></a>
+### Nested Schema for `memory_strategies.user_preference_memory_strategy.memory_record_schema.metadata_schema`
+
+Read-Only:
+
+- `extraction_config` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--user_preference_memory_strategy--memory_record_schema--metadata_schema--extraction_config))
+- `key` (String) Key name for metadata fields
+- `type` (String) Supported data types for metadata values
+
+<a id="nestedatt--memory_strategies--user_preference_memory_strategy--memory_record_schema--metadata_schema--extraction_config"></a>
+### Nested Schema for `memory_strategies.user_preference_memory_strategy.memory_record_schema.metadata_schema.extraction_config`
+
+Read-Only:
+
+- `llm_extraction_config` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--user_preference_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config))
+
+<a id="nestedatt--memory_strategies--user_preference_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config"></a>
+### Nested Schema for `memory_strategies.user_preference_memory_strategy.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config`
+
+Read-Only:
+
+- `definition` (String) Definition for the metadata schema entry
+- `llm_extraction_instruction` (String) LLM extraction instruction
+- `validation` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--user_preference_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation))
+
+<a id="nestedatt--memory_strategies--user_preference_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation"></a>
+### Nested Schema for `memory_strategies.user_preference_memory_strategy.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config.validation`
+
+Read-Only:
+
+- `number_validation` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--user_preference_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--number_validation))
+- `string_list_validation` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--user_preference_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--string_list_validation))
+- `string_validation` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--user_preference_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--string_validation))
+
+<a id="nestedatt--memory_strategies--user_preference_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--number_validation"></a>
+### Nested Schema for `memory_strategies.user_preference_memory_strategy.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config.validation.number_validation`
+
+Read-Only:
+
+- `max_value` (Number)
+- `min_value` (Number)
+
+
+<a id="nestedatt--memory_strategies--user_preference_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--string_list_validation"></a>
+### Nested Schema for `memory_strategies.user_preference_memory_strategy.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config.validation.string_list_validation`
+
+Read-Only:
+
+- `allowed_values` (List of String)
+- `max_items` (Number)
+
+
+<a id="nestedatt--memory_strategies--user_preference_memory_strategy--memory_record_schema--metadata_schema--extraction_config--llm_extraction_config--validation--string_validation"></a>
+### Nested Schema for `memory_strategies.user_preference_memory_strategy.memory_record_schema.metadata_schema.extraction_config.llm_extraction_config.validation.string_validation`
+
+Read-Only:
+
+- `allowed_values` (List of String)
+
+
+
+
+
+
+
+
+
+<a id="nestedatt--stream_delivery_resources"></a>
+### Nested Schema for `stream_delivery_resources`
+
+Read-Only:
+
+- `resources` (Attributes List) (see [below for nested schema](#nestedatt--stream_delivery_resources--resources))
+
+<a id="nestedatt--stream_delivery_resources--resources"></a>
+### Nested Schema for `stream_delivery_resources.resources`
+
+Read-Only:
+
+- `kinesis` (Attributes) (see [below for nested schema](#nestedatt--stream_delivery_resources--resources--kinesis))
+
+<a id="nestedatt--stream_delivery_resources--resources--kinesis"></a>
+### Nested Schema for `stream_delivery_resources.resources.kinesis`
+
+Read-Only:
+
+- `content_configurations` (Attributes List) (see [below for nested schema](#nestedatt--stream_delivery_resources--resources--kinesis--content_configurations))
+- `data_stream_arn` (String) ARN format
+
+<a id="nestedatt--stream_delivery_resources--resources--kinesis--content_configurations"></a>
+### Nested Schema for `stream_delivery_resources.resources.kinesis.content_configurations`
+
+Read-Only:
+
+- `level` (String) The level of content detail to deliver
+- `type` (String) The type of content to deliver

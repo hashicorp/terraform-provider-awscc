@@ -1,11 +1,101 @@
 {
+  "tagging": {
+    "permissions": [
+      "ssm:AddTagsToResource",
+      "ssm:ListTagsForResource",
+      "ssm:RemoveTagsFromResource"
+    ],
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "tagProperty": "/properties/Tags",
+    "cloudFormationSystemTags": true
+  },
   "typeName": "AWS::SSM::Document",
   "description": "The AWS::SSM::Document resource is an SSM document in AWS Systems Manager that defines the actions that Systems Manager performs, which can be used to set up and run commands on your instances.",
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/DocumentType"
+  ],
+  "primaryIdentifier": [
+    "/properties/Name"
+  ],
+  "required": [
+    "Content"
+  ],
+  "conditionalCreateOnlyProperties": [
+    "/properties/Content",
+    "/properties/Attachments",
+    "/properties/VersionName",
+    "/properties/DocumentFormat",
+    "/properties/TargetType",
+    "/properties/Requires"
+  ],
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ssm",
+  "handlers": {
+    "read": {
+      "permissions": [
+        "ssm:DescribeDocument",
+        "ssm:GetDocument",
+        "ssm:ListTagsForResource"
+      ]
+    },
+    "create": {
+      "permissions": [
+        "ssm:CreateDocument",
+        "ssm:GetDocument",
+        "ssm:AddTagsToResource",
+        "ssm:ListTagsForResource",
+        "s3:GetObject",
+        "iam:PassRole"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ssm:UpdateDocument",
+        "s3:GetObject",
+        "ssm:AddTagsToResource",
+        "ssm:RemoveTagsFromResource",
+        "ssm:ListTagsForResource",
+        "iam:PassRole",
+        "ssm:UpdateDocumentDefaultVersion",
+        "ssm:DescribeDocument"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ssm:ListDocuments"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ssm:DeleteDocument",
+        "ssm:GetDocument"
+      ]
+    }
+  },
+  "writeOnlyProperties": [
+    "/properties/UpdateMethod",
+    "/properties/Attachments"
+  ],
+  "additionalProperties": false,
   "definitions": {
     "AttachmentsSource": {
+      "additionalProperties": false,
       "type": "object",
       "properties": {
+        "Values": {
+          "minItems": 1,
+          "maxItems": 1,
+          "description": "The value of a key-value pair that identifies the location of an attachment to a document. The format for Value depends on the type of key you specify.",
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "minLength": 1,
+            "type": "string",
+            "maxLength": 100000
+          }
+        },
         "Key": {
           "description": "The key of a key-value pair that identifies the location of an attachment to a document.",
           "type": "string",
@@ -15,68 +105,74 @@
             "AttachmentReference"
           ]
         },
-        "Values": {
-          "description": "The value of a key-value pair that identifies the location of an attachment to a document. The format for Value depends on the type of key you specify.",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 100000
-          },
-          "minItems": 1,
-          "maxItems": 1,
-          "insertionOrder": false
-        },
         "Name": {
+          "minLength": 1,
+          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
           "description": "The name of the document attachment file.",
           "type": "string",
-          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
-          "minLength": 1,
           "maxLength": 128
         }
-      },
-      "additionalProperties": false
-    },
-    "Tag": {
-      "type": "object",
-      "properties": {
-        "Key": {
-          "description": "The name of the tag.",
-          "type": "string",
-          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
-          "minLength": 1,
-          "maxLength": 128
-        },
-        "Value": {
-          "description": "The value of the tag.",
-          "type": "string",
-          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
-          "minLength": 1,
-          "maxLength": 256
-        }
-      },
-      "additionalProperties": false
+      }
     },
     "DocumentRequires": {
+      "additionalProperties": false,
       "type": "object",
       "properties": {
-        "Name": {
-          "description": "The name of the required SSM document. The name can be an Amazon Resource Name (ARN).",
-          "type": "string",
-          "pattern": "^[a-zA-Z0-9_\\-.:/]{3,200}$",
-          "maxLength": 200
-        },
         "Version": {
+          "pattern": "([$]LATEST|[$]DEFAULT|^[1-9][0-9]*$)",
           "description": "The document version required by the current document.",
           "type": "string",
-          "pattern": "([$]LATEST|[$]DEFAULT|^[1-9][0-9]*$)",
           "maxLength": 8
+        },
+        "Name": {
+          "pattern": "^[a-zA-Z0-9_\\-.:/]{3,200}$",
+          "description": "The name of the required SSM document. The name can be an Amazon Resource Name (ARN).",
+          "type": "string",
+          "maxLength": 200
         }
-      },
-      "additionalProperties": false
+      }
+    },
+    "Tag": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "Value": {
+          "minLength": 1,
+          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+          "description": "The value of the tag.",
+          "type": "string",
+          "maxLength": 256
+        },
+        "Key": {
+          "minLength": 1,
+          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+          "description": "The name of the tag.",
+          "type": "string",
+          "maxLength": 128
+        }
+      }
     }
   },
   "properties": {
+    "DocumentFormat": {
+      "default": "JSON",
+      "description": "Specify the document format for the request. The document format can be either JSON or YAML. JSON is the default format.",
+      "type": "string",
+      "enum": [
+        "YAML",
+        "JSON",
+        "TEXT"
+      ]
+    },
+    "Requires": {
+      "minItems": 1,
+      "description": "A list of SSM documents required by a document. For example, an ApplicationConfiguration document requires an ApplicationConfigurationSchema document.",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/DocumentRequires"
+      }
+    },
     "Content": {
       "description": "The content for the Systems Manager document in JSON, YAML or String format.",
       "type": [
@@ -84,25 +180,10 @@
         "string"
       ]
     },
-    "Attachments": {
-      "description": "A list of key and value pairs that describe attachments to a version of a document.",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/AttachmentsSource"
-      },
-      "minItems": 0,
-      "maxItems": 20,
-      "insertionOrder": false
-    },
-    "Name": {
-      "description": "A name for the Systems Manager document.",
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9_\\-.]{3,128}$"
-    },
-    "VersionName": {
-      "description": "An optional field specifying the version of the artifact you are creating with the document. This value is unique across all versions of a document, and cannot be changed.",
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9_\\-.]{1,128}$"
+    "TargetType": {
+      "pattern": "^\\/[\\w\\.\\-\\:\\/]*$",
+      "description": "Specify a target type to define the kinds of resources the document can run on.",
+      "type": "string"
     },
     "DocumentType": {
       "description": "The type of document to create.",
@@ -125,124 +206,43 @@
         "Session"
       ]
     },
-    "DocumentFormat": {
-      "description": "Specify the document format for the request. The document format can be either JSON or YAML. JSON is the default format.",
-      "type": "string",
-      "enum": [
-        "YAML",
-        "JSON",
-        "TEXT"
-      ],
-      "default": "JSON"
-    },
-    "TargetType": {
-      "description": "Specify a target type to define the kinds of resources the document can run on.",
-      "type": "string",
-      "pattern": "^\\/[\\w\\.\\-\\:\\/]*$"
-    },
-    "Tags": {
-      "description": "Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment.",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/Tag"
-      },
-      "maxItems": 1000,
-      "insertionOrder": false
-    },
-    "Requires": {
-      "description": "A list of SSM documents required by a document. For example, an ApplicationConfiguration document requires an ApplicationConfigurationSchema document.",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/DocumentRequires"
-      },
-      "minItems": 1,
-      "insertionOrder": false
+    "VersionName": {
+      "pattern": "^[a-zA-Z0-9_\\-.]{1,128}$",
+      "description": "An optional field specifying the version of the artifact you are creating with the document. This value is unique across all versions of a document, and cannot be changed.",
+      "type": "string"
     },
     "UpdateMethod": {
+      "default": "Replace",
       "description": "Update method - when set to 'Replace', the update will replace the existing document; when set to 'NewVersion', the update will create a new version.",
       "type": "string",
       "enum": [
         "Replace",
         "NewVersion"
-      ],
-      "default": "Replace"
-    }
-  },
-  "additionalProperties": false,
-  "required": [
-    "Content"
-  ],
-  "createOnlyProperties": [
-    "/properties/Name",
-    "/properties/DocumentType"
-  ],
-  "conditionalCreateOnlyProperties": [
-    "/properties/Content",
-    "/properties/Attachments",
-    "/properties/VersionName",
-    "/properties/DocumentFormat",
-    "/properties/TargetType",
-    "/properties/Requires"
-  ],
-  "writeOnlyProperties": [
-    "/properties/UpdateMethod",
-    "/properties/Attachments"
-  ],
-  "primaryIdentifier": [
-    "/properties/Name"
-  ],
-  "tagging": {
-    "taggable": true,
-    "tagOnCreate": true,
-    "tagUpdatable": true,
-    "cloudFormationSystemTags": true,
-    "tagProperty": "/properties/Tags",
-    "permissions": [
-      "ssm:AddTagsToResource",
-      "ssm:ListTagsForResource",
-      "ssm:RemoveTagsFromResource"
-    ]
-  },
-  "handlers": {
-    "create": {
-      "permissions": [
-        "ssm:CreateDocument",
-        "ssm:GetDocument",
-        "ssm:AddTagsToResource",
-        "ssm:ListTagsForResource",
-        "s3:GetObject",
-        "iam:PassRole"
       ]
     },
-    "read": {
-      "permissions": [
-        "ssm:DescribeDocument",
-        "ssm:GetDocument",
-        "ssm:ListTagsForResource"
-      ]
+    "Attachments": {
+      "minItems": 0,
+      "maxItems": 20,
+      "description": "A list of key and value pairs that describe attachments to a version of a document.",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/AttachmentsSource"
+      }
     },
-    "update": {
-      "permissions": [
-        "ssm:UpdateDocument",
-        "s3:GetObject",
-        "ssm:AddTagsToResource",
-        "ssm:RemoveTagsFromResource",
-        "ssm:ListTagsForResource",
-        "iam:PassRole",
-        "ssm:UpdateDocumentDefaultVersion",
-        "ssm:DescribeDocument"
-      ]
+    "Tags": {
+      "maxItems": 1000,
+      "description": "Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment.",
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
     },
-    "delete": {
-      "permissions": [
-        "ssm:DeleteDocument",
-        "ssm:GetDocument"
-      ]
-    },
-    "list": {
-      "permissions": [
-        "ssm:ListDocuments"
-      ]
+    "Name": {
+      "pattern": "^[a-zA-Z0-9_\\-.]{3,128}$",
+      "description": "A name for the Systems Manager document.",
+      "type": "string"
     }
   }
 }

@@ -1,15 +1,21 @@
+# Copyright IBM Corp. 2021, 2026
+# "SPDX-License-Identifier: MPL-2.0"
+
 name: "Feed: Release Tag"
 on:
   push:
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+*'
+
+permissions: {} # Workflow only posts to Slack webhook
+
 jobs:
   tag-created:
     runs-on: ubuntu-latest
     steps:
       - name: Notify Slack
         id: slack
-        uses: slackapi/slack-github-action@91efab103c0de0a537f72a35f6b8cda0ee76bf0a # v2.1.1
+        uses: slackapi/slack-github-action@dcb1066f776dd043e64d0e8ba94ca15cc7e1875d # v4.0.0
         with:
           webhook: ${{ secrets.FEED_SLACK_WEBHOOK_URL }}
           webhook-type: incoming-webhook

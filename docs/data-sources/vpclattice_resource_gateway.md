@@ -25,6 +25,7 @@ Data Source schema for AWS::VpcLattice::ResourceGateway
 - `ip_address_type` (String)
 - `ipv_4_addresses_per_eni` (Number) The number of IPv4 addresses to allocate per ENI for the resource gateway
 - `name` (String)
+- `resource_config_dns_resolution` (String)
 - `resource_gateway_id` (String)
 - `security_group_ids` (Set of String) The ID of one or more security groups to associate with the endpoint network interface.
 - `subnet_ids` (Set of String) The ID of one or more subnets in which to create an endpoint network interface.

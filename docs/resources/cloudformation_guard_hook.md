@@ -177,16 +177,7 @@ Optional:
 
 Optional:
 
-- `input_params` (Attributes) S3 Source Location for the Guard files. (see [below for nested schema](#nestedatt--options--input_params))
-
-<a id="nestedatt--options--input_params"></a>
-### Nested Schema for `options.input_params`
-
-Optional:
-
-- `uri` (String) S3 uri of Guard files.
-- `version_id` (String) S3 object version
-
+- `input_params` (String) Specifies the S3 location of input parameter files for your Guard rules. You can specify either a single S3 location or an array of up to 10 S3 locations.
 
 
 <a id="nestedatt--stack_filters"></a>

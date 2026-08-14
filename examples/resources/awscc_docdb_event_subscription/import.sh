@@ -1,0 +1,1 @@
+$ terraform import awscc_docdb_event_subscription.example "subscription_name"

@@ -67,4 +67,4 @@ Read-Only:
 
 - `annotation_type` (String)
 - `format_to_header` (Map of String)
-- `schema` (List of List of String)
+- `schema` (List of Map of String)

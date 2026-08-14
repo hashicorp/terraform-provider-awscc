@@ -61,6 +61,17 @@
         }
       }
     },
+    "ArchivingOptions": {
+      "description": "An object that defines a MailManager archive that is used to preserve emails that you send using the configuration set.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ArchiveArn": {
+          "type": "string",
+          "description": "The ARN of the MailManager archive to associate with the configuration set."
+        }
+      }
+    },
     "ReputationOptions": {
       "description": "An object that defines whether or not Amazon SES collects reputation metrics for the emails that you send that use the configuration set.",
       "type": "object",
@@ -99,6 +110,46 @@
             "description": "The reason that the address was added to the suppression list for your account",
             "pattern": "BOUNCE|COMPLAINT"
           }
+        },
+        "ValidationOptions": {
+          "type": "object",
+          "description": "An object that contains information about the validation options for your account.",
+          "additionalProperties": false,
+          "properties": {
+            "ConditionThreshold": {
+              "type": "object",
+              "description": "The condition threshold settings for suppression validation.",
+              "additionalProperties": false,
+              "properties": {
+                "ConditionThresholdEnabled": {
+                  "type": "string",
+                  "description": "Whether the condition threshold is enabled or disabled.",
+                  "pattern": "ENABLED|DISABLED"
+                },
+                "OverallConfidenceThreshold": {
+                  "type": "object",
+                  "description": "The overall confidence threshold settings.",
+                  "additionalProperties": false,
+                  "properties": {
+                    "ConfidenceVerdictThreshold": {
+                      "type": "string",
+                      "description": "The confidence verdict threshold level.",
+                      "pattern": "MEDIUM|HIGH|MANAGED"
+                    }
+                  },
+                  "required": [
+                    "ConfidenceVerdictThreshold"
+                  ]
+                }
+              },
+              "required": [
+                "ConditionThresholdEnabled"
+              ]
+            }
+          },
+          "required": [
+            "ConditionThreshold"
+          ]
         }
       }
     },
@@ -170,6 +221,9 @@
     "VdmOptions": {
       "$ref": "#/definitions/VdmOptions"
     },
+    "ArchivingOptions": {
+      "$ref": "#/definitions/ArchivingOptions"
+    },
     "Tags": {
       "description": "The tags (keys and values) associated with the contact list.",
       "type": "array",
@@ -192,7 +246,7 @@
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": false,
+    "cloudFormationSystemTags": true,
     "tagProperty": "/properties/Tags",
     "permissions": [
       "ses:TagResource",
@@ -224,6 +278,7 @@
         "ses:PutConfigurationSetSendingOptions",
         "ses:PutConfigurationSetSuppressionOptions",
         "ses:PutConfigurationSetVdmOptions",
+        "ses:PutConfigurationSetArchivingOptions",
         "ses:DescribeConfigurationSet",
         "ses:UntagResource",
         "ses:TagResource"

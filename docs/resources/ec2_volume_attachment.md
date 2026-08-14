@@ -55,6 +55,7 @@ resource "awscc_ec2_volume_attachment" "this" {
 ### Optional
 
 - `device` (String) The device name (for example, ``/dev/sdh`` or ``xvdh``).
+- `ebs_card_index` (Number) The index of the EBS card. Some instance types support multiple EBS cards. The default EBS card index is 0.
 
 ### Read-Only
 

@@ -1,0 +1,199 @@
+{
+  "typeName": "AWS::BedrockAgentCore::HarnessEndpoint",
+  "description": "Resource Type definition for AWS::BedrockAgentCore::HarnessEndpoint - a named, stable reference to a specific version of a Harness that callers invoke, allowing the underlying version to be updated without changing how the agent is invoked.",
+  "definitions": {
+    "HarnessEndpointStatus": {
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "CREATE_FAILED",
+        "UPDATING",
+        "UPDATE_FAILED",
+        "READY",
+        "DELETING",
+        "DELETE_FAILED"
+      ]
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9\\s_.:/=+\\-@]*$"
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256,
+          "pattern": "^[a-zA-Z0-9\\s_.:/=+\\-@]*$"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "HarnessId": {
+      "type": "string",
+      "description": "The ID of the harness that the endpoint belongs to.",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,39}-[a-zA-Z0-9]{10}$"
+    },
+    "EndpointName": {
+      "type": "string",
+      "description": "The name of the endpoint. Must start with a letter and contain only alphanumeric characters and underscores.",
+      "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$"
+    },
+    "HarnessName": {
+      "type": "string",
+      "description": "The name of the harness that the endpoint belongs to."
+    },
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the endpoint."
+    },
+    "Status": {
+      "$ref": "#/definitions/HarnessEndpointStatus"
+    },
+    "TargetVersion": {
+      "type": "string",
+      "description": "The harness version that the endpoint points to and serves invocations from.",
+      "minLength": 1,
+      "maxLength": 5,
+      "pattern": "^([1-9][0-9]{0,4})$"
+    },
+    "LiveVersion": {
+      "type": "string",
+      "description": "The harness version that the endpoint is currently serving.",
+      "minLength": 1,
+      "maxLength": 5,
+      "pattern": "^([1-9][0-9]{0,4})$"
+    },
+    "Description": {
+      "type": "string",
+      "description": "The description of the endpoint.",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The timestamp when the endpoint was created.",
+      "format": "date-time"
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "The timestamp when the endpoint was last updated.",
+      "format": "date-time"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Tags to apply to the harness endpoint resource.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50,
+      "insertionOrder": false
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "HarnessId",
+    "EndpointName"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/HarnessName",
+    "/properties/Status",
+    "/properties/LiveVersion",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/HarnessId",
+    "/properties/EndpointName"
+  ],
+  "writeOnlyProperties": [
+    "/properties/TargetVersion"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/HarnessId",
+      "/properties/EndpointName"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "tagProperty": "/properties/Tags",
+    "cloudFormationSystemTags": true,
+    "permissions": [
+      "bedrock-agentcore:TagResource",
+      "bedrock-agentcore:UntagResource",
+      "bedrock-agentcore:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "bedrock-agentcore:CreateHarnessEndpoint",
+        "bedrock-agentcore:GetHarnessEndpoint",
+        "bedrock-agentcore:GetHarness",
+        "bedrock-agentcore:CreateAgentRuntimeEndpoint",
+        "bedrock-agentcore:GetAgentRuntimeEndpoint",
+        "bedrock-agentcore:UpdateAgentRuntimeEndpoint",
+        "bedrock-agentcore:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "bedrock-agentcore:GetHarnessEndpoint",
+        "bedrock-agentcore:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "bedrock-agentcore:UpdateHarnessEndpoint",
+        "bedrock-agentcore:GetHarnessEndpoint",
+        "bedrock-agentcore:GetHarness",
+        "bedrock-agentcore:CreateAgentRuntimeEndpoint",
+        "bedrock-agentcore:GetAgentRuntimeEndpoint",
+        "bedrock-agentcore:UpdateAgentRuntimeEndpoint",
+        "bedrock-agentcore:ListTagsForResource",
+        "bedrock-agentcore:TagResource",
+        "bedrock-agentcore:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "bedrock-agentcore:DeleteHarnessEndpoint",
+        "bedrock-agentcore:GetHarnessEndpoint",
+        "bedrock-agentcore:GetAgentRuntimeEndpoint",
+        "bedrock-agentcore:DeleteAgentRuntimeEndpoint"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "HarnessId": {
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,39}-[a-zA-Z0-9]{10}$"
+          }
+        },
+        "required": [
+          "HarnessId"
+        ]
+      },
+      "permissions": [
+        "bedrock-agentcore:ListHarnessEndpoints"
+      ]
+    }
+  }
+}

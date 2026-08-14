@@ -30,6 +30,7 @@ Data Source schema for AWS::MediaConnect::FlowOutput
 - `media_stream_output_configurations` (Attributes List) The definition for each media stream that is associated with the output. (see [below for nested schema](#nestedatt--media_stream_output_configurations))
 - `min_latency` (Number) The minimum latency in milliseconds.
 - `name` (String) The name of the output. This value must be unique within the current flow.
+- `ndi_output_timecode_source` (String) The timecode source for the NDI output.
 - `ndi_program_name` (String) A suffix for the names of the NDI sources that the flow creates. If a custom name isn't specified, MediaConnect uses the output name.
 - `ndi_speed_hq_quality` (Number) A quality setting for the NDI Speed HQ encoder.
 - `output_arn` (String) The ARN of the output.
@@ -41,6 +42,7 @@ Data Source schema for AWS::MediaConnect::FlowOutput
 - `router_integration_transit_encryption` (Attributes) The configuration that defines how content is encrypted during transit between the MediaConnect router and a MediaConnect flow. (see [below for nested schema](#nestedatt--router_integration_transit_encryption))
 - `smoothing_latency` (Number) The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.
 - `stream_id` (String) The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
+- `tags` (Attributes Set) Key-value pairs that can be used to tag and organize this flow output. (see [below for nested schema](#nestedatt--tags))
 - `vpc_interface_attachment` (Attributes) The name of the VPC interface attachment to use for this output. (see [below for nested schema](#nestedatt--vpc_interface_attachment))
 
 <a id="nestedatt--encryption"></a>
@@ -117,6 +119,15 @@ Read-Only:
 - `secret_arn` (String) The ARN of the AWS Secrets Manager secret used for transit encryption to the router input.
 
 
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
 
 
 <a id="nestedatt--vpc_interface_attachment"></a>

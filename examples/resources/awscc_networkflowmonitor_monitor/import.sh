@@ -1,0 +1,1 @@
+$ terraform import awscc_networkflowmonitor_monitor.example "arn"

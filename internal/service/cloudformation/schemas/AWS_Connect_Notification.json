@@ -1,0 +1,228 @@
+{
+  "typeName": "AWS::Connect::Notification",
+  "description": "Resource Type definition for AWS::Connect::Notification",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-connect",
+  "definitions": {
+    "LocalizedString": {
+      "description": "Localized notification content",
+      "type": "string",
+      "pattern": "^.{0,500}$"
+    },
+    "UserArn": {
+      "description": "The identifier of the user.",
+      "type": "string",
+      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/agent/[-a-zA-Z0-9]*$"
+    },
+    "InstanceArn": {
+      "description": "The identifier of the instance.",
+      "type": "string",
+      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$"
+    },
+    "Arn": {
+      "description": "The identifier of the instance.",
+      "type": "string",
+      "pattern": ""
+    },
+    "NotificationContent": {
+      "description": "The content of a notification",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "EnUS": {
+          "$ref": "#/definitions/LocalizedString"
+        },
+        "DeDE": {
+          "$ref": "#/definitions/LocalizedString"
+        },
+        "EsES": {
+          "$ref": "#/definitions/LocalizedString"
+        },
+        "FrFR": {
+          "$ref": "#/definitions/LocalizedString"
+        },
+        "IdID": {
+          "$ref": "#/definitions/LocalizedString"
+        },
+        "ItIT": {
+          "$ref": "#/definitions/LocalizedString"
+        },
+        "JaJP": {
+          "$ref": "#/definitions/LocalizedString"
+        },
+        "KoKR": {
+          "$ref": "#/definitions/LocalizedString"
+        },
+        "PtBR": {
+          "$ref": "#/definitions/LocalizedString"
+        },
+        "ZhCN": {
+          "$ref": "#/definitions/LocalizedString"
+        },
+        "ZhTW": {
+          "$ref": "#/definitions/LocalizedString"
+        }
+      }
+    },
+    "RecipientList": {
+      "description": "The recipients of the notification.",
+      "type": "array",
+      "maxItems": 200,
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Arn"
+      }
+    },
+    "Priority": {
+      "description": "The priority of notification. In the Amazon Connect console, when you create a notification, you are prompted to assign one of the following priorities: High (HIGH) or LOW (LOW)",
+      "type": "string",
+      "enum": [
+        "HIGH",
+        "LOW"
+      ]
+    },
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "InstanceArn": {
+      "description": "The identifier of the Amazon Connect instance.",
+      "type": "string",
+      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$"
+    },
+    "Content": {
+      "description": "The content of the notification.",
+      "$ref": "#/definitions/NotificationContent"
+    },
+    "Recipients": {
+      "description": "The recipients of the notification.",
+      "$ref": "#/definitions/RecipientList"
+    },
+    "Priority": {
+      "description": "The priority of the notification.",
+      "$ref": "#/definitions/Priority"
+    },
+    "Arn": {
+      "description": "The Amazon Resource Name (ARN) for the notification.",
+      "type": "string",
+      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/notification/[-a-zA-Z0-9]*$"
+    },
+    "Id": {
+      "description": "The identifier of the notification.",
+      "type": "string",
+      "pattern": "^.{0,256}$"
+    },
+    "CreatedAt": {
+      "description": "The time a notification was created",
+      "type": "string",
+      "pattern": "^[0-9]+$"
+    },
+    "ExpiresAt": {
+      "description": "The time a notification will expire",
+      "type": "string",
+      "pattern": "^[0-9]+$"
+    },
+    "Tags": {
+      "type": "array",
+      "maxItems": 200,
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "description": "One or more tags.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "required": [
+    "InstanceArn",
+    "Content"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "connect:CreateNotification",
+        "connect:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "connect:DescribeNotification"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "connect:DeleteNotification",
+        "connect:UntagResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "connect:UpdateNotificationContent",
+        "connect:TagResource",
+        "connect:UntagResource"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "InstanceArn": {
+            "$ref": "resource-schema.json#/properties/InstanceArn"
+          }
+        },
+        "required": [
+          "InstanceArn"
+        ]
+      },
+      "permissions": [
+        "connect:ListNotifications"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/Id",
+    "/properties/CreatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/Recipients",
+    "/properties/InstanceArn",
+    "/properties/ExpiresAt",
+    "/properties/Priority"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "connect:TagResource",
+      "connect:UntagResource"
+    ]
+  }
+}

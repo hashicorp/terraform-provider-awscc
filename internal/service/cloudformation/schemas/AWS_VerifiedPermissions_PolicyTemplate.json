@@ -23,6 +23,12 @@
       "type": "string",
       "maxLength": 10000,
       "minLength": 1
+    },
+    "Name": {
+      "type": "string",
+      "maxLength": 150,
+      "minLength": 0,
+      "pattern": "^[a-zA-Z0-9-/_]*$"
     }
   },
   "required": [

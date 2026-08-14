@@ -51,6 +51,10 @@
       "description": "Boolean flag which enables MULTI_PARTY_CHAT_CONFERENCE on an instance.",
       "type": "boolean"
     },
+    "MessageStreaming": {
+      "description": "Boolean flag which enables MESSAGE_STREAMING on an instance.",
+      "type": "boolean"
+    },
     "Attributes": {
       "type": "object",
       "additionalProperties": false,
@@ -90,6 +94,9 @@
         },
         "MultiPartyChatConference": {
           "$ref": "#/definitions/MultiPartyChatConference"
+        },
+        "MessageStreaming": {
+          "$ref": "#/definitions/MessageStreaming"
         }
       },
       "required": [

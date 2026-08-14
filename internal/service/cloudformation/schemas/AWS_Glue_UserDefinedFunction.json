@@ -1,0 +1,157 @@
+{
+  "typeName": "AWS::Glue::UserDefinedFunction",
+  "description": "Represents a user-defined function (UDF) definition in the AWS Glue Data Catalog.",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the user-defined function."
+    },
+    "DatabaseName": {
+      "type": "string",
+      "description": "The name of the catalog database in which the function is located.",
+      "minLength": 1,
+      "maxLength": 255,
+      "pattern": ""
+    },
+    "FunctionName": {
+      "type": "string",
+      "description": "The name of the function.",
+      "minLength": 1,
+      "maxLength": 255,
+      "pattern": ""
+    },
+    "ClassName": {
+      "type": "string",
+      "description": "The Java class that contains the function code.",
+      "minLength": 1,
+      "maxLength": 255,
+      "pattern": ""
+    },
+    "OwnerName": {
+      "type": "string",
+      "description": "The owner of the function.",
+      "minLength": 1,
+      "maxLength": 255,
+      "pattern": ""
+    },
+    "OwnerType": {
+      "type": "string",
+      "description": "The owner type.",
+      "enum": [
+        "USER",
+        "ROLE",
+        "GROUP"
+      ]
+    },
+    "FunctionType": {
+      "type": "string",
+      "description": "The type of the function.",
+      "enum": [
+        "REGULAR_FUNCTION",
+        "AGGREGATE_FUNCTION",
+        "STORED_PROCEDURE"
+      ]
+    },
+    "ResourceUris": {
+      "type": "array",
+      "description": "The resource URIs for the function.",
+      "items": {
+        "$ref": "#/definitions/ResourceUri"
+      },
+      "maxItems": 1000
+    }
+  },
+  "definitions": {
+    "ResourceUri": {
+      "type": "object",
+      "description": "The URIs for function resources.",
+      "properties": {
+        "ResourceType": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "enum": [
+            "JAR",
+            "FILE",
+            "ARCHIVE"
+          ]
+        },
+        "Uri": {
+          "type": "string",
+          "description": "The URI for accessing the resource.",
+          "minLength": 1,
+          "maxLength": 1024,
+          "pattern": ""
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "DatabaseName",
+    "FunctionName"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn"
+  ],
+  "createOnlyProperties": [
+    "/properties/DatabaseName",
+    "/properties/FunctionName",
+    "/properties/FunctionType"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/DatabaseName",
+      "/properties/FunctionName"
+    ]
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "glue:CreateUserDefinedFunction",
+        "glue:GetUserDefinedFunction"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "glue:GetUserDefinedFunction"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "glue:UpdateUserDefinedFunction",
+        "glue:GetUserDefinedFunction"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "glue:DeleteUserDefinedFunction",
+        "glue:GetUserDefinedFunction"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "DatabaseName": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "pattern": ""
+          }
+        },
+        "required": [
+          "DatabaseName"
+        ]
+      },
+      "permissions": [
+        "glue:GetUserDefinedFunctions"
+      ]
+    }
+  }
+}

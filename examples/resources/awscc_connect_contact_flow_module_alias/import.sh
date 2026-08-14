@@ -1,0 +1,1 @@
+$ terraform import awscc_connect_contact_flow_module_alias.example "contact_flow_module_alias_arn"

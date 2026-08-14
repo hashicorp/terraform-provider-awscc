@@ -99,6 +99,25 @@
       "required": [
         "Key"
       ]
+    },
+    "IamRole": {
+      "description": "An AWS Identity and Access Management (IAM) service role associated with the Autonomous VM cluster.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "AwsIntegration": {
+          "description": "The AWS integration configuration settings for the AWS Identity and Access Management (IAM) service role.",
+          "type": "string"
+        },
+        "IamRoleArn": {
+          "description": "The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) service role.",
+          "type": "string"
+        },
+        "Status": {
+          "description": "The current status of the AWS Identity and Access Management (IAM) service role.",
+          "type": "string"
+        }
+      }
     }
   },
   "properties": {
@@ -303,6 +322,15 @@
     "TotalContainerDatabases": {
       "type": "integer",
       "description": "The total number of Autonomous Container Databases that can be created with the allocated local storage."
+    },
+    "IamRoles": {
+      "type": "array",
+      "description": "The AWS Identity and Access Management (IAM) service roles associated with the Autonomous VM cluster.",
+      "insertionOrder": false,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/IamRole"
+      }
     }
   },
   "additionalProperties": false,
@@ -351,7 +379,8 @@
     "/properties/ProvisionedCpus",
     "/properties/ReclaimableCpus",
     "/properties/ReservedCpus",
-    "/properties/Shape"
+    "/properties/Shape",
+    "/properties/IamRoles/*/Status"
   ],
   "primaryIdentifier": [
     "/properties/CloudAutonomousVmClusterArn"
@@ -365,11 +394,13 @@
       "permissions": [
         "ec2:DescribeAvailabilityZones",
         "iam:CreateServiceLinkedRole",
+        "iam:PassRole",
         "odb:CreateCloudAutonomousVmCluster",
         "odb:GetCloudAutonomousVmCluster",
         "odb:ListCloudAutonomousVmClusters",
         "odb:ListTagsForResource",
         "odb:TagResource",
+        "odb:AssociateIamRoleToResource",
         "sts:GetCallerIdentity"
       ],
       "timeoutInMinutes": 2160
@@ -383,11 +414,14 @@
     },
     "update": {
       "permissions": [
+        "iam:PassRole",
         "odb:TagResource",
         "odb:UntagResource",
         "odb:GetCloudAutonomousVmCluster",
         "odb:ListCloudAutonomousVmClusters",
         "odb:ListTagsForResource",
+        "odb:AssociateIamRoleToResource",
+        "odb:DisassociateIamRoleFromResource",
         "sts:GetCallerIdentity"
       ]
     },

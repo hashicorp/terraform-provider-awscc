@@ -47,13 +47,14 @@ resource "awscc_appintegrations_application" "example" {
 ### Required
 
 - `application_source_config` (Attributes) Application source config (see [below for nested schema](#nestedatt--application_source_config))
-- `description` (String) The application description.
 - `name` (String) The name of the application.
 - `namespace` (String) The namespace of the application.
 
 ### Optional
 
 - `application_config` (Attributes) The application configuration. Cannot be used when IsService is true. (see [below for nested schema](#nestedatt--application_config))
+- `application_type` (String) The type of application
+- `description` (String) The application description.
 - `iframe_config` (Attributes) The iframe configuration (see [below for nested schema](#nestedatt--iframe_config))
 - `initialization_timeout` (Number) The initialization timeout in milliseconds. Required when IsService is true.
 - `is_service` (Boolean) Indicates if the application is a service

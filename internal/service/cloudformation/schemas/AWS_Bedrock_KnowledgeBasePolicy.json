@@ -1,0 +1,67 @@
+{
+  "typeName": "AWS::Bedrock::KnowledgeBasePolicy",
+  "description": "Definition of AWS::Bedrock::KnowledgeBasePolicy Resource Type",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-bedrock-agents",
+  "definitions": {},
+  "properties": {
+    "KnowledgeBaseId": {
+      "type": "string",
+      "description": "The unique identifier of the knowledge base",
+      "pattern": "^[0-9a-zA-Z]+$",
+      "minLength": 1,
+      "maxLength": 10
+    },
+    "PolicyDocument": {
+      "type": "object",
+      "description": "The IAM policy document defining access permissions for the knowledge base"
+    },
+    "RevisionId": {
+      "type": "string",
+      "description": "The revision identifier for the policy, used for optimistic concurrency control",
+      "minLength": 1,
+      "maxLength": 255
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "KnowledgeBaseId",
+    "PolicyDocument"
+  ],
+  "createOnlyProperties": [
+    "/properties/KnowledgeBaseId"
+  ],
+  "readOnlyProperties": [
+    "/properties/RevisionId"
+  ],
+  "primaryIdentifier": [
+    "/properties/KnowledgeBaseId"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "bedrock:PutResourcePolicy",
+        "bedrock:GetResourcePolicy"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "bedrock:GetResourcePolicy"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "bedrock:PutResourcePolicy",
+        "bedrock:GetResourcePolicy"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "bedrock:DeleteResourcePolicy",
+        "bedrock:GetResourcePolicy"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": false
+  }
+}

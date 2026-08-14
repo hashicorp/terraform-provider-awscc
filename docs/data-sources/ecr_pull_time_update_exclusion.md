@@ -21,4 +21,4 @@ Data Source schema for AWS::ECR::PullTimeUpdateExclusion
 
 ### Read-Only
 
-- `principal_arn` (String) Principal arn that should not update image pull times.
+- `principal_arn` (String) The ARN of the IAM principal to remove from the pull time update exclusion list.

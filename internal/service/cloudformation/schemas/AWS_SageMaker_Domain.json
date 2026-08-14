@@ -99,7 +99,7 @@
     "SingleSignOnApplicationArn": {
       "type": "string",
       "description": "The ARN of the application managed by SageMaker in IAM Identity Center. This value is only returned for domains created after October 1, 2023.",
-      "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::[0-9]+:application\/[a-zA-Z0-9-_.]+\/apl-[a-zA-Z0-9]+$"
+      "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::[0-9]+:application/[a-zA-Z0-9-_.]+/apl-[a-zA-Z0-9]+$"
     },
     "DomainSettings": {
       "$ref": "#/definitions/DomainSettings"
@@ -124,6 +124,14 @@
       "enum": [
         "ENABLED",
         "DISABLED"
+      ]
+    },
+    "HomeEfsFileSystemCreation": {
+      "type": "string",
+      "description": "Indicates whether a home EFS file system is created for the domain. Set to Disabled to skip EFS creation and reduce domain creation time.",
+      "enum": [
+        "Enabled",
+        "Disabled"
       ]
     }
   },
@@ -325,6 +333,13 @@
           "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
           "maxLength": 256,
           "pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$"
+        },
+        "TrainingPlanArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
+          "minLength": 0,
+          "maxLength": 2048,
+          "pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$"
         }
       }
     },
@@ -737,7 +752,7 @@
           "description": "The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.",
           "uniqueItems": false,
           "insertionOrder": false,
-          "minItems": 1,
+          "minItems": 0,
           "maxItems": 3,
           "items": {
             "type": "string",
@@ -1182,7 +1197,15 @@
         "ml.r6id.12xlarge",
         "ml.r6id.16xlarge",
         "ml.r6id.24xlarge",
-        "ml.r6id.32xlarge"
+        "ml.r6id.32xlarge",
+        "ml.p5.4xlarge",
+        "ml.p6-b200.48xlarge",
+        "ml.g7e.2xlarge",
+        "ml.g7e.4xlarge",
+        "ml.g7e.8xlarge",
+        "ml.g7e.12xlarge",
+        "ml.g7e.24xlarge",
+        "ml.g7e.48xlarge"
       ]
     },
     "HiddenSageMakerImage": {
@@ -1220,14 +1243,10 @@
     "/properties/AuthMode",
     "/properties/DomainName",
     "/properties/DomainSettings/RStudioServerProDomainSettings/DefaultResourceSpec",
-    "/properties/KmsKeyId",
-    "/properties/Tags"
+    "/properties/KmsKeyId"
   ],
   "conditionalCreateOnlyProperties": [
     "/properties/VpcId"
-  ],
-  "writeOnlyProperties": [
-    "/properties/Tags"
   ],
   "primaryIdentifier": [
     "/properties/DomainId"
@@ -1241,6 +1260,18 @@
     "/properties/SingleSignOnManagedApplicationInstanceId",
     "/properties/SingleSignOnApplicationArn"
   ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "sagemaker:AddTags",
+      "sagemaker:ListTags",
+      "sagemaker:DeleteTags"
+    ]
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -1255,12 +1286,20 @@
         "kms:CreateGrant",
         "kms:Decrypt",
         "kms:DescribeKey",
-        "kms:GenerateDataKeyWithoutPlainText"
+        "kms:GenerateDataKeyWithoutPlainText",
+        "sagemaker:AddTags",
+        "sagemaker:DeleteTags",
+        "sagemaker:ListTags"
       ]
     },
     "read": {
       "permissions": [
-        "sagemaker:DescribeDomain"
+        "sagemaker:DescribeDomain",
+        "sagemaker:DescribeApp",
+        "sagemaker:DescribeUserProfile",
+        "sagemaker:DescribeImage",
+        "sagemaker:DescribeImageVersion",
+        "sagemaker:ListTags"
       ]
     },
     "update": {
@@ -1270,19 +1309,29 @@
         "sagemaker:DescribeDomain",
         "sagemaker:DescribeImage",
         "sagemaker:DescribeImageVersion",
-        "iam:PassRole"
+        "iam:PassRole",
+        "sagemaker:AddTags",
+        "sagemaker:DeleteTags",
+        "sagemaker:ListTags"
       ]
     },
     "delete": {
       "permissions": [
         "sagemaker:DeleteApp",
         "sagemaker:DeleteDomain",
-        "sagemaker:DescribeDomain"
+        "sagemaker:DescribeDomain",
+        "sagemaker:AddTags",
+        "sagemaker:DeleteTags",
+        "sagemaker:ListTags",
+        "efs:DescribeMountTargets",
+        "efs:DeleteMountTarget",
+        "efs:DeleteFileSystem"
       ]
     },
     "list": {
       "permissions": [
-        "sagemaker:ListDomains"
+        "sagemaker:ListDomains",
+        "sagemaker:ListTags"
       ]
     }
   }

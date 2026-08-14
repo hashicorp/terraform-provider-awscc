@@ -181,6 +181,15 @@
       "type": "boolean",
       "default": false
     },
+    "ApplicationType": {
+      "description": "The type of application",
+      "type": "string",
+      "enum": [
+        "STANDARD",
+        "SERVICE",
+        "MCP_SERVER"
+      ]
+    },
     "InitializationTimeout": {
       "description": "The initialization timeout in milliseconds. Required when IsService is true.",
       "type": "integer"
@@ -198,7 +207,6 @@
   "required": [
     "Name",
     "Namespace",
-    "Description",
     "ApplicationSourceConfig"
   ],
   "tagging": {

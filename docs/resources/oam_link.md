@@ -16,9 +16,6 @@ Definition of AWS::Oam::Link Resource Type
 To use awscc_oam_link to create link from source account to monitoring account:
 
 ```terraform
-# Copyright (c) HashiCorp, Inc.
-# SPDX-License-Identifier: MPL-2.0
-
 resource "awscc_oam_link" "link_example" {
   resource_types  = ["AWS::CloudWatch::Metric", "AWS::Logs::LogGroup", "AWS::XRay::Trace"]
   sink_identifier = var.sinkArn

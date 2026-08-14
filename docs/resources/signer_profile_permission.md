@@ -2,12 +2,12 @@
 page_title: "awscc_signer_profile_permission Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  An example resource schema demonstrating some basic constructs and validation rules.
+  Resource Type definition for AWS::Signer::ProfilePermission
 ---
 
 # awscc_signer_profile_permission (Resource)
 
-An example resource schema demonstrating some basic constructs and validation rules.
+Resource Type definition for AWS::Signer::ProfilePermission
 
 ## Example Usage
 

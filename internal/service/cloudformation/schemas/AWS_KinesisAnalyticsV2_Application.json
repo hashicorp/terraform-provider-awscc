@@ -1003,6 +1003,7 @@
         "kinesisanalytics:DescribeApplication",
         "kinesisanalytics:ListTagsForResource",
         "kinesisanalytics:UpdateApplicationMaintenanceConfiguration",
+        "kinesisanalytics:TagResource",
         "kms:Decrypt",
         "kms:DescribeKey",
         "kms:GenerateDataKey",
@@ -1018,6 +1019,7 @@
     },
     "update": {
       "permissions": [
+        "iam:PassRole",
         "kinesisanalytics:UpdateApplication",
         "kinesisanalytics:DescribeApplication",
         "kinesisanalytics:TagResource",

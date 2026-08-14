@@ -5,7 +5,7 @@
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-gamelift.git",
   "tagging": {
     "taggable": true,
-    "cloudFormationSystemTags": false,
+    "cloudFormationSystemTags": true,
     "tagProperty": "/properties/Tags",
     "tagOnCreate": true,
     "tagUpdatable": true,
@@ -117,12 +117,20 @@
     "SizeOnDisk": {
       "description": "The file size of the uploaded Realtime script, expressed in bytes. When files are uploaded from an S3 location, this value remains at \"0\".",
       "type": "integer",
-      "minimum": 1
+      "minimum": 0
+    },
+    "NodeJsVersion": {
+      "description": "The Node.js version used for execution of the Realtime script.",
+      "pattern": "^\\d+\\.[x0-9]+$",
+      "type": "string"
     }
   },
   "additionalProperties": false,
   "required": [
     "StorageLocation"
+  ],
+  "createOnlyProperties": [
+    "/properties/NodeJsVersion"
   ],
   "readOnlyProperties": [
     "/properties/Id",

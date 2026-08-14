@@ -1,0 +1,196 @@
+{
+  "typeName": "AWS::Batch::QuotaShare",
+  "description": "Creates an AWS Batch quota share. Each quota share operates as a virtual queue with a configured compute capacity, resource sharing strategy, and borrow limits.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-batch",
+  "additionalProperties": false,
+  "definitions": {
+    "ResourceArn": {
+      "type": "string",
+      "pattern": "^arn:aws[a-z\\-]*:batch:[a-z0-9\\-]+:[0-9]{12}:job-queue/[a-zA-Z0-9_\\-]{1,128}/quota-share/[a-zA-Z0-9_\\-]{1,128}$"
+    },
+    "QuotaShareCapacityLimit": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MaxCapacity": {
+          "type": "integer",
+          "description": "The maximum capacity available for the quota share. This value represents the maximum quantity of a resource that can be allocated to jobs in the quota share without borrowing.",
+          "minimum": 1
+        },
+        "CapacityUnit": {
+          "type": "string",
+          "description": "The unit of compute capacity for the capacityLimit. For example, `ml.m5.large`."
+        }
+      },
+      "required": [
+        "MaxCapacity",
+        "CapacityUnit"
+      ]
+    },
+    "QuotaShareResourceSharingConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Strategy": {
+          "type": "string",
+          "description": "The resource sharing strategy for the quota share. The `RESERVE` strategy allows a quota share to reserve idle capacity for itself. `LEND` configures the share to lend its idle capacity to another share in need of capacity. The `LEND_AND_BORROW` strategy configures the share to borrow idle capacity from an underutilized share, as well as lend to another share.",
+          "enum": [
+            "RESERVE",
+            "LEND",
+            "LEND_AND_BORROW"
+          ]
+        },
+        "BorrowLimit": {
+          "type": "integer",
+          "description": "The maximum percentage of additional capacity that the quota share can borrow from other shares. `BorrowLimit` can only be applied to quota shares with a strategy of `LEND_AND_BORROW`. This value is expressed as a percentage of the quota share's configured CapacityLimits. The `BorrowLimit` is applied uniformly across all capacity units. For example, if the `BorrowLimit` is 200, the quota share can borrow up to 200% of its configured `maxCapacity` for each capacity unit. The default `BorrowLimit` is -1, which indicates unlimited borrowing.",
+          "minimum": -1
+        }
+      },
+      "required": [
+        "Strategy"
+      ]
+    },
+    "QuotaSharePreemptionConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "InSharePreemption": {
+          "type": "string",
+          "description": "Specifies whether jobs within a quota share can be preempted by another, higher priority job in the same quota share.",
+          "enum": [
+            "ENABLED",
+            "DISABLED"
+          ]
+        }
+      },
+      "required": [
+        "InSharePreemption"
+      ]
+    }
+  },
+  "properties": {
+    "QuotaShareName": {
+      "type": "string",
+      "description": "The name of the quota share. It can be up to 128 characters long. It can contain uppercase and lowercase letters, numbers, hyphens (-), and underscores (_).",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "QuotaShareArn": {
+      "description": "The Amazon Resource Name (ARN) of the quota share.",
+      "$ref": "#/definitions/ResourceArn"
+    },
+    "JobQueue": {
+      "type": "string",
+      "description": "The AWS Batch job queue associated with the quota share. This can be the job queue name or ARN. A job queue must be in the `VALID` state before you can associate it with a quota share."
+    },
+    "CapacityLimits": {
+      "type": "array",
+      "description": "A list that specifies the quantity and type of compute capacity allocated to the quota share.",
+      "insertionOrder": true,
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/QuotaShareCapacityLimit"
+      }
+    },
+    "ResourceSharingConfiguration": {
+      "description": "Specifies whether a quota share reserves, lends, or both lends and borrows idle compute capacity.",
+      "$ref": "#/definitions/QuotaShareResourceSharingConfiguration"
+    },
+    "PreemptionConfiguration": {
+      "description": "Specifies the preemption behavior for jobs in a quota share.",
+      "$ref": "#/definitions/QuotaSharePreemptionConfiguration"
+    },
+    "State": {
+      "type": "string",
+      "description": "The state of the quota share. If the quota share is `ENABLED`, it is able to accept jobs. If the quota share is `DISABLED`, new jobs won't be accepted but jobs already submitted can finish. The default state is `ENABLED`.",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "Tags": {
+      "type": "object",
+      "description": "The tags that you apply to the quota share to help you categorize and organize your resources. Each tag consists of a key and an optional value.",
+      "patternProperties": {
+        "": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "Batch:TagResource",
+      "Batch:UntagResource"
+    ]
+  },
+  "required": [
+    "QuotaShareName",
+    "JobQueue",
+    "CapacityLimits",
+    "ResourceSharingConfiguration",
+    "PreemptionConfiguration"
+  ],
+  "primaryIdentifier": [
+    "/properties/QuotaShareArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/QuotaShareName"
+    ]
+  ],
+  "createOnlyProperties": [
+    "/properties/QuotaShareName",
+    "/properties/JobQueue"
+  ],
+  "readOnlyProperties": [
+    "/properties/QuotaShareArn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "Batch:CreateQuotaShare",
+        "Batch:TagResource",
+        "Batch:DescribeQuotaShare"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "Batch:DescribeQuotaShare"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "Batch:DescribeQuotaShare",
+        "Batch:UpdateQuotaShare",
+        "Batch:TagResource",
+        "Batch:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "Batch:UpdateQuotaShare",
+        "Batch:DescribeQuotaShare",
+        "Batch:DeleteQuotaShare"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "Batch:ListQuotaShares"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "JobQueue": {
+            "$ref": "resource-schema.json#/properties/JobQueue"
+          }
+        }
+      }
+    }
+  }
+}

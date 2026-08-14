@@ -20,6 +20,7 @@
     "/properties/PeerOwnerId",
     "/properties/PeerVpcId",
     "/properties/PeerRoleArn",
+    "/properties/AssumeRoleRegion",
     "/properties/VpcId"
   ],
   "primaryIdentifier": [
@@ -65,7 +66,8 @@
     }
   },
   "writeOnlyProperties": [
-    "/properties/PeerRoleArn"
+    "/properties/PeerRoleArn",
+    "/properties/AssumeRoleRegion"
   ],
   "additionalProperties": false,
   "definitions": {
@@ -100,6 +102,10 @@
     },
     "PeerVpcId": {
       "description": "The ID of the VPC with which you are creating the VPC peering connection. You must specify this parameter in the request.",
+      "type": "string"
+    },
+    "AssumeRoleRegion": {
+      "description": "The Region code to use when calling Security Token Service (STS) to assume the PeerRoleArn, if provided.",
       "type": "string"
     },
     "Id": {

@@ -1,3 +1,6 @@
+# Copyright IBM Corp. 2021, 2026
+# "SPDX-License-Identifier: MPL-2.0"
+
 # See GitHub's docs for more information on this file:
 # https://docs.github.com/en/free-pro-team@latest/github/administering-a-repository/configuration-options-for-dependency-updates
 version: 2
@@ -23,6 +26,9 @@ updates:
         patterns:
           - "github.com/hashicorp/aws-sdk-go-base/v2"
           - "github.com/hashicorp/aws-sdk-go-base/v2/*"
+      terraform-devex:
+        patterns:
+          - "github.com/hashicorp/terraform-plugin-*"
     ignore:
       # terraform-plugin-go should only be updated via terraform-plugin-framework
       - dependency-name: "github.com/hashicorp/terraform-plugin-go"

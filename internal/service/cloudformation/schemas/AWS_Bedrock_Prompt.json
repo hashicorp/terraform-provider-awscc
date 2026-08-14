@@ -672,7 +672,7 @@
       "items": {
         "$ref": "#/definitions/PromptVariant"
       },
-      "maxItems": 1,
+      "maxItems": 3,
       "minItems": 0,
       "description": "List of prompt variants",
       "insertionOrder": true
@@ -757,7 +757,7 @@
     }
   },
   "tagging": {
-    "cloudFormationSystemTags": false,
+    "cloudFormationSystemTags": true,
     "tagOnCreate": true,
     "tagProperty": "/properties/Tags",
     "tagUpdatable": true,

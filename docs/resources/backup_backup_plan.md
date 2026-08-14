@@ -67,6 +67,7 @@ Required:
 Optional:
 
 - `advanced_backup_settings` (Attributes List) (see [below for nested schema](#nestedatt--backup_plan--advanced_backup_settings))
+- `scan_settings` (Attributes List) (see [below for nested schema](#nestedatt--backup_plan--scan_settings))
 
 <a id="nestedatt--backup_plan--backup_plan_rule"></a>
 ### Nested Schema for `backup_plan.backup_plan_rule`
@@ -84,6 +85,7 @@ Optional:
 - `index_actions` (Attributes List) (see [below for nested schema](#nestedatt--backup_plan--backup_plan_rule--index_actions))
 - `lifecycle` (Attributes) (see [below for nested schema](#nestedatt--backup_plan--backup_plan_rule--lifecycle))
 - `recovery_point_tags` (Map of String)
+- `scan_actions` (Attributes List) (see [below for nested schema](#nestedatt--backup_plan--backup_plan_rule--scan_actions))
 - `schedule_expression` (String)
 - `schedule_expression_timezone` (String)
 - `start_window_minutes` (Number)
@@ -126,6 +128,15 @@ Optional:
 - `opt_in_to_archive_for_supported_resources` (Boolean)
 
 
+<a id="nestedatt--backup_plan--backup_plan_rule--scan_actions"></a>
+### Nested Schema for `backup_plan.backup_plan_rule.scan_actions`
+
+Optional:
+
+- `malware_scanner` (String)
+- `scan_mode` (String)
+
+
 
 <a id="nestedatt--backup_plan--advanced_backup_settings"></a>
 ### Nested Schema for `backup_plan.advanced_backup_settings`
@@ -134,6 +145,16 @@ Optional:
 
 - `backup_options` (String)
 - `resource_type` (String)
+
+
+<a id="nestedatt--backup_plan--scan_settings"></a>
+### Nested Schema for `backup_plan.scan_settings`
+
+Optional:
+
+- `malware_scanner` (String)
+- `resource_types` (List of String)
+- `scanner_role_arn` (String)
 
 ## Import
 

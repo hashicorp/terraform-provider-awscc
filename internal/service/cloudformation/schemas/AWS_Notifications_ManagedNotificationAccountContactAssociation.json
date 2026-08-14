@@ -6,7 +6,7 @@
     "ManagedNotificationConfigurationArn": {
       "description": "The managed notification configuration ARN, against which the account contact association will be created",
       "type": "string",
-      "pattern": "^arn:[-.a-z0-9]{1,63}:notifications::[0-9]{12}:managed-notification-configuration/category/[a-zA-Z0-9-]{3,64}/sub-category/[a-zA-Z0-9-]{3,64}$"
+      "pattern": "^arn:[a-z-]{3,10}:notifications::([0-9]{12}|):managed-notification-configuration\/category\/[a-zA-Z0-9\\-]{3,64}\/sub-category\/[a-zA-Z0-9\\-]{3,64}$"
     },
     "ContactIdentifier": {
       "description": "This unique identifier for Contact",
@@ -71,7 +71,7 @@
         "properties": {
           "ManagedNotificationConfigurationArn": {
             "type": "string",
-            "pattern": "^arn:[-.a-z0-9]{1,63}:notifications::([0-9]{12}|):managed-notification-configuration/category/[a-zA-Z0-9-]{3,64}/sub-category/[a-zA-Z0-9-]{3,64}$"
+            "pattern": "^arn:[a-z-]{3,10}:notifications::([0-9]{12}|):managed-notification-configuration\/category\/[a-zA-Z0-9\\-]{3,64}\/sub-category\/[a-zA-Z0-9\\-]{3,64}$"
           }
         },
         "required": [

@@ -32,6 +32,9 @@
         },
         "S3RecordingConfig": {
           "$ref": "#/definitions/S3RecordingConfig"
+        },
+        "TelemetrySinkConfig": {
+          "$ref": "#/definitions/TelemetrySinkConfig"
         }
       },
       "additionalProperties": false
@@ -113,6 +116,10 @@
     "RoleArn": {
       "type": "string",
       "pattern": "^arn:[^:\\n]+:iam::[^:\\n]+:role\\/.+$"
+    },
+    "KinesisDataStreamArn": {
+      "type": "string",
+      "pattern": "^arn:[a-z0-9-.]{1,63}:kinesis:[-a-z0-9]{1,50}:[0-9]{12}:stream/[a-zA-Z0-9_.-]{1,128}$"
     },
     "UplinkSpectrumConfig": {
       "type": "object",
@@ -250,6 +257,60 @@
           "$ref": "#/definitions/S3KeyPrefix"
         }
       },
+      "additionalProperties": false
+    },
+    "TelemetrySinkType": {
+      "type": "string",
+      "enum": [
+        "KINESIS_DATA_STREAM"
+      ]
+    },
+    "KinesisDataStreamData": {
+      "type": "object",
+      "properties": {
+        "KinesisRoleArn": {
+          "$ref": "#/definitions/RoleArn"
+        },
+        "KinesisDataStreamArn": {
+          "$ref": "#/definitions/KinesisDataStreamArn"
+        }
+      },
+      "required": [
+        "KinesisRoleArn",
+        "KinesisDataStreamArn"
+      ],
+      "additionalProperties": false
+    },
+    "TelemetrySinkData": {
+      "type": "object",
+      "oneOf": [
+        {
+          "required": [
+            "KinesisDataStreamData"
+          ]
+        }
+      ],
+      "properties": {
+        "KinesisDataStreamData": {
+          "$ref": "#/definitions/KinesisDataStreamData"
+        }
+      },
+      "additionalProperties": false
+    },
+    "TelemetrySinkConfig": {
+      "type": "object",
+      "properties": {
+        "TelemetrySinkType": {
+          "$ref": "#/definitions/TelemetrySinkType"
+        },
+        "TelemetrySinkData": {
+          "$ref": "#/definitions/TelemetrySinkData"
+        }
+      },
+      "required": [
+        "TelemetrySinkType",
+        "TelemetrySinkData"
+      ],
       "additionalProperties": false
     },
     "Tag": {

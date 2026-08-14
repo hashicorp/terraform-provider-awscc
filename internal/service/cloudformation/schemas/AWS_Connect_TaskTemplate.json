@@ -50,7 +50,6 @@
     "FieldOption": {
       "description": "Single select field identifier",
       "type": "string",
-      "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9_.,\\s-]*[A-Za-z0-9_.,-])?$",
       "minLength": 1,
       "maxLength": 100
     },
@@ -226,12 +225,12 @@
     "ContactFlowArn": {
       "description": "The identifier of the contact flow.",
       "type": "string",
-      "pattern": "^$|arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*$"
+      "pattern": "^$|arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*(:[a-zA-Z0-9-]+)?$"
     },
     "SelfAssignContactFlowArn": {
       "description": "The identifier of the contact flow.",
       "type": "string",
-      "pattern": "^$|arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*$"
+      "pattern": "^$|arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*(:[a-zA-Z0-9-]+)?$"
     },
     "Constraints": {
       "description": "The constraints for the task template",
@@ -289,6 +288,8 @@
     "create": {
       "permissions": [
         "connect:CreateTaskTemplate",
+        "connect:DeleteTaskTemplate",
+        "connect:ListTaskTemplates",
         "connect:TagResource"
       ]
     },

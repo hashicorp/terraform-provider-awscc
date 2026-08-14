@@ -22,11 +22,14 @@ Data Source schema for AWS::Logs::DeliverySource
 ### Read-Only
 
 - `arn` (String) The Amazon Resource Name (ARN) that uniquely identifies this delivery source.
+- `delivery_source_configuration` (Map of String) A map of key-value pairs to configure the delivery source. Both keys and values must be between 1 and 255 characters in length.
 - `log_type` (String) The type of logs being delivered. Only mandatory when the resourceArn could match more than one. In such a case, the error message will contain all the possible options.
 - `name` (String) The unique name of the Log source.
 - `resource_arn` (String) The ARN of the resource that will be sending the logs.
 - `resource_arns` (Set of String) This array contains the ARN of the AWS resource that sends logs and is represented by this delivery source. Currently, only one ARN can be in the array.
 - `service` (String) The AWS service that is sending logs.
+- `status` (String) The status of this delivery source. The value can be ACTIVE or INACTIVE.
+- `status_reason` (String) The reason for the status of this delivery source, such as RESOURCE_DELETED.
 - `tags` (Attributes Set) The tags that have been assigned to this delivery source. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>

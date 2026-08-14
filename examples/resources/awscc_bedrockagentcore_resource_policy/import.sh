@@ -1,0 +1,1 @@
+$ terraform import awscc_bedrockagentcore_resource_policy.example "resource_arn"

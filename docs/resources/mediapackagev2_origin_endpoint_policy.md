@@ -24,7 +24,7 @@ description: |-
 
 ### Optional
 
-- `cdn_auth_configuration` (Attributes) (see [below for nested schema](#nestedatt--cdn_auth_configuration))
+- `cdn_auth_configuration` (Attributes) <p>The settings to enable CDN authorization headers in MediaPackage.</p> (see [below for nested schema](#nestedatt--cdn_auth_configuration))
 
 ### Read-Only
 
@@ -35,8 +35,8 @@ description: |-
 
 Optional:
 
-- `cdn_identifier_secret_arns` (List of String)
-- `secrets_role_arn` (String)
+- `cdn_identifier_secret_arns` (List of String) <p>The ARN for the secret in Secrets Manager that your CDN uses for authorization to access the endpoint.</p>
+- `secrets_role_arn` (String) <p>The ARN for the IAM role that gives MediaPackage read access to Secrets Manager and KMS for CDN authorization.</p>
 
 ## Import
 

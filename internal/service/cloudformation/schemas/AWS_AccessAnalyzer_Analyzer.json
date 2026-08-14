@@ -222,7 +222,8 @@
       "description": "Amazon Resource Name (ARN) of the analyzer",
       "type": "string",
       "minLength": 1,
-      "maxLength": 1600
+      "maxLength": 1600,
+      "pattern": "^arn:[^:]+:access-analyzer(-beta|-gamma)?:[^:]*:[^:]*:analyzer/.+$"
     },
     "Tags": {
       "type": "array",

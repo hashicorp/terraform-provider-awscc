@@ -33,10 +33,12 @@ resource "awscc_datazone_group_profile" "example" {
 ### Required
 
 - `domain_identifier` (String) The identifier of the Amazon DataZone domain in which the group profile would be created.
-- `group_identifier` (String) The ID of the group.
 
 ### Optional
 
+- `group_identifier` (String) The ID of the group.
+- `group_type` (String) The type of the group.
+- `role_principal_arn` (String) The ARN of the role principal for the group profile.
 - `status` (String) The status of the group profile.
 
 ### Read-Only
@@ -45,6 +47,7 @@ resource "awscc_datazone_group_profile" "example" {
 - `group_name` (String) The group-name of the Group Profile.
 - `group_profile_id` (String) The ID of the Amazon DataZone group profile.
 - `id` (String) Uniquely identifies the resource.
+- `role_principal_id` (String) The ID of the role principal for the group profile.
 
 ## Import
 

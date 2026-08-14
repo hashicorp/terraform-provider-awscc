@@ -618,6 +618,17 @@
       "insertionOrder": false,
       "minItems": 1,
       "maxItems": 1
+    },
+    "Scope": {
+      "description": "Scope of the integration, such as 'PROFILE' or 'DOMAIN'",
+      "type": "string",
+      "enum": [
+        "PROFILE",
+        "DOMAIN"
+      ],
+      "pattern": "^[a-zA-Z_][a-zA-Z_0-9-]*$",
+      "minLength": 1,
+      "maxLength": 255
     }
   },
   "required": [
@@ -654,7 +665,8 @@
     },
     "read": {
       "permissions": [
-        "profile:GetIntegration"
+        "profile:GetIntegration",
+        "profile:ListTagsForResource"
       ]
     },
     "delete": {
@@ -685,6 +697,7 @@
         "events:PutEvents",
         "profile:UntagResource",
         "profile:TagResource",
+        "profile:ListTagsForResource",
         "connect:DescribeInstance",
         "ds:DescribeDirectories"
       ]

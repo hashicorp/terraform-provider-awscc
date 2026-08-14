@@ -1,4 +1,4 @@
-// Copyright (c) HashiCorp, Inc.
+// Copyright IBM Corp. 2021, 2026
 // SPDX-License-Identifier: MPL-2.0
 
 package generic
@@ -96,7 +96,7 @@ func (sd *genericSingularDataSource) Read(ctx context.Context, request datasourc
 
 	translator := toTerraform{cfToTfNameMap: sd.cfToTfNameMap}
 	schema := currentConfig.Schema
-	val, err := translator.FromString(ctx, schema, aws.ToString(description.Properties))
+	val, err := translator.FromString(ctx, schema, aws.ToString(description.Properties), nil)
 
 	if err != nil {
 		response.Diagnostics.AddError(
@@ -120,7 +120,7 @@ func (sd *genericSingularDataSource) Read(ctx context.Context, request datasourc
 		return
 	}
 
-	tflog.Debug(ctx, "Response.State.Raw", map[string]interface{}{
+	tflog.Debug(ctx, "Response.State.Raw", map[string]any{
 		"value": hclog.Fmt("%v", response.State.Raw),
 	})
 

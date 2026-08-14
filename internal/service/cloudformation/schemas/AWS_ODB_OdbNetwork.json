@@ -34,6 +34,30 @@
         "DISABLING"
       ]
     },
+    "CrossRegionS3RestoreSourcesAccess": {
+      "type": "object",
+      "description": "The configuration access for the cross-Region Amazon S3 database restore source for the ODB network.",
+      "additionalProperties": false,
+      "properties": {
+        "Status": {
+          "$ref": "#/definitions/ManagedResourceStatus",
+          "description": "The current status of the cross-Region Amazon S3 restore access configuration."
+        },
+        "Ipv4Addresses": {
+          "type": "array",
+          "description": "The IPv4 addresses allowed for cross-Region Amazon S3 restore access.",
+          "uniqueItems": false,
+          "insertionOrder": false,
+          "items": {
+            "type": "string"
+          }
+        },
+        "Region": {
+          "type": "string",
+          "description": "The AWS-Region for cross-Region Amazon S3 restore access."
+        }
+      }
+    },
     "ManagedServices": {
       "description": "The managed services configuration for the ODB network.",
       "type": "object",
@@ -136,6 +160,71 @@
               "description": "The endpoint policy for the Amazon S3 access."
             }
           }
+        },
+        "KmsAccess": {
+          "type": "object",
+          "description": "The AWS Key Management Service (KMS) access configuration.",
+          "additionalProperties": false,
+          "properties": {
+            "Status": {
+              "$ref": "#/definitions/ManagedResourceStatus",
+              "description": "The status of the AWS KMS access."
+            },
+            "Ipv4Addresses": {
+              "type": "array",
+              "description": "The IPv4 addresses for the AWS KMS access.",
+              "uniqueItems": false,
+              "insertionOrder": false,
+              "items": {
+                "type": "string"
+              }
+            },
+            "DomainName": {
+              "type": "string",
+              "description": "The domain name for the AWS KMS access."
+            },
+            "KmsPolicyDocument": {
+              "type": "string",
+              "description": "The endpoint policy for the AWS KMS access."
+            }
+          }
+        },
+        "StsAccess": {
+          "type": "object",
+          "description": "The AWS Security Token Service (STS) access configuration.",
+          "additionalProperties": false,
+          "properties": {
+            "Status": {
+              "$ref": "#/definitions/ManagedResourceStatus",
+              "description": "The status of the AWS STS access."
+            },
+            "Ipv4Addresses": {
+              "type": "array",
+              "description": "The IPv4 addresses for the AWS STS access.",
+              "uniqueItems": false,
+              "insertionOrder": false,
+              "items": {
+                "type": "string"
+              }
+            },
+            "DomainName": {
+              "type": "string",
+              "description": "The domain name for the AWS STS access."
+            },
+            "StsPolicyDocument": {
+              "type": "string",
+              "description": "The endpoint policy for the AWS STS access."
+            }
+          }
+        },
+        "CrossRegionS3RestoreSourcesAccess": {
+          "type": "array",
+          "description": "The access configuration for the cross-Region Amazon S3 database restore source.",
+          "insertionOrder": false,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/CrossRegionS3RestoreSourcesAccess"
+          }
         }
       }
     }
@@ -188,6 +277,15 @@
       "minLength": 1,
       "maxLength": 255
     },
+    "Ec2PlacementGroupIds": {
+      "type": "array",
+      "description": "The list of EC2 placement group IDs associated with your ODB network.",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      }
+    },
     "OciNetworkAnchorId": {
       "type": "string",
       "description": "The unique identifier of the OCI network anchor for the ODB network.",
@@ -221,6 +319,39 @@
     "S3PolicyDocument": {
       "type": "string",
       "description": "Specifies the endpoint policy for Amazon S3 access from the ODB network."
+    },
+    "KmsAccess": {
+      "type": "string",
+      "description": "The AWS Key Management Service (KMS) access configuration for the ODB network.",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "KmsPolicyDocument": {
+      "type": "string",
+      "description": "The AWS Key Management Service (KMS) policy document that defines permissions for key usage within the ODB network."
+    },
+    "StsAccess": {
+      "type": "string",
+      "description": "The AWS Security Token Service (STS) access configuration for the ODB network.",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "StsPolicyDocument": {
+      "type": "string",
+      "description": "The AWS Security Token Service (STS) policy document that defines permissions for token service usage within the ODB network."
+    },
+    "CrossRegionS3RestoreSources": {
+      "type": "array",
+      "description": "The cross-Region Amazon S3 restore sources for the ODB network.",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      }
     },
     "Tags": {
       "type": "array",
@@ -258,13 +389,19 @@
     "/properties/OciResourceAnchorName",
     "/properties/OciVcnUrl",
     "/properties/OdbNetworkArn",
-    "/properties/OdbNetworkId"
+    "/properties/OdbNetworkId",
+    "/properties/Ec2PlacementGroupIds"
   ],
   "writeOnlyProperties": [
     "/properties/DeleteAssociatedResources",
     "/properties/DefaultDnsPrefix",
     "/properties/S3Access",
     "/properties/S3PolicyDocument",
+    "/properties/KmsAccess",
+    "/properties/KmsPolicyDocument",
+    "/properties/StsAccess",
+    "/properties/StsPolicyDocument",
+    "/properties/CrossRegionS3RestoreSources",
     "/properties/ZeroEtlAccess"
   ],
   "primaryIdentifier": [
@@ -296,7 +433,9 @@
         "ec2:DescribeVpcEndpointAssociations",
         "ec2:CreateVpcEndpoint",
         "ec2:DescribeVpcEndpoints",
-        "ec2:CreateTags"
+        "ec2:CreateTags",
+        "ec2:CreatePlacementGroup",
+        "ec2:AttachResourcesToPlacementGroup"
       ],
       "timeoutInMinutes": 2160
     },
@@ -352,7 +491,9 @@
         "ec2:ModifyOdbNetworkPeering",
         "ec2:DescribeVpcEndpointAssociations",
         "ec2:DeleteVpcEndpoints",
-        "ec2:DescribeVpcEndpoints"
+        "ec2:DescribeVpcEndpoints",
+        "ec2:DeletePlacementGroup",
+        "ec2:DetachResourcesFromPlacementGroup"
       ],
       "timeoutInMinutes": 2160
     },

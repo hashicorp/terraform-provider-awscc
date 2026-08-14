@@ -25,3 +25,12 @@ Data Source schema for AWS::Connect::IntegrationAssociation
 - `integration_arn` (String) ARN of Integration being associated with the instance
 - `integration_association_id` (String) Identifier of the association with Connect Instance
 - `integration_type` (String) Specifies the integration type to be associated with the instance
+- `tags` (Attributes List) The tags used to organize, track, or control access for this resource. (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String) The key name of the tag.
+- `value` (String) The value for the tag.

@@ -1,0 +1,1 @@
+$ terraform import awscc_appstream_stack.example "name"

@@ -1,0 +1,1 @@
+$ terraform import awscc_emrcontainers_security_configuration.example "arn"

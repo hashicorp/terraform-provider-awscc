@@ -34,6 +34,9 @@ Data Source schema for AWS::EKS::Cluster
 - `encryption_config_key_arn` (String) Amazon Resource Name (ARN) or alias of the customer master key (CMK).
 - `endpoint` (String) The endpoint for your Kubernetes API server, such as https://5E1D0CEXAMPLEA591B746AFC5AB30262.yl4.us-west-2.eks.amazonaws.com.
 - `force` (Boolean) Force cluster version update
+- `kube_api_server_config` (Attributes) The configuration for the Kubernetes API server on an Amazon EKS cluster. (see [below for nested schema](#nestedatt--kube_api_server_config))
+- `kube_controller_manager_config` (Attributes) The configuration for the Kubernetes controller manager on an Amazon EKS cluster. (see [below for nested schema](#nestedatt--kube_controller_manager_config))
+- `kube_scheduler_config` (Attributes) The configuration for the Kubernetes scheduler on an Amazon EKS cluster. (see [below for nested schema](#nestedatt--kube_scheduler_config))
 - `kubernetes_network_config` (Attributes) The Kubernetes network configuration for the cluster. (see [below for nested schema](#nestedatt--kubernetes_network_config))
 - `logging` (Attributes) Enable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs based on log types. By default, cluster control plane logs aren't exported to CloudWatch Logs. (see [below for nested schema](#nestedatt--logging))
 - `name` (String) The unique name to give to your cluster.
@@ -42,6 +45,7 @@ Data Source schema for AWS::EKS::Cluster
 - `remote_network_config` (Attributes) Configuration fields for specifying on-premises node and pod CIDRs that are external to the VPC passed during cluster creation. (see [below for nested schema](#nestedatt--remote_network_config))
 - `resources_vpc_config` (Attributes) An object representing the VPC configuration to use for an Amazon EKS cluster. (see [below for nested schema](#nestedatt--resources_vpc_config))
 - `role_arn` (String) The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes control plane to make calls to AWS API operations on your behalf.
+- `rollback_config` (Attributes) The rollback configuration to use for the cluster version rollback. (see [below for nested schema](#nestedatt--rollback_config))
 - `storage_config` (Attributes) Todo: add description (see [below for nested schema](#nestedatt--storage_config))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `upgrade_policy` (Attributes) An object representing the Upgrade Policy to use for the cluster. (see [below for nested schema](#nestedatt--upgrade_policy))
@@ -89,6 +93,74 @@ Read-Only:
 Read-Only:
 
 - `key_arn` (String) Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must be symmetric, created in the same region as the cluster, and if the KMS key was created in a different account, the user must have access to the KMS key.
+
+
+
+<a id="nestedatt--kube_api_server_config"></a>
+### Nested Schema for `kube_api_server_config`
+
+Read-Only:
+
+- `event_ttl` (String) The duration that Kubernetes events are retained (e.g., 30m, 1h).
+- `service_node_port_range` (Attributes) The port range for Kubernetes NodePort services. (see [below for nested schema](#nestedatt--kube_api_server_config--service_node_port_range))
+
+<a id="nestedatt--kube_api_server_config--service_node_port_range"></a>
+### Nested Schema for `kube_api_server_config.service_node_port_range`
+
+Read-Only:
+
+- `max_port` (Number) The maximum port number in the range.
+- `min_port` (Number) The minimum port number in the range.
+
+
+
+<a id="nestedatt--kube_controller_manager_config"></a>
+### Nested Schema for `kube_controller_manager_config`
+
+Read-Only:
+
+- `horizontal_pod_autoscaler_controller_config` (Attributes) The horizontal pod autoscaler controller configuration. (see [below for nested schema](#nestedatt--kube_controller_manager_config--horizontal_pod_autoscaler_controller_config))
+
+<a id="nestedatt--kube_controller_manager_config--horizontal_pod_autoscaler_controller_config"></a>
+### Nested Schema for `kube_controller_manager_config.horizontal_pod_autoscaler_controller_config`
+
+Read-Only:
+
+- `horizontal_pod_autoscaler_sync_period` (String) The interval between each sync of the horizontal pod autoscaler (e.g., 15s, 1m).
+
+
+
+<a id="nestedatt--kube_scheduler_config"></a>
+### Nested Schema for `kube_scheduler_config`
+
+Read-Only:
+
+- `node_resources_fit` (Attributes) The NodeResourcesFit plugin configuration for the Kubernetes scheduler. (see [below for nested schema](#nestedatt--kube_scheduler_config--node_resources_fit))
+
+<a id="nestedatt--kube_scheduler_config--node_resources_fit"></a>
+### Nested Schema for `kube_scheduler_config.node_resources_fit`
+
+Read-Only:
+
+- `scoring_strategy` (Attributes) The scoring strategy configuration for the NodeResourcesFit scheduler plugin. (see [below for nested schema](#nestedatt--kube_scheduler_config--node_resources_fit--scoring_strategy))
+
+<a id="nestedatt--kube_scheduler_config--node_resources_fit--scoring_strategy"></a>
+### Nested Schema for `kube_scheduler_config.node_resources_fit.scoring_strategy`
+
+Read-Only:
+
+- `resources` (Attributes List) The resource weights used for scoring nodes. (see [below for nested schema](#nestedatt--kube_scheduler_config--node_resources_fit--scoring_strategy--resources))
+- `type` (String) The scoring strategy type (LeastAllocated or MostAllocated).
+
+<a id="nestedatt--kube_scheduler_config--node_resources_fit--scoring_strategy--resources"></a>
+### Nested Schema for `kube_scheduler_config.node_resources_fit.scoring_strategy.resources`
+
+Read-Only:
+
+- `name` (String) The name of the resource (for example, cpu or memory).
+- `weight` (Number) The weight assigned to the resource for scoring. Must be between 1 and 100.
+
+
 
 
 
@@ -140,16 +212,27 @@ Read-Only:
 
 Read-Only:
 
-- `control_plane_instance_type` (String) Specify the Instance type of the machines that should be used to create your cluster.
-- `control_plane_placement` (Attributes) Specify the placement group of the control plane machines for your cluster. (see [below for nested schema](#nestedatt--outpost_config--control_plane_placement))
-- `outpost_arns` (List of String) Specify one or more Arn(s) of Outpost(s) on which you would like to create your cluster.
+- `control_plane_instance_type` (String) The EC2 instance type for the Kubernetes control plane instances of your local Amazon EKS cluster on AWS Outposts. This instance type applies to all control plane instances and cannot be changed after cluster creation.
+- `control_plane_placement` (Attributes) An object representing the placement configuration for all the control plane instances of your local Amazon EKS cluster on an AWS Outpost. (see [below for nested schema](#nestedatt--outpost_config--control_plane_placement))
+- `etcd_instance_type` (String) The EC2 instance type for etcd instances of your local Amazon EKS cluster on AWS Outposts. This instance type applies to all etcd instances and cannot be changed after cluster creation.
+- `etcd_placement` (Attributes) An object representing the placement configuration for the etcd instances of your local Amazon EKS cluster on an AWS Outpost. (see [below for nested schema](#nestedatt--outpost_config--etcd_placement))
+- `outpost_arns` (List of String) The ARN of the Outpost that you want to use for your local Amazon EKS cluster on Outposts. Only a single Outpost ARN is supported.
 
 <a id="nestedatt--outpost_config--control_plane_placement"></a>
 ### Nested Schema for `outpost_config.control_plane_placement`
 
 Read-Only:
 
-- `group_name` (String) Specify the placement group name of the control place machines for your cluster.
+- `group_name` (String) The name of the placement group for the Kubernetes control plane instances. This setting can't be changed after cluster creation.
+- `spread_level` (String) Optional parameter to specify the placement group spread level for control plane instances. If not provided, EKS will deploy control plane instances without a placement group.
+
+
+<a id="nestedatt--outpost_config--etcd_placement"></a>
+### Nested Schema for `outpost_config.etcd_placement`
+
+Read-Only:
+
+- `spread_level` (String) Optional parameter to specify the placement group spread level for etcd instances. If not provided, EKS will deploy etcd instances without a placement group.
 
 
 
@@ -183,11 +266,20 @@ Read-Only:
 
 Read-Only:
 
+- `control_plane_egress_mode` (String) Specify the egress mode for the cluster control plane. If you set this to CUSTOMER_ROUTED, the control plane routes traffic through your VPC subnets instead of using AWS managed networking.
 - `endpoint_private_access` (Boolean) Set this value to true to enable private access for your cluster's Kubernetes API server endpoint. If you enable private access, Kubernetes API requests from within your cluster's VPC use the private VPC endpoint. The default value for this parameter is false, which disables private access for your Kubernetes API server. If you disable private access and you have nodes or AWS Fargate pods in the cluster, then ensure that publicAccessCidrs includes the necessary CIDR blocks for communication with the nodes or Fargate pods.
 - `endpoint_public_access` (Boolean) Set this value to false to disable public access to your cluster's Kubernetes API server endpoint. If you disable public access, your cluster's Kubernetes API server can only receive requests from within the cluster VPC. The default value for this parameter is true, which enables public access for your Kubernetes API server.
 - `public_access_cidrs` (List of String) The CIDR blocks that are allowed access to your cluster's public Kubernetes API server endpoint. Communication to the endpoint from addresses outside of the CIDR blocks that you specify is denied. The default value is 0.0.0.0/0. If you've disabled private endpoint access and you have nodes or AWS Fargate pods in the cluster, then ensure that you specify the necessary CIDR blocks.
 - `security_group_ids` (List of String) Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane. If you don't specify a security group, the default security group for your VPC is used.
 - `subnet_ids` (List of String) Specify subnets for your Amazon EKS nodes. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your nodes and the Kubernetes control plane.
+
+
+<a id="nestedatt--rollback_config"></a>
+### Nested Schema for `rollback_config`
+
+Read-Only:
+
+- `timeout_minutes` (Number) The timeout in minutes for the version rollback operation. If not specified, defaults to 720 minutes (12 hours).
 
 
 <a id="nestedatt--storage_config"></a>

@@ -77,7 +77,7 @@
     "PermissionSetArn": {
       "description": "The permission set that the policy will be attached to",
       "type": "string",
-      "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}",
+      "pattern": "arn:aws(-[a-z]{1,5}){0,3}:sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}",
       "minLength": 10,
       "maxLength": 1224
     },
@@ -91,7 +91,7 @@
     "InstanceArn": {
       "description": "The sso instance arn that the permission set is owned.",
       "type": "string",
-      "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}",
+      "pattern": "arn:aws(-[a-z]{1,5}){0,3}:sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}",
       "minLength": 10,
       "maxLength": 1224
     },
@@ -115,7 +115,7 @@
       "items": {
         "$ref": "#/definitions/ManagedPolicyArn"
       },
-      "maxItems": 20,
+      "maxItems": 25,
       "default": []
     },
     "InlinePolicy": {
@@ -139,7 +139,7 @@
       "items": {
         "$ref": "#/definitions/CustomerManagedPolicyReference"
       },
-      "maxItems": 20,
+      "maxItems": 25,
       "default": []
     },
     "PermissionsBoundary": {
@@ -159,7 +159,8 @@
     "tagProperty": "/properties/Tags",
     "permissions": [
       "sso:TagResource",
-      "sso:UntagResource"
+      "sso:UntagResource",
+      "sso:ListTagsForResource"
     ]
   },
   "createOnlyProperties": [
@@ -233,18 +234,14 @@
         "properties": {
           "InstanceArn": {
             "$ref": "resource-schema.json#/properties/InstanceArn"
-          },
-          "PermissionSetArn": {
-            "$ref": "resource-schema.json#/properties/PermissionSetArn"
           }
         },
         "required": [
-          "InstanceArn",
-          "PermissionSetArn"
+          "InstanceArn"
         ]
       },
       "permissions": [
-        "sso:DescribePermissionSet"
+        "sso:ListPermissionSets"
       ]
     }
   }

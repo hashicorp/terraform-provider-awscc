@@ -2,12 +2,12 @@
 page_title: "awscc_apigatewayv2_integration Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  An example resource schema demonstrating some basic constructs and validation rules.
+  Resource Type definition for AWS::ApiGatewayV2::Integration
 ---
 
 # awscc_apigatewayv2_integration (Resource)
 
-An example resource schema demonstrating some basic constructs and validation rules.
+Resource Type definition for AWS::ApiGatewayV2::Integration
 
 ## Example Usage
 

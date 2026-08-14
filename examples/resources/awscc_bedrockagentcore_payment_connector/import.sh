@@ -1,0 +1,1 @@
+$ terraform import awscc_bedrockagentcore_payment_connector.example "payment_connector_arn"

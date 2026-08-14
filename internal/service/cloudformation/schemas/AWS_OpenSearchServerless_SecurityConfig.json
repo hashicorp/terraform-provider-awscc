@@ -1,7 +1,7 @@
 {
   "typeName": "AWS::OpenSearchServerless::SecurityConfig",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-opensearchserverless",
-  "description": "Amazon OpenSearchServerless security config resource",
+  "description": "Resource Type definition for AWS::OpenSearchServerless::SecurityConfig",
   "tagging": {
     "taggable": false,
     "tagOnCreate": false,

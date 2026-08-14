@@ -91,6 +91,17 @@
       ]
     }
   },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "codestar-notifications:TagResource",
+      "codestar-notifications:UntagResource"
+    ]
+  },
   "required": [
     "EventTypeIds",
     "Resource",

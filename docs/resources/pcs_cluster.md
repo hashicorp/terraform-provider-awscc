@@ -172,10 +172,12 @@ Optional:
 
 - `accounting` (Attributes) The accounting configuration includes configurable settings for Slurm accounting. (see [below for nested schema](#nestedatt--slurm_configuration--accounting))
 - `auth_key` (Attributes) The shared Slurm key for authentication, also known as the cluster secret. (see [below for nested schema](#nestedatt--slurm_configuration--auth_key))
+- `cgroup_custom_settings` (Attributes List) Additional cgroup-specific configuration that directly maps to cgroup.conf settings. (see [below for nested schema](#nestedatt--slurm_configuration--cgroup_custom_settings))
 - `jwt_auth` (Attributes) JWT authentication configuration for Slurm. (see [below for nested schema](#nestedatt--slurm_configuration--jwt_auth))
 - `scale_down_idle_time_in_seconds` (Number) The time before an idle node is scaled down.
 - `slurm_custom_settings` (Attributes List) Additional Slurm-specific configuration that directly maps to Slurm settings. (see [below for nested schema](#nestedatt--slurm_configuration--slurm_custom_settings))
 - `slurm_rest` (Attributes) The SlurmRest configuration includes configurable settings for Slurm Rest. (see [below for nested schema](#nestedatt--slurm_configuration--slurm_rest))
+- `slurmdbd_custom_settings` (Attributes List) Additional slurmdbd-specific configuration that directly maps to slurmdbd.conf settings. (see [below for nested schema](#nestedatt--slurm_configuration--slurmdbd_custom_settings))
 
 <a id="nestedatt--slurm_configuration--accounting"></a>
 ### Nested Schema for `slurm_configuration.accounting`
@@ -183,7 +185,7 @@ Optional:
 Optional:
 
 - `default_purge_time_in_days` (Number) The default value for all purge settings for `slurmdbd.conf`. For more information, see the [slurmdbd.conf documentation at SchedMD](https://slurm.schedmd.com/slurmdbd.conf.html). The default value is `-1`. A value of `-1` means there is no purge time and records persist as long as the cluster exists.
-- `mode` (String) The default value is `STANDARD`. A value of `STANDARD` means that Slurm accounting is enabled.
+- `mode` (String) The default value is `NONE`. A value of `STANDARD` means that Slurm accounting is enabled.
 
 
 <a id="nestedatt--slurm_configuration--auth_key"></a>
@@ -193,6 +195,15 @@ Optional:
 
 - `secret_arn` (String) The Amazon Resource Name (ARN) of the the shared Slurm key.
 - `secret_version` (String) The version of the shared Slurm key.
+
+
+<a id="nestedatt--slurm_configuration--cgroup_custom_settings"></a>
+### Nested Schema for `slurm_configuration.cgroup_custom_settings`
+
+Optional:
+
+- `parameter_name` (String) The cgroup.conf parameter name.
+- `parameter_value` (String) The value for the cgroup.conf parameter.
 
 
 <a id="nestedatt--slurm_configuration--jwt_auth"></a>
@@ -226,7 +237,16 @@ Optional:
 
 Optional:
 
-- `mode` (String) The default value is `STANDARD`. A value of `STANDARD` means that Slurm Rest is enabled.
+- `mode` (String) The default value is `NONE`. A value of `STANDARD` means that Slurm Rest is enabled.
+
+
+<a id="nestedatt--slurm_configuration--slurmdbd_custom_settings"></a>
+### Nested Schema for `slurm_configuration.slurmdbd_custom_settings`
+
+Optional:
+
+- `parameter_name` (String) The slurmdbd.conf parameter name.
+- `parameter_value` (String) The value for the slurmdbd.conf parameter.
 
 
 

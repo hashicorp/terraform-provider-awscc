@@ -2,6 +2,89 @@
   "typeName": "AWS::BedrockAgentCore::GatewayTarget",
   "description": "Definition of AWS::BedrockAgentCore::GatewayTarget Resource Type",
   "definitions": {
+    "ApiGatewayTargetConfiguration": {
+      "type": "object",
+      "properties": {
+        "RestApiId": {
+          "type": "string"
+        },
+        "Stage": {
+          "type": "string"
+        },
+        "ApiGatewayToolConfiguration": {
+          "$ref": "#/definitions/ApiGatewayToolConfiguration"
+        }
+      },
+      "required": [
+        "ApiGatewayToolConfiguration",
+        "RestApiId",
+        "Stage"
+      ],
+      "additionalProperties": false
+    },
+    "ApiGatewayToolConfiguration": {
+      "type": "object",
+      "properties": {
+        "ToolOverrides": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiGatewayToolOverride"
+          }
+        },
+        "ToolFilters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiGatewayToolFilter"
+          }
+        }
+      },
+      "required": [
+        "ToolFilters"
+      ],
+      "additionalProperties": false
+    },
+    "ApiGatewayToolFilter": {
+      "type": "object",
+      "properties": {
+        "FilterPath": {
+          "type": "string"
+        },
+        "Methods": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestApiMethod"
+          }
+        }
+      },
+      "required": [
+        "FilterPath",
+        "Methods"
+      ],
+      "additionalProperties": false
+    },
+    "ApiGatewayToolOverride": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "Path": {
+          "type": "string"
+        },
+        "Method": {
+          "$ref": "#/definitions/RestApiMethod"
+        }
+      },
+      "required": [
+        "Method",
+        "Name",
+        "Path"
+      ],
+      "additionalProperties": false
+    },
     "ApiKeyCredentialLocation": {
       "type": "string",
       "enum": [
@@ -65,6 +148,106 @@
         }
       ]
     },
+    "AuthorizationData": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "Oauth2",
+          "properties": {
+            "Oauth2": {
+              "$ref": "#/definitions/OAuth2AuthorizationData"
+            }
+          },
+          "required": [
+            "Oauth2"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "ConnectorConfiguration": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z][a-zA-Z0-9_-]*$"
+        },
+        "Description": {
+          "type": "string",
+          "maxLength": 2000
+        },
+        "ParameterValues": {},
+        "ParameterOverrides": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectorParameterOverride"
+          }
+        }
+      },
+      "required": [
+        "Name"
+      ],
+      "additionalProperties": false
+    },
+    "ConnectorParameterOverride": {
+      "type": "object",
+      "properties": {
+        "Path": {
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "Visible": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "Path"
+      ],
+      "additionalProperties": false
+    },
+    "ConnectorSource": {
+      "type": "object",
+      "properties": {
+        "ConnectorId": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 1
+        }
+      },
+      "required": [
+        "ConnectorId"
+      ],
+      "additionalProperties": false
+    },
+    "ConnectorTargetConfiguration": {
+      "type": "object",
+      "properties": {
+        "Source": {
+          "$ref": "#/definitions/ConnectorSource"
+        },
+        "Enabled": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 50,
+          "minItems": 1
+        },
+        "Configurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectorConfiguration"
+          }
+        }
+      },
+      "required": [
+        "Source"
+      ],
+      "additionalProperties": false
+    },
     "CredentialProvider": {
       "oneOf": [
         {
@@ -92,6 +275,19 @@
             "ApiKeyCredentialProvider"
           ],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "IamCredentialProvider",
+          "properties": {
+            "IamCredentialProvider": {
+              "$ref": "#/definitions/IamCredentialProvider"
+            }
+          },
+          "required": [
+            "IamCredentialProvider"
+          ],
+          "additionalProperties": false
         }
       ]
     },
@@ -115,8 +311,257 @@
       "enum": [
         "GATEWAY_IAM_ROLE",
         "OAUTH",
-        "API_KEY"
+        "API_KEY",
+        "CALLER_IAM_CREDENTIALS",
+        "JWT_PASSTHROUGH"
       ]
+    },
+    "EndpointIpAddressType": {
+      "type": "string",
+      "enum": [
+        "IPV4",
+        "IPV6"
+      ]
+    },
+    "HttpApiSchemaConfiguration": {
+      "type": "object",
+      "properties": {
+        "Source": {
+          "$ref": "#/definitions/ApiSchemaConfiguration"
+        }
+      },
+      "required": [
+        "Source"
+      ],
+      "additionalProperties": false
+    },
+    "HttpTargetConfiguration": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "AgentcoreRuntime",
+          "properties": {
+            "AgentcoreRuntime": {
+              "$ref": "#/definitions/RuntimeTargetConfiguration"
+            }
+          },
+          "required": [
+            "AgentcoreRuntime"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "Passthrough",
+          "properties": {
+            "Passthrough": {
+              "$ref": "#/definitions/PassthroughTargetConfiguration"
+            }
+          },
+          "required": [
+            "Passthrough"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "IamCredentialProvider": {
+      "type": "object",
+      "properties": {
+        "Service": {
+          "type": "string",
+          "maxLength": 64,
+          "minLength": 1,
+          "pattern": "^[a-zA-Z0-9._-]+$"
+        },
+        "Region": {
+          "type": "string",
+          "maxLength": 32,
+          "minLength": 1,
+          "pattern": "^[a-zA-Z0-9-]+$"
+        }
+      },
+      "required": [
+        "Service"
+      ],
+      "additionalProperties": false
+    },
+    "InferenceConnectorSource": {
+      "type": "object",
+      "properties": {
+        "ConnectorId": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 1
+        }
+      },
+      "required": [
+        "ConnectorId"
+      ],
+      "additionalProperties": false
+    },
+    "InferenceConnectorTargetConfiguration": {
+      "type": "object",
+      "properties": {
+        "Source": {
+          "$ref": "#/definitions/InferenceConnectorSource"
+        }
+      },
+      "required": [
+        "Source"
+      ],
+      "additionalProperties": false
+    },
+    "InferenceOperationConfiguration": {
+      "type": "object",
+      "properties": {
+        "Path": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^/[a-zA-Z0-9\\-\\._/]+$"
+        },
+        "ProviderPath": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^/[a-zA-Z0-9\\-\\._/]+$"
+        },
+        "Models": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModelEntry"
+          },
+          "maxItems": 100,
+          "minItems": 1
+        }
+      },
+      "required": [
+        "Path"
+      ],
+      "additionalProperties": false
+    },
+    "InferenceProviderTargetConfiguration": {
+      "type": "object",
+      "properties": {
+        "Endpoint": {
+          "type": "string",
+          "maxLength": 2048,
+          "minLength": 1,
+          "pattern": "^https://[a-zA-Z0-9\\-\\.]+(:[0-9]{1,5})?(/.*)?$"
+        },
+        "ModelMapping": {
+          "$ref": "#/definitions/ModelMapping"
+        },
+        "Operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InferenceOperationConfiguration"
+          },
+          "maxItems": 10,
+          "minItems": 1
+        }
+      },
+      "required": [
+        "Endpoint"
+      ],
+      "additionalProperties": false
+    },
+    "InferenceTargetConfiguration": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "Connector",
+          "properties": {
+            "Connector": {
+              "$ref": "#/definitions/InferenceConnectorTargetConfiguration"
+            }
+          },
+          "required": [
+            "Connector"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "Provider",
+          "properties": {
+            "Provider": {
+              "$ref": "#/definitions/InferenceProviderTargetConfiguration"
+            }
+          },
+          "required": [
+            "Provider"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "ListingMode": {
+      "type": "string",
+      "enum": [
+        "DEFAULT",
+        "DYNAMIC"
+      ]
+    },
+    "ManagedResourceDetails": {
+      "type": "object",
+      "properties": {
+        "Domain": {
+          "type": "string"
+        },
+        "ResourceGatewayArn": {
+          "type": "string",
+          "pattern": "^arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourcegateway/rgw-[0-9a-z]{17}$"
+        },
+        "ResourceAssociationArn": {
+          "type": "string",
+          "pattern": "^(arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:servicenetworkresourceassociation/)?snra-[0-9a-f]{17}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ManagedVpcResource": {
+      "type": "object",
+      "properties": {
+        "VpcIdentifier": {
+          "type": "string",
+          "pattern": "^vpc-(([0-9a-z]{8})|([0-9a-z]{17}))$"
+        },
+        "SubnetIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^subnet-[0-9a-zA-Z]{8,17}$"
+          }
+        },
+        "EndpointIpAddressType": {
+          "$ref": "#/definitions/EndpointIpAddressType"
+        },
+        "SecurityGroupIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^sg-(([0-9a-z]{8})|([0-9a-z]{17}))$"
+          },
+          "maxItems": 5,
+          "minItems": 0
+        },
+        "RoutingDomain": {
+          "type": "string",
+          "maxLength": 255,
+          "minLength": 3
+        },
+        "Tags": {
+          "$ref": "#/definitions/TagsMap"
+        }
+      },
+      "required": [
+        "EndpointIpAddressType",
+        "SubnetIds",
+        "VpcIdentifier"
+      ],
+      "additionalProperties": false
     },
     "McpLambdaTargetConfiguration": {
       "type": "object",
@@ -143,6 +588,17 @@
         "Endpoint": {
           "type": "string",
           "pattern": "^https://.*"
+        },
+        "McpToolSchema": {
+          "$ref": "#/definitions/McpToolSchemaConfiguration"
+        },
+        "ListingMode": {
+          "$ref": "#/definitions/ListingMode"
+        },
+        "ResourcePriority": {
+          "type": "number",
+          "maximum": 1000,
+          "minimum": 0
         }
       },
       "required": [
@@ -203,8 +659,145 @@
             "McpServer"
           ],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "ApiGateway",
+          "properties": {
+            "ApiGateway": {
+              "$ref": "#/definitions/ApiGatewayTargetConfiguration"
+            }
+          },
+          "required": [
+            "ApiGateway"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "Connector",
+          "properties": {
+            "Connector": {
+              "$ref": "#/definitions/ConnectorTargetConfiguration"
+            }
+          },
+          "required": [
+            "Connector"
+          ],
+          "additionalProperties": false
         }
       ]
+    },
+    "McpToolSchemaConfiguration": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "S3",
+          "properties": {
+            "S3": {
+              "$ref": "#/definitions/S3Configuration"
+            }
+          },
+          "required": [
+            "S3"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "InlinePayload",
+          "properties": {
+            "InlinePayload": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "InlinePayload"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "MetadataConfiguration": {
+      "type": "object",
+      "properties": {
+        "AllowedRequestHeaders": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1
+          },
+          "maxItems": 10,
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "AllowedQueryParameters": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 40,
+            "minLength": 1
+          },
+          "maxItems": 10,
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "AllowedResponseHeaders": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1
+          },
+          "maxItems": 10,
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "ModelEntry": {
+      "type": "object",
+      "properties": {
+        "Model": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^[a-zA-Z0-9\\-\\._\\*\\?@]+(/[a-zA-Z0-9\\-\\._\\*\\?@]+)*$"
+        }
+      },
+      "required": [
+        "Model"
+      ],
+      "additionalProperties": false
+    },
+    "ModelMapping": {
+      "type": "object",
+      "properties": {
+        "ProviderPrefix": {
+          "$ref": "#/definitions/ProviderPrefix"
+        }
+      },
+      "additionalProperties": false
+    },
+    "OAuth2AuthorizationData": {
+      "type": "object",
+      "properties": {
+        "AuthorizationUrl": {
+          "type": "string",
+          "minLength": 1
+        },
+        "UserId": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      },
+      "required": [
+        "AuthorizationUrl"
+      ],
+      "additionalProperties": false
     },
     "OAuthCredentialProvider": {
       "type": "object",
@@ -217,13 +810,29 @@
           "type": "array",
           "items": {
             "type": "string",
-            "maxLength": 64,
+            "maxLength": 128,
             "minLength": 1
           },
           "maxItems": 100
         },
         "CustomParameters": {
           "$ref": "#/definitions/OAuthCustomParameters"
+        },
+        "GrantType": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/OAuthGrantType"
+            },
+            {
+              "default": "CLIENT_CREDENTIALS"
+            }
+          ]
+        },
+        "DefaultReturnUrl": {
+          "type": "string",
+          "maxLength": 2048,
+          "minLength": 1,
+          "pattern": "^\\w+:(\\/?\\/?)[^\\s]+$"
         }
       },
       "required": [
@@ -243,6 +852,126 @@
           "minLength": 1
         }
       },
+      "additionalProperties": false
+    },
+    "OAuthGrantType": {
+      "type": "string",
+      "enum": [
+        "CLIENT_CREDENTIALS",
+        "AUTHORIZATION_CODE",
+        "TOKEN_EXCHANGE"
+      ]
+    },
+    "PassthroughProtocolType": {
+      "type": "string",
+      "enum": [
+        "MCP",
+        "A2A",
+        "INFERENCE",
+        "CUSTOM"
+      ]
+    },
+    "PassthroughTargetConfiguration": {
+      "type": "object",
+      "properties": {
+        "Endpoint": {
+          "type": "string",
+          "maxLength": 2048,
+          "minLength": 1,
+          "pattern": "^https://[a-zA-Z0-9\\-\\.]+(:[0-9]{1,5})?(/.*)?$"
+        },
+        "ProtocolType": {
+          "$ref": "#/definitions/PassthroughProtocolType"
+        },
+        "Schema": {
+          "$ref": "#/definitions/HttpApiSchemaConfiguration"
+        },
+        "StickinessConfiguration": {
+          "$ref": "#/definitions/StickinessConfiguration"
+        }
+      },
+      "required": [
+        "Endpoint",
+        "ProtocolType"
+      ],
+      "additionalProperties": false
+    },
+    "PrivateEndpoint": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "SelfManagedLatticeResource",
+          "properties": {
+            "SelfManagedLatticeResource": {
+              "$ref": "#/definitions/SelfManagedLatticeResource"
+            }
+          },
+          "required": [
+            "SelfManagedLatticeResource"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "ManagedVpcResource",
+          "properties": {
+            "ManagedVpcResource": {
+              "$ref": "#/definitions/ManagedVpcResource"
+            }
+          },
+          "required": [
+            "ManagedVpcResource"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "ProviderPrefix": {
+      "type": "object",
+      "properties": {
+        "Strip": {
+          "type": "boolean",
+          "default": false
+        },
+        "Separator": {
+          "type": "string",
+          "default": ".",
+          "maxLength": 1,
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "RestApiMethod": {
+      "type": "string",
+      "enum": [
+        "GET",
+        "DELETE",
+        "HEAD",
+        "OPTIONS",
+        "PATCH",
+        "PUT",
+        "POST"
+      ]
+    },
+    "RuntimeTargetConfiguration": {
+      "type": "object",
+      "properties": {
+        "Arn": {
+          "type": "string",
+          "pattern": "^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:runtime/[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10}$"
+        },
+        "Qualifier": {
+          "type": "string",
+          "pattern": "([1-9][0-9]{0,4})|([a-zA-Z][a-zA-Z0-9_]{0,47})"
+        },
+        "Schema": {
+          "$ref": "#/definitions/HttpApiSchemaConfiguration"
+        }
+      },
+      "required": [
+        "Arn"
+      ],
       "additionalProperties": false
     },
     "S3Configuration": {
@@ -306,6 +1035,45 @@
         "integer"
       ]
     },
+    "SelfManagedLatticeResource": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "ResourceConfigurationIdentifier",
+          "properties": {
+            "ResourceConfigurationIdentifier": {
+              "type": "string",
+              "maxLength": 2048,
+              "minLength": 20,
+              "pattern": "^((rcfg-[0-9a-z]{17})|(arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceconfiguration/rcfg-[0-9a-z]{17}))$"
+            }
+          },
+          "required": [
+            "ResourceConfigurationIdentifier"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "StickinessConfiguration": {
+      "type": "object",
+      "properties": {
+        "Identifier": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 1
+        },
+        "Timeout": {
+          "type": "number",
+          "maximum": 86400,
+          "minimum": 1
+        }
+      },
+      "required": [
+        "Identifier"
+      ],
+      "additionalProperties": false
+    },
     "TargetConfiguration": {
       "oneOf": [
         {
@@ -320,7 +1088,40 @@
             "Mcp"
           ],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "Http",
+          "properties": {
+            "Http": {
+              "$ref": "#/definitions/HttpTargetConfiguration"
+            }
+          },
+          "required": [
+            "Http"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "Inference",
+          "properties": {
+            "Inference": {
+              "$ref": "#/definitions/InferenceTargetConfiguration"
+            }
+          },
+          "required": [
+            "Inference"
+          ],
+          "additionalProperties": false
         }
+      ]
+    },
+    "TargetProtocolType": {
+      "type": "string",
+      "enum": [
+        "MCP",
+        "HTTP"
       ]
     },
     "TargetStatus": {
@@ -333,7 +1134,10 @@
         "READY",
         "FAILED",
         "SYNCHRONIZING",
-        "SYNCHRONIZE_UNSUCCESSFUL"
+        "SYNCHRONIZE_UNSUCCESSFUL",
+        "CREATE_PENDING_AUTH",
+        "UPDATE_PENDING_AUTH",
+        "SYNCHRONIZE_PENDING_AUTH"
       ]
     },
     "ToolDefinition": {
@@ -391,9 +1195,26 @@
           "additionalProperties": false
         }
       ]
+    },
+    "TagsMap": {
+      "type": "object",
+      "description": "Tags applied to the AWS-managed VPC Lattice resource gateway when it is created on your behalf (tag-on-create). Useful for cost allocation. These tags are forwarded to VPC Lattice and are not stored on the gateway target itself.",
+      "maxProperties": 50,
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 0,
+          "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "properties": {
+    "AuthorizationData": {
+      "$ref": "#/definitions/AuthorizationData"
+    },
     "CreatedAt": {
       "type": "string",
       "format": "date-time"
@@ -413,7 +1234,7 @@
     },
     "GatewayArn": {
       "type": "string",
-      "pattern": "^arn:aws(|-cn|-us-gov):bedrock-agentcore:[a-z0-9-]{1,20}:[0-9]{12}:gateway/([0-9a-z][-]?){1,100}-[a-z0-9]{10}$"
+      "pattern": "^arn:aws(|-cn|-us-gov):bedrock-agentcore:[a-z0-9-]{1,20}:[0-9]{12}:gateway/([0-9a-z][-]?){1,48}-[a-z0-9]{10}$"
     },
     "GatewayIdentifier": {
       "type": "string",
@@ -423,9 +1244,24 @@
       "type": "string",
       "format": "date-time"
     },
+    "MetadataConfiguration": {
+      "$ref": "#/definitions/MetadataConfiguration"
+    },
     "Name": {
       "type": "string",
       "pattern": "^([0-9a-zA-Z][-]?){1,100}$"
+    },
+    "PrivateEndpoint": {
+      "$ref": "#/definitions/PrivateEndpoint"
+    },
+    "PrivateEndpointManagedResources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ManagedResourceDetails"
+      }
+    },
+    "ProtocolType": {
+      "$ref": "#/definitions/TargetProtocolType"
     },
     "Status": {
       "$ref": "#/definitions/TargetStatus"
@@ -451,17 +1287,18 @@
     }
   },
   "required": [
-    "CredentialProviderConfigurations",
-    "Name",
     "TargetConfiguration"
   ],
   "createOnlyProperties": [
     "/properties/GatewayIdentifier"
   ],
   "readOnlyProperties": [
+    "/properties/AuthorizationData",
     "/properties/CreatedAt",
     "/properties/GatewayArn",
     "/properties/LastSynchronizedAt",
+    "/properties/PrivateEndpointManagedResources",
+    "/properties/ProtocolType",
     "/properties/Status",
     "/properties/StatusReasons",
     "/properties/TargetId",
@@ -474,35 +1311,36 @@
   "handlers": {
     "create": {
       "permissions": [
+        "apigateway:GET",
         "bedrock-agentcore:CreateGatewayTarget",
+        "bedrock-agentcore:GetAgentRuntime",
         "bedrock-agentcore:GetGatewayTarget",
         "bedrock-agentcore:GetResourceOauth2Token",
         "bedrock-agentcore:GetWorkloadAccessToken",
+        "bedrock-agentcore:GetWorkloadAccessTokenForUserId",
         "bedrock-agentcore:SynchronizeGatewayTargets",
+        "bedrock-mantle:GetModel",
+        "bedrock-mantle:ListModels",
+        "ec2:CreateNetworkInterface",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeVpcs",
+        "iam:CreateServiceLinkedRole",
         "kms:Decrypt",
         "kms:GenerateDataKey",
         "kms:ListGrants",
         "s3:GetObject",
-        "secretsmanager:GetSecretValue"
-      ]
-    },
-    "read": {
-      "permissions": [
-        "bedrock-agentcore:GetGatewayTarget"
-      ]
-    },
-    "update": {
-      "permissions": [
-        "bedrock-agentcore:GetGatewayTarget",
-        "bedrock-agentcore:GetResourceOauth2Token",
-        "bedrock-agentcore:GetWorkloadAccessToken",
-        "bedrock-agentcore:SynchronizeGatewayTargets",
-        "bedrock-agentcore:UpdateGatewayTarget",
-        "kms:Decrypt",
-        "kms:GenerateDataKey",
-        "kms:ListGrants",
-        "s3:GetObject",
-        "secretsmanager:GetSecretValue"
+        "secretsmanager:GetSecretValue",
+        "vpc-lattice:AssociateViaAWSService",
+        "vpc-lattice:CreateResourceConfiguration",
+        "vpc-lattice:CreateResourceGateway",
+        "vpc-lattice:CreateServiceNetworkResourceAssociation",
+        "vpc-lattice:DeleteResourceConfiguration",
+        "vpc-lattice:DeleteResourceGateway",
+        "vpc-lattice:DeleteServiceNetworkResourceAssociation",
+        "vpc-lattice:GetResourceConfiguration",
+        "vpc-lattice:GetServiceNetworkResourceAssociation",
+        "vpc-lattice:ListServiceNetworkResourceAssociations"
       ]
     },
     "delete": {
@@ -511,12 +1349,64 @@
         "bedrock-agentcore:GetGatewayTarget",
         "kms:Decrypt",
         "kms:GenerateDataKey",
-        "kms:ListGrants"
+        "kms:ListGrants",
+        "vpc-lattice:DeleteResourceConfiguration",
+        "vpc-lattice:DeleteResourceGateway",
+        "vpc-lattice:DeleteServiceNetworkResourceAssociation"
       ]
     },
     "list": {
       "permissions": [
         "bedrock-agentcore:ListGatewayTargets"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "GatewayIdentifier": {
+            "$ref": "resource-schema.json#/properties/GatewayIdentifier"
+          }
+        },
+        "required": [
+          "GatewayIdentifier"
+        ]
+      }
+    },
+    "read": {
+      "permissions": [
+        "bedrock-agentcore:GetGatewayTarget"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "apigateway:GET",
+        "bedrock-agentcore:GetAgentRuntime",
+        "bedrock-agentcore:GetGatewayTarget",
+        "bedrock-agentcore:GetResourceOauth2Token",
+        "bedrock-agentcore:GetWorkloadAccessToken",
+        "bedrock-agentcore:GetWorkloadAccessTokenForUserId",
+        "bedrock-agentcore:SynchronizeGatewayTargets",
+        "bedrock-agentcore:UpdateGatewayTarget",
+        "bedrock-mantle:GetModel",
+        "bedrock-mantle:ListModels",
+        "ec2:CreateNetworkInterface",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeVpcs",
+        "iam:CreateServiceLinkedRole",
+        "kms:Decrypt",
+        "kms:GenerateDataKey",
+        "kms:ListGrants",
+        "s3:GetObject",
+        "secretsmanager:GetSecretValue",
+        "vpc-lattice:AssociateViaAWSService",
+        "vpc-lattice:CreateResourceConfiguration",
+        "vpc-lattice:CreateResourceGateway",
+        "vpc-lattice:CreateServiceNetworkResourceAssociation",
+        "vpc-lattice:DeleteResourceConfiguration",
+        "vpc-lattice:DeleteResourceGateway",
+        "vpc-lattice:DeleteServiceNetworkResourceAssociation",
+        "vpc-lattice:GetResourceConfiguration",
+        "vpc-lattice:GetServiceNetworkResourceAssociation",
+        "vpc-lattice:ListServiceNetworkResourceAssociations"
       ]
     }
   },
@@ -524,5 +1414,8 @@
   "tagging": {
     "taggable": false,
     "cloudFormationSystemTags": false
-  }
+  },
+  "writeOnlyProperties": [
+    "/properties/PrivateEndpoint/ManagedVpcResource/Tags"
+  ]
 }

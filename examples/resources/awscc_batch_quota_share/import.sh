@@ -1,0 +1,1 @@
+$ terraform import awscc_batch_quota_share.example "quota_share_arn"

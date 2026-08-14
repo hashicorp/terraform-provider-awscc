@@ -58,7 +58,7 @@
     },
     "Engine": {
       "type": "string",
-      "description": "The database engine to use for your custom engine version (CEV).\n Valid values:\n  +   ``custom-oracle-ee`` \n  +   ``custom-oracle-ee-cdb``",
+      "description": "The database engine to use for your custom engine version (CEV).\n Valid values:\n  +   ``custom-oracle-ee`` \n  +   ``custom-oracle-ee-cdb`` \n  +   ``sqlserver-dev-ee`` \n  +   ``sqlserver-ee`` \n  +   ``sqlserver-se``",
       "minLength": 1,
       "maxLength": 35
     },
@@ -103,8 +103,17 @@
       "enum": [
         "available",
         "inactive",
-        "inactive-except-restore"
+        "inactive-except-restore",
+        "pending-validation"
       ]
+    },
+    "DatabaseInstallationFiles": {
+      "type": "array",
+      "description": "",
+      "insertionOrder": false,
+      "items": {
+        "type": "string"
+      }
     },
     "Tags": {
       "description": "A list of tags. For more information, see [Tagging Amazon RDS Resources](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in the *Amazon RDS User Guide.*",
@@ -143,6 +152,7 @@
     "/properties/EngineVersion",
     "/properties/DatabaseInstallationFilesS3BucketName",
     "/properties/DatabaseInstallationFilesS3Prefix",
+    "/properties/DatabaseInstallationFiles",
     "/properties/ImageId",
     "/properties/KMSKeyId",
     "/properties/Manifest",
@@ -154,7 +164,9 @@
       "permissions": [
         "ec2:CopySnapshot",
         "ec2:DeleteSnapshot",
+        "ec2:DescribeImages",
         "ec2:DescribeSnapshots",
+        "iam:CreateServiceLinkedRole",
         "kms:CreateGrant",
         "kms:Decrypt",
         "kms:DescribeKey",

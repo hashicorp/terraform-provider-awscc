@@ -10,6 +10,14 @@
         "ASSIGNED",
         "NOT_ASSIGNED"
       ]
+    },
+    "GroupType": {
+      "type": "string",
+      "description": "The type of the group.",
+      "enum": [
+        "DATAZONE_SSO_GROUP",
+        "IAM_ROLE_SESSION_GROUP"
+      ]
     }
   },
   "properties": {
@@ -35,6 +43,9 @@
       "minLength": 1,
       "pattern": "^[a-zA-Z_0-9+=,.@-]+$"
     },
+    "GroupType": {
+      "$ref": "#/definitions/GroupType"
+    },
     "Id": {
       "type": "string",
       "description": "The ID of the Amazon DataZone group profile.",
@@ -42,24 +53,35 @@
     },
     "Status": {
       "$ref": "#/definitions/GroupProfileStatus"
+    },
+    "RolePrincipalArn": {
+      "type": "string",
+      "description": "The ARN of the role principal for the group profile."
+    },
+    "RolePrincipalId": {
+      "type": "string",
+      "description": "The ID of the role principal for the group profile."
     }
   },
   "required": [
-    "DomainIdentifier",
-    "GroupIdentifier"
+    "DomainIdentifier"
   ],
   "readOnlyProperties": [
     "/properties/DomainId",
     "/properties/GroupName",
-    "/properties/Id"
+    "/properties/Id",
+    "/properties/RolePrincipalId"
   ],
   "writeOnlyProperties": [
     "/properties/DomainIdentifier",
-    "/properties/GroupIdentifier"
+    "/properties/GroupIdentifier",
+    "/properties/RolePrincipalArn",
+    "/properties/GroupType"
   ],
   "createOnlyProperties": [
     "/properties/DomainIdentifier",
-    "/properties/GroupIdentifier"
+    "/properties/GroupIdentifier",
+    "/properties/RolePrincipalArn"
   ],
   "primaryIdentifier": [
     "/properties/DomainId",
@@ -80,12 +102,14 @@
         "sso:ListProfiles",
         "sso:GetProfile",
         "sso:AssociateProfile",
-        "sso:DisassociateProfile"
+        "sso:DisassociateProfile",
+        "iam:GetRole"
       ]
     },
     "read": {
       "permissions": [
-        "datazone:GetGroupProfile"
+        "datazone:GetGroupProfile",
+        "iam:GetRole"
       ]
     },
     "update": {
@@ -114,6 +138,9 @@
         "properties": {
           "DomainIdentifier": {
             "$ref": "resource-schema.json#/properties/DomainIdentifier"
+          },
+          "GroupType": {
+            "$ref": "resource-schema.json#/properties/GroupType"
           }
         },
         "required": [
@@ -127,13 +154,3 @@
   },
   "additionalProperties": false
 }
-
-
-
-
-
-
-
-
-
-

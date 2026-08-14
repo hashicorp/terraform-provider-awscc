@@ -1,0 +1,1 @@
+$ terraform import awscc_bedrockagentcore_online_evaluation_config.example "online_evaluation_config_arn"

@@ -21,7 +21,7 @@ Data Source schema for AWS::Lex::BotAlias
 
 ### Read-Only
 
-- `arn` (String)
+- `arn` (String) The Amazon Resource Name (ARN) of the bot alias.
 - `bot_alias_id` (String) Unique ID of resource
 - `bot_alias_locale_settings` (Attributes Set) A list of bot alias locale settings to add to the bot alias. (see [below for nested schema](#nestedatt--bot_alias_locale_settings))
 - `bot_alias_name` (String) A unique identifier for a resource.

@@ -1,0 +1,1 @@
+$ terraform import awscc_ssm_service_setting.example "arn"

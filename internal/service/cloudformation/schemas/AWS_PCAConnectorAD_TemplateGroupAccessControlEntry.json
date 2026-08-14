@@ -48,7 +48,9 @@
   },
   "required": [
     "AccessRights",
-    "GroupDisplayName"
+    "GroupDisplayName",
+    "GroupSecurityIdentifier",
+    "TemplateArn"
   ],
   "tagging": {
     "taggable": false,

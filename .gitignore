@@ -23,6 +23,7 @@ website/node_modules
 .idea
 *.iml
 *.test
+.bob/
 
 website/vendor
 
@@ -42,5 +43,6 @@ last_resource.txt
 .make-resources.log
 .make-schemas.log
 .make-singular-data-sources.log
+.make-startup-errors.log
 
 *_test.json

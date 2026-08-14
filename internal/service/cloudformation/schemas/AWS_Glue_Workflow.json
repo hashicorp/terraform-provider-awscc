@@ -1,0 +1,81 @@
+{
+  "typeName": "AWS::Glue::Workflow",
+  "description": "Resource Type definition for AWS::Glue::Workflow",
+  "additionalProperties": false,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "glue:GetTags",
+      "glue:TagResource",
+      "glue:UntagResource"
+    ]
+  },
+  "properties": {
+    "Description": {
+      "type": "string",
+      "description": "A description of the workflow"
+    },
+    "Tags": {
+      "type": "object",
+      "description": "The tags to use with this workflow."
+    },
+    "DefaultRunProperties": {
+      "type": "object",
+      "description": "A collection of properties to be used as part of each execution of the workflow"
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the workflow representing the flow"
+    },
+    "MaxConcurrentRuns": {
+      "type": "integer",
+      "description": "You can use this parameter to prevent unwanted multiple updates to data, to control costs, or in some cases, to prevent exceeding the maximum number of concurrent runs of any of the component jobs. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs."
+    }
+  },
+  "createOnlyProperties": [
+    "/properties/Name"
+  ],
+  "primaryIdentifier": [
+    "/properties/Name"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "glue:GetWorkflow",
+        "glue:CreateWorkflow",
+        "glue:TagResource",
+        "glue:GetTags"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "glue:GetWorkflow",
+        "glue:GetTags"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "glue:GetWorkflow",
+        "glue:UpdateWorkflow",
+        "glue:TagResource",
+        "glue:UntagResource",
+        "glue:GetTags"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "glue:GetWorkflow",
+        "glue:DeleteWorkflow"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "glue:ListWorkflows"
+      ]
+    }
+  }
+}

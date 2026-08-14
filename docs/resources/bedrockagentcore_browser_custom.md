@@ -84,7 +84,9 @@ resource "awscc_bedrockagentcore_browser_custom" "example" {
 ### Optional
 
 - `browser_signing` (Attributes) Browser signing configuration. (see [below for nested schema](#nestedatt--browser_signing))
+- `certificates` (Attributes List) List of root CA certificates in PEM format. (see [below for nested schema](#nestedatt--certificates))
 - `description` (String) The description of the browser.
+- `enterprise_policies` (Attributes List) A list of enterprise policy files for the browser. (see [below for nested schema](#nestedatt--enterprise_policies))
 - `execution_role_arn` (String) The Amazon Resource Name (ARN) of the IAM role that the browser uses to access resources.
 - `recording_config` (Attributes) Recording configuration for browser. (see [below for nested schema](#nestedatt--recording_config))
 - `tags` (Map of String) A map of tag keys and values
@@ -123,6 +125,40 @@ Optional:
 Optional:
 
 - `enabled` (Boolean)
+
+
+<a id="nestedatt--certificates"></a>
+### Nested Schema for `certificates`
+
+Optional:
+
+- `certificate_location` (Attributes) Certificate location in Secrets Manager. (see [below for nested schema](#nestedatt--certificates--certificate_location))
+
+<a id="nestedatt--certificates--certificate_location"></a>
+### Nested Schema for `certificates.certificate_location`
+
+Optional:
+
+- `secret_arn` (String) Secrets Manager secret ARN.
+
+
+
+<a id="nestedatt--enterprise_policies"></a>
+### Nested Schema for `enterprise_policies`
+
+Optional:
+
+- `location` (Attributes) The S3 location of the enterprise policy file. (see [below for nested schema](#nestedatt--enterprise_policies--location))
+- `type` (String) The type of browser enterprise policy.
+
+<a id="nestedatt--enterprise_policies--location"></a>
+### Nested Schema for `enterprise_policies.location`
+
+Optional:
+
+- `bucket` (String)
+- `prefix` (String)
+
 
 
 <a id="nestedatt--recording_config"></a>

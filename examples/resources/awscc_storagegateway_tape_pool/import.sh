@@ -1,0 +1,1 @@
+$ terraform import awscc_storagegateway_tape_pool.example "pool_arn"

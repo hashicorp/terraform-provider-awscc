@@ -31,7 +31,6 @@
       "type": "string",
       "maxLength": 25,
       "minLength": 2,
-      "pattern": "^([a-z]{1,2})-([a-z]{1,15}-)+([0-9])$",
       "description": "Region that NotificationHub is present in."
     }
   },

@@ -21,6 +21,7 @@ Data Source schema for AWS::RDS::CustomDBEngineVersion
 
 ### Read-Only
 
+- `database_installation_files` (List of String)
 - `database_installation_files_s3_bucket_name` (String) The name of an Amazon S3 bucket that contains database installation files for your CEV. For example, a valid bucket name is ``my-custom-installation-files``.
 - `database_installation_files_s3_prefix` (String) The Amazon S3 directory that contains the database installation files for your CEV. For example, a valid bucket name is ``123456789012/cev1``. If this setting isn't specified, no prefix is assumed.
 - `db_engine_version_arn` (String)
@@ -28,7 +29,10 @@ Data Source schema for AWS::RDS::CustomDBEngineVersion
 - `engine` (String) The database engine to use for your custom engine version (CEV).
  Valid values:
   +   ``custom-oracle-ee`` 
-  +   ``custom-oracle-ee-cdb``
+  +   ``custom-oracle-ee-cdb`` 
+  +   ``sqlserver-dev-ee`` 
+  +   ``sqlserver-ee`` 
+  +   ``sqlserver-se``
 - `engine_version` (String) The name of your CEV. The name format is ``major version.customized_string``. For example, a valid CEV name is ``19.my_cev1``. This setting is required for RDS Custom for Oracle, but optional for Amazon RDS. The combination of ``Engine`` and ``EngineVersion`` is unique per customer per Region.
  *Constraints:* Minimum length is 1. Maximum length is 60.
  *Pattern:*``^[a-z0-9_.-]{1,60$``}

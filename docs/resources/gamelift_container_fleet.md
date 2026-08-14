@@ -100,6 +100,7 @@ resource "awscc_gamelift_container_fleet" "example" {
 - `metric_groups` (List of String) The name of an Amazon CloudWatch metric group. A metric group aggregates the metrics for all fleets in the group. Specify a string containing the metric group name. You can use an existing name or use a new name to create a new metric group. Currently, this parameter can have only one string.
 - `new_game_session_protection_policy` (String) A game session protection policy to apply to all game sessions hosted on instances in this fleet. When protected, active game sessions cannot be terminated during a scale-down event. If this parameter is not set, instances in this fleet default to no protection. You can change a fleet's protection policy to affect future game sessions on the fleet. You can also set protection for individual game sessions.
 - `per_instance_container_group_definition_name` (String) The name of the container group definition that will be created per instance. This field is optional if you specify GameServerContainerGroupDefinitionName.
+- `player_gateway_mode` (String) The player gateway mode for the container fleet.
 - `scaling_policies` (Attributes List) A list of rules that control how a fleet is scaled. (see [below for nested schema](#nestedatt--scaling_policies))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
@@ -161,6 +162,7 @@ Optional:
 
 - `location` (String)
 - `location_capacity` (Attributes) Current resource capacity settings in a specified fleet or location. The location value might refer to a fleet's remote location or its home Region. (see [below for nested schema](#nestedatt--locations--location_capacity))
+- `player_gateway_status` (String) The player gateway status for the location.
 - `stopped_actions` (List of String) A list of fleet actions that have been suspended in the fleet location.
 
 <a id="nestedatt--locations--location_capacity"></a>
@@ -169,8 +171,18 @@ Optional:
 Optional:
 
 - `desired_ec2_instances` (Number) Defaults to MinSize if not defined. The number of EC2 instances you want to maintain in the specified fleet location. This value must fall between the minimum and maximum size limits. If any auto-scaling policy is defined for the container fleet, the desired instance will only be applied once during fleet creation and will be ignored in updates to avoid conflicts with auto-scaling. During updates with any auto-scaling policy defined, if current desired instance is lower than the new MinSize, it will be increased to the new MinSize; if current desired instance is larger than the new MaxSize, it will be decreased to the new MaxSize.
+- `managed_capacity_configuration` (Attributes) Configuration options for Amazon GameLift Servers-managed capacity behavior. (see [below for nested schema](#nestedatt--locations--location_capacity--managed_capacity_configuration))
 - `max_size` (Number) The maximum value that is allowed for the fleet's instance count for a location.
 - `min_size` (Number) The minimum value allowed for the fleet's instance count for a location.
+
+<a id="nestedatt--locations--location_capacity--managed_capacity_configuration"></a>
+### Nested Schema for `locations.location_capacity.managed_capacity_configuration`
+
+Optional:
+
+- `scale_in_after_inactivity_minutes` (Number) Length of time, in minutes, that Amazon GameLift Servers will wait before scaling in your MinSize and DesiredInstances to 0 after a period with no game session activity.
+- `zero_capacity_strategy` (String) The strategy Amazon GameLift Servers will use to automatically scale your capacity to and from zero in response to game session activity. Game session activity refers to any active running sessions or game session requests. When set to SCALE_TO_AND_FROM_ZERO, MinSize must not be specified and will be managed automatically. When set to MANUAL, MinSize is required.
+
 
 
 

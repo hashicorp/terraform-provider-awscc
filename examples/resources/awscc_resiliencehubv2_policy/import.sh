@@ -1,0 +1,1 @@
+$ terraform import awscc_resiliencehubv2_policy.example "policy_arn"

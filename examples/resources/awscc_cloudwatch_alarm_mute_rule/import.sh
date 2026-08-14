@@ -1,0 +1,1 @@
+$ terraform import awscc_cloudwatch_alarm_mute_rule.example "arn"

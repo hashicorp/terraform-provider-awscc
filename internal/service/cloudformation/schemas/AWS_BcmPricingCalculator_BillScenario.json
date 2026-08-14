@@ -1,0 +1,179 @@
+{
+  "typeName": "AWS::BcmPricingCalculator::BillScenario",
+  "description": "Resource Type definition for AWS::BcmPricingCalculator::BillScenario",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-bcm-pricing-calculator",
+  "definitions": {
+    "BillInterval": {
+      "type": "object",
+      "properties": {
+        "Start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "End": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "additionalProperties": false
+    },
+    "BillScenarioStatus": {
+      "type": "string",
+      "enum": [
+        "READY",
+        "LOCKED",
+        "FAILED"
+      ]
+    },
+    "GroupSharingPreference": {
+      "type": "string",
+      "enum": [
+        "OPEN",
+        "PRIORITIZED",
+        "RESTRICTED"
+      ]
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the bill scenario.",
+      "pattern": "^arn:aws[-a-z]*:bcm-pricing-calculator::[0-9]{12}:bill-scenario/[a-f0-9-]+$"
+    },
+    "Id": {
+      "type": "string",
+      "description": "The unique identifier of the bill scenario"
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the bill scenario",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "BillInterval": {
+      "$ref": "#/definitions/BillInterval",
+      "description": "The time period covered by the bill scenario"
+    },
+    "Status": {
+      "$ref": "#/definitions/BillScenarioStatus",
+      "description": "The status of the bill scenario"
+    },
+    "CreatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the bill scenario was created"
+    },
+    "ExpiresAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The timestamp when the bill scenario expires"
+    },
+    "FailureMessage": {
+      "type": "string",
+      "description": "The failure message if the bill scenario failed"
+    },
+    "CostCategoryGroupSharingPreferenceArn": {
+      "type": "string",
+      "description": "The ARN of the cost category group sharing preference",
+      "pattern": "^arn:aws[a-z-]*:ce::[0-9]{12}:costcategory/[a-f0-9-]{36}$"
+    },
+    "GroupSharingPreference": {
+      "$ref": "#/definitions/GroupSharingPreference",
+      "description": "The group sharing preference for the bill scenario"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "An array of key-value pairs to apply to this resource",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 200,
+      "insertionOrder": false
+    }
+  },
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/Id",
+    "/properties/BillInterval",
+    "/properties/Status",
+    "/properties/CreatedAt",
+    "/properties/FailureMessage"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/Id"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "bcm-pricing-calculator:TagResource",
+      "bcm-pricing-calculator:UntagResource",
+      "bcm-pricing-calculator:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "bcm-pricing-calculator:CreateBillScenario",
+        "bcm-pricing-calculator:UpdateBillScenario",
+        "bcm-pricing-calculator:GetBillScenario",
+        "bcm-pricing-calculator:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "bcm-pricing-calculator:GetBillScenario",
+        "bcm-pricing-calculator:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "bcm-pricing-calculator:UpdateBillScenario",
+        "bcm-pricing-calculator:GetBillScenario",
+        "bcm-pricing-calculator:TagResource",
+        "bcm-pricing-calculator:UntagResource",
+        "bcm-pricing-calculator:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "bcm-pricing-calculator:DeleteBillScenario",
+        "bcm-pricing-calculator:GetBillScenario"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "bcm-pricing-calculator:ListBillScenarios"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

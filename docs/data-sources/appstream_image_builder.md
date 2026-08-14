@@ -32,6 +32,9 @@ Data Source schema for AWS::AppStream::ImageBuilder
 - `image_name` (String)
 - `instance_type` (String)
 - `name` (String)
+- `root_volume_config` (Attributes) (see [below for nested schema](#nestedatt--root_volume_config))
+- `softwares_to_install` (List of String)
+- `softwares_to_uninstall` (List of String)
 - `streaming_url` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `vpc_config` (Attributes) (see [below for nested schema](#nestedatt--vpc_config))
@@ -52,6 +55,14 @@ Read-Only:
 
 - `directory_name` (String)
 - `organizational_unit_distinguished_name` (String)
+
+
+<a id="nestedatt--root_volume_config"></a>
+### Nested Schema for `root_volume_config`
+
+Read-Only:
+
+- `volume_size_in_gb` (Number)
 
 
 <a id="nestedatt--tags"></a>

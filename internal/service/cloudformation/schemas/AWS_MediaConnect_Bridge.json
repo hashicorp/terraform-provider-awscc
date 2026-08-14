@@ -239,8 +239,8 @@
       "type": "object",
       "properties": {
         "MaxBitrate": {
-          "type": "integer",
-          "description": "The maximum expected bitrate of the egress bridge."
+          "description": "The maximum expected bitrate of the egress bridge.",
+          "type": "integer"
         }
       },
       "additionalProperties": false,

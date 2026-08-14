@@ -59,6 +59,11 @@
       "type": "string",
       "minLength": 1
     },
+    "Policy": {
+      "description": "The policy of the pod identity association.",
+      "type": "string",
+      "minLength": 1
+    },
     "ExternalId": {
       "description": "The External Id of the pod identity association.",
       "type": "string",

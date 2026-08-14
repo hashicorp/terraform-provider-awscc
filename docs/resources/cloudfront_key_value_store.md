@@ -44,8 +44,9 @@ resource "awscc_cloudfront_key_value_store" "example" {
 
 ### Optional
 
-- `comment` (String) A comment for the key value store.
+- `comment` (String) A comment to describe the Key Value Store. Omitting ``Comment`` from the template during updates will clear the existing comment (set to empty string). To preserve an existing comment, you must explicitly include it in the template.
 - `import_source` (Attributes) The import source for the key value store. (see [below for nested schema](#nestedatt--import_source))
+- `tags` (Attributes List) A complex type that contains zero or more ``Tag`` elements. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -61,6 +62,17 @@ Optional:
 
 - `source_arn` (String) The Amazon Resource Name (ARN) of the import source for the key value store.
 - `source_type` (String) The source type of the import source for the key value store.
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String) A string that contains ``Tag`` key.
+ The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.
+- `value` (String) A string that contains an optional ``Tag`` value.
+ The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.
 
 ## Import
 

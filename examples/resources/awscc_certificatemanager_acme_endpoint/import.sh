@@ -1,0 +1,1 @@
+$ terraform import awscc_certificatemanager_acme_endpoint.example "acme_endpoint_arn"

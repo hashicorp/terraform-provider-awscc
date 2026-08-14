@@ -39,8 +39,10 @@ Note: `Port` property will soon be deprecated from this resource. Please update 
 - `enable_cloudwatch_logs_exports` (List of String) Specifies a list of log types that are enabled for export to CloudWatch Logs.
 - `endpoint` (String) The connection endpoint for the DB cluster. For example: `mystack-mydbcluster-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com`
 - `engine_version` (String) Indicates the database engine version.
+- `global_cluster_identifier` (String) The ID of the Neptune global database to which this new DB cluster should be added.
 - `iam_auth_enabled` (Boolean) True if mapping of Amazon Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false.
 - `kms_key_id` (String) The Amazon Resource Name (ARN) of the AWS KMS key that is used to encrypt the database instances in the DB cluster, such as arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef. If you enable the StorageEncrypted property but don't specify this property, the default KMS key is used. If you specify this property, you must set the StorageEncrypted property to true.
+- `network_type` (String) The network type of the DB cluster.
 - `port` (String) The port number on which the DB cluster accepts connections. For example: `8182`.
 - `preferred_backup_window` (String) Specifies the daily time range during which automated backups are created if automated backups are enabled, as determined by the BackupRetentionPeriod.
 - `preferred_maintenance_window` (String) Specifies the weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).

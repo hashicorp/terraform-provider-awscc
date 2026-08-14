@@ -1,4 +1,4 @@
-// Copyright (c) HashiCorp, Inc.
+// Copyright IBM Corp. 2021, 2026
 // SPDX-License-Identifier: MPL-2.0
 
 package codegen
@@ -458,13 +458,13 @@ func (e Emitter) emitAttribute(tfType string, attributeNameMap map[string]string
 					}
 					switch nestedPatternProperty.Type.String() {
 					case cfschema.PropertyTypeBoolean:
-						elementType = "types.ListType{ElemType: types.BoolType}"
+						elementType = "types.MapType{ElemType: types.BoolType}"
 					case cfschema.PropertyTypeInteger:
-						elementType = "types.ListType{ElemType: types.Int64Type}"
+						elementType = "types.MapType{ElemType: types.Int64Type}"
 					case cfschema.PropertyTypeNumber:
-						elementType = "types.ListType{ElemType: types.Float64Type}"
+						elementType = "types.MapType{ElemType: types.Float64Type}"
 					case cfschema.PropertyTypeString:
-						elementType = "types.ListType{ElemType: types.StringType}"
+						elementType = "types.MapType{ElemType: types.StringType}"
 					default:
 						return features, unsupportedTypeError(path, fmt.Sprintf("list of key-value map of %s", nestedPatternProperty.Type.String()))
 					}
@@ -1061,18 +1061,18 @@ func (e Emitter) emitSchema(tfType string, attributeNameMap map[string]string, p
 }
 
 // printf emits a formatted string to the underlying writer.
-func (e Emitter) printf(format string, a ...interface{}) (int, error) {
-	return fprintf(e.Writer, format, a...)
+func (e Emitter) printf(format string, a ...any) {
+	fprintf(e.Writer, format, a...)
 }
 
 // warnf emits a formatted warning message to the UI.
-func (e Emitter) warnf(format string, a ...interface{}) {
+func (e Emitter) warnf(format string, a ...any) {
 	e.Ui.Warn(fmt.Sprintf(format, a...))
 }
 
 // fprintf writes a formatted string to a Writer.
-func fprintf(w io.Writer, format string, a ...interface{}) (int, error) {
-	return io.WriteString(w, fmt.Sprintf(format, a...))
+func fprintf(w io.Writer, format string, a ...any) {
+	_, _ = io.WriteString(w, fmt.Sprintf(format, a...))
 }
 
 type aggregate int
@@ -1213,7 +1213,7 @@ func attributeDefaultValue(path []string, property *cfschema.Property) (Features
 			// Set.
 			//
 			switch v := property.Default.(type) {
-			case []interface{}:
+			case []any:
 				switch itemType := property.Items.Type.String(); itemType {
 				case cfschema.PropertyTypeString:
 					features.UsesInternalDefaultsPackage = true
@@ -1248,7 +1248,7 @@ func attributeDefaultValue(path []string, property *cfschema.Property) (Features
 			// List.
 			//
 			switch v := property.Default.(type) {
-			case []interface{}:
+			case []any:
 				switch itemType := property.Items.Type.String(); itemType {
 				case cfschema.PropertyTypeString:
 					features.UsesInternalDefaultsPackage = true
@@ -1282,7 +1282,7 @@ func attributeDefaultValue(path []string, property *cfschema.Property) (Features
 
 	case cfschema.PropertyTypeObject:
 		switch v := property.Default.(type) {
-		case map[string]interface{}:
+		case map[string]any:
 			if _, ok := v["properties"]; ok {
 				// For example:
 				//
@@ -1531,7 +1531,7 @@ func stringValidators(path []string, property *cfschema.Property) (Features, []s
 	return features, validators, nil
 }
 
-func writeObjectGoLiteral(w io.Writer, obj map[string]interface{}) {
+func writeObjectGoLiteral(w io.Writer, obj map[string]any) {
 	if obj == nil {
 		fprintf(w, "nil")
 		return
@@ -1549,7 +1549,7 @@ func writeObjectGoLiteral(w io.Writer, obj map[string]interface{}) {
 			fprintf(w, "%t", v)
 		case string:
 			fprintf(w, "%q", v)
-		case map[string]interface{}:
+		case map[string]any:
 			writeObjectGoLiteral(w, v)
 		default:
 			fprintf(w, "nil")

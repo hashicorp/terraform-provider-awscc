@@ -145,7 +145,7 @@
       "type": "object",
       "properties": {
         "Destination": {
-          "description": "Defines the destination to send the metrics to. Valid values are CloudWatch and Evidently. If you specify Evidently, you must also specify the ARN of the Evidently experiment that is to be the destination and an IAM role that has permission to write to the experiment.",
+          "description": "Defines the destination to send the metrics to. Valid values are CloudWatch and Evidently. Note: Evidently has been discontinued and is no longer supported - requests with Evidently will be rejected.",
           "type": "string",
           "enum": [
             "CloudWatch",
@@ -155,12 +155,12 @@
         "DestinationArn": {
           "type": "string",
           "pattern": "arn:[^:]*:[^:]*:[^:]*:[^:]*:.*",
-          "description": "Use this parameter only if Destination is Evidently. This parameter specifies the ARN of the Evidently experiment that will receive the extended metrics."
+          "description": "Evidently has been discontinued and therefore this is no longer an acceptable field. If Destination is CloudWatch, do not use this parameter. \n\nThis parameter specifies the ARN of the Evidently experiment that will receive the extended metrics."
         },
         "IamRoleArn": {
           "type": "string",
           "pattern": "arn:[^:]*:[^:]*:[^:]*:[^:]*:.*",
-          "description": "This parameter is required if Destination is Evidently. If Destination is CloudWatch, do not use this parameter.\n\nThis parameter specifies the ARN of an IAM role that RUM will assume to write to the Evidently experiment that you are sending metrics to. This role must have permission to write to that experiment."
+          "description": "Evidently has been discontinued and therefore this is no longer an acceptable field. If Destination is CloudWatch, do not use this parameter. \n\nThis parameter specifies the ARN of an IAM role that RUM will assume to write to the Evidently experiment that you are sending metrics to. This role must have permission to write to that experiment."
         },
         "MetricDefinitions": {
           "description": "An array of structures which define the metrics that you want to send.",
@@ -197,7 +197,7 @@
           "maxLength": 237
         },
         "ValueKey": {
-          "description": "The field within the event object that the metric value is sourced from.\n\nIf you omit this field, a hardcoded value of 1 is pushed as the metric value. This is useful if you just want to count the number of events that the filter catches.\n\nIf this metric is sent to Evidently, this field will be passed to Evidently raw and Evidently will handle data extraction from the event.",
+          "description": "The field within the event object that the metric value is sourced from.\n\nIf you omit this field, a hardcoded value of 1 is pushed as the metric value. This is useful if you just want to count the number of events that the filter catches.\n\nIf this metric is sent to Evidently, this field will be passed to Evidently raw and Evidently will handle data extraction from the event. Note: Evidently has been discontinued.",
           "type": "string",
           "pattern": ".*",
           "minLength": 1,
@@ -368,6 +368,10 @@
   "createOnlyProperties": [
     "/properties/Name",
     "/properties/Platform"
+  ],
+  "deprecatedProperties": [
+    "/properties/AppMonitorConfiguration/MetricDestinations/*/DestinationArn",
+    "/properties/AppMonitorConfiguration/MetricDestinations/*/IamRoleArn"
   ],
   "readOnlyProperties": [
     "/properties/Id"

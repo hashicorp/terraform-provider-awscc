@@ -1,4 +1,4 @@
-// Copyright (c) HashiCorp, Inc.
+// Copyright IBM Corp. 2021, 2026
 // SPDX-License-Identifier: MPL-2.0
 
 package defaults
@@ -21,7 +21,7 @@ func TestStaticPartialObject_simple(t *testing.T) {
 		"name":   types.StringType,
 		"wicked": types.BoolType,
 	}
-	defaultVal := map[string]interface{}{
+	defaultVal := map[string]any{
 		"name": "defaultName",
 	}
 
@@ -54,7 +54,6 @@ func TestStaticPartialObject_simple(t *testing.T) {
 	}
 
 	for name, test := range tests {
-		name, test := name, test
 		t.Run(name, func(t *testing.T) {
 			ctx := context.TODO()
 			request := planmodifier.ObjectRequest{
@@ -82,8 +81,8 @@ func TestStaticPartialObject_complex(t *testing.T) {
 		"config": types.ObjectType{AttrTypes: innerAttributeTypes},
 		"id":     types.StringType,
 	}
-	defaultVal := map[string]interface{}{
-		"config": map[string]interface{}{
+	defaultVal := map[string]any{
+		"config": map[string]any{
 			"name": "defaultName",
 		},
 	}
@@ -126,7 +125,6 @@ func TestStaticPartialObject_complex(t *testing.T) {
 	}
 
 	for name, test := range tests {
-		name, test := name, test
 		t.Run(name, func(t *testing.T) {
 			ctx := context.TODO()
 			request := planmodifier.ObjectRequest{

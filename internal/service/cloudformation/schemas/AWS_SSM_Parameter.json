@@ -57,6 +57,11 @@
     "Name": {
       "type": "string",
       "description": "The name of the parameter.\n  The reported maximum length of 2048 characters for a parameter name includes 1037 characters that are reserved for internal use by SYS. The maximum length for a parameter name that you specify is 1011 characters.\n This count of 1011 characters includes the characters in the ARN that precede the name you specify. This ARN length will vary depending on your partition and Region. For example, the following 45 characters count toward the 1011 character maximum for a parameter created in the US East (Ohio) Region: ``arn:aws:ssm:us-east-2:111122223333:parameter/``."
+    },
+    "Arn": {
+      "type": "string",
+      "description": "",
+      "pattern": "arn:aws(-[a-z0-9-]+)*:ssm:[a-z0-9-]+:[0-9]{12}:parameter/.+"
     }
   },
   "required": [
@@ -80,6 +85,9 @@
   ],
   "primaryIdentifier": [
     "/properties/Name"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn"
   ],
   "writeOnlyProperties": [
     "/properties/Description",

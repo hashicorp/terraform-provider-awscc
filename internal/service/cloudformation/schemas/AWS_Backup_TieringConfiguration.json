@@ -1,0 +1,127 @@
+{
+  "typeName": "AWS::Backup::TieringConfiguration",
+  "description": "Resource Type definition for AWS::Backup::TieringConfiguration",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-backup.git",
+  "properties": {
+    "TieringConfigurationName": {
+      "type": "string"
+    },
+    "TieringConfigurationArn": {
+      "type": "string"
+    },
+    "BackupVaultName": {
+      "type": "string"
+    },
+    "ResourceSelection": {
+      "type": "array",
+      "insertionOrder": true,
+      "items": {
+        "$ref": "#/definitions/ResourceSelection"
+      }
+    },
+    "TieringConfigurationTags": {
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+        "": {
+          "type": "string"
+        }
+      }
+    },
+    "CreationTime": {
+      "type": "string"
+    },
+    "LastUpdatedTime": {
+      "type": "string"
+    }
+  },
+  "definitions": {
+    "ResourceSelection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Resources": {
+          "type": "array",
+          "insertionOrder": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "TieringDownSettingsInDays": {
+          "type": "integer"
+        },
+        "ResourceType": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Resources",
+        "TieringDownSettingsInDays",
+        "ResourceType"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "TieringConfigurationName",
+    "BackupVaultName",
+    "ResourceSelection"
+  ],
+  "createOnlyProperties": [
+    "/properties/TieringConfigurationName"
+  ],
+  "readOnlyProperties": [
+    "/properties/TieringConfigurationArn",
+    "/properties/CreationTime",
+    "/properties/LastUpdatedTime"
+  ],
+  "primaryIdentifier": [
+    "/properties/TieringConfigurationName"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/TieringConfigurationTags",
+    "permissions": [
+      "backup:TagResource",
+      "backup:UntagResource",
+      "backup:ListTags"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "backup:CreateTieringConfiguration",
+        "backup:GetTieringConfiguration",
+        "backup:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "backup:GetTieringConfiguration",
+        "backup:ListTags"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "backup:UpdateTieringConfiguration",
+        "backup:TagResource",
+        "backup:UntagResource",
+        "backup:ListTags"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "backup:DeleteTieringConfiguration",
+        "backup:GetTieringConfiguration"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "backup:ListTieringConfigurations"
+      ]
+    }
+  }
+}

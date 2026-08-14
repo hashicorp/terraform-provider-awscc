@@ -17,20 +17,21 @@ Resource Type definition for AWS::LicenseManager::License
 
 ### Required
 
+- `beneficiary` (String) Beneficiary of the license.
 - `consumption_configuration` (Attributes) (see [below for nested schema](#nestedatt--consumption_configuration))
 - `entitlements` (Attributes List) (see [below for nested schema](#nestedatt--entitlements))
 - `home_region` (String) Home region for the created license.
 - `issuer` (Attributes) (see [below for nested schema](#nestedatt--issuer))
 - `license_name` (String) Name for the created license.
 - `product_name` (String) Product name for the created license.
+- `product_sku` (String) ProductSKU of the license.
 - `validity` (Attributes) (see [below for nested schema](#nestedatt--validity))
 
 ### Optional
 
-- `beneficiary` (String) Beneficiary of the license.
 - `license_metadata` (Attributes List) (see [below for nested schema](#nestedatt--license_metadata))
-- `product_sku` (String) ProductSKU of the license.
 - `status` (String)
+- `tags` (Attributes List) A list of tags to attach. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -109,6 +110,15 @@ Optional:
 
 - `name` (String)
 - `value` (String)
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String) The key name of the tag.
+- `value` (String) The value for the tag.
 
 ## Import
 

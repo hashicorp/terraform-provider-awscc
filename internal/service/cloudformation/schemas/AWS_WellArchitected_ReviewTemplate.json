@@ -1,0 +1,152 @@
+{
+  "typeName": "AWS::WellArchitected::ReviewTemplate",
+  "description": "Creates a review template for the Well-Architected Tool.",
+  "properties": {
+    "TemplateArn": {
+      "type": "string",
+      "description": "The review template ARN.",
+      "minLength": 50,
+      "maxLength": 250,
+      "pattern": "^arn:aws(-us-gov|-iso(-[a-z])?|-cn)?:wellarchitected:[a-z]{2}(-gov|-iso([a-z])?)?-[a-z]+-\\d:\\d{12}:(review-template)/[a-f0-9]{32}$"
+    },
+    "TemplateName": {
+      "type": "string",
+      "description": "The name of the review template.",
+      "minLength": 3,
+      "maxLength": 100,
+      "pattern": "^[A-Za-z0-9-_.,:/()@!&?#+''\\s]+$"
+    },
+    "Description": {
+      "type": "string",
+      "description": "The review template description.",
+      "minLength": 3,
+      "maxLength": 250,
+      "pattern": "^[A-Za-z0-9-_.,:/()@!&?#+''\\s]+$"
+    },
+    "Lenses": {
+      "type": "array",
+      "description": "The lenses applied to the review template.",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 128
+      }
+    },
+    "Notes": {
+      "type": "string",
+      "description": "The notes associated with the review template.",
+      "minLength": 0,
+      "maxLength": 2084
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags assigned to the review template.",
+      "insertionOrder": false,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Key": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "Value": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 256
+          }
+        },
+        "required": [
+          "Key",
+          "Value"
+        ]
+      }
+    },
+    "Owner": {
+      "type": "string",
+      "description": "The owner of the review template.",
+      "minLength": 12,
+      "maxLength": 12,
+      "pattern": "^[0-9]{12}$"
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "The date and time the review template was last updated.",
+      "format": "date-time"
+    },
+    "UpdateStatus": {
+      "type": "string",
+      "description": "The latest status of the review template.",
+      "enum": [
+        "CURRENT",
+        "LENS_NOT_CURRENT"
+      ]
+    }
+  },
+  "required": [
+    "TemplateName",
+    "Description",
+    "Lenses"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/TemplateArn",
+    "/properties/Owner",
+    "/properties/UpdatedAt",
+    "/properties/UpdateStatus"
+  ],
+  "createOnlyProperties": [
+    "/properties/Lenses"
+  ],
+  "primaryIdentifier": [
+    "/properties/TemplateArn"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "wellarchitected:TagResource",
+      "wellarchitected:UntagResource",
+      "wellarchitected:GetReviewTemplate"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "wellarchitected:CreateReviewTemplate",
+        "wellarchitected:GetReviewTemplate",
+        "wellarchitected:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "wellarchitected:GetReviewTemplate"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "wellarchitected:UpdateReviewTemplate",
+        "wellarchitected:GetReviewTemplate",
+        "wellarchitected:TagResource",
+        "wellarchitected:UntagResource",
+        "wellarchitected:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "wellarchitected:DeleteReviewTemplate",
+        "wellarchitected:GetReviewTemplate"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "wellarchitected:ListReviewTemplates"
+      ]
+    }
+  }
+}

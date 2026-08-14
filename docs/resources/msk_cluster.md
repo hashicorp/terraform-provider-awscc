@@ -133,6 +133,7 @@ resource "awscc_msk_cluster" "example" {
 - `rebalancing` (Attributes) (see [below for nested schema](#nestedatt--rebalancing))
 - `storage_mode` (String)
 - `tags` (Map of String) A key-value pair to associate with a resource.
+- `zookeeper_access` (Attributes) (see [below for nested schema](#nestedatt--zookeeper_access))
 
 ### Read-Only
 
@@ -160,6 +161,7 @@ Optional:
 
 Optional:
 
+- `network_type` (String)
 - `public_access` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--connectivity_info--public_access))
 - `vpc_connectivity` (Attributes) (see [below for nested schema](#nestedatt--broker_node_group_info--connectivity_info--vpc_connectivity))
 
@@ -341,7 +343,46 @@ Optional:
 
 Optional:
 
+- `authorizer_logs` (Attributes) (see [below for nested schema](#nestedatt--logging_info--authorizer_logs))
 - `broker_logs` (Attributes) (see [below for nested schema](#nestedatt--logging_info--broker_logs))
+
+<a id="nestedatt--logging_info--authorizer_logs"></a>
+### Nested Schema for `logging_info.authorizer_logs`
+
+Optional:
+
+- `cloudwatch_logs` (Attributes) (see [below for nested schema](#nestedatt--logging_info--authorizer_logs--cloudwatch_logs))
+- `firehose` (Attributes) (see [below for nested schema](#nestedatt--logging_info--authorizer_logs--firehose))
+- `s3` (Attributes) (see [below for nested schema](#nestedatt--logging_info--authorizer_logs--s3))
+
+<a id="nestedatt--logging_info--authorizer_logs--cloudwatch_logs"></a>
+### Nested Schema for `logging_info.authorizer_logs.cloudwatch_logs`
+
+Optional:
+
+- `enabled` (Boolean)
+- `log_group` (String)
+
+
+<a id="nestedatt--logging_info--authorizer_logs--firehose"></a>
+### Nested Schema for `logging_info.authorizer_logs.firehose`
+
+Optional:
+
+- `delivery_stream` (String)
+- `enabled` (Boolean)
+
+
+<a id="nestedatt--logging_info--authorizer_logs--s3"></a>
+### Nested Schema for `logging_info.authorizer_logs.s3`
+
+Optional:
+
+- `bucket` (String)
+- `enabled` (Boolean)
+- `prefix` (String)
+
+
 
 <a id="nestedatt--logging_info--broker_logs"></a>
 ### Nested Schema for `logging_info.broker_logs`
@@ -421,6 +462,14 @@ Optional:
 Optional:
 
 - `status` (String)
+
+
+<a id="nestedatt--zookeeper_access"></a>
+### Nested Schema for `zookeeper_access`
+
+Optional:
+
+- `enabled` (Boolean)
 
 ## Import
 

@@ -1,4 +1,4 @@
-// Copyright (c) HashiCorp, Inc.
+// Copyright IBM Corp. 2021, 2026
 // SPDX-License-Identifier: MPL-2.0
 
 package ec2_test
@@ -26,6 +26,31 @@ func TestAccAWSEC2VPC_CidrBlock(t *testing.T) {
 				resource.TestCheckResourceAttr(resourceName, "tags.#", "1"),
 				resource.TestCheckResourceAttr(resourceName, "tags.0.key", "Name"),
 				resource.TestCheckResourceAttr(resourceName, "tags.0.value", rName),
+			),
+		},
+		{
+			ResourceName:      td.ResourceName,
+			ImportState:       true,
+			ImportStateVerify: true,
+		},
+	})
+}
+
+func TestAccAWSEC2VPC_providerMeta(t *testing.T) {
+	td := acctest.NewTestData(t, "AWS::EC2::VPC", "awscc_ec2_vpc", "test")
+	resourceName := td.ResourceName
+	rName := td.RandomName()
+	cidrBlock := "10.0.0.0/16"
+
+	td.ResourceTest(t, []resource.TestStep{
+		{
+			Config: acctest.ConfigCompose(
+				acctest.WithProviderMeta(),
+				testAccAWSEC2VPCCidrBlockConfig(&td, rName, cidrBlock),
+			),
+			Check: resource.ComposeTestCheckFunc(
+				td.CheckExistsInAWS(),
+				resource.TestCheckResourceAttr(resourceName, "cidr_block", cidrBlock),
 			),
 		},
 		{

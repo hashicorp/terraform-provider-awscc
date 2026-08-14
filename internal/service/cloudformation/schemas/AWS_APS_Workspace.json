@@ -115,6 +115,16 @@
             "$ref": "#/definitions/LimitsPerLabelSet"
           },
           "minItems": 0
+        },
+        "OutOfOrderTimeWindowInSeconds": {
+          "description": "The time window in seconds for accepting out-of-order samples",
+          "type": "integer",
+          "minimum": 0
+        },
+        "RuleQueryOffsetInSeconds": {
+          "description": "Duration in seconds to offset rule evaluation queries into the past",
+          "type": "integer",
+          "minimum": 0
         }
       },
       "additionalProperties": false

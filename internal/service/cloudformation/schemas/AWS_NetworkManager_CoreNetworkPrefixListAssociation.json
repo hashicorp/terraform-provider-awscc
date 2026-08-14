@@ -1,0 +1,79 @@
+{
+  "typeName": "AWS::NetworkManager::CoreNetworkPrefixListAssociation",
+  "description": "Resource Type definition for AWS::NetworkManager::CoreNetworkPrefixListAssociation which associates a prefix list with a core network.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-networkmanager.git",
+  "properties": {
+    "CoreNetworkId": {
+      "description": "The ID of the core network.",
+      "type": "string"
+    },
+    "PrefixListArn": {
+      "description": "The Amazon Resource Name (ARN) of the prefix list.",
+      "type": "string",
+      "pattern": "^arn:[a-z0-9-]+:ec2:[a-z]+-[a-z]+-[0-9]:([0-9]{12}):prefix-list\/pl-[a-z0-9]+$"
+    },
+    "PrefixListAlias": {
+      "description": "The alias of the prefix list",
+      "type": "string"
+    }
+  },
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
+  "additionalProperties": false,
+  "required": [
+    "CoreNetworkId",
+    "PrefixListArn",
+    "PrefixListAlias"
+  ],
+  "createOnlyProperties": [
+    "/properties/CoreNetworkId",
+    "/properties/PrefixListArn",
+    "/properties/PrefixListAlias"
+  ],
+  "primaryIdentifier": [
+    "/properties/CoreNetworkId",
+    "/properties/PrefixListArn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "networkmanager:ListCoreNetworkPrefixListAssociations",
+        "networkmanager:CreateCoreNetworkPrefixListAssociation",
+        "networkmanager:GetCoreNetwork"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "networkmanager:ListCoreNetworkPrefixListAssociations",
+        "networkmanager:GetCoreNetwork"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "CoreNetworkId": {
+            "$ref": "resource-schema.json#/properties/CoreNetworkId"
+          }
+        },
+        "required": [
+          "CoreNetworkId"
+        ]
+      },
+      "permissions": [
+        "networkmanager:ListCoreNetworkPrefixListAssociations",
+        "networkmanager:GetCoreNetwork"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "networkmanager:ListCoreNetworkPrefixListAssociations",
+        "networkmanager:DeleteCoreNetworkPrefixListAssociation",
+        "networkmanager:GetCoreNetwork"
+      ]
+    }
+  }
+}

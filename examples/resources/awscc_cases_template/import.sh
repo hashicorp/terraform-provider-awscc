@@ -1,0 +1,1 @@
+$ terraform import awscc_cases_template.example "template_arn"

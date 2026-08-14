@@ -70,7 +70,8 @@
         "value": {
           "type": "string"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "Tags": {
       "type": "array",

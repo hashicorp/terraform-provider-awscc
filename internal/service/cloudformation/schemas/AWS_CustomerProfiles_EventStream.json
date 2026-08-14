@@ -152,6 +152,7 @@
     "read": {
       "permissions": [
         "profile:GetEventStream",
+        "profile:ListTagsForResource",
         "kinesis:DescribeStreamSummary"
       ]
     },
@@ -160,7 +161,8 @@
         "kinesis:DescribeStreamSummary",
         "profile:GetEventStream",
         "profile:UntagResource",
-        "profile:TagResource"
+        "profile:TagResource",
+        "profile:ListTagsForResource"
       ]
     },
     "delete": {

@@ -1,0 +1,1 @@
+$ terraform import awscc_glue_data_catalog_encryption_settings.example "catalog_id"

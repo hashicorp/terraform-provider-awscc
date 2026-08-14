@@ -2,12 +2,12 @@
 page_title: "awscc_deadline_queue_fleet_association Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Definition of AWS::Deadline::QueueFleetAssociation Resource Type
+  Resource Type definition for AWS::Deadline::QueueFleetAssociation
 ---
 
 # awscc_deadline_queue_fleet_association (Resource)
 
-Definition of AWS::Deadline::QueueFleetAssociation Resource Type
+Resource Type definition for AWS::Deadline::QueueFleetAssociation
 
 ## Example Usage
 

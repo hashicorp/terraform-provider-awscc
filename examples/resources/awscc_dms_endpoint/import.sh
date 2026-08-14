@@ -1,0 +1,1 @@
+$ terraform import awscc_dms_endpoint.example "endpoint_arn"

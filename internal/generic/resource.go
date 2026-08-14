@@ -1,4 +1,4 @@
-// Copyright (c) HashiCorp, Inc.
+// Copyright IBM Corp. 2021, 2026
 // SPDX-License-Identifier: MPL-2.0
 
 package generic
@@ -12,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol"
 	cctypes "github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
+	"github.com/hashicorp/aws-sdk-go-base/v2/useragent"
 	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/path"
@@ -386,13 +387,16 @@ func (r *genericResource) Configure(_ context.Context, request resource.Configur
 }
 
 func (r *genericResource) Create(ctx context.Context, request resource.CreateRequest, response *resource.CreateResponse) {
-	ctx = r.bootstrapContext(ctx)
+	ctx = r.bootstrapContextWithProviderMeta(ctx, request.ProviderMeta, &response.Diagnostics)
+	if response.Diagnostics.HasError() {
+		return
+	}
 
 	traceEntry(ctx, "Resource.Create")
 
 	conn := r.provider.CloudControlAPIClient(ctx)
 
-	tflog.Debug(ctx, "Request.Plan.Raw", map[string]interface{}{
+	tflog.Debug(ctx, "Request.Plan.Raw", map[string]any{
 		"value": hclog.Fmt("%v", request.Plan.Raw),
 	})
 
@@ -405,7 +409,7 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 		return
 	}
 
-	tflog.Debug(ctx, "CloudControl DesiredState", map[string]interface{}{
+	tflog.Debug(ctx, "CloudControl DesiredState", map[string]any{
 		"value": desiredState,
 	})
 
@@ -481,7 +485,7 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 		return
 	}
 
-	tflog.Debug(ctx, "Response.State.Raw", map[string]interface{}{
+	tflog.Debug(ctx, "Response.State.Raw", map[string]any{
 		"value": hclog.Fmt("%v", response.State.Raw),
 	})
 
@@ -489,11 +493,14 @@ func (r *genericResource) Create(ctx context.Context, request resource.CreateReq
 }
 
 func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest, response *resource.ReadResponse) {
-	ctx = r.bootstrapContext(ctx)
+	ctx = r.bootstrapContextWithProviderMeta(ctx, request.ProviderMeta, &response.Diagnostics)
+	if response.Diagnostics.HasError() {
+		return
+	}
 
 	traceEntry(ctx, "Resource.Read")
 
-	tflog.Debug(ctx, "Request.State.Raw", map[string]interface{}{
+	tflog.Debug(ctx, "Request.State.Raw", map[string]any{
 		"value": hclog.Fmt("%v", request.State.Raw),
 	})
 
@@ -531,7 +538,18 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 
 	translator := toTerraform{cfToTfNameMap: r.cfToTfNameMap}
 	schema := currentState.Schema
-	val, err := translator.FromString(ctx, schema, aws.ToString(description.Properties))
+	// Reorder key-value lists (Tags, LoadBalancerAttributes, etc.) to match prior state
+	// so plan shows no diff regardless of user config order.
+	var priorMap map[string]any
+	if !currentState.Raw.IsNull() && currentState.Raw.IsKnown() {
+		toCC := toCloudControl{tfToCfNameMap: r.tfToCfNameMap}
+		var err error
+		priorMap, err = toCC.AsRaw(ctx, schema, currentState.Raw)
+		if err != nil {
+			tflog.Warn(ctx, "Failed to extract prior state for list ordering", map[string]any{"error": err.Error()})
+		}
+	}
+	val, err := translator.FromString(ctx, schema, aws.ToString(description.Properties), priorMap)
 
 	if err != nil {
 		response.Diagnostics.AddError(
@@ -571,7 +589,7 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 		return
 	}
 
-	tflog.Debug(ctx, "Response.State.Raw", map[string]interface{}{
+	tflog.Debug(ctx, "Response.State.Raw", map[string]any{
 		"value": hclog.Fmt("%v", response.State.Raw),
 	})
 
@@ -579,7 +597,10 @@ func (r *genericResource) Read(ctx context.Context, request resource.ReadRequest
 }
 
 func (r *genericResource) Update(ctx context.Context, request resource.UpdateRequest, response *resource.UpdateResponse) {
-	ctx = r.bootstrapContext(ctx)
+	ctx = r.bootstrapContextWithProviderMeta(ctx, request.ProviderMeta, &response.Diagnostics)
+	if response.Diagnostics.HasError() {
+		return
+	}
 
 	traceEntry(ctx, "Resource.Update")
 
@@ -651,7 +672,7 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 		return
 	}
 
-	tflog.Debug(ctx, "Cloud Control API PatchDocument", map[string]interface{}{
+	tflog.Debug(ctx, "Cloud Control API PatchDocument", map[string]any{
 		"value": patchDocument,
 	})
 
@@ -717,7 +738,10 @@ func (r *genericResource) Update(ctx context.Context, request resource.UpdateReq
 }
 
 func (r *genericResource) Delete(ctx context.Context, request resource.DeleteRequest, response *resource.DeleteResponse) {
-	ctx = r.bootstrapContext(ctx)
+	ctx = r.bootstrapContextWithProviderMeta(ctx, request.ProviderMeta, &response.Diagnostics)
+	if response.Diagnostics.HasError() {
+		return
+	}
 
 	traceEntry(ctx, "Resource.Delete")
 
@@ -774,7 +798,7 @@ func (r *genericResource) ImportState(ctx context.Context, request resource.Impo
 	traceEntry(ctx, "Resource.ImportState")
 
 	if request.ID != "" {
-		tflog.Debug(ctx, "Request.ID", map[string]interface{}{
+		tflog.Debug(ctx, "Request.ID", map[string]any{
 			"value": hclog.Fmt("%v", request.ID),
 		})
 
@@ -910,10 +934,23 @@ func (r *genericResource) populateUnknownValues(ctx context.Context, id string, 
 	return nil
 }
 
-// bootstrapContext injects the CloudFormation type name into logger contexts.
+// bootstrapContext injects the CloudFormation type name into logger contexts
 func (r *genericResource) bootstrapContext(ctx context.Context) context.Context {
 	ctx = tflog.SetField(ctx, LoggingKeyCFNType, r.cfTypeName)
-	ctx = r.provider.RegisterLogger(ctx)
+	return r.provider.RegisterLogger(ctx)
+}
+
+// bootstrapContextWithProviderMeta is an extension of bootstrapContext which
+// also injects details from the provider_meta block into context
+func (r *genericResource) bootstrapContextWithProviderMeta(ctx context.Context, providerMeta tfsdk.Config, d *diag.Diagnostics) context.Context {
+	ctx = r.bootstrapContext(ctx)
+
+	var metadata []string
+	d.Append(providerMeta.GetAttribute(ctx, path.Root("user_agent"), &metadata)...)
+
+	if len(metadata) > 0 {
+		ctx = useragent.Context(ctx, useragent.FromSlice(metadata))
+	}
 
 	return ctx
 }

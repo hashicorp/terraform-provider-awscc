@@ -83,6 +83,13 @@
       "description": "Indicates the database engine version.",
       "type": "string"
     },
+    "GlobalClusterIdentifier": {
+      "description": "The ID of the Neptune global database to which this new DB cluster should be added.",
+      "type": "string",
+      "pattern": "^[A-Za-z][0-9A-Za-z-:._]*$",
+      "minLength": 1,
+      "maxLength": 255
+    },
     "IamAuthEnabled": {
       "description": "True if mapping of Amazon Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false.",
       "type": "boolean"
@@ -150,6 +157,14 @@
         "type": "string"
       },
       "type": "array"
+    },
+    "NetworkType": {
+      "description": "The network type of the DB cluster.",
+      "type": "string",
+      "enum": [
+        "IPV4",
+        "DUAL"
+      ]
     }
   },
   "definitions": {
@@ -235,6 +250,7 @@
     "/properties/AvailabilityZones",
     "/properties/DBClusterIdentifier",
     "/properties/DBSubnetGroupName",
+    "/properties/GlobalClusterIdentifier",
     "/properties/KmsKeyId",
     "/properties/RestoreToTime",
     "/properties/RestoreType",

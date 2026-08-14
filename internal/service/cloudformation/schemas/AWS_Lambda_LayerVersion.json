@@ -18,6 +18,14 @@
         "S3Key": {
           "description": "The Amazon S3 key of the layer archive.",
           "type": "string"
+        },
+        "S3ObjectStorageMode": {
+          "type": "string",
+          "description": "Specifies whether Lambda should copy the deployment package to its internal storage (COPY) or reference it directly from your S3 bucket (REFERENCE).",
+          "enum": [
+            "COPY",
+            "REFERENCE"
+          ]
         }
       },
       "required": [
@@ -117,7 +125,17 @@
     "list": {
       "permissions": [
         "lambda:ListLayerVersions"
-      ]
+      ],
+      "handlerSchema": {
+        "properties": {
+          "LayerName": {
+            "$ref": "resource-schema.json#/properties/LayerName"
+          }
+        },
+        "required": [
+          "LayerName"
+        ]
+      }
     }
   }
 }

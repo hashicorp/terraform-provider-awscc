@@ -29,6 +29,7 @@ Represents a stored analysis within a collaboration
 - `error_message_configuration` (Attributes) (see [below for nested schema](#nestedatt--error_message_configuration))
 - `schema` (Attributes) (see [below for nested schema](#nestedatt--schema))
 - `source_metadata` (Attributes) (see [below for nested schema](#nestedatt--source_metadata))
+- `synthetic_data_parameters` (Attributes) (see [below for nested schema](#nestedatt--synthetic_data_parameters))
 - `tags` (Attributes List) An arbitrary set of tags (key-value pairs) for this cleanrooms analysis template. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -148,6 +149,42 @@ Optional:
 Optional:
 
 - `sha_256` (String)
+
+
+
+
+<a id="nestedatt--synthetic_data_parameters"></a>
+### Nested Schema for `synthetic_data_parameters`
+
+Optional:
+
+- `ml_synthetic_data_parameters` (Attributes) (see [below for nested schema](#nestedatt--synthetic_data_parameters--ml_synthetic_data_parameters))
+
+<a id="nestedatt--synthetic_data_parameters--ml_synthetic_data_parameters"></a>
+### Nested Schema for `synthetic_data_parameters.ml_synthetic_data_parameters`
+
+Optional:
+
+- `column_classification` (Attributes) (see [below for nested schema](#nestedatt--synthetic_data_parameters--ml_synthetic_data_parameters--column_classification))
+- `epsilon` (Number)
+- `max_membership_inference_attack_score` (Number)
+
+<a id="nestedatt--synthetic_data_parameters--ml_synthetic_data_parameters--column_classification"></a>
+### Nested Schema for `synthetic_data_parameters.ml_synthetic_data_parameters.column_classification`
+
+Optional:
+
+- `column_mapping` (Attributes List) (see [below for nested schema](#nestedatt--synthetic_data_parameters--ml_synthetic_data_parameters--column_classification--column_mapping))
+
+<a id="nestedatt--synthetic_data_parameters--ml_synthetic_data_parameters--column_classification--column_mapping"></a>
+### Nested Schema for `synthetic_data_parameters.ml_synthetic_data_parameters.column_classification.column_mapping`
+
+Optional:
+
+- `column_name` (String)
+- `column_type` (String)
+- `is_predictive_value` (Boolean)
+
 
 
 

@@ -1,0 +1,146 @@
+{
+  "typeName": "AWS::WorkSpaces::WorkspaceIpGroup",
+  "description": "Resource type definition for an IP access control group for Amazon WorkSpaces.",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the IP access control group."
+    },
+    "GroupId": {
+      "type": "string",
+      "description": "The identifier of the IP access control group.",
+      "pattern": "^wsipg-[0-9a-z]{8,63}$"
+    },
+    "GroupName": {
+      "type": "string",
+      "description": "The name of the group."
+    },
+    "GroupDesc": {
+      "type": "string",
+      "description": "The description of the group."
+    },
+    "UserRules": {
+      "type": "array",
+      "description": "The rules for the IP access control group.",
+      "items": {
+        "$ref": "#/definitions/IpRuleItem"
+      }
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags for the IP access control group.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "definitions": {
+    "IpRuleItem": {
+      "type": "object",
+      "description": "Describes a rule for an IP access control group.",
+      "properties": {
+        "IpRule": {
+          "type": "string",
+          "description": "The IP address range, in CIDR notation."
+        },
+        "RuleDesc": {
+          "type": "string",
+          "description": "The description of the rule."
+        }
+      },
+      "required": [
+        "IpRule"
+      ],
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Describes a tag.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key of the tag."
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value of the tag."
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "GroupName"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/GroupId"
+  ],
+  "createOnlyProperties": [
+    "/properties/GroupName",
+    "/properties/GroupDesc"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/GroupId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "workspaces:CreateTags",
+      "workspaces:DeleteTags",
+      "workspaces:DescribeTags"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "workspaces:CreateIpGroup",
+        "workspaces:DescribeIpGroups",
+        "workspaces:CreateTags",
+        "workspaces:DescribeTags"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "workspaces:DescribeIpGroups",
+        "workspaces:DescribeTags"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "workspaces:UpdateRulesOfIpGroup",
+        "workspaces:AuthorizeIpRules",
+        "workspaces:RevokeIpRules",
+        "workspaces:DescribeIpGroups",
+        "workspaces:CreateTags",
+        "workspaces:DeleteTags",
+        "workspaces:DescribeTags"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "workspaces:DeleteIpGroup",
+        "workspaces:DescribeIpGroups"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "workspaces:DescribeIpGroups"
+      ]
+    }
+  }
+}

@@ -17,6 +17,9 @@
         },
         "SqlKnowledgeBaseConfiguration": {
           "$ref": "#/definitions/SqlKnowledgeBaseConfiguration"
+        },
+        "ManagedKnowledgeBaseConfiguration": {
+          "$ref": "#/definitions/ManagedKnowledgeBaseConfiguration"
         }
       },
       "required": [
@@ -33,7 +36,8 @@
         "DELETING",
         "UPDATING",
         "FAILED",
-        "DELETE_UNSUCCESSFUL"
+        "DELETE_UNSUCCESSFUL",
+        "UPDATE_UNSUCCESSFUL"
       ]
     },
     "KnowledgeBaseStorageType": {
@@ -55,7 +59,8 @@
       "enum": [
         "VECTOR",
         "KENDRA",
-        "SQL"
+        "SQL",
+        "MANAGED"
       ]
     },
     "OpenSearchManagedClusterConfiguration": {
@@ -632,6 +637,84 @@
       },
       "additionalProperties": false
     },
+    "FixedLengthDuration": {
+      "type": "integer",
+      "description": "Duration in seconds to segment the multi modal media",
+      "minimum": 1,
+      "maximum": 30
+    },
+    "AudioSegmentationConfiguration": {
+      "type": "object",
+      "description": "Configure the audio segmentation configuration for multi modal ingestion.",
+      "properties": {
+        "FixedLengthDuration": {
+          "$ref": "#/definitions/FixedLengthDuration"
+        }
+      },
+      "required": [
+        "FixedLengthDuration"
+      ],
+      "additionalProperties": false
+    },
+    "VideoSegmentationConfiguration": {
+      "type": "object",
+      "description": "Configure the video segmentation configuration for multi modal ingestion.",
+      "properties": {
+        "FixedLengthDuration": {
+          "$ref": "#/definitions/FixedLengthDuration"
+        }
+      },
+      "required": [
+        "FixedLengthDuration"
+      ],
+      "additionalProperties": false
+    },
+    "AudioConfiguration": {
+      "type": "object",
+      "description": "Configure the audio configuration for multi modal ingestion.",
+      "properties": {
+        "SegmentationConfiguration": {
+          "$ref": "#/definitions/AudioSegmentationConfiguration"
+        }
+      },
+      "required": [
+        "SegmentationConfiguration"
+      ],
+      "additionalProperties": false
+    },
+    "VideoConfiguration": {
+      "type": "object",
+      "description": "Configure the video configuration for multi modal ingestion.",
+      "properties": {
+        "SegmentationConfiguration": {
+          "$ref": "#/definitions/VideoSegmentationConfiguration"
+        }
+      },
+      "required": [
+        "SegmentationConfiguration"
+      ],
+      "additionalProperties": false
+    },
+    "AudioConfigurations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/AudioConfiguration"
+      },
+      "maxItems": 1,
+      "minItems": 1,
+      "description": "List of audio configurations for multi modal ingestion.",
+      "insertionOrder": false
+    },
+    "VideoConfigurations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/VideoConfiguration"
+      },
+      "maxItems": 1,
+      "minItems": 1,
+      "description": "List of video configurations for multi modal ingestion.",
+      "insertionOrder": false
+    },
     "BedrockEmbeddingModelConfiguration": {
       "type": "object",
       "description": "The vector configuration details for the Bedrock embeddings model.",
@@ -649,6 +732,12 @@
             "FLOAT32",
             "BINARY"
           ]
+        },
+        "Audio": {
+          "$ref": "#/definitions/AudioConfigurations"
+        },
+        "Video": {
+          "$ref": "#/definitions/VideoConfigurations"
         }
       },
       "additionalProperties": false
@@ -747,6 +836,51 @@
       "required": [
         "SupplementalDataStorageLocations"
       ],
+      "additionalProperties": false
+    },
+    "EmbeddingModelType": {
+      "type": "string",
+      "description": "The type of embedding model to use for the managed knowledge base.",
+      "enum": [
+        "CUSTOM",
+        "MANAGED"
+      ]
+    },
+    "ManagedKnowledgeBaseConfiguration": {
+      "type": "object",
+      "description": "Contains details about the model used to create vector embeddings for a managed knowledge base.",
+      "properties": {
+        "EmbeddingModelArn": {
+          "type": "string",
+          "maxLength": 2048,
+          "minLength": 20,
+          "pattern": "^(arn:aws(-[^:]+)?:[a-z0-9-]+:[a-z0-9-]{1,20}:[0-9]{0,12}:[a-zA-Z0-9-:/._+]+)$",
+          "description": "The ARN of the model used to create vector embeddings for the knowledge base."
+        },
+        "EmbeddingModelType": {
+          "$ref": "#/definitions/EmbeddingModelType"
+        },
+        "EmbeddingModelConfiguration": {
+          "$ref": "#/definitions/EmbeddingModelConfiguration"
+        },
+        "ServerSideEncryptionConfiguration": {
+          "$ref": "#/definitions/ManagedKnowledgeBaseServerSideEncryptionConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ManagedKnowledgeBaseServerSideEncryptionConfiguration": {
+      "type": "object",
+      "description": "Contains details about the server-side encryption for the managed knowledge base.",
+      "properties": {
+        "KmsKeyArn": {
+          "type": "string",
+          "maxLength": 2048,
+          "minLength": 1,
+          "pattern": "^arn:aws(-cn|-us-gov|-eusc|-iso(-[b-f])?)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$",
+          "description": "The ARN of the AWS KMS key used to encrypt the managed knowledge base."
+        }
+      },
       "additionalProperties": false
     },
     "KendraKnowledgeBaseConfiguration": {
@@ -1257,6 +1391,7 @@
     "/properties/KnowledgeBaseConfiguration/Type",
     "/properties/KnowledgeBaseConfiguration/VectorKnowledgeBaseConfiguration",
     "/properties/KnowledgeBaseConfiguration/KendraKnowledgeBaseConfiguration",
+    "/properties/KnowledgeBaseConfiguration/ManagedKnowledgeBaseConfiguration",
     "/properties/KnowledgeBaseConfiguration/SqlKnowledgeBaseConfiguration/Type",
     "/properties/KnowledgeBaseConfiguration/SqlKnowledgeBaseConfiguration/RedshiftConfiguration/StorageConfigurations",
     "/properties/KnowledgeBaseConfiguration/SqlKnowledgeBaseConfiguration/RedshiftConfiguration/QueryEngineConfiguration"
@@ -1272,7 +1407,13 @@
         "bedrock:TagResource",
         "bedrock:ListTagsForResource",
         "bedrock:AssociateThirdPartyKnowledgeBase",
-        "iam:PassRole"
+        "iam:PassRole",
+        "kms:CreateGrant",
+        "kms:RetireGrant",
+        "kms:GenerateDataKey",
+        "kms:GenerateDataKeyWithoutPlaintext",
+        "kms:Encrypt",
+        "kms:Decrypt"
       ]
     },
     "read": {
@@ -1289,7 +1430,13 @@
         "bedrock:UntagResource",
         "bedrock:ListTagsForResource",
         "bedrock:AssociateThirdPartyKnowledgeBase",
-        "iam:PassRole"
+        "iam:PassRole",
+        "kms:CreateGrant",
+        "kms:RetireGrant",
+        "kms:GenerateDataKey",
+        "kms:GenerateDataKeyWithoutPlaintext",
+        "kms:Encrypt",
+        "kms:Decrypt"
       ]
     },
     "delete": {

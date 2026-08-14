@@ -23,6 +23,7 @@ The AWS::ODB::CloudAutonomousVmCluster resource creates a Cloud Autonomous VM Cl
 - `db_servers` (List of String) The list of database servers associated with the Autonomous VM cluster.
 - `description` (String) The user-provided description of the Autonomous VM cluster.
 - `display_name` (String) The display name of the Autonomous VM cluster.
+- `iam_roles` (Attributes Set) The AWS Identity and Access Management (IAM) service roles associated with the Autonomous VM cluster. (see [below for nested schema](#nestedatt--iam_roles))
 - `is_mtls_enabled_vm_cluster` (Boolean) Indicates whether mutual TLS (mTLS) authentication is enabled for the Autonomous VM cluster.
 - `license_model` (String) The Oracle license model that applies to the Autonomous VM cluster. Valid values are LICENSE_INCLUDED or BRING_YOUR_OWN_LICENSE.
 - `maintenance_window` (Attributes) The scheduling details for the maintenance window. Patching and system updates take place during the maintenance window. (see [below for nested schema](#nestedatt--maintenance_window))
@@ -65,6 +66,16 @@ The AWS::ODB::CloudAutonomousVmCluster resource creates a Cloud Autonomous VM Cl
 - `reclaimable_cpus` (Number) The number of CPU cores that can be reclaimed from terminated or scaled-down Autonomous Databases.
 - `reserved_cpus` (Number) The number of CPU cores reserved for system operations and redundancy.
 - `shape` (String) The shape of the Exadata infrastructure for the Autonomous VM cluster.
+
+<a id="nestedatt--iam_roles"></a>
+### Nested Schema for `iam_roles`
+
+Optional:
+
+- `aws_integration` (String) The AWS integration configuration settings for the AWS Identity and Access Management (IAM) service role.
+- `iam_role_arn` (String) The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) service role.
+- `status` (String) The current status of the AWS Identity and Access Management (IAM) service role.
+
 
 <a id="nestedatt--maintenance_window"></a>
 ### Nested Schema for `maintenance_window`

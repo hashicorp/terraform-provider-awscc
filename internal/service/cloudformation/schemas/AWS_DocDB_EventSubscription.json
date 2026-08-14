@@ -1,0 +1,90 @@
+{
+  "typeName": "AWS::DocDB::EventSubscription",
+  "description": "Resource Type definition for AWS::DocDB::EventSubscription",
+  "additionalProperties": false,
+  "required": [
+    "SnsTopicArn"
+  ],
+  "properties": {
+    "Enabled": {
+      "description": "A Boolean value; set to true to activate the subscription, set to false to create the subscription but not active it.",
+      "type": "boolean"
+    },
+    "EventCategories": {
+      "description": "A list of event categories for a SourceType that you want to subscribe to.",
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "type": "string"
+      }
+    },
+    "SnsTopicArn": {
+      "description": "The Amazon Resource Name (ARN) of the SNS topic created for event notification. Amazon SNS creates the ARN when you create a topic and subscribe to it.",
+      "type": "string"
+    },
+    "SubscriptionName": {
+      "description": "The name of the subscription.",
+      "maxLength": 255,
+      "type": "string"
+    },
+    "SourceIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$|^[a-zA-Z]$"
+      },
+      "description": "The list of identifiers of the event sources for which events are returned"
+    },
+    "SourceType": {
+      "type": "string",
+      "enum": [
+        "db-instance",
+        "db-cluster",
+        "db-parameter-group",
+        "db-security-group",
+        "db-cluster-snapshot"
+      ],
+      "description": "The type of source that is generating the events."
+    }
+  },
+  "createOnlyProperties": [
+    "/properties/SnsTopicArn",
+    "/properties/SubscriptionName"
+  ],
+  "primaryIdentifier": [
+    "/properties/SubscriptionName"
+  ],
+  "tagging": {
+    "taggable": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "rds:CreateEventSubscription"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "rds:DeleteEventSubscription"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "rds:DescribeEventSubscriptions"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "rds:DescribeEventSubscriptions"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "rds:ModifyEventSubscription",
+        "rds:DescribeEventSubscriptions",
+        "rds:AddSourceIdentifierToSubscription",
+        "rds:RemoveSourceIdentifierFromSubscription"
+      ]
+    }
+  }
+}

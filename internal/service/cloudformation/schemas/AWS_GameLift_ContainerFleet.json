@@ -7,7 +7,7 @@
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": false,
+    "cloudFormationSystemTags": true,
     "tagProperty": "/properties/Tags",
     "permissions": [
       "gamelift:ListTagsForResource",
@@ -150,11 +150,14 @@
           "description": "The maximum value that is allowed for the fleet's instance count for a location.",
           "type": "integer",
           "minimum": 0
+        },
+        "ManagedCapacityConfiguration": {
+          "description": "Configuration options for Amazon GameLift Servers-managed capacity behavior.",
+          "$ref": "#/definitions/ManagedCapacityConfiguration"
         }
       },
       "additionalProperties": false,
       "required": [
-        "MinSize",
         "MaxSize"
       ]
     },
@@ -170,11 +173,43 @@
         },
         "StoppedActions": {
           "$ref": "#/definitions/StoppedActions"
+        },
+        "PlayerGatewayStatus": {
+          "description": "The player gateway status for the location.",
+          "type": "string",
+          "enum": [
+            "DISABLED",
+            "ENABLED"
+          ]
         }
       },
       "additionalProperties": false,
       "required": [
         "Location"
+      ]
+    },
+    "ManagedCapacityConfiguration": {
+      "description": "Configuration options for Amazon GameLift Servers managed capacity behavior.",
+      "type": "object",
+      "properties": {
+        "ZeroCapacityStrategy": {
+          "description": "The strategy Amazon GameLift Servers will use to automatically scale your capacity to and from zero in response to game session activity. Game session activity refers to any active running sessions or game session requests. When set to SCALE_TO_AND_FROM_ZERO, MinSize must not be specified and will be managed automatically. When set to MANUAL, MinSize is required.",
+          "type": "string",
+          "enum": [
+            "SCALE_TO_AND_FROM_ZERO",
+            "MANUAL"
+          ]
+        },
+        "ScaleInAfterInactivityMinutes": {
+          "description": "Length of time, in minutes, that Amazon GameLift Servers will wait before scaling in your MinSize and DesiredInstances to 0 after a period with no game session activity.",
+          "type": "integer",
+          "minimum": 5,
+          "maximum": 1440
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "ZeroCapacityStrategy"
       ]
     },
     "ScalingPolicy": {
@@ -509,6 +544,15 @@
         "$ref": "#/definitions/Tag"
       }
     },
+    "PlayerGatewayMode": {
+      "description": "The player gateway mode for the container fleet.",
+      "type": "string",
+      "enum": [
+        "DISABLED",
+        "ENABLED",
+        "REQUIRED"
+      ]
+    },
     "FleetArn": {
       "description": "The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift container fleet resource and uniquely identifies it across all AWS Regions.",
       "type": "string",
@@ -523,7 +567,8 @@
   ],
   "createOnlyProperties": [
     "/properties/InstanceType",
-    "/properties/BillingType"
+    "/properties/BillingType",
+    "/properties/PlayerGatewayMode"
   ],
   "readOnlyProperties": [
     "/properties/CreationTime",
@@ -533,7 +578,8 @@
     "/properties/DeploymentDetails",
     "/properties/GameServerContainerGroupDefinitionArn",
     "/properties/PerInstanceContainerGroupDefinitionArn",
-    "/properties/MaximumGameServerContainerGroupsPerInstance"
+    "/properties/MaximumGameServerContainerGroupsPerInstance",
+    "/properties/Locations/*/PlayerGatewayStatus"
   ],
   "writeOnlyProperties": [
     "/properties/DeploymentConfiguration",

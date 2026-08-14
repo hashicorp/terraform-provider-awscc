@@ -9,6 +9,14 @@
       "minLength": 1,
       "description": "Campaign name"
     },
+    "CampaignType": {
+      "type": "string",
+      "enum": [
+        "MANAGED",
+        "JOURNEY"
+      ],
+      "description": "Campaign type"
+    },
     "InstanceId": {
       "type": "string",
       "maxLength": 256,
@@ -25,8 +33,14 @@
     "TimeoutDuration": {
       "type": "integer",
       "maximum": 300,
-      "minimum": 10,
+      "minimum": 1,
       "description": "Timeout duration for a preview contact in seconds"
+    },
+    "RingTimeout": {
+      "type": "integer",
+      "maximum": 60,
+      "minimum": 15,
+      "description": "Maximum ring time for outbound calls in seconds"
     },
     "QueueId": {
       "type": "string",
@@ -59,8 +73,8 @@
     },
     "SourceEmailAddressDisplayName": {
       "type": "string",
-      "maxLength": 127,
-      "minLength": 1,
+      "maxLength": 256,
+      "minLength": 0,
       "description": "The name of the source email address display name"
     },
     "BandwidthAllocation": {
@@ -83,7 +97,7 @@
       "description": "Time duration in ISO 8601 format",
       "maxLength": 50,
       "minLength": 0,
-      "pattern": "^[a-zA-Z0-9.]*$"
+      "pattern": "^P(?:([-+]?[0-9]+)D)?(T(?:([-+]?[0-9]+)H)?(?:([-+]?[0-9]+)M)?(?:([-+]?[0-9]+)(?:[.,]([0-9]{0,9}))?S)?)?$"
     },
     "Iso8601Date": {
       "type": "string",
@@ -255,6 +269,9 @@
         },
         "AnswerMachineDetectionConfig": {
           "$ref": "#/definitions/AnswerMachineDetectionConfig"
+        },
+        "RingTimeout": {
+          "$ref": "#/definitions/RingTimeout"
         }
       },
       "required": [
@@ -344,7 +361,7 @@
     },
     "EmailOutboundConfig": {
       "type": "object",
-      "description": "Default SMS outbound config",
+      "description": "Default Email outbound config",
       "properties": {
         "ConnectSourceEmailAddress": {
           "$ref": "#/definitions/EmailAddress"
@@ -382,6 +399,53 @@
       ],
       "additionalProperties": false
     },
+    "WhatsAppOutboundMode": {
+      "type": "object",
+      "description": "WhatsApp Outbound Mode",
+      "properties": {
+        "AgentlessConfig": {
+          "$ref": "#/definitions/AgentlessConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "WhatsAppOutboundConfig": {
+      "type": "object",
+      "description": "Default WhatsApp outbound config",
+      "properties": {
+        "ConnectSourcePhoneNumberArn": {
+          "$ref": "#/definitions/Arn"
+        },
+        "WisdomTemplateArn": {
+          "$ref": "#/definitions/Arn"
+        }
+      },
+      "required": [
+        "ConnectSourcePhoneNumberArn",
+        "WisdomTemplateArn"
+      ],
+      "additionalProperties": false
+    },
+    "WhatsAppChannelSubtypeConfig": {
+      "type": "object",
+      "description": "WhatsApp Channel Subtype config",
+      "properties": {
+        "Capacity": {
+          "$ref": "#/definitions/Capacity"
+        },
+        "OutboundMode": {
+          "$ref": "#/definitions/WhatsAppOutboundMode"
+        },
+        "DefaultOutboundConfig": {
+          "$ref": "#/definitions/WhatsAppOutboundConfig"
+        }
+      },
+      "required": [
+        "OutboundMode",
+        "DefaultOutboundConfig"
+      ],
+      "additionalProperties": false
+    },
     "ChannelSubtypeConfig": {
       "type": "object",
       "description": "The possible types of channel subtype config parameters",
@@ -394,6 +458,9 @@
         },
         "Email": {
           "$ref": "#/definitions/EmailChannelSubtypeConfig"
+        },
+        "WhatsApp": {
+          "$ref": "#/definitions/WhatsAppChannelSubtypeConfig"
         }
       },
       "anyOf": [
@@ -410,6 +477,11 @@
         {
           "required": [
             "Email"
+          ]
+        },
+        {
+          "required": [
+            "WhatsApp"
           ]
         }
       ],
@@ -601,6 +673,14 @@
         "AREA_CODE"
       ]
     },
+    "LocalTimeZoneDetectionScope": {
+      "type": "string",
+      "description": "Local TimeZone Detection scope",
+      "enum": [
+        "PRIMARY_ONLY",
+        "ALL_AVAILABLE"
+      ]
+    },
     "LocalTimeZoneDetection": {
       "type": "array",
       "description": "Local TimeZone Detection method list",
@@ -618,6 +698,9 @@
         },
         "LocalTimeZoneDetection": {
           "$ref": "#/definitions/LocalTimeZoneDetection"
+        },
+        "LocalTimeZoneDetectionScope": {
+          "$ref": "#/definitions/LocalTimeZoneDetectionScope"
         }
       },
       "additionalProperties": false
@@ -636,6 +719,9 @@
           "$ref": "#/definitions/TimeWindow"
         },
         "Email": {
+          "$ref": "#/definitions/TimeWindow"
+        },
+        "WhatsApp": {
           "$ref": "#/definitions/TimeWindow"
         }
       },
@@ -730,6 +816,26 @@
         "Value"
       ],
       "additionalProperties": false
+    },
+    "EntryLimitsConfig": {
+      "type": "object",
+      "description": "Entry limits config for a campaign",
+      "properties": {
+        "MaxEntryCount": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Maximum number of entries per participant. 0 indicates unlimited entries."
+        },
+        "MinEntryInterval": {
+          "$ref": "#/definitions/Iso8601Duration",
+          "description": "Minimum time interval between entries for the same participant in ISO 8601 duration format"
+        }
+      },
+      "required": [
+        "MaxEntryCount",
+        "MinEntryInterval"
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -742,6 +848,9 @@
     },
     "Name": {
       "$ref": "#/definitions/CampaignName"
+    },
+    "Type": {
+      "$ref": "#/definitions/CampaignType"
     },
     "ConnectInstanceId": {
       "$ref": "#/definitions/InstanceId"
@@ -764,6 +873,9 @@
     "CommunicationLimitsOverride": {
       "$ref": "#/definitions/CommunicationLimitsConfig"
     },
+    "EntryLimitsConfig": {
+      "$ref": "#/definitions/EntryLimitsConfig"
+    },
     "Tags": {
       "type": "array",
       "maxItems": 50,
@@ -779,7 +891,7 @@
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": false,
+    "cloudFormationSystemTags": true,
     "tagProperty": "/properties/Tags",
     "permissions": [
       "connect-campaigns:UntagResource",
@@ -788,8 +900,7 @@
   },
   "required": [
     "Name",
-    "ConnectInstanceId",
-    "ChannelSubtypeConfig"
+    "ConnectInstanceId"
   ],
   "readOnlyProperties": [
     "/properties/Arn"
@@ -825,7 +936,8 @@
         "connect-campaigns:DeleteCampaign",
         "connect-campaigns:DeleteCampaignChannelSubtypeConfig",
         "connect-campaigns:DeleteCampaignCommunicationLimits",
-        "connect-campaigns:DeleteCampaignCommunicationTime"
+        "connect-campaigns:DeleteCampaignCommunicationTime",
+        "connect-campaigns:DeleteCampaignEntryLimits"
       ]
     },
     "list": {
@@ -848,9 +960,11 @@
         "connect-campaigns:DeleteCampaignChannelSubtypeConfig",
         "connect-campaigns:DeleteCampaignCommunicationLimits",
         "connect-campaigns:DeleteCampaignCommunicationTime",
+        "connect-campaigns:DeleteCampaignEntryLimits",
         "connect-campaigns:UpdateCampaignChannelSubtypeConfig",
         "connect-campaigns:UpdateCampaignCommunicationLimits",
         "connect-campaigns:UpdateCampaignCommunicationTime",
+        "connect-campaigns:UpdateCampaignEntryLimits",
         "connect-campaigns:UpdateCampaignName",
         "connect-campaigns:UpdateCampaignFlowAssociation",
         "connect-campaigns:UpdateCampaignSchedule",

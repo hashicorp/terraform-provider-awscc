@@ -1,4 +1,4 @@
-// Copyright (c) HashiCorp, Inc.
+// Copyright IBM Corp. 2021, 2026
 // SPDX-License-Identifier: MPL-2.0
 
 package cloudcontrol
@@ -15,7 +15,7 @@ import (
 )
 
 func DeleteResource(ctx context.Context, conn *cloudcontrol.Client, roleARN, typeName, id string, maxWaitTime time.Duration) error {
-	tflog.Debug(ctx, "DeleteResource", map[string]interface{}{
+	tflog.Debug(ctx, "DeleteResource", map[string]any{
 		"cfTypeName": typeName,
 		"id":         id,
 	})

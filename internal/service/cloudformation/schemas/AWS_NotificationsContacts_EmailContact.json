@@ -118,10 +118,6 @@
     "/properties/EmailContact/CreationTime",
     "/properties/EmailContact/UpdateTime"
   ],
-  "writeOnlyProperties": [
-    "/properties/EmailAddress",
-    "/properties/Name"
-  ],
   "createOnlyProperties": [
     "/properties/EmailAddress",
     "/properties/Name",

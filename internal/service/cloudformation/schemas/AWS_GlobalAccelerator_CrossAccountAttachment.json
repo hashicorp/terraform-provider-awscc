@@ -80,8 +80,13 @@
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": false,
-    "tagProperty": "/properties/Tags"
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "globalaccelerator:TagResource",
+      "globalaccelerator:UntagResource",
+      "globalaccelerator:ListTagsForResource"
+    ]
   },
   "required": [
     "Name"
@@ -100,12 +105,14 @@
       "permissions": [
         "globalaccelerator:DescribeCrossAccountAttachment",
         "globalaccelerator:CreateCrossAccountAttachment",
-        "globalaccelerator:TagResource"
+        "globalaccelerator:TagResource",
+        "globalaccelerator:ListTagsForResource"
       ]
     },
     "read": {
       "permissions": [
-        "globalaccelerator:DescribeCrossAccountAttachment"
+        "globalaccelerator:DescribeCrossAccountAttachment",
+        "globalaccelerator:ListTagsForResource"
       ]
     },
     "update": {
@@ -113,7 +120,8 @@
         "globalaccelerator:UpdateCrossAccountAttachment",
         "globalaccelerator:DescribeCrossAccountAttachment",
         "globalaccelerator:TagResource",
-        "globalaccelerator:UntagResource"
+        "globalaccelerator:UntagResource",
+        "globalaccelerator:ListTagsForResource"
       ]
     },
     "delete": {

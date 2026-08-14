@@ -87,6 +87,11 @@
       "maxLength": 2048,
       "pattern": "^(arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:certificate/[0-9a-z-]+)?$"
     },
+    "IdleTimeoutSeconds": {
+      "type": "integer",
+      "minimum": 60,
+      "maximum": 600
+    },
     "CustomDomainName": {
       "type": "string",
       "maxLength": 255,

@@ -116,6 +116,7 @@ Optional:
 - `depends_on` (Attributes List) A list of container dependencies that determines when this container starts up and shuts down. For container groups with multiple containers, dependencies let you define a startup/shutdown sequence across the containers. (see [below for nested schema](#nestedatt--game_server_container_definition--depends_on))
 - `environment_override` (Attributes Set) The environment variables to pass to a container. (see [below for nested schema](#nestedatt--game_server_container_definition--environment_override))
 - `image_uri` (String) Specifies the image URI of this container.
+- `linux_capabilities` (Attributes) Linux-specific modifications applied to the default Docker container configuration, such as Linux capabilities. (see [below for nested schema](#nestedatt--game_server_container_definition--linux_capabilities))
 - `mount_points` (Attributes Set) A list of mount point configurations to be used in a container. (see [below for nested schema](#nestedatt--game_server_container_definition--mount_points))
 - `port_configuration` (Attributes) Defines the ports on the container. (see [below for nested schema](#nestedatt--game_server_container_definition--port_configuration))
 - `resolved_image_digest` (String) The digest of the container image.
@@ -137,6 +138,14 @@ Optional:
 
 - `name` (String) The environment variable name.
 - `value` (String) The environment variable value.
+
+
+<a id="nestedatt--game_server_container_definition--linux_capabilities"></a>
+### Nested Schema for `game_server_container_definition.linux_capabilities`
+
+Optional:
+
+- `include` (Set of String) The list of Linux capabilities to add to the container's default configuration.
 
 
 <a id="nestedatt--game_server_container_definition--mount_points"></a>
@@ -179,6 +188,7 @@ Optional:
 - `essential` (Boolean) Specifies if the container is essential. If an essential container fails a health check, then all containers in the container group will be restarted. You must specify exactly 1 essential container in a container group.
 - `health_check` (Attributes) Specifies how the health of the containers will be checked. (see [below for nested schema](#nestedatt--support_container_definitions--health_check))
 - `image_uri` (String) Specifies the image URI of this container.
+- `linux_capabilities` (Attributes) Linux-specific modifications applied to the default Docker container configuration, such as Linux capabilities. (see [below for nested schema](#nestedatt--support_container_definitions--linux_capabilities))
 - `memory_hard_limit_mebibytes` (Number) The total memory limit of container groups following this definition in MiB
 - `mount_points` (Attributes Set) A list of mount point configurations to be used in a container. (see [below for nested schema](#nestedatt--support_container_definitions--mount_points))
 - `port_configuration` (Attributes) Defines the ports on the container. (see [below for nested schema](#nestedatt--support_container_definitions--port_configuration))
@@ -213,6 +223,14 @@ Optional:
 - `retries` (Number) How many times the process manager will retry the command after a timeout. (The first run of the command does not count as a retry.)
 - `start_period` (Number) The optional grace period (in seconds) to give a container time to boostrap before teh health check is declared failed.
 - `timeout` (Number) How many seconds the process manager allows the command to run before canceling it.
+
+
+<a id="nestedatt--support_container_definitions--linux_capabilities"></a>
+### Nested Schema for `support_container_definitions.linux_capabilities`
+
+Optional:
+
+- `include` (Set of String) The list of Linux capabilities to add to the container's default configuration.
 
 
 <a id="nestedatt--support_container_definitions--mount_points"></a>

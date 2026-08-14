@@ -1,11 +1,12 @@
 {
   "typeName": "AWS::ImageBuilder::ContainerRecipe",
-  "description": "Resource schema for AWS::ImageBuilder::ContainerRecipe",
+  "description": "Resource Type definition for AWS::ImageBuilder::ContainerRecipe",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-imagebuilder.git",
   "properties": {
     "Arn": {
       "description": "The Amazon Resource Name (ARN) of the container recipe.",
-      "type": "string"
+      "type": "string",
+      "pattern": "^arn:[^:]+:imagebuilder:[^:]+:[^:]+:container-recipe/.+$"
     },
     "Name": {
       "description": "The name of the container recipe.",
@@ -192,8 +193,10 @@
             "standard",
             "io1",
             "io2",
+            "io2a",
             "gp2",
             "gp3",
+            "gp3a",
             "sc1",
             "st1"
           ]
@@ -310,11 +313,14 @@
     "/properties/ImageOsVersionOverride",
     "/properties/PlatformOverride"
   ],
+  "propertyTransform": {
+    "/properties/Version": "$join([\"^\", $replace($replace(Version, \".\", \"\\\\.\"), \"x\", \"[0-9]+\"), \"$\"])"
+  },
   "tagging": {
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": true,
+    "cloudFormationSystemTags": false,
     "tagProperty": "/properties/Tags",
     "permissions": [
       "imagebuilder:TagResource",

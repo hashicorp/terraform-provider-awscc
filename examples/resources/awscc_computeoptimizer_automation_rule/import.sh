@@ -1,0 +1,1 @@
+$ terraform import awscc_computeoptimizer_automation_rule.example "rule_arn"

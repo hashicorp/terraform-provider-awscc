@@ -69,7 +69,8 @@
     "/properties/VpcIdentifier",
     "/properties/SubnetIds",
     "/properties/IpAddressType",
-    "/properties/Name"
+    "/properties/Name",
+    "/properties/ResourceConfigDnsResolution"
   ],
   "additionalProperties": false,
   "primaryIdentifier": [
@@ -119,6 +120,13 @@
       "pattern": "^((rgw-[0-9a-z]{17})|(arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourcegateway/rgw-[0-9a-z]{17}))$",
       "type": "string",
       "maxLength": 2048
+    },
+    "ResourceConfigDnsResolution": {
+      "type": "string",
+      "enum": [
+        "IN_VPC",
+        "PUBLIC"
+      ]
     },
     "Arn": {
       "minLength": 20,

@@ -1,0 +1,1 @@
+$ terraform import awscc_codedeploy_deployment_group.example "application_name|deployment_group_name"

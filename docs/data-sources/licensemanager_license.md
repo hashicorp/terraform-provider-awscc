@@ -32,6 +32,7 @@ Data Source schema for AWS::LicenseManager::License
 - `product_name` (String) Product name for the created license.
 - `product_sku` (String) ProductSKU of the license.
 - `status` (String)
+- `tags` (Attributes List) A list of tags to attach. (see [below for nested schema](#nestedatt--tags))
 - `validity` (Attributes) (see [below for nested schema](#nestedatt--validity))
 - `version` (String) The version of the license.
 
@@ -91,6 +92,15 @@ Read-Only:
 
 - `name` (String)
 - `value` (String)
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String) The key name of the tag.
+- `value` (String) The value for the tag.
 
 
 <a id="nestedatt--validity"></a>

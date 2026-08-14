@@ -1,0 +1,1 @@
+$ terraform import awscc_redshift_snapshot_schedule.example "arn"

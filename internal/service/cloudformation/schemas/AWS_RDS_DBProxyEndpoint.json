@@ -96,6 +96,10 @@
     }
   },
   "additionalProperties": false,
+  "propertyTransform": {
+    "/properties/DBProxyName": "$lowercase(DBProxyName)",
+    "/properties/DBProxyEndpointName": "$lowercase(DBProxyEndpointName)"
+  },
   "required": [
     "DBProxyName",
     "DBProxyEndpointName",
@@ -117,7 +121,7 @@
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": false,
+    "cloudFormationSystemTags": true,
     "tagProperty": "/properties/Tags",
     "permissions": [
       "rds:AddTagsToResource",
@@ -132,7 +136,8 @@
     "create": {
       "permissions": [
         "rds:CreateDBProxyEndpoint",
-        "rds:DescribeDBProxyEndpoints"
+        "rds:DescribeDBProxyEndpoints",
+        "rds:AddTagsToResource"
       ]
     },
     "read": {
@@ -144,6 +149,7 @@
     "update": {
       "permissions": [
         "rds:ModifyDBProxyEndpoint",
+        "rds:DescribeDBProxyEndpoints",
         "rds:AddTagsToResource",
         "rds:RemoveTagsFromResource"
       ]

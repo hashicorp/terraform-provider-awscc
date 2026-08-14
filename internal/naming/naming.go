@@ -1,4 +1,4 @@
-// Copyright (c) HashiCorp, Inc.
+// Copyright IBM Corp. 2021, 2026
 // SPDX-License-Identifier: MPL-2.0
 
 package naming
@@ -18,6 +18,7 @@ var (
 		"CloudWatch":     "Cloudwatch",
 		"CNAMEs":         "Cnames",
 		"FSx":            "Fsx",
+		"OTel":           "Otel",
 	}
 )
 

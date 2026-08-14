@@ -74,6 +74,16 @@
       ]
     },
     "list": {
+      "handlerSchema": {
+        "properties": {
+          "TransitGatewayMulticastDomainId": {
+            "$ref": "resource-schema.json#/properties/TransitGatewayMulticastDomainId"
+          }
+        },
+        "required": [
+          "TransitGatewayMulticastDomainId"
+        ]
+      },
       "permissions": [
         "ec2:GetTransitGatewayMulticastDomainAssociations"
       ]

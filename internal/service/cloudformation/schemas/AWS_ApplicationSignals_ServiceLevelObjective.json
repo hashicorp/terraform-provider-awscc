@@ -187,6 +187,15 @@
         },
         "DependencyConfig": {
           "$ref": "#/definitions/DependencyConfig"
+        },
+        "MetricSource": {
+          "$ref": "#/definitions/MetricSource"
+        },
+        "MetricName": {
+          "$ref": "#/definitions/MetricName"
+        },
+        "CompositeSliConfig": {
+          "$ref": "#/definitions/CompositeSliConfig"
         }
       }
     },
@@ -221,6 +230,15 @@
         },
         "DependencyConfig": {
           "$ref": "#/definitions/DependencyConfig"
+        },
+        "MetricSource": {
+          "$ref": "#/definitions/MetricSource"
+        },
+        "MetricName": {
+          "$ref": "#/definitions/MetricName"
+        },
+        "CompositeSliConfig": {
+          "$ref": "#/definitions/CompositeSliConfig"
         }
       }
     },
@@ -585,6 +603,105 @@
         }
       },
       "additionalProperties": false
+    },
+    "MetricSource": {
+      "description": "Configuration for identifying the source of metrics for non-Application Signals services",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MetricSourceKeyAttributes": {
+          "$ref": "#/definitions/MetricSourceKeyAttributes"
+        },
+        "MetricSourceAttributes": {
+          "$ref": "#/definitions/MetricSourceAttributes"
+        }
+      },
+      "required": [
+        "MetricSourceKeyAttributes"
+      ]
+    },
+    "MetricSourceKeyAttributes": {
+      "description": "Required attributes that identify the metric source",
+      "patternProperties": {
+        "": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "MetricSourceAttributes": {
+      "description": "Optional additional attributes for the metric source",
+      "patternProperties": {
+        "": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "MetricName": {
+      "description": "The name of the metric for non-Application Signals services",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "CompositeSliConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "SelectionConfig": {
+          "$ref": "#/definitions/SelectionConfig"
+        },
+        "CompositeSliComponents": {
+          "$ref": "#/definitions/CompositeSliComponents"
+        }
+      },
+      "required": [
+        "SelectionConfig"
+      ]
+    },
+    "SelectionConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Type": {
+          "$ref": "#/definitions/SelectionType"
+        },
+        "Pattern": {
+          "type": "string",
+          "pattern": "^.+$"
+        }
+      },
+      "required": [
+        "Type"
+      ]
+    },
+    "SelectionType": {
+      "type": "string",
+      "enum": [
+        "EXPLICIT",
+        "PREFIX",
+        "REGEX"
+      ]
+    },
+    "CompositeSliComponents": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/CompositeSliComponent"
+      },
+      "minItems": 2,
+      "maxItems": 20
+    },
+    "CompositeSliComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "OperationName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "OperationName"
+      ]
     }
   },
   "handlers": {
@@ -598,7 +715,9 @@
         "iam:GetRole",
         "iam:CreateServiceLinkedRole",
         "application-signals:ListServiceLevelObjectiveExclusionWindows",
-        "application-signals:BatchUpdateExclusionWindows"
+        "application-signals:BatchUpdateExclusionWindows",
+        "rum:GetAppMonitor",
+        "rum:BatchGetRumMetricDefinitions"
       ]
     },
     "read": {
@@ -617,7 +736,9 @@
         "application-signals:GetServiceLevelObjective",
         "application-signals:ListTagsForResource",
         "application-signals:ListServiceLevelObjectiveExclusionWindows",
-        "application-signals:BatchUpdateExclusionWindows"
+        "application-signals:BatchUpdateExclusionWindows",
+        "rum:GetAppMonitor",
+        "rum:BatchGetRumMetricDefinitions"
       ]
     },
     "delete": {

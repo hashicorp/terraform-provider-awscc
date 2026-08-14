@@ -23,6 +23,7 @@ Represents a Connector that allows certificate issuance through Simple Certifica
 
 - `mobile_device_management` (Attributes) (see [below for nested schema](#nestedatt--mobile_device_management))
 - `tags` (Map of String)
+- `vpc_endpoint_id` (String)
 
 ### Read-Only
 

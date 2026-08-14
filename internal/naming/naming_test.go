@@ -1,4 +1,4 @@
-// Copyright (c) HashiCorp, Inc.
+// Copyright IBM Corp. 2021, 2026
 // SPDX-License-Identifier: MPL-2.0
 
 package naming_test
@@ -54,6 +54,11 @@ func TestCloudFormationPropertyToTerraformAttribute(t *testing.T) {
 			TestName:      "including replacement CNAMEs",
 			Value:         "CNAMEs",
 			ExpectedValue: "cnames",
+		},
+		{
+			TestName:      "including OTel",
+			Value:         "OTelEnrichment",
+			ExpectedValue: "otel_enrichment",
 		},
 	}
 

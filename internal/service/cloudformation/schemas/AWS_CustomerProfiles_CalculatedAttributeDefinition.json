@@ -368,7 +368,8 @@
     },
     "read": {
       "permissions": [
-        "profile:GetCalculatedAttributeDefinition"
+        "profile:GetCalculatedAttributeDefinition",
+        "profile:ListTagsForResource"
       ]
     },
     "update": {
@@ -376,7 +377,8 @@
         "profile:GetCalculatedAttributeDefinition",
         "profile:UpdateCalculatedAttributeDefinition",
         "profile:UntagResource",
-        "profile:TagResource"
+        "profile:TagResource",
+        "profile:ListTagsForResource"
       ]
     },
     "delete": {

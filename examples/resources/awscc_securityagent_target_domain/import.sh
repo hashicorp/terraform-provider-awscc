@@ -1,0 +1,1 @@
+$ terraform import awscc_securityagent_target_domain.example "target_domain_id"

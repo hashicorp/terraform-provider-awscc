@@ -35,6 +35,7 @@ Data Source schema for AWS::CleanRooms::AnalysisTemplate
 - `schema` (Attributes) (see [below for nested schema](#nestedatt--schema))
 - `source` (Attributes) (see [below for nested schema](#nestedatt--source))
 - `source_metadata` (Attributes) (see [below for nested schema](#nestedatt--source_metadata))
+- `synthetic_data_parameters` (Attributes) (see [below for nested schema](#nestedatt--synthetic_data_parameters))
 - `tags` (Attributes List) An arbitrary set of tags (key-value pairs) for this cleanrooms analysis template. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--analysis_parameters"></a>
@@ -145,6 +146,42 @@ Read-Only:
 Read-Only:
 
 - `sha_256` (String)
+
+
+
+
+<a id="nestedatt--synthetic_data_parameters"></a>
+### Nested Schema for `synthetic_data_parameters`
+
+Read-Only:
+
+- `ml_synthetic_data_parameters` (Attributes) (see [below for nested schema](#nestedatt--synthetic_data_parameters--ml_synthetic_data_parameters))
+
+<a id="nestedatt--synthetic_data_parameters--ml_synthetic_data_parameters"></a>
+### Nested Schema for `synthetic_data_parameters.ml_synthetic_data_parameters`
+
+Read-Only:
+
+- `column_classification` (Attributes) (see [below for nested schema](#nestedatt--synthetic_data_parameters--ml_synthetic_data_parameters--column_classification))
+- `epsilon` (Number)
+- `max_membership_inference_attack_score` (Number)
+
+<a id="nestedatt--synthetic_data_parameters--ml_synthetic_data_parameters--column_classification"></a>
+### Nested Schema for `synthetic_data_parameters.ml_synthetic_data_parameters.column_classification`
+
+Read-Only:
+
+- `column_mapping` (Attributes List) (see [below for nested schema](#nestedatt--synthetic_data_parameters--ml_synthetic_data_parameters--column_classification--column_mapping))
+
+<a id="nestedatt--synthetic_data_parameters--ml_synthetic_data_parameters--column_classification--column_mapping"></a>
+### Nested Schema for `synthetic_data_parameters.ml_synthetic_data_parameters.column_classification.column_mapping`
+
+Read-Only:
+
+- `column_name` (String)
+- `column_type` (String)
+- `is_predictive_value` (Boolean)
+
 
 
 

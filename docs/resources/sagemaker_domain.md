@@ -137,6 +137,7 @@ resource "awscc_sagemaker_app_image_config" "example" {
 - `app_security_group_management` (String) The entity that creates and manages the required security groups for inter-app communication in VPCOnly mode. Required when CreateDomain.AppNetworkAccessType is VPCOnly and DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn is provided.
 - `default_space_settings` (Attributes) The default space settings. (see [below for nested schema](#nestedatt--default_space_settings))
 - `domain_settings` (Attributes) A collection of Domain settings. (see [below for nested schema](#nestedatt--domain_settings))
+- `home_efs_file_system_creation` (String) Indicates whether a home EFS file system is created for the domain. Set to Disabled to skip EFS creation and reduce domain creation time.
 - `kms_key_id` (String) SageMaker uses AWS KMS to encrypt the EFS volume attached to the domain with an AWS managed customer master key (CMK) by default.
 - `subnet_ids` (List of String) The VPC subnets that Studio uses for communication.
 - `tag_propagation` (String) Indicates whether the tags added to Domain, User Profile and Space entity is propagated to all SageMaker resources.
@@ -228,6 +229,7 @@ Optional:
 - `lifecycle_config_arn` (String) The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.
 - `sage_maker_image_arn` (String) The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.
 - `sage_maker_image_version_arn` (String) The Amazon Resource Name (ARN) of the image version created on the instance.
+- `training_plan_arn` (String) The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.
 
 
 
@@ -335,6 +337,7 @@ Optional:
 - `lifecycle_config_arn` (String) The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.
 - `sage_maker_image_arn` (String) The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.
 - `sage_maker_image_version_arn` (String) The Amazon Resource Name (ARN) of the image version created on the instance.
+- `training_plan_arn` (String) The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.
 
 
 
@@ -355,6 +358,7 @@ Optional:
 - `lifecycle_config_arn` (String) The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.
 - `sage_maker_image_arn` (String) The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.
 - `sage_maker_image_version_arn` (String) The Amazon Resource Name (ARN) of the image version created on the instance.
+- `training_plan_arn` (String) The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.
 
 
 
@@ -386,6 +390,7 @@ Optional:
 - `lifecycle_config_arn` (String) The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.
 - `sage_maker_image_arn` (String) The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.
 - `sage_maker_image_version_arn` (String) The Amazon Resource Name (ARN) of the image version created on the instance.
+- `training_plan_arn` (String) The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.
 
 
 
@@ -416,6 +421,7 @@ Optional:
 - `lifecycle_config_arn` (String) The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.
 - `sage_maker_image_arn` (String) The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.
 - `sage_maker_image_version_arn` (String) The Amazon Resource Name (ARN) of the image version created on the instance.
+- `training_plan_arn` (String) The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.
 
 
 
@@ -594,6 +600,7 @@ Optional:
 - `lifecycle_config_arn` (String) The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.
 - `sage_maker_image_arn` (String) The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.
 - `sage_maker_image_version_arn` (String) The Amazon Resource Name (ARN) of the image version created on the instance.
+- `training_plan_arn` (String) The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.
 
 
 
@@ -614,6 +621,7 @@ Optional:
 - `lifecycle_config_arn` (String) The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.
 - `sage_maker_image_arn` (String) The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.
 - `sage_maker_image_version_arn` (String) The Amazon Resource Name (ARN) of the image version created on the instance.
+- `training_plan_arn` (String) The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.
 
 
 
@@ -645,6 +653,7 @@ Optional:
 - `lifecycle_config_arn` (String) The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.
 - `sage_maker_image_arn` (String) The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.
 - `sage_maker_image_version_arn` (String) The Amazon Resource Name (ARN) of the image version created on the instance.
+- `training_plan_arn` (String) The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.
 
 
 
@@ -706,6 +715,7 @@ Optional:
 - `lifecycle_config_arn` (String) The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.
 - `sage_maker_image_arn` (String) The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.
 - `sage_maker_image_version_arn` (String) The Amazon Resource Name (ARN) of the image version created on the instance.
+- `training_plan_arn` (String) The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.
 
 
 

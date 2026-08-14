@@ -33,8 +33,10 @@ Data Source schema for AWS::Timestream::InfluxDBInstance
 - `influx_auth_parameters_secret_arn` (String) The Auth parameters secret Amazon Resource name (ARN) that is associated with the InfluxDB instance.
 - `influx_db_instance_id` (String) The service generated unique identifier for InfluxDB instance.
 - `log_delivery_configuration` (Attributes) Configuration for sending logs to customer account from the InfluxDB instance. (see [below for nested schema](#nestedatt--log_delivery_configuration))
+- `maintenance_schedule` (Attributes) The maintenance schedule for the InfluxDB instance. (see [below for nested schema](#nestedatt--maintenance_schedule))
 - `name` (String) The unique name that is associated with the InfluxDB instance.
 - `network_type` (String) Network type of the InfluxDB Instance.
+- `next_maintenance_time` (String) The timestamp of the next scheduled maintenance event.
 - `organization` (String) The organization for the InfluxDB instance.
 - `password` (String) The password for the InfluxDB instance.
 - `port` (Number) The port number on which InfluxDB accepts connections.
@@ -61,6 +63,15 @@ Read-Only:
 - `bucket_name` (String) The bucket name for logs to be sent from the InfluxDB instance
 - `enabled` (Boolean) Specifies whether logging to customer specified bucket is enabled.
 
+
+
+<a id="nestedatt--maintenance_schedule"></a>
+### Nested Schema for `maintenance_schedule`
+
+Read-Only:
+
+- `preferred_maintenance_window` (String) The preferred maintenance window in format ddd:HH:MM-ddd:HH:MM.
+- `timezone` (String) The IANA timezone identifier for the maintenance schedule.
 
 
 <a id="nestedatt--tags"></a>

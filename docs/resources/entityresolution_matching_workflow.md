@@ -55,12 +55,13 @@ Optional:
 Required:
 
 - `output` (Attributes List) (see [below for nested schema](#nestedatt--output_source_config--output))
-- `output_s3_path` (String) The S3 path to which Entity Resolution will write the output table
 
 Optional:
 
 - `apply_normalization` (Boolean)
+- `customer_profiles_integration_config` (Attributes) The Customer Profiles integration configuration for the output source (see [below for nested schema](#nestedatt--output_source_config--customer_profiles_integration_config))
 - `kms_arn` (String)
+- `output_s3_path` (String) The S3 path to which Entity Resolution will write the output table
 
 <a id="nestedatt--output_source_config--output"></a>
 ### Nested Schema for `output_source_config.output`
@@ -74,12 +75,22 @@ Optional:
 - `hashed` (Boolean)
 
 
+<a id="nestedatt--output_source_config--customer_profiles_integration_config"></a>
+### Nested Schema for `output_source_config.customer_profiles_integration_config`
+
+Optional:
+
+- `domain_arn` (String) The Amazon Resource Name (ARN) of the Customer Profiles domain
+- `object_type_arn` (String) The Amazon Resource Name (ARN) of the Customer Profiles object type
+
+
 
 <a id="nestedatt--resolution_techniques"></a>
 ### Nested Schema for `resolution_techniques`
 
 Optional:
 
+- `enable_real_time_matching` (Boolean) Enables the workflow to use real-time matching. Can only be set on creation for RULE_MATCHING workflows that define RuleConditionProperties.
 - `provider_properties` (Attributes) (see [below for nested schema](#nestedatt--resolution_techniques--provider_properties))
 - `resolution_type` (String)
 - `rule_based_properties` (Attributes) (see [below for nested schema](#nestedatt--resolution_techniques--rule_based_properties))
@@ -127,7 +138,16 @@ Optional:
 
 Optional:
 
+- `matching_config` (Attributes) Configuration for matching behavior within rule condition properties (see [below for nested schema](#nestedatt--resolution_techniques--rule_condition_properties--matching_config))
 - `rules` (Attributes List) (see [below for nested schema](#nestedatt--resolution_techniques--rule_condition_properties--rules))
+
+<a id="nestedatt--resolution_techniques--rule_condition_properties--matching_config"></a>
+### Nested Schema for `resolution_techniques.rule_condition_properties.matching_config`
+
+Optional:
+
+- `enable_transitive_matching` (Boolean) Enables transitive matching to process records across all rule levels and connect unmatched records to existing match groups
+
 
 <a id="nestedatt--resolution_techniques--rule_condition_properties--rules"></a>
 ### Nested Schema for `resolution_techniques.rule_condition_properties.rules`

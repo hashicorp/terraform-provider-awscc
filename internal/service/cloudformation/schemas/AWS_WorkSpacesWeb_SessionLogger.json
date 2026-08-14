@@ -274,7 +274,7 @@
     }
   },
   "tagging": {
-    "cloudFormationSystemTags": false,
+    "cloudFormationSystemTags": true,
     "permissions": [
       "workspaces-web:ListTagsForResource",
       "workspaces-web:TagResource",

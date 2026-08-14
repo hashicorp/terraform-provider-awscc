@@ -9,7 +9,7 @@
     },
     "MemoryArn": {
       "type": "string",
-      "pattern": "^arn:aws:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:memory/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$",
+      "pattern": "^arn:(aws(?:-cn|-us-gov|-iso(?:-[bef])?)?):bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:memory/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$",
       "description": "ARN of the Memory resource"
     },
     "MemoryId": {
@@ -49,6 +49,12 @@
         "Namespaces": {
           "$ref": "#/definitions/NamespacesList"
         },
+        "NamespaceTemplates": {
+          "$ref": "#/definitions/NamespacesList"
+        },
+        "MemoryRecordSchema": {
+          "$ref": "#/definitions/MemoryRecordSchema"
+        },
         "StrategyId": {
           "type": "string",
           "minLength": 12,
@@ -61,7 +67,8 @@
             "SEMANTIC",
             "SUMMARIZATION",
             "USER_PREFERENCE",
-            "CUSTOM"
+            "CUSTOM",
+            "EPISODIC"
           ],
           "description": "Type of memory strategy"
         },
@@ -103,6 +110,12 @@
         "Namespaces": {
           "$ref": "#/definitions/NamespacesList"
         },
+        "NamespaceTemplates": {
+          "$ref": "#/definitions/NamespacesList"
+        },
+        "MemoryRecordSchema": {
+          "$ref": "#/definitions/MemoryRecordSchema"
+        },
         "StrategyId": {
           "type": "string",
           "minLength": 12,
@@ -115,7 +128,8 @@
             "SEMANTIC",
             "SUMMARIZATION",
             "USER_PREFERENCE",
-            "CUSTOM"
+            "CUSTOM",
+            "EPISODIC"
           ],
           "description": "Type of memory strategy"
         },
@@ -157,6 +171,12 @@
         "Namespaces": {
           "$ref": "#/definitions/NamespacesList"
         },
+        "NamespaceTemplates": {
+          "$ref": "#/definitions/NamespacesList"
+        },
+        "MemoryRecordSchema": {
+          "$ref": "#/definitions/MemoryRecordSchema"
+        },
         "StrategyId": {
           "type": "string",
           "minLength": 12,
@@ -169,7 +189,8 @@
             "SEMANTIC",
             "SUMMARIZATION",
             "USER_PREFERENCE",
-            "CUSTOM"
+            "CUSTOM",
+            "EPISODIC"
           ],
           "description": "Type of memory strategy"
         },
@@ -211,8 +232,14 @@
         "Namespaces": {
           "$ref": "#/definitions/NamespacesList"
         },
+        "NamespaceTemplates": {
+          "$ref": "#/definitions/NamespacesList"
+        },
         "Configuration": {
           "$ref": "#/definitions/CustomConfigurationInput"
+        },
+        "MemoryRecordSchema": {
+          "$ref": "#/definitions/MemoryRecordSchema"
         },
         "StrategyId": {
           "type": "string",
@@ -226,7 +253,72 @@
             "SEMANTIC",
             "SUMMARIZATION",
             "USER_PREFERENCE",
-            "CUSTOM"
+            "CUSTOM",
+            "EPISODIC"
+          ],
+          "description": "Type of memory strategy"
+        },
+        "Status": {
+          "type": "string",
+          "enum": [
+            "CREATING",
+            "ACTIVE",
+            "DELETING",
+            "FAILED"
+          ],
+          "description": "Status of the memory strategy"
+        },
+        "CreatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp of the memory strategy"
+        },
+        "UpdatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp of the memory strategy"
+        }
+      },
+      "required": [
+        "Name"
+      ],
+      "additionalProperties": false
+    },
+    "EpisodicMemoryStrategy": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "$ref": "#/definitions/Name"
+        },
+        "Description": {
+          "$ref": "#/definitions/Description"
+        },
+        "Namespaces": {
+          "$ref": "#/definitions/NamespacesList"
+        },
+        "NamespaceTemplates": {
+          "$ref": "#/definitions/NamespacesList"
+        },
+        "ReflectionConfiguration": {
+          "$ref": "#/definitions/EpisodicReflectionConfigurationInput"
+        },
+        "MemoryRecordSchema": {
+          "$ref": "#/definitions/MemoryRecordSchema"
+        },
+        "StrategyId": {
+          "type": "string",
+          "minLength": 12,
+          "pattern": "^[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$",
+          "description": "Unique identifier for the memory strategy"
+        },
+        "Type": {
+          "type": "string",
+          "enum": [
+            "SEMANTIC",
+            "SUMMARIZATION",
+            "USER_PREFERENCE",
+            "CUSTOM",
+            "EPISODIC"
           ],
           "description": "Type of memory strategy"
         },
@@ -270,6 +362,9 @@
         },
         "CustomMemoryStrategy": {
           "$ref": "#/definitions/CustomMemoryStrategy"
+        },
+        "EpisodicMemoryStrategy": {
+          "$ref": "#/definitions/EpisodicMemoryStrategy"
         }
       },
       "additionalProperties": false,
@@ -292,7 +387,8 @@
           "enum": [
             "SEMANTIC_OVERRIDE",
             "SUMMARY_OVERRIDE",
-            "USER_PREFERENCE_OVERRIDE"
+            "USER_PREFERENCE_OVERRIDE",
+            "EPISODIC"
           ],
           "description": "Type of strategy configuration override"
         },
@@ -431,6 +527,21 @@
       ],
       "additionalProperties": false
     },
+    "EpisodicReflectionConfigurationInput": {
+      "type": "object",
+      "properties": {
+        "Namespaces": {
+          "$ref": "#/definitions/NamespacesList"
+        },
+        "NamespaceTemplates": {
+          "$ref": "#/definitions/NamespacesList"
+        },
+        "MemoryRecordSchema": {
+          "$ref": "#/definitions/MemoryRecordSchema"
+        }
+      },
+      "additionalProperties": false
+    },
     "Namespace": {
       "type": "string",
       "pattern": "^[a-zA-Z0-9\\-_/]*(\\{(actorId|sessionId|memoryStrategyId)\\}[a-zA-Z0-9\\-_/]*)*$",
@@ -465,6 +576,9 @@
         },
         "SelfManagedConfiguration": {
           "$ref": "#/definitions/SelfManagedConfiguration"
+        },
+        "EpisodicOverride": {
+          "$ref": "#/definitions/EpisodicOverride"
         }
       },
       "additionalProperties": false,
@@ -673,6 +787,339 @@
       ],
       "additionalProperties": false
     },
+    "EpisodicOverride": {
+      "type": "object",
+      "properties": {
+        "Extraction": {
+          "$ref": "#/definitions/EpisodicOverrideExtractionConfigurationInput"
+        },
+        "Consolidation": {
+          "$ref": "#/definitions/EpisodicOverrideConsolidationConfigurationInput"
+        },
+        "Reflection": {
+          "$ref": "#/definitions/EpisodicOverrideReflectionConfigurationInput"
+        }
+      },
+      "additionalProperties": false
+    },
+    "EpisodicOverrideExtractionConfigurationInput": {
+      "type": "object",
+      "properties": {
+        "AppendToPrompt": {
+          "$ref": "#/definitions/Prompt"
+        },
+        "ModelId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "AppendToPrompt",
+        "ModelId"
+      ],
+      "additionalProperties": false
+    },
+    "EpisodicOverrideConsolidationConfigurationInput": {
+      "type": "object",
+      "properties": {
+        "AppendToPrompt": {
+          "$ref": "#/definitions/Prompt"
+        },
+        "ModelId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "AppendToPrompt",
+        "ModelId"
+      ],
+      "additionalProperties": false
+    },
+    "EpisodicOverrideReflectionConfigurationInput": {
+      "type": "object",
+      "properties": {
+        "AppendToPrompt": {
+          "$ref": "#/definitions/Prompt"
+        },
+        "ModelId": {
+          "type": "string"
+        },
+        "Namespaces": {
+          "$ref": "#/definitions/NamespacesList"
+        },
+        "NamespaceTemplates": {
+          "$ref": "#/definitions/NamespacesList"
+        },
+        "MemoryRecordSchema": {
+          "$ref": "#/definitions/MemoryRecordSchema"
+        }
+      },
+      "required": [
+        "AppendToPrompt",
+        "ModelId"
+      ],
+      "additionalProperties": false
+    },
+    "ContentConfiguration": {
+      "type": "object",
+      "properties": {
+        "Type": {
+          "type": "string",
+          "enum": [
+            "MEMORY_RECORDS"
+          ],
+          "description": "The type of content to deliver"
+        },
+        "Level": {
+          "type": "string",
+          "enum": [
+            "METADATA_ONLY",
+            "FULL_CONTENT"
+          ],
+          "description": "The level of content detail to deliver"
+        }
+      },
+      "required": [
+        "Type"
+      ],
+      "additionalProperties": false
+    },
+    "KinesisResource": {
+      "type": "object",
+      "properties": {
+        "DataStreamArn": {
+          "$ref": "#/definitions/Arn"
+        },
+        "ContentConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContentConfiguration"
+          },
+          "minItems": 1,
+          "maxItems": 1,
+          "insertionOrder": false
+        }
+      },
+      "required": [
+        "DataStreamArn",
+        "ContentConfigurations"
+      ],
+      "additionalProperties": false
+    },
+    "StreamDeliveryResource": {
+      "type": "object",
+      "properties": {
+        "Kinesis": {
+          "$ref": "#/definitions/KinesisResource"
+        }
+      },
+      "additionalProperties": false,
+      "maxProperties": 1,
+      "minProperties": 1
+    },
+    "StreamDeliveryResources": {
+      "type": "object",
+      "properties": {
+        "Resources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StreamDeliveryResource"
+          },
+          "maxItems": 1,
+          "insertionOrder": false
+        }
+      },
+      "required": [
+        "Resources"
+      ],
+      "additionalProperties": false
+    },
+    "MetadataKey": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$",
+      "description": "Key name for metadata fields"
+    },
+    "MetadataValueType": {
+      "type": "string",
+      "enum": [
+        "STRING",
+        "STRINGLIST",
+        "NUMBER"
+      ],
+      "description": "Supported data types for metadata values"
+    },
+    "IndexedKey": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "$ref": "#/definitions/MetadataKey"
+        },
+        "Type": {
+          "$ref": "#/definitions/MetadataValueType"
+        }
+      },
+      "required": [
+        "Key",
+        "Type"
+      ],
+      "additionalProperties": false
+    },
+    "IndexedKeysList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/IndexedKey"
+      },
+      "minItems": 1,
+      "maxItems": 10,
+      "insertionOrder": false,
+      "description": "List of indexed keys for the memory"
+    },
+    "Definition": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000,
+      "description": "Definition for the metadata schema entry"
+    },
+    "LlmExtractionInstruction": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000,
+      "description": "LLM extraction instruction"
+    },
+    "StringValidation": {
+      "type": "object",
+      "properties": {
+        "AllowedValues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "maxItems": 10,
+          "insertionOrder": false
+        }
+      },
+      "required": [
+        "AllowedValues"
+      ],
+      "additionalProperties": false
+    },
+    "StringListValidation": {
+      "type": "object",
+      "properties": {
+        "AllowedValues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "maxItems": 10,
+          "insertionOrder": false
+        },
+        "MaxItems": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        }
+      },
+      "additionalProperties": false
+    },
+    "NumberValidation": {
+      "type": "object",
+      "properties": {
+        "MinValue": {
+          "type": "number"
+        },
+        "MaxValue": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Validation": {
+      "type": "object",
+      "properties": {
+        "StringValidation": {
+          "$ref": "#/definitions/StringValidation"
+        },
+        "StringListValidation": {
+          "$ref": "#/definitions/StringListValidation"
+        },
+        "NumberValidation": {
+          "$ref": "#/definitions/NumberValidation"
+        }
+      },
+      "additionalProperties": false,
+      "maxProperties": 1,
+      "minProperties": 1
+    },
+    "LlmExtractionConfig": {
+      "type": "object",
+      "properties": {
+        "LlmExtractionInstruction": {
+          "$ref": "#/definitions/LlmExtractionInstruction"
+        },
+        "Definition": {
+          "$ref": "#/definitions/Definition"
+        },
+        "Validation": {
+          "$ref": "#/definitions/Validation"
+        }
+      },
+      "required": [
+        "Definition"
+      ],
+      "additionalProperties": false
+    },
+    "ExtractionConfig": {
+      "type": "object",
+      "properties": {
+        "LlmExtractionConfig": {
+          "$ref": "#/definitions/LlmExtractionConfig"
+        }
+      },
+      "additionalProperties": false,
+      "maxProperties": 1,
+      "minProperties": 1
+    },
+    "MetadataSchemaEntry": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "$ref": "#/definitions/MetadataKey"
+        },
+        "Type": {
+          "$ref": "#/definitions/MetadataValueType"
+        },
+        "ExtractionConfig": {
+          "$ref": "#/definitions/ExtractionConfig"
+        }
+      },
+      "required": [
+        "Key"
+      ],
+      "additionalProperties": false
+    },
+    "MetadataSchemaList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/MetadataSchemaEntry"
+      },
+      "minItems": 1,
+      "maxItems": 20,
+      "insertionOrder": false,
+      "description": "List of metadata schema entries"
+    },
+    "MemoryRecordSchema": {
+      "type": "object",
+      "properties": {
+        "MetadataSchema": {
+          "$ref": "#/definitions/MetadataSchemaList"
+        }
+      },
+      "additionalProperties": false
+    },
     "TagsMap": {
       "type": "object",
       "description": "A map of tag keys and values",
@@ -705,7 +1152,7 @@
     },
     "EventExpiryDuration": {
       "type": "integer",
-      "minimum": 7,
+      "minimum": 3,
       "maximum": 365,
       "description": "Duration in days until memory events expire"
     },
@@ -731,6 +1178,12 @@
     },
     "MemoryStrategies": {
       "$ref": "#/definitions/MemoryStrategies"
+    },
+    "IndexedKeys": {
+      "$ref": "#/definitions/IndexedKeysList"
+    },
+    "StreamDeliveryResources": {
+      "$ref": "#/definitions/StreamDeliveryResources"
     },
     "Tags": {
       "$ref": "#/definitions/TagsMap"
@@ -774,7 +1227,12 @@
     "/properties/MemoryStrategies/*/CustomMemoryStrategy/UpdatedAt",
     "/properties/MemoryStrategies/*/CustomMemoryStrategy/StrategyId",
     "/properties/MemoryStrategies/*/CustomMemoryStrategy/Status",
-    "/properties/MemoryStrategies/*/CustomMemoryStrategy/Type"
+    "/properties/MemoryStrategies/*/CustomMemoryStrategy/Type",
+    "/properties/MemoryStrategies/*/EpisodicMemoryStrategy/CreatedAt",
+    "/properties/MemoryStrategies/*/EpisodicMemoryStrategy/UpdatedAt",
+    "/properties/MemoryStrategies/*/EpisodicMemoryStrategy/StrategyId",
+    "/properties/MemoryStrategies/*/EpisodicMemoryStrategy/Status",
+    "/properties/MemoryStrategies/*/EpisodicMemoryStrategy/Type"
   ],
   "createOnlyProperties": [
     "/properties/Name",
@@ -800,7 +1258,10 @@
     "read": {
       "permissions": [
         "bedrock-agentcore:GetMemory",
-        "bedrock-agentcore:ListTagsForResource"
+        "bedrock-agentcore:ListTagsForResource",
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:GenerateDataKey"
       ]
     },
     "update": {
@@ -810,13 +1271,22 @@
         "iam:PassRole",
         "bedrock-agentcore:TagResource",
         "bedrock-agentcore:UntagResource",
-        "bedrock-agentcore:ListTagsForResource"
+        "bedrock-agentcore:ListTagsForResource",
+        "kms:DescribeKey",
+        "kms:Decrypt",
+        "kms:GenerateDataKeyWithoutPlaintext",
+        "kms:ReEncryptTo",
+        "kms:ReEncryptFrom",
+        "kms:GenerateDataKey"
       ]
     },
     "delete": {
       "permissions": [
         "bedrock-agentcore:DeleteMemory",
-        "bedrock-agentcore:GetMemory"
+        "bedrock-agentcore:GetMemory",
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:GenerateDataKey"
       ]
     },
     "list": {
@@ -826,7 +1296,7 @@
     }
   },
   "tagging": {
-    "cloudFormationSystemTags": false,
+    "cloudFormationSystemTags": true,
     "tagOnCreate": true,
     "tagProperty": "/properties/Tags",
     "tagUpdatable": true,

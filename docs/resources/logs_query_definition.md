@@ -78,12 +78,22 @@ EOF
 ### Optional
 
 - `log_group_names` (List of String) Optionally define specific log groups as part of your query definition
+- `parameters` (Attributes List) Use this parameter to include specific query parameters as part of your query definition. Query parameters are supported only for Logs Insights QL queries. Query parameters allow you to use placeholder variables in your query string that are substituted with values at execution time. Use the {{parameterName}} syntax in your query string to reference a parameter. (see [below for nested schema](#nestedatt--parameters))
 - `query_language` (String) Query language of the query string. Possible values are CWLI, SQL, PPL, with CWLI being the default.
 
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
 - `query_definition_id` (String) Unique identifier of a query definition
+
+<a id="nestedatt--parameters"></a>
+### Nested Schema for `parameters`
+
+Optional:
+
+- `default_value` (String) The default value to use for this query parameter if no value is supplied at execution time.
+- `description` (String) A description of the query parameter that explains its purpose or expected values.
+- `name` (String) The name of the query parameter. A query parameter name must start with a letter or underscore, and contain only letters, digits, and underscores.
 
 ## Import
 

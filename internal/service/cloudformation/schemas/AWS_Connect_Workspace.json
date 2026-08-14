@@ -1,0 +1,420 @@
+{
+  "typeName": "AWS::Connect::Workspace",
+  "description": "Resource Type definition for AWS::Connect::Workspace",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "Visibility": {
+      "description": "The visibility of the Connect workspace",
+      "type": "string",
+      "enum": [
+        "ALL",
+        "ASSIGNED",
+        "NONE"
+      ]
+    },
+    "WorkspaceFontFamily": {
+      "type": "string",
+      "enum": [
+        "ARIAL",
+        "COURIER_NEW",
+        "GEORGIA",
+        "TIMES_NEW_ROMAN",
+        "TREBUCHET",
+        "VERDANA"
+      ]
+    },
+    "ThemeString": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 127,
+      "pattern": ".*\\S.*"
+    },
+    "ThemeImageLink": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 254,
+      "pattern": ".*\\S.*"
+    },
+    "PaletteHeader": {
+      "type": "object",
+      "properties": {
+        "Background": {
+          "$ref": "#/definitions/ThemeString"
+        },
+        "Text": {
+          "$ref": "#/definitions/ThemeString"
+        },
+        "TextHover": {
+          "$ref": "#/definitions/ThemeString"
+        },
+        "InvertActionsColors": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PaletteNavigation": {
+      "type": "object",
+      "properties": {
+        "Background": {
+          "$ref": "#/definitions/ThemeString"
+        },
+        "TextBackgroundHover": {
+          "$ref": "#/definitions/ThemeString"
+        },
+        "TextBackgroundActive": {
+          "$ref": "#/definitions/ThemeString"
+        },
+        "Text": {
+          "$ref": "#/definitions/ThemeString"
+        },
+        "TextHover": {
+          "$ref": "#/definitions/ThemeString"
+        },
+        "TextActive": {
+          "$ref": "#/definitions/ThemeString"
+        },
+        "InvertActionsColors": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PaletteCanvas": {
+      "type": "object",
+      "properties": {
+        "ContainerBackground": {
+          "$ref": "#/definitions/ThemeString"
+        },
+        "PageBackground": {
+          "$ref": "#/definitions/ThemeString"
+        },
+        "ActiveBackground": {
+          "$ref": "#/definitions/ThemeString"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PalettePrimary": {
+      "type": "object",
+      "properties": {
+        "Default": {
+          "$ref": "#/definitions/ThemeString"
+        },
+        "Active": {
+          "$ref": "#/definitions/ThemeString"
+        },
+        "ContrastText": {
+          "$ref": "#/definitions/ThemeString"
+        }
+      },
+      "additionalProperties": false
+    },
+    "WorkspaceThemePalette": {
+      "type": "object",
+      "properties": {
+        "Header": {
+          "$ref": "#/definitions/PaletteHeader"
+        },
+        "Navigation": {
+          "$ref": "#/definitions/PaletteNavigation"
+        },
+        "Canvas": {
+          "$ref": "#/definitions/PaletteCanvas"
+        },
+        "Primary": {
+          "$ref": "#/definitions/PalettePrimary"
+        }
+      },
+      "additionalProperties": false
+    },
+    "FontFamily": {
+      "type": "object",
+      "properties": {
+        "Default": {
+          "$ref": "#/definitions/WorkspaceFontFamily"
+        }
+      },
+      "additionalProperties": false
+    },
+    "WorkspaceThemeTypography": {
+      "type": "object",
+      "properties": {
+        "FontFamily": {
+          "$ref": "#/definitions/FontFamily"
+        }
+      },
+      "additionalProperties": false
+    },
+    "WorkspaceThemeConfig": {
+      "type": "object",
+      "properties": {
+        "Palette": {
+          "$ref": "#/definitions/WorkspaceThemePalette"
+        },
+        "Typography": {
+          "$ref": "#/definitions/WorkspaceThemeTypography"
+        }
+      },
+      "additionalProperties": false
+    },
+    "WorkspaceTheme": {
+      "type": "object",
+      "description": "The theme configuration for the Connect workspace",
+      "properties": {
+        "Light": {
+          "$ref": "#/definitions/WorkspaceThemeConfig"
+        },
+        "Dark": {
+          "$ref": "#/definitions/WorkspaceThemeConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "MediaType": {
+      "description": "The type of media",
+      "type": "string",
+      "enum": [
+        "IMAGE_LOGO_LIGHT_FAVICON",
+        "IMAGE_LOGO_DARK_FAVICON",
+        "IMAGE_LOGO_LIGHT_HORIZONTAL",
+        "IMAGE_LOGO_DARK_HORIZONTAL"
+      ]
+    },
+    "MediaItem": {
+      "type": "object",
+      "properties": {
+        "Type": {
+          "$ref": "#/definitions/MediaType"
+        },
+        "Source": {
+          "type": "string",
+          "pattern": ".*\\S.*",
+          "minLength": 1,
+          "maxLength": 533333
+        }
+      },
+      "required": [
+        "Type"
+      ],
+      "additionalProperties": false
+    },
+    "WorkspacePage": {
+      "type": "object",
+      "properties": {
+        "ResourceArn": {
+          "description": "The Amazon Resource Name (ARN) of the resource associated with the page.",
+          "type": "string",
+          "maxLength": 2048
+        },
+        "Page": {
+          "description": "The page identifier.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 25,
+          "pattern": ""
+        },
+        "Slug": {
+          "description": "The slug for the page.",
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 63,
+          "pattern": "^$|^[\\p{L}\\p{Z}\\p{N}\\-_.:=@'|]{3,}$"
+        },
+        "InputData": {
+          "description": "The input data for the page.",
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        }
+      },
+      "required": [
+        "ResourceArn",
+        "Page"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "description": "The Amazon Resource Name (ARN) for the workspace.",
+      "type": "string",
+      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/workspace/[-a-zA-Z0-9]*$"
+    },
+    "Name": {
+      "description": "The name of the workspace.",
+      "type": "string",
+      "pattern": ".*\\S.*",
+      "minLength": 1,
+      "maxLength": 127
+    },
+    "Id": {
+      "description": "The identifier of the workspace.",
+      "type": "string",
+      "pattern": "^.{0,256}$"
+    },
+    "InstanceArn": {
+      "description": "The identifier of the Amazon Connect instance.",
+      "type": "string",
+      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$"
+    },
+    "Visibility": {
+      "description": "The visibility of the workspace. Will always be set to ASSIGNED oninitial creation.",
+      "$ref": "#/definitions/Visibility"
+    },
+    "Description": {
+      "description": "The description of the workspace",
+      "type": "string",
+      "pattern": "^[\\P{C}\r\n\t]*$",
+      "minLength": 0,
+      "maxLength": 500
+    },
+    "Title": {
+      "description": "The title of the workspace",
+      "type": "string",
+      "pattern": "^[\\P{C}]*$",
+      "minLength": 0,
+      "maxLength": 127
+    },
+    "Theme": {
+      "description": "The theme configuration for the workspace",
+      "$ref": "#/definitions/WorkspaceTheme"
+    },
+    "Media": {
+      "description": "The media items for the workspace",
+      "type": "array",
+      "maxItems": 4,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/MediaItem"
+      }
+    },
+    "Pages": {
+      "description": "The pages associated with the workspace",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/WorkspacePage"
+      }
+    },
+    "Associations": {
+      "description": "The resource ARNs associated with the workspace",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "maxLength": 2048
+      }
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to this resource.",
+      "type": "array",
+      "maxItems": 50,
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "Name",
+    "InstanceArn"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/Id"
+  ],
+  "writeOnlyProperties": [
+    "/properties/Media/*/Source"
+  ],
+  "createOnlyProperties": [
+    "/properties/InstanceArn"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "connect:TagResource",
+      "connect:UntagResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "connect:CreateWorkspace",
+        "connect:UpdateWorkspaceVisibility",
+        "connect:ImportWorkspaceMedia",
+        "connect:CreateWorkspacePage",
+        "connect:AssociateWorkspace",
+        "connect:TagResource",
+        "connect:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "connect:DescribeWorkspace",
+        "connect:ListTagsForResource",
+        "connect:ListWorkspaceMedia",
+        "connect:ListWorkspacePages",
+        "connect:SearchWorkspaceAssociations"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "connect:UpdateWorkspaceTheme",
+        "connect:UpdateWorkspaceVisibility",
+        "connect:UpdateWorkspaceMetadata",
+        "connect:ImportWorkspaceMedia",
+        "connect:DeleteWorkspaceMedia",
+        "connect:CreateWorkspacePage",
+        "connect:UpdateWorkspacePage",
+        "connect:DeleteWorkspacePage",
+        "connect:AssociateWorkspace",
+        "connect:DisassociateWorkspace",
+        "connect:TagResource",
+        "connect:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "connect:DeleteWorkspace"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "connect:ListWorkspaces"
+      ]
+    }
+  }
+}

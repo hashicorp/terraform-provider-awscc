@@ -27,6 +27,7 @@ Resource schema for AWS::MediaConnect::FlowEntitlement
 - `data_transfer_subscriber_fee_percent` (Number) Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
 - `encryption` (Attributes) The type of encryption that will be used on the output that is associated with this entitlement. (see [below for nested schema](#nestedatt--encryption))
 - `entitlement_status` (String) An indication of whether the entitlement is enabled.
+- `tags` (Attributes Set) Key-value pairs that can be used to tag and organize this flow entitlement. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -47,6 +48,15 @@ Optional:
 - `role_arn` (String) The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).
 - `secret_arn` (String) The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.
 - `url` (String) The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
 
 ## Import
 

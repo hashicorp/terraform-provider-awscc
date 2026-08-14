@@ -3,12 +3,12 @@
 page_title: "awscc_lex_bot_alias Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  A Bot Alias enables you to change the version of a bot without updating applications that use the bot
+  Resource Type definition for a Bot Alias, which enables you to change the version of a bot without updating applications that use the bot
 ---
 
 # awscc_lex_bot_alias (Resource)
 
-A Bot Alias enables you to change the version of a bot without updating applications that use the bot
+Resource Type definition for a Bot Alias, which enables you to change the version of a bot without updating applications that use the bot
 
 ## Example Usage
 
@@ -89,7 +89,7 @@ resource "awscc_lex_bot_alias" "example" {
 
 ### Read-Only
 
-- `arn` (String)
+- `arn` (String) The Amazon Resource Name (ARN) of the bot alias.
 - `bot_alias_id` (String) Unique ID of resource
 - `bot_alias_status` (String)
 - `id` (String) Uniquely identifies the resource.

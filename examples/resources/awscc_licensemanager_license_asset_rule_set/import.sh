@@ -1,0 +1,1 @@
+$ terraform import awscc_licensemanager_license_asset_rule_set.example "license_asset_ruleset_arn"

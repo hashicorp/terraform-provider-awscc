@@ -3,12 +3,12 @@
 page_title: "awscc_imagebuilder_distribution_configuration Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource schema for AWS::ImageBuilder::DistributionConfiguration
+  Resource Type definition for AWS::ImageBuilder::DistributionConfiguration
 ---
 
 # awscc_imagebuilder_distribution_configuration (Resource)
 
-Resource schema for AWS::ImageBuilder::DistributionConfiguration
+Resource Type definition for AWS::ImageBuilder::DistributionConfiguration
 
 ## Example Usage
 

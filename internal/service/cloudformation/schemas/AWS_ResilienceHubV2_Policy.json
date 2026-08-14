@@ -1,0 +1,256 @@
+{
+  "typeName": "AWS::ResilienceHubV2::Policy",
+  "description": "Creates a resilience policy that defines availability and disaster recovery requirements.",
+  "additionalProperties": false,
+  "properties": {
+    "PolicyArn": {
+      "type": "string",
+      "description": "The ARN of the policy.",
+      "pattern": ""
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the policy.",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$"
+    },
+    "Description": {
+      "type": "string",
+      "description": "The description of the policy.",
+      "maxLength": 615
+    },
+    "AvailabilitySlo": {
+      "$ref": "#/definitions/AvailabilitySlo"
+    },
+    "MultiAz": {
+      "$ref": "#/definitions/MultiAzTargets"
+    },
+    "MultiRegion": {
+      "$ref": "#/definitions/MultiRegionTargets"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Tags assigned to the policy.",
+      "maxItems": 50,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "insertionOrder": false
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The timestamp when the policy was created.",
+      "format": "date-time"
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "The timestamp when the policy was last updated.",
+      "format": "date-time"
+    },
+    "AssociatedServiceCount": {
+      "type": "integer",
+      "description": "The number of services associated with this policy."
+    },
+    "DataRecovery": {
+      "$ref": "#/definitions/DataRecoveryTargets"
+    },
+    "KmsKeyId": {
+      "type": "string",
+      "description": "The KMS key ID for encrypting policy data.",
+      "minLength": 1,
+      "maxLength": 2048,
+      "pattern": "^((arn:aws(-[^:]+)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:((key/[a-zA-Z0-9-]{36})|(alias/[a-zA-Z0-9-_/]+)))|([a-zA-Z0-9-]{36})|(alias/[a-zA-Z0-9-_/]+))$"
+    }
+  },
+  "definitions": {
+    "AvailabilitySlo": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Target": {
+          "type": "number",
+          "description": "Availability target percentage.",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
+    "MultiAzTargets": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "RtoInMinutes": {
+          "type": "integer",
+          "description": "Recovery Time Objective in minutes.",
+          "minimum": 0,
+          "maximum": 2147483647
+        },
+        "RpoInMinutes": {
+          "type": "integer",
+          "description": "Recovery Point Objective in minutes.",
+          "minimum": 0,
+          "maximum": 2147483647
+        },
+        "DisasterRecoveryApproach": {
+          "type": "string",
+          "description": "Multi-AZ disaster recovery approach.",
+          "enum": [
+            "ACTIVE_ACTIVE",
+            "HOT_STANDBY",
+            "WARM_STANDBY",
+            "PILOT_LIGHT",
+            "BACKUP_AND_RESTORE"
+          ]
+        }
+      }
+    },
+    "MultiRegionTargets": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "RtoInMinutes": {
+          "type": "integer",
+          "description": "Recovery Time Objective in minutes.",
+          "minimum": 0,
+          "maximum": 2147483647
+        },
+        "RpoInMinutes": {
+          "type": "integer",
+          "description": "Recovery Point Objective in minutes.",
+          "minimum": 0,
+          "maximum": 2147483647
+        },
+        "DisasterRecoveryApproach": {
+          "type": "string",
+          "description": "Multi-Region disaster recovery approach.",
+          "enum": [
+            "ACTIVE_ACTIVE",
+            "HOT_STANDBY",
+            "WARM_STANDBY",
+            "PILOT_LIGHT",
+            "BACKUP_AND_RESTORE"
+          ]
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The tag key.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The tag value.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    },
+    "DataRecoveryTargets": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "TimeBetweenBackupsInMinutes": {
+          "type": "integer",
+          "description": "Time between backups in minutes.",
+          "minimum": 0
+        }
+      }
+    }
+  },
+  "required": [
+    "Name"
+  ],
+  "primaryIdentifier": [
+    "/properties/PolicyArn"
+  ],
+  "readOnlyProperties": [
+    "/properties/PolicyArn",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt",
+    "/properties/AssociatedServiceCount"
+  ],
+  "createOnlyProperties": [
+    "/properties/Name",
+    "/properties/KmsKeyId"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "resiliencehub:TagResource",
+      "resiliencehub:UntagResource",
+      "resiliencehub:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "resiliencehub:CreatePolicy",
+        "resiliencehub:GetPolicy",
+        "resiliencehub:TagResource",
+        "resiliencehub:ListTagsForResource",
+        "kms:DescribeKey",
+        "kms:GenerateDataKey",
+        "kms:Decrypt",
+        "kms:Encrypt",
+        "kms:CreateGrant",
+        "kms:RetireGrant"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "resiliencehub:GetPolicy",
+        "resiliencehub:ListTagsForResource",
+        "kms:Decrypt",
+        "kms:DescribeKey"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "resiliencehub:UpdatePolicy",
+        "resiliencehub:GetPolicy",
+        "resiliencehub:TagResource",
+        "resiliencehub:UntagResource",
+        "resiliencehub:ListTagsForResource",
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:GenerateDataKey",
+        "kms:Encrypt",
+        "kms:CreateGrant",
+        "kms:RetireGrant"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "resiliencehub:DeletePolicy",
+        "resiliencehub:GetPolicy",
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:RetireGrant",
+        "kms:GenerateDataKey",
+        "kms:Encrypt",
+        "kms:CreateGrant"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "resiliencehub:ListPolicies"
+      ]
+    }
+  },
+  "writeOnlyProperties": [
+    "/properties/KmsKeyId"
+  ]
+}

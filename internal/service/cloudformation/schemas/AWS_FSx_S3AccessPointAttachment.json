@@ -4,25 +4,30 @@
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
   "properties": {
     "Name": {
-      "description": "The Name of the S3AccessPointAttachment",
+      "description": "The name of the S3 access point attachment; also used for the name of the S3 access point.",
       "type": "string",
       "minLength": 3,
       "maxLength": 50,
       "pattern": ""
     },
     "Type": {
-      "description": "",
+      "description": "The type of Amazon FSx volume that the S3 access point is attached to.",
       "type": "string",
       "enum": [
-        "OPENZFS"
+        "OPENZFS",
+        "ONTAP"
       ]
     },
+    "OntapConfiguration": {
+      "description": "The OntapConfiguration of the S3 access point attachment.",
+      "$ref": "#/definitions/S3AccessPointOntapConfiguration"
+    },
     "OpenZFSConfiguration": {
-      "description": "",
+      "description": "The OpenZFSConfiguration of the S3 access point attachment.",
       "$ref": "#/definitions/S3AccessPointOpenZFSConfiguration"
     },
     "S3AccessPoint": {
-      "description": "",
+      "description": "The S3 access point configuration of the S3 access point attachment.",
       "$ref": "#/definitions/S3AccessPoint"
     }
   },
@@ -32,7 +37,7 @@
       "additionalProperties": false,
       "properties": {
         "VpcId": {
-          "description": "",
+          "description": "Specifies the virtual private cloud (VPC) for the S3 access point VPC configuration, if one exists.",
           "type": "string",
           "minLength": 12,
           "maxLength": 21,
@@ -48,25 +53,25 @@
       "additionalProperties": false,
       "properties": {
         "ResourceARN": {
-          "description": "",
+          "description": "The S3 access point's ARN.",
           "type": "string",
           "minLength": 8,
           "maxLength": 1024,
           "pattern": ""
         },
         "Alias": {
-          "description": "",
+          "description": "The S3 access point's alias.",
           "type": "string",
           "minLength": 1,
           "maxLength": 63,
           "pattern": "^[0-9a-z\\\\-]{1,63}"
         },
         "VpcConfiguration": {
-          "description": "",
+          "description": "The S3 access point's virtual private cloud (VPC) configuration.",
           "$ref": "#/definitions/S3AccessPointVpcConfiguration"
         },
         "Policy": {
-          "description": "",
+          "description": "The S3 access point's policy.",
           "type": [
             "object",
             "string"
@@ -76,19 +81,94 @@
         }
       }
     },
-    "FileSystemGID": {
+    "OntapUnixFileSystemUser": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "Gid": {
-          "description": "",
-          "type": "number",
-          "minimum": 0,
-          "maximum": 4294967295
+        "Name": {
+          "description": "The name of the UNIX user.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": ""
         }
       },
       "required": [
-        "Gid"
+        "Name"
+      ]
+    },
+    "OntapWindowsFileSystemUser": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Name": {
+          "description": "The name of the Windows user.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": ""
+        }
+      },
+      "required": [
+        "Name"
+      ]
+    },
+    "OntapFileSystemIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Type": {
+          "description": "Specifies the FSx for ONTAP user identity type, accepts either UNIX or WINDOWS.",
+          "type": "string",
+          "enum": [
+            "UNIX",
+            "WINDOWS"
+          ]
+        },
+        "UnixUser": {
+          "description": "Specifies the properties of the file system UNIX user.",
+          "$ref": "#/definitions/OntapUnixFileSystemUser"
+        },
+        "WindowsUser": {
+          "description": "Specifies the properties of the file system Windows user.",
+          "$ref": "#/definitions/OntapWindowsFileSystemUser"
+        }
+      },
+      "required": [
+        "Type"
+      ],
+      "oneOf": [
+        {
+          "required": [
+            "UnixUser"
+          ]
+        },
+        {
+          "required": [
+            "WindowsUser"
+          ]
+        }
+      ]
+    },
+    "S3AccessPointOntapConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "VolumeId": {
+          "description": "The ID of the FSx for ONTAP volume that the S3 access point is attached to.",
+          "type": "string",
+          "minLength": 23,
+          "maxLength": 23,
+          "pattern": "^(fsvol-[0-9a-f]{17,})$"
+        },
+        "FileSystemIdentity": {
+          "description": "The file system identity used to authorize file access requests made using the S3 access point.",
+          "$ref": "#/definitions/OntapFileSystemIdentity"
+        }
+      },
+      "required": [
+        "VolumeId",
+        "FileSystemIdentity"
       ]
     },
     "OpenZFSPosixFileSystemUser": {
@@ -96,19 +176,19 @@
       "additionalProperties": false,
       "properties": {
         "Uid": {
-          "description": "",
+          "description": "The UID of the file system user.",
           "type": "number",
           "minimum": 0,
           "maximum": 4294967295
         },
         "Gid": {
-          "description": "",
+          "description": "The GID of the file system user.",
           "type": "number",
           "minimum": 0,
           "maximum": 4294967295
         },
         "SecondaryGids": {
-          "description": "",
+          "description": "The list of secondary GIDs for the file system user.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/FileSystemGID"
@@ -125,14 +205,14 @@
       "additionalProperties": false,
       "properties": {
         "Type": {
-          "description": "",
+          "description": "Specifies the FSx for OpenZFS user identity type, accepts only POSIX.",
           "type": "string",
           "enum": [
             "POSIX"
           ]
         },
         "PosixUser": {
-          "description": "",
+          "description": "Specifies the UID and GIDs of the file system POSIX user.",
           "$ref": "#/definitions/OpenZFSPosixFileSystemUser"
         }
       },
@@ -146,14 +226,14 @@
       "additionalProperties": false,
       "properties": {
         "VolumeId": {
-          "description": "",
+          "description": "The ID of the FSx for OpenZFS volume that the S3 access point is attached to.",
           "type": "string",
           "minLength": 23,
           "maxLength": 23,
           "pattern": "^(fsvol-[0-9a-f]{17,})$"
         },
         "FileSystemIdentity": {
-          "description": "",
+          "description": "The file system identity used to authorize file access requests made using the S3 access point.",
           "$ref": "#/definitions/OpenZFSFileSystemIdentity"
         }
       },
@@ -161,18 +241,45 @@
         "VolumeId",
         "FileSystemIdentity"
       ]
+    },
+    "FileSystemGID": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Gid": {
+          "description": "The GID of the file system user.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 4294967295
+        }
+      },
+      "required": [
+        "Gid"
+      ]
     }
   },
   "additionalProperties": false,
   "replacementStrategy": "delete_then_create",
   "required": [
     "Name",
-    "Type",
-    "OpenZFSConfiguration"
+    "Type"
+  ],
+  "oneOf": [
+    {
+      "required": [
+        "OntapConfiguration"
+      ]
+    },
+    {
+      "required": [
+        "OpenZFSConfiguration"
+      ]
+    }
   ],
   "createOnlyProperties": [
     "/properties/Name",
     "/properties/Type",
+    "/properties/OntapConfiguration",
     "/properties/OpenZFSConfiguration",
     "/properties/S3AccessPoint"
   ],

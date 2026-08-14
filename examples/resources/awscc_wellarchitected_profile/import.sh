@@ -1,0 +1,1 @@
+$ terraform import awscc_wellarchitected_profile.example "profile_arn"

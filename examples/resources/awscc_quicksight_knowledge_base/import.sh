@@ -1,0 +1,1 @@
+$ terraform import awscc_quicksight_knowledge_base.example "aws_account_id|knowledge_base_id"

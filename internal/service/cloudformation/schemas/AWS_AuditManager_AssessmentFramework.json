@@ -1,0 +1,222 @@
+{
+  "typeName": "AWS::AuditManager::AssessmentFramework",
+  "description": "Creates a custom framework in AWS Audit Manager.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-auditmanager",
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": ""
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "ControlSetControl": {
+      "description": "A reference to an existing control by ID.",
+      "type": "object",
+      "properties": {
+        "Id": {
+          "description": "The unique identifier of the control.",
+          "type": "string",
+          "minLength": 36,
+          "maxLength": 36,
+          "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+        }
+      },
+      "required": [
+        "Id"
+      ],
+      "additionalProperties": false
+    },
+    "ControlSet": {
+      "description": "A control set entity that represents a collection of controls in Audit Manager.",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "description": "The name of the control set.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300,
+          "pattern": "^[^\\\\_]*$"
+        },
+        "Controls": {
+          "description": "The list of controls within the control set.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ControlSetControl"
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "Name",
+        "Controls"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "description": "The Amazon Resource Name (ARN) of the framework.",
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 2048,
+      "pattern": "^arn:.*:auditmanager:"
+    },
+    "FrameworkId": {
+      "description": "The unique identifier for the framework.",
+      "type": "string",
+      "minLength": 36,
+      "maxLength": 36,
+      "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+    },
+    "Name": {
+      "description": "The name of the framework.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300,
+      "pattern": "^[^\\\\]*$"
+    },
+    "Description": {
+      "description": "The description of the framework.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000,
+      "pattern": "^[\\w\\W\\s\\S]*$"
+    },
+    "ComplianceType": {
+      "description": "The compliance type that the framework supports, such as CIS or HIPAA.",
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 100,
+      "pattern": "^[\\w\\W\\s\\S]*$"
+    },
+    "Type": {
+      "description": "The framework type, such as a standard framework or a custom framework.",
+      "type": "string",
+      "enum": [
+        "Standard",
+        "Custom"
+      ]
+    },
+    "ControlSets": {
+      "description": "The control sets that are associated with the framework.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ControlSet"
+      },
+      "minItems": 1
+    },
+    "CreatedAt": {
+      "description": "The time when the framework was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "LastUpdatedAt": {
+      "description": "The time when the framework was most recently updated.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "CreatedBy": {
+      "description": "The user or role that created the framework.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "pattern": "^[a-zA-Z0-9\\s-_()\\[\\]]+$"
+    },
+    "LastUpdatedBy": {
+      "description": "The user or role that most recently updated the framework.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "pattern": "^[a-zA-Z0-9\\s-_()\\[\\]]+$"
+    },
+    "Tags": {
+      "description": "The tags associated with the framework.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "Name",
+    "ControlSets"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/FrameworkId",
+    "/properties/Type",
+    "/properties/CreatedAt",
+    "/properties/LastUpdatedAt",
+    "/properties/CreatedBy",
+    "/properties/LastUpdatedBy"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/FrameworkId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "auditmanager:TagResource",
+      "auditmanager:UntagResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "auditmanager:CreateAssessmentFramework",
+        "auditmanager:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "auditmanager:GetAssessmentFramework"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "auditmanager:UpdateAssessmentFramework",
+        "auditmanager:TagResource",
+        "auditmanager:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "auditmanager:DeleteAssessmentFramework"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "auditmanager:ListAssessmentFrameworks"
+      ]
+    }
+  }
+}

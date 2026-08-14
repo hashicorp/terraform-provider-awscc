@@ -1,0 +1,1 @@
+$ terraform import awscc_elasticache_cache_cluster.example "cluster_name"

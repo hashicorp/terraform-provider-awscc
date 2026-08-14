@@ -26,4 +26,7 @@ Data Source schema for AWS::DataZone::GroupProfile
 - `group_identifier` (String) The ID of the group.
 - `group_name` (String) The group-name of the Group Profile.
 - `group_profile_id` (String) The ID of the Amazon DataZone group profile.
+- `group_type` (String) The type of the group.
+- `role_principal_arn` (String) The ARN of the role principal for the group profile.
+- `role_principal_id` (String) The ID of the role principal for the group profile.
 - `status` (String) The status of the group profile.

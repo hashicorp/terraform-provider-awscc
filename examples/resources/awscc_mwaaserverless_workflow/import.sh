@@ -1,0 +1,1 @@
+$ terraform import awscc_mwaaserverless_workflow.example "workflow_arn"

@@ -1,4 +1,4 @@
-// Copyright (c) HashiCorp, Inc.
+// Copyright IBM Corp. 2021, 2026
 // SPDX-License-Identifier: MPL-2.0
 
 package generic
@@ -8,6 +8,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"math/big"
+	"sort"
+	"strconv"
 
 	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
@@ -21,7 +23,7 @@ type toCloudControl struct {
 }
 
 // AsRaw returns the raw map[string]interface{} representing Cloud Control DesiredState from a Terraform Value.
-func (t toCloudControl) AsRaw(ctx context.Context, schema typeAtTerraformPather, val tftypes.Value) (map[string]interface{}, error) {
+func (t toCloudControl) AsRaw(ctx context.Context, schema typeAtTerraformPather, val tftypes.Value) (map[string]any, error) {
 	v, err := t.rawFromValue(ctx, schema, nil, val)
 
 	if err != nil {
@@ -29,10 +31,10 @@ func (t toCloudControl) AsRaw(ctx context.Context, schema typeAtTerraformPather,
 	}
 
 	if v == nil {
-		return make(map[string]interface{}), nil
+		return make(map[string]any), nil
 	}
 
-	if v, ok := v.(map[string]interface{}); ok {
+	if v, ok := v.(map[string]any); ok {
 		return v, nil
 	}
 
@@ -58,7 +60,7 @@ func (t toCloudControl) AsString(ctx context.Context, schema typeAtTerraformPath
 
 // rawFromValue returns the raw value (suitable for JSON marshaling) of the specified Terraform value.
 // Terraform attribute names are mapped to Cloud Control property names.
-func (t toCloudControl) rawFromValue(ctx context.Context, schema typeAtTerraformPather, path *tftypes.AttributePath, val tftypes.Value) (interface{}, error) {
+func (t toCloudControl) rawFromValue(ctx context.Context, schema typeAtTerraformPather, path *tftypes.AttributePath, val tftypes.Value) (any, error) {
 	if val.IsNull() || !val.IsKnown() {
 		return nil, nil
 	}
@@ -95,7 +97,7 @@ func (t toCloudControl) rawFromValue(ctx context.Context, schema typeAtTerraform
 			return nil, err
 		}
 		if t := new(jsontypes.NormalizedType); t.Equal(attributeType) {
-			var v interface{}
+			var v any
 			diags := jsontypes.NewNormalizedValue(s).Unmarshal(&v)
 			if diags.HasError() {
 				return nil, ccdiag.DiagnosticsError(diags)
@@ -112,7 +114,7 @@ func (t toCloudControl) rawFromValue(ctx context.Context, schema typeAtTerraform
 		if err := val.As(&vals); err != nil {
 			return nil, err
 		}
-		vs := make([]interface{}, 0)
+		vs := make([]any, 0)
 		for idx, val := range vals {
 			if typ.Is(tftypes.Set{}) {
 				// No need to worry about a specific value here.
@@ -140,7 +142,7 @@ func (t toCloudControl) rawFromValue(ctx context.Context, schema typeAtTerraform
 		if err := val.As(&vals); err != nil {
 			return nil, err
 		}
-		vs := make(map[string]interface{})
+		vs := make(map[string]any)
 		for name, val := range vals {
 			if typ.Is(tftypes.Object{}) {
 				path = path.WithAttributeName(name)
@@ -180,26 +182,263 @@ type toTerraform struct {
 }
 
 // FromRaw returns the Terraform Value for the specified Cloud Control Properties (raw map[string]interface{}).
-func (t toTerraform) FromRaw(ctx context.Context, schema typeAtTerraformPather, resourceModel map[string]interface{}) (tftypes.Value, error) {
+func (t toTerraform) FromRaw(ctx context.Context, schema typeAtTerraformPather, resourceModel map[string]any) (tftypes.Value, error) {
 	return t.valueFromRaw(ctx, schema, nil, resourceModel)
 }
 
 // FromString returns the Terraform Value for the specified Cloud Control Properties (string).
-func (t toTerraform) FromString(ctx context.Context, schema typeAtTerraformPather, resourceModel string) (tftypes.Value, error) {
-	var v interface{}
+// If priorStateMap is non-nil (e.g. from a previous Read), key-value list attributes
+// (Tags, TargetGroupAttributes, LoadBalancerAttributes, etc.) in the resource model
+// are reordered to match prior state so plan shows no diff regardless of user config order.
+func (t toTerraform) FromString(ctx context.Context, schema typeAtTerraformPather, resourceModel string, priorStateMap map[string]any) (tftypes.Value, error) {
+	var v any
 
 	if err := json.Unmarshal([]byte(resourceModel), &v); err != nil {
 		return tftypes.Value{}, err
 	}
 
-	if v, ok := v.(map[string]interface{}); ok {
-		return t.FromRaw(ctx, schema, v)
+	if m, ok := v.(map[string]any); ok {
+		if priorStateMap != nil {
+			reorderKeyValueSlicesToMatchPrior(m, priorStateMap)
+		} else {
+			normalizeKeyValueSlices(m)
+		}
+		return t.FromRaw(ctx, schema, m)
 	}
 
 	return tftypes.Value{}, fmt.Errorf("unexpected raw type: %T", v)
 }
 
-func (t toTerraform) valueFromRaw(ctx context.Context, schema typeAtTerraformPather, path *tftypes.AttributePath, v interface{}) (tftypes.Value, error) {
+// reorderKeyValueSlicesToMatchPrior reorders list values in m to match prior (key-value
+// lists by key, primitive lists by value). Recurses into nested objects (e.g. VpcConfig).
+// Preserves the user's order from the last apply so plan shows no diff.
+func reorderKeyValueSlicesToMatchPrior(m, prior map[string]any) {
+	for key, val := range m {
+		switch v := val.(type) {
+		case map[string]any:
+			priorMap, _ := prior[key].(map[string]any)
+			if priorMap != nil {
+				reorderKeyValueSlicesToMatchPrior(v, priorMap)
+			}
+		case []any:
+			if len(v) == 0 {
+				continue
+			}
+			priorSlice, _ := prior[key].([]any)
+			reordered := reorderKeyValueSliceToMatch(v, priorSlice)
+			if reordered != nil {
+				m[key] = reordered
+				for i, el := range reordered {
+					if elMap, ok := el.(map[string]any); ok {
+						var priorElMap map[string]any
+						if i < len(priorSlice) {
+							priorElMap, _ = priorSlice[i].(map[string]any)
+						}
+						reorderKeyValueSlicesToMatchPrior(elMap, priorElMap)
+					}
+				}
+			} else if reorderedPrim := reorderPrimitiveSliceToMatch(v, priorSlice); reorderedPrim != nil {
+				m[key] = reorderedPrim
+			} else {
+				sortSliceByKey(v)
+				for _, el := range v {
+					if elMap, ok := el.(map[string]any); ok {
+						reorderKeyValueSlicesToMatchPrior(elMap, nil)
+					}
+				}
+			}
+		}
+	}
+}
+
+// reorderPrimitiveSliceToMatch reorders current to match the element order in prior.
+// Elements in current that are not in prior are appended at the end (sorted).
+// Returns the reordered slice, or nil if current is not a primitive slice (all string or all number).
+func reorderPrimitiveSliceToMatch(current, prior []any) []any {
+	if len(current) == 0 {
+		return current
+	}
+	// Check all elements are primitive (string or float64)
+	prim := primitiveKind(current[0])
+	if prim == primKindOther {
+		return nil
+	}
+	for i := 1; i < len(current); i++ {
+		if primitiveKind(current[i]) != prim {
+			return nil
+		}
+	}
+	// Build set of current elements for lookup, using seen map to track both
+	currentSet := make(map[string]any, len(current))
+	for _, el := range current {
+		k := primitiveKey(el)
+		currentSet[k] = el
+	}
+	// Build result: prior order first, then current-only (sorted)
+	result := make([]any, 0, len(current))
+	if len(prior) > 0 {
+		for _, el := range prior {
+			k := primitiveKey(el)
+			if cur, exists := currentSet[k]; exists {
+				result = append(result, cur)
+				delete(currentSet, k) // reuse map to track unseen
+			}
+		}
+	}
+	// Remaining items in currentSet are extras
+	if len(currentSet) > 0 {
+		extra := make([]string, 0, len(currentSet))
+		for k := range currentSet {
+			extra = append(extra, k)
+		}
+		sort.Strings(extra)
+		for _, k := range extra {
+			result = append(result, currentSet[k])
+		}
+	}
+	return result
+}
+
+// primitiveKey returns the string key for a primitive value.
+func primitiveKey(a any) string {
+	switch x := a.(type) {
+	case string:
+		return x
+	case float64:
+		return strconv.FormatFloat(x, 'g', -1, 64)
+	default:
+		return fmt.Sprint(a)
+	}
+}
+
+// primitive kind constants for primitiveKind return value.
+const (
+	primKindOther = iota
+	primKindString
+	primKindFloat64
+)
+
+// primitiveKind returns primKindString for string, primKindFloat64 for float64, primKindOther for other.
+func primitiveKind(a any) int {
+	switch a.(type) {
+	case string:
+		return primKindString
+	case float64:
+		return primKindFloat64
+	default:
+		return primKindOther
+	}
+}
+
+// reorderKeyValueSliceToMatch reorders current to match the key order in prior.
+// Keys in current that are not in prior are appended at the end in sorted order.
+// Returns the reordered slice, or nil if current is not a key-value slice.
+func reorderKeyValueSliceToMatch(current, prior []any) []any {
+	if len(current) == 0 {
+		return current
+	}
+	// Build current by key
+	byKey := make(map[string]map[string]any, len(current))
+	for _, el := range current {
+		m, ok := el.(map[string]any)
+		if !ok || (m["Key"] == nil && m["key"] == nil) {
+			return nil
+		}
+		k := keyFromMap(m)
+		byKey[k] = m
+	}
+	// Build result: first in prior order, then any keys only in current (sorted)
+	result := make([]any, 0, len(current))
+	if len(prior) > 0 {
+		for _, el := range prior {
+			p, ok := el.(map[string]any)
+			if !ok {
+				continue
+			}
+			k := keyFromMap(p)
+			if k == "" {
+				continue
+			}
+			if cur, exists := byKey[k]; exists {
+				result = append(result, cur)
+				delete(byKey, k) // reuse map to track unseen
+			}
+		}
+	}
+	// Remaining items in byKey are extras
+	if len(byKey) > 0 {
+		extra := make([]string, 0, len(byKey))
+		for k := range byKey {
+			extra = append(extra, k)
+		}
+		sort.Strings(extra)
+		for _, k := range extra {
+			result = append(result, byKey[k])
+		}
+	}
+	return result
+}
+
+// normalizeKeyValueSlices recursively walks the resource model and sorts any
+// list of objects that have a "Key" field (Cloud Control API PascalCase) by
+// that key. Used when there is no prior state (e.g. first Read after import).
+func normalizeKeyValueSlices(v any) {
+	switch x := v.(type) {
+	case map[string]any:
+		for _, val := range x {
+			normalizeKeyValueSlices(val)
+		}
+	case []any:
+		if len(x) == 0 {
+			return
+		}
+		if sortSliceByKey(x) {
+			return
+		}
+		for _, el := range x {
+			normalizeKeyValueSlices(el)
+		}
+	}
+}
+
+// sortSliceByKey sorts slice in place by each element's "Key" or "key" field
+// (Cloud Control API may use PascalCase or lowercase). Returns true if the
+// slice was sorted (all elements were key-value maps), false otherwise.
+func sortSliceByKey(slice []any) bool {
+	for _, el := range slice {
+		m, ok := el.(map[string]any)
+		if !ok {
+			return false
+		}
+		// Must have either "Key" or "key" so we can sort
+		if _, hasKey := m["Key"]; hasKey {
+			continue
+		}
+		if _, hasKey := m["key"]; hasKey {
+			continue
+		}
+		return false
+	}
+	sort.Slice(slice, func(i, j int) bool {
+		mi := slice[i].(map[string]any)
+		mj := slice[j].(map[string]any)
+		return keyFromMap(mi) < keyFromMap(mj)
+	})
+	return true
+}
+
+// keyFromMap returns the sort key from a key-value object (Cloud Control "Key" or "key").
+func keyFromMap(m map[string]any) string {
+	if k, ok := m["Key"].(string); ok {
+		return k
+	}
+	if k, ok := m["key"].(string); ok {
+		return k
+	}
+	return ""
+}
+
+func (t toTerraform) valueFromRaw(ctx context.Context, schema typeAtTerraformPather, path *tftypes.AttributePath, v any) (tftypes.Value, error) {
 	attrType, err := schema.TypeAtTerraformPath(ctx, path)
 
 	if err != nil {
@@ -224,7 +463,7 @@ func (t toTerraform) valueFromRaw(ctx context.Context, schema typeAtTerraformPat
 	//
 	// Complex types.
 	//
-	case []interface{}:
+	case []any:
 		if len(v) == 0 {
 			return tftypes.NewValue(typ, nil), nil
 		}
@@ -256,7 +495,7 @@ func (t toTerraform) valueFromRaw(ctx context.Context, schema typeAtTerraformPat
 		}
 		return tftypes.NewValue(typ, vals), nil
 
-	case map[string]interface{}:
+	case map[string]any:
 		if typ.Is(tftypes.String) {
 			// Value is JSON string.
 			val, err := json.Marshal(v)
@@ -274,7 +513,7 @@ func (t toTerraform) valueFromRaw(ctx context.Context, schema typeAtTerraformPat
 			if isObject {
 				attributeName, ok := t.cfToTfNameMap[key]
 				if !ok {
-					tflog.Info(ctx, "attribute name mapping not found", map[string]interface{}{
+					tflog.Info(ctx, "attribute name mapping not found", map[string]any{
 						"key": key,
 					})
 					continue
@@ -286,7 +525,7 @@ func (t toTerraform) valueFromRaw(ctx context.Context, schema typeAtTerraformPat
 			val, err := t.valueFromRaw(ctx, schema, path, v)
 			if err != nil {
 				if isObject {
-					tflog.Info(ctx, "not found in Terraform schema", map[string]interface{}{
+					tflog.Info(ctx, "not found in Terraform schema", map[string]any{
 						"key":   key,
 						"path":  path,
 						"error": err.Error(),

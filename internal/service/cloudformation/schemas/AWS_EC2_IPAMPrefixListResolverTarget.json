@@ -1,0 +1,137 @@
+{
+  "typeName": "AWS::EC2::IPAMPrefixListResolverTarget",
+  "description": "Resource Type definition for AWS::EC2::IPAMPrefixListResolverTarget",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-ipam.git",
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "IpamPrefixListResolverId": {
+      "description": "The Id of the IPAM Prefix List Resolver associated with this Target.",
+      "type": "string"
+    },
+    "IpamPrefixListResolverTargetId": {
+      "description": "Id of the IPAM Prefix List Resolver Target.",
+      "type": "string"
+    },
+    "IpamPrefixListResolverTargetArn": {
+      "description": "Id of the IPAM Prefix List Resolver Target.",
+      "type": "string"
+    },
+    "PrefixListId": {
+      "description": "The Id of the Managed Prefix List.",
+      "type": "string"
+    },
+    "PrefixListRegion": {
+      "description": "The region that the Managed Prefix List is located in.",
+      "type": "string"
+    },
+    "DesiredVersion": {
+      "description": "The desired version of the Prefix List Resolver that this Target should synchronize with.",
+      "type": "integer",
+      "format": "int64"
+    },
+    "TrackLatestVersion": {
+      "description": "Indicates whether this Target automatically tracks the latest version of the Prefix List Resolver.",
+      "type": "boolean"
+    },
+    "Tags": {
+      "description": "An array of key-value pairs to apply to this resource.",
+      "type": "array",
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "IpamPrefixListResolverId",
+    "PrefixListId",
+    "PrefixListRegion",
+    "TrackLatestVersion"
+  ],
+  "primaryIdentifier": [
+    "/properties/IpamPrefixListResolverTargetId"
+  ],
+  "readOnlyProperties": [
+    "/properties/IpamPrefixListResolverTargetId",
+    "/properties/IpamPrefixListResolverTargetArn"
+  ],
+  "createOnlyProperties": [
+    "/properties/IpamPrefixListResolverId",
+    "/properties/PrefixListId",
+    "/properties/PrefixListRegion"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "ec2:CreateIpamPrefixListResolverTarget",
+        "ec2:DescribeIpamPrefixListResolverTargets",
+        "ec2:DescribeManagedPrefixLists",
+        "ec2:GetManagedPrefixListEntries",
+        "ec2:ModifyManagedPrefixList",
+        "ec2:CreateTags"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "ec2:DescribeIpamPrefixListResolverTargets"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ec2:ModifyIpamPrefixListResolverTarget",
+        "ec2:DescribeIpamPrefixListResolverTargets",
+        "ec2:CreateTags",
+        "ec2:DeleteTags"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "ec2:DeleteIpamPrefixListResolverTarget",
+        "ec2:DescribeIpamPrefixListResolverTargets",
+        "ec2:DeleteTags"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "ec2:DescribeIpamPrefixListResolverTargets"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "ec2:DeleteTags",
+      "ec2:CreateTags"
+    ]
+  }
+}

@@ -20,7 +20,7 @@ An example resource schema demonstrating some basic constructs and validation ru
 - `cluster_type` (String) The type of the cluster. When cluster type is specified as single-node, the NumberOfNodes parameter is not required and if multi-node, the NumberOfNodes parameter is required
 - `db_name` (String) The name of the first database to be created when the cluster is created. To create additional databases after the cluster is created, connect to the cluster with a SQL client and use SQL commands to create a database.
 - `master_username` (String) The user name associated with the master user account for the cluster that is being created. The user name can't be PUBLIC and first character must be a letter.
-- `node_type` (String) The node type to be provisioned for the cluster.Valid Values: ds2.xlarge | ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge | ra3.large | ra3.4xlarge | ra3.16xlarge
+- `node_type` (String) The node type to be provisioned for the cluster.Valid Values: ds2.xlarge | ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge | ra3.large | ra3.4xlarge | ra3.16xlarge | rg.large | rg.xlarge | rg.4xlarge | rg.12xlarge
 
 ### Optional
 
@@ -41,7 +41,7 @@ auto - Amazon Redshift determines whether to use AQUA.
 - `cluster_subnet_group_name` (String) The name of a cluster subnet group to be associated with this cluster.
 - `cluster_version` (String) The version of the Amazon Redshift engine software that you want to deploy on the cluster.The version selected runs on all the nodes in the cluster.
 - `defer_maintenance` (Boolean) A boolean indicating whether to enable the deferred maintenance window.
-- `defer_maintenance_duration` (Number) An integer indicating the duration of the maintenance window in days. If you specify a duration, you can't specify an end time. The duration must be 45 days or less.
+- `defer_maintenance_duration` (Number) An integer indicating the duration of the maintenance window in days. If you specify a duration, you can't specify an end time. The duration must be 60 days or less.
 - `defer_maintenance_end_time` (String) A timestamp indicating end time for the deferred maintenance window. If you specify an end time, you can't specify a duration.
 - `defer_maintenance_start_time` (String) A timestamp indicating the start time for the deferred maintenance window.
 - `destination_region` (String) The destination AWS Region that you want to copy snapshots to. Constraints: Must be the name of a valid AWS Region. For more information, see Regions and Endpoints in the Amazon Web Services [https://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region] General Reference

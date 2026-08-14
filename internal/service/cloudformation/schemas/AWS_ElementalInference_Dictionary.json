@@ -1,0 +1,113 @@
+{
+  "typeName": "AWS::ElementalInference::Dictionary",
+  "description": "Represents a custom dictionary for improving transcription accuracy",
+  "definitions": {
+    "DictionaryLanguage": {
+      "type": "string",
+      "enum": [
+        "eng",
+        "fra",
+        "ita",
+        "deu",
+        "spa",
+        "por"
+      ]
+    },
+    "TagMap": {
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "maxLength": 256
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "type": "string"
+    },
+    "Entries": {
+      "type": "string",
+      "maxLength": 40960
+    },
+    "Id": {
+      "type": "string",
+      "maxLength": 19,
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9]+$"
+    },
+    "Language": {
+      "$ref": "#/definitions/DictionaryLanguage"
+    },
+    "Name": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_]{0,126}[a-zA-Z0-9])?$"
+    },
+    "Tags": {
+      "$ref": "#/definitions/TagMap"
+    }
+  },
+  "required": [
+    "Language",
+    "Name"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/Id"
+  ],
+  "writeOnlyProperties": [
+    "/properties/Entries"
+  ],
+  "primaryIdentifier": [
+    "/properties/Id"
+  ],
+  "tagging": {
+    "cloudFormationSystemTags": true,
+    "permissions": [
+      "elemental-inference:ListTagsForResource",
+      "elemental-inference:TagResource",
+      "elemental-inference:UntagResource"
+    ],
+    "tagOnCreate": true,
+    "tagProperty": "/properties/Tags",
+    "tagUpdatable": true,
+    "taggable": true
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "elemental-inference:CreateDictionary",
+        "elemental-inference:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "elemental-inference:GetDictionary",
+        "elemental-inference:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "elemental-inference:UpdateDictionary",
+        "elemental-inference:GetDictionary",
+        "elemental-inference:TagResource",
+        "elemental-inference:UntagResource",
+        "elemental-inference:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "elemental-inference:DeleteDictionary",
+        "elemental-inference:GetDictionary"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "elemental-inference:ListDictionaries"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

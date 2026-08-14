@@ -21,6 +21,7 @@ Data Source schema for AWS::BedrockAgentCore::CodeInterpreterCustom
 
 ### Read-Only
 
+- `certificates` (Attributes List) List of root CA certificates in PEM format. (see [below for nested schema](#nestedatt--certificates))
 - `code_interpreter_arn` (String) The ARN of a CodeInterpreter resource.
 - `code_interpreter_id` (String) The id of the code interpreter.
 - `created_at` (String) Timestamp when the code interpreter was created.
@@ -32,6 +33,22 @@ Data Source schema for AWS::BedrockAgentCore::CodeInterpreterCustom
 - `network_configuration` (Attributes) Network configuration for code interpreter. (see [below for nested schema](#nestedatt--network_configuration))
 - `status` (String) Status of code interpreter.
 - `tags` (Map of String) A map of tag keys and values
+
+<a id="nestedatt--certificates"></a>
+### Nested Schema for `certificates`
+
+Read-Only:
+
+- `certificate_location` (Attributes) Certificate location in Secrets Manager. (see [below for nested schema](#nestedatt--certificates--certificate_location))
+
+<a id="nestedatt--certificates--certificate_location"></a>
+### Nested Schema for `certificates.certificate_location`
+
+Read-Only:
+
+- `secret_arn` (String) Secrets Manager secret ARN.
+
+
 
 <a id="nestedatt--network_configuration"></a>
 ### Nested Schema for `network_configuration`

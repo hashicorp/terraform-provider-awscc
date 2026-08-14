@@ -1,0 +1,1 @@
+$ terraform import awscc_cases_field.example "field_arn"

@@ -1,0 +1,1 @@
+$ terraform import awscc_resiliencehubv2_user_journey.example "system_identifier|user_journey_id"

@@ -83,6 +83,7 @@ resource "aws_iam_policy" "example" {
 ### Optional
 
 - `name` (String) A descriptive label that is associated with a script. Script names do not need to be unique.
+- `node_js_version` (String) The Node.js version used for execution of the Realtime script.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 - `version` (String) The version that is associated with a script. Version strings do not need to be unique.
 

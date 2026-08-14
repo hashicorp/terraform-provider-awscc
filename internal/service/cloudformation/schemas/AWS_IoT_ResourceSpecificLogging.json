@@ -55,7 +55,9 @@
     "TargetType",
     "LogLevel"
   ],
-  "taggable": false,
+  "tagging": {
+    "taggable": false
+  },
   "primaryIdentifier": [
     "/properties/TargetId"
   ],

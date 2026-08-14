@@ -1,4 +1,896 @@
-## 1.67.0 (Unreleased)
+## 1.98.0 (Unreleased)
+
+## 1.97.0 (August 12, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_accessanalyzer_archive_rule`
+* **New Data Source:** `awscc_apigatewayv2_portal_product`
+* **New Data Source:** `awscc_apigatewayv2_portal_products`
+* **New Data Source:** `awscc_appconfig_experiment_definition`
+* **New Data Source:** `awscc_bedrockagentcore_capacity_provider`
+* **New Data Source:** `awscc_bedrockagentcore_capacity_providers`
+* **New Data Source:** `awscc_bedrockagentcore_gateway_rate_limit`
+* **New Data Source:** `awscc_bedrockagentcore_gateway_rule`
+* **New Data Source:** `awscc_cloudhsm_cluster`
+* **New Data Source:** `awscc_cloudhsm_clusters`
+* **New Data Source:** `awscc_dataexchange_data_set`
+* **New Data Source:** `awscc_dataexchange_data_sets`
+* **New Data Source:** `awscc_elasticache_serverless_cache_snapshot`
+* **New Data Source:** `awscc_elasticache_serverless_cache_snapshots`
+* **New Data Source:** `awscc_glue_classifier`
+* **New Data Source:** `awscc_glue_classifiers`
+* **New Data Source:** `awscc_glue_custom_entity_type`
+* **New Data Source:** `awscc_glue_custom_entity_types`
+* **New Data Source:** `awscc_glue_data_quality_ruleset`
+* **New Data Source:** `awscc_glue_data_quality_rulesets`
+* **New Data Source:** `awscc_glue_security_configuration`
+* **New Data Source:** `awscc_glue_security_configurations`
+* **New Data Source:** `awscc_glue_table_optimizer`
+* **New Data Source:** `awscc_iot_job`
+* **New Data Source:** `awscc_iot_jobs`
+* **New Data Source:** `awscc_mediatailor_function`
+* **New Data Source:** `awscc_mediatailor_functions`
+* **New Data Source:** `awscc_opensearch_data_source`
+* **New Data Source:** `awscc_personalize_event_tracker`
+* **New Data Source:** `awscc_personalize_event_trackers`
+* **New Data Source:** `awscc_rekognition_dataset`
+* **New Data Source:** `awscc_sagemaker_artifact`
+* **New Data Source:** `awscc_sagemaker_artifacts`
+* **New Data Source:** `awscc_sagemaker_human_task_ui`
+* **New Data Source:** `awscc_sagemaker_human_task_uis`
+* **New Data Source:** `awscc_sagemaker_workforce`
+* **New Data Source:** `awscc_sagemaker_workforces`
+* **New Data Source:** `awscc_securityagent_artifact`
+* **New Data Source:** `awscc_serverlessrepo_application`
+* **New Data Source:** `awscc_serverlessrepo_applications`
+* **New Data Source:** `awscc_ssm_cloud_connector`
+* **New Data Source:** `awscc_ssm_cloud_connectors`
+* **New Data Source:** `awscc_transfer_host_key`
+* **New Data Source:** `awscc_wickr_network`
+* **New Data Source:** `awscc_wickr_networks`
+* **New List Resource:** `awscc_apigatewayv2_portal_product`
+* **New List Resource:** `awscc_bedrockagentcore_capacity_provider`
+* **New List Resource:** `awscc_cloudhsm_cluster`
+* **New List Resource:** `awscc_dataexchange_data_set`
+* **New List Resource:** `awscc_elasticache_serverless_cache_snapshot`
+* **New List Resource:** `awscc_glue_classifier`
+* **New List Resource:** `awscc_glue_custom_entity_type`
+* **New List Resource:** `awscc_glue_data_quality_ruleset`
+* **New List Resource:** `awscc_glue_security_configuration`
+* **New List Resource:** `awscc_iot_job`
+* **New List Resource:** `awscc_mediatailor_function`
+* **New List Resource:** `awscc_personalize_event_tracker`
+* **New List Resource:** `awscc_sagemaker_artifact`
+* **New List Resource:** `awscc_sagemaker_human_task_ui`
+* **New List Resource:** `awscc_sagemaker_workforce`
+* **New List Resource:** `awscc_serverlessrepo_application`
+* **New List Resource:** `awscc_ssm_cloud_connector`
+* **New List Resource:** `awscc_wickr_network`
+* **New Resource:** `awscc_accessanalyzer_archive_rule`
+* **New Resource:** `awscc_apigatewayv2_portal_product`
+* **New Resource:** `awscc_appconfig_experiment_definition`
+* **New Resource:** `awscc_bedrockagentcore_capacity_provider`
+* **New Resource:** `awscc_bedrockagentcore_gateway_rate_limit`
+* **New Resource:** `awscc_bedrockagentcore_gateway_rule`
+* **New Resource:** `awscc_cloudhsm_cluster`
+* **New Resource:** `awscc_dataexchange_data_set`
+* **New Resource:** `awscc_elasticache_serverless_cache_snapshot`
+* **New Resource:** `awscc_glue_classifier`
+* **New Resource:** `awscc_glue_custom_entity_type`
+* **New Resource:** `awscc_glue_data_quality_ruleset`
+* **New Resource:** `awscc_glue_security_configuration`
+* **New Resource:** `awscc_glue_table_optimizer`
+* **New Resource:** `awscc_iot_job`
+* **New Resource:** `awscc_mediatailor_function`
+* **New Resource:** `awscc_opensearch_data_source`
+* **New Resource:** `awscc_personalize_event_tracker`
+* **New Resource:** `awscc_rekognition_dataset`
+* **New Resource:** `awscc_sagemaker_artifact`
+* **New Resource:** `awscc_sagemaker_human_task_ui`
+* **New Resource:** `awscc_sagemaker_workforce`
+* **New Resource:** `awscc_securityagent_artifact`
+* **New Resource:** `awscc_serverlessrepo_application`
+* **New Resource:** `awscc_ssm_cloud_connector`
+* **New Resource:** `awscc_transfer_host_key`
+* **New Resource:** `awscc_wickr_network`
+
+## 1.96.0 (August 6, 2026)
+
+BUG FIXES:
+
+* data-source/awscc_bedrockagentcore_gateway: Set correct schema type `protocol_type` attribute ([#3255](https://github.com/hashicorp/terraform-provider-awscc/pull/3255))
+* data-source/awscc_ses_mail_manager_ingress_point: Set correct schema type for `network_configuration.public_network_configuration.ip_type` attribute ([#3255](https://github.com/hashicorp/terraform-provider-awscc/pull/3255))
+* resource/awscc_bedrockagentcore_gateway: Set correct schema type `protocol_type` argument ([#3255](https://github.com/hashicorp/terraform-provider-awscc/pull/3255))
+* resource/awscc_ses_mail_manager_ingress_point: Set correct schema type for `network_configuration.public_network_configuration.ip_type` argument ([#3255](https://github.com/hashicorp/terraform-provider-awscc/pull/3255))
+
+FEATURES:
+
+* **New Data Source:** `awscc_bedrockagentcore_harness_endpoint`
+* **New Data Source:** `awscc_dms_endpoint`
+* **New Data Source:** `awscc_dms_endpoints`
+* **New Data Source:** `awscc_dms_event_subscription`
+* **New Data Source:** `awscc_dms_event_subscriptions`
+* **New Data Source:** `awscc_glue_workflow`
+* **New Data Source:** `awscc_glue_workflows`
+* **New Data Source:** `awscc_licensemanager_license_asset_rule_set`
+* **New Data Source:** `awscc_licensemanager_license_asset_rule_sets`
+* **New Data Source:** `awscc_mediaconvert_preset`
+* **New Data Source:** `awscc_mediaconvert_presets`
+* **New Data Source:** `awscc_quicksight_topic_v2`
+* **New Data Source:** `awscc_quicksight_topic_v2s`
+* **New Data Source:** `awscc_redshift_snapshot_schedule`
+* **New Data Source:** `awscc_redshift_snapshot_schedules`
+* **New Data Source:** `awscc_ssm_service_setting`
+* **New List Resource:** `awscc_dms_endpoint`
+* **New List Resource:** `awscc_dms_event_subscription`
+* **New List Resource:** `awscc_glue_workflow`
+* **New List Resource:** `awscc_licensemanager_license_asset_rule_set`
+* **New List Resource:** `awscc_mediaconvert_preset`
+* **New List Resource:** `awscc_quicksight_topic_v2`
+* **New List Resource:** `awscc_redshift_snapshot_schedule`
+* **New Resource:** `awscc_bedrockagentcore_harness_endpoint`
+* **New Resource:** `awscc_dms_endpoint`
+* **New Resource:** `awscc_dms_event_subscription`
+* **New Resource:** `awscc_glue_workflow`
+* **New Resource:** `awscc_licensemanager_license_asset_rule_set`
+* **New Resource:** `awscc_mediaconvert_preset`
+* **New Resource:** `awscc_quicksight_topic_v2`
+* **New Resource:** `awscc_redshift_snapshot_schedule`
+* **New Resource:** `awscc_ssm_service_setting`
+
+## 1.95.0 (July 30, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_backup_legal_hold`
+* **New Data Source:** `awscc_backup_legal_holds`
+* **New Data Source:** `awscc_certificatemanager_certificate`
+* **New Data Source:** `awscc_certificatemanager_certificates`
+* **New Data Source:** `awscc_ec2_transit_gateway_policy_table_entry`
+* **New Data Source:** `awscc_msk_channel`
+* **New Data Source:** `awscc_msk_channels`
+* **New Data Source:** `awscc_networkflowmonitor_monitor`
+* **New Data Source:** `awscc_networkflowmonitor_monitors`
+* **New Data Source:** `awscc_quicksight_agent`
+* **New Data Source:** `awscc_quicksight_space`
+* **New Data Source:** `awscc_scn_dataset`
+* **New Data Source:** `awscc_scn_namespace`
+* **New Data Source:** `awscc_servicediscovery_service`
+* **New Data Source:** `awscc_servicediscovery_services`
+* **New Data Source:** `awscc_ssm_ops_item`
+* **New Data Source:** `awscc_ssm_ops_items`
+* **New List Resource:** `awscc_backup_legal_hold`
+* **New List Resource:** `awscc_certificatemanager_certificate`
+* **New List Resource:** `awscc_msk_channel`
+* **New List Resource:** `awscc_networkflowmonitor_monitor`
+* **New List Resource:** `awscc_servicediscovery_service`
+* **New List Resource:** `awscc_ssm_ops_item`
+* **New Resource:** `awscc_backup_legal_hold`
+* **New Resource:** `awscc_certificatemanager_certificate`
+* **New Resource:** `awscc_ec2_transit_gateway_policy_table_entry`
+* **New Resource:** `awscc_msk_channel`
+* **New Resource:** `awscc_networkflowmonitor_monitor`
+* **New Resource:** `awscc_quicksight_agent`
+* **New Resource:** `awscc_quicksight_space`
+* **New Resource:** `awscc_scn_dataset`
+* **New Resource:** `awscc_scn_namespace`
+* **New Resource:** `awscc_servicediscovery_service`
+* **New Resource:** `awscc_ssm_ops_item`
+
+## 1.94.0 (July 22, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_auditmanager_assessment_framework`
+* **New Data Source:** `awscc_auditmanager_assessment_frameworks`
+* **New Data Source:** `awscc_bedrock_knowledge_base_policy`
+* **New Data Source:** `awscc_cloudformation_generated_template`
+* **New Data Source:** `awscc_cloudformation_generated_templates`
+* **New Data Source:** `awscc_dms_certificate`
+* **New Data Source:** `awscc_dms_certificates`
+* **New Data Source:** `awscc_docdb_event_subscription`
+* **New Data Source:** `awscc_docdb_event_subscriptions`
+* **New Data Source:** `awscc_ec2_transit_gateway_policy_table_association`
+* **New Data Source:** `awscc_glue_blueprint`
+* **New Data Source:** `awscc_glue_blueprints`
+* **New Data Source:** `awscc_glue_user_defined_function`
+* **New Data Source:** `awscc_healthlake_data_transformation_profile`
+* **New Data Source:** `awscc_quicksight_knowledge_base`
+* **New Data Source:** `awscc_quicksight_knowledge_bases`
+* **New Data Source:** `awscc_sagemaker_action`
+* **New Data Source:** `awscc_sagemaker_actions`
+* **New Data Source:** `awscc_sagemaker_context`
+* **New Data Source:** `awscc_sagemaker_contexts`
+* **New Data Source:** `awscc_sagemaker_experiment`
+* **New Data Source:** `awscc_sagemaker_experiment_trial_component`
+* **New Data Source:** `awscc_sagemaker_experiment_trial_components`
+* **New Data Source:** `awscc_sagemaker_experiments`
+* **New Data Source:** `awscc_sagemaker_trial_component`
+* **New Data Source:** `awscc_sagemaker_trial_components`
+* **New Data Source:** `awscc_smsvoice_registration`
+* **New Data Source:** `awscc_smsvoice_registrations`
+* **New Data Source:** `awscc_storagegateway_tape_pool`
+* **New Data Source:** `awscc_storagegateway_tape_pools`
+* **New Data Source:** `awscc_transcribe_vocabulary_filter`
+* **New Data Source:** `awscc_transcribe_vocabulary_filters`
+* **New Data Source:** `awscc_wellarchitected_lens`
+* **New Data Source:** `awscc_wellarchitected_lenses`
+* **New Data Source:** `awscc_wellarchitected_profile`
+* **New Data Source:** `awscc_wellarchitected_profiles`
+* **New Data Source:** `awscc_wellarchitected_review_template`
+* **New Data Source:** `awscc_wellarchitected_review_templates`
+* **New Data Source:** `awscc_workspaces_workspace_ip_group`
+* **New Data Source:** `awscc_workspaces_workspace_ip_groups`
+* **New List Resource:** `awscc_auditmanager_assessment_framework`
+* **New List Resource:** `awscc_cloudformation_generated_template`
+* **New List Resource:** `awscc_dms_certificate`
+* **New List Resource:** `awscc_docdb_event_subscription`
+* **New List Resource:** `awscc_glue_blueprint`
+* **New List Resource:** `awscc_quicksight_knowledge_base`
+* **New List Resource:** `awscc_sagemaker_action`
+* **New List Resource:** `awscc_sagemaker_context`
+* **New List Resource:** `awscc_sagemaker_experiment`
+* **New List Resource:** `awscc_sagemaker_experiment_trial_component`
+* **New List Resource:** `awscc_sagemaker_trial_component`
+* **New List Resource:** `awscc_smsvoice_registration`
+* **New List Resource:** `awscc_storagegateway_tape_pool`
+* **New List Resource:** `awscc_transcribe_vocabulary_filter`
+* **New List Resource:** `awscc_wellarchitected_lens`
+* **New List Resource:** `awscc_wellarchitected_profile`
+* **New List Resource:** `awscc_wellarchitected_review_template`
+* **New List Resource:** `awscc_workspaces_workspace_ip_group`
+* **New Resource:** `awscc_auditmanager_assessment_framework`
+* **New Resource:** `awscc_bedrock_knowledge_base_policy`
+* **New Resource:** `awscc_cloudformation_generated_template`
+* **New Resource:** `awscc_dms_certificate`
+* **New Resource:** `awscc_docdb_event_subscription`
+* **New Resource:** `awscc_ec2_transit_gateway_policy_table_association`
+* **New Resource:** `awscc_glue_blueprint`
+* **New Resource:** `awscc_glue_user_defined_function`
+* **New Resource:** `awscc_healthlake_data_transformation_profile`
+* **New Resource:** `awscc_quicksight_knowledge_base`
+* **New Resource:** `awscc_sagemaker_action`
+* **New Resource:** `awscc_sagemaker_context`
+* **New Resource:** `awscc_sagemaker_experiment`
+* **New Resource:** `awscc_sagemaker_experiment_trial_component`
+* **New Resource:** `awscc_sagemaker_trial_component`
+* **New Resource:** `awscc_smsvoice_registration`
+* **New Resource:** `awscc_storagegateway_tape_pool`
+* **New Resource:** `awscc_transcribe_vocabulary_filter`
+* **New Resource:** `awscc_wellarchitected_lens`
+* **New Resource:** `awscc_wellarchitected_profile`
+* **New Resource:** `awscc_wellarchitected_review_template`
+* **New Resource:** `awscc_workspaces_workspace_ip_group`
+
+## 1.93.0 (July 15, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_cleanrooms_intermediate_table`
+* **New Data Source:** `awscc_connect_data_lake_association`
+* **New Data Source:** `awscc_ec2_transit_gateway_policy_table`
+* **New Data Source:** `awscc_ec2_transit_gateway_policy_tables`
+* **New Data Source:** `awscc_securityhub_connector`
+* **New Data Source:** `awscc_securityhub_connectors`
+* **New List Resource:** `awscc_ec2_transit_gateway_policy_table`
+* **New List Resource:** `awscc_securityhub_connector`
+* **New Resource:** `awscc_cleanrooms_intermediate_table`
+* **New Resource:** `awscc_connect_data_lake_association`
+* **New Resource:** `awscc_ec2_transit_gateway_policy_table`
+* **New Resource:** `awscc_securityhub_connector`
+
+## 1.92.0 (July 8, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_cloudwatch_insight_rule`
+* **New Data Source:** `awscc_cloudwatch_insight_rules`
+* **New Data Source:** `awscc_cognito_user_pool_regional_configuration_attachment`
+* **New Data Source:** `awscc_cognito_user_pool_replica`
+* **New Data Source:** `awscc_config_connector`
+* **New Data Source:** `awscc_config_connectors`
+* **New Data Source:** `awscc_connect_test_case`
+* **New Data Source:** `awscc_customerprofiles_domain_object_type`
+* **New Data Source:** `awscc_servicecatalog_accepted_portfolio_share`
+* **New Data Source:** `awscc_servicecatalog_accepted_portfolio_shares`
+* **New List Resource:** `awscc_cloudwatch_insight_rule`
+* **New List Resource:** `awscc_config_connector`
+* **New List Resource:** `awscc_servicecatalog_accepted_portfolio_share`
+* **New Resource:** `awscc_cloudwatch_insight_rule`
+* **New Resource:** `awscc_cognito_user_pool_regional_configuration_attachment`
+* **New Resource:** `awscc_cognito_user_pool_replica`
+* **New Resource:** `awscc_config_connector`
+* **New Resource:** `awscc_connect_test_case`
+* **New Resource:** `awscc_customerprofiles_domain_object_type`
+* **New Resource:** `awscc_servicecatalog_accepted_portfolio_share`
+
+## 1.91.0 (July 1, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_certificatemanager_acme_domain_validation`
+* **New Data Source:** `awscc_certificatemanager_acme_endpoint`
+* **New Data Source:** `awscc_certificatemanager_acme_endpoints`
+* **New Data Source:** `awscc_certificatemanager_acme_external_account_binding`
+* **New Data Source:** `awscc_certificatemanager_acme_external_account_bindings`
+* **New Data Source:** `awscc_config_remediation_configuration`
+* **New Data Source:** `awscc_config_remediation_configurations`
+* **New Data Source:** `awscc_glue_data_catalog_encryption_settings`
+* **New Data Source:** `awscc_medialive_node`
+* **New Data Source:** `awscc_outposts_site`
+* **New Data Source:** `awscc_outposts_sites`
+* **New Data Source:** `awscc_quicksight_o_auth_client_application`
+* **New Data Source:** `awscc_quicksight_o_auth_client_applications`
+* **New Data Source:** `awscc_sagemaker_algorithm`
+* **New Data Source:** `awscc_sagemaker_algorithms`
+* **New Data Source:** `awscc_sagemaker_hub`
+* **New Data Source:** `awscc_sagemaker_hubs`
+* **New Data Source:** `awscc_securityagent_security_requirement_pack`
+* **New Data Source:** `awscc_securityagent_security_requirement_packs`
+* **New List Resource:** `awscc_certificatemanager_acme_endpoint`
+* **New List Resource:** `awscc_certificatemanager_acme_external_account_binding`
+* **New List Resource:** `awscc_config_remediation_configuration`
+* **New List Resource:** `awscc_outposts_site`
+* **New List Resource:** `awscc_quicksight_o_auth_client_application`
+* **New List Resource:** `awscc_sagemaker_algorithm`
+* **New List Resource:** `awscc_sagemaker_hub`
+* **New List Resource:** `awscc_securityagent_security_requirement_pack`
+* **New Resource:** `awscc_certificatemanager_acme_domain_validation`
+* **New Resource:** `awscc_certificatemanager_acme_endpoint`
+* **New Resource:** `awscc_certificatemanager_acme_external_account_binding`
+* **New Resource:** `awscc_config_remediation_configuration`
+* **New Resource:** `awscc_glue_data_catalog_encryption_settings`
+* **New Resource:** `awscc_medialive_node`
+* **New Resource:** `awscc_outposts_site`
+* **New Resource:** `awscc_quicksight_o_auth_client_application`
+* **New Resource:** `awscc_sagemaker_algorithm`
+* **New Resource:** `awscc_sagemaker_hub`
+* **New Resource:** `awscc_securityagent_security_requirement_pack`
+
+## 1.90.0 (June 24, 2026)
+
+BREAKING CHANGES:
+
+* data-source/awscc_omics_annotation_store: The attribute `store_options.tsv_store_options.schema` now returns a list of key-value pairs instead of a list of strings. ([#30207](https://github.com/hashicorp/terraform-provider-awscc/pull/3207))
+* data-source/awscc_scheduler_schedule: The attribute `target.ecs_parameters.tags` now returns a list of key-value pairs instead of a list of strings. ([#30207](https://github.com/hashicorp/terraform-provider-awscc/pull/3207))
+* resource/awscc_omics_annotation_store: The argument `store_options.tsv_store_options.schema` now expects a list of key-value pairs instead of a list of strings. ([#30207](https://github.com/hashicorp/terraform-provider-awscc/pull/3207))
+* resource/awscc_scheduler_schedule: The argument `target.ecs_parameters.tags` now expects a list of key-value pairs instead of a list of strings. ([#30207](https://github.com/hashicorp/terraform-provider-awscc/pull/3207))
+
+FEATURES:
+
+* **New Data Source:** `awscc_devopsagent_service`
+* **New Data Source:** `awscc_lambda_microvm_image`
+* **New Data Source:** `awscc_lambda_microvm_images`
+* **New Data Source:** `awscc_lambda_network_connector`
+* **New Data Source:** `awscc_lambda_network_connectors`
+* **New List Resource:** `awscc_lambda_microvm_image`
+* **New List Resource:** `awscc_lambda_network_connector`
+* **New Resource:** `awscc_devopsagent_service`
+* **New Resource:** `awscc_lambda_microvm_image`
+* **New Resource:** `awscc_lambda_network_connector`
+
+## 1.89.0 (June 17, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_awsexternalanthropic_workspace`
+* **New Data Source:** `awscc_awsexternalanthropic_workspaces`
+* **New Data Source:** `awscc_bedrockagentcore_configuration_bundle`
+* **New Data Source:** `awscc_bedrockagentcore_configuration_bundles`
+* **New Data Source:** `awscc_cloudwatch_log_alarm`
+* **New Data Source:** `awscc_cloudwatch_log_alarms`
+* **New Data Source:** `awscc_elasticloadbalancing_load_balancer`
+* **New Data Source:** `awscc_elasticloadbalancing_load_balancers`
+* **New Data Source:** `awscc_elementalinference_dictionaries`
+* **New Data Source:** `awscc_elementalinference_dictionary`
+* **New Data Source:** `awscc_neptune_global_cluster`
+* **New Data Source:** `awscc_neptune_global_clusters`
+* **New Data Source:** `awscc_sagemaker_mlflow_app`
+* **New Data Source:** `awscc_sagemaker_mlflow_apps`
+* **New List Resource:** `awscc_awsexternalanthropic_workspace`
+* **New List Resource:** `awscc_bedrockagentcore_configuration_bundle`
+* **New List Resource:** `awscc_cloudwatch_log_alarm`
+* **New List Resource:** `awscc_elasticloadbalancing_load_balancer`
+* **New List Resource:** `awscc_elementalinference_dictionary`
+* **New List Resource:** `awscc_neptune_global_cluster`
+* **New List Resource:** `awscc_sagemaker_mlflow_app`
+* **New Resource:** `awscc_awsexternalanthropic_workspace`
+* **New Resource:** `awscc_bedrockagentcore_configuration_bundle`
+* **New Resource:** `awscc_cloudwatch_log_alarm`
+* **New Resource:** `awscc_elasticloadbalancing_load_balancer`
+* **New Resource:** `awscc_elementalinference_dictionary`
+* **New Resource:** `awscc_neptune_global_cluster`
+* **New Resource:** `awscc_sagemaker_mlflow_app`
+
+## 1.88.0 (June 10, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_appstream_stack_fleet_association`
+* **New Data Source:** `awscc_bedrockagentcore_payment_manager`
+* **New Data Source:** `awscc_bedrockagentcore_payment_managers`
+* **New Data Source:** `awscc_bedrockagentcore_resource_policy`
+* **New Data Source:** `awscc_resiliencehubv2_service_function`
+* **New Data Source:** `awscc_resiliencehubv2_user_journey`
+* **New Data Source:** `awscc_rtbfabric_link_routing_rule`
+* **New List Resource:** `awscc_bedrockagentcore_payment_manager`
+* **New Resource:** `awscc_appstream_stack_fleet_association`
+* **New Resource:** `awscc_bedrockagentcore_payment_manager`
+* **New Resource:** `awscc_bedrockagentcore_resource_policy`
+* **New Resource:** `awscc_resiliencehubv2_service_function`
+* **New Resource:** `awscc_resiliencehubv2_user_journey`
+* **New Resource:** `awscc_rtbfabric_link_routing_rule`
+
+## 1.87.0 (June 3, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_bedrockagentcore_payment_connector`
+* **New Data Source:** `awscc_opensearchserverless_collection_index`
+* **New Data Source:** `awscc_resiliencehubv2_policies`
+* **New Data Source:** `awscc_resiliencehubv2_policy`
+* **New Data Source:** `awscc_resiliencehubv2_service`
+* **New Data Source:** `awscc_resiliencehubv2_services`
+* **New Data Source:** `awscc_resiliencehubv2_system`
+* **New Data Source:** `awscc_resiliencehubv2_systems`
+* **New Data Source:** `awscc_verifiedpermissions_policy_store_alias`
+* **New Data Source:** `awscc_verifiedpermissions_policy_store_aliases`
+* **New List Resource:** `awscc_resiliencehubv2_policy`
+* **New List Resource:** `awscc_resiliencehubv2_service`
+* **New List Resource:** `awscc_resiliencehubv2_system`
+* **New List Resource:** `awscc_verifiedpermissions_policy_store_alias`
+* **New Resource:** `awscc_bedrockagentcore_payment_connector`
+* **New Resource:** `awscc_opensearchserverless_collection_index`
+* **New Resource:** `awscc_resiliencehubv2_policy`
+* **New Resource:** `awscc_resiliencehubv2_service`
+* **New Resource:** `awscc_resiliencehubv2_system`
+* **New Resource:** `awscc_verifiedpermissions_policy_store_alias`
+
+## 1.86.0 (May 27, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_appstream_stack_user_association`
+* **New Data Source:** `awscc_bedrockagentcore_harness`
+* **New Data Source:** `awscc_bedrockagentcore_harnesses`
+* **New List Resource:** `awscc_bedrockagentcore_harness`
+* **New Resource:** `awscc_appstream_stack_user_association`
+* **New Resource:** `awscc_bedrockagentcore_harness`
+
+## 1.85.0 (May 20, 2026)
+
+BUG FIXES:
+
+* provider: Fix diff showing after upgrade for resources whose list-type attributes (e.g. `tags`, `vpc_config.subnet_ids`, `load_balancer_attributes`) were stored in a different order than CloudFormation returns them. ([#3059](https://github.com/hashicorp/terraform-provider-awscc/issues/3059))
+
+FEATURES:
+
+* **New Data Source:** `awscc_bedrockagentcore_payment_credential_provider`
+* **New Data Source:** `awscc_bedrockagentcore_payment_credential_providers`
+* **New List Resource:** `awscc_bedrockagentcore_payment_credential_provider`
+* **New Resource:** `awscc_bedrockagentcore_payment_credential_provider`
+
+## 1.84.0 (May 13, 2026)
+
+FEATURES:
+
+* No new data sources, list resources, or resources.
+* Updated schemas.
+
+## 1.83.0 (May 6, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_chime_app_instance_bot`
+* **New Data Source:** `awscc_chime_app_instance_bots`
+* **New Data Source:** `awscc_elasticache_cache_cluster`
+* **New Data Source:** `awscc_elasticache_cache_clusters`
+* **New List Resource:** `awscc_chime_app_instance_bot`
+* **New List Resource:** `awscc_elasticache_cache_cluster`
+* **New Resource:** `awscc_chime_app_instance_bot`
+* **New Resource:** `awscc_elasticache_cache_cluster`
+
+## 1.82.0 (April 29, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_chime_app_instance`
+* **New Data Source:** `awscc_chime_app_instances`
+* **New Data Source:** `awscc_cloudwatch_otel_enrichment`
+* **New Data Source:** `awscc_cloudwatch_otel_enrichments`
+* **New Data Source:** `awscc_devopsagent_private_connection`
+* **New Data Source:** `awscc_devopsagent_private_connections`
+* **New Data Source:** `awscc_workspaces_connection_aliases`
+* **New List Resource:** `awscc_chime_app_instance`
+* **New List Resource:** `awscc_cloudwatch_otel_enrichment`
+* **New List Resource:** `awscc_devopsagent_private_connection`
+* **New List Resource:** `awscc_mediaconnect_flow_vpc_interface`
+* **New List Resource:** `awscc_workspaces_connection_alias`
+* **New Resource:** `awscc_chime_app_instance`
+* **New Resource:** `awscc_cloudwatch_otel_enrichment`
+* **New Resource:** `awscc_devopsagent_private_connection`
+
+## 1.81.0 (April 22, 2026)
+
+FEATURES:
+
+* No new data sources, list resources, or resources.
+* Updated schemas.
+
+## 1.80.0 (April 15, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_neptunegraph_graph_snapshot`
+* **New Data Source:** `awscc_neptunegraph_graph_snapshots`
+* **New List Resource:** `awscc_neptunegraph_graph_snapshot`
+* **New Resource:** `awscc_neptunegraph_graph_snapshot`
+
+## 1.79.0 (April 8, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_bcmpricingcalculator_bill_scenario`
+* **New Data Source:** `awscc_bcmpricingcalculator_bill_scenarios`
+* **New Data Source:** `awscc_bedrock_data_automation_libraries`
+* **New Data Source:** `awscc_bedrock_data_automation_library`
+* **New Data Source:** `awscc_bedrock_enforced_guardrail_configuration`
+* **New Data Source:** `awscc_bedrock_enforced_guardrail_configurations`
+* **New Data Source:** `awscc_bedrock_resource_policy`
+* **New Data Source:** `awscc_bedrockagentcore_api_key_credential_provider`
+* **New Data Source:** `awscc_bedrockagentcore_api_key_credential_providers`
+* **New Data Source:** `awscc_bedrockagentcore_o_auth_2_credential_provider`
+* **New Data Source:** `awscc_bedrockagentcore_o_auth_2_credential_providers`
+* **New Data Source:** `awscc_braket_spending_limit`
+* **New Data Source:** `awscc_braket_spending_limits`
+* **New Data Source:** `awscc_ecs_daemon`
+* **New Data Source:** `awscc_ecs_daemons`
+* **New Data Source:** `awscc_s3files_access_point`
+* **New Data Source:** `awscc_s3files_file_system`
+* **New Data Source:** `awscc_s3files_file_system_policies`
+* **New Data Source:** `awscc_s3files_file_system_policy`
+* **New Data Source:** `awscc_s3files_file_systems`
+* **New Data Source:** `awscc_s3files_mount_target`
+* **New List Resource:** `awscc_bcmpricingcalculator_bill_scenario`
+* **New List Resource:** `awscc_bedrock_data_automation_library`
+* **New List Resource:** `awscc_bedrock_enforced_guardrail_configuration`
+* **New List Resource:** `awscc_bedrockagentcore_api_key_credential_provider`
+* **New List Resource:** `awscc_bedrockagentcore_o_auth_2_credential_provider`
+* **New List Resource:** `awscc_braket_spending_limit`
+* **New List Resource:** `awscc_ecs_daemon`
+* **New List Resource:** `awscc_s3files_file_system`
+* **New List Resource:** `awscc_s3files_file_system_policy`
+* **New Resource:** `awscc_bcmpricingcalculator_bill_scenario`
+* **New Resource:** `awscc_bedrock_data_automation_library`
+* **New Resource:** `awscc_bedrock_enforced_guardrail_configuration`
+* **New Resource:** `awscc_bedrock_resource_policy`
+* **New Resource:** `awscc_bedrockagentcore_api_key_credential_provider`
+* **New Resource:** `awscc_bedrockagentcore_o_auth_2_credential_provider`
+* **New Resource:** `awscc_braket_spending_limit`
+* **New Resource:** `awscc_ecs_daemon`
+* **New Resource:** `awscc_s3files_access_point`
+* **New Resource:** `awscc_s3files_file_system`
+* **New Resource:** `awscc_s3files_file_system_policy`
+* **New Resource:** `awscc_s3files_mount_target`
+
+## 1.78.0 (April 1, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_apigatewayv2_stage`
+* **New Data Source:** `awscc_apigatewayv2_stages`
+* **New Data Source:** `awscc_appstream_stack`
+* **New Data Source:** `awscc_appstream_stacks`
+* **New Data Source:** `awscc_customerprofiles_recommender`
+* **New Data Source:** `awscc_customerprofiles_recommenders`
+* **New Data Source:** `awscc_novaact_workflow_definition`
+* **New Data Source:** `awscc_omics_configuration`
+* **New Data Source:** `awscc_omics_configurations`
+* **New Data Source:** `awscc_sagemaker_model`
+* **New Data Source:** `awscc_sagemaker_models`
+* **New Data Source:** `awscc_securityagent_agent_space`
+* **New Data Source:** `awscc_securityagent_agent_spaces`
+* **New Data Source:** `awscc_securityagent_application`
+* **New Data Source:** `awscc_securityagent_applications`
+* **New Data Source:** `awscc_securityagent_pentest`
+* **New Data Source:** `awscc_securityagent_target_domain`
+* **New Data Source:** `awscc_securityagent_target_domains`
+* **New List Resource:** `awscc_apigatewayv2_stage`
+* **New List Resource:** `awscc_appstream_stack`
+* **New List Resource:** `awscc_customerprofiles_recommender`
+* **New List Resource:** `awscc_omics_configuration`
+* **New List Resource:** `awscc_sagemaker_model`
+* **New List Resource:** `awscc_securityagent_agent_space`
+* **New List Resource:** `awscc_securityagent_application`
+* **New List Resource:** `awscc_securityagent_target_domain`
+* **New Resource:** `awscc_apigatewayv2_stage`
+* **New Resource:** `awscc_appstream_stack`
+* **New Resource:** `awscc_customerprofiles_recommender`
+* **New Resource:** `awscc_omics_configuration`
+* **New Resource:** `awscc_sagemaker_model`
+* **New Resource:** `awscc_securityagent_agent_space`
+* **New Resource:** `awscc_securityagent_application`
+* **New Resource:** `awscc_securityagent_pentest`
+* **New Resource:** `awscc_securityagent_target_domain`
+
+## 1.77.0 (March 25, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_batch_quota_share`
+* **New Data Source:** `awscc_batch_quota_shares`
+* **New Data Source:** `awscc_ec2_ipam_prefix_list_resolver_target`
+* **New Data Source:** `awscc_ec2_ipam_prefix_list_resolver_targets`
+* **New Data Source:** `awscc_ec2_sql_ha_standby_detected_instance`
+* **New Data Source:** `awscc_ec2_sql_ha_standby_detected_instances`
+* **New Data Source:** `awscc_interconnect_connection`
+* **New Data Source:** `awscc_interconnect_connections`
+* **New Data Source:** `awscc_uxc_account_customization`
+* **New List Resource:** `awscc_batch_quota_share`
+* **New List Resource:** `awscc_ec2_ipam_prefix_list_resolver_target`
+* **New List Resource:** `awscc_ec2_sql_ha_standby_detected_instance`
+* **New List Resource:** `awscc_interconnect_connection`
+* **New Resource:** `awscc_batch_quota_share`
+* **New Resource:** `awscc_ec2_ipam_prefix_list_resolver_target`
+* **New Resource:** `awscc_ec2_sql_ha_standby_detected_instance`
+* **New Resource:** `awscc_interconnect_connection`
+* **New Resource:** `awscc_uxc_account_customization`
+
+## 1.76.0 (March 18, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_elementalinference_feed`
+* **New Data Source:** `awscc_elementalinference_feeds`
+* **New Data Source:** `awscc_glue_catalog`
+* **New Data Source:** `awscc_glue_catalogs`
+* **New Data Source:** `awscc_observabilityadmin_telemetry_enrichment`
+* **New Data Source:** `awscc_observabilityadmin_telemetry_enrichments`
+* **New List Resource:** `awscc_elementalinference_feed`
+* **New List Resource:** `awscc_glue_catalog`
+* **New List Resource:** `awscc_observabilityadmin_telemetry_enrichment`
+* **New Resource:** `awscc_elementalinference_feed`
+* **New Resource:** `awscc_glue_catalog`
+* **New Resource:** `awscc_observabilityadmin_telemetry_enrichment`
+
+## 1.75.0 (March 11, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_cleanroomsml_configured_model_algorithm`
+* **New Data Source:** `awscc_cleanroomsml_configured_model_algorithm_association`
+* **New Data Source:** `awscc_cleanroomsml_configured_model_algorithm_associations`
+* **New Data Source:** `awscc_cleanroomsml_configured_model_algorithms`
+* **New Data Source:** `awscc_elasticache_replication_group`
+* **New Data Source:** `awscc_elasticache_replication_groups`
+* **New Data Source:** `awscc_route53globalresolver_access_source`
+* **New Data Source:** `awscc_route53globalresolver_access_token`
+* **New Data Source:** `awscc_route53globalresolver_dns_view`
+* **New Data Source:** `awscc_route53globalresolver_firewall_domain_list`
+* **New Data Source:** `awscc_route53globalresolver_firewall_domain_lists`
+* **New Data Source:** `awscc_route53globalresolver_firewall_rule`
+* **New Data Source:** `awscc_route53globalresolver_global_resolver`
+* **New Data Source:** `awscc_route53globalresolver_global_resolvers`
+* **New Data Source:** `awscc_route53globalresolver_hosted_zone_association`
+* **New Data Source:** `awscc_servicecatalog_stack_set_constraint`
+* **New List Resource:** `awscc_cleanroomsml_configured_model_algorithm`
+* **New List Resource:** `awscc_cleanroomsml_configured_model_algorithm_association`
+* **New List Resource:** `awscc_elasticache_replication_group`
+* **New List Resource:** `awscc_route53globalresolver_firewall_domain_list`
+* **New List Resource:** `awscc_route53globalresolver_global_resolver`
+* **New Resource:** `awscc_cleanroomsml_configured_model_algorithm`
+* **New Resource:** `awscc_cleanroomsml_configured_model_algorithm_association`
+* **New Resource:** `awscc_elasticache_replication_group`
+* **New Resource:** `awscc_route53globalresolver_access_source`
+* **New Resource:** `awscc_route53globalresolver_access_token`
+* **New Resource:** `awscc_route53globalresolver_dns_view`
+* **New Resource:** `awscc_route53globalresolver_firewall_domain_list`
+* **New Resource:** `awscc_route53globalresolver_firewall_rule`
+* **New Resource:** `awscc_route53globalresolver_global_resolver`
+* **New Resource:** `awscc_route53globalresolver_hosted_zone_association`
+* **New Resource:** `awscc_servicecatalog_stack_set_constraint`
+
+## 1.74.0 (March 4, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_bedrockagentcore_browser_profile`
+* **New Data Source:** `awscc_bedrockagentcore_browser_profiles`
+* **New Data Source:** `awscc_bedrockagentcore_evaluator`
+* **New Data Source:** `awscc_bedrockagentcore_evaluators`
+* **New Data Source:** `awscc_bedrockagentcore_online_evaluation_config`
+* **New Data Source:** `awscc_bedrockagentcore_online_evaluation_configs`
+* **New Data Source:** `awscc_bedrockagentcore_policy`
+* **New Data Source:** `awscc_bedrockagentcore_policy_engine`
+* **New Data Source:** `awscc_bedrockagentcore_policy_engines`
+* **New Data Source:** `awscc_bedrockmantle_project`
+* **New Data Source:** `awscc_bedrockmantle_projects`
+* **New Data Source:** `awscc_connect_contact_flow_module_alias`
+* **New Data Source:** `awscc_connect_contact_flow_module_version`
+* **New Data Source:** `awscc_connect_contact_flow_module_versions`
+* **New Data Source:** `awscc_directconnect_connection`
+* **New Data Source:** `awscc_directconnect_connections`
+* **New Data Source:** `awscc_directconnect_direct_connect_gateway`
+* **New Data Source:** `awscc_directconnect_direct_connect_gateway_association`
+* **New Data Source:** `awscc_directconnect_direct_connect_gateways`
+* **New Data Source:** `awscc_directconnect_lag`
+* **New Data Source:** `awscc_directconnect_lags`
+* **New Data Source:** `awscc_directconnect_private_virtual_interface`
+* **New Data Source:** `awscc_directconnect_private_virtual_interfaces`
+* **New Data Source:** `awscc_directconnect_public_virtual_interface`
+* **New Data Source:** `awscc_directconnect_public_virtual_interfaces`
+* **New Data Source:** `awscc_directconnect_transit_virtual_interface`
+* **New Data Source:** `awscc_directconnect_transit_virtual_interfaces`
+* **New Data Source:** `awscc_servicecatalog_portfolio`
+* **New Data Source:** `awscc_servicecatalog_portfolios`
+* **New List Resource:** `awscc_bedrockagentcore_browser_profile`
+* **New List Resource:** `awscc_bedrockagentcore_evaluator`
+* **New List Resource:** `awscc_bedrockagentcore_online_evaluation_config`
+* **New List Resource:** `awscc_bedrockagentcore_policy_engine`
+* **New List Resource:** `awscc_bedrockmantle_project`
+* **New List Resource:** `awscc_connect_contact_flow_module_version`
+* **New List Resource:** `awscc_directconnect_connection`
+* **New List Resource:** `awscc_directconnect_direct_connect_gateway`
+* **New List Resource:** `awscc_directconnect_lag`
+* **New List Resource:** `awscc_directconnect_private_virtual_interface`
+* **New List Resource:** `awscc_directconnect_public_virtual_interface`
+* **New List Resource:** `awscc_directconnect_transit_virtual_interface`
+* **New List Resource:** `awscc_servicecatalog_portfolio`
+* **New Resource:** `awscc_bedrockagentcore_browser_profile`
+* **New Resource:** `awscc_bedrockagentcore_evaluator`
+* **New Resource:** `awscc_bedrockagentcore_online_evaluation_config`
+* **New Resource:** `awscc_bedrockagentcore_policy`
+* **New Resource:** `awscc_bedrockagentcore_policy_engine`
+* **New Resource:** `awscc_bedrockmantle_project`
+* **New Resource:** `awscc_connect_contact_flow_module_alias`
+* **New Resource:** `awscc_connect_contact_flow_module_version`
+* **New Resource:** `awscc_directconnect_connection`
+* **New Resource:** `awscc_directconnect_direct_connect_gateway`
+* **New Resource:** `awscc_directconnect_direct_connect_gateway_association`
+* **New Resource:** `awscc_directconnect_lag`
+* **New Resource:** `awscc_directconnect_private_virtual_interface`
+* **New Resource:** `awscc_directconnect_public_virtual_interface`
+* **New Resource:** `awscc_directconnect_transit_virtual_interface`
+* **New Resource:** `awscc_servicecatalog_portfolio`
+
+## 1.73.0 (Feburary 25, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_computeoptimizer_automation_rule`
+* **New Data Source:** `awscc_computeoptimizer_automation_rules`
+* **New Data Source:** `awscc_servicecatalog_launch_role_constraint`
+* **New Data Source:** `awscc_ssm_maintenance_window`
+* **New Data Source:** `awscc_ssm_maintenance_windows`
+* **New List Resource:** `awscc_computeoptimizer_automation_rule`
+* **New List Resource:** `awscc_ssm_maintenance_window`
+* **New Resource:** `awscc_computeoptimizer_automation_rule`
+* **New Resource:** `awscc_servicecatalog_launch_role_constraint`
+* **New Resource:** `awscc_ssm_maintenance_window`
+
+## 1.72.0 (Feburary 18, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_cloudwatch_alarm_mute_rule`
+* **New Data Source:** `awscc_cloudwatch_alarm_mute_rules`
+* **New Data Source:** `awscc_connect_notification`
+* **New Data Source:** `awscc_ec2_ipam_prefix_list_resolver`
+* **New Data Source:** `awscc_ec2_ipam_prefix_list_resolvers`
+* **New Data Source:** `awscc_ses_custom_verification_email_template`
+* **New Data Source:** `awscc_ses_custom_verification_email_templates`
+* **New Data Source:** `awscc_timestream_influx_db_cluster`
+* **New Data Source:** `awscc_timestream_influx_db_clusters`
+* **New Resource:** `awscc_cloudwatch_alarm_mute_rule`
+* **New Resource:** `awscc_connect_notification`
+* **New Resource:** `awscc_ec2_ipam_prefix_list_resolver`
+* **New Resource:** `awscc_ses_custom_verification_email_template`
+* **New Resource:** `awscc_timestream_influx_db_cluster`
+
+## 1.71.0 (Feburary 11, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_codedeploy_deployment_group`
+* **New Data Source:** `awscc_logs_scheduled_queries`
+* **New Data Source:** `awscc_logs_scheduled_query`
+* **New Data Source:** `awscc_msk_topic`
+* **New Data Source:** `awscc_msk_topics`
+* **New List Resource:** `awscc_logs_scheduled_query`
+* **New List Resource:** `awscc_msk_topic`
+* **New Resource:** `awscc_codedeploy_deployment_group`
+* **New Resource:** `awscc_logs_scheduled_query`
+* **New Resource:** `awscc_msk_topic`
+
+## 1.70.0 (February 4, 2026)
+
+FEATURES:
+
+* No new data sources, list resources, or resources.
+* Update attributes and documentation for data sources and resources in Connect, DynamoDB, EC2, GameLift, Lambda, License Manager, Notifications, OSS, PCS, SES, and Transfer.
+
+## 1.69.0 (January 28, 2026)
+
+FEATURES:
+
+* **New Data Source:** `awscc_backup_tiering_configuration`
+* **New Data Source:** `awscc_backup_tiering_configurations`
+* **New Data Source:** `awscc_docdb_global_cluster`
+* **New Data Source:** `awscc_docdb_global_clusters`
+* **New Data Source:** `awscc_emrcontainers_security_configurations`
+* **New Data Source:** `awscc_lightsail_database_snapshot`
+* **New Data Source:** `awscc_lightsail_database_snapshots`
+* **New Data Source:** `awscc_mwaaserverless_workflow`
+* **New Data Source:** `awscc_mwaaserverless_workflows`
+* **New Data Source:** `awscc_opensearchserverless_collection_group`
+* **New Data Source:** `awscc_opensearchserverless_collection_groups`
+* **New Data Source:** `awscc_quicksight_action_connector`
+* **New Data Source:** `awscc_quicksight_action_connectors`
+* **New List Resource:** `awscc_backup_tiering_configuration`
+* **New List Resource:** `awscc_docdb_global_cluster`
+* **New List Resource:** `awscc_lightsail_database_snapshot`
+* **New List Resource:** `awscc_mwaaserverless_workflow`
+* **New List Resource:** `awscc_opensearchserverless_collection_group`
+* **New List Resource:** `awscc_quicksight_action_connector`
+* **New Resource:** `awscc_backup_tiering_configuration`
+* **New Resource:** `awscc_docdb_global_cluster`
+* **New Resource:** `awscc_lightsail_database_snapshot`
+* **New Resource:** `awscc_mwaaserverless_workflow`
+* **New Resource:** `awscc_opensearchserverless_collection_group`
+* **New Resource:** `awscc_quicksight_action_connector`
+
+## 1.68.0 (January 7, 2026)
+
+BUG FIXES:
+
+* provider: Fix handling of `provider_meta` `user_agent` values where the product name contains a forward slash ([#2959](https://github.com/hashicorp/terraform-provider-awscc/issues/2959))
+
+FEATURES:
+
+* **New Data Source:** `awscc_cases_case_rule`
+* **New Data Source:** `awscc_cases_domain`
+* **New Data Source:** `awscc_cases_domains`
+* **New Data Source:** `awscc_cases_field`
+* **New Data Source:** `awscc_cases_layout`
+* **New Data Source:** `awscc_cases_template`
+* **New Resource:** `awscc_cases_case_rule`
+* **New Resource:** `awscc_cases_domain`
+* **New Resource:** `awscc_cases_field`
+* **New Resource:** `awscc_cases_layout`
+* **New Resource:** `awscc_cases_template`
+
+## 1.67.0 (December 17, 2025)
+
+FEATURES:
+
+* provider: The [`provider_meta` block](https://developer.hashicorp.com/terraform/internals/provider-meta) is now supported. The `user_agent` argument enables module authors to include additional product information in the `User-Agent` header sent during all AWS API requests made during Create, Read, Update, and Delete operations.
+* **New Data Source:** `awscc_connect_data_table_record`
+* **New Data Source:** `awscc_connect_workspace`
+* **New Data Source:** `awscc_connect_workspaces`
+* **New Data Source:** `awscc_dax_subnet_group`
+* **New Data Source:** `awscc_dax_subnet_groups`
+* **New Data Source:** `awscc_glue_identity_center_configuration`
+* **New Data Source:** `awscc_groundstation_dataflow_endpoint_group_v2`
+* **New Data Source:** `awscc_groundstation_dataflow_endpoint_group_v2s`
+* **New Data Source:** `awscc_networkmanager_core_network_prefix_list_association`
+* **New Data Source:** `awscc_ses_tenant`
+* **New Data Source:** `awscc_ses_tenants`
+* **New Data Source:** `awscc_ssm_maintenance_window_target`
+* **New Data Source:** `awscc_ssm_maintenance_window_task`
+* **New List Resource:** `awscc_connect_workspace`
+* **New List Resource:** `awscc_dax_subnet_group`
+* **New List Resource:** `awscc_groundstation_dataflow_endpoint_group_v2`
+* **New List Resource:** `awscc_ses_tenant`
+* **New Resource:** `awscc_connect_data_table_record`
+* **New Resource:** `awscc_connect_workspace`
+* **New Resource:** `awscc_dax_subnet_group`
+* **New Resource:** `awscc_glue_identity_center_configuration`
+* **New Resource:** `awscc_groundstation_dataflow_endpoint_group_v2`
+* **New Resource:** `awscc_networkmanager_core_network_prefix_list_association`
+* **New Resource:** `awscc_ses_tenant`
+* **New Resource:** `awscc_ssm_maintenance_window_target`
+* **New Resource:** `awscc_ssm_maintenance_window_task`
 
 ## 1.66.0 (December 4, 2025)
 

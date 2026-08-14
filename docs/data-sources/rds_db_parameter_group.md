@@ -21,6 +21,7 @@ Data Source schema for AWS::RDS::DBParameterGroup
 
 ### Read-Only
 
+- `db_parameter_group_arn` (String)
 - `db_parameter_group_name` (String) The name of the DB parameter group.
  Constraints:
   +  Must be 1 to 255 letters, numbers, or hyphens.
@@ -40,6 +41,7 @@ Data Source schema for AWS::RDS::DBParameterGroup
   +   ``aurora-mysql`` 
   +   ``aurora-postgresql`` 
   +   ``db2-ae`` 
+  +   ``db2-ce`` 
   +   ``db2-se`` 
   +   ``mysql`` 
   +   ``oracle-ee`` 

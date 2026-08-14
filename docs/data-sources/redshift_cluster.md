@@ -41,7 +41,7 @@ auto - Amazon Redshift determines whether to use AQUA.
 - `cluster_version` (String) The version of the Amazon Redshift engine software that you want to deploy on the cluster.The version selected runs on all the nodes in the cluster.
 - `db_name` (String) The name of the first database to be created when the cluster is created. To create additional databases after the cluster is created, connect to the cluster with a SQL client and use SQL commands to create a database.
 - `defer_maintenance` (Boolean) A boolean indicating whether to enable the deferred maintenance window.
-- `defer_maintenance_duration` (Number) An integer indicating the duration of the maintenance window in days. If you specify a duration, you can't specify an end time. The duration must be 45 days or less.
+- `defer_maintenance_duration` (Number) An integer indicating the duration of the maintenance window in days. If you specify a duration, you can't specify an end time. The duration must be 60 days or less.
 - `defer_maintenance_end_time` (String) A timestamp indicating end time for the deferred maintenance window. If you specify an end time, you can't specify a duration.
 - `defer_maintenance_identifier` (String) A unique identifier for the deferred maintenance window.
 - `defer_maintenance_start_time` (String) A timestamp indicating the start time for the deferred maintenance window.
@@ -70,7 +70,7 @@ The value must be either -1 or an integer between 1 and 3,653.
 - `master_username` (String) The user name associated with the master user account for the cluster that is being created. The user name can't be PUBLIC and first character must be a letter.
 - `multi_az` (Boolean) A boolean indicating if the redshift cluster is multi-az or not. If you don't provide this parameter or set the value to false, the redshift cluster will be single-az.
 - `namespace_resource_policy` (String) The namespace resource policy document that will be attached to a Redshift cluster.
-- `node_type` (String) The node type to be provisioned for the cluster.Valid Values: ds2.xlarge | ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge | ra3.large | ra3.4xlarge | ra3.16xlarge
+- `node_type` (String) The node type to be provisioned for the cluster.Valid Values: ds2.xlarge | ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge | ra3.large | ra3.4xlarge | ra3.16xlarge | rg.large | rg.xlarge | rg.4xlarge | rg.12xlarge
 - `number_of_nodes` (Number) The number of compute nodes in the cluster. This parameter is required when the ClusterType parameter is specified as multi-node.
 - `owner_account` (String)
 - `port` (Number) The port number on which the cluster accepts incoming connections. The cluster is accessible only via the JDBC and ODBC connection strings

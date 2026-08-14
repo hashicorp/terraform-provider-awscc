@@ -1,11 +1,12 @@
 {
   "typeName": "AWS::ImageBuilder::ImagePipeline",
-  "description": "Resource schema for AWS::ImageBuilder::ImagePipeline",
+  "description": "Resource Type definition for AWS::ImageBuilder::ImagePipeline",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-imagebuilder.git",
   "properties": {
     "Arn": {
       "description": "The Amazon Resource Name (ARN) of the image pipeline.",
-      "type": "string"
+      "type": "string",
+      "pattern": "^arn:[^:]+:imagebuilder:[^:]+:[^:]+:image-pipeline/.+$"
     },
     "Name": {
       "description": "The name of the image pipeline.",
@@ -73,6 +74,16 @@
     },
     "Tags": {
       "description": "The tags of this image pipeline.",
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+        "": {
+          "type": "string"
+        }
+      }
+    },
+    "ImageTags": {
+      "description": "The tags to be applied to images created by this pipeline.",
       "type": "object",
       "additionalProperties": false,
       "patternProperties": {
@@ -158,6 +169,13 @@
         "AutoDisablePolicy": {
           "description": "The auto-disable policy for the image pipeline.",
           "$ref": "#/definitions/AutoDisablePolicy"
+        },
+        "Timezone": {
+          "description": "The timezone that applies to the scheduling expression, for example \"Etc/UTC\" or \"America/Los_Angeles\" in IANA timezone format. If not specified, this defaults to UTC.",
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 100,
+          "pattern": "^[a-zA-Z0-9]{2,}(?:\\/[a-zA-Z0-9\\-_+]+)*$"
         }
       }
     },
@@ -275,7 +293,7 @@
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": true,
+    "cloudFormationSystemTags": false,
     "tagProperty": "/properties/Tags",
     "permissions": [
       "imagebuilder:TagResource",
@@ -292,6 +310,7 @@
         "imagebuilder:TagResource",
         "imagebuilder:GetImagePipeline",
         "imagebuilder:GetImageRecipe",
+        "imagebuilder:GetContainerRecipe",
         "imagebuilder:GetInfrastructureConfiguration",
         "imagebuilder:GetDistributionConfiguration",
         "imagebuilder:CreateImagePipeline",
@@ -304,6 +323,10 @@
         "iam:PassRole",
         "imagebuilder:GetImagePipeline",
         "imagebuilder:UpdateImagePipeline",
+        "imagebuilder:GetImageRecipe",
+        "imagebuilder:GetContainerRecipe",
+        "imagebuilder:GetInfrastructureConfiguration",
+        "imagebuilder:GetDistributionConfiguration",
         "imagebuilder:GetWorkflow",
         "imagebuilder:TagResource",
         "imagebuilder:UntagResource"

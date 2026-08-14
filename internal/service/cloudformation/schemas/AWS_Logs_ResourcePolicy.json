@@ -12,7 +12,10 @@
     },
     "PolicyDocument": {
       "description": "The policy document",
-      "type": "string",
+      "type": [
+        "string",
+        "object"
+      ],
       "pattern": "",
       "minLength": 1,
       "maxLength": 5120

@@ -217,10 +217,19 @@ Optional:
 
 Optional:
 
+- `auto_repair_configuration` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--auto_repair_configuration))
 - `infrastructure_optimization` (Attributes) Defines how Amazon ECS Managed Instances optimizes the infrastructure in your capacity provider. Configure it to turn on or off the infrastructure optimization in your capacity provider, and to control the idle EC2 instances optimization delay. (see [below for nested schema](#nestedatt--managed_instances_provider--infrastructure_optimization))
 - `infrastructure_role_arn` (String)
 - `instance_launch_template` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template))
 - `propagate_tags` (String)
+
+<a id="nestedatt--managed_instances_provider--auto_repair_configuration"></a>
+### Nested Schema for `managed_instances_provider.auto_repair_configuration`
+
+Optional:
+
+- `actions_status` (String)
+
 
 <a id="nestedatt--managed_instances_provider--infrastructure_optimization"></a>
 ### Nested Schema for `managed_instances_provider.infrastructure_optimization`
@@ -235,11 +244,25 @@ Optional:
 
 Optional:
 
+- `capacity_option_type` (String)
+- `capacity_reservations` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template--capacity_reservations))
 - `ec_2_instance_profile_arn` (String)
+- `fips_enabled` (Boolean)
+- `instance_metadata_tags_propagation` (Boolean)
 - `instance_requirements` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template--instance_requirements))
+- `local_storage_configuration` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template--local_storage_configuration))
 - `monitoring` (String)
 - `network_configuration` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template--network_configuration))
 - `storage_configuration` (Attributes) (see [below for nested schema](#nestedatt--managed_instances_provider--instance_launch_template--storage_configuration))
+
+<a id="nestedatt--managed_instances_provider--instance_launch_template--capacity_reservations"></a>
+### Nested Schema for `managed_instances_provider.instance_launch_template.capacity_reservations`
+
+Optional:
+
+- `reservation_group_arn` (String)
+- `reservation_preference` (String)
+
 
 <a id="nestedatt--managed_instances_provider--instance_launch_template--instance_requirements"></a>
 ### Nested Schema for `managed_instances_provider.instance_launch_template.instance_requirements`
@@ -351,6 +374,14 @@ Optional:
 - `max` (Number)
 - `min` (Number)
 
+
+
+<a id="nestedatt--managed_instances_provider--instance_launch_template--local_storage_configuration"></a>
+### Nested Schema for `managed_instances_provider.instance_launch_template.local_storage_configuration`
+
+Optional:
+
+- `use_local_storage` (Boolean)
 
 
 <a id="nestedatt--managed_instances_provider--instance_launch_template--network_configuration"></a>

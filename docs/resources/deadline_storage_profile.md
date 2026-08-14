@@ -2,12 +2,12 @@
 page_title: "awscc_deadline_storage_profile Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Definition of AWS::Deadline::StorageProfile Resource Type
+  Resource Type definition for AWS::Deadline::StorageProfile
 ---
 
 # awscc_deadline_storage_profile (Resource)
 
-Definition of AWS::Deadline::StorageProfile Resource Type
+Resource Type definition for AWS::Deadline::StorageProfile
 
 ## Example Usage
 

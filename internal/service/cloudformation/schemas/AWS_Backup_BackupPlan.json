@@ -72,6 +72,14 @@
           "items": {
             "$ref": "#/definitions/BackupRuleResourceType"
           }
+        },
+        "ScanSettings": {
+          "type": "array",
+          "insertionOrder": true,
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/ScanSettingResourceType"
+          }
         }
       },
       "required": [
@@ -110,6 +118,14 @@
           "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/IndexActionsResourceType"
+          }
+        },
+        "ScanActions": {
+          "type": "array",
+          "insertionOrder": true,
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/ScanActionResourceType"
           }
         },
         "RecoveryPointTags": {
@@ -181,6 +197,46 @@
         }
       }
     },
+    "ScanSettingResourceType": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MalwareScanner": {
+          "$ref": "#/definitions/MalwareScanner"
+        },
+        "ResourceTypes": {
+          "$ref": "#/definitions/ResourceTypes"
+        },
+        "ScannerRoleArn": {
+          "type": "string"
+        }
+      }
+    },
+    "ScanActionResourceType": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MalwareScanner": {
+          "$ref": "#/definitions/MalwareScanner"
+        },
+        "ScanMode": {
+          "$ref": "#/definitions/ScanMode"
+        }
+      }
+    },
+    "ScanMode": {
+      "type": "string",
+      "enum": [
+        "FULL_SCAN",
+        "INCREMENTAL_SCAN"
+      ]
+    },
+    "MalwareScanner": {
+      "type": "string",
+      "enum": [
+        "GUARDDUTY"
+      ]
+    },
     "ResourceTypes": {
       "type": "array",
       "insertionOrder": true,
@@ -219,7 +275,8 @@
       "permissions": [
         "backup:GetBackupPlan",
         "backup:TagResource",
-        "backup:CreateBackupPlan"
+        "backup:CreateBackupPlan",
+        "iam:PassRole"
       ]
     },
     "delete": {
@@ -233,7 +290,8 @@
         "backup:UpdateBackupPlan",
         "backup:ListTags",
         "backup:TagResource",
-        "backup:UntagResource"
+        "backup:UntagResource",
+        "iam:PassRole"
       ]
     },
     "list": {

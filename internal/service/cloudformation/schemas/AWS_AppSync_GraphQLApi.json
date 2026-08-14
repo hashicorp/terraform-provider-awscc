@@ -21,6 +21,7 @@
     },
     "Arn": {
       "description": "The Amazon Resource Name (ARN) of the API key",
+      "pattern": "^arn:.*",
       "type": "string"
     },
     "AuthenticationType": {
@@ -276,19 +277,22 @@
           "description": "The service role that AWS AppSync will assume to publish to Amazon CloudWatch Logs in your account.",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "FieldLogLevel",
+        "CloudWatchLogsRoleArn"
+      ]
     }
   },
   "tagging": {
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": false,
+    "cloudFormationSystemTags": true,
     "tagProperty": "/properties/Tags",
     "permissions": [
       "appsync:TagResource",
-      "appsync:UntagResource",
-      "appsync:ListTagsForResource"
+      "appsync:UntagResource"
     ]
   },
   "required": [
@@ -307,11 +311,26 @@
     "/properties/RealtimeDns",
     "/properties/RealtimeUrl"
   ],
+  "conditionalCreateOnlyProperties": [
+    "/properties/LambdaAuthorizerConfig/AuthorizerResultTtlInSeconds",
+    "/properties/LambdaAuthorizerConfig/AuthorizerUri",
+    "/properties/LambdaAuthorizerConfig/IdentityValidationExpression",
+    "/properties/UserPoolConfig/AppIdClientRegex",
+    "/properties/UserPoolConfig/AwsRegion",
+    "/properties/UserPoolConfig/DefaultAction",
+    "/properties/UserPoolConfig/UserPoolId",
+    "/properties/OpenIDConnectConfig/AuthTTL",
+    "/properties/OpenIDConnectConfig/IatTTL",
+    "/properties/OpenIDConnectConfig/Issuer",
+    "/properties/OpenIDConnectConfig/ClientId"
+  ],
   "handlers": {
     "create": {
       "permissions": [
         "appsync:CreateGraphqlApi",
-        "appsync:TagResource"
+        "appsync:TagResource",
+        "iam:PassRole",
+        "appsync:PutGraphqlApiEnvironmentVariables"
       ]
     },
     "read": {
@@ -326,7 +345,10 @@
         "appsync:GetGraphqlApi",
         "appsync:UpdateGraphqlApi",
         "appsync:TagResource",
-        "appsync:UntagResource"
+        "appsync:UntagResource",
+        "iam:PassRole",
+        "appsync:GetGraphqlApiEnvironmentVariables",
+        "appsync:PutGraphqlApiEnvironmentVariables"
       ]
     },
     "delete": {

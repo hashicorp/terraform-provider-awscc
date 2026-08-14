@@ -3,12 +3,12 @@
 page_title: "awscc_deadline_limit Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Definition of AWS::Deadline::Limit Resource Type
+  Resource Type definition for AWS::Deadline::Limit
 ---
 
 # awscc_deadline_limit (Resource)
 
-Definition of AWS::Deadline::Limit Resource Type
+Resource Type definition for AWS::Deadline::Limit
 
 ## Example Usage
 

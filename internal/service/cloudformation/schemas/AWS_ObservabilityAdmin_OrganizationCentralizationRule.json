@@ -80,6 +80,9 @@
         },
         "SourceLogsConfiguration": {
           "$ref": "#/definitions/SourceLogsConfiguration"
+        },
+        "SourceMetricsConfiguration": {
+          "$ref": "#/definitions/SourceMetricsConfiguration"
         }
       },
       "required": [
@@ -95,6 +98,11 @@
           "minLength": 1,
           "maxLength": 2000
         },
+        "DataSourceSelectionCriteria": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
         "EncryptedLogGroupStrategy": {
           "type": "string",
           "enum": [
@@ -104,9 +112,19 @@
         }
       },
       "required": [
-        "LogGroupSelectionCriteria",
         "EncryptedLogGroupStrategy"
       ],
+      "additionalProperties": false
+    },
+    "SourceMetricsConfiguration": {
+      "type": "object",
+      "properties": {
+        "MetricsSelectionCriteria": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        }
+      },
       "additionalProperties": false
     },
     "CentralizationRuleDestination": {
@@ -120,6 +138,9 @@
         },
         "DestinationLogsConfiguration": {
           "$ref": "#/definitions/DestinationLogsConfiguration"
+        },
+        "DestinationMetricsConfiguration": {
+          "$ref": "#/definitions/DestinationMetricsConfiguration"
         }
       },
       "required": [
@@ -135,8 +156,32 @@
         },
         "BackupConfiguration": {
           "$ref": "#/definitions/LogsBackupConfiguration"
+        },
+        "LogGroupNameConfiguration": {
+          "$ref": "#/definitions/LogGroupNameConfiguration"
         }
       },
+      "additionalProperties": false
+    },
+    "DestinationMetricsConfiguration": {
+      "type": "object",
+      "properties": {
+        "BackupConfiguration": {
+          "$ref": "#/definitions/MetricsBackupConfiguration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "MetricsBackupConfiguration": {
+      "type": "object",
+      "properties": {
+        "Region": {
+          "$ref": "#/definitions/Region"
+        }
+      },
+      "required": [
+        "Region"
+      ],
       "additionalProperties": false
     },
     "LogsEncryptionConfiguration": {
@@ -158,6 +203,13 @@
             "ALLOW",
             "SKIP"
           ]
+        },
+        "EncryptionScope": {
+          "type": "string",
+          "enum": [
+            "ENCRYPTED_SOURCE_ONLY",
+            "NEW_DESTINATION_LOG_GROUPS"
+          ]
         }
       },
       "required": [
@@ -177,6 +229,21 @@
       },
       "required": [
         "Region"
+      ],
+      "additionalProperties": false
+    },
+    "LogGroupNameConfiguration": {
+      "type": "object",
+      "properties": {
+        "LogGroupNamePattern": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "^(?:[\\._\\-/#A-Za-z0-9]+|\\$\\{[A-Za-z]+(?:\\.[A-Za-z]+){1,2}\\})+$"
+        }
+      },
+      "required": [
+        "LogGroupNamePattern"
       ],
       "additionalProperties": false
     }

@@ -25,6 +25,7 @@ AWS::NetworkManager::TransitGatewayRouteTableAttachment Resource Type definition
 - `network_function_group_name` (String) The name of the network function group attachment.
 - `proposed_network_function_group_change` (Attributes) The attachment to move from one network function group to another. (see [below for nested schema](#nestedatt--proposed_network_function_group_change))
 - `proposed_segment_change` (Attributes) The attachment to move from one segment to another. (see [below for nested schema](#nestedatt--proposed_segment_change))
+- `routing_policy_label` (String) Routing policy label
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

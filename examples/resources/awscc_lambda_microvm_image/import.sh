@@ -1,0 +1,1 @@
+$ terraform import awscc_lambda_microvm_image.example "image_arn"

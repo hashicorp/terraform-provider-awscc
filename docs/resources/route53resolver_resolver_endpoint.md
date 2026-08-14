@@ -126,12 +126,16 @@ resource "awscc_route53resolver_resolver_endpoint" "example" {
 
 ### Optional
 
+- `dns_64_enabled` (Boolean) Specifies whether DNS64 is enabled for the Inbound Resolver Endpoint. When set to true, if a DNS AAAA query is made for a domain that has only an A (IPv4) record, the resolver automatically synthesizes an AAAA (IPv6) response by embedding the IPv4 address into the well-known prefix 64:ff9b::/96. Default is false.
+- `ipv_6_internet_access_enabled` (Boolean) Specifies whether IPv6 Internet Gateway access is enabled through the Outbound Resolver Endpoint. When set to true, this property allows your Endpoint ENIs to reach public IPv6 target nameservers through an internet gateway. Default is false.
 - `name` (String) A friendly name that lets you easily find a configuration in the Resolver dashboard in the Route 53 console.
 - `outpost_arn` (String) The ARN (Amazon Resource Name) for the Outpost.
 - `preferred_instance_type` (String) The Amazon EC2 instance type.
 - `protocols` (List of String) Protocols used for the endpoint. DoH-FIPS is applicable for inbound endpoints only.
 - `resolver_endpoint_type` (String) The Resolver endpoint IP address type.
+- `rni_enhanced_metrics_enabled` (Boolean) Specifies whether RNI enhanced metrics are enabled for the Resolver Endpoints. When set to true, one-minute granular metrics are published in CloudWatch for each RNI associated with this endpoint. When set to false, metrics are not published. Default is false.
 - `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `target_name_server_metrics_enabled` (Boolean) Specifies whether target name server metrics are enabled for the Outbound Resolver Endpoint. When set to true, one-minute granular metrics are published in CloudWatch for each target name server associated with this endpoint. When set to false, metrics are not published. Default is false.
 
 ### Read-Only
 

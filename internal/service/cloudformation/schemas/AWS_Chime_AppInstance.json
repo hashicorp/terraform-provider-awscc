@@ -1,0 +1,126 @@
+{
+  "typeName": "AWS::Chime::AppInstance",
+  "description": "Resource Type definition for AWS::Chime::AppInstance",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {
+    "Tag": {
+      "description": "A tag object containing a key-value pair.",
+      "type": "object",
+      "properties": {
+        "Key": {
+          "description": "The key in a tag.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "description": "The value in a tag.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "AppInstanceArn": {
+      "description": "The Amazon Resource Number (ARN) of the AppInstance.",
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 1600
+    },
+    "Name": {
+      "description": "The name of the AppInstance.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "Metadata": {
+      "description": "The metadata of the AppInstance. Limited to a 1KB string in UTF-8.",
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 1024
+    },
+    "CreatedTimestamp": {
+      "description": "The time at which an AppInstance was created. In epoch milliseconds.",
+      "type": "number"
+    },
+    "LastUpdatedTimestamp": {
+      "description": "The time an AppInstance was last updated. In epoch milliseconds.",
+      "type": "number"
+    },
+    "Tags": {
+      "description": "Tags assigned to the AppInstance.",
+      "type": "array",
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "Name"
+  ],
+  "readOnlyProperties": [
+    "/properties/AppInstanceArn",
+    "/properties/CreatedTimestamp",
+    "/properties/LastUpdatedTimestamp"
+  ],
+  "primaryIdentifier": [
+    "/properties/AppInstanceArn"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "chime:CreateAppInstance",
+        "chime:DescribeAppInstance",
+        "chime:TagResource",
+        "chime:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "chime:DescribeAppInstance",
+        "chime:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "chime:UpdateAppInstance",
+        "chime:DescribeAppInstance",
+        "chime:TagResource",
+        "chime:UntagResource",
+        "chime:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "chime:DeleteAppInstance",
+        "chime:DescribeAppInstance"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "chime:ListAppInstances"
+      ]
+    }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "chime:TagResource",
+      "chime:UntagResource",
+      "chime:ListTagsForResource"
+    ]
+  }
+}

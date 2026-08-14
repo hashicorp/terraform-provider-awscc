@@ -3,12 +3,12 @@
 page_title: "awscc_deadline_fleet Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Definition of AWS::Deadline::Fleet Resource Type
+  Resource Type definition for AWS::Deadline::Fleet
 ---
 
 # awscc_deadline_fleet (Resource)
 
-Definition of AWS::Deadline::Fleet Resource Type
+Resource Type definition for AWS::Deadline::Fleet
 
 ## Example Usage
 
@@ -142,10 +142,21 @@ Optional:
 
 Optional:
 
+- `auto_scaling_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--customer_managed--auto_scaling_configuration))
 - `mode` (String)
 - `storage_profile_id` (String)
 - `tag_propagation_mode` (String)
 - `worker_capabilities` (Attributes) (see [below for nested schema](#nestedatt--configuration--customer_managed--worker_capabilities))
+
+<a id="nestedatt--configuration--customer_managed--auto_scaling_configuration"></a>
+### Nested Schema for `configuration.customer_managed.auto_scaling_configuration`
+
+Optional:
+
+- `scale_out_workers_per_minute` (Number)
+- `standby_worker_count` (Number)
+- `worker_idle_duration_seconds` (Number)
+
 
 <a id="nestedatt--configuration--customer_managed--worker_capabilities"></a>
 ### Nested Schema for `configuration.customer_managed.worker_capabilities`
@@ -224,10 +235,22 @@ Optional:
 
 Optional:
 
+- `auto_scaling_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--auto_scaling_configuration))
 - `instance_capabilities` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--instance_capabilities))
 - `instance_market_options` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--instance_market_options))
+- `persistent_volume_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--persistent_volume_configuration))
 - `storage_profile_id` (String)
 - `vpc_configuration` (Attributes) (see [below for nested schema](#nestedatt--configuration--service_managed_ec_2--vpc_configuration))
+
+<a id="nestedatt--configuration--service_managed_ec_2--auto_scaling_configuration"></a>
+### Nested Schema for `configuration.service_managed_ec_2.auto_scaling_configuration`
+
+Optional:
+
+- `scale_out_workers_per_minute` (Number)
+- `standby_worker_count` (Number)
+- `worker_idle_duration_seconds` (Number)
+
 
 <a id="nestedatt--configuration--service_managed_ec_2--instance_capabilities"></a>
 ### Nested Schema for `configuration.service_managed_ec_2.instance_capabilities`
@@ -326,6 +349,18 @@ Optional:
 Optional:
 
 - `type` (String)
+
+
+<a id="nestedatt--configuration--service_managed_ec_2--persistent_volume_configuration"></a>
+### Nested Schema for `configuration.service_managed_ec_2.persistent_volume_configuration`
+
+Optional:
+
+- `iops` (Number)
+- `last_used_ttl_hours` (Number)
+- `mount_path` (String)
+- `size_gi_b` (Number)
+- `throughput_mi_b` (Number)
 
 
 <a id="nestedatt--configuration--service_managed_ec_2--vpc_configuration"></a>

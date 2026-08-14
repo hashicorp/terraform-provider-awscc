@@ -1,0 +1,4 @@
+import {
+  to = awscc_timestream_influx_db_cluster.example
+  id = "id"
+}

@@ -59,6 +59,7 @@ resource "awscc_rds_db_subnet_group" "example" {
 
 ### Read-Only
 
+- `db_subnet_group_arn` (String)
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--tags"></a>

@@ -31,6 +31,9 @@ Resource Type definition for AWS::AppStream::ImageBuilder
 - `iam_role_arn` (String)
 - `image_arn` (String)
 - `image_name` (String)
+- `root_volume_config` (Attributes) (see [below for nested schema](#nestedatt--root_volume_config))
+- `softwares_to_install` (List of String)
+- `softwares_to_uninstall` (List of String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `vpc_config` (Attributes) (see [below for nested schema](#nestedatt--vpc_config))
 
@@ -55,6 +58,14 @@ Optional:
 
 - `directory_name` (String)
 - `organizational_unit_distinguished_name` (String)
+
+
+<a id="nestedatt--root_volume_config"></a>
+### Nested Schema for `root_volume_config`
+
+Optional:
+
+- `volume_size_in_gb` (Number)
 
 
 <a id="nestedatt--tags"></a>
