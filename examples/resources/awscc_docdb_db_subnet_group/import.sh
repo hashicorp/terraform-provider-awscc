@@ -1,0 +1,1 @@
+$ terraform import awscc_docdb_db_subnet_group.example "db_subnet_group_name"

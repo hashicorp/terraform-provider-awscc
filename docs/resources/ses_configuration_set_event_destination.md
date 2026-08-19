@@ -93,7 +93,8 @@ In Terraform v1.12.0 and later, the [`import` block](https://developer.hashicorp
 import {
   to = awscc_ses_configuration_set_event_destination.example
   identity = {
-    id = "id"
+    id                     = "id"
+    configuration_set_name = "configuration_set_name"
   }
 }
 ```
@@ -103,6 +104,7 @@ import {
 
 #### Required
 
+- `configuration_set_name` (String) The name of the configuration set that contains the event destination
 - `id` (String)
 
 #### Optional
@@ -115,12 +117,12 @@ In Terraform v1.5.0 and later, the [`import` block](https://developer.hashicorp.
 ```terraform
 import {
   to = awscc_ses_configuration_set_event_destination.example
-  id = "id"
+  id = "id|configuration_set_name"
 }
 ```
 
 The [`terraform import` command](https://developer.hashicorp.com/terraform/cli/commands/import) can be used, for example:
 
 ```shell
-$ terraform import awscc_ses_configuration_set_event_destination.example "id"
+$ terraform import awscc_ses_configuration_set_event_destination.example "id|configuration_set_name"
 ```

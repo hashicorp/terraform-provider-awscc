@@ -1,0 +1,1 @@
+$ terraform import awscc_wellarchitected_workload.example "workload_arn"

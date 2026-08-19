@@ -55,6 +55,8 @@ resource "awscc_connect_queue" "example" {
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+- `last_modified_region` (String) The AWS Region where this resource was last modified.
+- `last_modified_time` (Number) The timestamp when this resource was last modified.
 - `queue_arn` (String) The Amazon Resource Name (ARN) for the queue.
 - `type` (String) The type of queue.
 

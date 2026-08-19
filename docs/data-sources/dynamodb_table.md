@@ -329,6 +329,7 @@ Read-Only:
   +  ``NEW_IMAGE`` - The entire item, as it appears after it was modified, is written to the stream.
   +  ``OLD_IMAGE`` - The entire item, as it appeared before it was modified, is written to the stream.
   +  ``NEW_AND_OLD_IMAGES`` - Both the new and the old item images of the item are written to the stream.
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--stream_specification--tags))
 
 <a id="nestedatt--stream_specification--resource_policy"></a>
 ### Nested Schema for `stream_specification.resource_policy`
@@ -336,6 +337,15 @@ Read-Only:
 Read-Only:
 
 - `policy_document` (String) A resource-based policy document that contains permissions to add to the specified DDB table, index, or both. In a CFNshort template, you can provide the policy in JSON or YAML format because CFNshort converts YAML to JSON before submitting it to DDB. For more information about resource-based policies, see [Using resource-based policies for](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/access-control-resource-based.html) and [Resource-based policy examples](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/rbac-examples.html).
+
+
+<a id="nestedatt--stream_specification--tags"></a>
+### Nested Schema for `stream_specification.tags`
+
+Read-Only:
+
+- `key` (String) The key of the tag. Tag keys are case sensitive. Each DynamoDB table can only have up to one tag with the same key. If you try to add an existing tag (same key), the existing tag value will be updated to the new value.
+- `value` (String) The value of the tag. Tag values are case-sensitive and can be null.
 
 
 

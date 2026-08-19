@@ -27,6 +27,7 @@ Data Source schema for AWS::Personalize::Dataset
 - `dataset_type` (String) The type of dataset
 - `name` (String) The name for the dataset
 - `schema_arn` (String) The ARN of the schema to associate with the dataset. The schema defines the dataset fields.
+- `tags` (Attributes List) The tags used to organize, track, or control access for this resource. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--dataset_import_job"></a>
 ### Nested Schema for `dataset_import_job`
@@ -45,3 +46,13 @@ Read-Only:
 Read-Only:
 
 - `data_location` (String) The path to the Amazon S3 bucket where the data that you want to upload to your dataset is stored.
+
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)

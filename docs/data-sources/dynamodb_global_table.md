@@ -360,6 +360,7 @@ Read-Only:
 Read-Only:
 
 - `resource_policy` (Attributes) (see [below for nested schema](#nestedatt--replicas--replica_stream_specification--resource_policy))
+- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--replicas--replica_stream_specification--tags))
 
 <a id="nestedatt--replicas--replica_stream_specification--resource_policy"></a>
 ### Nested Schema for `replicas.replica_stream_specification.resource_policy`
@@ -367,6 +368,15 @@ Read-Only:
 Read-Only:
 
 - `policy_document` (String)
+
+
+<a id="nestedatt--replicas--replica_stream_specification--tags"></a>
+### Nested Schema for `replicas.replica_stream_specification.tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)
 
 
 

@@ -1,0 +1,1 @@
+$ terraform import awscc_inspectorv2_connector.example "connector_arn"

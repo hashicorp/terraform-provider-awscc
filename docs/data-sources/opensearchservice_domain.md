@@ -350,6 +350,7 @@ Read-Only:
 Read-Only:
 
 - `auto_software_update_enabled` (Boolean)
+- `use_latest_service_software_for_blue_green` (Boolean)
 
 
 <a id="nestedatt--tags"></a>

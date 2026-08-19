@@ -1,0 +1,1 @@
+$ terraform import awscc_quicksight_limits_profile.example "account_id|profile_id"

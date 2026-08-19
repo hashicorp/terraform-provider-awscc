@@ -61,6 +61,7 @@ Read-Only:
 - `destination_pattern` (String) Pattern for telemetry data destination
 - `destination_type` (String) Type of telemetry destination
 - `elb_load_balancer_logging_parameters` (Attributes) Telemetry parameters for ELB/NLB Load Balancer Logs (see [below for nested schema](#nestedatt--rule--destination_configuration--elb_load_balancer_logging_parameters))
+- `kms_key_arn` (String) The Amazon Resource Name (ARN) of the customer-managed AWS KMS key used to encrypt the destination log groups specified in the Telemetry Rule.
 - `log_delivery_parameters` (Attributes) Parameters for log delivery configuration (see [below for nested schema](#nestedatt--rule--destination_configuration--log_delivery_parameters))
 - `retention_in_days` (Number) Number of days to retain the telemetry data in the specified destination
 - `vpc_flow_log_parameters` (Attributes) Telemetry parameters for VPC Flow logs (see [below for nested schema](#nestedatt--rule--destination_configuration--vpc_flow_log_parameters))

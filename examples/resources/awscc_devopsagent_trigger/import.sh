@@ -1,0 +1,1 @@
+$ terraform import awscc_devopsagent_trigger.example "agent_space_id|trigger_id"

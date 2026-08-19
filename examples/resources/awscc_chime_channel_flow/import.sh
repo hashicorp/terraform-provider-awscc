@@ -1,0 +1,1 @@
+$ terraform import awscc_chime_channel_flow.example "arn"
