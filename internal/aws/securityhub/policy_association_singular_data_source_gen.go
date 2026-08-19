@@ -41,7 +41,8 @@ func policyAssociationDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "enum": [
 		//	    "SUCCESS",
 		//	    "PENDING",
-		//	    "FAILED"
+		//	    "FAILED",
+		//	    "DISABLED"
 		//	  ],
 		//	  "type": "string"
 		//	}

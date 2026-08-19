@@ -27,7 +27,7 @@ func trustStoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "",
-		//	  "pattern": "^arn:aws:cloudfront::[0-9]{12}:trust-store/[A-Za-z0-9_]+$",
+		//	  "pattern": "^arn:aws(-[a-z]+)*:cloudfront::[0-9]{12}:trust-store/[A-Za-z0-9_]+$",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/

@@ -25,6 +25,8 @@ Data Source schema for AWS::Connect::Queue
 - `description` (String) The description of the queue.
 - `hours_of_operation_arn` (String) The identifier for the hours of operation.
 - `instance_arn` (String) The identifier of the Amazon Connect instance.
+- `last_modified_region` (String) The AWS Region where this resource was last modified.
+- `last_modified_time` (Number) The timestamp when this resource was last modified.
 - `max_contacts` (Number) The maximum number of contacts that can be in the queue before it is considered full.
 - `name` (String) The name of the queue.
 - `outbound_caller_config` (Attributes) The outbound caller ID name, number, and outbound whisper flow. (see [below for nested schema](#nestedatt--outbound_caller_config))

@@ -1,0 +1,188 @@
+{
+  "typeName": "AWS::DevOpsAgent::Asset",
+  "description": "Resource Type definition for AWS::DevOpsAgent::Asset. An asset attached to an existing AWS DevOps Agent Space. Customer-creatable types include skill, agents_md, and attachment; call ListAssetTypes for the current authoritative set.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {
+    "AssetFile": {
+      "description": "A single file inside an Asset's bundle. Path is the diff key on update; Content is write-only and not repopulated by Read.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Path": {
+          "description": "Path of this file within the asset bundle.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512,
+          "pattern": "^[a-zA-Z0-9_./-]+$"
+        },
+        "ContentText": {
+          "description": "UTF-8 text contents of the file. Mutually exclusive with ContentBytes (max 1.5 MiB).",
+          "type": "string",
+          "maxLength": 1572864
+        },
+        "ContentBytes": {
+          "description": "Base64-encoded binary contents of the file. Mutually exclusive with ContentText (max 6 MiB).",
+          "type": "string",
+          "maxLength": 8388608
+        },
+        "Metadata": {
+          "description": "Per-file metadata document. Values may be strings, numbers, booleans, or lists of any of those (validated server-side).",
+          "type": "object"
+        }
+      },
+      "required": [
+        "Path"
+      ],
+      "oneOf": [
+        {
+          "required": [
+            "ContentText"
+          ]
+        },
+        {
+          "required": [
+            "ContentBytes"
+          ]
+        }
+      ]
+    }
+  },
+  "properties": {
+    "AgentSpaceId": {
+      "description": "The unique identifier of the parent Agent Space. The asset is created as a child of this agent space.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "AssetType": {
+      "description": "The type of asset. The Asset API treats this as an open string; call ListAssetTypes for the current authoritative set of supported types. As of launch, customer-creatable types include skill, agents_md, and attachment.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[a-z][a-z0-9_]*$"
+    },
+    "AssetId": {
+      "description": "The unique identifier of the asset (assigned by the service on Create).",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "Metadata": {
+      "description": "Asset metadata document. Required and optional keys depend on AssetType. Values may be strings, numbers, booleans, or lists of any of those - validated server-side; see the public Asset API docs for the per-type metadata schema.",
+      "type": "object"
+    },
+    "Files": {
+      "description": "Inline file list. Mutually exclusive with Zip; enforced by the handler at Create/Update time. Write-only: not repopulated by Read.",
+      "type": "array",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "minItems": 1,
+      "items": {
+        "$ref": "#/definitions/AssetFile"
+      }
+    },
+    "Zip": {
+      "description": "Base64-encoded zip bundle containing all files for the asset. Mutually exclusive with Files; enforced by the handler at Create/Update time. Write-only: not repopulated by Read. Server treats a zip as 'replace all files' (max 6 MiB).",
+      "type": "string",
+      "maxLength": 8388608
+    },
+    "Version": {
+      "description": "The current asset version. Server-managed; bumps on every successful Update (including no-op updates). This is the drift signal for change detection.",
+      "type": "integer",
+      "minimum": 1
+    },
+    "CreatedAt": {
+      "description": "The timestamp when the asset was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "UpdatedAt": {
+      "description": "The timestamp when the asset was last updated.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "Arn": {
+      "description": "The Amazon Resource Name (ARN) of the asset. Nested under the parent Agent Space: arn:<partition>:aidevops:<region>:<account-id>:agentspace/<agentspace-id>/asset/<asset-id>.",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "AgentSpaceId",
+    "AssetType"
+  ],
+  "readOnlyProperties": [
+    "/properties/AssetId",
+    "/properties/Version",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt",
+    "/properties/Arn"
+  ],
+  "createOnlyProperties": [
+    "/properties/AgentSpaceId",
+    "/properties/AssetType"
+  ],
+  "writeOnlyProperties": [
+    "/properties/Files",
+    "/properties/Zip"
+  ],
+  "primaryIdentifier": [
+    "/properties/AgentSpaceId",
+    "/properties/AssetId"
+  ],
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "aidevops:CreateAsset",
+        "aidevops:GetAsset",
+        "aidevops:CreateAssetFile",
+        "aidevops:DeleteAssetFile",
+        "aidevops:DeleteAsset"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "aidevops:GetAsset"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "aidevops:GetAsset",
+        "aidevops:GetAssetContent",
+        "aidevops:GetAssetFile",
+        "aidevops:UpdateAsset",
+        "aidevops:CreateAssetFile",
+        "aidevops:UpdateAssetFile",
+        "aidevops:DeleteAssetFile",
+        "aidevops:ListAssetFiles"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "aidevops:DeleteAsset",
+        "aidevops:GetAsset"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "aidevops:ListAssets"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "AgentSpaceId": {
+            "$ref": "resource-schema.json#/properties/AgentSpaceId"
+          }
+        },
+        "required": [
+          "AgentSpaceId"
+        ]
+      }
+    }
+  }
+}

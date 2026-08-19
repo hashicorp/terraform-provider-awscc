@@ -89,7 +89,8 @@
     "tagProperty": "/properties/Tags",
     "permissions": [
       "connect:TagResource",
-      "connect:UntagResource"
+      "connect:UntagResource",
+      "connect:DescribeTrafficDistributionGroup"
     ]
   },
   "additionalProperties": false,
@@ -124,6 +125,7 @@
     },
     "update": {
       "permissions": [
+        "connect:DescribeTrafficDistributionGroup",
         "connect:TagResource",
         "connect:UntagResource"
       ]

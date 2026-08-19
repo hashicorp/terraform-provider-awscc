@@ -1,0 +1,254 @@
+{
+  "typeName": "AWS::QuickSight::DLPSetting",
+  "description": "Definition of the AWS::QuickSight::DLPSetting Resource Type.",
+  "definitions": {
+    "DlpAction": {
+      "type": "string",
+      "enum": [
+        "ALLOW",
+        "WARN",
+        "BLOCK"
+      ]
+    },
+    "DlpProviderType": {
+      "type": "string",
+      "enum": [
+        "MICROSOFT_PURVIEW"
+      ]
+    },
+    "DlpSettingStatus": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "INACTIVE"
+      ]
+    },
+    "LabelActionMapping": {
+      "type": "object",
+      "properties": {
+        "LabelId": {
+          "type": "string",
+          "maxLength": 512,
+          "minLength": 1
+        },
+        "LabelName": {
+          "type": "string",
+          "maxLength": 512,
+          "minLength": 1
+        },
+        "Action": {
+          "$ref": "#/definitions/DlpAction"
+        }
+      },
+      "required": [
+        "Action",
+        "LabelId",
+        "LabelName"
+      ],
+      "additionalProperties": false
+    },
+    "MicrosoftPurviewCredentials": {
+      "type": "object",
+      "properties": {
+        "SecretArn": {
+          "type": "string",
+          "pattern": "^arn:aws(-[\\w]+)*:secretsmanager:[a-z0-9\\-]+:\\d{12}:secret:.+$"
+        }
+      },
+      "required": [
+        "SecretArn"
+      ],
+      "additionalProperties": false
+    },
+    "MicrosoftPurviewProviderConfig": {
+      "type": "object",
+      "properties": {
+        "Credentials": {
+          "$ref": "#/definitions/MicrosoftPurviewCredentials"
+        },
+        "LabelActionMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LabelActionMapping"
+          },
+          "maxItems": 100
+        },
+        "UnmappedAction": {
+          "$ref": "#/definitions/DlpAction"
+        }
+      },
+      "required": [
+        "Credentials",
+        "LabelActionMappings",
+        "UnmappedAction"
+      ],
+      "additionalProperties": false
+    },
+    "ProviderConfig": {
+      "oneOf": [
+        {
+          "type": "object",
+          "title": "MicrosoftPurview",
+          "properties": {
+            "MicrosoftPurview": {
+              "$ref": "#/definitions/MicrosoftPurviewProviderConfig"
+            }
+          },
+          "required": [
+            "MicrosoftPurview"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Tag": {
+      "type": "object",
+      "description": "<p>The key or keys of the key-value pairs for the resource tag or tags assigned to the\n            resource.</p>",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1,
+          "description": "<p>Tag key.</p>"
+        },
+        "Value": {
+          "type": "string",
+          "maxLength": 256,
+          "minLength": 1,
+          "description": "<p>Tag value.</p>"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Arn": {
+      "type": "string"
+    },
+    "AwsAccountId": {
+      "type": "string",
+      "maxLength": 12,
+      "minLength": 12,
+      "pattern": "^[0-9]{12}$"
+    },
+    "CreatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "DlpSettingId": {
+      "type": "string",
+      "maxLength": 256,
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9\\-_]+$"
+    },
+    "Enabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "Name": {
+      "type": "string",
+      "maxLength": 255,
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9](?:[\\w- &]*[A-Za-z0-9])?$"
+    },
+    "ProviderConfig": {
+      "$ref": "#/definitions/ProviderConfig"
+    },
+    "ProviderOutageAction": {
+      "$ref": "#/definitions/DlpAction"
+    },
+    "ProviderType": {
+      "$ref": "#/definitions/DlpProviderType"
+    },
+    "Status": {
+      "$ref": "#/definitions/DlpSettingStatus"
+    },
+    "Tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 200,
+      "minItems": 1
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "DlpSettingId",
+    "Name",
+    "ProviderType",
+    "ProviderConfig",
+    "ProviderOutageAction",
+    "Enabled"
+  ],
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/CreatedAt",
+    "/properties/Status",
+    "/properties/UpdatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/AwsAccountId",
+    "/properties/DlpSettingId"
+  ],
+  "primaryIdentifier": [
+    "/properties/AwsAccountId",
+    "/properties/DlpSettingId"
+  ],
+  "handlers": {
+    "create": {
+      "permissions": [
+        "quicksight:CreateDlpSetting",
+        "quicksight:DescribeDlpSetting",
+        "quicksight:TagResource",
+        "quicksight:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "quicksight:DescribeDlpSetting",
+        "quicksight:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "quicksight:UpdateDlpSetting",
+        "quicksight:DescribeDlpSetting",
+        "quicksight:TagResource",
+        "quicksight:UntagResource",
+        "quicksight:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "quicksight:DeleteDlpSetting",
+        "quicksight:DescribeDlpSetting"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "quicksight:ListDlpSettings"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "quicksight:TagResource",
+      "quicksight:UntagResource",
+      "quicksight:ListTagsForResource"
+    ]
+  }
+}

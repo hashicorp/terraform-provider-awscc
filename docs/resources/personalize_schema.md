@@ -60,11 +60,20 @@ resource "awscc_personalize_schema" "example" {
 ### Optional
 
 - `domain` (String) The domain of a Domain dataset group.
+- `tags` (Attributes List) The tags used to organize, track, or control access for this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
 - `schema_arn` (String) Arn for the schema.
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
 
 ## Import
 

@@ -410,6 +410,14 @@
       "properties": {
         "ResourcePolicy": {
           "$ref": "#/definitions/ResourcePolicy"
+        },
+        "Tags": {
+          "uniqueItems": true,
+          "insertionOrder": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          }
         }
       }
     },

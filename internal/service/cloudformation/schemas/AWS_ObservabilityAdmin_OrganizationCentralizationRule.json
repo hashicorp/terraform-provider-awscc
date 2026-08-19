@@ -203,13 +203,6 @@
             "ALLOW",
             "SKIP"
           ]
-        },
-        "EncryptionScope": {
-          "type": "string",
-          "enum": [
-            "ENCRYPTED_SOURCE_ONLY",
-            "NEW_DESTINATION_LOG_GROUPS"
-          ]
         }
       },
       "required": [

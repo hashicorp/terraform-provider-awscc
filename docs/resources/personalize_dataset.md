@@ -118,6 +118,7 @@ resource "awscc_personalize_dataset" "dataset_items" {
 ### Optional
 
 - `dataset_import_job` (Attributes) Initial DatasetImportJob for the created dataset (see [below for nested schema](#nestedatt--dataset_import_job))
+- `tags` (Attributes List) The tags used to organize, track, or control access for this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -141,6 +142,16 @@ Optional:
 Optional:
 
 - `data_location` (String) The path to the Amazon S3 bucket where the data that you want to upload to your dataset is stored.
+
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
 
 ## Import
 

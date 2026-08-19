@@ -1,0 +1,102 @@
+{
+  "typeName": "AWS::DMS::ReplicationSubnetGroup",
+  "description": "Resource Type definition for AWS::DMS::ReplicationSubnetGroup",
+  "additionalProperties": false,
+  "properties": {
+    "ReplicationSubnetGroupDescription": {
+      "type": "string",
+      "description": "The description for the subnet group."
+    },
+    "ReplicationSubnetGroupIdentifier": {
+      "type": "string",
+      "description": "The name for the replication subnet group. This value is stored as a lowercase string."
+    },
+    "SubnetIds": {
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "type": "string"
+      },
+      "description": "One or more subnet IDs to be assigned to the replication subnet group."
+    },
+    "Tags": {
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "description": "One or more tags to be assigned to the replication subnet group"
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    }
+  },
+  "required": [
+    "ReplicationSubnetGroupDescription",
+    "SubnetIds"
+  ],
+  "createOnlyProperties": [
+    "/properties/ReplicationSubnetGroupIdentifier"
+  ],
+  "primaryIdentifier": [
+    "/properties/ReplicationSubnetGroupIdentifier"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "dms:AddTagsToResource",
+      "dms:ListTagsForResource",
+      "dms:RemoveTagsFromResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "dms:CreateReplicationSubnetGroup",
+        "dms:AddTagsToResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "dms:DescribeReplicationSubnetGroups",
+        "dms:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "dms:ModifyReplicationSubnetGroup",
+        "dms:AddTagsToResource",
+        "dms:RemoveTagsFromResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "dms:DeleteReplicationSubnetGroup"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "dms:DescribeReplicationSubnetGroups"
+      ]
+    }
+  }
+}

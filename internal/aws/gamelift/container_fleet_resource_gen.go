@@ -1304,7 +1304,8 @@ func containerFleetResource(ctx context.Context) (resource.Resource, error) {
 		//	    "ACTIVATING",
 		//	    "ACTIVE",
 		//	    "UPDATING",
-		//	    "DELETING"
+		//	    "DELETING",
+		//	    "EXPIRED"
 		//	  ],
 		//	  "type": "string"
 		//	}

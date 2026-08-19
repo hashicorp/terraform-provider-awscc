@@ -125,15 +125,6 @@ func eC2FleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                        "type": "integer"
 		//	                      },
 		//	                      "VolumeType": {
-		//	                        "enum": [
-		//	                          "gp2",
-		//	                          "gp3",
-		//	                          "io1",
-		//	                          "io2",
-		//	                          "sc1",
-		//	                          "st1",
-		//	                          "standard"
-		//	                        ],
 		//	                        "type": "string"
 		//	                      }
 		//	                    },

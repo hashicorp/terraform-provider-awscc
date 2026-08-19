@@ -1,8 +1,93 @@
-## 1.98.0 (Unreleased)
+## 1.98.0 (August 19, 2026)
 
 NOTES:
 
 * provider: The provider level retry handling added for `ThrottlingException` errors is a temporary measure to work around the absence of retry handling in the upstream AWS service SDK. This is being tracked in an [upstream Go SDK issue](https://github.com/aws/aws-sdk-go-v2/issues/3248). Once this addressed upstream, the provider retry handling will be reverted.
+
+FEATURES:
+
+* **New Data Source:** `awscc_accountaccess_application`
+* **New Data Source:** `awscc_accountaccess_applications`
+* **New Data Source:** `awscc_accountaccess_entitlement`
+* **New Data Source:** `awscc_agentregistry_registries`
+* **New Data Source:** `awscc_agentregistry_registry`
+* **New Data Source:** `awscc_agentregistry_registry_record`
+* **New Data Source:** `awscc_apigatewayv2_api_gateway_managed_overrides`
+* **New Data Source:** `awscc_chime_channel_flow`
+* **New Data Source:** `awscc_connect_metric`
+* **New Data Source:** `awscc_connect_metrics`
+* **New Data Source:** `awscc_devopsagent_asset`
+* **New Data Source:** `awscc_devopsagent_trigger`
+* **New Data Source:** `awscc_dms_replication_subnet_group`
+* **New Data Source:** `awscc_dms_replication_subnet_groups`
+* **New Data Source:** `awscc_docdb_db_subnet_group`
+* **New Data Source:** `awscc_docdb_db_subnet_groups`
+* **New Data Source:** `awscc_drs_source_network`
+* **New Data Source:** `awscc_drs_source_networks`
+* **New Data Source:** `awscc_dynamodb_backup`
+* **New Data Source:** `awscc_dynamodb_backups`
+* **New Data Source:** `awscc_eks_certificate_authority`
+* **New Data Source:** `awscc_glue_ml_transform`
+* **New Data Source:** `awscc_glue_ml_transforms`
+* **New Data Source:** `awscc_inspectorv2_connector`
+* **New Data Source:** `awscc_inspectorv2_connectors`
+* **New Data Source:** `awscc_logs_storage_tier_policies`
+* **New Data Source:** `awscc_logs_storage_tier_policy`
+* **New Data Source:** `awscc_quicksight_dlp_setting`
+* **New Data Source:** `awscc_quicksight_dlp_settings`
+* **New Data Source:** `awscc_quicksight_limits_profile`
+* **New Data Source:** `awscc_quicksight_limits_profiles`
+* **New Data Source:** `awscc_servicediscovery_private_dns_namespace`
+* **New Data Source:** `awscc_servicediscovery_private_dns_namespaces`
+* **New Data Source:** `awscc_servicediscovery_public_dns_namespace`
+* **New Data Source:** `awscc_servicediscovery_public_dns_namespaces`
+* **New Data Source:** `awscc_ses_receipt_filter`
+* **New Data Source:** `awscc_ses_receipt_filters`
+* **New Data Source:** `awscc_ses_receipt_rule_set`
+* **New Data Source:** `awscc_ses_receipt_rule_sets`
+* **New Data Source:** `awscc_wellarchitected_workload`
+* **New Data Source:** `awscc_wellarchitected_workloads`
+* **New List Resource:** `awscc_accountaccess_application`
+* **New List Resource:** `awscc_agentregistry_registry`
+* **New List Resource:** `awscc_connect_metric`
+* **New List Resource:** `awscc_dms_replication_subnet_group`
+* **New List Resource:** `awscc_docdb_db_subnet_group`
+* **New List Resource:** `awscc_drs_source_network`
+* **New List Resource:** `awscc_dynamodb_backup`
+* **New List Resource:** `awscc_glue_ml_transform`
+* **New List Resource:** `awscc_inspectorv2_connector`
+* **New List Resource:** `awscc_logs_storage_tier_policy`
+* **New List Resource:** `awscc_quicksight_dlp_setting`
+* **New List Resource:** `awscc_quicksight_limits_profile`
+* **New List Resource:** `awscc_servicediscovery_private_dns_namespace`
+* **New List Resource:** `awscc_servicediscovery_public_dns_namespace`
+* **New List Resource:** `awscc_ses_receipt_filter`
+* **New List Resource:** `awscc_ses_receipt_rule_set`
+* **New List Resource:** `awscc_wellarchitected_workload`
+* **New Resource:** `awscc_accountaccess_application`
+* **New Resource:** `awscc_accountaccess_entitlement`
+* **New Resource:** `awscc_agentregistry_registry`
+* **New Resource:** `awscc_agentregistry_registry_record`
+* **New Resource:** `awscc_apigatewayv2_api_gateway_managed_overrides`
+* **New Resource:** `awscc_chime_channel_flow`
+* **New Resource:** `awscc_connect_metric`
+* **New Resource:** `awscc_devopsagent_asset`
+* **New Resource:** `awscc_devopsagent_trigger`
+* **New Resource:** `awscc_dms_replication_subnet_group`
+* **New Resource:** `awscc_docdb_db_subnet_group`
+* **New Resource:** `awscc_drs_source_network`
+* **New Resource:** `awscc_dynamodb_backup`
+* **New Resource:** `awscc_eks_certificate_authority`
+* **New Resource:** `awscc_glue_ml_transform`
+* **New Resource:** `awscc_inspectorv2_connector`
+* **New Resource:** `awscc_logs_storage_tier_policy`
+* **New Resource:** `awscc_quicksight_dlp_setting`
+* **New Resource:** `awscc_quicksight_limits_profile`
+* **New Resource:** `awscc_servicediscovery_private_dns_namespace`
+* **New Resource:** `awscc_servicediscovery_public_dns_namespace`
+* **New Resource:** `awscc_ses_receipt_filter`
+* **New Resource:** `awscc_ses_receipt_rule_set`
+* **New Resource:** `awscc_wellarchitected_workload`
 
 BUG FIXES:
 

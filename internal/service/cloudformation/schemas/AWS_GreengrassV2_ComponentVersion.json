@@ -312,7 +312,8 @@
     },
     "delete": {
       "permissions": [
-        "greengrass:DeleteComponent"
+        "greengrass:DeleteComponent",
+        "greengrass:DescribeComponent"
       ]
     },
     "list": {

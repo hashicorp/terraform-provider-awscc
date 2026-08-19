@@ -25,3 +25,12 @@ Data Source schema for AWS::Personalize::Schema
 - `name` (String) Name for the schema.
 - `schema` (String) A schema in Avro JSON format.
 - `schema_arn` (String) Arn for the schema.
+- `tags` (Attributes List) The tags used to organize, track, or control access for this resource. (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)

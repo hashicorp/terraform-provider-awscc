@@ -1,0 +1,1 @@
+$ terraform import awscc_connect_metric.example "metric_arn"

@@ -1,0 +1,1 @@
+$ terraform import awscc_apigatewayv2_api_gateway_managed_overrides.example "api_id"

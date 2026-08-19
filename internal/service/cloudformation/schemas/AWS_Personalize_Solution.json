@@ -214,6 +214,27 @@
         }
       },
       "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "pattern": "",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -254,6 +275,15 @@
     },
     "SolutionConfig": {
       "$ref": "#/definitions/SolutionConfig"
+    },
+    "Tags": {
+      "description": "The tags used to organize, track, or control access for this resource.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "minItems": 0,
+      "maxItems": 50
     }
   },
   "additionalProperties": false,
@@ -261,6 +291,18 @@
     "Name",
     "DatasetGroupArn"
   ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "personalize:TagResource",
+      "personalize:UntagResource",
+      "personalize:ListTagsForResource"
+    ]
+  },
   "createOnlyProperties": [
     "/properties/Name",
     "/properties/EventType",
@@ -268,9 +310,9 @@
     "/properties/PerformAutoML",
     "/properties/PerformHPO",
     "/properties/RecipeArn",
-    "/properties/SolutionConfig"
+    "/properties/SolutionConfig",
+    "/properties/Tags"
   ],
-  "taggable": false,
   "readOnlyProperties": [
     "/properties/SolutionArn"
   ],
@@ -281,12 +323,15 @@
     "create": {
       "permissions": [
         "personalize:CreateSolution",
-        "personalize:DescribeSolution"
+        "personalize:DescribeSolution",
+        "personalize:ListTagsForResource",
+        "personalize:TagResource"
       ]
     },
     "read": {
       "permissions": [
-        "personalize:DescribeSolution"
+        "personalize:DescribeSolution",
+        "personalize:ListTagsForResource"
       ]
     },
     "delete": {

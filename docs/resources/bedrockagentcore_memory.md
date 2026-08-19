@@ -139,6 +139,7 @@ Optional:
 Optional:
 
 - `extraction_config` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--configuration--episodic_override--reflection--memory_record_schema--metadata_schema--extraction_config))
+- `extraction_type` (String) Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event
 - `key` (String) Key name for metadata fields
 - `type` (String) Supported data types for metadata values
 
@@ -338,6 +339,7 @@ Optional:
 Optional:
 
 - `extraction_config` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--custom_memory_strategy--memory_record_schema--metadata_schema--extraction_config))
+- `extraction_type` (String) Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event
 - `key` (String) Key name for metadata fields
 - `type` (String) Supported data types for metadata values
 
@@ -428,6 +430,7 @@ Optional:
 Optional:
 
 - `extraction_config` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--episodic_memory_strategy--memory_record_schema--metadata_schema--extraction_config))
+- `extraction_type` (String) Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event
 - `key` (String) Key name for metadata fields
 - `type` (String) Supported data types for metadata values
 
@@ -509,6 +512,7 @@ Optional:
 Optional:
 
 - `extraction_config` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--episodic_memory_strategy--reflection_configuration--memory_record_schema--metadata_schema--extraction_config))
+- `extraction_type` (String) Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event
 - `key` (String) Key name for metadata fields
 - `type` (String) Supported data types for metadata values
 
@@ -599,6 +603,7 @@ Optional:
 Optional:
 
 - `extraction_config` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--semantic_memory_strategy--memory_record_schema--metadata_schema--extraction_config))
+- `extraction_type` (String) Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event
 - `key` (String) Key name for metadata fields
 - `type` (String) Supported data types for metadata values
 
@@ -688,6 +693,7 @@ Optional:
 Optional:
 
 - `extraction_config` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--summary_memory_strategy--memory_record_schema--metadata_schema--extraction_config))
+- `extraction_type` (String) Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event
 - `key` (String) Key name for metadata fields
 - `type` (String) Supported data types for metadata values
 
@@ -777,6 +783,7 @@ Optional:
 Optional:
 
 - `extraction_config` (Attributes) (see [below for nested schema](#nestedatt--memory_strategies--user_preference_memory_strategy--memory_record_schema--metadata_schema--extraction_config))
+- `extraction_type` (String) Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event
 - `key` (String) Key name for metadata fields
 - `type` (String) Supported data types for metadata values
 

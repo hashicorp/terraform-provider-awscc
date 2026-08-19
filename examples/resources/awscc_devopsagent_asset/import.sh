@@ -1,0 +1,1 @@
+$ terraform import awscc_devopsagent_asset.example "agent_space_id|asset_id"

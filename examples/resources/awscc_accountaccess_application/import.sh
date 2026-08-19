@@ -1,0 +1,1 @@
+$ terraform import awscc_accountaccess_application.example "application_arn"

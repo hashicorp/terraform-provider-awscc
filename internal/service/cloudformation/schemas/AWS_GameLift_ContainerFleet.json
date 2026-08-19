@@ -470,7 +470,8 @@
         "ACTIVATING",
         "ACTIVE",
         "UPDATING",
-        "DELETING"
+        "DELETING",
+        "EXPIRED"
       ]
     },
     "DeploymentDetails": {

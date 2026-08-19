@@ -855,7 +855,8 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	    "ACTIVATING",
 		//	    "ACTIVE",
 		//	    "UPDATING",
-		//	    "DELETING"
+		//	    "DELETING",
+		//	    "EXPIRED"
 		//	  ],
 		//	  "type": "string"
 		//	}

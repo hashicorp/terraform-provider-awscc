@@ -164,6 +164,7 @@ func assessmentResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// EmailAddress is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: Id
 				"id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -189,6 +190,7 @@ func assessmentResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// Name is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The AWS account associated with the assessment.",
@@ -710,6 +712,7 @@ func assessmentResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// AwsServices is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The wrapper that contains the AWS accounts and AWS services in scope for the assessment.",
@@ -874,6 +877,13 @@ func assessmentResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Name",
 		"/properties/Description",
+		"/properties/Scope/AwsAccounts/*/Name",
+		"/properties/Scope/AwsAccounts/*/EmailAddress",
+		"/properties/Scope/AwsServices",
+		"/properties/AwsAccount/Name",
+		"/properties/AwsAccount/EmailAddress",
+		"/properties/Delegations/*/AssessmentId",
+		"/properties/Delegations/*/AssessmentName",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

@@ -472,6 +472,52 @@ func solutionDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The configuration to use with the solution. When performAutoML is set to true, Amazon Personalize only evaluates the autoMLConfig section of the solution configuration.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The tags used to organize, track, or control access for this resource.",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags used to organize, track, or control access for this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -502,6 +548,7 @@ func solutionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"hpo_objective":                      "HpoObjective",
 		"hpo_resource_config":                "HpoResourceConfig",
 		"integer_hyper_parameter_ranges":     "IntegerHyperParameterRanges",
+		"key":                                "Key",
 		"max_number_of_training_jobs":        "MaxNumberOfTrainingJobs",
 		"max_parallel_training_jobs":         "MaxParallelTrainingJobs",
 		"max_value":                          "MaxValue",
@@ -515,7 +562,9 @@ func solutionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"recipe_list":                        "RecipeList",
 		"solution_arn":                       "SolutionArn",
 		"solution_config":                    "SolutionConfig",
+		"tags":                               "Tags",
 		"type":                               "Type",
+		"value":                              "Value",
 		"values":                             "Values",
 	})
 

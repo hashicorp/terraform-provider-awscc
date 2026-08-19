@@ -1,0 +1,1 @@
+$ terraform import awscc_quicksight_dlp_setting.example "aws_account_id|dlp_setting_id"

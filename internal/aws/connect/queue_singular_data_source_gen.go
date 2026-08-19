@@ -98,6 +98,29 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The identifier of the Amazon Connect instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: LastModifiedRegion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS Region where this resource was last modified.",
+		//	  "pattern": "[a-z]{2}(-[a-z]+){1,2}(-[0-9])?",
+		//	  "type": "string"
+		//	}
+		"last_modified_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AWS Region where this resource was last modified.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: LastModifiedTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The timestamp when this resource was last modified.",
+		//	  "type": "number"
+		//	}
+		"last_modified_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Description: "The timestamp when this resource was last modified.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaxContacts
 		// CloudFormation resource type schema:
 		//
@@ -145,7 +168,7 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "description": "The outbound whisper flow to be used during an outbound call.",
 		//	      "maxLength": 500,
 		//	      "minLength": 1,
-		//	      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*$",
+		//	      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*(:[a-zA-Z0-9-]+)?$",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -334,6 +357,8 @@ func queueDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"hours_of_operation_arn":        "HoursOfOperationArn",
 		"instance_arn":                  "InstanceArn",
 		"key":                           "Key",
+		"last_modified_region":          "LastModifiedRegion",
+		"last_modified_time":            "LastModifiedTime",
 		"max_contacts":                  "MaxContacts",
 		"name":                          "Name",
 		"outbound_caller_config":        "OutboundCallerConfig",

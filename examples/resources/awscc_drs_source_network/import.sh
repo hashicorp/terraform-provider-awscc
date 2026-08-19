@@ -1,0 +1,1 @@
+$ terraform import awscc_drs_source_network.example "arn"

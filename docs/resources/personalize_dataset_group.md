@@ -79,11 +79,20 @@ resource "awscc_personalize_dataset" "dataset_items" {
 - `domain` (String) The domain of a Domain dataset group.
 - `kms_key_arn` (String) The Amazon Resource Name(ARN) of a AWS Key Management Service (KMS) key used to encrypt the datasets.
 - `role_arn` (String) The ARN of the AWS Identity and Access Management (IAM) role that has permissions to access the AWS Key Management Service (KMS) key. Supplying an IAM role is only valid when also specifying a KMS key.
+- `tags` (Attributes List) The tags used to organize, track, or control access for this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `dataset_group_arn` (String) The Amazon Resource Name (ARN) of the dataset group.
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
 
 ## Import
 
