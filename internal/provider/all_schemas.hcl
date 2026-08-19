@@ -2732,6 +2732,11 @@ resource_schema "aws_eks_certificate_authority" {
 
 resource_schema "aws_eks_cluster" {
   cloudformation_type_name = "AWS::EKS::Cluster"
+
+  # Latest schema updates are suppressed.
+  # git checkout internal/service/cloudformation/schemas/AWS_EKS_Cluster.json
+  # Suppression Reason: tfplugindocs Error executing command:
+  # unable to generate website: error rendering static website: unable to render templated website to static markdown: unable to render template "resources/eks_cluster.md.tmpl": unable to execute template: template: docTemplate:5:18: executing "docTemplate" at <plainmarkdown>: invalid value; expected string
 }
 
 resource_schema "aws_eks_fargate_profile" {
