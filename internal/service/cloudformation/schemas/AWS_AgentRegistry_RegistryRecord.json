@@ -1,0 +1,552 @@
+{
+  "typeName": "AWS::AgentRegistry::RegistryRecord",
+  "description": "Definition of AWS::AgentRegistry::RegistryRecord Resource Type",
+  "definitions": {
+    "RecordType": {
+      "type": "string",
+      "description": "The type of the registry record.",
+      "enum": [
+        "MCP",
+        "AGENT",
+        "SKILL",
+        "CUSTOM"
+      ]
+    },
+    "RegistryRecordStatus": {
+      "type": "string",
+      "description": "The lifecycle status of the registry record.",
+      "enum": [
+        "DRAFT",
+        "PENDING_APPROVAL",
+        "APPROVED",
+        "REJECTED",
+        "DEPRECATED",
+        "CREATING",
+        "UPDATING",
+        "CREATE_FAILED",
+        "UPDATE_FAILED"
+      ]
+    },
+    "Descriptors": {
+      "type": "object",
+      "description": "The typed set of descriptors for a registry record. Exactly one descriptor field is populated based on the record type.",
+      "properties": {
+        "McpServer": {
+          "$ref": "#/definitions/McpServerDescriptor"
+        },
+        "A2aAgentCard": {
+          "$ref": "#/definitions/A2aAgentCardDescriptor"
+        },
+        "AgentSkillsDefinition": {
+          "$ref": "#/definitions/AgentSkillsDefinitionDescriptor"
+        },
+        "Custom": {
+          "$ref": "#/definitions/CustomDescriptor"
+        }
+      },
+      "additionalProperties": false
+    },
+    "McpServerDescriptor": {
+      "type": "object",
+      "description": "The MCP server descriptor, populated when the record type is MCP.",
+      "properties": {
+        "Data": {
+          "$ref": "#/definitions/DescriptorData"
+        },
+        "DataSchemaVersion": {
+          "type": "string",
+          "description": "Version of the descriptor type schema.",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "AdditionalData": {
+          "$ref": "#/definitions/McpServerAdditionalData"
+        },
+        "Source": {
+          "$ref": "#/definitions/DescriptorSource"
+        }
+      },
+      "additionalProperties": false
+    },
+    "McpServerAdditionalData": {
+      "type": "object",
+      "description": "Additional data associated with an MCP server descriptor.",
+      "properties": {
+        "Tools": {
+          "$ref": "#/definitions/McpToolsDescriptor"
+        }
+      },
+      "additionalProperties": false
+    },
+    "McpToolsDescriptor": {
+      "type": "object",
+      "description": "The MCP tools descriptor.",
+      "properties": {
+        "Data": {
+          "$ref": "#/definitions/DescriptorData"
+        },
+        "DataSchemaVersion": {
+          "type": "string",
+          "description": "Version of the tools descriptor schema.",
+          "minLength": 1,
+          "maxLength": 255
+        }
+      },
+      "additionalProperties": false
+    },
+    "A2aAgentCardDescriptor": {
+      "type": "object",
+      "description": "The A2A agent card descriptor, populated when the record type is AGENT.",
+      "properties": {
+        "Data": {
+          "$ref": "#/definitions/DescriptorData"
+        },
+        "DataSchemaVersion": {
+          "type": "string",
+          "description": "Version of the descriptor type schema.",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "Source": {
+          "$ref": "#/definitions/DescriptorSource"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentSkillsDefinitionDescriptor": {
+      "type": "object",
+      "description": "The agent skills definition descriptor, populated when the record type is SKILL.",
+      "properties": {
+        "Data": {
+          "$ref": "#/definitions/DescriptorData"
+        },
+        "DataSchemaVersion": {
+          "type": "string",
+          "description": "Version of the descriptor type schema.",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "AdditionalData": {
+          "$ref": "#/definitions/AgentSkillsAdditionalData"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentSkillsAdditionalData": {
+      "type": "object",
+      "description": "Additional data associated with an agent skills definition descriptor.",
+      "properties": {
+        "SkillMd": {
+          "$ref": "#/definitions/AgentSkillsMdDescriptor"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentSkillsMdDescriptor": {
+      "type": "object",
+      "description": "Markdown-format descriptor containing an agent skills document.",
+      "properties": {
+        "Source": {
+          "$ref": "#/definitions/SkillMdSource"
+        },
+        "Data": {
+          "$ref": "#/definitions/DescriptorData"
+        },
+        "DataSchemaVersion": {
+          "type": "string",
+          "description": "Version of the descriptor type schema.",
+          "minLength": 1,
+          "maxLength": 255
+        }
+      },
+      "additionalProperties": false
+    },
+    "CustomDescriptor": {
+      "type": "object",
+      "description": "The custom descriptor, populated when the record type is CUSTOM.",
+      "properties": {
+        "Data": {
+          "$ref": "#/definitions/DescriptorData"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DescriptorData": {
+      "type": "string",
+      "description": "Descriptor payload data.",
+      "minLength": 1,
+      "maxLength": 102400
+    },
+    "DescriptorSource": {
+      "type": "object",
+      "description": "The source configuration that defines where descriptor content is retrieved from.",
+      "properties": {
+        "FromUrl": {
+          "$ref": "#/definitions/DescriptorSourceFromUrl"
+        }
+      },
+      "additionalProperties": false
+    },
+    "DescriptorSourceFromUrl": {
+      "type": "object",
+      "description": "URL-based descriptor source configuration, with credential provider configurations for authenticated URL retrieval.",
+      "properties": {
+        "Url": {
+          "type": "string",
+          "description": "URL source for descriptor content.",
+          "minLength": 1,
+          "maxLength": 2048,
+          "pattern": "^https://.*$"
+        },
+        "CredentialProviderConfigurations": {
+          "type": "array",
+          "description": "The credential providers used to authenticate when fetching descriptor content from the source URL.",
+          "items": {
+            "$ref": "#/definitions/RegistryRecordCredentialProviderConfiguration"
+          },
+          "maxItems": 1
+        }
+      },
+      "required": [
+        "Url"
+      ],
+      "additionalProperties": false
+    },
+    "RegistryRecordCredentialProviderConfiguration": {
+      "type": "object",
+      "description": "A credential provider configuration used for authenticated descriptor retrieval.",
+      "properties": {
+        "CredentialProviderType": {
+          "type": "string",
+          "enum": [
+            "OAUTH",
+            "IAM"
+          ]
+        },
+        "CredentialProvider": {
+          "$ref": "#/definitions/RegistryRecordCredentialProviderUnion"
+        }
+      },
+      "required": [
+        "CredentialProviderType",
+        "CredentialProvider"
+      ],
+      "additionalProperties": false
+    },
+    "RegistryRecordCredentialProviderUnion": {
+      "type": "object",
+      "description": "The credential provider details. Specify exactly one member.",
+      "properties": {
+        "OauthCredentialProvider": {
+          "$ref": "#/definitions/RegistryRecordOAuthCredentialProvider"
+        },
+        "IamCredentialProvider": {
+          "$ref": "#/definitions/RegistryRecordIamCredentialProvider"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RegistryRecordOAuthCredentialProvider": {
+      "type": "object",
+      "description": "OAuth credential provider configuration.",
+      "properties": {
+        "ProviderArn": {
+          "type": "string",
+          "description": "The ARN of the OAuth credential provider.",
+          "minLength": 1,
+          "maxLength": 2048,
+          "pattern": "^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:.*$"
+        },
+        "GrantType": {
+          "type": "string",
+          "enum": [
+            "CLIENT_CREDENTIALS"
+          ]
+        },
+        "Scopes": {
+          "type": "array",
+          "description": "OAuth scopes to request.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "CustomParameters": {
+          "type": "object",
+          "description": "Additional custom parameters for the OAuth flow.",
+          "patternProperties": {
+            "": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "ProviderArn"
+      ],
+      "additionalProperties": false
+    },
+    "RegistryRecordIamCredentialProvider": {
+      "type": "object",
+      "description": "IAM credential provider configuration.",
+      "properties": {
+        "RoleArn": {
+          "type": "string",
+          "description": "The ARN of the IAM role.",
+          "minLength": 20,
+          "maxLength": 2048,
+          "pattern": "^arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+$"
+        },
+        "Service": {
+          "type": "string",
+          "description": "The SigV4 signing service name.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "Region": {
+          "type": "string",
+          "description": "The SigV4 signing region.",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-z0-9-]+$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "description": "A tag to assign to the registry record.",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key of the tag.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$"
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value of the tag.",
+          "minLength": 0,
+          "maxLength": 256,
+          "pattern": "^[a-zA-Z0-9\\s._:/=+@-]*$"
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    },
+    "SkillMdSourceFromUrl": {
+      "type": "object",
+      "description": "URL-based source for SkillMd content (sync is skipped; content is provided inline via Data).",
+      "properties": {
+        "Url": {
+          "type": "string",
+          "description": "URL source for the SkillMd document.",
+          "minLength": 1,
+          "maxLength": 2048,
+          "pattern": "^https://.*$"
+        }
+      },
+      "required": [
+        "Url"
+      ],
+      "additionalProperties": false
+    },
+    "SkillMdSource": {
+      "type": "object",
+      "description": "Source configuration for a SkillMd document. Unlike MCP/A2A sources, SkillMd does not support credential providers.",
+      "properties": {
+        "FromUrl": {
+          "$ref": "#/definitions/SkillMdSourceFromUrl"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "RegistryId": {
+      "type": "string",
+      "description": "The identifier of the registry containing the record.",
+      "minLength": 12,
+      "maxLength": 16,
+      "pattern": "^[a-zA-Z0-9]{12,16}$"
+    },
+    "RecordId": {
+      "type": "string",
+      "description": "The unique identifier of the registry record.",
+      "minLength": 12,
+      "maxLength": 12,
+      "pattern": "^[a-zA-Z0-9]{12}$"
+    },
+    "RecordArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the registry record.",
+      "minLength": 1,
+      "maxLength": 2048,
+      "pattern": "^arn:aws(-[^:]+)?:agent-registry:[a-z0-9-]+:[0-9]{12}:registry/[a-zA-Z0-9]{12,16}/record/[a-zA-Z0-9]{12}$"
+    },
+    "RegistryArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the registry containing the record.",
+      "minLength": 46,
+      "maxLength": 2048,
+      "pattern": "^arn:aws(-[^:]+)?:agent-registry:[a-z0-9-]+:[0-9]{12}:registry/[a-zA-Z0-9]{12,16}$"
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the registry record.",
+      "minLength": 1,
+      "maxLength": 255,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-\\.\\/]*$"
+    },
+    "DisplayName": {
+      "type": "string",
+      "description": "The human-readable display name of the registry record.",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "Description": {
+      "type": "string",
+      "description": "The description of the registry record.",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "RecordType": {
+      "$ref": "#/definitions/RecordType"
+    },
+    "Descriptors": {
+      "$ref": "#/definitions/Descriptors"
+    },
+    "RecordVersion": {
+      "type": "string",
+      "description": "The version of the registry record.",
+      "minLength": 1,
+      "maxLength": 255,
+      "pattern": "^[a-zA-Z0-9.-]+$"
+    },
+    "Status": {
+      "$ref": "#/definitions/RegistryRecordStatus"
+    },
+    "CreatedAt": {
+      "type": "string",
+      "description": "The timestamp when the registry record was created.",
+      "format": "date-time"
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "The timestamp when the registry record was last updated.",
+      "format": "date-time"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Tags to assign to the registry record.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "maxItems": 50,
+      "insertionOrder": false
+    }
+  },
+  "required": [
+    "RegistryId",
+    "Name",
+    "RecordType",
+    "Descriptors"
+  ],
+  "readOnlyProperties": [
+    "/properties/RecordId",
+    "/properties/RecordArn",
+    "/properties/RegistryArn",
+    "/properties/Status",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt"
+  ],
+  "createOnlyProperties": [
+    "/properties/RegistryId",
+    "/properties/RecordType"
+  ],
+  "primaryIdentifier": [
+    "/properties/RecordArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/RegistryId",
+      "/properties/RecordId"
+    ]
+  ],
+  "additionalProperties": false,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "agent-registry:TagResource",
+      "agent-registry:UntagResource",
+      "agent-registry:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "agent-registry:CreateRegistryRecord",
+        "agent-registry:GetRegistryRecord",
+        "agent-registry:TagResource",
+        "agent-registry:ListTagsForResource",
+        "iam:PassRole",
+        "bedrock-agentcore:GetWorkloadAccessToken",
+        "bedrock-agentcore:GetResourceOauth2Token",
+        "secretsmanager:GetSecretValue"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "agent-registry:GetRegistryRecord",
+        "agent-registry:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "agent-registry:UpdateRegistryRecord",
+        "agent-registry:GetRegistryRecord",
+        "agent-registry:TagResource",
+        "agent-registry:UntagResource",
+        "agent-registry:ListTagsForResource",
+        "iam:PassRole",
+        "bedrock-agentcore:GetWorkloadAccessToken",
+        "bedrock-agentcore:GetResourceOauth2Token",
+        "secretsmanager:GetSecretValue"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "agent-registry:DeleteRegistryRecord",
+        "agent-registry:GetRegistryRecord",
+        "agent-registry:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "handlerSchema": {
+        "properties": {
+          "RegistryId": {
+            "type": "string",
+            "minLength": 12,
+            "maxLength": 16,
+            "pattern": "^[a-zA-Z0-9]{12,16}$"
+          }
+        },
+        "required": [
+          "RegistryId"
+        ]
+      },
+      "permissions": [
+        "agent-registry:ListRegistryRecords"
+      ]
+    }
+  }
+}

@@ -1,0 +1,240 @@
+{
+  "typeName": "AWS::WellArchitected::Workload",
+  "description": "Definition of AWS::WellArchitected::Workload Resource Type",
+  "properties": {
+    "WorkloadArn": {
+      "type": "string",
+      "description": "The ARN for the workload."
+    },
+    "WorkloadId": {
+      "type": "string",
+      "description": "The ID assigned to the workload.",
+      "minLength": 32,
+      "maxLength": 32,
+      "pattern": "^[0-9a-f]{32}$"
+    },
+    "WorkloadName": {
+      "type": "string",
+      "description": "The name of the workload.",
+      "minLength": 3,
+      "maxLength": 100
+    },
+    "Description": {
+      "type": "string",
+      "description": "The description for the workload.",
+      "minLength": 3,
+      "maxLength": 250
+    },
+    "Environment": {
+      "type": "string",
+      "description": "The environment for the workload.",
+      "enum": [
+        "PRODUCTION",
+        "PREPRODUCTION"
+      ]
+    },
+    "AccountIds": {
+      "type": "array",
+      "description": "The list of Amazon Web Services account IDs associated with the workload.",
+      "items": {
+        "type": "string",
+        "minLength": 12,
+        "maxLength": 12,
+        "pattern": "^[0-9]{12}$"
+      },
+      "minItems": 0,
+      "maxItems": 100
+    },
+    "AwsRegions": {
+      "type": "array",
+      "description": "The list of Amazon Web Services Regions associated with the workload.",
+      "items": {
+        "type": "string",
+        "maxLength": 100
+      },
+      "minItems": 0,
+      "maxItems": 50
+    },
+    "NonAwsRegions": {
+      "type": "array",
+      "description": "The list of non-Amazon Web Services Regions associated with the workload.",
+      "items": {
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 25
+      },
+      "minItems": 0,
+      "maxItems": 5
+    },
+    "ArchitecturalDesign": {
+      "type": "string",
+      "description": "The URL of the architectural design for the workload.",
+      "maxLength": 2048,
+      "pattern": "^(|(https?|ftp):\\/\\/[^\\s/$.?#].[^\\s]*)$"
+    },
+    "ReviewOwner": {
+      "type": "string",
+      "description": "The review owner of the workload.",
+      "minLength": 3,
+      "maxLength": 255
+    },
+    "IndustryType": {
+      "type": "string",
+      "description": "The industry type for the workload.",
+      "maxLength": 100
+    },
+    "Industry": {
+      "type": "string",
+      "description": "The industry for the workload.",
+      "maxLength": 100
+    },
+    "Lenses": {
+      "type": "array",
+      "description": "The list of lenses associated with the workload.",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 128
+      }
+    },
+    "Notes": {
+      "type": "string",
+      "description": "The notes associated with the workload.",
+      "maxLength": 2084
+    },
+    "ImprovementStatus": {
+      "type": "string",
+      "description": "The improvement status for a workload.",
+      "enum": [
+        "NOT_APPLICABLE",
+        "NOT_STARTED",
+        "IN_PROGRESS",
+        "COMPLETE",
+        "RISK_ACKNOWLEDGED"
+      ]
+    },
+    "DiscoveryConfig": {
+      "type": "object",
+      "description": "Discovery configuration associated to the workload.",
+      "properties": {
+        "TrustedAdvisorIntegrationStatus": {
+          "type": "string",
+          "description": "Discovery integration status in respect to Trusted Advisor for the workload.",
+          "enum": [
+            "ENABLED",
+            "DISABLED"
+          ]
+        },
+        "WorkloadResourceDefinition": {
+          "type": "array",
+          "description": "The mode to use for identifying resources associated with the workload.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "WORKLOAD_METADATA",
+              "APP_REGISTRY"
+            ]
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "Tags": {
+      "type": "array",
+      "description": "The tags associated with the workload.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Key": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "Value": {
+            "type": "string",
+            "minLength": 0,
+            "maxLength": 256
+          }
+        },
+        "required": [
+          "Key",
+          "Value"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 50
+    }
+  },
+  "required": [
+    "WorkloadName",
+    "Description",
+    "Environment",
+    "Lenses"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/WorkloadArn",
+    "/properties/WorkloadId",
+    "/properties/ImprovementStatus"
+  ],
+  "createOnlyProperties": [
+    "/properties/Lenses"
+  ],
+  "primaryIdentifier": [
+    "/properties/WorkloadArn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/WorkloadId"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "wellarchitected:TagResource",
+      "wellarchitected:UntagResource",
+      "wellarchitected:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "wellarchitected:CreateWorkload",
+        "wellarchitected:GetWorkload",
+        "wellarchitected:TagResource",
+        "wellarchitected:ListTagsForResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "wellarchitected:GetWorkload",
+        "wellarchitected:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "wellarchitected:UpdateWorkload",
+        "wellarchitected:GetWorkload",
+        "wellarchitected:TagResource",
+        "wellarchitected:UntagResource",
+        "wellarchitected:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "wellarchitected:DeleteWorkload",
+        "wellarchitected:GetWorkload",
+        "wellarchitected:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "wellarchitected:ListWorkloads"
+      ]
+    }
+  }
+}

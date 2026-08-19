@@ -64,6 +64,24 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_accountaccess_application",
+        "generateListResource": true,
+        "identifier": ["ApplicationArn"]
+    },
+    {
+        "resource": "awscc_accountaccess_entitlement",
+        "identifier": ["ApplicationArn","EntitlementId"]
+    },
+    {
+        "resource": "awscc_agentregistry_registry",
+        "generateListResource": true,
+        "identifier": ["RegistryArn"]
+    },
+    {
+        "resource": "awscc_agentregistry_registry_record",
+        "identifier": ["RecordArn"]
+    },
+    {
         "resource": "awscc_amazonmq_configuration",
         "generateListResource": true,
         "identifier": ["Id"]
@@ -210,6 +228,10 @@
         "resource": "awscc_apigatewayv2_integration_response",
         "generateListResource": true,
         "identifier": ["ApiId","IntegrationId","IntegrationResponseId"]
+    },
+    {
+        "resource": "awscc_apigatewayv2_api_gateway_managed_overrides",
+        "identifier": ["ApiId"]
     },
     {
         "resource": "awscc_apigatewayv2_model",
@@ -996,6 +1018,10 @@
         "identifier": ["AppInstanceBotArn"]
     },
     {
+        "resource": "awscc_chime_channel_flow",
+        "identifier": ["Arn"]
+    },
+    {
         "resource": "awscc_cleanrooms_analysis_template",
         "identifier": ["AnalysisTemplateIdentifier","MembershipIdentifier"]
     },
@@ -1547,6 +1573,11 @@
         "identifier": ["InstanceId","IntegrationType","IntegrationArn"]
     },
     {
+        "resource": "awscc_connect_metric",
+        "generateListResource": true,
+        "identifier": ["MetricArn"]
+    },
+    {
         "resource": "awscc_connect_notification",
         "identifier": ["Arn"]
     },
@@ -1720,6 +1751,16 @@
         "resource": "awscc_dms_replication_config",
         "generateListResource": true,
         "identifier": ["ReplicationConfigArn"]
+    },
+    {
+        "resource": "awscc_dms_replication_subnet_group",
+        "generateListResource": true,
+        "identifier": ["ReplicationSubnetGroupIdentifier"]
+    },
+    {
+        "resource": "awscc_drs_source_network",
+        "generateListResource": true,
+        "identifier": ["Arn"]
     },
     {
         "resource": "awscc_dsql_cluster",
@@ -1970,6 +2011,10 @@
         "identifier": ["AgentSpaceId"]
     },
     {
+        "resource": "awscc_devopsagent_asset",
+        "identifier": ["AgentSpaceId","AssetId"]
+    },
+    {
         "resource": "awscc_devopsagent_association",
         "identifier": ["AgentSpaceId","AssociationId"]
     },
@@ -1981,6 +2026,10 @@
     {
         "resource": "awscc_devopsagent_service",
         "identifier": ["ServiceId"]
+    },
+    {
+        "resource": "awscc_devopsagent_trigger",
+        "identifier": ["AgentSpaceId","TriggerId"]
     },
     {
         "resource": "awscc_devopsguru_log_anomaly_detection_integration",
@@ -2013,9 +2062,19 @@
         "identifier": ["GlobalClusterIdentifier"]
     },
     {
+        "resource": "awscc_docdb_db_subnet_group",
+        "generateListResource": true,
+        "identifier": ["DBSubnetGroupName"]
+    },
+    {
         "resource": "awscc_docdbelastic_cluster",
         "generateListResource": true,
         "identifier": ["ClusterArn"]
+    },
+    {
+        "resource": "awscc_dynamodb_backup",
+        "generateListResource": true,
+        "identifier": ["BackupArn"]
     },
     {
         "resource": "awscc_dynamodb_global_table",
@@ -2674,6 +2733,10 @@
         "identifier": ["Arn"]
     },
     {
+        "resource": "awscc_eks_certificate_authority",
+        "identifier": ["ClusterName","Id"]
+    },
+    {
         "resource": "awscc_eks_cluster",
         "generateListResource": true,
         "identifier": ["Name"]
@@ -3149,6 +3212,11 @@
         "identifier": ["Name"]
     },
     {
+        "resource": "awscc_glue_ml_transform",
+        "generateListResource": true,
+        "identifier": ["TransformId"]
+    },
+    {
         "resource": "awscc_glue_registry",
         "generateListResource": true,
         "identifier": ["Arn"]
@@ -3485,6 +3553,11 @@
         "resource": "awscc_inspectorv2_code_security_scan_configuration",
         "generateListResource": true,
         "identifier": ["Arn"]
+    },
+    {
+        "resource": "awscc_inspectorv2_connector",
+        "generateListResource": true,
+        "identifier": ["ConnectorArn"]
     },
     {
         "resource": "awscc_inspectorv2_filter",
@@ -4206,6 +4279,11 @@
         "resource": "awscc_logs_scheduled_query",
         "generateListResource": true,
         "identifier": ["ScheduledQueryArn"]
+    },
+    {
+        "resource": "awscc_logs_storage_tier_policy",
+        "generateListResource": true,
+        "identifier": ["AccountId"]
     },
     {
         "resource": "awscc_logs_subscription_filter",
@@ -5153,6 +5231,11 @@
         "identifier": ["AwsAccountId","DataSourceId"]
     },
     {
+        "resource": "awscc_quicksight_dlp_setting",
+        "generateListResource": true,
+        "identifier": ["AwsAccountId","DlpSettingId"]
+    },
+    {
         "resource": "awscc_quicksight_folder",
         "generateListResource": true,
         "identifier": ["AwsAccountId","FolderId"]
@@ -5161,6 +5244,11 @@
         "resource": "awscc_quicksight_knowledge_base",
         "generateListResource": true,
         "identifier": ["AwsAccountId","KnowledgeBaseId"]
+    },
+    {
+        "resource": "awscc_quicksight_limits_profile",
+        "generateListResource": true,
+        "identifier": ["AccountId","ProfileId"]
     },
     {
         "resource": "awscc_quicksight_o_auth_client_application",
@@ -5904,6 +5992,16 @@
         "identifier": ["EndpointName"]
     },
     {
+        "resource": "awscc_ses_receipt_filter",
+        "generateListResource": true,
+        "identifier": ["Id"]
+    },
+    {
+        "resource": "awscc_ses_receipt_rule_set",
+        "generateListResource": true,
+        "identifier": ["RuleSetName"]
+    },
+    {
         "resource": "awscc_ses_template",
         "generateListResource": true,
         "identifier": ["Id"]
@@ -6224,6 +6322,16 @@
         "resource": "awscc_sagemaker_mlflow_tracking_server",
         "generateListResource": true,
         "identifier": ["TrackingServerName"]
+    },
+    {
+        "resource": "awscc_servicediscovery_private_dns_namespace",
+        "generateListResource": true,
+        "identifier": ["Id"]
+    },
+    {
+        "resource": "awscc_servicediscovery_public_dns_namespace",
+        "generateListResource": true,
+        "identifier": ["Id"]
     },
     {
         "resource": "awscc_servicediscovery_service",
@@ -6824,6 +6932,11 @@
         "resource": "awscc_wellarchitected_review_template",
         "generateListResource": true,
         "identifier": ["TemplateArn"]
+    },
+    {
+        "resource": "awscc_wellarchitected_workload",
+        "generateListResource": true,
+        "identifier": ["WorkloadArn"]
     },
     {
         "resource": "awscc_wickr_network",

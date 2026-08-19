@@ -1,0 +1,142 @@
+{
+  "typeName": "AWS::DRS::SourceNetwork",
+  "description": "A Source Network resource represents a VPC that is protected by AWS Elastic Disaster Recovery.",
+  "properties": {
+    "Arn": {
+      "type": "string",
+      "description": "The ARN of the Source Network.",
+      "minLength": 20,
+      "maxLength": 2048,
+      "pattern": ""
+    },
+    "SourceNetworkID": {
+      "type": "string",
+      "description": "The ID of the Source Network.",
+      "minLength": 20,
+      "maxLength": 20,
+      "pattern": "^sn-[0-9a-zA-Z]{17}$"
+    },
+    "VpcID": {
+      "type": "string",
+      "description": "The VPC ID to protect.",
+      "minLength": 12,
+      "maxLength": 21,
+      "pattern": "^vpc-[0-9a-fA-F]{8,}$"
+    },
+    "OriginAccountID": {
+      "type": "string",
+      "description": "The account ID containing the VPC to protect.",
+      "minLength": 12,
+      "maxLength": 12,
+      "pattern": "[0-9]{12,}"
+    },
+    "OriginRegion": {
+      "type": "string",
+      "description": "The region containing the VPC to protect.",
+      "maxLength": 255,
+      "pattern": "^(us(-gov)?|ap|ca|cn|eu|eusc|sa|af|me|il)-([a-z]{2}-)?(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-[0-9]$"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "A set of tags associated with the Source Network.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "insertionOrder": false
+    }
+  },
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "VpcID",
+    "OriginAccountID",
+    "OriginRegion"
+  ],
+  "additionalProperties": false,
+  "readOnlyProperties": [
+    "/properties/Arn",
+    "/properties/SourceNetworkID"
+  ],
+  "createOnlyProperties": [
+    "/properties/VpcID",
+    "/properties/OriginAccountID",
+    "/properties/OriginRegion"
+  ],
+  "primaryIdentifier": [
+    "/properties/Arn"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/SourceNetworkID"
+    ]
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "drs:TagResource",
+      "drs:UntagResource",
+      "drs:ListTagsForResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "drs:CreateSourceNetwork",
+        "drs:DescribeSourceNetworks",
+        "drs:TagResource",
+        "ec2:DescribeVpcs",
+        "ec2:DescribeInstances"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "drs:DescribeSourceNetworks",
+        "drs:ListTagsForResource"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "drs:DescribeSourceNetworks",
+        "drs:TagResource",
+        "drs:UntagResource",
+        "drs:ListTagsForResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "drs:DeleteSourceNetwork",
+        "drs:DescribeSourceNetworks",
+        "drs:ListTagsForResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "drs:DescribeSourceNetworks"
+      ]
+    }
+  }
+}
