@@ -47,6 +47,27 @@
         }
       },
       "additionalProperties": false
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "pattern": "",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -87,6 +108,15 @@
     },
     "DatasetImportJob": {
       "$ref": "#/definitions/DatasetImportJob"
+    },
+    "Tags": {
+      "description": "The tags used to organize, track, or control access for this resource.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "minItems": 0,
+      "maxItems": 50
     }
   },
   "additionalProperties": false,
@@ -96,14 +126,26 @@
     "DatasetGroupArn",
     "SchemaArn"
   ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "personalize:TagResource",
+      "personalize:UntagResource",
+      "personalize:ListTagsForResource"
+    ]
+  },
   "createOnlyProperties": [
     "/properties/Name",
     "/properties/DatasetType",
     "/properties/DatasetGroupArn",
-    "/properties/SchemaArn"
+    "/properties/SchemaArn",
+    "/properties/Tags"
   ],
   "replacementStrategy": "delete_then_create",
-  "taggable": false,
   "readOnlyProperties": [
     "/properties/DatasetArn"
   ],
@@ -117,13 +159,19 @@
         "personalize:DescribeDataset",
         "personalize:CreateDatasetImportJob",
         "personalize:DescribeDatasetImportJob",
-        "iam:PassRole"
+        "iam:PassRole",
+        "personalize:ListTagsForResource",
+        "personalize:TagResource",
+        "personalize:ListDatasetImportJobs"
       ],
       "timeoutInMinutes": 2160
     },
     "read": {
       "permissions": [
-        "personalize:DescribeDataset"
+        "personalize:DescribeDataset",
+        "personalize:ListTagsForResource",
+        "personalize:ListDatasetImportJobs",
+        "personalize:DescribeDatasetImportJob"
       ]
     },
     "update": {
@@ -131,7 +179,9 @@
         "personalize:DescribeDataset",
         "personalize:CreateDatasetImportJob",
         "personalize:DescribeDatasetImportJob",
-        "iam:PassRole"
+        "personalize:ListTagsForResource",
+        "iam:PassRole",
+        "personalize:ListDatasetImportJobs"
       ],
       "timeoutInMinutes": 2160
     },

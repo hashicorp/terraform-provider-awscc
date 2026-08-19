@@ -90,7 +90,8 @@
     "/properties/LastUpdatedAt"
   ],
   "createOnlyProperties": [
-    "/properties/Name"
+    "/properties/Name",
+    "/properties/SharingConfig"
   ],
   "primaryIdentifier": [
     "/properties/Arn"

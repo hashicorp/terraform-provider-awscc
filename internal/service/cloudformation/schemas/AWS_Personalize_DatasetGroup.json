@@ -2,6 +2,29 @@
   "typeName": "AWS::Personalize::DatasetGroup",
   "description": "Resource Schema for AWS::Personalize::DatasetGroup.",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-personalize",
+  "definitions": {
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string",
+          "pattern": "",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "Value": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "additionalProperties": false
+    }
+  },
   "properties": {
     "DatasetGroupArn": {
       "description": "The Amazon Resource Name (ARN) of the dataset group.",
@@ -36,17 +59,39 @@
         "ECOMMERCE",
         "VIDEO_ON_DEMAND"
       ]
+    },
+    "Tags": {
+      "description": "The tags used to organize, track, or control access for this resource.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      },
+      "minItems": 0,
+      "maxItems": 50
     }
   },
   "additionalProperties": false,
   "required": [
     "Name"
   ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "personalize:TagResource",
+      "personalize:UntagResource",
+      "personalize:ListTagsForResource"
+    ]
+  },
   "createOnlyProperties": [
     "/properties/Name",
     "/properties/RoleArn",
     "/properties/KmsKeyArn",
-    "/properties/Domain"
+    "/properties/Domain",
+    "/properties/Tags"
   ],
   "readOnlyProperties": [
     "/properties/DatasetGroupArn"
@@ -59,12 +104,15 @@
       "permissions": [
         "personalize:CreateDatasetGroup",
         "personalize:DescribeDatasetGroup",
+        "personalize:ListTagsForResource",
+        "personalize:TagResource",
         "iam:PassRole"
       ]
     },
     "read": {
       "permissions": [
-        "personalize:DescribeDatasetGroup"
+        "personalize:DescribeDatasetGroup",
+        "personalize:ListTagsForResource"
       ]
     },
     "delete": {

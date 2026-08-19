@@ -5836,7 +5836,7 @@
     },
     {
         "resource": "awscc_ses_configuration_set_event_destination",
-        "identifier": ["Id"]
+        "identifier": ["Id","ConfigurationSetName"]
     },
     {
         "resource": "awscc_ses_contact_list",

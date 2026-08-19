@@ -194,8 +194,7 @@
     "/properties/UpdateIntegrationDetails"
   ],
   "createOnlyProperties": [
-    "/properties/CreateIntegrationDetails",
-    "/properties/Tags"
+    "/properties/CreateIntegrationDetails"
   ],
   "additionalProperties": false,
   "primaryIdentifier": [
