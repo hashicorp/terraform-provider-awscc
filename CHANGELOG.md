@@ -1,3 +1,5 @@
+## 1.99.0 (Unreleased)
+
 ## 1.98.0 (August 19, 2026)
 
 NOTES:
