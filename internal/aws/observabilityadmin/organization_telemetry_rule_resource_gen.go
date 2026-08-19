@@ -242,6 +242,13 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 		//	          },
 		//	          "type": "object"
 		//	        },
+		//	        "KmsKeyArn": {
+		//	          "description": "The Amazon Resource Name (ARN) of the customer-managed AWS KMS key used to encrypt the destination log groups specified in the Telemetry Rule.",
+		//	          "maxLength": 2048,
+		//	          "minLength": 1,
+		//	          "pattern": "^arn:aws[a-zA-Z-]*:kms:[a-z0-9-]+:\\d{12}:key/(mrk-)?[a-f0-9-]+$",
+		//	          "type": "string"
+		//	        },
 		//	        "LogDeliveryParameters": {
 		//	          "additionalProperties": false,
 		//	          "description": "Parameters for log delivery configuration",
@@ -697,6 +704,19 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: KmsKeyArn
+						"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Resource Name (ARN) of the customer-managed AWS KMS key used to encrypt the destination log groups specified in the Telemetry Rule.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 2048),
+								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-zA-Z-]*:kms:[a-z0-9-]+:\\d{12}:key/(mrk-)?[a-f0-9-]+$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: LogDeliveryParameters
@@ -1250,6 +1270,7 @@ func organizationTelemetryRuleResource(ctx context.Context) (resource.Resource, 
 		"field_selectors":                      "FieldSelectors",
 		"filters":                              "Filters",
 		"key":                                  "Key",
+		"kms_key_arn":                          "KmsKeyArn",
 		"label_name":                           "LabelName",
 		"label_name_condition":                 "LabelNameCondition",
 		"log_delivery_parameters":              "LogDeliveryParameters",

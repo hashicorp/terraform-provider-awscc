@@ -7,7 +7,6 @@ package bedrock
 
 import (
 	"context"
-	"regexp"
 
 	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -48,7 +47,6 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ARN of the Bedrock Guardrail or Guardrail Profile resource",
 		//	  "maxLength": 2048,
 		//	  "minLength": 1,
-		//	  "pattern": "^arn:aws(-[a-z]+)*:bedrock:[a-z0-9-]+:[0-9]{12}:(guardrail|guardrail-profile)/[a-z0-9]+$",
 		//	  "type": "string"
 		//	}
 		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -56,7 +54,6 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 2048),
-				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[a-z]+)*:bedrock:[a-z0-9-]+:[0-9]{12}:(guardrail|guardrail-profile)/[a-z0-9]+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),

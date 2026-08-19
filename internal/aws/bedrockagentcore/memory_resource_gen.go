@@ -400,6 +400,14 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	                                  },
 		//	                                  "type": "object"
 		//	                                },
+		//	                                "ExtractionType": {
+		//	                                  "description": "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+		//	                                  "enum": [
+		//	                                    "LLM_INFERRED",
+		//	                                    "STRICTLY_CONSISTENT"
+		//	                                  ],
+		//	                                  "type": "string"
+		//	                                },
 		//	                                "Key": {
 		//	                                  "description": "Key name for metadata fields",
 		//	                                  "maxLength": 128,
@@ -752,6 +760,14 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	                      },
 		//	                      "type": "object"
 		//	                    },
+		//	                    "ExtractionType": {
+		//	                      "description": "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+		//	                      "enum": [
+		//	                        "LLM_INFERRED",
+		//	                        "STRICTLY_CONSISTENT"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    },
 		//	                    "Key": {
 		//	                      "description": "Key name for metadata fields",
 		//	                      "maxLength": 128,
@@ -950,6 +966,14 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	                      },
 		//	                      "type": "object"
 		//	                    },
+		//	                    "ExtractionType": {
+		//	                      "description": "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+		//	                      "enum": [
+		//	                        "LLM_INFERRED",
+		//	                        "STRICTLY_CONSISTENT"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    },
 		//	                    "Key": {
 		//	                      "description": "Key name for metadata fields",
 		//	                      "maxLength": 128,
@@ -1100,6 +1124,14 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	                            }
 		//	                          },
 		//	                          "type": "object"
+		//	                        },
+		//	                        "ExtractionType": {
+		//	                          "description": "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+		//	                          "enum": [
+		//	                            "LLM_INFERRED",
+		//	                            "STRICTLY_CONSISTENT"
+		//	                          ],
+		//	                          "type": "string"
 		//	                        },
 		//	                        "Key": {
 		//	                          "description": "Key name for metadata fields",
@@ -1296,6 +1328,14 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	                        }
 		//	                      },
 		//	                      "type": "object"
+		//	                    },
+		//	                    "ExtractionType": {
+		//	                      "description": "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+		//	                      "enum": [
+		//	                        "LLM_INFERRED",
+		//	                        "STRICTLY_CONSISTENT"
+		//	                      ],
+		//	                      "type": "string"
 		//	                    },
 		//	                    "Key": {
 		//	                      "description": "Key name for metadata fields",
@@ -1495,6 +1535,14 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	                      },
 		//	                      "type": "object"
 		//	                    },
+		//	                    "ExtractionType": {
+		//	                      "description": "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+		//	                      "enum": [
+		//	                        "LLM_INFERRED",
+		//	                        "STRICTLY_CONSISTENT"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    },
 		//	                    "Key": {
 		//	                      "description": "Key name for metadata fields",
 		//	                      "maxLength": 128,
@@ -1692,6 +1740,14 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		//	                        }
 		//	                      },
 		//	                      "type": "object"
+		//	                    },
+		//	                    "ExtractionType": {
+		//	                      "description": "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+		//	                      "enum": [
+		//	                        "LLM_INFERRED",
+		//	                        "STRICTLY_CONSISTENT"
+		//	                      ],
+		//	                      "type": "string"
 		//	                    },
 		//	                    "Key": {
 		//	                      "description": "Key name for metadata fields",
@@ -2032,6 +2088,21 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 																			Computed: true,
 																			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 																				objectplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																		// Property: ExtractionType
+																		"extraction_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+																			Optional:    true,
+																			Computed:    true,
+																			Validators: []validator.String{ /*START VALIDATORS*/
+																				stringvalidator.OneOf(
+																					"LLM_INFERRED",
+																					"STRICTLY_CONSISTENT",
+																				),
+																			}, /*END VALIDATORS*/
+																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																				stringplanmodifier.UseStateForUnknown(),
 																			}, /*END PLAN MODIFIERS*/
 																		}, /*END ATTRIBUTE*/
 																		// Property: Key
@@ -2645,6 +2716,21 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 														objectplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
+												// Property: ExtractionType
+												"extraction_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.OneOf(
+															"LLM_INFERRED",
+															"STRICTLY_CONSISTENT",
+														),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
 												// Property: Key
 												"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "Key name for metadata fields",
@@ -2975,6 +3061,21 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 														objectplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
+												// Property: ExtractionType
+												"extraction_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.OneOf(
+															"LLM_INFERRED",
+															"STRICTLY_CONSISTENT",
+														),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
 												// Property: Key
 												"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "Key name for metadata fields",
@@ -3219,6 +3320,21 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 															Computed: true,
 															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 																objectplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: ExtractionType
+														"extraction_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+															Optional:    true,
+															Computed:    true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.OneOf(
+																	"LLM_INFERRED",
+																	"STRICTLY_CONSISTENT",
+																),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
 															}, /*END PLAN MODIFIERS*/
 														}, /*END ATTRIBUTE*/
 														// Property: Key
@@ -3543,6 +3659,21 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: ExtractionType
+												"extraction_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.OneOf(
+															"LLM_INFERRED",
+															"STRICTLY_CONSISTENT",
+														),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: Key
@@ -3875,6 +4006,21 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 														objectplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
+												// Property: ExtractionType
+												"extraction_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.OneOf(
+															"LLM_INFERRED",
+															"STRICTLY_CONSISTENT",
+														),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
 												// Property: Key
 												"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "Key name for metadata fields",
@@ -4203,6 +4349,21 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 													Computed: true,
 													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 														objectplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: ExtractionType
+												"extraction_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.OneOf(
+															"LLM_INFERRED",
+															"STRICTLY_CONSISTENT",
+														),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
 													}, /*END PLAN MODIFIERS*/
 												}, /*END ATTRIBUTE*/
 												// Property: Key
@@ -4664,6 +4825,7 @@ func memoryResource(ctx context.Context) (resource.Resource, error) {
 		"event_expiry_duration":           "EventExpiryDuration",
 		"extraction":                      "Extraction",
 		"extraction_config":               "ExtractionConfig",
+		"extraction_type":                 "ExtractionType",
 		"failure_reason":                  "FailureReason",
 		"historical_context_window_size":  "HistoricalContextWindowSize",
 		"idle_session_timeout":            "IdleSessionTimeout",

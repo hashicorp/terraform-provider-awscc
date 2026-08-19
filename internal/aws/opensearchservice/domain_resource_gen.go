@@ -1689,6 +1689,9 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	  "properties": {
 		//	    "AutoSoftwareUpdateEnabled": {
 		//	      "type": "boolean"
+		//	    },
+		//	    "UseLatestServiceSoftwareForBlueGreen": {
+		//	      "type": "boolean"
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -1697,6 +1700,14 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AutoSoftwareUpdateEnabled
 				"auto_software_update_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseLatestServiceSoftwareForBlueGreen
+				"use_latest_service_software_for_blue_green": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Optional: true,
 					Computed: true,
 					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
@@ -2008,17 +2019,18 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"update_available":                 "UpdateAvailable",
 		"update_status":                    "UpdateStatus",
 		"use_case":                         "UseCase",
-		"user_pool_id":                     "UserPoolId",
-		"value":                            "Value",
-		"volume_size":                      "VolumeSize",
-		"volume_type":                      "VolumeType",
-		"vpc_options":                      "VPCOptions",
-		"warm_count":                       "WarmCount",
-		"warm_enabled":                     "WarmEnabled",
-		"warm_type":                        "WarmType",
-		"window_start_time":                "WindowStartTime",
-		"zone_awareness_config":            "ZoneAwarenessConfig",
-		"zone_awareness_enabled":           "ZoneAwarenessEnabled",
+		"use_latest_service_software_for_blue_green": "UseLatestServiceSoftwareForBlueGreen",
+		"user_pool_id":           "UserPoolId",
+		"value":                  "Value",
+		"volume_size":            "VolumeSize",
+		"volume_type":            "VolumeType",
+		"vpc_options":            "VPCOptions",
+		"warm_count":             "WarmCount",
+		"warm_enabled":           "WarmEnabled",
+		"warm_type":              "WarmType",
+		"window_start_time":      "WindowStartTime",
+		"zone_awareness_config":  "ZoneAwarenessConfig",
+		"zone_awareness_enabled": "ZoneAwarenessEnabled",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

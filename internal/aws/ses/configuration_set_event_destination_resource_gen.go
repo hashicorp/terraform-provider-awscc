@@ -393,6 +393,11 @@ func configurationSetEventDestinationResource(ctx context.Context) (resource.Res
 		identity.Identifier{
 			Name:              "id",
 			RequiredForImport: true,
+		},
+		identity.Identifier{
+			Name:              "configuration_set_name",
+			Description:       "The name of the configuration set that contains the event destination",
+			RequiredForImport: true,
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
