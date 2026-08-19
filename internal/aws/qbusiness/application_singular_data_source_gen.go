@@ -195,7 +195,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "maxLength": 2048,
 		//	  "minLength": 20,
-		//	  "pattern": "^arn:aws:iam::\\d{12}:(oidc-provider|saml-provider)/[a-zA-Z0-9_\\.\\/@\\-]+$",
+		//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::\\d{12}:(oidc-provider|saml-provider)/[a-zA-Z0-9_\\.\\/@\\-]+$",
 		//	  "type": "string"
 		//	}
 		"iam_identity_provider_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

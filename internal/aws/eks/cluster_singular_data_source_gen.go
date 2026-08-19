@@ -62,6 +62,17 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "An object representing the Access Config to use for the cluster.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ActiveCertificateAuthorityId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the certificate authority to activate as the cluster's signing CA. Setting or changing this value activates the specified CA (the previously active CA becomes trusted).",
+		//	  "type": "string"
+		//	}
+		"active_certificate_authority_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the certificate authority to activate as the cluster's signing CA. Setting or changing this value activates the specified CA (the previously active CA becomes trusted).",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -82,6 +93,63 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"bootstrap_self_managed_addons": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Set this value to false to avoid creating the default networking add-ons when the cluster is created.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: CertificateAuthority
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The certificate authority information for the cluster, including the trust bundle and the currently active signing certificate authority.",
+		//	  "properties": {
+		//	    "Active": {
+		//	      "additionalProperties": false,
+		//	      "description": "Identifies the certificate authority currently signing certificates for the cluster.",
+		//	      "properties": {
+		//	        "ActivatedBy": {
+		//	          "description": "Indicates whether the active certificate authority was activated by EKS or by the customer.",
+		//	          "type": "string"
+		//	        },
+		//	        "Id": {
+		//	          "description": "The ID of the active (signing) certificate authority.",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "Data": {
+		//	      "description": "The base64-encoded certificate-authority trust bundle for the cluster (all trusted CAs).",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"certificate_authority": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Active
+				"active": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ActivatedBy
+						"activated_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Indicates whether the active certificate authority was activated by EKS or by the customer.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Id
+						"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ID of the active (signing) certificate authority.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Identifies the certificate authority currently signing certificates for the cluster.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Data
+				"data": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The base64-encoded certificate-authority trust bundle for the cluster (all trusted CAs).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The certificate authority information for the cluster, including the trust bundle and the currently active signing certificate authority.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CertificateAuthorityData
@@ -1153,12 +1221,16 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::EKS::Cluster").WithTerraformTypeName("awscc_eks_cluster")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"access_config":       "AccessConfig",
-		"arn":                 "Arn",
-		"authentication_mode": "AuthenticationMode",
-		"block_storage":       "BlockStorage",
+		"access_config":                   "AccessConfig",
+		"activated_by":                    "ActivatedBy",
+		"active":                          "Active",
+		"active_certificate_authority_id": "ActiveCertificateAuthorityId",
+		"arn":                             "Arn",
+		"authentication_mode":             "AuthenticationMode",
+		"block_storage":                   "BlockStorage",
 		"bootstrap_cluster_creator_admin_permissions": "BootstrapClusterCreatorAdminPermissions",
 		"bootstrap_self_managed_addons":               "BootstrapSelfManagedAddons",
+		"certificate_authority":                       "CertificateAuthority",
 		"certificate_authority_data":                  "CertificateAuthorityData",
 		"cidrs":                                       "Cidrs",
 		"cluster_id":                                  "Id",
@@ -1169,6 +1241,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"control_plane_instance_type":                 "ControlPlaneInstanceType",
 		"control_plane_placement":                     "ControlPlanePlacement",
 		"control_plane_scaling_config":                "ControlPlaneScalingConfig",
+		"data":                                        "Data",
 		"deletion_protection":                         "DeletionProtection",
 		"elastic_load_balancing":                      "ElasticLoadBalancing",
 		"enabled":                                     "Enabled",
@@ -1185,6 +1258,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"group_name":                                  "GroupName",
 		"horizontal_pod_autoscaler_controller_config": "HorizontalPodAutoscalerControllerConfig",
 		"horizontal_pod_autoscaler_sync_period":       "HorizontalPodAutoscalerSyncPeriod",
+		"id":                                          "Id",
 		"ip_family":                                   "IpFamily",
 		"key":                                         "Key",
 		"key_arn":                                     "KeyArn",

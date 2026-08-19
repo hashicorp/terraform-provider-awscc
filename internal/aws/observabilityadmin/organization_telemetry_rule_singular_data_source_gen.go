@@ -223,6 +223,13 @@ func organizationTelemetryRuleDataSource(ctx context.Context) (datasource.DataSo
 		//	          },
 		//	          "type": "object"
 		//	        },
+		//	        "KmsKeyArn": {
+		//	          "description": "The Amazon Resource Name (ARN) of the customer-managed AWS KMS key used to encrypt the destination log groups specified in the Telemetry Rule.",
+		//	          "maxLength": 2048,
+		//	          "minLength": 1,
+		//	          "pattern": "^arn:aws[a-zA-Z-]*:kms:[a-z0-9-]+:\\d{12}:key/(mrk-)?[a-f0-9-]+$",
+		//	          "type": "string"
+		//	        },
 		//	        "LogDeliveryParameters": {
 		//	          "additionalProperties": false,
 		//	          "description": "Parameters for log delivery configuration",
@@ -586,6 +593,11 @@ func organizationTelemetryRuleDataSource(ctx context.Context) (datasource.DataSo
 							Description: "Telemetry parameters for ELB/NLB Load Balancer Logs",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
+						// Property: KmsKeyArn
+						"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Resource Name (ARN) of the customer-managed AWS KMS key used to encrypt the destination log groups specified in the Telemetry Rule.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 						// Property: LogDeliveryParameters
 						"log_delivery_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -893,6 +905,7 @@ func organizationTelemetryRuleDataSource(ctx context.Context) (datasource.DataSo
 		"field_selectors":                      "FieldSelectors",
 		"filters":                              "Filters",
 		"key":                                  "Key",
+		"kms_key_arn":                          "KmsKeyArn",
 		"label_name":                           "LabelName",
 		"label_name_condition":                 "LabelNameCondition",
 		"log_delivery_parameters":              "LogDeliveryParameters",

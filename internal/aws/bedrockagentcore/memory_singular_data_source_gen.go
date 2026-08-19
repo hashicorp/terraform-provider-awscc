@@ -328,6 +328,14 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                                  },
 		//	                                  "type": "object"
 		//	                                },
+		//	                                "ExtractionType": {
+		//	                                  "description": "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+		//	                                  "enum": [
+		//	                                    "LLM_INFERRED",
+		//	                                    "STRICTLY_CONSISTENT"
+		//	                                  ],
+		//	                                  "type": "string"
+		//	                                },
 		//	                                "Key": {
 		//	                                  "description": "Key name for metadata fields",
 		//	                                  "maxLength": 128,
@@ -680,6 +688,14 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                      },
 		//	                      "type": "object"
 		//	                    },
+		//	                    "ExtractionType": {
+		//	                      "description": "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+		//	                      "enum": [
+		//	                        "LLM_INFERRED",
+		//	                        "STRICTLY_CONSISTENT"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    },
 		//	                    "Key": {
 		//	                      "description": "Key name for metadata fields",
 		//	                      "maxLength": 128,
@@ -878,6 +894,14 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                      },
 		//	                      "type": "object"
 		//	                    },
+		//	                    "ExtractionType": {
+		//	                      "description": "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+		//	                      "enum": [
+		//	                        "LLM_INFERRED",
+		//	                        "STRICTLY_CONSISTENT"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    },
 		//	                    "Key": {
 		//	                      "description": "Key name for metadata fields",
 		//	                      "maxLength": 128,
@@ -1028,6 +1052,14 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                            }
 		//	                          },
 		//	                          "type": "object"
+		//	                        },
+		//	                        "ExtractionType": {
+		//	                          "description": "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+		//	                          "enum": [
+		//	                            "LLM_INFERRED",
+		//	                            "STRICTLY_CONSISTENT"
+		//	                          ],
+		//	                          "type": "string"
 		//	                        },
 		//	                        "Key": {
 		//	                          "description": "Key name for metadata fields",
@@ -1224,6 +1256,14 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                        }
 		//	                      },
 		//	                      "type": "object"
+		//	                    },
+		//	                    "ExtractionType": {
+		//	                      "description": "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+		//	                      "enum": [
+		//	                        "LLM_INFERRED",
+		//	                        "STRICTLY_CONSISTENT"
+		//	                      ],
+		//	                      "type": "string"
 		//	                    },
 		//	                    "Key": {
 		//	                      "description": "Key name for metadata fields",
@@ -1423,6 +1463,14 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                      },
 		//	                      "type": "object"
 		//	                    },
+		//	                    "ExtractionType": {
+		//	                      "description": "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+		//	                      "enum": [
+		//	                        "LLM_INFERRED",
+		//	                        "STRICTLY_CONSISTENT"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    },
 		//	                    "Key": {
 		//	                      "description": "Key name for metadata fields",
 		//	                      "maxLength": 128,
@@ -1620,6 +1668,14 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                        }
 		//	                      },
 		//	                      "type": "object"
+		//	                    },
+		//	                    "ExtractionType": {
+		//	                      "description": "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+		//	                      "enum": [
+		//	                        "LLM_INFERRED",
+		//	                        "STRICTLY_CONSISTENT"
+		//	                      ],
+		//	                      "type": "string"
 		//	                    },
 		//	                    "Key": {
 		//	                      "description": "Key name for metadata fields",
@@ -1844,6 +1900,11 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 																				}, /*END ATTRIBUTE*/
 																			}, /*END SCHEMA*/
 																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: ExtractionType
+																		"extraction_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+																			Computed:    true,
 																		}, /*END ATTRIBUTE*/
 																		// Property: Key
 																		"key": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -2130,6 +2191,11 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 													}, /*END SCHEMA*/
 													Computed: true,
 												}, /*END ATTRIBUTE*/
+												// Property: ExtractionType
+												"extraction_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
 												// Property: Key
 												"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "Key name for metadata fields",
@@ -2278,6 +2344,11 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 													}, /*END SCHEMA*/
 													Computed: true,
 												}, /*END ATTRIBUTE*/
+												// Property: ExtractionType
+												"extraction_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
 												// Property: Key
 												"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "Key name for metadata fields",
@@ -2390,6 +2461,11 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 																}, /*END ATTRIBUTE*/
 															}, /*END SCHEMA*/
 															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: ExtractionType
+														"extraction_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+															Computed:    true,
 														}, /*END ATTRIBUTE*/
 														// Property: Key
 														"key": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -2536,6 +2612,11 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: ExtractionType
+												"extraction_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Key
 												"key": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -2685,6 +2766,11 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 													}, /*END SCHEMA*/
 													Computed: true,
 												}, /*END ATTRIBUTE*/
+												// Property: ExtractionType
+												"extraction_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
 												// Property: Key
 												"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "Key name for metadata fields",
@@ -2832,6 +2918,11 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 														}, /*END ATTRIBUTE*/
 													}, /*END SCHEMA*/
 													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: ExtractionType
+												"extraction_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event",
+													Computed:    true,
 												}, /*END ATTRIBUTE*/
 												// Property: Key
 												"key": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -3103,6 +3194,7 @@ func memoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"event_expiry_duration":           "EventExpiryDuration",
 		"extraction":                      "Extraction",
 		"extraction_config":               "ExtractionConfig",
+		"extraction_type":                 "ExtractionType",
 		"failure_reason":                  "FailureReason",
 		"historical_context_window_size":  "HistoricalContextWindowSize",
 		"idle_session_timeout":            "IdleSessionTimeout",
