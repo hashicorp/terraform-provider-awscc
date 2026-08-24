@@ -162,6 +162,122 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "additionalProperties": false,
 		//	    "description": "Details of an instance group in a SageMaker HyperPod cluster.",
 		//	    "properties": {
+		//	      "AutoPatchConfig": {
+		//	        "additionalProperties": false,
+		//	        "description": "The configuration for automatic patching of the instance group. Enables workload-aware, patch-level AMI updates.",
+		//	        "properties": {
+		//	          "DeploymentConfig": {
+		//	            "additionalProperties": false,
+		//	            "description": "The configuration to use when updating the AMI versions.",
+		//	            "properties": {
+		//	              "AutoRollbackConfiguration": {
+		//	                "description": "An array that contains the alarms that SageMaker monitors to know whether to roll back the AMI update.",
+		//	                "insertionOrder": false,
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "The details of the alarm to monitor during the AMI update.",
+		//	                  "properties": {
+		//	                    "AlarmName": {
+		//	                      "description": "The name of the alarm.",
+		//	                      "maxLength": 256,
+		//	                      "minLength": 1,
+		//	                      "pattern": "",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "AlarmName"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "RollingUpdatePolicy": {
+		//	                "additionalProperties": false,
+		//	                "description": "The policy that SageMaker uses when updating the AMI versions of the cluster.",
+		//	                "properties": {
+		//	                  "MaximumBatchSize": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "The configuration of the size measurements of the AMI update. Using this configuration, you can specify whether SageMaker should update your instance group by an amount or percentage of instances.",
+		//	                    "properties": {
+		//	                      "Type": {
+		//	                        "description": "Specifies whether SageMaker should process the update by amount or percentage of instances.",
+		//	                        "pattern": "INSTANCE_COUNT|CAPACITY_PERCENTAGE",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Value": {
+		//	                        "description": "Specifies the amount or percentage of instances SageMaker updates at a time.",
+		//	                        "minimum": 1,
+		//	                        "type": "integer"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "Type",
+		//	                      "Value"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "RollbackMaximumBatchSize": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "The configuration of the size measurements of the AMI update. Using this configuration, you can specify whether SageMaker should update your instance group by an amount or percentage of instances.",
+		//	                    "properties": {
+		//	                      "Type": {
+		//	                        "description": "Specifies whether SageMaker should process the update by amount or percentage of instances.",
+		//	                        "pattern": "INSTANCE_COUNT|CAPACITY_PERCENTAGE",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Value": {
+		//	                        "description": "Specifies the amount or percentage of instances SageMaker updates at a time.",
+		//	                        "minimum": 1,
+		//	                        "type": "integer"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "Type",
+		//	                      "Value"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "MaximumBatchSize"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "WaitIntervalInSeconds": {
+		//	                "description": "The duration in seconds that SageMaker waits before updating more instances in the cluster.",
+		//	                "maximum": 3600,
+		//	                "minimum": 0,
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "PatchSchedule": {
+		//	            "additionalProperties": false,
+		//	            "description": "The schedule configuration for automatic patching.",
+		//	            "properties": {
+		//	              "NextPatchDate": {
+		//	                "description": "The date and time of the next scheduled patch, set by the system when a patch AMI is detected.",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "PatchingStrategy": {
+		//	            "description": "The patching strategy that determines when and how instances are patched. WhenIdle patches instances as they become idle. WhenAllIdle patches all instances when they are all idle.",
+		//	            "enum": [
+		//	              "WhenIdle",
+		//	              "WhenAllIdle"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "PatchingStrategy"
+		//	        ],
+		//	        "type": "object"
+		//	      },
 		//	      "CapacityRequirements": {
 		//	        "additionalProperties": false,
 		//	        "description": "Specifies the capacity requirements configuration for an instance group",
@@ -210,6 +326,27 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
 		//	        "type": "string"
 		//	      },
+		//	      "InstanceRequirements": {
+		//	        "additionalProperties": false,
+		//	        "description": "The instance requirements for the instance group. Specifies a list of instance types that can be used.",
+		//	        "properties": {
+		//	          "InstanceTypes": {
+		//	            "description": "A list of instance types that can be used for this instance group.",
+		//	            "insertionOrder": true,
+		//	            "items": {
+		//	              "description": "The instance type of the instance group of a SageMaker HyperPod cluster.",
+		//	              "type": "string"
+		//	            },
+		//	            "maxItems": 20,
+		//	            "minItems": 1,
+		//	            "type": "array"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "InstanceTypes"
+		//	        ],
+		//	        "type": "object"
+		//	      },
 		//	      "InstanceStorageConfigs": {
 		//	        "description": "The instance storage configuration for the instance group.",
 		//	        "insertionOrder": false,
@@ -237,11 +374,35 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                }
 		//	              },
 		//	              "type": "object"
+		//	            },
+		//	            "FsxOpenZfsConfig": {
+		//	              "additionalProperties": false,
+		//	              "description": "Configuration for mounting an Amazon FSx OpenZFS file system to the instances in the SageMaker HyperPod cluster instance group.",
+		//	              "properties": {
+		//	                "DnsName": {
+		//	                  "description": "The DNS name of the FSx for OpenZFS file system.",
+		//	                  "maxLength": 275,
+		//	                  "minLength": 16,
+		//	                  "pattern": "^((fs|fc)i?-[0-9a-f]{8,}\\..{4,253})$",
+		//	                  "type": "string"
+		//	                },
+		//	                "MountPath": {
+		//	                  "description": "The mount path for the FSx for OpenZFS file system.",
+		//	                  "maxLength": 1024,
+		//	                  "minLength": 1,
+		//	                  "pattern": "",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "DnsName"
+		//	              ],
+		//	              "type": "object"
 		//	            }
 		//	          },
 		//	          "type": "object"
 		//	        },
-		//	        "maxItems": 1,
+		//	        "maxItems": 4,
 		//	        "type": "array"
 		//	      },
 		//	      "InstanceType": {
@@ -301,10 +462,17 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "LifeCycleConfig": {
 		//	        "additionalProperties": false,
-		//	        "description": "The lifecycle configuration for a SageMaker HyperPod cluster.",
+		//	        "description": "The lifecycle configuration for a SageMaker HyperPod cluster. When omitted, the instance group uses Bootstrap mode. When provided with SourceS3Uri and OnCreate, uses Customer Managed mode. When provided with SourceS3Uri and OnInitComplete, uses Extended mode.",
 		//	        "properties": {
 		//	          "OnCreate": {
-		//	            "description": "The file name of the entrypoint script of lifecycle scripts under SourceS3Uri. This entrypoint script runs during cluster creation.",
+		//	            "description": "The file name of the entrypoint script of lifecycle scripts under SourceS3Uri. This entrypoint script runs during cluster creation. Mutually exclusive with OnInitComplete.",
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "pattern": "^[\\S\\s]+$",
+		//	            "type": "string"
+		//	          },
+		//	          "OnInitComplete": {
+		//	            "description": "The file name of the extension script under SourceS3Uri. This script runs after HyperPod configures the default software on the instance. Mutually exclusive with OnCreate.",
 		//	            "maxLength": 128,
 		//	            "minLength": 1,
 		//	            "pattern": "^[\\S\\s]+$",
@@ -317,16 +485,30 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "type": "string"
 		//	          }
 		//	        },
-		//	        "required": [
-		//	          "OnCreate",
-		//	          "SourceS3Uri"
-		//	        ],
 		//	        "type": "object"
 		//	      },
 		//	      "MinInstanceCount": {
 		//	        "description": "The minimum number of instances required for the instance group to be InService. MinInstanceCount must be less than or equal to InstanceCount.",
 		//	        "minimum": 0,
 		//	        "type": "integer"
+		//	      },
+		//	      "NetworkInterface": {
+		//	        "additionalProperties": false,
+		//	        "description": "Specifies the network interface configuration for the instance group.",
+		//	        "properties": {
+		//	          "InterfaceType": {
+		//	            "description": "The type of network interface.",
+		//	            "enum": [
+		//	              "efa",
+		//	              "efa-only"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "InterfaceType"
+		//	        ],
+		//	        "type": "object"
 		//	      },
 		//	      "OnStartDeepHealthChecks": {
 		//	        "description": "Nodes will undergo advanced stress test to detect and replace faulty instances, based on the type of deep health check(s) passed in.",
@@ -480,6 +662,39 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        ],
 		//	        "type": "object"
 		//	      },
+		//	      "SlurmConfig": {
+		//	        "additionalProperties": false,
+		//	        "description": "Slurm configuration for the instance group.",
+		//	        "properties": {
+		//	          "NodeType": {
+		//	            "description": "The type of Slurm node for this instance group.",
+		//	            "enum": [
+		//	              "Controller",
+		//	              "Login",
+		//	              "Compute"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "PartitionNames": {
+		//	            "description": "The Slurm partitions that this instance group belongs to. Maximum of 1 partition.",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "description": "The name of a Slurm partition.",
+		//	              "maxLength": 1024,
+		//	              "minLength": 0,
+		//	              "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
+		//	              "type": "string"
+		//	            },
+		//	            "maxItems": 1,
+		//	            "minItems": 0,
+		//	            "type": "array"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "NodeType"
+		//	        ],
+		//	        "type": "object"
+		//	      },
 		//	      "ThreadsPerCore": {
 		//	        "description": "The number you specified to TreadsPerCore in CreateCluster for enabling or disabling multithreading. For instance types that support multithreading, you can specify 1 for disabling multithreading and 2 for enabling multithreading.",
 		//	        "maximum": 2,
@@ -497,9 +712,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "required": [
 		//	      "ExecutionRole",
 		//	      "InstanceCount",
-		//	      "InstanceGroupName",
-		//	      "InstanceType",
-		//	      "LifeCycleConfig"
+		//	      "InstanceGroupName"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -509,6 +722,97 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"instance_groups": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AutoPatchConfig
+					"auto_patch_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DeploymentConfig
+							"deployment_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AutoRollbackConfiguration
+									"auto_rollback_configuration": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: AlarmName
+												"alarm_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The name of the alarm.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "An array that contains the alarms that SageMaker monitors to know whether to roll back the AMI update.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: RollingUpdatePolicy
+									"rolling_update_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: MaximumBatchSize
+											"maximum_batch_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Type
+													"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Specifies whether SageMaker should process the update by amount or percentage of instances.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Value
+													"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+														Description: "Specifies the amount or percentage of instances SageMaker updates at a time.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "The configuration of the size measurements of the AMI update. Using this configuration, you can specify whether SageMaker should update your instance group by an amount or percentage of instances.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: RollbackMaximumBatchSize
+											"rollback_maximum_batch_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Type
+													"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Specifies whether SageMaker should process the update by amount or percentage of instances.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Value
+													"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+														Description: "Specifies the amount or percentage of instances SageMaker updates at a time.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "The configuration of the size measurements of the AMI update. Using this configuration, you can specify whether SageMaker should update your instance group by an amount or percentage of instances.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "The policy that SageMaker uses when updating the AMI versions of the cluster.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: WaitIntervalInSeconds
+									"wait_interval_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The duration in seconds that SageMaker waits before updating more instances in the cluster.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The configuration to use when updating the AMI versions.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: PatchSchedule
+							"patch_schedule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: NextPatchDate
+									"next_patch_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The date and time of the next scheduled patch, set by the system when a patch AMI is detected.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The schedule configuration for automatic patching.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: PatchingStrategy
+							"patching_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The patching strategy that determines when and how instances are patched. WhenIdle patches instances as they become idle. WhenAllIdle patches all instances when they are all idle.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The configuration for automatic patching of the instance group. Enables workload-aware, patch-level AMI updates.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: CapacityRequirements
 					"capacity_requirements": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -553,6 +857,19 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Description: "The name of the instance group of a SageMaker HyperPod cluster.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
+					// Property: InstanceRequirements
+					"instance_requirements": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: InstanceTypes
+							"instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "A list of instance types that can be used for this instance group.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The instance requirements for the instance group. Specifies a list of instance types that can be used.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: InstanceStorageConfigs
 					"instance_storage_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -575,6 +892,23 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "Defines the configuration for attaching additional Amazon Elastic Block Store (EBS) volumes to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to /opt/sagemaker.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: FsxOpenZfsConfig
+								"fsx_open_zfs_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: DnsName
+										"dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The DNS name of the FSx for OpenZFS file system.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: MountPath
+										"mount_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The mount path for the FSx for OpenZFS file system.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Configuration for mounting an Amazon FSx OpenZFS file system to the instances in the SageMaker HyperPod cluster instance group.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -630,7 +964,12 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: OnCreate
 							"on_create": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The file name of the entrypoint script of lifecycle scripts under SourceS3Uri. This entrypoint script runs during cluster creation.",
+								Description: "The file name of the entrypoint script of lifecycle scripts under SourceS3Uri. This entrypoint script runs during cluster creation. Mutually exclusive with OnInitComplete.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: OnInitComplete
+							"on_init_complete": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The file name of the extension script under SourceS3Uri. This script runs after HyperPod configures the default software on the instance. Mutually exclusive with OnCreate.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: SourceS3Uri
@@ -639,12 +978,24 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Description: "The lifecycle configuration for a SageMaker HyperPod cluster.",
+						Description: "The lifecycle configuration for a SageMaker HyperPod cluster. When omitted, the instance group uses Bootstrap mode. When provided with SourceS3Uri and OnCreate, uses Customer Managed mode. When provided with SourceS3Uri and OnInitComplete, uses Extended mode.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: MinInstanceCount
 					"min_instance_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
 						Description: "The minimum number of instances required for the instance group to be InService. MinInstanceCount must be less than or equal to InstanceCount.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: NetworkInterface
+					"network_interface": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: InterfaceType
+							"interface_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The type of network interface.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Specifies the network interface configuration for the instance group.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: OnStartDeepHealthChecks
@@ -751,6 +1102,24 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 						Description: "The configuration object of the schedule that SageMaker follows when updating the AMI.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
+					// Property: SlurmConfig
+					"slurm_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: NodeType
+							"node_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The type of Slurm node for this instance group.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: PartitionNames
+							"partition_names": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "The Slurm partitions that this instance group belongs to. Maximum of 1 partition.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Slurm configuration for the instance group.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: ThreadsPerCore
 					"threads_per_core": schema.Int64Attribute{ /*START ATTRIBUTE*/
 						Description: "The number you specified to TreadsPerCore in CreateCluster for enabling or disabling multithreading. For instance types that support multithreading, you can specify 1 for disabling multithreading and 2 for enabling multithreading.",
@@ -799,8 +1168,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "additionalProperties": false,
-		//	  "description": "Specifies parameter(s) specific to the orchestrator, e.g. specify the EKS cluster.",
+		//	  "description": "Specifies parameter(s) specific to the orchestrator, e.g. specify the EKS cluster or Slurm configuration.",
 		//	  "properties": {
 		//	    "Eks": {
 		//	      "additionalProperties": false,
@@ -815,11 +1183,24 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "ClusterArn"
 		//	      ],
 		//	      "type": "object"
+		//	    },
+		//	    "Slurm": {
+		//	      "additionalProperties": false,
+		//	      "description": "Specifies parameter(s) related to Slurm as orchestrator.",
+		//	      "properties": {
+		//	        "SlurmConfigStrategy": {
+		//	          "description": "The strategy for managing Slurm configuration on the cluster.",
+		//	          "enum": [
+		//	            "Overwrite",
+		//	            "Managed",
+		//	            "Merge"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "Eks"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"orchestrator": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -836,8 +1217,20 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "Specifies parameter(s) related to EKS as orchestrator, e.g. the EKS cluster nodes will attach to,",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: Slurm
+				"slurm": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SlurmConfigStrategy
+						"slurm_config_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The strategy for managing Slurm configuration on the cluster.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Specifies parameter(s) related to Slurm as orchestrator.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "Specifies parameter(s) specific to the orchestrator, e.g. specify the EKS cluster.",
+			Description: "Specifies parameter(s) specific to the orchestrator, e.g. specify the EKS cluster or Slurm configuration.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RestrictedInstanceGroups
@@ -931,11 +1324,35 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                }
 		//	              },
 		//	              "type": "object"
+		//	            },
+		//	            "FsxOpenZfsConfig": {
+		//	              "additionalProperties": false,
+		//	              "description": "Configuration for mounting an Amazon FSx OpenZFS file system to the instances in the SageMaker HyperPod cluster instance group.",
+		//	              "properties": {
+		//	                "DnsName": {
+		//	                  "description": "The DNS name of the FSx for OpenZFS file system.",
+		//	                  "maxLength": 275,
+		//	                  "minLength": 16,
+		//	                  "pattern": "^((fs|fc)i?-[0-9a-f]{8,}\\..{4,253})$",
+		//	                  "type": "string"
+		//	                },
+		//	                "MountPath": {
+		//	                  "description": "The mount path for the FSx for OpenZFS file system.",
+		//	                  "maxLength": 1024,
+		//	                  "minLength": 1,
+		//	                  "pattern": "",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "DnsName"
+		//	              ],
+		//	              "type": "object"
 		//	            }
 		//	          },
 		//	          "type": "object"
 		//	        },
-		//	        "maxItems": 1,
+		//	        "maxItems": 4,
 		//	        "type": "array"
 		//	      },
 		//	      "InstanceType": {
@@ -1008,8 +1425,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "ExecutionRole",
 		//	      "InstanceCount",
 		//	      "InstanceGroupName",
-		//	      "InstanceType",
-		//	      "EnvironmentConfig"
+		//	      "InstanceType"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -1087,6 +1503,23 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 									Description: "Defines the configuration for attaching additional Amazon Elastic Block Store (EBS) volumes to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to /opt/sagemaker.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
+								// Property: FsxOpenZfsConfig
+								"fsx_open_zfs_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: DnsName
+										"dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The DNS name of the FSx for OpenZFS file system.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: MountPath
+										"mount_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The mount path for the FSx for OpenZFS file system.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Configuration for mounting an Amazon FSx OpenZFS file system to the instances in the SageMaker HyperPod cluster instance group.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
 						Description: "The instance storage configuration for the instance group.",
@@ -1135,6 +1568,95 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "The restricted instance groups of the SageMaker HyperPod cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: RestrictedInstanceGroupsConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The cluster-level configuration for restricted instance groups, including shared environment settings for inter-RIG communication and FSx Lustre sharing.",
+		//	  "properties": {
+		//	    "SharedEnvironmentConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "The shared environment configuration for restricted instance groups that use cluster-level shared FSx Lustre storage.",
+		//	      "properties": {
+		//	        "FSxLustreConfig": {
+		//	          "additionalProperties": false,
+		//	          "description": "Configuration settings for an Amazon FSx for Lustre file system to be used with the cluster.",
+		//	          "properties": {
+		//	            "PerUnitStorageThroughput": {
+		//	              "description": "The throughput capacity of the FSx for Lustre file system, measured in MB/s per TiB of storage.",
+		//	              "maximum": 1000,
+		//	              "minimum": 125,
+		//	              "type": "integer"
+		//	            },
+		//	            "SizeInGiB": {
+		//	              "description": "The storage capacity of the FSx for Lustre file system, specified in gibibytes (GiB).",
+		//	              "maximum": 100800,
+		//	              "minimum": 1200,
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SizeInGiB",
+		//	            "PerUnitStorageThroughput"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "FSxLustreDeletionPolicy": {
+		//	          "description": "The deletion policy for the shared FSx Lustre file system. Keep retains the FSx when RIGs are deleted. DeleteIfNotUsed deletes the FSx when no RIGs reference it.",
+		//	          "enum": [
+		//	            "Keep",
+		//	            "DeleteIfNotUsed"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "FSxLustreDeletionPolicy"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "SharedEnvironmentConfig"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"restricted_instance_groups_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SharedEnvironmentConfig
+				"shared_environment_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: FSxLustreConfig
+						"fsx_lustre_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: PerUnitStorageThroughput
+								"per_unit_storage_throughput": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The throughput capacity of the FSx for Lustre file system, measured in MB/s per TiB of storage.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SizeInGiB
+								"size_in_gi_b": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The storage capacity of the FSx for Lustre file system, specified in gibibytes (GiB).",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Configuration settings for an Amazon FSx for Lustre file system to be used with the cluster.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: FSxLustreDeletionPolicy
+						"fsx_lustre_deletion_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The deletion policy for the shared FSx Lustre file system. Keep retains the FSx when RIGs are deleted. DeleteIfNotUsed deletes the FSx when no RIGs reference it.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The shared environment configuration for restricted instance groups that use cluster-level shared FSx Lustre storage.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The cluster-level configuration for restricted instance groups, including shared environment settings for inter-RIG communication and FSx Lustre sharing.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -1305,6 +1827,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"alarm_name":                            "AlarmName",
+		"auto_patch_config":                     "AutoPatchConfig",
 		"auto_rollback_configuration":           "AutoRollbackConfiguration",
 		"auto_scaler_type":                      "AutoScalerType",
 		"auto_scaling":                          "AutoScaling",
@@ -1316,6 +1839,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"creation_time":                         "CreationTime",
 		"current_count":                         "CurrentCount",
 		"deployment_config":                     "DeploymentConfig",
+		"dns_name":                              "DnsName",
 		"ebs_volume_config":                     "EbsVolumeConfig",
 		"effect":                                "Effect",
 		"eks":                                   "Eks",
@@ -1323,13 +1847,18 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"execution_role":                        "ExecutionRole",
 		"failure_message":                       "FailureMessage",
 		"fsx_lustre_config":                     "FSxLustreConfig",
+		"fsx_lustre_deletion_policy":            "FSxLustreDeletionPolicy",
+		"fsx_open_zfs_config":                   "FsxOpenZfsConfig",
 		"image_id":                              "ImageId",
 		"instance_count":                        "InstanceCount",
 		"instance_group_name":                   "InstanceGroupName",
 		"instance_groups":                       "InstanceGroups",
 		"instance_memory_allocation_percentage": "InstanceMemoryAllocationPercentage",
+		"instance_requirements":                 "InstanceRequirements",
 		"instance_storage_configs":              "InstanceStorageConfigs",
 		"instance_type":                         "InstanceType",
+		"instance_types":                        "InstanceTypes",
+		"interface_type":                        "InterfaceType",
 		"key":                                   "Key",
 		"kubernetes_config":                     "KubernetesConfig",
 		"labels":                                "Labels",
@@ -1337,22 +1866,35 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"maximum_batch_size":                    "MaximumBatchSize",
 		"min_instance_count":                    "MinInstanceCount",
 		"mode":                                  "Mode",
+		"mount_path":                            "MountPath",
+		"network_interface":                     "NetworkInterface",
+		"next_patch_date":                       "NextPatchDate",
 		"node_provisioning_mode":                "NodeProvisioningMode",
 		"node_recovery":                         "NodeRecovery",
+		"node_type":                             "NodeType",
 		"on_create":                             "OnCreate",
 		"on_demand":                             "OnDemand",
+		"on_init_complete":                      "OnInitComplete",
 		"on_start_deep_health_checks":           "OnStartDeepHealthChecks",
 		"orchestrator":                          "Orchestrator",
 		"override_vpc_config":                   "OverrideVpcConfig",
+		"partition_names":                       "PartitionNames",
+		"patch_schedule":                        "PatchSchedule",
+		"patching_strategy":                     "PatchingStrategy",
 		"per_unit_storage_throughput":           "PerUnitStorageThroughput",
 		"restricted_instance_groups":            "RestrictedInstanceGroups",
+		"restricted_instance_groups_config":     "RestrictedInstanceGroupsConfig",
 		"rollback_maximum_batch_size":           "RollbackMaximumBatchSize",
 		"rolling_update_policy":                 "RollingUpdatePolicy",
 		"root_volume":                           "RootVolume",
 		"schedule_expression":                   "ScheduleExpression",
 		"scheduled_update_config":               "ScheduledUpdateConfig",
 		"security_group_ids":                    "SecurityGroupIds",
+		"shared_environment_config":             "SharedEnvironmentConfig",
 		"size_in_gi_b":                          "SizeInGiB",
+		"slurm":                                 "Slurm",
+		"slurm_config":                          "SlurmConfig",
+		"slurm_config_strategy":                 "SlurmConfigStrategy",
 		"source_s3_uri":                         "SourceS3Uri",
 		"spot":                                  "Spot",
 		"subnets":                               "Subnets",
