@@ -472,6 +472,7 @@ resource_schema "aws_appstream_stack" {
 resource_schema "aws_appstream_stack_fleet_association" {
   cloudformation_type_name               = "AWS::AppStream::StackFleetAssociation"
   suppress_plural_data_source_generation = true
+  non_provisionable                      = true
 }
 
 resource_schema "aws_appstream_stack_user_association" {
@@ -1858,6 +1859,7 @@ resource_schema "aws_dax_parameter_group" {
 
 resource_schema "aws_dax_subnet_group" {
   cloudformation_type_name = "AWS::DAX::SubnetGroup"
+  non_provisionable        = true
 }
 
 resource_schema "aws_dms_certificate" {
@@ -2873,24 +2875,6 @@ resource_schema "aws_eks_nodegroup" {
 resource_schema "aws_eks_pod_identity_association" {
   cloudformation_type_name               = "AWS::EKS::PodIdentityAssociation"
   suppress_plural_data_source_generation = true
-}
-
-# This resource was not present in the 04/01/2026 refresh
-#resource_schema "aws_emr_cluster" {
-#  cloudformation_type_name = "AWS::EMR::Cluster"
-#
-#  # Suppression Reason:
-#  # Recursive Attribute Definitions https://github.com/hashicorp/terraform-provider-awscc/issues/3100
-#  suppress_resource_generation             = true
-#  suppress_singular_data_source_generation = true
-#  suppress_plural_data_source_generation   = true
-#}
-
-resource_schema "aws_emr_instance_group_config" {
-  cloudformation_type_name                 = "AWS::EMR::InstanceGroupConfig"
-  suppress_resource_generation             = true
-  suppress_singular_data_source_generation = true
-  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_emr_security_configuration" {
@@ -6294,6 +6278,7 @@ resource_schema "aws_sagemaker_experiment" {
 resource_schema "aws_sagemaker_experiment_trial_component" {
   cloudformation_type_name = "AWS::SageMaker::ExperimentTrialComponent"
   frozen_since             = "2026-07-22"
+  non_provisionable        = true
 }
 
 resource_schema "aws_sagemaker_feature_group" {

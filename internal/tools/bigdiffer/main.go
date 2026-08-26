@@ -152,13 +152,13 @@ type rowRef struct {
 
 // Report summarizes what the normalization did and what a human should review.
 type Report struct {
-	AddedNew      []rowRef // in base, absent from overlay, absent from previous base
-	AddedBacklog  []rowRef // in base, absent from overlay, present in previous base
-	Retained      []rowRef // live in overlay, absent from base
-	UnpinnedGone  []rowRef // Retained rows with no suppressions_checkout.txt pin
-	Duplicates    []string // CloudFormation type names with more than one live block
-	NamingViolate []string
-	Total         int
+	AddedNew            []rowRef // in base, absent from overlay, absent from previous base
+	AddedBacklog        []rowRef // in base, absent from overlay, present in previous base
+	Retained            []rowRef // live in overlay, absent from base
+	UnexplainedRetained []rowRef // Retained rows not explained by frozen_since, non_provisionable, or a checkout pin
+	Duplicates          []string // CloudFormation type names with more than one live block
+	NamingViolate       []string
+	Total               int
 }
 
 func normalize(overlay string, base, previous []allschemas.ResourceSchema, checkout map[string]bool) (string, Report, error) {
@@ -172,9 +172,16 @@ func normalize(overlay string, base, previous []allschemas.ResourceSchema, check
 
 	// Cross-validate the scanner against a real HCL decode: the set of live
 	// resource_schema blocks must match exactly. This catches any scanner drift
-	// or unusual formatting before we rewrite the file.
-	if err := crossValidate(overlay, items); err != nil {
+	// or unusual formatting before we rewrite the file. The decoded resources
+	// also give us per-block attributes (frozen_since, non_provisionable) that
+	// explain why a row may legitimately be absent from the base.
+	overlayResources, err := crossValidate(overlay, items)
+	if err != nil {
 		return "", Report{}, err
+	}
+	overlayByCFN := make(map[string]allschemas.ResourceAllSchema, len(overlayResources))
+	for _, r := range overlayResources {
+		overlayByCFN[r.CloudFormationTypeName] = r
 	}
 
 	// Live blocks indexed by CloudFormation type name.
@@ -227,8 +234,10 @@ func normalize(overlay string, base, previous []allschemas.ResourceSchema, check
 		}
 		ref := rowRef{cfn: it.key, label: it.label}
 		report.Retained = append(report.Retained, ref)
-		if !checkout[it.key] {
-			report.UnpinnedGone = append(report.UnpinnedGone, ref)
+		r := overlayByCFN[it.key]
+		explained := checkout[it.key] || r.FrozenSince != "" || r.NonProvisionable
+		if !explained {
+			report.UnexplainedRetained = append(report.UnexplainedRetained, ref)
 		}
 	}
 
@@ -407,15 +416,15 @@ func expectedLabel(cfn string) (string, error) {
 // crossValidate decodes the overlay with a real HCL parser and asserts that the
 // set of live resource_schema blocks equals what the text scanner found. This
 // guards the verbatim, comment-preserving text path with a structural check.
-func crossValidate(overlay string, items []item) error {
+func crossValidate(overlay string, items []item) ([]allschemas.ResourceAllSchema, error) {
 	parser := hclparse.NewParser()
 	f, diag := parser.ParseHCL([]byte(overlay), "all_schemas.hcl")
 	if diag.HasErrors() {
-		return fmt.Errorf("HCL parse: %s", diag.Error())
+		return nil, fmt.Errorf("HCL parse: %s", diag.Error())
 	}
 	var decoded allschemas.AllSchemas
 	if diag := gohcl.DecodeBody(f.Body, nil, &decoded); diag.HasErrors() {
-		return fmt.Errorf("HCL decode: %s", diag.Error())
+		return nil, fmt.Errorf("HCL decode: %s", diag.Error())
 	}
 
 	decodedCFN := make(map[string]string, len(decoded.Resources)) // cfn -> label
@@ -432,17 +441,17 @@ func crossValidate(overlay string, items []item) error {
 
 	for cfn, label := range decodedCFN {
 		if got, ok := scannedCFN[cfn]; !ok {
-			return fmt.Errorf("HCL decode found live block %q that the scanner missed", cfn)
+			return nil, fmt.Errorf("HCL decode found live block %q that the scanner missed", cfn)
 		} else if got != label {
-			return fmt.Errorf("live block %q: scanner label %q != HCL label %q", cfn, got, label)
+			return nil, fmt.Errorf("live block %q: scanner label %q != HCL label %q", cfn, got, label)
 		}
 	}
 	for cfn := range scannedCFN {
 		if _, ok := decodedCFN[cfn]; !ok {
-			return fmt.Errorf("scanner found live block %q that the HCL decode did not", cfn)
+			return nil, fmt.Errorf("scanner found live block %q that the HCL decode did not", cfn)
 		}
 	}
-	return nil
+	return decoded.Resources, nil
 }
 
 func parseAvailable(path string) ([]allschemas.ResourceSchema, error) {
@@ -532,9 +541,9 @@ func (r Report) write(w *os.File) {
 		fmt.Fprintf(w, "  + %s  (%s)  [available previously but never added]\n", b.cfn, b.label)
 	}
 	fmt.Fprintf(w, "retained (gone from AWS):    %d\n", len(r.Retained))
-	if len(r.UnpinnedGone) > 0 {
-		fmt.Fprintf(w, "ANOMALY - retained but NOT pinned in suppressions_checkout.txt: %d\n", len(r.UnpinnedGone))
-		for _, b := range r.UnpinnedGone {
+	if len(r.UnexplainedRetained) > 0 {
+		fmt.Fprintf(w, "ANOMALY - retained but unexplained (no frozen_since / non_provisionable / checkout pin): %d\n", len(r.UnexplainedRetained))
+		for _, b := range r.UnexplainedRetained {
 			fmt.Fprintf(w, "  ! %s  (%s)\n", b.cfn, b.label)
 		}
 	}

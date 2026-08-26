@@ -142,8 +142,8 @@ func TestNormalize(t *testing.T) {
 	if len(report.Retained) != 1 || report.Retained[0].cfn != "AWS::Old::Gone" {
 		t.Errorf("Retained = %+v, want [AWS::Old::Gone]", report.Retained)
 	}
-	if len(report.UnpinnedGone) != 1 || report.UnpinnedGone[0].cfn != "AWS::Old::Gone" {
-		t.Errorf("UnpinnedGone = %+v, want [AWS::Old::Gone]", report.UnpinnedGone)
+	if len(report.UnexplainedRetained) != 1 || report.UnexplainedRetained[0].cfn != "AWS::Old::Gone" {
+		t.Errorf("UnexplainedRetained = %+v, want [AWS::Old::Gone]", report.UnexplainedRetained)
 	}
 	if len(report.NamingViolate) != 1 || !strings.Contains(report.NamingViolate[0], "AWS::EC2::Widget") {
 		t.Errorf("NamingViolate = %v, want one entry for AWS::EC2::Widget", report.NamingViolate)
@@ -194,8 +194,8 @@ func TestCheckoutPinSuppressesAnomaly(t *testing.T) {
 	if len(report.Retained) != 1 {
 		t.Errorf("Retained = %+v, want 1", report.Retained)
 	}
-	if len(report.UnpinnedGone) != 0 {
-		t.Errorf("UnpinnedGone = %+v, want 0 (Old::Gone is pinned)", report.UnpinnedGone)
+	if len(report.UnexplainedRetained) != 0 {
+		t.Errorf("UnexplainedRetained = %+v, want 0 (Old::Gone is pinned)", report.UnexplainedRetained)
 	}
 }
 
@@ -258,8 +258,8 @@ resource_schema "aws_svc_kept" {
 	if len(report.Retained) != 1 || report.Retained[0].cfn != "AWS::Svc::Kept" {
 		t.Errorf("Retained = %+v, want [AWS::Svc::Kept]", report.Retained)
 	}
-	if len(report.UnpinnedGone) != 0 {
-		t.Errorf("UnpinnedGone = %+v, want none", report.UnpinnedGone)
+	if len(report.UnexplainedRetained) != 0 {
+		t.Errorf("UnexplainedRetained = %+v, want none", report.UnexplainedRetained)
 	}
 
 	// Idempotent.
@@ -299,7 +299,7 @@ func TestAnomalyProblemsGating(t *testing.T) {
 	t.Parallel()
 
 	// Unpinned-retained is advisory only and must NOT be a blocking problem.
-	r := Report{UnpinnedGone: []rowRef{{cfn: "AWS::Svc::Gone"}}}
+	r := Report{UnexplainedRetained: []rowRef{{cfn: "AWS::Svc::Gone"}}}
 	if got := r.anomalyProblems(); len(got) != 0 {
 		t.Errorf("unpinned-retained should not block -check, got %v", got)
 	}
@@ -311,5 +311,49 @@ func TestAnomalyProblemsGating(t *testing.T) {
 	}
 	if got := r.anomalyProblems(); len(got) != 2 {
 		t.Errorf("anomalyProblems() = %v, want 2 problems", got)
+	}
+}
+
+func TestFrozenAndNonProvisionableSuppressAnomaly(t *testing.T) {
+	t.Parallel()
+
+	// All three are retained (absent from base). Frozen and Nonprov are
+	// explained by their attributes; Orphan is not and must be flagged.
+	frozen := `resource_schema "aws_svc_frozen" {
+  cloudformation_type_name = "AWS::Svc::Frozen"
+  frozen_since             = "2025-01-02"
+}`
+	nonprov := `resource_schema "aws_svc_nonprov" {
+  cloudformation_type_name = "AWS::Svc::Nonprov"
+  non_provisionable        = true
+}`
+	orphan := `resource_schema "aws_svc_orphan" {
+  cloudformation_type_name = "AWS::Svc::Orphan"
+}`
+
+	overlay := testHead +
+		"# 0 CloudFormation resource types schemas are available for use with the Cloud Control API.\n\n" +
+		strings.Join([]string{frozen, nonprov, orphan}, "\n\n") + "\n"
+
+	// Empty base: every row is retained.
+	out, report, err := normalize(overlay, nil, nil, map[string]bool{})
+	if err != nil {
+		t.Fatalf("normalize: %v", err)
+	}
+
+	if len(report.Retained) != 3 {
+		t.Errorf("Retained = %+v, want 3", report.Retained)
+	}
+	if len(report.UnexplainedRetained) != 1 || report.UnexplainedRetained[0].cfn != "AWS::Svc::Orphan" {
+		t.Errorf("UnexplainedRetained = %+v, want [AWS::Svc::Orphan]", report.UnexplainedRetained)
+	}
+
+	// Idempotent.
+	again, _, err := normalize(out, nil, nil, map[string]bool{})
+	if err != nil {
+		t.Fatalf("second normalize: %v", err)
+	}
+	if again != out {
+		t.Errorf("not idempotent:\n--- first ---\n%s\n--- second ---\n%s", out, again)
 	}
 }
