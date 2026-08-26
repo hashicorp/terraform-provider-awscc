@@ -18,7 +18,12 @@
         "READY",
         "CREATE_FAILED",
         "UPDATE_FAILED",
-        "DELETE_FAILED"
+        "DELETE_FAILED",
+        "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED",
+        "PENDING_AUTHENTICATION",
+        "PROVISIONING",
+        "AUTHENTICATION_EXPIRED",
+        "AUTHENTICATION_FAILED"
       ]
     },
     "PaymentConnectorType": {
@@ -26,6 +31,13 @@
       "enum": [
         "CoinbaseCDP",
         "StripePrivy"
+      ]
+    },
+    "PaymentConnectorProvisionMode": {
+      "type": "string",
+      "enum": [
+        "MANUAL",
+        "QUICK_CREATE"
       ]
     },
     "CredentialsProviderConfiguration": {
@@ -85,13 +97,17 @@
     "ConnectorType": {
       "$ref": "#/definitions/PaymentConnectorType"
     },
+    "ProvisionMode": {
+      "$ref": "#/definitions/PaymentConnectorProvisionMode",
+      "description": "The provision mode for creating the connector. MANUAL requires CredentialProviderConfigurations; QUICK_CREATE orchestrates OAuth consent and credential provisioning."
+    },
     "CredentialProviderConfigurations": {
       "type": "array",
-      "description": "The credential provider configurations for the connector",
+      "description": "The credential provider configurations for the connector. Required when ProvisionMode is MANUAL or not specified. Empty for QUICK_CREATE until provisioning completes.",
       "items": {
         "$ref": "#/definitions/CredentialsProviderConfiguration"
       },
-      "minItems": 1,
+      "minItems": 0,
       "maxItems": 1,
       "insertionOrder": false
     },
@@ -107,25 +123,33 @@
       "type": "string",
       "format": "date-time",
       "description": "The timestamp when the connector was last updated"
+    },
+    "AuthorizationUrl": {
+      "type": "string",
+      "description": "The URL the user must open to complete OAuth consent. Only present when ConnectorStatus is PENDING_AUTHENTICATION.",
+      "pattern": "^https://[^\\p{C}]*$",
+      "maxLength": 4096
     }
   },
   "additionalProperties": false,
   "required": [
     "PaymentManagerId",
     "ConnectorName",
-    "ConnectorType",
-    "CredentialProviderConfigurations"
+    "ConnectorType"
   ],
   "readOnlyProperties": [
     "/properties/PaymentConnectorId",
     "/properties/PaymentConnectorArn",
     "/properties/ConnectorStatus",
     "/properties/ConnectorCreatedAt",
-    "/properties/ConnectorLastUpdatedAt"
+    "/properties/ConnectorLastUpdatedAt",
+    "/properties/AuthorizationUrl"
   ],
   "createOnlyProperties": [
     "/properties/PaymentManagerId",
-    "/properties/ConnectorName"
+    "/properties/ConnectorName",
+    "/properties/ProvisionMode",
+    "/properties/ConnectorType"
   ],
   "primaryIdentifier": [
     "/properties/PaymentConnectorArn"
@@ -179,5 +203,8 @@
         ]
       }
     }
-  }
+  },
+  "writeOnlyProperties": [
+    "/properties/ProvisionMode"
+  ]
 }

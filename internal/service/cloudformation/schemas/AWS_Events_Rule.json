@@ -57,9 +57,15 @@
   },
   "typeName": "AWS::Events::Rule",
   "readOnlyProperties": [
-    "/properties/Arn"
+    "/properties/Arn",
+    "/properties/RuleName"
   ],
   "description": "Resource Type definition for AWS::Events::Rule",
+  "additionalIdentifiers": [
+    [
+      "/properties/RuleName"
+    ]
+  ],
   "createOnlyProperties": [
     "/properties/Name"
   ],
@@ -545,6 +551,9 @@
       ]
     }
   },
+  "conditionalCreateOnlyProperties": [
+    "/properties/EventBusName"
+  ],
   "properties": {
     "EventBusName": {
       "description": "The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.",
@@ -591,6 +600,10 @@
       "description": "The Amazon Resource Name (ARN) of the role that is used for target invocation.",
       "type": "string"
     },
+    "RuleName": {
+      "description": "The name of the rule, exposed as a read-only attribute for use with Fn::GetAtt.",
+      "type": "string"
+    },
     "Tags": {
       "uniqueItems": false,
       "description": "Any tags assigned to the event rule.",
@@ -604,8 +617,5 @@
       "description": "The name of the rule.",
       "type": "string"
     }
-  },
-  "conditionalCreateOnlyProperties": [
-    "/properties/EventBusName"
-  ]
+  }
 }

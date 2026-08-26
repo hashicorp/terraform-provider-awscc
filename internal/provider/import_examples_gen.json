@@ -5636,7 +5636,7 @@
     },
     {
         "resource": "awscc_route53_record_set",
-        "identifier": ["Id"]
+        "identifier": ["Name","HostedZoneId","Type","SetIdentifier"]
     },
     {
         "resource": "awscc_route53profiles_profile",

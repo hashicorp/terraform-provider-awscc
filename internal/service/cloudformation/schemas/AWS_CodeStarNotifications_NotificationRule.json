@@ -95,7 +95,7 @@
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": false,
+    "cloudFormationSystemTags": true,
     "tagProperty": "/properties/Tags",
     "permissions": [
       "codestar-notifications:TagResource",
@@ -125,7 +125,8 @@
   "handlers": {
     "create": {
       "permissions": [
-        "codestar-notifications:createNotificationRule"
+        "codestar-notifications:createNotificationRule",
+        "codestar-notifications:TagResource"
       ]
     },
     "list": {

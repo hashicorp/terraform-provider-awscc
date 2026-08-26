@@ -133,7 +133,10 @@
       "permissions": [
         "apigateway:POST",
         "apigateway:GET",
-        "apigateway:PUT"
+        "apigateway:PUT",
+        "apigateway:AddCertificateToDomain",
+        "s3:GetObject",
+        "s3:GetObjectVersion"
       ]
     },
     "update": {
@@ -142,7 +145,11 @@
         "apigateway:GET",
         "apigateway:PUT",
         "apigateway:POST",
-        "apigateway:DELETE"
+        "apigateway:DELETE",
+        "apigateway:AddCertificateToDomain",
+        "apigateway:RemoveCertificateFromDomain",
+        "s3:GetObject",
+        "s3:GetObjectVersion"
       ]
     },
     "read": {
@@ -153,7 +160,8 @@
     "delete": {
       "permissions": [
         "apigateway:GET",
-        "apigateway:DELETE"
+        "apigateway:DELETE",
+        "apigateway:RemoveCertificateFromDomain"
       ]
     },
     "list": {

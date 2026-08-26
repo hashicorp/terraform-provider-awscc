@@ -25,12 +25,39 @@
           "type": "string",
           "maxLength": 1024,
           "pattern": "^[\\w \\-\\.',@:;]*$"
+        },
+        "DataSourceConfiguration": {
+          "$ref": "#/definitions/DataSourceConfiguration"
         }
       },
       "additionalProperties": false
     },
     "CroppingConfig": {
       "type": "object",
+      "properties": {
+        "TemplateGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TemplateGroup"
+          },
+          "maxItems": 4,
+          "minItems": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "DataSourceConfiguration": {
+      "type": "object",
+      "properties": {
+        "FixtureId": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 1
+        }
+      },
+      "required": [
+        "FixtureId"
+      ],
       "additionalProperties": false
     },
     "GetOutput": {
@@ -151,6 +178,31 @@
       },
       "additionalProperties": false
     },
+    "TemplateGroup": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_]{0,126}[a-zA-Z0-9])?$"
+        },
+        "TemplateUris": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 10,
+            "pattern": "^s3://[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]/.+$"
+          },
+          "maxItems": 2,
+          "minItems": 1
+        }
+      },
+      "required": [
+        "Name",
+        "TemplateUris"
+      ],
+      "additionalProperties": false
+    },
     "TranscriptionLanguage": {
       "type": "string",
       "enum": [
@@ -167,6 +219,12 @@
     }
   },
   "properties": {
+    "AccessRoleArn": {
+      "type": "string",
+      "maxLength": 255,
+      "minLength": 32,
+      "pattern": "^arn:aws[a-z\\-]*:iam::[0-9]{12}:role/.+$"
+    },
     "Arn": {
       "type": "string"
     },
@@ -222,7 +280,8 @@
     "create": {
       "permissions": [
         "elemental-inference:CreateFeed",
-        "elemental-inference:TagResource"
+        "elemental-inference:TagResource",
+        "iam:PassRole"
       ]
     },
     "read": {
@@ -237,7 +296,8 @@
         "elemental-inference:GetFeed",
         "elemental-inference:TagResource",
         "elemental-inference:UntagResource",
-        "elemental-inference:ListTagsForResource"
+        "elemental-inference:ListTagsForResource",
+        "iam:PassRole"
       ]
     },
     "delete": {

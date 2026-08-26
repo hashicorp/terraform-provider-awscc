@@ -159,8 +159,36 @@
         },
         "LogGroupNameConfiguration": {
           "$ref": "#/definitions/LogGroupNameConfiguration"
+        },
+        "TagPropagationConfiguration": {
+          "$ref": "#/definitions/TagPropagationConfiguration"
         }
       },
+      "additionalProperties": false
+    },
+    "TagPropagationConfiguration": {
+      "type": "object",
+      "properties": {
+        "DestinationRoleArn": {
+          "type": "string",
+          "description": "The ARN of the destination account IAM role used for tag propagation.",
+          "minLength": 20,
+          "maxLength": 2048,
+          "pattern": "^arn:aws[a-zA-Z-]*:iam::\\d{12}:role/[\\w+=,.@/-]+$"
+        },
+        "TagConflictResolutionStrategy": {
+          "type": "string",
+          "description": "The strategy to resolve tag conflicts during propagation.",
+          "enum": [
+            "IN_SYNC",
+            "ADD_ONLY",
+            "UPDATE_SYNC"
+          ]
+        }
+      },
+      "required": [
+        "DestinationRoleArn"
+      ],
       "additionalProperties": false
     },
     "DestinationMetricsConfiguration": {
@@ -202,6 +230,13 @@
           "enum": [
             "ALLOW",
             "SKIP"
+          ]
+        },
+        "EncryptionScope": {
+          "type": "string",
+          "enum": [
+            "ENCRYPTED_SOURCE_ONLY",
+            "NEW_DESTINATION_LOG_GROUPS"
           ]
         }
       },
@@ -292,7 +327,8 @@
         "observabilityadmin:CreateCentralizationRuleForOrganization",
         "observabilityadmin:GetCentralizationRuleForOrganization",
         "observabilityadmin:ListTagsForResource",
-        "observabilityadmin:TagResource"
+        "observabilityadmin:TagResource",
+        "iam:PassRole"
       ],
       "timeoutInMinutes": 90
     },
@@ -308,7 +344,8 @@
         "observabilityadmin:GetCentralizationRuleForOrganization",
         "observabilityadmin:ListTagsForResource",
         "observabilityadmin:TagResource",
-        "observabilityadmin:UntagResource"
+        "observabilityadmin:UntagResource",
+        "iam:PassRole"
       ]
     },
     "delete": {

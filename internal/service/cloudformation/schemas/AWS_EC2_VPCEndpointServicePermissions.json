@@ -59,6 +59,7 @@
   "properties": {
     "AllowedPrincipals": {
       "uniqueItems": false,
+      "insertionOrder": false,
       "type": "array",
       "items": {
         "type": "string"
