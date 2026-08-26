@@ -1,0 +1,1 @@
+$ terraform import awscc_ses_receipt_rule_set.example "rule_set_name"

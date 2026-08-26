@@ -1,0 +1,1 @@
+$ terraform import awscc_logs_storage_tier_policy.example "account_id"

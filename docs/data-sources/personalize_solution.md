@@ -29,6 +29,7 @@ Data Source schema for AWS::Personalize::Solution
 - `recipe_arn` (String) The ARN of the recipe to use for model training. Only specified when performAutoML is false.
 - `solution_arn` (String) The ARN of the solution
 - `solution_config` (Attributes) The configuration to use with the solution. When performAutoML is set to true, Amazon Personalize only evaluates the autoMLConfig section of the solution configuration. (see [below for nested schema](#nestedatt--solution_config))
+- `tags` (Attributes List) The tags used to organize, track, or control access for this resource. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--solution_config"></a>
 ### Nested Schema for `solution_config`
@@ -115,3 +116,14 @@ Read-Only:
 
 - `max_number_of_training_jobs` (String) The maximum number of training jobs when you create a solution version. The maximum value for maxNumberOfTrainingJobs is 40.
 - `max_parallel_training_jobs` (String) The maximum number of parallel training jobs when you create a solution version. The maximum value for maxParallelTrainingJobs is 10.
+
+
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String)
+- `value` (String)

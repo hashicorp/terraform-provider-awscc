@@ -96,13 +96,6 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 		//	                  ],
 		//	                  "type": "string"
 		//	                },
-		//	                "EncryptionScope": {
-		//	                  "enum": [
-		//	                    "ENCRYPTED_SOURCE_ONLY",
-		//	                    "NEW_DESTINATION_LOG_GROUPS"
-		//	                  ],
-		//	                  "type": "string"
-		//	                },
 		//	                "EncryptionStrategy": {
 		//	                  "enum": [
 		//	                    "CUSTOMER_MANAGED",
@@ -310,20 +303,6 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 												stringvalidator.OneOf(
 													"ALLOW",
 													"SKIP",
-												),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: EncryptionScope
-										"encryption_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.OneOf(
-													"ENCRYPTED_SOURCE_ONLY",
-													"NEW_DESTINATION_LOG_GROUPS",
 												),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -652,7 +631,6 @@ func organizationCentralizationRuleResource(ctx context.Context) (resource.Resou
 		"destination_metrics_configuration":       "DestinationMetricsConfiguration",
 		"encrypted_log_group_strategy":            "EncryptedLogGroupStrategy",
 		"encryption_conflict_resolution_strategy": "EncryptionConflictResolutionStrategy",
-		"encryption_scope":                        "EncryptionScope",
 		"encryption_strategy":                     "EncryptionStrategy",
 		"key":                                     "Key",
 		"kms_key_arn":                             "KmsKeyArn",

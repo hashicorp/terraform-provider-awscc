@@ -156,15 +156,6 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		//	                        "type": "integer"
 		//	                      },
 		//	                      "VolumeType": {
-		//	                        "enum": [
-		//	                          "gp2",
-		//	                          "gp3",
-		//	                          "io1",
-		//	                          "io2",
-		//	                          "sc1",
-		//	                          "st1",
-		//	                          "standard"
-		//	                        ],
 		//	                        "type": "string"
 		//	                      }
 		//	                    },
@@ -784,17 +775,6 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 													"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Optional: true,
 														Computed: true,
-														Validators: []validator.String{ /*START VALIDATORS*/
-															stringvalidator.OneOf(
-																"gp2",
-																"gp3",
-																"io1",
-																"io2",
-																"sc1",
-																"st1",
-																"standard",
-															),
-														}, /*END VALIDATORS*/
 														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 															stringplanmodifier.UseStateForUnknown(),
 														}, /*END PLAN MODIFIERS*/

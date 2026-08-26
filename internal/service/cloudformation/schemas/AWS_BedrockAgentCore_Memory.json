@@ -1083,6 +1083,14 @@
       "maxProperties": 1,
       "minProperties": 1
     },
+    "ExtractionType": {
+      "type": "string",
+      "enum": [
+        "LLM_INFERRED",
+        "STRICTLY_CONSISTENT"
+      ],
+      "description": "Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event"
+    },
     "MetadataSchemaEntry": {
       "type": "object",
       "properties": {
@@ -1091,6 +1099,9 @@
         },
         "Type": {
           "$ref": "#/definitions/MetadataValueType"
+        },
+        "ExtractionType": {
+          "$ref": "#/definitions/ExtractionType"
         },
         "ExtractionConfig": {
           "$ref": "#/definitions/ExtractionConfig"

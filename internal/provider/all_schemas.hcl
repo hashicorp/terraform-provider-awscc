@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 1472 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 1533 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -83,6 +83,24 @@ resource_schema "aws_accessanalyzer_analyzer" {
 
 resource_schema "aws_accessanalyzer_archive_rule" {
   cloudformation_type_name               = "AWS::AccessAnalyzer::ArchiveRule"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_accountaccess_application" {
+  cloudformation_type_name = "AWS::AccountAccess::Application"
+}
+
+resource_schema "aws_accountaccess_entitlement" {
+  cloudformation_type_name               = "AWS::AccountAccess::Entitlement"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_agentregistry_registry" {
+  cloudformation_type_name = "AWS::AgentRegistry::Registry"
+}
+
+resource_schema "aws_agentregistry_registry_record" {
+  cloudformation_type_name               = "AWS::AgentRegistry::RegistryRecord"
   suppress_plural_data_source_generation = true
 }
 
@@ -271,6 +289,11 @@ resource_schema "aws_apigatewayv2_integration" {
 
 resource_schema "aws_apigatewayv2_integration_response" {
   cloudformation_type_name = "AWS::ApiGatewayV2::IntegrationResponse"
+}
+
+resource_schema "aws_apigatewayv2_api_gateway_managed_overrides" {
+  cloudformation_type_name               = "AWS::ApiGatewayV2::ApiGatewayManagedOverrides"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_apigatewayv2_model" {
@@ -1026,6 +1049,11 @@ resource_schema "aws_chime_app_instance_bot" {
   cloudformation_type_name = "AWS::Chime::AppInstanceBot"
 }
 
+resource_schema "aws_chime_channel_flow" {
+  cloudformation_type_name               = "AWS::Chime::ChannelFlow"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_cleanrooms_analysis_template" {
   cloudformation_type_name               = "AWS::CleanRooms::AnalysisTemplate"
   suppress_plural_data_source_generation = true
@@ -1584,6 +1612,10 @@ resource_schema "aws_connect_integration_association" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_connect_metric" {
+  cloudformation_type_name = "AWS::Connect::Metric"
+}
+
 resource_schema "aws_connect_notification" {
   cloudformation_type_name               = "AWS::Connect::Notification"
   suppress_plural_data_source_generation = true
@@ -1805,6 +1837,14 @@ resource_schema "aws_dms_migration_project" {
 
 resource_schema "aws_dms_replication_config" {
   cloudformation_type_name = "AWS::DMS::ReplicationConfig"
+}
+
+resource_schema "aws_dms_replication_subnet_group" {
+  cloudformation_type_name = "AWS::DMS::ReplicationSubnetGroup"
+}
+
+resource_schema "aws_drs_source_network" {
+  cloudformation_type_name = "AWS::DRS::SourceNetwork"
 }
 
 resource_schema "aws_dsql_cluster" {
@@ -2056,6 +2096,11 @@ resource_schema "aws_devopsagent_agent_space" {
   cloudformation_type_name = "AWS::DevOpsAgent::AgentSpace"
 }
 
+resource_schema "aws_devopsagent_asset" {
+  cloudformation_type_name               = "AWS::DevOpsAgent::Asset"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_devopsagent_association" {
   cloudformation_type_name               = "AWS::DevOpsAgent::Association"
   suppress_plural_data_source_generation = true
@@ -2067,6 +2112,11 @@ resource_schema "aws_devopsagent_private_connection" {
 
 resource_schema "aws_devopsagent_service" {
   cloudformation_type_name               = "AWS::DevOpsAgent::Service"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_devopsagent_trigger" {
+  cloudformation_type_name               = "AWS::DevOpsAgent::Trigger"
   suppress_plural_data_source_generation = true
 }
 
@@ -2094,8 +2144,16 @@ resource_schema "aws_docdb_global_cluster" {
   cloudformation_type_name = "AWS::DocDB::GlobalCluster"
 }
 
+resource_schema "aws_docdb_db_subnet_group" {
+  cloudformation_type_name = "AWS::DocDB::DBSubnetGroup"
+}
+
 resource_schema "aws_docdbelastic_cluster" {
   cloudformation_type_name = "AWS::DocDBElastic::Cluster"
+}
+
+resource_schema "aws_dynamodb_backup" {
+  cloudformation_type_name = "AWS::DynamoDB::Backup"
 }
 
 resource_schema "aws_dynamodb_global_table" {
@@ -2667,8 +2725,18 @@ resource_schema "aws_eks_capability" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_eks_certificate_authority" {
+  cloudformation_type_name               = "AWS::EKS::CertificateAuthority"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_eks_cluster" {
   cloudformation_type_name = "AWS::EKS::Cluster"
+
+  # Latest schema updates are suppressed.
+  # git checkout internal/service/cloudformation/schemas/AWS_EKS_Cluster.json
+  # Suppression Reason: tfplugindocs Error executing command:
+  # unable to generate website: error rendering static website: unable to render templated website to static markdown: unable to render template "resources/eks_cluster.md.tmpl": unable to execute template: template: docTemplate:5:18: executing "docTemplate" at <plainmarkdown>: invalid value; expected string
 }
 
 resource_schema "aws_eks_fargate_profile" {
@@ -3137,6 +3205,10 @@ resource_schema "aws_glue_job" {
   cloudformation_type_name = "AWS::Glue::Job"
 }
 
+resource_schema "aws_glue_ml_transform" {
+  cloudformation_type_name = "AWS::Glue::MLTransform"
+}
+
 resource_schema "aws_glue_registry" {
   cloudformation_type_name = "AWS::Glue::Registry"
 }
@@ -3446,6 +3518,10 @@ resource_schema "aws_inspectorv2_code_security_integration" {
 
 resource_schema "aws_inspectorv2_code_security_scan_configuration" {
   cloudformation_type_name = "AWS::InspectorV2::CodeSecurityScanConfiguration"
+}
+
+resource_schema "aws_inspectorv2_connector" {
+  cloudformation_type_name = "AWS::InspectorV2::Connector"
 }
 
 resource_schema "aws_inspectorv2_filter" {
@@ -4098,6 +4174,10 @@ resource_schema "aws_logs_resource_policy" {
 
 resource_schema "aws_logs_scheduled_query" {
   cloudformation_type_name = "AWS::Logs::ScheduledQuery"
+}
+
+resource_schema "aws_logs_storage_tier_policy" {
+  cloudformation_type_name = "AWS::Logs::StorageTierPolicy"
 }
 
 resource_schema "aws_logs_subscription_filter" {
@@ -5042,6 +5122,16 @@ resource_schema "aws_quicksight_analysis" {
   # https://github.com/hashicorp/terraform-provider-awscc/issues/1531
 }
 
+resource_schema "aws_quicksight_approval_policy" {
+  cloudformation_type_name = "AWS::QuickSight::ApprovalPolicy"
+
+  # Suppression Reason: Actions is of unsupported type: list of "".
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/1515
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
 resource_schema "aws_quicksight_custom_permissions" {
   cloudformation_type_name = "AWS::QuickSight::CustomPermissions"
 }
@@ -5069,12 +5159,20 @@ resource_schema "aws_quicksight_data_source" {
   cloudformation_type_name = "AWS::QuickSight::DataSource"
 }
 
+resource_schema "aws_quicksight_dlp_setting" {
+  cloudformation_type_name = "AWS::QuickSight::DLPSetting"
+}
+
 resource_schema "aws_quicksight_folder" {
   cloudformation_type_name = "AWS::QuickSight::Folder"
 }
 
 resource_schema "aws_quicksight_knowledge_base" {
   cloudformation_type_name = "AWS::QuickSight::KnowledgeBase"
+}
+
+resource_schema "aws_quicksight_limits_profile" {
+  cloudformation_type_name = "AWS::QuickSight::LimitsProfile"
 }
 
 resource_schema "aws_quicksight_o_auth_client_application" {
@@ -5755,6 +5853,24 @@ resource_schema "aws_ses_multi_region_endpoint" {
   cloudformation_type_name = "AWS::SES::MultiRegionEndpoint"
 }
 
+resource_schema "aws_ses_receipt_filter" {
+  cloudformation_type_name = "AWS::SES::ReceiptFilter"
+}
+
+resource_schema "aws_ses_receipt_rule" {
+  cloudformation_type_name               = "AWS::SES::ReceiptRule"
+
+  # Suppression Reason: IamRoleArn overwrites IAMRoleARN for Terraform attribute iam_role_arn.
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/3280
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_ses_receipt_rule_set" {
+  cloudformation_type_name = "AWS::SES::ReceiptRuleSet"
+}
+
 resource_schema "aws_ses_template" {
   cloudformation_type_name = "AWS::SES::Template"
 }
@@ -6034,6 +6150,14 @@ resource_schema "aws_sagemaker_mlflow_app" {
 
 resource_schema "aws_sagemaker_mlflow_tracking_server" {
   cloudformation_type_name = "AWS::SageMaker::MlflowTrackingServer"
+}
+
+resource_schema "aws_servicediscovery_private_dns_namespace" {
+  cloudformation_type_name = "AWS::ServiceDiscovery::PrivateDnsNamespace"
+}
+
+resource_schema "aws_servicediscovery_public_dns_namespace" {
+  cloudformation_type_name = "AWS::ServiceDiscovery::PublicDnsNamespace"
 }
 
 resource_schema "aws_servicediscovery_service" {
@@ -6659,6 +6783,10 @@ resource_schema "aws_wellarchitected_review_template" {
   cloudformation_type_name = "AWS::WellArchitected::ReviewTemplate"
 }
 
+resource_schema "aws_wellarchitected_workload" {
+  cloudformation_type_name = "AWS::WellArchitected::Workload"
+}
+
 resource_schema "aws_wickr_network" {
   cloudformation_type_name = "AWS::Wickr::Network"
 }
@@ -6729,7 +6857,8 @@ resource_schema "aws_workspaces_workspace" {
   cloudformation_type_name = "AWS::WorkSpaces::Workspace"
 
   # Suppression Reason:
-  # WorkspaceId overwrites Id for Terraform attribute workspace_id https://github.com/hashicorp/terraform-provider-awscc/issues/3021
+  # WorkspaceId overwrites Id for Terraform attribute workspace_id.
+  # https://github.com/hashicorp/terraform-provider-awscc/issues/3021
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true

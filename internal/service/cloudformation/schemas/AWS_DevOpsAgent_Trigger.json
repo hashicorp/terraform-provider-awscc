@@ -1,0 +1,156 @@
+{
+  "typeName": "AWS::DevOpsAgent::Trigger",
+  "description": "Resource Type definition for AWS::DevOpsAgent::Trigger. A trigger defines an automated action that fires on a schedule within an Agent Space.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "definitions": {
+    "Schedule": {
+      "description": "Schedule configuration for a time-based trigger.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Expression": {
+          "description": "A cron or rate expression that defines when the trigger fires.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Expression"
+      ]
+    },
+    "Condition": {
+      "description": "The condition that causes the trigger to fire.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Schedule": {
+          "$ref": "#/definitions/Schedule"
+        }
+      },
+      "required": [
+        "Schedule"
+      ]
+    }
+  },
+  "properties": {
+    "AgentSpaceId": {
+      "description": "The unique identifier of the parent Agent Space.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "TriggerId": {
+      "description": "The unique identifier of the trigger (assigned by the service on Create).",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
+    },
+    "Type": {
+      "description": "The type of trigger.",
+      "type": "string",
+      "enum": [
+        "TIME_BASED"
+      ]
+    },
+    "Condition": {
+      "$ref": "#/definitions/Condition"
+    },
+    "Action": {
+      "description": "The action to perform when the trigger fires. A JSON object containing actionType and task.",
+      "type": "object"
+    },
+    "Status": {
+      "description": "The status of the trigger. Active triggers fire on schedule; Inactive triggers are paused.",
+      "type": "string",
+      "enum": [
+        "Active",
+        "Inactive"
+      ],
+      "default": "Active"
+    },
+    "CreatedAt": {
+      "description": "The timestamp when the trigger was created.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "UpdatedAt": {
+      "description": "The timestamp when the trigger was last updated.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "Arn": {
+      "description": "The Amazon Resource Name (ARN) of the trigger. Nested under the parent Agent Space: arn:<partition>:aidevops:<region>:<account-id>:agentspace/<agentspace-id>/trigger/<trigger-id>.",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "AgentSpaceId",
+    "Type",
+    "Condition",
+    "Action"
+  ],
+  "readOnlyProperties": [
+    "/properties/TriggerId",
+    "/properties/CreatedAt",
+    "/properties/UpdatedAt",
+    "/properties/Arn"
+  ],
+  "createOnlyProperties": [
+    "/properties/AgentSpaceId",
+    "/properties/Type",
+    "/properties/Condition",
+    "/properties/Action"
+  ],
+  "primaryIdentifier": [
+    "/properties/AgentSpaceId",
+    "/properties/TriggerId"
+  ],
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "aidevops:CreateTrigger",
+        "aidevops:GetTrigger"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "aidevops:GetTrigger"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "aidevops:UpdateTrigger",
+        "aidevops:GetTrigger"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "aidevops:DeleteTrigger",
+        "aidevops:GetTrigger"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "aidevops:ListTriggers"
+      ],
+      "handlerSchema": {
+        "properties": {
+          "AgentSpaceId": {
+            "$ref": "resource-schema.json#/properties/AgentSpaceId"
+          }
+        },
+        "required": [
+          "AgentSpaceId"
+        ]
+      }
+    }
+  }
+}

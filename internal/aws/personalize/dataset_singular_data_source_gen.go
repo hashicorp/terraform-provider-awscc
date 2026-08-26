@@ -178,6 +178,52 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The ARN of the schema to associate with the dataset. The schema defines the dataset fields.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The tags used to organize, track, or control access for this resource.",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags used to organize, track, or control access for this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -203,9 +249,12 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"dataset_import_job_arn": "DatasetImportJobArn",
 		"dataset_type":           "DatasetType",
 		"job_name":               "JobName",
+		"key":                    "Key",
 		"name":                   "Name",
 		"role_arn":               "RoleArn",
 		"schema_arn":             "SchemaArn",
+		"tags":                   "Tags",
+		"value":                  "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

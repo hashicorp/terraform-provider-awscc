@@ -907,6 +907,27 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              "PolicyDocument"
 		//	            ],
 		//	            "type": "object"
+		//	          },
+		//	          "Tags": {
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Key": {
+		//	                  "type": "string"
+		//	                },
+		//	                "Value": {
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Value",
+		//	                "Key"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": true
 		//	          }
 		//	        },
 		//	        "type": "object"
@@ -1189,6 +1210,22 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 										Computed:   true,
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Tags
+							"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Key
+										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Value
+										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
 								Computed: true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/

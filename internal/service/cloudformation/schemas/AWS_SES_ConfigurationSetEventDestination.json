@@ -172,7 +172,8 @@
     "/properties/Id"
   ],
   "primaryIdentifier": [
-    "/properties/Id"
+    "/properties/Id",
+    "/properties/ConfigurationSetName"
   ],
   "handlers": {
     "create": {

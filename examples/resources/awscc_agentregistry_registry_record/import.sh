@@ -1,0 +1,1 @@
+$ terraform import awscc_agentregistry_registry_record.example "record_arn"

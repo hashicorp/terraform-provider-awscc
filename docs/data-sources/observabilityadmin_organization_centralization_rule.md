@@ -76,7 +76,6 @@ Read-Only:
 Read-Only:
 
 - `encryption_conflict_resolution_strategy` (String)
-- `encryption_scope` (String)
 - `encryption_strategy` (String)
 - `kms_key_arn` (String)
 

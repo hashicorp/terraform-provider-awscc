@@ -1,0 +1,1 @@
+$ terraform import awscc_servicediscovery_private_dns_namespace.example "id"

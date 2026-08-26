@@ -116,7 +116,6 @@
   "createOnlyProperties": [
     "/properties/SubjectAlternativeNames",
     "/properties/DomainValidationOptions",
-    "/properties/ValidationMethod",
     "/properties/KeyAlgorithm",
     "/properties/DomainName",
     "/properties/CertificateAuthorityArn",
@@ -152,6 +151,7 @@
     },
     "update": {
       "permissions": [
+        "acm:DescribeCertificate",
         "acm:UpdateCertificateOptions",
         "acm:AddTagsToCertificate",
         "acm:RemoveTagsFromCertificate"

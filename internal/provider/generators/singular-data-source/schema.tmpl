@@ -23,6 +23,7 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+{{ .AttributeFunctions }}
 func init() {
 	registry.AddDataSourceFactory("{{ .TerraformTypeName }}", {{ .FactoryFunctionName }})
 }

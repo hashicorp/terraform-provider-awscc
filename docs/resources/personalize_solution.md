@@ -88,6 +88,7 @@ resource "awscc_personalize_solution" "example" {
 - `perform_hpo` (Boolean) Whether to perform hyperparameter optimization (HPO) on the specified or selected recipe. The default is false. When performing AutoML, this parameter is always true and you should not set it to false.
 - `recipe_arn` (String) The ARN of the recipe to use for model training. Only specified when performAutoML is false.
 - `solution_config` (Attributes) The configuration to use with the solution. When performAutoML is set to true, Amazon Personalize only evaluates the autoMLConfig section of the solution configuration. (see [below for nested schema](#nestedatt--solution_config))
+- `tags` (Attributes List) The tags used to organize, track, or control access for this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -179,6 +180,17 @@ Optional:
 
 - `max_number_of_training_jobs` (String) The maximum number of training jobs when you create a solution version. The maximum value for maxNumberOfTrainingJobs is 40.
 - `max_parallel_training_jobs` (String) The maximum number of parallel training jobs when you create a solution version. The maximum value for maxParallelTrainingJobs is 10.
+
+
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Optional:
+
+- `key` (String)
+- `value` (String)
 
 ## Import
 

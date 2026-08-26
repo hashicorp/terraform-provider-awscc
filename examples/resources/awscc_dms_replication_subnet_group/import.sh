@@ -1,0 +1,1 @@
+$ terraform import awscc_dms_replication_subnet_group.example "replication_subnet_group_identifier"

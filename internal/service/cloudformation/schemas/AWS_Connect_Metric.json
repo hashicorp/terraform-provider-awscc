@@ -1,0 +1,449 @@
+{
+  "typeName": "AWS::Connect::Metric",
+  "description": "Resource Type definition for AWS::Connect::Metric, a custom metric configured for an Amazon Connect instance",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
+  "properties": {
+    "InstanceArn": {
+      "description": "The identifier of the Amazon Connect instance.",
+      "type": "string",
+      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$"
+    },
+    "MetricArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) for the custom metric.",
+      "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/metric/[-a-zA-Z0-9]*$"
+    },
+    "Name": {
+      "type": "string",
+      "description": "The name of the custom metric",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "Description": {
+      "type": "string",
+      "description": "The description of the custom metric",
+      "minLength": 0,
+      "maxLength": 500
+    },
+    "MetricCalculation": {
+      "type": "object",
+      "description": "The calculation configuration for the metric",
+      "additionalProperties": false,
+      "properties": {
+        "CalculationComponents": {
+          "type": "array",
+          "description": "The calculation components for the metric",
+          "minItems": 1,
+          "maxItems": 5,
+          "items": {
+            "$ref": "#/definitions/CalculationComponent"
+          }
+        },
+        "Calculation": {
+          "type": "string",
+          "description": "The calculation formula",
+          "minLength": 1,
+          "maxLength": 1024
+        }
+      },
+      "required": [
+        "CalculationComponents",
+        "Calculation"
+      ]
+    },
+    "CreationMethod": {
+      "type": "string",
+      "description": "Whether the metric was built with the guided Service Level (SL) experience, or with the free-form metric builder",
+      "enum": [
+        "SERVICE_LEVEL_BUILDER",
+        "METRIC_BUILDER"
+      ]
+    },
+    "Status": {
+      "type": "string",
+      "description": "The status of the custom metric",
+      "enum": [
+        "SAVED",
+        "PUBLISHED"
+      ]
+    },
+    "Unit": {
+      "type": "string",
+      "description": "Display unit for the metric data",
+      "enum": [
+        "INTEGER",
+        "DOUBLE",
+        "PERCENT",
+        "SECONDS"
+      ]
+    },
+    "PositiveTrendIndicator": {
+      "type": "string",
+      "description": "Indicates how to classify a positive trend in metric data on the UI",
+      "enum": [
+        "POSITIVE",
+        "NEGATIVE",
+        "NEUTRAL"
+      ]
+    },
+    "Groupings": {
+      "type": "array",
+      "description": "List of groupings that may be used with this metric",
+      "items": {
+        "type": "string"
+      }
+    },
+    "Filters": {
+      "type": "array",
+      "description": "List of filter types that may be used with this metric",
+      "items": {
+        "$ref": "#/definitions/AvailableFilter"
+      }
+    },
+    "EffectiveTime": {
+      "type": "number",
+      "description": "Earliest time that can be queried for this metric"
+    },
+    "RefreshRate": {
+      "type": "integer",
+      "description": "Recommended time to wait between each refresh of data for the metric",
+      "minimum": 0,
+      "maximum": 2147483647
+    },
+    "Category": {
+      "type": "string",
+      "description": "The category of the custom metric"
+    },
+    "Type": {
+      "type": "string",
+      "description": "Whether the metric is provided out-of-the-box or created by each customer",
+      "enum": [
+        "AWS_MANAGED",
+        "CUSTOMER_MANAGED"
+      ]
+    },
+    "SupportedStats": {
+      "type": "array",
+      "description": "List of stat aggregations available for the metric",
+      "items": {
+        "type": "string"
+      }
+    },
+    "SupportsPreaggregateCalculation": {
+      "type": "boolean",
+      "description": "The metric may be used to compose other (custom) metrics, meaning it can be used inside of aggregate stat functions"
+    },
+    "SupportsCustomCalculation": {
+      "type": "boolean",
+      "description": "The metric may be used to compose other (custom) metrics"
+    },
+    "PrimaryEventSource": {
+      "type": "string",
+      "description": "Main provider of the document/row-level data for the metric; should match Data Lake table names"
+    },
+    "PrimaryEventSourceEffectiveTimestampType": {
+      "type": "string",
+      "description": "Identifies the timestamp used to place the metrics on a time-series; should match public attribute name"
+    },
+    "CreatedTime": {
+      "type": "number",
+      "description": "The timestamp where the metric was created"
+    },
+    "CreatedUser": {
+      "$ref": "#/definitions/CreatedByInfo"
+    },
+    "LastModifiedRegion": {
+      "type": "string",
+      "description": "The AWS region where the metric was last modified"
+    },
+    "LastModifiedTime": {
+      "type": "number",
+      "description": "The timestamp where the metric was last modified"
+    },
+    "LastModifiedUser": {
+      "$ref": "#/definitions/CreatedByInfo"
+    },
+    "Tags": {
+      "type": "array",
+      "maxItems": 50,
+      "uniqueItems": true,
+      "insertionOrder": false,
+      "description": "One or more tags.",
+      "items": {
+        "$ref": "#/definitions/Tag"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "InstanceArn"
+  ],
+  "createOnlyProperties": [
+    "/properties/InstanceArn",
+    "/properties/Status"
+  ],
+  "readOnlyProperties": [
+    "/properties/MetricArn",
+    "/properties/CreatedTime",
+    "/properties/CreatedUser",
+    "/properties/LastModifiedTime",
+    "/properties/LastModifiedRegion",
+    "/properties/LastModifiedUser",
+    "/properties/CreationMethod",
+    "/properties/Category",
+    "/properties/Type",
+    "/properties/SupportsPreaggregateCalculation",
+    "/properties/SupportsCustomCalculation",
+    "/properties/Groupings",
+    "/properties/Filters",
+    "/properties/EffectiveTime",
+    "/properties/RefreshRate",
+    "/properties/SupportedStats",
+    "/properties/PrimaryEventSource",
+    "/properties/PrimaryEventSourceEffectiveTimestampType"
+  ],
+  "definitions": {
+    "Tag": {
+      "description": "A key-value pair to associate with a resource.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Key": {
+          "type": "string",
+          "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": ""
+        },
+        "Value": {
+          "type": "string",
+          "description": "The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "Key",
+        "Value"
+      ]
+    },
+    "CalculationComponent": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Alias": {
+          "type": "string",
+          "description": "Metric calculation component alias for use within a calculation",
+          "pattern": "[a-zA-Z_][a-zA-Z0-9_]*",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "MetricName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "MetricId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "MetricFilters": {
+          "type": "array",
+          "minItems": 0,
+          "maxItems": 5,
+          "items": {
+            "$ref": "#/definitions/MetricFilter"
+          }
+        }
+      },
+      "required": [
+        "Alias"
+      ]
+    },
+    "AvailableFilter": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "Type": {
+          "type": "string",
+          "enum": [
+            "METRIC_LEVEL",
+            "RESOURCE_LEVEL"
+          ]
+        }
+      },
+      "required": [
+        "Id",
+        "Type"
+      ]
+    },
+    "MetricFilterNumberCondition": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Comparison": {
+          "type": "string",
+          "enum": [
+            "LESSER",
+            "LESSER_OR_EQUAL",
+            "GREATER",
+            "GREATER_OR_EQUAL"
+          ]
+        },
+        "Values": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "type": "number"
+          }
+        }
+      },
+      "required": [
+        "Comparison",
+        "Values"
+      ]
+    },
+    "MetricFilterStringCondition": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Comparison": {
+          "type": "string",
+          "enum": [
+            "MATCHES_ANY",
+            "MATCHES_NONE"
+          ]
+        },
+        "Values": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 15,
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "Comparison",
+        "Values"
+      ]
+    },
+    "MetricFilterBooleanCondition": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Comparison": {
+          "type": "string",
+          "enum": [
+            "IS_TRUE",
+            "IS_FALSE"
+          ]
+        }
+      },
+      "required": [
+        "Comparison"
+      ]
+    },
+    "MetricFilter": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MetricFilterKey": {
+          "type": "string"
+        },
+        "Negate": {
+          "type": "boolean"
+        },
+        "NumberCondition": {
+          "$ref": "#/definitions/MetricFilterNumberCondition"
+        },
+        "StringCondition": {
+          "$ref": "#/definitions/MetricFilterStringCondition"
+        },
+        "BooleanCondition": {
+          "$ref": "#/definitions/MetricFilterBooleanCondition"
+        }
+      },
+      "required": [
+        "MetricFilterKey"
+      ]
+    },
+    "CreatedByInfo": {
+      "type": "object",
+      "oneOf": [
+        {
+          "properties": {
+            "AWSIdentityArn": {
+              "type": "string",
+              "description": "STS or IAM ARN representing the identity of API Caller. SDK users cannot populate this and this value is calculated automatically if ConnectUserArn is not provided."
+            }
+          },
+          "required": [
+            "AWSIdentityArn"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "ConnectUserArn": {
+              "type": "string",
+              "description": "An agent ARN representing a connect user."
+            }
+          },
+          "required": [
+            "ConnectUserArn"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "primaryIdentifier": [
+    "/properties/MetricArn"
+  ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags",
+    "permissions": [
+      "connect:TagResource",
+      "connect:UntagResource"
+    ]
+  },
+  "handlers": {
+    "create": {
+      "permissions": [
+        "connect:CreateMetric",
+        "connect:TagResource"
+      ]
+    },
+    "read": {
+      "permissions": [
+        "connect:DescribeMetric"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "connect:UpdateMetricMetadata",
+        "connect:UpdateMetricContent",
+        "connect:TagResource",
+        "connect:UntagResource"
+      ]
+    },
+    "delete": {
+      "permissions": [
+        "connect:DeleteMetric",
+        "connect:UntagResource"
+      ]
+    },
+    "list": {
+      "permissions": [
+        "connect:ListMetrics"
+      ]
+    }
+  }
+}

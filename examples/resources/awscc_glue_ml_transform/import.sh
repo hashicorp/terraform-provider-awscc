@@ -1,0 +1,1 @@
+$ terraform import awscc_glue_ml_transform.example "transform_id"

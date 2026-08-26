@@ -14,7 +14,8 @@
       "enum": [
         "SUCCESS",
         "PENDING",
-        "FAILED"
+        "FAILED",
+        "DISABLED"
       ]
     },
     "AssociationType": {

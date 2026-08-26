@@ -42,7 +42,7 @@ All CRUDL operations also accept a `RoleArn` parameter which represents the [AWS
 ## Quick Starts
 
 - [Using the Provider](https://developer.hashicorp.com/terraform/tutorials/aws/aws-cloud-control)
-- [Provider development](contributing/DEVELOPMENT.md)
+- [Provider development](contributing/docs/development-environment-setup.md)
 
 ## Documentation
 

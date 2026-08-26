@@ -85,13 +85,6 @@ func organizationCentralizationRuleDataSource(ctx context.Context) (datasource.D
 		//	                  ],
 		//	                  "type": "string"
 		//	                },
-		//	                "EncryptionScope": {
-		//	                  "enum": [
-		//	                    "ENCRYPTED_SOURCE_ONLY",
-		//	                    "NEW_DESTINATION_LOG_GROUPS"
-		//	                  ],
-		//	                  "type": "string"
-		//	                },
 		//	                "EncryptionStrategy": {
 		//	                  "enum": [
 		//	                    "CUSTOMER_MANAGED",
@@ -252,10 +245,6 @@ func organizationCentralizationRuleDataSource(ctx context.Context) (datasource.D
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: EncryptionConflictResolutionStrategy
 										"encryption_conflict_resolution_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: EncryptionScope
-										"encryption_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Computed: true,
 										}, /*END ATTRIBUTE*/
 										// Property: EncryptionStrategy
@@ -440,7 +429,6 @@ func organizationCentralizationRuleDataSource(ctx context.Context) (datasource.D
 		"destination_metrics_configuration":       "DestinationMetricsConfiguration",
 		"encrypted_log_group_strategy":            "EncryptedLogGroupStrategy",
 		"encryption_conflict_resolution_strategy": "EncryptionConflictResolutionStrategy",
-		"encryption_scope":                        "EncryptionScope",
 		"encryption_strategy":                     "EncryptionStrategy",
 		"key":                                     "Key",
 		"kms_key_arn":                             "KmsKeyArn",

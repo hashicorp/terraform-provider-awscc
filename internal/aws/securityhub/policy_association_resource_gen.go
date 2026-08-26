@@ -51,7 +51,8 @@ func policyAssociationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "enum": [
 		//	    "SUCCESS",
 		//	    "PENDING",
-		//	    "FAILED"
+		//	    "FAILED",
+		//	    "DISABLED"
 		//	  ],
 		//	  "type": "string"
 		//	}

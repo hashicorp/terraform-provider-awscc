@@ -67,7 +67,7 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 
 	// Generate code for the CloudFormation root properties schema.
 	attributeNameMap := make(map[string]string) // Terraform attribute name to CloudFormation property name.
-	codeFeatures, err := codeEmitter.EmitRootPropertiesSchema(resource.TfType, attributeNameMap)
+	codeFeatures, attributeFunctions, err := codeEmitter.EmitRootPropertiesSchema(resource.TfType, attributeNameMap)
 
 	if err != nil {
 		return nil, fmt.Errorf("emitting schema code: %w", err)
@@ -78,6 +78,7 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 
 	templateData := &TemplateData{
 		AcceptanceTestFunctionPrefix: acceptanceTestFunctionPrefix,
+		AttributeFunctions:           attributeFunctions,
 		AttributeNameMap:             attributeNameMap,
 		CloudFormationTypeName:       cfTypeName,
 		FactoryFunctionName:          factoryFunctionName,
@@ -209,6 +210,7 @@ func GenerateTemplateData(ui cli.Ui, cfTypeSchemaFile, resType, tfResourceType, 
 
 type TemplateData struct {
 	AcceptanceTestFunctionPrefix  string
+	AttributeFunctions            string
 	AttributeNameMap              map[string]string
 	CloudFormationTypeName        string
 	CreateTimeoutInMinutes        int

@@ -150,6 +150,7 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// OutpostArn is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Size
 		// CloudFormation resource type schema:
@@ -368,6 +369,9 @@ func volumeResource(ctx context.Context) (resource.Resource, error) {
 		"volume_type":                "VolumeType",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/OutpostArn",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(725).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(2160)

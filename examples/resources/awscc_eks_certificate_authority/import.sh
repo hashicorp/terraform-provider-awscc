@@ -1,0 +1,1 @@
+$ terraform import awscc_eks_certificate_authority.example "cluster_name|id"
