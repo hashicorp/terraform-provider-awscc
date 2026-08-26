@@ -8,6 +8,8 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 )
 
@@ -81,6 +83,70 @@ func Test_unorderedArrayPaths(t *testing.T) {
 			},
 			tfToCfNameMap: map[string]string{"name": "Name", "ports": "Ports"},
 			want:          map[string]bool{},
+		},
+		{
+			// insertionOrder:false + non-unique items renders as a List (not a Set)
+			// carrying the Multiset plan modifier; it is equally order-unstable.
+			name: "top-level multiset list nested attribute",
+			attrs: map[string]schema.Attribute{
+				"config": schema.ListNestedAttribute{
+					NestedObject: schema.NestedAttributeObject{
+						Attributes: map[string]schema.Attribute{
+							"day": schema.StringAttribute{},
+						},
+					},
+					PlanModifiers: []planmodifier.List{Multiset()},
+				},
+			},
+			tfToCfNameMap: map[string]string{"config": "Config", "day": "Day"},
+			want:          map[string]bool{"/Config": true},
+		},
+		{
+			name: "top-level multiset primitive list attribute",
+			attrs: map[string]schema.Attribute{
+				"values": schema.ListAttribute{
+					ElementType:   types.StringType,
+					PlanModifiers: []planmodifier.List{Multiset()},
+				},
+			},
+			tfToCfNameMap: map[string]string{"values": "Values"},
+			want:          map[string]bool{"/Values": true},
+		},
+		{
+			// A plain ordered list (no Multiset modifier) must not be flagged, even
+			// when it carries other plan modifiers.
+			name: "ordered list with non-multiset plan modifier is not flagged",
+			attrs: map[string]schema.Attribute{
+				"steps": schema.ListNestedAttribute{
+					NestedObject: schema.NestedAttributeObject{
+						Attributes: map[string]schema.Attribute{
+							"name": schema.StringAttribute{},
+						},
+					},
+					PlanModifiers: []planmodifier.List{listplanmodifier.UseStateForUnknown()},
+				},
+			},
+			tfToCfNameMap: map[string]string{"steps": "Steps", "name": "Name"},
+			want:          map[string]bool{},
+		},
+		{
+			// Multiset nested inside an ordinary ordered list: only the inner,
+			// order-unstable array is flagged, at its index-free skeleton path.
+			name: "multiset nested inside an ordered list",
+			attrs: map[string]schema.Attribute{
+				"containers": schema.ListNestedAttribute{
+					NestedObject: schema.NestedAttributeObject{
+						Attributes: map[string]schema.Attribute{
+							"command": schema.ListAttribute{
+								ElementType:   types.StringType,
+								PlanModifiers: []planmodifier.List{Multiset()},
+							},
+						},
+					},
+				},
+			},
+			tfToCfNameMap: map[string]string{"containers": "Containers", "command": "Command"},
+			want:          map[string]bool{"/Containers/Command": true},
 		},
 	}
 
