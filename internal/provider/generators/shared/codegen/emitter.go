@@ -4,6 +4,7 @@
 package codegen
 
 import (
+	"crypto/sha256"
 	"fmt"
 	"io"
 	"regexp"
@@ -68,11 +69,14 @@ var (
 	}
 )
 
+const attributeFunctionHashBytes = 12
+
 type Emitter struct {
-	CfResource   *cfschema.Resource
-	IsDataSource bool
-	Ui           cli.Ui
-	Writer       io.Writer
+	CfResource         *cfschema.Resource
+	IsDataSource       bool
+	Ui                 cli.Ui
+	Writer             io.Writer
+	attributeFunctions *attributeFunctionRegistry
 }
 
 type parent struct {
@@ -84,23 +88,87 @@ type parent struct {
 	}
 }
 
+type attributeFunction struct {
+	body string
+	name string
+}
+
+type attributeFunctionRegistry struct {
+	functionsByBody map[string]attributeFunction
+	functionsByName map[string]attributeFunction
+	scope           string
+}
+
+func newAttributeFunctionRegistry(tfType string, isDataSource bool) *attributeFunctionRegistry {
+	scope := tfType + "\x00resource"
+	if isDataSource {
+		scope = tfType + "\x00data-source"
+	}
+
+	return &attributeFunctionRegistry{
+		functionsByBody: make(map[string]attributeFunction),
+		functionsByName: make(map[string]attributeFunction),
+		scope:           scope,
+	}
+}
+
+func (r *attributeFunctionRegistry) register(body string) (string, error) {
+	if function, ok := r.functionsByBody[body]; ok {
+		return function.name, nil
+	}
+
+	hash := sha256.Sum256([]byte(r.scope + "\x00" + body))
+	// Keep generated call sites compact. The registry still rejects a collision.
+	name := fmt.Sprintf("schemaAttribute%x", hash[:attributeFunctionHashBytes])
+	if function, ok := r.functionsByName[name]; ok {
+		return "", fmt.Errorf("schema attribute function hash collision between %q and %q", function.body, body)
+	}
+
+	function := attributeFunction{
+		body: body,
+		name: name,
+	}
+	r.functionsByBody[body] = function
+	r.functionsByName[name] = function
+
+	return name, nil
+}
+
+func (r *attributeFunctionRegistry) render() string {
+	names := tfmaps.Keys(r.functionsByName)
+	sort.Strings(names)
+
+	var w strings.Builder
+	for _, name := range names {
+		function := r.functionsByName[name]
+		fprintf(&w, "func %s() schema.Attribute {\n", function.name)
+		fprintf(&w, "return (\n%s)\n", function.body)
+		fprintf(&w, "}\n\n")
+	}
+
+	return w.String()
+}
+
 // EmitRootPropertiesSchema generates the Terraform Plugin SDK code for a CloudFormation root schema
-// and emits the generated code to the emitter's Writer. Code features are returned.
+// and emits the generated code to the emitter's Writer. Code features and the deduplicated
+// top-level attribute function declarations are returned.
 // The root schema is the map of root property names to Attributes.
-func (e Emitter) EmitRootPropertiesSchema(tfType string, attributeNameMap map[string]string) (Features, error) {
+func (e Emitter) EmitRootPropertiesSchema(tfType string, attributeNameMap map[string]string) (Features, string, error) {
 	var features Features
+
+	e.attributeFunctions = newAttributeFunctionRegistry(tfType, e.IsDataSource)
 
 	cfResource := e.CfResource
 	features, err := e.emitSchema(tfType, attributeNameMap, parent{reqd: cfResource}, cfResource.Properties)
 
 	if err != nil {
-		return features, err
+		return features, "", err
 	}
 
 	for name := range cfResource.Properties {
 		for _, tfMetaArgument := range tfMetaArguments {
 			if naming.CloudFormationPropertyToTerraformAttribute(name) == tfMetaArgument {
-				return features, fmt.Errorf("top-level property %s conflicts with Terraform meta-argument: %s", name, tfMetaArgument)
+				return features, "", fmt.Errorf("top-level property %s conflicts with Terraform meta-argument: %s", name, tfMetaArgument)
 			}
 		}
 
@@ -109,7 +177,7 @@ func (e Emitter) EmitRootPropertiesSchema(tfType string, attributeNameMap map[st
 		}
 	}
 
-	return features, nil
+	return features, e.attributeFunctions.render(), nil
 }
 
 // emitAttribute generates the Terraform Plugin SDK code for a CloudFormation property's Attributes
@@ -1034,9 +1102,11 @@ func (e Emitter) emitSchema(tfType string, attributeNameMap map[string]string, p
 			e.printf("%s\n", regexp.MustCompile(`(?m)^`).ReplaceAllString(fmt.Sprintf("%v", properties[name]), "// "))
 		}
 
-		e.printf("%q:", tfAttributeName)
+		var attributeBody strings.Builder
+		attributeEmitter := e
+		attributeEmitter.Writer = &attributeBody
 
-		f, err := e.emitAttribute(
+		f, err := attributeEmitter.emitAttribute(
 			tfType,
 			attributeNameMap,
 			append(parent.path, name),
@@ -1053,7 +1123,12 @@ func (e Emitter) emitSchema(tfType string, attributeNameMap map[string]string, p
 
 		features = features.LogicalOr(f)
 
-		e.printf(",\n")
+		functionName, err := e.attributeFunctions.register(attributeBody.String())
+		if err != nil {
+			return features, err
+		}
+
+		e.printf("%q:%s(),\n", tfAttributeName, functionName)
 	}
 	e.printf("}/*END SCHEMA*/")
 
