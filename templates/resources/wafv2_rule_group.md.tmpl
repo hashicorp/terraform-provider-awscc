@@ -12,11 +12,11 @@ description: |-
 ## Statement nesting depth
 
 This resource is generated from a depth-limited schema: rule statements support up to
-**3 levels of `statement` nesting**, which allows **2 chained logical statements**
+**4 levels of `statement` nesting**, which allows **3 chained logical statements**
 (`and_statement`, `or_statement`, `not_statement`) above a match statement — for
-example `and_statement` → `not_statement` → `byte_match_statement`. The AWS WAF API
-itself imposes no nesting limit, and the hand-written `aws_wafv2_rule_group` resource in
-terraform-provider-aws currently supports one additional logical level.
+example `and_statement` → `or_statement` → `not_statement` → `byte_match_statement`,
+the same depth the hand-written WAFv2 resources in terraform-provider-aws support.
+The AWS WAF API itself imposes no nesting limit.
 
 Consequences of the depth limit:
 

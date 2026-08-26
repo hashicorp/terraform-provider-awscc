@@ -2471,6 +2471,21 @@
       ],
       "additionalProperties": false
     },
+    "AndStatementLevel3": {
+      "type": "object",
+      "properties": {
+        "Statements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StatementLevel4"
+          }
+        }
+      },
+      "required": [
+        "Statements"
+      ],
+      "additionalProperties": false
+    },
     "ManagedRuleGroupStatementLevel2": {
       "type": "object",
       "properties": {
@@ -2538,6 +2553,52 @@
             "$ref": "#/definitions/ExcludedRule"
           }
         },
+        "ScopeDownStatement": {
+          "$ref": "#/definitions/StatementLevel4"
+        },
+        "ManagedRuleGroupConfigs": {
+          "description": "Collection of ManagedRuleGroupConfig.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleGroupConfig"
+          }
+        },
+        "RuleActionOverrides": {
+          "description": "Action overrides for rules in the rule group.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RuleActionOverride"
+          },
+          "maxItems": 100
+        }
+      },
+      "required": [
+        "VendorName",
+        "Name"
+      ],
+      "additionalProperties": false
+    },
+    "ManagedRuleGroupStatementLevel4": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "$ref": "#/definitions/EntityName"
+        },
+        "VendorName": {
+          "type": "string"
+        },
+        "Version": {
+          "type": "string",
+          "pattern": "^[\\w#:\\.\\-/]+$",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "ExcludedRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExcludedRule"
+          }
+        },
         "ManagedRuleGroupConfigs": {
           "description": "Collection of ManagedRuleGroupConfig.",
           "type": "array",
@@ -2572,6 +2633,18 @@
       ],
       "additionalProperties": false
     },
+    "NotStatementLevel3": {
+      "type": "object",
+      "properties": {
+        "Statement": {
+          "$ref": "#/definitions/StatementLevel4"
+        }
+      },
+      "required": [
+        "Statement"
+      ],
+      "additionalProperties": false
+    },
     "OrStatementLevel2": {
       "type": "object",
       "properties": {
@@ -2579,6 +2652,21 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/StatementLevel3"
+          }
+        }
+      },
+      "required": [
+        "Statements"
+      ],
+      "additionalProperties": false
+    },
+    "OrStatementLevel3": {
+      "type": "object",
+      "properties": {
+        "Statements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StatementLevel4"
           }
         }
       },
@@ -2627,6 +2715,45 @@
       "additionalProperties": false
     },
     "RateBasedStatementLevel3": {
+      "type": "object",
+      "properties": {
+        "Limit": {
+          "$ref": "#/definitions/RateLimit"
+        },
+        "EvaluationWindowSec": {
+          "$ref": "#/definitions/EvaluationWindowSec"
+        },
+        "AggregateKeyType": {
+          "type": "string",
+          "enum": [
+            "CONSTANT",
+            "IP",
+            "FORWARDED_IP",
+            "CUSTOM_KEYS"
+          ]
+        },
+        "CustomKeys": {
+          "description": "Specifies the aggregate keys to use in a rate-base rule.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RateBasedStatementCustomKey"
+          },
+          "maxItems": 5
+        },
+        "ScopeDownStatement": {
+          "$ref": "#/definitions/StatementLevel4"
+        },
+        "ForwardedIPConfig": {
+          "$ref": "#/definitions/ForwardedIPConfiguration"
+        }
+      },
+      "required": [
+        "Limit",
+        "AggregateKeyType"
+      ],
+      "additionalProperties": false
+    },
+    "RateBasedStatementLevel4": {
       "type": "object",
       "properties": {
         "Limit": {
@@ -2750,6 +2877,61 @@
         },
         "RateBasedStatement": {
           "$ref": "#/definitions/RateBasedStatementLevel3"
+        },
+        "AndStatement": {
+          "$ref": "#/definitions/AndStatementLevel3"
+        },
+        "OrStatement": {
+          "$ref": "#/definitions/OrStatementLevel3"
+        },
+        "NotStatement": {
+          "$ref": "#/definitions/NotStatementLevel3"
+        },
+        "LabelMatchStatement": {
+          "$ref": "#/definitions/LabelMatchStatement"
+        },
+        "RegexMatchStatement": {
+          "$ref": "#/definitions/RegexMatchStatement"
+        },
+        "AsnMatchStatement": {
+          "$ref": "#/definitions/AsnMatchStatement"
+        }
+      },
+      "additionalProperties": false
+    },
+    "StatementLevel4": {
+      "description": "First level statement that contains conditions, such as ByteMatch, SizeConstraint, etc",
+      "type": "object",
+      "properties": {
+        "ByteMatchStatement": {
+          "$ref": "#/definitions/ByteMatchStatement"
+        },
+        "SqliMatchStatement": {
+          "$ref": "#/definitions/SqliMatchStatement"
+        },
+        "XssMatchStatement": {
+          "$ref": "#/definitions/XssMatchStatement"
+        },
+        "SizeConstraintStatement": {
+          "$ref": "#/definitions/SizeConstraintStatement"
+        },
+        "GeoMatchStatement": {
+          "$ref": "#/definitions/GeoMatchStatement"
+        },
+        "RuleGroupReferenceStatement": {
+          "$ref": "#/definitions/RuleGroupReferenceStatement"
+        },
+        "IPSetReferenceStatement": {
+          "$ref": "#/definitions/IPSetReferenceStatement"
+        },
+        "RegexPatternSetReferenceStatement": {
+          "$ref": "#/definitions/RegexPatternSetReferenceStatement"
+        },
+        "ManagedRuleGroupStatement": {
+          "$ref": "#/definitions/ManagedRuleGroupStatementLevel4"
+        },
+        "RateBasedStatement": {
+          "$ref": "#/definitions/RateBasedStatementLevel4"
         },
         "LabelMatchStatement": {
           "$ref": "#/definitions/LabelMatchStatement"
@@ -2918,7 +3100,7 @@
     }
   },
   "x-derecursed": {
-    "depth": 3,
+    "depth": 4,
     "prunedProperties": [
       "AndStatement",
       "NotStatement",
