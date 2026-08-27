@@ -83,11 +83,14 @@ func run(allSchemasPath, availablePath, allSchemasDir, checkoutPath string, disc
 		previous []resourceRow
 	)
 	if discoverLive {
-		rows, err := discover(context.Background())
+		disc, err := discover(context.Background())
 		if err != nil {
 			return fmt.Errorf("live discovery: %w", err)
 		}
-		base = rows
+		base = make([]resourceRow, len(disc))
+		for i, d := range disc {
+			base[i] = d.row
+		}
 	} else {
 		if availablePath == "" {
 			newest, _, err := latestAvailable(allSchemasDir)

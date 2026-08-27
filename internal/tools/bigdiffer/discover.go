@@ -17,32 +17,88 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
 	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
+	"golang.org/x/sync/errgroup"
 )
 
 // discoverRegion is forced regardless of the ambient AWS_REGION: the CloudFormation
 // registry is queried from a single reference region for reproducibility.
 const discoverRegion = "us-east-1"
 
-// discover queries AWS for the set of provisionable public resource types
-// (FULLY_MUTABLE + IMMUTABLE, LIVE) and returns them as resource rows. This is
-// the "what's new" half of the mandate: bigdiffer gets the list itself rather
-// than diffing checked-in available_schemas.<date>.hcl snapshots.
-//
-// It intentionally mirrors the old manual_allschemas generator's logic but lives
-// here so bigdiffer stays self-contained.
-func discover(ctx context.Context) ([]resourceRow, error) {
+// discoverConcurrency bounds the number of in-flight DescribeType calls.
+// DescribeType is throttled by AWS, so the SDK client retries with backoff;
+// concurrency trades a higher (bounded) request rate for wall-clock time. The
+// speedup over the serial crawl is real but limited by the account's DescribeType
+// throttle ceiling, so a much larger value mostly adds retries, not throughput.
+const discoverConcurrency = 10
+
+// discovered pairs a resource row with the sanitized CloudFormation schema bytes
+// captured in the same DescribeType call (§10 "one crawl"). err records a
+// per-type failure without aborting the whole crawl; schema is nil on failure.
+type discovered struct {
+	row    resourceRow
+	schema []byte
+	err    error
+}
+
+// discover queries AWS for the provisionable public resource types
+// (FULLY_MUTABLE + IMMUTABLE, LIVE) and, in one bounded-concurrency sweep,
+// derives per-type metadata (Terraform name, plural-DS support) and captures the
+// sanitized schema bytes. This is the "what's new" half of the mandate plus the
+// cache input, fetched once.
+func discover(ctx context.Context) ([]discovered, error) {
+	conn, err := newCFNClient(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	names, err := listTypeNames(ctx, conn)
+	if err != nil {
+		return nil, err
+	}
+
+	// Fan out DescribeType across a bounded worker pool. Each goroutine writes
+	// its own slot, so no mutex is needed; per-type errors are captured in-band.
+	results := make([]discovered, len(names))
+	var g errgroup.Group
+	g.SetLimit(discoverConcurrency)
+	for i, cfn := range names {
+		g.Go(func() error {
+			results[i] = describeOne(ctx, conn, cfn)
+			return nil
+		})
+	}
+	_ = g.Wait() // goroutines never return an error; failures are in-band.
+
+	var failures int
+	for _, d := range results {
+		if d.err != nil {
+			failures++
+		}
+	}
+	if failures > 0 {
+		fmt.Fprintf(os.Stderr, "bigdiffer: discovery: %d of %d types failed to describe (see per-type warnings)\n", failures, len(results))
+	}
+	return results, nil
+}
+
+// newCFNClient builds a CloudFormation client pinned to the reference region with
+// an aggressive retryer so concurrent DescribeType calls ride through throttling.
+func newCFNClient(ctx context.Context) (*cloudformation.Client, error) {
 	cfg, err := config.LoadDefaultConfig(ctx, config.WithRegion(discoverRegion))
 	if err != nil {
 		return nil, fmt.Errorf("loading AWS config: %w", err)
 	}
-
-	conn := cloudformation.NewFromConfig(cfg, func(o *cloudformation.Options) {
+	return cloudformation.NewFromConfig(cfg, func(o *cloudformation.Options) {
 		o.Retryer = retry.NewStandard(func(so *retry.StandardOptions) {
 			so.MaxAttempts = 25
 			so.RateLimiter = ratelimit.None
 		})
-	})
+	}), nil
+}
 
+// listTypeNames pages ListTypes for both provisionable visibilities and returns
+// the AWS-owned CloudFormation type names, deduplicated and sorted.
+func listTypeNames(ctx context.Context, conn *cloudformation.Client) ([]string, error) {
 	var summaries []types.TypeSummary
 	for _, in := range []*cloudformation.ListTypesInput{
 		{
@@ -65,63 +121,84 @@ func discover(ctx context.Context) ([]resourceRow, error) {
 			summaries = append(summaries, page.TypeSummaries...)
 		}
 	}
+	return awsTypeNames(summaries), nil
+}
 
+// awsTypeNames filters type summaries to AWS-owned types, deduplicates, and
+// sorts. Pure: unit-tested without AWS.
+func awsTypeNames(summaries []types.TypeSummary) []string {
 	seen := make(map[string]bool)
-	var cfnNames []string
+	var names []string
 	for _, s := range summaries {
 		name := aws.ToString(s.TypeName)
-		if org, _, _, err := naming.ParseCloudFormationTypeName(name); err == nil && org != naming.OrganizationNameAWS {
+		if name == "" {
+			continue
+		}
+		if org, _, _, err := naming.ParseCloudFormationTypeName(name); err != nil || org != naming.OrganizationNameAWS {
 			continue
 		}
 		if !seen[name] {
 			seen[name] = true
-			cfnNames = append(cfnNames, name)
+			names = append(names, name)
 		}
 	}
-	sort.Strings(cfnNames)
-
-	rows := make([]resourceRow, 0, len(cfnNames))
-	for _, cfn := range cfnNames {
-		org, svc, res, err := naming.ParseCloudFormationTypeName(cfn)
-		if err != nil {
-			return nil, fmt.Errorf("parsing CloudFormation type name %q: %w", cfn, err)
-		}
-		label := strings.ToLower(org) + "_" + strings.ToLower(svc) + "_" + naming.CloudFormationPropertyToTerraformAttribute(res)
-
-		rows = append(rows, resourceRow{
-			ResourceTypeName:                   label,
-			CloudFormationTypeName:             cfn,
-			SuppressPluralDataSourceGeneration: !supportsPluralDataSource(ctx, conn, cfn),
-		})
-	}
-	return rows, nil
+	sort.Strings(names)
+	return names
 }
 
-// supportsPluralDataSource reports whether the type has a List handler with no
-// required arguments (the condition under which a plural data source is
-// generated). Any error is treated as "no plural data source" and logged.
-func supportsPluralDataSource(ctx context.Context, conn *cloudformation.Client, cfn string) bool {
+// describeOne fetches and sanitizes one type's schema and derives its row. A
+// failure is returned in-band (discovered.err) so the crawl continues.
+func describeOne(ctx context.Context, conn *cloudformation.Client, cfn string) discovered {
+	org, svc, res, err := naming.ParseCloudFormationTypeName(cfn)
+	if err != nil {
+		return discovered{row: resourceRow{CloudFormationTypeName: cfn}, err: fmt.Errorf("parsing %q: %w", cfn, err)}
+	}
+	label := strings.ToLower(org) + "_" + strings.ToLower(svc) + "_" + naming.CloudFormationPropertyToTerraformAttribute(res)
+
+	schema, pluralSupported, err := describeSchema(ctx, conn, cfn)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "bigdiffer: %v\n", err)
+		return discovered{
+			row: resourceRow{ResourceTypeName: label, CloudFormationTypeName: cfn},
+			err: err,
+		}
+	}
+	return discovered{
+		row: resourceRow{
+			ResourceTypeName:                   label,
+			CloudFormationTypeName:             cfn,
+			SuppressPluralDataSourceGeneration: !pluralSupported,
+		},
+		schema: schema,
+	}
+}
+
+// describeSchema returns the sanitized schema bytes and whether a plural data
+// source is supported (a list handler with no required arguments).
+func describeSchema(ctx context.Context, conn *cloudformation.Client, cfn string) ([]byte, bool, error) {
 	out, err := conn.DescribeType(ctx, &cloudformation.DescribeTypeInput{
 		Type:     types.RegistryTypeResource,
 		TypeName: aws.String(cfn),
 	})
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "bigdiffer: describing %s: %v\n", cfn, err)
-		return false
+		return nil, false, fmt.Errorf("describing %s: %w", cfn, err)
 	}
-	schema, err := cfschema.Sanitize(aws.ToString(out.Schema))
+	sanitized, err := cfschema.Sanitize(aws.ToString(out.Schema))
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "bigdiffer: sanitizing %s: %v\n", cfn, err)
-		return false
+		return nil, false, fmt.Errorf("sanitizing %s: %w", cfn, err)
 	}
-	doc, err := cfschema.NewResourceJsonSchemaDocument(schema)
+	return []byte(sanitized), pluralSupported(sanitized), nil
+}
+
+// pluralSupported reports whether the sanitized schema has a list handler with no
+// required arguments. Any parse error is treated as "no plural data source."
+func pluralSupported(sanitized string) bool {
+	doc, err := cfschema.NewResourceJsonSchemaDocument(sanitized)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "bigdiffer: parsing %s schema: %v\n", cfn, err)
 		return false
 	}
 	resource, err := doc.Resource()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "bigdiffer: parsing %s resource: %v\n", cfn, err)
 		return false
 	}
 	handler, ok := resource.Handlers[cfschema.HandlerTypeList]
