@@ -4,8 +4,6 @@ package main
 
 import (
 	"fmt"
-	"path"
-	"strings"
 
 	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
 )
@@ -58,7 +56,7 @@ func generationPlan(row resourceRow, prefix, cacheDir string) (plan, error) {
 
 	schemaFile := row.CloudFormationSchemaPath
 	if schemaFile == "" {
-		schemaFile = path.Join(cacheDir, strings.ReplaceAll(row.CloudFormationTypeName, "::", "_")+".json")
+		schemaFile = schemaCachePath(cacheDir, row.CloudFormationTypeName)
 	}
 
 	pathSuffix := org + "/" + svc
