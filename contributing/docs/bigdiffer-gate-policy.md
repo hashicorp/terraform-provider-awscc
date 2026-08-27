@@ -41,9 +41,18 @@ Implications:
   gate runs only on the **changed/new** set (byte-identical skip, §4), which is
   a handful per week — so per-type subprocess is entirely acceptable.
 - The per-type **recipe** (awscc type name, `-listresource`, package, cfschema
-  path, output paths) is non-trivial naming logic we do *not* want to
-  reimplement. It is already materialized in the directive files. bigdiffer can
-  reuse those lines rather than deriving them.
+  path, output file names) is non-trivial naming logic — but it is compact and
+  copyable. `schema/main.go`'s `Downloader.Schemas` + `ResourceSchema` derive it
+  in ~170 lines, depending only on `internal/naming` (already a bigdiffer
+  dependency) and `cfschema`. Copy that core into bigdiffer and compute recipes
+  **in memory** — no temp overlay, no schema-generator subprocess, no
+  directive-file round-trip.
+- `schema/main.go` is *not* the code generator. It derives recipes, downloads,
+  and writes the `//go:generate` directive lists. The actual code generation is
+  in `resource/main.go` etc. atop `shared/`. So the gate's pass/fail comes from
+  generation's **front half** — `shared.GenerateTemplateData(...)`, importable —
+  where almost all generation failures surface. That is §6's "validation is the
+  front half of generation," in-process, with no temp output tree.
 
 ## Prerequisites / missing pieces (dependency order)
 
@@ -53,14 +62,24 @@ Implications:
    New types are always candidates. Frozen types are skipped.
    - Enabler: reuse the `DescribeType` bytes from discovery (§10 / roadmap #4)
      so the fetch is the same crawl, not a second one.
-2. **Per-type recipe access.** The candidate's generate command(s). Cleanest:
-   run `generators/schema/main.go` to (re)emit the directive files against the
-   working overlay + cache, then look up the candidate's line(s) in
-   `resources.go` / `singular_data_sources.go` / `plural_data_sources.go`.
-   Honors `suppress_*` automatically (suppressed artifacts get no directive).
-3. **Temp generation sandbox.** Execute the candidate's directives with the `--`
-   output paths redirected to a temp dir, so a gate run never touches
-   `internal/aws/**` until the result is accepted.
+2. **Recipe + refresh core (copy & redesign, not reuse).** Copy the reusable
+   ~170 lines of `schema/main.go` — `Downloader.Schemas` (per-type recipe:
+   Terraform type via `naming.CreateTerraformTypeName`, package/paths, plural
+   name, `-listresource`, and `suppress_*` gating) and `ResourceSchema`
+   (download-or-cached + `frozen_since` + meta-schema validation). Redesign for
+   the in-memory pipeline: return recipes as values, refresh by
+   compare-not-missing (§4), and **drop** the directive-file/template emission
+   (`GenerateResources`/`GenerateDataSources`) — bigdiffer never writes
+   `resources.go`; it consumes recipes directly.
+3. **Gate mechanism (in-process front half).** The pass/fail signal is
+   `shared.GenerateTemplateData(...)` per applicable artifact (resource /
+   singular DS / plural DS). It parses the CFN schema into template data and is
+   where the vast majority of generation failures surface (unsupported types,
+   recursive definitions, bad identifiers). No temp output tree is needed because
+   recipes are in memory and the check is in-process. Full template rendering +
+   compilation is covered once by the whole-repo build (P6). New dependency:
+   `shared` (the generation engine core) — acceptable now; the template layer can
+   be copied later if full independence is wanted.
 4. **Block mutation in the overlay.** New capability. Today bigdiffer only *adds*
    blocks and preserves existing ones verbatim. Policy must *set* attributes
    (`frozen_since = "<date>"`, `suppress_*_generation = true`) on an existing
@@ -80,9 +99,11 @@ Implications:
 - **Stage A — selective refresh + changed set.** Download non-frozen to temp,
   byte-compare, replace changed, emit the changed set. Frozen skipped. New mode;
   does not yet gate. Verify against a week with known churn.
-- **Stage B — gate runner.** Given a candidate set, (re)emit directives, run the
-  applicable per-type generators into temp, return per-type results. Test with a
-  stub generator (fast) and with one real known-good type.
+- **Stage B — gate runner.** For each candidate, derive its recipe(s) in memory
+  (copied core, P2) and run the generation front half
+  (`shared.GenerateTemplateData`) for the applicable artifacts, returning
+  per-type results. No temp tree, no subprocess. Test with a known-good and a
+  known-broken type.
 - **Stage C — policy engine.** Pure `apply(class, result) → edit` matching the
   §7 table. Table-driven unit tests; no AWS, no generation.
 - **Stage D — block mutation.** `setAttr(block, name, value)` preserving
@@ -96,6 +117,10 @@ Implications:
 
 ## Required bigdiffer refactors
 
+- **New recipe/refresh module (copied core).** A bigdiffer-owned file adapted
+  from `schema/main.go`'s `Downloader.Schemas` + `ResourceSchema`: derive
+  per-type recipes in memory and refresh the cache by compare-not-missing. No
+  directive emission. This is the "copy for free, redesign" piece.
 - **run() becomes a pipeline.** Currently: read → `normalize` → write.
   New: read → reconcile → refresh → gate → policy → emit → report. `normalize`
   stays the reconcile/emit core; policy edits are applied to the item set before
@@ -109,17 +134,19 @@ Implications:
 
 ## Open decisions
 
-- **New-type gating needs a tentative overlay.** To get a directive for a New
-  type, its row must exist when `generators/schema/main.go` runs. Plan: add New
-  rows to a *working copy* of the overlay, emit directives + gate in temp, and
-  only write the tree copy once policy is decided. Confirm this is acceptable vs.
-  deriving New recipes directly.
-- **Reuse vs. reimplement the schema generator.** For now, reuse it as a
-  subprocess (recipe emission + download), consistent with "gate = black-box
-  subprocess." Reimplementing recipe/naming derivation inside bigdiffer is
-  explicitly out of scope until the tool stabilizes.
-- **Change detection source.** Byte-compare in bigdiffer (self-contained) vs.
-  `git diff` on the schemas dir (cheap but git-coupled). Prefer byte-compare.
+- **Copy & redesign, don't reuse (decided).** bigdiffer absorbs `schema/main.go`'s
+  ~170-line recipe/refresh core rather than shelling out to it. This removes the
+  temp-overlay + subprocess + directive-file round-trip entirely.
+- **New-type gating is no longer special (resolved).** Because recipes are
+  derived in memory from a `resourceRow`, a New type's recipe is computed
+  directly — nothing is written to disk to gate it, so no tentative overlay is
+  needed. (This dissolves the open item from the first draft.)
+- **`shared` dependency (open).** The gate's front half uses
+  `shared.GenerateTemplateData`. Acceptable now; copy the template layer later if
+  full independence from the generation engine is wanted.
+- **Change detection source (lean byte-compare).** Byte-compare in bigdiffer
+  (self-contained) vs. `git diff` on the schemas dir (cheap but git-coupled).
+  Prefer byte-compare.
 
 ## Verification strategy
 
