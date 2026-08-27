@@ -3,12 +3,12 @@
 page_title: "awscc_emr_wal_workspace Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource schema for AWS::EMR::WALWorkspace Type
+  Resource Type definition for AWS::EMR::WALWorkspace
 ---
 
 # awscc_emr_wal_workspace (Resource)
 
-Resource schema for AWS::EMR::WALWorkspace Type
+Resource Type definition for AWS::EMR::WALWorkspace
 
 ## Example Usage
 

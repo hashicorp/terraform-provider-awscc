@@ -67,6 +67,7 @@ resource "awscc_apigatewayv2_api" "example_http_api" {
 
 - `api_endpoint` (String)
 - `api_id` (String)
+- `execute_api_arn` (String)
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--body_s3_location"></a>

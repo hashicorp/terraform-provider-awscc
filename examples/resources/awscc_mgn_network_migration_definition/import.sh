@@ -1,0 +1,1 @@
+$ terraform import awscc_mgn_network_migration_definition.example "arn"

@@ -27,6 +27,7 @@ Data Source schema for AWS::BedrockAgentCore::Runtime
 - `agent_runtime_name` (String) Name for a resource
 - `agent_runtime_version` (String) Version of the Agent
 - `authorizer_configuration` (Attributes) Authorizer configuration for the agent runtime (see [below for nested schema](#nestedatt--authorizer_configuration))
+- `capacity_provider_configuration` (Attributes) Capacity provider configuration for the agent runtime (see [below for nested schema](#nestedatt--capacity_provider_configuration))
 - `created_at` (String) Timestamp when the Agent was created
 - `description` (String) Description of the resource
 - `environment_variables` (Map of String) Environment variables for the agent runtime
@@ -224,14 +225,32 @@ Read-Only:
 
 
 
+<a id="nestedatt--capacity_provider_configuration"></a>
+### Nested Schema for `capacity_provider_configuration`
+
+Read-Only:
+
+- `capacity_provider_arn` (String) ARN of the capacity provider
+
+
 <a id="nestedatt--filesystem_configurations"></a>
 ### Nested Schema for `filesystem_configurations`
 
 Read-Only:
 
+- `capacity_provider_volume` (Attributes) Configuration for a CapacityProvider-managed volume to mount into the agent runtime (see [below for nested schema](#nestedatt--filesystem_configurations--capacity_provider_volume))
 - `efs_access_point` (Attributes) Configuration for EFS access point filesystem (see [below for nested schema](#nestedatt--filesystem_configurations--efs_access_point))
 - `s3_files_access_point` (Attributes) Configuration for S3 Files access point filesystem (see [below for nested schema](#nestedatt--filesystem_configurations--s3_files_access_point))
 - `session_storage` (Attributes) Configuration for session storage (see [below for nested schema](#nestedatt--filesystem_configurations--session_storage))
+
+<a id="nestedatt--filesystem_configurations--capacity_provider_volume"></a>
+### Nested Schema for `filesystem_configurations.capacity_provider_volume`
+
+Read-Only:
+
+- `mount_path` (String) Mount path for filesystem configuration
+- `volume_name` (String) Name of the capacity provider volume
+
 
 <a id="nestedatt--filesystem_configurations--efs_access_point"></a>
 ### Nested Schema for `filesystem_configurations.efs_access_point`

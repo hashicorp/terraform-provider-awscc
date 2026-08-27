@@ -36,7 +36,7 @@ Data Source schema for AWS::CloudWatch::Alarm
 - `evaluation_interval` (Number) The frequency, in seconds, at which the alarm is evaluated.
 - `evaluation_periods` (Number) The number of periods over which data is compared to the specified threshold. If you are setting an alarm that requires that a number of consecutive data points be breaching to trigger the alarm, this value specifies that number. If you are setting an "M out of N" alarm, this value is the N, and ``DatapointsToAlarm`` is the M.
  For more information, see [Evaluating an Alarm](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation) in the *User Guide*.
-- `evaluation_window` (Attributes) (see [below for nested schema](#nestedatt--evaluation_window))
+- `evaluation_window` (Attributes) The evaluation window that the alarm uses to select the range of metric data that it evaluates. This is either a sliding window or a wall clock window. For more information, see [Alarm evaluation windows](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-evaluation-window.html) in the *CloudWatch User Guide*. (see [below for nested schema](#nestedatt--evaluation_window))
 - `extended_statistic` (String) The percentile statistic for the metric associated with the alarm. Specify a value between p0.0 and p100.
  For an alarm based on a metric, you must specify either ``Statistic`` or ``ExtendedStatistic`` but not both.
  For an alarm based on a math expression, you can't specify ``ExtendedStatistic``. Instead, you use ``Metrics``.
@@ -61,6 +61,7 @@ Data Source schema for AWS::CloudWatch::Alarm
  If you omit this parameter, the default behavior of ``missing`` is used.
 - `unit` (String) The unit of the metric associated with the alarm. Specify this only if you are creating an alarm based on a single metric. Do not specify this if you are specifying a ``Metrics`` array.
   You can specify the following values: Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, or None.
+- `warm_up_configuration` (Attributes) (see [below for nested schema](#nestedatt--warm_up_configuration))
 
 <a id="nestedatt--dimensions"></a>
 ### Nested Schema for `dimensions`
@@ -94,15 +95,16 @@ Read-Only:
 
 Read-Only:
 
-- `sliding_window` (String) Configuration for sliding evaluation window (default behavior).
-- `wall_clock_window` (Attributes) Configuration for wall clock based evaluation window. (see [below for nested schema](#nestedatt--evaluation_window--wall_clock_window))
+- `sliding_window` (String) A sliding window, which advances each time the alarm is evaluated, forming a rolling time window. This is the default evaluation window.
+- `wall_clock_window` (Attributes) A wall clock window, which aligns the evaluated range to fixed clock boundaries that match the alarm's period, such as the top of the hour, midnight, or the start of the calendar week. (see [below for nested schema](#nestedatt--evaluation_window--wall_clock_window))
 
 <a id="nestedatt--evaluation_window--wall_clock_window"></a>
 ### Nested Schema for `evaluation_window.wall_clock_window`
 
 Read-Only:
 
-- `timezone` (String) The timezone for wall clock evaluation, in IANA time zone format (e.g., America/New_York, UTC).
+- `timezone` (String) The time zone to use when the alarm aligns the evaluation window to clock boundaries. You can specify an IANA time zone name (for example, ``America/New_York``), a fixed UTC offset (for example, ``+05:30``), or an offset-prefixed identifier (for example, ``UTC+05:30``). The offset must be aligned to a multiple of 5 minutes. If you don't specify a time zone, CloudWatch uses ``UTC``.
+ The time zone affects window alignment for all periods, including periods of one hour or shorter.
 
 
 
@@ -166,3 +168,12 @@ Read-Only:
 
 - `key` (String) A string that you can use to assign a value. The combination of tag keys and values can help you organize and categorize your resources.
 - `value` (String) The value for the specified tag key.
+
+
+<a id="nestedatt--warm_up_configuration"></a>
+### Nested Schema for `warm_up_configuration`
+
+Read-Only:
+
+- `only_start_evaluating_after_warm_up_period_ends` (Boolean) Specifies whether the alarm waits for the full warm-up period before it starts evaluating. If true, the alarm waits the entire WarmUpPeriodDurationInMinutes before it starts evaluating, even if metric data arrives earlier. If false, the alarm ends the warm-up period early and starts evaluating as soon as it has enough metric data to fill its evaluation window. This is the default behavior.
+- `warm_up_period_duration_in_minutes` (Number) The length of the warm-up period, in minutes. For this duration after you create or update the alarm, the alarm stays in INSUFFICIENT_DATA and doesn't perform alarm actions. Valid values range from 1 to 2880 minutes (2 days). You can change this value while the alarm is still in its warm-up period. Changes have no effect after the warm-up period ends.

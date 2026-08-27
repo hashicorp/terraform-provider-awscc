@@ -29,9 +29,9 @@ Resource Type definition for AWS::Chime::AppInstanceBot
 ### Read-Only
 
 - `app_instance_bot_arn` (String) The ARN of the AppInstanceBot.
-- `created_timestamp` (Number) The time at which the AppInstanceBot was created. In epoch milliseconds.
+- `created_timestamp` (String) The time at which the AppInstanceBot was created, as an ISO 8601 timestamp.
 - `id` (String) Uniquely identifies the resource.
-- `last_updated_timestamp` (Number) The time at which the AppInstanceBot was last updated. In epoch milliseconds.
+- `last_updated_timestamp` (String) The time at which the AppInstanceBot was last updated, as an ISO 8601 timestamp.
 
 <a id="nestedatt--configuration"></a>
 ### Nested Schema for `configuration`

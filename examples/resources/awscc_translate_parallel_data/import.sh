@@ -1,0 +1,1 @@
+$ terraform import awscc_translate_parallel_data.example "arn"

@@ -1,0 +1,1 @@
+$ terraform import awscc_textract_adapter.example "arn"

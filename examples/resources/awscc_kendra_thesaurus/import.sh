@@ -1,0 +1,1 @@
+$ terraform import awscc_kendra_thesaurus.example "arn"

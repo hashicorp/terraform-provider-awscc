@@ -1,0 +1,1 @@
+$ terraform import awscc_deadline_budget.example "arn"

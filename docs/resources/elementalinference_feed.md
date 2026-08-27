@@ -64,6 +64,7 @@ resource "awscc_elementalinference_feed" "example" {
 
 ### Optional
 
+- `access_role_arn` (String)
 - `tags` (Map of String)
 
 ### Read-Only
@@ -92,7 +93,7 @@ Optional:
 Optional:
 
 - `clipping` (Attributes) (see [below for nested schema](#nestedatt--outputs--output_config--clipping))
-- `cropping` (String)
+- `cropping` (Attributes) (see [below for nested schema](#nestedatt--outputs--output_config--cropping))
 - `subtitling` (Attributes) (see [below for nested schema](#nestedatt--outputs--output_config--subtitling))
 
 <a id="nestedatt--outputs--output_config--clipping"></a>
@@ -101,6 +102,32 @@ Optional:
 Optional:
 
 - `callback_metadata` (String)
+- `data_source_configuration` (Attributes) (see [below for nested schema](#nestedatt--outputs--output_config--clipping--data_source_configuration))
+
+<a id="nestedatt--outputs--output_config--clipping--data_source_configuration"></a>
+### Nested Schema for `outputs.output_config.clipping.data_source_configuration`
+
+Optional:
+
+- `fixture_id` (String)
+
+
+
+<a id="nestedatt--outputs--output_config--cropping"></a>
+### Nested Schema for `outputs.output_config.cropping`
+
+Optional:
+
+- `template_groups` (Attributes List) (see [below for nested schema](#nestedatt--outputs--output_config--cropping--template_groups))
+
+<a id="nestedatt--outputs--output_config--cropping--template_groups"></a>
+### Nested Schema for `outputs.output_config.cropping.template_groups`
+
+Optional:
+
+- `name` (String)
+- `template_uris` (List of String)
+
 
 
 <a id="nestedatt--outputs--output_config--subtitling"></a>

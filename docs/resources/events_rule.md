@@ -67,6 +67,7 @@ Targets are the resources that are invoked when a rule is triggered. (see [below
 
 - `arn` (String) The ARN of the rule, such as arn:aws:events:us-east-2:123456789012:rule/example.
 - `id` (String) Uniquely identifies the resource.
+- `rule_name` (String) The name of the rule, exposed as a read-only attribute for use with Fn::GetAtt.
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

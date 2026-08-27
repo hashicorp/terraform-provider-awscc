@@ -1,0 +1,1 @@
+$ terraform import awscc_dax_parameter_group.example "parameter_group_name"

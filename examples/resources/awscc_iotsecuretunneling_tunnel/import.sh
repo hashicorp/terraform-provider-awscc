@@ -1,0 +1,1 @@
+$ terraform import awscc_iotsecuretunneling_tunnel.example "tunnel_arn"

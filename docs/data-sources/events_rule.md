@@ -27,6 +27,7 @@ Data Source schema for AWS::Events::Rule
 - `event_pattern` (String) The event pattern of the rule. For more information, see Events and Event Patterns in the Amazon EventBridge User Guide.
 - `name` (String) The name of the rule.
 - `role_arn` (String) The Amazon Resource Name (ARN) of the role that is used for target invocation.
+- `rule_name` (String) The name of the rule, exposed as a read-only attribute for use with Fn::GetAtt.
 - `schedule_expression` (String) The scheduling expression. For example, "cron(0 20 * * ? *)", "rate(5 minutes)". For more information, see Creating an Amazon EventBridge rule that runs on a schedule.
 - `state` (String) The state of the rule.
 - `tags` (Attributes List) Any tags assigned to the event rule. (see [below for nested schema](#nestedatt--tags))

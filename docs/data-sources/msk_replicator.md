@@ -65,6 +65,7 @@ Read-Only:
 Read-Only:
 
 - `mtls` (Attributes) Details for mTLS client authentication. (see [below for nested schema](#nestedatt--kafka_clusters--client_authentication--mtls))
+- `sasl_o_auth_bearer` (Attributes) Details for client authentication using SASL/OAUTHBEARER. (see [below for nested schema](#nestedatt--kafka_clusters--client_authentication--sasl_o_auth_bearer))
 - `sasl_scram` (Attributes) Details for SASL/SCRAM client authentication. (see [below for nested schema](#nestedatt--kafka_clusters--client_authentication--sasl_scram))
 
 <a id="nestedatt--kafka_clusters--client_authentication--mtls"></a>
@@ -73,6 +74,48 @@ Read-Only:
 Read-Only:
 
 - `secret_arn` (String) The Amazon Resource Name (ARN) of the Secrets Manager secret.
+
+
+<a id="nestedatt--kafka_clusters--client_authentication--sasl_o_auth_bearer"></a>
+### Nested Schema for `kafka_clusters.client_authentication.sasl_o_auth_bearer`
+
+Read-Only:
+
+- `client_credentials` (Attributes) Details for SASL/OAUTHBEARER using standard client_credentials grant. Mutually exclusive with iamJwtBearer and clientCredentialsAssertion. (see [below for nested schema](#nestedatt--kafka_clusters--client_authentication--sasl_o_auth_bearer--client_credentials))
+- `client_credentials_assertion` (Attributes) Details for SASL/OAUTHBEARER using client credentials grant with JWT client assertion (RFC 7521/7523). Mutually exclusive with clientCredentials and iamJwtBearer. (see [below for nested schema](#nestedatt--kafka_clusters--client_authentication--sasl_o_auth_bearer--client_credentials_assertion))
+- `iam_jwt_bearer` (Attributes) Details for SASL/OAUTHBEARER using JWT Bearer assertion grant (RFC 7523). Mutually exclusive with clientCredentials and clientCredentialsAssertion. (see [below for nested schema](#nestedatt--kafka_clusters--client_authentication--sasl_o_auth_bearer--iam_jwt_bearer))
+- `scope` (String) OAuth scope to request. Included in the token request if provided.
+- `token_endpoint_authentication_method` (String) How client credentials are sent to the identity provider (POST, BASIC, or NONE).
+- `token_endpoint_tls_certificate_arn` (String) Secrets Manager ARN containing a custom CA certificate for the identity provider. Required only if the identity provider uses a private CA.
+- `token_endpoint_url` (String) The HTTPS URL of the OAuth token endpoint that vends OAuth Bearer tokens per RFC 6749.
+
+<a id="nestedatt--kafka_clusters--client_authentication--sasl_o_auth_bearer--client_credentials"></a>
+### Nested Schema for `kafka_clusters.client_authentication.sasl_o_auth_bearer.client_credentials`
+
+Read-Only:
+
+- `token_request_secret_arn` (String) Secrets Manager ARN of the secret containing the client_id and client_secret used to obtain an OAuth Bearer token via the client_credentials grant.
+
+
+<a id="nestedatt--kafka_clusters--client_authentication--sasl_o_auth_bearer--client_credentials_assertion"></a>
+### Nested Schema for `kafka_clusters.client_authentication.sasl_o_auth_bearer.client_credentials_assertion`
+
+Read-Only:
+
+- `audience` (String) The audience (aud claim) set in the STS JWT client assertion.
+- `signing_algorithm` (String) The algorithm used to sign the JWT client assertion.
+- `token_request_secret_arn` (String) Optional Secrets Manager ARN for identity providers that require client_id as a form parameter alongside the JWT client assertion.
+
+
+<a id="nestedatt--kafka_clusters--client_authentication--sasl_o_auth_bearer--iam_jwt_bearer"></a>
+### Nested Schema for `kafka_clusters.client_authentication.sasl_o_auth_bearer.iam_jwt_bearer`
+
+Read-Only:
+
+- `audience` (String) The audience (aud claim) set in the STS JWT assertion.
+- `signing_algorithm` (String) The algorithm used to sign the JWT assertion.
+- `token_request_secret_arn` (String) Optional Secrets Manager ARN for identity providers that require client authentication alongside the JWT Bearer assertion.
+
 
 
 <a id="nestedatt--kafka_clusters--client_authentication--sasl_scram"></a>

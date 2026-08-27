@@ -22,6 +22,7 @@ Resource Type definition for AWS::MWAAServerless::Workflow resource
 
 ### Optional
 
+- `code` (Attributes) The location of code artifacts in Amazon S3 for the workflow. Modeled as a single-member container so it stays extensible to future artifact types (e.g. OCI images). (see [below for nested schema](#nestedatt--code))
 - `description` (String)
 - `encryption_configuration` (Attributes) (see [below for nested schema](#nestedatt--encryption_configuration))
 - `logging_configuration` (Attributes) (see [below for nested schema](#nestedatt--logging_configuration))
@@ -32,6 +33,7 @@ Resource Type definition for AWS::MWAAServerless::Workflow resource
 
 ### Read-Only
 
+- `code_snapshotted_at` (String)
 - `created_at` (String)
 - `id` (String) Uniquely identifies the resource.
 - `modified_at` (String)
@@ -51,6 +53,24 @@ Required:
 Optional:
 
 - `version_id` (String)
+
+
+<a id="nestedatt--code"></a>
+### Nested Schema for `code`
+
+Optional:
+
+- `s3_location` (Attributes) (see [below for nested schema](#nestedatt--code--s3_location))
+
+<a id="nestedatt--code--s3_location"></a>
+### Nested Schema for `code.s3_location`
+
+Optional:
+
+- `bucket` (String)
+- `object_key` (String)
+- `version_id` (String)
+
 
 
 <a id="nestedatt--encryption_configuration"></a>

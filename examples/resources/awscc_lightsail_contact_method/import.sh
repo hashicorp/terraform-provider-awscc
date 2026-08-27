@@ -1,0 +1,1 @@
+$ terraform import awscc_lightsail_contact_method.example "arn"

@@ -1,0 +1,1 @@
+$ terraform import awscc_guardduty_custom_detection_rule_association.example "rule_id|association_id"

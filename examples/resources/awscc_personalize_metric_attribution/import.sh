@@ -1,0 +1,1 @@
+$ terraform import awscc_personalize_metric_attribution.example "metric_attribution_arn"

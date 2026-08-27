@@ -35,6 +35,7 @@ Resource Type definition for AWS::CloudWatch::LogAlarm. A LogAlarm evaluates sch
 - `ok_actions` (List of String) The actions to execute when this alarm transitions to the OK state from any other state.
 - `tags` (Attributes Set) A list of key-value pairs to associate with the log alarm. (see [below for nested schema](#nestedatt--tags))
 - `treat_missing_data` (String) Sets how this alarm is to handle missing data points. Valid values are breaching, notBreaching, ignore, and missing.
+- `warm_up_configuration` (Attributes) The warm-up configuration for the alarm. During the warm-up period, the alarm stays in INSUFFICIENT_DATA and doesn't perform alarm actions. For more information, see Alarm warm-up periods in the Amazon CloudWatch User Guide. (see [below for nested schema](#nestedatt--warm_up_configuration))
 
 ### Read-Only
 
@@ -86,6 +87,15 @@ Optional:
 
 - `key` (String) A unique identifier for the tag. The combination of tag keys and values can help you organize and categorize your resources.
 - `value` (String) The value for the specified tag key.
+
+
+<a id="nestedatt--warm_up_configuration"></a>
+### Nested Schema for `warm_up_configuration`
+
+Optional:
+
+- `only_start_evaluating_after_warm_up_period_ends` (Boolean) Specifies whether the alarm waits for the full warm-up period before it starts evaluating. If true, the alarm waits the entire WarmUpPeriodDurationInMinutes before it starts evaluating, even if metric data arrives earlier. If false, the alarm ends the warm-up period early and starts evaluating as soon as it has enough metric data to fill its evaluation window. This is the default behavior.
+- `warm_up_period_duration_in_minutes` (Number) The length of the warm-up period, in minutes. For this duration after you create or update the alarm, the alarm stays in INSUFFICIENT_DATA and doesn't perform alarm actions. Valid values range from 1 to 2,880 minutes (2 days). You can change this value while the alarm is still in its warm-up period. Changes have no effect after the warm-up period ends.
 
 ## Import
 

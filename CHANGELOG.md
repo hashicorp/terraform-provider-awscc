@@ -1,4 +1,141 @@
-## 1.99.0 (Unreleased)
+## 1.99.0 (August 27, 2026)
+
+NOTES:
+
+* provider: Generated schema code is now deduplicated into shared helper functions, reducing generated source size and allowing very large or deeply-nested CloudFormation schemas that previously exceeded a Go compiler per-function limit to build. Runtime behavior is unchanged. ([#3270](https://github.com/hashicorp/terraform-provider-awscc/pull/3270))
+
+FEATURES:
+
+* **New Data Source:** `awscc_amplify_webhook`
+* **New Data Source:** `awscc_appstream_user`
+* **New Data Source:** `awscc_appstream_users`
+* **New Data Source:** `awscc_appsync_type`
+* **New Data Source:** `awscc_bedrock_session`
+* **New Data Source:** `awscc_bedrock_sessions`
+* **New Data Source:** `awscc_cases_case`
+* **New Data Source:** `awscc_chime_app_instance_user`
+* **New Data Source:** `awscc_cloudformation_change_set`
+* **New Data Source:** `awscc_codebuild_source_credential`
+* **New Data Source:** `awscc_codebuild_source_credentials`
+* **New Data Source:** `awscc_codecommit_repositories`
+* **New Data Source:** `awscc_codecommit_repository`
+* **New Data Source:** `awscc_codeconnections_host`
+* **New Data Source:** `awscc_codeconnections_hosts`
+* **New Data Source:** `awscc_dataexchange_event_action`
+* **New Data Source:** `awscc_dataexchange_event_actions`
+* **New Data Source:** `awscc_dax_parameter_group`
+* **New Data Source:** `awscc_dax_parameter_groups`
+* **New Data Source:** `awscc_deadline_budget`
+* **New Data Source:** `awscc_deadline_worker`
+* **New Data Source:** `awscc_docdb_db_cluster_parameter_group`
+* **New Data Source:** `awscc_docdb_db_cluster_parameter_groups`
+* **New Data Source:** `awscc_ec2_fpga_image`
+* **New Data Source:** `awscc_ec2_fpga_images`
+* **New Data Source:** `awscc_ecs_daemon_task_definition`
+* **New Data Source:** `awscc_ecs_daemon_task_definitions`
+* **New Data Source:** `awscc_glue_connection`
+* **New Data Source:** `awscc_glue_session`
+* **New Data Source:** `awscc_glue_sessions`
+* **New Data Source:** `awscc_guardduty_custom_detection_rule_association`
+* **New Data Source:** `awscc_guardduty_custom_detection_rule_associations`
+* **New Data Source:** `awscc_identitystore_user`
+* **New Data Source:** `awscc_iot_stream`
+* **New Data Source:** `awscc_iot_streams`
+* **New Data Source:** `awscc_iotsecuretunneling_tunnel`
+* **New Data Source:** `awscc_iotsecuretunneling_tunnels`
+* **New Data Source:** `awscc_kendra_query_suggestions_block_list`
+* **New Data Source:** `awscc_kendra_thesaurus`
+* **New Data Source:** `awscc_lambda_resource_policy`
+* **New Data Source:** `awscc_lightsail_contact_method`
+* **New Data Source:** `awscc_lightsail_contact_methods`
+* **New Data Source:** `awscc_mediatailor_prefetch_schedule`
+* **New Data Source:** `awscc_mgn_network_migration_definition`
+* **New Data Source:** `awscc_mgn_network_migration_definitions`
+* **New Data Source:** `awscc_omics_run_cache`
+* **New Data Source:** `awscc_omics_run_caches`
+* **New Data Source:** `awscc_personalize_metric_attribution`
+* **New Data Source:** `awscc_personalize_metric_attributions`
+* **New Data Source:** `awscc_quicksight_flow`
+* **New Data Source:** `awscc_quicksight_flows`
+* **New Data Source:** `awscc_rds_cluster_snapshot`
+* **New Data Source:** `awscc_rds_cluster_snapshots`
+* **New Data Source:** `awscc_rds_db_snapshot`
+* **New Data Source:** `awscc_rds_db_snapshots`
+* **New Data Source:** `awscc_sdb_domain`
+* **New Data Source:** `awscc_sdb_domains`
+* **New Data Source:** `awscc_supportauthz_support_permit`
+* **New Data Source:** `awscc_supportauthz_support_permits`
+* **New Data Source:** `awscc_textract_adapter`
+* **New Data Source:** `awscc_textract_adapters`
+* **New Data Source:** `awscc_translate_parallel_data`
+* **New Data Source:** `awscc_translate_parallel_data_plural`
+* **New List Resource:** `awscc_appstream_user`
+* **New List Resource:** `awscc_bedrock_session`
+* **New List Resource:** `awscc_codebuild_source_credential`
+* **New List Resource:** `awscc_codecommit_repository`
+* **New List Resource:** `awscc_codeconnections_host`
+* **New List Resource:** `awscc_dataexchange_event_action`
+* **New List Resource:** `awscc_dax_parameter_group`
+* **New List Resource:** `awscc_docdb_db_cluster_parameter_group`
+* **New List Resource:** `awscc_ec2_fpga_image`
+* **New List Resource:** `awscc_ecs_daemon_task_definition`
+* **New List Resource:** `awscc_glue_session`
+* **New List Resource:** `awscc_guardduty_custom_detection_rule_association`
+* **New List Resource:** `awscc_iot_stream`
+* **New List Resource:** `awscc_iotsecuretunneling_tunnel`
+* **New List Resource:** `awscc_lightsail_contact_method`
+* **New List Resource:** `awscc_mgn_network_migration_definition`
+* **New List Resource:** `awscc_omics_run_cache`
+* **New List Resource:** `awscc_personalize_metric_attribution`
+* **New List Resource:** `awscc_quicksight_flow`
+* **New List Resource:** `awscc_rds_cluster_snapshot`
+* **New List Resource:** `awscc_rds_db_snapshot`
+* **New List Resource:** `awscc_sdb_domain`
+* **New List Resource:** `awscc_supportauthz_support_permit`
+* **New List Resource:** `awscc_textract_adapter`
+* **New List Resource:** `awscc_translate_parallel_data`
+* **New Resource:** `awscc_amplify_webhook`
+* **New Resource:** `awscc_appstream_user`
+* **New Resource:** `awscc_appsync_type`
+* **New Resource:** `awscc_bedrock_session`
+* **New Resource:** `awscc_cases_case`
+* **New Resource:** `awscc_chime_app_instance_user`
+* **New Resource:** `awscc_cloudformation_change_set`
+* **New Resource:** `awscc_codebuild_source_credential`
+* **New Resource:** `awscc_codecommit_repository`
+* **New Resource:** `awscc_codeconnections_host`
+* **New Resource:** `awscc_dataexchange_event_action`
+* **New Resource:** `awscc_dax_parameter_group`
+* **New Resource:** `awscc_deadline_budget`
+* **New Resource:** `awscc_deadline_worker`
+* **New Resource:** `awscc_docdb_db_cluster_parameter_group`
+* **New Resource:** `awscc_ec2_fpga_image`
+* **New Resource:** `awscc_ecs_daemon_task_definition`
+* **New Resource:** `awscc_glue_connection`
+* **New Resource:** `awscc_glue_session`
+* **New Resource:** `awscc_guardduty_custom_detection_rule_association`
+* **New Resource:** `awscc_identitystore_user`
+* **New Resource:** `awscc_iot_stream`
+* **New Resource:** `awscc_iotsecuretunneling_tunnel`
+* **New Resource:** `awscc_kendra_query_suggestions_block_list`
+* **New Resource:** `awscc_kendra_thesaurus`
+* **New Resource:** `awscc_lambda_resource_policy`
+* **New Resource:** `awscc_lightsail_contact_method`
+* **New Resource:** `awscc_mediatailor_prefetch_schedule`
+* **New Resource:** `awscc_mgn_network_migration_definition`
+* **New Resource:** `awscc_omics_run_cache`
+* **New Resource:** `awscc_personalize_metric_attribution`
+* **New Resource:** `awscc_quicksight_flow`
+* **New Resource:** `awscc_rds_cluster_snapshot`
+* **New Resource:** `awscc_rds_db_snapshot`
+* **New Resource:** `awscc_sdb_domain`
+* **New Resource:** `awscc_supportauthz_support_permit`
+* **New Resource:** `awscc_textract_adapter`
+* **New Resource:** `awscc_translate_parallel_data`
+
+BUG FIXES:
+
+* provider: Fix `UpdateResource` patches for order-unstable list attributes (CloudFormation `insertionOrder: false`, represented as Terraform sets). When Cloud Control returned elements in a different order than state, generated patches could pair fields with the wrong element or fail with an index out-of-bound error (e.g. `awscc_connect_hours_of_operation`, `awscc_connect_security_profile`). ([#3275](https://github.com/hashicorp/terraform-provider-awscc/pull/3275))
 
 ## 1.98.0 (August 19, 2026)
 

@@ -52,6 +52,7 @@ Read-Only:
 - `backup_configuration` (Attributes) (see [below for nested schema](#nestedatt--rule--destination--destination_logs_configuration--backup_configuration))
 - `log_group_name_configuration` (Attributes) (see [below for nested schema](#nestedatt--rule--destination--destination_logs_configuration--log_group_name_configuration))
 - `logs_encryption_configuration` (Attributes) (see [below for nested schema](#nestedatt--rule--destination--destination_logs_configuration--logs_encryption_configuration))
+- `tag_propagation_configuration` (Attributes) (see [below for nested schema](#nestedatt--rule--destination--destination_logs_configuration--tag_propagation_configuration))
 
 <a id="nestedatt--rule--destination--destination_logs_configuration--backup_configuration"></a>
 ### Nested Schema for `rule.destination.destination_logs_configuration.backup_configuration`
@@ -76,8 +77,18 @@ Read-Only:
 Read-Only:
 
 - `encryption_conflict_resolution_strategy` (String)
+- `encryption_scope` (String)
 - `encryption_strategy` (String)
 - `kms_key_arn` (String)
+
+
+<a id="nestedatt--rule--destination--destination_logs_configuration--tag_propagation_configuration"></a>
+### Nested Schema for `rule.destination.destination_logs_configuration.tag_propagation_configuration`
+
+Read-Only:
+
+- `destination_role_arn` (String) The ARN of the destination account IAM role used for tag propagation.
+- `tag_conflict_resolution_strategy` (String) The strategy to resolve tag conflicts during propagation.
 
 
 
