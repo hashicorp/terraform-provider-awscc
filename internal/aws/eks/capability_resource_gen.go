@@ -26,6 +26,423 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute33e30a7495a281f88486e73c() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Id
+				"id": schemaAttribute406e25ce77e14df9fb7b37ae(),
+				// Property: Type
+				"type": schemaAttribute5f5e20a18c0429f099e88620(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of IAM Identity Center identities (users or groups) that should be assigned this Argo CD role.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			fwvalidators.NotNullList(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3c2f4f6720d9a4b46dc05991() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique name for the capability. The name must be unique within your cluster and can contain alphanumeric characters, hyphens, and underscores.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 100),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3d549551a84b63b8238af90d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AwsIdc
+			"aws_idc": schemaAttributeeb8dc238e04eed44717e07af(),
+			// Property: Namespace
+			"namespace": schemaAttributeb2246aed04383dcbe64f4ba4(),
+			// Property: NetworkAccess
+			"network_access": schemaAttribute6f0b77a8ccb171a4fd42ddf5(),
+			// Property: RbacRoleMappings
+			"rbac_role_mappings": schemaAttribute72ce4bbd796eaeff631a2854(),
+			// Property: ServerUrl
+			"server_url": schemaAttribute9be136784507062e7931223d(),
+		}, /*END SCHEMA*/
+		Description: "Configuration settings for an Argo CD capability. This includes the Kubernetes namespace, IAM Identity Center integration, RBAC role mappings, and network access configuration.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute406e25ce77e14df9fb7b37ae() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the IAM Identity Center user or group.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4ae458dfe00dacf104153d4d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the managed application created in IAM Identity Center for this Argo CD capability. This application is automatically created and managed by EKS.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute51b21f7efe53c3ff75c42129() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the EKS cluster where you want to create the capability.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 100),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute52c5f7861c4cc830fd8d3406() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The current status of the capability. Valid values include: CREATING (the capability is being created), ACTIVE (the capability is running and available), UPDATING (the capability is being updated), DELETING (the capability is being deleted), CREATE_FAILED (the capability creation failed), UPDATE_FAILED (the capability update failed), or DELETE_FAILED (the capability deletion failed).",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5f5e20a18c0429f099e88620() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of identity. Valid values are SSO_USER or SSO_GROUP.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"SSO_USER",
+				"SSO_GROUP",
+			),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute672aaaa205e2bc911d81e2be() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Ack
+			"ack": schemaAttribute7a36cec1a1fbbb46a94d3128(),
+			// Property: ArgoCd
+			"argo_cd": schemaAttribute3d549551a84b63b8238af90d(),
+		}, /*END SCHEMA*/
+		Description: "The configuration settings for the capability. The structure of this object varies depending on the capability type. For Argo CD capabilities, you can configure IAM Identity Center integration, RBAC role mappings, and network access settings.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6f0b77a8ccb171a4fd42ddf5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: VpceIds
+			"vpce_ids": schemaAttributec6346551bba61364eb190bd3(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for network access to the Argo CD capability's managed API server endpoint. By default, the Argo CD server is accessible via a public endpoint. You can optionally specify one or more VPC endpoint IDs to enable private connectivity from your VPCs.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute72ce4bbd796eaeff631a2854() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Identities
+				"identities": schemaAttribute33e30a7495a281f88486e73c(),
+				// Property: Role
+				"role": schemaAttributed81a6f04c85940ef5e59ee79(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of role mappings that define which IAM Identity Center users or groups have which Argo CD roles. Each mapping associates an Argo CD role (ADMIN, EDITOR, or VIEWER) with one or more IAM Identity Center identities.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute755a2eef8f040b3ab6ff0c63() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 256),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7a36cec1a1fbbb46a94d3128() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType: jsontypes.NormalizedType{},
+		Optional:   true,
+		Computed:   true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute81a4941e33277d07e5f9414a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Region where your IAM Identity Center instance is located.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8b9fdedeac2ea313ae0acae1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version of the capability software that is currently running.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9331d2e022a790248fb535ea() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the IAM Identity Center instance to use for authentication.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9be136784507062e7931223d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The URL of the Argo CD server. Use this URL to access the Argo CD web interface and API.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea7d66a1a2541c6fad1944316() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies how Kubernetes resources managed by the capability should be handled when the capability is deleted. Currently, the only supported value is RETAIN which retains all Kubernetes resources managed by the capability when the capability is deleted.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"RETAIN",
+			),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeab7e8f28b7eebd77c1d5440f() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributee39de6ea4d53c16bd454cd55(),
+				// Property: Value
+				"value": schemaAttribute755a2eef8f040b3ab6ff0c63(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb0b9b94784fb9276edb5c32f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of capability to create. Valid values are: ACK (AWS Controllers for Kubernetes, which lets you manage AWS resources directly from Kubernetes), ARGOCD (Argo CD for GitOps-based continuous delivery), or KRO (Kube Resource Orchestrator for composing and managing custom Kubernetes resources).",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"ARGOCD",
+				"ACK",
+				"KRO",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb2246aed04383dcbe64f4ba4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Kubernetes namespace where Argo CD resources will be created. If not specified, the default namespace is used.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb53af9cb0059f1592f6dc4f7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Unix epoch timestamp in seconds for when the capability was last modified.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6346551bba61364eb190bd3() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of VPC endpoint IDs to associate with the managed Argo CD API server endpoint. Each VPC endpoint provides private connectivity from a specific VPC to the Argo CD server. You can specify multiple VPC endpoint IDs to enable access from multiple VPCs.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec69c228e8e1f7ae04047b056() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Unix epoch timestamp in seconds for when the capability was created.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec8a5e7f11790caf010cf50f5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the capability.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed81a6f04c85940ef5e59ee79() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Argo CD role to assign. Valid values are: ADMIN (full administrative access to Argo CD), EDITOR (edit access to Argo CD resources), or VIEWER (read-only access to Argo CD resources).",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"ADMIN",
+				"EDITOR",
+				"VIEWER",
+			),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeda6dfa9e68992f7c72bce99d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the IAM role that the capability uses to interact with AWS services. This role must have a trust policy that allows the EKS service principal to assume it, and it must have the necessary permissions for the capability type you're creating.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z-]*:iam::[0-9]+:role/[a-zA-Z0-9+=,.@_-]+$"), ""),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee39de6ea4d53c16bd454cd55() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeb8dc238e04eed44717e07af() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IdcInstanceArn
+			"idc_instance_arn": schemaAttribute9331d2e022a790248fb535ea(),
+			// Property: IdcManagedApplicationArn
+			"idc_managed_application_arn": schemaAttribute4ae458dfe00dacf104153d4d(),
+			// Property: IdcRegion
+			"idc_region": schemaAttribute81a4941e33277d07e5f9414a(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for integrating Argo CD with IAM Identity Center. This allows you to use your organization's identity provider for authentication to Argo CD.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+			objectplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_eks_capability", capabilityResource)
 }
@@ -41,13 +458,7 @@ func capabilityResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the capability.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the capability.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributec8a5e7f11790caf010cf50f5(),
 		// Property: CapabilityName
 		// CloudFormation resource type schema:
 		//
@@ -57,16 +468,7 @@ func capabilityResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"capability_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A unique name for the capability. The name must be unique within your cluster and can contain alphanumeric characters, hyphens, and underscores.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 100),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"capability_name": schemaAttribute3c2f4f6720d9a4b46dc05991(),
 		// Property: ClusterName
 		// CloudFormation resource type schema:
 		//
@@ -76,16 +478,7 @@ func capabilityResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"cluster_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the EKS cluster where you want to create the capability.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 100),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"cluster_name": schemaAttribute51b21f7efe53c3ff75c42129(),
 		// Property: Configuration
 		// CloudFormation resource type schema:
 		//
@@ -205,196 +598,7 @@ func capabilityResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Ack
-				"ack": schema.StringAttribute{ /*START ATTRIBUTE*/
-					CustomType: jsontypes.NormalizedType{},
-					Optional:   true,
-					Computed:   true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: ArgoCd
-				"argo_cd": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AwsIdc
-						"aws_idc": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: IdcInstanceArn
-								"idc_instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The ARN of the IAM Identity Center instance to use for authentication.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										fwvalidators.NotNullString(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: IdcManagedApplicationArn
-								"idc_managed_application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The ARN of the managed application created in IAM Identity Center for this Argo CD capability. This application is automatically created and managed by EKS.",
-									Computed:    true,
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: IdcRegion
-								"idc_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Region where your IAM Identity Center instance is located.",
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Configuration for integrating Argo CD with IAM Identity Center. This allows you to use your organization's identity provider for authentication to Argo CD.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.Object{ /*START VALIDATORS*/
-								fwvalidators.NotNullObject(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-								objectplanmodifier.RequiresReplaceIfConfigured(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: Namespace
-						"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Kubernetes namespace where Argo CD resources will be created. If not specified, the default namespace is used.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-								stringplanmodifier.RequiresReplaceIfConfigured(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: NetworkAccess
-						"network_access": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: VpceIds
-								"vpce_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "A list of VPC endpoint IDs to associate with the managed Argo CD API server endpoint. Each VPC endpoint provides private connectivity from a specific VPC to the Argo CD server. You can specify multiple VPC endpoint IDs to enable access from multiple VPCs.",
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										generic.Multiset(),
-										listplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Configuration for network access to the Argo CD capability's managed API server endpoint. By default, the Argo CD server is accessible via a public endpoint. You can optionally specify one or more VPC endpoint IDs to enable private connectivity from your VPCs.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: RbacRoleMappings
-						"rbac_role_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Identities
-									"identities": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Id
-												"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The unique identifier of the IAM Identity Center user or group.",
-													Optional:    true,
-													Computed:    true,
-													Validators: []validator.String{ /*START VALIDATORS*/
-														fwvalidators.NotNullString(),
-													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: Type
-												"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The type of identity. Valid values are SSO_USER or SSO_GROUP.",
-													Optional:    true,
-													Computed:    true,
-													Validators: []validator.String{ /*START VALIDATORS*/
-														stringvalidator.OneOf(
-															"SSO_USER",
-															"SSO_GROUP",
-														),
-														fwvalidators.NotNullString(),
-													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Description: "A list of IAM Identity Center identities (users or groups) that should be assigned this Argo CD role.",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.List{ /*START VALIDATORS*/
-											fwvalidators.NotNullList(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-											generic.Multiset(),
-											listplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-									// Property: Role
-									"role": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The Argo CD role to assign. Valid values are: ADMIN (full administrative access to Argo CD), EDITOR (edit access to Argo CD resources), or VIEWER (read-only access to Argo CD resources).",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.OneOf(
-												"ADMIN",
-												"EDITOR",
-												"VIEWER",
-											),
-											fwvalidators.NotNullString(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "A list of role mappings that define which IAM Identity Center users or groups have which Argo CD roles. Each mapping associates an Argo CD role (ADMIN, EDITOR, or VIEWER) with one or more IAM Identity Center identities.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								generic.Multiset(),
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: ServerUrl
-						"server_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The URL of the Argo CD server. Use this URL to access the Argo CD web interface and API.",
-							Computed:    true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Configuration settings for an Argo CD capability. This includes the Kubernetes namespace, IAM Identity Center integration, RBAC role mappings, and network access configuration.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The configuration settings for the capability. The structure of this object varies depending on the capability type. For Argo CD capabilities, you can configure IAM Identity Center integration, RBAC role mappings, and network access settings.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"configuration": schemaAttribute672aaaa205e2bc911d81e2be(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -402,13 +606,7 @@ func capabilityResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Unix epoch timestamp in seconds for when the capability was created.",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Unix epoch timestamp in seconds for when the capability was created.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttributec69c228e8e1f7ae04047b056(),
 		// Property: DeletePropagationPolicy
 		// CloudFormation resource type schema:
 		//
@@ -419,15 +617,7 @@ func capabilityResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"delete_propagation_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies how Kubernetes resources managed by the capability should be handled when the capability is deleted. Currently, the only supported value is RETAIN which retains all Kubernetes resources managed by the capability when the capability is deleted.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"RETAIN",
-				),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"delete_propagation_policy": schemaAttributea7d66a1a2541c6fad1944316(),
 		// Property: ModifiedAt
 		// CloudFormation resource type schema:
 		//
@@ -435,13 +625,7 @@ func capabilityResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Unix epoch timestamp in seconds for when the capability was last modified.",
 		//	  "type": "string"
 		//	}
-		"modified_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Unix epoch timestamp in seconds for when the capability was last modified.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"modified_at": schemaAttributeb53af9cb0059f1592f6dc4f7(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -450,13 +634,7 @@ func capabilityResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:aws[a-z-]*:iam::[0-9]+:role/[a-zA-Z0-9+=,.@_-]+$",
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the IAM role that the capability uses to interact with AWS services. This role must have a trust policy that allows the EKS service principal to assume it, and it must have the necessary permissions for the capability type you're creating.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z-]*:iam::[0-9]+:role/[a-zA-Z0-9+=,.@_-]+$"), ""),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttributeda6dfa9e68992f7c72bce99d(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -464,13 +642,7 @@ func capabilityResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The current status of the capability. Valid values include: CREATING (the capability is being created), ACTIVE (the capability is running and available), UPDATING (the capability is being updated), DELETING (the capability is being deleted), CREATE_FAILED (the capability creation failed), UPDATE_FAILED (the capability update failed), or DELETE_FAILED (the capability deletion failed).",
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The current status of the capability. Valid values include: CREATING (the capability is being created), ACTIVE (the capability is running and available), UPDATING (the capability is being updated), DELETING (the capability is being deleted), CREATE_FAILED (the capability creation failed), UPDATE_FAILED (the capability update failed), or DELETE_FAILED (the capability deletion failed).",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute52c5f7861c4cc830fd8d3406(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -503,44 +675,7 @@ func capabilityResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeab7e8f28b7eebd77c1d5440f(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -553,20 +688,7 @@ func capabilityResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of capability to create. Valid values are: ACK (AWS Controllers for Kubernetes, which lets you manage AWS resources directly from Kubernetes), ARGOCD (Argo CD for GitOps-based continuous delivery), or KRO (Kube Resource Orchestrator for composing and managing custom Kubernetes resources).",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"ARGOCD",
-					"ACK",
-					"KRO",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttributeb0b9b94784fb9276edb5c32f(),
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -574,13 +696,7 @@ func capabilityResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The version of the capability software that is currently running.",
 		//	  "type": "string"
 		//	}
-		"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version of the capability software that is currently running.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"version": schemaAttribute8b9fdedeac2ea313ae0acae1(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

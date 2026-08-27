@@ -30,6 +30,465 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute036cbc55283e1c16d3ee1fa4() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of type names that the hook is going to target",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Set{ /*START VALIDATORS*/
+			setvalidator.SizeBetween(1, 50),
+			setvalidator.ValueStringsAre(
+				stringvalidator.LengthBetween(1, 256),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0814d3168fb4f52b100c0abd() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LogGroupName
+			"log_group_name": schemaAttributef090bf72a6ca5c014a84ff36(),
+			// Property: LogRoleArn
+			"log_role_arn": schemaAttributeb97d369d749a16d0569649cf(),
+		}, /*END SCHEMA*/
+		Description: "Contains logging configuration information for the hook.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+			objectplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// LoggingConfig is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0a9ee183af3f51214fedac29() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FilteringCriteria
+			"filtering_criteria": schemaAttributec4fe9b54964f62d17227c555(),
+			// Property: StackNames
+			"stack_names": schemaAttribute4ddc7967f3d40d5e4208f55a(),
+			// Property: StackRoles
+			"stack_roles": schemaAttribute7e20a094b480aec7a7b0406b(),
+		}, /*END SCHEMA*/
+		Description: "Filters to allow hooks to target specific stack attributes",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute10251fc869e8506f1b672ddb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The execution role ARN assumed by Hooks to invoke Lambda.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(256),
+			stringvalidator.RegexMatches(regexp.MustCompile("arn:.+:iam::[0-9]{12}:role/.+"), ""),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute17847e3a1a97f79d6b13493a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Actions
+			"actions": schemaAttributed952357630590d9fc363cf59(),
+			// Property: InvocationPoints
+			"invocation_points": schemaAttribute67c0c0bef1b83a9352c56f1a(),
+			// Property: TargetNames
+			"target_names": schemaAttribute036cbc55283e1c16d3ee1fa4(),
+			// Property: Targets
+			"targets": schemaAttributed4dd49400644c673f9eae74e(),
+		}, /*END SCHEMA*/
+		Description: "Attribute to specify which targets should invoke the hook",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute30f74c564b6043b4b412bc61() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the activated hook",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute47d0fc360d9a26c8c193ae75() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Amazon Resource Name (ARN), Partial ARN, name, version, or alias of the Lambda function to invoke with this hook.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 170),
+			stringvalidator.RegexMatches(regexp.MustCompile("(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?(-iso([a-z])?)?-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?"), ""),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4b3fb69119349447c913b677() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of stack roles that the hook is going to be excluded from",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Set{ /*START VALIDATORS*/
+			setvalidator.SizeBetween(1, 50),
+			setvalidator.ValueStringsAre(
+				stringvalidator.LengthAtMost(256),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4ddc7967f3d40d5e4208f55a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Exclude
+			"exclude": schemaAttributeabbcab1ad443eaf75a9c7e0c(),
+			// Property: Include
+			"include": schemaAttributea120730f73ec91e3c591fa49(),
+		}, /*END SCHEMA*/
+		Description: "List of stack names as filters",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute62ca7490fdfef0f7a54f7cb6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Attribute to specify CloudFormation behavior on hook failure.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"FAIL",
+				"WARN",
+			),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute64a4103b188dd3c4258bbcb7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Invocation points are the point in provisioning workflow where hooks will be executed.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"PRE_PROVISION",
+			),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6765ab8b4597ac760a4d8c45() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The typename alias for the hook.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute67c0c0bef1b83a9352c56f1a() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of invocation points that the hook is going to target",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Set{ /*START VALIDATORS*/
+			setvalidator.SizeBetween(1, 50),
+			setvalidator.ValueStringsAre(
+				stringvalidator.OneOf(
+					"PRE_PROVISION",
+				),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute73b580f820194df49b5c1bdf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Attribute to specify which stacks this hook applies to or should get invoked for",
+		Optional:    true,
+		Computed:    true,
+		Default:     stringdefault.StaticString("ENABLED"),
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"ENABLED",
+				"DISABLED",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute791741180f0e55d15e484f49() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Type name of hook target. Hook targets are the destination where hooks will be invoked against.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 256),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7e20a094b480aec7a7b0406b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Exclude
+			"exclude": schemaAttribute4b3fb69119349447c913b677(),
+			// Property: Include
+			"include": schemaAttributee3d29892af7a390391864050(),
+		}, /*END SCHEMA*/
+		Description: "List of stack roles that are performing the stack operations.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8c60d434511f300e7bd8565c() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Which operations should this Hook run against? Resource changes, stacks or change sets.",
+		Required:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.UniqueValues(),
+			listvalidator.ValueStringsAre(
+				stringvalidator.OneOf(
+					"RESOURCE",
+					"STACK",
+					"CHANGE_SET",
+					"CLOUD_CONTROL",
+				),
+			),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea120730f73ec91e3c591fa49() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of stack names that the hook is going to target",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Set{ /*START VALIDATORS*/
+			setvalidator.SizeBetween(1, 50),
+			setvalidator.ValueStringsAre(
+				stringvalidator.LengthAtMost(128),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z*?][-a-zA-Z0-9*?]*$"), ""),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea96318c1519aca4a6a8877eb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Target actions are the type of operation hooks will be executed at.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"CREATE",
+				"UPDATE",
+				"DELETE",
+			),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea9d076844e1eb1a44061667b() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether to automatically update the extension in this account and Region when a new minor version is published by the extension publisher.",
+		Optional:    true,
+		Computed:    true,
+		Default:     booldefault.StaticBool(true),
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+			boolplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// AutoUpdate is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeabbcab1ad443eaf75a9c7e0c() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of stack names that the hook is going to be excluded from",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Set{ /*START VALIDATORS*/
+			setvalidator.SizeBetween(1, 50),
+			setvalidator.ValueStringsAre(
+				stringvalidator.LengthAtMost(128),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z*?][-a-zA-Z0-9*?]*$"), ""),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb97d369d749a16d0569649cf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the role that CloudFormation should assume when sending log entries to CloudWatch Logs.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 256),
+			stringvalidator.RegexMatches(regexp.MustCompile("arn:.+:iam::[0-9]{12}:role/.+"), ""),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec4fe9b54964f62d17227c555() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Attribute to specify the filtering behavior. ANY will make the Hook pass if one filter matches. ALL will make the Hook pass if all filters match",
+		Optional:    true,
+		Computed:    true,
+		Default:     stringdefault.StaticString("ALL"),
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"ALL",
+				"ANY",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed4dd49400644c673f9eae74e() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Action
+				"action": schemaAttributea96318c1519aca4a6a8877eb(),
+				// Property: InvocationPoint
+				"invocation_point": schemaAttribute64a4103b188dd3c4258bbcb7(),
+				// Property: TargetName
+				"target_name": schemaAttribute791741180f0e55d15e484f49(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of hook targets",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(1, 50),
+			listvalidator.UniqueValues(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed952357630590d9fc363cf59() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of actions that the hook is going to target",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Set{ /*START VALIDATORS*/
+			setvalidator.SizeBetween(1, 50),
+			setvalidator.ValueStringsAre(
+				stringvalidator.OneOf(
+					"CREATE",
+					"UPDATE",
+					"DELETE",
+				),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee3d29892af7a390391864050() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of stack roles that the hook is going to target",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Set{ /*START VALIDATORS*/
+			setvalidator.SizeBetween(1, 50),
+			setvalidator.ValueStringsAre(
+				stringvalidator.LengthAtMost(256),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef090bf72a6ca5c014a84ff36() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon CloudWatch Logs group to which CloudFormation sends error logging information when invoking the extension's handlers.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 512),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[\\.\\-_/#A-Za-z0-9]+$"), ""),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_cloudformation_lambda_hook", lambdaHookResource)
 	registry.AddListResourceFactory("awscc_cloudformation_lambda_hook", generic.NewListResource(lambdaHookResource))
@@ -47,13 +506,7 @@ func lambdaHookResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"alias": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The typename alias for the hook.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"alias": schemaAttribute6765ab8b4597ac760a4d8c45(),
 		// Property: AutoUpdate
 		// CloudFormation resource type schema:
 		//
@@ -62,17 +515,7 @@ func lambdaHookResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Whether to automatically update the extension in this account and Region when a new minor version is published by the extension publisher.",
 		//	  "type": "boolean"
 		//	}
-		"auto_update": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether to automatically update the extension in this account and Region when a new minor version is published by the extension publisher.",
-			Optional:    true,
-			Computed:    true,
-			Default:     booldefault.StaticBool(true),
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-				boolplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// AutoUpdate is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"auto_update": schemaAttributea9d076844e1eb1a44061667b(),
 		// Property: ExecutionRole
 		// CloudFormation resource type schema:
 		//
@@ -82,14 +525,7 @@ func lambdaHookResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "arn:.+:iam::[0-9]{12}:role/.+",
 		//	  "type": "string"
 		//	}
-		"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The execution role ARN assumed by Hooks to invoke Lambda.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(256),
-				stringvalidator.RegexMatches(regexp.MustCompile("arn:.+:iam::[0-9]{12}:role/.+"), ""),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"execution_role": schemaAttribute10251fc869e8506f1b672ddb(),
 		// Property: FailureMode
 		// CloudFormation resource type schema:
 		//
@@ -101,16 +537,7 @@ func lambdaHookResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"failure_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Attribute to specify CloudFormation behavior on hook failure.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"FAIL",
-					"WARN",
-				),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"failure_mode": schemaAttribute62ca7490fdfef0f7a54f7cb6(),
 		// Property: HookArn
 		// CloudFormation resource type schema:
 		//
@@ -119,13 +546,7 @@ func lambdaHookResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/hook/.+$",
 		//	  "type": "string"
 		//	}
-		"hook_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the activated hook",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"hook_arn": schemaAttribute30f74c564b6043b4b412bc61(),
 		// Property: HookStatus
 		// CloudFormation resource type schema:
 		//
@@ -138,21 +559,7 @@ func lambdaHookResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"hook_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Attribute to specify which stacks this hook applies to or should get invoked for",
-			Optional:    true,
-			Computed:    true,
-			Default:     stringdefault.StaticString("ENABLED"),
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"ENABLED",
-					"DISABLED",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"hook_status": schemaAttribute73b580f820194df49b5c1bdf(),
 		// Property: LambdaFunction
 		// CloudFormation resource type schema:
 		//
@@ -163,14 +570,7 @@ func lambdaHookResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?(-iso([a-z])?)?-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?",
 		//	  "type": "string"
 		//	}
-		"lambda_function": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Amazon Resource Name (ARN), Partial ARN, name, version, or alias of the Lambda function to invoke with this hook.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 170),
-				stringvalidator.RegexMatches(regexp.MustCompile("(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?(-iso([a-z])?)?-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?"), ""),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"lambda_function": schemaAttribute47d0fc360d9a26c8c193ae75(),
 		// Property: LoggingConfig
 		// CloudFormation resource type schema:
 		//
@@ -199,46 +599,7 @@ func lambdaHookResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"logging_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: LogGroupName
-				"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Amazon CloudWatch Logs group to which CloudFormation sends error logging information when invoking the extension's handlers.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 512),
-						stringvalidator.RegexMatches(regexp.MustCompile("^[\\.\\-_/#A-Za-z0-9]+$"), ""),
-						fwvalidators.NotNullString(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: LogRoleArn
-				"log_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the role that CloudFormation should assume when sending log entries to CloudWatch Logs.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 256),
-						stringvalidator.RegexMatches(regexp.MustCompile("arn:.+:iam::[0-9]{12}:role/.+"), ""),
-						fwvalidators.NotNullString(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Contains logging configuration information for the hook.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// LoggingConfig is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"logging_config": schemaAttribute0814d3168fb4f52b100c0abd(),
 		// Property: StackFilters
 		// CloudFormation resource type schema:
 		//
@@ -337,120 +698,7 @@ func lambdaHookResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"stack_filters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FilteringCriteria
-				"filtering_criteria": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Attribute to specify the filtering behavior. ANY will make the Hook pass if one filter matches. ALL will make the Hook pass if all filters match",
-					Optional:    true,
-					Computed:    true,
-					Default:     stringdefault.StaticString("ALL"),
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"ALL",
-							"ANY",
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: StackNames
-				"stack_names": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Exclude
-						"exclude": schema.SetAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "List of stack names that the hook is going to be excluded from",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.Set{ /*START VALIDATORS*/
-								setvalidator.SizeBetween(1, 50),
-								setvalidator.ValueStringsAre(
-									stringvalidator.LengthAtMost(128),
-									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z*?][-a-zA-Z0-9*?]*$"), ""),
-								),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-								setplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: Include
-						"include": schema.SetAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "List of stack names that the hook is going to target",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.Set{ /*START VALIDATORS*/
-								setvalidator.SizeBetween(1, 50),
-								setvalidator.ValueStringsAre(
-									stringvalidator.LengthAtMost(128),
-									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z*?][-a-zA-Z0-9*?]*$"), ""),
-								),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-								setplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "List of stack names as filters",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: StackRoles
-				"stack_roles": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Exclude
-						"exclude": schema.SetAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "List of stack roles that the hook is going to be excluded from",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.Set{ /*START VALIDATORS*/
-								setvalidator.SizeBetween(1, 50),
-								setvalidator.ValueStringsAre(
-									stringvalidator.LengthAtMost(256),
-								),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-								setplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: Include
-						"include": schema.SetAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "List of stack roles that the hook is going to target",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.Set{ /*START VALIDATORS*/
-								setvalidator.SizeBetween(1, 50),
-								setvalidator.ValueStringsAre(
-									stringvalidator.LengthAtMost(256),
-								),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-								setplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "List of stack roles that are performing the stack operations.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Filters to allow hooks to target specific stack attributes",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"stack_filters": schemaAttribute0a9ee183af3f51214fedac29(),
 		// Property: TargetFilters
 		// CloudFormation resource type schema:
 		//
@@ -549,132 +797,7 @@ func lambdaHookResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"target_filters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Actions
-				"actions": schema.SetAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "List of actions that the hook is going to target",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.Set{ /*START VALIDATORS*/
-						setvalidator.SizeBetween(1, 50),
-						setvalidator.ValueStringsAre(
-							stringvalidator.OneOf(
-								"CREATE",
-								"UPDATE",
-								"DELETE",
-							),
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-						setplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: InvocationPoints
-				"invocation_points": schema.SetAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "List of invocation points that the hook is going to target",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.Set{ /*START VALIDATORS*/
-						setvalidator.SizeBetween(1, 50),
-						setvalidator.ValueStringsAre(
-							stringvalidator.OneOf(
-								"PRE_PROVISION",
-							),
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-						setplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: TargetNames
-				"target_names": schema.SetAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "List of type names that the hook is going to target",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.Set{ /*START VALIDATORS*/
-						setvalidator.SizeBetween(1, 50),
-						setvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(1, 256),
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-						setplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: Targets
-				"targets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Action
-							"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Target actions are the type of operation hooks will be executed at.",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.OneOf(
-										"CREATE",
-										"UPDATE",
-										"DELETE",
-									),
-									fwvalidators.NotNullString(),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: InvocationPoint
-							"invocation_point": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Invocation points are the point in provisioning workflow where hooks will be executed.",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.OneOf(
-										"PRE_PROVISION",
-									),
-									fwvalidators.NotNullString(),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: TargetName
-							"target_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Type name of hook target. Hook targets are the destination where hooks will be invoked against.",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 256),
-									fwvalidators.NotNullString(),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "List of hook targets",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.SizeBetween(1, 50),
-						listvalidator.UniqueValues(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Attribute to specify which targets should invoke the hook",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"target_filters": schemaAttribute17847e3a1a97f79d6b13493a(),
 		// Property: TargetOperations
 		// CloudFormation resource type schema:
 		//
@@ -693,22 +816,7 @@ func lambdaHookResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"target_operations": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Which operations should this Hook run against? Resource changes, stacks or change sets.",
-			Required:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.UniqueValues(),
-				listvalidator.ValueStringsAre(
-					stringvalidator.OneOf(
-						"RESOURCE",
-						"STACK",
-						"CHANGE_SET",
-						"CLOUD_CONTROL",
-					),
-				),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"target_operations": schemaAttribute8c60d434511f300e7bd8565c(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

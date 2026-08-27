@@ -23,6 +23,109 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute0f044e0e6b751542c8a010e1() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The definition of the snapshot schedule. The definition is made up of schedule expressions, for example \"cron(30 12 *)\" or \"rate(12 hours)\".",
+		Required:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2cc28712e9c79693b8266776() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of clusters associated with the schedule.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute468749dd73101c6405c48973() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributefd914cdecdf7c1b8da052f02(),
+				// Property: Value
+				"value": schemaAttributef6dffb4bc858550c293a657b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An optional set of tags for the snapshot schedule.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6aeb692607fed1e919788bcf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the snapshot schedule.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed5da6739bdd3b2110c01462b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique identifier for the snapshot schedule. Only alphanumeric characters are allowed.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef6dffb4bc858550c293a657b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the resource tag.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 255),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef9963e0cd98fde389b4bf2ac() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the snapshot schedule.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefd914cdecdf7c1b8da052f02() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key, or name, for the resource tag.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 127),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_redshift_snapshot_schedule", snapshotScheduleResource)
 	registry.AddListResourceFactory("awscc_redshift_snapshot_schedule", generic.NewListResource(snapshotScheduleResource))
@@ -39,13 +142,7 @@ func snapshotScheduleResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the snapshot schedule.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the snapshot schedule.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributef9963e0cd98fde389b4bf2ac(),
 		// Property: AssociatedClusterCount
 		// CloudFormation resource type schema:
 		//
@@ -53,13 +150,7 @@ func snapshotScheduleResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The number of clusters associated with the schedule.",
 		//	  "type": "integer"
 		//	}
-		"associated_cluster_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of clusters associated with the schedule.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"associated_cluster_count": schemaAttribute2cc28712e9c79693b8266776(),
 		// Property: ScheduleDefinitions
 		// CloudFormation resource type schema:
 		//
@@ -71,14 +162,7 @@ func snapshotScheduleResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"schedule_definitions": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The definition of the snapshot schedule. The definition is made up of schedule expressions, for example \"cron(30 12 *)\" or \"rate(12 hours)\".",
-			Required:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"schedule_definitions": schemaAttribute0f044e0e6b751542c8a010e1(),
 		// Property: ScheduleDescription
 		// CloudFormation resource type schema:
 		//
@@ -86,15 +170,7 @@ func snapshotScheduleResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The description of the snapshot schedule.",
 		//	  "type": "string"
 		//	}
-		"schedule_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the snapshot schedule.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"schedule_description": schemaAttribute6aeb692607fed1e919788bcf(),
 		// Property: ScheduleIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -102,13 +178,7 @@ func snapshotScheduleResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A unique identifier for the snapshot schedule. Only alphanumeric characters are allowed.",
 		//	  "type": "string"
 		//	}
-		"schedule_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A unique identifier for the snapshot schedule. Only alphanumeric characters are allowed.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"schedule_identifier": schemaAttributed5da6739bdd3b2110c01462b(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -139,45 +209,7 @@ func snapshotScheduleResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key, or name, for the resource tag.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 127),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the resource tag.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 255),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An optional set of tags for the snapshot schedule.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute468749dd73101c6405c48973(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

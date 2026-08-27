@@ -24,6 +24,270 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute0470ba18c943414463b45f8d() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributef25712547b86711282274139(),
+				// Property: Value
+				"value": schemaAttributeede310e582135c4676516b39(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "One or more tags.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Set{ /*START VALIDATORS*/
+			setvalidator.SizeAtMost(200),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute04e6e9dad640010d574c33e7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the quick connect.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 127),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute17e2afcc82073f65cb06e6ad() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ContactFlowArn
+			"contact_flow_arn": schemaAttribute5605b79f56c4a23025cc43d8(),
+			// Property: QueueArn
+			"queue_arn": schemaAttributed3012d6dcb9730faa353f85b(),
+		}, /*END SCHEMA*/
+		Description: "The queue configuration. This is required only if QuickConnectType is QUEUE.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c1bbfefb3dec403fd30a0c1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ContactFlowArn
+			"contact_flow_arn": schemaAttribute5605b79f56c4a23025cc43d8(),
+		}, /*END SCHEMA*/
+		Description: "The flow configuration. This is required only if QuickConnectType is FLOW.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2fd4de29f09c56a00b9c7e55() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the Amazon Connect instance.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$"), ""),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3b39369aa410f7ad17338373() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the user.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/agent/[-a-zA-Z0-9]*$"), ""),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4adac843005ef68f5e6cb104() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The phone number in E.164 format.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("^\\+[1-9]\\d{1,14}$"), ""),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4b18bc315992a32a921378d4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PhoneNumber
+			"phone_number": schemaAttribute4adac843005ef68f5e6cb104(),
+		}, /*END SCHEMA*/
+		Description: "The phone configuration. This is required only if QuickConnectType is PHONE_NUMBER.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5198beccea15d7aa6de24066() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FlowConfig
+			"flow_config": schemaAttribute2c1bbfefb3dec403fd30a0c1(),
+			// Property: PhoneConfig
+			"phone_config": schemaAttribute4b18bc315992a32a921378d4(),
+			// Property: QueueConfig
+			"queue_config": schemaAttribute17e2afcc82073f65cb06e6ad(),
+			// Property: QuickConnectType
+			"quick_connect_type": schemaAttributea6646908707fe04b16d798cf(),
+			// Property: UserConfig
+			"user_config": schemaAttributeb63d9f305a44a978fb926f20(),
+		}, /*END SCHEMA*/
+		Description: "Configuration settings for the quick connect.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5605b79f56c4a23025cc43d8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the contact flow.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*(:[a-zA-Z0-9-]+)?$"), ""),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute58a88272717cfe8423c68e73() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea6646908707fe04b16d798cf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"PHONE_NUMBER",
+				"QUEUE",
+				"USER",
+				"FLOW",
+			),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea7ec1e19239be5423b090912() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) for the quick connect.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeacf5a76eb1e4b60d444d5ba5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the quick connect.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 250),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb63d9f305a44a978fb926f20() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ContactFlowArn
+			"contact_flow_arn": schemaAttribute5605b79f56c4a23025cc43d8(),
+			// Property: UserArn
+			"user_arn": schemaAttribute3b39369aa410f7ad17338373(),
+		}, /*END SCHEMA*/
+		Description: "The user configuration. This is required only if QuickConnectType is USER.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed3012d6dcb9730faa353f85b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier for the queue.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/queue/[-a-zA-Z0-9]*$"), ""),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeede310e582135c4676516b39() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(256),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef25712547b86711282274139() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_connect_quick_connect", quickConnectResource)
 }
@@ -41,17 +305,7 @@ func quickConnectResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the quick connect.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 250),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributeacf5a76eb1e4b60d444d5ba5(),
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -60,13 +314,7 @@ func quickConnectResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the Amazon Connect instance.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$"), ""),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"instance_arn": schemaAttribute2fd4de29f09c56a00b9c7e55(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -76,13 +324,7 @@ func quickConnectResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the quick connect.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 127),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute04e6e9dad640010d574c33e7(),
 		// Property: QuickConnectArn
 		// CloudFormation resource type schema:
 		//
@@ -91,13 +333,7 @@ func quickConnectResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/transfer-destination/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"quick_connect_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) for the quick connect.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"quick_connect_arn": schemaAttributea7ec1e19239be5423b090912(),
 		// Property: QuickConnectConfig
 		// CloudFormation resource type schema:
 		//
@@ -193,147 +429,7 @@ func quickConnectResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"quick_connect_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FlowConfig
-				"flow_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ContactFlowArn
-						"contact_flow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The identifier of the contact flow.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*(:[a-zA-Z0-9-]+)?$"), ""),
-								fwvalidators.NotNullString(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The flow configuration. This is required only if QuickConnectType is FLOW.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: PhoneConfig
-				"phone_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: PhoneNumber
-						"phone_number": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The phone number in E.164 format.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.RegexMatches(regexp.MustCompile("^\\+[1-9]\\d{1,14}$"), ""),
-								fwvalidators.NotNullString(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The phone configuration. This is required only if QuickConnectType is PHONE_NUMBER.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: QueueConfig
-				"queue_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ContactFlowArn
-						"contact_flow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The identifier of the contact flow.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*(:[a-zA-Z0-9-]+)?$"), ""),
-								fwvalidators.NotNullString(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: QueueArn
-						"queue_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The identifier for the queue.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/queue/[-a-zA-Z0-9]*$"), ""),
-								fwvalidators.NotNullString(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The queue configuration. This is required only if QuickConnectType is QUEUE.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: QuickConnectType
-				"quick_connect_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).",
-					Required:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"PHONE_NUMBER",
-							"QUEUE",
-							"USER",
-							"FLOW",
-						),
-					}, /*END VALIDATORS*/
-				}, /*END ATTRIBUTE*/
-				// Property: UserConfig
-				"user_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ContactFlowArn
-						"contact_flow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The identifier of the contact flow.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*(:[a-zA-Z0-9-]+)?$"), ""),
-								fwvalidators.NotNullString(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: UserArn
-						"user_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The identifier of the user.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/agent/[-a-zA-Z0-9]*$"), ""),
-								fwvalidators.NotNullString(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The user configuration. This is required only if QuickConnectType is USER.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Configuration settings for the quick connect.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"quick_connect_config": schemaAttribute5198beccea15d7aa6de24066(),
 		// Property: QuickConnectType
 		// CloudFormation resource type schema:
 		//
@@ -347,13 +443,7 @@ func quickConnectResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"quick_connect_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"quick_connect_type": schemaAttribute58a88272717cfe8423c68e73(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -387,47 +477,7 @@ func quickConnectResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(256),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "One or more tags.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.Set{ /*START VALIDATORS*/
-				setvalidator.SizeAtMost(200),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute0470ba18c943414463b45f8d(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

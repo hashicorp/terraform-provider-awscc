@@ -24,6 +24,152 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute1acb494f83168811df50cc10() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of a channel.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute24523dcb4f7092b73296cd2f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute27b4877748d5425413246868() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of an on-premises storage solution or application, or a partner event source.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 256),
+			stringvalidator.RegexMatches(regexp.MustCompile("(.*)"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2e07572585a472652675bc89() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Location
+				"location": schemaAttribute6d1bfdc87de632bf717e5367(),
+				// Property: Type
+				"type": schemaAttribute3109ed3a08d878b3fab7aa05(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "One or more resources to which events arriving through a channel are logged and stored.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Set{ /*START VALIDATORS*/
+			setvalidator.SizeAtMost(10),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3109ed3a08d878b3fab7aa05() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of destination for events arriving from a channel.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"EVENT_DATA_STORE",
+			),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute44c85ecf023e1058163f78e6() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute24523dcb4f7092b73296cd2f(),
+				// Property: Value
+				"value": schemaAttributec70ee59ce3298cb460e8715d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5c9d696a927773796b754772() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the channel.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(3, 128),
+			stringvalidator.RegexMatches(regexp.MustCompile("(^[a-zA-Z0-9._\\-]+$)"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6d1bfdc87de632bf717e5367() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of a resource that receives events from a channel.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(3, 1024),
+			stringvalidator.RegexMatches(regexp.MustCompile("(^[a-zA-Z0-9._/\\-:]+$)"), ""),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec70ee59ce3298cb460e8715d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 256),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_cloudtrail_channel", channelResource)
 	registry.AddListResourceFactory("awscc_cloudtrail_channel", generic.NewListResource(channelResource))
@@ -43,13 +189,7 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "(^[a-zA-Z0-9._/\\-:]+$)",
 		//	  "type": "string"
 		//	}
-		"channel_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of a channel.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"channel_arn": schemaAttribute1acb494f83168811df50cc10(),
 		// Property: Destinations
 		// CloudFormation resource type schema:
 		//
@@ -85,50 +225,7 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"destinations": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Location
-					"location": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The ARN of a resource that receives events from a channel.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(3, 1024),
-							stringvalidator.RegexMatches(regexp.MustCompile("(^[a-zA-Z0-9._/\\-:]+$)"), ""),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Type
-					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The type of destination for events arriving from a channel.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.OneOf(
-								"EVENT_DATA_STORE",
-							),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "One or more resources to which events arriving through a channel are logged and stored.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.Set{ /*START VALIDATORS*/
-				setvalidator.SizeAtMost(10),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"destinations": schemaAttribute2e07572585a472652675bc89(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -139,18 +236,7 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "(^[a-zA-Z0-9._\\-]+$)",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the channel.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(3, 128),
-				stringvalidator.RegexMatches(regexp.MustCompile("(^[a-zA-Z0-9._\\-]+$)"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute5c9d696a927773796b754772(),
 		// Property: Source
 		// CloudFormation resource type schema:
 		//
@@ -161,19 +247,7 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "(.*)",
 		//	  "type": "string"
 		//	}
-		"source": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of an on-premises storage solution or application, or a partner event source.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
-				stringvalidator.RegexMatches(regexp.MustCompile("(.*)"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"source": schemaAttribute27b4877748d5425413246868(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -206,45 +280,7 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute44c85ecf023e1058163f78e6(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

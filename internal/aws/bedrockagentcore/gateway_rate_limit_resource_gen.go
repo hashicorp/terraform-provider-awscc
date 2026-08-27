@@ -27,6 +27,218 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute043cee32bcb920f508b17b01() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Optional human-readable description for this limit.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 512),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute51a4628c1a2965ff944ff8be() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.Float64{ /*START VALIDATORS*/
+			float64validator.Between(0.000000, 10000000.000000),
+			fwvalidators.NotNullFloat64(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+			float64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6e300bb47946a9808bf7c36a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType: timetypes.RFC3339Type{},
+		Computed:   true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7c35fd76352cd5806564c77f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Status of a gateway limit",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute939c29fb6557d230b0475fb6() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Connections
+				"connections": schemaAttributed8b5820b1c98772374727876(),
+				// Property: Dimensions
+				"dimensions": schemaAttributee199fc6b0bf71abad9641688(),
+				// Property: Requests
+				"requests": schemaAttributec59f16a5931a75ce47960112(),
+				// Property: Tokens
+				"tokens": schemaAttributebe269d299cd982526c9a646a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Rule entries mapping dimension values to rate configurations.",
+		Required:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(1, 1000),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute96923c04b73df0fe760ccec0() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Ordered list of dimension names defining the scope of this limit.\nUnique per gateway — no two limits can share the same dimensionKeys.",
+		Required:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(1, 10),
+			listvalidator.ValueStringsAre(
+				stringvalidator.LengthBetween(1, 80),
+				stringvalidator.RegexMatches(regexp.MustCompile("^(targetName|toolName|qualifiedModelId|\\$\\.context\\.iam\\.principal|\\$\\.context\\.iam\\.sourceIdentity|\\$\\.context\\.jwt\\.[a-zA-Z_][a-zA-Z0-9_\\-\\.]{0,61}[a-zA-Z0-9_])$"), ""),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb85d1eadead4850fddc0d04e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("^([0-9a-z][-]?){1,100}-[0-9a-z]{10}$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebe269d299cd982526c9a646a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Period
+				"period": schemaAttributef73aa0d28d8ff338985f4bc6(),
+				// Property: Rate
+				"rate": schemaAttribute51a4628c1a2965ff944ff8be(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Token rate limits (TPM). Limited to 1 entry for now. — P1",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(1, 1),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec59f16a5931a75ce47960112() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Period
+				"period": schemaAttributef73aa0d28d8ff338985f4bc6(),
+				// Property: Rate
+				"rate": schemaAttribute51a4628c1a2965ff944ff8be(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Request rate limits (RPS or RPM). Limited to 1 entry for now.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(1, 1),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed8b5820b1c98772374727876() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Period
+				"period": schemaAttributef73aa0d28d8ff338985f4bc6(),
+				// Property: Rate
+				"rate": schemaAttribute51a4628c1a2965ff944ff8be(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Connection rate limits (per second only). Limited to 1 entry for now. — P2",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(1, 1),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee199fc6b0bf71abad9641688() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Map of dimension name to dimension value for a rule entry",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef73aa0d28d8ff338985f4bc6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Time period for rate limiting",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"second",
+				"minute",
+			),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefeb059eb7b241ffc869f4116() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Limit identifier. Optional on Create (system-generates if not provided by customer).\nAlways present in responses.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(2, 64),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_\\.]{0,62}[a-zA-Z0-9]$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_bedrockagentcore_gateway_rate_limit", gatewayRateLimitResource)
 }
@@ -42,13 +254,7 @@ func gatewayRateLimitResource(ctx context.Context) (resource.Resource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute6e300bb47946a9808bf7c36a(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -58,17 +264,7 @@ func gatewayRateLimitResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Optional human-readable description for this limit.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 512),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute043cee32bcb920f508b17b01(),
 		// Property: DimensionKeys
 		// CloudFormation resource type schema:
 		//
@@ -85,21 +281,7 @@ func gatewayRateLimitResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"dimension_keys": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Ordered list of dimension names defining the scope of this limit.\nUnique per gateway — no two limits can share the same dimensionKeys.",
-			Required:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(1, 10),
-				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(1, 80),
-					stringvalidator.RegexMatches(regexp.MustCompile("^(targetName|toolName|qualifiedModelId|\\$\\.context\\.iam\\.principal|\\$\\.context\\.iam\\.sourceIdentity|\\$\\.context\\.jwt\\.[a-zA-Z_][a-zA-Z0-9_\\-\\.]{0,61}[a-zA-Z0-9_])$"), ""),
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"dimension_keys": schemaAttribute96923c04b73df0fe760ccec0(),
 		// Property: Entries
 		// CloudFormation resource type schema:
 		//
@@ -222,156 +404,7 @@ func gatewayRateLimitResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"entries": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Connections
-					"connections": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Period
-								"period": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Time period for rate limiting",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.OneOf(
-											"second",
-											"minute",
-										),
-										fwvalidators.NotNullString(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: Rate
-								"rate": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.Float64{ /*START VALIDATORS*/
-										float64validator.Between(0.000000, 10000000.000000),
-										fwvalidators.NotNullFloat64(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-										float64planmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "Connection rate limits (per second only). Limited to 1 entry for now. — P2",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.List{ /*START VALIDATORS*/
-							listvalidator.SizeBetween(1, 1),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-							listplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Dimensions
-					"dimensions":        // Pattern: ""
-					schema.MapAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "Map of dimension name to dimension value for a rule entry",
-						Required:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Requests
-					"requests": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Period
-								"period": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Time period for rate limiting",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.OneOf(
-											"second",
-											"minute",
-										),
-										fwvalidators.NotNullString(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: Rate
-								"rate": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.Float64{ /*START VALIDATORS*/
-										float64validator.Between(0.000000, 10000000.000000),
-										fwvalidators.NotNullFloat64(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-										float64planmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "Request rate limits (RPS or RPM). Limited to 1 entry for now.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.List{ /*START VALIDATORS*/
-							listvalidator.SizeBetween(1, 1),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-							listplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Tokens
-					"tokens": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Period
-								"period": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Time period for rate limiting",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.OneOf(
-											"second",
-											"minute",
-										),
-										fwvalidators.NotNullString(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: Rate
-								"rate": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.Float64{ /*START VALIDATORS*/
-										float64validator.Between(0.000000, 10000000.000000),
-										fwvalidators.NotNullFloat64(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-										float64planmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "Token rate limits (TPM). Limited to 1 entry for now. — P1",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.List{ /*START VALIDATORS*/
-							listvalidator.SizeBetween(1, 1),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-							listplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Rule entries mapping dimension values to rate configurations.",
-			Required:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(1, 1000),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"entries": schemaAttribute939c29fb6557d230b0475fb6(),
 		// Property: GatewayIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -379,17 +412,7 @@ func gatewayRateLimitResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^([0-9a-z][-]?){1,100}-[0-9a-z]{10}$",
 		//	  "type": "string"
 		//	}
-		"gateway_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^([0-9a-z][-]?){1,100}-[0-9a-z]{10}$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"gateway_identifier": schemaAttributeb85d1eadead4850fddc0d04e(),
 		// Property: RateLimitId
 		// CloudFormation resource type schema:
 		//
@@ -400,19 +423,7 @@ func gatewayRateLimitResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_\\.]{0,62}[a-zA-Z0-9]$",
 		//	  "type": "string"
 		//	}
-		"rate_limit_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Limit identifier. Optional on Create (system-generates if not provided by customer).\nAlways present in responses.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(2, 64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_\\.]{0,62}[a-zA-Z0-9]$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"rate_limit_id": schemaAttributefeb059eb7b241ffc869f4116(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -426,13 +437,7 @@ func gatewayRateLimitResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Status of a gateway limit",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute7c35fd76352cd5806564c77f(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -440,13 +445,7 @@ func gatewayRateLimitResource(ctx context.Context) (resource.Resource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttribute6e300bb47946a9808bf7c36a(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

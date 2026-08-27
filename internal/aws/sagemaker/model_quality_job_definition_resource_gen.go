@@ -30,6 +30,948 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute05c06feb9e16578ffaef01d7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The local path to the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job. LocalPath is an absolute path for the output data.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(256),
+			stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0671cb21f4272512b0c0bcd9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Index or JSONpath to locate probabilities",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(256),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0eac37ab1cf3a797799eef41() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Index or JSONpath to locate predicted label(s)",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(256),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute111b2589ec8f94b57b3ecb6c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3Uri
+			"s3_uri": schemaAttribute7c251bdcf552a2251a58edc4(),
+		}, /*END SCHEMA*/
+		Description: "The baseline constraints resource for a monitoring job.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1239db0f36d7e7849f6a7995() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A URI that identifies the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(512),
+			stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1989da0e7069637350c5aa27() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum runtime allowed in seconds.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.Between(1, 86400),
+			fwvalidators.NotNullInt64(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1b3842025c1528555b90e117() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		// Pattern "[\\S\\s]*" ignored.
+		Description: "Sets the environment variables in the Docker container",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+			mapplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1b4308b8be83bc405f870e14() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the endpoint used to run the monitoring job.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(63),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*"), ""),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1ce6bb27ae8b1359f5579176() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: S3Output
+				"s3_output": schemaAttribute313aff5f0dfecdacc3aaac4c(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Monitoring outputs for monitoring jobs. This is where the output of the periodic monitoring jobs is uploaded.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1ebcb9eabdea3c0658b38ed6() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Specifies the entrypoint for a container used to run the monitoring job.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeAtMost(100),
+			listvalidator.ValueStringsAre(
+				stringvalidator.LengthBetween(1, 256),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute22f7c1bc3b621aeca5433f92() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(20, 2048),
+			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2bd1d4173fcca9c695a9589b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance(s) that run the model monitoring job.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2dbedd6b7f4afe7cfc19b7c0() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether to encrypt all communications between distributed processing jobs. Choose True to encrypt communications. Encryption provides greater security for distributed processing jobs, but the processing might take longer.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute313aff5f0dfecdacc3aaac4c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LocalPath
+			"local_path": schemaAttribute05c06feb9e16578ffaef01d7(),
+			// Property: S3UploadMode
+			"s3_upload_mode": schemaAttribute4993499fa72fd43820ac6fe6(),
+			// Property: S3Uri
+			"s3_uri": schemaAttribute1239db0f36d7e7849f6a7995(),
+		}, /*END SCHEMA*/
+		Description: "Information about where and how to store the results of a monitoring job.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3cd7a505c3283aa00fd8abdc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Line
+			"line": schemaAttribute9c17885b809abefcea7c89c2(),
+		}, /*END SCHEMA*/
+		Description: "The Json format",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3d02755f741fde9d5727e8f9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InstanceCount
+			"instance_count": schemaAttribute5e4972bfe0a6e315e1bd8fd1(),
+			// Property: InstanceType
+			"instance_type": schemaAttributea58d0fd5405902544d294cd0(),
+			// Property: VolumeKmsKeyId
+			"volume_kms_key_id": schemaAttribute2bd1d4173fcca9c695a9589b(),
+			// Property: VolumeSizeInGB
+			"volume_size_in_gb": schemaAttributeabbf1f6f6f29053ce2e68f33(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for the cluster used to run model monitoring jobs.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3eb3ec5b2d4a775e1fb5e640() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BaseliningJobName
+			"baselining_job_name": schemaAttribute8f5d50c66b089e7b2bb786fe(),
+			// Property: ConstraintsResource
+			"constraints_resource": schemaAttribute111b2589ec8f94b57b3ecb6c(),
+		}, /*END SCHEMA*/
+		Description: "Baseline configuration used to validate that the data conforms to the specified constraints and statistics.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+			objectplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3fe035a65f0c65984bd22c5c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Header
+			"header": schemaAttribute5065c36e6e303ac743a0a362(),
+		}, /*END SCHEMA*/
+		Description: "The CSV format",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute40b82824689b3ea4c8bf9b53() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DataCapturedDestinationS3Uri
+			"data_captured_destination_s3_uri": schemaAttribute71fc219c5e2c17a68920037e(),
+			// Property: DatasetFormat
+			"dataset_format": schemaAttributef7cf6929e91b6647469e4d8b(),
+			// Property: EndTimeOffset
+			"end_time_offset": schemaAttributea47a90f88882176a6c774601(),
+			// Property: InferenceAttribute
+			"inference_attribute": schemaAttribute0eac37ab1cf3a797799eef41(),
+			// Property: LocalPath
+			"local_path": schemaAttribute70d780f277bd232259b4ceb9(),
+			// Property: ProbabilityAttribute
+			"probability_attribute": schemaAttribute0671cb21f4272512b0c0bcd9(),
+			// Property: ProbabilityThresholdAttribute
+			"probability_threshold_attribute": schemaAttribute82a304ee725fd5162cccaca9(),
+			// Property: S3DataDistributionType
+			"s3_data_distribution_type": schemaAttributee4babaccdf6ef93074f8b827(),
+			// Property: S3InputMode
+			"s3_input_mode": schemaAttribute5fb00cc14eb3cda1f6b8da89(),
+			// Property: StartTimeOffset
+			"start_time_offset": schemaAttribute49be56b1ffe7a3372ae0b5c4(),
+		}, /*END SCHEMA*/
+		Description: "The batch transform input for a monitoring job.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4688076e2339a7a87e34e11c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SecurityGroupIds
+			"security_group_ids": schemaAttributea1fb80ba833c9570e167c01a(),
+			// Property: Subnets
+			"subnets": schemaAttributefc39be5c26e560528dbe4bf9(),
+		}, /*END SCHEMA*/
+		Description: "Specifies a VPC that your training jobs and hosted models have access to. Control access to and from your training and model containers by configuring the VPC.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4993499fa72fd43820ac6fe6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether to upload the results of the monitoring job continuously or after the job completes.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"Continuous",
+				"EndOfJob",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute49be56b1ffe7a3372ae0b5c4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Monitoring start time offset, e.g. -PT1H",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 15),
+			stringvalidator.RegexMatches(regexp.MustCompile("^.?P.*"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4b81308f392965d1ea2279b2() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether to allow inbound and outbound network calls to and from the containers used for the processing job.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5065c36e6e303ac743a0a362() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A boolean flag indicating if given CSV has header",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute53ac19f545ffa7bb1de614f1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BatchTransformInput
+			"batch_transform_input": schemaAttribute40b82824689b3ea4c8bf9b53(),
+			// Property: EndpointInput
+			"endpoint_input": schemaAttribute8f72684bda9f04ad36365c09(),
+			// Property: GroundTruthS3Input
+			"ground_truth_s3_input": schemaAttribute7eddd9fd031e6543985a82ba(),
+		}, /*END SCHEMA*/
+		Description: "The inputs for a monitoring job.",
+		Required:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute564cbdf69328c33d92858476() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An Amazon S3 URI to a script that is called per row prior to running analysis. It can base64 decode the payload and convert it into a flatted json so that the built-in container can use the converted data. Applicable only for the built-in (first party) containers",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(1024),
+			stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5966fc0920d75cefd6203fa2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the job definition.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(63),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5e4972bfe0a6e315e1bd8fd1() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of ML compute instances to use in the model monitoring job. For distributed processing jobs, specify a value greater than 1. The default value is 1.",
+		Required:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.Between(1, 100),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5fb00cc14eb3cda1f6b8da89() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"Pipe",
+				"File",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6153cf9a8756e7a51ddb903d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the monitoring job.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"BinaryClassification",
+				"MulticlassClassification",
+				"Regression",
+			),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6febc8b5b7e56b1eb189da76() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(256),
+			stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute70d780f277bd232259b4ceb9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Path to the filesystem where the endpoint data is available to the container.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(256),
+			stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute71fc219c5e2c17a68920037e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A URI that identifies the Amazon S3 storage location where Batch Transform Job captures data.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(512),
+			stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute74a8cc3dd50182a03799ec75() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributec8ac423050056fd123562937(),
+				// Property: Value
+				"value": schemaAttribute6febc8b5b7e56b1eb189da76(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeAtMost(50),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+			listplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7a1e6068380e36c24a0c85c4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: KmsKeyId
+			"kms_key_id": schemaAttributee4072978079f8c353f5fe68c(),
+			// Property: MonitoringOutputs
+			"monitoring_outputs": schemaAttribute1ce6bb27ae8b1359f5579176(),
+		}, /*END SCHEMA*/
+		Description: "The output configuration for monitoring jobs.",
+		Required:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7c251bdcf552a2251a58edc4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon S3 URI for baseline constraint file in Amazon S3 that the current monitoring job should validated against.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(1024),
+			stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7dcbe3dc8605bd8a8e5ab0ed() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of job definition.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7eddd9fd031e6543985a82ba() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3Uri
+			"s3_uri": schemaAttribute1239db0f36d7e7849f6a7995(),
+		}, /*END SCHEMA*/
+		Description: "Ground truth input provided in S3 ",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute82a304ee725fd5162cccaca9() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+			float64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8f5d50c66b089e7b2bb786fe() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of a processing job",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 63),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8f72684bda9f04ad36365c09() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EndTimeOffset
+			"end_time_offset": schemaAttributea47a90f88882176a6c774601(),
+			// Property: EndpointName
+			"endpoint_name": schemaAttribute1b4308b8be83bc405f870e14(),
+			// Property: InferenceAttribute
+			"inference_attribute": schemaAttribute0eac37ab1cf3a797799eef41(),
+			// Property: LocalPath
+			"local_path": schemaAttribute70d780f277bd232259b4ceb9(),
+			// Property: ProbabilityAttribute
+			"probability_attribute": schemaAttribute0671cb21f4272512b0c0bcd9(),
+			// Property: ProbabilityThresholdAttribute
+			"probability_threshold_attribute": schemaAttribute82a304ee725fd5162cccaca9(),
+			// Property: S3DataDistributionType
+			"s3_data_distribution_type": schemaAttributee4babaccdf6ef93074f8b827(),
+			// Property: S3InputMode
+			"s3_input_mode": schemaAttribute5fb00cc14eb3cda1f6b8da89(),
+			// Property: StartTimeOffset
+			"start_time_offset": schemaAttribute49be56b1ffe7a3372ae0b5c4(),
+		}, /*END SCHEMA*/
+		Description: "The endpoint for a monitoring job.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9348b51f7c4c02e99ffbc023() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A flag indicating if the dataset format is Parquet",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c17885b809abefcea7c89c2() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A boolean flag indicating if it is JSON line format",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea1fb80ba833c9570e167c01a() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(1, 5),
+			listvalidator.ValueStringsAre(
+				stringvalidator.LengthAtMost(32),
+				stringvalidator.RegexMatches(regexp.MustCompile("[-0-9a-zA-Z]+"), ""),
+			),
+			fwvalidators.NotNullList(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea47a90f88882176a6c774601() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Monitoring end time offset, e.g. PT0H",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 15),
+			stringvalidator.RegexMatches(regexp.MustCompile("^.?P.*"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea58d0fd5405902544d294cd0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ML compute instance type for the processing job.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeabbf1f6f6f29053ce2e68f33() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The size of the ML storage volume, in gigabytes, that you want to provision. You must specify sufficient ML storage for your scenario.",
+		Required:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.Between(1, 16384),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb40e69ae3fda5af5bf2ed0d7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An Amazon S3 URI to a script that is called after analysis has been performed. Applicable only for the built-in (first party) containers.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(1024),
+			stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec2b669a436d1f081f0b167ef() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EnableInterContainerTrafficEncryption
+			"enable_inter_container_traffic_encryption": schemaAttribute2dbedd6b7f4afe7cfc19b7c0(),
+			// Property: EnableNetworkIsolation
+			"enable_network_isolation": schemaAttribute4b81308f392965d1ea2279b2(),
+			// Property: VpcConfig
+			"vpc_config": schemaAttribute4688076e2339a7a87e34e11c(),
+		}, /*END SCHEMA*/
+		Description: "Networking options for a job, such as network traffic encryption between containers, whether to allow inbound and outbound network calls to and from containers, and the VPC subnets and security groups to use for VPC-enabled jobs.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+			objectplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec542a2f1999e28f9bd6098dc() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "An array of arguments for the container used to run the monitoring job.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeAtMost(50),
+			listvalidator.ValueStringsAre(
+				stringvalidator.LengthBetween(1, 256),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec8ac423050056fd123562937() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee4072978079f8c353f5fe68c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(2048),
+			stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee4babaccdf6ef93074f8b827() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"FullyReplicated",
+				"ShardedByS3Key",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee4ee37138405f29acbac4025() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ClusterConfig
+			"cluster_config": schemaAttribute3d02755f741fde9d5727e8f9(),
+		}, /*END SCHEMA*/
+		Description: "Identifies the resources to deploy for a monitoring job.",
+		Required:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee575e86ab0bb401b2896d229() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ContainerArguments
+			"container_arguments": schemaAttributec542a2f1999e28f9bd6098dc(),
+			// Property: ContainerEntrypoint
+			"container_entrypoint": schemaAttribute1ebcb9eabdea3c0658b38ed6(),
+			// Property: Environment
+			"environment": schemaAttribute1b3842025c1528555b90e117(),
+			// Property: ImageUri
+			"image_uri": schemaAttributef1ec0e1e1915c9e2ad13d4cb(),
+			// Property: PostAnalyticsProcessorSourceUri
+			"post_analytics_processor_source_uri": schemaAttributeb40e69ae3fda5af5bf2ed0d7(),
+			// Property: ProblemType
+			"problem_type": schemaAttribute6153cf9a8756e7a51ddb903d(),
+			// Property: RecordPreprocessorSourceUri
+			"record_preprocessor_source_uri": schemaAttribute564cbdf69328c33d92858476(),
+		}, /*END SCHEMA*/
+		Description: "Container image configuration object for the monitoring job.",
+		Required:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee5c9258a0dee82c251a1280e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time at which the job definition was created.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef0813ac1408df8a7de0ace47() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the endpoint used to run the monitoring job.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(63),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// EndpointName is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef1ec0e1e1915c9e2ad13d4cb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The container image to be run by the monitoring job.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(255),
+			stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef434d0f389acc18033c423e0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MaxRuntimeInSeconds
+			"max_runtime_in_seconds": schemaAttribute1989da0e7069637350c5aa27(),
+		}, /*END SCHEMA*/
+		Description: "Specifies a time limit for how long the monitoring job is allowed to run.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+			objectplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef7cf6929e91b6647469e4d8b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Csv
+			"csv": schemaAttribute3fe035a65f0c65984bd22c5c(),
+			// Property: Json
+			"json": schemaAttribute3cd7a505c3283aa00fd8abdc(),
+			// Property: Parquet
+			"parquet": schemaAttribute9348b51f7c4c02e99ffbc023(),
+		}, /*END SCHEMA*/
+		Description: "The dataset format of the data to monitor",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefc39be5c26e560528dbe4bf9() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The ID of the subnets in the VPC to which you want to connect to your monitoring jobs.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(1, 16),
+			listvalidator.ValueStringsAre(
+				stringvalidator.LengthAtMost(32),
+				stringvalidator.RegexMatches(regexp.MustCompile("[-0-9a-zA-Z]+"), ""),
+			),
+			fwvalidators.NotNullList(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_sagemaker_model_quality_job_definition", modelQualityJobDefinitionResource)
 	registry.AddListResourceFactory("awscc_sagemaker_model_quality_job_definition", generic.NewListResource(modelQualityJobDefinitionResource))
@@ -46,13 +988,7 @@ func modelQualityJobDefinitionResource(ctx context.Context) (resource.Resource, 
 		//	  "description": "The time at which the job definition was created.",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time at which the job definition was created.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"creation_time": schemaAttributee5c9258a0dee82c251a1280e(),
 		// Property: EndpointName
 		// CloudFormation resource type schema:
 		//
@@ -62,20 +998,7 @@ func modelQualityJobDefinitionResource(ctx context.Context) (resource.Resource, 
 		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*",
 		//	  "type": "string"
 		//	}
-		"endpoint_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the endpoint used to run the monitoring job.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(63),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// EndpointName is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"endpoint_name": schemaAttributef0813ac1408df8a7de0ace47(),
 		// Property: JobDefinitionArn
 		// CloudFormation resource type schema:
 		//
@@ -85,13 +1008,7 @@ func modelQualityJobDefinitionResource(ctx context.Context) (resource.Resource, 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"job_definition_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of job definition.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"job_definition_arn": schemaAttribute7dcbe3dc8605bd8a8e5ab0ed(),
 		// Property: JobDefinitionName
 		// CloudFormation resource type schema:
 		//
@@ -101,19 +1018,7 @@ func modelQualityJobDefinitionResource(ctx context.Context) (resource.Resource, 
 		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
 		//	  "type": "string"
 		//	}
-		"job_definition_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the job definition.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(63),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"job_definition_name": schemaAttribute5966fc0920d75cefd6203fa2(),
 		// Property: JobResources
 		// CloudFormation resource type schema:
 		//
@@ -161,52 +1066,7 @@ func modelQualityJobDefinitionResource(ctx context.Context) (resource.Resource, 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"job_resources": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ClusterConfig
-				"cluster_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: InstanceCount
-						"instance_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The number of ML compute instances to use in the model monitoring job. For distributed processing jobs, specify a value greater than 1. The default value is 1.",
-							Required:    true,
-							Validators: []validator.Int64{ /*START VALIDATORS*/
-								int64validator.Between(1, 100),
-							}, /*END VALIDATORS*/
-						}, /*END ATTRIBUTE*/
-						// Property: InstanceType
-						"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ML compute instance type for the processing job.",
-							Required:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: VolumeKmsKeyId
-						"volume_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance(s) that run the model monitoring job.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: VolumeSizeInGB
-						"volume_size_in_gb": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The size of the ML storage volume, in gigabytes, that you want to provision. You must specify sufficient ML storage for your scenario.",
-							Required:    true,
-							Validators: []validator.Int64{ /*START VALIDATORS*/
-								int64validator.Between(1, 16384),
-							}, /*END VALIDATORS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Configuration for the cluster used to run model monitoring jobs.",
-					Required:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Identifies the resources to deploy for a monitoring job.",
-			Required:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"job_resources": schemaAttributee4ee37138405f29acbac4025(),
 		// Property: ModelQualityAppSpecification
 		// CloudFormation resource type schema:
 		//
@@ -284,106 +1144,7 @@ func modelQualityJobDefinitionResource(ctx context.Context) (resource.Resource, 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"model_quality_app_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ContainerArguments
-				"container_arguments": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "An array of arguments for the container used to run the monitoring job.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.SizeAtMost(50),
-						listvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(1, 256),
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: ContainerEntrypoint
-				"container_entrypoint": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "Specifies the entrypoint for a container used to run the monitoring job.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.SizeAtMost(100),
-						listvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(1, 256),
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: Environment
-				"environment":       // Pattern: ""
-				schema.MapAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					// Pattern "[\\S\\s]*" ignored.
-					Description: "Sets the environment variables in the Docker container",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-						mapplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: ImageUri
-				"image_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The container image to be run by the monitoring job.",
-					Required:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(255),
-						stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
-					}, /*END VALIDATORS*/
-				}, /*END ATTRIBUTE*/
-				// Property: PostAnalyticsProcessorSourceUri
-				"post_analytics_processor_source_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "An Amazon S3 URI to a script that is called after analysis has been performed. Applicable only for the built-in (first party) containers.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(1024),
-						stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: ProblemType
-				"problem_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The status of the monitoring job.",
-					Required:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"BinaryClassification",
-							"MulticlassClassification",
-							"Regression",
-						),
-					}, /*END VALIDATORS*/
-				}, /*END ATTRIBUTE*/
-				// Property: RecordPreprocessorSourceUri
-				"record_preprocessor_source_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "An Amazon S3 URI to a script that is called per row prior to running analysis. It can base64 decode the payload and convert it into a flatted json so that the built-in container can use the converted data. Applicable only for the built-in (first party) containers",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(1024),
-						stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Container image configuration object for the monitoring job.",
-			Required:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"model_quality_app_specification": schemaAttributee575e86ab0bb401b2896d229(),
 		// Property: ModelQualityBaselineConfig
 		// CloudFormation resource type schema:
 		//
@@ -414,54 +1175,7 @@ func modelQualityJobDefinitionResource(ctx context.Context) (resource.Resource, 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"model_quality_baseline_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: BaseliningJobName
-				"baselining_job_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of a processing job",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 63),
-						stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: ConstraintsResource
-				"constraints_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: S3Uri
-						"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Amazon S3 URI for baseline constraint file in Amazon S3 that the current monitoring job should validated against.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(1024),
-								stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The baseline constraints resource for a monitoring job.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Baseline configuration used to validate that the data conforms to the specified constraints and statistics.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"model_quality_baseline_config": schemaAttribute3eb3ec5b2d4a775e1fb5e640(),
 		// Property: ModelQualityJobInput
 		// CloudFormation resource type schema:
 		//
@@ -656,348 +1370,7 @@ func modelQualityJobDefinitionResource(ctx context.Context) (resource.Resource, 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"model_quality_job_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: BatchTransformInput
-				"batch_transform_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: DataCapturedDestinationS3Uri
-						"data_captured_destination_s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "A URI that identifies the Amazon S3 storage location where Batch Transform Job captures data.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(512),
-								stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
-								fwvalidators.NotNullString(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: DatasetFormat
-						"dataset_format": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Csv
-								"csv": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Header
-										"header": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Description: "A boolean flag indicating if given CSV has header",
-											Optional:    true,
-											Computed:    true,
-											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-												boolplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "The CSV format",
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: Json
-								"json": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Line
-										"line": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Description: "A boolean flag indicating if it is JSON line format",
-											Optional:    true,
-											Computed:    true,
-											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-												boolplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "The Json format",
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: Parquet
-								"parquet": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Description: "A flag indicating if the dataset format is Parquet",
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The dataset format of the data to monitor",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.Object{ /*START VALIDATORS*/
-								fwvalidators.NotNullObject(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: EndTimeOffset
-						"end_time_offset": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Monitoring end time offset, e.g. PT0H",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 15),
-								stringvalidator.RegexMatches(regexp.MustCompile("^.?P.*"), ""),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: InferenceAttribute
-						"inference_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Index or JSONpath to locate predicted label(s)",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(256),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: LocalPath
-						"local_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Path to the filesystem where the endpoint data is available to the container.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(256),
-								stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
-								fwvalidators.NotNullString(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: ProbabilityAttribute
-						"probability_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Index or JSONpath to locate probabilities",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(256),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: ProbabilityThresholdAttribute
-						"probability_threshold_attribute": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-								float64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: S3DataDistributionType
-						"s3_data_distribution_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.OneOf(
-									"FullyReplicated",
-									"ShardedByS3Key",
-								),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: S3InputMode
-						"s3_input_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.OneOf(
-									"Pipe",
-									"File",
-								),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: StartTimeOffset
-						"start_time_offset": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Monitoring start time offset, e.g. -PT1H",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 15),
-								stringvalidator.RegexMatches(regexp.MustCompile("^.?P.*"), ""),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The batch transform input for a monitoring job.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: EndpointInput
-				"endpoint_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: EndTimeOffset
-						"end_time_offset": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Monitoring end time offset, e.g. PT0H",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 15),
-								stringvalidator.RegexMatches(regexp.MustCompile("^.?P.*"), ""),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: EndpointName
-						"endpoint_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The name of the endpoint used to run the monitoring job.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(63),
-								stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*"), ""),
-								fwvalidators.NotNullString(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: InferenceAttribute
-						"inference_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Index or JSONpath to locate predicted label(s)",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(256),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: LocalPath
-						"local_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Path to the filesystem where the endpoint data is available to the container.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(256),
-								stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
-								fwvalidators.NotNullString(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: ProbabilityAttribute
-						"probability_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Index or JSONpath to locate probabilities",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(256),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: ProbabilityThresholdAttribute
-						"probability_threshold_attribute": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-								float64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: S3DataDistributionType
-						"s3_data_distribution_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to FullyReplicated",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.OneOf(
-									"FullyReplicated",
-									"ShardedByS3Key",
-								),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: S3InputMode
-						"s3_input_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Whether the Pipe or File is used as the input mode for transfering data for the monitoring job. Pipe mode is recommended for large datasets. File mode is useful for small files that fit in memory. Defaults to File.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.OneOf(
-									"Pipe",
-									"File",
-								),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: StartTimeOffset
-						"start_time_offset": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Monitoring start time offset, e.g. -PT1H",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 15),
-								stringvalidator.RegexMatches(regexp.MustCompile("^.?P.*"), ""),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The endpoint for a monitoring job.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: GroundTruthS3Input
-				"ground_truth_s3_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: S3Uri
-						"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "A URI that identifies the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job.",
-							Required:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(512),
-								stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
-							}, /*END VALIDATORS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Ground truth input provided in S3 ",
-					Required:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The inputs for a monitoring job.",
-			Required:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"model_quality_job_input": schemaAttribute53ac19f545ffa7bb1de614f1(),
 		// Property: ModelQualityJobOutputConfig
 		// CloudFormation resource type schema:
 		//
@@ -1064,77 +1437,7 @@ func modelQualityJobDefinitionResource(ctx context.Context) (resource.Resource, 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"model_quality_job_output_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: KmsKeyId
-				"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(2048),
-						stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: MonitoringOutputs
-				"monitoring_outputs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: S3Output
-							"s3_output": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: LocalPath
-									"local_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The local path to the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job. LocalPath is an absolute path for the output data.",
-										Required:    true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthAtMost(256),
-											stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
-										}, /*END VALIDATORS*/
-									}, /*END ATTRIBUTE*/
-									// Property: S3UploadMode
-									"s3_upload_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Whether to upload the results of the monitoring job continuously or after the job completes.",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.OneOf(
-												"Continuous",
-												"EndOfJob",
-											),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-									// Property: S3Uri
-									"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "A URI that identifies the Amazon S3 storage location where Amazon SageMaker saves the results of a monitoring job.",
-										Required:    true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthAtMost(512),
-											stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
-										}, /*END VALIDATORS*/
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Information about where and how to store the results of a monitoring job.",
-								Required:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "Monitoring outputs for monitoring jobs. This is where the output of the periodic monitoring jobs is uploaded.",
-					Required:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The output configuration for monitoring jobs.",
-			Required:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"model_quality_job_output_config": schemaAttribute7a1e6068380e36c24a0c85c4(),
 		// Property: NetworkConfig
 		// CloudFormation resource type schema:
 		//
@@ -1186,82 +1489,7 @@ func modelQualityJobDefinitionResource(ctx context.Context) (resource.Resource, 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"network_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EnableInterContainerTrafficEncryption
-				"enable_inter_container_traffic_encryption": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Whether to encrypt all communications between distributed processing jobs. Choose True to encrypt communications. Encryption provides greater security for distributed processing jobs, but the processing might take longer.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: EnableNetworkIsolation
-				"enable_network_isolation": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Whether to allow inbound and outbound network calls to and from the containers used for the processing job.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: VpcConfig
-				"vpc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: SecurityGroupIds
-						"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.List{ /*START VALIDATORS*/
-								listvalidator.SizeBetween(1, 5),
-								listvalidator.ValueStringsAre(
-									stringvalidator.LengthAtMost(32),
-									stringvalidator.RegexMatches(regexp.MustCompile("[-0-9a-zA-Z]+"), ""),
-								),
-								fwvalidators.NotNullList(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: Subnets
-						"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "The ID of the subnets in the VPC to which you want to connect to your monitoring jobs.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.List{ /*START VALIDATORS*/
-								listvalidator.SizeBetween(1, 16),
-								listvalidator.ValueStringsAre(
-									stringvalidator.LengthAtMost(32),
-									stringvalidator.RegexMatches(regexp.MustCompile("[-0-9a-zA-Z]+"), ""),
-								),
-								fwvalidators.NotNullList(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Specifies a VPC that your training jobs and hosted models have access to. Control access to and from your training and model containers by configuring the VPC.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Networking options for a job, such as network traffic encryption between containers, whether to allow inbound and outbound network calls to and from containers, and the VPC subnets and security groups to use for VPC-enabled jobs.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"network_config": schemaAttributec2b669a436d1f081f0b167ef(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -1272,17 +1500,7 @@ func modelQualityJobDefinitionResource(ctx context.Context) (resource.Resource, 
 		//	  "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(20, 2048),
-				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttribute22f7c1bc3b621aeca5433f92(),
 		// Property: StoppingCondition
 		// CloudFormation resource type schema:
 		//
@@ -1302,30 +1520,7 @@ func modelQualityJobDefinitionResource(ctx context.Context) (resource.Resource, 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"stopping_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MaxRuntimeInSeconds
-				"max_runtime_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The maximum runtime allowed in seconds.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.Int64{ /*START VALIDATORS*/
-						int64validator.Between(1, 86400),
-						fwvalidators.NotNullInt64(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						int64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies a time limit for how long the monitoring job is allowed to run.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"stopping_condition": schemaAttributef434d0f389acc18033c423e0(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1358,50 +1553,7 @@ func modelQualityJobDefinitionResource(ctx context.Context) (resource.Resource, 
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
-							stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(256),
-							stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeAtMost(50),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-				listplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute74a8cc3dd50182a03799ec75(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

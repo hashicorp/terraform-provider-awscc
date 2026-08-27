@@ -25,6 +25,236 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute135983e8bc7e35137c7a2500() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The time at which the channel flow was last updated.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2d6d6782b6fc1e287aad0364() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Determines whether to continue or stop processing when communication with a processor fails.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"CONTINUE",
+				"ABORT",
+			),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3dd986ecabdc80dc56dc4ceb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The time at which the channel flow was created.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4407745936cae54761587cf9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the channel flow.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 256),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4a0680b4203813dd3be387d0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the app instance.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(5, 1600),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4c3cbeefa124736f6d20d770() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key in a tag.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5797fa6c683bc2f7749d83fa() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InvocationType
+			"invocation_type": schemaAttributeb73d4f05f46a7ed6a92f875c(),
+			// Property: ResourceArn
+			"resource_arn": schemaAttribute600bbcd9cbae19d41be8c4bf(),
+		}, /*END SCHEMA*/
+		Description: "Stores metadata about a Lambda processor.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute600bbcd9cbae19d41be8c4bf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the Lambda message processing function.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(15, 2048),
+			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws:lambda:[a-z]{2}-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9\\-_\\.]+(:(\\$LATEST|[a-zA-Z0-9\\-_]+))?$"), ""),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute678fa71c43d09daa2811dfe5() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Configuration
+				"configuration": schemaAttribute7d7a2e822156462ab01439ff(),
+				// Property: ExecutionOrder
+				"execution_order": schemaAttributeff5cffd330ba7517df83d027(),
+				// Property: FallbackAction
+				"fallback_action": schemaAttribute2d6d6782b6fc1e287aad0364(),
+				// Property: Name
+				"name": schemaAttributed6f471d2c8cae1935b32e1ce(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Information about the processor Lambda functions.",
+		Required:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(1, 3),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6cd7761d0be6d4082621a397() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the channel flow.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7d7a2e822156462ab01439ff() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Lambda
+			"lambda": schemaAttribute5797fa6c683bc2f7749d83fa(),
+		}, /*END SCHEMA*/
+		Description: "A processor's metadata.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8458b7ccefaff26784606537() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the channel flow, extracted from the channel flow ARN.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea68ce1ed5d7ef83926069665() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value in a tag.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 256),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaff7ce8fb90f8b86a450944e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the app instance, extracted from the channel flow ARN.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb73d4f05f46a7ed6a92f875c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Controls how the Lambda function is invoked.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"ASYNC",
+			),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed6f471d2c8cae1935b32e1ce() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the processor.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 256),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeebd1446527a24f8d56f9e5a0() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute4c3cbeefa124736f6d20d770(),
+				// Property: Value
+				"value": schemaAttributea68ce1ed5d7ef83926069665(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags for the channel flow.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeAtMost(50),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeff5cffd330ba7517df83d027() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The sequence in which processors run.",
+		Required:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.Between(1, 3),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_chime_channel_flow", channelFlowResource)
 }
@@ -43,16 +273,7 @@ func channelFlowResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"app_instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the app instance.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(5, 1600),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"app_instance_arn": schemaAttribute4a0680b4203813dd3be387d0(),
 		// Property: AppInstanceId
 		// CloudFormation resource type schema:
 		//
@@ -60,13 +281,7 @@ func channelFlowResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of the app instance, extracted from the channel flow ARN.",
 		//	  "type": "string"
 		//	}
-		"app_instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the app instance, extracted from the channel flow ARN.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"app_instance_id": schemaAttributeaff7ce8fb90f8b86a450944e(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -77,13 +292,7 @@ func channelFlowResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the channel flow.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute6cd7761d0be6d4082621a397(),
 		// Property: ChannelFlowId
 		// CloudFormation resource type schema:
 		//
@@ -91,13 +300,7 @@ func channelFlowResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of the channel flow, extracted from the channel flow ARN.",
 		//	  "type": "string"
 		//	}
-		"channel_flow_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the channel flow, extracted from the channel flow ARN.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"channel_flow_id": schemaAttribute8458b7ccefaff26784606537(),
 		// Property: CreatedTimestamp
 		// CloudFormation resource type schema:
 		//
@@ -106,14 +309,7 @@ func channelFlowResource(ctx context.Context) (resource.Resource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The time at which the channel flow was created.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"created_timestamp": schemaAttribute3dd986ecabdc80dc56dc4ceb(),
 		// Property: LastUpdatedTimestamp
 		// CloudFormation resource type schema:
 		//
@@ -122,14 +318,7 @@ func channelFlowResource(ctx context.Context) (resource.Resource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_updated_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The time at which the channel flow was last updated.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"last_updated_timestamp": schemaAttribute135983e8bc7e35137c7a2500(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -139,13 +328,7 @@ func channelFlowResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the channel flow.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute4407745936cae54761587cf9(),
 		// Property: Processors
 		// CloudFormation resource type schema:
 		//
@@ -224,77 +407,7 @@ func channelFlowResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"processors": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Configuration
-					"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Lambda
-							"lambda": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: InvocationType
-									"invocation_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Controls how the Lambda function is invoked.",
-										Required:    true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.OneOf(
-												"ASYNC",
-											),
-										}, /*END VALIDATORS*/
-									}, /*END ATTRIBUTE*/
-									// Property: ResourceArn
-									"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The ARN of the Lambda message processing function.",
-										Required:    true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(15, 2048),
-											stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws:lambda:[a-z]{2}-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9\\-_\\.]+(:(\\$LATEST|[a-zA-Z0-9\\-_]+))?$"), ""),
-										}, /*END VALIDATORS*/
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Stores metadata about a Lambda processor.",
-								Required:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "A processor's metadata.",
-						Required:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ExecutionOrder
-					"execution_order": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The sequence in which processors run.",
-						Required:    true,
-						Validators: []validator.Int64{ /*START VALIDATORS*/
-							int64validator.Between(1, 3),
-						}, /*END VALIDATORS*/
-					}, /*END ATTRIBUTE*/
-					// Property: FallbackAction
-					"fallback_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Determines whether to continue or stop processing when communication with a processor fails.",
-						Required:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.OneOf(
-								"CONTINUE",
-								"ABORT",
-							),
-						}, /*END VALIDATORS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the processor.",
-						Required:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
-						}, /*END VALIDATORS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Information about the processor Lambda functions.",
-			Required:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(1, 3),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"processors": schemaAttribute678fa71c43d09daa2811dfe5(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -326,48 +439,7 @@ func channelFlowResource(ctx context.Context) (resource.Resource, error) {
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key in a tag.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value in a tag.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags for the channel flow.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeAtMost(50),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeebd1446527a24f8d56f9e5a0(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

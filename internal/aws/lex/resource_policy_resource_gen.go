@@ -20,6 +20,47 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0bd0751334d99c1d8eb39d59() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy is attached to.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 1011),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4d2ca2a0b0f8d226ae1f1e2c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The current revision of the resource policy. Use the revision ID to make sure that you are updating the most current version of a resource policy when you add a policy statement to a resource, delete a resource, or update a resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute98cd3759ed65245d8ec24994() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "A resource policy to add to the resource. The policy is a JSON structure following the IAM syntax that contains one or more statements that define the policy.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee395b416e6dd679840b58372() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Physical ID of the resource policy.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_lex_resource_policy", resourcePolicyResource)
 	registry.AddListResourceFactory("awscc_lex_resource_policy", generic.NewListResource(resourcePolicyResource))
@@ -36,13 +77,7 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Physical ID of the resource policy.",
 		//	  "type": "string"
 		//	}
-		"resource_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Physical ID of the resource policy.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"resource_policy_id": schemaAttributee395b416e6dd679840b58372(),
 		// Property: Policy
 		// CloudFormation resource type schema:
 		//
@@ -50,11 +85,7 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A resource policy to add to the resource. The policy is a JSON structure following the IAM syntax that contains one or more statements that define the policy.",
 		//	  "type": "object"
 		//	}
-		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "A resource policy to add to the resource. The policy is a JSON structure following the IAM syntax that contains one or more statements that define the policy.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"policy": schemaAttribute98cd3759ed65245d8ec24994(),
 		// Property: ResourceArn
 		// CloudFormation resource type schema:
 		//
@@ -64,16 +95,7 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy is attached to.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 1011),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"resource_arn": schemaAttribute0bd0751334d99c1d8eb39d59(),
 		// Property: RevisionId
 		// CloudFormation resource type schema:
 		//
@@ -84,13 +106,7 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[0-9]+$",
 		//	  "type": "string"
 		//	}
-		"revision_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The current revision of the resource policy. Use the revision ID to make sure that you are updating the most current version of a resource policy when you add a policy statement to a resource, delete a resource, or update a resource.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"revision_id": schemaAttribute4d2ca2a0b0f8d226ae1f1e2c(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

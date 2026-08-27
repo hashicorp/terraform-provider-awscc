@@ -22,6 +22,40 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1e8d2159d582ac7352e91f92() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5b5a5e9103ebd73b0e3e3e33() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Required: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("^d-[0-9a-f]{10}$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8e4b97720a3f44856804be16() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+			mapplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_pcaconnectorad_directory_registration", directoryRegistrationResource)
 	registry.AddListResourceFactory("awscc_pcaconnectorad_directory_registration", generic.NewListResource(directoryRegistrationResource))
@@ -38,15 +72,7 @@ func directoryRegistrationResource(ctx context.Context) (resource.Resource, erro
 		//	  "pattern": "^d-[0-9a-f]{10}$",
 		//	  "type": "string"
 		//	}
-		"directory_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^d-[0-9a-f]{10}$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"directory_id": schemaAttribute5b5a5e9103ebd73b0e3e3e33(),
 		// Property: DirectoryRegistrationArn
 		// CloudFormation resource type schema:
 		//
@@ -56,12 +82,7 @@ func directoryRegistrationResource(ctx context.Context) (resource.Resource, erro
 		//	  "pattern": "^arn:[\\w-]+:pca-connector-ad:[\\w-]+:[0-9]+:directory-registration(\\/[\\w-]+)$",
 		//	  "type": "string"
 		//	}
-		"directory_registration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"directory_registration_arn": schemaAttribute1e8d2159d582ac7352e91f92(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -74,15 +95,7 @@ func directoryRegistrationResource(ctx context.Context) (resource.Resource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-				mapplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute8e4b97720a3f44856804be16(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

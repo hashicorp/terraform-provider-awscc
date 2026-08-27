@@ -28,6 +28,241 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute085c35a43fc3d249d9b75a8a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MarkAsAnomaly
+			"mark_as_anomaly": schemaAttributebf390e97307c01cdff33e89c(),
+			// Property: Skip
+			"skip": schemaAttributebf390e97307c01cdff33e89c(),
+		}, /*END SCHEMA*/
+		Description: "The action to perform when running the expression returns no data.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute33fc2ecfe33d38e771cca433() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The AnomalyDetector period of detection and metric generation.",
+		Optional:    true,
+		Computed:    true,
+		Default:     int64default.StaticInt64(60),
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3df153a735d22f98d1ad650e() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+			float64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3e5640c29fac12753df04738() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Default:  int64default.StaticInt64(8),
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.Between(2, 1024),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4e2bfb922122c49baf02a43e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Amount
+			"amount": schemaAttribute3df153a735d22f98d1ad650e(),
+			// Property: Ratio
+			"ratio": schemaAttribute3df153a735d22f98d1ad650e(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute58e72076aefd886d77ee2be5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7191d4506e431790f6b22b9a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Required to identify a specific APS Workspace associated with this Anomaly Detector.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-us-gov|aws-cn):aps:[a-z0-9-]+:[0-9]+:workspace/[a-zA-Z0-9-]+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea1c41626045a86f44b68bc6b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IgnoreNearExpectedFromAbove
+			"ignore_near_expected_from_above": schemaAttribute4e2bfb922122c49baf02a43e(),
+			// Property: IgnoreNearExpectedFromBelow
+			"ignore_near_expected_from_below": schemaAttribute4e2bfb922122c49baf02a43e(),
+			// Property: Query
+			"query": schemaAttributec22702277f5373c52903a7b2(),
+			// Property: SampleSize
+			"sample_size": schemaAttributea1cb392b24906f35039bbff8(),
+			// Property: ShingleSize
+			"shingle_size": schemaAttribute3e5640c29fac12753df04738(),
+		}, /*END SCHEMA*/
+		Required: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea1cb392b24906f35039bbff8() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Default:  int64default.StaticInt64(256),
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.Between(256, 1024),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeac32d5c7cabaaae34d5fc539() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AnomalyDetector alias.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaf0f1ee2e859c4206e3ddcad() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 256),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaf24791182efde06950a4fce() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AnomalyDetector ARN.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebf390e97307c01cdff33e89c() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec22702277f5373c52903a7b2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Required: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtLeast(1),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecb443200401f9fca97103d17() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute58e72076aefd886d77ee2be5(),
+				// Property: Value
+				"value": schemaAttributeaf0f1ee2e859c4206e3ddcad(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to provide meta-data.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedb84480eee265b54c906cbdf() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RandomCutForest
+			"random_cut_forest": schemaAttributea1c41626045a86f44b68bc6b(),
+		}, /*END SCHEMA*/
+		Description: "Determines the anomaly detector's algorithm and its configuration.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedf3f019a693345fee571f297() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute58e72076aefd886d77ee2be5(),
+				// Property: Value
+				"value": schemaAttributeaf0f1ee2e859c4206e3ddcad(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_aps_anomaly_detector", anomalyDetectorResource)
 }
@@ -45,16 +280,7 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"alias": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AnomalyDetector alias.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"alias": schemaAttributeac32d5c7cabaaae34d5fc539(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -63,13 +289,7 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn):aps:[a-z0-9-]+:[0-9]+:anomalydetector/[a-zA-Z0-9-]+/[0-9A-Za-z][-.0-9A-Z_a-z]*$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AnomalyDetector ARN.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributeaf24791182efde06950a4fce(),
 		// Property: Configuration
 		// CloudFormation resource type schema:
 		//
@@ -154,101 +374,7 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: RandomCutForest
-				"random_cut_forest": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: IgnoreNearExpectedFromAbove
-						"ignore_near_expected_from_above": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Amount
-								"amount": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-										float64planmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: Ratio
-								"ratio": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-										float64planmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: IgnoreNearExpectedFromBelow
-						"ignore_near_expected_from_below": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Amount
-								"amount": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-										float64planmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: Ratio
-								"ratio": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-										float64planmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: Query
-						"query": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtLeast(1),
-							}, /*END VALIDATORS*/
-						}, /*END ATTRIBUTE*/
-						// Property: SampleSize
-						"sample_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							Default:  int64default.StaticInt64(256),
-							Validators: []validator.Int64{ /*START VALIDATORS*/
-								int64validator.Between(256, 1024),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: ShingleSize
-						"shingle_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							Default:  int64default.StaticInt64(8),
-							Validators: []validator.Int64{ /*START VALIDATORS*/
-								int64validator.Between(2, 1024),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Required: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Determines the anomaly detector's algorithm and its configuration.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"configuration": schemaAttributedb84480eee265b54c906cbdf(),
 		// Property: EvaluationIntervalInSeconds
 		// CloudFormation resource type schema:
 		//
@@ -257,15 +383,7 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The AnomalyDetector period of detection and metric generation.",
 		//	  "type": "integer"
 		//	}
-		"evaluation_interval_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The AnomalyDetector period of detection and metric generation.",
-			Optional:    true,
-			Computed:    true,
-			Default:     int64default.StaticInt64(60),
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"evaluation_interval_in_seconds": schemaAttribute33fc2ecfe33d38e771cca433(),
 		// Property: Labels
 		// CloudFormation resource type schema:
 		//
@@ -298,44 +416,7 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"labels": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to provide meta-data.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"labels": schemaAttributecb443200401f9fca97103d17(),
 		// Property: MissingDataAction
 		// CloudFormation resource type schema:
 		//
@@ -363,32 +444,7 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 		//	    }
 		//	  }
 		//	}
-		"missing_data_action": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MarkAsAnomaly
-				"mark_as_anomaly": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: Skip
-				"skip": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The action to perform when running the expression returns no data.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"missing_data_action": schemaAttribute085c35a43fc3d249d9b75a8a(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -421,44 +477,7 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributedf3f019a693345fee571f297(),
 		// Property: Workspace
 		// CloudFormation resource type schema:
 		//
@@ -467,16 +486,7 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn):aps:[a-z0-9-]+:[0-9]+:workspace/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"workspace": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Required to identify a specific APS Workspace associated with this Anomaly Detector.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-us-gov|aws-cn):aps:[a-z0-9-]+:[0-9]+:workspace/[a-zA-Z0-9-]+$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"workspace": schemaAttribute7191d4506e431790f6b22b9a(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

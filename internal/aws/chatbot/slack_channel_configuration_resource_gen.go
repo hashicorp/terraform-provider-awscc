@@ -27,6 +27,181 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute1f296e6acc513a10acca714a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the configuration",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9-_]+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute27149cee25f13406d359d44e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 256),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2a76e77f978929dc2f86b4ff() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of IAM policy ARNs that are applied as channel guardrails. The AWS managed 'AdministratorAccess' policy is applied as a default if this is not set.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute551f8a0b18390e0ca5f12742() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The id of the Slack workspace",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 256),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[0-9A-Z]{1,255}$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute562cda7fa5d843cf5b995c2c() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeab7bad178fbc943de4139a34(),
+				// Property: Value
+				"value": schemaAttribute27149cee25f13406d359d44e(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags to add to the configuration",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute605cc03cc411fb3722593c27() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the logging level for this configuration:ERROR,INFO or NONE. This property affects the log entries pushed to Amazon CloudWatch logs",
+		Optional:    true,
+		Computed:    true,
+		Default:     stringdefault.StaticString("NONE"),
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("^(ERROR|INFO|NONE)$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute69625cd017b12fe69af144f0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the IAM role that defines the permissions for AWS Chatbot",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute70510ab8a1d087e0939bfb56() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "ARNs of SNS topics which delivers notifications to AWS Chatbot, for example CloudWatch alarm notifications.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7d61ae8bf4dd90d0d0380b6d() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Enables use of a user role requirement in your chat configuration",
+		Optional:    true,
+		Computed:    true,
+		Default:     booldefault.StaticBool(false),
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeab7bad178fbc943de4139a34() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed24172ef7340b90e4da0fcb0() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "ARNs of Custom Actions to associate with notifications in the provided chat channel.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.ValueStringsAre(
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws:chatbot:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:custom-action/[a-zA-Z0-9_-]{1,64}$"), ""),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefa4d9e347140eed4f9273e51() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Amazon Resource Name (ARN) of the configuration",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefe77fde608819b0ad8110cd3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The id of the Slack channel",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 256),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9]+$"), ""),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_chatbot_slack_channel_configuration", slackChannelConfigurationResource)
 	registry.AddListResourceFactory("awscc_chatbot_slack_channel_configuration", generic.NewListResource(slackChannelConfigurationResource))
@@ -44,13 +219,7 @@ func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, 
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Amazon Resource Name (ARN) of the configuration",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributefa4d9e347140eed4f9273e51(),
 		// Property: ConfigurationName
 		// CloudFormation resource type schema:
 		//
@@ -61,17 +230,7 @@ func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, 
 		//	  "pattern": "^[A-Za-z0-9-_]+$",
 		//	  "type": "string"
 		//	}
-		"configuration_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the configuration",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9-_]+$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"configuration_name": schemaAttribute1f296e6acc513a10acca714a(),
 		// Property: CustomizationResourceArns
 		// CloudFormation resource type schema:
 		//
@@ -84,21 +243,7 @@ func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, 
 		//	  },
 		//	  "type": "array"
 		//	}
-		"customization_resource_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "ARNs of Custom Actions to associate with notifications in the provided chat channel.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.ValueStringsAre(
-					stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws:chatbot:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:custom-action/[a-zA-Z0-9_-]{1,64}$"), ""),
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"customization_resource_arns": schemaAttributed24172ef7340b90e4da0fcb0(),
 		// Property: GuardrailPolicies
 		// CloudFormation resource type schema:
 		//
@@ -111,16 +256,7 @@ func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, 
 		//	  },
 		//	  "type": "array"
 		//	}
-		"guardrail_policies": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The list of IAM policy ARNs that are applied as channel guardrails. The AWS managed 'AdministratorAccess' policy is applied as a default if this is not set.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"guardrail_policies": schemaAttribute2a76e77f978929dc2f86b4ff(),
 		// Property: IamRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -129,10 +265,7 @@ func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, 
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"iam_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the IAM role that defines the permissions for AWS Chatbot",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"iam_role_arn": schemaAttribute69625cd017b12fe69af144f0(),
 		// Property: LoggingLevel
 		// CloudFormation resource type schema:
 		//
@@ -142,18 +275,7 @@ func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, 
 		//	  "pattern": "^(ERROR|INFO|NONE)$",
 		//	  "type": "string"
 		//	}
-		"logging_level": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the logging level for this configuration:ERROR,INFO or NONE. This property affects the log entries pushed to Amazon CloudWatch logs",
-			Optional:    true,
-			Computed:    true,
-			Default:     stringdefault.StaticString("NONE"),
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^(ERROR|INFO|NONE)$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"logging_level": schemaAttribute605cc03cc411fb3722593c27(),
 		// Property: SlackChannelId
 		// CloudFormation resource type schema:
 		//
@@ -164,14 +286,7 @@ func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, 
 		//	  "pattern": "^[A-Za-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"slack_channel_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The id of the Slack channel",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9]+$"), ""),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"slack_channel_id": schemaAttributefe77fde608819b0ad8110cd3(),
 		// Property: SlackWorkspaceId
 		// CloudFormation resource type schema:
 		//
@@ -182,17 +297,7 @@ func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, 
 		//	  "pattern": "^[0-9A-Z]{1,255}$",
 		//	  "type": "string"
 		//	}
-		"slack_workspace_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The id of the Slack workspace",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9A-Z]{1,255}$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"slack_workspace_id": schemaAttribute551f8a0b18390e0ca5f12742(),
 		// Property: SnsTopicArns
 		// CloudFormation resource type schema:
 		//
@@ -205,16 +310,7 @@ func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, 
 		//	  },
 		//	  "type": "array"
 		//	}
-		"sns_topic_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "ARNs of SNS topics which delivers notifications to AWS Chatbot, for example CloudWatch alarm notifications.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"sns_topic_arns": schemaAttribute70510ab8a1d087e0939bfb56(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -244,43 +340,7 @@ func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, 
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags to add to the configuration",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute562cda7fa5d843cf5b995c2c(),
 		// Property: UserRoleRequired
 		// CloudFormation resource type schema:
 		//
@@ -289,15 +349,7 @@ func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, 
 		//	  "description": "Enables use of a user role requirement in your chat configuration",
 		//	  "type": "boolean"
 		//	}
-		"user_role_required": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Enables use of a user role requirement in your chat configuration",
-			Optional:    true,
-			Computed:    true,
-			Default:     booldefault.StaticBool(false),
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"user_role_required": schemaAttribute7d61ae8bf4dd90d0d0380b6d(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

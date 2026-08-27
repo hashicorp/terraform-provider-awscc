@@ -27,6 +27,217 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute052e6ee4712f42d6bf6f5966() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A control parameter that is a string.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2b443034e0bd0af854072c48() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Value
+				"value": schemaAttributea052c9f8193c539a32f947c5(),
+				// Property: ValueType
+				"value_type": schemaAttribute8c684c52cec0b4c79a7762de(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An object that identifies the name of a control parameter, its current value, and whether it has been customized.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3572794b5644d0334494ca02() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "A control parameter that is a integer.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3633b6698ca70254c64c8d92() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A control parameter that is a enum.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3d45e146438c62f7d2666eb7() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A control parameter that is a list of strings.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.ValueStringsAre(
+				stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute55644a3d0a2670733e5de440() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A control parameter that is a boolean.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8c684c52cec0b4c79a7762de() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"DEFAULT",
+				"CUSTOM",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea052c9f8193c539a32f947c5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Boolean
+			"boolean": schemaAttribute55644a3d0a2670733e5de440(),
+			// Property: Double
+			"double": schemaAttributecf83e7b286b22e5883b34196(),
+			// Property: Enum
+			"enum": schemaAttribute3633b6698ca70254c64c8d92(),
+			// Property: EnumList
+			"enum_list": schemaAttributec0dd6fe821933f87c1443266(),
+			// Property: Integer
+			"integer": schemaAttribute3572794b5644d0334494ca02(),
+			// Property: IntegerList
+			"integer_list": schemaAttributeff4e1d5585b76cd3f18a432b(),
+			// Property: String
+			"string": schemaAttribute052e6ee4712f42d6bf6f5966(),
+			// Property: StringList
+			"string_list": schemaAttribute3d45e146438c62f7d2666eb7(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec0dd6fe821933f87c1443266() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A control parameter that is a list of enums.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.ValueStringsAre(
+				stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecf83e7b286b22e5883b34196() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "A control parameter that is a double.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+			float64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed4e57d29ab2912bdebfbaaa0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of a security control across standards. Values for this field typically consist of an AWS service name and a number, such as APIGateway.3.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed8c7c73a401d8581ce630f25() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The most recent reason for updating the customizable properties of a security control. This differs from the UpdateReason field of the BatchUpdateStandardsControlAssociations API, which tracks the reason for updating the enablement status of a control. This field accepts alphanumeric characters in addition to white spaces, dashes, and underscores.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("^([^\x00-\x7f]|[-_ a-zA-Z0-9])+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee88e9926f5d9d96387b055e8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) for a security control across standards, such as `arn:aws:securityhub:eu-central-1:123456789012:security-control/S3.1`. This parameter doesn't mention a specific standard.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeff4e1d5585b76cd3f18a432b() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.Int64Type,
+		Description: "A control parameter that is a list of integers.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_securityhub_security_control", securityControlResource)
 	registry.AddListResourceFactory("awscc_securityhub_security_control", generic.NewListResource(securityControlResource))
@@ -44,17 +255,7 @@ func securityControlResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^([^\u0000-]|[-_ a-zA-Z0-9])+$",
 		//	  "type": "string"
 		//	}
-		"last_update_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The most recent reason for updating the customizable properties of a security control. This differs from the UpdateReason field of the BatchUpdateStandardsControlAssociations API, which tracks the reason for updating the enablement status of a control. This field accepts alphanumeric characters in addition to white spaces, dashes, and underscores.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^([^\x00-\x7f]|[-_ a-zA-Z0-9])+$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"last_update_reason": schemaAttributed8c7c73a401d8581ce630f25(),
 		// Property: Parameters
 		// CloudFormation resource type schema:
 		//
@@ -174,130 +375,7 @@ func securityControlResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"parameters":              // Pattern: ""
-		schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Value
-					"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Boolean
-							"boolean": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "A control parameter that is a boolean.",
-								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-									boolplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: Double
-							"double": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "A control parameter that is a double.",
-								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-									float64planmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: Enum
-							"enum": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A control parameter that is a enum.",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: EnumList
-							"enum_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Description: "A control parameter that is a list of enums.",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.List{ /*START VALIDATORS*/
-									listvalidator.ValueStringsAre(
-										stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
-									),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									listplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: Integer
-							"integer": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "A control parameter that is a integer.",
-								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-									int64planmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: IntegerList
-							"integer_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.Int64Type,
-								Description: "A control parameter that is a list of integers.",
-								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									listplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: String
-							"string": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A control parameter that is a string.",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: StringList
-							"string_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Description: "A control parameter that is a list of strings.",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.List{ /*START VALIDATORS*/
-									listvalidator.ValueStringsAre(
-										stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
-									),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									listplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-							objectplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: ValueType
-					"value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.OneOf(
-								"DEFAULT",
-								"CUSTOM",
-							),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An object that identifies the name of a control parameter, its current value, and whether it has been customized.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"parameters": schemaAttribute2b443034e0bd0af854072c48(),
 		// Property: SecurityControlArn
 		// CloudFormation resource type schema:
 		//
@@ -306,17 +384,7 @@ func securityControlResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": ".*\\S.*",
 		//	  "type": "string"
 		//	}
-		"security_control_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) for a security control across standards, such as `arn:aws:securityhub:eu-central-1:123456789012:security-control/S3.1`. This parameter doesn't mention a specific standard.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"security_control_arn": schemaAttributee88e9926f5d9d96387b055e8(),
 		// Property: SecurityControlId
 		// CloudFormation resource type schema:
 		//
@@ -325,18 +393,7 @@ func securityControlResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": ".*\\S.*",
 		//	  "type": "string"
 		//	}
-		"security_control_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of a security control across standards. Values for this field typically consist of an AWS service name and a number, such as APIGateway.3.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"security_control_id": schemaAttributed4e57d29ab2912bdebfbaaa0(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

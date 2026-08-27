@@ -17,6 +17,76 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute47035f49f62dd0dafb4c7c5f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The allocation ID. This is required.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9472904d84d6d6b55013d4e0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedd4b2ef8b789fb127e0813b5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the instance. The instance must have exactly one attached network interface. You can specify either the instance ID or the network interface ID, but not both.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee345a71ff55c997a08218030() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the network interface. If the instance has more than one network interface, you must specify a network interface ID.\n You can specify either the instance ID or the network interface ID, but not both.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee93f9817e6646ec694c4d0ea() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The primary or secondary private IP address to associate with the Elastic IP address. If no private IP address is specified, the Elastic IP address is associated with the primary private IP address.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef30bd50ef6f38661a911dc4b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_ec2_eip_association", eIPAssociationResource)
 	registry.AddListResourceFactory("awscc_ec2_eip_association", generic.NewListResource(eIPAssociationResource))
@@ -33,15 +103,7 @@ func eIPAssociationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The allocation ID. This is required.",
 		//	  "type": "string"
 		//	}
-		"allocation_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The allocation ID. This is required.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"allocation_id": schemaAttribute47035f49f62dd0dafb4c7c5f(),
 		// Property: EIP
 		// CloudFormation resource type schema:
 		//
@@ -53,15 +115,7 @@ func eIPAssociationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"eip": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"eip": schemaAttribute9472904d84d6d6b55013d4e0(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -69,13 +123,7 @@ func eIPAssociationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"eip_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"eip_association_id": schemaAttributef30bd50ef6f38661a911dc4b(),
 		// Property: InstanceId
 		// CloudFormation resource type schema:
 		//
@@ -83,15 +131,7 @@ func eIPAssociationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of the instance. The instance must have exactly one attached network interface. You can specify either the instance ID or the network interface ID, but not both.",
 		//	  "type": "string"
 		//	}
-		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the instance. The instance must have exactly one attached network interface. You can specify either the instance ID or the network interface ID, but not both.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"instance_id": schemaAttributedd4b2ef8b789fb127e0813b5(),
 		// Property: NetworkInterfaceId
 		// CloudFormation resource type schema:
 		//
@@ -99,15 +139,7 @@ func eIPAssociationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of the network interface. If the instance has more than one network interface, you must specify a network interface ID.\n You can specify either the instance ID or the network interface ID, but not both.",
 		//	  "type": "string"
 		//	}
-		"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the network interface. If the instance has more than one network interface, you must specify a network interface ID.\n You can specify either the instance ID or the network interface ID, but not both.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"network_interface_id": schemaAttributee345a71ff55c997a08218030(),
 		// Property: PrivateIpAddress
 		// CloudFormation resource type schema:
 		//
@@ -115,15 +147,7 @@ func eIPAssociationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The primary or secondary private IP address to associate with the Elastic IP address. If no private IP address is specified, the Elastic IP address is associated with the primary private IP address.",
 		//	  "type": "string"
 		//	}
-		"private_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The primary or secondary private IP address to associate with the Elastic IP address. If no private IP address is specified, the Elastic IP address is associated with the primary private IP address.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"private_ip_address": schemaAttributee93f9817e6646ec694c4d0ea(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

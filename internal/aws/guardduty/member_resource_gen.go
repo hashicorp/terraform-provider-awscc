@@ -18,6 +18,55 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute059bb596639de923db05ab42() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// Message is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4ffc02dc8d1cf0cda649aac8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute55a1b44465d268cb7585c835() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// DisableEmailNotification is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6275d12465fe6716d315baf9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedb80eb71b3e5fc7029b6d563() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Required: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_guardduty_member", memberResource)
 	registry.AddListResourceFactory("awscc_guardduty_member", generic.NewListResource(memberResource))
@@ -33,78 +82,42 @@ func memberResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"detector_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"detector_id": schemaAttribute6275d12465fe6716d315baf9(),
 		// Property: DisableEmailNotification
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"disable_email_notification": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// DisableEmailNotification is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"disable_email_notification": schemaAttribute55a1b44465d268cb7585c835(),
 		// Property: Email
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"email": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
-		}, /*END ATTRIBUTE*/
+		"email": schemaAttributedb80eb71b3e5fc7029b6d563(),
 		// Property: MemberId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"member_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"member_id": schemaAttribute6275d12465fe6716d315baf9(),
 		// Property: Message
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"message": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// Message is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"message": schemaAttribute059bb596639de923db05ab42(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute4ffc02dc8d1cf0cda649aac8(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

@@ -27,6 +27,587 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute06e08b480b183b7a5e002989() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The timestamp at which you last modified the inference experiment.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1bd3c4d27fca30a4e1ff9f9d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute26613782406303bc3757077e() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of all content type headers that SageMaker will treat as CSV and capture accordingly.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(1, 10),
+			listvalidator.ValueStringsAre(
+				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*/[a-zA-Z0-9](-*[a-zA-Z0-9.])*"), ""),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3208b9e27c95b7ee0050ea6f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the endpoint used to run the inference experiment.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(63),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3a002147bc7a3b0266a13cc0() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SamplingPercentage
+				"sampling_percentage": schemaAttributea28830d51b19378189299de6(),
+				// Property: ShadowModelVariantName
+				"shadow_model_variant_name": schemaAttributebe03cb2b2062b23c3ff93e95(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of shadow variant configurations.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(1, 1),
+			fwvalidators.NotNullList(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3d410007353f1e3daebed11b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The timestamp at which the inference experiment ended or will end.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4815c26bd8f7d598d8aa788f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: InfrastructureConfig
+				"infrastructure_config": schemaAttributef67539683a4a0ab2ee7ab562(),
+				// Property: ModelName
+				"model_name": schemaAttribute89e5650ea37280569a8b47fa(),
+				// Property: VariantName
+				"variant_name": schemaAttributeeb43f03545d0c9a94d05026d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of ModelVariantConfig objects. Each ModelVariantConfig object in the array describes the infrastructure configuration for the corresponding variant.",
+		Required:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeAtMost(2),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4f83f3d87456d875300d136d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the endpoint. For possible values of the status of an endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute50479bec77ff14213f3ce65f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(256),
+			stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute52ddf4efc35d4ae0557dbe50() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name for the inference experiment.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 120),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute53bcb660a283e0a9009704d3() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute1bd3c4d27fca30a4e1ff9f9d(),
+				// Property: Value
+				"value": schemaAttribute50479bec77ff14213f3ce65f(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeAtMost(50),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute54ad21496705825813926d46() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the inference experiment that you want to run.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"ShadowMode",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5cec2ebabddc4e2fa61341f3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EndpointConfigName
+			"endpoint_config_name": schemaAttribute5da685ce4e32277fcdcb09f3(),
+			// Property: EndpointName
+			"endpoint_name": schemaAttributebc5deb2cc866f30f2e9b3e02(),
+			// Property: EndpointStatus
+			"endpoint_status": schemaAttribute4f83f3d87456d875300d136d(),
+		}, /*END SCHEMA*/
+		Description: "The metadata of the endpoint on which the inference experiment ran.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5d19b02d0ed0ec8a47cb68fa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The error message or client-specified reason from the StopInferenceExperiment API, that explains the status of the inference experiment.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 1024),
+			stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// StatusReason is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5da685ce4e32277fcdcb09f3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the endpoint configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5e14b006d5ce8de52516ceab() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the inference experiment.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5f5d6d03848144b83ee7b4c5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the inference experiment.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 1024),
+			stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute64f9a4f70abd60313f744374() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The timestamp at which you created the inference experiment.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6bf2fb4edcaf3e478b2fb0c7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CsvContentTypes
+			"csv_content_types": schemaAttribute26613782406303bc3757077e(),
+			// Property: JsonContentTypes
+			"json_content_types": schemaAttributeb4d8fab64af1248e4fa370da(),
+		}, /*END SCHEMA*/
+		Description: "Configuration specifying how to treat different headers. If no headers are specified SageMaker will by default base64 encode when capturing the data.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6cf5f62bdcdb8b2b22cdc151() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EndTime
+			"end_time": schemaAttribute3d410007353f1e3daebed11b(),
+			// Property: StartTime
+			"start_time": schemaAttributef64562dd9a9a956a8b36dcf1(),
+		}, /*END SCHEMA*/
+		Description: "The duration for which you want the inference experiment to run.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// Schedule is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute70d601e5cbe2ef1f40c4c2d7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the inference experiment.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute748b70c3ed8c5cbc238831a0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon S3 bucket where the inference request and response data is stored.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(512),
+			stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/])/?(.*)$"), ""),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute868447d4db2d8aa8cde52fa5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The desired state of the experiment after starting or stopping operation.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"Running",
+				"Completed",
+				"Cancelled",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// DesiredState is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute89e5650ea37280569a8b47fa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Amazon SageMaker Model entity.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(63),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*"), ""),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a5b4e305943dd685c78b959() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the production variant, which takes all the inference requests.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(63),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]([\\-a-zA-Z0-9]*[a-zA-Z0-9])?"), ""),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9d92f7d982c2b149a5130de4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InstanceCount
+			"instance_count": schemaAttributeccc744b35415b22d1514453d(),
+			// Property: InstanceType
+			"instance_type": schemaAttributebbcd51241675da77844edffb(),
+		}, /*END SCHEMA*/
+		Description: "The infrastructure configuration for deploying the model to a real-time inference endpoint.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea28830d51b19378189299de6() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The percentage of inference requests that Amazon SageMaker replicates from the production variant to the shadow variant.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.AtMost(100),
+			fwvalidators.NotNullInt64(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb4d8fab64af1248e4fa370da() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of all content type headers that SageMaker will treat as JSON and capture accordingly.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(1, 10),
+			listvalidator.ValueStringsAre(
+				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*/[a-zA-Z0-9](-*[a-zA-Z0-9.])*"), ""),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebbcd51241675da77844edffb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The instance type the model is deployed to.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebc5deb2cc866f30f2e9b3e02() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the endpoint used to run the inference experiment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebe03cb2b2062b23c3ff93e95() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the shadow variant.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(63),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]([\\-a-zA-Z0-9]*[a-zA-Z0-9])?"), ""),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebe074fd28b89882693051f37() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ShadowModelVariants
+			"shadow_model_variants": schemaAttribute3a002147bc7a3b0266a13cc0(),
+			// Property: SourceModelVariantName
+			"source_model_variant_name": schemaAttribute8a5b4e305943dd685c78b959(),
+		}, /*END SCHEMA*/
+		Description: "The configuration of ShadowMode inference experiment type. Use this field to specify a production variant which takes all the inference requests, and a shadow variant to which Amazon SageMaker replicates a percentage of the inference requests. For the shadow variant also specify the percentage of requests that Amazon SageMaker replicates.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeccc744b35415b22d1514453d() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of instances of the type specified by InstanceType.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedef9ca9b0386f23acda5807a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS Key Management Service key that Amazon SageMaker uses to encrypt captured data at rest using Amazon S3 server-side encryption.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(2048),
+			stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeb43f03545d0c9a94d05026d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the variant.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(63),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]([\\-a-zA-Z0-9]*[a-zA-Z0-9])?"), ""),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef016dd2febb7d04269477ec0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the inference experiment that you want to run.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"RealTimeInference",
+			),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef64562dd9a9a956a8b36dcf1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The timestamp at which the inference experiment started or will start.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef67539683a4a0ab2ee7ab562() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InfrastructureType
+			"infrastructure_type": schemaAttributef016dd2febb7d04269477ec0(),
+			// Property: RealTimeInferenceConfig
+			"real_time_inference_config": schemaAttribute9d92f7d982c2b149a5130de4(),
+		}, /*END SCHEMA*/
+		Description: "The configuration for the infrastructure that the model will be deployed to.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef6e7df5d0fdd681b55b34a11() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(2048),
+			stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefabf77031457e0655f569478() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to access model artifacts and container images, and manage Amazon SageMaker Inference endpoints for model deployment.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(20, 2048),
+			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefb55a40a07ce99de203968e6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ContentType
+			"content_type": schemaAttribute6bf2fb4edcaf3e478b2fb0c7(),
+			// Property: Destination
+			"destination": schemaAttribute748b70c3ed8c5cbc238831a0(),
+			// Property: KmsKey
+			"kms_key": schemaAttributedef9ca9b0386f23acda5807a(),
+		}, /*END SCHEMA*/
+		Description: "The Amazon S3 location and configuration for storing inference request and response data.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_sagemaker_inference_experiment", inferenceExperimentResource)
 	registry.AddListResourceFactory("awscc_sagemaker_inference_experiment", generic.NewListResource(inferenceExperimentResource))
@@ -46,13 +627,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 		//	  "pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:inference-experiment/[a-zA-Z_0-9+=,.@\\-_/]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the inference experiment.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute5e14b006d5ce8de52516ceab(),
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -60,13 +635,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 		//	  "description": "The timestamp at which you created the inference experiment.",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The timestamp at which you created the inference experiment.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"creation_time": schemaAttribute64f9a4f70abd60313f744374(),
 		// Property: DataStorageConfig
 		// CloudFormation resource type schema:
 		//
@@ -123,88 +692,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"data_storage_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ContentType
-				"content_type": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CsvContentTypes
-						"csv_content_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "The list of all content type headers that SageMaker will treat as CSV and capture accordingly.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.List{ /*START VALIDATORS*/
-								listvalidator.SizeBetween(1, 10),
-								listvalidator.ValueStringsAre(
-									stringvalidator.LengthBetween(1, 256),
-									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*/[a-zA-Z0-9](-*[a-zA-Z0-9.])*"), ""),
-								),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: JsonContentTypes
-						"json_content_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "The list of all content type headers that SageMaker will treat as JSON and capture accordingly.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.List{ /*START VALIDATORS*/
-								listvalidator.SizeBetween(1, 10),
-								listvalidator.ValueStringsAre(
-									stringvalidator.LengthBetween(1, 256),
-									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*/[a-zA-Z0-9](-*[a-zA-Z0-9.])*"), ""),
-								),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Configuration specifying how to treat different headers. If no headers are specified SageMaker will by default base64 encode when capturing the data.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: Destination
-				"destination": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Amazon S3 bucket where the inference request and response data is stored.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(512),
-						stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/])/?(.*)$"), ""),
-						fwvalidators.NotNullString(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: KmsKey
-				"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The AWS Key Management Service key that Amazon SageMaker uses to encrypt captured data at rest using Amazon S3 server-side encryption.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(2048),
-						stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The Amazon S3 location and configuration for storing inference request and response data.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"data_storage_config": schemaAttributefb55a40a07ce99de203968e6(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -215,18 +703,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 		//	  "pattern": ".*",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the inference experiment.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 1024),
-				stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute5f5d6d03848144b83ee7b4c5(),
 		// Property: DesiredState
 		// CloudFormation resource type schema:
 		//
@@ -239,22 +716,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"desired_state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The desired state of the experiment after starting or stopping operation.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"Running",
-					"Completed",
-					"Cancelled",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// DesiredState is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"desired_state": schemaAttribute868447d4db2d8aa8cde52fa5(),
 		// Property: EndpointMetadata
 		// CloudFormation resource type schema:
 		//
@@ -295,30 +757,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"endpoint_metadata": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EndpointConfigName
-				"endpoint_config_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the endpoint configuration.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: EndpointName
-				"endpoint_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the endpoint used to run the inference experiment.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: EndpointStatus
-				"endpoint_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The status of the endpoint. For possible values of the status of an endpoint.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The metadata of the endpoint on which the inference experiment ran.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"endpoint_metadata": schemaAttribute5cec2ebabddc4e2fa61341f3(),
 		// Property: EndpointName
 		// CloudFormation resource type schema:
 		//
@@ -328,17 +767,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*",
 		//	  "type": "string"
 		//	}
-		"endpoint_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the endpoint used to run the inference experiment.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(63),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"endpoint_name": schemaAttribute3208b9e27c95b7ee0050ea6f(),
 		// Property: KmsKey
 		// CloudFormation resource type schema:
 		//
@@ -348,19 +777,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 		//	  "pattern": ".*",
 		//	  "type": "string"
 		//	}
-		"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(2048),
-				stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"kms_key": schemaAttributef6e7df5d0fdd681b55b34a11(),
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -368,13 +785,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 		//	  "description": "The timestamp at which you last modified the inference experiment.",
 		//	  "type": "string"
 		//	}
-		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The timestamp at which you last modified the inference experiment.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"last_modified_time": schemaAttribute06e08b480b183b7a5e002989(),
 		// Property: ModelVariants
 		// CloudFormation resource type schema:
 		//
@@ -444,69 +855,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 		//	  "maxItems": 2,
 		//	  "type": "array"
 		//	}
-		"model_variants": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: InfrastructureConfig
-					"infrastructure_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: InfrastructureType
-							"infrastructure_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The type of the inference experiment that you want to run.",
-								Required:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.OneOf(
-										"RealTimeInference",
-									),
-								}, /*END VALIDATORS*/
-							}, /*END ATTRIBUTE*/
-							// Property: RealTimeInferenceConfig
-							"real_time_inference_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: InstanceCount
-									"instance_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "The number of instances of the type specified by InstanceType.",
-										Required:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: InstanceType
-									"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The instance type the model is deployed to.",
-										Required:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "The infrastructure configuration for deploying the model to a real-time inference endpoint.",
-								Required:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "The configuration for the infrastructure that the model will be deployed to.",
-						Required:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ModelName
-					"model_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the Amazon SageMaker Model entity.",
-						Required:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(63),
-							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*"), ""),
-						}, /*END VALIDATORS*/
-					}, /*END ATTRIBUTE*/
-					// Property: VariantName
-					"variant_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the variant.",
-						Required:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(63),
-							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]([\\-a-zA-Z0-9]*[a-zA-Z0-9])?"), ""),
-						}, /*END VALIDATORS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of ModelVariantConfig objects. Each ModelVariantConfig object in the array describes the infrastructure configuration for the corresponding variant.",
-			Required:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeAtMost(2),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"model_variants": schemaAttribute4815c26bd8f7d598d8aa788f(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -516,16 +865,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name for the inference experiment.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 120),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute52ddf4efc35d4ae0557dbe50(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -536,17 +876,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 		//	  "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to access model artifacts and container images, and manage Amazon SageMaker Inference endpoints for model deployment.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(20, 2048),
-				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttributefabf77031457e0655f569478(),
 		// Property: Schedule
 		// CloudFormation resource type schema:
 		//
@@ -565,35 +895,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"schedule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EndTime
-				"end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The timestamp at which the inference experiment ended or will end.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: StartTime
-				"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The timestamp at which the inference experiment started or will start.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The duration for which you want the inference experiment to run.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// Schedule is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"schedule": schemaAttribute6cf5f62bdcdb8b2b22cdc151(),
 		// Property: ShadowModeConfig
 		// CloudFormation resource type schema:
 		//
@@ -642,74 +944,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"shadow_mode_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ShadowModelVariants
-				"shadow_model_variants": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: SamplingPercentage
-							"sampling_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The percentage of inference requests that Amazon SageMaker replicates from the production variant to the shadow variant.",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.Int64{ /*START VALIDATORS*/
-									int64validator.AtMost(100),
-									fwvalidators.NotNullInt64(),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-									int64planmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: ShadowModelVariantName
-							"shadow_model_variant_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The name of the shadow variant.",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthAtMost(63),
-									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]([\\-a-zA-Z0-9]*[a-zA-Z0-9])?"), ""),
-									fwvalidators.NotNullString(),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "List of shadow variant configurations.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.SizeBetween(1, 1),
-						fwvalidators.NotNullList(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: SourceModelVariantName
-				"source_model_variant_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the production variant, which takes all the inference requests.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(63),
-						stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]([\\-a-zA-Z0-9]*[a-zA-Z0-9])?"), ""),
-						fwvalidators.NotNullString(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The configuration of ShadowMode inference experiment type. Use this field to specify a production variant which takes all the inference requests, and a shadow variant to which Amazon SageMaker replicates a percentage of the inference requests. For the shadow variant also specify the percentage of requests that Amazon SageMaker replicates.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"shadow_mode_config": schemaAttributebe074fd28b89882693051f37(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -727,13 +962,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the inference experiment.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute70d601e5cbe2ef1f40c4c2d7(),
 		// Property: StatusReason
 		// CloudFormation resource type schema:
 		//
@@ -744,19 +973,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 		//	  "pattern": ".*",
 		//	  "type": "string"
 		//	}
-		"status_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The error message or client-specified reason from the StopInferenceExperiment API, that explains the status of the inference experiment.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 1024),
-				stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// StatusReason is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"status_reason": schemaAttribute5d19b02d0ed0ec8a47cb68fa(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -789,49 +1006,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
-							stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(256),
-							stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeAtMost(50),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute53bcb660a283e0a9009704d3(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -842,18 +1017,7 @@ func inferenceExperimentResource(ctx context.Context) (resource.Resource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of the inference experiment that you want to run.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"ShadowMode",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttribute54ad21496705825813926d46(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

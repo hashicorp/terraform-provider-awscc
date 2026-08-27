@@ -29,6 +29,932 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute042bc38a6d339f6f9a032c62() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.Float64{ /*START VALIDATORS*/
+			float64validator.Between(1.000000, 8766000.000000),
+			fwvalidators.NotNullFloat64(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+			float64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute059ee4ec6a7af150fd795d7d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Algorithm
+			"algorithm": schemaAttribute35b6843f1cfe10c435615d8a(),
+			// Property: CryptoProviders
+			"crypto_providers": schemaAttribute1719232e56725900d55cef83(),
+			// Property: KeySpec
+			"key_spec": schemaAttribute525276d44c5b5125b0889099(),
+			// Property: KeyUsageProperty
+			"key_usage_property": schemaAttribute85f1f1f4cb71449cd9687ac0(),
+			// Property: MinimalKeyLength
+			"minimal_key_length": schemaAttributec6093a7778df7b48c9c90b8e(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0612e79612e202d869e4596b() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// ReenrollAllCertificateHolders is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute08ec18a73fe587086747415b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RequireCommonName
+			"require_common_name": schemaAttribute82205693d8d706ce4ce878a5(),
+			// Property: RequireDirectoryPath
+			"require_directory_path": schemaAttribute82205693d8d706ce4ce878a5(),
+			// Property: RequireDnsAsCn
+			"require_dns_as_cn": schemaAttribute82205693d8d706ce4ce878a5(),
+			// Property: RequireEmail
+			"require_email": schemaAttribute82205693d8d706ce4ce878a5(),
+			// Property: SanRequireDirectoryGuid
+			"san_require_directory_guid": schemaAttribute82205693d8d706ce4ce878a5(),
+			// Property: SanRequireDns
+			"san_require_dns": schemaAttribute82205693d8d706ce4ce878a5(),
+			// Property: SanRequireDomainDns
+			"san_require_domain_dns": schemaAttribute82205693d8d706ce4ce878a5(),
+			// Property: SanRequireEmail
+			"san_require_email": schemaAttribute82205693d8d706ce4ce878a5(),
+			// Property: SanRequireSpn
+			"san_require_spn": schemaAttribute82205693d8d706ce4ce878a5(),
+			// Property: SanRequireUpn
+			"san_require_upn": schemaAttribute82205693d8d706ce4ce878a5(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute11ac5f37b0655e548a9d9f5e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"HOURS",
+				"DAYS",
+				"WEEKS",
+				"MONTHS",
+				"YEARS",
+			),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1719232e56725900d55cef83() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(1, 100),
+			listvalidator.UniqueValues(),
+			listvalidator.ValueStringsAre(
+				stringvalidator.LengthBetween(1, 100),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1a01c80a56ed9ed06e9965e0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"SHA256",
+				"SHA384",
+				"SHA512",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute27de52df0da3c2827b4929d7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EnableKeyReuseOnNtTokenKeysetStorageFull
+			"enable_key_reuse_on_nt_token_keyset_storage_full": schemaAttribute82205693d8d706ce4ce878a5(),
+			// Property: IncludeSymmetricAlgorithms
+			"include_symmetric_algorithms": schemaAttribute82205693d8d706ce4ce878a5(),
+			// Property: NoSecurityExtension
+			"no_security_extension": schemaAttribute82205693d8d706ce4ce878a5(),
+			// Property: RemoveInvalidCertificateFromPersonalStore
+			"remove_invalid_certificate_from_personal_store": schemaAttribute82205693d8d706ce4ce878a5(),
+			// Property: UserInteractionRequired
+			"user_interaction_required": schemaAttribute82205693d8d706ce4ce878a5(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute28e0aa5d0503891fb263fa01() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CertificateValidity
+			"certificate_validity": schemaAttributeaf154671b19e7d09b944d1dc(),
+			// Property: EnrollmentFlags
+			"enrollment_flags": schemaAttribute27de52df0da3c2827b4929d7(),
+			// Property: Extensions
+			"extensions": schemaAttributeb925a39094d11a6ba617e3aa(),
+			// Property: GeneralFlags
+			"general_flags": schemaAttribute8fe27913d1781a692c906f25(),
+			// Property: PrivateKeyAttributes
+			"private_key_attributes": schemaAttribute882729fb6e25e8e4315d534a(),
+			// Property: PrivateKeyFlags
+			"private_key_flags": schemaAttribute826bfb3f59497cf211cddd57(),
+			// Property: SubjectNameFlags
+			"subject_name_flags": schemaAttribute08ec18a73fe587086747415b(),
+			// Property: SupersededTemplates
+			"superseded_templates": schemaAttributef3309eab708d8c00419b3a89(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2f5928cec29f8ddb1e9bdea2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute35b6843f1cfe10c435615d8a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"RSA",
+				"ECDH_P256",
+				"ECDH_P384",
+				"ECDH_P521",
+			),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3b9bc203c7d6cb5b5c522226() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PolicyObjectIdentifier
+				"policy_object_identifier": schemaAttribute8a12665ba1d0060dd39ef2e6(),
+				// Property: PolicyType
+				"policy_type": schemaAttributedd52197bf13731cccf802af8(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(1, 100),
+			listvalidator.UniqueValues(),
+			fwvalidators.NotNullList(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3dfe0488d34be19ff3c3d75c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"WINDOWS_SERVER_2008",
+				"WINDOWS_SERVER_2008_R2",
+				"WINDOWS_SERVER_2012",
+				"WINDOWS_SERVER_2012_R2",
+				"WINDOWS_SERVER_2016",
+			),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute525276d44c5b5125b0889099() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"KEY_EXCHANGE",
+				"SIGNATURE",
+			),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute59613b9af0e2af3221f3be73() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"ALL",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5f9ec67e4e1c3bd1ac75fb0c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"WINDOWS_SERVER_2012",
+				"WINDOWS_SERVER_2012_R2",
+				"WINDOWS_SERVER_2016",
+			),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute68625835623751e973cf717f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"RSA",
+				"ECDH_P256",
+				"ECDH_P384",
+				"ECDH_P521",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute70f08a16fb0407f18a081008() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CertificateValidity
+			"certificate_validity": schemaAttributeaf154671b19e7d09b944d1dc(),
+			// Property: EnrollmentFlags
+			"enrollment_flags": schemaAttribute27de52df0da3c2827b4929d7(),
+			// Property: Extensions
+			"extensions": schemaAttributeb925a39094d11a6ba617e3aa(),
+			// Property: GeneralFlags
+			"general_flags": schemaAttribute8fe27913d1781a692c906f25(),
+			// Property: HashAlgorithm
+			"hash_algorithm": schemaAttribute1a01c80a56ed9ed06e9965e0(),
+			// Property: PrivateKeyAttributes
+			"private_key_attributes": schemaAttribute723be1c100a114cf2d00f834(),
+			// Property: PrivateKeyFlags
+			"private_key_flags": schemaAttributec584afdbf5f52051b6724a36(),
+			// Property: SubjectNameFlags
+			"subject_name_flags": schemaAttribute08ec18a73fe587086747415b(),
+			// Property: SupersededTemplates
+			"superseded_templates": schemaAttributef3309eab708d8c00419b3a89(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute723be1c100a114cf2d00f834() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Algorithm
+			"algorithm": schemaAttribute68625835623751e973cf717f(),
+			// Property: CryptoProviders
+			"crypto_providers": schemaAttribute1719232e56725900d55cef83(),
+			// Property: KeySpec
+			"key_spec": schemaAttribute525276d44c5b5125b0889099(),
+			// Property: KeyUsageProperty
+			"key_usage_property": schemaAttributeaa18a5b819c520ac1a279599(),
+			// Property: MinimalKeyLength
+			"minimal_key_length": schemaAttributec6093a7778df7b48c9c90b8e(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7a96a3730aac97359b572358() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Period
+			"period": schemaAttribute042bc38a6d339f6f9a032c62(),
+			// Property: PeriodType
+			"period_type": schemaAttribute11ac5f37b0655e548a9d9f5e(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7cbcc43b403e1dccbeeb57a6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Critical
+			"critical": schemaAttribute82205693d8d706ce4ce878a5(),
+			// Property: UsageFlags
+			"usage_flags": schemaAttributeae1d4cfb510f7f376bc34bd5(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute82205693d8d706ce4ce878a5() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute826bfb3f59497cf211cddd57() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ClientVersion
+			"client_version": schemaAttributea0bc727bedf07cf038854f68(),
+			// Property: ExportableKey
+			"exportable_key": schemaAttribute82205693d8d706ce4ce878a5(),
+			// Property: StrongKeyProtectionRequired
+			"strong_key_protection_required": schemaAttribute82205693d8d706ce4ce878a5(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute85f1f1f4cb71449cd9687ac0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PropertyFlags
+			"property_flags": schemaAttributef077898bbe9d48f746b38c3b(),
+			// Property: PropertyType
+			"property_type": schemaAttribute59613b9af0e2af3221f3be73(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute882729fb6e25e8e4315d534a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CryptoProviders
+			"crypto_providers": schemaAttribute1719232e56725900d55cef83(),
+			// Property: KeySpec
+			"key_spec": schemaAttribute525276d44c5b5125b0889099(),
+			// Property: MinimalKeyLength
+			"minimal_key_length": schemaAttributec6093a7778df7b48c9c90b8e(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a12665ba1d0060dd39ef2e6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 64),
+			stringvalidator.RegexMatches(regexp.MustCompile("^([0-2])\\.([0-9]|([0-3][0-9]))(\\.([0-9]+)){0,126}$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8fe27913d1781a692c906f25() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AutoEnrollment
+			"auto_enrollment": schemaAttribute82205693d8d706ce4ce878a5(),
+			// Property: MachineType
+			"machine_type": schemaAttribute82205693d8d706ce4ce878a5(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute985151dae45f5afd3b9f7998() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CertificateValidity
+			"certificate_validity": schemaAttributeaf154671b19e7d09b944d1dc(),
+			// Property: EnrollmentFlags
+			"enrollment_flags": schemaAttribute27de52df0da3c2827b4929d7(),
+			// Property: Extensions
+			"extensions": schemaAttributeb925a39094d11a6ba617e3aa(),
+			// Property: GeneralFlags
+			"general_flags": schemaAttribute8fe27913d1781a692c906f25(),
+			// Property: HashAlgorithm
+			"hash_algorithm": schemaAttributebbc5ad0dcd20f978b68af0a0(),
+			// Property: PrivateKeyAttributes
+			"private_key_attributes": schemaAttribute059ee4ec6a7af150fd795d7d(),
+			// Property: PrivateKeyFlags
+			"private_key_flags": schemaAttributea48eb9df1fcebac43e2382c7(),
+			// Property: SubjectNameFlags
+			"subject_name_flags": schemaAttribute08ec18a73fe587086747415b(),
+			// Property: SupersededTemplates
+			"superseded_templates": schemaAttributef3309eab708d8c00419b3a89(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea0bc727bedf07cf038854f68() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"WINDOWS_SERVER_2003",
+				"WINDOWS_SERVER_2008",
+				"WINDOWS_SERVER_2008_R2",
+				"WINDOWS_SERVER_2012",
+				"WINDOWS_SERVER_2012_R2",
+				"WINDOWS_SERVER_2016",
+			),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea48eb9df1fcebac43e2382c7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ClientVersion
+			"client_version": schemaAttribute3dfe0488d34be19ff3c3d75c(),
+			// Property: ExportableKey
+			"exportable_key": schemaAttribute82205693d8d706ce4ce878a5(),
+			// Property: RequireAlternateSignatureAlgorithm
+			"require_alternate_signature_algorithm": schemaAttribute82205693d8d706ce4ce878a5(),
+			// Property: StrongKeyProtectionRequired
+			"strong_key_protection_required": schemaAttribute82205693d8d706ce4ce878a5(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaa18a5b819c520ac1a279599() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PropertyFlags
+			"property_flags": schemaAttributef077898bbe9d48f746b38c3b(),
+			// Property: PropertyType
+			"property_type": schemaAttribute59613b9af0e2af3221f3be73(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeadeb357c64a2422ad947ea8e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Required: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 64),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeae1d4cfb510f7f376bc34bd5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DataEncipherment
+			"data_encipherment": schemaAttribute82205693d8d706ce4ce878a5(),
+			// Property: DigitalSignature
+			"digital_signature": schemaAttribute82205693d8d706ce4ce878a5(),
+			// Property: KeyAgreement
+			"key_agreement": schemaAttribute82205693d8d706ce4ce878a5(),
+			// Property: KeyEncipherment
+			"key_encipherment": schemaAttribute82205693d8d706ce4ce878a5(),
+			// Property: NonRepudiation
+			"non_repudiation": schemaAttribute82205693d8d706ce4ce878a5(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaf154671b19e7d09b944d1dc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RenewalPeriod
+			"renewal_period": schemaAttribute7a96a3730aac97359b572358(),
+			// Property: ValidityPeriod
+			"validity_period": schemaAttribute7a96a3730aac97359b572358(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb925a39094d11a6ba617e3aa() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ApplicationPolicies
+			"application_policies": schemaAttributefca9b265ca1b7f7816b3aad8(),
+			// Property: KeyUsage
+			"key_usage": schemaAttribute7cbcc43b403e1dccbeeb57a6(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebbc5ad0dcd20f978b68af0a0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"SHA256",
+				"SHA384",
+				"SHA512",
+			),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec584afdbf5f52051b6724a36() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ClientVersion
+			"client_version": schemaAttribute5f9ec67e4e1c3bd1ac75fb0c(),
+			// Property: ExportableKey
+			"exportable_key": schemaAttribute82205693d8d706ce4ce878a5(),
+			// Property: RequireAlternateSignatureAlgorithm
+			"require_alternate_signature_algorithm": schemaAttribute82205693d8d706ce4ce878a5(),
+			// Property: RequireSameKeyRenewal
+			"require_same_key_renewal": schemaAttribute82205693d8d706ce4ce878a5(),
+			// Property: StrongKeyProtectionRequired
+			"strong_key_protection_required": schemaAttribute82205693d8d706ce4ce878a5(),
+			// Property: UseLegacyProvider
+			"use_legacy_provider": schemaAttribute82205693d8d706ce4ce878a5(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6093a7778df7b48c9c90b8e() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.Float64{ /*START VALIDATORS*/
+			float64validator.AtLeast(1.000000),
+			fwvalidators.NotNullFloat64(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+			float64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed115050536df1a7760fa12e6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: TemplateV2
+			"template_v2": schemaAttribute28e0aa5d0503891fb263fa01(),
+			// Property: TemplateV3
+			"template_v3": schemaAttribute985151dae45f5afd3b9f7998(),
+			// Property: TemplateV4
+			"template_v4": schemaAttribute70f08a16fb0407f18a081008(),
+		}, /*END SCHEMA*/
+		Required: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed408c823675d57bbc416f682() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Required: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(5, 200),
+			stringvalidator.RegexMatches(regexp.MustCompile("^arn:[\\w-]+:pca-connector-ad:[\\w-]+:[0-9]+:connector\\/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedd52197bf13731cccf802af8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"ALL_APPLICATION_POLICIES",
+				"ANY_PURPOSE",
+				"ATTESTATION_IDENTITY_KEY_CERTIFICATE",
+				"CERTIFICATE_REQUEST_AGENT",
+				"CLIENT_AUTHENTICATION",
+				"CODE_SIGNING",
+				"CTL_USAGE",
+				"DIGITAL_RIGHTS",
+				"DIRECTORY_SERVICE_EMAIL_REPLICATION",
+				"DISALLOWED_LIST",
+				"DNS_SERVER_TRUST",
+				"DOCUMENT_ENCRYPTION",
+				"DOCUMENT_SIGNING",
+				"DYNAMIC_CODE_GENERATOR",
+				"EARLY_LAUNCH_ANTIMALWARE_DRIVER",
+				"EMBEDDED_WINDOWS_SYSTEM_COMPONENT_VERIFICATION",
+				"ENCLAVE",
+				"ENCRYPTING_FILE_SYSTEM",
+				"ENDORSEMENT_KEY_CERTIFICATE",
+				"FILE_RECOVERY",
+				"HAL_EXTENSION",
+				"IP_SECURITY_END_SYSTEM",
+				"IP_SECURITY_IKE_INTERMEDIATE",
+				"IP_SECURITY_TUNNEL_TERMINATION",
+				"IP_SECURITY_USER",
+				"ISOLATED_USER_MODE",
+				"KDC_AUTHENTICATION",
+				"KERNEL_MODE_CODE_SIGNING",
+				"KEY_PACK_LICENSES",
+				"KEY_RECOVERY",
+				"KEY_RECOVERY_AGENT",
+				"LICENSE_SERVER_VERIFICATION",
+				"LIFETIME_SIGNING",
+				"MICROSOFT_PUBLISHER",
+				"MICROSOFT_TIME_STAMPING",
+				"MICROSOFT_TRUST_LIST_SIGNING",
+				"OCSP_SIGNING",
+				"OEM_WINDOWS_SYSTEM_COMPONENT_VERIFICATION",
+				"PLATFORM_CERTIFICATE",
+				"PREVIEW_BUILD_SIGNING",
+				"PRIVATE_KEY_ARCHIVAL",
+				"PROTECTED_PROCESS_LIGHT_VERIFICATION",
+				"PROTECTED_PROCESS_VERIFICATION",
+				"QUALIFIED_SUBORDINATION",
+				"REVOKED_LIST_SIGNER",
+				"ROOT_PROGRAM_AUTO_UPDATE_CA_REVOCATION",
+				"ROOT_PROGRAM_AUTO_UPDATE_END_REVOCATION",
+				"ROOT_PROGRAM_NO_OSCP_FAILOVER_TO_CRL",
+				"ROOT_LIST_SIGNER",
+				"SECURE_EMAIL",
+				"SERVER_AUTHENTICATION",
+				"SMART_CARD_LOGIN",
+				"SPC_ENCRYPTED_DIGEST_RETRY_COUNT",
+				"SPC_RELAXED_PE_MARKER_CHECK",
+				"TIME_STAMPING",
+				"WINDOWS_HARDWARE_DRIVER_ATTESTED_VERIFICATION",
+				"WINDOWS_HARDWARE_DRIVER_EXTENDED_VERIFICATION",
+				"WINDOWS_HARDWARE_DRIVER_VERIFICATION",
+				"WINDOWS_HELLO_RECOVERY_KEY_ENCRYPTION",
+				"WINDOWS_KITS_COMPONENT",
+				"WINDOWS_RT_VERIFICATION",
+				"WINDOWS_SOFTWARE_EXTENSION_VERIFICATION",
+				"WINDOWS_STORE",
+				"WINDOWS_SYSTEM_COMPONENT_VERIFICATION",
+				"WINDOWS_TCB_COMPONENT",
+				"WINDOWS_THIRD_PARTY_APPLICATION_COMPONENT",
+				"WINDOWS_UPDATE",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeec39a6d8a399bc8381851602() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+			mapplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef077898bbe9d48f746b38c3b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Decrypt
+			"decrypt": schemaAttribute82205693d8d706ce4ce878a5(),
+			// Property: KeyAgreement
+			"key_agreement": schemaAttribute82205693d8d706ce4ce878a5(),
+			// Property: Sign
+			"sign": schemaAttribute82205693d8d706ce4ce878a5(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef3309eab708d8c00419b3a89() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(1, 100),
+			listvalidator.UniqueValues(),
+			listvalidator.ValueStringsAre(
+				stringvalidator.LengthBetween(1, 64),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefca9b265ca1b7f7816b3aad8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Critical
+			"critical": schemaAttribute82205693d8d706ce4ce878a5(),
+			// Property: Policies
+			"policies": schemaAttribute3b9bc203c7d6cb5b5c522226(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_pcaconnectorad_template", templateResource)
 }
@@ -46,16 +972,7 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:[\\w-]+:pca-connector-ad:[\\w-]+:[0-9]+:connector\\/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(5, 200),
-				stringvalidator.RegexMatches(regexp.MustCompile("^arn:[\\w-]+:pca-connector-ad:[\\w-]+:[0-9]+:connector\\/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"connector_arn": schemaAttributed408c823675d57bbc416f682(),
 		// Property: Definition
 		// CloudFormation resource type schema:
 		//
@@ -1232,2071 +2149,7 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: TemplateV2
-				"template_v2": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CertificateValidity
-						"certificate_validity": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: RenewalPeriod
-								"renewal_period": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Period
-										"period": schema.Float64Attribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.Float64{ /*START VALIDATORS*/
-												float64validator.Between(1.000000, 8766000.000000),
-												fwvalidators.NotNullFloat64(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-												float64planmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: PeriodType
-										"period_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.OneOf(
-													"HOURS",
-													"DAYS",
-													"WEEKS",
-													"MONTHS",
-													"YEARS",
-												),
-												fwvalidators.NotNullString(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.Object{ /*START VALIDATORS*/
-										fwvalidators.NotNullObject(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: ValidityPeriod
-								"validity_period": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Period
-										"period": schema.Float64Attribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.Float64{ /*START VALIDATORS*/
-												float64validator.Between(1.000000, 8766000.000000),
-												fwvalidators.NotNullFloat64(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-												float64planmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: PeriodType
-										"period_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.OneOf(
-													"HOURS",
-													"DAYS",
-													"WEEKS",
-													"MONTHS",
-													"YEARS",
-												),
-												fwvalidators.NotNullString(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.Object{ /*START VALIDATORS*/
-										fwvalidators.NotNullObject(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.Object{ /*START VALIDATORS*/
-								fwvalidators.NotNullObject(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: EnrollmentFlags
-						"enrollment_flags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: EnableKeyReuseOnNtTokenKeysetStorageFull
-								"enable_key_reuse_on_nt_token_keyset_storage_full": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: IncludeSymmetricAlgorithms
-								"include_symmetric_algorithms": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: NoSecurityExtension
-								"no_security_extension": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: RemoveInvalidCertificateFromPersonalStore
-								"remove_invalid_certificate_from_personal_store": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: UserInteractionRequired
-								"user_interaction_required": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.Object{ /*START VALIDATORS*/
-								fwvalidators.NotNullObject(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: Extensions
-						"extensions": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ApplicationPolicies
-								"application_policies": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Critical
-										"critical": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-												boolplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: Policies
-										"policies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: PolicyObjectIdentifier
-													"policy_object_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Optional: true,
-														Computed: true,
-														Validators: []validator.String{ /*START VALIDATORS*/
-															stringvalidator.LengthBetween(1, 64),
-															stringvalidator.RegexMatches(regexp.MustCompile("^([0-2])\\.([0-9]|([0-3][0-9]))(\\.([0-9]+)){0,126}$"), ""),
-														}, /*END VALIDATORS*/
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-													// Property: PolicyType
-													"policy_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Optional: true,
-														Computed: true,
-														Validators: []validator.String{ /*START VALIDATORS*/
-															stringvalidator.OneOf(
-																"ALL_APPLICATION_POLICIES",
-																"ANY_PURPOSE",
-																"ATTESTATION_IDENTITY_KEY_CERTIFICATE",
-																"CERTIFICATE_REQUEST_AGENT",
-																"CLIENT_AUTHENTICATION",
-																"CODE_SIGNING",
-																"CTL_USAGE",
-																"DIGITAL_RIGHTS",
-																"DIRECTORY_SERVICE_EMAIL_REPLICATION",
-																"DISALLOWED_LIST",
-																"DNS_SERVER_TRUST",
-																"DOCUMENT_ENCRYPTION",
-																"DOCUMENT_SIGNING",
-																"DYNAMIC_CODE_GENERATOR",
-																"EARLY_LAUNCH_ANTIMALWARE_DRIVER",
-																"EMBEDDED_WINDOWS_SYSTEM_COMPONENT_VERIFICATION",
-																"ENCLAVE",
-																"ENCRYPTING_FILE_SYSTEM",
-																"ENDORSEMENT_KEY_CERTIFICATE",
-																"FILE_RECOVERY",
-																"HAL_EXTENSION",
-																"IP_SECURITY_END_SYSTEM",
-																"IP_SECURITY_IKE_INTERMEDIATE",
-																"IP_SECURITY_TUNNEL_TERMINATION",
-																"IP_SECURITY_USER",
-																"ISOLATED_USER_MODE",
-																"KDC_AUTHENTICATION",
-																"KERNEL_MODE_CODE_SIGNING",
-																"KEY_PACK_LICENSES",
-																"KEY_RECOVERY",
-																"KEY_RECOVERY_AGENT",
-																"LICENSE_SERVER_VERIFICATION",
-																"LIFETIME_SIGNING",
-																"MICROSOFT_PUBLISHER",
-																"MICROSOFT_TIME_STAMPING",
-																"MICROSOFT_TRUST_LIST_SIGNING",
-																"OCSP_SIGNING",
-																"OEM_WINDOWS_SYSTEM_COMPONENT_VERIFICATION",
-																"PLATFORM_CERTIFICATE",
-																"PREVIEW_BUILD_SIGNING",
-																"PRIVATE_KEY_ARCHIVAL",
-																"PROTECTED_PROCESS_LIGHT_VERIFICATION",
-																"PROTECTED_PROCESS_VERIFICATION",
-																"QUALIFIED_SUBORDINATION",
-																"REVOKED_LIST_SIGNER",
-																"ROOT_PROGRAM_AUTO_UPDATE_CA_REVOCATION",
-																"ROOT_PROGRAM_AUTO_UPDATE_END_REVOCATION",
-																"ROOT_PROGRAM_NO_OSCP_FAILOVER_TO_CRL",
-																"ROOT_LIST_SIGNER",
-																"SECURE_EMAIL",
-																"SERVER_AUTHENTICATION",
-																"SMART_CARD_LOGIN",
-																"SPC_ENCRYPTED_DIGEST_RETRY_COUNT",
-																"SPC_RELAXED_PE_MARKER_CHECK",
-																"TIME_STAMPING",
-																"WINDOWS_HARDWARE_DRIVER_ATTESTED_VERIFICATION",
-																"WINDOWS_HARDWARE_DRIVER_EXTENDED_VERIFICATION",
-																"WINDOWS_HARDWARE_DRIVER_VERIFICATION",
-																"WINDOWS_HELLO_RECOVERY_KEY_ENCRYPTION",
-																"WINDOWS_KITS_COMPONENT",
-																"WINDOWS_RT_VERIFICATION",
-																"WINDOWS_SOFTWARE_EXTENSION_VERIFICATION",
-																"WINDOWS_STORE",
-																"WINDOWS_SYSTEM_COMPONENT_VERIFICATION",
-																"WINDOWS_TCB_COMPONENT",
-																"WINDOWS_THIRD_PARTY_APPLICATION_COMPONENT",
-																"WINDOWS_UPDATE",
-															),
-														}, /*END VALIDATORS*/
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-											}, /*END NESTED OBJECT*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.List{ /*START VALIDATORS*/
-												listvalidator.SizeBetween(1, 100),
-												listvalidator.UniqueValues(),
-												fwvalidators.NotNullList(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-												listplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: KeyUsage
-								"key_usage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Critical
-										"critical": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-												boolplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: UsageFlags
-										"usage_flags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: DataEncipherment
-												"data_encipherment": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-														boolplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: DigitalSignature
-												"digital_signature": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-														boolplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: KeyAgreement
-												"key_agreement": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-														boolplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: KeyEncipherment
-												"key_encipherment": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-														boolplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: NonRepudiation
-												"non_repudiation": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-														boolplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.Object{ /*START VALIDATORS*/
-												fwvalidators.NotNullObject(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-												objectplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.Object{ /*START VALIDATORS*/
-										fwvalidators.NotNullObject(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.Object{ /*START VALIDATORS*/
-								fwvalidators.NotNullObject(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: GeneralFlags
-						"general_flags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: AutoEnrollment
-								"auto_enrollment": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: MachineType
-								"machine_type": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.Object{ /*START VALIDATORS*/
-								fwvalidators.NotNullObject(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: PrivateKeyAttributes
-						"private_key_attributes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: CryptoProviders
-								"crypto_providers": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.List{ /*START VALIDATORS*/
-										listvalidator.SizeBetween(1, 100),
-										listvalidator.UniqueValues(),
-										listvalidator.ValueStringsAre(
-											stringvalidator.LengthBetween(1, 100),
-										),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										listplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: KeySpec
-								"key_spec": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.OneOf(
-											"KEY_EXCHANGE",
-											"SIGNATURE",
-										),
-										fwvalidators.NotNullString(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: MinimalKeyLength
-								"minimal_key_length": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.Float64{ /*START VALIDATORS*/
-										float64validator.AtLeast(1.000000),
-										fwvalidators.NotNullFloat64(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-										float64planmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.Object{ /*START VALIDATORS*/
-								fwvalidators.NotNullObject(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: PrivateKeyFlags
-						"private_key_flags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ClientVersion
-								"client_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.OneOf(
-											"WINDOWS_SERVER_2003",
-											"WINDOWS_SERVER_2008",
-											"WINDOWS_SERVER_2008_R2",
-											"WINDOWS_SERVER_2012",
-											"WINDOWS_SERVER_2012_R2",
-											"WINDOWS_SERVER_2016",
-										),
-										fwvalidators.NotNullString(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: ExportableKey
-								"exportable_key": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: StrongKeyProtectionRequired
-								"strong_key_protection_required": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.Object{ /*START VALIDATORS*/
-								fwvalidators.NotNullObject(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: SubjectNameFlags
-						"subject_name_flags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: RequireCommonName
-								"require_common_name": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: RequireDirectoryPath
-								"require_directory_path": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: RequireDnsAsCn
-								"require_dns_as_cn": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: RequireEmail
-								"require_email": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireDirectoryGuid
-								"san_require_directory_guid": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireDns
-								"san_require_dns": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireDomainDns
-								"san_require_domain_dns": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireEmail
-								"san_require_email": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireSpn
-								"san_require_spn": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireUpn
-								"san_require_upn": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.Object{ /*START VALIDATORS*/
-								fwvalidators.NotNullObject(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: SupersededTemplates
-						"superseded_templates": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.List{ /*START VALIDATORS*/
-								listvalidator.SizeBetween(1, 100),
-								listvalidator.UniqueValues(),
-								listvalidator.ValueStringsAre(
-									stringvalidator.LengthBetween(1, 64),
-								),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: TemplateV3
-				"template_v3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CertificateValidity
-						"certificate_validity": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: RenewalPeriod
-								"renewal_period": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Period
-										"period": schema.Float64Attribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.Float64{ /*START VALIDATORS*/
-												float64validator.Between(1.000000, 8766000.000000),
-												fwvalidators.NotNullFloat64(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-												float64planmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: PeriodType
-										"period_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.OneOf(
-													"HOURS",
-													"DAYS",
-													"WEEKS",
-													"MONTHS",
-													"YEARS",
-												),
-												fwvalidators.NotNullString(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.Object{ /*START VALIDATORS*/
-										fwvalidators.NotNullObject(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: ValidityPeriod
-								"validity_period": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Period
-										"period": schema.Float64Attribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.Float64{ /*START VALIDATORS*/
-												float64validator.Between(1.000000, 8766000.000000),
-												fwvalidators.NotNullFloat64(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-												float64planmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: PeriodType
-										"period_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.OneOf(
-													"HOURS",
-													"DAYS",
-													"WEEKS",
-													"MONTHS",
-													"YEARS",
-												),
-												fwvalidators.NotNullString(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.Object{ /*START VALIDATORS*/
-										fwvalidators.NotNullObject(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.Object{ /*START VALIDATORS*/
-								fwvalidators.NotNullObject(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: EnrollmentFlags
-						"enrollment_flags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: EnableKeyReuseOnNtTokenKeysetStorageFull
-								"enable_key_reuse_on_nt_token_keyset_storage_full": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: IncludeSymmetricAlgorithms
-								"include_symmetric_algorithms": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: NoSecurityExtension
-								"no_security_extension": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: RemoveInvalidCertificateFromPersonalStore
-								"remove_invalid_certificate_from_personal_store": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: UserInteractionRequired
-								"user_interaction_required": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.Object{ /*START VALIDATORS*/
-								fwvalidators.NotNullObject(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: Extensions
-						"extensions": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ApplicationPolicies
-								"application_policies": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Critical
-										"critical": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-												boolplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: Policies
-										"policies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: PolicyObjectIdentifier
-													"policy_object_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Optional: true,
-														Computed: true,
-														Validators: []validator.String{ /*START VALIDATORS*/
-															stringvalidator.LengthBetween(1, 64),
-															stringvalidator.RegexMatches(regexp.MustCompile("^([0-2])\\.([0-9]|([0-3][0-9]))(\\.([0-9]+)){0,126}$"), ""),
-														}, /*END VALIDATORS*/
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-													// Property: PolicyType
-													"policy_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Optional: true,
-														Computed: true,
-														Validators: []validator.String{ /*START VALIDATORS*/
-															stringvalidator.OneOf(
-																"ALL_APPLICATION_POLICIES",
-																"ANY_PURPOSE",
-																"ATTESTATION_IDENTITY_KEY_CERTIFICATE",
-																"CERTIFICATE_REQUEST_AGENT",
-																"CLIENT_AUTHENTICATION",
-																"CODE_SIGNING",
-																"CTL_USAGE",
-																"DIGITAL_RIGHTS",
-																"DIRECTORY_SERVICE_EMAIL_REPLICATION",
-																"DISALLOWED_LIST",
-																"DNS_SERVER_TRUST",
-																"DOCUMENT_ENCRYPTION",
-																"DOCUMENT_SIGNING",
-																"DYNAMIC_CODE_GENERATOR",
-																"EARLY_LAUNCH_ANTIMALWARE_DRIVER",
-																"EMBEDDED_WINDOWS_SYSTEM_COMPONENT_VERIFICATION",
-																"ENCLAVE",
-																"ENCRYPTING_FILE_SYSTEM",
-																"ENDORSEMENT_KEY_CERTIFICATE",
-																"FILE_RECOVERY",
-																"HAL_EXTENSION",
-																"IP_SECURITY_END_SYSTEM",
-																"IP_SECURITY_IKE_INTERMEDIATE",
-																"IP_SECURITY_TUNNEL_TERMINATION",
-																"IP_SECURITY_USER",
-																"ISOLATED_USER_MODE",
-																"KDC_AUTHENTICATION",
-																"KERNEL_MODE_CODE_SIGNING",
-																"KEY_PACK_LICENSES",
-																"KEY_RECOVERY",
-																"KEY_RECOVERY_AGENT",
-																"LICENSE_SERVER_VERIFICATION",
-																"LIFETIME_SIGNING",
-																"MICROSOFT_PUBLISHER",
-																"MICROSOFT_TIME_STAMPING",
-																"MICROSOFT_TRUST_LIST_SIGNING",
-																"OCSP_SIGNING",
-																"OEM_WINDOWS_SYSTEM_COMPONENT_VERIFICATION",
-																"PLATFORM_CERTIFICATE",
-																"PREVIEW_BUILD_SIGNING",
-																"PRIVATE_KEY_ARCHIVAL",
-																"PROTECTED_PROCESS_LIGHT_VERIFICATION",
-																"PROTECTED_PROCESS_VERIFICATION",
-																"QUALIFIED_SUBORDINATION",
-																"REVOKED_LIST_SIGNER",
-																"ROOT_PROGRAM_AUTO_UPDATE_CA_REVOCATION",
-																"ROOT_PROGRAM_AUTO_UPDATE_END_REVOCATION",
-																"ROOT_PROGRAM_NO_OSCP_FAILOVER_TO_CRL",
-																"ROOT_LIST_SIGNER",
-																"SECURE_EMAIL",
-																"SERVER_AUTHENTICATION",
-																"SMART_CARD_LOGIN",
-																"SPC_ENCRYPTED_DIGEST_RETRY_COUNT",
-																"SPC_RELAXED_PE_MARKER_CHECK",
-																"TIME_STAMPING",
-																"WINDOWS_HARDWARE_DRIVER_ATTESTED_VERIFICATION",
-																"WINDOWS_HARDWARE_DRIVER_EXTENDED_VERIFICATION",
-																"WINDOWS_HARDWARE_DRIVER_VERIFICATION",
-																"WINDOWS_HELLO_RECOVERY_KEY_ENCRYPTION",
-																"WINDOWS_KITS_COMPONENT",
-																"WINDOWS_RT_VERIFICATION",
-																"WINDOWS_SOFTWARE_EXTENSION_VERIFICATION",
-																"WINDOWS_STORE",
-																"WINDOWS_SYSTEM_COMPONENT_VERIFICATION",
-																"WINDOWS_TCB_COMPONENT",
-																"WINDOWS_THIRD_PARTY_APPLICATION_COMPONENT",
-																"WINDOWS_UPDATE",
-															),
-														}, /*END VALIDATORS*/
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-											}, /*END NESTED OBJECT*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.List{ /*START VALIDATORS*/
-												listvalidator.SizeBetween(1, 100),
-												listvalidator.UniqueValues(),
-												fwvalidators.NotNullList(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-												listplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: KeyUsage
-								"key_usage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Critical
-										"critical": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-												boolplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: UsageFlags
-										"usage_flags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: DataEncipherment
-												"data_encipherment": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-														boolplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: DigitalSignature
-												"digital_signature": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-														boolplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: KeyAgreement
-												"key_agreement": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-														boolplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: KeyEncipherment
-												"key_encipherment": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-														boolplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: NonRepudiation
-												"non_repudiation": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-														boolplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.Object{ /*START VALIDATORS*/
-												fwvalidators.NotNullObject(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-												objectplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.Object{ /*START VALIDATORS*/
-										fwvalidators.NotNullObject(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.Object{ /*START VALIDATORS*/
-								fwvalidators.NotNullObject(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: GeneralFlags
-						"general_flags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: AutoEnrollment
-								"auto_enrollment": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: MachineType
-								"machine_type": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.Object{ /*START VALIDATORS*/
-								fwvalidators.NotNullObject(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: HashAlgorithm
-						"hash_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.OneOf(
-									"SHA256",
-									"SHA384",
-									"SHA512",
-								),
-								fwvalidators.NotNullString(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: PrivateKeyAttributes
-						"private_key_attributes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Algorithm
-								"algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.OneOf(
-											"RSA",
-											"ECDH_P256",
-											"ECDH_P384",
-											"ECDH_P521",
-										),
-										fwvalidators.NotNullString(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: CryptoProviders
-								"crypto_providers": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.List{ /*START VALIDATORS*/
-										listvalidator.SizeBetween(1, 100),
-										listvalidator.UniqueValues(),
-										listvalidator.ValueStringsAre(
-											stringvalidator.LengthBetween(1, 100),
-										),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										listplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: KeySpec
-								"key_spec": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.OneOf(
-											"KEY_EXCHANGE",
-											"SIGNATURE",
-										),
-										fwvalidators.NotNullString(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: KeyUsageProperty
-								"key_usage_property": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: PropertyFlags
-										"property_flags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Decrypt
-												"decrypt": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-														boolplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: KeyAgreement
-												"key_agreement": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-														boolplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: Sign
-												"sign": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-														boolplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-												objectplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: PropertyType
-										"property_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.OneOf(
-													"ALL",
-												),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.Object{ /*START VALIDATORS*/
-										fwvalidators.NotNullObject(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: MinimalKeyLength
-								"minimal_key_length": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.Float64{ /*START VALIDATORS*/
-										float64validator.AtLeast(1.000000),
-										fwvalidators.NotNullFloat64(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-										float64planmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.Object{ /*START VALIDATORS*/
-								fwvalidators.NotNullObject(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: PrivateKeyFlags
-						"private_key_flags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ClientVersion
-								"client_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.OneOf(
-											"WINDOWS_SERVER_2008",
-											"WINDOWS_SERVER_2008_R2",
-											"WINDOWS_SERVER_2012",
-											"WINDOWS_SERVER_2012_R2",
-											"WINDOWS_SERVER_2016",
-										),
-										fwvalidators.NotNullString(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: ExportableKey
-								"exportable_key": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: RequireAlternateSignatureAlgorithm
-								"require_alternate_signature_algorithm": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: StrongKeyProtectionRequired
-								"strong_key_protection_required": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.Object{ /*START VALIDATORS*/
-								fwvalidators.NotNullObject(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: SubjectNameFlags
-						"subject_name_flags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: RequireCommonName
-								"require_common_name": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: RequireDirectoryPath
-								"require_directory_path": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: RequireDnsAsCn
-								"require_dns_as_cn": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: RequireEmail
-								"require_email": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireDirectoryGuid
-								"san_require_directory_guid": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireDns
-								"san_require_dns": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireDomainDns
-								"san_require_domain_dns": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireEmail
-								"san_require_email": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireSpn
-								"san_require_spn": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireUpn
-								"san_require_upn": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.Object{ /*START VALIDATORS*/
-								fwvalidators.NotNullObject(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: SupersededTemplates
-						"superseded_templates": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.List{ /*START VALIDATORS*/
-								listvalidator.SizeBetween(1, 100),
-								listvalidator.UniqueValues(),
-								listvalidator.ValueStringsAre(
-									stringvalidator.LengthBetween(1, 64),
-								),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: TemplateV4
-				"template_v4": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CertificateValidity
-						"certificate_validity": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: RenewalPeriod
-								"renewal_period": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Period
-										"period": schema.Float64Attribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.Float64{ /*START VALIDATORS*/
-												float64validator.Between(1.000000, 8766000.000000),
-												fwvalidators.NotNullFloat64(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-												float64planmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: PeriodType
-										"period_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.OneOf(
-													"HOURS",
-													"DAYS",
-													"WEEKS",
-													"MONTHS",
-													"YEARS",
-												),
-												fwvalidators.NotNullString(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.Object{ /*START VALIDATORS*/
-										fwvalidators.NotNullObject(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: ValidityPeriod
-								"validity_period": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Period
-										"period": schema.Float64Attribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.Float64{ /*START VALIDATORS*/
-												float64validator.Between(1.000000, 8766000.000000),
-												fwvalidators.NotNullFloat64(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-												float64planmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: PeriodType
-										"period_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.OneOf(
-													"HOURS",
-													"DAYS",
-													"WEEKS",
-													"MONTHS",
-													"YEARS",
-												),
-												fwvalidators.NotNullString(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.Object{ /*START VALIDATORS*/
-										fwvalidators.NotNullObject(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.Object{ /*START VALIDATORS*/
-								fwvalidators.NotNullObject(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: EnrollmentFlags
-						"enrollment_flags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: EnableKeyReuseOnNtTokenKeysetStorageFull
-								"enable_key_reuse_on_nt_token_keyset_storage_full": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: IncludeSymmetricAlgorithms
-								"include_symmetric_algorithms": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: NoSecurityExtension
-								"no_security_extension": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: RemoveInvalidCertificateFromPersonalStore
-								"remove_invalid_certificate_from_personal_store": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: UserInteractionRequired
-								"user_interaction_required": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.Object{ /*START VALIDATORS*/
-								fwvalidators.NotNullObject(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: Extensions
-						"extensions": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ApplicationPolicies
-								"application_policies": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Critical
-										"critical": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-												boolplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: Policies
-										"policies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: PolicyObjectIdentifier
-													"policy_object_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Optional: true,
-														Computed: true,
-														Validators: []validator.String{ /*START VALIDATORS*/
-															stringvalidator.LengthBetween(1, 64),
-															stringvalidator.RegexMatches(regexp.MustCompile("^([0-2])\\.([0-9]|([0-3][0-9]))(\\.([0-9]+)){0,126}$"), ""),
-														}, /*END VALIDATORS*/
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-													// Property: PolicyType
-													"policy_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Optional: true,
-														Computed: true,
-														Validators: []validator.String{ /*START VALIDATORS*/
-															stringvalidator.OneOf(
-																"ALL_APPLICATION_POLICIES",
-																"ANY_PURPOSE",
-																"ATTESTATION_IDENTITY_KEY_CERTIFICATE",
-																"CERTIFICATE_REQUEST_AGENT",
-																"CLIENT_AUTHENTICATION",
-																"CODE_SIGNING",
-																"CTL_USAGE",
-																"DIGITAL_RIGHTS",
-																"DIRECTORY_SERVICE_EMAIL_REPLICATION",
-																"DISALLOWED_LIST",
-																"DNS_SERVER_TRUST",
-																"DOCUMENT_ENCRYPTION",
-																"DOCUMENT_SIGNING",
-																"DYNAMIC_CODE_GENERATOR",
-																"EARLY_LAUNCH_ANTIMALWARE_DRIVER",
-																"EMBEDDED_WINDOWS_SYSTEM_COMPONENT_VERIFICATION",
-																"ENCLAVE",
-																"ENCRYPTING_FILE_SYSTEM",
-																"ENDORSEMENT_KEY_CERTIFICATE",
-																"FILE_RECOVERY",
-																"HAL_EXTENSION",
-																"IP_SECURITY_END_SYSTEM",
-																"IP_SECURITY_IKE_INTERMEDIATE",
-																"IP_SECURITY_TUNNEL_TERMINATION",
-																"IP_SECURITY_USER",
-																"ISOLATED_USER_MODE",
-																"KDC_AUTHENTICATION",
-																"KERNEL_MODE_CODE_SIGNING",
-																"KEY_PACK_LICENSES",
-																"KEY_RECOVERY",
-																"KEY_RECOVERY_AGENT",
-																"LICENSE_SERVER_VERIFICATION",
-																"LIFETIME_SIGNING",
-																"MICROSOFT_PUBLISHER",
-																"MICROSOFT_TIME_STAMPING",
-																"MICROSOFT_TRUST_LIST_SIGNING",
-																"OCSP_SIGNING",
-																"OEM_WINDOWS_SYSTEM_COMPONENT_VERIFICATION",
-																"PLATFORM_CERTIFICATE",
-																"PREVIEW_BUILD_SIGNING",
-																"PRIVATE_KEY_ARCHIVAL",
-																"PROTECTED_PROCESS_LIGHT_VERIFICATION",
-																"PROTECTED_PROCESS_VERIFICATION",
-																"QUALIFIED_SUBORDINATION",
-																"REVOKED_LIST_SIGNER",
-																"ROOT_PROGRAM_AUTO_UPDATE_CA_REVOCATION",
-																"ROOT_PROGRAM_AUTO_UPDATE_END_REVOCATION",
-																"ROOT_PROGRAM_NO_OSCP_FAILOVER_TO_CRL",
-																"ROOT_LIST_SIGNER",
-																"SECURE_EMAIL",
-																"SERVER_AUTHENTICATION",
-																"SMART_CARD_LOGIN",
-																"SPC_ENCRYPTED_DIGEST_RETRY_COUNT",
-																"SPC_RELAXED_PE_MARKER_CHECK",
-																"TIME_STAMPING",
-																"WINDOWS_HARDWARE_DRIVER_ATTESTED_VERIFICATION",
-																"WINDOWS_HARDWARE_DRIVER_EXTENDED_VERIFICATION",
-																"WINDOWS_HARDWARE_DRIVER_VERIFICATION",
-																"WINDOWS_HELLO_RECOVERY_KEY_ENCRYPTION",
-																"WINDOWS_KITS_COMPONENT",
-																"WINDOWS_RT_VERIFICATION",
-																"WINDOWS_SOFTWARE_EXTENSION_VERIFICATION",
-																"WINDOWS_STORE",
-																"WINDOWS_SYSTEM_COMPONENT_VERIFICATION",
-																"WINDOWS_TCB_COMPONENT",
-																"WINDOWS_THIRD_PARTY_APPLICATION_COMPONENT",
-																"WINDOWS_UPDATE",
-															),
-														}, /*END VALIDATORS*/
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-											}, /*END NESTED OBJECT*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.List{ /*START VALIDATORS*/
-												listvalidator.SizeBetween(1, 100),
-												listvalidator.UniqueValues(),
-												fwvalidators.NotNullList(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-												listplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: KeyUsage
-								"key_usage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Critical
-										"critical": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-												boolplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: UsageFlags
-										"usage_flags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: DataEncipherment
-												"data_encipherment": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-														boolplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: DigitalSignature
-												"digital_signature": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-														boolplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: KeyAgreement
-												"key_agreement": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-														boolplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: KeyEncipherment
-												"key_encipherment": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-														boolplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: NonRepudiation
-												"non_repudiation": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-														boolplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.Object{ /*START VALIDATORS*/
-												fwvalidators.NotNullObject(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-												objectplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.Object{ /*START VALIDATORS*/
-										fwvalidators.NotNullObject(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.Object{ /*START VALIDATORS*/
-								fwvalidators.NotNullObject(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: GeneralFlags
-						"general_flags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: AutoEnrollment
-								"auto_enrollment": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: MachineType
-								"machine_type": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.Object{ /*START VALIDATORS*/
-								fwvalidators.NotNullObject(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: HashAlgorithm
-						"hash_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.OneOf(
-									"SHA256",
-									"SHA384",
-									"SHA512",
-								),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: PrivateKeyAttributes
-						"private_key_attributes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Algorithm
-								"algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.OneOf(
-											"RSA",
-											"ECDH_P256",
-											"ECDH_P384",
-											"ECDH_P521",
-										),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: CryptoProviders
-								"crypto_providers": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.List{ /*START VALIDATORS*/
-										listvalidator.SizeBetween(1, 100),
-										listvalidator.UniqueValues(),
-										listvalidator.ValueStringsAre(
-											stringvalidator.LengthBetween(1, 100),
-										),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										listplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: KeySpec
-								"key_spec": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.OneOf(
-											"KEY_EXCHANGE",
-											"SIGNATURE",
-										),
-										fwvalidators.NotNullString(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: KeyUsageProperty
-								"key_usage_property": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: PropertyFlags
-										"property_flags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Decrypt
-												"decrypt": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-														boolplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: KeyAgreement
-												"key_agreement": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-														boolplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: Sign
-												"sign": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-														boolplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-												objectplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: PropertyType
-										"property_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.OneOf(
-													"ALL",
-												),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: MinimalKeyLength
-								"minimal_key_length": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.Float64{ /*START VALIDATORS*/
-										float64validator.AtLeast(1.000000),
-										fwvalidators.NotNullFloat64(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-										float64planmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.Object{ /*START VALIDATORS*/
-								fwvalidators.NotNullObject(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: PrivateKeyFlags
-						"private_key_flags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ClientVersion
-								"client_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.OneOf(
-											"WINDOWS_SERVER_2012",
-											"WINDOWS_SERVER_2012_R2",
-											"WINDOWS_SERVER_2016",
-										),
-										fwvalidators.NotNullString(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: ExportableKey
-								"exportable_key": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: RequireAlternateSignatureAlgorithm
-								"require_alternate_signature_algorithm": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: RequireSameKeyRenewal
-								"require_same_key_renewal": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: StrongKeyProtectionRequired
-								"strong_key_protection_required": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: UseLegacyProvider
-								"use_legacy_provider": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.Object{ /*START VALIDATORS*/
-								fwvalidators.NotNullObject(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: SubjectNameFlags
-						"subject_name_flags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: RequireCommonName
-								"require_common_name": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: RequireDirectoryPath
-								"require_directory_path": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: RequireDnsAsCn
-								"require_dns_as_cn": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: RequireEmail
-								"require_email": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireDirectoryGuid
-								"san_require_directory_guid": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireDns
-								"san_require_dns": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireDomainDns
-								"san_require_domain_dns": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireEmail
-								"san_require_email": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireSpn
-								"san_require_spn": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireUpn
-								"san_require_upn": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-										boolplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.Object{ /*START VALIDATORS*/
-								fwvalidators.NotNullObject(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: SupersededTemplates
-						"superseded_templates": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.List{ /*START VALIDATORS*/
-								listvalidator.SizeBetween(1, 100),
-								listvalidator.UniqueValues(),
-								listvalidator.ValueStringsAre(
-									stringvalidator.LengthBetween(1, 64),
-								),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Required: true,
-		}, /*END ATTRIBUTE*/
+		"definition": schemaAttributed115050536df1a7760fa12e6(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -3306,29 +2159,14 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 64),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributeadeb357c64a2422ad947ea8e(),
 		// Property: ReenrollAllCertificateHolders
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"reenroll_all_certificate_holders": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// ReenrollAllCertificateHolders is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"reenroll_all_certificate_holders": schemaAttribute0612e79612e202d869e4596b(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -3341,15 +2179,7 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-				mapplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeec39a6d8a399bc8381851602(),
 		// Property: TemplateArn
 		// CloudFormation resource type schema:
 		//
@@ -3359,12 +2189,7 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:[\\w-]+:pca-connector-ad:[\\w-]+:[0-9]+:connector\\/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}\\/template\\/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"template_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"template_arn": schemaAttribute2f5928cec29f8ddb1e9bdea2(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

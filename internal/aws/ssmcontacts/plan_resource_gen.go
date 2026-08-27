@@ -26,6 +26,189 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute0084bd03c741521cb5db9ff3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ChannelId
+			"channel_id": schemaAttribute33bd31af1b286664cf548a12(),
+			// Property: RetryIntervalInMinutes
+			"retry_interval_in_minutes": schemaAttributeb0a81606ae12c96194fb01a4(),
+		}, /*END SCHEMA*/
+		Description: "Information about the contact channel that SSM Incident Manager uses to engage the contact.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0d50ef9c58ec9e1500b7e17e() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A Boolean value determining if the contact's acknowledgement stops the progress of stages in the plan.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Bool{ /*START VALIDATORS*/
+			fwvalidators.NotNullBool(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2df879a60a6b1e1a6b1fbe39() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DurationInMinutes
+				"duration_in_minutes": schemaAttributea756fae9f16de963a41a12bc(),
+				// Property: Targets
+				"targets": schemaAttribute6390279f0504c3b4d1f88b04(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The stages that an escalation plan or engagement plan engages contacts and contact methods in.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute33bd31af1b286664cf548a12() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the contact channel.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4831630c9430a28f30d181bd() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ContactId
+			"contact_id": schemaAttributecb3954b69d627095875ed11f(),
+			// Property: IsEssential
+			"is_essential": schemaAttribute0d50ef9c58ec9e1500b7e17e(),
+		}, /*END SCHEMA*/
+		Description: "The contact that SSM Incident Manager is engaging during an incident.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5b0ae4f5edff968d0a4646ce() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the contact.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6390279f0504c3b4d1f88b04() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ChannelTargetInfo
+				"channel_target_info": schemaAttribute0084bd03c741521cb5db9ff3(),
+				// Property: ContactTargetInfo
+				"contact_target_info": schemaAttribute4831630c9430a28f30d181bd(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The contacts or contact methods that the escalation plan or engagement plan is engaging.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea756fae9f16de963a41a12bc() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The time to wait until beginning the next stage.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			fwvalidators.NotNullInt64(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb0a81606ae12c96194fb01a4() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of minutes to wait to retry sending engagement in the case the engagement initially fails.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			fwvalidators.NotNullInt64(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec0fb4e8e3309f811d46552ea() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Rotation Ids to associate with Oncall Contact for engagement.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// RotationIds is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecb3954b69d627095875ed11f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the contact.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed5ecb1f24b2bfad02dcdf071() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Contact ID for the AWS SSM Incident Manager Contact to associate the plan.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("arn:[-\\w+=\\/,.@]+:[-\\w+=\\/,.@]+:[-\\w+=\\/,.@]*:[0-9]+:([\\w+=\\/,.@:-]+)*"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_ssmcontacts_plan", planResource)
 }
@@ -41,13 +224,7 @@ func planResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the contact.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the contact.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute5b0ae4f5edff968d0a4646ce(),
 		// Property: ContactId
 		// CloudFormation resource type schema:
 		//
@@ -56,18 +233,7 @@ func planResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "arn:[-\\w+=\\/,.@]+:[-\\w+=\\/,.@]+:[-\\w+=\\/,.@]*:[0-9]+:([\\w+=\\/,.@:-]+)*",
 		//	  "type": "string"
 		//	}
-		"contact_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Contact ID for the AWS SSM Incident Manager Contact to associate the plan.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("arn:[-\\w+=\\/,.@]+:[-\\w+=\\/,.@]+:[-\\w+=\\/,.@]*:[0-9]+:([\\w+=\\/,.@:-]+)*"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"contact_id": schemaAttributed5ecb1f24b2bfad02dcdf071(),
 		// Property: RotationIds
 		// CloudFormation resource type schema:
 		//
@@ -79,17 +245,7 @@ func planResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"rotation_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Rotation Ids to associate with Oncall Contact for engagement.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// RotationIds is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"rotation_ids": schemaAttributec0fb4e8e3309f811d46552ea(),
 		// Property: Stages
 		// CloudFormation resource type schema:
 		//
@@ -174,115 +330,7 @@ func planResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"stages": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: DurationInMinutes
-					"duration_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The time to wait until beginning the next stage.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.Int64{ /*START VALIDATORS*/
-							fwvalidators.NotNullInt64(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-							int64planmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Targets
-					"targets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ChannelTargetInfo
-								"channel_target_info": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: ChannelId
-										"channel_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The Amazon Resource Name (ARN) of the contact channel.",
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												fwvalidators.NotNullString(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: RetryIntervalInMinutes
-										"retry_interval_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "The number of minutes to wait to retry sending engagement in the case the engagement initially fails.",
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.Int64{ /*START VALIDATORS*/
-												fwvalidators.NotNullInt64(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-												int64planmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "Information about the contact channel that SSM Incident Manager uses to engage the contact.",
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: ContactTargetInfo
-								"contact_target_info": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: ContactId
-										"contact_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The Amazon Resource Name (ARN) of the contact.",
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												fwvalidators.NotNullString(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: IsEssential
-										"is_essential": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Description: "A Boolean value determining if the contact's acknowledgement stops the progress of stages in the plan.",
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.Bool{ /*START VALIDATORS*/
-												fwvalidators.NotNullBool(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-												boolplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "The contact that SSM Incident Manager is engaging during an incident.",
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "The contacts or contact methods that the escalation plan or engagement plan is engaging.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-							generic.Multiset(),
-							listplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The stages that an escalation plan or engagement plan engages contacts and contact methods in.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"stages": schemaAttribute2df879a60a6b1e1a6b1fbe39(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

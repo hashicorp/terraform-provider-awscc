@@ -28,6 +28,752 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute064fd8da253b915c801377b7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EncryptionMode
+			"encryption_mode": schemaAttribute90098198ddc5ea6b4fa14e14(),
+			// Property: KmsKeyArn
+			"kms_key_arn": schemaAttribute697080c81219ec97eaef5a26(),
+		}, /*END SCHEMA*/
+		Description: "Encryption configuration for uploading artifacts to S3",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0a5630448b9355d79202768e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of the screenshot to be used as base reference for visual testing",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0a5e303c27e5bf7fca5d400e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DurationInSeconds
+			"duration_in_seconds": schemaAttribute3b49822e75e7697f78b8a712(),
+			// Property: Expression
+			"expression": schemaAttributed6ee5cbec61a989963dc6718(),
+			// Property: RetryConfig
+			"retry_config": schemaAttributec188524885e84eb4ce367097(),
+		}, /*END SCHEMA*/
+		Description: "Frequency to run your canaries",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0bddaafc87516f64d2eff7d3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BlueprintTypes
+			"blueprint_types": schemaAttribute2c0eab44d486154f456287e3(),
+			// Property: Dependencies
+			"dependencies": schemaAttribute91f4a8d51409bd44d7bdb5c7(),
+			// Property: Handler
+			"handler": schemaAttribute3b49822e75e7697f78b8a712(),
+			// Property: S3Bucket
+			"s3_bucket": schemaAttribute60cdbdc0df45d808f0956470(),
+			// Property: S3Key
+			"s3_key": schemaAttribute21ba97c6004fe0d70fbad03a(),
+			// Property: S3ObjectVersion
+			"s3_object_version": schemaAttributecf575338533edd7a15f085d1(),
+			// Property: Script
+			"script": schemaAttributeaefc00526a7d505644bab920(),
+			// Property: SourceLocationArn
+			"source_location_arn": schemaAttribute331af54d88c39b0a43f02ed6(),
+		}, /*END SCHEMA*/
+		Description: "Provide the canary script source",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1101533b940da0278776b57e() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BrowserType
+				"browser_type": schemaAttribute782123fbe8faea8013110203(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of browser configurations for the canary",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(1, 2),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute18f98444da189f55c3a6e76c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Id of the canary",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1e04d5cfef4efe84800f5eb3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Runtime version of Synthetics Library",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute21ba97c6004fe0d70fbad03a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// S3Key is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute24d60dca0c28f6659f630094() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of the canary.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-z_\\-]{1,255}$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute262b8c84c67e3c9827526a30() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of coordinates of rectangles to be ignored during visual testing",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute27477f724b952c8b46341ea5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3Encryption
+			"s3_encryption": schemaAttribute064fd8da253b915c801377b7(),
+		}, /*END SCHEMA*/
+		Description: "Provide artifact configuration",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c0eab44d486154f456287e3() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeAtMost(1),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2da2d976c6f898e2ca24954b() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of resources which canary tags should be replicated to.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.UniqueValues(),
+			listvalidator.ValueStringsAre(
+				stringvalidator.OneOf(
+					"lambda-function",
+				),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// ResourcesToReplicateTags is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2fafc8ec85850c8c97ce559e() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Environment variable key-value pairs.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+			mapplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// EnvironmentVariables is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute331af54d88c39b0a43f02ed6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute34b27864cbcb8fa7d9f9ce99() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"CHROME",
+				"FIREFOX",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3b49822e75e7697f78b8a712() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3c14a5486ae1dba493157bb2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ActiveTracing
+			"active_tracing": schemaAttributeb219a1f707c331f522b3ddec(),
+			// Property: EnvironmentVariables
+			"environment_variables": schemaAttribute2fafc8ec85850c8c97ce559e(),
+			// Property: EphemeralStorage
+			"ephemeral_storage": schemaAttributeda6529c07699927be75dfb5d(),
+			// Property: MemoryInMB
+			"memory_in_mb": schemaAttribute62c36065fd542a3b89e82bc0(),
+			// Property: TimeoutInSeconds
+			"timeout_in_seconds": schemaAttributee11a5a474b5ee4314f8e185b(),
+		}, /*END SCHEMA*/
+		Description: "Provide canary run configuration",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4217bfc2fa0aa2ebf3f9081c() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Retention period of failed canary runs represented in number of days",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute428b54bd164a56946fdb4fc1() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Deletes associated lambda resources created by Synthetics if set to True. Default is False",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// DeleteLambdaResourcesOnCanaryDeletion is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4bbb2cafc8b6c5e7fefd970f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute74ae6b4fe0f9a6107a0d6205(),
+				// Property: Value
+				"value": schemaAttributee8427ac773921a1e4810bcc9(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4d96888c0cfb0f62d4f1a56a() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Retention period of successful canary runs represented in number of days",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute60cdbdc0df45d808f0956470() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// S3Bucket is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute62c36065fd542a3b89e82bc0() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Provide maximum memory available for canary in MB",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute65d6c24c2dc87dbb7c06a062() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "maximum times the canary will be retried upon the scheduled run failure",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			fwvalidators.NotNullInt64(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute67fc964623bec637f3d0e891() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Type of dependency",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"LambdaLayer",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute697080c81219ec97eaef5a26() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "KMS key Arn for encrypting artifacts when uploading to S3. You must specify KMS key Arn for SSE_KMS encryption mode only.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute72f6b10f1ac203426d995264() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Runs canary if set to True. Default is False",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// StartCanaryAfterCreation is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute74ae6b4fe0f9a6107a0d6205() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute778377aba1e82c20bbe57bc3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Provide the s3 bucket output location for test results",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("^(s3|S3)://"), ""),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute782123fbe8faea8013110203() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"CHROME",
+				"FIREFOX",
+			),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7bc494007c9d89933122aa2b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Setting to control if provisioned resources created by Synthetics are deleted alongside the canary. Default is AUTOMATIC.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"AUTOMATIC",
+				"OFF",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7bd82fce66bf8320857e0608() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Canary run id to be used as base reference for visual testing",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8523d38b09c6054cf3436096() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IgnoreCoordinates
+				"ignore_coordinates": schemaAttribute262b8c84c67e3c9827526a30(),
+				// Property: ScreenshotName
+				"screenshot_name": schemaAttribute0a5630448b9355d79202768e(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of screenshots used as base reference for visual testing",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8920e16e71ac5bd7cc8697f8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Ipv6AllowedForDualStack
+			"ipv_6_allowed_for_dual_stack": schemaAttributee4c57632b78b55dc64b4946e(),
+			// Property: SecurityGroupIds
+			"security_group_ids": schemaAttributef432a0eb48d9fd8911a5afb4(),
+			// Property: SubnetIds
+			"subnet_ids": schemaAttributef432a0eb48d9fd8911a5afb4(),
+			// Property: VpcId
+			"vpc_id": schemaAttribute3b49822e75e7697f78b8a712(),
+		}, /*END SCHEMA*/
+		Description: "Provide VPC Configuration if enabled.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a2903f0c094a54ac5af2823() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN of the Lambda layer",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 140),
+			stringvalidator.RegexMatches(regexp.MustCompile("arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\\d{12}:layer:[a-zA-Z0-9-_]+:[0-9]+"), ""),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute90098198ddc5ea6b4fa14e14() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Encryption mode for encrypting artifacts when uploading to S3. Valid values: SSE_S3 and SSE_KMS.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute91f4a8d51409bd44d7bdb5c7() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Reference
+				"reference": schemaAttribute8a2903f0c094a54ac5af2823(),
+				// Property: Type
+				"type": schemaAttribute67fc964623bec637f3d0e891(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of Lambda layers to attach to the canary",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeAtMost(1),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute97a9facc47944f8aef8f29a0() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Setting to control if UpdateCanary will perform a DryRun and validate it is PASSING before performing the Update. Default is FALSE.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// DryRunAndUpdate is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9d79ff5066ee93382fea8ebc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BaseCanaryRunId
+			"base_canary_run_id": schemaAttribute7bd82fce66bf8320857e0608(),
+			// Property: BaseScreenshots
+			"base_screenshots": schemaAttribute8523d38b09c6054cf3436096(),
+			// Property: BrowserType
+			"browser_type": schemaAttribute34b27864cbcb8fa7d9f9ce99(),
+		}, /*END SCHEMA*/
+		Description: "Visual reference configuration for visual testing",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// VisualReference is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea8ce025d0cfc066a800baa08() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Lambda Execution role used to run your canaries",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaefc00526a7d505644bab920() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// Script is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb219a1f707c331f522b3ddec() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Enable active tracing if set to true",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb442bc391f41c761443b3244() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BaseCanaryRunId
+				"base_canary_run_id": schemaAttribute7bd82fce66bf8320857e0608(),
+				// Property: BaseScreenshots
+				"base_screenshots": schemaAttribute8523d38b09c6054cf3436096(),
+				// Property: BrowserType
+				"browser_type": schemaAttribute34b27864cbcb8fa7d9f9ce99(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of visual references for the canary",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(1, 2),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// VisualReferences is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec188524885e84eb4ce367097() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MaxRetries
+			"max_retries": schemaAttribute65d6c24c2dc87dbb7c06a062(),
+		}, /*END SCHEMA*/
+		Description: "Provide canary auto retry configuration",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecf575338533edd7a15f085d1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// S3ObjectVersion is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed6ee5cbec61a989963dc6718() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Required: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeda6529c07699927be75dfb5d() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Provide ephemeralStorage available for canary in MB",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee11a5a474b5ee4314f8e185b() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Provide maximum canary timeout per run in seconds",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee4c57632b78b55dc64b4946e() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Allow outbound IPv6 traffic on VPC canaries that are connected to dual-stack subnets if set to true",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee8427ac773921a1e4810bcc9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 256),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeed39b0cc6b205936fb366c4c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "State of the canary",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef432a0eb48d9fd8911a5afb4() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			fwvalidators.NotNullList(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_synthetics_canary", canaryResource)
 	registry.AddListResourceFactory("awscc_synthetics_canary", generic.NewListResource(canaryResource))
@@ -62,45 +808,7 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"artifact_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: S3Encryption
-				"s3_encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: EncryptionMode
-						"encryption_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Encryption mode for encrypting artifacts when uploading to S3. Valid values: SSE_S3 and SSE_KMS.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: KmsKeyArn
-						"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "KMS key Arn for encrypting artifacts when uploading to S3. You must specify KMS key Arn for SSE_KMS encryption mode only.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Encryption configuration for uploading artifacts to S3",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Provide artifact configuration",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"artifact_config": schemaAttribute27477f724b952c8b46341ea5(),
 		// Property: ArtifactS3Location
 		// CloudFormation resource type schema:
 		//
@@ -109,13 +817,7 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^(s3|S3)://",
 		//	  "type": "string"
 		//	}
-		"artifact_s3_location": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Provide the s3 bucket output location for test results",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^(s3|S3)://"), ""),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"artifact_s3_location": schemaAttribute778377aba1e82c20bbe57bc3(),
 		// Property: BrowserConfigs
 		// CloudFormation resource type schema:
 		//
@@ -141,36 +843,7 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"browser_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: BrowserType
-					"browser_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.OneOf(
-								"CHROME",
-								"FIREFOX",
-							),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "List of browser configurations for the canary",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(1, 2),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"browser_configs": schemaAttribute1101533b940da0278776b57e(),
 		// Property: Code
 		// CloudFormation resource type schema:
 		//
@@ -262,119 +935,7 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"code": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: BlueprintTypes
-				"blueprint_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.SizeAtMost(1),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: Dependencies
-				"dependencies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Reference
-							"reference": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "ARN of the Lambda layer",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 140),
-									stringvalidator.RegexMatches(regexp.MustCompile("arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\\d{12}:layer:[a-zA-Z0-9-_]+:[0-9]+"), ""),
-									fwvalidators.NotNullString(),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: Type
-							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Type of dependency",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.OneOf(
-										"LambdaLayer",
-									),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "List of Lambda layers to attach to the canary",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.SizeAtMost(1),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: Handler
-				"handler": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: S3Bucket
-				"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-					// S3Bucket is a write-only property.
-				}, /*END ATTRIBUTE*/
-				// Property: S3Key
-				"s3_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-					// S3Key is a write-only property.
-				}, /*END ATTRIBUTE*/
-				// Property: S3ObjectVersion
-				"s3_object_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-					// S3ObjectVersion is a write-only property.
-				}, /*END ATTRIBUTE*/
-				// Property: Script
-				"script": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-					// Script is a write-only property.
-				}, /*END ATTRIBUTE*/
-				// Property: SourceLocationArn
-				"source_location_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Provide the canary script source",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"code": schemaAttribute0bddaafc87516f64d2eff7d3(),
 		// Property: DeleteLambdaResourcesOnCanaryDeletion
 		// CloudFormation resource type schema:
 		//
@@ -382,15 +943,7 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Deletes associated lambda resources created by Synthetics if set to True. Default is False",
 		//	  "type": "boolean"
 		//	}
-		"delete_lambda_resources_on_canary_deletion": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Deletes associated lambda resources created by Synthetics if set to True. Default is False",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// DeleteLambdaResourcesOnCanaryDeletion is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"delete_lambda_resources_on_canary_deletion": schemaAttribute428b54bd164a56946fdb4fc1(),
 		// Property: DryRunAndUpdate
 		// CloudFormation resource type schema:
 		//
@@ -398,15 +951,7 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Setting to control if UpdateCanary will perform a DryRun and validate it is PASSING before performing the Update. Default is FALSE.",
 		//	  "type": "boolean"
 		//	}
-		"dry_run_and_update": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Setting to control if UpdateCanary will perform a DryRun and validate it is PASSING before performing the Update. Default is FALSE.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// DryRunAndUpdate is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"dry_run_and_update": schemaAttribute97a9facc47944f8aef8f29a0(),
 		// Property: ExecutionRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -414,10 +959,7 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Lambda Execution role used to run your canaries",
 		//	  "type": "string"
 		//	}
-		"execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Lambda Execution role used to run your canaries",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"execution_role_arn": schemaAttributea8ce025d0cfc066a800baa08(),
 		// Property: FailureRetentionPeriod
 		// CloudFormation resource type schema:
 		//
@@ -425,14 +967,7 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Retention period of failed canary runs represented in number of days",
 		//	  "type": "integer"
 		//	}
-		"failure_retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Retention period of failed canary runs represented in number of days",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"failure_retention_period": schemaAttribute4217bfc2fa0aa2ebf3f9081c(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -440,13 +975,7 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Id of the canary",
 		//	  "type": "string"
 		//	}
-		"canary_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Id of the canary",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"canary_id": schemaAttribute18f98444da189f55c3a6e76c(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -455,16 +984,7 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[0-9a-z_\\-]{1,255}$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Name of the canary.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-z_\\-]{1,255}$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute24d60dca0c28f6659f630094(),
 		// Property: ProvisionedResourceCleanup
 		// CloudFormation resource type schema:
 		//
@@ -476,20 +996,7 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"provisioned_resource_cleanup": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Setting to control if provisioned resources created by Synthetics are deleted alongside the canary. Default is AUTOMATIC.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"AUTOMATIC",
-					"OFF",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"provisioned_resource_cleanup": schemaAttribute7bc494007c9d89933122aa2b(),
 		// Property: ResourcesToReplicateTags
 		// CloudFormation resource type schema:
 		//
@@ -505,24 +1012,7 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"resources_to_replicate_tags": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "List of resources which canary tags should be replicated to.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.UniqueValues(),
-				listvalidator.ValueStringsAre(
-					stringvalidator.OneOf(
-						"lambda-function",
-					),
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// ResourcesToReplicateTags is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"resources_to_replicate_tags": schemaAttribute2da2d976c6f898e2ca24954b(),
 		// Property: RunConfig
 		// CloudFormation resource type schema:
 		//
@@ -559,64 +1049,7 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"run_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ActiveTracing
-				"active_tracing": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Enable active tracing if set to true",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: EnvironmentVariables
-				"environment_variables": // Pattern: ""
-				schema.MapAttribute{     /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "Environment variable key-value pairs.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-						mapplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-					// EnvironmentVariables is a write-only property.
-				}, /*END ATTRIBUTE*/
-				// Property: EphemeralStorage
-				"ephemeral_storage": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Provide ephemeralStorage available for canary in MB",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						int64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: MemoryInMB
-				"memory_in_mb": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Provide maximum memory available for canary in MB",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						int64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: TimeoutInSeconds
-				"timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Provide maximum canary timeout per run in seconds",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						int64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Provide canary run configuration",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"run_config": schemaAttribute3c14a5486ae1dba493157bb2(),
 		// Property: RuntimeVersion
 		// CloudFormation resource type schema:
 		//
@@ -624,10 +1057,7 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Runtime version of Synthetics Library",
 		//	  "type": "string"
 		//	}
-		"runtime_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Runtime version of Synthetics Library",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"runtime_version": schemaAttribute1e04d5cfef4efe84800f5eb3(),
 		// Property: Schedule
 		// CloudFormation resource type schema:
 		//
@@ -661,47 +1091,7 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"schedule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DurationInSeconds
-				"duration_in_seconds": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: Expression
-				"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
-				}, /*END ATTRIBUTE*/
-				// Property: RetryConfig
-				"retry_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: MaxRetries
-						"max_retries": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "maximum times the canary will be retried upon the scheduled run failure",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.Int64{ /*START VALIDATORS*/
-								fwvalidators.NotNullInt64(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Provide canary auto retry configuration",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Frequency to run your canaries",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"schedule": schemaAttribute0a5e303c27e5bf7fca5d400e(),
 		// Property: StartCanaryAfterCreation
 		// CloudFormation resource type schema:
 		//
@@ -709,15 +1099,7 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Runs canary if set to True. Default is False",
 		//	  "type": "boolean"
 		//	}
-		"start_canary_after_creation": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Runs canary if set to True. Default is False",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// StartCanaryAfterCreation is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"start_canary_after_creation": schemaAttribute72f6b10f1ac203426d995264(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -725,13 +1107,7 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "State of the canary",
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "State of the canary",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttributeed39b0cc6b205936fb366c4c(),
 		// Property: SuccessRetentionPeriod
 		// CloudFormation resource type schema:
 		//
@@ -739,14 +1115,7 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Retention period of successful canary runs represented in number of days",
 		//	  "type": "integer"
 		//	}
-		"success_retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Retention period of successful canary runs represented in number of days",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"success_retention_period": schemaAttribute4d96888c0cfb0f62d4f1a56a(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -777,43 +1146,7 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute4bbb2cafc8b6c5e7fefd970f(),
 		// Property: VPCConfig
 		// CloudFormation resource type schema:
 		//
@@ -847,57 +1180,7 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"vpc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Ipv6AllowedForDualStack
-				"ipv_6_allowed_for_dual_stack": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Allow outbound IPv6 traffic on VPC canaries that are connected to dual-stack subnets if set to true",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: SecurityGroupIds
-				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.List{ /*START VALIDATORS*/
-						fwvalidators.NotNullList(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: SubnetIds
-				"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.List{ /*START VALIDATORS*/
-						fwvalidators.NotNullList(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: VpcId
-				"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Provide VPC Configuration if enabled.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"vpc_config": schemaAttribute8920e16e71ac5bd7cc8697f8(),
 		// Property: VisualReference
 		// CloudFormation resource type schema:
 		//
@@ -946,78 +1229,7 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"visual_reference": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: BaseCanaryRunId
-				"base_canary_run_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Canary run id to be used as base reference for visual testing",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						fwvalidators.NotNullString(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: BaseScreenshots
-				"base_screenshots": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: IgnoreCoordinates
-							"ignore_coordinates": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Description: "List of coordinates of rectangles to be ignored during visual testing",
-								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									listplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: ScreenshotName
-							"screenshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Name of the screenshot to be used as base reference for visual testing",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									fwvalidators.NotNullString(),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "List of screenshots used as base reference for visual testing",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: BrowserType
-				"browser_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"CHROME",
-							"FIREFOX",
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Visual reference configuration for visual testing",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// VisualReference is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"visual_reference": schemaAttribute9d79ff5066ee93382fea8ebc(),
 		// Property: VisualReferences
 		// CloudFormation resource type schema:
 		//
@@ -1071,83 +1283,7 @@ func canaryResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"visual_references": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: BaseCanaryRunId
-					"base_canary_run_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Canary run id to be used as base reference for visual testing",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: BaseScreenshots
-					"base_screenshots": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: IgnoreCoordinates
-								"ignore_coordinates": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "List of coordinates of rectangles to be ignored during visual testing",
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										listplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: ScreenshotName
-								"screenshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Name of the screenshot to be used as base reference for visual testing",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										fwvalidators.NotNullString(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "List of screenshots used as base reference for visual testing",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-							listplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: BrowserType
-					"browser_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.OneOf(
-								"CHROME",
-								"FIREFOX",
-							),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "List of visual references for the canary",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(1, 2),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// VisualReferences is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"visual_references": schemaAttributeb442bc391f41c761443b3244(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

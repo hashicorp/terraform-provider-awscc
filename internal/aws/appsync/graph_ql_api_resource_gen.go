@@ -27,6 +27,646 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute013e3fc0fafc18c452ba4f63() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Controls how operation metrics will be emitted to CloudWatch. Operation metrics include:\n\n",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0232bcab7ffc9880220172ad() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A regular expression for validating the incoming Amazon Cognito user pool app client ID. ",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute078d6e9b438c4fab6005caba() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AuthTTL
+			"auth_ttl": schemaAttribute23272a06a38da7d94956761c(),
+			// Property: ClientId
+			"client_id": schemaAttribute4d5db0e70df7e7ee455fafa2(),
+			// Property: IatTTL
+			"iat_ttl": schemaAttribute88e69ad27f408e002c6d6de8(),
+			// Property: Issuer
+			"issuer": schemaAttribute18dce6bd3cc0de5fe2ca63dd(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0a900c8aec0457a7fb9c5e7b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AuthorizerResultTtlInSeconds
+			"authorizer_result_ttl_in_seconds": schemaAttributee6485eb47bbfcbd217431484(),
+			// Property: AuthorizerUri
+			"authorizer_uri": schemaAttribute312de1a1e27ec550e032aaaa(),
+			// Property: IdentityValidationExpression
+			"identity_validation_expression": schemaAttribute296dff9befc5af6b755b0cfc(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute18dce6bd3cc0de5fe2ca63dd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The issuer for the OIDC configuration. ",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute19e80b75ad04088aba307a68() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AuthTTL
+			"auth_ttl": schemaAttribute23272a06a38da7d94956761c(),
+			// Property: ClientId
+			"client_id": schemaAttribute4d5db0e70df7e7ee455fafa2(),
+			// Property: IatTTL
+			"iat_ttl": schemaAttribute88e69ad27f408e002c6d6de8(),
+			// Property: Issuer
+			"issuer": schemaAttribute18dce6bd3cc0de5fe2ca63dd(),
+		}, /*END SCHEMA*/
+		Description: "The OpenID Connect configuration.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute227300983871f9adb9e221db() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Controls how data source metrics will be emitted to CloudWatch. Data source metrics include:\n\n",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute23272a06a38da7d94956761c() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of milliseconds that a token is valid after being authenticated.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+			float64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute28bfa3f501699ef6a7d20eab() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum number of resolvers that can be invoked in a single request.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute296dff9befc5af6b755b0cfc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A regular expression for validation of tokens before the Lambda function is called.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2cee9f5542c4c348cbc69394() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The API name",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute30a1e2f953bb0374ee2f8310() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The action that you want your GraphQL API to take when a request that uses Amazon Cognito user pool authentication doesn't match the Amazon Cognito user pool configuration.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute312de1a1e27ec550e032aaaa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the Lambda function to be called for authorization.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute341bde1f747efdf37646c407() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The user pool ID",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3a306046c32738a42460c64a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS Identity and Access Management service role ARN for a merged API. ",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3e63a4cf43f0fda16caf0382() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The fully qualified domain name (FQDN) of the real-time endpoint URL of your GraphQL API.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4620bb5ca6d21610fbb97eec() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Sets the scope of the GraphQL API to public (GLOBAL) or private (PRIVATE). By default, the scope is set to Global if no value is provided.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4d5db0e70df7e7ee455fafa2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The client identifier of the Relying party at the OpenID identity provider.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4ff6d4cd23b2aec9c021ccb2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the API key",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute56e8723eafc93d1a72b4c1b6() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum depth a query can have in a single request. Depth refers to the amount of nested levels allowed in the body of query.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5f02aaca104d94f0f241fbf4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Controls how resolver metrics will be emitted to CloudWatch. Resolver metrics include:\n\n",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute62b35501d36b7ed84c2b1be1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The field logging level. Values can be NONE, ERROR, INFO, DEBUG, or ALL.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6923124d5a791d38caa1002e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The fully qualified domain name (FQDN) of the endpoint URL of your GraphQL API.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute70646ab5a31e080293886614() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AppIdClientRegex
+			"app_id_client_regex": schemaAttribute0232bcab7ffc9880220172ad(),
+			// Property: AwsRegion
+			"aws_region": schemaAttributed1da95624d4625b11ad79f06(),
+			// Property: UserPoolId
+			"user_pool_id": schemaAttribute341bde1f747efdf37646c407(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute74b12387370d995240f4b5b2() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A map containing the list of resources with their properties and environment variables.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+			mapplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b34d0f8017a024cc4a274ad() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The service role that AWS AppSync will assume to publish to Amazon CloudWatch Logs in your account.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute888190b57be56eed91287f50() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The authentication type for API key, AWS Identity and Access Management, OIDC, Amazon Cognito user pools, or AWS Lambda.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute88e69ad27f408e002c6d6de8() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of milliseconds that a token is valid after it's issued to a user.\n\n",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+			float64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute913d5c818c669b12df693504() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributee5bcde0af3415455d4775812(),
+				// Property: Value
+				"value": schemaAttributee5bcde0af3415455d4775812(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An arbitrary set of tags (key-value pairs) for this GraphQL API.\n\n",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.UniqueValues(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute933d2fd8ab877bb0ddbc4a79() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Set to TRUE to exclude sections that contain information such as headers, context, and evaluated mapping templates, regardless of logging level.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9535782b7333442296ce6c7e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CloudWatchLogsRoleArn
+			"cloudwatch_logs_role_arn": schemaAttribute7b34d0f8017a024cc4a274ad(),
+			// Property: ExcludeVerboseContent
+			"exclude_verbose_content": schemaAttribute933d2fd8ab877bb0ddbc4a79(),
+			// Property: FieldLogLevel
+			"field_log_level": schemaAttribute62b35501d36b7ed84c2b1be1(),
+		}, /*END SCHEMA*/
+		Description: "The Amazon CloudWatch Logs configuration.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute99bca4371a9b05c2d35aeb40() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A flag indicating whether to use AWS X-Ray tracing for this GraphqlApi.\n\n",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea555213c0204a3fdf8e5c94f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The user pool ID.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeab7685651eb70471c0fbc21f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AuthorizerResultTtlInSeconds
+			"authorizer_result_ttl_in_seconds": schemaAttributee6485eb47bbfcbd217431484(),
+			// Property: AuthorizerUri
+			"authorizer_uri": schemaAttribute312de1a1e27ec550e032aaaa(),
+			// Property: IdentityValidationExpression
+			"identity_validation_expression": schemaAttribute296dff9befc5af6b755b0cfc(),
+		}, /*END SCHEMA*/
+		Description: "A LambdaAuthorizerConfig holds configuration on how to authorize AWS AppSync API access when using the AWS_LAMBDA authorizer mode. Be aware that an AWS AppSync API may have only one Lambda authorizer configured at a time.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec9b3a5b26a6d6c3980608cad() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AuthenticationType
+				"authentication_type": schemaAttribute888190b57be56eed91287f50(),
+				// Property: LambdaAuthorizerConfig
+				"lambda_authorizer_config": schemaAttribute0a900c8aec0457a7fb9c5e7b(),
+				// Property: OpenIDConnectConfig
+				"open_id_connect_config": schemaAttribute078d6e9b438c4fab6005caba(),
+				// Property: UserPoolConfig
+				"user_pool_config": schemaAttribute70646ab5a31e080293886614(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of additional authentication providers for the GraphqlApi API.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.UniqueValues(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecaa6f4257afdadbf6f75b849() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Unique AWS AppSync GraphQL API identifier.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributece4a391289344600402e0c86() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Endpoint URL of your GraphQL API.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed1da95624d4625b11ad79f06() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS Region in which the user pool was created.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed53ff882be173a965d5b06ae() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Sets the value of the GraphQL API to enable (ENABLED) or disable (DISABLED) introspection. If no value is provided, the introspection configuration will be set to ENABLED by default. This field will produce an error if the operation attempts to use the introspection feature while this field is disabled.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed7135fbf4e55b8751a9bb6bd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The owner contact information for an API resource.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributede9bde68cf8c57f7cba2ce61() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Security configuration for your GraphQL API",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedff1856e08282c55d13dba96() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A regular expression for validating the incoming Amazon Cognito user pool app client ID.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee5bcde0af3415455d4775812() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee6485eb47bbfcbd217431484() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of seconds a response should be cached for.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeea02889746e470168f98460a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The GraphQL endpoint ARN.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeec2d927ec3da4ac1adff3453() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value that indicates whether the GraphQL API is a standard API (GRAPHQL) or merged API (MERGED).",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeefddd34aa55108f17b095770() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The GraphQL API real-time endpoint URL.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefc2b6399e64bd565c7d26d9d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DataSourceLevelMetricsBehavior
+			"data_source_level_metrics_behavior": schemaAttribute227300983871f9adb9e221db(),
+			// Property: OperationLevelMetricsConfig
+			"operation_level_metrics_config": schemaAttribute013e3fc0fafc18c452ba4f63(),
+			// Property: ResolverLevelMetricsBehavior
+			"resolver_level_metrics_behavior": schemaAttribute5f02aaca104d94f0f241fbf4(),
+		}, /*END SCHEMA*/
+		Description: "Enables and controls the enhanced metrics feature. Enhanced metrics emit granular data on API usage and performance such as AppSync request and error counts, latency, and cache hits/misses. All enhanced metric data is sent to your CloudWatch account, and you can configure the types of data that will be sent.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeff691113637a6c5b8631fb35() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AppIdClientRegex
+			"app_id_client_regex": schemaAttributedff1856e08282c55d13dba96(),
+			// Property: AwsRegion
+			"aws_region": schemaAttributed1da95624d4625b11ad79f06(),
+			// Property: DefaultAction
+			"default_action": schemaAttribute30a1e2f953bb0374ee2f8310(),
+			// Property: UserPoolId
+			"user_pool_id": schemaAttributea555213c0204a3fdf8e5c94f(),
+		}, /*END SCHEMA*/
+		Description: "Optional authorization configuration for using Amazon Cognito user pools with your GraphQL endpoint.\n\n",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_appsync_graph_ql_api", graphQLApiResource)
 	registry.AddListResourceFactory("awscc_appsync_graph_ql_api", generic.NewListResource(graphQLApiResource))
@@ -115,153 +755,7 @@ func graphQLApiResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"additional_authentication_providers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: AuthenticationType
-					"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The authentication type for API key, AWS Identity and Access Management, OIDC, Amazon Cognito user pools, or AWS Lambda.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: LambdaAuthorizerConfig
-					"lambda_authorizer_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AuthorizerResultTtlInSeconds
-							"authorizer_result_ttl_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The number of seconds a response should be cached for.",
-								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-									int64planmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: AuthorizerUri
-							"authorizer_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The ARN of the Lambda function to be called for authorization.",
-								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: IdentityValidationExpression
-							"identity_validation_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A regular expression for validation of tokens before the Lambda function is called.",
-								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-							objectplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: OpenIDConnectConfig
-					"open_id_connect_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AuthTTL
-							"auth_ttl": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The number of milliseconds that a token is valid after being authenticated.",
-								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-									float64planmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: ClientId
-							"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The client identifier of the Relying party at the OpenID identity provider.",
-								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: IatTTL
-							"iat_ttl": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The number of milliseconds that a token is valid after it's issued to a user.\n\n",
-								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-									float64planmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: Issuer
-							"issuer": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The issuer for the OIDC configuration. ",
-								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-							objectplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: UserPoolConfig
-					"user_pool_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AppIdClientRegex
-							"app_id_client_regex": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A regular expression for validating the incoming Amazon Cognito user pool app client ID. ",
-								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: AwsRegion
-							"aws_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The AWS Region in which the user pool was created.",
-								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: UserPoolId
-							"user_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The user pool ID",
-								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-							objectplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of additional authentication providers for the GraphqlApi API.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.UniqueValues(),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"additional_authentication_providers": schemaAttributec9b3a5b26a6d6c3980608cad(),
 		// Property: ApiId
 		// CloudFormation resource type schema:
 		//
@@ -269,13 +763,7 @@ func graphQLApiResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Unique AWS AppSync GraphQL API identifier.",
 		//	  "type": "string"
 		//	}
-		"api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Unique AWS AppSync GraphQL API identifier.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"api_id": schemaAttributecaa6f4257afdadbf6f75b849(),
 		// Property: ApiType
 		// CloudFormation resource type schema:
 		//
@@ -283,14 +771,7 @@ func graphQLApiResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The value that indicates whether the GraphQL API is a standard API (GRAPHQL) or merged API (MERGED).",
 		//	  "type": "string"
 		//	}
-		"api_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The value that indicates whether the GraphQL API is a standard API (GRAPHQL) or merged API (MERGED).",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"api_type": schemaAttributeec2d927ec3da4ac1adff3453(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -299,13 +780,7 @@ func graphQLApiResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:.*",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the API key",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute4ff6d4cd23b2aec9c021ccb2(),
 		// Property: AuthenticationType
 		// CloudFormation resource type schema:
 		//
@@ -313,10 +788,7 @@ func graphQLApiResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Security configuration for your GraphQL API",
 		//	  "type": "string"
 		//	}
-		"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Security configuration for your GraphQL API",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"authentication_type": schemaAttributede9bde68cf8c57f7cba2ce61(),
 		// Property: EnhancedMetricsConfig
 		// CloudFormation resource type schema:
 		//
@@ -344,52 +816,7 @@ func graphQLApiResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"enhanced_metrics_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DataSourceLevelMetricsBehavior
-				"data_source_level_metrics_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Controls how data source metrics will be emitted to CloudWatch. Data source metrics include:\n\n",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						fwvalidators.NotNullString(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: OperationLevelMetricsConfig
-				"operation_level_metrics_config": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Controls how operation metrics will be emitted to CloudWatch. Operation metrics include:\n\n",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						fwvalidators.NotNullString(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: ResolverLevelMetricsBehavior
-				"resolver_level_metrics_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Controls how resolver metrics will be emitted to CloudWatch. Resolver metrics include:\n\n",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						fwvalidators.NotNullString(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Enables and controls the enhanced metrics feature. Enhanced metrics emit granular data on API usage and performance such as AppSync request and error counts, latency, and cache hits/misses. All enhanced metric data is sent to your CloudWatch account, and you can configure the types of data that will be sent.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"enhanced_metrics_config": schemaAttributefc2b6399e64bd565c7d26d9d(),
 		// Property: EnvironmentVariables
 		// CloudFormation resource type schema:
 		//
@@ -403,16 +830,7 @@ func graphQLApiResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"environment_variables": // Pattern: ""
-		schema.MapAttribute{     /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A map containing the list of resources with their properties and environment variables.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-				mapplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"environment_variables": schemaAttribute74b12387370d995240f4b5b2(),
 		// Property: GraphQLDns
 		// CloudFormation resource type schema:
 		//
@@ -420,13 +838,7 @@ func graphQLApiResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The fully qualified domain name (FQDN) of the endpoint URL of your GraphQL API.",
 		//	  "type": "string"
 		//	}
-		"graph_ql_dns": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The fully qualified domain name (FQDN) of the endpoint URL of your GraphQL API.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"graph_ql_dns": schemaAttribute6923124d5a791d38caa1002e(),
 		// Property: GraphQLEndpointArn
 		// CloudFormation resource type schema:
 		//
@@ -434,13 +846,7 @@ func graphQLApiResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The GraphQL endpoint ARN.",
 		//	  "type": "string"
 		//	}
-		"graph_ql_endpoint_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The GraphQL endpoint ARN.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"graph_ql_endpoint_arn": schemaAttributeea02889746e470168f98460a(),
 		// Property: GraphQLUrl
 		// CloudFormation resource type schema:
 		//
@@ -448,13 +854,7 @@ func graphQLApiResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Endpoint URL of your GraphQL API.",
 		//	  "type": "string"
 		//	}
-		"graph_ql_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Endpoint URL of your GraphQL API.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"graph_ql_url": schemaAttributece4a391289344600402e0c86(),
 		// Property: IntrospectionConfig
 		// CloudFormation resource type schema:
 		//
@@ -462,14 +862,7 @@ func graphQLApiResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Sets the value of the GraphQL API to enable (ENABLED) or disable (DISABLED) introspection. If no value is provided, the introspection configuration will be set to ENABLED by default. This field will produce an error if the operation attempts to use the introspection feature while this field is disabled.",
 		//	  "type": "string"
 		//	}
-		"introspection_config": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Sets the value of the GraphQL API to enable (ENABLED) or disable (DISABLED) introspection. If no value is provided, the introspection configuration will be set to ENABLED by default. This field will produce an error if the operation attempts to use the introspection feature while this field is disabled.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"introspection_config": schemaAttributed53ff882be173a965d5b06ae(),
 		// Property: LambdaAuthorizerConfig
 		// CloudFormation resource type schema:
 		//
@@ -492,43 +885,7 @@ func graphQLApiResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"lambda_authorizer_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AuthorizerResultTtlInSeconds
-				"authorizer_result_ttl_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The number of seconds a response should be cached for.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						int64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: AuthorizerUri
-				"authorizer_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the Lambda function to be called for authorization.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: IdentityValidationExpression
-				"identity_validation_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A regular expression for validation of tokens before the Lambda function is called.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A LambdaAuthorizerConfig holds configuration on how to authorize AWS AppSync API access when using the AWS_LAMBDA authorizer mode. Be aware that an AWS AppSync API may have only one Lambda authorizer configured at a time.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"lambda_authorizer_config": schemaAttributeab7685651eb70471c0fbc21f(),
 		// Property: LogConfig
 		// CloudFormation resource type schema:
 		//
@@ -555,49 +912,7 @@ func graphQLApiResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"log_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CloudWatchLogsRoleArn
-				"cloudwatch_logs_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The service role that AWS AppSync will assume to publish to Amazon CloudWatch Logs in your account.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						fwvalidators.NotNullString(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: ExcludeVerboseContent
-				"exclude_verbose_content": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Set to TRUE to exclude sections that contain information such as headers, context, and evaluated mapping templates, regardless of logging level.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: FieldLogLevel
-				"field_log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The field logging level. Values can be NONE, ERROR, INFO, DEBUG, or ALL.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						fwvalidators.NotNullString(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The Amazon CloudWatch Logs configuration.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"log_config": schemaAttribute9535782b7333442296ce6c7e(),
 		// Property: MergedApiExecutionRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -605,14 +920,7 @@ func graphQLApiResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The AWS Identity and Access Management service role ARN for a merged API. ",
 		//	  "type": "string"
 		//	}
-		"merged_api_execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS Identity and Access Management service role ARN for a merged API. ",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"merged_api_execution_role_arn": schemaAttribute3a306046c32738a42460c64a(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -620,10 +928,7 @@ func graphQLApiResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The API name",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The API name",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute2cee9f5542c4c348cbc69394(),
 		// Property: OpenIDConnectConfig
 		// CloudFormation resource type schema:
 		//
@@ -650,52 +955,7 @@ func graphQLApiResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"open_id_connect_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AuthTTL
-				"auth_ttl": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "The number of milliseconds that a token is valid after being authenticated.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-						float64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: ClientId
-				"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The client identifier of the Relying party at the OpenID identity provider.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: IatTTL
-				"iat_ttl": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "The number of milliseconds that a token is valid after it's issued to a user.\n\n",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-						float64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: Issuer
-				"issuer": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The issuer for the OIDC configuration. ",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The OpenID Connect configuration.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"open_id_connect_config": schemaAttribute19e80b75ad04088aba307a68(),
 		// Property: OwnerContact
 		// CloudFormation resource type schema:
 		//
@@ -703,14 +963,7 @@ func graphQLApiResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The owner contact information for an API resource.",
 		//	  "type": "string"
 		//	}
-		"owner_contact": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The owner contact information for an API resource.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"owner_contact": schemaAttributed7135fbf4e55b8751a9bb6bd(),
 		// Property: QueryDepthLimit
 		// CloudFormation resource type schema:
 		//
@@ -718,14 +971,7 @@ func graphQLApiResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The maximum depth a query can have in a single request. Depth refers to the amount of nested levels allowed in the body of query.",
 		//	  "type": "integer"
 		//	}
-		"query_depth_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The maximum depth a query can have in a single request. Depth refers to the amount of nested levels allowed in the body of query.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"query_depth_limit": schemaAttribute56e8723eafc93d1a72b4c1b6(),
 		// Property: RealtimeDns
 		// CloudFormation resource type schema:
 		//
@@ -733,13 +979,7 @@ func graphQLApiResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The fully qualified domain name (FQDN) of the real-time endpoint URL of your GraphQL API.",
 		//	  "type": "string"
 		//	}
-		"realtime_dns": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The fully qualified domain name (FQDN) of the real-time endpoint URL of your GraphQL API.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"realtime_dns": schemaAttribute3e63a4cf43f0fda16caf0382(),
 		// Property: RealtimeUrl
 		// CloudFormation resource type schema:
 		//
@@ -747,13 +987,7 @@ func graphQLApiResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The GraphQL API real-time endpoint URL.",
 		//	  "type": "string"
 		//	}
-		"realtime_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The GraphQL API real-time endpoint URL.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"realtime_url": schemaAttributeefddd34aa55108f17b095770(),
 		// Property: ResolverCountLimit
 		// CloudFormation resource type schema:
 		//
@@ -761,14 +995,7 @@ func graphQLApiResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The maximum number of resolvers that can be invoked in a single request.",
 		//	  "type": "integer"
 		//	}
-		"resolver_count_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The maximum number of resolvers that can be invoked in a single request.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"resolver_count_limit": schemaAttribute28bfa3f501699ef6a7d20eab(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -793,43 +1020,7 @@ func graphQLApiResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An arbitrary set of tags (key-value pairs) for this GraphQL API.\n\n",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.UniqueValues(),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute913d5c818c669b12df693504(),
 		// Property: UserPoolConfig
 		// CloudFormation resource type schema:
 		//
@@ -856,52 +1047,7 @@ func graphQLApiResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"user_pool_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AppIdClientRegex
-				"app_id_client_regex": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A regular expression for validating the incoming Amazon Cognito user pool app client ID.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: AwsRegion
-				"aws_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The AWS Region in which the user pool was created.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: DefaultAction
-				"default_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The action that you want your GraphQL API to take when a request that uses Amazon Cognito user pool authentication doesn't match the Amazon Cognito user pool configuration.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: UserPoolId
-				"user_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The user pool ID.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Optional authorization configuration for using Amazon Cognito user pools with your GraphQL endpoint.\n\n",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"user_pool_config": schemaAttributeff691113637a6c5b8631fb35(),
 		// Property: Visibility
 		// CloudFormation resource type schema:
 		//
@@ -909,14 +1055,7 @@ func graphQLApiResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Sets the scope of the GraphQL API to public (GLOBAL) or private (PRIVATE). By default, the scope is set to Global if no value is provided.",
 		//	  "type": "string"
 		//	}
-		"visibility": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Sets the scope of the GraphQL API to public (GLOBAL) or private (PRIVATE). By default, the scope is set to Global if no value is provided.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"visibility": schemaAttribute4620bb5ca6d21610fbb97eec(),
 		// Property: XrayEnabled
 		// CloudFormation resource type schema:
 		//
@@ -924,14 +1063,7 @@ func graphQLApiResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A flag indicating whether to use AWS X-Ray tracing for this GraphqlApi.\n\n",
 		//	  "type": "boolean"
 		//	}
-		"xray_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "A flag indicating whether to use AWS X-Ray tracing for this GraphqlApi.\n\n",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"xray_enabled": schemaAttribute99bca4371a9b05c2d35aeb40(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

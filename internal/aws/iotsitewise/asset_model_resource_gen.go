@@ -24,6 +24,929 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute03d882d8ffdd1f0897fbb985() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the asset model property.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute06bbaa909fdc123503a969af() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the interface that is enforced to the asset model",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute07425ab0538f50ecabdd9430() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the hierarchy that is trying to be referenced",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(36, 36),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0b54e5b47a0686958a820358() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The External ID of the composite model",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(2, 128),
+			stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0dd176722f49d70d98bbaebf() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Interval
+			"interval": schemaAttributeccc6a82393e188cc01c6894d(),
+			// Property: Offset
+			"offset": schemaAttribute58c4b6ef7886d2690cf2632c(),
+		}, /*END SCHEMA*/
+		Description: "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute10ca8b94b3a361e51c0696f8() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute452427403474ac79f261db1d(),
+				// Property: Value
+				"value": schemaAttribute452427403474ac79f261db1d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of key-value pairs that contain metadata for the asset model.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute255b9ad212bc74c9ab7ae54e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Customer provided actual ID for hierarchy",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(36, 36),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2644a3804a139bd61cfe3ae5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The component model ID for which the composite model is composed of",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2e2db824713baf5956ca9dd0() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttribute61932a73f83b28c5fd15b5de(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The path of the property that is trying to be referenced",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute30c2824f0f829b7cde1995ba() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The parent composite model External ID",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(2, 128),
+			stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute341c9bca50a275ab5401eb29() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DataType
+				"data_type": schemaAttribute85c9eda18ad1321d0a9cbe62(),
+				// Property: DataTypeSpec
+				"data_type_spec": schemaAttribute5c41d5afcf3022fb3784161a(),
+				// Property: ExternalId
+				"external_id": schemaAttribute701d09096a9ddb727a17240c(),
+				// Property: Id
+				"id": schemaAttributedc5e7aa762b1b217d4ad7342(),
+				// Property: LogicalId
+				"logical_id": schemaAttribute6711d36b059cee2a01f9402c(),
+				// Property: Name
+				"name": schemaAttribute03d882d8ffdd1f0897fbb985(),
+				// Property: Type
+				"type": schemaAttribute546f23ebf659ab1e76130731(),
+				// Property: Unit
+				"unit": schemaAttribute6c57b8a5388495c21d7630b4(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3509be33947953940a7521b8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the asset model.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute381e63f07cb3e5ea1637b7bf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Customer provided logical ID for hierarchy.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 256),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3f6fd8770c862812f3a7ce03() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the asset model, which has the following format.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute452427403474ac79f261db1d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4b2502c0153781ff159cb13e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4cb61a2264b83f6ad1d5bd77() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the asset model. All assets in this hierarchy must be instances of the child AssetModelId asset model.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute546f23ebf659ab1e76130731() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Attribute
+			"attribute": schemaAttributea3c727832a077b13ef138875(),
+			// Property: Metric
+			"metric": schemaAttributebeec157991df50e74c4783ca(),
+			// Property: Transform
+			"transform": schemaAttribute6b64edba2d17fef9da9ef3ae(),
+			// Property: TypeName
+			"type_name": schemaAttributeb2bdbf002c355c425e547e2a(),
+		}, /*END SCHEMA*/
+		Description: "The property type",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute58c4b6ef7886d2690cf2632c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The shift or reference point on timeline for the contiguous time intervals.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute597200ddaa1ebcebc20b9783() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the property that is trying to be referenced",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(36, 36),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5a57a8dc1870b8329ff802ec() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description for the asset model.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5c41d5afcf3022fb3784161a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The data type of the structure for this property.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"AWS/ALARM_STATE",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5e742ec6be8e6b9e6eea95c2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the composite model. For alarm composite models, this type is AWS/ALARM",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5f69f99034738fe15b069571() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 256),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6094a62a59d0f634d5ad26a4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The external ID of the enforced asset model property",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute61932a73f83b28c5fd15b5de() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the property",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute65241f1ef3fef92263bc1016() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Actual ID of the composite model",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(36, 36),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6711d36b059cee2a01f9402c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Customer provided Logical ID for property.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 256),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute67c0107d5895f493bd98152c() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ChildAssetModelId
+				"child_asset_model_id": schemaAttribute4cb61a2264b83f6ad1d5bd77(),
+				// Property: ExternalId
+				"external_id": schemaAttribute8be486dcc4499a30184b6bde(),
+				// Property: Id
+				"id": schemaAttribute255b9ad212bc74c9ab7ae54e(),
+				// Property: LogicalId
+				"logical_id": schemaAttribute381e63f07cb3e5ea1637b7bf(),
+				// Property: Name
+				"name": schemaAttribute772a6e902984254e34d79367(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The hierarchy definitions of the asset model. Each hierarchy specifies an asset model whose assets can be children of any other assets created from this asset model. You can specify up to 10 hierarchies per asset model.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6a6c6ddd9b49db8e3546f1c7() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: InterfaceAssetModelId
+				"interface_asset_model_id": schemaAttribute06bbaa909fdc123503a969af(),
+				// Property: PropertyMappings
+				"property_mappings": schemaAttribute6d642f61e0af3cccddcdb2a0(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "a list of asset model and interface relationships",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b64edba2d17fef9da9ef3ae() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Expression
+			"expression": schemaAttribute4b2502c0153781ff159cb13e(),
+			// Property: Variables
+			"variables": schemaAttribute8f336ae6837708cd02c6a5db(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6c57b8a5388495c21d7630b4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unit of the asset model property, such as Newtons or RPM.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6d642f61e0af3cccddcdb2a0() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AssetModelPropertyExternalId
+				"asset_model_property_external_id": schemaAttribute6094a62a59d0f634d5ad26a4(),
+				// Property: AssetModelPropertyLogicalId
+				"asset_model_property_logical_id": schemaAttribute7ef33b98156f31c0b14f54d8(),
+				// Property: InterfaceAssetModelPropertyExternalId
+				"interface_asset_model_property_external_id": schemaAttributedea332c1876ae4c5f20e412c(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Contains information about enforced interface property and asset model property",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute701d09096a9ddb727a17240c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The External ID of the Asset Model Property",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(2, 128),
+			stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute772a6e902984254e34d79367() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the asset model hierarchy.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b6326e791aa3671eff399da() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The External ID of the property that is trying to be referenced",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(2, 128),
+			stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7ef33b98156f31c0b14f54d8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The logical ID of the enforced asset model property",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute85c9eda18ad1321d0a9cbe62() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The data type of the asset model property.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"STRING",
+				"INTEGER",
+				"DOUBLE",
+				"BOOLEAN",
+				"STRUCT",
+			),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8be486dcc4499a30184b6bde() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Customer provided external ID for hierarchy",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(2, 128),
+			stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8f336ae6837708cd02c6a5db() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttributeb4d2ab427e46ab8d5a023d4a(),
+				// Property: Value
+				"value": schemaAttributec267d4dbec198488afd6a6e9(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of variables used in the expression.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			fwvalidators.NotNullList(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9bd6092019738af89a060b8c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea3c727832a077b13ef138875() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DefaultValue
+			"default_value": schemaAttributec7c09918ed9eb59eb2f52ea0(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb2bdbf002c355c425e547e2a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"Measurement",
+				"Attribute",
+				"Transform",
+				"Metric",
+			),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb4d2ab427e46ab8d5a023d4a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The friendly name of the variable to be used in the expression.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb56b7a461760daf009397a47() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The External ID of the hierarchy that is trying to be referenced",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(2, 128),
+			stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb83c2c3ab65552a10ebbd488() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique, friendly name for the asset model.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebeec157991df50e74c4783ca() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Expression
+			"expression": schemaAttribute9bd6092019738af89a060b8c(),
+			// Property: Variables
+			"variables": schemaAttribute8f336ae6837708cd02c6a5db(),
+			// Property: Window
+			"window": schemaAttributedf57c026e450fea82f967865(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec267d4dbec198488afd6a6e9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: HierarchyExternalId
+			"hierarchy_external_id": schemaAttributeb56b7a461760daf009397a47(),
+			// Property: HierarchyId
+			"hierarchy_id": schemaAttribute07425ab0538f50ecabdd9430(),
+			// Property: HierarchyLogicalId
+			"hierarchy_logical_id": schemaAttribute5f69f99034738fe15b069571(),
+			// Property: PropertyExternalId
+			"property_external_id": schemaAttribute7b6326e791aa3671eff399da(),
+			// Property: PropertyId
+			"property_id": schemaAttribute597200ddaa1ebcebc20b9783(),
+			// Property: PropertyLogicalId
+			"property_logical_id": schemaAttribute5f69f99034738fe15b069571(),
+			// Property: PropertyPath
+			"property_path": schemaAttribute2e2db824713baf5956ca9dd0(),
+		}, /*END SCHEMA*/
+		Description: "The variable that identifies an asset property from which to use values.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec35896eb115d626a4d46ea79() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description for the asset composite model.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec7c09918ed9eb59eb2f52ea0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca6eacdb763cea04f07e30e4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique, friendly name for the asset composite model.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecb12e37c95db4ee618937067() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The path of the composite model. This is only for derived composite models",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeccc6a82393e188cc01c6894d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time interval for the tumbling window.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedc5e7aa762b1b217d4ad7342() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the Asset Model Property",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(36, 36),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedea332c1876ae4c5f20e412c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The external ID of the enforced interface property",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedf57c026e450fea82f967865() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Tumbling
+			"tumbling": schemaAttribute0dd176722f49d70d98bbaebf(),
+		}, /*END SCHEMA*/
+		Description: "The window (time interval) over which AWS IoT SiteWise computes the metric's aggregation expression",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef1f0ae8ef1e5cc889a7af37f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the asset model (ASSET_MODEL OR COMPONENT_MODEL or INTERFACE)",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef98ff2717a7d1287dd025909() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ComposedAssetModelId
+				"composed_asset_model_id": schemaAttribute2644a3804a139bd61cfe3ae5(),
+				// Property: CompositeModelProperties
+				"composite_model_properties": schemaAttribute341c9bca50a275ab5401eb29(),
+				// Property: Description
+				"description": schemaAttributec35896eb115d626a4d46ea79(),
+				// Property: ExternalId
+				"external_id": schemaAttribute0b54e5b47a0686958a820358(),
+				// Property: Id
+				"id": schemaAttribute65241f1ef3fef92263bc1016(),
+				// Property: Name
+				"name": schemaAttributeca6eacdb763cea04f07e30e4(),
+				// Property: ParentAssetModelCompositeModelExternalId
+				"parent_asset_model_composite_model_external_id": schemaAttribute30c2824f0f829b7cde1995ba(),
+				// Property: Path
+				"path": schemaAttributecb12e37c95db4ee618937067(),
+				// Property: Type
+				"type": schemaAttribute5e742ec6be8e6b9e6eea95c2(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The composite asset models that are part of this asset model. Composite asset models are asset models that contain specific properties.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefd70a7d7f5fa516f3b02bb0e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The external ID of the asset model.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(2, 128),
+			stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_iotsitewise_asset_model", assetModelResource)
 	registry.AddListResourceFactory("awscc_iotsitewise_asset_model", generic.NewListResource(assetModelResource))
@@ -40,13 +963,7 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ARN of the asset model, which has the following format.",
 		//	  "type": "string"
 		//	}
-		"asset_model_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the asset model, which has the following format.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"asset_model_arn": schemaAttribute3f6fd8770c862812f3a7ce03(),
 		// Property: AssetModelCompositeModels
 		// CloudFormation resource type schema:
 		//
@@ -427,639 +1344,7 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"asset_model_composite_models": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ComposedAssetModelId
-					"composed_asset_model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The component model ID for which the composite model is composed of",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: CompositeModelProperties
-					"composite_model_properties": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: DataType
-								"data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The data type of the asset model property.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.OneOf(
-											"STRING",
-											"INTEGER",
-											"DOUBLE",
-											"BOOLEAN",
-											"STRUCT",
-										),
-										fwvalidators.NotNullString(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: DataTypeSpec
-								"data_type_spec": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The data type of the structure for this property.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.OneOf(
-											"AWS/ALARM_STATE",
-										),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: ExternalId
-								"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The External ID of the Asset Model Property",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(2, 128),
-										stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: Id
-								"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The ID of the Asset Model Property",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(36, 36),
-										stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: LogicalId
-								"logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Customer provided Logical ID for property.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 256),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: Name
-								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The name of the asset model property.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										fwvalidators.NotNullString(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: Type
-								"type": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Attribute
-										"attribute": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: DefaultValue
-												"default_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-												objectplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: Metric
-										"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Expression
-												"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
-													Optional:    true,
-													Computed:    true,
-													Validators: []validator.String{ /*START VALIDATORS*/
-														fwvalidators.NotNullString(),
-													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: Variables
-												"variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: Name
-															"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The friendly name of the variable to be used in the expression.",
-																Optional:    true,
-																Computed:    true,
-																Validators: []validator.String{ /*START VALIDATORS*/
-																	fwvalidators.NotNullString(),
-																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																	stringplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: Value
-															"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: HierarchyExternalId
-																	"hierarchy_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The External ID of the hierarchy that is trying to be referenced",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(2, 128),
-																			stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: HierarchyId
-																	"hierarchy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The ID of the hierarchy that is trying to be referenced",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(36, 36),
-																			stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: HierarchyLogicalId
-																	"hierarchy_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Optional: true,
-																		Computed: true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 256),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: PropertyExternalId
-																	"property_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The External ID of the property that is trying to be referenced",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(2, 128),
-																			stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: PropertyId
-																	"property_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The ID of the property that is trying to be referenced",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(36, 36),
-																			stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: PropertyLogicalId
-																	"property_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Optional: true,
-																		Computed: true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 256),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: PropertyPath
-																	"property_path": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																				// Property: Name
-																				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																					Description: "The name of the property",
-																					Optional:    true,
-																					Computed:    true,
-																					Validators: []validator.String{ /*START VALIDATORS*/
-																						fwvalidators.NotNullString(),
-																					}, /*END VALIDATORS*/
-																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																						stringplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
-																				}, /*END ATTRIBUTE*/
-																			}, /*END SCHEMA*/
-																		}, /*END NESTED OBJECT*/
-																		Description: "The path of the property that is trying to be referenced",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																			listplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "The variable that identifies an asset property from which to use values.",
-																Optional:    true,
-																Computed:    true,
-																Validators: []validator.Object{ /*START VALIDATORS*/
-																	fwvalidators.NotNullObject(),
-																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-													}, /*END NESTED OBJECT*/
-													Description: "The list of variables used in the expression.",
-													Optional:    true,
-													Computed:    true,
-													Validators: []validator.List{ /*START VALIDATORS*/
-														fwvalidators.NotNullList(),
-													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-														generic.Multiset(),
-														listplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: Window
-												"window": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: Tumbling
-														"tumbling": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: Interval
-																"interval": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The time interval for the tumbling window.",
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.String{ /*START VALIDATORS*/
-																		fwvalidators.NotNullString(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																		stringplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-																// Property: Offset
-																"offset": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The shift or reference point on timeline for the contiguous time intervals.",
-																	Optional:    true,
-																	Computed:    true,
-																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																		stringplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																objectplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "The window (time interval) over which AWS IoT SiteWise computes the metric's aggregation expression",
-													Optional:    true,
-													Computed:    true,
-													Validators: []validator.Object{ /*START VALIDATORS*/
-														fwvalidators.NotNullObject(),
-													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-														objectplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-												objectplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: Transform
-										"transform": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Expression
-												"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
-													Optional:    true,
-													Computed:    true,
-													Validators: []validator.String{ /*START VALIDATORS*/
-														fwvalidators.NotNullString(),
-													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: Variables
-												"variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: Name
-															"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The friendly name of the variable to be used in the expression.",
-																Optional:    true,
-																Computed:    true,
-																Validators: []validator.String{ /*START VALIDATORS*/
-																	fwvalidators.NotNullString(),
-																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																	stringplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: Value
-															"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: HierarchyExternalId
-																	"hierarchy_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The External ID of the hierarchy that is trying to be referenced",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(2, 128),
-																			stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: HierarchyId
-																	"hierarchy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The ID of the hierarchy that is trying to be referenced",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(36, 36),
-																			stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: HierarchyLogicalId
-																	"hierarchy_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Optional: true,
-																		Computed: true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 256),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: PropertyExternalId
-																	"property_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The External ID of the property that is trying to be referenced",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(2, 128),
-																			stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: PropertyId
-																	"property_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The ID of the property that is trying to be referenced",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(36, 36),
-																			stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: PropertyLogicalId
-																	"property_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Optional: true,
-																		Computed: true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 256),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: PropertyPath
-																	"property_path": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																				// Property: Name
-																				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																					Description: "The name of the property",
-																					Optional:    true,
-																					Computed:    true,
-																					Validators: []validator.String{ /*START VALIDATORS*/
-																						fwvalidators.NotNullString(),
-																					}, /*END VALIDATORS*/
-																					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																						stringplanmodifier.UseStateForUnknown(),
-																					}, /*END PLAN MODIFIERS*/
-																				}, /*END ATTRIBUTE*/
-																			}, /*END SCHEMA*/
-																		}, /*END NESTED OBJECT*/
-																		Description: "The path of the property that is trying to be referenced",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																			listplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "The variable that identifies an asset property from which to use values.",
-																Optional:    true,
-																Computed:    true,
-																Validators: []validator.Object{ /*START VALIDATORS*/
-																	fwvalidators.NotNullObject(),
-																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-													}, /*END NESTED OBJECT*/
-													Description: "The list of variables used in the expression.",
-													Optional:    true,
-													Computed:    true,
-													Validators: []validator.List{ /*START VALIDATORS*/
-														fwvalidators.NotNullList(),
-													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-														generic.Multiset(),
-														listplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-												objectplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: TypeName
-										"type_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.OneOf(
-													"Measurement",
-													"Attribute",
-													"Transform",
-													"Metric",
-												),
-												fwvalidators.NotNullString(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "The property type",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.Object{ /*START VALIDATORS*/
-										fwvalidators.NotNullObject(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: Unit
-								"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The unit of the asset model property, such as Newtons or RPM.",
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-							generic.Multiset(),
-							listplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Description
-					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A description for the asset composite model.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: ExternalId
-					"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The External ID of the composite model",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(2, 128),
-							stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Id
-					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The Actual ID of the composite model",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(36, 36),
-							stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A unique, friendly name for the asset composite model.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: ParentAssetModelCompositeModelExternalId
-					"parent_asset_model_composite_model_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The parent composite model External ID",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(2, 128),
-							stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Path
-					"path": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "The path of the composite model. This is only for derived composite models",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-							listplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Type
-					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The type of the composite model. For alarm composite models, this type is AWS/ALARM",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The composite asset models that are part of this asset model. Composite asset models are asset models that contain specific properties.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"asset_model_composite_models": schemaAttributef98ff2717a7d1287dd025909(),
 		// Property: AssetModelDescription
 		// CloudFormation resource type schema:
 		//
@@ -1067,14 +1352,7 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A description for the asset model.",
 		//	  "type": "string"
 		//	}
-		"asset_model_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description for the asset model.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"asset_model_description": schemaAttribute5a57a8dc1870b8329ff802ec(),
 		// Property: AssetModelExternalId
 		// CloudFormation resource type schema:
 		//
@@ -1085,18 +1363,7 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+",
 		//	  "type": "string"
 		//	}
-		"asset_model_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The external ID of the asset model.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(2, 128),
-				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"asset_model_external_id": schemaAttributefd70a7d7f5fa516f3b02bb0e(),
 		// Property: AssetModelHierarchies
 		// CloudFormation resource type schema:
 		//
@@ -1145,81 +1412,7 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"asset_model_hierarchies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ChildAssetModelId
-					"child_asset_model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The ID of the asset model. All assets in this hierarchy must be instances of the child AssetModelId asset model.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: ExternalId
-					"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Customer provided external ID for hierarchy",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(2, 128),
-							stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Id
-					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Customer provided actual ID for hierarchy",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(36, 36),
-							stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: LogicalId
-					"logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Customer provided logical ID for hierarchy.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the asset model hierarchy.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The hierarchy definitions of the asset model. Each hierarchy specifies an asset model whose assets can be children of any other assets created from this asset model. You can specify up to 10 hierarchies per asset model.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"asset_model_hierarchies": schemaAttribute67c0107d5895f493bd98152c(),
 		// Property: AssetModelId
 		// CloudFormation resource type schema:
 		//
@@ -1230,13 +1423,7 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"asset_model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the asset model.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"asset_model_id": schemaAttribute3509be33947953940a7521b8(),
 		// Property: AssetModelName
 		// CloudFormation resource type schema:
 		//
@@ -1244,10 +1431,7 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A unique, friendly name for the asset model.",
 		//	  "type": "string"
 		//	}
-		"asset_model_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A unique, friendly name for the asset model.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"asset_model_name": schemaAttributeb83c2c3ab65552a10ebbd488(),
 		// Property: AssetModelProperties
 		// CloudFormation resource type schema:
 		//
@@ -1567,534 +1751,7 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"asset_model_properties": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: DataType
-					"data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The data type of the asset model property.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.OneOf(
-								"STRING",
-								"INTEGER",
-								"DOUBLE",
-								"BOOLEAN",
-								"STRUCT",
-							),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: DataTypeSpec
-					"data_type_spec": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The data type of the structure for this property.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.OneOf(
-								"AWS/ALARM_STATE",
-							),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: ExternalId
-					"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The External ID of the Asset Model Property",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(2, 128),
-							stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Id
-					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The ID of the Asset Model Property",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(36, 36),
-							stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: LogicalId
-					"logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Customer provided Logical ID for property.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the asset model property.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Type
-					"type": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Attribute
-							"attribute": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: DefaultValue
-									"default_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Optional: true,
-								Computed: true,
-								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-									objectplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: Metric
-							"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Expression
-									"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											fwvalidators.NotNullString(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-									// Property: Variables
-									"variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Name
-												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The friendly name of the variable to be used in the expression.",
-													Optional:    true,
-													Computed:    true,
-													Validators: []validator.String{ /*START VALIDATORS*/
-														fwvalidators.NotNullString(),
-													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: Value
-												"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: HierarchyExternalId
-														"hierarchy_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The External ID of the hierarchy that is trying to be referenced",
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.LengthBetween(2, 128),
-																stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: HierarchyId
-														"hierarchy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The ID of the hierarchy that is trying to be referenced",
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.LengthBetween(36, 36),
-																stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: HierarchyLogicalId
-														"hierarchy_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Optional: true,
-															Computed: true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.LengthBetween(1, 256),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: PropertyExternalId
-														"property_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The External ID of the property that is trying to be referenced",
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.LengthBetween(2, 128),
-																stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: PropertyId
-														"property_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The ID of the property that is trying to be referenced",
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.LengthBetween(36, 36),
-																stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: PropertyLogicalId
-														"property_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Optional: true,
-															Computed: true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.LengthBetween(1, 256),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: PropertyPath
-														"property_path": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-															NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: Name
-																	"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the property",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-															}, /*END NESTED OBJECT*/
-															Description: "The path of the property that is trying to be referenced",
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																listplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "The variable that identifies an asset property from which to use values.",
-													Optional:    true,
-													Computed:    true,
-													Validators: []validator.Object{ /*START VALIDATORS*/
-														fwvalidators.NotNullObject(),
-													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-														objectplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Description: "The list of variables used in the expression.",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.List{ /*START VALIDATORS*/
-											fwvalidators.NotNullList(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-											generic.Multiset(),
-											listplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-									// Property: Window
-									"window": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: Tumbling
-											"tumbling": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: Interval
-													"interval": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "The time interval for the tumbling window.",
-														Optional:    true,
-														Computed:    true,
-														Validators: []validator.String{ /*START VALIDATORS*/
-															fwvalidators.NotNullString(),
-														}, /*END VALIDATORS*/
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-													// Property: Offset
-													"offset": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "The shift or reference point on timeline for the contiguous time intervals.",
-														Optional:    true,
-														Computed:    true,
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Description: "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-													objectplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "The window (time interval) over which AWS IoT SiteWise computes the metric's aggregation expression",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.Object{ /*START VALIDATORS*/
-											fwvalidators.NotNullObject(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Optional: true,
-								Computed: true,
-								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-									objectplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: Transform
-							"transform": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Expression
-									"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											fwvalidators.NotNullString(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-									// Property: Variables
-									"variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Name
-												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The friendly name of the variable to be used in the expression.",
-													Optional:    true,
-													Computed:    true,
-													Validators: []validator.String{ /*START VALIDATORS*/
-														fwvalidators.NotNullString(),
-													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: Value
-												"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: HierarchyExternalId
-														"hierarchy_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The External ID of the hierarchy that is trying to be referenced",
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.LengthBetween(2, 128),
-																stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: HierarchyId
-														"hierarchy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The ID of the hierarchy that is trying to be referenced",
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.LengthBetween(36, 36),
-																stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: HierarchyLogicalId
-														"hierarchy_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Optional: true,
-															Computed: true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.LengthBetween(1, 256),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: PropertyExternalId
-														"property_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The External ID of the property that is trying to be referenced",
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.LengthBetween(2, 128),
-																stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_][a-zA-Z_\\-0-9.:]*[a-zA-Z0-9_]+"), ""),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: PropertyId
-														"property_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The ID of the property that is trying to be referenced",
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.LengthBetween(36, 36),
-																stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"), ""),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: PropertyLogicalId
-														"property_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Optional: true,
-															Computed: true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.LengthBetween(1, 256),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: PropertyPath
-														"property_path": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-															NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: Name
-																	"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the property",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-															}, /*END NESTED OBJECT*/
-															Description: "The path of the property that is trying to be referenced",
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																listplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "The variable that identifies an asset property from which to use values.",
-													Optional:    true,
-													Computed:    true,
-													Validators: []validator.Object{ /*START VALIDATORS*/
-														fwvalidators.NotNullObject(),
-													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-														objectplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Description: "The list of variables used in the expression.",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.List{ /*START VALIDATORS*/
-											fwvalidators.NotNullList(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-											generic.Multiset(),
-											listplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Optional: true,
-								Computed: true,
-								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-									objectplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: TypeName
-							"type_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
-								Computed: true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.OneOf(
-										"Measurement",
-										"Attribute",
-										"Transform",
-										"Metric",
-									),
-									fwvalidators.NotNullString(),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "The property type",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.Object{ /*START VALIDATORS*/
-							fwvalidators.NotNullObject(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-							objectplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Unit
-					"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The unit of the asset model property, such as Newtons or RPM.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"asset_model_properties": schemaAttribute341c9bca50a275ab5401eb29(),
 		// Property: AssetModelType
 		// CloudFormation resource type schema:
 		//
@@ -2102,15 +1759,7 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The type of the asset model (ASSET_MODEL OR COMPONENT_MODEL or INTERFACE)",
 		//	  "type": "string"
 		//	}
-		"asset_model_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of the asset model (ASSET_MODEL OR COMPONENT_MODEL or INTERFACE)",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"asset_model_type": schemaAttributef1f0ae8ef1e5cc889a7af37f(),
 		// Property: EnforcedAssetModelInterfaceRelationships
 		// CloudFormation resource type schema:
 		//
@@ -2157,71 +1806,7 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"enforced_asset_model_interface_relationships": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: InterfaceAssetModelId
-					"interface_asset_model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The ID of the interface that is enforced to the asset model",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: PropertyMappings
-					"property_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: AssetModelPropertyExternalId
-								"asset_model_property_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The external ID of the enforced asset model property",
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: AssetModelPropertyLogicalId
-								"asset_model_property_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The logical ID of the enforced asset model property",
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: InterfaceAssetModelPropertyExternalId
-								"interface_asset_model_property_external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The external ID of the enforced interface property",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										fwvalidators.NotNullString(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "Contains information about enforced interface property and asset model property",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-							listplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "a list of asset model and interface relationships",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"enforced_asset_model_interface_relationships": schemaAttribute6a6c6ddd9b49db8e3546f1c7(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -2246,41 +1831,7 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of key-value pairs that contain metadata for the asset model.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute10ca8b94b3a361e51c0696f8(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

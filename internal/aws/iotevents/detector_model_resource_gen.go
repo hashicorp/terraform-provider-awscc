@@ -27,6 +27,1357 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute016e3407aee98827ffd5bdd3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The state that is entered at the creation of each detector (instance).",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute034b42fe4712643eed765983() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Required. A Boolean expression that when TRUE causes the actions to be performed and the ``nextState`` to be entered.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(512),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute050ad524193f36a119f0278f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The timestamp, in seconds, in the Unix epoch format. The valid range is between 1-31556889864403199.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute09bed87201ae28435a7953f0() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of seconds until the timer expires. The minimum value is 60 seconds to ensure accuracy. The maximum value is 31622400 seconds.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.Between(60, 31622400),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0dd8cc4c4a236ae189b76ab8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The next state to enter.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0e46f36158e3f475a938dc52() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DurationExpression
+			"duration_expression": schemaAttribute66ab54bf5afaf8ca47bce55d(),
+			// Property: Seconds
+			"seconds": schemaAttribute09bed87201ae28435a7953f0(),
+			// Property: TimerName
+			"timer_name": schemaAttribute4eb8a5b27c264f422fc2edb7(),
+		}, /*END SCHEMA*/
+		Description: "Information needed to set the timer.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute13272df7ebd30c9bab618f04() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The quality of the asset property value. The value must be ``'GOOD'``, ``'BAD'``, or ``'UNCERTAIN'``.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute16206120baecb5aa6fa0a3dd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\\n' (newline), '\\t' (tab), '\\r\\n' (Windows newline), ',' (comma).",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("([\\n\\t])|(\\r\\n)|(,)"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute16dfa1979c3910747e2d2231() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Information about the order in which events are evaluated and how actions are executed.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"BATCH",
+				"SERIAL",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute173a5326a02d057ce6cbfd34() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the Lambda function that is executed.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 2048),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute18f585bc30953fa8dd24c540() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ContentExpression
+			"content_expression": schemaAttribute327e247ed032bede7a742ce2(),
+			// Property: Type
+			"type": schemaAttributeedb2d102a5840a9c2f6b2154(),
+		}, /*END SCHEMA*/
+		Description: "Information needed to configure the payload.\n By default, ITE generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use ``contentExpression``.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1d621c77fb6852ae1bf89578() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value used to identify a detector instance. When a device or system sends input, a new detector instance with a unique key value is created. ITE can continue to route input to its corresponding detector instance based on this identifying information. \n This parameter uses a JSON-path expression to select the attribute-value pair in the message payload that is used for identification. To route the message to the correct detector instance, the device must send a message payload that contains the same attribute-value.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			stringvalidator.RegexMatches(regexp.MustCompile("^((`[\\w\\- ]+`)|([\\w\\-]+))(\\.((`[\\w\\- ]+`)|([\\w\\-]+)))*$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1df06b6f12a54c71564749a4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the DynamoDB column that receives the action payload.\n If you don't specify this parameter, the name of the DynamoDB column is ``payload``.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1fd32747b074b81541bc04ab() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the hash key (also called the partition key). The ``hashKeyField`` value must match the partition key of the target DynamoDB table.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute208ef6d6066e4ff22b574f03() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of operation to perform. You can specify the following values: \n  +  ``'INSERT'`` - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.\n  +  ``'UPDATE'`` - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  +  ``'DELETE'`` - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  \n If you don't specify this parameter, ITE triggers the ``'INSERT'`` operation.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute25bcdd6451138348f34cd298() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MqttTopic
+			"mqtt_topic": schemaAttribute82369adab2840de6a5b617eb(),
+			// Property: Payload
+			"payload": schemaAttribute7b27f3c36f52ccaa93e96821(),
+		}, /*END SCHEMA*/
+		Description: "Publishes an MQTT message with the given topic to the IoT message broker.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2a45204fb0d068d8ac4b1dcd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the variable.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute30102bb851076edac776d7e1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Events
+			"events": schemaAttributef39c83261ad357f59685e568(),
+		}, /*END SCHEMA*/
+		Description: "When entering this state, perform these ``actions`` if the ``condition`` is TRUE.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute309f79cba1fb711bd70a6fca() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The asset property value is an integer. You must use an expression, and the evaluated result should be an integer.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute321711232df4bb3394c11dcb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Payload
+			"payload": schemaAttribute18f585bc30953fa8dd24c540(),
+			// Property: TableName
+			"table_name": schemaAttributefaf84311938cf30529cfb539(),
+		}, /*END SCHEMA*/
+		Description: "Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *Developer Guide*.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute327e247ed032bede7a742ce2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtLeast(1),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute333515643108a892e6770aa7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ContentExpression
+			"content_expression": schemaAttribute327e247ed032bede7a742ce2(),
+			// Property: Type
+			"type": schemaAttributeedb2d102a5840a9c2f6b2154(),
+		}, /*END SCHEMA*/
+		Description: "You can configure the action payload when you send a message to an ITE input.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute33c8043049648623ff6b27e7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Payload
+			"payload": schemaAttribute95d3b8013422b2a3d7294650(),
+			// Property: QueueUrl
+			"queue_url": schemaAttribute7f50e2042d58682b5bc9881c(),
+			// Property: UseBase64
+			"use_base_64": schemaAttributeade6617b46cbbc9ecc5ac28a(),
+		}, /*END SCHEMA*/
+		Description: "Sends an Amazon SNS message.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute368b5206d7287b2f0fae7a54() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Payload
+			"payload": schemaAttribute9bfc0c9b03b55e0f212c8eb5(),
+			// Property: TargetArn
+			"target_arn": schemaAttribute3d11a9db7550f2b3f394ce74(),
+		}, /*END SCHEMA*/
+		Description: "Sends an Amazon SNS message.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3d11a9db7550f2b3f394ce74() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the Amazon SNS target where the message is sent.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 2048),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3f67a368aec662d257a7d786() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique identifier for this entry. You can use the entry ID to track which data entry causes an error in case of failure. The default is a new unique identifier.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute407c3b21f36fb2d8c27c229b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the asset property.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute413dfded2484bece5ab9161c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: TimerName
+			"timer_name": schemaAttribute41b02f060e271a33e3cbc2e8(),
+		}, /*END SCHEMA*/
+		Description: "Information needed to clear the timer.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute41b02f060e271a33e3cbc2e8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the timer to clear.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute42f22d93a60a92b6768bbfdd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag's key.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute442b1341592d845525ec46ea() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the asset that has the specified property.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute44b8b6c62625b93ac8ef68c4() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute42f22d93a60a92b6768bbfdd(),
+				// Property: Value
+				"value": schemaAttributee845417d226a85209f097e7f(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.\n For more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html).",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute463c36b85a5e6411cdfd1ad9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BooleanValue
+			"boolean_value": schemaAttributeb92384bba8b51f22727b1fab(),
+			// Property: DoubleValue
+			"double_value": schemaAttributec50fb2e52169ddbd1a4d7319(),
+			// Property: IntegerValue
+			"integer_value": schemaAttribute309f79cba1fb711bd70a6fca(),
+			// Property: StringValue
+			"string_value": schemaAttributef334b0d29696a513b0cd1973(),
+		}, /*END SCHEMA*/
+		Description: "The value to send to an asset property.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4eb8a5b27c264f422fc2edb7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the timer.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4f5433d300d7f3898278fd43() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The data type for the hash key (also called the partition key). You can specify the following values:\n  +  ``'STRING'`` - The hash key is a string.\n  +  ``'NUMBER'`` - The hash key is a number.\n  \n If you don't specify ``hashKeyType``, the default value is ``'STRING'``.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute56f514518ddf63b0704db3bb() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Actions
+				"actions": schemaAttribute9622872f797d0a5b2104c0b8(),
+				// Property: Condition
+				"condition": schemaAttribute034b42fe4712643eed765983(),
+				// Property: EventName
+				"event_name": schemaAttributec43ce3e5df87dcc655f0f6fa(),
+				// Property: NextState
+				"next_state": schemaAttribute0dd8cc4c4a236ae189b76ab8(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Specifies the actions performed, and the next state entered, when a ``condition`` evaluates to TRUE.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute574da8874809c00ea4973af8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InputName
+			"input_name": schemaAttributefbd0283c55da0e9db11fe158(),
+			// Property: Payload
+			"payload": schemaAttribute333515643108a892e6770aa7(),
+		}, /*END SCHEMA*/
+		Description: "Sends ITE input, which passes information about the detector model instance and the event that triggered the action.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5aeec6205cc9b1a401a5d1e1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the role that grants permission to ITE to perform its operations.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 2048),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute61d0e2ba5c89cdb66993f2ba() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A brief description of the detector model.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(1024),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute66ab54bf5afaf8ca47bce55d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (``$variable.<variable-name>``), and input values (``$input.<input-name>.<path-to-datum>``) as the duration. The range of the duration is 1-31622400 seconds. To ensure accuracy, the minimum duration is 60 seconds. The evaluated result of the duration is rounded down to the nearest whole number.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 1024),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6975f76fe807c3b411aba856() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ContentExpression
+			"content_expression": schemaAttribute327e247ed032bede7a742ce2(),
+			// Property: Type
+			"type": schemaAttributeedb2d102a5840a9c2f6b2154(),
+		}, /*END SCHEMA*/
+		Description: "You can configure the action payload when you send a message to an Amazon Data Firehose delivery stream.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute773c3667157e8cfebab45db7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The nanosecond offset converted from ``timeInSeconds``. The valid range is between 0-999999999.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute77671ce9d2bdaacf236dc2cb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FunctionArn
+			"function_arn": schemaAttribute173a5326a02d057ce6cbfd34(),
+			// Property: Payload
+			"payload": schemaAttribute906cebba0dceb3a19198d763(),
+		}, /*END SCHEMA*/
+		Description: "Calls a Lambda function, passing in information about the detector model instance and the event that triggered the action.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7a4aaa53b36fca3bc292d6d2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The new value of the variable.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 1024),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b27f3c36f52ccaa93e96821() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ContentExpression
+			"content_expression": schemaAttribute327e247ed032bede7a742ce2(),
+			// Property: Type
+			"type": schemaAttributeedb2d102a5840a9c2f6b2154(),
+		}, /*END SCHEMA*/
+		Description: "You can configure the action payload when you publish a message to an IoTCore topic.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7c7808495f9f02495ca4d0a1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the event.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(128),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7f50e2042d58682b5bc9881c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The URL of the SQS queue where the data is written.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8043f4282c2980f6642b2635() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Actions
+				"actions": schemaAttribute9622872f797d0a5b2104c0b8(),
+				// Property: Condition
+				"condition": schemaAttribute948a3e6d6dc6ac98a799f205(),
+				// Property: EventName
+				"event_name": schemaAttribute7c7808495f9f02495ca4d0a1(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Specifies the actions performed when the ``condition`` evaluates to TRUE.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute82369adab2840de6a5b617eb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The MQTT topic of the message. You can use a string expression that includes variables (``$variable.<variable-name>``) and input values (``$input.<input-name>.<path-to-datum>``) as the topic string.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute826723ba00074530d019f37d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AssetId
+			"asset_id": schemaAttribute442b1341592d845525ec46ea(),
+			// Property: EntryId
+			"entry_id": schemaAttribute3f67a368aec662d257a7d786(),
+			// Property: PropertyAlias
+			"property_alias": schemaAttributebf411d3d2f513c9efac23eeb(),
+			// Property: PropertyId
+			"property_id": schemaAttribute407c3b21f36fb2d8c27c229b(),
+			// Property: PropertyValue
+			"property_value": schemaAttributeac7b27d9f7b2b99dcdae884d(),
+		}, /*END SCHEMA*/
+		Description: "Sends information about the detector model instance and the event that triggered the action to an asset property in ITSW .",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute83603dfcd6fd4d20482f268e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InitialStateName
+			"initial_state_name": schemaAttribute016e3407aee98827ffd5bdd3(),
+			// Property: States
+			"states": schemaAttributef41b3dd99bbffe1854dc2025(),
+		}, /*END SCHEMA*/
+		Description: "Information that defines how a detector operates.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8af12d717c252405252391e1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value of the range key (also called the sort key).",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute906cebba0dceb3a19198d763() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ContentExpression
+			"content_expression": schemaAttribute327e247ed032bede7a742ce2(),
+			// Property: Type
+			"type": schemaAttributeedb2d102a5840a9c2f6b2154(),
+		}, /*END SCHEMA*/
+		Description: "You can configure the action payload when you send a message to a Lambda function.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute908134607edde0de8fbcba91() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the detector model.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute93a17e61e0ddba87379d7aee() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the state.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute948a3e6d6dc6ac98a799f205() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Optional. The Boolean expression that, when TRUE, causes the ``actions`` to be performed. If not present, the actions are performed (=TRUE). If the expression result is not a Boolean value, the actions are not performed (=FALSE).",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(512),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute95d3b8013422b2a3d7294650() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ContentExpression
+			"content_expression": schemaAttribute327e247ed032bede7a742ce2(),
+			// Property: Type
+			"type": schemaAttributeedb2d102a5840a9c2f6b2154(),
+		}, /*END SCHEMA*/
+		Description: "You can configure the action payload when you send a message to an Amazon SQS queue.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9622872f797d0a5b2104c0b8() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ClearTimer
+				"clear_timer": schemaAttribute413dfded2484bece5ab9161c(),
+				// Property: DynamoDB
+				"dynamo_db": schemaAttributed8b0dfe5d82d218dd5af6d50(),
+				// Property: DynamoDBv2
+				"dynamo_d_bv_2": schemaAttribute321711232df4bb3394c11dcb(),
+				// Property: Firehose
+				"firehose": schemaAttribute9c157dc7373033ceca30f552(),
+				// Property: IotEvents
+				"iot_events": schemaAttribute574da8874809c00ea4973af8(),
+				// Property: IotSiteWise
+				"iot_site_wise": schemaAttribute826723ba00074530d019f37d(),
+				// Property: IotTopicPublish
+				"iot_topic_publish": schemaAttribute25bcdd6451138348f34cd298(),
+				// Property: Lambda
+				"lambda": schemaAttribute77671ce9d2bdaacf236dc2cb(),
+				// Property: ResetTimer
+				"reset_timer": schemaAttributee2a45e59a1d4aadfeefaf501(),
+				// Property: SetTimer
+				"set_timer": schemaAttribute0e46f36158e3f475a938dc52(),
+				// Property: SetVariable
+				"set_variable": schemaAttributeea6287f64b459f488a021ac0(),
+				// Property: Sns
+				"sns": schemaAttribute368b5206d7287b2f0fae7a54(),
+				// Property: Sqs
+				"sqs": schemaAttribute33c8043049648623ff6b27e7(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The actions to be performed.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9bfc0c9b03b55e0f212c8eb5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ContentExpression
+			"content_expression": schemaAttribute327e247ed032bede7a742ce2(),
+			// Property: Type
+			"type": schemaAttributeedb2d102a5840a9c2f6b2154(),
+		}, /*END SCHEMA*/
+		Description: "You can configure the action payload when you send a message as an Amazon SNS push notification.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c157dc7373033ceca30f552() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DeliveryStreamName
+			"delivery_stream_name": schemaAttributeb4e793932e09fc728c1b1444(),
+			// Property: Payload
+			"payload": schemaAttribute6975f76fe807c3b411aba856(),
+			// Property: Separator
+			"separator": schemaAttribute16206120baecb5aa6fa0a3dd(),
+		}, /*END SCHEMA*/
+		Description: "Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea2faf605fbfd794a3ec77d1c() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Actions
+				"actions": schemaAttribute9622872f797d0a5b2104c0b8(),
+				// Property: Condition
+				"condition": schemaAttribute948a3e6d6dc6ac98a799f205(),
+				// Property: EventName
+				"event_name": schemaAttribute7c7808495f9f02495ca4d0a1(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Specifies the ``actions`` that are performed when the state is exited and the ``condition`` is ``TRUE``.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea84a921288a7804cd2b81928() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the DynamoDB table. The ``tableName`` value must match the table name of the target DynamoDB table.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeac7b27d9f7b2b99dcdae884d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Quality
+			"quality": schemaAttribute13272df7ebd30c9bab618f04(),
+			// Property: Timestamp
+			"timestamp": schemaAttributef17849018908b8f34b6835b7(),
+			// Property: Value
+			"value": schemaAttribute463c36b85a5e6411cdfd1ad9(),
+		}, /*END SCHEMA*/
+		Description: "The value to send to the asset property. This value contains timestamp, quality, and value (TQV) information.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeade6617b46cbbc9ecc5ac28a() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Set this to TRUE if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to FALSE.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb1b0c8fd46fa04b48bf96bcd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the timer to reset.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb3509f432528ca867454e2ef() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Events
+			"events": schemaAttribute8043f4282c2980f6642b2635(),
+			// Property: TransitionEvents
+			"transition_events": schemaAttribute56f514518ddf63b0704db3bb(),
+		}, /*END SCHEMA*/
+		Description: "When an input is received and the ``condition`` is TRUE, perform the specified ``actions``.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb4e793932e09fc728c1b1444() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Kinesis Data Firehose delivery stream where the data is written.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb92384bba8b51f22727b1fab() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The asset property value is a Boolean value that must be ``'TRUE'`` or ``'FALSE'``. You must use an expression, and the evaluated result should be a Boolean value.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebe7036992630f52815690650() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The data type for the range key (also called the sort key), You can specify the following values:\n  +  ``'STRING'`` - The range key is a string.\n  +  ``'NUMBER'`` - The range key is number.\n  \n If you don't specify ``rangeKeyField``, the default value is ``'STRING'``.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebf411d3d2f513c9efac23eeb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The alias of the asset property.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec43ce3e5df87dcc655f0f6fa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the transition event.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec50fb2e52169ddbd1a4d7319() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The asset property value is a double. You must use an expression, and the evaluated result should be a double.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed8b0dfe5d82d218dd5af6d50() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: HashKeyField
+			"hash_key_field": schemaAttribute1fd32747b074b81541bc04ab(),
+			// Property: HashKeyType
+			"hash_key_type": schemaAttribute4f5433d300d7f3898278fd43(),
+			// Property: HashKeyValue
+			"hash_key_value": schemaAttributeea3615ef01dffd2ea1fea193(),
+			// Property: Operation
+			"operation": schemaAttribute208ef6d6066e4ff22b574f03(),
+			// Property: Payload
+			"payload": schemaAttribute18f585bc30953fa8dd24c540(),
+			// Property: PayloadField
+			"payload_field": schemaAttribute1df06b6f12a54c71564749a4(),
+			// Property: RangeKeyField
+			"range_key_field": schemaAttributef7605a32577e98a02325d1ca(),
+			// Property: RangeKeyType
+			"range_key_type": schemaAttributebe7036992630f52815690650(),
+			// Property: RangeKeyValue
+			"range_key_value": schemaAttribute8af12d717c252405252391e1(),
+			// Property: TableName
+			"table_name": schemaAttributea84a921288a7804cd2b81928(),
+		}, /*END SCHEMA*/
+		Description: "Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *Developer Guide*.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedd87bb4e75776918161b1af7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Events
+			"events": schemaAttributea2faf605fbfd794a3ec77d1c(),
+		}, /*END SCHEMA*/
+		Description: "When exiting this state, perform these ``actions`` if the specified ``condition`` is ``TRUE``.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee2a45e59a1d4aadfeefaf501() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: TimerName
+			"timer_name": schemaAttributeb1b0c8fd46fa04b48bf96bcd(),
+		}, /*END SCHEMA*/
+		Description: "Information needed to reset the timer.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee845417d226a85209f097e7f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag's value.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeea3615ef01dffd2ea1fea193() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value of the hash key (also called the partition key).",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeea6287f64b459f488a021ac0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Value
+			"value": schemaAttribute7a4aaa53b36fca3bc292d6d2(),
+			// Property: VariableName
+			"variable_name": schemaAttribute2a45204fb0d068d8ac4b1dcd(),
+		}, /*END SCHEMA*/
+		Description: "Sets a variable to a specified value.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeedb2d102a5840a9c2f6b2154() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef17849018908b8f34b6835b7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: OffsetInNanos
+			"offset_in_nanos": schemaAttribute773c3667157e8cfebab45db7(),
+			// Property: TimeInSeconds
+			"time_in_seconds": schemaAttribute050ad524193f36a119f0278f(),
+		}, /*END SCHEMA*/
+		Description: "The timestamp associated with the asset property value. The default is the current event time.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef334b0d29696a513b0cd1973() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The asset property value is a string. You must use an expression, and the evaluated result should be a string.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef39c83261ad357f59685e568() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Actions
+				"actions": schemaAttribute9622872f797d0a5b2104c0b8(),
+				// Property: Condition
+				"condition": schemaAttribute948a3e6d6dc6ac98a799f205(),
+				// Property: EventName
+				"event_name": schemaAttribute7c7808495f9f02495ca4d0a1(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Specifies the actions that are performed when the state is entered and the ``condition`` is ``TRUE``.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef41b3dd99bbffe1854dc2025() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: OnEnter
+				"on_enter": schemaAttribute30102bb851076edac776d7e1(),
+				// Property: OnExit
+				"on_exit": schemaAttributedd87bb4e75776918161b1af7(),
+				// Property: OnInput
+				"on_input": schemaAttributeb3509f432528ca867454e2ef(),
+				// Property: StateName
+				"state_name": schemaAttribute93a17e61e0ddba87379d7aee(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Information about the states of the detector.",
+		Required:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeAtLeast(1),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef7605a32577e98a02325d1ca() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the range key (also called the sort key). The ``rangeKeyField`` value must match the sort key of the target DynamoDB table.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefaf84311938cf30529cfb539() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the DynamoDB table.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefbd0283c55da0e9db11fe158() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the ITE input where the data is sent.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_iotevents_detector_model", detectorModelResource)
 	registry.AddListResourceFactory("awscc_iotevents_detector_model", generic.NewListResource(detectorModelResource))
@@ -2221,3749 +3572,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"detector_model_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: InitialStateName
-				"initial_state_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The state that is entered at the creation of each detector (instance).",
-					Required:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 128),
-					}, /*END VALIDATORS*/
-				}, /*END ATTRIBUTE*/
-				// Property: States
-				"states": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: OnEnter
-							"on_enter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Events
-									"events": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Actions
-												"actions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: ClearTimer
-															"clear_timer": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: TimerName
-																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the timer to clear.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Information needed to clear the timer.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: DynamoDB
-															"dynamo_db": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: HashKeyField
-																	"hash_key_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the hash key (also called the partition key). The ``hashKeyField`` value must match the partition key of the target DynamoDB table.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: HashKeyType
-																	"hash_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The data type for the hash key (also called the partition key). You can specify the following values:\n  +  ``'STRING'`` - The hash key is a string.\n  +  ``'NUMBER'`` - The hash key is a number.\n  \n If you don't specify ``hashKeyType``, the default value is ``'STRING'``.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: HashKeyValue
-																	"hash_key_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The value of the hash key (also called the partition key).",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Operation
-																	"operation": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The type of operation to perform. You can specify the following values: \n  +  ``'INSERT'`` - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.\n  +  ``'UPDATE'`` - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  +  ``'DELETE'`` - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  \n If you don't specify this parameter, ITE triggers the ``'INSERT'`` operation.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Payload
-																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: ContentExpression
-																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Type
-																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "Information needed to configure the payload.\n By default, ITE generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use ``contentExpression``.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: PayloadField
-																	"payload_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the DynamoDB column that receives the action payload.\n If you don't specify this parameter, the name of the DynamoDB column is ``payload``.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: RangeKeyField
-																	"range_key_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the range key (also called the sort key). The ``rangeKeyField`` value must match the sort key of the target DynamoDB table.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: RangeKeyType
-																	"range_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The data type for the range key (also called the sort key), You can specify the following values:\n  +  ``'STRING'`` - The range key is a string.\n  +  ``'NUMBER'`` - The range key is number.\n  \n If you don't specify ``rangeKeyField``, the default value is ``'STRING'``.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: RangeKeyValue
-																	"range_key_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The value of the range key (also called the sort key).",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: TableName
-																	"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the DynamoDB table. The ``tableName`` value must match the table name of the target DynamoDB table.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *Developer Guide*.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: DynamoDBv2
-															"dynamo_d_bv_2": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: Payload
-																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: ContentExpression
-																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Type
-																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "Information needed to configure the payload.\n By default, ITE generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use ``contentExpression``.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: TableName
-																	"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the DynamoDB table.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *Developer Guide*.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: Firehose
-															"firehose": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: DeliveryStreamName
-																	"delivery_stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the Kinesis Data Firehose delivery stream where the data is written.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Payload
-																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: ContentExpression
-																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Type
-																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "You can configure the action payload when you send a message to an Amazon Data Firehose delivery stream.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Separator
-																	"separator": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\\n' (newline), '\\t' (tab), '\\r\\n' (Windows newline), ',' (comma).",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.RegexMatches(regexp.MustCompile("([\\n\\t])|(\\r\\n)|(,)"), ""),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: IotEvents
-															"iot_events": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: InputName
-																	"input_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the ITE input where the data is sent.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
-																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Payload
-																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: ContentExpression
-																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Type
-																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "You can configure the action payload when you send a message to an ITE input.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Sends ITE input, which passes information about the detector model instance and the event that triggered the action.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: IotSiteWise
-															"iot_site_wise": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: AssetId
-																	"asset_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The ID of the asset that has the specified property.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: EntryId
-																	"entry_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "A unique identifier for this entry. You can use the entry ID to track which data entry causes an error in case of failure. The default is a new unique identifier.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: PropertyAlias
-																	"property_alias": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The alias of the asset property.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: PropertyId
-																	"property_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The ID of the asset property.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: PropertyValue
-																	"property_value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: Quality
-																			"quality": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The quality of the asset property value. The value must be ``'GOOD'``, ``'BAD'``, or ``'UNCERTAIN'``.",
-																				Optional:    true,
-																				Computed:    true,
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Timestamp
-																			"timestamp": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																					// Property: OffsetInNanos
-																					"offset_in_nanos": schema.StringAttribute{ /*START ATTRIBUTE*/
-																						Description: "The nanosecond offset converted from ``timeInSeconds``. The valid range is between 0-999999999.",
-																						Optional:    true,
-																						Computed:    true,
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
-																					}, /*END ATTRIBUTE*/
-																					// Property: TimeInSeconds
-																					"time_in_seconds": schema.StringAttribute{ /*START ATTRIBUTE*/
-																						Description: "The timestamp, in seconds, in the Unix epoch format. The valid range is between 1-31556889864403199.",
-																						Optional:    true,
-																						Computed:    true,
-																						Validators: []validator.String{ /*START VALIDATORS*/
-																							fwvalidators.NotNullString(),
-																						}, /*END VALIDATORS*/
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
-																					}, /*END ATTRIBUTE*/
-																				}, /*END SCHEMA*/
-																				Description: "The timestamp associated with the asset property value. The default is the current event time.",
-																				Optional:    true,
-																				Computed:    true,
-																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																					objectplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Value
-																			"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																					// Property: BooleanValue
-																					"boolean_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																						Description: "The asset property value is a Boolean value that must be ``'TRUE'`` or ``'FALSE'``. You must use an expression, and the evaluated result should be a Boolean value.",
-																						Optional:    true,
-																						Computed:    true,
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
-																					}, /*END ATTRIBUTE*/
-																					// Property: DoubleValue
-																					"double_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																						Description: "The asset property value is a double. You must use an expression, and the evaluated result should be a double.",
-																						Optional:    true,
-																						Computed:    true,
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
-																					}, /*END ATTRIBUTE*/
-																					// Property: IntegerValue
-																					"integer_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																						Description: "The asset property value is an integer. You must use an expression, and the evaluated result should be an integer.",
-																						Optional:    true,
-																						Computed:    true,
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
-																					}, /*END ATTRIBUTE*/
-																					// Property: StringValue
-																					"string_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																						Description: "The asset property value is a string. You must use an expression, and the evaluated result should be a string.",
-																						Optional:    true,
-																						Computed:    true,
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
-																					}, /*END ATTRIBUTE*/
-																				}, /*END SCHEMA*/
-																				Description: "The value to send to an asset property.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.Object{ /*START VALIDATORS*/
-																					fwvalidators.NotNullObject(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																					objectplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "The value to send to the asset property. This value contains timestamp, quality, and value (TQV) information.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.Object{ /*START VALIDATORS*/
-																			fwvalidators.NotNullObject(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Sends information about the detector model instance and the event that triggered the action to an asset property in ITSW .",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: IotTopicPublish
-															"iot_topic_publish": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: MqttTopic
-																	"mqtt_topic": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The MQTT topic of the message. You can use a string expression that includes variables (``$variable.<variable-name>``) and input values (``$input.<input-name>.<path-to-datum>``) as the topic string.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Payload
-																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: ContentExpression
-																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Type
-																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "You can configure the action payload when you publish a message to an IoTCore topic.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Publishes an MQTT message with the given topic to the IoT message broker.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: Lambda
-															"lambda": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: FunctionArn
-																	"function_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The ARN of the Lambda function that is executed.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 2048),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Payload
-																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: ContentExpression
-																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Type
-																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "You can configure the action payload when you send a message to a Lambda function.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Calls a Lambda function, passing in information about the detector model instance and the event that triggered the action.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: ResetTimer
-															"reset_timer": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: TimerName
-																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the timer to reset.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Information needed to reset the timer.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: SetTimer
-															"set_timer": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: DurationExpression
-																	"duration_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (``$variable.<variable-name>``), and input values (``$input.<input-name>.<path-to-datum>``) as the duration. The range of the duration is 1-31622400 seconds. To ensure accuracy, the minimum duration is 60 seconds. The evaluated result of the duration is rounded down to the nearest whole number.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 1024),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Seconds
-																	"seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-																		Description: "The number of seconds until the timer expires. The minimum value is 60 seconds to ensure accuracy. The maximum value is 31622400 seconds.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.Int64{ /*START VALIDATORS*/
-																			int64validator.Between(60, 31622400),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-																			int64planmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: TimerName
-																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the timer.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Information needed to set the timer.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: SetVariable
-															"set_variable": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: Value
-																	"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The new value of the variable.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 1024),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: VariableName
-																	"variable_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the variable.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
-																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Sets a variable to a specified value.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: Sns
-															"sns": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: Payload
-																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: ContentExpression
-																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Type
-																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "You can configure the action payload when you send a message as an Amazon SNS push notification.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: TargetArn
-																	"target_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The ARN of the Amazon SNS target where the message is sent.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 2048),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Sends an Amazon SNS message.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: Sqs
-															"sqs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: Payload
-																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: ContentExpression
-																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Type
-																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "You can configure the action payload when you send a message to an Amazon SQS queue.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: QueueUrl
-																	"queue_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The URL of the SQS queue where the data is written.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: UseBase64
-																	"use_base_64": schema.BoolAttribute{ /*START ATTRIBUTE*/
-																		Description: "Set this to TRUE if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to FALSE.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-																			boolplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Sends an Amazon SNS message.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-													}, /*END NESTED OBJECT*/
-													Description: "The actions to be performed.",
-													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-														generic.Multiset(),
-														listplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: Condition
-												"condition": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "Optional. The Boolean expression that, when TRUE, causes the ``actions`` to be performed. If not present, the actions are performed (=TRUE). If the expression result is not a Boolean value, the actions are not performed (=FALSE).",
-													Optional:    true,
-													Computed:    true,
-													Validators: []validator.String{ /*START VALIDATORS*/
-														stringvalidator.LengthAtMost(512),
-													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: EventName
-												"event_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The name of the event.",
-													Optional:    true,
-													Computed:    true,
-													Validators: []validator.String{ /*START VALIDATORS*/
-														stringvalidator.LengthAtMost(128),
-														fwvalidators.NotNullString(),
-													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Description: "Specifies the actions that are performed when the state is entered and the ``condition`` is ``TRUE``.",
-										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-											generic.Multiset(),
-											listplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "When entering this state, perform these ``actions`` if the ``condition`` is TRUE.",
-								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-									objectplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: OnExit
-							"on_exit": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Events
-									"events": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Actions
-												"actions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: ClearTimer
-															"clear_timer": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: TimerName
-																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the timer to clear.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Information needed to clear the timer.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: DynamoDB
-															"dynamo_db": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: HashKeyField
-																	"hash_key_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the hash key (also called the partition key). The ``hashKeyField`` value must match the partition key of the target DynamoDB table.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: HashKeyType
-																	"hash_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The data type for the hash key (also called the partition key). You can specify the following values:\n  +  ``'STRING'`` - The hash key is a string.\n  +  ``'NUMBER'`` - The hash key is a number.\n  \n If you don't specify ``hashKeyType``, the default value is ``'STRING'``.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: HashKeyValue
-																	"hash_key_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The value of the hash key (also called the partition key).",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Operation
-																	"operation": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The type of operation to perform. You can specify the following values: \n  +  ``'INSERT'`` - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.\n  +  ``'UPDATE'`` - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  +  ``'DELETE'`` - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  \n If you don't specify this parameter, ITE triggers the ``'INSERT'`` operation.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Payload
-																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: ContentExpression
-																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Type
-																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "Information needed to configure the payload.\n By default, ITE generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use ``contentExpression``.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: PayloadField
-																	"payload_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the DynamoDB column that receives the action payload.\n If you don't specify this parameter, the name of the DynamoDB column is ``payload``.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: RangeKeyField
-																	"range_key_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the range key (also called the sort key). The ``rangeKeyField`` value must match the sort key of the target DynamoDB table.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: RangeKeyType
-																	"range_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The data type for the range key (also called the sort key), You can specify the following values:\n  +  ``'STRING'`` - The range key is a string.\n  +  ``'NUMBER'`` - The range key is number.\n  \n If you don't specify ``rangeKeyField``, the default value is ``'STRING'``.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: RangeKeyValue
-																	"range_key_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The value of the range key (also called the sort key).",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: TableName
-																	"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the DynamoDB table. The ``tableName`` value must match the table name of the target DynamoDB table.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *Developer Guide*.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: DynamoDBv2
-															"dynamo_d_bv_2": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: Payload
-																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: ContentExpression
-																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Type
-																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "Information needed to configure the payload.\n By default, ITE generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use ``contentExpression``.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: TableName
-																	"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the DynamoDB table.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *Developer Guide*.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: Firehose
-															"firehose": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: DeliveryStreamName
-																	"delivery_stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the Kinesis Data Firehose delivery stream where the data is written.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Payload
-																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: ContentExpression
-																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Type
-																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "You can configure the action payload when you send a message to an Amazon Data Firehose delivery stream.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Separator
-																	"separator": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\\n' (newline), '\\t' (tab), '\\r\\n' (Windows newline), ',' (comma).",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.RegexMatches(regexp.MustCompile("([\\n\\t])|(\\r\\n)|(,)"), ""),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: IotEvents
-															"iot_events": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: InputName
-																	"input_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the ITE input where the data is sent.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
-																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Payload
-																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: ContentExpression
-																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Type
-																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "You can configure the action payload when you send a message to an ITE input.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Sends ITE input, which passes information about the detector model instance and the event that triggered the action.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: IotSiteWise
-															"iot_site_wise": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: AssetId
-																	"asset_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The ID of the asset that has the specified property.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: EntryId
-																	"entry_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "A unique identifier for this entry. You can use the entry ID to track which data entry causes an error in case of failure. The default is a new unique identifier.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: PropertyAlias
-																	"property_alias": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The alias of the asset property.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: PropertyId
-																	"property_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The ID of the asset property.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: PropertyValue
-																	"property_value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: Quality
-																			"quality": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The quality of the asset property value. The value must be ``'GOOD'``, ``'BAD'``, or ``'UNCERTAIN'``.",
-																				Optional:    true,
-																				Computed:    true,
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Timestamp
-																			"timestamp": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																					// Property: OffsetInNanos
-																					"offset_in_nanos": schema.StringAttribute{ /*START ATTRIBUTE*/
-																						Description: "The nanosecond offset converted from ``timeInSeconds``. The valid range is between 0-999999999.",
-																						Optional:    true,
-																						Computed:    true,
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
-																					}, /*END ATTRIBUTE*/
-																					// Property: TimeInSeconds
-																					"time_in_seconds": schema.StringAttribute{ /*START ATTRIBUTE*/
-																						Description: "The timestamp, in seconds, in the Unix epoch format. The valid range is between 1-31556889864403199.",
-																						Optional:    true,
-																						Computed:    true,
-																						Validators: []validator.String{ /*START VALIDATORS*/
-																							fwvalidators.NotNullString(),
-																						}, /*END VALIDATORS*/
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
-																					}, /*END ATTRIBUTE*/
-																				}, /*END SCHEMA*/
-																				Description: "The timestamp associated with the asset property value. The default is the current event time.",
-																				Optional:    true,
-																				Computed:    true,
-																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																					objectplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Value
-																			"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																					// Property: BooleanValue
-																					"boolean_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																						Description: "The asset property value is a Boolean value that must be ``'TRUE'`` or ``'FALSE'``. You must use an expression, and the evaluated result should be a Boolean value.",
-																						Optional:    true,
-																						Computed:    true,
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
-																					}, /*END ATTRIBUTE*/
-																					// Property: DoubleValue
-																					"double_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																						Description: "The asset property value is a double. You must use an expression, and the evaluated result should be a double.",
-																						Optional:    true,
-																						Computed:    true,
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
-																					}, /*END ATTRIBUTE*/
-																					// Property: IntegerValue
-																					"integer_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																						Description: "The asset property value is an integer. You must use an expression, and the evaluated result should be an integer.",
-																						Optional:    true,
-																						Computed:    true,
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
-																					}, /*END ATTRIBUTE*/
-																					// Property: StringValue
-																					"string_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																						Description: "The asset property value is a string. You must use an expression, and the evaluated result should be a string.",
-																						Optional:    true,
-																						Computed:    true,
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
-																					}, /*END ATTRIBUTE*/
-																				}, /*END SCHEMA*/
-																				Description: "The value to send to an asset property.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.Object{ /*START VALIDATORS*/
-																					fwvalidators.NotNullObject(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																					objectplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "The value to send to the asset property. This value contains timestamp, quality, and value (TQV) information.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.Object{ /*START VALIDATORS*/
-																			fwvalidators.NotNullObject(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Sends information about the detector model instance and the event that triggered the action to an asset property in ITSW .",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: IotTopicPublish
-															"iot_topic_publish": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: MqttTopic
-																	"mqtt_topic": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The MQTT topic of the message. You can use a string expression that includes variables (``$variable.<variable-name>``) and input values (``$input.<input-name>.<path-to-datum>``) as the topic string.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Payload
-																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: ContentExpression
-																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Type
-																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "You can configure the action payload when you publish a message to an IoTCore topic.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Publishes an MQTT message with the given topic to the IoT message broker.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: Lambda
-															"lambda": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: FunctionArn
-																	"function_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The ARN of the Lambda function that is executed.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 2048),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Payload
-																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: ContentExpression
-																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Type
-																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "You can configure the action payload when you send a message to a Lambda function.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Calls a Lambda function, passing in information about the detector model instance and the event that triggered the action.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: ResetTimer
-															"reset_timer": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: TimerName
-																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the timer to reset.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Information needed to reset the timer.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: SetTimer
-															"set_timer": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: DurationExpression
-																	"duration_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (``$variable.<variable-name>``), and input values (``$input.<input-name>.<path-to-datum>``) as the duration. The range of the duration is 1-31622400 seconds. To ensure accuracy, the minimum duration is 60 seconds. The evaluated result of the duration is rounded down to the nearest whole number.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 1024),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Seconds
-																	"seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-																		Description: "The number of seconds until the timer expires. The minimum value is 60 seconds to ensure accuracy. The maximum value is 31622400 seconds.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.Int64{ /*START VALIDATORS*/
-																			int64validator.Between(60, 31622400),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-																			int64planmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: TimerName
-																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the timer.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Information needed to set the timer.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: SetVariable
-															"set_variable": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: Value
-																	"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The new value of the variable.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 1024),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: VariableName
-																	"variable_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the variable.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
-																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Sets a variable to a specified value.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: Sns
-															"sns": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: Payload
-																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: ContentExpression
-																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Type
-																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "You can configure the action payload when you send a message as an Amazon SNS push notification.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: TargetArn
-																	"target_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The ARN of the Amazon SNS target where the message is sent.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 2048),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Sends an Amazon SNS message.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: Sqs
-															"sqs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: Payload
-																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: ContentExpression
-																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Type
-																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "You can configure the action payload when you send a message to an Amazon SQS queue.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: QueueUrl
-																	"queue_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The URL of the SQS queue where the data is written.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: UseBase64
-																	"use_base_64": schema.BoolAttribute{ /*START ATTRIBUTE*/
-																		Description: "Set this to TRUE if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to FALSE.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-																			boolplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Sends an Amazon SNS message.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-													}, /*END NESTED OBJECT*/
-													Description: "The actions to be performed.",
-													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-														generic.Multiset(),
-														listplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: Condition
-												"condition": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "Optional. The Boolean expression that, when TRUE, causes the ``actions`` to be performed. If not present, the actions are performed (=TRUE). If the expression result is not a Boolean value, the actions are not performed (=FALSE).",
-													Optional:    true,
-													Computed:    true,
-													Validators: []validator.String{ /*START VALIDATORS*/
-														stringvalidator.LengthAtMost(512),
-													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: EventName
-												"event_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The name of the event.",
-													Optional:    true,
-													Computed:    true,
-													Validators: []validator.String{ /*START VALIDATORS*/
-														stringvalidator.LengthAtMost(128),
-														fwvalidators.NotNullString(),
-													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Description: "Specifies the ``actions`` that are performed when the state is exited and the ``condition`` is ``TRUE``.",
-										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-											generic.Multiset(),
-											listplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "When exiting this state, perform these ``actions`` if the specified ``condition`` is ``TRUE``.",
-								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-									objectplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: OnInput
-							"on_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Events
-									"events": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Actions
-												"actions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: ClearTimer
-															"clear_timer": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: TimerName
-																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the timer to clear.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Information needed to clear the timer.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: DynamoDB
-															"dynamo_db": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: HashKeyField
-																	"hash_key_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the hash key (also called the partition key). The ``hashKeyField`` value must match the partition key of the target DynamoDB table.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: HashKeyType
-																	"hash_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The data type for the hash key (also called the partition key). You can specify the following values:\n  +  ``'STRING'`` - The hash key is a string.\n  +  ``'NUMBER'`` - The hash key is a number.\n  \n If you don't specify ``hashKeyType``, the default value is ``'STRING'``.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: HashKeyValue
-																	"hash_key_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The value of the hash key (also called the partition key).",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Operation
-																	"operation": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The type of operation to perform. You can specify the following values: \n  +  ``'INSERT'`` - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.\n  +  ``'UPDATE'`` - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  +  ``'DELETE'`` - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  \n If you don't specify this parameter, ITE triggers the ``'INSERT'`` operation.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Payload
-																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: ContentExpression
-																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Type
-																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "Information needed to configure the payload.\n By default, ITE generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use ``contentExpression``.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: PayloadField
-																	"payload_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the DynamoDB column that receives the action payload.\n If you don't specify this parameter, the name of the DynamoDB column is ``payload``.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: RangeKeyField
-																	"range_key_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the range key (also called the sort key). The ``rangeKeyField`` value must match the sort key of the target DynamoDB table.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: RangeKeyType
-																	"range_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The data type for the range key (also called the sort key), You can specify the following values:\n  +  ``'STRING'`` - The range key is a string.\n  +  ``'NUMBER'`` - The range key is number.\n  \n If you don't specify ``rangeKeyField``, the default value is ``'STRING'``.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: RangeKeyValue
-																	"range_key_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The value of the range key (also called the sort key).",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: TableName
-																	"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the DynamoDB table. The ``tableName`` value must match the table name of the target DynamoDB table.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *Developer Guide*.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: DynamoDBv2
-															"dynamo_d_bv_2": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: Payload
-																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: ContentExpression
-																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Type
-																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "Information needed to configure the payload.\n By default, ITE generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use ``contentExpression``.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: TableName
-																	"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the DynamoDB table.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *Developer Guide*.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: Firehose
-															"firehose": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: DeliveryStreamName
-																	"delivery_stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the Kinesis Data Firehose delivery stream where the data is written.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Payload
-																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: ContentExpression
-																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Type
-																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "You can configure the action payload when you send a message to an Amazon Data Firehose delivery stream.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Separator
-																	"separator": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\\n' (newline), '\\t' (tab), '\\r\\n' (Windows newline), ',' (comma).",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.RegexMatches(regexp.MustCompile("([\\n\\t])|(\\r\\n)|(,)"), ""),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: IotEvents
-															"iot_events": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: InputName
-																	"input_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the ITE input where the data is sent.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
-																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Payload
-																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: ContentExpression
-																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Type
-																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "You can configure the action payload when you send a message to an ITE input.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Sends ITE input, which passes information about the detector model instance and the event that triggered the action.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: IotSiteWise
-															"iot_site_wise": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: AssetId
-																	"asset_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The ID of the asset that has the specified property.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: EntryId
-																	"entry_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "A unique identifier for this entry. You can use the entry ID to track which data entry causes an error in case of failure. The default is a new unique identifier.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: PropertyAlias
-																	"property_alias": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The alias of the asset property.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: PropertyId
-																	"property_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The ID of the asset property.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: PropertyValue
-																	"property_value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: Quality
-																			"quality": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The quality of the asset property value. The value must be ``'GOOD'``, ``'BAD'``, or ``'UNCERTAIN'``.",
-																				Optional:    true,
-																				Computed:    true,
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Timestamp
-																			"timestamp": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																					// Property: OffsetInNanos
-																					"offset_in_nanos": schema.StringAttribute{ /*START ATTRIBUTE*/
-																						Description: "The nanosecond offset converted from ``timeInSeconds``. The valid range is between 0-999999999.",
-																						Optional:    true,
-																						Computed:    true,
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
-																					}, /*END ATTRIBUTE*/
-																					// Property: TimeInSeconds
-																					"time_in_seconds": schema.StringAttribute{ /*START ATTRIBUTE*/
-																						Description: "The timestamp, in seconds, in the Unix epoch format. The valid range is between 1-31556889864403199.",
-																						Optional:    true,
-																						Computed:    true,
-																						Validators: []validator.String{ /*START VALIDATORS*/
-																							fwvalidators.NotNullString(),
-																						}, /*END VALIDATORS*/
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
-																					}, /*END ATTRIBUTE*/
-																				}, /*END SCHEMA*/
-																				Description: "The timestamp associated with the asset property value. The default is the current event time.",
-																				Optional:    true,
-																				Computed:    true,
-																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																					objectplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Value
-																			"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																					// Property: BooleanValue
-																					"boolean_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																						Description: "The asset property value is a Boolean value that must be ``'TRUE'`` or ``'FALSE'``. You must use an expression, and the evaluated result should be a Boolean value.",
-																						Optional:    true,
-																						Computed:    true,
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
-																					}, /*END ATTRIBUTE*/
-																					// Property: DoubleValue
-																					"double_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																						Description: "The asset property value is a double. You must use an expression, and the evaluated result should be a double.",
-																						Optional:    true,
-																						Computed:    true,
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
-																					}, /*END ATTRIBUTE*/
-																					// Property: IntegerValue
-																					"integer_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																						Description: "The asset property value is an integer. You must use an expression, and the evaluated result should be an integer.",
-																						Optional:    true,
-																						Computed:    true,
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
-																					}, /*END ATTRIBUTE*/
-																					// Property: StringValue
-																					"string_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																						Description: "The asset property value is a string. You must use an expression, and the evaluated result should be a string.",
-																						Optional:    true,
-																						Computed:    true,
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
-																					}, /*END ATTRIBUTE*/
-																				}, /*END SCHEMA*/
-																				Description: "The value to send to an asset property.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.Object{ /*START VALIDATORS*/
-																					fwvalidators.NotNullObject(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																					objectplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "The value to send to the asset property. This value contains timestamp, quality, and value (TQV) information.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.Object{ /*START VALIDATORS*/
-																			fwvalidators.NotNullObject(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Sends information about the detector model instance and the event that triggered the action to an asset property in ITSW .",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: IotTopicPublish
-															"iot_topic_publish": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: MqttTopic
-																	"mqtt_topic": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The MQTT topic of the message. You can use a string expression that includes variables (``$variable.<variable-name>``) and input values (``$input.<input-name>.<path-to-datum>``) as the topic string.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Payload
-																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: ContentExpression
-																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Type
-																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "You can configure the action payload when you publish a message to an IoTCore topic.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Publishes an MQTT message with the given topic to the IoT message broker.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: Lambda
-															"lambda": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: FunctionArn
-																	"function_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The ARN of the Lambda function that is executed.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 2048),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Payload
-																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: ContentExpression
-																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Type
-																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "You can configure the action payload when you send a message to a Lambda function.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Calls a Lambda function, passing in information about the detector model instance and the event that triggered the action.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: ResetTimer
-															"reset_timer": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: TimerName
-																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the timer to reset.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Information needed to reset the timer.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: SetTimer
-															"set_timer": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: DurationExpression
-																	"duration_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (``$variable.<variable-name>``), and input values (``$input.<input-name>.<path-to-datum>``) as the duration. The range of the duration is 1-31622400 seconds. To ensure accuracy, the minimum duration is 60 seconds. The evaluated result of the duration is rounded down to the nearest whole number.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 1024),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Seconds
-																	"seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-																		Description: "The number of seconds until the timer expires. The minimum value is 60 seconds to ensure accuracy. The maximum value is 31622400 seconds.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.Int64{ /*START VALIDATORS*/
-																			int64validator.Between(60, 31622400),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-																			int64planmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: TimerName
-																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the timer.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Information needed to set the timer.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: SetVariable
-															"set_variable": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: Value
-																	"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The new value of the variable.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 1024),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: VariableName
-																	"variable_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the variable.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
-																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Sets a variable to a specified value.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: Sns
-															"sns": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: Payload
-																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: ContentExpression
-																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Type
-																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "You can configure the action payload when you send a message as an Amazon SNS push notification.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: TargetArn
-																	"target_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The ARN of the Amazon SNS target where the message is sent.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 2048),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Sends an Amazon SNS message.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: Sqs
-															"sqs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: Payload
-																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: ContentExpression
-																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Type
-																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "You can configure the action payload when you send a message to an Amazon SQS queue.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: QueueUrl
-																	"queue_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The URL of the SQS queue where the data is written.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: UseBase64
-																	"use_base_64": schema.BoolAttribute{ /*START ATTRIBUTE*/
-																		Description: "Set this to TRUE if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to FALSE.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-																			boolplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Sends an Amazon SNS message.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-													}, /*END NESTED OBJECT*/
-													Description: "The actions to be performed.",
-													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-														generic.Multiset(),
-														listplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: Condition
-												"condition": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "Optional. The Boolean expression that, when TRUE, causes the ``actions`` to be performed. If not present, the actions are performed (=TRUE). If the expression result is not a Boolean value, the actions are not performed (=FALSE).",
-													Optional:    true,
-													Computed:    true,
-													Validators: []validator.String{ /*START VALIDATORS*/
-														stringvalidator.LengthAtMost(512),
-													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: EventName
-												"event_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The name of the event.",
-													Optional:    true,
-													Computed:    true,
-													Validators: []validator.String{ /*START VALIDATORS*/
-														stringvalidator.LengthAtMost(128),
-														fwvalidators.NotNullString(),
-													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Description: "Specifies the actions performed when the ``condition`` evaluates to TRUE.",
-										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-											generic.Multiset(),
-											listplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-									// Property: TransitionEvents
-									"transition_events": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Actions
-												"actions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: ClearTimer
-															"clear_timer": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: TimerName
-																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the timer to clear.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Information needed to clear the timer.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: DynamoDB
-															"dynamo_db": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: HashKeyField
-																	"hash_key_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the hash key (also called the partition key). The ``hashKeyField`` value must match the partition key of the target DynamoDB table.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: HashKeyType
-																	"hash_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The data type for the hash key (also called the partition key). You can specify the following values:\n  +  ``'STRING'`` - The hash key is a string.\n  +  ``'NUMBER'`` - The hash key is a number.\n  \n If you don't specify ``hashKeyType``, the default value is ``'STRING'``.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: HashKeyValue
-																	"hash_key_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The value of the hash key (also called the partition key).",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Operation
-																	"operation": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The type of operation to perform. You can specify the following values: \n  +  ``'INSERT'`` - Insert data as a new item into the DynamoDB table. This item uses the specified hash key as a partition key. If you specified a range key, the item uses the range key as a sort key.\n  +  ``'UPDATE'`` - Update an existing item of the DynamoDB table with new data. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  +  ``'DELETE'`` - Delete an existing item of the DynamoDB table. This item's partition key must match the specified hash key. If you specified a range key, the range key must match the item's sort key.\n  \n If you don't specify this parameter, ITE triggers the ``'INSERT'`` operation.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Payload
-																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: ContentExpression
-																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Type
-																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "Information needed to configure the payload.\n By default, ITE generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use ``contentExpression``.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: PayloadField
-																	"payload_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the DynamoDB column that receives the action payload.\n If you don't specify this parameter, the name of the DynamoDB column is ``payload``.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: RangeKeyField
-																	"range_key_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the range key (also called the sort key). The ``rangeKeyField`` value must match the sort key of the target DynamoDB table.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: RangeKeyType
-																	"range_key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The data type for the range key (also called the sort key), You can specify the following values:\n  +  ``'STRING'`` - The range key is a string.\n  +  ``'NUMBER'`` - The range key is number.\n  \n If you don't specify ``rangeKeyField``, the default value is ``'STRING'``.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: RangeKeyValue
-																	"range_key_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The value of the range key (also called the sort key).",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: TableName
-																	"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the DynamoDB table. The ``tableName`` value must match the table name of the target DynamoDB table.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). One column of the DynamoDB table receives all attribute-value pairs in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *Developer Guide*.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: DynamoDBv2
-															"dynamo_d_bv_2": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: Payload
-																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: ContentExpression
-																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Type
-																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "Information needed to configure the payload.\n By default, ITE generates a standard payload in JSON for any action. This action payload contains all attribute-value pairs that have the information about the detector model instance and the event triggered the action. To configure the action payload, you can use ``contentExpression``.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: TableName
-																	"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the DynamoDB table.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Writes to the DynamoDB table that you created. The default action payload contains all attribute-value pairs that have the information about the detector model instance and the event that triggered the action. You can customize the [payload](https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html). A separate column of the DynamoDB table receives one attribute-value pair in the payload that you specify. For more information, see [Actions](https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html) in *Developer Guide*.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: Firehose
-															"firehose": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: DeliveryStreamName
-																	"delivery_stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the Kinesis Data Firehose delivery stream where the data is written.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Payload
-																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: ContentExpression
-																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Type
-																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "You can configure the action payload when you send a message to an Amazon Data Firehose delivery stream.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Separator
-																	"separator": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "A character separator that is used to separate records written to the Kinesis Data Firehose delivery stream. Valid values are: '\\n' (newline), '\\t' (tab), '\\r\\n' (Windows newline), ',' (comma).",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.RegexMatches(regexp.MustCompile("([\\n\\t])|(\\r\\n)|(,)"), ""),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Sends information about the detector model instance and the event that triggered the action to an Amazon Kinesis Data Firehose delivery stream.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: IotEvents
-															"iot_events": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: InputName
-																	"input_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the ITE input where the data is sent.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
-																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Payload
-																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: ContentExpression
-																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Type
-																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "You can configure the action payload when you send a message to an ITE input.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Sends ITE input, which passes information about the detector model instance and the event that triggered the action.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: IotSiteWise
-															"iot_site_wise": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: AssetId
-																	"asset_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The ID of the asset that has the specified property.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: EntryId
-																	"entry_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "A unique identifier for this entry. You can use the entry ID to track which data entry causes an error in case of failure. The default is a new unique identifier.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: PropertyAlias
-																	"property_alias": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The alias of the asset property.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: PropertyId
-																	"property_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The ID of the asset property.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: PropertyValue
-																	"property_value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: Quality
-																			"quality": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The quality of the asset property value. The value must be ``'GOOD'``, ``'BAD'``, or ``'UNCERTAIN'``.",
-																				Optional:    true,
-																				Computed:    true,
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Timestamp
-																			"timestamp": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																					// Property: OffsetInNanos
-																					"offset_in_nanos": schema.StringAttribute{ /*START ATTRIBUTE*/
-																						Description: "The nanosecond offset converted from ``timeInSeconds``. The valid range is between 0-999999999.",
-																						Optional:    true,
-																						Computed:    true,
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
-																					}, /*END ATTRIBUTE*/
-																					// Property: TimeInSeconds
-																					"time_in_seconds": schema.StringAttribute{ /*START ATTRIBUTE*/
-																						Description: "The timestamp, in seconds, in the Unix epoch format. The valid range is between 1-31556889864403199.",
-																						Optional:    true,
-																						Computed:    true,
-																						Validators: []validator.String{ /*START VALIDATORS*/
-																							fwvalidators.NotNullString(),
-																						}, /*END VALIDATORS*/
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
-																					}, /*END ATTRIBUTE*/
-																				}, /*END SCHEMA*/
-																				Description: "The timestamp associated with the asset property value. The default is the current event time.",
-																				Optional:    true,
-																				Computed:    true,
-																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																					objectplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Value
-																			"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																					// Property: BooleanValue
-																					"boolean_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																						Description: "The asset property value is a Boolean value that must be ``'TRUE'`` or ``'FALSE'``. You must use an expression, and the evaluated result should be a Boolean value.",
-																						Optional:    true,
-																						Computed:    true,
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
-																					}, /*END ATTRIBUTE*/
-																					// Property: DoubleValue
-																					"double_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																						Description: "The asset property value is a double. You must use an expression, and the evaluated result should be a double.",
-																						Optional:    true,
-																						Computed:    true,
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
-																					}, /*END ATTRIBUTE*/
-																					// Property: IntegerValue
-																					"integer_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																						Description: "The asset property value is an integer. You must use an expression, and the evaluated result should be an integer.",
-																						Optional:    true,
-																						Computed:    true,
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
-																					}, /*END ATTRIBUTE*/
-																					// Property: StringValue
-																					"string_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																						Description: "The asset property value is a string. You must use an expression, and the evaluated result should be a string.",
-																						Optional:    true,
-																						Computed:    true,
-																						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																							stringplanmodifier.UseStateForUnknown(),
-																						}, /*END PLAN MODIFIERS*/
-																					}, /*END ATTRIBUTE*/
-																				}, /*END SCHEMA*/
-																				Description: "The value to send to an asset property.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.Object{ /*START VALIDATORS*/
-																					fwvalidators.NotNullObject(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																					objectplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "The value to send to the asset property. This value contains timestamp, quality, and value (TQV) information.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.Object{ /*START VALIDATORS*/
-																			fwvalidators.NotNullObject(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Sends information about the detector model instance and the event that triggered the action to an asset property in ITSW .",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: IotTopicPublish
-															"iot_topic_publish": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: MqttTopic
-																	"mqtt_topic": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The MQTT topic of the message. You can use a string expression that includes variables (``$variable.<variable-name>``) and input values (``$input.<input-name>.<path-to-datum>``) as the topic string.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Payload
-																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: ContentExpression
-																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Type
-																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "You can configure the action payload when you publish a message to an IoTCore topic.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Publishes an MQTT message with the given topic to the IoT message broker.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: Lambda
-															"lambda": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: FunctionArn
-																	"function_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The ARN of the Lambda function that is executed.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 2048),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Payload
-																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: ContentExpression
-																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Type
-																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "You can configure the action payload when you send a message to a Lambda function.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Calls a Lambda function, passing in information about the detector model instance and the event that triggered the action.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: ResetTimer
-															"reset_timer": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: TimerName
-																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the timer to reset.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Information needed to reset the timer.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: SetTimer
-															"set_timer": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: DurationExpression
-																	"duration_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The duration of the timer, in seconds. You can use a string expression that includes numbers, variables (``$variable.<variable-name>``), and input values (``$input.<input-name>.<path-to-datum>``) as the duration. The range of the duration is 1-31622400 seconds. To ensure accuracy, the minimum duration is 60 seconds. The evaluated result of the duration is rounded down to the nearest whole number.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 1024),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Seconds
-																	"seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-																		Description: "The number of seconds until the timer expires. The minimum value is 60 seconds to ensure accuracy. The maximum value is 31622400 seconds.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.Int64{ /*START VALIDATORS*/
-																			int64validator.Between(60, 31622400),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-																			int64planmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: TimerName
-																	"timer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the timer.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Information needed to set the timer.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: SetVariable
-															"set_variable": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: Value
-																	"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The new value of the variable.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 1024),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: VariableName
-																	"variable_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The name of the variable.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
-																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Sets a variable to a specified value.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: Sns
-															"sns": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: Payload
-																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: ContentExpression
-																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Type
-																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "You can configure the action payload when you send a message as an Amazon SNS push notification.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: TargetArn
-																	"target_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The ARN of the Amazon SNS target where the message is sent.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 2048),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Sends an Amazon SNS message.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: Sqs
-															"sqs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: Payload
-																	"payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: ContentExpression
-																			"content_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The content of the payload. You can use a string expression that includes quoted strings (``'<string>'``), variables (``$variable.<variable-name>``), input values (``$input.<input-name>.<path-to-datum>``), string concatenations, and quoted strings that contain ``${}`` as the content. The recommended maximum size of a content expression is 1 KB.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					stringvalidator.LengthAtLeast(1),
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																			// Property: Type
-																			"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the payload type can be either ``STRING`` or ``JSON``.",
-																				Optional:    true,
-																				Computed:    true,
-																				Validators: []validator.String{ /*START VALIDATORS*/
-																					fwvalidators.NotNullString(),
-																				}, /*END VALIDATORS*/
-																				PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																					stringplanmodifier.UseStateForUnknown(),
-																				}, /*END PLAN MODIFIERS*/
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "You can configure the action payload when you send a message to an Amazon SQS queue.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																			objectplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: QueueUrl
-																	"queue_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The URL of the SQS queue where the data is written.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: UseBase64
-																	"use_base_64": schema.BoolAttribute{ /*START ATTRIBUTE*/
-																		Description: "Set this to TRUE if you want the data to be base-64 encoded before it is written to the queue. Otherwise, set this to FALSE.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-																			boolplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Sends an Amazon SNS message.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-													}, /*END NESTED OBJECT*/
-													Description: "The actions to be performed.",
-													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-														generic.Multiset(),
-														listplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: Condition
-												"condition": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "Required. A Boolean expression that when TRUE causes the actions to be performed and the ``nextState`` to be entered.",
-													Optional:    true,
-													Computed:    true,
-													Validators: []validator.String{ /*START VALIDATORS*/
-														stringvalidator.LengthAtMost(512),
-														fwvalidators.NotNullString(),
-													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: EventName
-												"event_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The name of the transition event.",
-													Optional:    true,
-													Computed:    true,
-													Validators: []validator.String{ /*START VALIDATORS*/
-														stringvalidator.LengthBetween(1, 128),
-														fwvalidators.NotNullString(),
-													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: NextState
-												"next_state": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The next state to enter.",
-													Optional:    true,
-													Computed:    true,
-													Validators: []validator.String{ /*START VALIDATORS*/
-														stringvalidator.LengthBetween(1, 128),
-														fwvalidators.NotNullString(),
-													}, /*END VALIDATORS*/
-													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-														stringplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Description: "Specifies the actions performed, and the next state entered, when a ``condition`` evaluates to TRUE.",
-										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-											listplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "When an input is received and the ``condition`` is TRUE, perform the specified ``actions``.",
-								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-									objectplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: StateName
-							"state_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The name of the state.",
-								Required:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 128),
-								}, /*END VALIDATORS*/
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "Information about the states of the detector.",
-					Required:    true,
-					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.SizeAtLeast(1),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Information that defines how a detector operates.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"detector_model_definition": schemaAttribute83603dfcd6fd4d20482f268e(),
 		// Property: DetectorModelDescription
 		// CloudFormation resource type schema:
 		//
@@ -5972,17 +3581,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 		//	  "maxLength": 1024,
 		//	  "type": "string"
 		//	}
-		"detector_model_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A brief description of the detector model.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(1024),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"detector_model_description": schemaAttribute61d0e2ba5c89cdb66993f2ba(),
 		// Property: DetectorModelName
 		// CloudFormation resource type schema:
 		//
@@ -5993,19 +3592,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"detector_model_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the detector model.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"detector_model_name": schemaAttribute908134607edde0de8fbcba91(),
 		// Property: EvaluationMethod
 		// CloudFormation resource type schema:
 		//
@@ -6017,20 +3604,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"evaluation_method": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Information about the order in which events are evaluated and how actions are executed.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"BATCH",
-					"SERIAL",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"evaluation_method": schemaAttribute16dfa1979c3910747e2d2231(),
 		// Property: Key
 		// CloudFormation resource type schema:
 		//
@@ -6041,19 +3615,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^((`[\\w\\- ]+`)|([\\w\\-]+))(\\.((`[\\w\\- ]+`)|([\\w\\-]+)))*$",
 		//	  "type": "string"
 		//	}
-		"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The value used to identify a detector instance. When a device or system sends input, a new detector instance with a unique key value is created. ITE can continue to route input to its corresponding detector instance based on this identifying information. \n This parameter uses a JSON-path expression to select the attribute-value pair in the message payload that is used for identification. To route the message to the correct detector instance, the device must send a message payload that contains the same attribute-value.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
-				stringvalidator.RegexMatches(regexp.MustCompile("^((`[\\w\\- ]+`)|([\\w\\-]+))(\\.((`[\\w\\- ]+`)|([\\w\\-]+)))*$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"key": schemaAttribute1d621c77fb6852ae1bf89578(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -6063,13 +3625,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the role that grants permission to ITE to perform its operations.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 2048),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttribute5aeec6205cc9b1a401a5d1e1(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -6098,43 +3654,7 @@ func detectorModelResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag's key.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag's value.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.\n For more information, see [Tag](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html).",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute44b8b6c62625b93ac8ef68c4(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

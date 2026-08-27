@@ -17,6 +17,16 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttributed50048a5bebef3f8a6d2e451() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "User account id, used as the primary identifier for the resource",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_devopsguru_log_anomaly_detection_integration", logAnomalyDetectionIntegrationResource)
 	registry.AddListResourceFactory("awscc_devopsguru_log_anomaly_detection_integration", generic.NewListResource(logAnomalyDetectionIntegrationResource))
@@ -34,13 +44,7 @@ func logAnomalyDetectionIntegrationResource(ctx context.Context) (resource.Resou
 		//	  "pattern": "^\\d{12}$",
 		//	  "type": "string"
 		//	}
-		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "User account id, used as the primary identifier for the resource",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"account_id": schemaAttributed50048a5bebef3f8a6d2e451(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

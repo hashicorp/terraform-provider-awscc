@@ -33,6 +33,1177 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute00048b051dab28927b0c2ba5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("^.+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute01231fc02e5e65d68506348b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CalendarInterval
+			"calendar_interval": schemaAttribute97ccdd35b8ff466d1bf7ee88(),
+			// Property: RollingInterval
+			"rolling_interval": schemaAttribute4d52c809c133f1b1e1ee0d75(),
+		}, /*END SCHEMA*/
+		Description: "The time period used to evaluate the SLO. It can be either a calendar interval or rolling interval.\nIf you omit this parameter, a rolling interval of 7 days is used.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute02c67f4fc96a831363c84f1b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string that you can use to assign a value. The combination of tag keys and values can help you organize and categorize your resources.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute03eb3d3aee14e6be266a1c1a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the account where the metrics are located, if this is a cross-account alarm.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute05474478edc003f82506411c() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AccountId
+				"account_id": schemaAttribute03eb3d3aee14e6be266a1c1a(),
+				// Property: Expression
+				"expression": schemaAttributef8082e51f9b6fbffd4ee113c(),
+				// Property: Id
+				"id": schemaAttributed3479a8df432f4e689e90e01(),
+				// Property: MetricStat
+				"metric_stat": schemaAttribute90906907a30eb76a0283d48a(),
+				// Property: ReturnData
+				"return_data": schemaAttribute8644ad815f0fa5378a538eb0(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "This structure defines the metric that is used as the \"total requests\" number for a request-based SLO. The number observed for this metric is divided by the number of \"good requests\" or \"bad requests\" that is observed for the metric defined in `MonitoredRequestCountMetric`.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0a03718ebf569c4b3eb708f0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the metric to use.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0c38e23f4e563e281cb54216() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The threshold that determines if the goal is being met. An attainment goal is the ratio of good periods that meet the threshold requirements to the total periods within the interval. For example, an attainment goal of 99.9% means that within your interval, you are targeting 99.9% of the periods to be in healthy state.\nIf you omit this parameter, 99 is used to represent 99% as the attainment goal.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+			float64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute181e5c9fefd46cb01468fb87() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time you want the exclusion window to start at. Note that time exclusion windows can only be scheduled in the future, not the past.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute20c6ed27f5e55bbca0a79e5c() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The value that the SLI metric is compared to.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+			float64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute21154d79a694a42921d90a67() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2a14ad837234882e88479c7d() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "If this SLO is related to a metric collected by Application Signals, you must use this field to specify which dependency the SLO metric is related to.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Map{ /*START VALIDATORS*/
+			fwvalidators.NotNullMap(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+			mapplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2d9dd7a78fa66768c0b7a679() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CompositeSliConfig
+			"composite_sli_config": schemaAttribute85bdcec9ad84dec4e02e0ea5(),
+			// Property: DependencyConfig
+			"dependency_config": schemaAttributef1fefbfa0a84b8f6b70a2499(),
+			// Property: KeyAttributes
+			"key_attributes": schemaAttribute614a759c9609b15f2f1a2dcf(),
+			// Property: MetricName
+			"metric_name": schemaAttribute454c76da1959bf6c2d458c2f(),
+			// Property: MetricSource
+			"metric_source": schemaAttributeebe35b322174747119bbc70a(),
+			// Property: MetricType
+			"metric_type": schemaAttributed3f38def33a1a50634ca1963(),
+			// Property: MonitoredRequestCountMetric
+			"monitored_request_count_metric": schemaAttributea81a651255ed1934f96ae311(),
+			// Property: OperationName
+			"operation_name": schemaAttribute6d07e267aa12a138042d9952(),
+			// Property: TotalRequestCountMetric
+			"total_request_count_metric": schemaAttribute05474478edc003f82506411c(),
+		}, /*END SCHEMA*/
+		Description: "This structure contains the information about the metric that is used for a request-based SLO.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2e813361549e4fb43b0619ea() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ComparisonOperator
+			"comparison_operator": schemaAttribute5c5b32d8e31869b055ac3a80(),
+			// Property: MetricThreshold
+			"metric_threshold": schemaAttributecacbeb006a6d9bf406daf918(),
+			// Property: SliMetric
+			"sli_metric": schemaAttribute9d76338271e104c3bd72f800(),
+		}, /*END SCHEMA*/
+		Description: "This structure contains information about the performance metric that an SLO monitors.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3b43c55a4aa790f1c87da9cd() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: LookBackWindowMinutes
+				"look_back_window_minutes": schemaAttribute6e86768d55a88970a9ce5150(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Each object in this array defines the length of the look-back window used to calculate one burn rate metric for this SLO. The burn rate measures how fast the service is consuming the error budget, relative to the attainment goal of the SLO.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Set{ /*START VALIDATORS*/
+			setvalidator.SizeBetween(0, 10),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4008e772bc23d589260cbabb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Displays whether this is a period-based SLO or a request-based SLO.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute40cd3cf5fe34a113359dcaa8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "If you omit Unit then all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4258fbf991b11dc43f0d645e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Duration
+			"duration": schemaAttributedb8b1d96a590cfe8ff2c57ab(),
+			// Property: DurationUnit
+			"duration_unit": schemaAttributeb142368526204b23427c3eb6(),
+		}, /*END SCHEMA*/
+		Description: "This object defines the length of time an exclusion window should span.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute43ffaadd259bdbe3624f22ea() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Expression
+			"expression": schemaAttribute679b016e0eada9bbae055cc3(),
+		}, /*END SCHEMA*/
+		Description: "This object defines how often to repeat a time exclusion window.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute44cce155b91e5afae60c0968() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Required attributes that identify the metric source",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Map{ /*START VALIDATORS*/
+			fwvalidators.NotNullMap(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+			mapplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute454c76da1959bf6c2d458c2f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the metric for non-Application Signals services",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 255),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4755dec81fa7290b3cf9ea88() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ComparisonOperator
+			"comparison_operator": schemaAttribute6502a72d7d835d996f89cd91(),
+			// Property: MetricThreshold
+			"metric_threshold": schemaAttribute20c6ed27f5e55bbca0a79e5c(),
+			// Property: RequestBasedSliMetric
+			"request_based_sli_metric": schemaAttribute2d9dd7a78fa66768c0b7a679(),
+		}, /*END SCHEMA*/
+		Description: "This structure contains information about the performance metric that a request-based SLO monitors.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4d40e30c5bfcbd05f1897bbf() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The granularity, in seconds, to be used for the metric.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			fwvalidators.NotNullInt64(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4d52c809c133f1b1e1ee0d75() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Duration
+			"duration": schemaAttributedb8b1d96a590cfe8ff2c57ab(),
+			// Property: DurationUnit
+			"duration_unit": schemaAttributeb142368526204b23427c3eb6(),
+		}, /*END SCHEMA*/
+		Description: "If the interval is a calendar interval, this structure contains the interval specifications.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4f9a2927b74376e639084d3d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Pattern
+			"pattern": schemaAttribute00048b051dab28927b0c2ba5(),
+			// Property: Type
+			"type": schemaAttribute900a5d2827e0ceb98fa6ad05(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute515ab9fc9c6db19915271d59() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The percentage of remaining budget over total budget that you want to get warnings for. If you omit this parameter, the default of 50.0 is used.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+			float64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute545487899f329b78f7bceac0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 20),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute589af9129238d9be1585d6ce() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of this SLO.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5c5b32d8e31869b055ac3a80() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The arithmetic operation used when comparing the specified metric to the threshold.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"GreaterThanOrEqualTo",
+				"LessThanOrEqualTo",
+				"LessThan",
+				"GreaterThan",
+			),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5f3f3dff3a28e6532fa62570() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An optional reason for scheduling this time exclusion window. Default is 'No reason'.",
+		Optional:    true,
+		Computed:    true,
+		Default:     stringdefault.StaticString("No reason"),
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 1024),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute60af93b608852bfdd7deee4a() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Reason
+				"reason": schemaAttribute5f3f3dff3a28e6532fa62570(),
+				// Property: RecurrenceRule
+				"recurrence_rule": schemaAttribute43ffaadd259bdbe3624f22ea(),
+				// Property: StartTime
+				"start_time": schemaAttribute181e5c9fefd46cb01468fb87(),
+				// Property: Window
+				"window": schemaAttribute4258fbf991b11dc43f0d645e(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Each object in this array defines a time exclusion window for this SLO. The time exclusion window is used to exclude breaching data points from affecting attainment rate, error budget, and burn rate metrics.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Set{ /*START VALIDATORS*/
+			setvalidator.SizeBetween(0, 10),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute60d056222876e6a36d701a22() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AccountId
+				"account_id": schemaAttribute03eb3d3aee14e6be266a1c1a(),
+				// Property: Expression
+				"expression": schemaAttributef8082e51f9b6fbffd4ee113c(),
+				// Property: Id
+				"id": schemaAttributed3479a8df432f4e689e90e01(),
+				// Property: MetricStat
+				"metric_stat": schemaAttribute90906907a30eb76a0283d48a(),
+				// Property: ReturnData
+				"return_data": schemaAttribute8644ad815f0fa5378a538eb0(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "If you want to count \"good requests\" to determine the percentage of successful requests for this request-based SLO, specify the metric to use as \"good requests\" in this structure.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute614a759c9609b15f2f1a2dcf() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "This is a string-to-string map that contains information about the type of object that this SLO is related to.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+			mapplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6258c0121e51a4e815bf2fe9() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: OperationName
+				"operation_name": schemaAttributea758e4ca6e3d11772c2815f2(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(2, 20),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6502a72d7d835d996f89cd91() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The arithmetic operation used when comparing the specified metric to the threshold.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"GreaterThanOrEqualTo",
+				"LessThanOrEqualTo",
+				"LessThan",
+				"GreaterThan",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute679b016e0eada9bbae055cc3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A cron or rate expression denoting how often to repeat this exclusion window.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 1024),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6d07e267aa12a138042d9952() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "If the SLO monitors a specific operation of the service, this field displays that operation name.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 255),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6da5b53dc45abf5fcd1b361b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "When the SLO monitors a specific operation of the dependency, this field specifies the name of that operation in the dependency.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 255),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6e86768d55a88970a9ce5150() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of minutes to use as the look-back window.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.Between(1, 10080),
+			fwvalidators.NotNullInt64(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute754d1c848577aca0c31821b6() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Epoch time in seconds you want the first interval to start. Be sure to choose a time that configures the intervals the way that you want. For example, if you want weekly intervals starting on Mondays at 6 a.m., be sure to specify a start time that is a Monday at 6 a.m.\nAs soon as one calendar interval ends, another automatically begins.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.AtLeast(946684800),
+			fwvalidators.NotNullInt64(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute85bdcec9ad84dec4e02e0ea5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CompositeSliComponents
+			"composite_sli_components": schemaAttribute6258c0121e51a4e815bf2fe9(),
+			// Property: SelectionConfig
+			"selection_config": schemaAttribute4f9a2927b74376e639084d3d(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8644ad815f0fa5378a538eb0() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "This option indicates whether to return the timestamps and raw data values of this metric.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8dc587b5cea5b3b3db211c51() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AttainmentGoal
+			"attainment_goal": schemaAttribute0c38e23f4e563e281cb54216(),
+			// Property: Interval
+			"interval": schemaAttribute01231fc02e5e65d68506348b(),
+			// Property: WarningThreshold
+			"warning_threshold": schemaAttribute515ab9fc9c6db19915271d59(),
+		}, /*END SCHEMA*/
+		Description: "A structure that contains the attributes that determine the goal of the SLO. This includes the time period for evaluation and the attainment threshold.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute900a5d2827e0ceb98fa6ad05() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"EXPLICIT",
+				"PREFIX",
+				"REGEX",
+			),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute90906907a30eb76a0283d48a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Metric
+			"metric": schemaAttributeba5bb7c0a77952eebb861ef6(),
+			// Property: Period
+			"period": schemaAttribute4d40e30c5bfcbd05f1897bbf(),
+			// Property: Stat
+			"stat": schemaAttributeb83956cea26dd44a64c72e94(),
+			// Property: Unit
+			"unit": schemaAttribute40cd3cf5fe34a113359dcaa8(),
+		}, /*END SCHEMA*/
+		Description: "A metric to be used directly for the SLO, or to be used in the math expression that will be used for the SLO. Within one MetricDataQuery, you must specify either Expression or MetricStat but not both.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute90e5d45960de9792a65dfa61() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Epoch time in seconds of the time that this SLO was created",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute97ccdd35b8ff466d1bf7ee88() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Duration
+			"duration": schemaAttributedb8b1d96a590cfe8ff2c57ab(),
+			// Property: DurationUnit
+			"duration_unit": schemaAttributeb142368526204b23427c3eb6(),
+			// Property: StartTime
+			"start_time": schemaAttribute754d1c848577aca0c31821b6(),
+		}, /*END SCHEMA*/
+		Description: "If the interval for this service level objective is a calendar interval, this structure contains the interval specifications.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute986276b25ba62ddf8648cbb7() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of seconds to use as the period for SLO evaluation. Your application's performance is compared to the SLI during each period. For each period, the application is determined to have either achieved or not achieved the necessary performance.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.Between(60, 900),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9cc320d81927aee90e86c807() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Optional additional attributes for the metric source",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+			mapplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9d76338271e104c3bd72f800() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CompositeSliConfig
+			"composite_sli_config": schemaAttribute85bdcec9ad84dec4e02e0ea5(),
+			// Property: DependencyConfig
+			"dependency_config": schemaAttributef1fefbfa0a84b8f6b70a2499(),
+			// Property: KeyAttributes
+			"key_attributes": schemaAttribute614a759c9609b15f2f1a2dcf(),
+			// Property: MetricDataQueries
+			"metric_data_queries": schemaAttributefed54e54f07582a2441c7dba(),
+			// Property: MetricName
+			"metric_name": schemaAttribute454c76da1959bf6c2d458c2f(),
+			// Property: MetricSource
+			"metric_source": schemaAttributeebe35b322174747119bbc70a(),
+			// Property: MetricType
+			"metric_type": schemaAttributed3f38def33a1a50634ca1963(),
+			// Property: OperationName
+			"operation_name": schemaAttribute6d07e267aa12a138042d9952(),
+			// Property: PeriodSeconds
+			"period_seconds": schemaAttribute986276b25ba62ddf8648cbb7(),
+			// Property: Statistic
+			"statistic": schemaAttribute545487899f329b78f7bceac0(),
+		}, /*END SCHEMA*/
+		Description: "A structure that contains information about the metric that the SLO monitors.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9fe80dbdc001e35a62eec12e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the specified tag key.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 256),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea758e4ca6e3d11772c2815f2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea81a651255ed1934f96ae311() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BadCountMetric
+			"bad_count_metric": schemaAttributeaabee1630874595ba1d8c89d(),
+			// Property: GoodCountMetric
+			"good_count_metric": schemaAttribute60d056222876e6a36d701a22(),
+		}, /*END SCHEMA*/
+		Description: "This structure defines the metric that is used as the \"good request\" or \"bad request\" value for a request-based SLO. This value observed for the metric defined in `TotalRequestCountMetric` is divided by the number found for `MonitoredRequestCountMetric` to determine the percentage of successful requests that this SLO tracks.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaabee1630874595ba1d8c89d() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AccountId
+				"account_id": schemaAttribute03eb3d3aee14e6be266a1c1a(),
+				// Property: Expression
+				"expression": schemaAttributef8082e51f9b6fbffd4ee113c(),
+				// Property: Id
+				"id": schemaAttributed3479a8df432f4e689e90e01(),
+				// Property: MetricStat
+				"metric_stat": schemaAttribute90906907a30eb76a0283d48a(),
+				// Property: ReturnData
+				"return_data": schemaAttribute8644ad815f0fa5378a538eb0(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "If you want to count \"bad requests\" to determine the percentage of successful requests for this request-based SLO, specify the metric to use as \"bad requests\" in this structure.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb142368526204b23427c3eb6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the interval unit.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"MINUTE",
+				"HOUR",
+				"DAY",
+				"MONTH",
+			),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb83956cea26dd44a64c72e94() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeba5bb7c0a77952eebb861ef6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Dimensions
+			"dimensions": schemaAttributeed7943bbd8d22a4cdf147412(),
+			// Property: MetricName
+			"metric_name": schemaAttribute0a03718ebf569c4b3eb708f0(),
+			// Property: Namespace
+			"namespace": schemaAttributefcd95921a823f961609624a1(),
+		}, /*END SCHEMA*/
+		Description: "This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebf75fffd96328bd0195173c9() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute02c67f4fc96a831363c84f1b(),
+				// Property: Value
+				"value": schemaAttribute9fe80dbdc001e35a62eec12e(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of tag keys and values associated with the resource you specified",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Set{ /*START VALIDATORS*/
+			setvalidator.SizeBetween(1, 200),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec3fd930e506439fedf2c04a5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecacbeb006a6d9bf406daf918() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The value that the SLI metric is compared to.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Float64{ /*START VALIDATORS*/
+			fwvalidators.NotNullFloat64(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+			float64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed3479a8df432f4e689e90e01() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A short name used to tie this object to the results in the response.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed3f38def33a1a50634ca1963() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "If the SLO monitors either the LATENCY or AVAILABILITY metric that Application Signals collects, this field displays which of those metrics is used.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"LATENCY",
+				"AVAILABILITY",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedb8b1d96a590cfe8ff2c57ab() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the duration of each interval. For example, if `Duration` is 1 and `DurationUnit` is `MONTH`, each interval is one month, aligned with the calendar.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.AtLeast(1),
+			fwvalidators.NotNullInt64(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee2981439f7d0d3ff35caac7b() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Epoch time in seconds of the time that this SLO was most recently updated",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeebe35b322174747119bbc70a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MetricSourceAttributes
+			"metric_source_attributes": schemaAttribute9cc320d81927aee90e86c807(),
+			// Property: MetricSourceKeyAttributes
+			"metric_source_key_attributes": schemaAttribute44cce155b91e5afae60c0968(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for identifying the source of metrics for non-Application Signals services",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeed7943bbd8d22a4cdf147412() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttribute21154d79a694a42921d90a67(),
+				// Property: Value
+				"value": schemaAttributec3fd930e506439fedf2c04a5(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of one or more dimensions to use to define the metric that you want to use.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef1fefbfa0a84b8f6b70a2499() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DependencyKeyAttributes
+			"dependency_key_attributes": schemaAttribute2a14ad837234882e88479c7d(),
+			// Property: DependencyOperationName
+			"dependency_operation_name": schemaAttribute6da5b53dc45abf5fcd1b361b(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for identifying a dependency and its operation",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef206b2869bca72c165ac9f1f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of this SLO.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("^[0-9A-Za-z][-._0-9A-Za-z ]{0,126}[0-9A-Za-z]$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef8082e51f9b6fbffd4ee113c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The math expression to be performed on the returned data.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef9cf842ac5d433c91577fe34() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An optional description for this SLO. Default is 'No description'",
+		Optional:    true,
+		Computed:    true,
+		Default:     stringdefault.StaticString("No description"),
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 1024),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefcd95921a823f961609624a1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The namespace of the metric.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefed54e54f07582a2441c7dba() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AccountId
+				"account_id": schemaAttribute03eb3d3aee14e6be266a1c1a(),
+				// Property: Expression
+				"expression": schemaAttributef8082e51f9b6fbffd4ee113c(),
+				// Property: Id
+				"id": schemaAttributed3479a8df432f4e689e90e01(),
+				// Property: MetricStat
+				"metric_stat": schemaAttribute90906907a30eb76a0283d48a(),
+				// Property: ReturnData
+				"return_data": schemaAttribute8644ad815f0fa5378a538eb0(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "If this SLO monitors a CloudWatch metric or the result of a CloudWatch metric math expression, this structure includes the information about that metric or expression.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_applicationsignals_service_level_objective", serviceLevelObjectiveResource)
 	registry.AddListResourceFactory("awscc_applicationsignals_service_level_objective", generic.NewListResource(serviceLevelObjectiveResource))
@@ -50,13 +1221,7 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 		//	  "pattern": "^arn:[^:]*:application-signals:[^:]*:[^:]*:slo\\/[0-9A-Za-z][-._0-9A-Za-z ]{0,126}[0-9A-Za-z]$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of this SLO.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute589af9129238d9be1585d6ce(),
 		// Property: BurnRateConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -84,34 +1249,7 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"burn_rate_configurations": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: LookBackWindowMinutes
-					"look_back_window_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The number of minutes to use as the look-back window.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.Int64{ /*START VALIDATORS*/
-							int64validator.Between(1, 10080),
-							fwvalidators.NotNullInt64(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-							int64planmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Each object in this array defines the length of the look-back window used to calculate one burn rate metric for this SLO. The burn rate measures how fast the service is consuming the error budget, relative to the attainment goal of the SLO.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.Set{ /*START VALIDATORS*/
-				setvalidator.SizeBetween(0, 10),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"burn_rate_configurations": schemaAttribute3b43c55a4aa790f1c87da9cd(),
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -120,13 +1258,7 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 		//	  "minimum": 946684800,
 		//	  "type": "integer"
 		//	}
-		"created_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Epoch time in seconds of the time that this SLO was created",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"created_time": schemaAttribute90e5d45960de9792a65dfa61(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -137,18 +1269,7 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "An optional description for this SLO. Default is 'No description'",
-			Optional:    true,
-			Computed:    true,
-			Default:     stringdefault.StaticString("No description"),
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 1024),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributef9cf842ac5d433c91577fe34(),
 		// Property: EvaluationType
 		// CloudFormation resource type schema:
 		//
@@ -160,13 +1281,7 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"evaluation_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Displays whether this is a period-based SLO or a request-based SLO.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"evaluation_type": schemaAttribute4008e772bc23d589260cbabb(),
 		// Property: ExclusionWindows
 		// CloudFormation resource type schema:
 		//
@@ -241,112 +1356,7 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"exclusion_windows": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Reason
-					"reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "An optional reason for scheduling this time exclusion window. Default is 'No reason'.",
-						Optional:    true,
-						Computed:    true,
-						Default:     stringdefault.StaticString("No reason"),
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 1024),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: RecurrenceRule
-					"recurrence_rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Expression
-							"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A cron or rate expression denoting how often to repeat this exclusion window.",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 1024),
-									fwvalidators.NotNullString(),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "This object defines how often to repeat a time exclusion window.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-							objectplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: StartTime
-					"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The time you want the exclusion window to start at. Note that time exclusion windows can only be scheduled in the future, not the past.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Window
-					"window": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Duration
-							"duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "Specifies the duration of each interval. For example, if `Duration` is 1 and `DurationUnit` is `MONTH`, each interval is one month, aligned with the calendar.",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.Int64{ /*START VALIDATORS*/
-									int64validator.AtLeast(1),
-									fwvalidators.NotNullInt64(),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-									int64planmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: DurationUnit
-							"duration_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Specifies the interval unit.",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.OneOf(
-										"MINUTE",
-										"HOUR",
-										"DAY",
-										"MONTH",
-									),
-									fwvalidators.NotNullString(),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "This object defines the length of time an exclusion window should span.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.Object{ /*START VALIDATORS*/
-							fwvalidators.NotNullObject(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-							objectplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Each object in this array defines a time exclusion window for this SLO. The time exclusion window is used to exclude breaching data points from affecting attainment rate, error budget, and burn rate metrics.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.Set{ /*START VALIDATORS*/
-				setvalidator.SizeBetween(0, 10),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"exclusion_windows": schemaAttribute60af93b608852bfdd7deee4a(),
 		// Property: Goal
 		// CloudFormation resource type schema:
 		//
@@ -430,142 +1440,7 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"goal": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AttainmentGoal
-				"attainment_goal": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "The threshold that determines if the goal is being met. An attainment goal is the ratio of good periods that meet the threshold requirements to the total periods within the interval. For example, an attainment goal of 99.9% means that within your interval, you are targeting 99.9% of the periods to be in healthy state.\nIf you omit this parameter, 99 is used to represent 99% as the attainment goal.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-						float64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: Interval
-				"interval": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CalendarInterval
-						"calendar_interval": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Duration
-								"duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "Specifies the duration of each interval. For example, if `Duration` is 1 and `DurationUnit` is `MONTH`, each interval is one month, aligned with the calendar.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.Int64{ /*START VALIDATORS*/
-										int64validator.AtLeast(1),
-										fwvalidators.NotNullInt64(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-										int64planmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: DurationUnit
-								"duration_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Specifies the interval unit.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.OneOf(
-											"MINUTE",
-											"HOUR",
-											"DAY",
-											"MONTH",
-										),
-										fwvalidators.NotNullString(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: StartTime
-								"start_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "Epoch time in seconds you want the first interval to start. Be sure to choose a time that configures the intervals the way that you want. For example, if you want weekly intervals starting on Mondays at 6 a.m., be sure to specify a start time that is a Monday at 6 a.m.\nAs soon as one calendar interval ends, another automatically begins.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.Int64{ /*START VALIDATORS*/
-										int64validator.AtLeast(946684800),
-										fwvalidators.NotNullInt64(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-										int64planmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "If the interval for this service level objective is a calendar interval, this structure contains the interval specifications.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: RollingInterval
-						"rolling_interval": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Duration
-								"duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "Specifies the duration of each interval. For example, if `Duration` is 1 and `DurationUnit` is `MONTH`, each interval is one month, aligned with the calendar.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.Int64{ /*START VALIDATORS*/
-										int64validator.AtLeast(1),
-										fwvalidators.NotNullInt64(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-										int64planmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: DurationUnit
-								"duration_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Specifies the interval unit.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.OneOf(
-											"MINUTE",
-											"HOUR",
-											"DAY",
-											"MONTH",
-										),
-										fwvalidators.NotNullString(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "If the interval is a calendar interval, this structure contains the interval specifications.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The time period used to evaluate the SLO. It can be either a calendar interval or rolling interval.\nIf you omit this parameter, a rolling interval of 7 days is used.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: WarningThreshold
-				"warning_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "The percentage of remaining budget over total budget that you want to get warnings for. If you omit this parameter, the default of 50.0 is used.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-						float64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A structure that contains the attributes that determine the goal of the SLO. This includes the time period for evaluation and the attainment threshold.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"goal": schemaAttribute8dc587b5cea5b3b3db211c51(),
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -574,13 +1449,7 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 		//	  "minimum": 946684800,
 		//	  "type": "integer"
 		//	}
-		"last_updated_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Epoch time in seconds of the time that this SLO was most recently updated",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"last_updated_time": schemaAttributee2981439f7d0d3ff35caac7b(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -589,16 +1458,7 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 		//	  "pattern": "^[0-9A-Za-z][-._0-9A-Za-z ]{0,126}[0-9A-Za-z]$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of this SLO.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9A-Za-z][-._0-9A-Za-z ]{0,126}[0-9A-Za-z]$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributef206b2869bca72c165ac9f1f(),
 		// Property: RequestBasedSli
 		// CloudFormation resource type schema:
 		//
@@ -1058,765 +1918,7 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"request_based_sli": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ComparisonOperator
-				"comparison_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The arithmetic operation used when comparing the specified metric to the threshold.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"GreaterThanOrEqualTo",
-							"LessThanOrEqualTo",
-							"LessThan",
-							"GreaterThan",
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: MetricThreshold
-				"metric_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "The value that the SLI metric is compared to.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-						float64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: RequestBasedSliMetric
-				"request_based_sli_metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CompositeSliConfig
-						"composite_sli_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: CompositeSliComponents
-								"composite_sli_components": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: OperationName
-											"operation_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Optional: true,
-												Computed: true,
-												Validators: []validator.String{ /*START VALIDATORS*/
-													fwvalidators.NotNullString(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.List{ /*START VALIDATORS*/
-										listvalidator.SizeBetween(2, 20),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										listplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: SelectionConfig
-								"selection_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Pattern
-										"pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.RegexMatches(regexp.MustCompile("^.+$"), ""),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: Type
-										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.OneOf(
-													"EXPLICIT",
-													"PREFIX",
-													"REGEX",
-												),
-												fwvalidators.NotNullString(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.Object{ /*START VALIDATORS*/
-										fwvalidators.NotNullObject(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: DependencyConfig
-						"dependency_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: DependencyKeyAttributes
-								"dependency_key_attributes": // Pattern: ""
-								schema.MapAttribute{         /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "If this SLO is related to a metric collected by Application Signals, you must use this field to specify which dependency the SLO metric is related to.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.Map{ /*START VALIDATORS*/
-										fwvalidators.NotNullMap(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-										mapplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: DependencyOperationName
-								"dependency_operation_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "When the SLO monitors a specific operation of the dependency, this field specifies the name of that operation in the dependency.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 255),
-										fwvalidators.NotNullString(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Configuration for identifying a dependency and its operation",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: KeyAttributes
-						"key_attributes":    // Pattern: ""
-						schema.MapAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "This is a string-to-string map that contains information about the type of object that this SLO is related to.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-								mapplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: MetricName
-						"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The name of the metric for non-Application Signals services",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 255),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: MetricSource
-						"metric_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: MetricSourceAttributes
-								"metric_source_attributes": // Pattern: ""
-								schema.MapAttribute{        /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "Optional additional attributes for the metric source",
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-										mapplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: MetricSourceKeyAttributes
-								"metric_source_key_attributes": // Pattern: ""
-								schema.MapAttribute{            /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "Required attributes that identify the metric source",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.Map{ /*START VALIDATORS*/
-										fwvalidators.NotNullMap(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-										mapplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Configuration for identifying the source of metrics for non-Application Signals services",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: MetricType
-						"metric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "If the SLO monitors either the LATENCY or AVAILABILITY metric that Application Signals collects, this field displays which of those metrics is used.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.OneOf(
-									"LATENCY",
-									"AVAILABILITY",
-								),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: MonitoredRequestCountMetric
-						"monitored_request_count_metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: BadCountMetric
-								"bad_count_metric": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: AccountId
-											"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The ID of the account where the metrics are located, if this is a cross-account alarm.",
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-											// Property: Expression
-											"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The math expression to be performed on the returned data.",
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-											// Property: Id
-											"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "A short name used to tie this object to the results in the response.",
-												Optional:    true,
-												Computed:    true,
-												Validators: []validator.String{ /*START VALIDATORS*/
-													fwvalidators.NotNullString(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-											// Property: MetricStat
-											"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: Metric
-													"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: Dimensions
-															"dimensions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																		// Property: Name
-																		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																			Description: "The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.",
-																			Optional:    true,
-																			Computed:    true,
-																			Validators: []validator.String{ /*START VALIDATORS*/
-																				fwvalidators.NotNullString(),
-																			}, /*END VALIDATORS*/
-																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																				stringplanmodifier.UseStateForUnknown(),
-																			}, /*END PLAN MODIFIERS*/
-																		}, /*END ATTRIBUTE*/
-																		// Property: Value
-																		"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																			Description: "The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values",
-																			Optional:    true,
-																			Computed:    true,
-																			Validators: []validator.String{ /*START VALIDATORS*/
-																				fwvalidators.NotNullString(),
-																			}, /*END VALIDATORS*/
-																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																				stringplanmodifier.UseStateForUnknown(),
-																			}, /*END PLAN MODIFIERS*/
-																		}, /*END ATTRIBUTE*/
-																	}, /*END SCHEMA*/
-																}, /*END NESTED OBJECT*/
-																Description: "An array of one or more dimensions to use to define the metric that you want to use.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																	generic.Multiset(),
-																	listplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: MetricName
-															"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The name of the metric to use.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																	stringplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: Namespace
-															"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The namespace of the metric.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																	stringplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-														Description: "This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions.",
-														Optional:    true,
-														Computed:    true,
-														Validators: []validator.Object{ /*START VALIDATORS*/
-															fwvalidators.NotNullObject(),
-														}, /*END VALIDATORS*/
-														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-															objectplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-													// Property: Period
-													"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-														Description: "The granularity, in seconds, to be used for the metric.",
-														Optional:    true,
-														Computed:    true,
-														Validators: []validator.Int64{ /*START VALIDATORS*/
-															fwvalidators.NotNullInt64(),
-														}, /*END VALIDATORS*/
-														PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-															int64planmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-													// Property: Stat
-													"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.",
-														Optional:    true,
-														Computed:    true,
-														Validators: []validator.String{ /*START VALIDATORS*/
-															fwvalidators.NotNullString(),
-														}, /*END VALIDATORS*/
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-													// Property: Unit
-													"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "If you omit Unit then all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.",
-														Optional:    true,
-														Computed:    true,
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Description: "A metric to be used directly for the SLO, or to be used in the math expression that will be used for the SLO. Within one MetricDataQuery, you must specify either Expression or MetricStat but not both.",
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-													objectplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-											// Property: ReturnData
-											"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
-												Description: "This option indicates whether to return the timestamps and raw data values of this metric.",
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-													boolplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Description: "If you want to count \"bad requests\" to determine the percentage of successful requests for this request-based SLO, specify the metric to use as \"bad requests\" in this structure.",
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										listplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: GoodCountMetric
-								"good_count_metric": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: AccountId
-											"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The ID of the account where the metrics are located, if this is a cross-account alarm.",
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-											// Property: Expression
-											"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The math expression to be performed on the returned data.",
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-											// Property: Id
-											"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "A short name used to tie this object to the results in the response.",
-												Optional:    true,
-												Computed:    true,
-												Validators: []validator.String{ /*START VALIDATORS*/
-													fwvalidators.NotNullString(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-											// Property: MetricStat
-											"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: Metric
-													"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: Dimensions
-															"dimensions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																		// Property: Name
-																		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																			Description: "The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.",
-																			Optional:    true,
-																			Computed:    true,
-																			Validators: []validator.String{ /*START VALIDATORS*/
-																				fwvalidators.NotNullString(),
-																			}, /*END VALIDATORS*/
-																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																				stringplanmodifier.UseStateForUnknown(),
-																			}, /*END PLAN MODIFIERS*/
-																		}, /*END ATTRIBUTE*/
-																		// Property: Value
-																		"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																			Description: "The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values",
-																			Optional:    true,
-																			Computed:    true,
-																			Validators: []validator.String{ /*START VALIDATORS*/
-																				fwvalidators.NotNullString(),
-																			}, /*END VALIDATORS*/
-																			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																				stringplanmodifier.UseStateForUnknown(),
-																			}, /*END PLAN MODIFIERS*/
-																		}, /*END ATTRIBUTE*/
-																	}, /*END SCHEMA*/
-																}, /*END NESTED OBJECT*/
-																Description: "An array of one or more dimensions to use to define the metric that you want to use.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																	generic.Multiset(),
-																	listplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: MetricName
-															"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The name of the metric to use.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																	stringplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: Namespace
-															"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The namespace of the metric.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																	stringplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-														Description: "This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions.",
-														Optional:    true,
-														Computed:    true,
-														Validators: []validator.Object{ /*START VALIDATORS*/
-															fwvalidators.NotNullObject(),
-														}, /*END VALIDATORS*/
-														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-															objectplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-													// Property: Period
-													"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-														Description: "The granularity, in seconds, to be used for the metric.",
-														Optional:    true,
-														Computed:    true,
-														Validators: []validator.Int64{ /*START VALIDATORS*/
-															fwvalidators.NotNullInt64(),
-														}, /*END VALIDATORS*/
-														PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-															int64planmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-													// Property: Stat
-													"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.",
-														Optional:    true,
-														Computed:    true,
-														Validators: []validator.String{ /*START VALIDATORS*/
-															fwvalidators.NotNullString(),
-														}, /*END VALIDATORS*/
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-													// Property: Unit
-													"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "If you omit Unit then all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.",
-														Optional:    true,
-														Computed:    true,
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Description: "A metric to be used directly for the SLO, or to be used in the math expression that will be used for the SLO. Within one MetricDataQuery, you must specify either Expression or MetricStat but not both.",
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-													objectplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-											// Property: ReturnData
-											"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
-												Description: "This option indicates whether to return the timestamps and raw data values of this metric.",
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-													boolplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Description: "If you want to count \"good requests\" to determine the percentage of successful requests for this request-based SLO, specify the metric to use as \"good requests\" in this structure.",
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										listplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "This structure defines the metric that is used as the \"good request\" or \"bad request\" value for a request-based SLO. This value observed for the metric defined in `TotalRequestCountMetric` is divided by the number found for `MonitoredRequestCountMetric` to determine the percentage of successful requests that this SLO tracks.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: OperationName
-						"operation_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "If the SLO monitors a specific operation of the service, this field displays that operation name.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 255),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: TotalRequestCountMetric
-						"total_request_count_metric": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: AccountId
-									"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The ID of the account where the metrics are located, if this is a cross-account alarm.",
-										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-									// Property: Expression
-									"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The math expression to be performed on the returned data.",
-										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-									// Property: Id
-									"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "A short name used to tie this object to the results in the response.",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											fwvalidators.NotNullString(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-									// Property: MetricStat
-									"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: Metric
-											"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: Dimensions
-													"dimensions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-														NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: Name
-																"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.",
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.String{ /*START VALIDATORS*/
-																		fwvalidators.NotNullString(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																		stringplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-																// Property: Value
-																"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values",
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.String{ /*START VALIDATORS*/
-																		fwvalidators.NotNullString(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																		stringplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-														}, /*END NESTED OBJECT*/
-														Description: "An array of one or more dimensions to use to define the metric that you want to use.",
-														Optional:    true,
-														Computed:    true,
-														PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-															generic.Multiset(),
-															listplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-													// Property: MetricName
-													"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "The name of the metric to use.",
-														Optional:    true,
-														Computed:    true,
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-													// Property: Namespace
-													"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "The namespace of the metric.",
-														Optional:    true,
-														Computed:    true,
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Description: "This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions.",
-												Optional:    true,
-												Computed:    true,
-												Validators: []validator.Object{ /*START VALIDATORS*/
-													fwvalidators.NotNullObject(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-													objectplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-											// Property: Period
-											"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-												Description: "The granularity, in seconds, to be used for the metric.",
-												Optional:    true,
-												Computed:    true,
-												Validators: []validator.Int64{ /*START VALIDATORS*/
-													fwvalidators.NotNullInt64(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-													int64planmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-											// Property: Stat
-											"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.",
-												Optional:    true,
-												Computed:    true,
-												Validators: []validator.String{ /*START VALIDATORS*/
-													fwvalidators.NotNullString(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-											// Property: Unit
-											"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "If you omit Unit then all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.",
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "A metric to be used directly for the SLO, or to be used in the math expression that will be used for the SLO. Within one MetricDataQuery, you must specify either Expression or MetricStat but not both.",
-										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-									// Property: ReturnData
-									"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
-										Description: "This option indicates whether to return the timestamps and raw data values of this metric.",
-										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-											boolplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "This structure defines the metric that is used as the \"total requests\" number for a request-based SLO. The number observed for this metric is divided by the number of \"good requests\" or \"bad requests\" that is observed for the metric defined in `MonitoredRequestCountMetric`.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "This structure contains the information about the metric that is used for a request-based SLO.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.Object{ /*START VALIDATORS*/
-						fwvalidators.NotNullObject(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "This structure contains information about the performance metric that a request-based SLO monitors.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"request_based_sli": schemaAttribute4755dec81fa7290b3cf9ea88(),
 		// Property: Sli
 		// CloudFormation resource type schema:
 		//
@@ -2091,450 +2193,7 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"sli": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ComparisonOperator
-				"comparison_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The arithmetic operation used when comparing the specified metric to the threshold.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"GreaterThanOrEqualTo",
-							"LessThanOrEqualTo",
-							"LessThan",
-							"GreaterThan",
-						),
-						fwvalidators.NotNullString(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: MetricThreshold
-				"metric_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "The value that the SLI metric is compared to.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.Float64{ /*START VALIDATORS*/
-						fwvalidators.NotNullFloat64(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-						float64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: SliMetric
-				"sli_metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CompositeSliConfig
-						"composite_sli_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: CompositeSliComponents
-								"composite_sli_components": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: OperationName
-											"operation_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Optional: true,
-												Computed: true,
-												Validators: []validator.String{ /*START VALIDATORS*/
-													fwvalidators.NotNullString(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.List{ /*START VALIDATORS*/
-										listvalidator.SizeBetween(2, 20),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										listplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: SelectionConfig
-								"selection_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Pattern
-										"pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.RegexMatches(regexp.MustCompile("^.+$"), ""),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: Type
-										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.OneOf(
-													"EXPLICIT",
-													"PREFIX",
-													"REGEX",
-												),
-												fwvalidators.NotNullString(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.Object{ /*START VALIDATORS*/
-										fwvalidators.NotNullObject(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: DependencyConfig
-						"dependency_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: DependencyKeyAttributes
-								"dependency_key_attributes": // Pattern: ""
-								schema.MapAttribute{         /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "If this SLO is related to a metric collected by Application Signals, you must use this field to specify which dependency the SLO metric is related to.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.Map{ /*START VALIDATORS*/
-										fwvalidators.NotNullMap(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-										mapplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: DependencyOperationName
-								"dependency_operation_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "When the SLO monitors a specific operation of the dependency, this field specifies the name of that operation in the dependency.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 255),
-										fwvalidators.NotNullString(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Configuration for identifying a dependency and its operation",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: KeyAttributes
-						"key_attributes":    // Pattern: ""
-						schema.MapAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "This is a string-to-string map that contains information about the type of object that this SLO is related to.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-								mapplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: MetricDataQueries
-						"metric_data_queries": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: AccountId
-									"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The ID of the account where the metrics are located, if this is a cross-account alarm.",
-										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-									// Property: Expression
-									"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The math expression to be performed on the returned data.",
-										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-									// Property: Id
-									"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "A short name used to tie this object to the results in the response.",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											fwvalidators.NotNullString(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-									// Property: MetricStat
-									"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: Metric
-											"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: Dimensions
-													"dimensions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-														NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: Name
-																"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The name of the dimension. Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:). ASCII control characters are not supported as part of dimension names.",
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.String{ /*START VALIDATORS*/
-																		fwvalidators.NotNullString(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																		stringplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-																// Property: Value
-																"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The value of the dimension. Dimension values must contain only ASCII characters and must include at least one non-whitespace character. ASCII control characters are not supported as part of dimension values",
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.String{ /*START VALIDATORS*/
-																		fwvalidators.NotNullString(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																		stringplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-														}, /*END NESTED OBJECT*/
-														Description: "An array of one or more dimensions to use to define the metric that you want to use.",
-														Optional:    true,
-														Computed:    true,
-														PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-															generic.Multiset(),
-															listplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-													// Property: MetricName
-													"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "The name of the metric to use.",
-														Optional:    true,
-														Computed:    true,
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-													// Property: Namespace
-													"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "The namespace of the metric.",
-														Optional:    true,
-														Computed:    true,
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Description: "This structure defines the metric used for a service level indicator, including the metric name, namespace, and dimensions.",
-												Optional:    true,
-												Computed:    true,
-												Validators: []validator.Object{ /*START VALIDATORS*/
-													fwvalidators.NotNullObject(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-													objectplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-											// Property: Period
-											"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-												Description: "The granularity, in seconds, to be used for the metric.",
-												Optional:    true,
-												Computed:    true,
-												Validators: []validator.Int64{ /*START VALIDATORS*/
-													fwvalidators.NotNullInt64(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-													int64planmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-											// Property: Stat
-											"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic.",
-												Optional:    true,
-												Computed:    true,
-												Validators: []validator.String{ /*START VALIDATORS*/
-													fwvalidators.NotNullString(),
-												}, /*END VALIDATORS*/
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-											// Property: Unit
-											"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "If you omit Unit then all data that was collected with any unit is returned, along with the corresponding units that were specified when the data was reported to CloudWatch. If you specify a unit, the operation returns only data that was collected with that unit specified. If you specify a unit that does not match the data collected, the results of the operation are null. CloudWatch does not perform unit conversions.",
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "A metric to be used directly for the SLO, or to be used in the math expression that will be used for the SLO. Within one MetricDataQuery, you must specify either Expression or MetricStat but not both.",
-										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											objectplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-									// Property: ReturnData
-									"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
-										Description: "This option indicates whether to return the timestamps and raw data values of this metric.",
-										Optional:    true,
-										Computed:    true,
-										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-											boolplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "If this SLO monitors a CloudWatch metric or the result of a CloudWatch metric math expression, this structure includes the information about that metric or expression.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: MetricName
-						"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The name of the metric for non-Application Signals services",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 255),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: MetricSource
-						"metric_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: MetricSourceAttributes
-								"metric_source_attributes": // Pattern: ""
-								schema.MapAttribute{        /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "Optional additional attributes for the metric source",
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-										mapplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: MetricSourceKeyAttributes
-								"metric_source_key_attributes": // Pattern: ""
-								schema.MapAttribute{            /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "Required attributes that identify the metric source",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.Map{ /*START VALIDATORS*/
-										fwvalidators.NotNullMap(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-										mapplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Configuration for identifying the source of metrics for non-Application Signals services",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: MetricType
-						"metric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "If the SLO monitors either the LATENCY or AVAILABILITY metric that Application Signals collects, this field displays which of those metrics is used.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.OneOf(
-									"LATENCY",
-									"AVAILABILITY",
-								),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: OperationName
-						"operation_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "If the SLO monitors a specific operation of the service, this field displays that operation name.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 255),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: PeriodSeconds
-						"period_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The number of seconds to use as the period for SLO evaluation. Your application's performance is compared to the SLI during each period. For each period, the application is determined to have either achieved or not achieved the necessary performance.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.Int64{ /*START VALIDATORS*/
-								int64validator.Between(60, 900),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: Statistic
-						"statistic": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The statistic to use for comparison to the threshold. It can be any CloudWatch statistic or extended statistic",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 20),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "A structure that contains information about the metric that the SLO monitors.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.Object{ /*START VALIDATORS*/
-						fwvalidators.NotNullObject(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "This structure contains information about the performance metric that an SLO monitors.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"sli": schemaAttribute2e813361549e4fb43b0619ea(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -2569,47 +2228,7 @@ func serviceLevelObjectiveResource(ctx context.Context) (resource.Resource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A string that you can use to assign a value. The combination of tag keys and values can help you organize and categorize your resources.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the specified tag key.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The list of tag keys and values associated with the resource you specified",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.Set{ /*START VALIDATORS*/
-				setvalidator.SizeBetween(1, 200),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributebf75fffd96328bd0195173c9(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

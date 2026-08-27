@@ -18,6 +18,63 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute20e9357155e5fbcba9c0063a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The API identifier.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c7ae10ac677615ce5d21fb4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The content-type for the model, for example, \"application/json\".",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute427991c6773bbcb17d5632fb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6fd20f19cddb63f1f0824572() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the model.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute784b6b4534839aba4c484259() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "The schema for the model. For application/json models, this should be JSON schema draft 4 model.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8acaed68badecba81c54ec52() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the model.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_apigatewayv2_model", modelResource)
 }
@@ -33,13 +90,7 @@ func modelResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The API identifier.",
 		//	  "type": "string"
 		//	}
-		"api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The API identifier.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"api_id": schemaAttribute20e9357155e5fbcba9c0063a(),
 		// Property: ContentType
 		// CloudFormation resource type schema:
 		//
@@ -47,14 +98,7 @@ func modelResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The content-type for the model, for example, \"application/json\".",
 		//	  "type": "string"
 		//	}
-		"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The content-type for the model, for example, \"application/json\".",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"content_type": schemaAttribute2c7ae10ac677615ce5d21fb4(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -62,14 +106,7 @@ func modelResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The description of the model.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the model.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute8acaed68badecba81c54ec52(),
 		// Property: ModelId
 		// CloudFormation resource type schema:
 		//
@@ -77,13 +114,7 @@ func modelResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"model_id": schemaAttribute427991c6773bbcb17d5632fb(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -91,10 +122,7 @@ func modelResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the model.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the model.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute6fd20f19cddb63f1f0824572(),
 		// Property: Schema
 		// CloudFormation resource type schema:
 		//
@@ -102,11 +130,7 @@ func modelResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The schema for the model. For application/json models, this should be JSON schema draft 4 model.",
 		//	  "type": "object"
 		//	}
-		"schema": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "The schema for the model. For application/json models, this should be JSON schema draft 4 model.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"schema": schemaAttribute784b6b4534839aba4c484259(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

@@ -27,6 +27,703 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute0663ed19fa8b9896797db6ea() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Descriptor payload data.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 102400),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute07d9856e23901e8117948051() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: A2aAgentCard
+			"a2_a_agent_card": schemaAttributebc3b8ba2bcc0258b35bc3f18(),
+			// Property: AgentSkillsDefinition
+			"agent_skills_definition": schemaAttributec3764472b27abeaa41543fc3(),
+			// Property: Custom
+			"custom": schemaAttributec00453de1f7b54e0103c3736(),
+			// Property: McpServer
+			"mcp_server": schemaAttribute8f4d7424206fe92fe7638537(),
+		}, /*END SCHEMA*/
+		Description: "The typed set of descriptors for a registry record. Exactly one descriptor field is populated based on the record type.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute087e2ff73a7310c4dff86112() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The lifecycle status of the registry record.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute117a46e33781d2df61431d01() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The SigV4 signing region.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 64),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9-]+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute165d0402d74a65ab53921b8a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SkillMd
+			"skill_md": schemaAttributeb605ba7ee656a84283d5269c(),
+		}, /*END SCHEMA*/
+		Description: "Additional data associated with an agent skills definition descriptor.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1744863e605fd857d38fc94e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the registry record.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"MCP",
+				"AGENT",
+				"SKILL",
+				"CUSTOM",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute28fc2c3404fa5c2126441d5b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"OAUTH",
+				"IAM",
+			),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2bb62400ec9d141bd96fa8d7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Url
+			"url": schemaAttribute4d33f9cc8c5b0900626e7560(),
+		}, /*END SCHEMA*/
+		Description: "URL-based source for SkillMd content (sync is skipped; content is provided inline via Data).",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3ea595dd0622d5f0b865c400() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"CLIENT_CREDENTIALS",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3ee28d84d8950005148fc419() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the registry containing the record.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4024d409d1f54119a0d4573a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Version of the descriptor type schema.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 255),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4c0be77e439acc8eee0f3469() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the IAM role.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(20, 2048),
+			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4d33f9cc8c5b0900626e7560() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "URL source for the SkillMd document.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 2048),
+			stringvalidator.RegexMatches(regexp.MustCompile("^https://.*$"), ""),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5576ab31b7302a6ccf524ff1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IamCredentialProvider
+			"iam_credential_provider": schemaAttribute73bfad79c62707e07bf154e6(),
+			// Property: OauthCredentialProvider
+			"oauth_credential_provider": schemaAttribute61ffc01a77f678b4ce18d6bc(),
+		}, /*END SCHEMA*/
+		Description: "The credential provider details. Specify exactly one member.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5b5abb69eb815327aa9e3dbf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the OAuth credential provider.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 2048),
+			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:.*$"), ""),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6005513c3301e1a081caed99() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FromUrl
+			"from_url": schemaAttribute2bb62400ec9d141bd96fa8d7(),
+		}, /*END SCHEMA*/
+		Description: "Source configuration for a SkillMd document. Unlike MCP/A2A sources, SkillMd does not support credential providers.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute61ffc01a77f678b4ce18d6bc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CustomParameters
+			"custom_parameters": schemaAttribute74b0be8c337c20d6ef5dd127(),
+			// Property: GrantType
+			"grant_type": schemaAttribute3ea595dd0622d5f0b865c400(),
+			// Property: ProviderArn
+			"provider_arn": schemaAttribute5b5abb69eb815327aa9e3dbf(),
+			// Property: Scopes
+			"scopes": schemaAttributeb4f56b72d488d26a0c64468a(),
+		}, /*END SCHEMA*/
+		Description: "OAuth credential provider configuration.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute62f9c2cd1f3a2b0f01fdf9c7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the registry record was last updated.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6da401d0bd0f4971c5e1f37a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The human-readable display name of the registry record.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 255),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6fc53204272e0da38100a3ef() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FromUrl
+			"from_url": schemaAttributeb4c0d5e34b65a2d93e5127a2(),
+		}, /*END SCHEMA*/
+		Description: "The source configuration that defines where descriptor content is retrieved from.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7020d22f5037079ed2def773() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Version of the tools descriptor schema.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 255),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute73bfad79c62707e07bf154e6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Region
+			"region": schemaAttribute117a46e33781d2df61431d01(),
+			// Property: RoleArn
+			"role_arn": schemaAttribute4c0be77e439acc8eee0f3469(),
+			// Property: Service
+			"service": schemaAttributebace8bfeb15f882819bec665(),
+		}, /*END SCHEMA*/
+		Description: "IAM credential provider configuration.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute74b0be8c337c20d6ef5dd127() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Additional custom parameters for the OAuth flow.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+			mapplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7f0f3544a54cd248dddfbb13() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributec02e2330951cca7430b1710a(),
+				// Property: Value
+				"value": schemaAttribute9ef47642413fda2004aa0bab(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags to assign to the registry record.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeAtMost(50),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute81c4466c47a6fe937f4968f0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Data
+			"data": schemaAttribute0663ed19fa8b9896797db6ea(),
+			// Property: DataSchemaVersion
+			"data_schema_version": schemaAttribute7020d22f5037079ed2def773(),
+		}, /*END SCHEMA*/
+		Description: "The MCP tools descriptor.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute86b5cb5a352e70a78298c5bb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the registry containing the record.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(12, 16),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]{12,16}$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8f4d7424206fe92fe7638537() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AdditionalData
+			"additional_data": schemaAttributee0f4e62980ec943f9f6b226f(),
+			// Property: Data
+			"data": schemaAttribute0663ed19fa8b9896797db6ea(),
+			// Property: DataSchemaVersion
+			"data_schema_version": schemaAttribute4024d409d1f54119a0d4573a(),
+			// Property: Source
+			"source": schemaAttribute6fc53204272e0da38100a3ef(),
+		}, /*END SCHEMA*/
+		Description: "The MCP server descriptor, populated when the record type is MCP.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ef47642413fda2004aa0bab() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value of the tag.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 256),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\s._:/=+@-]*$"), ""),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea072fc7e0e8b9673c7297844() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version of the registry record.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 255),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9.-]+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea74afb6e77635193cdea78cb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "URL source for descriptor content.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 2048),
+			stringvalidator.RegexMatches(regexp.MustCompile("^https://.*$"), ""),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb20384b04da2cbcb3c3d195c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the registry record was created.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb4c0d5e34b65a2d93e5127a2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CredentialProviderConfigurations
+			"credential_provider_configurations": schemaAttributeeab6abd53b119d99890e22b0(),
+			// Property: Url
+			"url": schemaAttributea74afb6e77635193cdea78cb(),
+		}, /*END SCHEMA*/
+		Description: "URL-based descriptor source configuration, with credential provider configurations for authenticated URL retrieval.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb4f56b72d488d26a0c64468a() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "OAuth scopes to request.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb605ba7ee656a84283d5269c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Data
+			"data": schemaAttribute0663ed19fa8b9896797db6ea(),
+			// Property: DataSchemaVersion
+			"data_schema_version": schemaAttribute4024d409d1f54119a0d4573a(),
+			// Property: Source
+			"source": schemaAttribute6005513c3301e1a081caed99(),
+		}, /*END SCHEMA*/
+		Description: "Markdown-format descriptor containing an agent skills document.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebace8bfeb15f882819bec665() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The SigV4 signing service name.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebc3b8ba2bcc0258b35bc3f18() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Data
+			"data": schemaAttribute0663ed19fa8b9896797db6ea(),
+			// Property: DataSchemaVersion
+			"data_schema_version": schemaAttribute4024d409d1f54119a0d4573a(),
+			// Property: Source
+			"source": schemaAttribute6fc53204272e0da38100a3ef(),
+		}, /*END SCHEMA*/
+		Description: "The A2A agent card descriptor, populated when the record type is AGENT.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec00453de1f7b54e0103c3736() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Data
+			"data": schemaAttribute0663ed19fa8b9896797db6ea(),
+		}, /*END SCHEMA*/
+		Description: "The custom descriptor, populated when the record type is CUSTOM.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec02e2330951cca7430b1710a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key of the tag.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\s._:/=+@-]*$"), ""),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec3764472b27abeaa41543fc3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AdditionalData
+			"additional_data": schemaAttribute165d0402d74a65ab53921b8a(),
+			// Property: Data
+			"data": schemaAttribute0663ed19fa8b9896797db6ea(),
+			// Property: DataSchemaVersion
+			"data_schema_version": schemaAttribute4024d409d1f54119a0d4573a(),
+		}, /*END SCHEMA*/
+		Description: "The agent skills definition descriptor, populated when the record type is SKILL.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec4370d75474a1dab397aa25e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the registry record.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec57998f659e86df1d64e33bb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the registry record.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 4096),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee0f4e62980ec943f9f6b226f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Tools
+			"tools": schemaAttribute81c4466c47a6fe937f4968f0(),
+		}, /*END SCHEMA*/
+		Description: "Additional data associated with an MCP server descriptor.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee99a3b19f4d105ca8c16a815() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the registry record.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeab6abd53b119d99890e22b0() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CredentialProvider
+				"credential_provider": schemaAttribute5576ab31b7302a6ccf524ff1(),
+				// Property: CredentialProviderType
+				"credential_provider_type": schemaAttribute28fc2c3404fa5c2126441d5b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The credential providers used to authenticate when fetching descriptor content from the source URL.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeAtMost(1),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef5e86d77e4049a6b5fff4daf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the registry record.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 255),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9_\\-\\.\\/]*$"), ""),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_agentregistry_registry_record", registryRecordResource)
 }
@@ -43,14 +740,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the registry record was created.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttributeb20384b04da2cbcb3c3d195c(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -60,17 +750,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the registry record.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 4096),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributec57998f659e86df1d64e33bb(),
 		// Property: Descriptors
 		// CloudFormation resource type schema:
 		//
@@ -471,648 +1151,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"descriptors": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: A2aAgentCard
-				"a2_a_agent_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Data
-						"data": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Descriptor payload data.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 102400),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: DataSchemaVersion
-						"data_schema_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Version of the descriptor type schema.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 255),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: Source
-						"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: FromUrl
-								"from_url": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: CredentialProviderConfigurations
-										"credential_provider_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: CredentialProvider
-													"credential_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: IamCredentialProvider
-															"iam_credential_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: Region
-																	"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The SigV4 signing region.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 64),
-																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9-]+$"), ""),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: RoleArn
-																	"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The ARN of the IAM role.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(20, 2048),
-																			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+$"), ""),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Service
-																	"service": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The SigV4 signing service name.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
-																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "IAM credential provider configuration.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: OauthCredentialProvider
-															"oauth_credential_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: CustomParameters
-																	"custom_parameters": // Pattern: ""
-																	schema.MapAttribute{ /*START ATTRIBUTE*/
-																		ElementType: types.StringType,
-																		Description: "Additional custom parameters for the OAuth flow.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-																			mapplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: GrantType
-																	"grant_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Optional: true,
-																		Computed: true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.OneOf(
-																				"CLIENT_CREDENTIALS",
-																			),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: ProviderArn
-																	"provider_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The ARN of the OAuth credential provider.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 2048),
-																			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:.*$"), ""),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Scopes
-																	"scopes": schema.ListAttribute{ /*START ATTRIBUTE*/
-																		ElementType: types.StringType,
-																		Description: "OAuth scopes to request.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																			listplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "OAuth credential provider configuration.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-														Description: "The credential provider details. Specify exactly one member.",
-														Optional:    true,
-														Computed:    true,
-														Validators: []validator.Object{ /*START VALIDATORS*/
-															fwvalidators.NotNullObject(),
-														}, /*END VALIDATORS*/
-														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-															objectplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-													// Property: CredentialProviderType
-													"credential_provider_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Optional: true,
-														Computed: true,
-														Validators: []validator.String{ /*START VALIDATORS*/
-															stringvalidator.OneOf(
-																"OAUTH",
-																"IAM",
-															),
-															fwvalidators.NotNullString(),
-														}, /*END VALIDATORS*/
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-											}, /*END NESTED OBJECT*/
-											Description: "The credential providers used to authenticate when fetching descriptor content from the source URL.",
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.List{ /*START VALIDATORS*/
-												listvalidator.SizeAtMost(1),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-												listplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: Url
-										"url": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "URL source for descriptor content.",
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 2048),
-												stringvalidator.RegexMatches(regexp.MustCompile("^https://.*$"), ""),
-												fwvalidators.NotNullString(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "URL-based descriptor source configuration, with credential provider configurations for authenticated URL retrieval.",
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The source configuration that defines where descriptor content is retrieved from.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The A2A agent card descriptor, populated when the record type is AGENT.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: AgentSkillsDefinition
-				"agent_skills_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AdditionalData
-						"additional_data": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: SkillMd
-								"skill_md": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Data
-										"data": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Descriptor payload data.",
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 102400),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: DataSchemaVersion
-										"data_schema_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Version of the descriptor type schema.",
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 255),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: Source
-										"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: FromUrl
-												"from_url": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: Url
-														"url": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "URL source for the SkillMd document.",
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.LengthBetween(1, 2048),
-																stringvalidator.RegexMatches(regexp.MustCompile("^https://.*$"), ""),
-																fwvalidators.NotNullString(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "URL-based source for SkillMd content (sync is skipped; content is provided inline via Data).",
-													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-														objectplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Description: "Source configuration for a SkillMd document. Unlike MCP/A2A sources, SkillMd does not support credential providers.",
-											Optional:    true,
-											Computed:    true,
-											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-												objectplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "Markdown-format descriptor containing an agent skills document.",
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Additional data associated with an agent skills definition descriptor.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: Data
-						"data": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Descriptor payload data.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 102400),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: DataSchemaVersion
-						"data_schema_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Version of the descriptor type schema.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 255),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The agent skills definition descriptor, populated when the record type is SKILL.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: Custom
-				"custom": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Data
-						"data": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Descriptor payload data.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 102400),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The custom descriptor, populated when the record type is CUSTOM.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: McpServer
-				"mcp_server": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AdditionalData
-						"additional_data": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Tools
-								"tools": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Data
-										"data": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Descriptor payload data.",
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 102400),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: DataSchemaVersion
-										"data_schema_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Version of the tools descriptor schema.",
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 255),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "The MCP tools descriptor.",
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Additional data associated with an MCP server descriptor.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: Data
-						"data": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Descriptor payload data.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 102400),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: DataSchemaVersion
-						"data_schema_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Version of the descriptor type schema.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 255),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: Source
-						"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: FromUrl
-								"from_url": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: CredentialProviderConfigurations
-										"credential_provider_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: CredentialProvider
-													"credential_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: IamCredentialProvider
-															"iam_credential_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: Region
-																	"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The SigV4 signing region.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 64),
-																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9-]+$"), ""),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: RoleArn
-																	"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The ARN of the IAM role.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(20, 2048),
-																			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+$"), ""),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Service
-																	"service": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The SigV4 signing service name.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 128),
-																			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "IAM credential provider configuration.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: OauthCredentialProvider
-															"oauth_credential_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: CustomParameters
-																	"custom_parameters": // Pattern: ""
-																	schema.MapAttribute{ /*START ATTRIBUTE*/
-																		ElementType: types.StringType,
-																		Description: "Additional custom parameters for the OAuth flow.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-																			mapplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: GrantType
-																	"grant_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Optional: true,
-																		Computed: true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.OneOf(
-																				"CLIENT_CREDENTIALS",
-																			),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: ProviderArn
-																	"provider_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The ARN of the OAuth credential provider.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.LengthBetween(1, 2048),
-																			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:.*$"), ""),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Scopes
-																	"scopes": schema.ListAttribute{ /*START ATTRIBUTE*/
-																		ElementType: types.StringType,
-																		Description: "OAuth scopes to request.",
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																			listplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "OAuth credential provider configuration.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-														Description: "The credential provider details. Specify exactly one member.",
-														Optional:    true,
-														Computed:    true,
-														Validators: []validator.Object{ /*START VALIDATORS*/
-															fwvalidators.NotNullObject(),
-														}, /*END VALIDATORS*/
-														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-															objectplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-													// Property: CredentialProviderType
-													"credential_provider_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Optional: true,
-														Computed: true,
-														Validators: []validator.String{ /*START VALIDATORS*/
-															stringvalidator.OneOf(
-																"OAUTH",
-																"IAM",
-															),
-															fwvalidators.NotNullString(),
-														}, /*END VALIDATORS*/
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-											}, /*END NESTED OBJECT*/
-											Description: "The credential providers used to authenticate when fetching descriptor content from the source URL.",
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.List{ /*START VALIDATORS*/
-												listvalidator.SizeAtMost(1),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-												listplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: Url
-										"url": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "URL source for descriptor content.",
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 2048),
-												stringvalidator.RegexMatches(regexp.MustCompile("^https://.*$"), ""),
-												fwvalidators.NotNullString(),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "URL-based descriptor source configuration, with credential provider configurations for authenticated URL retrieval.",
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The source configuration that defines where descriptor content is retrieved from.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The MCP server descriptor, populated when the record type is MCP.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The typed set of descriptors for a registry record. Exactly one descriptor field is populated based on the record type.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"descriptors": schemaAttribute07d9856e23901e8117948051(),
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -1122,17 +1161,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The human-readable display name of the registry record.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"display_name": schemaAttribute6da401d0bd0f4971c5e1f37a(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -1143,14 +1172,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-\\.\\/]*$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the registry record.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9_\\-\\.\\/]*$"), ""),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributef5e86d77e4049a6b5fff4daf(),
 		// Property: RecordArn
 		// CloudFormation resource type schema:
 		//
@@ -1161,13 +1183,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:aws(-[^:]+)?:agent-registry:[a-z0-9-]+:[0-9]{12}:registry/[a-zA-Z0-9]{12,16}/record/[a-zA-Z0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"record_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the registry record.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"record_arn": schemaAttributec4370d75474a1dab397aa25e(),
 		// Property: RecordId
 		// CloudFormation resource type schema:
 		//
@@ -1178,13 +1194,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[a-zA-Z0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"record_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the registry record.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"record_id": schemaAttributee99a3b19f4d105ca8c16a815(),
 		// Property: RecordType
 		// CloudFormation resource type schema:
 		//
@@ -1198,21 +1208,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"record_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of the registry record.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"MCP",
-					"AGENT",
-					"SKILL",
-					"CUSTOM",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"record_type": schemaAttribute1744863e605fd857d38fc94e(),
 		// Property: RecordVersion
 		// CloudFormation resource type schema:
 		//
@@ -1223,18 +1219,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[a-zA-Z0-9.-]+$",
 		//	  "type": "string"
 		//	}
-		"record_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version of the registry record.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9.-]+$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"record_version": schemaAttributea072fc7e0e8b9673c7297844(),
 		// Property: RegistryArn
 		// CloudFormation resource type schema:
 		//
@@ -1245,13 +1230,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:aws(-[^:]+)?:agent-registry:[a-z0-9-]+:[0-9]{12}:registry/[a-zA-Z0-9]{12,16}$",
 		//	  "type": "string"
 		//	}
-		"registry_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the registry containing the record.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"registry_arn": schemaAttribute3ee28d84d8950005148fc419(),
 		// Property: RegistryId
 		// CloudFormation resource type schema:
 		//
@@ -1262,17 +1241,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[a-zA-Z0-9]{12,16}$",
 		//	  "type": "string"
 		//	}
-		"registry_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the registry containing the record.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(12, 16),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]{12,16}$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"registry_id": schemaAttribute86b5cb5a352e70a78298c5bb(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -1291,13 +1260,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The lifecycle status of the registry record.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute087e2ff73a7310c4dff86112(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1332,50 +1295,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key of the tag.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
-							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\s._:/=+@-]*$"), ""),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value of the tag.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
-							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\s._:/=+@-]*$"), ""),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags to assign to the registry record.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeAtMost(50),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute7f0f3544a54cd248dddfbb13(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -1384,14 +1304,7 @@ func registryRecordResource(ctx context.Context) (resource.Resource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the registry record was last updated.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttribute62f9c2cd1f3a2b0f01fdf9c7(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

@@ -24,6 +24,214 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute09749a63959dba3d91a010c8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of a runtime role for the application instance.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 255),
+			stringvalidator.RegexMatches(regexp.MustCompile("^arn:[a-z0-9][-.a-z0-9]{0,62}:iam::[0-9]{12}:role/.+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4681ec3883e1c05fd9e50418() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description for the application instance.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 255),
+			stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute560ec67106a8367fbc1b0ac5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The application manifest.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 51200),
+			stringvalidator.RegexMatches(regexp.MustCompile("^.+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7aae106c940a48dacf7565e9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PayloadData
+			"payload_data": schemaAttribute560ec67106a8367fbc1b0ac5(),
+		}, /*END SCHEMA*/
+		Description: "The application's manifest document.",
+		Required:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute89d11a4fe9883e8b7984c70f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A name for the application instance.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 255),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-\\_]+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8ea412d71ed87ffdcebd37f4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			stringvalidator.RegexMatches(regexp.MustCompile("^.+$"), ""),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8ea8d0239f410afddd347cf5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of an application instance to replace with the new instance.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 255),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-\\_]+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// ApplicationInstanceIdToReplace is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute91fd324bbfe413f5d5e86c18() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute8ea412d71ed87ffdcebd37f4(),
+				// Property: Value
+				"value": schemaAttributecf1041d59de0398593deb84e(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags for the application instance.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecc66a4b2d9ec5a3fe1bb78a1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The overrides document.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 51200),
+			stringvalidator.RegexMatches(regexp.MustCompile("^.+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecf1041d59de0398593deb84e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 256),
+			stringvalidator.RegexMatches(regexp.MustCompile("^.+$"), ""),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee89d6130a11b66aa1d50e6b9() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef8d58831a4b8a1d818e2690c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The device's ID.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 255),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-\\_]+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef9ae991c1623cc5e71b8cd36() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefd60f666268ad21b55291924() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PayloadData
+			"payload_data": schemaAttributecc66a4b2d9ec5a3fe1bb78a1(),
+		}, /*END SCHEMA*/
+		Description: "Setting overrides for the application manifest.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+			objectplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_panorama_application_instance", applicationInstanceResource)
 	registry.AddListResourceFactory("awscc_panorama_application_instance", generic.NewListResource(applicationInstanceResource))
@@ -42,12 +250,7 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 		//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 		//	  "type": "string"
 		//	}
-		"application_instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"application_instance_id": schemaAttributef9ae991c1623cc5e71b8cd36(),
 		// Property: ApplicationInstanceIdToReplace
 		// CloudFormation resource type schema:
 		//
@@ -58,20 +261,7 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 		//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 		//	  "type": "string"
 		//	}
-		"application_instance_id_to_replace": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of an application instance to replace with the new instance.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-\\_]+$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// ApplicationInstanceIdToReplace is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"application_instance_id_to_replace": schemaAttribute8ea8d0239f410afddd347cf5(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -80,24 +270,14 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributef9ae991c1623cc5e71b8cd36(),
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "integer"
 		//	}
-		"created_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"created_time": schemaAttributee89d6130a11b66aa1d50e6b9(),
 		// Property: DefaultRuntimeContextDevice
 		// CloudFormation resource type schema:
 		//
@@ -108,17 +288,7 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 		//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 		//	  "type": "string"
 		//	}
-		"default_runtime_context_device": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The device's ID.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-\\_]+$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"default_runtime_context_device": schemaAttributef8d58831a4b8a1d818e2690c(),
 		// Property: DefaultRuntimeContextDeviceName
 		// CloudFormation resource type schema:
 		//
@@ -128,12 +298,7 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 		//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 		//	  "type": "string"
 		//	}
-		"default_runtime_context_device_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"default_runtime_context_device_name": schemaAttributef9ae991c1623cc5e71b8cd36(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -144,19 +309,7 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 		//	  "pattern": "^.*$",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description for the application instance.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 255),
-				stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute4681ec3883e1c05fd9e50418(),
 		// Property: HealthStatus
 		// CloudFormation resource type schema:
 		//
@@ -168,24 +321,14 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"health_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"health_status": schemaAttributef9ae991c1623cc5e71b8cd36(),
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "integer"
 		//	}
-		"last_updated_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"last_updated_time": schemaAttributee89d6130a11b66aa1d50e6b9(),
 		// Property: ManifestOverridesPayload
 		// CloudFormation resource type schema:
 		//
@@ -203,30 +346,7 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"manifest_overrides_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: PayloadData
-				"payload_data": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The overrides document.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(0, 51200),
-						stringvalidator.RegexMatches(regexp.MustCompile("^.+$"), ""),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Setting overrides for the application manifest.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"manifest_overrides_payload": schemaAttributefd60f666268ad21b55291924(),
 		// Property: ManifestPayload
 		// CloudFormation resource type schema:
 		//
@@ -244,28 +364,7 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"manifest_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: PayloadData
-				"payload_data": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The application manifest.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 51200),
-						stringvalidator.RegexMatches(regexp.MustCompile("^.+$"), ""),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The application's manifest document.",
-			Required:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"manifest_payload": schemaAttribute7aae106c940a48dacf7565e9(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -276,19 +375,7 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 		//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A name for the application instance.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-\\_]+$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute89d11a4fe9883e8b7984c70f(),
 		// Property: RuntimeRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -299,19 +386,7 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 		//	  "pattern": "^arn:[a-z0-9][-.a-z0-9]{0,62}:iam::[0-9]{12}:role/.+$",
 		//	  "type": "string"
 		//	}
-		"runtime_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of a runtime role for the application instance.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
-				stringvalidator.RegexMatches(regexp.MustCompile("^arn:[a-z0-9][-.a-z0-9]{0,62}:iam::[0-9]{12}:role/.+$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"runtime_role_arn": schemaAttribute09749a63959dba3d91a010c8(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -330,12 +405,7 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttributef9ae991c1623cc5e71b8cd36(),
 		// Property: StatusDescription
 		// CloudFormation resource type schema:
 		//
@@ -344,12 +414,7 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"status_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"status_description": schemaAttributef9ae991c1623cc5e71b8cd36(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -384,46 +449,7 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
-							stringvalidator.RegexMatches(regexp.MustCompile("^.+$"), ""),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
-							stringvalidator.RegexMatches(regexp.MustCompile("^.+$"), ""),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags for the application instance.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute91fd324bbfe413f5d5e86c18(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

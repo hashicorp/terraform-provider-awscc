@@ -19,6 +19,97 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0b4b0d2d4e96026d0dd62211() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The ID associated with the revocation.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0eb74de18051f3c45bed49c5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4c4422c15407ea0eb32bf206() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6be8eac617a98297529db5ac() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: NumberOfRevokedEntries
+				"number_of_revoked_entries": schemaAttributef2257e743ffa629b3cb4ffc8(),
+				// Property: RevocationId
+				"revocation_id": schemaAttribute0eb74de18051f3c45bed49c5(),
+				// Property: RevocationType
+				"revocation_type": schemaAttribute0eb74de18051f3c45bed49c5(),
+				// Property: TrustStoreArn
+				"trust_store_arn": schemaAttribute0eb74de18051f3c45bed49c5(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The data associated with a trust store revocation",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec8a45c73881930301ba322c0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the trust store.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee96e96fc3ab229c7d142f9c0() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RevocationType
+				"revocation_type": schemaAttribute4c4422c15407ea0eb32bf206(),
+				// Property: S3Bucket
+				"s3_bucket": schemaAttribute4c4422c15407ea0eb32bf206(),
+				// Property: S3Key
+				"s3_key": schemaAttribute4c4422c15407ea0eb32bf206(),
+				// Property: S3ObjectVersion
+				"s3_object_version": schemaAttribute4c4422c15407ea0eb32bf206(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The attributes required to create a trust store revocation.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+			setplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// RevocationContents is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef2257e743ffa629b3cb4ffc8() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_elasticloadbalancingv2_trust_store_revocation", trustStoreRevocationResource)
 }
@@ -54,52 +145,7 @@ func trustStoreRevocationResource(ctx context.Context) (resource.Resource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"revocation_contents": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: RevocationType
-					"revocation_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: S3Bucket
-					"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: S3Key
-					"s3_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: S3ObjectVersion
-					"s3_object_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The attributes required to create a trust store revocation.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
-				setplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// RevocationContents is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"revocation_contents": schemaAttributee96e96fc3ab229c7d142f9c0(),
 		// Property: RevocationId
 		// CloudFormation resource type schema:
 		//
@@ -108,13 +154,7 @@ func trustStoreRevocationResource(ctx context.Context) (resource.Resource, error
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
-		"revocation_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The ID associated with the revocation.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"revocation_id": schemaAttribute0b4b0d2d4e96026d0dd62211(),
 		// Property: TrustStoreArn
 		// CloudFormation resource type schema:
 		//
@@ -122,15 +162,7 @@ func trustStoreRevocationResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The Amazon Resource Name (ARN) of the trust store.",
 		//	  "type": "string"
 		//	}
-		"trust_store_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the trust store.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"trust_store_arn": schemaAttributec8a45c73881930301ba322c0(),
 		// Property: TrustStoreRevocations
 		// CloudFormation resource type schema:
 		//
@@ -159,33 +191,7 @@ func trustStoreRevocationResource(ctx context.Context) (resource.Resource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"trust_store_revocations": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: NumberOfRevokedEntries
-					"number_of_revoked_entries": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: RevocationId
-					"revocation_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: RevocationType
-					"revocation_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: TrustStoreArn
-					"trust_store_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The data associated with a trust store revocation",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"trust_store_revocations": schemaAttribute6be8eac617a98297529db5ac(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

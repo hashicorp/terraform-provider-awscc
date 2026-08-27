@@ -24,6 +24,214 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute000810f9834af8f8f0c0f789() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the component denotes whether the component is used to build the image or only to test it. ",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute138c1ba797c27a9f6b18ef17() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The operating system (OS) version supported by the component.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+			listplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute31ee99c42541145fd25b3fa1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version of the component.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute31feaa8f0f419b9418f0af2d() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The tags associated with the component.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+			mapplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute350a58b69cc0756e9cfd119b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Arn
+			"arn": schemaAttribute3aeb36e57518d131666a0c04(),
+			// Property: Major
+			"major": schemaAttributed6898341775d022da7e51a31(),
+			// Property: Minor
+			"minor": schemaAttribute508388c6ef08b9190a0ac617(),
+			// Property: Patch
+			"patch": schemaAttributebcbf3d9bfd4a2576c6b5c249(),
+		}, /*END SCHEMA*/
+		Description: "The latest version references of the component.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3aeb36e57518d131666a0c04() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The latest version ARN of the created component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute508388c6ef08b9190a0ac617() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The latest version ARN of the created component, with the same minor version.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute611dbff424f3311289a2e650() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The uri of the component.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// Uri is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute65981e9ae74cd444e66f9c76() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "The encryption status of the component.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6f52b6c73b27ceb7bdb50dc2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the component.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9f7cfc44308d20f6df6aea22() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the component.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb2b713f7454d2a0d9c3f466b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The platform of the component.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"Windows",
+				"Linux",
+				"macOS",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb5ec52c5b790951485286467() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the component.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebcbf3d9bfd4a2576c6b5c249() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The latest version ARN of the created component, with the same patch version.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed18cf85d77a936bd255d98e1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The data of the component.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 16000),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// Data is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed6898341775d022da7e51a31() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The latest version ARN of the created component, with the same major version.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef70371465e28b537c12f7337() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The change description of the component.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef87cdaab66557113c36f9bb7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The KMS key identifier used to encrypt the component.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_imagebuilder_component", componentResource)
 }
@@ -40,13 +248,7 @@ func componentResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:[^:]+:imagebuilder:[^:]+:[^:]+:component/.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the component.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributeb5ec52c5b790951485286467(),
 		// Property: ChangeDescription
 		// CloudFormation resource type schema:
 		//
@@ -54,15 +256,7 @@ func componentResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The change description of the component.",
 		//	  "type": "string"
 		//	}
-		"change_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The change description of the component.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"change_description": schemaAttributef70371465e28b537c12f7337(),
 		// Property: Data
 		// CloudFormation resource type schema:
 		//
@@ -72,19 +266,7 @@ func componentResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"data": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The data of the component.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 16000),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// Data is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"data": schemaAttributed18cf85d77a936bd255d98e1(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -92,15 +274,7 @@ func componentResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The description of the component.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the component.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute9f7cfc44308d20f6df6aea22(),
 		// Property: Encrypted
 		// CloudFormation resource type schema:
 		//
@@ -108,13 +282,7 @@ func componentResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The encryption status of the component.",
 		//	  "type": "boolean"
 		//	}
-		"encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "The encryption status of the component.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"encrypted": schemaAttribute65981e9ae74cd444e66f9c76(),
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -122,15 +290,7 @@ func componentResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The KMS key identifier used to encrypt the component.",
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The KMS key identifier used to encrypt the component.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"kms_key_id": schemaAttributef87cdaab66557113c36f9bb7(),
 		// Property: LatestVersion
 		// CloudFormation resource type schema:
 		//
@@ -157,35 +317,7 @@ func componentResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"latest_version": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Arn
-				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The latest version ARN of the created component.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Major
-				"major": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The latest version ARN of the created component, with the same major version.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Minor
-				"minor": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The latest version ARN of the created component, with the same minor version.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Patch
-				"patch": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The latest version ARN of the created component, with the same patch version.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The latest version references of the component.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"latest_version": schemaAttribute350a58b69cc0756e9cfd119b(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -193,13 +325,7 @@ func componentResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the component.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the component.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute6f52b6c73b27ceb7bdb50dc2(),
 		// Property: Platform
 		// CloudFormation resource type schema:
 		//
@@ -212,20 +338,7 @@ func componentResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"platform": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The platform of the component.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"Windows",
-					"Linux",
-					"macOS",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"platform": schemaAttributeb2b713f7454d2a0d9c3f466b(),
 		// Property: SupportedOsVersions
 		// CloudFormation resource type schema:
 		//
@@ -237,17 +350,7 @@ func componentResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"supported_os_versions": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The operating system (OS) version supported by the component.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-				listplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"supported_os_versions": schemaAttribute138c1ba797c27a9f6b18ef17(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -261,16 +364,7 @@ func componentResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The tags associated with the component.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-				mapplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute31feaa8f0f419b9418f0af2d(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -282,13 +376,7 @@ func componentResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of the component denotes whether the component is used to build the image or only to test it. ",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttribute000810f9834af8f8f0c0f789(),
 		// Property: Uri
 		// CloudFormation resource type schema:
 		//
@@ -296,16 +384,7 @@ func componentResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The uri of the component.",
 		//	  "type": "string"
 		//	}
-		"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The uri of the component.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// Uri is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"uri": schemaAttribute611dbff424f3311289a2e650(),
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -313,13 +392,7 @@ func componentResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The version of the component.",
 		//	  "type": "string"
 		//	}
-		"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version of the component.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"version": schemaAttribute31ee99c42541145fd25b3fa1(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

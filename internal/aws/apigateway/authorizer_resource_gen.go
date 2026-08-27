@@ -20,6 +20,67 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute189af92569a1806aac4c6d53() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute63ff685e8a847b0f6aa9aee5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6f9ac20e5d88024a01629dcc() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec5ea0ff1d460041c72da900b() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed51bcbde8751b9f475df8000() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedcaa473fd5ec0819fae916b3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_apigateway_authorizer", authorizerResource)
 }
@@ -35,14 +96,7 @@ func authorizerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"auth_type": schemaAttribute63ff685e8a847b0f6aa9aee5(),
 		// Property: AuthorizerCredentials
 		// CloudFormation resource type schema:
 		//
@@ -50,14 +104,7 @@ func authorizerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"authorizer_credentials": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"authorizer_credentials": schemaAttribute63ff685e8a847b0f6aa9aee5(),
 		// Property: AuthorizerId
 		// CloudFormation resource type schema:
 		//
@@ -65,13 +112,7 @@ func authorizerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"authorizer_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"authorizer_id": schemaAttribute189af92569a1806aac4c6d53(),
 		// Property: AuthorizerResultTtlInSeconds
 		// CloudFormation resource type schema:
 		//
@@ -79,14 +120,7 @@ func authorizerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "",
 		//	  "type": "integer"
 		//	}
-		"authorizer_result_ttl_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"authorizer_result_ttl_in_seconds": schemaAttribute6f9ac20e5d88024a01629dcc(),
 		// Property: AuthorizerUri
 		// CloudFormation resource type schema:
 		//
@@ -94,14 +128,7 @@ func authorizerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"authorizer_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"authorizer_uri": schemaAttribute63ff685e8a847b0f6aa9aee5(),
 		// Property: IdentitySource
 		// CloudFormation resource type schema:
 		//
@@ -109,14 +136,7 @@ func authorizerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"identity_source": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"identity_source": schemaAttribute63ff685e8a847b0f6aa9aee5(),
 		// Property: IdentityValidationExpression
 		// CloudFormation resource type schema:
 		//
@@ -124,14 +144,7 @@ func authorizerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"identity_validation_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"identity_validation_expression": schemaAttribute63ff685e8a847b0f6aa9aee5(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -139,10 +152,7 @@ func authorizerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributed51bcbde8751b9f475df8000(),
 		// Property: ProviderARNs
 		// CloudFormation resource type schema:
 		//
@@ -155,15 +165,7 @@ func authorizerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"provider_ar_ns": schema.SetAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"provider_ar_ns": schemaAttributec5ea0ff1d460041c72da900b(),
 		// Property: RestApiId
 		// CloudFormation resource type schema:
 		//
@@ -171,13 +173,7 @@ func authorizerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"rest_api_id": schemaAttributedcaa473fd5ec0819fae916b3(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -185,10 +181,7 @@ func authorizerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttributed51bcbde8751b9f475df8000(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

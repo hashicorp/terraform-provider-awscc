@@ -25,6 +25,226 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute05e001628f54f1624a9d916a() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of manifests that you want Amazon Web Services to create for this report.",
+		Optional:    true,
+		Computed:    true,
+		Default:     defaults.StaticListOfString(),
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.ValueStringsAre(
+				stringvalidator.OneOf(
+					"REDSHIFT",
+					"QUICKSIGHT",
+					"ATHENA",
+				),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2afeee263e685672d1f336bc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the report that you want to create. The name must be unique, is case sensitive, and can't include spaces.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 256),
+			stringvalidator.RegexMatches(regexp.MustCompile("[0-9A-Za-z!\\-_.*\\'()]+"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2f0a9ce04ceacf98bf7a991f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon resource name of the billing view. You can get this value by using the billing view service public APIs.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			stringvalidator.RegexMatches(regexp.MustCompile("(arn:aws(-cn)?:billing::[0-9]{12}:billingview/)?[a-zA-Z0-9_\\+=\\.\\-@].{1,30}"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute31a1eaae31b1f3b58640e53c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The compression format that AWS uses for the report.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"ZIP",
+				"GZIP",
+				"Parquet",
+			),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute37996eb3868658e8ffcbafc5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 256),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute42bc71b04007f644dd0072d3() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of strings that indicate additional content that Amazon Web Services includes in the report, such as individual resource IDs.",
+		Optional:    true,
+		Computed:    true,
+		Default:     defaults.StaticListOfString(),
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.ValueStringsAre(
+				stringvalidator.OneOf(
+					"RESOURCES",
+					"SPLIT_COST_ALLOCATION_DATA",
+					"MANUAL_DISCOUNT_COMPATIBILITY",
+				),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+			listplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute79059ad28a87219ab8ff0560() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute804d7df7fd3e945604e7c297() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether you want Amazon Web Services to update your reports after they have been finalized if Amazon Web Services detects charges related to previous months. These charges can include refunds, credits, or support fees.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute82b8d8be8e11efe100264357() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The format that AWS saves the report in.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"textORcsv",
+				"Parquet",
+			),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9799f07288ad532e00a00b1f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The prefix that AWS adds to the report name when AWS delivers the report. Your prefix can't include spaces.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 256),
+			stringvalidator.RegexMatches(regexp.MustCompile("[0-9A-Za-z!\\-_.*\\'()/]*"), ""),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea3c5e63af3ac9fd79cd44b8f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The S3 bucket where AWS delivers the report.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 256),
+			stringvalidator.RegexMatches(regexp.MustCompile("[A-Za-z0-9_\\.\\-]+"), ""),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea725bd40ee9f8b12f7e49882() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute79059ad28a87219ab8ff0560(),
+				// Property: Value
+				"value": schemaAttribute37996eb3868658e8ffcbafc5(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(0, 100),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeac6607ca7967ae8499e01873() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether you want Amazon Web Services to overwrite the previous version of each report or to deliver the report in addition to the previous versions.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"CREATE_NEW_REPORT",
+				"OVERWRITE_REPORT",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed399f67b24b8026759bddd07() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The granularity of the line items in the report.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"HOURLY",
+				"DAILY",
+				"MONTHLY",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed93d60270eccc9f6dd08c702() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The region of the S3 bucket that AWS delivers the report into.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_cur_report_definition", reportDefinitionResource)
 	registry.AddListResourceFactory("awscc_cur_report_definition", generic.NewListResource(reportDefinitionResource))
@@ -51,25 +271,7 @@ func reportDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"additional_artifacts": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of manifests that you want Amazon Web Services to create for this report.",
-			Optional:    true,
-			Computed:    true,
-			Default:     defaults.StaticListOfString(),
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.ValueStringsAre(
-					stringvalidator.OneOf(
-						"REDSHIFT",
-						"QUICKSIGHT",
-						"ATHENA",
-					),
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"additional_artifacts": schemaAttribute05e001628f54f1624a9d916a(),
 		// Property: AdditionalSchemaElements
 		// CloudFormation resource type schema:
 		//
@@ -87,26 +289,7 @@ func reportDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"additional_schema_elements": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of strings that indicate additional content that Amazon Web Services includes in the report, such as individual resource IDs.",
-			Optional:    true,
-			Computed:    true,
-			Default:     defaults.StaticListOfString(),
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.ValueStringsAre(
-					stringvalidator.OneOf(
-						"RESOURCES",
-						"SPLIT_COST_ALLOCATION_DATA",
-						"MANUAL_DISCOUNT_COMPATIBILITY",
-					),
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-				listplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"additional_schema_elements": schemaAttribute42bc71b04007f644dd0072d3(),
 		// Property: BillingViewArn
 		// CloudFormation resource type schema:
 		//
@@ -117,19 +300,7 @@ func reportDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "(arn:aws(-cn)?:billing::[0-9]{12}:billingview/)?[a-zA-Z0-9_\\+=\\.\\-@].{1,30}",
 		//	  "type": "string"
 		//	}
-		"billing_view_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon resource name of the billing view. You can get this value by using the billing view service public APIs.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
-				stringvalidator.RegexMatches(regexp.MustCompile("(arn:aws(-cn)?:billing::[0-9]{12}:billingview/)?[a-zA-Z0-9_\\+=\\.\\-@].{1,30}"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"billing_view_arn": schemaAttribute2f0a9ce04ceacf98bf7a991f(),
 		// Property: Compression
 		// CloudFormation resource type schema:
 		//
@@ -142,17 +313,7 @@ func reportDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"compression": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The compression format that AWS uses for the report.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"ZIP",
-					"GZIP",
-					"Parquet",
-				),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"compression": schemaAttribute31a1eaae31b1f3b58640e53c(),
 		// Property: Format
 		// CloudFormation resource type schema:
 		//
@@ -164,16 +325,7 @@ func reportDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"format": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The format that AWS saves the report in.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"textORcsv",
-					"Parquet",
-				),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"format": schemaAttribute82b8d8be8e11efe100264357(),
 		// Property: RefreshClosedReports
 		// CloudFormation resource type schema:
 		//
@@ -181,10 +333,7 @@ func reportDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Whether you want Amazon Web Services to update your reports after they have been finalized if Amazon Web Services detects charges related to previous months. These charges can include refunds, credits, or support fees.",
 		//	  "type": "boolean"
 		//	}
-		"refresh_closed_reports": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether you want Amazon Web Services to update your reports after they have been finalized if Amazon Web Services detects charges related to previous months. These charges can include refunds, credits, or support fees.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"refresh_closed_reports": schemaAttribute804d7df7fd3e945604e7c297(),
 		// Property: ReportName
 		// CloudFormation resource type schema:
 		//
@@ -195,17 +344,7 @@ func reportDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "[0-9A-Za-z!\\-_.*\\'()]+",
 		//	  "type": "string"
 		//	}
-		"report_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the report that you want to create. The name must be unique, is case sensitive, and can't include spaces.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
-				stringvalidator.RegexMatches(regexp.MustCompile("[0-9A-Za-z!\\-_.*\\'()]+"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"report_name": schemaAttribute2afeee263e685672d1f336bc(),
 		// Property: ReportVersioning
 		// CloudFormation resource type schema:
 		//
@@ -217,19 +356,7 @@ func reportDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"report_versioning": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether you want Amazon Web Services to overwrite the previous version of each report or to deliver the report in addition to the previous versions.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"CREATE_NEW_REPORT",
-					"OVERWRITE_REPORT",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"report_versioning": schemaAttributeac6607ca7967ae8499e01873(),
 		// Property: S3Bucket
 		// CloudFormation resource type schema:
 		//
@@ -240,14 +367,7 @@ func reportDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "[A-Za-z0-9_\\.\\-]+",
 		//	  "type": "string"
 		//	}
-		"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The S3 bucket where AWS delivers the report.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
-				stringvalidator.RegexMatches(regexp.MustCompile("[A-Za-z0-9_\\.\\-]+"), ""),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"s3_bucket": schemaAttributea3c5e63af3ac9fd79cd44b8f(),
 		// Property: S3Prefix
 		// CloudFormation resource type schema:
 		//
@@ -258,14 +378,7 @@ func reportDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "[0-9A-Za-z!\\-_.*\\'()/]*",
 		//	  "type": "string"
 		//	}
-		"s3_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The prefix that AWS adds to the report name when AWS delivers the report. Your prefix can't include spaces.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
-				stringvalidator.RegexMatches(regexp.MustCompile("[0-9A-Za-z!\\-_.*\\'()/]*"), ""),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"s3_prefix": schemaAttribute9799f07288ad532e00a00b1f(),
 		// Property: S3Region
 		// CloudFormation resource type schema:
 		//
@@ -273,10 +386,7 @@ func reportDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The region of the S3 bucket that AWS delivers the report into.",
 		//	  "type": "string"
 		//	}
-		"s3_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The region of the S3 bucket that AWS delivers the report into.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"s3_region": schemaAttributed93d60270eccc9f6dd08c702(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -305,44 +415,7 @@ func reportDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Optional: true,
-			Computed: true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(0, 100),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributea725bd40ee9f8b12f7e49882(),
 		// Property: TimeUnit
 		// CloudFormation resource type schema:
 		//
@@ -355,20 +428,7 @@ func reportDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"time_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The granularity of the line items in the report.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"HOURLY",
-					"DAILY",
-					"MONTHLY",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"time_unit": schemaAttributed399f67b24b8026759bddd07(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

@@ -22,6 +22,53 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute33d386aea42b9b6afa8d68da() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key-name for the LF-tag.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			stringvalidator.RegexMatches(regexp.MustCompile("^([{a-zA-Z}{\\s}{0-9}_.:\\/=+\\-@%]*)$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec7168c40ba17105ef03e2e84() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of possible values an attribute can take.",
+		Required:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(1, 1000),
+			listvalidator.ValueStringsAre(
+				stringvalidator.LengthBetween(0, 256),
+				stringvalidator.RegexMatches(regexp.MustCompile("^([{a-zA-Z}{\\s}{0-9}_.:\\*\\/=+\\-@%]*)$"), ""),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed5d84386cc3b2abd03d23559() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(12, 12),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_lakeformation_tag", tagResource)
 	registry.AddListResourceFactory("awscc_lakeformation_tag", generic.NewListResource(tagResource))
@@ -40,18 +87,7 @@ func tagResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 12,
 		//	  "type": "string"
 		//	}
-		"catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(12, 12),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"catalog_id": schemaAttributed5d84386cc3b2abd03d23559(),
 		// Property: TagKey
 		// CloudFormation resource type schema:
 		//
@@ -62,17 +98,7 @@ func tagResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^([{a-zA-Z}{\\s}{0-9}_.:\\/=+\\-@%]*)$",
 		//	  "type": "string"
 		//	}
-		"tag_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The key-name for the LF-tag.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
-				stringvalidator.RegexMatches(regexp.MustCompile("^([{a-zA-Z}{\\s}{0-9}_.:\\/=+\\-@%]*)$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tag_key": schemaAttribute33d386aea42b9b6afa8d68da(),
 		// Property: TagValues
 		// CloudFormation resource type schema:
 		//
@@ -89,21 +115,7 @@ func tagResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"tag_values": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of possible values an attribute can take.",
-			Required:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(1, 1000),
-				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(0, 256),
-					stringvalidator.RegexMatches(regexp.MustCompile("^([{a-zA-Z}{\\s}{0-9}_.:\\*\\/=+\\-@%]*)$"), ""),
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tag_values": schemaAttributec7168c40ba17105ef03e2e84(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

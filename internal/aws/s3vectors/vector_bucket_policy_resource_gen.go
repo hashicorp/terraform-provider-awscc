@@ -19,6 +19,41 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute47977d67a1e611e7fd3656e7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the vector bucket.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute686f56ec5430f087b059816c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the vector bucket",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(3, 63),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// VectorBucketName is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute85889d01cc379cfdcf826d7d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A policy document containing permissions to add to the specified vector bucket. In IAM, you must provide policy documents in JSON format. However, in CloudFormation you can provide the policy in JSON or YAML format because CloudFormation converts YAML to JSON before submitting it to IAM.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_s3vectors_vector_bucket_policy", vectorBucketPolicyResource)
 	registry.AddListResourceFactory("awscc_s3vectors_vector_bucket_policy", generic.NewListResource(vectorBucketPolicyResource))
@@ -35,10 +70,7 @@ func vectorBucketPolicyResource(ctx context.Context) (resource.Resource, error) 
 		//	  "description": "A policy document containing permissions to add to the specified vector bucket. In IAM, you must provide policy documents in JSON format. However, in CloudFormation you can provide the policy in JSON or YAML format because CloudFormation converts YAML to JSON before submitting it to IAM.",
 		//	  "type": "string"
 		//	}
-		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A policy document containing permissions to add to the specified vector bucket. In IAM, you must provide policy documents in JSON format. However, in CloudFormation you can provide the policy in JSON or YAML format because CloudFormation converts YAML to JSON before submitting it to IAM.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"policy": schemaAttribute85889d01cc379cfdcf826d7d(),
 		// Property: VectorBucketArn
 		// CloudFormation resource type schema:
 		//
@@ -49,15 +81,7 @@ func vectorBucketPolicyResource(ctx context.Context) (resource.Resource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"vector_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the vector bucket.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"vector_bucket_arn": schemaAttribute47977d67a1e611e7fd3656e7(),
 		// Property: VectorBucketName
 		// CloudFormation resource type schema:
 		//
@@ -67,19 +91,7 @@ func vectorBucketPolicyResource(ctx context.Context) (resource.Resource, error) 
 		//	  "minLength": 3,
 		//	  "type": "string"
 		//	}
-		"vector_bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the vector bucket",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(3, 63),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// VectorBucketName is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"vector_bucket_name": schemaAttribute686f56ec5430f087b059816c(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

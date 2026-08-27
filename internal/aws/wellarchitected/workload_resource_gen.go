@@ -25,6 +25,315 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute01581da33e4e66ac348275e5() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute78eaba6dff3fb1fb63dda070(),
+				// Property: Value
+				"value": schemaAttribute46155bb6a37e252a736e170a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags associated with the workload.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeAtMost(50),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute09c5399ac6e7c43d33868de6() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of Amazon Web Services account IDs associated with the workload.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(0, 100),
+			listvalidator.ValueStringsAre(
+				stringvalidator.LengthBetween(12, 12),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]{12}$"), ""),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute27774055e757be7b2542680f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the workload.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(3, 100),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute31a5a6349457d13d59ae7f01() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The industry for the workload.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(100),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute46155bb6a37e252a736e170a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 256),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute46d5afaed141f996dee52393() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The industry type for the workload.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(100),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute58bf516bc9aa6ed7927da813() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of non-Amazon Web Services Regions associated with the workload.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(0, 5),
+			listvalidator.ValueStringsAre(
+				stringvalidator.LengthBetween(3, 25),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5fade057db8754a0bac72f90() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description for the workload.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(3, 250),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute667475eb1c82d1051c8917a6() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of lenses associated with the workload.",
+		Required:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.ValueStringsAre(
+				stringvalidator.LengthBetween(1, 128),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6bd5823b64ff995e9eb7375d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The review owner of the workload.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(3, 255),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute708525ca269a8a8ba8902388() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The mode to use for identifying resources associated with the workload.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.ValueStringsAre(
+				stringvalidator.OneOf(
+					"WORKLOAD_METADATA",
+					"APP_REGISTRY",
+				),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute78eaba6dff3fb1fb63dda070() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8755646cebec2f86b4b1674d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The notes associated with the workload.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(2084),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecc397cb42e649d96b24aac12() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The environment for the workload.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"PRODUCTION",
+				"PREPRODUCTION",
+			),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed0721c3699709a4efefb45e8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The improvement status for a workload.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed2baea57f88fe9b5dd5e2e8d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: TrustedAdvisorIntegrationStatus
+			"trusted_advisor_integration_status": schemaAttributef0d565fc6d745e161f323b52(),
+			// Property: WorkloadResourceDefinition
+			"workload_resource_definition": schemaAttribute708525ca269a8a8ba8902388(),
+		}, /*END SCHEMA*/
+		Description: "Discovery configuration associated to the workload.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed7e291d96b7939d47368550d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN for the workload.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeca37e39e033b84acc497ffa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The URL of the architectural design for the workload.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(2048),
+			stringvalidator.RegexMatches(regexp.MustCompile("^(|(https?|ftp):\\/\\/[^\\s/$.?#].[^\\s]*)$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef0d565fc6d745e161f323b52() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Discovery integration status in respect to Trusted Advisor for the workload.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"ENABLED",
+				"DISABLED",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef64c632095352c4c722c0058() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of Amazon Web Services Regions associated with the workload.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(0, 50),
+			listvalidator.ValueStringsAre(
+				stringvalidator.LengthAtMost(100),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefec8aef92a6e51ab4a1ad118() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID assigned to the workload.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_wellarchitected_workload", workloadResource)
 	registry.AddListResourceFactory("awscc_wellarchitected_workload", generic.NewListResource(workloadResource))
@@ -49,22 +358,7 @@ func workloadResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"account_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The list of Amazon Web Services account IDs associated with the workload.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(0, 100),
-				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(12, 12),
-					stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]{12}$"), ""),
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"account_ids": schemaAttribute09c5399ac6e7c43d33868de6(),
 		// Property: ArchitecturalDesign
 		// CloudFormation resource type schema:
 		//
@@ -74,18 +368,7 @@ func workloadResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^(|(https?|ftp):\\/\\/[^\\s/$.?#].[^\\s]*)$",
 		//	  "type": "string"
 		//	}
-		"architectural_design": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The URL of the architectural design for the workload.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(2048),
-				stringvalidator.RegexMatches(regexp.MustCompile("^(|(https?|ftp):\\/\\/[^\\s/$.?#].[^\\s]*)$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"architectural_design": schemaAttributeeca37e39e033b84acc497ffa(),
 		// Property: AwsRegions
 		// CloudFormation resource type schema:
 		//
@@ -99,21 +382,7 @@ func workloadResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"aws_regions": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The list of Amazon Web Services Regions associated with the workload.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(0, 50),
-				listvalidator.ValueStringsAre(
-					stringvalidator.LengthAtMost(100),
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"aws_regions": schemaAttributef64c632095352c4c722c0058(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -123,13 +392,7 @@ func workloadResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 3,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description for the workload.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(3, 250),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute5fade057db8754a0bac72f90(),
 		// Property: DiscoveryConfig
 		// CloudFormation resource type schema:
 		//
@@ -159,49 +422,7 @@ func workloadResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"discovery_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: TrustedAdvisorIntegrationStatus
-				"trusted_advisor_integration_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Discovery integration status in respect to Trusted Advisor for the workload.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"ENABLED",
-							"DISABLED",
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: WorkloadResourceDefinition
-				"workload_resource_definition": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The mode to use for identifying resources associated with the workload.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.ValueStringsAre(
-							stringvalidator.OneOf(
-								"WORKLOAD_METADATA",
-								"APP_REGISTRY",
-							),
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Discovery configuration associated to the workload.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"discovery_config": schemaAttributed2baea57f88fe9b5dd5e2e8d(),
 		// Property: Environment
 		// CloudFormation resource type schema:
 		//
@@ -213,16 +434,7 @@ func workloadResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"environment": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The environment for the workload.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"PRODUCTION",
-					"PREPRODUCTION",
-				),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"environment": schemaAttributecc397cb42e649d96b24aac12(),
 		// Property: ImprovementStatus
 		// CloudFormation resource type schema:
 		//
@@ -237,13 +449,7 @@ func workloadResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"improvement_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The improvement status for a workload.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"improvement_status": schemaAttributed0721c3699709a4efefb45e8(),
 		// Property: Industry
 		// CloudFormation resource type schema:
 		//
@@ -252,17 +458,7 @@ func workloadResource(ctx context.Context) (resource.Resource, error) {
 		//	  "maxLength": 100,
 		//	  "type": "string"
 		//	}
-		"industry": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The industry for the workload.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(100),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"industry": schemaAttribute31a5a6349457d13d59ae7f01(),
 		// Property: IndustryType
 		// CloudFormation resource type schema:
 		//
@@ -271,17 +467,7 @@ func workloadResource(ctx context.Context) (resource.Resource, error) {
 		//	  "maxLength": 100,
 		//	  "type": "string"
 		//	}
-		"industry_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The industry type for the workload.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(100),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"industry_type": schemaAttribute46d5afaed141f996dee52393(),
 		// Property: Lenses
 		// CloudFormation resource type schema:
 		//
@@ -294,19 +480,7 @@ func workloadResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"lenses": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The list of lenses associated with the workload.",
-			Required:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(1, 128),
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"lenses": schemaAttribute667475eb1c82d1051c8917a6(),
 		// Property: NonAwsRegions
 		// CloudFormation resource type schema:
 		//
@@ -321,21 +495,7 @@ func workloadResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"non_aws_regions": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The list of non-Amazon Web Services Regions associated with the workload.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(0, 5),
-				listvalidator.ValueStringsAre(
-					stringvalidator.LengthBetween(3, 25),
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"non_aws_regions": schemaAttribute58bf516bc9aa6ed7927da813(),
 		// Property: Notes
 		// CloudFormation resource type schema:
 		//
@@ -344,17 +504,7 @@ func workloadResource(ctx context.Context) (resource.Resource, error) {
 		//	  "maxLength": 2084,
 		//	  "type": "string"
 		//	}
-		"notes": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The notes associated with the workload.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(2084),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"notes": schemaAttribute8755646cebec2f86b4b1674d(),
 		// Property: ReviewOwner
 		// CloudFormation resource type schema:
 		//
@@ -364,17 +514,7 @@ func workloadResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 3,
 		//	  "type": "string"
 		//	}
-		"review_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The review owner of the workload.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(3, 255),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"review_owner": schemaAttribute6bd5823b64ff995e9eb7375d(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -403,45 +543,7 @@ func workloadResource(ctx context.Context) (resource.Resource, error) {
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags associated with the workload.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeAtMost(50),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute01581da33e4e66ac348275e5(),
 		// Property: WorkloadArn
 		// CloudFormation resource type schema:
 		//
@@ -449,13 +551,7 @@ func workloadResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ARN for the workload.",
 		//	  "type": "string"
 		//	}
-		"workload_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN for the workload.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"workload_arn": schemaAttributed7e291d96b7939d47368550d(),
 		// Property: WorkloadId
 		// CloudFormation resource type schema:
 		//
@@ -466,13 +562,7 @@ func workloadResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[0-9a-f]{32}$",
 		//	  "type": "string"
 		//	}
-		"workload_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID assigned to the workload.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"workload_id": schemaAttributefec8aef92a6e51ab4a1ad118(),
 		// Property: WorkloadName
 		// CloudFormation resource type schema:
 		//
@@ -482,13 +572,7 @@ func workloadResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 3,
 		//	  "type": "string"
 		//	}
-		"workload_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the workload.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(3, 100),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"workload_name": schemaAttribute27774055e757be7b2542680f(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

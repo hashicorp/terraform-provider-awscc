@@ -26,6 +26,288 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute019581f59fcf14696239eb55() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute08fabaaec01722a28b9ea8a2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DataQuery
+			"data_query": schemaAttributeefab330c588cad8ca3fe61cb(),
+			// Property: Description
+			"description": schemaAttribute85ba82ffcd791ddbc04b67d2(),
+			// Property: DestinationConfigurations
+			"destination_configurations": schemaAttribute6f0648ed5d834a5f92eedd84(),
+			// Property: ExportArn
+			"export_arn": schemaAttributea19a37ec9bf7cd977876e326(),
+			// Property: Name
+			"name": schemaAttribute8a5164b254e201adda2d8483(),
+			// Property: RefreshCadence
+			"refresh_cadence": schemaAttribute2b7fa8c4cc1e6f75f416b40a(),
+		}, /*END SCHEMA*/
+		Required: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2b7fa8c4cc1e6f75f416b40a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Frequency
+			"frequency": schemaAttribute8791833ea00f8ab356f672d4(),
+		}, /*END SCHEMA*/
+		Required: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3e6949e7dc1cfbdaa2e32caf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Required: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"GZIP",
+				"PARQUET",
+				"ZIP",
+			),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4698ee49b38a4c74ff4035c0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Required: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 1024),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[\\S\\s]*$"), ""),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute688fe17d05f363cd037c8348() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.MapType{ElemType: types.StringType},
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+			mapplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6f0648ed5d834a5f92eedd84() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3Destination
+			"s3_destination": schemaAttribute95bbf40ff7da9ecbfdac3dd2(),
+		}, /*END SCHEMA*/
+		Required: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute85ba82ffcd791ddbc04b67d2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 1024),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[\\S\\s]*$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8791833ea00f8ab356f672d4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Required: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"SYNCHRONOUS",
+			),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a3cdec34e76779006855a11() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Required: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"CUSTOM",
+				"ATHENA",
+				"REDSHIFT",
+			),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a5164b254e201adda2d8483() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Required: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[0-9A-Za-z\\-_]+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute91d3c79a80eca963ea5cf982() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Required: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 36000),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[\\S\\s]*$"), ""),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute95bbf40ff7da9ecbfdac3dd2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3Bucket
+			"s3_bucket": schemaAttribute4698ee49b38a4c74ff4035c0(),
+			// Property: S3BucketOwner
+			"s3_bucket_owner": schemaAttributeae7e9f078e8b4675a78d9a5f(),
+			// Property: S3OutputConfigurations
+			"s3_output_configurations": schemaAttributeb2c75f0acf7c849b6781f84e(),
+			// Property: S3Prefix
+			"s3_prefix": schemaAttribute4698ee49b38a4c74ff4035c0(),
+			// Property: S3Region
+			"s3_region": schemaAttribute4698ee49b38a4c74ff4035c0(),
+		}, /*END SCHEMA*/
+		Required: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea19a37ec9bf7cd977876e326() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeae7e9f078e8b4675a78d9a5f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(12, 12),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]{12}$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb2c75f0acf7c849b6781f84e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Compression
+			"compression": schemaAttribute3e6949e7dc1cfbdaa2e32caf(),
+			// Property: Format
+			"format": schemaAttributed30ceb95bd79d182e177ff1f(),
+			// Property: OutputType
+			"output_type": schemaAttribute8a3cdec34e76779006855a11(),
+			// Property: Overwrite
+			"overwrite": schemaAttributede91af1e8be643f84000db6b(),
+		}, /*END SCHEMA*/
+		Required: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec144e96e97b1d2a3e58b441b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 256),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed30ceb95bd79d182e177ff1f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Required: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"TEXT_OR_CSV",
+				"PARQUET",
+			),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed5bede780b32c0f513d45615() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute019581f59fcf14696239eb55(),
+				// Property: Value
+				"value": schemaAttributec144e96e97b1d2a3e58b441b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(0, 200),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributede91af1e8be643f84000db6b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Required: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"CREATE_NEW_REPORT",
+				"OVERWRITE_REPORT",
+			),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeefab330c588cad8ca3fe61cb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: QueryStatement
+			"query_statement": schemaAttribute91d3c79a80eca963ea5cf982(),
+			// Property: TableConfigurations
+			"table_configurations": schemaAttribute688fe17d05f363cd037c8348(),
+		}, /*END SCHEMA*/
+		Required: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_bcmdataexports_export", exportResource)
 	registry.AddListResourceFactory("awscc_bcmdataexports_export", generic.NewListResource(exportResource))
@@ -203,179 +485,7 @@ func exportResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"export": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DataQuery
-				"data_query": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: QueryStatement
-						"query_statement": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(1, 36000),
-								stringvalidator.RegexMatches(regexp.MustCompile("^[\\S\\s]*$"), ""),
-							}, /*END VALIDATORS*/
-						}, /*END ATTRIBUTE*/
-						// Property: TableConfigurations
-						"table_configurations": // Pattern: ""
-						schema.MapAttribute{    /*START ATTRIBUTE*/
-							ElementType: types.MapType{ElemType: types.StringType},
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-								mapplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Required: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Description
-				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(0, 1024),
-						stringvalidator.RegexMatches(regexp.MustCompile("^[\\S\\s]*$"), ""),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: DestinationConfigurations
-				"destination_configurations": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: S3Destination
-						"s3_destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: S3Bucket
-								"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(0, 1024),
-										stringvalidator.RegexMatches(regexp.MustCompile("^[\\S\\s]*$"), ""),
-									}, /*END VALIDATORS*/
-								}, /*END ATTRIBUTE*/
-								// Property: S3BucketOwner
-								"s3_bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(12, 12),
-										stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]{12}$"), ""),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: S3OutputConfigurations
-								"s3_output_configurations": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Compression
-										"compression": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Required: true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.OneOf(
-													"GZIP",
-													"PARQUET",
-													"ZIP",
-												),
-											}, /*END VALIDATORS*/
-										}, /*END ATTRIBUTE*/
-										// Property: Format
-										"format": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Required: true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.OneOf(
-													"TEXT_OR_CSV",
-													"PARQUET",
-												),
-											}, /*END VALIDATORS*/
-										}, /*END ATTRIBUTE*/
-										// Property: OutputType
-										"output_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Required: true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.OneOf(
-													"CUSTOM",
-													"ATHENA",
-													"REDSHIFT",
-												),
-											}, /*END VALIDATORS*/
-										}, /*END ATTRIBUTE*/
-										// Property: Overwrite
-										"overwrite": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Required: true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.OneOf(
-													"CREATE_NEW_REPORT",
-													"OVERWRITE_REPORT",
-												),
-											}, /*END VALIDATORS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Required: true,
-								}, /*END ATTRIBUTE*/
-								// Property: S3Prefix
-								"s3_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(0, 1024),
-										stringvalidator.RegexMatches(regexp.MustCompile("^[\\S\\s]*$"), ""),
-									}, /*END VALIDATORS*/
-								}, /*END ATTRIBUTE*/
-								// Property: S3Region
-								"s3_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Required: true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(0, 1024),
-										stringvalidator.RegexMatches(regexp.MustCompile("^[\\S\\s]*$"), ""),
-									}, /*END VALIDATORS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Required: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Required: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ExportArn
-				"export_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: Name
-				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 128),
-						stringvalidator.RegexMatches(regexp.MustCompile("^[0-9A-Za-z\\-_]+$"), ""),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.RequiresReplace(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: RefreshCadence
-				"refresh_cadence": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Frequency
-						"frequency": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.OneOf(
-									"SYNCHRONOUS",
-								),
-							}, /*END VALIDATORS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Required: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.RequiresReplace(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Required: true,
-		}, /*END ATTRIBUTE*/
+		"export": schemaAttribute08fabaaec01722a28b9ea8a2(),
 		// Property: ExportArn
 		// CloudFormation resource type schema:
 		//
@@ -385,12 +495,7 @@ func exportResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:(bcm-data-exports):[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$",
 		//	  "type": "string"
 		//	}
-		"export_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"export_arn": schemaAttributea19a37ec9bf7cd977876e326(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -419,44 +524,7 @@ func exportResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Optional: true,
-			Computed: true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(0, 200),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributed5bede780b32c0f513d45615(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

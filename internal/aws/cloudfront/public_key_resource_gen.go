@@ -17,6 +17,65 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute19eeba4ce67f40ebd2e8fc54() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CallerReference
+			"caller_reference": schemaAttributea576ff7eccc1417c16b1a8d2(),
+			// Property: Comment
+			"comment": schemaAttributec3f58cc921ad96264dde8971(),
+			// Property: EncodedKey
+			"encoded_key": schemaAttribute85fc6f6801ab0e1c4bb6d98f(),
+			// Property: Name
+			"name": schemaAttribute6fc306a25eb175a5e5de16e8(),
+		}, /*END SCHEMA*/
+		Description: "Configuration information about a public key that you can use with [signed URLs and signed cookies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html), or with [field-level encryption](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html).",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute473146e35eb25450a2e09e21() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6fc306a25eb175a5e5de16e8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A name to help identify the public key.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute85fc6f6801ab0e1c4bb6d98f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The public key that you can use with [signed URLs and signed cookies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html), or with [field-level encryption](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html).",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea576ff7eccc1417c16b1a8d2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string included in the request to help make sure that the request can't be replayed.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec3f58cc921ad96264dde8971() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A comment to describe the public key. The comment cannot be longer than 128 characters.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_cloudfront_public_key", publicKeyResource)
 	registry.AddListResourceFactory("awscc_cloudfront_public_key", generic.NewListResource(publicKeyResource))
@@ -33,13 +92,7 @@ func publicKeyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"created_time": schemaAttribute473146e35eb25450a2e09e21(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -47,13 +100,7 @@ func publicKeyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"public_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"public_key_id": schemaAttribute473146e35eb25450a2e09e21(),
 		// Property: PublicKeyConfig
 		// CloudFormation resource type schema:
 		//
@@ -85,36 +132,7 @@ func publicKeyResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"public_key_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CallerReference
-				"caller_reference": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A string included in the request to help make sure that the request can't be replayed.",
-					Required:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Comment
-				"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A comment to describe the public key. The comment cannot be longer than 128 characters.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: EncodedKey
-				"encoded_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The public key that you can use with [signed URLs and signed cookies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html), or with [field-level encryption](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html).",
-					Required:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Name
-				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A name to help identify the public key.",
-					Required:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Configuration information about a public key that you can use with [signed URLs and signed cookies](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html), or with [field-level encryption](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html).",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"public_key_config": schemaAttribute19eeba4ce67f40ebd2e8fc54(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

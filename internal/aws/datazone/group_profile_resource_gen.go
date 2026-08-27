@@ -20,6 +20,124 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0702916bc768bde12f3098c5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the role principal for the group profile.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute12ebb4944e8208763018ab28() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the role principal for the group profile.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// RolePrincipalArn is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute57413f5e8dacdea8ea672286() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the Amazon DataZone group profile.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5c5cd57cefc754e5ce663d43() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the group.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"DATAZONE_SSO_GROUP",
+				"IAM_ROLE_SESSION_GROUP",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// GroupType is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6c84d2c92cddd3a1330a4344() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the group.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("(^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$|[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\t\\n\\r  ]+)"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// GroupIdentifier is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6e2f8e4c315d93d37c472dde() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the Amazon DataZone domain in which the group profile would be created.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("^dzd[-_][a-zA-Z0-9_-]{1,36}$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+		// DomainIdentifier is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute727fc1cde604c99c15e02f06() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the group profile.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"ASSIGNED",
+				"NOT_ASSIGNED",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute80841c8f14da0ac78d3e8d15() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The group-name of the Group Profile.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee148c049da8fa992e795529a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the Amazon DataZone domain in which the group profile is created.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_datazone_group_profile", groupProfileResource)
 }
@@ -36,13 +154,7 @@ func groupProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the Amazon DataZone domain in which the group profile is created.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"domain_id": schemaAttributee148c049da8fa992e795529a(),
 		// Property: DomainIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -51,17 +163,7 @@ func groupProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"domain_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the Amazon DataZone domain in which the group profile would be created.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^dzd[-_][a-zA-Z0-9_-]{1,36}$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-			// DomainIdentifier is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"domain_identifier": schemaAttribute6e2f8e4c315d93d37c472dde(),
 		// Property: GroupIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -70,19 +172,7 @@ func groupProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "(^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$|[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\t\\n\\r  ]+)",
 		//	  "type": "string"
 		//	}
-		"group_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the group.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("(^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$|[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\t\\n\\r  ]+)"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// GroupIdentifier is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"group_identifier": schemaAttribute6c84d2c92cddd3a1330a4344(),
 		// Property: GroupName
 		// CloudFormation resource type schema:
 		//
@@ -93,13 +183,7 @@ func groupProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[a-zA-Z_0-9+=,.@-]+$",
 		//	  "type": "string"
 		//	}
-		"group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The group-name of the Group Profile.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"group_name": schemaAttribute80841c8f14da0ac78d3e8d15(),
 		// Property: GroupType
 		// CloudFormation resource type schema:
 		//
@@ -111,21 +195,7 @@ func groupProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"group_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of the group.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"DATAZONE_SSO_GROUP",
-					"IAM_ROLE_SESSION_GROUP",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// GroupType is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"group_type": schemaAttribute5c5cd57cefc754e5ce663d43(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -134,13 +204,7 @@ func groupProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"group_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Amazon DataZone group profile.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"group_profile_id": schemaAttribute57413f5e8dacdea8ea672286(),
 		// Property: RolePrincipalArn
 		// CloudFormation resource type schema:
 		//
@@ -148,16 +212,7 @@ func groupProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ARN of the role principal for the group profile.",
 		//	  "type": "string"
 		//	}
-		"role_principal_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the role principal for the group profile.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// RolePrincipalArn is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"role_principal_arn": schemaAttribute12ebb4944e8208763018ab28(),
 		// Property: RolePrincipalId
 		// CloudFormation resource type schema:
 		//
@@ -165,13 +220,7 @@ func groupProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of the role principal for the group profile.",
 		//	  "type": "string"
 		//	}
-		"role_principal_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the role principal for the group profile.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"role_principal_id": schemaAttribute0702916bc768bde12f3098c5(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -183,20 +232,7 @@ func groupProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the group profile.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"ASSIGNED",
-					"NOT_ASSIGNED",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute727fc1cde604c99c15e02f06(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

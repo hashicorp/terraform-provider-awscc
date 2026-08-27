@@ -28,6 +28,1125 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute004806b2d1a9dccf1167ce52() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AcceleratorCount
+			"accelerator_count": schemaAttributeb6a029ad4e1e7ecaa245b8b2(),
+			// Property: AcceleratorManufacturers
+			"accelerator_manufacturers": schemaAttributed460427c44c0a113f67dddec(),
+			// Property: AcceleratorNames
+			"accelerator_names": schemaAttribute851eba34262a91ed45372719(),
+			// Property: AcceleratorTotalMemoryMiB
+			"accelerator_total_memory_mi_b": schemaAttributeb6a029ad4e1e7ecaa245b8b2(),
+			// Property: AcceleratorTypes
+			"accelerator_types": schemaAttribute44f656da8604264c3d376a4d(),
+			// Property: AllowedInstanceTypes
+			"allowed_instance_types": schemaAttributeab586386292945bcd91757d0(),
+			// Property: BareMetal
+			"bare_metal": schemaAttribute64a74c8459cf4706ec60bfe0(),
+			// Property: BaselineEbsBandwidthMbps
+			"baseline_ebs_bandwidth_mbps": schemaAttributeb6a029ad4e1e7ecaa245b8b2(),
+			// Property: BaselinePerformanceFactors
+			"baseline_performance_factors": schemaAttributec6f87d276d3929033ae1b4dd(),
+			// Property: BurstablePerformance
+			"burstable_performance": schemaAttribute64a74c8459cf4706ec60bfe0(),
+			// Property: CpuManufacturers
+			"cpu_manufacturers": schemaAttribute84f7adfe047be3f46b816e2e(),
+			// Property: ExcludedInstanceTypes
+			"excluded_instance_types": schemaAttributeab586386292945bcd91757d0(),
+			// Property: InstanceGenerations
+			"instance_generations": schemaAttributee8a02dc9010d1a5b28d3d989(),
+			// Property: LocalStorage
+			"local_storage": schemaAttribute64a74c8459cf4706ec60bfe0(),
+			// Property: LocalStorageTypes
+			"local_storage_types": schemaAttribute698c14e0c25035593f0792a3(),
+			// Property: MaxSpotPriceAsPercentageOfOptimalOnDemandPrice
+			"max_spot_price_as_percentage_of_optimal_on_demand_price": schemaAttributedf9a845db56e6dd761872f0e(),
+			// Property: MemoryGiBPerVCpu
+			"memory_gi_b_per_v_cpu": schemaAttribute41a243b1c6f66fee46c068f0(),
+			// Property: MemoryMiB
+			"memory_mi_b": schemaAttributeb6a029ad4e1e7ecaa245b8b2(),
+			// Property: NetworkBandwidthGbps
+			"network_bandwidth_gbps": schemaAttribute41a243b1c6f66fee46c068f0(),
+			// Property: NetworkInterfaceCount
+			"network_interface_count": schemaAttributeb6a029ad4e1e7ecaa245b8b2(),
+			// Property: OnDemandMaxPricePercentageOverLowestPrice
+			"on_demand_max_price_percentage_over_lowest_price": schemaAttributedf9a845db56e6dd761872f0e(),
+			// Property: RequireEncryptionInTransit
+			"require_encryption_in_transit": schemaAttribute505bfa7795cfd9fdc86ec555(),
+			// Property: RequireHibernateSupport
+			"require_hibernate_support": schemaAttribute505bfa7795cfd9fdc86ec555(),
+			// Property: SpotMaxPricePercentageOverLowestPrice
+			"spot_max_price_percentage_over_lowest_price": schemaAttributedf9a845db56e6dd761872f0e(),
+			// Property: TotalLocalStorageGB
+			"total_local_storage_gb": schemaAttribute41a243b1c6f66fee46c068f0(),
+			// Property: VCpuCount
+			"v_cpu_count": schemaAttributeb6a029ad4e1e7ecaa245b8b2(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute00763e5cb2e5de40708cd09e() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: LaunchTemplateSpecification
+				"launch_template_specification": schemaAttribute768f3e6a8503f469f02bb87a(),
+				// Property: Overrides
+				"overrides": schemaAttribute9a9b6fa1611d0a54ba87af05(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Required: true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeAtMost(50),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute02caedcc585899daec97ff6d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Arn
+			"arn": schemaAttribute2de5f66bc6bebed391b8d3a1(),
+			// Property: Name
+			"name": schemaAttribute2de5f66bc6bebed391b8d3a1(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0eef12eac89548b2b81a12d9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"maintain",
+				"request",
+				"instant",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1fec48b1c79acb2bf7e7a7a5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"hibernate",
+				"stop",
+				"terminate",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute208e1e88149b8fc9bfa532e9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"optional",
+				"required",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute248bf1fda8960da09be552f9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"disabled",
+				"enabled",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute25fab11f2835e6cd0609225d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CapacityRebalance
+			"capacity_rebalance": schemaAttributee83102b832b868087015c45f(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute26c86fa12a79ef63d5ecefa0() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DeviceName
+				"device_name": schemaAttribute2de5f66bc6bebed391b8d3a1(),
+				// Property: Ebs
+				"ebs": schemaAttributeb340a929787548c148fd7893(),
+				// Property: NoDevice
+				"no_device": schemaAttribute2de5f66bc6bebed391b8d3a1(),
+				// Property: VirtualName
+				"virtual_name": schemaAttribute2de5f66bc6bebed391b8d3a1(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.UniqueValues(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2ae21c295680768a6d51f54a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: References
+			"references": schemaAttributea3207ed31d1556b55463ece8(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2de5f66bc6bebed391b8d3a1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute318b75fa74f81d478cf23c68() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Required: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute34f2c5459e845d2d813f73e9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ReservationTypes
+			"reservation_types": schemaAttributee33840ab359ac2d83e3897a9(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+			objectplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute377b85086637764d86699174() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"vcpu",
+				"memory-mib",
+				"units",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3e45f01ff2896eb576acc4d3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3f149bcc37cf4f88ebf1a5c3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"launch",
+				"launch-before-terminate",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3ffc7e75cc9f6f8f76fe8ef9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute41a243b1c6f66fee46c068f0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Max
+			"max": schemaAttribute607309e780cf3d564aee0a3f(),
+			// Property: Min
+			"min": schemaAttribute607309e780cf3d564aee0a3f(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute43dbedea1ed607fbc2ca253f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ResourceType
+				"resource_type": schemaAttribute5ec81d8d5346804a97dbc335(),
+				// Property: Tags
+				"tags": schemaAttribute6cc058e9a57f01340f222421(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+			listplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute44f656da8604264c3d376a4d() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.ValueStringsAre(
+				stringvalidator.OneOf(
+					"gpu",
+					"fpga",
+					"inference",
+					"media",
+				),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4939313522f35091ae4b2282() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"use-capacity-reservations-first",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4977695569bff8d371ef0eb4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute505bfa7795cfd9fdc86ec555() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5b3c816db8e659506b07c929() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"on-demand",
+				"spot",
+				"capacity-block",
+				"reserved-capacity",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5ec81d8d5346804a97dbc335() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"client-vpn-endpoint",
+				"customer-gateway",
+				"dedicated-host",
+				"dhcp-options",
+				"egress-only-internet-gateway",
+				"elastic-gpu",
+				"elastic-ip",
+				"export-image-task",
+				"export-instance-task",
+				"fleet",
+				"fpga-image",
+				"host-reservation",
+				"image",
+				"import-image-task",
+				"import-snapshot-task",
+				"instance",
+				"internet-gateway",
+				"key-pair",
+				"launch-template",
+				"local-gateway-route-table-vpc-association",
+				"natgateway",
+				"network-acl",
+				"network-insights-analysis",
+				"network-insights-path",
+				"network-interface",
+				"placement-group",
+				"reserved-instances",
+				"route-table",
+				"security-group",
+				"snapshot",
+				"spot-fleet-request",
+				"spot-instances-request",
+				"subnet",
+				"traffic-mirror-filter",
+				"traffic-mirror-session",
+				"traffic-mirror-target",
+				"transit-gateway",
+				"transit-gateway-attachment",
+				"transit-gateway-connect-peer",
+				"transit-gateway-multicast-domain",
+				"transit-gateway-route-table",
+				"volume",
+				"vpc",
+				"vpc-flow-log",
+				"vpc-peering-connection",
+				"vpn-connection",
+				"vpn-gateway",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute607309e780cf3d564aee0a3f() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+			float64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute611c29403e0b35ef2edae0e6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AllocationStrategy
+			"allocation_strategy": schemaAttribute7ed78494eccb0ab6e969fabc(),
+			// Property: InstanceInterruptionBehavior
+			"instance_interruption_behavior": schemaAttribute1fec48b1c79acb2bf7e7a7a5(),
+			// Property: InstancePoolsToUseCount
+			"instance_pools_to_use_count": schemaAttributedf9a845db56e6dd761872f0e(),
+			// Property: MaintenanceStrategies
+			"maintenance_strategies": schemaAttribute25fab11f2835e6cd0609225d(),
+			// Property: MaxTotalPrice
+			"max_total_price": schemaAttribute2de5f66bc6bebed391b8d3a1(),
+			// Property: MinTargetCapacity
+			"min_target_capacity": schemaAttributedf9a845db56e6dd761872f0e(),
+			// Property: SingleAvailabilityZone
+			"single_availability_zone": schemaAttribute505bfa7795cfd9fdc86ec555(),
+			// Property: SingleInstanceType
+			"single_instance_type": schemaAttribute505bfa7795cfd9fdc86ec555(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+			objectplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute64a74c8459cf4706ec60bfe0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"included",
+				"required",
+				"excluded",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute698c14e0c25035593f0792a3() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.ValueStringsAre(
+				stringvalidator.OneOf(
+					"hdd",
+					"ssd",
+				),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6cc058e9a57f01340f222421() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute3e45f01ff2896eb576acc4d3(),
+				// Property: Value
+				"value": schemaAttribute3e45f01ff2896eb576acc4d3(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute70dbd01d229e6c908d3d3641() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DefaultTargetCapacityType
+			"default_target_capacity_type": schemaAttribute5b3c816db8e659506b07c929(),
+			// Property: OnDemandTargetCapacity
+			"on_demand_target_capacity": schemaAttributedf9a845db56e6dd761872f0e(),
+			// Property: SpotTargetCapacity
+			"spot_target_capacity": schemaAttributedf9a845db56e6dd761872f0e(),
+			// Property: TargetCapacityUnitType
+			"target_capacity_unit_type": schemaAttribute377b85086637764d86699174(),
+			// Property: TotalTargetCapacity
+			"total_target_capacity": schemaAttribute318b75fa74f81d478cf23c68(),
+		}, /*END SCHEMA*/
+		Required: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute768f3e6a8503f469f02bb87a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LaunchTemplateId
+			"launch_template_id": schemaAttribute2de5f66bc6bebed391b8d3a1(),
+			// Property: LaunchTemplateName
+			"launch_template_name": schemaAttributee4a8d449b69ce0375fa6b42e(),
+			// Property: LaunchTemplateSpecificationUserData
+			"launch_template_specification_user_data": schemaAttribute2de5f66bc6bebed391b8d3a1(),
+			// Property: Version
+			"version": schemaAttribute3e45f01ff2896eb576acc4d3(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7ed78494eccb0ab6e969fabc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"lowest-price",
+				"lowestPrice",
+				"diversified",
+				"capacityOptimized",
+				"capacity-optimized",
+				"capacityOptimizedPrioritized",
+				"capacity-optimized-prioritized",
+				"priceCapacityOptimized",
+				"price-capacity-optimized",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute84f7adfe047be3f46b816e2e() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.ValueStringsAre(
+				stringvalidator.OneOf(
+					"intel",
+					"amd",
+					"amazon-web-services",
+					"apple",
+				),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute851eba34262a91ed45372719() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.ValueStringsAre(
+				stringvalidator.OneOf(
+					"a10g",
+					"a100",
+					"h100",
+					"inferentia",
+					"k520",
+					"k80",
+					"m60",
+					"radeon-pro-v520",
+					"t4",
+					"t4g",
+					"vu9p",
+					"v100",
+					"l40s",
+					"l4",
+					"gaudi-hl-205",
+					"inferentia2",
+					"trainium",
+					"trainium2",
+					"u30",
+				),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute981378805458299eaf923868() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Ipv6Address
+				"ipv_6_address": schemaAttribute2de5f66bc6bebed391b8d3a1(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9a9b6fa1611d0a54ba87af05() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AvailabilityZone
+				"availability_zone": schemaAttribute2de5f66bc6bebed391b8d3a1(),
+				// Property: AvailabilityZoneId
+				"availability_zone_id": schemaAttribute2de5f66bc6bebed391b8d3a1(),
+				// Property: BlockDeviceMappings
+				"block_device_mappings": schemaAttribute26c86fa12a79ef63d5ecefa0(),
+				// Property: IamInstanceProfile
+				"iam_instance_profile": schemaAttribute02caedcc585899daec97ff6d(),
+				// Property: InstanceRequirements
+				"instance_requirements": schemaAttribute004806b2d1a9dccf1167ce52(),
+				// Property: InstanceType
+				"instance_type": schemaAttribute2de5f66bc6bebed391b8d3a1(),
+				// Property: KeyName
+				"key_name": schemaAttribute2de5f66bc6bebed391b8d3a1(),
+				// Property: MaxPrice
+				"max_price": schemaAttribute2de5f66bc6bebed391b8d3a1(),
+				// Property: MetadataOptions
+				"metadata_options": schemaAttributea18f28980e45d3f255987cf1(),
+				// Property: NetworkInterfaces
+				"network_interfaces": schemaAttribute9bdb764060dd91c728711a5c(),
+				// Property: Placement
+				"placement": schemaAttributed884935fb401586d479f26e6(),
+				// Property: Priority
+				"priority": schemaAttribute607309e780cf3d564aee0a3f(),
+				// Property: SubnetId
+				"subnet_id": schemaAttribute2de5f66bc6bebed391b8d3a1(),
+				// Property: WeightedCapacity
+				"weighted_capacity": schemaAttribute607309e780cf3d564aee0a3f(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9bdb764060dd91c728711a5c() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AssociatePublicIpAddress
+				"associate_public_ip_address": schemaAttribute505bfa7795cfd9fdc86ec555(),
+				// Property: DeleteOnTermination
+				"delete_on_termination": schemaAttribute505bfa7795cfd9fdc86ec555(),
+				// Property: Description
+				"description": schemaAttribute2de5f66bc6bebed391b8d3a1(),
+				// Property: DeviceIndex
+				"device_index": schemaAttributedf9a845db56e6dd761872f0e(),
+				// Property: Groups
+				"groups": schemaAttributeedfb11e9e241dfaa4f8f656a(),
+				// Property: InterfaceType
+				"interface_type": schemaAttribute2de5f66bc6bebed391b8d3a1(),
+				// Property: Ipv6AddressCount
+				"ipv_6_address_count": schemaAttributedf9a845db56e6dd761872f0e(),
+				// Property: Ipv6Addresses
+				"ipv_6_addresses": schemaAttribute981378805458299eaf923868(),
+				// Property: NetworkCardIndex
+				"network_card_index": schemaAttributedf9a845db56e6dd761872f0e(),
+				// Property: NetworkInterfaceId
+				"network_interface_id": schemaAttribute2de5f66bc6bebed391b8d3a1(),
+				// Property: PrivateIpAddress
+				"private_ip_address": schemaAttribute2de5f66bc6bebed391b8d3a1(),
+				// Property: PrivateIpAddresses
+				"private_ip_addresses": schemaAttributed5f46fcc84a06a1a26f52ab0(),
+				// Property: SecondaryPrivateIpAddressCount
+				"secondary_private_ip_address_count": schemaAttributedf9a845db56e6dd761872f0e(),
+				// Property: SubnetId
+				"subnet_id": schemaAttribute2de5f66bc6bebed391b8d3a1(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ced0547e002c7a3d969b2cc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"termination",
+				"no-termination",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea18f28980e45d3f255987cf1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: HttpEndpoint
+			"http_endpoint": schemaAttribute248bf1fda8960da09be552f9(),
+			// Property: HttpPutResponseHopLimit
+			"http_put_response_hop_limit": schemaAttributedf9a845db56e6dd761872f0e(),
+			// Property: HttpTokens
+			"http_tokens": schemaAttribute208e1e88149b8fc9bfa532e9(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea3207ed31d1556b55463ece8() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: InstanceFamily
+				"instance_family": schemaAttribute2de5f66bc6bebed391b8d3a1(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea6e15eb2f5bff3cba63ab2b1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: UsageStrategy
+			"usage_strategy": schemaAttribute4939313522f35091ae4b2282(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeab586386292945bcd91757d0() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.ValueStringsAre(
+				stringvalidator.LengthBetween(1, 30),
+				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9\\.\\*]+"), ""),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaec28edd797f4561831793d9() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+			boolplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb340a929787548c148fd7893() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DeleteOnTermination
+			"delete_on_termination": schemaAttribute505bfa7795cfd9fdc86ec555(),
+			// Property: Encrypted
+			"encrypted": schemaAttribute505bfa7795cfd9fdc86ec555(),
+			// Property: Iops
+			"iops": schemaAttributedf9a845db56e6dd761872f0e(),
+			// Property: KmsKeyId
+			"kms_key_id": schemaAttribute2de5f66bc6bebed391b8d3a1(),
+			// Property: SnapshotId
+			"snapshot_id": schemaAttribute2de5f66bc6bebed391b8d3a1(),
+			// Property: VolumeSize
+			"volume_size": schemaAttributedf9a845db56e6dd761872f0e(),
+			// Property: VolumeType
+			"volume_type": schemaAttribute2de5f66bc6bebed391b8d3a1(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb6a029ad4e1e7ecaa245b8b2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Max
+			"max": schemaAttributedf9a845db56e6dd761872f0e(),
+			// Property: Min
+			"min": schemaAttributedf9a845db56e6dd761872f0e(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6f87d276d3929033ae1b4dd() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Cpu
+			"cpu": schemaAttribute2ae21c295680768a6d51f54a(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed460427c44c0a113f67dddec() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.ValueStringsAre(
+				stringvalidator.OneOf(
+					"amazon-web-services",
+					"amd",
+					"habana",
+					"nvidia",
+					"xilinx",
+				),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed5f46fcc84a06a1a26f52ab0() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Primary
+				"primary": schemaAttribute505bfa7795cfd9fdc86ec555(),
+				// Property: PrivateIpAddress
+				"private_ip_address": schemaAttribute2de5f66bc6bebed391b8d3a1(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed884935fb401586d479f26e6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Affinity
+			"affinity": schemaAttribute2de5f66bc6bebed391b8d3a1(),
+			// Property: AvailabilityZone
+			"availability_zone": schemaAttribute2de5f66bc6bebed391b8d3a1(),
+			// Property: GroupName
+			"group_name": schemaAttribute2de5f66bc6bebed391b8d3a1(),
+			// Property: HostId
+			"host_id": schemaAttribute2de5f66bc6bebed391b8d3a1(),
+			// Property: HostResourceGroupArn
+			"host_resource_group_arn": schemaAttribute2de5f66bc6bebed391b8d3a1(),
+			// Property: PartitionNumber
+			"partition_number": schemaAttributedf9a845db56e6dd761872f0e(),
+			// Property: SpreadDomain
+			"spread_domain": schemaAttribute2de5f66bc6bebed391b8d3a1(),
+			// Property: Tenancy
+			"tenancy": schemaAttribute2de5f66bc6bebed391b8d3a1(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedf9a845db56e6dd761872f0e() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee33840ab359ac2d83e3897a9() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.ValueStringsAre(
+				stringvalidator.OneOf(
+					"interruptible-capacity-reservation",
+				),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee4a8d449b69ce0375fa6b42e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(3, 128),
+			stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9\\(\\)\\.\\-/_]+"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee83102b832b868087015c45f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ReplacementStrategy
+			"replacement_strategy": schemaAttribute3f149bcc37cf4f88ebf1a5c3(),
+			// Property: TerminationDelay
+			"termination_delay": schemaAttributedf9a845db56e6dd761872f0e(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee8a02dc9010d1a5b28d3d989() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.ValueStringsAre(
+				stringvalidator.OneOf(
+					"current",
+					"previous",
+				),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeedfb11e9e241dfaa4f8f656a() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefc2d0e354f3c60431869b320() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AllocationStrategy
+			"allocation_strategy": schemaAttribute2de5f66bc6bebed391b8d3a1(),
+			// Property: CapacityReservationOptions
+			"capacity_reservation_options": schemaAttributea6e15eb2f5bff3cba63ab2b1(),
+			// Property: MaxTotalPrice
+			"max_total_price": schemaAttribute2de5f66bc6bebed391b8d3a1(),
+			// Property: MinTargetCapacity
+			"min_target_capacity": schemaAttributedf9a845db56e6dd761872f0e(),
+			// Property: SingleAvailabilityZone
+			"single_availability_zone": schemaAttribute505bfa7795cfd9fdc86ec555(),
+			// Property: SingleInstanceType
+			"single_instance_type": schemaAttribute505bfa7795cfd9fdc86ec555(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+			objectplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_ec2_ec2_fleet", eC2FleetResource)
 	registry.AddListResourceFactory("awscc_ec2_ec2_fleet", generic.NewListResource(eC2FleetResource))
@@ -43,13 +1162,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"context": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"context": schemaAttribute2de5f66bc6bebed391b8d3a1(),
 		// Property: ExcessCapacityTerminationPolicy
 		// CloudFormation resource type schema:
 		//
@@ -60,31 +1173,14 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"excess_capacity_termination_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"termination",
-					"no-termination",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"excess_capacity_termination_policy": schemaAttribute9ced0547e002c7a3d969b2cc(),
 		// Property: FleetId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"fleet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"fleet_id": schemaAttribute3ffc7e75cc9f6f8f76fe8ef9(),
 		// Property: LaunchTemplateConfigs
 		// CloudFormation resource type schema:
 		//
@@ -636,1077 +1732,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"launch_template_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: LaunchTemplateSpecification
-					"launch_template_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: LaunchTemplateId
-							"launch_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
-								Computed: true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: LaunchTemplateName
-							"launch_template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
-								Computed: true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(3, 128),
-									stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9\\(\\)\\.\\-/_]+"), ""),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: LaunchTemplateSpecificationUserData
-							"launch_template_specification_user_data": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
-								Computed: true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: Version
-							"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
-								Computed: true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									fwvalidators.NotNullString(),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-							objectplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Overrides
-					"overrides": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: AvailabilityZone
-								"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: AvailabilityZoneId
-								"availability_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: BlockDeviceMappings
-								"block_device_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: DeviceName
-											"device_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-											// Property: Ebs
-											"ebs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: DeleteOnTermination
-													"delete_on_termination": schema.BoolAttribute{ /*START ATTRIBUTE*/
-														Optional: true,
-														Computed: true,
-														PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-															boolplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-													// Property: Encrypted
-													"encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
-														Optional: true,
-														Computed: true,
-														PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-															boolplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-													// Property: Iops
-													"iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
-														Optional: true,
-														Computed: true,
-														PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-															int64planmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-													// Property: KmsKeyId
-													"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Optional: true,
-														Computed: true,
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-													// Property: SnapshotId
-													"snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Optional: true,
-														Computed: true,
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-													// Property: VolumeSize
-													"volume_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-														Optional: true,
-														Computed: true,
-														PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-															int64planmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-													// Property: VolumeType
-													"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Optional: true,
-														Computed: true,
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-													objectplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-											// Property: NoDevice
-											"no_device": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-											// Property: VirtualName
-											"virtual_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.List{ /*START VALIDATORS*/
-										listvalidator.UniqueValues(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										listplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: IamInstanceProfile
-								"iam_instance_profile": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Arn
-										"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: Name
-										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: InstanceRequirements
-								"instance_requirements": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: AcceleratorCount
-										"accelerator_count": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Max
-												"max": schema.Int64Attribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-														int64planmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: Min
-												"min": schema.Int64Attribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-														int64planmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-												objectplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: AcceleratorManufacturers
-										"accelerator_manufacturers": schema.ListAttribute{ /*START ATTRIBUTE*/
-											ElementType: types.StringType,
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.List{ /*START VALIDATORS*/
-												listvalidator.ValueStringsAre(
-													stringvalidator.OneOf(
-														"amazon-web-services",
-														"amd",
-														"habana",
-														"nvidia",
-														"xilinx",
-													),
-												),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-												listplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: AcceleratorNames
-										"accelerator_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-											ElementType: types.StringType,
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.List{ /*START VALIDATORS*/
-												listvalidator.ValueStringsAre(
-													stringvalidator.OneOf(
-														"a10g",
-														"a100",
-														"h100",
-														"inferentia",
-														"k520",
-														"k80",
-														"m60",
-														"radeon-pro-v520",
-														"t4",
-														"t4g",
-														"vu9p",
-														"v100",
-														"l40s",
-														"l4",
-														"gaudi-hl-205",
-														"inferentia2",
-														"trainium",
-														"trainium2",
-														"u30",
-													),
-												),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-												listplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: AcceleratorTotalMemoryMiB
-										"accelerator_total_memory_mi_b": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Max
-												"max": schema.Int64Attribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-														int64planmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: Min
-												"min": schema.Int64Attribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-														int64planmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-												objectplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: AcceleratorTypes
-										"accelerator_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-											ElementType: types.StringType,
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.List{ /*START VALIDATORS*/
-												listvalidator.ValueStringsAre(
-													stringvalidator.OneOf(
-														"gpu",
-														"fpga",
-														"inference",
-														"media",
-													),
-												),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-												listplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: AllowedInstanceTypes
-										"allowed_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-											ElementType: types.StringType,
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.List{ /*START VALIDATORS*/
-												listvalidator.ValueStringsAre(
-													stringvalidator.LengthBetween(1, 30),
-													stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9\\.\\*]+"), ""),
-												),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-												listplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: BareMetal
-										"bare_metal": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.OneOf(
-													"included",
-													"required",
-													"excluded",
-												),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: BaselineEbsBandwidthMbps
-										"baseline_ebs_bandwidth_mbps": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Max
-												"max": schema.Int64Attribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-														int64planmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: Min
-												"min": schema.Int64Attribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-														int64planmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-												objectplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: BaselinePerformanceFactors
-										"baseline_performance_factors": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Cpu
-												"cpu": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: References
-														"references": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-															NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: InstanceFamily
-																	"instance_family": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Optional: true,
-																		Computed: true,
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-															}, /*END NESTED OBJECT*/
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																listplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-														objectplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-												objectplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: BurstablePerformance
-										"burstable_performance": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.OneOf(
-													"included",
-													"required",
-													"excluded",
-												),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: CpuManufacturers
-										"cpu_manufacturers": schema.ListAttribute{ /*START ATTRIBUTE*/
-											ElementType: types.StringType,
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.List{ /*START VALIDATORS*/
-												listvalidator.ValueStringsAre(
-													stringvalidator.OneOf(
-														"intel",
-														"amd",
-														"amazon-web-services",
-														"apple",
-													),
-												),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-												listplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: ExcludedInstanceTypes
-										"excluded_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-											ElementType: types.StringType,
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.List{ /*START VALIDATORS*/
-												listvalidator.ValueStringsAre(
-													stringvalidator.LengthBetween(1, 30),
-													stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9\\.\\*]+"), ""),
-												),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-												listplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: InstanceGenerations
-										"instance_generations": schema.ListAttribute{ /*START ATTRIBUTE*/
-											ElementType: types.StringType,
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.List{ /*START VALIDATORS*/
-												listvalidator.ValueStringsAre(
-													stringvalidator.OneOf(
-														"current",
-														"previous",
-													),
-												),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-												listplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: LocalStorage
-										"local_storage": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.OneOf(
-													"included",
-													"required",
-													"excluded",
-												),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: LocalStorageTypes
-										"local_storage_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-											ElementType: types.StringType,
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.List{ /*START VALIDATORS*/
-												listvalidator.ValueStringsAre(
-													stringvalidator.OneOf(
-														"hdd",
-														"ssd",
-													),
-												),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-												listplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: MaxSpotPriceAsPercentageOfOptimalOnDemandPrice
-										"max_spot_price_as_percentage_of_optimal_on_demand_price": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-												int64planmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: MemoryGiBPerVCpu
-										"memory_gi_b_per_v_cpu": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Max
-												"max": schema.Float64Attribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-														float64planmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: Min
-												"min": schema.Float64Attribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-														float64planmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-												objectplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: MemoryMiB
-										"memory_mi_b": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Max
-												"max": schema.Int64Attribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-														int64planmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: Min
-												"min": schema.Int64Attribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-														int64planmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-												objectplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: NetworkBandwidthGbps
-										"network_bandwidth_gbps": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Max
-												"max": schema.Float64Attribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-														float64planmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: Min
-												"min": schema.Float64Attribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-														float64planmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-												objectplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: NetworkInterfaceCount
-										"network_interface_count": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Max
-												"max": schema.Int64Attribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-														int64planmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: Min
-												"min": schema.Int64Attribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-														int64planmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-												objectplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: OnDemandMaxPricePercentageOverLowestPrice
-										"on_demand_max_price_percentage_over_lowest_price": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-												int64planmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: RequireEncryptionInTransit
-										"require_encryption_in_transit": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-												boolplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: RequireHibernateSupport
-										"require_hibernate_support": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-												boolplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: SpotMaxPricePercentageOverLowestPrice
-										"spot_max_price_percentage_over_lowest_price": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-												int64planmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: TotalLocalStorageGB
-										"total_local_storage_gb": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Max
-												"max": schema.Float64Attribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-														float64planmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: Min
-												"min": schema.Float64Attribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-														float64planmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-												objectplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: VCpuCount
-										"v_cpu_count": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Max
-												"max": schema.Int64Attribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-														int64planmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: Min
-												"min": schema.Int64Attribute{ /*START ATTRIBUTE*/
-													Optional: true,
-													Computed: true,
-													PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-														int64planmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-												objectplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: InstanceType
-								"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: KeyName
-								"key_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: MaxPrice
-								"max_price": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: MetadataOptions
-								"metadata_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: HttpEndpoint
-										"http_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.OneOf(
-													"disabled",
-													"enabled",
-												),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: HttpPutResponseHopLimit
-										"http_put_response_hop_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-												int64planmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: HttpTokens
-										"http_tokens": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.OneOf(
-													"optional",
-													"required",
-												),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: NetworkInterfaces
-								"network_interfaces": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: AssociatePublicIpAddress
-											"associate_public_ip_address": schema.BoolAttribute{ /*START ATTRIBUTE*/
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-													boolplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-											// Property: DeleteOnTermination
-											"delete_on_termination": schema.BoolAttribute{ /*START ATTRIBUTE*/
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-													boolplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-											// Property: Description
-											"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-											// Property: DeviceIndex
-											"device_index": schema.Int64Attribute{ /*START ATTRIBUTE*/
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-													int64planmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-											// Property: Groups
-											"groups": schema.ListAttribute{ /*START ATTRIBUTE*/
-												ElementType: types.StringType,
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-													listplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-											// Property: InterfaceType
-											"interface_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-											// Property: Ipv6AddressCount
-											"ipv_6_address_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-													int64planmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-											// Property: Ipv6Addresses
-											"ipv_6_addresses": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: Ipv6Address
-														"ipv_6_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-												}, /*END NESTED OBJECT*/
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-													listplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-											// Property: NetworkCardIndex
-											"network_card_index": schema.Int64Attribute{ /*START ATTRIBUTE*/
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-													int64planmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-											// Property: NetworkInterfaceId
-											"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-											// Property: PrivateIpAddress
-											"private_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-											// Property: PrivateIpAddresses
-											"private_ip_addresses": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: Primary
-														"primary": schema.BoolAttribute{ /*START ATTRIBUTE*/
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-																boolplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: PrivateIpAddress
-														"private_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-												}, /*END NESTED OBJECT*/
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-													listplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-											// Property: SecondaryPrivateIpAddressCount
-											"secondary_private_ip_address_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-													int64planmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-											// Property: SubnetId
-											"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-													stringplanmodifier.UseStateForUnknown(),
-												}, /*END PLAN MODIFIERS*/
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										listplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: Placement
-								"placement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Affinity
-										"affinity": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: AvailabilityZone
-										"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: GroupName
-										"group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: HostId
-										"host_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: HostResourceGroupArn
-										"host_resource_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: PartitionNumber
-										"partition_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-												int64planmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: SpreadDomain
-										"spread_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: Tenancy
-										"tenancy": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: Priority
-								"priority": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-										float64planmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: SubnetId
-								"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: WeightedCapacity
-								"weighted_capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-										float64planmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-							listplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Required: true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeAtMost(50),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"launch_template_configs": schemaAttribute00763e5cb2e5de40708cd09e(),
 		// Property: OnDemandOptions
 		// CloudFormation resource type schema:
 		//
@@ -1743,93 +1769,14 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"on_demand_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AllocationStrategy
-				"allocation_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: CapacityReservationOptions
-				"capacity_reservation_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: UsageStrategy
-						"usage_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.OneOf(
-									"use-capacity-reservations-first",
-								),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: MaxTotalPrice
-				"max_total_price": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: MinTargetCapacity
-				"min_target_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						int64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: SingleAvailabilityZone
-				"single_availability_zone": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: SingleInstanceType
-				"single_instance_type": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"on_demand_options": schemaAttributefc2d0e354f3c60431869b320(),
 		// Property: ReplaceUnhealthyInstances
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"replace_unhealthy_instances": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-				boolplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"replace_unhealthy_instances": schemaAttributeaec28edd797f4561831793d9(),
 		// Property: ReservedCapacityOptions
 		// CloudFormation resource type schema:
 		//
@@ -1849,32 +1796,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"reserved_capacity_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ReservationTypes
-				"reservation_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.ValueStringsAre(
-							stringvalidator.OneOf(
-								"interruptible-capacity-reservation",
-							),
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"reserved_capacity_options": schemaAttribute34f2c5459e845d2d813f73e9(),
 		// Property: SpotOptions
 		// CloudFormation resource type schema:
 		//
@@ -1943,134 +1865,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"spot_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AllocationStrategy
-				"allocation_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"lowest-price",
-							"lowestPrice",
-							"diversified",
-							"capacityOptimized",
-							"capacity-optimized",
-							"capacityOptimizedPrioritized",
-							"capacity-optimized-prioritized",
-							"priceCapacityOptimized",
-							"price-capacity-optimized",
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: InstanceInterruptionBehavior
-				"instance_interruption_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"hibernate",
-							"stop",
-							"terminate",
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: InstancePoolsToUseCount
-				"instance_pools_to_use_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						int64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: MaintenanceStrategies
-				"maintenance_strategies": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CapacityRebalance
-						"capacity_rebalance": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ReplacementStrategy
-								"replacement_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.OneOf(
-											"launch",
-											"launch-before-terminate",
-										),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: TerminationDelay
-								"termination_delay": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-										int64planmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: MaxTotalPrice
-				"max_total_price": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: MinTargetCapacity
-				"min_target_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						int64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: SingleAvailabilityZone
-				"single_availability_zone": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: SingleInstanceType
-				"single_instance_type": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"spot_options": schemaAttribute611c29403e0b35ef2edae0e6(),
 		// Property: TagSpecifications
 		// CloudFormation resource type schema:
 		//
@@ -2156,111 +1951,7 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tag_specifications": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ResourceType
-					"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.OneOf(
-								"client-vpn-endpoint",
-								"customer-gateway",
-								"dedicated-host",
-								"dhcp-options",
-								"egress-only-internet-gateway",
-								"elastic-gpu",
-								"elastic-ip",
-								"export-image-task",
-								"export-instance-task",
-								"fleet",
-								"fpga-image",
-								"host-reservation",
-								"image",
-								"import-image-task",
-								"import-snapshot-task",
-								"instance",
-								"internet-gateway",
-								"key-pair",
-								"launch-template",
-								"local-gateway-route-table-vpc-association",
-								"natgateway",
-								"network-acl",
-								"network-insights-analysis",
-								"network-insights-path",
-								"network-interface",
-								"placement-group",
-								"reserved-instances",
-								"route-table",
-								"security-group",
-								"snapshot",
-								"spot-fleet-request",
-								"spot-instances-request",
-								"subnet",
-								"traffic-mirror-filter",
-								"traffic-mirror-session",
-								"traffic-mirror-target",
-								"transit-gateway",
-								"transit-gateway-attachment",
-								"transit-gateway-connect-peer",
-								"transit-gateway-multicast-domain",
-								"transit-gateway-route-table",
-								"volume",
-								"vpc",
-								"vpc-flow-log",
-								"vpc-peering-connection",
-								"vpn-connection",
-								"vpn-gateway",
-							),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Tags
-					"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Key
-								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										fwvalidators.NotNullString(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: Value
-								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										fwvalidators.NotNullString(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-							listplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-				listplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tag_specifications": schemaAttribute43dbedea1ed607fbc2ca253f(),
 		// Property: TargetCapacitySpecification
 		// CloudFormation resource type schema:
 		//
@@ -2299,78 +1990,14 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"target_capacity_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DefaultTargetCapacityType
-				"default_target_capacity_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"on-demand",
-							"spot",
-							"capacity-block",
-							"reserved-capacity",
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-						stringplanmodifier.RequiresReplaceIfConfigured(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: OnDemandTargetCapacity
-				"on_demand_target_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						int64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: SpotTargetCapacity
-				"spot_target_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						int64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: TargetCapacityUnitType
-				"target_capacity_unit_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"vcpu",
-							"memory-mib",
-							"units",
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-						stringplanmodifier.RequiresReplaceIfConfigured(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: TotalTargetCapacity
-				"total_target_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Required: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Required: true,
-		}, /*END ATTRIBUTE*/
+		"target_capacity_specification": schemaAttribute70dbd01d229e6c908d3d3641(),
 		// Property: TerminateInstancesWithExpiration
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"terminate_instances_with_expiration": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-				boolplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"terminate_instances_with_expiration": schemaAttributeaec28edd797f4561831793d9(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -2382,49 +2009,21 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"maintain",
-					"request",
-					"instant",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttribute0eef12eac89548b2b81a12d9(),
 		// Property: ValidFrom
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"valid_from": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"valid_from": schemaAttribute4977695569bff8d371ef0eb4(),
 		// Property: ValidUntil
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"valid_until": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"valid_until": schemaAttribute4977695569bff8d371ef0eb4(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -2453,70 +2052,70 @@ func eC2FleetResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"accelerator_count":                       "AcceleratorCount",
-		"accelerator_manufacturers":               "AcceleratorManufacturers",
-		"accelerator_names":                       "AcceleratorNames",
-		"accelerator_total_memory_mi_b":           "AcceleratorTotalMemoryMiB",
-		"accelerator_types":                       "AcceleratorTypes",
-		"affinity":                                "Affinity",
-		"allocation_strategy":                     "AllocationStrategy",
-		"allowed_instance_types":                  "AllowedInstanceTypes",
-		"arn":                                     "Arn",
-		"associate_public_ip_address":             "AssociatePublicIpAddress",
-		"availability_zone":                       "AvailabilityZone",
-		"availability_zone_id":                    "AvailabilityZoneId",
-		"bare_metal":                              "BareMetal",
-		"baseline_ebs_bandwidth_mbps":             "BaselineEbsBandwidthMbps",
-		"baseline_performance_factors":            "BaselinePerformanceFactors",
-		"block_device_mappings":                   "BlockDeviceMappings",
-		"burstable_performance":                   "BurstablePerformance",
-		"capacity_rebalance":                      "CapacityRebalance",
-		"capacity_reservation_options":            "CapacityReservationOptions",
-		"context":                                 "Context",
-		"cpu":                                     "Cpu",
-		"cpu_manufacturers":                       "CpuManufacturers",
-		"default_target_capacity_type":            "DefaultTargetCapacityType",
-		"delete_on_termination":                   "DeleteOnTermination",
-		"description":                             "Description",
-		"device_index":                            "DeviceIndex",
-		"device_name":                             "DeviceName",
-		"ebs":                                     "Ebs",
-		"encrypted":                               "Encrypted",
-		"excess_capacity_termination_policy":      "ExcessCapacityTerminationPolicy",
-		"excluded_instance_types":                 "ExcludedInstanceTypes",
-		"fleet_id":                                "FleetId",
-		"group_name":                              "GroupName",
-		"groups":                                  "Groups",
-		"host_id":                                 "HostId",
-		"host_resource_group_arn":                 "HostResourceGroupArn",
-		"http_endpoint":                           "HttpEndpoint",
-		"http_put_response_hop_limit":             "HttpPutResponseHopLimit",
-		"http_tokens":                             "HttpTokens",
-		"iam_instance_profile":                    "IamInstanceProfile",
-		"instance_family":                         "InstanceFamily",
-		"instance_generations":                    "InstanceGenerations",
-		"instance_interruption_behavior":          "InstanceInterruptionBehavior",
-		"instance_pools_to_use_count":             "InstancePoolsToUseCount",
-		"instance_requirements":                   "InstanceRequirements",
-		"instance_type":                           "InstanceType",
-		"interface_type":                          "InterfaceType",
-		"iops":                                    "Iops",
-		"ipv_6_address":                           "Ipv6Address",
-		"ipv_6_address_count":                     "Ipv6AddressCount",
-		"ipv_6_addresses":                         "Ipv6Addresses",
-		"key":                                     "Key",
-		"key_name":                                "KeyName",
-		"kms_key_id":                              "KmsKeyId",
-		"launch_template_configs":                 "LaunchTemplateConfigs",
-		"launch_template_id":                      "LaunchTemplateId",
-		"launch_template_name":                    "LaunchTemplateName",
-		"launch_template_specification":           "LaunchTemplateSpecification",
+		"accelerator_count":                  "AcceleratorCount",
+		"accelerator_manufacturers":          "AcceleratorManufacturers",
+		"accelerator_names":                  "AcceleratorNames",
+		"accelerator_total_memory_mi_b":      "AcceleratorTotalMemoryMiB",
+		"accelerator_types":                  "AcceleratorTypes",
+		"affinity":                           "Affinity",
+		"allocation_strategy":                "AllocationStrategy",
+		"allowed_instance_types":             "AllowedInstanceTypes",
+		"arn":                                "Arn",
+		"associate_public_ip_address":        "AssociatePublicIpAddress",
+		"availability_zone":                  "AvailabilityZone",
+		"availability_zone_id":               "AvailabilityZoneId",
+		"bare_metal":                         "BareMetal",
+		"baseline_ebs_bandwidth_mbps":        "BaselineEbsBandwidthMbps",
+		"baseline_performance_factors":       "BaselinePerformanceFactors",
+		"block_device_mappings":              "BlockDeviceMappings",
+		"burstable_performance":              "BurstablePerformance",
+		"capacity_rebalance":                 "CapacityRebalance",
+		"capacity_reservation_options":       "CapacityReservationOptions",
+		"context":                            "Context",
+		"cpu":                                "Cpu",
+		"cpu_manufacturers":                  "CpuManufacturers",
+		"default_target_capacity_type":       "DefaultTargetCapacityType",
+		"delete_on_termination":              "DeleteOnTermination",
+		"description":                        "Description",
+		"device_index":                       "DeviceIndex",
+		"device_name":                        "DeviceName",
+		"ebs":                                "Ebs",
+		"encrypted":                          "Encrypted",
+		"excess_capacity_termination_policy": "ExcessCapacityTerminationPolicy",
+		"excluded_instance_types":            "ExcludedInstanceTypes",
+		"fleet_id":                           "FleetId",
+		"group_name":                         "GroupName",
+		"groups":                             "Groups",
+		"host_id":                            "HostId",
+		"host_resource_group_arn":            "HostResourceGroupArn",
+		"http_endpoint":                      "HttpEndpoint",
+		"http_put_response_hop_limit":        "HttpPutResponseHopLimit",
+		"http_tokens":                        "HttpTokens",
+		"iam_instance_profile":               "IamInstanceProfile",
+		"instance_family":                    "InstanceFamily",
+		"instance_generations":               "InstanceGenerations",
+		"instance_interruption_behavior":     "InstanceInterruptionBehavior",
+		"instance_pools_to_use_count":        "InstancePoolsToUseCount",
+		"instance_requirements":              "InstanceRequirements",
+		"instance_type":                      "InstanceType",
+		"interface_type":                     "InterfaceType",
+		"iops":                               "Iops",
+		"ipv_6_address":                      "Ipv6Address",
+		"ipv_6_address_count":                "Ipv6AddressCount",
+		"ipv_6_addresses":                    "Ipv6Addresses",
+		"key":                                "Key",
+		"key_name":                           "KeyName",
+		"kms_key_id":                         "KmsKeyId",
+		"launch_template_configs":            "LaunchTemplateConfigs",
+		"launch_template_id":                 "LaunchTemplateId",
+		"launch_template_name":               "LaunchTemplateName",
+		"launch_template_specification":      "LaunchTemplateSpecification",
 		"launch_template_specification_user_data": "LaunchTemplateSpecificationUserData",
-		"local_storage":                           "LocalStorage",
-		"local_storage_types":                     "LocalStorageTypes",
-		"maintenance_strategies":                  "MaintenanceStrategies",
-		"max":                                     "Max",
-		"max_price":                               "MaxPrice",
+		"local_storage":          "LocalStorage",
+		"local_storage_types":    "LocalStorageTypes",
+		"maintenance_strategies": "MaintenanceStrategies",
+		"max":                    "Max",
+		"max_price":              "MaxPrice",
 		"max_spot_price_as_percentage_of_optimal_on_demand_price": "MaxSpotPriceAsPercentageOfOptimalOnDemandPrice",
 		"max_total_price":         "MaxTotalPrice",
 		"memory_gi_b_per_v_cpu":   "MemoryGiBPerVCpu",

@@ -17,6 +17,56 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute4ffab4127961c0302ccb8cdb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The base path name that callers of the API must provide in the URL after the domain name.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute55260f372209166cc4b2feac() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the API's stage.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb98f154c28bef78a04689650() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Amazon Resource Name (ARN) of the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6e284f0daf050e4e1998eab() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the API.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedf8ad43c11f30608d9be2f3b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Arn of an AWS::ApiGateway::DomainNameV2 resource.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_apigateway_base_path_mapping_v2", basePathMappingV2Resource)
 }
@@ -32,15 +82,7 @@ func basePathMappingV2Resource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The base path name that callers of the API must provide in the URL after the domain name.",
 		//	  "type": "string"
 		//	}
-		"base_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The base path name that callers of the API must provide in the URL after the domain name.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"base_path": schemaAttribute4ffab4127961c0302ccb8cdb(),
 		// Property: BasePathMappingArn
 		// CloudFormation resource type schema:
 		//
@@ -48,13 +90,7 @@ func basePathMappingV2Resource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Amazon Resource Name (ARN) of the resource.",
 		//	  "type": "string"
 		//	}
-		"base_path_mapping_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Amazon Resource Name (ARN) of the resource.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"base_path_mapping_arn": schemaAttributeb98f154c28bef78a04689650(),
 		// Property: DomainNameArn
 		// CloudFormation resource type schema:
 		//
@@ -62,13 +98,7 @@ func basePathMappingV2Resource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Arn of an AWS::ApiGateway::DomainNameV2 resource.",
 		//	  "type": "string"
 		//	}
-		"domain_name_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Arn of an AWS::ApiGateway::DomainNameV2 resource.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"domain_name_arn": schemaAttributedf8ad43c11f30608d9be2f3b(),
 		// Property: RestApiId
 		// CloudFormation resource type schema:
 		//
@@ -76,10 +106,7 @@ func basePathMappingV2Resource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of the API.",
 		//	  "type": "string"
 		//	}
-		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the API.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"rest_api_id": schemaAttributec6e284f0daf050e4e1998eab(),
 		// Property: Stage
 		// CloudFormation resource type schema:
 		//
@@ -87,14 +114,7 @@ func basePathMappingV2Resource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the API's stage.",
 		//	  "type": "string"
 		//	}
-		"stage": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the API's stage.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"stage": schemaAttribute55260f372209166cc4b2feac(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

@@ -17,6 +17,53 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0eb3f4ca33bc3b04bcc69012() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The service principal for the AWS service to which this role is attached.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// AWSServiceName is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute44030d21d63e444c417eca91() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string that you provide, which is combined with the service-provided prefix to form the complete role name.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// CustomSuffix is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea1c51e89ce9eaf378dde51ff() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the role.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebd1ae95a6aa57139781d0c19() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the role.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_iam_service_linked_role", serviceLinkedRoleResource)
 }
@@ -32,16 +79,7 @@ func serviceLinkedRoleResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The service principal for the AWS service to which this role is attached.",
 		//	  "type": "string"
 		//	}
-		"aws_service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The service principal for the AWS service to which this role is attached.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// AWSServiceName is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"aws_service_name": schemaAttribute0eb3f4ca33bc3b04bcc69012(),
 		// Property: CustomSuffix
 		// CloudFormation resource type schema:
 		//
@@ -49,16 +87,7 @@ func serviceLinkedRoleResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A string that you provide, which is combined with the service-provided prefix to form the complete role name.",
 		//	  "type": "string"
 		//	}
-		"custom_suffix": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A string that you provide, which is combined with the service-provided prefix to form the complete role name.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// CustomSuffix is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"custom_suffix": schemaAttribute44030d21d63e444c417eca91(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -66,14 +95,7 @@ func serviceLinkedRoleResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The description of the role.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the role.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributebd1ae95a6aa57139781d0c19(),
 		// Property: RoleName
 		// CloudFormation resource type schema:
 		//
@@ -81,13 +103,7 @@ func serviceLinkedRoleResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the role.",
 		//	  "type": "string"
 		//	}
-		"role_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the role.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"role_name": schemaAttributea1c51e89ce9eaf378dde51ff(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

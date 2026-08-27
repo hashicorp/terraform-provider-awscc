@@ -24,6 +24,202 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute051abc52cf6bd62e56ded0fa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the multi-cloud configuration connector used to establish the connection to Azure.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute06f279c38b5cbf79b4e45552() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the connector.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute18fff59568d0d6da3fd2b9e8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ScopeType
+			"scope_type": schemaAttributee63ede8c99fcdbe85a5463de(),
+			// Property: ScopeValues
+			"scope_values": schemaAttribute6039bdce71002f7a41af47a5(),
+		}, /*END SCHEMA*/
+		Description: "The scope configuration that defines which Azure resources are monitored.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2f7e6d3cb1e8fc4cefa960c0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The timestamp formatted in ISO8601",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute40da773eb2d9ee2ad1f11f69() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The error code that identifies the type of health issue.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute48f34cd42fbc4c60ddfdccff() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of Azure regions to monitor.",
+		Required:    true,
+		Validators: []validator.Set{ /*START VALIDATORS*/
+			setvalidator.SizeBetween(1, 100),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute58171dc816c1bfa2a2b3cc19() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute596faade1f0648da811d27d3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the connector.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6039bdce71002f7a41af47a5() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of scope values, such as subscription IDs, when the scope type is ``subscription``.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Set{ /*START VALIDATORS*/
+			setvalidator.SizeBetween(0, 100),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8121cb060723227cc6f009b5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AWSConfigConnectorArn
+			"aws_config_connector_arn": schemaAttribute051abc52cf6bd62e56ded0fa(),
+			// Property: AzureRegions
+			"azure_regions": schemaAttribute48f34cd42fbc4c60ddfdccff(),
+			// Property: ScopeConfiguration
+			"scope_configuration": schemaAttribute18fff59568d0d6da3fd2b9e8(),
+		}, /*END SCHEMA*/
+		Description: "The configuration for connecting to an Azure environment.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute93b82c5b80c8ff97a584eb4a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Code
+				"code": schemaAttribute40da773eb2d9ee2ad1f11f69(),
+				// Property: Message
+				"message": schemaAttributef679e51ec47920712869dd36(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "",
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute94ce986abe17dc71d7b3115e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Azure
+			"azure": schemaAttribute8121cb060723227cc6f009b5(),
+		}, /*END SCHEMA*/
+		Description: "",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributece2f022cd570065d94f63ec2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The enablement status of the connector",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed93f554bb65daab758c488db() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A key-value pair to associate with a resource.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+			mapplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee63ede8c99fcdbe85a5463de() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of scope. Valid values are ``tenant`` and ``subscription``.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"TENANT",
+				"SUBSCRIPTION",
+			),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef679e51ec47920712869dd36() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A human-readable message that describes the health issue.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef971c732b4f6b438cb59efa9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the connector",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_securityhub_connector", connectorResource)
 	registry.AddListResourceFactory("awscc_securityhub_connector", generic.NewListResource(connectorResource))
@@ -41,13 +237,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:aws\\S*:securityhub:[a-z0-9-]+:[0-9]{12}:connector/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"connector_arn": schemaAttribute58171dc816c1bfa2a2b3cc19(),
 		// Property: ConnectorId
 		// CloudFormation resource type schema:
 		//
@@ -56,13 +246,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"connector_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"connector_id": schemaAttribute58171dc816c1bfa2a2b3cc19(),
 		// Property: ConnectorStatus
 		// CloudFormation resource type schema:
 		//
@@ -70,13 +254,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The status of the connector",
 		//	  "type": "string"
 		//	}
-		"connector_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the connector",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"connector_status": schemaAttributef971c732b4f6b438cb59efa9(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -85,13 +263,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^(\\d\\d\\d\\d)-([0][1-9]|[1][0-2])-([0][1-9]|[1-2](\\d)|[3][0-1])[T](?:([0-1](\\d)|[2][0-3]):[0-5](\\d):[0-5](\\d)|23:59:60)(?:\\.(\\d)+)?([Z]|[+-](\\d\\d)(:?(\\d\\d))?)$",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The timestamp formatted in ISO8601",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute2f7e6d3cb1e8fc4cefa960c0(),
 		// Property: CreatedBy
 		// CloudFormation resource type schema:
 		//
@@ -99,13 +271,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"created_by": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"created_by": schemaAttribute58171dc816c1bfa2a2b3cc19(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -113,14 +279,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The description of the connector.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the connector.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute06f279c38b5cbf79b4e45552(),
 		// Property: EnablementStatus
 		// CloudFormation resource type schema:
 		//
@@ -128,13 +287,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The enablement status of the connector",
 		//	  "type": "string"
 		//	}
-		"enablement_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The enablement status of the connector",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"enablement_status": schemaAttributece2f022cd570065d94f63ec2(),
 		// Property: Issues
 		// CloudFormation resource type schema:
 		//
@@ -162,28 +315,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"issues": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Code
-					"code": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The error code that identifies the type of health issue.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Message
-					"message": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A human-readable message that describes the health issue.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "",
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"issues": schemaAttribute93b82c5b80c8ff97a584eb4a(),
 		// Property: LastCheckedAt
 		// CloudFormation resource type schema:
 		//
@@ -192,13 +324,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^(\\d\\d\\d\\d)-([0][1-9]|[1][0-2])-([0][1-9]|[1-2](\\d)|[3][0-1])[T](?:([0-1](\\d)|[2][0-3]):[0-5](\\d):[0-5](\\d)|23:59:60)(?:\\.(\\d)+)?([Z]|[+-](\\d\\d)(:?(\\d\\d))?)$",
 		//	  "type": "string"
 		//	}
-		"last_checked_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The timestamp formatted in ISO8601",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"last_checked_at": schemaAttribute2f7e6d3cb1e8fc4cefa960c0(),
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -207,13 +333,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^(\\d\\d\\d\\d)-([0][1-9]|[1][0-2])-([0][1-9]|[1-2](\\d)|[3][0-1])[T](?:([0-1](\\d)|[2][0-3]):[0-5](\\d):[0-5](\\d)|23:59:60)(?:\\.(\\d)+)?([Z]|[+-](\\d\\d)(:?(\\d\\d))?)$",
 		//	  "type": "string"
 		//	}
-		"last_updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The timestamp formatted in ISO8601",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"last_updated_at": schemaAttribute2f7e6d3cb1e8fc4cefa960c0(),
 		// Property: Message
 		// CloudFormation resource type schema:
 		//
@@ -221,13 +341,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"message": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"message": schemaAttribute58171dc816c1bfa2a2b3cc19(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -235,13 +349,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the connector.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the connector.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute596faade1f0648da811d27d3(),
 		// Property: Provider
 		// CloudFormation resource type schema:
 		//
@@ -311,67 +419,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"provider_name": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Azure
-				"azure": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AWSConfigConnectorArn
-						"aws_config_connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ARN of the multi-cloud configuration connector used to establish the connection to Azure.",
-							Required:    true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.RequiresReplace(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: AzureRegions
-						"azure_regions": schema.SetAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "The list of Azure regions to monitor.",
-							Required:    true,
-							Validators: []validator.Set{ /*START VALIDATORS*/
-								setvalidator.SizeBetween(1, 100),
-							}, /*END VALIDATORS*/
-						}, /*END ATTRIBUTE*/
-						// Property: ScopeConfiguration
-						"scope_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ScopeType
-								"scope_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The type of scope. Valid values are ``tenant`` and ``subscription``.",
-									Required:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.OneOf(
-											"TENANT",
-											"SUBSCRIPTION",
-										),
-									}, /*END VALIDATORS*/
-								}, /*END ATTRIBUTE*/
-								// Property: ScopeValues
-								"scope_values": schema.SetAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "The list of scope values, such as subscription IDs, when the scope type is ``subscription``.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.Set{ /*START VALIDATORS*/
-										setvalidator.SizeBetween(0, 100),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-										setplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The scope configuration that defines which Azure resources are monitored.",
-							Required:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The configuration for connecting to an Azure environment.",
-					Required:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"provider_name": schemaAttribute94ce986abe17dc71d7b3115e(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -388,16 +436,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A key-value pair to associate with a resource.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-				mapplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributed93f554bb65daab758c488db(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

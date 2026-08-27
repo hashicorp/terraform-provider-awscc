@@ -34,6 +34,503 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute010889c0a3db429c7b60fff2() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Provides a list of VPC security groups that the DB cluster belongs to.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.UniqueValues(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute064cb4227b1283f0762a727b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Creates a new DB cluster from a DB snapshot or DB cluster snapshot.\n\nIf a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group.\n\nIf a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster, except that the new DB cluster is created with the default security group.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// RestoreToTime is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute132a55e902af7f29ffc48275() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum number of Neptune capacity units (NCUs) for a DB instance in an Neptune Serverless cluster. You can specify NCU values in half-step increments, such as 40, 40.5, 41, and so on. The smallest value you can use is 2.5, whereas the largest is 128.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Float64{ /*START VALIDATORS*/
+			float64validator.Between(2.500000, 128.000000),
+			fwvalidators.NotNullFloat64(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+			float64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute175c948524712b9b8f9c0773() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The port number on which the DB instances in the DB cluster accept connections. \n\nIf not specified, the default port used is `8182`. \n\nNote: `Port` property will soon be deprecated from this resource. Please update existing templates to rename it with new property `DBPort` having same functionalities.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute18d72e56f64bb4937c34b12a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 256),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1d7800bf9934b67aad4f4c30() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Specifies a list of log types that are enabled for export to CloudWatch Logs.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.UniqueValues(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute29125c51ffb66b998eb9564f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Provides the name of the DB cluster parameter group.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute34efb3e26d8e3ff39be0e205() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the DB cluster is encrypted.\n\nIf you specify the KmsKeyId property, then you must enable encryption and set this property to true.\n\nIf you enable the StorageEncrypted property but don't specify KmsKeyId property, then the default KMS key is used. If you specify KmsKeyId property, then that KMS Key is used to encrypt the database instances in the DB cluster.\n\nIf you specify the SourceDBClusterIdentifier property and don't specify this property or disable it. The value is inherited from the source DB cluster, and if the DB cluster is encrypted, the KmsKeyId property from the source cluster is used.\n\nIf you specify the DBSnapshotIdentifier and don't specify this property or disable it. The value is inherited from the snapshot, and the specified KmsKeyId property from the snapshot is used.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+			boolplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3d8b68bffe2ed73066f39eee() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The reader endpoint for the DB cluster. For example: `mystack-mydbcluster-ro-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com`",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3fe5934dd2f7cafc1c58b772() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The network type of the DB cluster.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"IPV4",
+				"DUAL",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4011710ffd7b55268d21926b() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether or not the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4323c828639c5f030952e43c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MaxCapacity
+			"max_capacity": schemaAttribute132a55e902af7f29ffc48275(),
+			// Property: MinCapacity
+			"min_capacity": schemaAttributece18cb534a6ae7add9ca5f68(),
+		}, /*END SCHEMA*/
+		Description: "Contains the scaling configuration used by the Neptune Serverless Instances within this DB cluster.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4a982d9dd8e9974c6a5eb40c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The DB cluster identifier. Contains a user-supplied DB cluster identifier. This identifier is the unique key that identifies a DB cluster stored as a lowercase string.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 63),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z]{1}(?:-?[a-zA-Z0-9]){0,62}$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5673fa07ccefee634db5f376() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Creates a new DB cluster from a DB snapshot or DB cluster snapshot.\n\nIf a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group.\n\nIf a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster, except that the new DB cluster is created with the default security group.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+			boolplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// UseLatestRestorableTime is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute594a7922527a2172b340bf67() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The port number on which the DB cluster accepts connections. For example: `8182`.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute61696d2664f4560704460f1e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the DB parameter group to apply to all instances of the DB cluster. Used only in case of a major EngineVersion upgrade request.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// DBInstanceParameterGroupName is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6218b83218152b9e277b3083() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Creates a new DB cluster from a DB snapshot or DB cluster snapshot.\n\nIf a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group.\n\nIf a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster, except that the new DB cluster is created with the default security group.",
+		Optional:    true,
+		Computed:    true,
+		Default:     stringdefault.StaticString("full-copy"),
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// RestoreType is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute68f692345097ed8201e2ff74() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributee8fd81caf80409dbf81451d7(),
+				// Property: Value
+				"value": schemaAttribute18d72e56f64bb4937c34b12a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags assigned to this cluster.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Set{ /*START VALIDATORS*/
+			setvalidator.SizeAtMost(50),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute75faa610be540823817a9de5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7755e27c8f7b5de049960577() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates the database engine version.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute79ae5014ce8fb724e1a31324() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the Neptune global database to which this new DB cluster should be added.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 255),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z][0-9A-Za-z-:._]*$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7bba42b03bba549b1d6bfb85() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the daily time range during which automated backups are created if automated backups are enabled, as determined by the BackupRetentionPeriod.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute80950bba55b45815b19c4b85() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the feature associated with the AWS Identity and Access Management (IAM) role. For the list of supported feature names, see DBEngineVersion in the Amazon Neptune API Reference.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute882cb098feb220412bb30c80() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The resource id for the DB cluster. For example: `cluster-ABCD1234EFGH5678IJKL90MNOP`. The cluster ID uniquely identifies the cluster and is used in things like IAM authentication policies.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9843dd22d7cc0a685eb9bb12() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The connection endpoint for the DB cluster. For example: `mystack-mydbcluster-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com`",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea3d7d736e326eb1b705e3de6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the IAM role that is associated with the DB cluster.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributead287b9a01051d196f6c2efb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Creates a new DB cluster from a DB snapshot or DB cluster snapshot.\n\nIf a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group.\n\nIf a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster, except that the new DB cluster is created with the default security group.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// SourceDBClusterIdentifier is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb6aae4a125bd21a4437d2e7e() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the number of days for which automatic DB snapshots are retained.",
+		Optional:    true,
+		Computed:    true,
+		Default:     int64default.StaticInt64(1),
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.AtLeast(1),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecb06c22782b159e20cd093fe() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FeatureName
+				"feature_name": schemaAttribute80950bba55b45815b19c4b85(),
+				// Property: RoleArn
+				"role_arn": schemaAttributea3d7d736e326eb1b705e3de6(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Provides a list of the AWS Identity and Access Management (IAM) roles that are associated with the DB cluster. IAM roles that are associated with a DB cluster grant permission for the DB cluster to access other AWS services on your behalf.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.UniqueValues(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecc3d8d7e842c09c5d7b1a2b7() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Provides the list of EC2 Availability Zones that instances in the DB cluster can be created in.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.UniqueValues(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+			listplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributece18cb534a6ae7add9ca5f68() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The minimum number of Neptune capacity units (NCUs) for a DB instance in an Neptune Serverless cluster. You can specify NCU values in half-step increments, such as 8, 8.5, 9, and so on. The smallest value you can use is 1, whereas the largest is 128.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Float64{ /*START VALIDATORS*/
+			float64validator.Between(1.000000, 128.000000),
+			fwvalidators.NotNullFloat64(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+			float64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed1d3e2a21cfef6cbb3d60275() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies information on the subnet group associated with the DB cluster, including the name, description, and subnets in the subnet group.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed3097c15813a8816bb091bd2() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A value that indicates whether to copy all tags from the DB cluster to snapshots of the DB cluster. The default behaviour is not to copy them.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedd65d8646b05689c491ef910() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the AWS KMS key that is used to encrypt the database instances in the DB cluster, such as arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef. If you enable the StorageEncrypted property but don't specify this property, the default KMS key is used. If you specify this property, you must set the StorageEncrypted property to true.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee037419558c92374d377cad7() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "True if mapping of Amazon Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee8fd81caf80409dbf81451d7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef0b7e9475a7e567ebf665ed8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the identifier for a DB cluster snapshot. Must match the identifier of an existing snapshot.\n\nAfter you restore a DB cluster using a SnapshotIdentifier, you must specify the same SnapshotIdentifier for any future updates to the DB cluster. When you specify this property for an update, the DB cluster is not restored from the snapshot again, and the data in the database is not changed.\n\nHowever, if you don't specify the SnapshotIdentifier, an empty DB cluster is created, and the original DB cluster is deleted. If you specify a property that is different from the previous snapshot restore property, the DB cluster is restored from the snapshot specified by the SnapshotIdentifier, and the original DB cluster is deleted.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// SnapshotIdentifier is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_neptune_db_cluster", dBClusterResource)
 	registry.AddListResourceFactory("awscc_neptune_db_cluster", generic.NewListResource(dBClusterResource))
@@ -70,42 +567,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"associated_roles": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: FeatureName
-					"feature_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the feature associated with the AWS Identity and Access Management (IAM) role. For the list of supported feature names, see DBEngineVersion in the Amazon Neptune API Reference.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: RoleArn
-					"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The Amazon Resource Name (ARN) of the IAM role that is associated with the DB cluster.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Provides a list of the AWS Identity and Access Management (IAM) roles that are associated with the DB cluster. IAM roles that are associated with a DB cluster grant permission for the DB cluster to access other AWS services on your behalf.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.UniqueValues(),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"associated_roles": schemaAttributecb06c22782b159e20cd093fe(),
 		// Property: AvailabilityZones
 		// CloudFormation resource type schema:
 		//
@@ -118,19 +580,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"availability_zones": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Provides the list of EC2 Availability Zones that instances in the DB cluster can be created in.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.UniqueValues(),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-				listplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"availability_zones": schemaAttributecc3d8d7e842c09c5d7b1a2b7(),
 		// Property: BackupRetentionPeriod
 		// CloudFormation resource type schema:
 		//
@@ -140,18 +590,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"backup_retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the number of days for which automatic DB snapshots are retained.",
-			Optional:    true,
-			Computed:    true,
-			Default:     int64default.StaticInt64(1),
-			Validators: []validator.Int64{ /*START VALIDATORS*/
-				int64validator.AtLeast(1),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"backup_retention_period": schemaAttributeb6aae4a125bd21a4437d2e7e(),
 		// Property: ClusterResourceId
 		// CloudFormation resource type schema:
 		//
@@ -159,13 +598,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The resource id for the DB cluster. For example: `cluster-ABCD1234EFGH5678IJKL90MNOP`. The cluster ID uniquely identifies the cluster and is used in things like IAM authentication policies.",
 		//	  "type": "string"
 		//	}
-		"cluster_resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The resource id for the DB cluster. For example: `cluster-ABCD1234EFGH5678IJKL90MNOP`. The cluster ID uniquely identifies the cluster and is used in things like IAM authentication policies.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"cluster_resource_id": schemaAttribute882cb098feb220412bb30c80(),
 		// Property: CopyTagsToSnapshot
 		// CloudFormation resource type schema:
 		//
@@ -173,14 +606,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A value that indicates whether to copy all tags from the DB cluster to snapshots of the DB cluster. The default behaviour is not to copy them.",
 		//	  "type": "boolean"
 		//	}
-		"copy_tags_to_snapshot": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "A value that indicates whether to copy all tags from the DB cluster to snapshots of the DB cluster. The default behaviour is not to copy them.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"copy_tags_to_snapshot": schemaAttributed3097c15813a8816bb091bd2(),
 		// Property: DBClusterIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -191,19 +617,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[a-zA-Z]{1}(?:-?[a-zA-Z0-9]){0,62}$",
 		//	  "type": "string"
 		//	}
-		"db_cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The DB cluster identifier. Contains a user-supplied DB cluster identifier. This identifier is the unique key that identifies a DB cluster stored as a lowercase string.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 63),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z]{1}(?:-?[a-zA-Z0-9]){0,62}$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"db_cluster_identifier": schemaAttribute4a982d9dd8e9974c6a5eb40c(),
 		// Property: DBClusterParameterGroupName
 		// CloudFormation resource type schema:
 		//
@@ -211,14 +625,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Provides the name of the DB cluster parameter group.",
 		//	  "type": "string"
 		//	}
-		"db_cluster_parameter_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Provides the name of the DB cluster parameter group.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"db_cluster_parameter_group_name": schemaAttribute29125c51ffb66b998eb9564f(),
 		// Property: DBInstanceParameterGroupName
 		// CloudFormation resource type schema:
 		//
@@ -226,15 +633,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the DB parameter group to apply to all instances of the DB cluster. Used only in case of a major EngineVersion upgrade request.",
 		//	  "type": "string"
 		//	}
-		"db_instance_parameter_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the DB parameter group to apply to all instances of the DB cluster. Used only in case of a major EngineVersion upgrade request.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// DBInstanceParameterGroupName is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"db_instance_parameter_group_name": schemaAttribute61696d2664f4560704460f1e(),
 		// Property: DBPort
 		// CloudFormation resource type schema:
 		//
@@ -242,14 +641,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The port number on which the DB instances in the DB cluster accept connections. \n\nIf not specified, the default port used is `8182`. \n\nNote: `Port` property will soon be deprecated from this resource. Please update existing templates to rename it with new property `DBPort` having same functionalities.",
 		//	  "type": "integer"
 		//	}
-		"db_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The port number on which the DB instances in the DB cluster accept connections. \n\nIf not specified, the default port used is `8182`. \n\nNote: `Port` property will soon be deprecated from this resource. Please update existing templates to rename it with new property `DBPort` having same functionalities.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"db_port": schemaAttribute175c948524712b9b8f9c0773(),
 		// Property: DBSubnetGroupName
 		// CloudFormation resource type schema:
 		//
@@ -257,15 +649,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Specifies information on the subnet group associated with the DB cluster, including the name, description, and subnets in the subnet group.",
 		//	  "type": "string"
 		//	}
-		"db_subnet_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies information on the subnet group associated with the DB cluster, including the name, description, and subnets in the subnet group.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"db_subnet_group_name": schemaAttributed1d3e2a21cfef6cbb3d60275(),
 		// Property: DeletionProtection
 		// CloudFormation resource type schema:
 		//
@@ -273,14 +657,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Indicates whether or not the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled.",
 		//	  "type": "boolean"
 		//	}
-		"deletion_protection": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether or not the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"deletion_protection": schemaAttribute4011710ffd7b55268d21926b(),
 		// Property: EnableCloudwatchLogsExports
 		// CloudFormation resource type schema:
 		//
@@ -293,18 +670,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"enable_cloudwatch_logs_exports": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Specifies a list of log types that are enabled for export to CloudWatch Logs.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.UniqueValues(),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"enable_cloudwatch_logs_exports": schemaAttribute1d7800bf9934b67aad4f4c30(),
 		// Property: Endpoint
 		// CloudFormation resource type schema:
 		//
@@ -312,13 +678,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The connection endpoint for the DB cluster. For example: `mystack-mydbcluster-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com`",
 		//	  "type": "string"
 		//	}
-		"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The connection endpoint for the DB cluster. For example: `mystack-mydbcluster-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com`",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"endpoint": schemaAttribute9843dd22d7cc0a685eb9bb12(),
 		// Property: EngineVersion
 		// CloudFormation resource type schema:
 		//
@@ -326,14 +686,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Indicates the database engine version.",
 		//	  "type": "string"
 		//	}
-		"engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates the database engine version.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"engine_version": schemaAttribute7755e27c8f7b5de049960577(),
 		// Property: GlobalClusterIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -344,19 +697,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[A-Za-z][0-9A-Za-z-:._]*$",
 		//	  "type": "string"
 		//	}
-		"global_cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Neptune global database to which this new DB cluster should be added.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z][0-9A-Za-z-:._]*$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"global_cluster_identifier": schemaAttribute79ae5014ce8fb724e1a31324(),
 		// Property: IamAuthEnabled
 		// CloudFormation resource type schema:
 		//
@@ -364,14 +705,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "True if mapping of Amazon Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false.",
 		//	  "type": "boolean"
 		//	}
-		"iam_auth_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "True if mapping of Amazon Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"iam_auth_enabled": schemaAttributee037419558c92374d377cad7(),
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -379,15 +713,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the AWS KMS key that is used to encrypt the database instances in the DB cluster, such as arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef. If you enable the StorageEncrypted property but don't specify this property, the default KMS key is used. If you specify this property, you must set the StorageEncrypted property to true.",
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the AWS KMS key that is used to encrypt the database instances in the DB cluster, such as arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef. If you enable the StorageEncrypted property but don't specify this property, the default KMS key is used. If you specify this property, you must set the StorageEncrypted property to true.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"kms_key_id": schemaAttributedd65d8646b05689c491ef910(),
 		// Property: NetworkType
 		// CloudFormation resource type schema:
 		//
@@ -399,20 +725,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The network type of the DB cluster.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"IPV4",
-					"DUAL",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"network_type": schemaAttribute3fe5934dd2f7cafc1c58b772(),
 		// Property: Port
 		// CloudFormation resource type schema:
 		//
@@ -420,13 +733,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The port number on which the DB cluster accepts connections. For example: `8182`.",
 		//	  "type": "string"
 		//	}
-		"port": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The port number on which the DB cluster accepts connections. For example: `8182`.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"port": schemaAttribute594a7922527a2172b340bf67(),
 		// Property: PreferredBackupWindow
 		// CloudFormation resource type schema:
 		//
@@ -434,14 +741,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Specifies the daily time range during which automated backups are created if automated backups are enabled, as determined by the BackupRetentionPeriod.",
 		//	  "type": "string"
 		//	}
-		"preferred_backup_window": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the daily time range during which automated backups are created if automated backups are enabled, as determined by the BackupRetentionPeriod.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"preferred_backup_window": schemaAttribute7bba42b03bba549b1d6bfb85(),
 		// Property: PreferredMaintenanceWindow
 		// CloudFormation resource type schema:
 		//
@@ -449,14 +749,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Specifies the weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).",
 		//	  "type": "string"
 		//	}
-		"preferred_maintenance_window": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"preferred_maintenance_window": schemaAttribute75faa610be540823817a9de5(),
 		// Property: ReadEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -464,13 +757,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The reader endpoint for the DB cluster. For example: `mystack-mydbcluster-ro-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com`",
 		//	  "type": "string"
 		//	}
-		"read_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The reader endpoint for the DB cluster. For example: `mystack-mydbcluster-ro-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com`",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"read_endpoint": schemaAttribute3d8b68bffe2ed73066f39eee(),
 		// Property: RestoreToTime
 		// CloudFormation resource type schema:
 		//
@@ -478,16 +765,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Creates a new DB cluster from a DB snapshot or DB cluster snapshot.\n\nIf a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group.\n\nIf a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster, except that the new DB cluster is created with the default security group.",
 		//	  "type": "string"
 		//	}
-		"restore_to_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Creates a new DB cluster from a DB snapshot or DB cluster snapshot.\n\nIf a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group.\n\nIf a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster, except that the new DB cluster is created with the default security group.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// RestoreToTime is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"restore_to_time": schemaAttribute064cb4227b1283f0762a727b(),
 		// Property: RestoreType
 		// CloudFormation resource type schema:
 		//
@@ -496,17 +774,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Creates a new DB cluster from a DB snapshot or DB cluster snapshot.\n\nIf a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group.\n\nIf a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster, except that the new DB cluster is created with the default security group.",
 		//	  "type": "string"
 		//	}
-		"restore_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Creates a new DB cluster from a DB snapshot or DB cluster snapshot.\n\nIf a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group.\n\nIf a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster, except that the new DB cluster is created with the default security group.",
-			Optional:    true,
-			Computed:    true,
-			Default:     stringdefault.StaticString("full-copy"),
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// RestoreType is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"restore_type": schemaAttribute6218b83218152b9e277b3083(),
 		// Property: ServerlessScalingConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -533,42 +801,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"serverless_scaling_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MaxCapacity
-				"max_capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "The maximum number of Neptune capacity units (NCUs) for a DB instance in an Neptune Serverless cluster. You can specify NCU values in half-step increments, such as 40, 40.5, 41, and so on. The smallest value you can use is 2.5, whereas the largest is 128.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.Float64{ /*START VALIDATORS*/
-						float64validator.Between(2.500000, 128.000000),
-						fwvalidators.NotNullFloat64(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-						float64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: MinCapacity
-				"min_capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "The minimum number of Neptune capacity units (NCUs) for a DB instance in an Neptune Serverless cluster. You can specify NCU values in half-step increments, such as 8, 8.5, 9, and so on. The smallest value you can use is 1, whereas the largest is 128.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.Float64{ /*START VALIDATORS*/
-						float64validator.Between(1.000000, 128.000000),
-						fwvalidators.NotNullFloat64(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-						float64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Contains the scaling configuration used by the Neptune Serverless Instances within this DB cluster.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"serverless_scaling_configuration": schemaAttribute4323c828639c5f030952e43c(),
 		// Property: SnapshotIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -576,16 +809,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Specifies the identifier for a DB cluster snapshot. Must match the identifier of an existing snapshot.\n\nAfter you restore a DB cluster using a SnapshotIdentifier, you must specify the same SnapshotIdentifier for any future updates to the DB cluster. When you specify this property for an update, the DB cluster is not restored from the snapshot again, and the data in the database is not changed.\n\nHowever, if you don't specify the SnapshotIdentifier, an empty DB cluster is created, and the original DB cluster is deleted. If you specify a property that is different from the previous snapshot restore property, the DB cluster is restored from the snapshot specified by the SnapshotIdentifier, and the original DB cluster is deleted.",
 		//	  "type": "string"
 		//	}
-		"snapshot_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the identifier for a DB cluster snapshot. Must match the identifier of an existing snapshot.\n\nAfter you restore a DB cluster using a SnapshotIdentifier, you must specify the same SnapshotIdentifier for any future updates to the DB cluster. When you specify this property for an update, the DB cluster is not restored from the snapshot again, and the data in the database is not changed.\n\nHowever, if you don't specify the SnapshotIdentifier, an empty DB cluster is created, and the original DB cluster is deleted. If you specify a property that is different from the previous snapshot restore property, the DB cluster is restored from the snapshot specified by the SnapshotIdentifier, and the original DB cluster is deleted.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// SnapshotIdentifier is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"snapshot_identifier": schemaAttributef0b7e9475a7e567ebf665ed8(),
 		// Property: SourceDBClusterIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -593,16 +817,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Creates a new DB cluster from a DB snapshot or DB cluster snapshot.\n\nIf a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group.\n\nIf a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster, except that the new DB cluster is created with the default security group.",
 		//	  "type": "string"
 		//	}
-		"source_db_cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Creates a new DB cluster from a DB snapshot or DB cluster snapshot.\n\nIf a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group.\n\nIf a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster, except that the new DB cluster is created with the default security group.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// SourceDBClusterIdentifier is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"source_db_cluster_identifier": schemaAttributead287b9a01051d196f6c2efb(),
 		// Property: StorageEncrypted
 		// CloudFormation resource type schema:
 		//
@@ -610,15 +825,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Indicates whether the DB cluster is encrypted.\n\nIf you specify the KmsKeyId property, then you must enable encryption and set this property to true.\n\nIf you enable the StorageEncrypted property but don't specify KmsKeyId property, then the default KMS key is used. If you specify KmsKeyId property, then that KMS Key is used to encrypt the database instances in the DB cluster.\n\nIf you specify the SourceDBClusterIdentifier property and don't specify this property or disable it. The value is inherited from the source DB cluster, and if the DB cluster is encrypted, the KmsKeyId property from the source cluster is used.\n\nIf you specify the DBSnapshotIdentifier and don't specify this property or disable it. The value is inherited from the snapshot, and the specified KmsKeyId property from the snapshot is used.",
 		//	  "type": "boolean"
 		//	}
-		"storage_encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether the DB cluster is encrypted.\n\nIf you specify the KmsKeyId property, then you must enable encryption and set this property to true.\n\nIf you enable the StorageEncrypted property but don't specify KmsKeyId property, then the default KMS key is used. If you specify KmsKeyId property, then that KMS Key is used to encrypt the database instances in the DB cluster.\n\nIf you specify the SourceDBClusterIdentifier property and don't specify this property or disable it. The value is inherited from the source DB cluster, and if the DB cluster is encrypted, the KmsKeyId property from the source cluster is used.\n\nIf you specify the DBSnapshotIdentifier and don't specify this property or disable it. The value is inherited from the snapshot, and the specified KmsKeyId property from the snapshot is used.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-				boolplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"storage_encrypted": schemaAttribute34efb3e26d8e3ff39be0e205(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -651,46 +858,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags assigned to this cluster.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.Set{ /*START VALIDATORS*/
-				setvalidator.SizeAtMost(50),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute68f692345097ed8201e2ff74(),
 		// Property: UseLatestRestorableTime
 		// CloudFormation resource type schema:
 		//
@@ -698,16 +866,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Creates a new DB cluster from a DB snapshot or DB cluster snapshot.\n\nIf a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group.\n\nIf a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster, except that the new DB cluster is created with the default security group.",
 		//	  "type": "boolean"
 		//	}
-		"use_latest_restorable_time": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Creates a new DB cluster from a DB snapshot or DB cluster snapshot.\n\nIf a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group.\n\nIf a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster, except that the new DB cluster is created with the default security group.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-				boolplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// UseLatestRestorableTime is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"use_latest_restorable_time": schemaAttribute5673fa07ccefee634db5f376(),
 		// Property: VpcSecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -720,18 +879,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"vpc_security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Provides a list of VPC security groups that the DB cluster belongs to.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.UniqueValues(),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"vpc_security_group_ids": schemaAttribute010889c0a3db429c7b60fff2(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

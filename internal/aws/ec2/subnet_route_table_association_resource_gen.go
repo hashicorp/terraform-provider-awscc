@@ -17,6 +17,36 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0597d3e6c3c6cb0fe5bd5831() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the subnet.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8108c277d8b1fe39f8f68f7a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee3a59e878175cd99da5f6b31() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the route table.\n The physical ID changes when the route table ID is changed.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_ec2_subnet_route_table_association", subnetRouteTableAssociationResource)
 	registry.AddListResourceFactory("awscc_ec2_subnet_route_table_association", generic.NewListResource(subnetRouteTableAssociationResource))
@@ -33,13 +63,7 @@ func subnetRouteTableAssociationResource(ctx context.Context) (resource.Resource
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"subnet_route_table_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"subnet_route_table_association_id": schemaAttribute8108c277d8b1fe39f8f68f7a(),
 		// Property: RouteTableId
 		// CloudFormation resource type schema:
 		//
@@ -47,13 +71,7 @@ func subnetRouteTableAssociationResource(ctx context.Context) (resource.Resource
 		//	  "description": "The ID of the route table.\n The physical ID changes when the route table ID is changed.",
 		//	  "type": "string"
 		//	}
-		"route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the route table.\n The physical ID changes when the route table ID is changed.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"route_table_id": schemaAttributee3a59e878175cd99da5f6b31(),
 		// Property: SubnetId
 		// CloudFormation resource type schema:
 		//
@@ -61,13 +79,7 @@ func subnetRouteTableAssociationResource(ctx context.Context) (resource.Resource
 		//	  "description": "The ID of the subnet.",
 		//	  "type": "string"
 		//	}
-		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the subnet.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"subnet_id": schemaAttribute0597d3e6c3c6cb0fe5bd5831(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

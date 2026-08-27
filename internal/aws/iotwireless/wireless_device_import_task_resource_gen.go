@@ -25,6 +25,226 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute11eb7a2bff59ae8597181904() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "StatusReason for import task",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute40cc7922ae7e035b12bbb6fe() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Arn for Wireless Device Import Task, Returned upon successful start.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute494b73fdacb71a0659063f15() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Initialized Imported Devices Count",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute60cec01f4cca09aa47f0bd3f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(1024),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// DeviceCreationFile is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6930d8b925bf8bfa97495d04() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributef11c03a4e57625d967840319(),
+				// Property: Value
+				"value": schemaAttribute72f80c7fbad9851440d18561(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute72f80c7fbad9851440d18561() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 256),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute777ff80f86f1b231f0391d66() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Id for Wireless Device Import Task, Returned upon successful start.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7baef4d924bce51d1d1311c6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "CreationDate for import task",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ebe5e93995752bc0287783d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Destination Name for import task",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(128),
+			stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9-_]+"), ""),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeab5f707d25bf63364130a118() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DeviceCreationFile
+			"device_creation_file": schemaAttribute60cec01f4cca09aa47f0bd3f(),
+			// Property: DeviceCreationFileList
+			"device_creation_file_list": schemaAttributef445153ebd938a97426be820(),
+			// Property: Role
+			"role": schemaAttributeb392d0197636193141787d4d(),
+			// Property: SidewalkManufacturingSn
+			"sidewalk_manufacturing_sn": schemaAttributed9b0d26ca65e27bb24b6f4d6(),
+		}, /*END SCHEMA*/
+		Description: "sidewalk contain file for created device and role",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb392d0197636193141787d4d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "sidewalk role",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(2048),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb80f724eee83c776523e5c1e() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Pending Imported Devices Count",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebdd5034934f8c55a6256c2a2() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Failed Imported Devices Count",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed9b0d26ca65e27bb24b6f4d6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(64),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// SidewalkManufacturingSn is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef11c03a4e57625d967840319() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef445153ebd938a97426be820() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "sidewalk create device's file path",
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef597d07caa4332f3035be062() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Status for import task",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefa5c2eeec7e24ba90a28adee() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Onboarded Imported Devices Count",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_iotwireless_wireless_device_import_task", wirelessDeviceImportTaskResource)
 	registry.AddListResourceFactory("awscc_iotwireless_wireless_device_import_task", generic.NewListResource(wirelessDeviceImportTaskResource))
@@ -42,13 +262,7 @@ func wirelessDeviceImportTaskResource(ctx context.Context) (resource.Resource, e
 		//	  "maxLength": 128,
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Arn for Wireless Device Import Task, Returned upon successful start.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute40cc7922ae7e035b12bbb6fe(),
 		// Property: CreationDate
 		// CloudFormation resource type schema:
 		//
@@ -56,13 +270,7 @@ func wirelessDeviceImportTaskResource(ctx context.Context) (resource.Resource, e
 		//	  "description": "CreationDate for import task",
 		//	  "type": "string"
 		//	}
-		"creation_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "CreationDate for import task",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"creation_date": schemaAttribute7baef4d924bce51d1d1311c6(),
 		// Property: DestinationName
 		// CloudFormation resource type schema:
 		//
@@ -72,14 +280,7 @@ func wirelessDeviceImportTaskResource(ctx context.Context) (resource.Resource, e
 		//	  "pattern": "[a-zA-Z0-9-_]+",
 		//	  "type": "string"
 		//	}
-		"destination_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Destination Name for import task",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(128),
-				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9-_]+"), ""),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"destination_name": schemaAttribute9ebe5e93995752bc0287783d(),
 		// Property: FailedImportedDevicesCount
 		// CloudFormation resource type schema:
 		//
@@ -87,13 +288,7 @@ func wirelessDeviceImportTaskResource(ctx context.Context) (resource.Resource, e
 		//	  "description": "Failed Imported Devices Count",
 		//	  "type": "integer"
 		//	}
-		"failed_imported_devices_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Failed Imported Devices Count",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"failed_imported_devices_count": schemaAttributebdd5034934f8c55a6256c2a2(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -102,13 +297,7 @@ func wirelessDeviceImportTaskResource(ctx context.Context) (resource.Resource, e
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"wireless_device_import_task_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Id for Wireless Device Import Task, Returned upon successful start.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"wireless_device_import_task_id": schemaAttribute777ff80f86f1b231f0391d66(),
 		// Property: InitializedImportedDevicesCount
 		// CloudFormation resource type schema:
 		//
@@ -116,13 +305,7 @@ func wirelessDeviceImportTaskResource(ctx context.Context) (resource.Resource, e
 		//	  "description": "Initialized Imported Devices Count",
 		//	  "type": "integer"
 		//	}
-		"initialized_imported_devices_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Initialized Imported Devices Count",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"initialized_imported_devices_count": schemaAttribute494b73fdacb71a0659063f15(),
 		// Property: OnboardedImportedDevicesCount
 		// CloudFormation resource type schema:
 		//
@@ -130,13 +313,7 @@ func wirelessDeviceImportTaskResource(ctx context.Context) (resource.Resource, e
 		//	  "description": "Onboarded Imported Devices Count",
 		//	  "type": "integer"
 		//	}
-		"onboarded_imported_devices_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Onboarded Imported Devices Count",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"onboarded_imported_devices_count": schemaAttributefa5c2eeec7e24ba90a28adee(),
 		// Property: PendingImportedDevicesCount
 		// CloudFormation resource type schema:
 		//
@@ -144,13 +321,7 @@ func wirelessDeviceImportTaskResource(ctx context.Context) (resource.Resource, e
 		//	  "description": "Pending Imported Devices Count",
 		//	  "type": "integer"
 		//	}
-		"pending_imported_devices_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Pending Imported Devices Count",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"pending_imported_devices_count": schemaAttributeb80f724eee83c776523e5c1e(),
 		// Property: Sidewalk
 		// CloudFormation resource type schema:
 		//
@@ -182,57 +353,7 @@ func wirelessDeviceImportTaskResource(ctx context.Context) (resource.Resource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"sidewalk": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DeviceCreationFile
-				"device_creation_file": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(1024),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-					// DeviceCreationFile is a write-only property.
-				}, /*END ATTRIBUTE*/
-				// Property: DeviceCreationFileList
-				"device_creation_file_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "sidewalk create device's file path",
-					Computed:    true,
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: Role
-				"role": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "sidewalk role",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(2048),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: SidewalkManufacturingSn
-				"sidewalk_manufacturing_sn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(64),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-					// SidewalkManufacturingSn is a write-only property.
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "sidewalk contain file for created device and role",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"sidewalk": schemaAttributeab5f707d25bf63364130a118(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -248,13 +369,7 @@ func wirelessDeviceImportTaskResource(ctx context.Context) (resource.Resource, e
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Status for import task",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttributef597d07caa4332f3035be062(),
 		// Property: StatusReason
 		// CloudFormation resource type schema:
 		//
@@ -262,13 +377,7 @@ func wirelessDeviceImportTaskResource(ctx context.Context) (resource.Resource, e
 		//	  "description": "StatusReason for import task",
 		//	  "type": "string"
 		//	}
-		"status_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "StatusReason for import task",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"status_reason": schemaAttribute11eb7a2bff59ae8597181904(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -301,44 +410,7 @@ func wirelessDeviceImportTaskResource(ctx context.Context) (resource.Resource, e
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute6930d8b925bf8bfa97495d04(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

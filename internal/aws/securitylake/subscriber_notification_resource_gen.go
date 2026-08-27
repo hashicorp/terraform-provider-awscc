@@ -23,6 +23,150 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute0edc453bb227bbbfaf745083() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the EventBridge API destinations IAM role that you created.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*$"), ""),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// TargetRoleArn is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute45122f2483c100f62e1a2b62() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The endpoint the subscriber should listen to for notifications",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5d93eba709967d501646d534() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "The configurations for SQS subscriber notification. The members of this structure are context-dependent.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute666d7e7eb0412db7bd9138ae() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN for the subscriber",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute76646b9abfb443f3bc8101cb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key value for the notification subscription.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// AuthorizationApiKeyValue is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7bf4c67db1f3c9a07d8ad327() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name for the notification subscription.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// AuthorizationApiKeyName is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8229f9a90bc16a123b243ade() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The subscription endpoint in Security Lake.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("^https?://.+$"), ""),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// Endpoint is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea70c26c34c5613e2b5eeeb39() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The HTTPS method used for the notification subscription.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"POST",
+				"PUT",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// HttpMethod is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb8d5edb215a94337f04670fb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: HttpsNotificationConfiguration
+			"https_notification_configuration": schemaAttributef025df5105e76e09eb427cad(),
+			// Property: SqsNotificationConfiguration
+			"sqs_notification_configuration": schemaAttribute5d93eba709967d501646d534(),
+		}, /*END SCHEMA*/
+		Required: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef025df5105e76e09eb427cad() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AuthorizationApiKeyName
+			"authorization_api_key_name": schemaAttribute7bf4c67db1f3c9a07d8ad327(),
+			// Property: AuthorizationApiKeyValue
+			"authorization_api_key_value": schemaAttribute76646b9abfb443f3bc8101cb(),
+			// Property: Endpoint
+			"endpoint": schemaAttribute8229f9a90bc16a123b243ade(),
+			// Property: HttpMethod
+			"http_method": schemaAttributea70c26c34c5613e2b5eeeb39(),
+			// Property: TargetRoleArn
+			"target_role_arn": schemaAttribute0edc453bb227bbbfaf745083(),
+		}, /*END SCHEMA*/
+		Description: "The configuration for HTTPS subscriber notification.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_securitylake_subscriber_notification", subscriberNotificationResource)
 	registry.AddListResourceFactory("awscc_securitylake_subscriber_notification", generic.NewListResource(subscriberNotificationResource))
@@ -94,96 +238,7 @@ func subscriberNotificationResource(ctx context.Context) (resource.Resource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"notification_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: HttpsNotificationConfiguration
-				"https_notification_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AuthorizationApiKeyName
-						"authorization_api_key_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The key name for the notification subscription.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-							// AuthorizationApiKeyName is a write-only property.
-						}, /*END ATTRIBUTE*/
-						// Property: AuthorizationApiKeyValue
-						"authorization_api_key_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The key value for the notification subscription.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-							// AuthorizationApiKeyValue is a write-only property.
-						}, /*END ATTRIBUTE*/
-						// Property: Endpoint
-						"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The subscription endpoint in Security Lake.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.RegexMatches(regexp.MustCompile("^https?://.+$"), ""),
-								fwvalidators.NotNullString(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-							// Endpoint is a write-only property.
-						}, /*END ATTRIBUTE*/
-						// Property: HttpMethod
-						"http_method": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The HTTPS method used for the notification subscription.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.OneOf(
-									"POST",
-									"PUT",
-								),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-							// HttpMethod is a write-only property.
-						}, /*END ATTRIBUTE*/
-						// Property: TargetRoleArn
-						"target_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Amazon Resource Name (ARN) of the EventBridge API destinations IAM role that you created.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*$"), ""),
-								fwvalidators.NotNullString(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-							// TargetRoleArn is a write-only property.
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The configuration for HTTPS subscriber notification.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: SqsNotificationConfiguration
-				"sqs_notification_configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
-					CustomType:  jsontypes.NormalizedType{},
-					Description: "The configurations for SQS subscriber notification. The members of this structure are context-dependent.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Required: true,
-		}, /*END ATTRIBUTE*/
+		"notification_configuration": schemaAttributeb8d5edb215a94337f04670fb(),
 		// Property: SubscriberArn
 		// CloudFormation resource type schema:
 		//
@@ -192,16 +247,7 @@ func subscriberNotificationResource(ctx context.Context) (resource.Resource, err
 		//	  "pattern": "^arn:.*$",
 		//	  "type": "string"
 		//	}
-		"subscriber_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN for the subscriber",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"subscriber_arn": schemaAttribute666d7e7eb0412db7bd9138ae(),
 		// Property: SubscriberEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -209,13 +255,7 @@ func subscriberNotificationResource(ctx context.Context) (resource.Resource, err
 		//	  "description": "The endpoint the subscriber should listen to for notifications",
 		//	  "type": "string"
 		//	}
-		"subscriber_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The endpoint the subscriber should listen to for notifications",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"subscriber_endpoint": schemaAttribute45122f2483c100f62e1a2b62(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

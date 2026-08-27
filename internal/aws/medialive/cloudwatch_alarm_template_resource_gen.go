@@ -26,6 +26,243 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute10ca3fff67d377b07eb4ff77() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of periods over which data is compared to the specified threshold.",
+		Optional:    true,
+		Computed:    true,
+		Default:     float64default.StaticFloat64(0.000000),
+		Validators: []validator.Float64{ /*START VALIDATORS*/
+			float64validator.AtLeast(1.000000),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+			float64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1a101dd58924acb2324b3ca2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The comparison operator used to compare the specified statistic and the threshold.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"GreaterThanOrEqualToThreshold",
+				"GreaterThanThreshold",
+				"LessThanThreshold",
+				"LessThanOrEqualToThreshold",
+			),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4487b648ef7afcdf6573efea() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of datapoints within the evaluation period that must be breaching to trigger the alarm.",
+		Optional:    true,
+		Computed:    true,
+		Default:     float64default.StaticFloat64(0.000000),
+		Validators: []validator.Float64{ /*START VALIDATORS*/
+			float64validator.AtLeast(1.000000),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+			float64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute49e3911bb2a5707d3cd83d0a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the metric associated with the alarm. Must be compatible with targetResourceType.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 64),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute58e821d6a0eb116886c4ee10() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType: timetypes.RFC3339Type{},
+		Computed:   true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute82d06cf8f0624ef3f681aa58() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The threshold value to compare with the specified statistic.",
+		Optional:    true,
+		Computed:    true,
+		Default:     float64default.StaticFloat64(0.000000),
+		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+			float64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute92fffd95876946301f6070c3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9f66bf64a6c45b65be1de563() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A cloudwatch alarm template's id. AWS provided templates have ids that start with `aws-`",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9f856682d1abb6aee305bb91() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies how missing data points are treated when evaluating the alarm's condition.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"notBreaching",
+				"breaching",
+				"ignore",
+				"missing",
+			),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea82c34869f8550bda3763134() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A cloudwatch alarm template group's identifier. Can be either be its id or current name.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("^[^\\s]+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// GroupIdentifier is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebff26068029994722b4e0360() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A cloudwatch alarm template's ARN (Amazon Resource Name)",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec58316a9689141bf0f6442de() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Represents the tags associated with a resource.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+			mapplanmodifier.UseStateForUnknown(),
+			mapplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecf72c9204570ac78a8e6c4e0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A resource's name. Names must be unique within the scope of a resource type in a specific region.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 255),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[^\\s]+$"), ""),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedc4b6d8e67a939de107406b4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A resource's optional description.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 1024),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedff70fabac62eac554016fb5() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The period, in seconds, over which the specified statistic is applied.",
+		Optional:    true,
+		Computed:    true,
+		Default:     float64default.StaticFloat64(0.000000),
+		Validators: []validator.Float64{ /*START VALIDATORS*/
+			float64validator.Between(10.000000, 86400.000000),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+			float64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef75123fd5b769a0d02201a30() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The statistic to apply to the alarm's metric data.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"SampleCount",
+				"Average",
+				"Sum",
+				"Minimum",
+				"Maximum",
+			),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef82677f21a71b85833db3b0f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The resource type this template should dynamically generate cloudwatch metric alarms for.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"CLOUDFRONT_DISTRIBUTION",
+				"MEDIALIVE_MULTIPLEX",
+				"MEDIALIVE_CHANNEL",
+				"MEDIALIVE_INPUT_DEVICE",
+				"MEDIAPACKAGE_CHANNEL",
+				"MEDIAPACKAGE_ORIGIN_ENDPOINT",
+				"MEDIACONNECT_FLOW",
+				"MEDIATAILOR_PLAYBACK_CONFIGURATION",
+				"S3_BUCKET",
+			),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeffcdba906028ea648b70effc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A cloudwatch alarm template group's id. AWS provided template groups have ids that start with `aws-`",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_medialive_cloudwatch_alarm_template", cloudWatchAlarmTemplateResource)
 	registry.AddListResourceFactory("awscc_medialive_cloudwatch_alarm_template", generic.NewListResource(cloudWatchAlarmTemplateResource))
@@ -43,13 +280,7 @@ func cloudWatchAlarmTemplateResource(ctx context.Context) (resource.Resource, er
 		//	  "pattern": "^arn:.+:medialive:.+:cloudwatch-alarm-template:.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A cloudwatch alarm template's ARN (Amazon Resource Name)",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributebff26068029994722b4e0360(),
 		// Property: ComparisonOperator
 		// CloudFormation resource type schema:
 		//
@@ -63,18 +294,7 @@ func cloudWatchAlarmTemplateResource(ctx context.Context) (resource.Resource, er
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"comparison_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The comparison operator used to compare the specified statistic and the threshold.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"GreaterThanOrEqualToThreshold",
-					"GreaterThanThreshold",
-					"LessThanThreshold",
-					"LessThanOrEqualToThreshold",
-				),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"comparison_operator": schemaAttribute1a101dd58924acb2324b3ca2(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -82,13 +302,7 @@ func cloudWatchAlarmTemplateResource(ctx context.Context) (resource.Resource, er
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute58e821d6a0eb116886c4ee10(),
 		// Property: DatapointsToAlarm
 		// CloudFormation resource type schema:
 		//
@@ -98,18 +312,7 @@ func cloudWatchAlarmTemplateResource(ctx context.Context) (resource.Resource, er
 		//	  "minimum": 1,
 		//	  "type": "number"
 		//	}
-		"datapoints_to_alarm": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of datapoints within the evaluation period that must be breaching to trigger the alarm.",
-			Optional:    true,
-			Computed:    true,
-			Default:     float64default.StaticFloat64(0.000000),
-			Validators: []validator.Float64{ /*START VALIDATORS*/
-				float64validator.AtLeast(1.000000),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-				float64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"datapoints_to_alarm": schemaAttribute4487b648ef7afcdf6573efea(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -119,17 +322,7 @@ func cloudWatchAlarmTemplateResource(ctx context.Context) (resource.Resource, er
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A resource's optional description.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 1024),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributedc4b6d8e67a939de107406b4(),
 		// Property: EvaluationPeriods
 		// CloudFormation resource type schema:
 		//
@@ -139,18 +332,7 @@ func cloudWatchAlarmTemplateResource(ctx context.Context) (resource.Resource, er
 		//	  "minimum": 1,
 		//	  "type": "number"
 		//	}
-		"evaluation_periods": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of periods over which data is compared to the specified threshold.",
-			Optional:    true,
-			Computed:    true,
-			Default:     float64default.StaticFloat64(0.000000),
-			Validators: []validator.Float64{ /*START VALIDATORS*/
-				float64validator.AtLeast(1.000000),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-				float64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"evaluation_periods": schemaAttribute10ca3fff67d377b07eb4ff77(),
 		// Property: GroupId
 		// CloudFormation resource type schema:
 		//
@@ -161,13 +343,7 @@ func cloudWatchAlarmTemplateResource(ctx context.Context) (resource.Resource, er
 		//	  "pattern": "^(aws-)?[0-9]{7}$",
 		//	  "type": "string"
 		//	}
-		"group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A cloudwatch alarm template group's id. AWS provided template groups have ids that start with `aws-`",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"group_id": schemaAttributeffcdba906028ea648b70effc(),
 		// Property: GroupIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -176,18 +352,7 @@ func cloudWatchAlarmTemplateResource(ctx context.Context) (resource.Resource, er
 		//	  "pattern": "^[^\\s]+$",
 		//	  "type": "string"
 		//	}
-		"group_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A cloudwatch alarm template group's identifier. Can be either be its id or current name.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^[^\\s]+$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// GroupIdentifier is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"group_identifier": schemaAttributea82c34869f8550bda3763134(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -198,25 +363,14 @@ func cloudWatchAlarmTemplateResource(ctx context.Context) (resource.Resource, er
 		//	  "pattern": "^(aws-)?[0-9]{7}$",
 		//	  "type": "string"
 		//	}
-		"cloudwatch_alarm_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A cloudwatch alarm template's id. AWS provided templates have ids that start with `aws-`",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"cloudwatch_alarm_template_id": schemaAttribute9f66bf64a6c45b65be1de563(),
 		// Property: Identifier
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"identifier": schemaAttribute92fffd95876946301f6070c3(),
 		// Property: MetricName
 		// CloudFormation resource type schema:
 		//
@@ -226,13 +380,7 @@ func cloudWatchAlarmTemplateResource(ctx context.Context) (resource.Resource, er
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the metric associated with the alarm. Must be compatible with targetResourceType.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 64),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"metric_name": schemaAttribute49e3911bb2a5707d3cd83d0a(),
 		// Property: ModifiedAt
 		// CloudFormation resource type schema:
 		//
@@ -240,13 +388,7 @@ func cloudWatchAlarmTemplateResource(ctx context.Context) (resource.Resource, er
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"modified_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"modified_at": schemaAttribute58e821d6a0eb116886c4ee10(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -257,14 +399,7 @@ func cloudWatchAlarmTemplateResource(ctx context.Context) (resource.Resource, er
 		//	  "pattern": "^[^\\s]+$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A resource's name. Names must be unique within the scope of a resource type in a specific region.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[^\\s]+$"), ""),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributecf72c9204570ac78a8e6c4e0(),
 		// Property: Period
 		// CloudFormation resource type schema:
 		//
@@ -275,18 +410,7 @@ func cloudWatchAlarmTemplateResource(ctx context.Context) (resource.Resource, er
 		//	  "minimum": 10,
 		//	  "type": "number"
 		//	}
-		"period": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "The period, in seconds, over which the specified statistic is applied.",
-			Optional:    true,
-			Computed:    true,
-			Default:     float64default.StaticFloat64(0.000000),
-			Validators: []validator.Float64{ /*START VALIDATORS*/
-				float64validator.Between(10.000000, 86400.000000),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-				float64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"period": schemaAttributedff70fabac62eac554016fb5(),
 		// Property: Statistic
 		// CloudFormation resource type schema:
 		//
@@ -301,19 +425,7 @@ func cloudWatchAlarmTemplateResource(ctx context.Context) (resource.Resource, er
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"statistic": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The statistic to apply to the alarm's metric data.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"SampleCount",
-					"Average",
-					"Sum",
-					"Minimum",
-					"Maximum",
-				),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"statistic": schemaAttributef75123fd5b769a0d02201a30(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -327,17 +439,7 @@ func cloudWatchAlarmTemplateResource(ctx context.Context) (resource.Resource, er
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Represents the tags associated with a resource.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-				mapplanmodifier.UseStateForUnknown(),
-				mapplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributec58316a9689141bf0f6442de(),
 		// Property: TargetResourceType
 		// CloudFormation resource type schema:
 		//
@@ -356,23 +458,7 @@ func cloudWatchAlarmTemplateResource(ctx context.Context) (resource.Resource, er
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"target_resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The resource type this template should dynamically generate cloudwatch metric alarms for.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"CLOUDFRONT_DISTRIBUTION",
-					"MEDIALIVE_MULTIPLEX",
-					"MEDIALIVE_CHANNEL",
-					"MEDIALIVE_INPUT_DEVICE",
-					"MEDIAPACKAGE_CHANNEL",
-					"MEDIAPACKAGE_ORIGIN_ENDPOINT",
-					"MEDIACONNECT_FLOW",
-					"MEDIATAILOR_PLAYBACK_CONFIGURATION",
-					"S3_BUCKET",
-				),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"target_resource_type": schemaAttributef82677f21a71b85833db3b0f(),
 		// Property: Threshold
 		// CloudFormation resource type schema:
 		//
@@ -381,15 +467,7 @@ func cloudWatchAlarmTemplateResource(ctx context.Context) (resource.Resource, er
 		//	  "description": "The threshold value to compare with the specified statistic.",
 		//	  "type": "number"
 		//	}
-		"threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "The threshold value to compare with the specified statistic.",
-			Optional:    true,
-			Computed:    true,
-			Default:     float64default.StaticFloat64(0.000000),
-			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-				float64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"threshold": schemaAttribute82d06cf8f0624ef3f681aa58(),
 		// Property: TreatMissingData
 		// CloudFormation resource type schema:
 		//
@@ -403,18 +481,7 @@ func cloudWatchAlarmTemplateResource(ctx context.Context) (resource.Resource, er
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"treat_missing_data": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies how missing data points are treated when evaluating the alarm's condition.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"notBreaching",
-					"breaching",
-					"ignore",
-					"missing",
-				),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"treat_missing_data": schemaAttribute9f856682d1abb6aee305bb91(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

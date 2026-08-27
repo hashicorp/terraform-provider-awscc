@@ -21,6 +21,27 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute01c8e84472bcc266a2480351() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "The JSON formatted resource-based policy to attach.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute45a7f4254e87bf567220dd27() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the AWS End User Messaging SMS and Voice resource to attach the resource-based policy to.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("^arn:\\S+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_smsvoice_resource_policy", resourcePolicyResource)
 	registry.AddListResourceFactory("awscc_smsvoice_resource_policy", generic.NewListResource(resourcePolicyResource))
@@ -37,11 +58,7 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The JSON formatted resource-based policy to attach.",
 		//	  "type": "object"
 		//	}
-		"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "The JSON formatted resource-based policy to attach.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"policy_document": schemaAttribute01c8e84472bcc266a2480351(),
 		// Property: ResourceArn
 		// CloudFormation resource type schema:
 		//
@@ -50,16 +67,7 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:\\S+$",
 		//	  "type": "string"
 		//	}
-		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the AWS End User Messaging SMS and Voice resource to attach the resource-based policy to.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^arn:\\S+$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"resource_arn": schemaAttribute45a7f4254e87bf567220dd27(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

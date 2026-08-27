@@ -18,6 +18,24 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute2c7031714bd1c2d3ebb21278() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "The JSON policy text for your registry.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8be7d80a0b3f52a27f617183() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The registry id.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_ecr_registry_policy", registryPolicyResource)
 	registry.AddListResourceFactory("awscc_ecr_registry_policy", generic.NewListResource(registryPolicyResource))
@@ -34,11 +52,7 @@ func registryPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The JSON policy text for your registry.",
 		//	  "type": "object"
 		//	}
-		"policy_text": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "The JSON policy text for your registry.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"policy_text": schemaAttribute2c7031714bd1c2d3ebb21278(),
 		// Property: RegistryId
 		// CloudFormation resource type schema:
 		//
@@ -49,13 +63,7 @@ func registryPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"registry_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The registry id.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"registry_id": schemaAttribute8be7d80a0b3f52a27f617183(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

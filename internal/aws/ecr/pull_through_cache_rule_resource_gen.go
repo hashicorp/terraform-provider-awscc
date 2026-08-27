@@ -20,6 +20,96 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1bae3b072d83b2a5c65db1ca() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the Secrets Manager secret associated with the pull through cache rule.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(50, 612),
+			stringvalidator.RegexMatches(regexp.MustCompile("^arn:[a-zA-Z-]+:secretsmanager:[a-zA-Z0-9-:]+:secret:ecr\\-pullthroughcache\\/[a-zA-Z0-9\\/_+=.@-]+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// CredentialArn is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute40b9499e3b19eae819e463ce() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the upstream source registry associated with the pull through cache rule.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// UpstreamRegistry is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute52851ff6921f13e8bd014e9c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon ECR repository prefix associated with the pull through cache rule.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(2, 30),
+			stringvalidator.RegexMatches(regexp.MustCompile("^([a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*\\/?|ROOT)$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute576cf6a4ad68fab0d04e3271() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The upstream repository prefix associated with the pull through cache rule.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(2, 30),
+			stringvalidator.RegexMatches(regexp.MustCompile("^([a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*\\/?|ROOT)$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea993447b285e53c48dbd89ae() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the IAM role associated with the pull through cache rule.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(2048),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// CustomRoleArn is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed9e4ad120f06139c90f4b3df() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The upstream registry URL associated with the pull through cache rule.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_ecr_pull_through_cache_rule", pullThroughCacheRuleResource)
 	registry.AddListResourceFactory("awscc_ecr_pull_through_cache_rule", generic.NewListResource(pullThroughCacheRuleResource))
@@ -39,20 +129,7 @@ func pullThroughCacheRuleResource(ctx context.Context) (resource.Resource, error
 		//	  "pattern": "^arn:[a-zA-Z-]+:secretsmanager:[a-zA-Z0-9-:]+:secret:ecr\\-pullthroughcache\\/[a-zA-Z0-9\\/_+=.@-]+$",
 		//	  "type": "string"
 		//	}
-		"credential_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the Secrets Manager secret associated with the pull through cache rule.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(50, 612),
-				stringvalidator.RegexMatches(regexp.MustCompile("^arn:[a-zA-Z-]+:secretsmanager:[a-zA-Z0-9-:]+:secret:ecr\\-pullthroughcache\\/[a-zA-Z0-9\\/_+=.@-]+$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// CredentialArn is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"credential_arn": schemaAttribute1bae3b072d83b2a5c65db1ca(),
 		// Property: CustomRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -61,19 +138,7 @@ func pullThroughCacheRuleResource(ctx context.Context) (resource.Resource, error
 		//	  "maxLength": 2048,
 		//	  "type": "string"
 		//	}
-		"custom_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the IAM role associated with the pull through cache rule.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(2048),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// CustomRoleArn is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"custom_role_arn": schemaAttributea993447b285e53c48dbd89ae(),
 		// Property: EcrRepositoryPrefix
 		// CloudFormation resource type schema:
 		//
@@ -84,19 +149,7 @@ func pullThroughCacheRuleResource(ctx context.Context) (resource.Resource, error
 		//	  "pattern": "^([a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*\\/?|ROOT)$",
 		//	  "type": "string"
 		//	}
-		"ecr_repository_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon ECR repository prefix associated with the pull through cache rule.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(2, 30),
-				stringvalidator.RegexMatches(regexp.MustCompile("^([a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*\\/?|ROOT)$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"ecr_repository_prefix": schemaAttribute52851ff6921f13e8bd014e9c(),
 		// Property: UpstreamRegistry
 		// CloudFormation resource type schema:
 		//
@@ -104,16 +157,7 @@ func pullThroughCacheRuleResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The name of the upstream source registry associated with the pull through cache rule.",
 		//	  "type": "string"
 		//	}
-		"upstream_registry": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the upstream source registry associated with the pull through cache rule.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// UpstreamRegistry is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"upstream_registry": schemaAttribute40b9499e3b19eae819e463ce(),
 		// Property: UpstreamRegistryUrl
 		// CloudFormation resource type schema:
 		//
@@ -121,15 +165,7 @@ func pullThroughCacheRuleResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The upstream registry URL associated with the pull through cache rule.",
 		//	  "type": "string"
 		//	}
-		"upstream_registry_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The upstream registry URL associated with the pull through cache rule.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"upstream_registry_url": schemaAttributed9e4ad120f06139c90f4b3df(),
 		// Property: UpstreamRepositoryPrefix
 		// CloudFormation resource type schema:
 		//
@@ -140,19 +176,7 @@ func pullThroughCacheRuleResource(ctx context.Context) (resource.Resource, error
 		//	  "pattern": "^([a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*\\/?|ROOT)$",
 		//	  "type": "string"
 		//	}
-		"upstream_repository_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The upstream repository prefix associated with the pull through cache rule.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(2, 30),
-				stringvalidator.RegexMatches(regexp.MustCompile("^([a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*\\/?|ROOT)$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"upstream_repository_prefix": schemaAttribute576cf6a4ad68fab0d04e3271(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

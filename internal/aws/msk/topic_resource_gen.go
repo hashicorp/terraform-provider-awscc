@@ -20,6 +20,71 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute373444e02d674c03dffcdc87() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the topic",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4cb274ee5726d6588fa1199b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Base64 encoded configuration properties of the topic",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// Configs is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute72efceb6fe2aaeee21d8c2ea() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The replication factor for the topic",
+		Required:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.AtLeast(1),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca8a98c10df6ce58796ec2df() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of partitions for the topic",
+		Required:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.AtLeast(1),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee8cec3ac15df2581f854a326() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the topic",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee8dc3b255d25fa6c9ce4e731() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the MSK cluster",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_msk_topic", topicResource)
 	registry.AddListResourceFactory("awscc_msk_topic", generic.NewListResource(topicResource))
@@ -36,13 +101,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the MSK cluster",
 		//	  "type": "string"
 		//	}
-		"cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the MSK cluster",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"cluster_arn": schemaAttributee8dc3b255d25fa6c9ce4e731(),
 		// Property: Configs
 		// CloudFormation resource type schema:
 		//
@@ -50,15 +109,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Base64 encoded configuration properties of the topic",
 		//	  "type": "string"
 		//	}
-		"configs": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Base64 encoded configuration properties of the topic",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// Configs is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"configs": schemaAttribute4cb274ee5726d6588fa1199b(),
 		// Property: PartitionCount
 		// CloudFormation resource type schema:
 		//
@@ -67,13 +118,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"partition_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of partitions for the topic",
-			Required:    true,
-			Validators: []validator.Int64{ /*START VALIDATORS*/
-				int64validator.AtLeast(1),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"partition_count": schemaAttributeca8a98c10df6ce58796ec2df(),
 		// Property: ReplicationFactor
 		// CloudFormation resource type schema:
 		//
@@ -82,16 +127,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"replication_factor": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The replication factor for the topic",
-			Required:    true,
-			Validators: []validator.Int64{ /*START VALIDATORS*/
-				int64validator.AtLeast(1),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"replication_factor": schemaAttribute72efceb6fe2aaeee21d8c2ea(),
 		// Property: TopicArn
 		// CloudFormation resource type schema:
 		//
@@ -99,13 +135,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the topic",
 		//	  "type": "string"
 		//	}
-		"topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the topic",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"topic_arn": schemaAttributee8cec3ac15df2581f854a326(),
 		// Property: TopicName
 		// CloudFormation resource type schema:
 		//
@@ -113,13 +143,7 @@ func topicResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the topic",
 		//	  "type": "string"
 		//	}
-		"topic_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the topic",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"topic_name": schemaAttribute373444e02d674c03dffcdc87(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

@@ -23,6 +23,375 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute0e17cef1da4f561e05f18b2a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The client secret.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute17efdfd4d2295332c5c8012e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier to be used when working with policy rules.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute27a424cedde51f9957079e64() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 256),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2ec166005ac63ff3b910a8ab() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of device-based trust provider. Possible values: oidc|iam-identity-center",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3055938f06f51c440232067d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PublicSigningKeyUrl
+			"public_signing_key_url": schemaAttribute6a112c0bbca117f9f12d8274(),
+			// Property: TenantId
+			"tenant_id": schemaAttribute47979d998343185c6b6cefe6(),
+		}, /*END SCHEMA*/
+		Description: "The options for device identity based trust providers.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+			objectplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute34aaac3adc648b811dcf0fdf() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AuthorizationEndpoint
+			"authorization_endpoint": schemaAttribute4af2c3f1ac942d52e7d7069d(),
+			// Property: ClientId
+			"client_id": schemaAttribute9ff154afafcce14f1bc63583(),
+			// Property: ClientSecret
+			"client_secret": schemaAttribute4a1078bd985bf887c9c355bb(),
+			// Property: Issuer
+			"issuer": schemaAttributea8ae7aac5a9d6defb56017f0(),
+			// Property: PublicSigningKeyEndpoint
+			"public_signing_key_endpoint": schemaAttributec69d247b1ad8376fea87f6ad(),
+			// Property: Scope
+			"scope": schemaAttribute98aa428dc56f14016e9674ec(),
+			// Property: TokenEndpoint
+			"token_endpoint": schemaAttribute5fdfc8046f4b0bb3a3f0d0fb(),
+			// Property: UserInfoEndpoint
+			"user_info_endpoint": schemaAttributeb785c59fcf969a015ac4ff02(),
+		}, /*END SCHEMA*/
+		Description: "The OpenID Connect details for an oidc -type, user-identity based trust provider for L4.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute40ef569addde4e8b720c2f7f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AuthorizationEndpoint
+			"authorization_endpoint": schemaAttribute4af2c3f1ac942d52e7d7069d(),
+			// Property: ClientId
+			"client_id": schemaAttribute9ff154afafcce14f1bc63583(),
+			// Property: ClientSecret
+			"client_secret": schemaAttribute0e17cef1da4f561e05f18b2a(),
+			// Property: Issuer
+			"issuer": schemaAttributea8ae7aac5a9d6defb56017f0(),
+			// Property: Scope
+			"scope": schemaAttribute98aa428dc56f14016e9674ec(),
+			// Property: TokenEndpoint
+			"token_endpoint": schemaAttribute5fdfc8046f4b0bb3a3f0d0fb(),
+			// Property: UserInfoEndpoint
+			"user_info_endpoint": schemaAttributeb785c59fcf969a015ac4ff02(),
+		}, /*END SCHEMA*/
+		Description: "The OpenID Connect details for an oidc -type, user-identity based trust provider.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4609196dbbb6b286d28e5853() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "KMS Key Arn used to encrypt the group policy",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute47979d998343185c6b6cefe6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the tenant application with the device-identity provider.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4a1078bd985bf887c9c355bb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The client secret.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// ClientSecret is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4af2c3f1ac942d52e7d7069d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The OIDC authorization endpoint.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute563c25200fa8fe78f249ae71() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of device-based trust provider. Possible values: jamf|crowdstrike",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5fdfc8046f4b0bb3a3f0d0fb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The OIDC token endpoint.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute66811e0d8351f1a759582edc() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether to encrypt the policy with the provided key or disable encryption",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6a112c0bbca117f9f12d8274() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "URL Verified Access will use to verify authenticity of the device tokens.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute78a538eefdc38de402048f10() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The creation time.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7de69bd7148a506a78371677() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeb0c71641a527ce2fb6ef36e1(),
+				// Property: Value
+				"value": schemaAttribute27a424cedde51f9957079e64(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute812bdf0126a28831a2801198() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the Amazon Web Services Verified Access trust provider.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute98aa428dc56f14016e9674ec() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "OpenID Connect (OIDC) scopes are used by an application during authentication to authorize access to details of a user. Each scope returns a specific set of user attributes.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ff154afafcce14f1bc63583() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The client identifier.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea8ae7aac5a9d6defb56017f0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The OIDC issuer.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeab093e372553cf21100d9432() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description for the Amazon Web Services Verified Access trust provider.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb0c71641a527ce2fb6ef36e1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb785c59fcf969a015ac4ff02() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The OIDC user info endpoint.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec69d247b1ad8376fea87f6ad() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The public signing key for endpoint",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed36eecb5398a2d7d2dae724e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CustomerManagedKeyEnabled
+			"customer_managed_key_enabled": schemaAttribute66811e0d8351f1a759582edc(),
+			// Property: KmsKeyArn
+			"kms_key_arn": schemaAttribute4609196dbbb6b286d28e5853(),
+		}, /*END SCHEMA*/
+		Description: "The configuration options for customer provided KMS encryption.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee5e6610fd1ebb8ed38244592() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The last updated time.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee94298d460a4002a7b5f16d6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Type of trust provider. Possible values: user|device",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_ec2_verified_access_trust_provider", verifiedAccessTrustProviderResource)
 	registry.AddListResourceFactory("awscc_ec2_verified_access_trust_provider", generic.NewListResource(verifiedAccessTrustProviderResource))
@@ -39,13 +408,7 @@ func verifiedAccessTrustProviderResource(ctx context.Context) (resource.Resource
 		//	  "description": "The creation time.",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The creation time.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"creation_time": schemaAttribute78a538eefdc38de402048f10(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -53,14 +416,7 @@ func verifiedAccessTrustProviderResource(ctx context.Context) (resource.Resource
 		//	  "description": "A description for the Amazon Web Services Verified Access trust provider.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description for the Amazon Web Services Verified Access trust provider.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributeab093e372553cf21100d9432(),
 		// Property: DeviceOptions
 		// CloudFormation resource type schema:
 		//
@@ -79,35 +435,7 @@ func verifiedAccessTrustProviderResource(ctx context.Context) (resource.Resource
 		//	  },
 		//	  "type": "object"
 		//	}
-		"device_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: PublicSigningKeyUrl
-				"public_signing_key_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "URL Verified Access will use to verify authenticity of the device tokens.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: TenantId
-				"tenant_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ID of the tenant application with the device-identity provider.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The options for device identity based trust providers.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"device_options": schemaAttribute3055938f06f51c440232067d(),
 		// Property: DeviceTrustProviderType
 		// CloudFormation resource type schema:
 		//
@@ -115,15 +443,7 @@ func verifiedAccessTrustProviderResource(ctx context.Context) (resource.Resource
 		//	  "description": "The type of device-based trust provider. Possible values: jamf|crowdstrike",
 		//	  "type": "string"
 		//	}
-		"device_trust_provider_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of device-based trust provider. Possible values: jamf|crowdstrike",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"device_trust_provider_type": schemaAttribute563c25200fa8fe78f249ae71(),
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -131,13 +451,7 @@ func verifiedAccessTrustProviderResource(ctx context.Context) (resource.Resource
 		//	  "description": "The last updated time.",
 		//	  "type": "string"
 		//	}
-		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The last updated time.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"last_updated_time": schemaAttributee5e6610fd1ebb8ed38244592(),
 		// Property: NativeApplicationOidcOptions
 		// CloudFormation resource type schema:
 		//
@@ -180,89 +494,7 @@ func verifiedAccessTrustProviderResource(ctx context.Context) (resource.Resource
 		//	  },
 		//	  "type": "object"
 		//	}
-		"native_application_oidc_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AuthorizationEndpoint
-				"authorization_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The OIDC authorization endpoint.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: ClientId
-				"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The client identifier.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: ClientSecret
-				"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The client secret.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-					// ClientSecret is a write-only property.
-				}, /*END ATTRIBUTE*/
-				// Property: Issuer
-				"issuer": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The OIDC issuer.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: PublicSigningKeyEndpoint
-				"public_signing_key_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The public signing key for endpoint",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: Scope
-				"scope": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "OpenID Connect (OIDC) scopes are used by an application during authentication to authorize access to details of a user. Each scope returns a specific set of user attributes.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: TokenEndpoint
-				"token_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The OIDC token endpoint.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: UserInfoEndpoint
-				"user_info_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The OIDC user info endpoint.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The OpenID Connect details for an oidc -type, user-identity based trust provider for L4.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"native_application_oidc_options": schemaAttribute34aaac3adc648b811dcf0fdf(),
 		// Property: OidcOptions
 		// CloudFormation resource type schema:
 		//
@@ -301,79 +533,7 @@ func verifiedAccessTrustProviderResource(ctx context.Context) (resource.Resource
 		//	  },
 		//	  "type": "object"
 		//	}
-		"oidc_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AuthorizationEndpoint
-				"authorization_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The OIDC authorization endpoint.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: ClientId
-				"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The client identifier.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: ClientSecret
-				"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The client secret.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: Issuer
-				"issuer": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The OIDC issuer.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: Scope
-				"scope": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "OpenID Connect (OIDC) scopes are used by an application during authentication to authorize access to details of a user. Each scope returns a specific set of user attributes.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: TokenEndpoint
-				"token_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The OIDC token endpoint.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: UserInfoEndpoint
-				"user_info_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The OIDC user info endpoint.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The OpenID Connect details for an oidc -type, user-identity based trust provider.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"oidc_options": schemaAttribute40ef569addde4e8b720c2f7f(),
 		// Property: PolicyReferenceName
 		// CloudFormation resource type schema:
 		//
@@ -381,13 +541,7 @@ func verifiedAccessTrustProviderResource(ctx context.Context) (resource.Resource
 		//	  "description": "The identifier to be used when working with policy rules.",
 		//	  "type": "string"
 		//	}
-		"policy_reference_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier to be used when working with policy rules.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"policy_reference_name": schemaAttribute17efdfd4d2295332c5c8012e(),
 		// Property: SseSpecification
 		// CloudFormation resource type schema:
 		//
@@ -406,34 +560,7 @@ func verifiedAccessTrustProviderResource(ctx context.Context) (resource.Resource
 		//	  },
 		//	  "type": "object"
 		//	}
-		"sse_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CustomerManagedKeyEnabled
-				"customer_managed_key_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Whether to encrypt the policy with the provided key or disable encryption",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: KmsKeyArn
-				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "KMS Key Arn used to encrypt the group policy",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The configuration options for customer provided KMS encryption.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"sse_specification": schemaAttributed36eecb5398a2d7d2dae724e(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -466,44 +593,7 @@ func verifiedAccessTrustProviderResource(ctx context.Context) (resource.Resource
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute7de69bd7148a506a78371677(),
 		// Property: TrustProviderType
 		// CloudFormation resource type schema:
 		//
@@ -511,13 +601,7 @@ func verifiedAccessTrustProviderResource(ctx context.Context) (resource.Resource
 		//	  "description": "Type of trust provider. Possible values: user|device",
 		//	  "type": "string"
 		//	}
-		"trust_provider_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Type of trust provider. Possible values: user|device",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"trust_provider_type": schemaAttributee94298d460a4002a7b5f16d6(),
 		// Property: UserTrustProviderType
 		// CloudFormation resource type schema:
 		//
@@ -525,15 +609,7 @@ func verifiedAccessTrustProviderResource(ctx context.Context) (resource.Resource
 		//	  "description": "The type of device-based trust provider. Possible values: oidc|iam-identity-center",
 		//	  "type": "string"
 		//	}
-		"user_trust_provider_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of device-based trust provider. Possible values: oidc|iam-identity-center",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"user_trust_provider_type": schemaAttribute2ec166005ac63ff3b910a8ab(),
 		// Property: VerifiedAccessTrustProviderId
 		// CloudFormation resource type schema:
 		//
@@ -541,13 +617,7 @@ func verifiedAccessTrustProviderResource(ctx context.Context) (resource.Resource
 		//	  "description": "The ID of the Amazon Web Services Verified Access trust provider.",
 		//	  "type": "string"
 		//	}
-		"verified_access_trust_provider_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Amazon Web Services Verified Access trust provider.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"verified_access_trust_provider_id": schemaAttribute812bdf0126a28831a2801198(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

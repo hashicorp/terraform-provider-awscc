@@ -18,6 +18,191 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute006cf3874f83695b963bd0f3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS SSO ID of the user.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute15d6edd173e4b98b9959a437() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: id
+			"id": schemaAttribute006cf3874f83695b963bd0f3(),
+		}, /*END SCHEMA*/
+		Description: "Contains information for a user identity in an access policy.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute282a92376dba189f23adede3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Portal
+			"portal": schemaAttributea44d3d537fb2399cb8ff926a(),
+			// Property: Project
+			"project": schemaAttributedfd779acc56fae8b5e4145d0(),
+		}, /*END SCHEMA*/
+		Description: "The AWS IoT SiteWise Monitor resource for this access policy. Choose either portal or project but not both.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute39f9913cd4fc9ca7bcf59a1e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the access policy.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute53e8e7d45bfa852dbd97aa3d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the access policy.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5647d140415bfe8441fbfe15() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the portal.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute62913e4810f79fee771e34f9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the IAM user.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute62d3d43e29c342c6cb0db143() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the IAM role.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea44d3d537fb2399cb8ff926a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: id
+			"id": schemaAttribute5647d140415bfe8441fbfe15(),
+		}, /*END SCHEMA*/
+		Description: "A portal resource.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec7cc6c301d895f0b894b9784() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The permission level for this access policy. Valid values are ADMINISTRATOR or VIEWER.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed0d6524391093b08ced3f86a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IamRole
+			"iam_role": schemaAttributefb3c5eac63d526ea306cf160(),
+			// Property: IamUser
+			"iam_user": schemaAttributef57e46aa9b0d7d80162fad38(),
+			// Property: User
+			"user": schemaAttribute15d6edd173e4b98b9959a437(),
+		}, /*END SCHEMA*/
+		Description: "The identity for this access policy. Choose either a user or a group but not both.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed62e71ff34ab14fb0c97f6d6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the project.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedfd779acc56fae8b5e4145d0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: id
+			"id": schemaAttributed62e71ff34ab14fb0c97f6d6(),
+		}, /*END SCHEMA*/
+		Description: "A project resource.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef57e46aa9b0d7d80162fad38() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: arn
+			"arn": schemaAttribute62913e4810f79fee771e34f9(),
+		}, /*END SCHEMA*/
+		Description: "Contains information for an IAM user identity in an access policy.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefb3c5eac63d526ea306cf160() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: arn
+			"arn": schemaAttribute62d3d43e29c342c6cb0db143(),
+		}, /*END SCHEMA*/
+		Description: "Contains information for an IAM role identity in an access policy.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_iotsitewise_access_policy", accessPolicyResource)
 	registry.AddListResourceFactory("awscc_iotsitewise_access_policy", generic.NewListResource(accessPolicyResource))
@@ -34,13 +219,7 @@ func accessPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ARN of the access policy.",
 		//	  "type": "string"
 		//	}
-		"access_policy_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the access policy.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"access_policy_arn": schemaAttribute53e8e7d45bfa852dbd97aa3d(),
 		// Property: AccessPolicyId
 		// CloudFormation resource type schema:
 		//
@@ -48,13 +227,7 @@ func accessPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of the access policy.",
 		//	  "type": "string"
 		//	}
-		"access_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the access policy.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"access_policy_id": schemaAttribute39f9913cd4fc9ca7bcf59a1e(),
 		// Property: AccessPolicyIdentity
 		// CloudFormation resource type schema:
 		//
@@ -98,72 +271,7 @@ func accessPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"access_policy_identity": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: IamRole
-				"iam_role": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: arn
-						"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ARN of the IAM role.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Contains information for an IAM role identity in an access policy.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: IamUser
-				"iam_user": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: arn
-						"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ARN of the IAM user.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Contains information for an IAM user identity in an access policy.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: User
-				"user": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: id
-						"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The AWS SSO ID of the user.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Contains information for a user identity in an access policy.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The identity for this access policy. Choose either a user or a group but not both.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"access_policy_identity": schemaAttributed0d6524391093b08ced3f86a(),
 		// Property: AccessPolicyPermission
 		// CloudFormation resource type schema:
 		//
@@ -171,10 +279,7 @@ func accessPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The permission level for this access policy. Valid values are ADMINISTRATOR or VIEWER.",
 		//	  "type": "string"
 		//	}
-		"access_policy_permission": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The permission level for this access policy. Valid values are ADMINISTRATOR or VIEWER.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"access_policy_permission": schemaAttributec7cc6c301d895f0b894b9784(),
 		// Property: AccessPolicyResource
 		// CloudFormation resource type schema:
 		//
@@ -207,52 +312,7 @@ func accessPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"access_policy_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Portal
-				"portal": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: id
-						"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ID of the portal.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "A portal resource.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: Project
-				"project": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: id
-						"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ID of the project.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "A project resource.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The AWS IoT SiteWise Monitor resource for this access policy. Choose either portal or project but not both.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"access_policy_resource": schemaAttribute282a92376dba189f23adede3(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

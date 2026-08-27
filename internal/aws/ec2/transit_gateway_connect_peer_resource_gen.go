@@ -20,6 +20,211 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute015aa22edeee3fb146a6d2df() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The range of interior BGP peer IP addresses.",
+		Required:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0f422e74291f13262c170440() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BgpStatus
+				"bgp_status": schemaAttribute66b9b65a8266b3f1f142cd1c(),
+				// Property: PeerAddress
+				"peer_address": schemaAttribute73a1c48f9cb67f5193b82250(),
+				// Property: PeerAsn
+				"peer_asn": schemaAttribute3aaa72c503ec5b07fc1cfdd2(),
+				// Property: TransitGatewayAddress
+				"transit_gateway_address": schemaAttributea3b8584b2079dd794624ff4e(),
+				// Property: TransitGatewayAsn
+				"transit_gateway_asn": schemaAttributecce3cb90801762ed40a09bc1(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The BGP configuration details.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute256b794c7257b121e1093e89() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The peer IP address (GRE outer IP address) on the appliance side of the Connect peer.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute275c4bc886275dbdc5a9e2bd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the Connect peer.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3aaa72c503ec5b07fc1cfdd2() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The peer Autonomous System Number (ASN).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3accb48e98f4d5613bbd3156() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BgpConfigurations
+			"bgp_configurations": schemaAttribute0f422e74291f13262c170440(),
+			// Property: InsideCidrBlocks
+			"inside_cidr_blocks": schemaAttribute015aa22edeee3fb146a6d2df(),
+			// Property: PeerAddress
+			"peer_address": schemaAttribute256b794c7257b121e1093e89(),
+			// Property: Protocol
+			"protocol": schemaAttributeba54bbd773396b880bc57857(),
+			// Property: TransitGatewayAddress
+			"transit_gateway_address": schemaAttributed59af04c88599c0578abb520(),
+		}, /*END SCHEMA*/
+		Description: "The Connect peer details.",
+		Required:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6410edd66635aa4ca6e673dc() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeb73de205202621397948d436(),
+				// Property: Value
+				"value": schemaAttribute6625d494d0c805a026bf512c(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags for the Connect Peer.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6625d494d0c805a026bf512c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value of the tag. Constraints: Tag values are case-sensitive and accept a maximum of 256 Unicode characters.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute66b9b65a8266b3f1f142cd1c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The BGP status.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute73a1c48f9cb67f5193b82250() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The interior BGP peer IP address for the appliance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9e17c5e99d1888644a403dd1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The creation time.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea3b8584b2079dd794624ff4e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The interior BGP peer IP address for the transit gateway.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaa8c3800813826af3edef9ca() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The state of the Connect peer.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb73de205202621397948d436() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key of the tag. Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with aws: .",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeba54bbd773396b880bc57857() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tunnel protocol.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecce3cb90801762ed40a09bc1() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The transit gateway Autonomous System Number (ASN).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecd18030540aac7cfddb2451d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the Connect attachment.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed59af04c88599c0578abb520() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Connect peer IP address on the transit gateway side of the tunnel.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_ec2_transit_gateway_connect_peer", transitGatewayConnectPeerResource)
 	registry.AddListResourceFactory("awscc_ec2_transit_gateway_connect_peer", generic.NewListResource(transitGatewayConnectPeerResource))
@@ -92,87 +297,7 @@ func transitGatewayConnectPeerResource(ctx context.Context) (resource.Resource, 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"connect_peer_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: BgpConfigurations
-				"bgp_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: BgpStatus
-							"bgp_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The BGP status.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: PeerAddress
-							"peer_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The interior BGP peer IP address for the appliance.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: PeerAsn
-							"peer_asn": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The peer Autonomous System Number (ASN).",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: TransitGatewayAddress
-							"transit_gateway_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The interior BGP peer IP address for the transit gateway.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: TransitGatewayAsn
-							"transit_gateway_asn": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The transit gateway Autonomous System Number (ASN).",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The BGP configuration details.",
-					Computed:    true,
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: InsideCidrBlocks
-				"inside_cidr_blocks": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The range of interior BGP peer IP addresses.",
-					Required:    true,
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.RequiresReplace(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: PeerAddress
-				"peer_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The peer IP address (GRE outer IP address) on the appliance side of the Connect peer.",
-					Required:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.RequiresReplace(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: Protocol
-				"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The tunnel protocol.",
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: TransitGatewayAddress
-				"transit_gateway_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Connect peer IP address on the transit gateway side of the tunnel.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-						stringplanmodifier.RequiresReplaceIfConfigured(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The Connect peer details.",
-			Required:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"connect_peer_configuration": schemaAttribute3accb48e98f4d5613bbd3156(),
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -180,13 +305,7 @@ func transitGatewayConnectPeerResource(ctx context.Context) (resource.Resource, 
 		//	  "description": "The creation time.",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The creation time.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"creation_time": schemaAttribute9e17c5e99d1888644a403dd1(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -194,13 +313,7 @@ func transitGatewayConnectPeerResource(ctx context.Context) (resource.Resource, 
 		//	  "description": "The state of the Connect peer.",
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The state of the Connect peer.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttributeaa8c3800813826af3edef9ca(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -222,36 +335,7 @@ func transitGatewayConnectPeerResource(ctx context.Context) (resource.Resource, 
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key of the tag. Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with aws: .",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value of the tag. Constraints: Tag values are case-sensitive and accept a maximum of 256 Unicode characters.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags for the Connect Peer.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute6410edd66635aa4ca6e673dc(),
 		// Property: TransitGatewayAttachmentId
 		// CloudFormation resource type schema:
 		//
@@ -259,13 +343,7 @@ func transitGatewayConnectPeerResource(ctx context.Context) (resource.Resource, 
 		//	  "description": "The ID of the Connect attachment.",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Connect attachment.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"transit_gateway_attachment_id": schemaAttributecd18030540aac7cfddb2451d(),
 		// Property: TransitGatewayConnectPeerId
 		// CloudFormation resource type schema:
 		//
@@ -273,13 +351,7 @@ func transitGatewayConnectPeerResource(ctx context.Context) (resource.Resource, 
 		//	  "description": "The ID of the Connect peer.",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_connect_peer_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Connect peer.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"transit_gateway_connect_peer_id": schemaAttribute275c4bc886275dbdc5a9e2bd(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

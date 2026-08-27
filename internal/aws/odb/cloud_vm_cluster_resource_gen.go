@@ -30,6 +30,802 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute0334e4afccd609a543189a5e() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The amount of local node storage, in gigabytes (GB), that's allocated on the DB node.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute052a5039fa3aa5f09baf4eb9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The OCID of the VNIC.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0a3bf4b966b5d37ba6a26b2c() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether database backups to local Exadata storage is enabled for the VM cluster.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+			boolplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute103dad9c5aaa6df2250989c2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The current status of the DB node.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1360fc7cfe92eb6f6c318c70() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The hardware model name of the Exadata infrastructure that's running the VM cluster.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute196f01f60f5498fa70db904d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The OCID of the VM cluster.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute20a24b8053abb8b9522762f5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the Exadata infrastructure that this VM cluster belongs to.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute29e34609df731e780eb71e29() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The amount of local node storage, in gigabytes (GB), that's allocated to the VM cluster.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute343dc5cdd283cf0b95c8a254() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributec32cc68bd2d37a6197da82bc(),
+				// Property: Value
+				"value": schemaAttributee76a154db2f1362f679ecfc6(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute345d814e25d285aec4fb5d42() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The current status of the AWS Identity and Access Management (IAM) service role.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3c388993994f2692ebce8642() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The host name for the VM cluster.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 12),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute403156e3004779dd4a3a1922() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The OCID of the DB node.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4b54635def9ced1b5a3b3fc5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The user-friendly name for the VM cluster.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 255),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4b751a26e679db40154f79d6() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether health monitoring is enabled for the VM cluster.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4dede73aa9ab1f1fd30b60a7() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of CPU cores enabled on the DB node.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4eb72716be622ecb14fcc6b1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Oracle license model applied to the VM cluster.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"BRING_YOUR_OWN_LICENSE",
+				"LICENSE_INCLUDED",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute515b382fe34cf5e56241ed6b() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AwsIntegration
+				"aws_integration": schemaAttributef69df24f3b842e3c2570a74e(),
+				// Property: IamRoleArn
+				"iam_role_arn": schemaAttribute9e1526c877e109c829c49956(),
+				// Property: Status
+				"status": schemaAttribute345d814e25d285aec4fb5d42(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The AWS Identity and Access Management (IAM) service roles associated with the VM cluster.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute521fd4d1ff9505bce6259a67() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the database server that's associated with the DB node.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute522b8cef446c618d0f00df90() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Grid Infrastructure (GI) cluster.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 11),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9-]*$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute543567eb8e3c8afbd79989a5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of redundancy configured for the VM cluster. NORMAL is 2-way redundancy. HIGH is 3-way redundancy.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6067b6620ae4aacfcf173e9e() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributec32cc68bd2d37a6197da82bc(),
+				// Property: Value
+				"value": schemaAttributee76a154db2f1362f679ecfc6(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags to assign to the Vm Cluster.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute63e58030fa826f6cf0f0a976() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The OCID of the second VNIC.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute652dacce2962f8cd3255ec70() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The host name for the DB node.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6d9fd337dd7a2d7a7cf8a09d() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of CPU cores enabled on the VM cluster.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.Between(0, 368),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+			int64planmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute707992d9060d822c66fa9720() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The amount of local node storage, in gigabytes (GB), that's allocated for the VM cluster.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+			int64planmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute71c33dc4005e343d6259fb2e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The HTTPS link to the VM cluster in OCI.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute72c4b54b2b4ec2cc500c3218() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the DB node.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute798041ef371db18bdacb2022() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The OCID of the DB system.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7994814eabd73080dbcd8748() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The OCID of the host IP address that's associated with the DB node.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7ae1d801df23d5c17b84a505() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The port number configured for the listener on the VM cluster.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8164714f120497061c5e3a85() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The domain of the VM cluster.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8185c4f2983897217d13db62() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of nodes in the VM cluster.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute824d68c25bc78d7ab9e29130() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of database servers for the VM cluster.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+			listplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute82d0427c7b5d00dbb42950df() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the ODB network for the VM cluster.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute862dd75e1b5865565a960f0a() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the VM cluster is configured with a sparse disk group.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+			boolplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute923b3eade57819dd924ec4b6() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether diagnostic collection is enabled for the VM cluster.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9e1526c877e109c829c49956() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) service role.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea2b51f780a7730ebe8dcaa1c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Oracle Cloud ID (OCID) of the backup IP address that's associated with the DB node.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaad44acd934c1537a7b32203() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the VM cluster.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributead0354f6bec48cdeb1c8a15a() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The OCID of the SCAN IP addresses that are associated with the VM cluster.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributead8ed68fe67723d3086f0c76() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the VM cluster.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaeab85f3b93b83fb991cd4ae() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BackupIpId
+				"backup_ip_id": schemaAttributea2b51f780a7730ebe8dcaa1c(),
+				// Property: BackupVnic2Id
+				"backup_vnic_2_id": schemaAttributef49666f70f5b5b9006ca864a(),
+				// Property: CpuCoreCount
+				"cpu_core_count": schemaAttribute4dede73aa9ab1f1fd30b60a7(),
+				// Property: DbNodeArn
+				"db_node_arn": schemaAttribute72c4b54b2b4ec2cc500c3218(),
+				// Property: DbNodeId
+				"db_node_id": schemaAttributeb2ead36a298fd63811c3f87b(),
+				// Property: DbNodeStorageSizeInGBs
+				"db_node_storage_size_in_g_bs": schemaAttribute0334e4afccd609a543189a5e(),
+				// Property: DbServerId
+				"db_server_id": schemaAttribute521fd4d1ff9505bce6259a67(),
+				// Property: DbSystemId
+				"db_system_id": schemaAttribute798041ef371db18bdacb2022(),
+				// Property: HostIpId
+				"host_ip_id": schemaAttribute7994814eabd73080dbcd8748(),
+				// Property: Hostname
+				"hostname": schemaAttribute652dacce2962f8cd3255ec70(),
+				// Property: MemorySizeInGBs
+				"memory_size_in_g_bs": schemaAttributee4b55eb45c22e20c1d090124(),
+				// Property: Ocid
+				"ocid": schemaAttribute403156e3004779dd4a3a1922(),
+				// Property: Status
+				"status": schemaAttribute103dad9c5aaa6df2250989c2(),
+				// Property: Tags
+				"tags": schemaAttribute343dc5cdd283cf0b95c8a254(),
+				// Property: Vnic2Id
+				"vnic_2_id": schemaAttribute63e58030fa826f6cf0f0a976(),
+				// Property: VnicId
+				"vnic_id": schemaAttribute052a5039fa3aa5f09baf4eb9(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The DB nodes that are implicitly created and managed as part of this VM Cluster.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.UniqueValues(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb2ead36a298fd63811c3f87b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the DB node.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb728a28655d2a1713fa1fbb6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the OCI resource anchor for the VM cluster.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebc27e798c1af31bffcbc6b0c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The OCI model compute model used when you create or clone an instance: ECPU or OCPU. An ECPU is an abstracted measure of compute resources. ECPUs are based on the number of cores elastically allocated from a pool of compute and storage servers. An OCPU is a legacy physical measure of compute resources. OCPUs are based on the physical core of a processor with hyper-threading enabled.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebf01deb0570ff065eb9bd20c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The FQDN of the DNS record for the Single Client Access Name (SCAN) IP addresses that are associated with the VM cluster.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec208ecf88f8f408af5ddcf49() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The size of the data disk group, in terabytes (TB), that's allocated for the VM cluster.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+			float64planmodifier.UseStateForUnknown(),
+			float64planmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec2b2e37ad459d9f6988555cc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The software version of the Oracle Grid Infrastructure (GI) for the VM cluster.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 255),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec32cc68bd2d37a6197da82bc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that's 1 to 128 Unicode characters in length and can't be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, @, -, and \".",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec512ad4b348a5b91306d2670() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The amount of memory, in gigabytes (GB), that's allocated for the VM cluster.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+			int64planmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed650d769cb1a5d8e890c8095() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether incident logs are enabled for the cloud VM cluster.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed65fcf0749641cb1c447f91c() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The public key portion of one or more key pairs used for SSH access to the VM cluster.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+			listplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed7914aff8a220c2d37fe9887() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The operating system version of the image chosen for the VM cluster.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 255),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee4b55eb45c22e20c1d090124() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The amount of memory, in gigabytes (GB), that allocated on the DB node.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee76a154db2f1362f679ecfc6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that's 1 to 256 characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 256),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeea8e3d00ae30fc13bc1d71fd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time zone of the VM cluster.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 255),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef49666f70f5b5b9006ca864a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The OCID of the second backup virtual network interface card (VNIC) for the DB node.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef69df24f3b842e3c2570a74e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS integration configuration settings for the AWS Identity and Access Management (IAM) service role.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef6cb9b5fa007eaf34e6e4598() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Property description not available.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.Between(1024, 8999),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+			int64planmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// ScanListenerPortTcp is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefae3c7b4a19c1c91d7ab2169() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The virtual IP (VIP) addresses that are associated with the VM cluster. Oracle's Cluster Ready Services (CRS) creates and maintains one VIP address for each node in the VM cluster to enable failover. If one node fails, the VIP is reassigned to another active node in the cluster.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeff6dfbf25e32e1a9b89710ba() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IsDiagnosticsEventsEnabled
+			"is_diagnostics_events_enabled": schemaAttribute923b3eade57819dd924ec4b6(),
+			// Property: IsHealthMonitoringEnabled
+			"is_health_monitoring_enabled": schemaAttribute4b751a26e679db40154f79d6(),
+			// Property: IsIncidentLogsEnabled
+			"is_incident_logs_enabled": schemaAttributed650d769cb1a5d8e890c8095(),
+		}, /*END SCHEMA*/
+		Description: "The set of diagnostic collection options enabled for the VM cluster.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+			objectplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_odb_cloud_vm_cluster", cloudVmClusterResource)
 	registry.AddListResourceFactory("awscc_odb_cloud_vm_cluster", generic.NewListResource(cloudVmClusterResource))
@@ -46,15 +842,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The unique identifier of the Exadata infrastructure that this VM cluster belongs to.",
 		//	  "type": "string"
 		//	}
-		"cloud_exadata_infrastructure_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the Exadata infrastructure that this VM cluster belongs to.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"cloud_exadata_infrastructure_id": schemaAttribute20a24b8053abb8b9522762f5(),
 		// Property: CloudVmClusterArn
 		// CloudFormation resource type schema:
 		//
@@ -62,13 +850,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the VM cluster.",
 		//	  "type": "string"
 		//	}
-		"cloud_vm_cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the VM cluster.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"cloud_vm_cluster_arn": schemaAttributeaad44acd934c1537a7b32203(),
 		// Property: CloudVmClusterId
 		// CloudFormation resource type schema:
 		//
@@ -76,13 +858,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The unique identifier of the VM cluster.",
 		//	  "type": "string"
 		//	}
-		"cloud_vm_cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the VM cluster.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"cloud_vm_cluster_id": schemaAttributead8ed68fe67723d3086f0c76(),
 		// Property: ClusterName
 		// CloudFormation resource type schema:
 		//
@@ -93,19 +869,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9-]*$",
 		//	  "type": "string"
 		//	}
-		"cluster_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the Grid Infrastructure (GI) cluster.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 11),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9-]*$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"cluster_name": schemaAttribute522b8cef446c618d0f00df90(),
 		// Property: ComputeModel
 		// CloudFormation resource type schema:
 		//
@@ -113,13 +877,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The OCI model compute model used when you create or clone an instance: ECPU or OCPU. An ECPU is an abstracted measure of compute resources. ECPUs are based on the number of cores elastically allocated from a pool of compute and storage servers. An OCPU is a legacy physical measure of compute resources. OCPUs are based on the physical core of a processor with hyper-threading enabled.",
 		//	  "type": "string"
 		//	}
-		"compute_model": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The OCI model compute model used when you create or clone an instance: ECPU or OCPU. An ECPU is an abstracted measure of compute resources. ECPUs are based on the number of cores elastically allocated from a pool of compute and storage servers. An OCPU is a legacy physical measure of compute resources. OCPUs are based on the physical core of a processor with hyper-threading enabled.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"compute_model": schemaAttributebc27e798c1af31bffcbc6b0c(),
 		// Property: CpuCoreCount
 		// CloudFormation resource type schema:
 		//
@@ -129,18 +887,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"cpu_core_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of CPU cores enabled on the VM cluster.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.Int64{ /*START VALIDATORS*/
-				int64validator.Between(0, 368),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-				int64planmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"cpu_core_count": schemaAttribute6d9fd337dd7a2d7a7cf8a09d(),
 		// Property: DataCollectionOptions
 		// CloudFormation resource type schema:
 		//
@@ -163,44 +910,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"data_collection_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: IsDiagnosticsEventsEnabled
-				"is_diagnostics_events_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether diagnostic collection is enabled for the VM cluster.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: IsHealthMonitoringEnabled
-				"is_health_monitoring_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether health monitoring is enabled for the VM cluster.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: IsIncidentLogsEnabled
-				"is_incident_logs_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether incident logs are enabled for the cloud VM cluster.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The set of diagnostic collection options enabled for the VM cluster.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"data_collection_options": schemaAttributeff6dfbf25e32e1a9b89710ba(),
 		// Property: DataStorageSizeInTBs
 		// CloudFormation resource type schema:
 		//
@@ -208,15 +918,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The size of the data disk group, in terabytes (TB), that's allocated for the VM cluster.",
 		//	  "type": "number"
 		//	}
-		"data_storage_size_in_t_bs": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "The size of the data disk group, in terabytes (TB), that's allocated for the VM cluster.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-				float64planmodifier.UseStateForUnknown(),
-				float64planmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"data_storage_size_in_t_bs": schemaAttributec208ecf88f8f408af5ddcf49(),
 		// Property: DbNodeStorageSizeInGBs
 		// CloudFormation resource type schema:
 		//
@@ -224,15 +926,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The amount of local node storage, in gigabytes (GB), that's allocated for the VM cluster.",
 		//	  "type": "integer"
 		//	}
-		"db_node_storage_size_in_g_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The amount of local node storage, in gigabytes (GB), that's allocated for the VM cluster.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-				int64planmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"db_node_storage_size_in_g_bs": schemaAttribute707992d9060d822c66fa9720(),
 		// Property: DbNodes
 		// CloudFormation resource type schema:
 		//
@@ -340,197 +1034,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"db_nodes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: BackupIpId
-					"backup_ip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The Oracle Cloud ID (OCID) of the backup IP address that's associated with the DB node.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: BackupVnic2Id
-					"backup_vnic_2_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The OCID of the second backup virtual network interface card (VNIC) for the DB node.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: CpuCoreCount
-					"cpu_core_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The number of CPU cores enabled on the DB node.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-							int64planmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: DbNodeArn
-					"db_node_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The Amazon Resource Name (ARN) of the DB node.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: DbNodeId
-					"db_node_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The unique identifier of the DB node.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: DbNodeStorageSizeInGBs
-					"db_node_storage_size_in_g_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The amount of local node storage, in gigabytes (GB), that's allocated on the DB node.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-							int64planmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: DbServerId
-					"db_server_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The unique identifier of the database server that's associated with the DB node.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: DbSystemId
-					"db_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The OCID of the DB system.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: HostIpId
-					"host_ip_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The OCID of the host IP address that's associated with the DB node.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Hostname
-					"hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The host name for the DB node.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: MemorySizeInGBs
-					"memory_size_in_g_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The amount of memory, in gigabytes (GB), that allocated on the DB node.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-							int64planmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Ocid
-					"ocid": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The OCID of the DB node.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Status
-					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The current status of the DB node.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Tags
-					"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Key
-								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The key name of the tag. You can specify a value that's 1 to 128 Unicode characters in length and can't be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, @, -, and \".",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 128),
-										fwvalidators.NotNullString(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: Value
-								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The value for the tag. You can specify a value that's 1 to 256 characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(0, 256),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-							generic.Multiset(),
-							listplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Vnic2Id
-					"vnic_2_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The OCID of the second VNIC.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: VnicId
-					"vnic_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The OCID of the VNIC.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The DB nodes that are implicitly created and managed as part of this VM Cluster.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.UniqueValues(),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"db_nodes": schemaAttributeaeab85f3b93b83fb991cd4ae(),
 		// Property: DbServers
 		// CloudFormation resource type schema:
 		//
@@ -542,16 +1046,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"db_servers": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The list of database servers for the VM cluster.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-				listplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"db_servers": schemaAttribute824d68c25bc78d7ab9e29130(),
 		// Property: DiskRedundancy
 		// CloudFormation resource type schema:
 		//
@@ -559,13 +1054,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The type of redundancy configured for the VM cluster. NORMAL is 2-way redundancy. HIGH is 3-way redundancy.",
 		//	  "type": "string"
 		//	}
-		"disk_redundancy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of redundancy configured for the VM cluster. NORMAL is 2-way redundancy. HIGH is 3-way redundancy.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"disk_redundancy": schemaAttribute543567eb8e3c8afbd79989a5(),
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -576,18 +1065,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The user-friendly name for the VM cluster.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"display_name": schemaAttribute4b54635def9ced1b5a3b3fc5(),
 		// Property: Domain
 		// CloudFormation resource type schema:
 		//
@@ -595,13 +1073,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The domain of the VM cluster.",
 		//	  "type": "string"
 		//	}
-		"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The domain of the VM cluster.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"domain": schemaAttribute8164714f120497061c5e3a85(),
 		// Property: GiVersion
 		// CloudFormation resource type schema:
 		//
@@ -611,18 +1083,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"gi_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The software version of the Oracle Grid Infrastructure (GI) for the VM cluster.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"gi_version": schemaAttributec2b2e37ad459d9f6988555cc(),
 		// Property: Hostname
 		// CloudFormation resource type schema:
 		//
@@ -633,19 +1094,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$",
 		//	  "type": "string"
 		//	}
-		"hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The host name for the VM cluster.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 12),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"hostname": schemaAttribute3c388993994f2692ebce8642(),
 		// Property: IamRoles
 		// CloudFormation resource type schema:
 		//
@@ -674,45 +1123,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"iam_roles": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: AwsIntegration
-					"aws_integration": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The AWS integration configuration settings for the AWS Identity and Access Management (IAM) service role.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: IamRoleArn
-					"iam_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) service role.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Status
-					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The current status of the AWS Identity and Access Management (IAM) service role.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The AWS Identity and Access Management (IAM) service roles associated with the VM cluster.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"iam_roles": schemaAttribute515b382fe34cf5e56241ed6b(),
 		// Property: IsLocalBackupEnabled
 		// CloudFormation resource type schema:
 		//
@@ -720,15 +1131,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Indicates whether database backups to local Exadata storage is enabled for the VM cluster.",
 		//	  "type": "boolean"
 		//	}
-		"is_local_backup_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether database backups to local Exadata storage is enabled for the VM cluster.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-				boolplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"is_local_backup_enabled": schemaAttribute0a3bf4b966b5d37ba6a26b2c(),
 		// Property: IsSparseDiskgroupEnabled
 		// CloudFormation resource type schema:
 		//
@@ -736,15 +1139,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Indicates whether the VM cluster is configured with a sparse disk group.",
 		//	  "type": "boolean"
 		//	}
-		"is_sparse_diskgroup_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether the VM cluster is configured with a sparse disk group.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-				boolplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"is_sparse_diskgroup_enabled": schemaAttribute862dd75e1b5865565a960f0a(),
 		// Property: LicenseModel
 		// CloudFormation resource type schema:
 		//
@@ -756,21 +1151,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"license_model": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Oracle license model applied to the VM cluster.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"BRING_YOUR_OWN_LICENSE",
-					"LICENSE_INCLUDED",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"license_model": schemaAttribute4eb72716be622ecb14fcc6b1(),
 		// Property: ListenerPort
 		// CloudFormation resource type schema:
 		//
@@ -778,13 +1159,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The port number configured for the listener on the VM cluster.",
 		//	  "type": "integer"
 		//	}
-		"listener_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The port number configured for the listener on the VM cluster.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"listener_port": schemaAttribute7ae1d801df23d5c17b84a505(),
 		// Property: MemorySizeInGBs
 		// CloudFormation resource type schema:
 		//
@@ -792,15 +1167,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The amount of memory, in gigabytes (GB), that's allocated for the VM cluster.",
 		//	  "type": "integer"
 		//	}
-		"memory_size_in_g_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The amount of memory, in gigabytes (GB), that's allocated for the VM cluster.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-				int64planmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"memory_size_in_g_bs": schemaAttributec512ad4b348a5b91306d2670(),
 		// Property: NodeCount
 		// CloudFormation resource type schema:
 		//
@@ -808,13 +1175,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The number of nodes in the VM cluster.",
 		//	  "type": "integer"
 		//	}
-		"node_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of nodes in the VM cluster.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"node_count": schemaAttribute8185c4f2983897217d13db62(),
 		// Property: OciResourceAnchorName
 		// CloudFormation resource type schema:
 		//
@@ -822,13 +1183,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the OCI resource anchor for the VM cluster.",
 		//	  "type": "string"
 		//	}
-		"oci_resource_anchor_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the OCI resource anchor for the VM cluster.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"oci_resource_anchor_name": schemaAttributeb728a28655d2a1713fa1fbb6(),
 		// Property: OciUrl
 		// CloudFormation resource type schema:
 		//
@@ -836,13 +1191,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The HTTPS link to the VM cluster in OCI.",
 		//	  "type": "string"
 		//	}
-		"oci_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The HTTPS link to the VM cluster in OCI.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"oci_url": schemaAttribute71c33dc4005e343d6259fb2e(),
 		// Property: Ocid
 		// CloudFormation resource type schema:
 		//
@@ -850,13 +1199,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The OCID of the VM cluster.",
 		//	  "type": "string"
 		//	}
-		"ocid": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The OCID of the VM cluster.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"ocid": schemaAttribute196f01f60f5498fa70db904d(),
 		// Property: OdbNetworkId
 		// CloudFormation resource type schema:
 		//
@@ -864,15 +1207,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The unique identifier of the ODB network for the VM cluster.",
 		//	  "type": "string"
 		//	}
-		"odb_network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the ODB network for the VM cluster.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"odb_network_id": schemaAttribute82d0427c7b5d00dbb42950df(),
 		// Property: ScanDnsName
 		// CloudFormation resource type schema:
 		//
@@ -880,13 +1215,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The FQDN of the DNS record for the Single Client Access Name (SCAN) IP addresses that are associated with the VM cluster.",
 		//	  "type": "string"
 		//	}
-		"scan_dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The FQDN of the DNS record for the Single Client Access Name (SCAN) IP addresses that are associated with the VM cluster.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"scan_dns_name": schemaAttributebf01deb0570ff065eb9bd20c(),
 		// Property: ScanIpIds
 		// CloudFormation resource type schema:
 		//
@@ -898,14 +1227,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"scan_ip_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The OCID of the SCAN IP addresses that are associated with the VM cluster.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"scan_ip_ids": schemaAttributead0354f6bec48cdeb1c8a15a(),
 		// Property: ScanListenerPortTcp
 		// CloudFormation resource type schema:
 		//
@@ -915,19 +1237,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minimum": 1024,
 		//	  "type": "integer"
 		//	}
-		"scan_listener_port_tcp": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Property description not available.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.Int64{ /*START VALIDATORS*/
-				int64validator.Between(1024, 8999),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-				int64planmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// ScanListenerPortTcp is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"scan_listener_port_tcp": schemaAttributef6cb9b5fa007eaf34e6e4598(),
 		// Property: Shape
 		// CloudFormation resource type schema:
 		//
@@ -935,13 +1245,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The hardware model name of the Exadata infrastructure that's running the VM cluster.",
 		//	  "type": "string"
 		//	}
-		"shape": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The hardware model name of the Exadata infrastructure that's running the VM cluster.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"shape": schemaAttribute1360fc7cfe92eb6f6c318c70(),
 		// Property: SshPublicKeys
 		// CloudFormation resource type schema:
 		//
@@ -953,16 +1257,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"ssh_public_keys": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The public key portion of one or more key pairs used for SSH access to the VM cluster.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-				listplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"ssh_public_keys": schemaAttributed65fcf0749641cb1c447f91c(),
 		// Property: StorageSizeInGBs
 		// CloudFormation resource type schema:
 		//
@@ -970,13 +1265,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The amount of local node storage, in gigabytes (GB), that's allocated to the VM cluster.",
 		//	  "type": "integer"
 		//	}
-		"storage_size_in_g_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The amount of local node storage, in gigabytes (GB), that's allocated to the VM cluster.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"storage_size_in_g_bs": schemaAttribute29e34609df731e780eb71e29(),
 		// Property: SystemVersion
 		// CloudFormation resource type schema:
 		//
@@ -986,18 +1275,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"system_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The operating system version of the image chosen for the VM cluster.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"system_version": schemaAttributed7914aff8a220c2d37fe9887(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1029,44 +1307,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that's 1 to 128 Unicode characters in length and can't be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, @, -, and \".",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that's 1 to 256 characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags to assign to the Vm Cluster.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute6067b6620ae4aacfcf173e9e(),
 		// Property: TimeZone
 		// CloudFormation resource type schema:
 		//
@@ -1076,18 +1317,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"time_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time zone of the VM cluster.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"time_zone": schemaAttributeea8e3d00ae30fc13bc1d71fd(),
 		// Property: VipIds
 		// CloudFormation resource type schema:
 		//
@@ -1099,14 +1329,7 @@ func cloudVmClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"vip_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The virtual IP (VIP) addresses that are associated with the VM cluster. Oracle's Cluster Ready Services (CRS) creates and maintains one VIP address for each node in the VM cluster to enable failover. If one node fails, the VIP is reassigned to another active node in the cluster.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"vip_ids": schemaAttributefae3c7b4a19c1c91d7ab2169(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

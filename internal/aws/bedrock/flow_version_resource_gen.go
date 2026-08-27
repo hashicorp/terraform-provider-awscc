@@ -24,6 +24,797 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute042738f272fdf19d20310988() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of a connection in a flow",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute083d5a49fb2777aa59067de6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BucketName
+			"bucket_name": schemaAttributebbbf30dc35a1ee29d17e1c42(),
+		}, /*END SCHEMA*/
+		Description: "s3 Retrieval configuration for Retrieval node",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute09c1c0751495b851742c084f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Code
+			"code": schemaAttributeff6f0e94e0be275103405a09(),
+			// Property: Language
+			"language": schemaAttribute0aa077e867b561e8b7e23c3a(),
+		}, /*END SCHEMA*/
+		Description: "Inline code config strucuture, contains code configs",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0a13662f3948df0cb35b3f79() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MaxTokens
+			"max_tokens": schemaAttributee14fca328edcee87faca79f5(),
+			// Property: StopSequences
+			"stop_sequences": schemaAttribute13c52ba1319a28ed0f40bf0d(),
+			// Property: Temperature
+			"temperature": schemaAttribute297ec4ea855f7285cdd7aaee(),
+			// Property: TopP
+			"top_p": schemaAttribute70cc28331dfc0d84d77d7ff9(),
+		}, /*END SCHEMA*/
+		Description: "Prompt model inference configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0aa077e867b561e8b7e23c3a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Enum encodes the supported language type",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0f4ebadd9e999c7fa6ab9d53() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of a condition in a flow",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute10374402ef7c00bab6972aa7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Text
+			"text": schemaAttribute0a13662f3948df0cb35b3f79(),
+		}, /*END SCHEMA*/
+		Description: "Model inference configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute13c52ba1319a28ed0f40bf0d() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of stop sequences",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1951d84c06e3c74aa77dc067() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "Collector flow node configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1e20d9c7ccd607c8678aced6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Arn representation of the Agent Alias.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2722d96793caa22f03e1214e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Agent
+			"agent": schemaAttributefc7cce443d7a847fc7ad36e6(),
+			// Property: Collector
+			"collector": schemaAttribute1951d84c06e3c74aa77dc067(),
+			// Property: Condition
+			"condition": schemaAttribute2ade99dca1433dd4e201cfa7(),
+			// Property: InlineCode
+			"inline_code": schemaAttribute09c1c0751495b851742c084f(),
+			// Property: Input
+			"input": schemaAttribute66bc72e0c10b61f66c2fcd87(),
+			// Property: Iterator
+			"iterator": schemaAttribute91009a75971e4fc5b25e6b0b(),
+			// Property: KnowledgeBase
+			"knowledge_base": schemaAttribute9fdc317fb40bc084a29d3d0c(),
+			// Property: LambdaFunction
+			"lambda_function": schemaAttributef93873e2cbc8f5ec72b7b393(),
+			// Property: Lex
+			"lex": schemaAttributee57cbaecec31c4a2e3a9562b(),
+			// Property: Output
+			"output": schemaAttributec5a6c532c5ff6e0f04206246(),
+			// Property: Prompt
+			"prompt": schemaAttribute2ca697e4c5918d3cc805b04b(),
+			// Property: Retrieval
+			"retrieval": schemaAttribute6c527cf67ca8d9c399f9fe91(),
+			// Property: Storage
+			"storage": schemaAttribute3099c5832a780bb4847b14d0(),
+		}, /*END SCHEMA*/
+		Description: "Node configuration in a flow",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2751b65d0e8ea9a15ccea342() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BucketName
+			"bucket_name": schemaAttribute5d2f96217f13c8dfb48ce6b5(),
+		}, /*END SCHEMA*/
+		Description: "s3 storage configuration for storage node",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute28994bbe7354de9ea9e94fdf() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InferenceConfiguration
+			"inference_configuration": schemaAttribute10374402ef7c00bab6972aa7(),
+			// Property: ModelId
+			"model_id": schemaAttribute5e17e24aa2f0ff4c55e92a1a(),
+			// Property: TemplateConfiguration
+			"template_configuration": schemaAttributee855ea9bdad96788b84a46ec(),
+			// Property: TemplateType
+			"template_type": schemaAttributed1d33d8916d1faa3b77e7aa2(),
+		}, /*END SCHEMA*/
+		Description: "Inline prompt configuration for prompt node",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute297ec4ea855f7285cdd7aaee() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "Controls randomness, higher values increase diversity",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2ade99dca1433dd4e201cfa7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Conditions
+			"conditions": schemaAttributea67d510d4e34a4bf0d032d2c(),
+		}, /*END SCHEMA*/
+		Description: "Condition flow node configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2ca697e4c5918d3cc805b04b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: GuardrailConfiguration
+			"guardrail_configuration": schemaAttributef4c000ec3610278f286d67b2(),
+			// Property: SourceConfiguration
+			"source_configuration": schemaAttributedb1252cf1f43f36947afaefb(),
+		}, /*END SCHEMA*/
+		Description: "Prompt flow node configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3066f09cdae9eb5224927235() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of a node output in a flow",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3099c5832a780bb4847b14d0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ServiceConfiguration
+			"service_configuration": schemaAttribute6a39d0f5a0b1fb54628a399a(),
+		}, /*END SCHEMA*/
+		Description: "Storage flow node configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute35c1202021cbf6cff82c366c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name for the flow",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute361cb8140c1b9ad2b98dfc39() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Schema Type for Flow APIs",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3b3fbfce1f28c03334c15f06() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Connections
+			"connections": schemaAttribute693b5c4eea5711d9869baa35(),
+			// Property: Nodes
+			"nodes": schemaAttribute3d593e9b85547d22d9b691c7(),
+		}, /*END SCHEMA*/
+		Description: "Flow definition",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3d593e9b85547d22d9b691c7() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Configuration
+				"configuration": schemaAttribute2722d96793caa22f03e1214e(),
+				// Property: Inputs
+				"inputs": schemaAttributeb9b967ddc693c31f06a2270f(),
+				// Property: Name
+				"name": schemaAttributed4c81c103038ee7c5ec05d5f(),
+				// Property: Outputs
+				"outputs": schemaAttributedd7b005d4ea402dd34c77d65(),
+				// Property: Type
+				"type": schemaAttributeecc5a7b02035b8bc7b72840a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of nodes in a flow",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4a19271876bcf9ea87301981() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Version of the guardrail",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5d2f96217f13c8dfb48ce6b5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "bucket name of an s3 that will be used for storage flow node configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5e17e24aa2f0ff4c55e92a1a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN or Id of a Bedrock Foundational Model or Inference Profile, or the ARN of a imported model, or a provisioned throughput ARN for custom models.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5eeffb9855ad0e3a041c3d31() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Description of the flow version",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 200),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute66bc72e0c10b61f66c2fcd87() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "Input flow node configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute693b5c4eea5711d9869baa35() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Configuration
+				"configuration": schemaAttribute96ca784db59f2150b4f57262(),
+				// Property: Name
+				"name": schemaAttribute042738f272fdf19d20310988(),
+				// Property: Source
+				"source": schemaAttributed4c81c103038ee7c5ec05d5f(),
+				// Property: Target
+				"target": schemaAttributed4c81c103038ee7c5ec05d5f(),
+				// Property: Type
+				"type": schemaAttribute6d0ade09cd46b082c2fb87df(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of connections",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6a39d0f5a0b1fb54628a399a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3
+			"s3": schemaAttribute2751b65d0e8ea9a15ccea342(),
+		}, /*END SCHEMA*/
+		Description: "storage service configuration for storage node",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6c527cf67ca8d9c399f9fe91() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ServiceConfiguration
+			"service_configuration": schemaAttributeca24b821113dba8bd2dff4c7(),
+		}, /*END SCHEMA*/
+		Description: "Retrieval flow node configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6c5bd51ebddb061173b087ee() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Identifier of the KnowledgeBase",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6d0ade09cd46b082c2fb87df() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Connection type",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute70cc28331dfc0d84d77d7ff9() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "Cumulative probability cutoff for token selection",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8cb120a1701fcb5c80951804() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InputVariables
+			"input_variables": schemaAttributede07e418436a164644a1fa00(),
+			// Property: Text
+			"text": schemaAttributec8bea8ef53abe6f6583cf4a6(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for text prompt template",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute905fb8f8226213b4418a5e28() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Arn representation of the Flow",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:flow/[0-9a-zA-Z]{10}$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute91009a75971e4fc5b25e6b0b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "Iterator flow node configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute96ca784db59f2150b4f57262() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Conditional
+			"conditional": schemaAttributeb901a3ba9c0c126de5e1d4c8(),
+			// Property: Data
+			"data": schemaAttributed6dda546b1f25caf7ac0b331(),
+		}, /*END SCHEMA*/
+		Description: "Connection configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9d6da907f84933282c188a95() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A KMS key ARN",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9fdc317fb40bc084a29d3d0c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: GuardrailConfiguration
+			"guardrail_configuration": schemaAttributef4c000ec3610278f286d67b2(),
+			// Property: KnowledgeBaseId
+			"knowledge_base_id": schemaAttribute6c5bd51ebddb061173b087ee(),
+			// Property: ModelId
+			"model_id": schemaAttribute5e17e24aa2f0ff4c55e92a1a(),
+		}, /*END SCHEMA*/
+		Description: "Knowledge base flow node configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea67d510d4e34a4bf0d032d2c() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Expression
+				"expression": schemaAttributed8038ee254d95b3cf70162fd(),
+				// Property: Name
+				"name": schemaAttribute0f4ebadd9e999c7fa6ab9d53(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of conditions in a condition node",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb309cd921af3b0068d479b46() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN of a Lambda.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb6aea4d9f32c7a1c9419f20c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Type of input/output for a node in a flow",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb901a3ba9c0c126de5e1d4c8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Condition
+			"condition": schemaAttribute0f4ebadd9e999c7fa6ab9d53(),
+		}, /*END SCHEMA*/
+		Description: "Conditional connection configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb9b967ddc693c31f06a2270f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Expression
+				"expression": schemaAttributef090856b8728882ec50918da(),
+				// Property: Name
+				"name": schemaAttributec5179664c9b05b1b47faecd3(),
+				// Property: Type
+				"type": schemaAttributeb6aea4d9f32c7a1c9419f20c(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of node inputs in a flow",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebb88d55eb9e5e02215e1e799() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "Time Stamp.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebbbf30dc35a1ee29d17e1c42() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "bucket name of an s3 that will be used for Retrieval flow node configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebd60ad138d92bb583eeff4c6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Identifier for a Flow",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec2d4de677c078a425cfc2211() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN of a IAM role",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec5179664c9b05b1b47faecd3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of a node input in a flow",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec5a6c532c5ff6e0f04206246() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "Output flow node configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec8bea8ef53abe6f6583cf4a6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Prompt content for String prompt template",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca24b821113dba8bd2dff4c7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3
+			"s3": schemaAttribute083d5a49fb2777aa59067de6(),
+		}, /*END SCHEMA*/
+		Description: "Retrieval service configuration for Retrieval node",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecfba8dcb1e522c2d93ffde6f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN of a prompt resource possibly with a version",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed1d33d8916d1faa3b77e7aa2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Prompt template type",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed4c81c103038ee7c5ec05d5f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of a node in a flow",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed651fb032641945c53cf091a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Numerical Version.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed6dda546b1f25caf7ac0b331() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SourceOutput
+			"source_output": schemaAttribute3066f09cdae9eb5224927235(),
+			// Property: TargetInput
+			"target_input": schemaAttributec5179664c9b05b1b47faecd3(),
+		}, /*END SCHEMA*/
+		Description: "Data connection configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed8038ee254d95b3cf70162fd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Expression for a condition in a flow",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedb1252cf1f43f36947afaefb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Inline
+			"inline": schemaAttribute28994bbe7354de9ea9e94fdf(),
+			// Property: Resource
+			"resource": schemaAttributefd87129e89667ad4b5d6568e(),
+		}, /*END SCHEMA*/
+		Description: "Prompt source configuration for prompt node",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedd7b005d4ea402dd34c77d65() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttribute3066f09cdae9eb5224927235(),
+				// Property: Type
+				"type": schemaAttributeb6aea4d9f32c7a1c9419f20c(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of node outputs in a flow",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributede07e418436a164644a1fa00() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttributeeb483f7bb82b4dfb86154e0f(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of input variables",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee14fca328edcee87faca79f5() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "Maximum length of output",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee20078653301e9a13401be92() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Identifier for the guardrail, could be the id or the arn",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee57cbaecec31c4a2e3a9562b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BotAliasArn
+			"bot_alias_arn": schemaAttributefcae0a25d0171865efff9f99(),
+			// Property: LocaleId
+			"locale_id": schemaAttributee819ef7887d60ad11c3f4d22(),
+		}, /*END SCHEMA*/
+		Description: "Lex flow node configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee819ef7887d60ad11c3f4d22() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Lex bot locale id",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee855ea9bdad96788b84a46ec() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Text
+			"text": schemaAttribute8cb120a1701fcb5c80951804(),
+		}, /*END SCHEMA*/
+		Description: "Prompt template configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeb483f7bb82b4dfb86154e0f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name for an input variable",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeecc5a7b02035b8bc7b72840a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Flow node types",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef090856b8728882ec50918da() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Expression for a node input in a flow",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef4c000ec3610278f286d67b2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: GuardrailIdentifier
+			"guardrail_identifier": schemaAttributee20078653301e9a13401be92(),
+			// Property: GuardrailVersion
+			"guardrail_version": schemaAttribute4a19271876bcf9ea87301981(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for a guardrail",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef93873e2cbc8f5ec72b7b393() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LambdaArn
+			"lambda_arn": schemaAttributeb309cd921af3b0068d479b46(),
+		}, /*END SCHEMA*/
+		Description: "Lambda function flow node configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefc7cce443d7a847fc7ad36e6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AgentAliasArn
+			"agent_alias_arn": schemaAttribute1e20d9c7ccd607c8678aced6(),
+		}, /*END SCHEMA*/
+		Description: "Agent flow node configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefcae0a25d0171865efff9f99() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN of a Lex bot alias",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefd87129e89667ad4b5d6568e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PromptArn
+			"prompt_arn": schemaAttributecfba8dcb1e522c2d93ffde6f(),
+		}, /*END SCHEMA*/
+		Description: "Resource prompt configuration for prompt node",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeff6f0e94e0be275103405a09() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The inline code entered by customers. max size is 5MB.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_bedrock_flow_version", flowVersionResource)
 }
@@ -40,14 +831,7 @@ func flowVersionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "Time Stamp.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttributebb88d55eb9e5e02215e1e799(),
 		// Property: CustomerEncryptionKeyArn
 		// CloudFormation resource type schema:
 		//
@@ -58,13 +842,7 @@ func flowVersionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$",
 		//	  "type": "string"
 		//	}
-		"customer_encryption_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A KMS key ARN",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"customer_encryption_key_arn": schemaAttribute9d6da907f84933282c188a95(),
 		// Property: Definition
 		// CloudFormation resource type schema:
 		//
@@ -675,471 +1453,7 @@ func flowVersionResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Connections
-				"connections": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Configuration
-							"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Conditional
-									"conditional": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: Condition
-											"condition": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Name of a condition in a flow",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "Conditional connection configuration",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Data
-									"data": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: SourceOutput
-											"source_output": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Name of a node output in a flow",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: TargetInput
-											"target_input": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Name of a node input in a flow",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "Data connection configuration",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Connection configuration",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Name
-							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Name of a connection in a flow",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Source
-							"source": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Name of a node in a flow",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Target
-							"target": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Name of a node in a flow",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Type
-							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Connection type",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "List of connections",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Nodes
-				"nodes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Configuration
-							"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Agent
-									"agent": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: AgentAliasArn
-											"agent_alias_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Arn representation of the Agent Alias.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "Agent flow node configuration",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Collector
-									"collector": schema.StringAttribute{ /*START ATTRIBUTE*/
-										CustomType:  jsontypes.NormalizedType{},
-										Description: "Collector flow node configuration",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Condition
-									"condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: Conditions
-											"conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: Expression
-														"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "Expression for a condition in a flow",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: Name
-														"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "Name of a condition in a flow",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-												}, /*END NESTED OBJECT*/
-												Description: "List of conditions in a condition node",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "Condition flow node configuration",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: InlineCode
-									"inline_code": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: Code
-											"code": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The inline code entered by customers. max size is 5MB.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: Language
-											"language": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Enum encodes the supported language type",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "Inline code config strucuture, contains code configs",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Input
-									"input": schema.StringAttribute{ /*START ATTRIBUTE*/
-										CustomType:  jsontypes.NormalizedType{},
-										Description: "Input flow node configuration",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Iterator
-									"iterator": schema.StringAttribute{ /*START ATTRIBUTE*/
-										CustomType:  jsontypes.NormalizedType{},
-										Description: "Iterator flow node configuration",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: KnowledgeBase
-									"knowledge_base": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: GuardrailConfiguration
-											"guardrail_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: GuardrailIdentifier
-													"guardrail_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "Identifier for the guardrail, could be the id or the arn",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: GuardrailVersion
-													"guardrail_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "Version of the guardrail",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Description: "Configuration for a guardrail",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: KnowledgeBaseId
-											"knowledge_base_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Identifier of the KnowledgeBase",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: ModelId
-											"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "ARN or Id of a Bedrock Foundational Model or Inference Profile, or the ARN of a imported model, or a provisioned throughput ARN for custom models.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "Knowledge base flow node configuration",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: LambdaFunction
-									"lambda_function": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: LambdaArn
-											"lambda_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "ARN of a Lambda.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "Lambda function flow node configuration",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Lex
-									"lex": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: BotAliasArn
-											"bot_alias_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "ARN of a Lex bot alias",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: LocaleId
-											"locale_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Lex bot locale id",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "Lex flow node configuration",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Output
-									"output": schema.StringAttribute{ /*START ATTRIBUTE*/
-										CustomType:  jsontypes.NormalizedType{},
-										Description: "Output flow node configuration",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Prompt
-									"prompt": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: GuardrailConfiguration
-											"guardrail_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: GuardrailIdentifier
-													"guardrail_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "Identifier for the guardrail, could be the id or the arn",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: GuardrailVersion
-													"guardrail_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "Version of the guardrail",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Description: "Configuration for a guardrail",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: SourceConfiguration
-											"source_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: Inline
-													"inline": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: InferenceConfiguration
-															"inference_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: Text
-																	"text": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: MaxTokens
-																			"max_tokens": schema.Float64Attribute{ /*START ATTRIBUTE*/
-																				Description: "Maximum length of output",
-																				Computed:    true,
-																			}, /*END ATTRIBUTE*/
-																			// Property: StopSequences
-																			"stop_sequences": schema.ListAttribute{ /*START ATTRIBUTE*/
-																				ElementType: types.StringType,
-																				Description: "List of stop sequences",
-																				Computed:    true,
-																			}, /*END ATTRIBUTE*/
-																			// Property: Temperature
-																			"temperature": schema.Float64Attribute{ /*START ATTRIBUTE*/
-																				Description: "Controls randomness, higher values increase diversity",
-																				Computed:    true,
-																			}, /*END ATTRIBUTE*/
-																			// Property: TopP
-																			"top_p": schema.Float64Attribute{ /*START ATTRIBUTE*/
-																				Description: "Cumulative probability cutoff for token selection",
-																				Computed:    true,
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "Prompt model inference configuration",
-																		Computed:    true,
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Model inference configuration",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: ModelId
-															"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "ARN or Id of a Bedrock Foundational Model or Inference Profile, or the ARN of a imported model, or a provisioned throughput ARN for custom models.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: TemplateConfiguration
-															"template_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: Text
-																	"text": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: InputVariables
-																			"input_variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-																				NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																						// Property: Name
-																						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																							Description: "Name for an input variable",
-																							Computed:    true,
-																						}, /*END ATTRIBUTE*/
-																					}, /*END SCHEMA*/
-																				}, /*END NESTED OBJECT*/
-																				Description: "List of input variables",
-																				Computed:    true,
-																			}, /*END ATTRIBUTE*/
-																			// Property: Text
-																			"text": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "Prompt content for String prompt template",
-																				Computed:    true,
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																		Description: "Configuration for text prompt template",
-																		Computed:    true,
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Prompt template configuration",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: TemplateType
-															"template_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "Prompt template type",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-														Description: "Inline prompt configuration for prompt node",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: Resource
-													"resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: PromptArn
-															"prompt_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "ARN of a prompt resource possibly with a version",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-														Description: "Resource prompt configuration for prompt node",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Description: "Prompt source configuration for prompt node",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "Prompt flow node configuration",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Retrieval
-									"retrieval": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: ServiceConfiguration
-											"service_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: S3
-													"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: BucketName
-															"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "bucket name of an s3 that will be used for Retrieval flow node configuration",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-														Description: "s3 Retrieval configuration for Retrieval node",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Description: "Retrieval service configuration for Retrieval node",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "Retrieval flow node configuration",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Storage
-									"storage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: ServiceConfiguration
-											"service_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: S3
-													"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: BucketName
-															"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "bucket name of an s3 that will be used for storage flow node configuration",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-														Description: "s3 storage configuration for storage node",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Description: "storage service configuration for storage node",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "Storage flow node configuration",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Node configuration in a flow",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Inputs
-							"inputs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Expression
-										"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Expression for a node input in a flow",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Name
-										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Name of a node input in a flow",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Type
-										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Type of input/output for a node in a flow",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Description: "List of node inputs in a flow",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Name
-							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Name of a node in a flow",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Outputs
-							"outputs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Name
-										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Name of a node output in a flow",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Type
-										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Type of input/output for a node in a flow",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Description: "List of node outputs in a flow",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Type
-							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Flow node types",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "List of nodes in a flow",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Flow definition",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"definition": schemaAttribute3b3fbfce1f28c03334c15f06(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -1149,18 +1463,7 @@ func flowVersionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Description of the flow version",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 200),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute5eeffb9855ad0e3a041c3d31(),
 		// Property: ExecutionRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -1170,13 +1473,7 @@ func flowVersionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:aws(-[^:]+)?:iam::([0-9]{12})?:role/(service-role/)?.+$",
 		//	  "type": "string"
 		//	}
-		"execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ARN of a IAM role",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"execution_role_arn": schemaAttributec2d4de677c078a425cfc2211(),
 		// Property: FlowArn
 		// CloudFormation resource type schema:
 		//
@@ -1185,16 +1482,7 @@ func flowVersionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:flow/[0-9a-zA-Z]{10}$",
 		//	  "type": "string"
 		//	}
-		"flow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Arn representation of the Flow",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:flow/[0-9a-zA-Z]{10}$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"flow_arn": schemaAttribute905fb8f8226213b4418a5e28(),
 		// Property: FlowId
 		// CloudFormation resource type schema:
 		//
@@ -1203,13 +1491,7 @@ func flowVersionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[0-9a-zA-Z]{10}$",
 		//	  "type": "string"
 		//	}
-		"flow_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Identifier for a Flow",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"flow_id": schemaAttributebd60ad138d92bb583eeff4c6(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -1218,13 +1500,7 @@ func flowVersionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^([0-9a-zA-Z][_-]?){1,100}$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Name for the flow",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute35c1202021cbf6cff82c366c(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -1238,13 +1514,7 @@ func flowVersionResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Schema Type for Flow APIs",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute361cb8140c1b9ad2b98dfc39(),
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -1253,13 +1523,7 @@ func flowVersionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[0-9]{1,5}$",
 		//	  "type": "string"
 		//	}
-		"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Numerical Version.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"version": schemaAttributed651fb032641945c53cf091a(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

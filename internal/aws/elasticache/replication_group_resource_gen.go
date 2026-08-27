@@ -28,6 +28,857 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute0727ae33f24bf0a3c50b8aec() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CloudWatchLogsDetails
+			"cloudwatch_logs_details": schemaAttributebc1b6f9e72951eb567cf20ca(),
+			// Property: KinesisFirehoseDetails
+			"kinesis_firehose_details": schemaAttributec77be824f1edab0635fd0e6b(),
+		}, /*END SCHEMA*/
+		Description: "Configuration details of either a CloudWatch Logs destination or Kinesis Data Firehose destination.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0a2f44a054f63ba4e450545b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the parameter group to associate with this replication group. If this argument is omitted, the default cache parameter group for the specified engine is used.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// CacheParameterGroupName is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1216c3802fceb28b22fb9243() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1dbd4bd4a50171da22b16499() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The port number that the cache engine is listening on.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute256a97b7e4b4aae44afa5a81() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of a snapshot from which to restore data into the new replication group. The snapshot status changes to restoring while the new replication group is being created.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// SnapshotName is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2607fab38a78daebce4f55a8() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of clusters this replication group initially has.This parameter is not used if there is more than one node group (shard). You should use ReplicasPerNodeGroup instead.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2616312f9d509350554b0e96() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Address
+			"address": schemaAttribute8b7e44bea08a6e4ae156027b(),
+			// Property: Port
+			"port": schemaAttribute1dbd4bd4a50171da22b16499(),
+		}, /*END SCHEMA*/
+		Description: "The endpoint of the reader node in the replication group.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2808093fcc011521e4c59861() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The resolved durability state of the replication group after resolving the default value. This is a read-only property.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute28ae198132ff7abcf00ff94c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Valid values are either json or text.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2e4aa0c0555ea1208e07ff19() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A user-created description for the replication group.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2e64b9fbf2dd5c4ec73c0f5b() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of cache security group names to associate with this replication group.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.UniqueValues(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// CacheSecurityGroupNames is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute307bcdb4d4265a9f905bbcb8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the KMS key used to encrypt the disk on the cluster.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// KmsKeyId is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute373bba6bcdb8e4c2c7e98e6b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Either the ElastiCache for Redis supplied 4-digit id or a user supplied id for the node group these configuration values apply to.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3c01a8e700e70e1cab74066a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Reserved parameter. The password used to access a password protected server.AuthToken can be specified only on replication groups where TransitEncryptionEnabled is true. For more information.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// AuthToken is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3ef3e59fa13169228c13a3b7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Kinesis Data Firehose delivery stream.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute40cbc45d391bd76eecd1e580() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "One or more Amazon VPC security groups associated with this replication group.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.UniqueValues(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// SecurityGroupIds is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute43972542103281ddaaaee757() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Global datastore",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute52c52524fe7f7f6f527f5e33() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute53ae984c22f7f1a1adf474c7() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of EC2 Availability Zones in which the replication group's clusters are created. The order of the Availability Zones in the list is the order in which clusters are allocated. The primary cluster is created in the first AZ in the list. This parameter is not used if there is more than one node group (shard). You should use NodeGroupConfiguration instead.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+			listplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// PreferredCacheClusterAZs is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute542237598d9d70eb36160d44() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// PreferredMaintenanceWindow is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute549cde275621120c03cdbf8b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The replication group identifier. This parameter is stored as a lowercase string.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute56193abd9176af8fe5836ac0() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The ID of user group to associate with the replication group.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.UniqueValues(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute57ef1797ee48322d5c2738e5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Enabled or Disabled. To modify cluster mode from Disabled to Enabled, you must first set the cluster mode to Compatible. Compatible mode allows your Redis OSS clients to connect using both cluster mode enabled and cluster mode disabled. After you migrate all Redis OSS clients to use cluster mode enabled, you can then complete cluster mode configuration and set the cluster mode to Enabled. For more information, see Modify cluster mode.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute59ec3fc9eff06d7825fefb50() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "This parameter is currently disabled.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6455adfdad644b8504b57ff4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The compute and memory capacity of the nodes in the node group (shard).",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute67296c4bdf12d91123c5db29() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of ports for the read-only replicas. The order of the ports maps to the order of the addresses from the ReadEndPoint.Addresses attribute.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6a7219cc4ef5bdbc4e0fdc81() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of endpoints for the read-only replicas. The order of the addresses maps to the order of the ports from the ReadEndPoint.Ports attribute.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b24d3095481aea474de2012() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A setting that allows you to migrate your clients to use in-transit encryption, with no downtime. When setting TransitEncryptionEnabled to true, you can set your TransitEncryptionMode to preferred in the same request, to allow both encrypted and unencrypted connections at the same time. Once you migrate all your Redis OSS clients to use encrypted connections you can modify the value to required to allow encrypted connections only. Setting TransitEncryptionMode to required is a two-step process that requires you to first set the TransitEncryptionMode to preferred, after that you can set TransitEncryptionMode to required. This process will not trigger the replacement of the replication group.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6c5fd1ae7956e8a9f948699f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The cluster ID that is used as the daily snapshot source for the replication group. This parameter cannot be set for Redis (cluster mode enabled) replication groups.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6e41791cc3a42f49fac7f247() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The daily time range (in UTC) during which ElastiCache begins taking a daily snapshot of your node group (shard).",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute725ba7f1e981c59f8a0f977c() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of read replica nodes in this node group (shard).",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute775d38a3d2f4f8329b650b8e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string of comma-separated values where the first set of values are the slot numbers (zero based), and the second set of values are the keyspaces for each slot. The following example specifies three slots (numbered 0, 1, and 2): 0,1,2,0-4999,5000-9999,10000-16,383.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7853e058991ed5009438bb1b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the CloudWatch Logs log group.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b3c22ea7b65315dbd150e48() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string containing a comma-separated list of endpoints for the primary and read-only replicas, formatted as [address1, address2, ...]. The order of the addresses maps to the order of the ports from the ReadEndPoint.Ports attribute.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute82131d88f3e1d5fdfdc0c2ae() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "An optional parameter that specifies the number of replica nodes in each node group (shard). Valid values are 0 to 5.\n\n**Note:** Using ReplicasPerNodeGroup with NodeGroupConfiguration results in resource replacement. For online scaling, use ReplicasPerNodeGroup alone.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute84c12d5bfac1e38b82ab4cf8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the cache engine to be used for the clusters in this replication group.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute86b9df8d6cade812c9a360af() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Addresses
+			"addresses": schemaAttribute7b3c22ea7b65315dbd150e48(),
+			// Property: AddressesList
+			"addresses_list": schemaAttribute6a7219cc4ef5bdbc4e0fdc81(),
+			// Property: Ports
+			"ports": schemaAttributeed6f6c9281d39ccf3bfb12f2(),
+			// Property: PortsList
+			"ports_list": schemaAttribute67296c4bdf12d91123c5db29(),
+		}, /*END SCHEMA*/
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8b7e44bea08a6e4ae156027b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The DNS hostname of the cache node.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8bcc0a0db7b91e7dcbf7aa0b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the cache subnet group to be used for the replication group.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// CacheSubnetGroupName is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute97526b240133aefe770143a1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version number of the cache engine to be used for the clusters in this replication group. To view the supported cache engine versions, use the DescribeCacheEngineVersions operation.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// EngineVersion is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ceada7607fa11ea3ba2be38() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Must be either ipv4 | ipv6 | dual_stack. IPv6 is supported for workloads using Redis OSS engine version 6.2 onward or Memcached engine version 1.6.6 on all instances built on the Nitro system",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea42a8632173690318d526419() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A flag indicating if you have Multi-AZ enabled to enhance fault tolerance. For more information, see Minimizing Downtime: Multi-AZ.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeac0da105afa2edc66a05934a() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Enables data tiering. Data tiering is only supported for replication groups using the r6gd node type. This parameter must be set to true when using r6gd nodes.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+			boolplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb0f70a275da4f2e362c3d8ac() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: NodeGroupId
+				"node_group_id": schemaAttribute373bba6bcdb8e4c2c7e98e6b(),
+				// Property: PrimaryAvailabilityZone
+				"primary_availability_zone": schemaAttributeb9f5d985468a3e4a02207dde(),
+				// Property: ReplicaAvailabilityZones
+				"replica_availability_zones": schemaAttributec4088cc4ad8e64c1c28fb14f(),
+				// Property: ReplicaCount
+				"replica_count": schemaAttribute725ba7f1e981c59f8a0f977c(),
+				// Property: Slots
+				"slots": schemaAttribute775d38a3d2f4f8329b650b8e(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "NodeGroupConfiguration is a property of the AWS::ElastiCache::ReplicationGroup resource that configures an Amazon ElastiCache (ElastiCache) Redis cluster node group.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// NodeGroupConfiguration is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb5325fc66b837bba57fe5f7b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Address
+			"address": schemaAttribute8b7e44bea08a6e4ae156027b(),
+			// Property: Port
+			"port": schemaAttribute1dbd4bd4a50171da22b16499(),
+		}, /*END SCHEMA*/
+		Description: "The primary endpoint configuration",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb58a877c391d4b71638bdc84() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Address
+			"address": schemaAttribute8b7e44bea08a6e4ae156027b(),
+			// Property: Port
+			"port": schemaAttribute1dbd4bd4a50171da22b16499(),
+		}, /*END SCHEMA*/
+		Description: "The configuration details of the replication group.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb88cf38ae3ee2f76c183f3ea() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether a read-only replica is automatically promoted to read/write primary if the existing primary fails. AutomaticFailoverEnabled must be enabled for Redis (cluster mode enabled) replication groups.",
+		Optional:    true,
+		Computed:    true,
+		Default:     booldefault.StaticBool(false),
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb9f5d985468a3e4a02207dde() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Availability Zone where the primary node of this node group (shard) is launched.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebc1b6f9e72951eb567cf20ca() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LogGroup
+			"log_group": schemaAttribute7853e058991ed5009438bb1b(),
+		}, /*END SCHEMA*/
+		Description: "The configuration details of the CloudWatch Logs destination. Note that this field is marked as required but only if CloudWatch Logs was chosen as the destination.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebcf08552efde0efaf2a6a41b() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A flag that enables in-transit encryption when set to true.",
+		Optional:    true,
+		Computed:    true,
+		Default:     booldefault.StaticBool(false),
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebe8f2e05f9c3428f2e9fc3cd() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A flag that enables encryption at rest when set to true.AtRestEncryptionEnabled after the replication group is created. To enable encryption at rest on a replication group you must set AtRestEncryptionEnabled to true when you create the replication group.",
+		Optional:    true,
+		Computed:    true,
+		Default:     booldefault.StaticBool(false),
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+			boolplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec319cd36c1ad54937bb1665f() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of Amazon Resource Names (ARN) that uniquely identify the Redis RDB snapshot files stored in Amazon S3.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.UniqueValues(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+			listplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// SnapshotArns is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec4088cc4ad8e64c1c28fb14f() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of Availability Zones to be used for the read replicas. The number of Availability Zones in this list must match the value of ReplicaCount or ReplicasPerNodeGroup if not specified.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec653b8c255c3e6c869f80188() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "An optional parameter that specifies the number of node groups (shards) for this Redis (cluster mode enabled) replication group. For Redis (cluster mode disabled) either omit this parameter or set it to 1.",
+		Optional:    true,
+		Computed:    true,
+		Default:     int64default.StaticInt64(1),
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// NumNodeGroups is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec77be824f1edab0635fd0e6b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DeliveryStream
+			"delivery_stream": schemaAttribute3ef3e59fa13169228c13a3b7(),
+		}, /*END SCHEMA*/
+		Description: "The configuration details of the Kinesis Data Firehose destination. Note that this field is marked as required but only if Kinesis Data Firehose was chosen as the destination.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec7e4e7b2934929969cd0315b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specify either CloudWatch Logs or Kinesis Data Firehose as the destination type. Valid values are either cloudwatch-logs or kinesis-firehose.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec90947ec989a7381a3ac6849() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The durability setting for the replication group. Valid values: default, async, sync, disabled. Enabling durability on an existing non-durable cluster or disabling durability on an existing durable cluster is not currently supported and will result in an error; specify the desired durability at create time. The resolved state is returned in EffectiveDurability.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"default",
+				"async",
+				"sync",
+				"disabled",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed5c2bb0e4ee312eb96b275b7() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The port number on which each member of the replication group accepts connections.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+			int64planmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedcdd0c897dff274b1e6a0372() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the cluster that serves as the primary for this replication group. This cluster must already exist and have a status of available.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// PrimaryClusterId is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee002e971bc5e179b46f57046() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DestinationDetails
+				"destination_details": schemaAttribute0727ae33f24bf0a3c50b8aec(),
+				// Property: DestinationType
+				"destination_type": schemaAttributec7e4e7b2934929969cd0315b(),
+				// Property: LogFormat
+				"log_format": schemaAttribute28ae198132ff7abcf00ff94c(),
+				// Property: LogType
+				"log_type": schemaAttributefd5f104ade3478e92e2a4233(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Specifies the destination, format and type of the logs.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee621e396ce12d21386bffbcb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic to which notifications are sent.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// NotificationTopicArn is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeae44f0cac79b4aff4e019f9() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of days for which ElastiCache retains automatic snapshots before deleting them. For example, if you set SnapshotRetentionLimit to 5, a snapshot that was taken today is retained for 5 days before being deleted.",
+		Optional:    true,
+		Computed:    true,
+		Default:     int64default.StaticInt64(0),
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeed6f6c9281d39ccf3bfb12f2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string containing a comma-separated list of ports for the read-only replicas, formatted as [port1, port2, ...]. The order of the ports maps to the order of the addresses from the ReadEndPoint.Addresses attribute.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefa45211d04106eba8a48748e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The network type you choose when creating a replication group, either ipv4 | ipv6. IPv6 is supported for workloads using Redis OSS engine version 6.2 onward or Memcached engine version 1.6.6 on all instances built on the Nitro system.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefbce310a2904fcae4d8ffcdc() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute1216c3802fceb28b22fb9243(),
+				// Property: Value
+				"value": schemaAttribute52c52524fe7f7f6f527f5e33(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of cost allocation tags to be added to this resource. Tags are comma-separated key,value pairs (e.g. Key=myKey, Value=myKeyValue. You can include multiple tags as shown following: Key=myKey, Value=myKeyValue Key=mySecondKey, Value=mySecondKeyValue.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefd5f104ade3478e92e2a4233() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Valid value is either slow-log, which refers to slow-log or engine-log.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_elasticache_replication_group", replicationGroupResource)
 	registry.AddListResourceFactory("awscc_elasticache_replication_group", generic.NewListResource(replicationGroupResource))
@@ -45,16 +896,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A flag that enables encryption at rest when set to true.AtRestEncryptionEnabled after the replication group is created. To enable encryption at rest on a replication group you must set AtRestEncryptionEnabled to true when you create the replication group.",
 		//	  "type": "boolean"
 		//	}
-		"at_rest_encryption_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "A flag that enables encryption at rest when set to true.AtRestEncryptionEnabled after the replication group is created. To enable encryption at rest on a replication group you must set AtRestEncryptionEnabled to true when you create the replication group.",
-			Optional:    true,
-			Computed:    true,
-			Default:     booldefault.StaticBool(false),
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-				boolplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"at_rest_encryption_enabled": schemaAttributebe8f2e05f9c3428f2e9fc3cd(),
 		// Property: AuthToken
 		// CloudFormation resource type schema:
 		//
@@ -62,15 +904,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Reserved parameter. The password used to access a password protected server.AuthToken can be specified only on replication groups where TransitEncryptionEnabled is true. For more information.",
 		//	  "type": "string"
 		//	}
-		"auth_token": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Reserved parameter. The password used to access a password protected server.AuthToken can be specified only on replication groups where TransitEncryptionEnabled is true. For more information.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// AuthToken is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"auth_token": schemaAttribute3c01a8e700e70e1cab74066a(),
 		// Property: AutoMinorVersionUpgrade
 		// CloudFormation resource type schema:
 		//
@@ -78,14 +912,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "This parameter is currently disabled.",
 		//	  "type": "boolean"
 		//	}
-		"auto_minor_version_upgrade": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "This parameter is currently disabled.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"auto_minor_version_upgrade": schemaAttribute59ec3fc9eff06d7825fefb50(),
 		// Property: AutomaticFailoverEnabled
 		// CloudFormation resource type schema:
 		//
@@ -94,15 +921,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Specifies whether a read-only replica is automatically promoted to read/write primary if the existing primary fails. AutomaticFailoverEnabled must be enabled for Redis (cluster mode enabled) replication groups.",
 		//	  "type": "boolean"
 		//	}
-		"automatic_failover_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether a read-only replica is automatically promoted to read/write primary if the existing primary fails. AutomaticFailoverEnabled must be enabled for Redis (cluster mode enabled) replication groups.",
-			Optional:    true,
-			Computed:    true,
-			Default:     booldefault.StaticBool(false),
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"automatic_failover_enabled": schemaAttributeb88cf38ae3ee2f76c183f3ea(),
 		// Property: CacheNodeType
 		// CloudFormation resource type schema:
 		//
@@ -110,14 +929,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The compute and memory capacity of the nodes in the node group (shard).",
 		//	  "type": "string"
 		//	}
-		"cache_node_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The compute and memory capacity of the nodes in the node group (shard).",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"cache_node_type": schemaAttribute6455adfdad644b8504b57ff4(),
 		// Property: CacheParameterGroupName
 		// CloudFormation resource type schema:
 		//
@@ -125,15 +937,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the parameter group to associate with this replication group. If this argument is omitted, the default cache parameter group for the specified engine is used.",
 		//	  "type": "string"
 		//	}
-		"cache_parameter_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the parameter group to associate with this replication group. If this argument is omitted, the default cache parameter group for the specified engine is used.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// CacheParameterGroupName is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"cache_parameter_group_name": schemaAttribute0a2f44a054f63ba4e450545b(),
 		// Property: CacheSecurityGroupNames
 		// CloudFormation resource type schema:
 		//
@@ -145,19 +949,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"cache_security_group_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of cache security group names to associate with this replication group.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.UniqueValues(),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// CacheSecurityGroupNames is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"cache_security_group_names": schemaAttribute2e64b9fbf2dd5c4ec73c0f5b(),
 		// Property: CacheSubnetGroupName
 		// CloudFormation resource type schema:
 		//
@@ -165,16 +957,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the cache subnet group to be used for the replication group.",
 		//	  "type": "string"
 		//	}
-		"cache_subnet_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the cache subnet group to be used for the replication group.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// CacheSubnetGroupName is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"cache_subnet_group_name": schemaAttribute8bcc0a0db7b91e7dcbf7aa0b(),
 		// Property: ClusterMode
 		// CloudFormation resource type schema:
 		//
@@ -182,14 +965,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Enabled or Disabled. To modify cluster mode from Disabled to Enabled, you must first set the cluster mode to Compatible. Compatible mode allows your Redis OSS clients to connect using both cluster mode enabled and cluster mode disabled. After you migrate all Redis OSS clients to use cluster mode enabled, you can then complete cluster mode configuration and set the cluster mode to Enabled. For more information, see Modify cluster mode.",
 		//	  "type": "string"
 		//	}
-		"cluster_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Enabled or Disabled. To modify cluster mode from Disabled to Enabled, you must first set the cluster mode to Compatible. Compatible mode allows your Redis OSS clients to connect using both cluster mode enabled and cluster mode disabled. After you migrate all Redis OSS clients to use cluster mode enabled, you can then complete cluster mode configuration and set the cluster mode to Enabled. For more information, see Modify cluster mode.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"cluster_mode": schemaAttribute57ef1797ee48322d5c2738e5(),
 		// Property: ConfigurationEndPoint
 		// CloudFormation resource type schema:
 		//
@@ -208,25 +984,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"configuration_end_point": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Address
-				"address": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The DNS hostname of the cache node.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Port
-				"port": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The port number that the cache engine is listening on.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The configuration details of the replication group.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"configuration_end_point": schemaAttributeb58a877c391d4b71638bdc84(),
 		// Property: DataTieringEnabled
 		// CloudFormation resource type schema:
 		//
@@ -234,15 +992,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Enables data tiering. Data tiering is only supported for replication groups using the r6gd node type. This parameter must be set to true when using r6gd nodes.",
 		//	  "type": "boolean"
 		//	}
-		"data_tiering_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Enables data tiering. Data tiering is only supported for replication groups using the r6gd node type. This parameter must be set to true when using r6gd nodes.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-				boolplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"data_tiering_enabled": schemaAttributeac0da105afa2edc66a05934a(),
 		// Property: Durability
 		// CloudFormation resource type schema:
 		//
@@ -256,22 +1006,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"durability": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The durability setting for the replication group. Valid values: default, async, sync, disabled. Enabling durability on an existing non-durable cluster or disabling durability on an existing durable cluster is not currently supported and will result in an error; specify the desired durability at create time. The resolved state is returned in EffectiveDurability.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"default",
-					"async",
-					"sync",
-					"disabled",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"durability": schemaAttributec90947ec989a7381a3ac6849(),
 		// Property: EffectiveDurability
 		// CloudFormation resource type schema:
 		//
@@ -284,13 +1019,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"effective_durability": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The resolved durability state of the replication group after resolving the default value. This is a read-only property.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"effective_durability": schemaAttribute2808093fcc011521e4c59861(),
 		// Property: Engine
 		// CloudFormation resource type schema:
 		//
@@ -298,14 +1027,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the cache engine to be used for the clusters in this replication group.",
 		//	  "type": "string"
 		//	}
-		"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the cache engine to be used for the clusters in this replication group.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"engine": schemaAttribute84c12d5bfac1e38b82ab4cf8(),
 		// Property: EngineVersion
 		// CloudFormation resource type schema:
 		//
@@ -313,15 +1035,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The version number of the cache engine to be used for the clusters in this replication group. To view the supported cache engine versions, use the DescribeCacheEngineVersions operation.",
 		//	  "type": "string"
 		//	}
-		"engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version number of the cache engine to be used for the clusters in this replication group. To view the supported cache engine versions, use the DescribeCacheEngineVersions operation.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// EngineVersion is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"engine_version": schemaAttribute97526b240133aefe770143a1(),
 		// Property: GlobalReplicationGroupId
 		// CloudFormation resource type schema:
 		//
@@ -329,15 +1043,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the Global datastore",
 		//	  "type": "string"
 		//	}
-		"global_replication_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the Global datastore",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"global_replication_group_id": schemaAttribute43972542103281ddaaaee757(),
 		// Property: IpDiscovery
 		// CloudFormation resource type schema:
 		//
@@ -345,14 +1051,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The network type you choose when creating a replication group, either ipv4 | ipv6. IPv6 is supported for workloads using Redis OSS engine version 6.2 onward or Memcached engine version 1.6.6 on all instances built on the Nitro system.",
 		//	  "type": "string"
 		//	}
-		"ip_discovery": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The network type you choose when creating a replication group, either ipv4 | ipv6. IPv6 is supported for workloads using Redis OSS engine version 6.2 onward or Memcached engine version 1.6.6 on all instances built on the Nitro system.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"ip_discovery": schemaAttributefa45211d04106eba8a48748e(),
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -360,16 +1059,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of the KMS key used to encrypt the disk on the cluster.",
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the KMS key used to encrypt the disk on the cluster.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// KmsKeyId is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"kms_key_id": schemaAttribute307bcdb4d4265a9f905bbcb8(),
 		// Property: LogDeliveryConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -436,114 +1126,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"log_delivery_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: DestinationDetails
-					"destination_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: CloudWatchLogsDetails
-							"cloudwatch_logs_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: LogGroup
-									"log_group": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The name of the CloudWatch Logs log group.",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											fwvalidators.NotNullString(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "The configuration details of the CloudWatch Logs destination. Note that this field is marked as required but only if CloudWatch Logs was chosen as the destination.",
-								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-									objectplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: KinesisFirehoseDetails
-							"kinesis_firehose_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: DeliveryStream
-									"delivery_stream": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The name of the Kinesis Data Firehose delivery stream.",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											fwvalidators.NotNullString(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "The configuration details of the Kinesis Data Firehose destination. Note that this field is marked as required but only if Kinesis Data Firehose was chosen as the destination.",
-								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-									objectplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Configuration details of either a CloudWatch Logs destination or Kinesis Data Firehose destination.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.Object{ /*START VALIDATORS*/
-							fwvalidators.NotNullObject(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-							objectplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: DestinationType
-					"destination_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Specify either CloudWatch Logs or Kinesis Data Firehose as the destination type. Valid values are either cloudwatch-logs or kinesis-firehose.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: LogFormat
-					"log_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Valid values are either json or text.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: LogType
-					"log_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Valid value is either slow-log, which refers to slow-log or engine-log.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Specifies the destination, format and type of the logs.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"log_delivery_configurations": schemaAttributee002e971bc5e179b46f57046(),
 		// Property: MultiAZEnabled
 		// CloudFormation resource type schema:
 		//
@@ -551,14 +1134,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A flag indicating if you have Multi-AZ enabled to enhance fault tolerance. For more information, see Minimizing Downtime: Multi-AZ.",
 		//	  "type": "boolean"
 		//	}
-		"multi_az_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "A flag indicating if you have Multi-AZ enabled to enhance fault tolerance. For more information, see Minimizing Downtime: Multi-AZ.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"multi_az_enabled": schemaAttributea42a8632173690318d526419(),
 		// Property: NetworkType
 		// CloudFormation resource type schema:
 		//
@@ -566,15 +1142,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Must be either ipv4 | ipv6 | dual_stack. IPv6 is supported for workloads using Redis OSS engine version 6.2 onward or Memcached engine version 1.6.6 on all instances built on the Nitro system",
 		//	  "type": "string"
 		//	}
-		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Must be either ipv4 | ipv6 | dual_stack. IPv6 is supported for workloads using Redis OSS engine version 6.2 onward or Memcached engine version 1.6.6 on all instances built on the Nitro system",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"network_type": schemaAttribute9ceada7607fa11ea3ba2be38(),
 		// Property: NodeGroupConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -613,65 +1181,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"node_group_configuration": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: NodeGroupId
-					"node_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Either the ElastiCache for Redis supplied 4-digit id or a user supplied id for the node group these configuration values apply to.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: PrimaryAvailabilityZone
-					"primary_availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The Availability Zone where the primary node of this node group (shard) is launched.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: ReplicaAvailabilityZones
-					"replica_availability_zones": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "A list of Availability Zones to be used for the read replicas. The number of Availability Zones in this list must match the value of ReplicaCount or ReplicasPerNodeGroup if not specified.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-							listplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: ReplicaCount
-					"replica_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The number of read replica nodes in this node group (shard).",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-							int64planmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Slots
-					"slots": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A string of comma-separated values where the first set of values are the slot numbers (zero based), and the second set of values are the keyspaces for each slot. The following example specifies three slots (numbered 0, 1, and 2): 0,1,2,0-4999,5000-9999,10000-16,383.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "NodeGroupConfiguration is a property of the AWS::ElastiCache::ReplicationGroup resource that configures an Amazon ElastiCache (ElastiCache) Redis cluster node group.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// NodeGroupConfiguration is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"node_group_configuration": schemaAttributeb0f70a275da4f2e362c3d8ac(),
 		// Property: NotificationTopicArn
 		// CloudFormation resource type schema:
 		//
@@ -679,15 +1189,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic to which notifications are sent.",
 		//	  "type": "string"
 		//	}
-		"notification_topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic to which notifications are sent.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// NotificationTopicArn is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"notification_topic_arn": schemaAttributee621e396ce12d21386bffbcb(),
 		// Property: NumCacheClusters
 		// CloudFormation resource type schema:
 		//
@@ -695,14 +1197,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The number of clusters this replication group initially has.This parameter is not used if there is more than one node group (shard). You should use ReplicasPerNodeGroup instead.",
 		//	  "type": "integer"
 		//	}
-		"num_cache_clusters": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of clusters this replication group initially has.This parameter is not used if there is more than one node group (shard). You should use ReplicasPerNodeGroup instead.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"num_cache_clusters": schemaAttribute2607fab38a78daebce4f55a8(),
 		// Property: NumNodeGroups
 		// CloudFormation resource type schema:
 		//
@@ -711,16 +1206,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "An optional parameter that specifies the number of node groups (shards) for this Redis (cluster mode enabled) replication group. For Redis (cluster mode disabled) either omit this parameter or set it to 1.",
 		//	  "type": "integer"
 		//	}
-		"num_node_groups": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "An optional parameter that specifies the number of node groups (shards) for this Redis (cluster mode enabled) replication group. For Redis (cluster mode disabled) either omit this parameter or set it to 1.",
-			Optional:    true,
-			Computed:    true,
-			Default:     int64default.StaticInt64(1),
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// NumNodeGroups is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"num_node_groups": schemaAttributec653b8c255c3e6c869f80188(),
 		// Property: Port
 		// CloudFormation resource type schema:
 		//
@@ -728,15 +1214,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The port number on which each member of the replication group accepts connections.",
 		//	  "type": "integer"
 		//	}
-		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The port number on which each member of the replication group accepts connections.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-				int64planmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"port": schemaAttributed5c2bb0e4ee312eb96b275b7(),
 		// Property: PreferredCacheClusterAZs
 		// CloudFormation resource type schema:
 		//
@@ -748,17 +1226,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"preferred_cache_cluster_a_zs": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of EC2 Availability Zones in which the replication group's clusters are created. The order of the Availability Zones in the list is the order in which clusters are allocated. The primary cluster is created in the first AZ in the list. This parameter is not used if there is more than one node group (shard). You should use NodeGroupConfiguration instead.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-				listplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// PreferredCacheClusterAZs is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"preferred_cache_cluster_a_zs": schemaAttribute53ae984c22f7f1a1adf474c7(),
 		// Property: PreferredMaintenanceWindow
 		// CloudFormation resource type schema:
 		//
@@ -766,15 +1234,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period.",
 		//	  "type": "string"
 		//	}
-		"preferred_maintenance_window": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// PreferredMaintenanceWindow is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"preferred_maintenance_window": schemaAttribute542237598d9d70eb36160d44(),
 		// Property: PrimaryClusterId
 		// CloudFormation resource type schema:
 		//
@@ -782,15 +1242,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The identifier of the cluster that serves as the primary for this replication group. This cluster must already exist and have a status of available.",
 		//	  "type": "string"
 		//	}
-		"primary_cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the cluster that serves as the primary for this replication group. This cluster must already exist and have a status of available.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// PrimaryClusterId is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"primary_cluster_id": schemaAttributedcdd0c897dff274b1e6a0372(),
 		// Property: PrimaryEndPoint
 		// CloudFormation resource type schema:
 		//
@@ -809,25 +1261,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"primary_end_point": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Address
-				"address": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The DNS hostname of the cache node.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Port
-				"port": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The port number that the cache engine is listening on.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The primary endpoint configuration",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"primary_end_point": schemaAttributeb5325fc66b837bba57fe5f7b(),
 		// Property: ReadEndPoint
 		// CloudFormation resource type schema:
 		//
@@ -861,36 +1295,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"read_end_point": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Addresses
-				"addresses": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A string containing a comma-separated list of endpoints for the primary and read-only replicas, formatted as [address1, address2, ...]. The order of the addresses maps to the order of the ports from the ReadEndPoint.Ports attribute.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: AddressesList
-				"addresses_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "A list of endpoints for the read-only replicas. The order of the addresses maps to the order of the ports from the ReadEndPoint.Ports attribute.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Ports
-				"ports": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A string containing a comma-separated list of ports for the read-only replicas, formatted as [port1, port2, ...]. The order of the ports maps to the order of the addresses from the ReadEndPoint.Addresses attribute.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: PortsList
-				"ports_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "A list of ports for the read-only replicas. The order of the ports maps to the order of the addresses from the ReadEndPoint.Addresses attribute.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"read_end_point": schemaAttribute86b9df8d6cade812c9a360af(),
 		// Property: ReaderEndPoint
 		// CloudFormation resource type schema:
 		//
@@ -909,25 +1314,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"reader_end_point": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Address
-				"address": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The DNS hostname of the cache node.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Port
-				"port": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The port number that the cache engine is listening on.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The endpoint of the reader node in the replication group.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"reader_end_point": schemaAttribute2616312f9d509350554b0e96(),
 		// Property: ReplicasPerNodeGroup
 		// CloudFormation resource type schema:
 		//
@@ -935,14 +1322,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "An optional parameter that specifies the number of replica nodes in each node group (shard). Valid values are 0 to 5.\n\n**Note:** Using ReplicasPerNodeGroup with NodeGroupConfiguration results in resource replacement. For online scaling, use ReplicasPerNodeGroup alone.",
 		//	  "type": "integer"
 		//	}
-		"replicas_per_node_group": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "An optional parameter that specifies the number of replica nodes in each node group (shard). Valid values are 0 to 5.\n\n**Note:** Using ReplicasPerNodeGroup with NodeGroupConfiguration results in resource replacement. For online scaling, use ReplicasPerNodeGroup alone.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"replicas_per_node_group": schemaAttribute82131d88f3e1d5fdfdc0c2ae(),
 		// Property: ReplicationGroupDescription
 		// CloudFormation resource type schema:
 		//
@@ -950,10 +1330,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A user-created description for the replication group.",
 		//	  "type": "string"
 		//	}
-		"replication_group_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A user-created description for the replication group.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"replication_group_description": schemaAttribute2e4aa0c0555ea1208e07ff19(),
 		// Property: ReplicationGroupId
 		// CloudFormation resource type schema:
 		//
@@ -961,15 +1338,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The replication group identifier. This parameter is stored as a lowercase string.",
 		//	  "type": "string"
 		//	}
-		"replication_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The replication group identifier. This parameter is stored as a lowercase string.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"replication_group_id": schemaAttribute549cde275621120c03cdbf8b(),
 		// Property: SecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -981,19 +1350,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "One or more Amazon VPC security groups associated with this replication group.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.UniqueValues(),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// SecurityGroupIds is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"security_group_ids": schemaAttribute40cbc45d391bd76eecd1e580(),
 		// Property: SnapshotArns
 		// CloudFormation resource type schema:
 		//
@@ -1005,20 +1362,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"snapshot_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of Amazon Resource Names (ARN) that uniquely identify the Redis RDB snapshot files stored in Amazon S3.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.UniqueValues(),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-				listplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// SnapshotArns is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"snapshot_arns": schemaAttributec319cd36c1ad54937bb1665f(),
 		// Property: SnapshotName
 		// CloudFormation resource type schema:
 		//
@@ -1026,16 +1370,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of a snapshot from which to restore data into the new replication group. The snapshot status changes to restoring while the new replication group is being created.",
 		//	  "type": "string"
 		//	}
-		"snapshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of a snapshot from which to restore data into the new replication group. The snapshot status changes to restoring while the new replication group is being created.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// SnapshotName is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"snapshot_name": schemaAttribute256a97b7e4b4aae44afa5a81(),
 		// Property: SnapshotRetentionLimit
 		// CloudFormation resource type schema:
 		//
@@ -1044,15 +1379,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The number of days for which ElastiCache retains automatic snapshots before deleting them. For example, if you set SnapshotRetentionLimit to 5, a snapshot that was taken today is retained for 5 days before being deleted.",
 		//	  "type": "integer"
 		//	}
-		"snapshot_retention_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of days for which ElastiCache retains automatic snapshots before deleting them. For example, if you set SnapshotRetentionLimit to 5, a snapshot that was taken today is retained for 5 days before being deleted.",
-			Optional:    true,
-			Computed:    true,
-			Default:     int64default.StaticInt64(0),
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"snapshot_retention_limit": schemaAttributeeae44f0cac79b4aff4e019f9(),
 		// Property: SnapshotWindow
 		// CloudFormation resource type schema:
 		//
@@ -1060,14 +1387,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The daily time range (in UTC) during which ElastiCache begins taking a daily snapshot of your node group (shard).",
 		//	  "type": "string"
 		//	}
-		"snapshot_window": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The daily time range (in UTC) during which ElastiCache begins taking a daily snapshot of your node group (shard).",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"snapshot_window": schemaAttribute6e41791cc3a42f49fac7f247(),
 		// Property: SnapshottingClusterId
 		// CloudFormation resource type schema:
 		//
@@ -1075,14 +1395,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The cluster ID that is used as the daily snapshot source for the replication group. This parameter cannot be set for Redis (cluster mode enabled) replication groups.",
 		//	  "type": "string"
 		//	}
-		"snapshotting_cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The cluster ID that is used as the daily snapshot source for the replication group. This parameter cannot be set for Redis (cluster mode enabled) replication groups.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"snapshotting_cluster_id": schemaAttribute6c5fd1ae7956e8a9f948699f(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1109,42 +1422,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of cost allocation tags to be added to this resource. Tags are comma-separated key,value pairs (e.g. Key=myKey, Value=myKeyValue. You can include multiple tags as shown following: Key=myKey, Value=myKeyValue Key=mySecondKey, Value=mySecondKeyValue.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributefbce310a2904fcae4d8ffcdc(),
 		// Property: TransitEncryptionEnabled
 		// CloudFormation resource type schema:
 		//
@@ -1153,15 +1431,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A flag that enables in-transit encryption when set to true.",
 		//	  "type": "boolean"
 		//	}
-		"transit_encryption_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "A flag that enables in-transit encryption when set to true.",
-			Optional:    true,
-			Computed:    true,
-			Default:     booldefault.StaticBool(false),
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"transit_encryption_enabled": schemaAttributebcf08552efde0efaf2a6a41b(),
 		// Property: TransitEncryptionMode
 		// CloudFormation resource type schema:
 		//
@@ -1169,14 +1439,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A setting that allows you to migrate your clients to use in-transit encryption, with no downtime. When setting TransitEncryptionEnabled to true, you can set your TransitEncryptionMode to preferred in the same request, to allow both encrypted and unencrypted connections at the same time. Once you migrate all your Redis OSS clients to use encrypted connections you can modify the value to required to allow encrypted connections only. Setting TransitEncryptionMode to required is a two-step process that requires you to first set the TransitEncryptionMode to preferred, after that you can set TransitEncryptionMode to required. This process will not trigger the replacement of the replication group.",
 		//	  "type": "string"
 		//	}
-		"transit_encryption_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A setting that allows you to migrate your clients to use in-transit encryption, with no downtime. When setting TransitEncryptionEnabled to true, you can set your TransitEncryptionMode to preferred in the same request, to allow both encrypted and unencrypted connections at the same time. Once you migrate all your Redis OSS clients to use encrypted connections you can modify the value to required to allow encrypted connections only. Setting TransitEncryptionMode to required is a two-step process that requires you to first set the TransitEncryptionMode to preferred, after that you can set TransitEncryptionMode to required. This process will not trigger the replacement of the replication group.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"transit_encryption_mode": schemaAttribute6b24d3095481aea474de2012(),
 		// Property: UserGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -1188,18 +1451,7 @@ func replicationGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"user_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The ID of user group to associate with the replication group.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.UniqueValues(),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"user_group_ids": schemaAttribute56193abd9176af8fe5836ac0(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

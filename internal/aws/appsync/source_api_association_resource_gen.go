@@ -21,6 +21,166 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute139ccbe39054f3c3540a2502() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN of the SourceApiAssociation.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2790596241122eb431aac4b3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "GraphQLApiId of the Merged API in the association.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute30b610cc8dc09f0f0ca44e18() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "Date of last schema successful merge.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3347c47f418c9d3a74c145c5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Current status of SourceApiAssociation.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute34405ff9ddb930c5fc5276ff() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Identifier of the Merged GraphQLApi to associate. It could be either GraphQLApi ApiId or ARN",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// MergedApiIdentifier is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute382cc593c0f3b0aba7568125() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Current SourceApiAssociation status details.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute73c56be14b3985c395208e34() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN of the source API in the association.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute75abb7224a7b53baafa09c40() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN of the Merged API in the association.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8abd6faeaf44229e9f889af0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MergeType
+			"merge_type": schemaAttributeaefd6fda045a0c990d4cb5e6(),
+		}, /*END SCHEMA*/
+		Description: "Customized configuration for SourceApiAssociation.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute96236a4f620b0a1f80ed8f90() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Id of the SourceApiAssociation.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9b6056f0d70553be92982d84() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Description of the SourceApiAssociation.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9fff80e4e4a2786cf48aab42() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "GraphQLApiId of the source API in the association.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaefd6fda045a0c990d4cb5e6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Configuration of the merged behavior for the association. For example when it could be auto or has to be manual.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"AUTO_MERGE",
+				"MANUAL_MERGE",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebd27eef1bd8bd263efa0f029() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Identifier of the Source GraphQLApi to associate. It could be either GraphQLApi ApiId or ARN",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// SourceApiIdentifier is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_appsync_source_api_association", sourceApiAssociationResource)
 }
@@ -36,13 +196,7 @@ func sourceApiAssociationResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "ARN of the SourceApiAssociation.",
 		//	  "type": "string"
 		//	}
-		"association_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ARN of the SourceApiAssociation.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"association_arn": schemaAttribute139ccbe39054f3c3540a2502(),
 		// Property: AssociationId
 		// CloudFormation resource type schema:
 		//
@@ -50,13 +204,7 @@ func sourceApiAssociationResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "Id of the SourceApiAssociation.",
 		//	  "type": "string"
 		//	}
-		"association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Id of the SourceApiAssociation.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"association_id": schemaAttribute96236a4f620b0a1f80ed8f90(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -64,14 +212,7 @@ func sourceApiAssociationResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "Description of the SourceApiAssociation.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Description of the SourceApiAssociation.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute9b6056f0d70553be92982d84(),
 		// Property: LastSuccessfulMergeDate
 		// CloudFormation resource type schema:
 		//
@@ -80,14 +221,7 @@ func sourceApiAssociationResource(ctx context.Context) (resource.Resource, error
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_successful_merge_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "Date of last schema successful merge.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"last_successful_merge_date": schemaAttribute30b610cc8dc09f0f0ca44e18(),
 		// Property: MergedApiArn
 		// CloudFormation resource type schema:
 		//
@@ -96,13 +230,7 @@ func sourceApiAssociationResource(ctx context.Context) (resource.Resource, error
 		//	  "pattern": "^arn:aws(-(cn|us-gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 		//	  "type": "string"
 		//	}
-		"merged_api_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ARN of the Merged API in the association.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"merged_api_arn": schemaAttribute75abb7224a7b53baafa09c40(),
 		// Property: MergedApiId
 		// CloudFormation resource type schema:
 		//
@@ -110,13 +238,7 @@ func sourceApiAssociationResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "GraphQLApiId of the Merged API in the association.",
 		//	  "type": "string"
 		//	}
-		"merged_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "GraphQLApiId of the Merged API in the association.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"merged_api_id": schemaAttribute2790596241122eb431aac4b3(),
 		// Property: MergedApiIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -124,16 +246,7 @@ func sourceApiAssociationResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "Identifier of the Merged GraphQLApi to associate. It could be either GraphQLApi ApiId or ARN",
 		//	  "type": "string"
 		//	}
-		"merged_api_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Identifier of the Merged GraphQLApi to associate. It could be either GraphQLApi ApiId or ARN",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// MergedApiIdentifier is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"merged_api_identifier": schemaAttribute34405ff9ddb930c5fc5276ff(),
 		// Property: SourceApiArn
 		// CloudFormation resource type schema:
 		//
@@ -142,13 +255,7 @@ func sourceApiAssociationResource(ctx context.Context) (resource.Resource, error
 		//	  "pattern": "^arn:aws(-(cn|us-gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 		//	  "type": "string"
 		//	}
-		"source_api_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ARN of the source API in the association.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"source_api_arn": schemaAttribute73c56be14b3985c395208e34(),
 		// Property: SourceApiAssociationConfig
 		// CloudFormation resource type schema:
 		//
@@ -166,31 +273,7 @@ func sourceApiAssociationResource(ctx context.Context) (resource.Resource, error
 		//	    }
 		//	  }
 		//	}
-		"source_api_association_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MergeType
-				"merge_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Configuration of the merged behavior for the association. For example when it could be auto or has to be manual.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"AUTO_MERGE",
-							"MANUAL_MERGE",
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Customized configuration for SourceApiAssociation.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"source_api_association_config": schemaAttribute8abd6faeaf44229e9f889af0(),
 		// Property: SourceApiAssociationStatus
 		// CloudFormation resource type schema:
 		//
@@ -208,13 +291,7 @@ func sourceApiAssociationResource(ctx context.Context) (resource.Resource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"source_api_association_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Current status of SourceApiAssociation.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"source_api_association_status": schemaAttribute3347c47f418c9d3a74c145c5(),
 		// Property: SourceApiAssociationStatusDetail
 		// CloudFormation resource type schema:
 		//
@@ -222,13 +299,7 @@ func sourceApiAssociationResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "Current SourceApiAssociation status details.",
 		//	  "type": "string"
 		//	}
-		"source_api_association_status_detail": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Current SourceApiAssociation status details.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"source_api_association_status_detail": schemaAttribute382cc593c0f3b0aba7568125(),
 		// Property: SourceApiId
 		// CloudFormation resource type schema:
 		//
@@ -236,13 +307,7 @@ func sourceApiAssociationResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "GraphQLApiId of the source API in the association.",
 		//	  "type": "string"
 		//	}
-		"source_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "GraphQLApiId of the source API in the association.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"source_api_id": schemaAttribute9fff80e4e4a2786cf48aab42(),
 		// Property: SourceApiIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -250,16 +315,7 @@ func sourceApiAssociationResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "Identifier of the Source GraphQLApi to associate. It could be either GraphQLApi ApiId or ARN",
 		//	  "type": "string"
 		//	}
-		"source_api_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Identifier of the Source GraphQLApi to associate. It could be either GraphQLApi ApiId or ARN",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// SourceApiIdentifier is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"source_api_identifier": schemaAttributebd27eef1bd8bd263efa0f029(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

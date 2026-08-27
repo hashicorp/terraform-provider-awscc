@@ -18,6 +18,102 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0cd561c302bbe31755d03806() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the target.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0eeb1a3d22b7cdebecab058f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A user-provided value that will be included in any Amazon CloudWatch Events events that are raised while running tasks for these targets in this maintenance window.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute200f431ade8782046f7bb0eb() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "User-defined criteria that maps to Key.",
+		Required:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute43fe6f898f1ed0bc939898b5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "User-defined criteria for sending commands that target managed nodes that meet the criteria.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute67493b753a59ab214f6983df() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the maintenance window to register the target with.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute740606a247916d82c662cce4() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute43fe6f898f1ed0bc939898b5(),
+				// Property: Values
+				"values": schemaAttribute200f431ade8782046f7bb0eb(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The targets to register with the maintenance window.",
+		Required:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8bb4b78c0902b7522f54fa36() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description for the target.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecb12ad1edda08cc6bae286a6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name for the maintenance window target.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeecd9d8809542eaa6370fb9ae() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of target that is being registered with the maintenance window.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_ssm_maintenance_window_target", maintenanceWindowTargetResource)
 }
@@ -33,14 +129,7 @@ func maintenanceWindowTargetResource(ctx context.Context) (resource.Resource, er
 		//	  "description": "A description for the target.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description for the target.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute8bb4b78c0902b7522f54fa36(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -48,14 +137,7 @@ func maintenanceWindowTargetResource(ctx context.Context) (resource.Resource, er
 		//	  "description": "The name for the maintenance window target.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name for the maintenance window target.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributecb12ad1edda08cc6bae286a6(),
 		// Property: OwnerInformation
 		// CloudFormation resource type schema:
 		//
@@ -63,14 +145,7 @@ func maintenanceWindowTargetResource(ctx context.Context) (resource.Resource, er
 		//	  "description": "A user-provided value that will be included in any Amazon CloudWatch Events events that are raised while running tasks for these targets in this maintenance window.",
 		//	  "type": "string"
 		//	}
-		"owner_information": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A user-provided value that will be included in any Amazon CloudWatch Events events that are raised while running tasks for these targets in this maintenance window.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"owner_information": schemaAttribute0eeb1a3d22b7cdebecab058f(),
 		// Property: ResourceType
 		// CloudFormation resource type schema:
 		//
@@ -78,10 +153,7 @@ func maintenanceWindowTargetResource(ctx context.Context) (resource.Resource, er
 		//	  "description": "The type of target that is being registered with the maintenance window.",
 		//	  "type": "string"
 		//	}
-		"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of target that is being registered with the maintenance window.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_type": schemaAttributeecd9d8809542eaa6370fb9ae(),
 		// Property: Targets
 		// CloudFormation resource type schema:
 		//
@@ -114,31 +186,7 @@ func maintenanceWindowTargetResource(ctx context.Context) (resource.Resource, er
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"targets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "User-defined criteria for sending commands that target managed nodes that meet the criteria.",
-						Required:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Values
-					"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "User-defined criteria that maps to Key.",
-						Required:    true,
-						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-							generic.Multiset(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The targets to register with the maintenance window.",
-			Required:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"targets": schemaAttribute740606a247916d82c662cce4(),
 		// Property: WindowId
 		// CloudFormation resource type schema:
 		//
@@ -146,13 +194,7 @@ func maintenanceWindowTargetResource(ctx context.Context) (resource.Resource, er
 		//	  "description": "The ID of the maintenance window to register the target with.",
 		//	  "type": "string"
 		//	}
-		"window_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the maintenance window to register the target with.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"window_id": schemaAttribute67493b753a59ab214f6983df(),
 		// Property: WindowTargetId
 		// CloudFormation resource type schema:
 		//
@@ -160,13 +202,7 @@ func maintenanceWindowTargetResource(ctx context.Context) (resource.Resource, er
 		//	  "description": "The ID of the target.",
 		//	  "type": "string"
 		//	}
-		"window_target_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the target.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"window_target_id": schemaAttribute0cd561c302bbe31755d03806(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

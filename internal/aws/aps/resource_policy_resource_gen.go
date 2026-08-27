@@ -20,6 +20,26 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute698822b883985d150a44e7a9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Arn of an APS Workspace that the PolicyDocument will be attached to.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-us-gov|aws-cn):aps:[a-z0-9-]+:[0-9]+:workspace/[a-zA-Z0-9-]+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute78838f659f15721f9e684e4e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The JSON to use as the Resource-based Policy.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_aps_resource_policy", resourcePolicyResource)
 	registry.AddListResourceFactory("awscc_aps_resource_policy", generic.NewListResource(resourcePolicyResource))
@@ -36,10 +56,7 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The JSON to use as the Resource-based Policy.",
 		//	  "type": "string"
 		//	}
-		"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The JSON to use as the Resource-based Policy.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"policy_document": schemaAttribute78838f659f15721f9e684e4e(),
 		// Property: WorkspaceArn
 		// CloudFormation resource type schema:
 		//
@@ -48,16 +65,7 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn):aps:[a-z0-9-]+:[0-9]+:workspace/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"workspace_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Arn of an APS Workspace that the PolicyDocument will be attached to.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-us-gov|aws-cn):aps:[a-z0-9-]+:[0-9]+:workspace/[a-zA-Z0-9-]+$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"workspace_arn": schemaAttribute698822b883985d150a44e7a9(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

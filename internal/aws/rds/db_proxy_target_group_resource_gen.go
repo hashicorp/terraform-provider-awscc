@@ -25,6 +25,142 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute15941f340fa41508231e5723() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Controls how actively the proxy closes idle database connections in the connection pool.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.Between(0, 100),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1ed51fbf895fe402d4260f89() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) representing the target group.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute433279d5b41156f14edb5fe5() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Each item in the list represents a class of SQL operations that normally cause all later statements in a session using a proxy to be pinned to the same underlying database connection.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6af7cd8c09883d4be42d07a0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier for the DBProxyTargetGroup",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"default",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6f3dab5f7ccc682e9e49ac8a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "One or more SQL statements for the proxy to run when opening each new database connection.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9a1b10c68911e0b08c5e225f() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeac3d3595e5bf3257678821ce() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ConnectionBorrowTimeout
+			"connection_borrow_timeout": schemaAttributee02c85d708bccd3d5d7f93ee(),
+			// Property: InitQuery
+			"init_query": schemaAttribute6f3dab5f7ccc682e9e49ac8a(),
+			// Property: MaxConnectionsPercent
+			"max_connections_percent": schemaAttributebfea15190bca274aa11d2066(),
+			// Property: MaxIdleConnectionsPercent
+			"max_idle_connections_percent": schemaAttribute15941f340fa41508231e5723(),
+			// Property: SessionPinningFilters
+			"session_pinning_filters": schemaAttribute433279d5b41156f14edb5fe5(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb3029251fb6758bee345307e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier for the proxy.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(64),
+			stringvalidator.RegexMatches(regexp.MustCompile("[A-z][0-z]*"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebfea15190bca274aa11d2066() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum size of the connection pool for each target in a target group.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.Between(0, 100),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee02c85d708bccd3d5d7f93ee() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of seconds for a proxy to wait for a connection to become available in the connection pool.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_rds_db_proxy_target_group", dBProxyTargetGroupResource)
 	registry.AddListResourceFactory("awscc_rds_db_proxy_target_group", generic.NewListResource(dBProxyTargetGroupResource))
@@ -71,68 +207,7 @@ func dBProxyTargetGroupResource(ctx context.Context) (resource.Resource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"connection_pool_configuration_info": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ConnectionBorrowTimeout
-				"connection_borrow_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The number of seconds for a proxy to wait for a connection to become available in the connection pool.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						int64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: InitQuery
-				"init_query": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "One or more SQL statements for the proxy to run when opening each new database connection.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: MaxConnectionsPercent
-				"max_connections_percent": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The maximum size of the connection pool for each target in a target group.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.Int64{ /*START VALIDATORS*/
-						int64validator.Between(0, 100),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						int64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: MaxIdleConnectionsPercent
-				"max_idle_connections_percent": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Controls how actively the proxy closes idle database connections in the connection pool.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.Int64{ /*START VALIDATORS*/
-						int64validator.Between(0, 100),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						int64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: SessionPinningFilters
-				"session_pinning_filters": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "Each item in the list represents a class of SQL operations that normally cause all later statements in a session using a proxy to be pinned to the same underlying database connection.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"connection_pool_configuration_info": schemaAttributeac3d3595e5bf3257678821ce(),
 		// Property: DBClusterIdentifiers
 		// CloudFormation resource type schema:
 		//
@@ -143,15 +218,7 @@ func dBProxyTargetGroupResource(ctx context.Context) (resource.Resource, error) 
 		//	  },
 		//	  "type": "array"
 		//	}
-		"db_cluster_identifiers": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"db_cluster_identifiers": schemaAttribute9a1b10c68911e0b08c5e225f(),
 		// Property: DBInstanceIdentifiers
 		// CloudFormation resource type schema:
 		//
@@ -162,15 +229,7 @@ func dBProxyTargetGroupResource(ctx context.Context) (resource.Resource, error) 
 		//	  },
 		//	  "type": "array"
 		//	}
-		"db_instance_identifiers": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"db_instance_identifiers": schemaAttribute9a1b10c68911e0b08c5e225f(),
 		// Property: DBProxyName
 		// CloudFormation resource type schema:
 		//
@@ -180,17 +239,7 @@ func dBProxyTargetGroupResource(ctx context.Context) (resource.Resource, error) 
 		//	  "pattern": "[A-z][0-z]*",
 		//	  "type": "string"
 		//	}
-		"db_proxy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier for the proxy.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(64),
-				stringvalidator.RegexMatches(regexp.MustCompile("[A-z][0-z]*"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"db_proxy_name": schemaAttributeb3029251fb6758bee345307e(),
 		// Property: TargetGroupArn
 		// CloudFormation resource type schema:
 		//
@@ -198,13 +247,7 @@ func dBProxyTargetGroupResource(ctx context.Context) (resource.Resource, error) 
 		//	  "description": "The Amazon Resource Name (ARN) representing the target group.",
 		//	  "type": "string"
 		//	}
-		"target_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) representing the target group.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"target_group_arn": schemaAttribute1ed51fbf895fe402d4260f89(),
 		// Property: TargetGroupName
 		// CloudFormation resource type schema:
 		//
@@ -215,18 +258,7 @@ func dBProxyTargetGroupResource(ctx context.Context) (resource.Resource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"target_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier for the DBProxyTargetGroup",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"default",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"target_group_name": schemaAttribute6af7cd8c09883d4be42d07a0(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

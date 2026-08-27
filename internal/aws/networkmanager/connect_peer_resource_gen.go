@@ -24,6 +24,304 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute01bb26938e732f87082c52aa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "State of the connect peer.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0d4c45ec2375a0240ed82ca4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BgpConfigurations
+			"bgp_configurations": schemaAttribute84fb0c8ef44218819e0997fb(),
+			// Property: CoreNetworkAddress
+			"core_network_address": schemaAttributef1d1b7fd1a0d31904d9be97d(),
+			// Property: InsideCidrBlocks
+			"inside_cidr_blocks": schemaAttributeb07eb455e301aac378c07444(),
+			// Property: PeerAddress
+			"peer_address": schemaAttribute4d4c4760d4ab2bc0c80adaa5(),
+			// Property: Protocol
+			"protocol": schemaAttributec362eb7c80395b043c23938f(),
+		}, /*END SCHEMA*/
+		Description: "Configuration of the connect peer.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute19e9095a7bb162fd06c089b5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the attachment to connect.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute285c73b7b30dc05ee5eb1739() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3b0115a10da612ba49ac38e2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Connect peer creation time.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4d4c4760d4ab2bc0c80adaa5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IP address of the Connect peer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7194276e54b5f4d35f53a3bb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The address of a core network Connect peer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7c175400c2b3d56fbdf9e606() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The inside IP addresses used for a Connect peer configuration.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+			listplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute80f6d7d0348de3d0cdcb6dd3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IP address of the Connect peer.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute84fb0c8ef44218819e0997fb() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CoreNetworkAddress
+				"core_network_address": schemaAttributebfb40cd3f3db274b37747d90(),
+				// Property: CoreNetworkAsn
+				"core_network_asn": schemaAttributedd668f702ac4c5487a2e9d07(),
+				// Property: PeerAddress
+				"peer_address": schemaAttribute7194276e54b5f4d35f53a3bb(),
+				// Property: PeerAsn
+				"peer_asn": schemaAttributee2163fdf2125639a622b4f76(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute99cef57fbcd320fb7427da96() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the core network.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ddc53dcc066242e2f52690a() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute285c73b7b30dc05ee5eb1739(),
+				// Property: Value
+				"value": schemaAttributec4e194ef49faf3ae51a70244(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb07eb455e301aac378c07444() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The inside IP addresses used for a Connect peer configuration.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb491146f02a56cf6c4390c07() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Errors from the last modification of the connect peer.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb8c49367b3af9a7b6446044a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PeerAsn
+			"peer_asn": schemaAttributefa6c802e731db3b6a8d7ceaa(),
+		}, /*END SCHEMA*/
+		Description: "Bgp options for connect peer.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+			objectplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// BgpOptions is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebfb40cd3f3db274b37747d90() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The address of a core network.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec10284631a93686cfcd7f64d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the Connect peer.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec362eb7c80395b043c23938f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The protocol used for a Connect peer configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec4e194ef49faf3ae51a70244() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedd668f702ac4c5487a2e9d07() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The ASN of the Coret Network.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedd9f57546d9cbc28bfd2b042() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IP address of a core network.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// CoreNetworkAddress is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee2163fdf2125639a622b4f76() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The ASN of the Connect peer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee3ed8448fd0967e17e782b62() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The subnet ARN for the connect peer.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// SubnetArn is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef14ac643905e533bd9f90c65() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Connect peer Regions where edges are located.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef1d1b7fd1a0d31904d9be97d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IP address of a core network.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefa6c802e731db3b6a8d7ceaa() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+			float64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_networkmanager_connect_peer", connectPeerResource)
 	registry.AddListResourceFactory("awscc_networkmanager_connect_peer", generic.NewListResource(connectPeerResource))
@@ -46,26 +344,7 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"bgp_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: PeerAsn
-				"peer_asn": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-						float64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Bgp options for connect peer.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// BgpOptions is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"bgp_options": schemaAttributeb8c49367b3af9a7b6446044a(),
 		// Property: Configuration
 		// CloudFormation resource type schema:
 		//
@@ -123,70 +402,7 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: BgpConfigurations
-				"bgp_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: CoreNetworkAddress
-							"core_network_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The address of a core network.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: CoreNetworkAsn
-							"core_network_asn": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The ASN of the Coret Network.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: PeerAddress
-							"peer_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The address of a core network Connect peer.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: PeerAsn
-							"peer_asn": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The ASN of the Connect peer.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: CoreNetworkAddress
-				"core_network_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The IP address of a core network.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: InsideCidrBlocks
-				"inside_cidr_blocks": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The inside IP addresses used for a Connect peer configuration.",
-					Computed:    true,
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: PeerAddress
-				"peer_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The IP address of the Connect peer.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Protocol
-				"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The protocol used for a Connect peer configuration.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Configuration of the connect peer.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"configuration": schemaAttribute0d4c45ec2375a0240ed82ca4(),
 		// Property: ConnectAttachmentId
 		// CloudFormation resource type schema:
 		//
@@ -194,13 +410,7 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of the attachment to connect.",
 		//	  "type": "string"
 		//	}
-		"connect_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the attachment to connect.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"connect_attachment_id": schemaAttribute19e9095a7bb162fd06c089b5(),
 		// Property: ConnectPeerId
 		// CloudFormation resource type schema:
 		//
@@ -208,13 +418,7 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of the Connect peer.",
 		//	  "type": "string"
 		//	}
-		"connect_peer_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Connect peer.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"connect_peer_id": schemaAttributec10284631a93686cfcd7f64d(),
 		// Property: CoreNetworkAddress
 		// CloudFormation resource type schema:
 		//
@@ -222,16 +426,7 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The IP address of a core network.",
 		//	  "type": "string"
 		//	}
-		"core_network_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The IP address of a core network.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// CoreNetworkAddress is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"core_network_address": schemaAttributedd9f57546d9cbc28bfd2b042(),
 		// Property: CoreNetworkId
 		// CloudFormation resource type schema:
 		//
@@ -239,13 +434,7 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of the core network.",
 		//	  "type": "string"
 		//	}
-		"core_network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the core network.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"core_network_id": schemaAttribute99cef57fbcd320fb7427da96(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -253,13 +442,7 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Connect peer creation time.",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Connect peer creation time.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute3b0115a10da612ba49ac38e2(),
 		// Property: EdgeLocation
 		// CloudFormation resource type schema:
 		//
@@ -267,13 +450,7 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Connect peer Regions where edges are located.",
 		//	  "type": "string"
 		//	}
-		"edge_location": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Connect peer Regions where edges are located.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"edge_location": schemaAttributef14ac643905e533bd9f90c65(),
 		// Property: InsideCidrBlocks
 		// CloudFormation resource type schema:
 		//
@@ -285,17 +462,7 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"inside_cidr_blocks": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The inside IP addresses used for a Connect peer configuration.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-				listplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"inside_cidr_blocks": schemaAttribute7c175400c2b3d56fbdf9e606(),
 		// Property: LastModificationErrors
 		// CloudFormation resource type schema:
 		//
@@ -306,14 +473,7 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"last_modification_errors": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Errors from the last modification of the connect peer.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"last_modification_errors": schemaAttributeb491146f02a56cf6c4390c07(),
 		// Property: PeerAddress
 		// CloudFormation resource type schema:
 		//
@@ -321,13 +481,7 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The IP address of the Connect peer.",
 		//	  "type": "string"
 		//	}
-		"peer_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The IP address of the Connect peer.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"peer_address": schemaAttribute80f6d7d0348de3d0cdcb6dd3(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -335,13 +489,7 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "State of the connect peer.",
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "State of the connect peer.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttribute01bb26938e732f87082c52aa(),
 		// Property: SubnetArn
 		// CloudFormation resource type schema:
 		//
@@ -349,16 +497,7 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The subnet ARN for the connect peer.",
 		//	  "type": "string"
 		//	}
-		"subnet_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The subnet ARN for the connect peer.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// SubnetArn is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"subnet_arn": schemaAttributee3ed8448fd0967e17e782b62(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -387,42 +526,7 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute9ddc53dcc066242e2f52690a(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

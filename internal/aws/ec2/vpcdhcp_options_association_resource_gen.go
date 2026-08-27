@@ -17,6 +17,26 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute6f425ad51f5145141664c32f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the VPC.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributede907c4cdb8d95375000225f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the DHCP options set, or default to associate no DHCP options with the VPC.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_ec2_vpcdhcp_options_association", vPCDHCPOptionsAssociationResource)
 	registry.AddListResourceFactory("awscc_ec2_vpcdhcp_options_association", generic.NewListResource(vPCDHCPOptionsAssociationResource))
@@ -33,13 +53,7 @@ func vPCDHCPOptionsAssociationResource(ctx context.Context) (resource.Resource, 
 		//	  "description": "The ID of the DHCP options set, or default to associate no DHCP options with the VPC.",
 		//	  "type": "string"
 		//	}
-		"dhcp_options_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the DHCP options set, or default to associate no DHCP options with the VPC.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"dhcp_options_id": schemaAttributede907c4cdb8d95375000225f(),
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -47,13 +61,7 @@ func vPCDHCPOptionsAssociationResource(ctx context.Context) (resource.Resource, 
 		//	  "description": "The ID of the VPC.",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the VPC.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"vpc_id": schemaAttribute6f425ad51f5145141664c32f(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

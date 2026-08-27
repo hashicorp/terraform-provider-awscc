@@ -22,6 +22,155 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute0fcfdfdaa50281573058bc8d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The operational state of the Resource Discovery Association. Related to Create/Delete activities.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute14688faf904ffc04aba0f686() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the resource discovery.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1cc081dad637339773e88a8a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 256),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1e3743b62de2a5df52c70962() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the IPAM Resource Discovery Association.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5f8c8e7bcb7e908abdcba251() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Arn of the IPAM.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute87da2bd2dec47359cbd3aac5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the resource discovery association is a part of.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute87e2095a0bb5f07f7e250fb8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS Account ID for the account where the shared IPAM exists.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute92f957b375bececbaf79fa44() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "If the Resource Discovery Association exists due as part of CreateIpam.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea23c87e61a2525999a5da6a4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Id of the IPAM this Resource Discovery is associated to.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebe006adea071df2bd7dfedea() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee047d33429690649bf526b56() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The home region of the IPAM.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee6e3de559b4e54ecbf70d052() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Id of the IPAM Resource Discovery Association.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefb937a051c678550fc4b9bc8() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributebe006adea071df2bd7dfedea(),
+				// Property: Value
+				"value": schemaAttribute1cc081dad637339773e88a8a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_ec2_ipam_resource_discovery_association", iPAMResourceDiscoveryAssociationResource)
 	registry.AddListResourceFactory("awscc_ec2_ipam_resource_discovery_association", generic.NewListResource(iPAMResourceDiscoveryAssociationResource))
@@ -38,13 +187,7 @@ func iPAMResourceDiscoveryAssociationResource(ctx context.Context) (resource.Res
 		//	  "description": "Arn of the IPAM.",
 		//	  "type": "string"
 		//	}
-		"ipam_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Arn of the IPAM.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"ipam_arn": schemaAttribute5f8c8e7bcb7e908abdcba251(),
 		// Property: IpamId
 		// CloudFormation resource type schema:
 		//
@@ -52,13 +195,7 @@ func iPAMResourceDiscoveryAssociationResource(ctx context.Context) (resource.Res
 		//	  "description": "The Id of the IPAM this Resource Discovery is associated to.",
 		//	  "type": "string"
 		//	}
-		"ipam_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Id of the IPAM this Resource Discovery is associated to.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"ipam_id": schemaAttributea23c87e61a2525999a5da6a4(),
 		// Property: IpamRegion
 		// CloudFormation resource type schema:
 		//
@@ -66,13 +203,7 @@ func iPAMResourceDiscoveryAssociationResource(ctx context.Context) (resource.Res
 		//	  "description": "The home region of the IPAM.",
 		//	  "type": "string"
 		//	}
-		"ipam_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The home region of the IPAM.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"ipam_region": schemaAttributee047d33429690649bf526b56(),
 		// Property: IpamResourceDiscoveryAssociationArn
 		// CloudFormation resource type schema:
 		//
@@ -80,13 +211,7 @@ func iPAMResourceDiscoveryAssociationResource(ctx context.Context) (resource.Res
 		//	  "description": "The Amazon Resource Name (ARN) of the resource discovery association is a part of.",
 		//	  "type": "string"
 		//	}
-		"ipam_resource_discovery_association_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the resource discovery association is a part of.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"ipam_resource_discovery_association_arn": schemaAttribute87da2bd2dec47359cbd3aac5(),
 		// Property: IpamResourceDiscoveryAssociationId
 		// CloudFormation resource type schema:
 		//
@@ -94,13 +219,7 @@ func iPAMResourceDiscoveryAssociationResource(ctx context.Context) (resource.Res
 		//	  "description": "Id of the IPAM Resource Discovery Association.",
 		//	  "type": "string"
 		//	}
-		"ipam_resource_discovery_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Id of the IPAM Resource Discovery Association.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"ipam_resource_discovery_association_id": schemaAttributee6e3de559b4e54ecbf70d052(),
 		// Property: IpamResourceDiscoveryId
 		// CloudFormation resource type schema:
 		//
@@ -108,13 +227,7 @@ func iPAMResourceDiscoveryAssociationResource(ctx context.Context) (resource.Res
 		//	  "description": "The Amazon Resource Name (ARN) of the IPAM Resource Discovery Association.",
 		//	  "type": "string"
 		//	}
-		"ipam_resource_discovery_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the IPAM Resource Discovery Association.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"ipam_resource_discovery_id": schemaAttribute1e3743b62de2a5df52c70962(),
 		// Property: IsDefault
 		// CloudFormation resource type schema:
 		//
@@ -122,13 +235,7 @@ func iPAMResourceDiscoveryAssociationResource(ctx context.Context) (resource.Res
 		//	  "description": "If the Resource Discovery Association exists due as part of CreateIpam.",
 		//	  "type": "boolean"
 		//	}
-		"is_default": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "If the Resource Discovery Association exists due as part of CreateIpam.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"is_default": schemaAttribute92f957b375bececbaf79fa44(),
 		// Property: OwnerId
 		// CloudFormation resource type schema:
 		//
@@ -136,13 +243,7 @@ func iPAMResourceDiscoveryAssociationResource(ctx context.Context) (resource.Res
 		//	  "description": "The AWS Account ID for the account where the shared IPAM exists.",
 		//	  "type": "string"
 		//	}
-		"owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS Account ID for the account where the shared IPAM exists.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"owner_id": schemaAttribute87e2095a0bb5f07f7e250fb8(),
 		// Property: ResourceDiscoveryStatus
 		// CloudFormation resource type schema:
 		//
@@ -150,13 +251,7 @@ func iPAMResourceDiscoveryAssociationResource(ctx context.Context) (resource.Res
 		//	  "description": "The status of the resource discovery.",
 		//	  "type": "string"
 		//	}
-		"resource_discovery_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the resource discovery.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"resource_discovery_status": schemaAttribute14688faf904ffc04aba0f686(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -164,13 +259,7 @@ func iPAMResourceDiscoveryAssociationResource(ctx context.Context) (resource.Res
 		//	  "description": "The operational state of the Resource Discovery Association. Related to Create/Delete activities.",
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The operational state of the Resource Discovery Association. Related to Create/Delete activities.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttribute0fcfdfdaa50281573058bc8d(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -203,44 +292,7 @@ func iPAMResourceDiscoveryAssociationResource(ctx context.Context) (resource.Res
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributefb937a051c678550fc4b9bc8(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

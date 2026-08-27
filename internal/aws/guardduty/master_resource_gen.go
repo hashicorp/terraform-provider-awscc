@@ -17,6 +17,38 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute07cd53324796d2755be5f212() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Unique ID of the detector of the GuardDuty member account.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6508dbfe4e9e7a8096eeaf84() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ID of the account used as the master account.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee674e7c400047d129a8563e4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Value used to validate the master account to the member account.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_guardduty_master", masterResource)
 	registry.AddListResourceFactory("awscc_guardduty_master", generic.NewListResource(masterResource))
@@ -33,13 +65,7 @@ func masterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Unique ID of the detector of the GuardDuty member account.",
 		//	  "type": "string"
 		//	}
-		"detector_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Unique ID of the detector of the GuardDuty member account.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"detector_id": schemaAttribute07cd53324796d2755be5f212(),
 		// Property: InvitationId
 		// CloudFormation resource type schema:
 		//
@@ -47,15 +73,7 @@ func masterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Value used to validate the master account to the member account.",
 		//	  "type": "string"
 		//	}
-		"invitation_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Value used to validate the master account to the member account.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"invitation_id": schemaAttributee674e7c400047d129a8563e4(),
 		// Property: MasterId
 		// CloudFormation resource type schema:
 		//
@@ -63,13 +81,7 @@ func masterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "ID of the account used as the master account.",
 		//	  "type": "string"
 		//	}
-		"master_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ID of the account used as the master account.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"master_id": schemaAttribute6508dbfe4e9e7a8096eeaf84(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

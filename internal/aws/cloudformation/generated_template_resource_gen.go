@@ -22,6 +22,167 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute057290f098c2413eadca7c76() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The time the generated template was last updated.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0cd25fc6953768750c812f9b() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of resources that failed the template generation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1cefb9176ec9e746211b1068() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of resources that succeeded the template generation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2621c0d16d02a1e3dcb74677() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of resources that are in-process for the template generation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute28cd5f233457b37ff51fc6c2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the generated template.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute357c9b08017647582e86e807() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ResourcesFailed
+			"resources_failed": schemaAttribute0cd25fc6953768750c812f9b(),
+			// Property: ResourcesPending
+			"resources_pending": schemaAttribute4783316200e46e52ee87fff2(),
+			// Property: ResourcesProcessing
+			"resources_processing": schemaAttribute2621c0d16d02a1e3dcb74677(),
+			// Property: ResourcesSucceeded
+			"resources_succeeded": schemaAttribute1cefb9176ec9e746211b1068(),
+		}, /*END SCHEMA*/
+		Description: "A summary of the progress of the template generation.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4783316200e46e52ee87fff2() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of resources that are still pending the template generation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5bae2bc0858bebcaad02087e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the template generation.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute75d5ed8f01faaa23f3f2fe7b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name assigned to the generated template.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute93d44c6de7807c6d05b2d4e6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The DeletionPolicy assigned to resources in the generated template.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"DELETE",
+				"RETAIN",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute95b1061f85c2a67a2e1246f8() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of warnings generated for this template.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9fc6fa496a1ae98d55e1b8fd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The time the generated template was created.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb31305f51713f1d9b1eeb084() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The UpdateReplacePolicy assigned to resources in the generated template.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"DELETE",
+				"RETAIN",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec266496773cc3ec53916c53e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DeletionPolicy
+			"deletion_policy": schemaAttribute93d44c6de7807c6d05b2d4e6(),
+			// Property: UpdateReplacePolicy
+			"update_replace_policy": schemaAttributeb31305f51713f1d9b1eeb084(),
+		}, /*END SCHEMA*/
+		Description: "The configuration details of the generated template.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_cloudformation_generated_template", generatedTemplateResource)
 	registry.AddListResourceFactory("awscc_cloudformation_generated_template", generic.NewListResource(generatedTemplateResource))
@@ -39,14 +200,7 @@ func generatedTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The time the generated template was created.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"creation_time": schemaAttribute9fc6fa496a1ae98d55e1b8fd(),
 		// Property: GeneratedTemplateId
 		// CloudFormation resource type schema:
 		//
@@ -56,13 +210,7 @@ func generatedTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"generated_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the generated template.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"generated_template_id": schemaAttribute28cd5f233457b37ff51fc6c2(),
 		// Property: GeneratedTemplateName
 		// CloudFormation resource type schema:
 		//
@@ -72,13 +220,7 @@ func generatedTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"generated_template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name assigned to the generated template.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"generated_template_name": schemaAttribute75d5ed8f01faaa23f3f2fe7b(),
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -87,14 +229,7 @@ func generatedTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The time the generated template was last updated.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"last_updated_time": schemaAttribute057290f098c2413eadca7c76(),
 		// Property: Progress
 		// CloudFormation resource type schema:
 		//
@@ -121,35 +256,7 @@ func generatedTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"progress": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ResourcesFailed
-				"resources_failed": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The number of resources that failed the template generation.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourcesPending
-				"resources_pending": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The number of resources that are still pending the template generation.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourcesProcessing
-				"resources_processing": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The number of resources that are in-process for the template generation.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourcesSucceeded
-				"resources_succeeded": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The number of resources that succeeded the template generation.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A summary of the progress of the template generation.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"progress": schemaAttribute357c9b08017647582e86e807(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -167,13 +274,7 @@ func generatedTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the template generation.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute5bae2bc0858bebcaad02087e(),
 		// Property: TemplateConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -200,46 +301,7 @@ func generatedTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"template_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DeletionPolicy
-				"deletion_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The DeletionPolicy assigned to resources in the generated template.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"DELETE",
-							"RETAIN",
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: UpdateReplacePolicy
-				"update_replace_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The UpdateReplacePolicy assigned to resources in the generated template.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"DELETE",
-							"RETAIN",
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The configuration details of the generated template.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"template_configuration": schemaAttributec266496773cc3ec53916c53e(),
 		// Property: TotalWarnings
 		// CloudFormation resource type schema:
 		//
@@ -248,13 +310,7 @@ func generatedTemplateResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"total_warnings": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of warnings generated for this template.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"total_warnings": schemaAttribute95b1061f85c2a67a2e1246f8(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

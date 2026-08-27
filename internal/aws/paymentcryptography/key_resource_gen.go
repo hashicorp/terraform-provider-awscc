@@ -27,6 +27,341 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute13422358034e567e0c6dd227() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute157052d4e3bec26354090fff() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Defines the state of a key",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute23c9a15c454c902401fb126a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2b23c690bcc7c011b623597c() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Default:  booldefault.StaticBool(false),
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2cc2b6154e114f7fa2f22637() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Defines the source of a key",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3ae966cce864bf6c736ba303() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.ValueStringsAre(
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-z]{2}-[a-z]{1,16}-[0-9]+$"), ""),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// ReplicationRegions is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4e9833900db0079a9292ecfb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"TR31_B0_BASE_DERIVATION_KEY",
+				"TR31_C0_CARD_VERIFICATION_KEY",
+				"TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY",
+				"TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS",
+				"TR31_E1_EMV_MKEY_CONFIDENTIALITY",
+				"TR31_E2_EMV_MKEY_INTEGRITY",
+				"TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS",
+				"TR31_E5_EMV_MKEY_CARD_PERSONALIZATION",
+				"TR31_E6_EMV_MKEY_OTHER",
+				"TR31_K0_KEY_ENCRYPTION_KEY",
+				"TR31_K1_KEY_BLOCK_PROTECTION_KEY",
+				"TR31_M3_ISO_9797_3_MAC_KEY",
+				"TR31_M1_ISO_9797_1_MAC_KEY",
+				"TR31_M6_ISO_9797_5_CMAC_KEY",
+				"TR31_M7_HMAC_KEY",
+				"TR31_P0_PIN_ENCRYPTION_KEY",
+				"TR31_P1_PIN_GENERATION_KEY",
+				"TR31_V1_IBM3624_PIN_VERIFICATION_KEY",
+				"TR31_V2_VISA_PIN_VERIFICATION_KEY",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5873e4654b2690766317231a() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Required: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5cb6d69948985af37d22cb4e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Required: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"TDES_2KEY",
+				"TDES_3KEY",
+				"AES_128",
+				"AES_192",
+				"AES_256",
+				"HMAC_SHA256",
+				"HMAC_SHA384",
+				"HMAC_SHA512",
+				"HMAC_SHA224",
+				"RSA_2048",
+				"RSA_3072",
+				"RSA_4096",
+				"ECC_NIST_P256",
+				"ECC_NIST_P384",
+				"ECC_NIST_P521",
+			),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6a175266ad4c3e99be3d06bf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Defines the replication state of a key",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute75f01333073142b2e36acab2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 256),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7faa1f0c5250caa55d6665d7() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Status
+				"status": schemaAttribute6a175266ad4c3e99be3d06bf(),
+				// Property: StatusMessage
+				"status_message": schemaAttribute23c9a15c454c902401fb126a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+			mapplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute92edb99cb7117eaaeb0574c0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: KeyAlgorithm
+			"key_algorithm": schemaAttribute5cb6d69948985af37d22cb4e(),
+			// Property: KeyClass
+			"key_class": schemaAttributeb45cfa119fa3e54420197c1a(),
+			// Property: KeyModesOfUse
+			"key_modes_of_use": schemaAttributec2fce703d201a5d36a48f301(),
+			// Property: KeyUsage
+			"key_usage": schemaAttributea8e10ca50d743fd6416c61ed(),
+		}, /*END SCHEMA*/
+		Required: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute93a3ee711bf5719b614cbf3c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea8e10ca50d743fd6416c61ed() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Required: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"TR31_B0_BASE_DERIVATION_KEY",
+				"TR31_C0_CARD_VERIFICATION_KEY",
+				"TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY",
+				"TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION",
+				"TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS",
+				"TR31_E1_EMV_MKEY_CONFIDENTIALITY",
+				"TR31_E2_EMV_MKEY_INTEGRITY",
+				"TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS",
+				"TR31_E5_EMV_MKEY_CARD_PERSONALIZATION",
+				"TR31_E6_EMV_MKEY_OTHER",
+				"TR31_K0_KEY_ENCRYPTION_KEY",
+				"TR31_K1_KEY_BLOCK_PROTECTION_KEY",
+				"TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT",
+				"TR31_M0_ISO_16609_MAC_KEY",
+				"TR31_M3_ISO_9797_3_MAC_KEY",
+				"TR31_M1_ISO_9797_1_MAC_KEY",
+				"TR31_M6_ISO_9797_5_CMAC_KEY",
+				"TR31_M7_HMAC_KEY",
+				"TR31_P0_PIN_ENCRYPTION_KEY",
+				"TR31_P1_PIN_GENERATION_KEY",
+				"TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE",
+				"TR31_V1_IBM3624_PIN_VERIFICATION_KEY",
+				"TR31_V2_VISA_PIN_VERIFICATION_KEY",
+				"TR31_K2_TR34_ASYMMETRIC_KEY",
+			),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaf49e244938a87973317b947() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The resource-based policy attached to the key, in JSON format.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 20480),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb45cfa119fa3e54420197c1a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Required: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"SYMMETRIC_KEY",
+				"ASYMMETRIC_KEY_PAIR",
+				"PRIVATE_KEY",
+				"PUBLIC_KEY",
+			),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec2fce703d201a5d36a48f301() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Decrypt
+			"decrypt": schemaAttribute2b23c690bcc7c011b623597c(),
+			// Property: DeriveKey
+			"derive_key": schemaAttribute2b23c690bcc7c011b623597c(),
+			// Property: Encrypt
+			"encrypt": schemaAttribute2b23c690bcc7c011b623597c(),
+			// Property: Generate
+			"generate": schemaAttribute2b23c690bcc7c011b623597c(),
+			// Property: NoRestrictions
+			"no_restrictions": schemaAttribute2b23c690bcc7c011b623597c(),
+			// Property: Sign
+			"sign": schemaAttribute2b23c690bcc7c011b623597c(),
+			// Property: Unwrap
+			"unwrap": schemaAttribute2b23c690bcc7c011b623597c(),
+			// Property: Verify
+			"verify": schemaAttribute2b23c690bcc7c011b623597c(),
+			// Property: Wrap
+			"wrap": schemaAttribute2b23c690bcc7c011b623597c(),
+		}, /*END SCHEMA*/
+		Required: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6f348657920438e2496e3e0() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute93a3ee711bf5719b614cbf3c(),
+				// Property: Value
+				"value": schemaAttribute75f01333073142b2e36acab2(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(0, 200),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedd07e7d6ffb7e20e1d410ac1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef4683de4cabcf081b884d305() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"CMAC",
+				"ANSI_X9_24",
+				"HMAC",
+				"SHA_1",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_paymentcryptography_key", keyResource)
 	registry.AddListResourceFactory("awscc_paymentcryptography_key", generic.NewListResource(keyResource))
@@ -63,58 +398,21 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"derive_key_usage": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"TR31_B0_BASE_DERIVATION_KEY",
-					"TR31_C0_CARD_VERIFICATION_KEY",
-					"TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY",
-					"TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS",
-					"TR31_E1_EMV_MKEY_CONFIDENTIALITY",
-					"TR31_E2_EMV_MKEY_INTEGRITY",
-					"TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS",
-					"TR31_E5_EMV_MKEY_CARD_PERSONALIZATION",
-					"TR31_E6_EMV_MKEY_OTHER",
-					"TR31_K0_KEY_ENCRYPTION_KEY",
-					"TR31_K1_KEY_BLOCK_PROTECTION_KEY",
-					"TR31_M3_ISO_9797_3_MAC_KEY",
-					"TR31_M1_ISO_9797_1_MAC_KEY",
-					"TR31_M6_ISO_9797_5_CMAC_KEY",
-					"TR31_M7_HMAC_KEY",
-					"TR31_P0_PIN_ENCRYPTION_KEY",
-					"TR31_P1_PIN_GENERATION_KEY",
-					"TR31_V1_IBM3624_PIN_VERIFICATION_KEY",
-					"TR31_V2_VISA_PIN_VERIFICATION_KEY",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"derive_key_usage": schemaAttribute4e9833900db0079a9292ecfb(),
 		// Property: Enabled
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"enabled": schemaAttribute13422358034e567e0c6dd227(),
 		// Property: Exportable
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"exportable": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Required: true,
-		}, /*END ATTRIBUTE*/
+		"exportable": schemaAttribute5873e4654b2690766317231a(),
 		// Property: KeyAttributes
 		// CloudFormation resource type schema:
 		//
@@ -230,165 +528,7 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"key_attributes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: KeyAlgorithm
-				"key_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"TDES_2KEY",
-							"TDES_3KEY",
-							"AES_128",
-							"AES_192",
-							"AES_256",
-							"HMAC_SHA256",
-							"HMAC_SHA384",
-							"HMAC_SHA512",
-							"HMAC_SHA224",
-							"RSA_2048",
-							"RSA_3072",
-							"RSA_4096",
-							"ECC_NIST_P256",
-							"ECC_NIST_P384",
-							"ECC_NIST_P521",
-						),
-					}, /*END VALIDATORS*/
-				}, /*END ATTRIBUTE*/
-				// Property: KeyClass
-				"key_class": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"SYMMETRIC_KEY",
-							"ASYMMETRIC_KEY_PAIR",
-							"PRIVATE_KEY",
-							"PUBLIC_KEY",
-						),
-					}, /*END VALIDATORS*/
-				}, /*END ATTRIBUTE*/
-				// Property: KeyModesOfUse
-				"key_modes_of_use": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Decrypt
-						"decrypt": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							Default:  booldefault.StaticBool(false),
-							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								boolplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: DeriveKey
-						"derive_key": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							Default:  booldefault.StaticBool(false),
-							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								boolplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: Encrypt
-						"encrypt": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							Default:  booldefault.StaticBool(false),
-							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								boolplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: Generate
-						"generate": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							Default:  booldefault.StaticBool(false),
-							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								boolplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: NoRestrictions
-						"no_restrictions": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							Default:  booldefault.StaticBool(false),
-							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								boolplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: Sign
-						"sign": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							Default:  booldefault.StaticBool(false),
-							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								boolplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: Unwrap
-						"unwrap": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							Default:  booldefault.StaticBool(false),
-							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								boolplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: Verify
-						"verify": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							Default:  booldefault.StaticBool(false),
-							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								boolplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: Wrap
-						"wrap": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							Default:  booldefault.StaticBool(false),
-							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								boolplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Required: true,
-				}, /*END ATTRIBUTE*/
-				// Property: KeyUsage
-				"key_usage": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"TR31_B0_BASE_DERIVATION_KEY",
-							"TR31_C0_CARD_VERIFICATION_KEY",
-							"TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY",
-							"TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION",
-							"TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS",
-							"TR31_E1_EMV_MKEY_CONFIDENTIALITY",
-							"TR31_E2_EMV_MKEY_INTEGRITY",
-							"TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS",
-							"TR31_E5_EMV_MKEY_CARD_PERSONALIZATION",
-							"TR31_E6_EMV_MKEY_OTHER",
-							"TR31_K0_KEY_ENCRYPTION_KEY",
-							"TR31_K1_KEY_BLOCK_PROTECTION_KEY",
-							"TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT",
-							"TR31_M0_ISO_16609_MAC_KEY",
-							"TR31_M3_ISO_9797_3_MAC_KEY",
-							"TR31_M1_ISO_9797_1_MAC_KEY",
-							"TR31_M6_ISO_9797_5_CMAC_KEY",
-							"TR31_M7_HMAC_KEY",
-							"TR31_P0_PIN_ENCRYPTION_KEY",
-							"TR31_P1_PIN_GENERATION_KEY",
-							"TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE",
-							"TR31_V1_IBM3624_PIN_VERIFICATION_KEY",
-							"TR31_V2_VISA_PIN_VERIFICATION_KEY",
-							"TR31_K2_TR34_ASYMMETRIC_KEY",
-						),
-					}, /*END VALIDATORS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Required: true,
-		}, /*END ATTRIBUTE*/
+		"key_attributes": schemaAttribute92edb99cb7117eaaeb0574c0(),
 		// Property: KeyCheckValueAlgorithm
 		// CloudFormation resource type schema:
 		//
@@ -401,21 +541,7 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"key_check_value_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"CMAC",
-					"ANSI_X9_24",
-					"HMAC",
-					"SHA_1",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"key_check_value_algorithm": schemaAttributef4683de4cabcf081b884d305(),
 		// Property: KeyIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -425,12 +551,7 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^arn:aws:payment-cryptography:[a-z]{2}-[a-z]{1,16}-[0-9]+:[0-9]{12}:(key/[0-9a-zA-Z]{16,64}|alias/[a-zA-Z0-9/_-]+)$|^alias/[a-zA-Z0-9/_-]+$",
 		//	  "type": "string"
 		//	}
-		"key_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"key_identifier": schemaAttributedd07e7d6ffb7e20e1d410ac1(),
 		// Property: KeyOrigin
 		// CloudFormation resource type schema:
 		//
@@ -442,13 +563,7 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"key_origin": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Defines the source of a key",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"key_origin": schemaAttribute2cc2b6154e114f7fa2f22637(),
 		// Property: KeyState
 		// CloudFormation resource type schema:
 		//
@@ -462,13 +577,7 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"key_state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Defines the state of a key",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"key_state": schemaAttribute157052d4e3bec26354090fff(),
 		// Property: Policy
 		// CloudFormation resource type schema:
 		//
@@ -479,17 +588,7 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The resource-based policy attached to the key, in JSON format.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 20480),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"policy": schemaAttributeaf49e244938a87973317b947(),
 		// Property: ReplicationRegions
 		// CloudFormation resource type schema:
 		//
@@ -500,20 +599,7 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"replication_regions": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.ValueStringsAre(
-					stringvalidator.RegexMatches(regexp.MustCompile("^[a-z]{2}-[a-z]{1,16}-[0-9]+$"), ""),
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// ReplicationRegions is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"replication_regions": schemaAttribute3ae966cce864bf6c736ba303(),
 		// Property: ReplicationStatus
 		// CloudFormation resource type schema:
 		//
@@ -545,26 +631,7 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"replication_status":      // Pattern: ""
-		schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Status
-					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Defines the replication state of a key",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: StatusMessage
-					"status_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-				mapplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"replication_status": schemaAttribute7faa1f0c5250caa55d6665d7(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -594,45 +661,7 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Optional: true,
-			Computed: true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(0, 200),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributec6f348657920438e2496e3e0(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

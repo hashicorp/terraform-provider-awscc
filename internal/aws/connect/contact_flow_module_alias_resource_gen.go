@@ -21,6 +21,75 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute3d87434b8ae67973ac73ceb9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the alias.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7434c5876eec6c46227cfb64() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the alias.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 127),
+			stringvalidator.RegexMatches(regexp.MustCompile("^([$0-9a-zA-Z][_-]?)+$"), ""),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute95891e17e2e39d803d40d427() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the alias.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 500),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebeaa16067698865d573fafe1() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The version number of the contact flow module this alias points to.",
+		Required:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.AtLeast(1),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec17c3c6d0c05414754344bd0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the contact flow module (ARN) this alias is tied to.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 500),
+			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]+:[0-9]{12}:instance/[-a-zA-Z0-9]+/flow-module/[-a-zA-Z0-9]+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee25c60e7ec8381c8c6707b92() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the contact flow module alias (ARN). This is constructed from the ContactFlowModuleArn and AliasId.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_connect_contact_flow_module_alias", contactFlowModuleAliasResource)
 }
@@ -38,13 +107,7 @@ func contactFlowModuleAliasResource(ctx context.Context) (resource.Resource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"alias_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the alias.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"alias_id": schemaAttribute3d87434b8ae67973ac73ceb9(),
 		// Property: ContactFlowModuleAliasARN
 		// CloudFormation resource type schema:
 		//
@@ -55,13 +118,7 @@ func contactFlowModuleAliasResource(ctx context.Context) (resource.Resource, err
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]+:[0-9]{12}:instance/[-a-zA-Z0-9]+/flow-module/[-a-zA-Z0-9]+:[-a-zA-Z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"contact_flow_module_alias_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the contact flow module alias (ARN). This is constructed from the ContactFlowModuleArn and AliasId.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"contact_flow_module_alias_arn": schemaAttributee25c60e7ec8381c8c6707b92(),
 		// Property: ContactFlowModuleId
 		// CloudFormation resource type schema:
 		//
@@ -72,17 +129,7 @@ func contactFlowModuleAliasResource(ctx context.Context) (resource.Resource, err
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]+:[0-9]{12}:instance/[-a-zA-Z0-9]+/flow-module/[-a-zA-Z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"contact_flow_module_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the contact flow module (ARN) this alias is tied to.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 500),
-				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]+:[0-9]{12}:instance/[-a-zA-Z0-9]+/flow-module/[-a-zA-Z0-9]+$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"contact_flow_module_id": schemaAttributec17c3c6d0c05414754344bd0(),
 		// Property: ContactFlowModuleVersion
 		// CloudFormation resource type schema:
 		//
@@ -91,13 +138,7 @@ func contactFlowModuleAliasResource(ctx context.Context) (resource.Resource, err
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"contact_flow_module_version": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The version number of the contact flow module this alias points to.",
-			Required:    true,
-			Validators: []validator.Int64{ /*START VALIDATORS*/
-				int64validator.AtLeast(1),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"contact_flow_module_version": schemaAttributebeaa16067698865d573fafe1(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -107,17 +148,7 @@ func contactFlowModuleAliasResource(ctx context.Context) (resource.Resource, err
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the alias.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 500),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute95891e17e2e39d803d40d427(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -128,14 +159,7 @@ func contactFlowModuleAliasResource(ctx context.Context) (resource.Resource, err
 		//	  "pattern": "^([$0-9a-zA-Z][_-]?)+$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the alias.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 127),
-				stringvalidator.RegexMatches(regexp.MustCompile("^([$0-9a-zA-Z][_-]?)+$"), ""),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute7434c5876eec6c46227cfb64(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

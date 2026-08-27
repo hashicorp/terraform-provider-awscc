@@ -26,6 +26,306 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute002a590d4c8585dc7507dddb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Required: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(3, 63),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"), ""),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute171bdc70986dd62f2e1416e1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the inference scheduler being created.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 200),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-zA-Z_-]{1,200}$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute28f26cdb158a516721c6dc05() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the specified tag.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 256),
+			stringvalidator.RegexMatches(regexp.MustCompile("[\\s\\w+-=\\.:/@]*"), ""),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute36854ed5350097c055c2b7ea() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID number for the AWS KMS key used to encrypt the inference output.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 2048),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute53816b64a9e85e7650386cb8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InferenceInputNameConfiguration
+			"inference_input_name_configuration": schemaAttribute7ac0ffbeb8447c603f962a4d(),
+			// Property: InputTimeZoneOffset
+			"input_time_zone_offset": schemaAttributeb699ae7ab4d08650e912fe93(),
+			// Property: S3InputConfiguration
+			"s3_input_configuration": schemaAttributee99134d2cc37d74b86839672(),
+		}, /*END SCHEMA*/
+		Description: "Specifies configuration information for the input data for the inference scheduler, including delimiter, format, and dataset location.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5c3c16c8be587fd79f1f610e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "How often data is uploaded to the source S3 bucket for the input data.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"PT5M",
+				"PT10M",
+				"PT15M",
+				"PT30M",
+				"PT1H",
+			),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6bcd1714d0e8ee1dd85a0ba9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 1024),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7ac0ffbeb8447c603f962a4d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ComponentTimestampDelimiter
+			"component_timestamp_delimiter": schemaAttribute7b877691a944b1555a5678da(),
+			// Property: TimestampFormat
+			"timestamp_format": schemaAttributebbd4762507717e0913ac19de(),
+		}, /*END SCHEMA*/
+		Description: "Specifies configuration information for the input data for the inference, including timestamp format and delimiter.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b877691a944b1555a5678da() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates the delimiter character used between items in the data.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 1),
+			stringvalidator.RegexMatches(regexp.MustCompile("^(\\-|\\_|\\s)?$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute818ee1b3cc624904aac8a2d1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the previously trained ML model being used to create the inference scheduler.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 200),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-zA-Z_-]{1,200}$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea386c32fa40775f4e89bbe09() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributefffb4f825bcf911a2cd61add(),
+				// Property: Value
+				"value": schemaAttribute28f26cdb158a516721c6dc05(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Any tags associated with the inference scheduler.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Set{ /*START VALIDATORS*/
+			setvalidator.SizeAtMost(200),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb699ae7ab4d08650e912fe93() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates the difference between your time zone and Greenwich Mean Time (GMT).",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("^(\\+|\\-)[0-9]{2}\\:[0-9]{2}$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeba96561a5963ca911a6c6da9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Bucket
+			"bucket": schemaAttribute002a590d4c8585dc7507dddb(),
+			// Property: Prefix
+			"prefix": schemaAttribute6bcd1714d0e8ee1dd85a0ba9(),
+		}, /*END SCHEMA*/
+		Description: "Specifies configuration information for the output results from the inference, including output S3 location.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeba9873d576517dda3838ec5b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of a role with permission to access the data source being used for the inference.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(20, 2048),
+			stringvalidator.RegexMatches(regexp.MustCompile("arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+"), ""),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebbd4762507717e0913ac19de() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The format of the timestamp, whether Epoch time, or standard, with or without hyphens (-).",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("^EPOCH|yyyy-MM-dd-HH-mm-ss|yyyyMMddHHmmss$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebd40282ba0fac00b2cce09fa() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: KmsKeyId
+			"kms_key_id": schemaAttribute36854ed5350097c055c2b7ea(),
+			// Property: S3OutputConfiguration
+			"s3_output_configuration": schemaAttributeba96561a5963ca911a6c6da9(),
+		}, /*END SCHEMA*/
+		Description: "Specifies configuration information for the output results for the inference scheduler, including the S3 location for the output.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed7d4e8979243d93f09718506() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the inference scheduler being created.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee3ead52c22274a02ff31729d() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "A period of time (in minutes) by which inference on the data is delayed after the data starts.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.Between(0, 60),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee96479bf63105cfd6cecda13() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt inference scheduler data by Amazon Lookout for Equipment.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 2048),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee99134d2cc37d74b86839672() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Bucket
+			"bucket": schemaAttribute002a590d4c8585dc7507dddb(),
+			// Property: Prefix
+			"prefix": schemaAttribute6bcd1714d0e8ee1dd85a0ba9(),
+		}, /*END SCHEMA*/
+		Description: "Specifies configuration information for the input data for the inference, including input data S3 location.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefffb4f825bcf911a2cd61add() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key for the specified tag.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_lookoutequipment_inference_scheduler", inferenceSchedulerResource)
 	registry.AddListResourceFactory("awscc_lookoutequipment_inference_scheduler", generic.NewListResource(inferenceSchedulerResource))
@@ -44,17 +344,7 @@ func inferenceSchedulerResource(ctx context.Context) (resource.Resource, error) 
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"data_delay_offset_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "A period of time (in minutes) by which inference on the data is delayed after the data starts.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.Int64{ /*START VALIDATORS*/
-				int64validator.Between(0, 60),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"data_delay_offset_in_minutes": schemaAttributee3ead52c22274a02ff31729d(),
 		// Property: DataInputConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -113,86 +403,7 @@ func inferenceSchedulerResource(ctx context.Context) (resource.Resource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"data_input_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: InferenceInputNameConfiguration
-				"inference_input_name_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ComponentTimestampDelimiter
-						"component_timestamp_delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Indicates the delimiter character used between items in the data.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(0, 1),
-								stringvalidator.RegexMatches(regexp.MustCompile("^(\\-|\\_|\\s)?$"), ""),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: TimestampFormat
-						"timestamp_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The format of the timestamp, whether Epoch time, or standard, with or without hyphens (-).",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.RegexMatches(regexp.MustCompile("^EPOCH|yyyy-MM-dd-HH-mm-ss|yyyyMMddHHmmss$"), ""),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Specifies configuration information for the input data for the inference, including timestamp format and delimiter.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: InputTimeZoneOffset
-				"input_time_zone_offset": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates the difference between your time zone and Greenwich Mean Time (GMT).",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.RegexMatches(regexp.MustCompile("^(\\+|\\-)[0-9]{2}\\:[0-9]{2}$"), ""),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: S3InputConfiguration
-				"s3_input_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Bucket
-						"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(3, 63),
-								stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"), ""),
-							}, /*END VALIDATORS*/
-						}, /*END ATTRIBUTE*/
-						// Property: Prefix
-						"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(0, 1024),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Specifies configuration information for the input data for the inference, including input data S3 location.",
-					Required:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies configuration information for the input data for the inference scheduler, including delimiter, format, and dataset location.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"data_input_configuration": schemaAttribute53816b64a9e85e7650386cb8(),
 		// Property: DataOutputConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -234,50 +445,7 @@ func inferenceSchedulerResource(ctx context.Context) (resource.Resource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"data_output_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: KmsKeyId
-				"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ID number for the AWS KMS key used to encrypt the inference output.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 2048),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: S3OutputConfiguration
-				"s3_output_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Bucket
-						"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(3, 63),
-								stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"), ""),
-							}, /*END VALIDATORS*/
-						}, /*END ATTRIBUTE*/
-						// Property: Prefix
-						"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(0, 1024),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Specifies configuration information for the output results from the inference, including output S3 location.",
-					Required:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies configuration information for the output results for the inference scheduler, including the S3 location for the output.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"data_output_configuration": schemaAttributebd40282ba0fac00b2cce09fa(),
 		// Property: DataUploadFrequency
 		// CloudFormation resource type schema:
 		//
@@ -292,19 +460,7 @@ func inferenceSchedulerResource(ctx context.Context) (resource.Resource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"data_upload_frequency": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "How often data is uploaded to the source S3 bucket for the input data.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"PT5M",
-					"PT10M",
-					"PT15M",
-					"PT30M",
-					"PT1H",
-				),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"data_upload_frequency": schemaAttribute5c3c16c8be587fd79f1f610e(),
 		// Property: InferenceSchedulerArn
 		// CloudFormation resource type schema:
 		//
@@ -315,13 +471,7 @@ func inferenceSchedulerResource(ctx context.Context) (resource.Resource, error) 
 		//	  "pattern": "arn:aws(-[^:]+)?:lookoutequipment:[a-zA-Z0-9\\-]*:[0-9]{12}:inference-scheduler\\/.+",
 		//	  "type": "string"
 		//	}
-		"inference_scheduler_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the inference scheduler being created.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"inference_scheduler_arn": schemaAttributed7d4e8979243d93f09718506(),
 		// Property: InferenceSchedulerName
 		// CloudFormation resource type schema:
 		//
@@ -332,19 +482,7 @@ func inferenceSchedulerResource(ctx context.Context) (resource.Resource, error) 
 		//	  "pattern": "^[0-9a-zA-Z_-]{1,200}$",
 		//	  "type": "string"
 		//	}
-		"inference_scheduler_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the inference scheduler being created.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 200),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-zA-Z_-]{1,200}$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"inference_scheduler_name": schemaAttribute171bdc70986dd62f2e1416e1(),
 		// Property: ModelName
 		// CloudFormation resource type schema:
 		//
@@ -355,17 +493,7 @@ func inferenceSchedulerResource(ctx context.Context) (resource.Resource, error) 
 		//	  "pattern": "^[0-9a-zA-Z_-]{1,200}$",
 		//	  "type": "string"
 		//	}
-		"model_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the previously trained ML model being used to create the inference scheduler.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 200),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-zA-Z_-]{1,200}$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"model_name": schemaAttribute818ee1b3cc624904aac8a2d1(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -376,14 +504,7 @@ func inferenceSchedulerResource(ctx context.Context) (resource.Resource, error) 
 		//	  "pattern": "arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+",
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of a role with permission to access the data source being used for the inference.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(20, 2048),
-				stringvalidator.RegexMatches(regexp.MustCompile("arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+"), ""),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttributeba9873d576517dda3838ec5b(),
 		// Property: ServerSideKmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -394,18 +515,7 @@ func inferenceSchedulerResource(ctx context.Context) (resource.Resource, error) 
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"server_side_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt inference scheduler data by Amazon Lookout for Equipment.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 2048),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"server_side_kms_key_id": schemaAttributee96479bf63105cfd6cecda13(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -441,48 +551,7 @@ func inferenceSchedulerResource(ctx context.Context) (resource.Resource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key for the specified tag.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the specified tag.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
-							stringvalidator.RegexMatches(regexp.MustCompile("[\\s\\w+-=\\.:/@]*"), ""),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Any tags associated with the inference scheduler.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.Set{ /*START VALIDATORS*/
-				setvalidator.SizeAtMost(200),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributea386c32fa40775f4e89bbe09(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

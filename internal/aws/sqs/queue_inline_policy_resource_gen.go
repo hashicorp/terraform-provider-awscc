@@ -18,6 +18,24 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0d9f148146bf33403d2f7e38() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "A policy document that contains permissions to add to the specified SQS queue",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb72d5b6a4c08a0669430bc2e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The URL of the SQS queue.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_sqs_queue_inline_policy", queueInlinePolicyResource)
 }
@@ -33,11 +51,7 @@ func queueInlinePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A policy document that contains permissions to add to the specified SQS queue",
 		//	  "type": "object"
 		//	}
-		"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "A policy document that contains permissions to add to the specified SQS queue",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"policy_document": schemaAttribute0d9f148146bf33403d2f7e38(),
 		// Property: Queue
 		// CloudFormation resource type schema:
 		//
@@ -45,13 +59,7 @@ func queueInlinePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The URL of the SQS queue.",
 		//	  "type": "string"
 		//	}
-		"queue": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The URL of the SQS queue.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"queue": schemaAttributeb72d5b6a4c08a0669430bc2e(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

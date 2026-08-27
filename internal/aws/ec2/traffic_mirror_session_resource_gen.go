@@ -21,6 +21,121 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute0e24734f4c19b609cc893225() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute28a5c89708d746a09df3cdf8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of a Traffic Mirror target.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c82f8ccda618fbd0f7ca4fe() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the account that owns the Traffic Mirror session.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4d911fb20d907b09786c22c2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the source network interface.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a1b6cafb394395fe382d17a() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The session number determines the order in which sessions are evaluated when an interface is used by multiple sessions. The first session with a matching filter is the one that mirrors the packets.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8c8b30ba9c83d02895c40574() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of a Traffic Mirror filter.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c1c3888e558549c21440c7b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the Traffic Mirror session.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9d8e4de9fee15b7f6fd18e55() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of bytes in each packet to mirror.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb77b4cdee2f4ff927f11aa2b() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute0e24734f4c19b609cc893225(),
+				// Property: Value
+				"value": schemaAttribute0e24734f4c19b609cc893225(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags assigned to the Traffic Mirror session.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec56d2cca1aa17d8afba83736() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of a Traffic Mirror session.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedcda1e44427353de90f12588() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The VXLAN ID for the Traffic Mirror session.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_ec2_traffic_mirror_session", trafficMirrorSessionResource)
 	registry.AddListResourceFactory("awscc_ec2_traffic_mirror_session", generic.NewListResource(trafficMirrorSessionResource))
@@ -37,14 +152,7 @@ func trafficMirrorSessionResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The description of the Traffic Mirror session.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the Traffic Mirror session.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute9c1c3888e558549c21440c7b(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -52,13 +160,7 @@ func trafficMirrorSessionResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The ID of a Traffic Mirror session.",
 		//	  "type": "string"
 		//	}
-		"traffic_mirror_session_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of a Traffic Mirror session.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"traffic_mirror_session_id": schemaAttributec56d2cca1aa17d8afba83736(),
 		// Property: NetworkInterfaceId
 		// CloudFormation resource type schema:
 		//
@@ -66,10 +168,7 @@ func trafficMirrorSessionResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The ID of the source network interface.",
 		//	  "type": "string"
 		//	}
-		"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the source network interface.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"network_interface_id": schemaAttribute4d911fb20d907b09786c22c2(),
 		// Property: OwnerId
 		// CloudFormation resource type schema:
 		//
@@ -77,14 +176,7 @@ func trafficMirrorSessionResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The ID of the account that owns the Traffic Mirror session.",
 		//	  "type": "string"
 		//	}
-		"owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the account that owns the Traffic Mirror session.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"owner_id": schemaAttribute2c82f8ccda618fbd0f7ca4fe(),
 		// Property: PacketLength
 		// CloudFormation resource type schema:
 		//
@@ -92,14 +184,7 @@ func trafficMirrorSessionResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The number of bytes in each packet to mirror.",
 		//	  "type": "integer"
 		//	}
-		"packet_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of bytes in each packet to mirror.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"packet_length": schemaAttribute9d8e4de9fee15b7f6fd18e55(),
 		// Property: SessionNumber
 		// CloudFormation resource type schema:
 		//
@@ -107,10 +192,7 @@ func trafficMirrorSessionResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The session number determines the order in which sessions are evaluated when an interface is used by multiple sessions. The first session with a matching filter is the one that mirrors the packets.",
 		//	  "type": "integer"
 		//	}
-		"session_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The session number determines the order in which sessions are evaluated when an interface is used by multiple sessions. The first session with a matching filter is the one that mirrors the packets.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"session_number": schemaAttribute8a1b6cafb394395fe382d17a(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -137,41 +219,7 @@ func trafficMirrorSessionResource(ctx context.Context) (resource.Resource, error
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags assigned to the Traffic Mirror session.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeb77b4cdee2f4ff927f11aa2b(),
 		// Property: TrafficMirrorFilterId
 		// CloudFormation resource type schema:
 		//
@@ -179,10 +227,7 @@ func trafficMirrorSessionResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The ID of a Traffic Mirror filter.",
 		//	  "type": "string"
 		//	}
-		"traffic_mirror_filter_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of a Traffic Mirror filter.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"traffic_mirror_filter_id": schemaAttribute8c8b30ba9c83d02895c40574(),
 		// Property: TrafficMirrorTargetId
 		// CloudFormation resource type schema:
 		//
@@ -190,10 +235,7 @@ func trafficMirrorSessionResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The ID of a Traffic Mirror target.",
 		//	  "type": "string"
 		//	}
-		"traffic_mirror_target_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of a Traffic Mirror target.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"traffic_mirror_target_id": schemaAttribute28a5c89708d746a09df3cdf8(),
 		// Property: VirtualNetworkId
 		// CloudFormation resource type schema:
 		//
@@ -201,14 +243,7 @@ func trafficMirrorSessionResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The VXLAN ID for the Traffic Mirror session.",
 		//	  "type": "integer"
 		//	}
-		"virtual_network_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The VXLAN ID for the Traffic Mirror session.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"virtual_network_id": schemaAttributedcda1e44427353de90f12588(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

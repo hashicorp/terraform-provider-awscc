@@ -21,6 +21,65 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttributea47bbe1ab19d2983eef1795f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates the checksum value of the latest published flow content",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea642320e70d70ca545726817() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the contact flow version (ARN).",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed096617f84902bb7adedf133() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The version number of this revision",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedcaed075d35d3f525e7d7a22() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the version.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(500),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeef53db90e0737b07e429ce03() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the contact flow this version is tied to.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 500),
+			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]+:[0-9]{12}:instance/[-a-zA-Z0-9]+/contact-flow/[-a-zA-Z0-9]+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_connect_contact_flow_version", contactFlowVersionResource)
 }
@@ -39,17 +98,7 @@ func contactFlowVersionResource(ctx context.Context) (resource.Resource, error) 
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]+:[0-9]{12}:instance/[-a-zA-Z0-9]+/contact-flow/[-a-zA-Z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"contact_flow_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the contact flow this version is tied to.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 500),
-				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]+:[0-9]{12}:instance/[-a-zA-Z0-9]+/contact-flow/[-a-zA-Z0-9]+$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"contact_flow_id": schemaAttributeef53db90e0737b07e429ce03(),
 		// Property: ContactFlowVersionARN
 		// CloudFormation resource type schema:
 		//
@@ -60,13 +109,7 @@ func contactFlowVersionResource(ctx context.Context) (resource.Resource, error) 
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]+:[0-9]{12}:instance/[-a-zA-Z0-9]+/contact-flow/[-a-zA-Z0-9]+:[0-9]+$",
 		//	  "type": "string"
 		//	}
-		"contact_flow_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the contact flow version (ARN).",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"contact_flow_version_arn": schemaAttributea642320e70d70ca545726817(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -75,18 +118,7 @@ func contactFlowVersionResource(ctx context.Context) (resource.Resource, error) 
 		//	  "maxLength": 500,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the version.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(500),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributedcaed075d35d3f525e7d7a22(),
 		// Property: FlowContentSha256
 		// CloudFormation resource type schema:
 		//
@@ -97,13 +129,7 @@ func contactFlowVersionResource(ctx context.Context) (resource.Resource, error) 
 		//	  "pattern": "^[a-zA-Z0-9]{64}$",
 		//	  "type": "string"
 		//	}
-		"flow_content_sha_256": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates the checksum value of the latest published flow content",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"flow_content_sha_256": schemaAttributea47bbe1ab19d2983eef1795f(),
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -111,13 +137,7 @@ func contactFlowVersionResource(ctx context.Context) (resource.Resource, error) 
 		//	  "description": "The version number of this revision",
 		//	  "type": "integer"
 		//	}
-		"version": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The version number of this revision",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"version": schemaAttributed096617f84902bb7adedf133(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

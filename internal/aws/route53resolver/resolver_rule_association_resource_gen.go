@@ -17,6 +17,48 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute176231592c66b9c375f90853() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the VPC that you associated the Resolver rule with.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute20d7fceb2c3ae90d69bc8899() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3ce2a28a74eb594e52911bf2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of an association between a Resolver rule and a VPC.\n The name can be up to 64 characters long and can contain letters (a-z, A-Z), numbers (0-9), hyphens (-), underscores (_), and spaces. The name cannot consist of only numbers.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5f06147e4e8b5cfa152ec743() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the Resolver rule that you associated with the VPC that is specified by ``VPCId``.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_route53resolver_resolver_rule_association", resolverRuleAssociationResource)
 	registry.AddListResourceFactory("awscc_route53resolver_resolver_rule_association", generic.NewListResource(resolverRuleAssociationResource))
@@ -33,15 +75,7 @@ func resolverRuleAssociationResource(ctx context.Context) (resource.Resource, er
 		//	  "description": "The name of an association between a Resolver rule and a VPC.\n The name can be up to 64 characters long and can contain letters (a-z, A-Z), numbers (0-9), hyphens (-), underscores (_), and spaces. The name cannot consist of only numbers.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of an association between a Resolver rule and a VPC.\n The name can be up to 64 characters long and can contain letters (a-z, A-Z), numbers (0-9), hyphens (-), underscores (_), and spaces. The name cannot consist of only numbers.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute3ce2a28a74eb594e52911bf2(),
 		// Property: ResolverRuleAssociationId
 		// CloudFormation resource type schema:
 		//
@@ -49,13 +83,7 @@ func resolverRuleAssociationResource(ctx context.Context) (resource.Resource, er
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"resolver_rule_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"resolver_rule_association_id": schemaAttribute20d7fceb2c3ae90d69bc8899(),
 		// Property: ResolverRuleId
 		// CloudFormation resource type schema:
 		//
@@ -63,13 +91,7 @@ func resolverRuleAssociationResource(ctx context.Context) (resource.Resource, er
 		//	  "description": "The ID of the Resolver rule that you associated with the VPC that is specified by ``VPCId``.",
 		//	  "type": "string"
 		//	}
-		"resolver_rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Resolver rule that you associated with the VPC that is specified by ``VPCId``.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"resolver_rule_id": schemaAttribute5f06147e4e8b5cfa152ec743(),
 		// Property: VPCId
 		// CloudFormation resource type schema:
 		//
@@ -77,13 +99,7 @@ func resolverRuleAssociationResource(ctx context.Context) (resource.Resource, er
 		//	  "description": "The ID of the VPC that you associated the Resolver rule with.",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the VPC that you associated the Resolver rule with.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"vpc_id": schemaAttribute176231592c66b9c375f90853(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

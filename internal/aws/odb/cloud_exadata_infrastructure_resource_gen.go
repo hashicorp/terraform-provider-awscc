@@ -29,6 +29,583 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute018e81cf9d6521fbb5e36539() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The total amount of memory, in gigabytes (GB), that's available on the Exadata infrastructure.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0a3f24344734d4d1f0f5e1a9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The patching mode for the maintenance window.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0df33663b2269934e1977f9f() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The timeout duration for custom actions in minutes.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.Between(15, 120),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute18ff5291b08894d6d4648fae() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that's 1 to 256 characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 256),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute193f53f16bfde2d6b1ee8f38() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The OCI model compute model used when you create or clone an instance: ECPU or OCPU. An ECPU is an abstracted measure of compute resources. ECPUs are based on the number of cores elastically allocated from a pool of compute and storage servers. An OCPU is a legacy physical measure of compute resources. OCPUs are based on the physical core of a processor with hyper-threading enabled.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1f7ca7591294f548c3e8d4e4() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The total amount of local node storage, in gigabytes (GB), that's available on the Exadata infrastructure.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2127e8f9f75f588c05554bfb() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The size of the Exadata infrastructure's local node storage, in gigabytes (GB).",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute263b64299c4a9994b6413ae0() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Email
+				"email": schemaAttributeb9db395b77953fabe132e463(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The email addresses of contacts to receive notification from Oracle about maintenance updates for the Exadata infrastructure.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+			listplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute26628896d5592f9bd6d4d2a5() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.Int64Type,
+		Description: "The hours of the day when maintenance can be performed.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.UniqueValues(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3b0cac6085b685d42d551dba() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributea4d93411da60bc587d33661f(),
+				// Property: Value
+				"value": schemaAttribute18ff5291b08894d6d4648fae(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags to assign to the Exadata Infrastructure.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3e3abb66d7627b76c411b81f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Availability Zone (AZ) where the Exadata infrastructure is located.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 255),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute40a312c97a0481303fae7260() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.Int64Type,
+		Description: "The weeks of the month when maintenance can be performed.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.UniqueValues(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute41ec20aceec0745de1f24329() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of storage servers that are activated for the Exadata infrastructure.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+			int64planmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute464fb7d374f7f656b8d5692b() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The total number of CPU cores that are allocated to the Exadata infrastructure.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4a31a6d121e10e31b44ad0c1() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of storage servers requested for the Exadata infrastructure.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4f05b6b322502738e114a4b4() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The amount of memory, in gigabytes (GB), that's allocated on the Exadata infrastructure.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5b5bfd696d48fc08b7264dc6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CustomActionTimeoutInMins
+			"custom_action_timeout_in_mins": schemaAttribute0df33663b2269934e1977f9f(),
+			// Property: DaysOfWeek
+			"days_of_week": schemaAttribute839e4f5823b1a06a2ab8bc43(),
+			// Property: HoursOfDay
+			"hours_of_day": schemaAttribute26628896d5592f9bd6d4d2a5(),
+			// Property: IsCustomActionTimeoutEnabled
+			"is_custom_action_timeout_enabled": schemaAttribute919a3cd2d2f289e04d0453d7(),
+			// Property: LeadTimeInWeeks
+			"lead_time_in_weeks": schemaAttributed3c5cf2a635127ba8aceb5c9(),
+			// Property: Months
+			"months": schemaAttributee69e17c295fc9a24b3abcfb1(),
+			// Property: PatchingMode
+			"patching_mode": schemaAttribute0a3f24344734d4d1f0f5e1a9(),
+			// Property: Preference
+			"preference": schemaAttributeef8807129233386ef8c11c06(),
+			// Property: WeeksOfMonth
+			"weeks_of_month": schemaAttribute40a312c97a0481303fae7260(),
+		}, /*END SCHEMA*/
+		Description: "The scheduling details for the maintenance window. Patching and system updates take place during the maintenance window.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5ff1720bf053e2f511e6674c() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of database server identifiers for the Exadata infrastructure.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6282ec0c1a6a328724c37578() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier for the Exadata infrastructure.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute699085f94833e454b81e8934() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The database server model type of the Exadata infrastructure. For the list of valid model names, use the ListDbSystemShapes operation.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 255),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_\\/.=-]+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute79d0742d37446439e13ba3f2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) for the Exadata infrastructure.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute839e4f5823b1a06a2ab8bc43() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The days of the week when maintenance can be performed.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.UniqueValues(),
+			listvalidator.ValueStringsAre(
+				stringvalidator.OneOf(
+					"MONDAY",
+					"TUESDAY",
+					"WEDNESDAY",
+					"THURSDAY",
+					"FRIDAY",
+					"SATURDAY",
+					"SUNDAY",
+				),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute919a3cd2d2f289e04d0453d7() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether custom action timeout is enabled.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute923b3f810228bcb04bc492d4() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The total amount of storage, in gigabytes (GB), on the the Exadata infrastructure.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea25951ed8a4beb5e19fddf2c() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of database servers for the Exadata infrastructure.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+			int64planmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea4d93411da60bc587d33661f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that's 1 to 128 Unicode characters in length and can't be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, @, -, and \".",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb7bcf783f788824a4bfe4d97() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The storage server model type of the Exadata infrastructure. For the list of valid model names, use the ListDbSystemShapes operation.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 255),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_\\/.=-]+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb9db395b77953fabe132e463() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The email address of the contact.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebcf0796a7d9b8c7a088d189b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the OCI resource anchor for the Exadata infrastructure.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebec4f398436f08cf4780fe1f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The software version of the storage servers on the Exadata infrastructure.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed3c5cf2a635127ba8aceb5c9() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The lead time in weeks before the maintenance window.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.Between(1, 4),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeda9e868adaf5ec1d6dcae18c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The software version of the database servers (dom0) in the Exadata infrastructure.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedb3ad271efaf8fad06cc8636() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The HTTPS link to the Exadata infrastructure in OCI.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeddfe41e587e6e2d6169c5884() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The model name of the Exadata infrastructure.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 255),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_\\/.=-]+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedfaa55cfb57297c9196f93bb() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The amount of available storage, in gigabytes (GB), for the Exadata infrastructure.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedfefadb4f1e167871fdad4cb() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The size of the Exadata infrastructure's data disk group, in terabytes (TB).",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+			float64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee69e17c295fc9a24b3abcfb1() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The months when maintenance can be performed.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.UniqueValues(),
+			listvalidator.ValueStringsAre(
+				stringvalidator.OneOf(
+					"JANUARY",
+					"FEBRUARY",
+					"MARCH",
+					"APRIL",
+					"MAY",
+					"JUNE",
+					"JULY",
+					"AUGUST",
+					"SEPTEMBER",
+					"OCTOBER",
+					"NOVEMBER",
+					"DECEMBER",
+				),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee9311368e7369f7faa57edc5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The user-friendly name for the Exadata infrastructure.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 255),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeedefc0ea1d47d729f27f7ce0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AZ ID of the AZ where the Exadata infrastructure is located.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 255),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeef8807129233386ef8c11c06() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The preference for the maintenance window scheduling.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef27c52ed91f1cb0e8edd17dd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The OCID of the Exadata infrastructure.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef6338c8eae6f205b43d7989e() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The total amount of data disk group storage, in terabytes (TB), that's available on the Exadata infrastructure.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+			float64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef6c59a0e18cc4648486451fc() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The total number of CPU cores available on the Exadata infrastructure.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_odb_cloud_exadata_infrastructure", cloudExadataInfrastructureResource)
 	registry.AddListResourceFactory("awscc_odb_cloud_exadata_infrastructure", generic.NewListResource(cloudExadataInfrastructureResource))
@@ -45,13 +622,7 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The number of storage servers requested for the Exadata infrastructure.",
 		//	  "type": "integer"
 		//	}
-		"activated_storage_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of storage servers requested for the Exadata infrastructure.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"activated_storage_count": schemaAttribute4a31a6d121e10e31b44ad0c1(),
 		// Property: AdditionalStorageCount
 		// CloudFormation resource type schema:
 		//
@@ -59,13 +630,7 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The number of storage servers requested for the Exadata infrastructure.",
 		//	  "type": "integer"
 		//	}
-		"additional_storage_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of storage servers requested for the Exadata infrastructure.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"additional_storage_count": schemaAttribute4a31a6d121e10e31b44ad0c1(),
 		// Property: AvailabilityZone
 		// CloudFormation resource type schema:
 		//
@@ -75,18 +640,7 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the Availability Zone (AZ) where the Exadata infrastructure is located.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"availability_zone": schemaAttribute3e3abb66d7627b76c411b81f(),
 		// Property: AvailabilityZoneId
 		// CloudFormation resource type schema:
 		//
@@ -96,18 +650,7 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"availability_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AZ ID of the AZ where the Exadata infrastructure is located.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"availability_zone_id": schemaAttributeedefc0ea1d47d729f27f7ce0(),
 		// Property: AvailableStorageSizeInGBs
 		// CloudFormation resource type schema:
 		//
@@ -115,13 +658,7 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The amount of available storage, in gigabytes (GB), for the Exadata infrastructure.",
 		//	  "type": "integer"
 		//	}
-		"available_storage_size_in_g_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The amount of available storage, in gigabytes (GB), for the Exadata infrastructure.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"available_storage_size_in_g_bs": schemaAttributedfaa55cfb57297c9196f93bb(),
 		// Property: CloudExadataInfrastructureArn
 		// CloudFormation resource type schema:
 		//
@@ -129,13 +666,7 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The Amazon Resource Name (ARN) for the Exadata infrastructure.",
 		//	  "type": "string"
 		//	}
-		"cloud_exadata_infrastructure_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) for the Exadata infrastructure.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"cloud_exadata_infrastructure_arn": schemaAttribute79d0742d37446439e13ba3f2(),
 		// Property: CloudExadataInfrastructureId
 		// CloudFormation resource type schema:
 		//
@@ -143,13 +674,7 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The unique identifier for the Exadata infrastructure.",
 		//	  "type": "string"
 		//	}
-		"cloud_exadata_infrastructure_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier for the Exadata infrastructure.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"cloud_exadata_infrastructure_id": schemaAttribute6282ec0c1a6a328724c37578(),
 		// Property: ComputeCount
 		// CloudFormation resource type schema:
 		//
@@ -157,15 +682,7 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The number of database servers for the Exadata infrastructure.",
 		//	  "type": "integer"
 		//	}
-		"compute_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of database servers for the Exadata infrastructure.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-				int64planmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"compute_count": schemaAttributea25951ed8a4beb5e19fddf2c(),
 		// Property: ComputeModel
 		// CloudFormation resource type schema:
 		//
@@ -173,13 +690,7 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The OCI model compute model used when you create or clone an instance: ECPU or OCPU. An ECPU is an abstracted measure of compute resources. ECPUs are based on the number of cores elastically allocated from a pool of compute and storage servers. An OCPU is a legacy physical measure of compute resources. OCPUs are based on the physical core of a processor with hyper-threading enabled.",
 		//	  "type": "string"
 		//	}
-		"compute_model": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The OCI model compute model used when you create or clone an instance: ECPU or OCPU. An ECPU is an abstracted measure of compute resources. ECPUs are based on the number of cores elastically allocated from a pool of compute and storage servers. An OCPU is a legacy physical measure of compute resources. OCPUs are based on the physical core of a processor with hyper-threading enabled.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"compute_model": schemaAttribute193f53f16bfde2d6b1ee8f38(),
 		// Property: CpuCount
 		// CloudFormation resource type schema:
 		//
@@ -187,13 +698,7 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The total number of CPU cores that are allocated to the Exadata infrastructure.",
 		//	  "type": "integer"
 		//	}
-		"cpu_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The total number of CPU cores that are allocated to the Exadata infrastructure.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"cpu_count": schemaAttribute464fb7d374f7f656b8d5692b(),
 		// Property: CustomerContactsToSendToOCI
 		// CloudFormation resource type schema:
 		//
@@ -214,29 +719,7 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"customer_contacts_to_send_to_oci": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Email
-					"email": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The email address of the contact.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The email addresses of contacts to receive notification from Oracle about maintenance updates for the Exadata infrastructure.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-				listplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"customer_contacts_to_send_to_oci": schemaAttribute263b64299c4a9994b6413ae0(),
 		// Property: DataStorageSizeInTBs
 		// CloudFormation resource type schema:
 		//
@@ -244,13 +727,7 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The size of the Exadata infrastructure's data disk group, in terabytes (TB).",
 		//	  "type": "number"
 		//	}
-		"data_storage_size_in_t_bs": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "The size of the Exadata infrastructure's data disk group, in terabytes (TB).",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-				float64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"data_storage_size_in_t_bs": schemaAttributedfefadb4f1e167871fdad4cb(),
 		// Property: DatabaseServerType
 		// CloudFormation resource type schema:
 		//
@@ -261,19 +738,7 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 		//	  "pattern": "^[a-zA-Z0-9_\\/.=-]+$",
 		//	  "type": "string"
 		//	}
-		"database_server_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The database server model type of the Exadata infrastructure. For the list of valid model names, use the ListDbSystemShapes operation.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_\\/.=-]+$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"database_server_type": schemaAttribute699085f94833e454b81e8934(),
 		// Property: DbNodeStorageSizeInGBs
 		// CloudFormation resource type schema:
 		//
@@ -281,13 +746,7 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The size of the Exadata infrastructure's local node storage, in gigabytes (GB).",
 		//	  "type": "integer"
 		//	}
-		"db_node_storage_size_in_g_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The size of the Exadata infrastructure's local node storage, in gigabytes (GB).",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"db_node_storage_size_in_g_bs": schemaAttribute2127e8f9f75f588c05554bfb(),
 		// Property: DbServerIds
 		// CloudFormation resource type schema:
 		//
@@ -300,15 +759,7 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"db_server_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The list of database server identifiers for the Exadata infrastructure.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"db_server_ids": schemaAttribute5ff1720bf053e2f511e6674c(),
 		// Property: DbServerVersion
 		// CloudFormation resource type schema:
 		//
@@ -316,13 +767,7 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The software version of the database servers (dom0) in the Exadata infrastructure.",
 		//	  "type": "string"
 		//	}
-		"db_server_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The software version of the database servers (dom0) in the Exadata infrastructure.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"db_server_version": schemaAttributeda9e868adaf5ec1d6dcae18c(),
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -333,18 +778,7 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The user-friendly name for the Exadata infrastructure.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"display_name": schemaAttributee9311368e7369f7faa57edc5(),
 		// Property: MaintenanceWindow
 		// CloudFormation resource type schema:
 		//
@@ -434,146 +868,7 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 		//	  },
 		//	  "type": "object"
 		//	}
-		"maintenance_window": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CustomActionTimeoutInMins
-				"custom_action_timeout_in_mins": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The timeout duration for custom actions in minutes.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.Int64{ /*START VALIDATORS*/
-						int64validator.Between(15, 120),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						int64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: DaysOfWeek
-				"days_of_week": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The days of the week when maintenance can be performed.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.UniqueValues(),
-						listvalidator.ValueStringsAre(
-							stringvalidator.OneOf(
-								"MONDAY",
-								"TUESDAY",
-								"WEDNESDAY",
-								"THURSDAY",
-								"FRIDAY",
-								"SATURDAY",
-								"SUNDAY",
-							),
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: HoursOfDay
-				"hours_of_day": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.Int64Type,
-					Description: "The hours of the day when maintenance can be performed.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.UniqueValues(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: IsCustomActionTimeoutEnabled
-				"is_custom_action_timeout_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether custom action timeout is enabled.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: LeadTimeInWeeks
-				"lead_time_in_weeks": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The lead time in weeks before the maintenance window.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.Int64{ /*START VALIDATORS*/
-						int64validator.Between(1, 4),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						int64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: Months
-				"months": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The months when maintenance can be performed.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.UniqueValues(),
-						listvalidator.ValueStringsAre(
-							stringvalidator.OneOf(
-								"JANUARY",
-								"FEBRUARY",
-								"MARCH",
-								"APRIL",
-								"MAY",
-								"JUNE",
-								"JULY",
-								"AUGUST",
-								"SEPTEMBER",
-								"OCTOBER",
-								"NOVEMBER",
-								"DECEMBER",
-							),
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: PatchingMode
-				"patching_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The patching mode for the maintenance window.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: Preference
-				"preference": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The preference for the maintenance window scheduling.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: WeeksOfMonth
-				"weeks_of_month": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.Int64Type,
-					Description: "The weeks of the month when maintenance can be performed.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.UniqueValues(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The scheduling details for the maintenance window. Patching and system updates take place during the maintenance window.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"maintenance_window": schemaAttribute5b5bfd696d48fc08b7264dc6(),
 		// Property: MaxCpuCount
 		// CloudFormation resource type schema:
 		//
@@ -581,13 +876,7 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The total number of CPU cores available on the Exadata infrastructure.",
 		//	  "type": "integer"
 		//	}
-		"max_cpu_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The total number of CPU cores available on the Exadata infrastructure.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"max_cpu_count": schemaAttributef6c59a0e18cc4648486451fc(),
 		// Property: MaxDataStorageInTBs
 		// CloudFormation resource type schema:
 		//
@@ -595,13 +884,7 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The total amount of data disk group storage, in terabytes (TB), that's available on the Exadata infrastructure.",
 		//	  "type": "number"
 		//	}
-		"max_data_storage_in_t_bs": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "The total amount of data disk group storage, in terabytes (TB), that's available on the Exadata infrastructure.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-				float64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"max_data_storage_in_t_bs": schemaAttributef6338c8eae6f205b43d7989e(),
 		// Property: MaxDbNodeStorageSizeInGBs
 		// CloudFormation resource type schema:
 		//
@@ -609,13 +892,7 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The total amount of local node storage, in gigabytes (GB), that's available on the Exadata infrastructure.",
 		//	  "type": "integer"
 		//	}
-		"max_db_node_storage_size_in_g_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The total amount of local node storage, in gigabytes (GB), that's available on the Exadata infrastructure.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"max_db_node_storage_size_in_g_bs": schemaAttribute1f7ca7591294f548c3e8d4e4(),
 		// Property: MaxMemoryInGBs
 		// CloudFormation resource type schema:
 		//
@@ -623,13 +900,7 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The total amount of memory, in gigabytes (GB), that's available on the Exadata infrastructure.",
 		//	  "type": "integer"
 		//	}
-		"max_memory_in_g_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The total amount of memory, in gigabytes (GB), that's available on the Exadata infrastructure.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"max_memory_in_g_bs": schemaAttribute018e81cf9d6521fbb5e36539(),
 		// Property: MemorySizeInGBs
 		// CloudFormation resource type schema:
 		//
@@ -637,13 +908,7 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The amount of memory, in gigabytes (GB), that's allocated on the Exadata infrastructure.",
 		//	  "type": "integer"
 		//	}
-		"memory_size_in_g_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The amount of memory, in gigabytes (GB), that's allocated on the Exadata infrastructure.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"memory_size_in_g_bs": schemaAttribute4f05b6b322502738e114a4b4(),
 		// Property: OciResourceAnchorName
 		// CloudFormation resource type schema:
 		//
@@ -651,13 +916,7 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The name of the OCI resource anchor for the Exadata infrastructure.",
 		//	  "type": "string"
 		//	}
-		"oci_resource_anchor_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the OCI resource anchor for the Exadata infrastructure.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"oci_resource_anchor_name": schemaAttributebcf0796a7d9b8c7a088d189b(),
 		// Property: OciUrl
 		// CloudFormation resource type schema:
 		//
@@ -665,13 +924,7 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The HTTPS link to the Exadata infrastructure in OCI.",
 		//	  "type": "string"
 		//	}
-		"oci_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The HTTPS link to the Exadata infrastructure in OCI.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"oci_url": schemaAttributedb3ad271efaf8fad06cc8636(),
 		// Property: Ocid
 		// CloudFormation resource type schema:
 		//
@@ -679,13 +932,7 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The OCID of the Exadata infrastructure.",
 		//	  "type": "string"
 		//	}
-		"ocid": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The OCID of the Exadata infrastructure.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"ocid": schemaAttributef27c52ed91f1cb0e8edd17dd(),
 		// Property: Shape
 		// CloudFormation resource type schema:
 		//
@@ -696,19 +943,7 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 		//	  "pattern": "^[a-zA-Z0-9_\\/.=-]+$",
 		//	  "type": "string"
 		//	}
-		"shape": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The model name of the Exadata infrastructure.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_\\/.=-]+$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"shape": schemaAttributeddfe41e587e6e2d6169c5884(),
 		// Property: StorageCount
 		// CloudFormation resource type schema:
 		//
@@ -716,15 +951,7 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The number of storage servers that are activated for the Exadata infrastructure.",
 		//	  "type": "integer"
 		//	}
-		"storage_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of storage servers that are activated for the Exadata infrastructure.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-				int64planmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"storage_count": schemaAttribute41ec20aceec0745de1f24329(),
 		// Property: StorageServerType
 		// CloudFormation resource type schema:
 		//
@@ -735,19 +962,7 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 		//	  "pattern": "^[a-zA-Z0-9_\\/.=-]+$",
 		//	  "type": "string"
 		//	}
-		"storage_server_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The storage server model type of the Exadata infrastructure. For the list of valid model names, use the ListDbSystemShapes operation.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_\\/.=-]+$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"storage_server_type": schemaAttributeb7bcf783f788824a4bfe4d97(),
 		// Property: StorageServerVersion
 		// CloudFormation resource type schema:
 		//
@@ -755,13 +970,7 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The software version of the storage servers on the Exadata infrastructure.",
 		//	  "type": "string"
 		//	}
-		"storage_server_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The software version of the storage servers on the Exadata infrastructure.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"storage_server_version": schemaAttributebec4f398436f08cf4780fe1f(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -793,44 +1002,7 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that's 1 to 128 Unicode characters in length and can't be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, @, -, and \".",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that's 1 to 256 characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags to assign to the Exadata Infrastructure.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute3b0cac6085b685d42d551dba(),
 		// Property: TotalStorageSizeInGBs
 		// CloudFormation resource type schema:
 		//
@@ -838,13 +1010,7 @@ func cloudExadataInfrastructureResource(ctx context.Context) (resource.Resource,
 		//	  "description": "The total amount of storage, in gigabytes (GB), on the the Exadata infrastructure.",
 		//	  "type": "integer"
 		//	}
-		"total_storage_size_in_g_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The total amount of storage, in gigabytes (GB), on the the Exadata infrastructure.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"total_storage_size_in_g_bs": schemaAttribute923b3f810228bcb04bc492d4(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

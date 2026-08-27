@@ -20,6 +20,193 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute02ccd6dfbd19f07b73ad5324() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The list of IP addresses of the instances receiving traffic from the transit gateway",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0a1a74f0f3a8baddd7108560() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the source attachment through which traffic enters a transit gateway",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0a9fe97b11b494d2d9c3c534() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "State of the transit gateway metering policy",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2efb1c138aa66ac9bcec859d() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The rule number of the metering policy entry",
+		Required:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4cb4bb3cd50c488f0619503f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the transit gateway metering policy for which the entry is being created",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4ebe5bffa66e6850d1f24bbe() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The resource owner information responsible for paying default billable charges for the traffic flow",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"source-attachment-owner",
+				"destination-attachment-owner",
+				"transit-gateway-owner",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4f018a26513fec52e56c8d5e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the attachment through which traffic enters a  transit gateway",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"vpc",
+				"vpn",
+				"direct-connect-gateway",
+				"peering",
+				"network-function",
+				"vpn-concentrator",
+				"client-vpn",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute57e6f98861d2f661646f902b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The list of IP addresses of the instances sending traffic to the transit gateway for which the metering policy entry is applicable",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8dd550db857d7f988dc9d0dd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The list of ports on destination instances receiving traffic from the transit gateway",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9deea739c939080032feb4fb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the attachment through which traffic leaves a transit gateway",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"vpc",
+				"vpn",
+				"direct-connect-gateway",
+				"peering",
+				"network-function",
+				"vpn-concentrator",
+				"client-vpn",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9f0c2a82bd0530b6a335beed() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the source attachment through which traffic leaves a transit gateway",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributead907ed940d15b3abb0edd53() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The timestamp at which the latest action performed on the metering policy entry will become effective",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee5686bd138c5f8938a0a69de() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The list of ports on source instances sending traffic to the transit gateway",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee73cc9090c5d8ef6b4936cf4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The protocol of the traffic",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_ec2_transit_gateway_metering_policy_entry", transitGatewayMeteringPolicyEntryResource)
 }
@@ -35,15 +222,7 @@ func transitGatewayMeteringPolicyEntryResource(ctx context.Context) (resource.Re
 		//	  "description": "The list of IP addresses of the instances receiving traffic from the transit gateway",
 		//	  "type": "string"
 		//	}
-		"destination_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The list of IP addresses of the instances receiving traffic from the transit gateway",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"destination_cidr_block": schemaAttribute02ccd6dfbd19f07b73ad5324(),
 		// Property: DestinationPortRange
 		// CloudFormation resource type schema:
 		//
@@ -51,15 +230,7 @@ func transitGatewayMeteringPolicyEntryResource(ctx context.Context) (resource.Re
 		//	  "description": "The list of ports on destination instances receiving traffic from the transit gateway",
 		//	  "type": "string"
 		//	}
-		"destination_port_range": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The list of ports on destination instances receiving traffic from the transit gateway",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"destination_port_range": schemaAttribute8dd550db857d7f988dc9d0dd(),
 		// Property: DestinationTransitGatewayAttachmentId
 		// CloudFormation resource type schema:
 		//
@@ -67,15 +238,7 @@ func transitGatewayMeteringPolicyEntryResource(ctx context.Context) (resource.Re
 		//	  "description": "The ID of the source attachment through which traffic leaves a transit gateway",
 		//	  "type": "string"
 		//	}
-		"destination_transit_gateway_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the source attachment through which traffic leaves a transit gateway",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"destination_transit_gateway_attachment_id": schemaAttribute9f0c2a82bd0530b6a335beed(),
 		// Property: DestinationTransitGatewayAttachmentType
 		// CloudFormation resource type schema:
 		//
@@ -92,26 +255,7 @@ func transitGatewayMeteringPolicyEntryResource(ctx context.Context) (resource.Re
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"destination_transit_gateway_attachment_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of the attachment through which traffic leaves a transit gateway",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"vpc",
-					"vpn",
-					"direct-connect-gateway",
-					"peering",
-					"network-function",
-					"vpn-concentrator",
-					"client-vpn",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"destination_transit_gateway_attachment_type": schemaAttribute9deea739c939080032feb4fb(),
 		// Property: MeteredAccount
 		// CloudFormation resource type schema:
 		//
@@ -124,20 +268,7 @@ func transitGatewayMeteringPolicyEntryResource(ctx context.Context) (resource.Re
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"metered_account": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The resource owner information responsible for paying default billable charges for the traffic flow",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"source-attachment-owner",
-					"destination-attachment-owner",
-					"transit-gateway-owner",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"metered_account": schemaAttribute4ebe5bffa66e6850d1f24bbe(),
 		// Property: PolicyRuleNumber
 		// CloudFormation resource type schema:
 		//
@@ -145,13 +276,7 @@ func transitGatewayMeteringPolicyEntryResource(ctx context.Context) (resource.Re
 		//	  "description": "The rule number of the metering policy entry",
 		//	  "type": "integer"
 		//	}
-		"policy_rule_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The rule number of the metering policy entry",
-			Required:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"policy_rule_number": schemaAttribute2efb1c138aa66ac9bcec859d(),
 		// Property: Protocol
 		// CloudFormation resource type schema:
 		//
@@ -159,15 +284,7 @@ func transitGatewayMeteringPolicyEntryResource(ctx context.Context) (resource.Re
 		//	  "description": "The protocol of the traffic",
 		//	  "type": "string"
 		//	}
-		"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The protocol of the traffic",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"protocol": schemaAttributee73cc9090c5d8ef6b4936cf4(),
 		// Property: SourceCidrBlock
 		// CloudFormation resource type schema:
 		//
@@ -175,15 +292,7 @@ func transitGatewayMeteringPolicyEntryResource(ctx context.Context) (resource.Re
 		//	  "description": "The list of IP addresses of the instances sending traffic to the transit gateway for which the metering policy entry is applicable",
 		//	  "type": "string"
 		//	}
-		"source_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The list of IP addresses of the instances sending traffic to the transit gateway for which the metering policy entry is applicable",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"source_cidr_block": schemaAttribute57e6f98861d2f661646f902b(),
 		// Property: SourcePortRange
 		// CloudFormation resource type schema:
 		//
@@ -191,15 +300,7 @@ func transitGatewayMeteringPolicyEntryResource(ctx context.Context) (resource.Re
 		//	  "description": "The list of ports on source instances sending traffic to the transit gateway",
 		//	  "type": "string"
 		//	}
-		"source_port_range": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The list of ports on source instances sending traffic to the transit gateway",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"source_port_range": schemaAttributee5686bd138c5f8938a0a69de(),
 		// Property: SourceTransitGatewayAttachmentId
 		// CloudFormation resource type schema:
 		//
@@ -207,15 +308,7 @@ func transitGatewayMeteringPolicyEntryResource(ctx context.Context) (resource.Re
 		//	  "description": "The ID of the source attachment through which traffic enters a transit gateway",
 		//	  "type": "string"
 		//	}
-		"source_transit_gateway_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the source attachment through which traffic enters a transit gateway",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"source_transit_gateway_attachment_id": schemaAttribute0a1a74f0f3a8baddd7108560(),
 		// Property: SourceTransitGatewayAttachmentType
 		// CloudFormation resource type schema:
 		//
@@ -232,26 +325,7 @@ func transitGatewayMeteringPolicyEntryResource(ctx context.Context) (resource.Re
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"source_transit_gateway_attachment_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of the attachment through which traffic enters a  transit gateway",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"vpc",
-					"vpn",
-					"direct-connect-gateway",
-					"peering",
-					"network-function",
-					"vpn-concentrator",
-					"client-vpn",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"source_transit_gateway_attachment_type": schemaAttribute4f018a26513fec52e56c8d5e(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -259,13 +333,7 @@ func transitGatewayMeteringPolicyEntryResource(ctx context.Context) (resource.Re
 		//	  "description": "State of the transit gateway metering policy",
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "State of the transit gateway metering policy",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttribute0a9fe97b11b494d2d9c3c534(),
 		// Property: TransitGatewayMeteringPolicyId
 		// CloudFormation resource type schema:
 		//
@@ -273,13 +341,7 @@ func transitGatewayMeteringPolicyEntryResource(ctx context.Context) (resource.Re
 		//	  "description": "The ID of the transit gateway metering policy for which the entry is being created",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_metering_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the transit gateway metering policy for which the entry is being created",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"transit_gateway_metering_policy_id": schemaAttribute4cb4bb3cd50c488f0619503f(),
 		// Property: UpdateEffectiveAt
 		// CloudFormation resource type schema:
 		//
@@ -287,13 +349,7 @@ func transitGatewayMeteringPolicyEntryResource(ctx context.Context) (resource.Re
 		//	  "description": "The timestamp at which the latest action performed on the metering policy entry will become effective",
 		//	  "type": "string"
 		//	}
-		"update_effective_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The timestamp at which the latest action performed on the metering policy entry will become effective",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"update_effective_at": schemaAttributead907ed940d15b3abb0edd53(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

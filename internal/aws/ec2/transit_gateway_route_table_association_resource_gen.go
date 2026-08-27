@@ -17,6 +17,26 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0355518dcde4f4b88ba98f75() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of transit gateway attachment.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecddd84667ac8d36b9631f9f2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of transit gateway route table.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_ec2_transit_gateway_route_table_association", transitGatewayRouteTableAssociationResource)
 }
@@ -32,13 +52,7 @@ func transitGatewayRouteTableAssociationResource(ctx context.Context) (resource.
 		//	  "description": "The ID of transit gateway attachment.",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of transit gateway attachment.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"transit_gateway_attachment_id": schemaAttribute0355518dcde4f4b88ba98f75(),
 		// Property: TransitGatewayRouteTableId
 		// CloudFormation resource type schema:
 		//
@@ -46,13 +60,7 @@ func transitGatewayRouteTableAssociationResource(ctx context.Context) (resource.
 		//	  "description": "The ID of transit gateway route table.",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of transit gateway route table.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"transit_gateway_route_table_id": schemaAttributecddd84667ac8d36b9631f9f2(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

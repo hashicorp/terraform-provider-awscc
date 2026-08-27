@@ -20,6 +20,60 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute4ad32b36090a58b5fdab0812() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The SQL Server high availability status of the EC2 instance.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute628a1261956a8e792b6067a7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the EC2 instance to enable for SQL Server high availability standby detection.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("^i-[0-9a-f]{8,17}$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9d5ed27fe0a102b1cd35fe56() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the AWS Secrets Manager secret containing SQL Server access credentials to the EC2 instance. If not specified, AWS Systems Manager agent will use default local user credentials.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb94308eb583d2ed937c34ccb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The timestamp when the EC2 instance's SQL Server high availability status was last updated.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecd6071b12705d9ea2d49fd95() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The SQL Server license type of the EC2 instance.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_ec2_sql_ha_standby_detected_instance", sqlHaStandbyDetectedInstanceResource)
 	registry.AddListResourceFactory("awscc_ec2_sql_ha_standby_detected_instance", generic.NewListResource(sqlHaStandbyDetectedInstanceResource))
@@ -42,13 +96,7 @@ func sqlHaStandbyDetectedInstanceResource(ctx context.Context) (resource.Resourc
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"ha_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The SQL Server high availability status of the EC2 instance.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"ha_status": schemaAttribute4ad32b36090a58b5fdab0812(),
 		// Property: InstanceId
 		// CloudFormation resource type schema:
 		//
@@ -57,16 +105,7 @@ func sqlHaStandbyDetectedInstanceResource(ctx context.Context) (resource.Resourc
 		//	  "pattern": "^i-[0-9a-f]{8,17}$",
 		//	  "type": "string"
 		//	}
-		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the EC2 instance to enable for SQL Server high availability standby detection.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^i-[0-9a-f]{8,17}$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"instance_id": schemaAttribute628a1261956a8e792b6067a7(),
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -74,13 +113,7 @@ func sqlHaStandbyDetectedInstanceResource(ctx context.Context) (resource.Resourc
 		//	  "description": "The timestamp when the EC2 instance's SQL Server high availability status was last updated.",
 		//	  "type": "string"
 		//	}
-		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The timestamp when the EC2 instance's SQL Server high availability status was last updated.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"last_updated_time": schemaAttributeb94308eb583d2ed937c34ccb(),
 		// Property: SqlServerCredentials
 		// CloudFormation resource type schema:
 		//
@@ -89,14 +122,7 @@ func sqlHaStandbyDetectedInstanceResource(ctx context.Context) (resource.Resourc
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"sql_server_credentials": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the AWS Secrets Manager secret containing SQL Server access credentials to the EC2 instance. If not specified, AWS Systems Manager agent will use default local user credentials.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"sql_server_credentials": schemaAttribute9d5ed27fe0a102b1cd35fe56(),
 		// Property: SqlServerLicenseUsage
 		// CloudFormation resource type schema:
 		//
@@ -108,13 +134,7 @@ func sqlHaStandbyDetectedInstanceResource(ctx context.Context) (resource.Resourc
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"sql_server_license_usage": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The SQL Server license type of the EC2 instance.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"sql_server_license_usage": schemaAttributecd6071b12705d9ea2d49fd95(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

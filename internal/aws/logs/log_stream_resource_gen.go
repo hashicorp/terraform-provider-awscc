@@ -17,6 +17,28 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute4d0f25bc7f885b31312e1b78() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the log stream. The name must be unique wihtin the log group.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec0e1c46a465c2775bb052216() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the log group where the log stream is created.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_logs_log_stream", logStreamResource)
 }
@@ -32,13 +54,7 @@ func logStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the log group where the log stream is created.",
 		//	  "type": "string"
 		//	}
-		"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the log group where the log stream is created.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"log_group_name": schemaAttributec0e1c46a465c2775bb052216(),
 		// Property: LogStreamName
 		// CloudFormation resource type schema:
 		//
@@ -46,15 +62,7 @@ func logStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the log stream. The name must be unique wihtin the log group.",
 		//	  "type": "string"
 		//	}
-		"log_stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the log stream. The name must be unique wihtin the log group.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"log_stream_name": schemaAttribute4d0f25bc7f885b31312e1b78(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

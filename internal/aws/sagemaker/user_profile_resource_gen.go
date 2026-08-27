@@ -29,6 +29,1731 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute0134d07466d52ea1d7f5afa9() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Default size of the Amazon EBS volume in Gb",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.Between(5, 16384),
+			fwvalidators.NotNullInt64(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0c6c82841da0f192ced9aa84() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The instance types you are hiding from the Studio user interface.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Set{ /*START VALIDATORS*/
+			setvalidator.SizeAtLeast(0),
+			setvalidator.ValueStringsAre(
+				stringvalidator.OneOf(
+					"system",
+					"ml.t3.micro",
+					"ml.t3.small",
+					"ml.t3.medium",
+					"ml.t3.large",
+					"ml.t3.xlarge",
+					"ml.t3.2xlarge",
+					"ml.m5.large",
+					"ml.m5.xlarge",
+					"ml.m5.2xlarge",
+					"ml.m5.4xlarge",
+					"ml.m5.8xlarge",
+					"ml.m5.12xlarge",
+					"ml.m5.16xlarge",
+					"ml.m5.24xlarge",
+					"ml.m5d.large",
+					"ml.m5d.xlarge",
+					"ml.m5d.2xlarge",
+					"ml.m5d.4xlarge",
+					"ml.m5d.8xlarge",
+					"ml.m5d.12xlarge",
+					"ml.m5d.16xlarge",
+					"ml.m5d.24xlarge",
+					"ml.c5.large",
+					"ml.c5.xlarge",
+					"ml.c5.2xlarge",
+					"ml.c5.4xlarge",
+					"ml.c5.9xlarge",
+					"ml.c5.12xlarge",
+					"ml.c5.18xlarge",
+					"ml.c5.24xlarge",
+					"ml.p3.2xlarge",
+					"ml.p3.8xlarge",
+					"ml.p3.16xlarge",
+					"ml.p3dn.24xlarge",
+					"ml.g4dn.xlarge",
+					"ml.g4dn.2xlarge",
+					"ml.g4dn.4xlarge",
+					"ml.g4dn.8xlarge",
+					"ml.g4dn.12xlarge",
+					"ml.g4dn.16xlarge",
+					"ml.r5.large",
+					"ml.r5.xlarge",
+					"ml.r5.2xlarge",
+					"ml.r5.4xlarge",
+					"ml.r5.8xlarge",
+					"ml.r5.12xlarge",
+					"ml.r5.16xlarge",
+					"ml.r5.24xlarge",
+					"ml.g5.xlarge",
+					"ml.g5.2xlarge",
+					"ml.g5.4xlarge",
+					"ml.g5.8xlarge",
+					"ml.g5.12xlarge",
+					"ml.g5.16xlarge",
+					"ml.g5.24xlarge",
+					"ml.g5.48xlarge",
+					"ml.g6.xlarge",
+					"ml.g6.2xlarge",
+					"ml.g6.4xlarge",
+					"ml.g6.8xlarge",
+					"ml.g6.12xlarge",
+					"ml.g6.16xlarge",
+					"ml.g6.24xlarge",
+					"ml.g6.48xlarge",
+					"ml.g6e.xlarge",
+					"ml.g6e.2xlarge",
+					"ml.g6e.4xlarge",
+					"ml.g6e.8xlarge",
+					"ml.g6e.12xlarge",
+					"ml.g6e.16xlarge",
+					"ml.g6e.24xlarge",
+					"ml.g6e.48xlarge",
+					"ml.geospatial.interactive",
+					"ml.p4d.24xlarge",
+					"ml.p4de.24xlarge",
+					"ml.trn1.2xlarge",
+					"ml.trn1.32xlarge",
+					"ml.trn1n.32xlarge",
+					"ml.p5.48xlarge",
+					"ml.p5e.48xlarge",
+					"ml.p5en.48xlarge",
+					"ml.m6i.large",
+					"ml.m6i.xlarge",
+					"ml.m6i.2xlarge",
+					"ml.m6i.4xlarge",
+					"ml.m6i.8xlarge",
+					"ml.m6i.12xlarge",
+					"ml.m6i.16xlarge",
+					"ml.m6i.24xlarge",
+					"ml.m6i.32xlarge",
+					"ml.m7i.large",
+					"ml.m7i.xlarge",
+					"ml.m7i.2xlarge",
+					"ml.m7i.4xlarge",
+					"ml.m7i.8xlarge",
+					"ml.m7i.12xlarge",
+					"ml.m7i.16xlarge",
+					"ml.m7i.24xlarge",
+					"ml.m7i.48xlarge",
+					"ml.c6i.large",
+					"ml.c6i.xlarge",
+					"ml.c6i.2xlarge",
+					"ml.c6i.4xlarge",
+					"ml.c6i.8xlarge",
+					"ml.c6i.12xlarge",
+					"ml.c6i.16xlarge",
+					"ml.c6i.24xlarge",
+					"ml.c6i.32xlarge",
+					"ml.c7i.large",
+					"ml.c7i.xlarge",
+					"ml.c7i.2xlarge",
+					"ml.c7i.4xlarge",
+					"ml.c7i.8xlarge",
+					"ml.c7i.12xlarge",
+					"ml.c7i.16xlarge",
+					"ml.c7i.24xlarge",
+					"ml.c7i.48xlarge",
+					"ml.r6i.large",
+					"ml.r6i.xlarge",
+					"ml.r6i.2xlarge",
+					"ml.r6i.4xlarge",
+					"ml.r6i.8xlarge",
+					"ml.r6i.12xlarge",
+					"ml.r6i.16xlarge",
+					"ml.r6i.24xlarge",
+					"ml.r6i.32xlarge",
+					"ml.r7i.large",
+					"ml.r7i.xlarge",
+					"ml.r7i.2xlarge",
+					"ml.r7i.4xlarge",
+					"ml.r7i.8xlarge",
+					"ml.r7i.12xlarge",
+					"ml.r7i.16xlarge",
+					"ml.r7i.24xlarge",
+					"ml.r7i.48xlarge",
+					"ml.m6id.large",
+					"ml.m6id.xlarge",
+					"ml.m6id.2xlarge",
+					"ml.m6id.4xlarge",
+					"ml.m6id.8xlarge",
+					"ml.m6id.12xlarge",
+					"ml.m6id.16xlarge",
+					"ml.m6id.24xlarge",
+					"ml.m6id.32xlarge",
+					"ml.c6id.large",
+					"ml.c6id.xlarge",
+					"ml.c6id.2xlarge",
+					"ml.c6id.4xlarge",
+					"ml.c6id.8xlarge",
+					"ml.c6id.12xlarge",
+					"ml.c6id.16xlarge",
+					"ml.c6id.24xlarge",
+					"ml.c6id.32xlarge",
+					"ml.r6id.large",
+					"ml.r6id.xlarge",
+					"ml.r6id.2xlarge",
+					"ml.r6id.4xlarge",
+					"ml.r6id.8xlarge",
+					"ml.r6id.12xlarge",
+					"ml.r6id.16xlarge",
+					"ml.r6id.24xlarge",
+					"ml.r6id.32xlarge",
+					"ml.p5.4xlarge",
+					"ml.p6-b200.48xlarge",
+					"ml.g7.2xlarge",
+					"ml.g7.4xlarge",
+					"ml.g7.8xlarge",
+					"ml.g7.12xlarge",
+					"ml.g7.24xlarge",
+					"ml.g7.48xlarge",
+					"ml.g7e.2xlarge",
+					"ml.g7e.4xlarge",
+					"ml.g7e.8xlarge",
+					"ml.g7e.12xlarge",
+					"ml.g7e.24xlarge",
+					"ml.g7e.48xlarge",
+				),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute12302bbbb2dd2d922071d174() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IdleTimeoutInMinutes
+			"idle_timeout_in_minutes": schemaAttributee8f3138f038622fff4d4541c(),
+			// Property: LifecycleManagement
+			"lifecycle_management": schemaAttribute9eb7c2aea7a5a9931f3ce5fb(),
+			// Property: MaxIdleTimeoutInMinutes
+			"max_idle_timeout_in_minutes": schemaAttributec671ba4457ea0027b23e6aa3(),
+			// Property: MinIdleTimeoutInMinutes
+			"min_idle_timeout_in_minutes": schemaAttribute905f5083fb8561486a38f657(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute140203e825768284c69cccac() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IdleSettings
+			"idle_settings": schemaAttribute12302bbbb2dd2d922071d174(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute15ed6b7fdddeeea84bb7f28e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether to include the notebook cell output when sharing the notebook. The default is Disabled.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"Allowed",
+				"Disabled",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute178479c4cbe78111800eb6df() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "When NotebookOutputOption is Allowed, the Amazon S3 bucket used to store the shared notebook snapshots.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(1024),
+			stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1796294fb7322e71345cfd95() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AppImageConfigName
+				"app_image_config_name": schemaAttribute54e00610025b226a2eb332d1(),
+				// Property: ImageName
+				"image_name": schemaAttribute539334bc502b0ad415f9adac(),
+				// Property: ImageVersionNumber
+				"image_version_number": schemaAttribute4facead5f441c359f6624dc6(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(0, 30),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1a171a9475688fb013bacdf6() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EFSFileSystemConfig
+				"efs_file_system_config": schemaAttributeb4431ac80a3f2582b6fd5b47(),
+				// Property: FSxLustreFileSystemConfig
+				"fsx_lustre_file_system_config": schemaAttributeb4431ac80a3f2582b6fd5b47(),
+				// Property: S3FileSystemConfig
+				"s3_file_system_config": schemaAttribute1f3931e37e9a72a796198188(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(0, 10),
+			listvalidator.UniqueValues(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1f3931e37e9a72a796198188() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MountPath
+			"mount_path": schemaAttributeabf2be2862822f9ed62eaf94(),
+			// Property: S3Uri
+			"s3_uri": schemaAttribute60ea80f120f1822eced35e38(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute21d594821d524264a44b6cf2() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeAtMost(20),
+			listvalidator.ValueStringsAre(
+				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.RegexMatches(regexp.MustCompile("^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"), ""),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute245e31c58e1cca5d5fe4e4f8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(11, 21),
+			stringvalidator.RegexMatches(regexp.MustCompile("^(fs-[0-9a-f]{8,})$"), ""),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2877cb4c954f38b4ad32b026() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of LifecycleConfigArns available for use with KernelGateway apps.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(0, 30),
+			listvalidator.ValueStringsAre(
+				stringvalidator.LengthAtMost(256),
+				stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$"), ""),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2d1a7ff53722d5619ee7fc10() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The level of permissions that the user has within the RStudioServerPro app. This value defaults to User. The Admin value allows the user access to the RStudio Administrative Dashboard.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"R_STUDIO_ADMIN",
+				"R_STUDIO_USER",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2fa0824d474d24e94ad12056() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RepositoryUrl
+				"repository_url": schemaAttributee5055cfa2a1557c00c776cb9(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of CodeRepositories available for use with JupyterLab apps.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(0, 30),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3051a80c5d30e5e21bae53c0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DefaultEbsVolumeSizeInGb
+			"default_ebs_volume_size_in_gb": schemaAttribute0134d07466d52ea1d7f5afa9(),
+			// Property: MaximumEbsVolumeSizeInGb
+			"maximum_ebs_volume_size_in_gb": schemaAttribute8670f136713c07daa8635442(),
+		}, /*END SCHEMA*/
+		Description: "Properties related to the Amazon Elastic Block Store volume.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute33cd6b68457ed6bc424ec714() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.Between(10000, 4000000),
+			fwvalidators.NotNullInt64(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute34f5acee4b2890b7972c2702() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "An array of ARNs of IAM roles used by EMR cluster instances or job execution environments.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(0, 5),
+			listvalidator.ValueStringsAre(
+				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute369a8b25f08bfd6e017a2040() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The user profile Amazon Resource Name (ARN).",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(20, 2048),
+			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute39a43f8364b4d5b73f9f3357() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The SageMaker image name that you are hiding from the Studio user interface.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"sagemaker_distribution",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4af95870c0f5757b95b448c8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Defines which Amazon SageMaker application users are directed to by default.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(1023),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4facead5f441c359f6624dc6() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The version number of the CustomImage.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.AtLeast(0),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute539334bc502b0ad415f9adac() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the CustomImage. Must be unique to your account.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(63),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]([-.]?[a-zA-Z0-9]){0,62}$"), ""),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute54e00610025b226a2eb332d1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Name of the AppImageConfig.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(63),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"), ""),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute59fac92bec3a19bc5365af63() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AppImageConfigName
+				"app_image_config_name": schemaAttribute54e00610025b226a2eb332d1(),
+				// Property: ImageName
+				"image_name": schemaAttribute539334bc502b0ad415f9adac(),
+				// Property: ImageVersionNumber
+				"image_version_number": schemaAttribute4facead5f441c359f6624dc6(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of custom images for use for CodeEditor apps.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(0, 200),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5e9770a8cb116f10b9d4b4f9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InstanceType
+			"instance_type": schemaAttributec9b43242d133e795781077a8(),
+			// Property: LifecycleConfigArn
+			"lifecycle_config_arn": schemaAttributeb73e428adccdd6358af601fd(),
+			// Property: SageMakerImageArn
+			"sage_maker_image_arn": schemaAttributed12962d13ab84d1955fb6140(),
+			// Property: SageMakerImageVersionArn
+			"sage_maker_image_version_arn": schemaAttribute6694278842cb97e5cd8c0a86(),
+			// Property: TrainingPlanArn
+			"training_plan_arn": schemaAttribute8a0c309a9f9e049ed8b37593(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute60ea80f120f1822eced35e38() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 1024),
+			stringvalidator.RegexMatches(regexp.MustCompile("(s3)://([^/]+)/?(.*)"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6694278842cb97e5cd8c0a86() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the image version created on the instance.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(256),
+			stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+|None)"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6881f1322bd3ac647659859c() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.Between(1001, 4000000),
+			fwvalidators.NotNullInt64(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute68c384c93158db72cde9fadf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute76fc19ed0731e18ada58ab01() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InstanceType
+			"instance_type": schemaAttributec9b43242d133e795781077a8(),
+			// Property: LifecycleConfigArn
+			"lifecycle_config_arn": schemaAttributeb73e428adccdd6358af601fd(),
+			// Property: SageMakerImageArn
+			"sage_maker_image_arn": schemaAttributed12962d13ab84d1955fb6140(),
+			// Property: SageMakerImageVersionArn
+			"sage_maker_image_version_arn": schemaAttribute6694278842cb97e5cd8c0a86(),
+			// Property: TrainingPlanArn
+			"training_plan_arn": schemaAttribute8a0c309a9f9e049ed8b37593(),
+		}, /*END SCHEMA*/
+		Description: "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the CodeEditor app.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute77512e9174b65e20761883b2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The lifecycle configuration that runs before the default lifecycle configuration.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(256),
+			stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b64cd081fe541da9776c837() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AppImageConfigName
+				"app_image_config_name": schemaAttribute54e00610025b226a2eb332d1(),
+				// Property: ImageName
+				"image_name": schemaAttribute539334bc502b0ad415f9adac(),
+				// Property: ImageVersionNumber
+				"image_version_number": schemaAttribute4facead5f441c359f6624dc6(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of custom images available for use for JupyterLab apps",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(0, 200),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute826a6196646284eddfdf13a3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AutoMountHomeEFS
+			"auto_mount_home_efs": schemaAttributeac77fb48aa73102a34790732(),
+			// Property: CodeEditorAppSettings
+			"code_editor_app_settings": schemaAttributead32e411c74528a71bf81e48(),
+			// Property: CustomFileSystemConfigs
+			"custom_file_system_configs": schemaAttribute1a171a9475688fb013bacdf6(),
+			// Property: CustomPosixUserConfig
+			"custom_posix_user_config": schemaAttributedb615f92ce63f28ac65f53e1(),
+			// Property: DefaultLandingUri
+			"default_landing_uri": schemaAttribute4af95870c0f5757b95b448c8(),
+			// Property: ExecutionRole
+			"execution_role": schemaAttribute369a8b25f08bfd6e017a2040(),
+			// Property: JupyterLabAppSettings
+			"jupyter_lab_app_settings": schemaAttributea0e13dc13b77a8cb33d38fb7(),
+			// Property: JupyterServerAppSettings
+			"jupyter_server_app_settings": schemaAttribute9b0b70902356581cef936fae(),
+			// Property: KernelGatewayAppSettings
+			"kernel_gateway_app_settings": schemaAttributec91ecf978fce1bc2a48e10b0(),
+			// Property: RStudioServerProAppSettings
+			"r_studio_server_pro_app_settings": schemaAttributee56872fb26a442251b7ca969(),
+			// Property: SecurityGroups
+			"security_groups": schemaAttributecc03eec947aab32795750f63(),
+			// Property: SharingSettings
+			"sharing_settings": schemaAttribute9479711821eb3ac0230d7eb9(),
+			// Property: SpaceStorageSettings
+			"space_storage_settings": schemaAttributef2b405ec21dbea64bf3b0a19(),
+			// Property: StudioWebPortal
+			"studio_web_portal": schemaAttribute97e5e2ff1670d8ed89364cd3(),
+			// Property: StudioWebPortalSettings
+			"studio_web_portal_settings": schemaAttribute944dcd94fb108c19bc33aa67(),
+		}, /*END SCHEMA*/
+		Description: "A collection of settings.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute82a08ec89b379ef7a4ed4bff() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InstanceType
+			"instance_type": schemaAttributec9b43242d133e795781077a8(),
+			// Property: LifecycleConfigArn
+			"lifecycle_config_arn": schemaAttributeb73e428adccdd6358af601fd(),
+			// Property: SageMakerImageArn
+			"sage_maker_image_arn": schemaAttributed12962d13ab84d1955fb6140(),
+			// Property: SageMakerImageVersionArn
+			"sage_maker_image_version_arn": schemaAttribute6694278842cb97e5cd8c0a86(),
+			// Property: TrainingPlanArn
+			"training_plan_arn": schemaAttribute8a0c309a9f9e049ed8b37593(),
+		}, /*END SCHEMA*/
+		Description: "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the JupyterLab app.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute831889ef77b6ea97fdb3b349() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the associated Domain.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 63),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8670f136713c07daa8635442() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Maximum size of the Amazon EBS volume in Gb. Must be greater than or equal to the DefaultEbsVolumeSizeInGb.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.Between(5, 16384),
+			fwvalidators.NotNullInt64(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a0c309a9f9e049ed8b37593() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 2048),
+			stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8b527e9ef3ad85af78a85758() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the current user has access to the RStudioServerPro app.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"ENABLED",
+				"DISABLED",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8d4802d754f678ed2370929f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The username of the associated AWS Single Sign-On User for this UserProfile. If the Domain's AuthMode is SSO, this field is required, and must match a valid username of a user in your directory. If the Domain's AuthMode is not SSO, this field cannot be specified.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 256),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute905f5083fb8561486a38f657() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The minimum idle timeout value set in minutes",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.Between(60, 525600),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute944dcd94fb108c19bc33aa67() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: HiddenAppTypes
+			"hidden_app_types": schemaAttributefd11630b44026b0800077008(),
+			// Property: HiddenInstanceTypes
+			"hidden_instance_types": schemaAttribute0c6c82841da0f192ced9aa84(),
+			// Property: HiddenMlTools
+			"hidden_ml_tools": schemaAttributef172658d1b5f75007080cdd0(),
+			// Property: HiddenSageMakerImageVersionAliases
+			"hidden_sage_maker_image_version_aliases": schemaAttributeef74fdea7ae5b35a7afaebb5(),
+		}, /*END SCHEMA*/
+		Description: "Studio settings. If these settings are applied on a user level, they take priority over the settings applied on a domain level.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9479711821eb3ac0230d7eb9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: NotebookOutputOption
+			"notebook_output_option": schemaAttribute15ed6b7fdddeeea84bb7f28e(),
+			// Property: S3KmsKeyId
+			"s3_kms_key_id": schemaAttributeac55b14ab719ecad8097c140(),
+			// Property: S3OutputPath
+			"s3_output_path": schemaAttribute178479c4cbe78111800eb6df(),
+		}, /*END SCHEMA*/
+		Description: "The sharing settings.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute97e5e2ff1670d8ed89364cd3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the Studio experience is available to users. If not, users cannot access Studio.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"ENABLED",
+				"DISABLED",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute98340010d54d453aa68bda73() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of LifecycleConfigArns available for use with JupyterLab apps.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(0, 30),
+			listvalidator.ValueStringsAre(
+				stringvalidator.LengthAtMost(256),
+				stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$"), ""),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9b0b70902356581cef936fae() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DefaultResourceSpec
+			"default_resource_spec": schemaAttribute5e9770a8cb116f10b9d4b4f9(),
+			// Property: LifecycleConfigArns
+			"lifecycle_config_arns": schemaAttributeb880542667c7dc2c9116ce02(),
+		}, /*END SCHEMA*/
+		Description: "The Jupyter server's app settings.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9d41f3615b89cf92917e6b97() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 256),
+			stringvalidator.RegexMatches(regexp.MustCompile("^\\/\\S*$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9eb7c2aea7a5a9931f3ce5fb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A flag to enable/disable AppLifecycleManagement settings",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"ENABLED",
+				"DISABLED",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea0e13dc13b77a8cb33d38fb7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AppLifecycleManagement
+			"app_lifecycle_management": schemaAttribute140203e825768284c69cccac(),
+			// Property: BuiltInLifecycleConfigArn
+			"built_in_lifecycle_config_arn": schemaAttribute77512e9174b65e20761883b2(),
+			// Property: CodeRepositories
+			"code_repositories": schemaAttribute2fa0824d474d24e94ad12056(),
+			// Property: CustomImages
+			"custom_images": schemaAttribute7b64cd081fe541da9776c837(),
+			// Property: DefaultResourceSpec
+			"default_resource_spec": schemaAttribute82a08ec89b379ef7a4ed4bff(),
+			// Property: EmrSettings
+			"emr_settings": schemaAttributea80785add4327eeea48c5f16(),
+			// Property: LifecycleConfigArns
+			"lifecycle_config_arns": schemaAttribute98340010d54d453aa68bda73(),
+		}, /*END SCHEMA*/
+		Description: "The JupyterLab app settings.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea144004ba707b824bdcf16e6() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "An array of Amazon Resource Names (ARNs) of the IAM roles that the execution role of SageMaker can assume.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(0, 5),
+			listvalidator.ValueStringsAre(
+				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea56ce1d80fd4efe553184981() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InstanceType
+			"instance_type": schemaAttributec9b43242d133e795781077a8(),
+			// Property: LifecycleConfigArn
+			"lifecycle_config_arn": schemaAttributeb73e428adccdd6358af601fd(),
+			// Property: SageMakerImageArn
+			"sage_maker_image_arn": schemaAttributed12962d13ab84d1955fb6140(),
+			// Property: SageMakerImageVersionArn
+			"sage_maker_image_version_arn": schemaAttribute6694278842cb97e5cd8c0a86(),
+			// Property: TrainingPlanArn
+			"training_plan_arn": schemaAttribute8a0c309a9f9e049ed8b37593(),
+		}, /*END SCHEMA*/
+		Description: "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the KernelGateway app.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea80785add4327eeea48c5f16() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AssumableRoleArns
+			"assumable_role_arns": schemaAttributea144004ba707b824bdcf16e6(),
+			// Property: ExecutionRoleArns
+			"execution_role_arns": schemaAttribute34f5acee4b2890b7972c2702(),
+		}, /*END SCHEMA*/
+		Description: "The configuration parameters for EMR settings.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeabf2be2862822f9ed62eaf94() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 1024),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeac55b14ab719ecad8097c140() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "When NotebookOutputOption is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(2048),
+			stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeac77fb48aa73102a34790732() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether auto-mounting of an EFS volume is supported for the user profile. ",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"Enabled",
+				"Disabled",
+				"DefaultAsDomain",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributead32e411c74528a71bf81e48() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AppLifecycleManagement
+			"app_lifecycle_management": schemaAttribute140203e825768284c69cccac(),
+			// Property: BuiltInLifecycleConfigArn
+			"built_in_lifecycle_config_arn": schemaAttribute77512e9174b65e20761883b2(),
+			// Property: CustomImages
+			"custom_images": schemaAttribute59fac92bec3a19bc5365af63(),
+			// Property: DefaultResourceSpec
+			"default_resource_spec": schemaAttribute76fc19ed0731e18ada58ab01(),
+			// Property: LifecycleConfigArns
+			"lifecycle_config_arns": schemaAttributeba76faf9813a6c9861e634bc(),
+		}, /*END SCHEMA*/
+		Description: "The CodeEditor app settings.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb4431ac80a3f2582b6fd5b47() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FileSystemId
+			"file_system_id": schemaAttribute245e31c58e1cca5d5fe4e4f8(),
+			// Property: FileSystemPath
+			"file_system_path": schemaAttribute9d41f3615b89cf92917e6b97(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb73e428adccdd6358af601fd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(256),
+			stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb880542667c7dc2c9116ce02() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of LifecycleConfigArns available for use with JupyterServer apps.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(0, 30),
+			listvalidator.ValueStringsAre(
+				stringvalidator.LengthAtMost(256),
+				stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$"), ""),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeba76faf9813a6c9861e634bc() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of LifecycleConfigArns available for use with CodeEditor apps.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(0, 30),
+			listvalidator.ValueStringsAre(
+				stringvalidator.LengthAtMost(256),
+				stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$"), ""),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec671ba4457ea0027b23e6aa3() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum idle timeout value set in minutes",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.Between(60, 525600),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec91ecf978fce1bc2a48e10b0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CustomImages
+			"custom_images": schemaAttribute1796294fb7322e71345cfd95(),
+			// Property: DefaultResourceSpec
+			"default_resource_spec": schemaAttributea56ce1d80fd4efe553184981(),
+			// Property: LifecycleConfigArns
+			"lifecycle_config_arns": schemaAttribute2877cb4c954f38b4ad32b026(),
+		}, /*END SCHEMA*/
+		Description: "The kernel gateway app settings.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec9b43242d133e795781077a8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The instance type that the image version runs on.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"system",
+				"ml.t3.micro",
+				"ml.t3.small",
+				"ml.t3.medium",
+				"ml.t3.large",
+				"ml.t3.xlarge",
+				"ml.t3.2xlarge",
+				"ml.m5.large",
+				"ml.m5.xlarge",
+				"ml.m5.2xlarge",
+				"ml.m5.4xlarge",
+				"ml.m5.8xlarge",
+				"ml.m5.12xlarge",
+				"ml.m5.16xlarge",
+				"ml.m5.24xlarge",
+				"ml.m5d.large",
+				"ml.m5d.xlarge",
+				"ml.m5d.2xlarge",
+				"ml.m5d.4xlarge",
+				"ml.m5d.8xlarge",
+				"ml.m5d.12xlarge",
+				"ml.m5d.16xlarge",
+				"ml.m5d.24xlarge",
+				"ml.c5.large",
+				"ml.c5.xlarge",
+				"ml.c5.2xlarge",
+				"ml.c5.4xlarge",
+				"ml.c5.9xlarge",
+				"ml.c5.12xlarge",
+				"ml.c5.18xlarge",
+				"ml.c5.24xlarge",
+				"ml.p3.2xlarge",
+				"ml.p3.8xlarge",
+				"ml.p3.16xlarge",
+				"ml.p3dn.24xlarge",
+				"ml.g4dn.xlarge",
+				"ml.g4dn.2xlarge",
+				"ml.g4dn.4xlarge",
+				"ml.g4dn.8xlarge",
+				"ml.g4dn.12xlarge",
+				"ml.g4dn.16xlarge",
+				"ml.r5.large",
+				"ml.r5.xlarge",
+				"ml.r5.2xlarge",
+				"ml.r5.4xlarge",
+				"ml.r5.8xlarge",
+				"ml.r5.12xlarge",
+				"ml.r5.16xlarge",
+				"ml.r5.24xlarge",
+				"ml.g5.xlarge",
+				"ml.g5.2xlarge",
+				"ml.g5.4xlarge",
+				"ml.g5.8xlarge",
+				"ml.g5.12xlarge",
+				"ml.g5.16xlarge",
+				"ml.g5.24xlarge",
+				"ml.g5.48xlarge",
+				"ml.g6.xlarge",
+				"ml.g6.2xlarge",
+				"ml.g6.4xlarge",
+				"ml.g6.8xlarge",
+				"ml.g6.12xlarge",
+				"ml.g6.16xlarge",
+				"ml.g6.24xlarge",
+				"ml.g6.48xlarge",
+				"ml.g6e.xlarge",
+				"ml.g6e.2xlarge",
+				"ml.g6e.4xlarge",
+				"ml.g6e.8xlarge",
+				"ml.g6e.12xlarge",
+				"ml.g6e.16xlarge",
+				"ml.g6e.24xlarge",
+				"ml.g6e.48xlarge",
+				"ml.geospatial.interactive",
+				"ml.p4d.24xlarge",
+				"ml.p4de.24xlarge",
+				"ml.trn1.2xlarge",
+				"ml.trn1.32xlarge",
+				"ml.trn1n.32xlarge",
+				"ml.p5.48xlarge",
+				"ml.p5e.48xlarge",
+				"ml.p5en.48xlarge",
+				"ml.m6i.large",
+				"ml.m6i.xlarge",
+				"ml.m6i.2xlarge",
+				"ml.m6i.4xlarge",
+				"ml.m6i.8xlarge",
+				"ml.m6i.12xlarge",
+				"ml.m6i.16xlarge",
+				"ml.m6i.24xlarge",
+				"ml.m6i.32xlarge",
+				"ml.m7i.large",
+				"ml.m7i.xlarge",
+				"ml.m7i.2xlarge",
+				"ml.m7i.4xlarge",
+				"ml.m7i.8xlarge",
+				"ml.m7i.12xlarge",
+				"ml.m7i.16xlarge",
+				"ml.m7i.24xlarge",
+				"ml.m7i.48xlarge",
+				"ml.c6i.large",
+				"ml.c6i.xlarge",
+				"ml.c6i.2xlarge",
+				"ml.c6i.4xlarge",
+				"ml.c6i.8xlarge",
+				"ml.c6i.12xlarge",
+				"ml.c6i.16xlarge",
+				"ml.c6i.24xlarge",
+				"ml.c6i.32xlarge",
+				"ml.c7i.large",
+				"ml.c7i.xlarge",
+				"ml.c7i.2xlarge",
+				"ml.c7i.4xlarge",
+				"ml.c7i.8xlarge",
+				"ml.c7i.12xlarge",
+				"ml.c7i.16xlarge",
+				"ml.c7i.24xlarge",
+				"ml.c7i.48xlarge",
+				"ml.r6i.large",
+				"ml.r6i.xlarge",
+				"ml.r6i.2xlarge",
+				"ml.r6i.4xlarge",
+				"ml.r6i.8xlarge",
+				"ml.r6i.12xlarge",
+				"ml.r6i.16xlarge",
+				"ml.r6i.24xlarge",
+				"ml.r6i.32xlarge",
+				"ml.r7i.large",
+				"ml.r7i.xlarge",
+				"ml.r7i.2xlarge",
+				"ml.r7i.4xlarge",
+				"ml.r7i.8xlarge",
+				"ml.r7i.12xlarge",
+				"ml.r7i.16xlarge",
+				"ml.r7i.24xlarge",
+				"ml.r7i.48xlarge",
+				"ml.m6id.large",
+				"ml.m6id.xlarge",
+				"ml.m6id.2xlarge",
+				"ml.m6id.4xlarge",
+				"ml.m6id.8xlarge",
+				"ml.m6id.12xlarge",
+				"ml.m6id.16xlarge",
+				"ml.m6id.24xlarge",
+				"ml.m6id.32xlarge",
+				"ml.c6id.large",
+				"ml.c6id.xlarge",
+				"ml.c6id.2xlarge",
+				"ml.c6id.4xlarge",
+				"ml.c6id.8xlarge",
+				"ml.c6id.12xlarge",
+				"ml.c6id.16xlarge",
+				"ml.c6id.24xlarge",
+				"ml.c6id.32xlarge",
+				"ml.r6id.large",
+				"ml.r6id.xlarge",
+				"ml.r6id.2xlarge",
+				"ml.r6id.4xlarge",
+				"ml.r6id.8xlarge",
+				"ml.r6id.12xlarge",
+				"ml.r6id.16xlarge",
+				"ml.r6id.24xlarge",
+				"ml.r6id.32xlarge",
+				"ml.p5.4xlarge",
+				"ml.p6-b200.48xlarge",
+				"ml.g7.2xlarge",
+				"ml.g7.4xlarge",
+				"ml.g7.8xlarge",
+				"ml.g7.12xlarge",
+				"ml.g7.24xlarge",
+				"ml.g7.48xlarge",
+				"ml.g7e.2xlarge",
+				"ml.g7e.4xlarge",
+				"ml.g7e.8xlarge",
+				"ml.g7e.12xlarge",
+				"ml.g7e.24xlarge",
+				"ml.g7e.48xlarge",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecc03eec947aab32795750f63() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(0, 5),
+			listvalidator.ValueStringsAre(
+				stringvalidator.LengthAtMost(32),
+				stringvalidator.RegexMatches(regexp.MustCompile("[-0-9a-zA-Z]+"), ""),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecec2beac8f03b1a1db8b1fea() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A specifier for the type of value specified in SingleSignOnUserValue. Currently, the only supported value is \"UserName\". If the Domain's AuthMode is SSO, this field is required. If the Domain's AuthMode is not SSO, this field cannot be specified.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("UserName"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed07dae642d5b83abbe1dc983() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A name for the UserProfile.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 63),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed12962d13ab84d1955fb6140() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the SageMaker image that the image version belongs to.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(256),
+			stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed30a6ec4b8346b7b09d7a7c6() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute68c384c93158db72cde9fadf(),
+				// Property: Value
+				"value": schemaAttribute68c384c93158db72cde9fadf(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of tags to apply to the user profile.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(0, 50),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedb615f92ce63f28ac65f53e1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Gid
+			"gid": schemaAttribute6881f1322bd3ac647659859c(),
+			// Property: Uid
+			"uid": schemaAttribute33cd6b68457ed6bc424ec714(),
+		}, /*END SCHEMA*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedbd1f4f29c01cf225214d3cc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The user profile Amazon Resource Name (ARN).",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee5055cfa2a1557c00c776cb9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A CodeRepository (valid URL) to be used within Jupyter's Git extension.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(256),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee56872fb26a442251b7ca969() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AccessStatus
+			"access_status": schemaAttribute8b527e9ef3ad85af78a85758(),
+			// Property: UserGroup
+			"user_group": schemaAttribute2d1a7ff53722d5619ee7fc10(),
+		}, /*END SCHEMA*/
+		Description: "A collection of settings that configure user interaction with the RStudioServerPro app.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee8f3138f038622fff4d4541c() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The idle timeout value set in minutes",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.Between(60, 525600),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeef74fdea7ae5b35a7afaebb5() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SageMakerImageName
+				"sage_maker_image_name": schemaAttribute39a43f8364b4d5b73f9f3357(),
+				// Property: VersionAliases
+				"version_aliases": schemaAttribute21d594821d524264a44b6cf2(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The version aliases you are hiding from the Studio user interface.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Set{ /*START VALIDATORS*/
+			setvalidator.SizeBetween(0, 5),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef172658d1b5f75007080cdd0() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The machine learning tools that are hidden from the Studio left navigation pane.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Set{ /*START VALIDATORS*/
+			setvalidator.SizeAtLeast(0),
+			setvalidator.ValueStringsAre(
+				stringvalidator.OneOf(
+					"DataWrangler",
+					"FeatureStore",
+					"EmrClusters",
+					"AutoMl",
+					"Experiments",
+					"Training",
+					"ModelEvaluation",
+					"Pipelines",
+					"Models",
+					"JumpStart",
+					"InferenceRecommender",
+					"Endpoints",
+					"Projects",
+					"InferenceOptimization",
+					"HyperPodClusters",
+					"Comet",
+					"DeepchecksLLMEvaluation",
+					"Fiddler",
+					"LakeraGuard",
+					"PerformanceEvaluation",
+				),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef2b405ec21dbea64bf3b0a19() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DefaultEbsStorageSettings
+			"default_ebs_storage_settings": schemaAttribute3051a80c5d30e5e21bae53c0(),
+		}, /*END SCHEMA*/
+		Description: "Default storage settings for a space.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefd11630b44026b0800077008() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Applications supported in Studio that are hidden from the Studio left navigation pane.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Set{ /*START VALIDATORS*/
+			setvalidator.SizeAtLeast(0),
+			setvalidator.ValueStringsAre(
+				stringvalidator.OneOf(
+					"JupyterServer",
+					"TensorBoard",
+					"RStudioServerPro",
+					"JupyterLab",
+					"CodeEditor",
+					"DetailedProfiler",
+					"Canvas",
+				),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_sagemaker_user_profile", userProfileResource)
 	registry.AddListResourceFactory("awscc_sagemaker_user_profile", generic.NewListResource(userProfileResource))
@@ -47,16 +1772,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the associated Domain.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 63),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"domain_id": schemaAttribute831889ef77b6ea97fdb3b349(),
 		// Property: SingleSignOnUserIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -65,18 +1781,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "UserName",
 		//	  "type": "string"
 		//	}
-		"single_sign_on_user_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A specifier for the type of value specified in SingleSignOnUserValue. Currently, the only supported value is \"UserName\". If the Domain's AuthMode is SSO, this field is required. If the Domain's AuthMode is not SSO, this field cannot be specified.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("UserName"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"single_sign_on_user_identifier": schemaAttributecec2beac8f03b1a1db8b1fea(),
 		// Property: SingleSignOnUserValue
 		// CloudFormation resource type schema:
 		//
@@ -86,18 +1791,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"single_sign_on_user_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The username of the associated AWS Single Sign-On User for this UserProfile. If the Domain's AuthMode is SSO, this field is required, and must match a valid username of a user in your directory. If the Domain's AuthMode is not SSO, this field cannot be specified.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 256),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"single_sign_on_user_value": schemaAttribute8d4802d754f678ed2370929f(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -128,45 +1822,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of tags to apply to the user profile.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(0, 50),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributed30a6ec4b8346b7b09d7a7c6(),
 		// Property: UserProfileArn
 		// CloudFormation resource type schema:
 		//
@@ -176,13 +1832,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:user-profile/.*",
 		//	  "type": "string"
 		//	}
-		"user_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The user profile Amazon Resource Name (ARN).",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"user_profile_arn": schemaAttributedbd1f4f29c01cf225214d3cc(),
 		// Property: UserProfileName
 		// CloudFormation resource type schema:
 		//
@@ -192,16 +1842,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"user_profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A name for the UserProfile.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 63),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"user_profile_name": schemaAttributed07dae642d5b83abbe1dc983(),
 		// Property: UserSettings
 		// CloudFormation resource type schema:
 		//
@@ -1892,2231 +3533,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"user_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AutoMountHomeEFS
-				"auto_mount_home_efs": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether auto-mounting of an EFS volume is supported for the user profile. ",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"Enabled",
-							"Disabled",
-							"DefaultAsDomain",
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: CodeEditorAppSettings
-				"code_editor_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AppLifecycleManagement
-						"app_lifecycle_management": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: IdleSettings
-								"idle_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: IdleTimeoutInMinutes
-										"idle_timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "The idle timeout value set in minutes",
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.Int64{ /*START VALIDATORS*/
-												int64validator.Between(60, 525600),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-												int64planmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: LifecycleManagement
-										"lifecycle_management": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "A flag to enable/disable AppLifecycleManagement settings",
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.OneOf(
-													"ENABLED",
-													"DISABLED",
-												),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: MaxIdleTimeoutInMinutes
-										"max_idle_timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "The maximum idle timeout value set in minutes",
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.Int64{ /*START VALIDATORS*/
-												int64validator.Between(60, 525600),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-												int64planmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: MinIdleTimeoutInMinutes
-										"min_idle_timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "The minimum idle timeout value set in minutes",
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.Int64{ /*START VALIDATORS*/
-												int64validator.Between(60, 525600),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-												int64planmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: BuiltInLifecycleConfigArn
-						"built_in_lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The lifecycle configuration that runs before the default lifecycle configuration.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(256),
-								stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$"), ""),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: CustomImages
-						"custom_images": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: AppImageConfigName
-									"app_image_config_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The Name of the AppImageConfig.",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthAtMost(63),
-											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"), ""),
-											fwvalidators.NotNullString(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-									// Property: ImageName
-									"image_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The name of the CustomImage. Must be unique to your account.",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthAtMost(63),
-											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]([-.]?[a-zA-Z0-9]){0,62}$"), ""),
-											fwvalidators.NotNullString(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-									// Property: ImageVersionNumber
-									"image_version_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "The version number of the CustomImage.",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.Int64{ /*START VALIDATORS*/
-											int64validator.AtLeast(0),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-											int64planmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "A list of custom images for use for CodeEditor apps.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.List{ /*START VALIDATORS*/
-								listvalidator.SizeBetween(0, 200),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: DefaultResourceSpec
-						"default_resource_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: InstanceType
-								"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The instance type that the image version runs on.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.OneOf(
-											"system",
-											"ml.t3.micro",
-											"ml.t3.small",
-											"ml.t3.medium",
-											"ml.t3.large",
-											"ml.t3.xlarge",
-											"ml.t3.2xlarge",
-											"ml.m5.large",
-											"ml.m5.xlarge",
-											"ml.m5.2xlarge",
-											"ml.m5.4xlarge",
-											"ml.m5.8xlarge",
-											"ml.m5.12xlarge",
-											"ml.m5.16xlarge",
-											"ml.m5.24xlarge",
-											"ml.m5d.large",
-											"ml.m5d.xlarge",
-											"ml.m5d.2xlarge",
-											"ml.m5d.4xlarge",
-											"ml.m5d.8xlarge",
-											"ml.m5d.12xlarge",
-											"ml.m5d.16xlarge",
-											"ml.m5d.24xlarge",
-											"ml.c5.large",
-											"ml.c5.xlarge",
-											"ml.c5.2xlarge",
-											"ml.c5.4xlarge",
-											"ml.c5.9xlarge",
-											"ml.c5.12xlarge",
-											"ml.c5.18xlarge",
-											"ml.c5.24xlarge",
-											"ml.p3.2xlarge",
-											"ml.p3.8xlarge",
-											"ml.p3.16xlarge",
-											"ml.p3dn.24xlarge",
-											"ml.g4dn.xlarge",
-											"ml.g4dn.2xlarge",
-											"ml.g4dn.4xlarge",
-											"ml.g4dn.8xlarge",
-											"ml.g4dn.12xlarge",
-											"ml.g4dn.16xlarge",
-											"ml.r5.large",
-											"ml.r5.xlarge",
-											"ml.r5.2xlarge",
-											"ml.r5.4xlarge",
-											"ml.r5.8xlarge",
-											"ml.r5.12xlarge",
-											"ml.r5.16xlarge",
-											"ml.r5.24xlarge",
-											"ml.g5.xlarge",
-											"ml.g5.2xlarge",
-											"ml.g5.4xlarge",
-											"ml.g5.8xlarge",
-											"ml.g5.12xlarge",
-											"ml.g5.16xlarge",
-											"ml.g5.24xlarge",
-											"ml.g5.48xlarge",
-											"ml.g6.xlarge",
-											"ml.g6.2xlarge",
-											"ml.g6.4xlarge",
-											"ml.g6.8xlarge",
-											"ml.g6.12xlarge",
-											"ml.g6.16xlarge",
-											"ml.g6.24xlarge",
-											"ml.g6.48xlarge",
-											"ml.g6e.xlarge",
-											"ml.g6e.2xlarge",
-											"ml.g6e.4xlarge",
-											"ml.g6e.8xlarge",
-											"ml.g6e.12xlarge",
-											"ml.g6e.16xlarge",
-											"ml.g6e.24xlarge",
-											"ml.g6e.48xlarge",
-											"ml.geospatial.interactive",
-											"ml.p4d.24xlarge",
-											"ml.p4de.24xlarge",
-											"ml.trn1.2xlarge",
-											"ml.trn1.32xlarge",
-											"ml.trn1n.32xlarge",
-											"ml.p5.48xlarge",
-											"ml.p5e.48xlarge",
-											"ml.p5en.48xlarge",
-											"ml.m6i.large",
-											"ml.m6i.xlarge",
-											"ml.m6i.2xlarge",
-											"ml.m6i.4xlarge",
-											"ml.m6i.8xlarge",
-											"ml.m6i.12xlarge",
-											"ml.m6i.16xlarge",
-											"ml.m6i.24xlarge",
-											"ml.m6i.32xlarge",
-											"ml.m7i.large",
-											"ml.m7i.xlarge",
-											"ml.m7i.2xlarge",
-											"ml.m7i.4xlarge",
-											"ml.m7i.8xlarge",
-											"ml.m7i.12xlarge",
-											"ml.m7i.16xlarge",
-											"ml.m7i.24xlarge",
-											"ml.m7i.48xlarge",
-											"ml.c6i.large",
-											"ml.c6i.xlarge",
-											"ml.c6i.2xlarge",
-											"ml.c6i.4xlarge",
-											"ml.c6i.8xlarge",
-											"ml.c6i.12xlarge",
-											"ml.c6i.16xlarge",
-											"ml.c6i.24xlarge",
-											"ml.c6i.32xlarge",
-											"ml.c7i.large",
-											"ml.c7i.xlarge",
-											"ml.c7i.2xlarge",
-											"ml.c7i.4xlarge",
-											"ml.c7i.8xlarge",
-											"ml.c7i.12xlarge",
-											"ml.c7i.16xlarge",
-											"ml.c7i.24xlarge",
-											"ml.c7i.48xlarge",
-											"ml.r6i.large",
-											"ml.r6i.xlarge",
-											"ml.r6i.2xlarge",
-											"ml.r6i.4xlarge",
-											"ml.r6i.8xlarge",
-											"ml.r6i.12xlarge",
-											"ml.r6i.16xlarge",
-											"ml.r6i.24xlarge",
-											"ml.r6i.32xlarge",
-											"ml.r7i.large",
-											"ml.r7i.xlarge",
-											"ml.r7i.2xlarge",
-											"ml.r7i.4xlarge",
-											"ml.r7i.8xlarge",
-											"ml.r7i.12xlarge",
-											"ml.r7i.16xlarge",
-											"ml.r7i.24xlarge",
-											"ml.r7i.48xlarge",
-											"ml.m6id.large",
-											"ml.m6id.xlarge",
-											"ml.m6id.2xlarge",
-											"ml.m6id.4xlarge",
-											"ml.m6id.8xlarge",
-											"ml.m6id.12xlarge",
-											"ml.m6id.16xlarge",
-											"ml.m6id.24xlarge",
-											"ml.m6id.32xlarge",
-											"ml.c6id.large",
-											"ml.c6id.xlarge",
-											"ml.c6id.2xlarge",
-											"ml.c6id.4xlarge",
-											"ml.c6id.8xlarge",
-											"ml.c6id.12xlarge",
-											"ml.c6id.16xlarge",
-											"ml.c6id.24xlarge",
-											"ml.c6id.32xlarge",
-											"ml.r6id.large",
-											"ml.r6id.xlarge",
-											"ml.r6id.2xlarge",
-											"ml.r6id.4xlarge",
-											"ml.r6id.8xlarge",
-											"ml.r6id.12xlarge",
-											"ml.r6id.16xlarge",
-											"ml.r6id.24xlarge",
-											"ml.r6id.32xlarge",
-											"ml.p5.4xlarge",
-											"ml.p6-b200.48xlarge",
-											"ml.g7.2xlarge",
-											"ml.g7.4xlarge",
-											"ml.g7.8xlarge",
-											"ml.g7.12xlarge",
-											"ml.g7.24xlarge",
-											"ml.g7.48xlarge",
-											"ml.g7e.2xlarge",
-											"ml.g7e.4xlarge",
-											"ml.g7e.8xlarge",
-											"ml.g7e.12xlarge",
-											"ml.g7e.24xlarge",
-											"ml.g7e.48xlarge",
-										),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: LifecycleConfigArn
-								"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(256),
-										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$"), ""),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: SageMakerImageArn
-								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The ARN of the SageMaker image that the image version belongs to.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(256),
-										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$"), ""),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: SageMakerImageVersionArn
-								"sage_maker_image_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The ARN of the image version created on the instance.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(256),
-										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+|None)"), ""),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: TrainingPlanArn
-								"training_plan_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(0, 2048),
-										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$"), ""),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the CodeEditor app.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: LifecycleConfigArns
-						"lifecycle_config_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "A list of LifecycleConfigArns available for use with CodeEditor apps.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.List{ /*START VALIDATORS*/
-								listvalidator.SizeBetween(0, 30),
-								listvalidator.ValueStringsAre(
-									stringvalidator.LengthAtMost(256),
-									stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$"), ""),
-								),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The CodeEditor app settings.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: CustomFileSystemConfigs
-				"custom_file_system_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: EFSFileSystemConfig
-							"efs_file_system_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: FileSystemId
-									"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(11, 21),
-											stringvalidator.RegexMatches(regexp.MustCompile("^(fs-[0-9a-f]{8,})$"), ""),
-											fwvalidators.NotNullString(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-									// Property: FileSystemPath
-									"file_system_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(1, 256),
-											stringvalidator.RegexMatches(regexp.MustCompile("^\\/\\S*$"), ""),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Optional: true,
-								Computed: true,
-								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-									objectplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: FSxLustreFileSystemConfig
-							"fsx_lustre_file_system_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: FileSystemId
-									"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(11, 21),
-											stringvalidator.RegexMatches(regexp.MustCompile("^(fs-[0-9a-f]{8,})$"), ""),
-											fwvalidators.NotNullString(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-									// Property: FileSystemPath
-									"file_system_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(1, 256),
-											stringvalidator.RegexMatches(regexp.MustCompile("^\\/\\S*$"), ""),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Optional: true,
-								Computed: true,
-								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-									objectplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: S3FileSystemConfig
-							"s3_file_system_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: MountPath
-									"mount_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(0, 1024),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-									// Property: S3Uri
-									"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
-										Computed: true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthBetween(0, 1024),
-											stringvalidator.RegexMatches(regexp.MustCompile("(s3)://([^/]+)/?(.*)"), ""),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Optional: true,
-								Computed: true,
-								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-									objectplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Optional: true,
-					Computed: true,
-					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.SizeBetween(0, 10),
-						listvalidator.UniqueValues(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: CustomPosixUserConfig
-				"custom_posix_user_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Gid
-						"gid": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.Int64{ /*START VALIDATORS*/
-								int64validator.Between(1001, 4000000),
-								fwvalidators.NotNullInt64(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: Uid
-						"uid": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
-							Validators: []validator.Int64{ /*START VALIDATORS*/
-								int64validator.Between(10000, 4000000),
-								fwvalidators.NotNullInt64(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: DefaultLandingUri
-				"default_landing_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Defines which Amazon SageMaker application users are directed to by default.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(1023),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: ExecutionRole
-				"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The user profile Amazon Resource Name (ARN).",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(20, 2048),
-						stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: JupyterLabAppSettings
-				"jupyter_lab_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AppLifecycleManagement
-						"app_lifecycle_management": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: IdleSettings
-								"idle_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: IdleTimeoutInMinutes
-										"idle_timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "The idle timeout value set in minutes",
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.Int64{ /*START VALIDATORS*/
-												int64validator.Between(60, 525600),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-												int64planmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: LifecycleManagement
-										"lifecycle_management": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "A flag to enable/disable AppLifecycleManagement settings",
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.OneOf(
-													"ENABLED",
-													"DISABLED",
-												),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: MaxIdleTimeoutInMinutes
-										"max_idle_timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "The maximum idle timeout value set in minutes",
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.Int64{ /*START VALIDATORS*/
-												int64validator.Between(60, 525600),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-												int64planmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: MinIdleTimeoutInMinutes
-										"min_idle_timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "The minimum idle timeout value set in minutes",
-											Optional:    true,
-											Computed:    true,
-											Validators: []validator.Int64{ /*START VALIDATORS*/
-												int64validator.Between(60, 525600),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-												int64planmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										objectplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: BuiltInLifecycleConfigArn
-						"built_in_lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The lifecycle configuration that runs before the default lifecycle configuration.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(256),
-								stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$"), ""),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: CodeRepositories
-						"code_repositories": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: RepositoryUrl
-									"repository_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "A CodeRepository (valid URL) to be used within Jupyter's Git extension.",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthAtMost(256),
-											fwvalidators.NotNullString(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "A list of CodeRepositories available for use with JupyterLab apps.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.List{ /*START VALIDATORS*/
-								listvalidator.SizeBetween(0, 30),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: CustomImages
-						"custom_images": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: AppImageConfigName
-									"app_image_config_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The Name of the AppImageConfig.",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthAtMost(63),
-											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"), ""),
-											fwvalidators.NotNullString(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-									// Property: ImageName
-									"image_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The name of the CustomImage. Must be unique to your account.",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthAtMost(63),
-											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]([-.]?[a-zA-Z0-9]){0,62}$"), ""),
-											fwvalidators.NotNullString(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-									// Property: ImageVersionNumber
-									"image_version_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "The version number of the CustomImage.",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.Int64{ /*START VALIDATORS*/
-											int64validator.AtLeast(0),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-											int64planmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "A list of custom images available for use for JupyterLab apps",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.List{ /*START VALIDATORS*/
-								listvalidator.SizeBetween(0, 200),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: DefaultResourceSpec
-						"default_resource_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: InstanceType
-								"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The instance type that the image version runs on.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.OneOf(
-											"system",
-											"ml.t3.micro",
-											"ml.t3.small",
-											"ml.t3.medium",
-											"ml.t3.large",
-											"ml.t3.xlarge",
-											"ml.t3.2xlarge",
-											"ml.m5.large",
-											"ml.m5.xlarge",
-											"ml.m5.2xlarge",
-											"ml.m5.4xlarge",
-											"ml.m5.8xlarge",
-											"ml.m5.12xlarge",
-											"ml.m5.16xlarge",
-											"ml.m5.24xlarge",
-											"ml.m5d.large",
-											"ml.m5d.xlarge",
-											"ml.m5d.2xlarge",
-											"ml.m5d.4xlarge",
-											"ml.m5d.8xlarge",
-											"ml.m5d.12xlarge",
-											"ml.m5d.16xlarge",
-											"ml.m5d.24xlarge",
-											"ml.c5.large",
-											"ml.c5.xlarge",
-											"ml.c5.2xlarge",
-											"ml.c5.4xlarge",
-											"ml.c5.9xlarge",
-											"ml.c5.12xlarge",
-											"ml.c5.18xlarge",
-											"ml.c5.24xlarge",
-											"ml.p3.2xlarge",
-											"ml.p3.8xlarge",
-											"ml.p3.16xlarge",
-											"ml.p3dn.24xlarge",
-											"ml.g4dn.xlarge",
-											"ml.g4dn.2xlarge",
-											"ml.g4dn.4xlarge",
-											"ml.g4dn.8xlarge",
-											"ml.g4dn.12xlarge",
-											"ml.g4dn.16xlarge",
-											"ml.r5.large",
-											"ml.r5.xlarge",
-											"ml.r5.2xlarge",
-											"ml.r5.4xlarge",
-											"ml.r5.8xlarge",
-											"ml.r5.12xlarge",
-											"ml.r5.16xlarge",
-											"ml.r5.24xlarge",
-											"ml.g5.xlarge",
-											"ml.g5.2xlarge",
-											"ml.g5.4xlarge",
-											"ml.g5.8xlarge",
-											"ml.g5.12xlarge",
-											"ml.g5.16xlarge",
-											"ml.g5.24xlarge",
-											"ml.g5.48xlarge",
-											"ml.g6.xlarge",
-											"ml.g6.2xlarge",
-											"ml.g6.4xlarge",
-											"ml.g6.8xlarge",
-											"ml.g6.12xlarge",
-											"ml.g6.16xlarge",
-											"ml.g6.24xlarge",
-											"ml.g6.48xlarge",
-											"ml.g6e.xlarge",
-											"ml.g6e.2xlarge",
-											"ml.g6e.4xlarge",
-											"ml.g6e.8xlarge",
-											"ml.g6e.12xlarge",
-											"ml.g6e.16xlarge",
-											"ml.g6e.24xlarge",
-											"ml.g6e.48xlarge",
-											"ml.geospatial.interactive",
-											"ml.p4d.24xlarge",
-											"ml.p4de.24xlarge",
-											"ml.trn1.2xlarge",
-											"ml.trn1.32xlarge",
-											"ml.trn1n.32xlarge",
-											"ml.p5.48xlarge",
-											"ml.p5e.48xlarge",
-											"ml.p5en.48xlarge",
-											"ml.m6i.large",
-											"ml.m6i.xlarge",
-											"ml.m6i.2xlarge",
-											"ml.m6i.4xlarge",
-											"ml.m6i.8xlarge",
-											"ml.m6i.12xlarge",
-											"ml.m6i.16xlarge",
-											"ml.m6i.24xlarge",
-											"ml.m6i.32xlarge",
-											"ml.m7i.large",
-											"ml.m7i.xlarge",
-											"ml.m7i.2xlarge",
-											"ml.m7i.4xlarge",
-											"ml.m7i.8xlarge",
-											"ml.m7i.12xlarge",
-											"ml.m7i.16xlarge",
-											"ml.m7i.24xlarge",
-											"ml.m7i.48xlarge",
-											"ml.c6i.large",
-											"ml.c6i.xlarge",
-											"ml.c6i.2xlarge",
-											"ml.c6i.4xlarge",
-											"ml.c6i.8xlarge",
-											"ml.c6i.12xlarge",
-											"ml.c6i.16xlarge",
-											"ml.c6i.24xlarge",
-											"ml.c6i.32xlarge",
-											"ml.c7i.large",
-											"ml.c7i.xlarge",
-											"ml.c7i.2xlarge",
-											"ml.c7i.4xlarge",
-											"ml.c7i.8xlarge",
-											"ml.c7i.12xlarge",
-											"ml.c7i.16xlarge",
-											"ml.c7i.24xlarge",
-											"ml.c7i.48xlarge",
-											"ml.r6i.large",
-											"ml.r6i.xlarge",
-											"ml.r6i.2xlarge",
-											"ml.r6i.4xlarge",
-											"ml.r6i.8xlarge",
-											"ml.r6i.12xlarge",
-											"ml.r6i.16xlarge",
-											"ml.r6i.24xlarge",
-											"ml.r6i.32xlarge",
-											"ml.r7i.large",
-											"ml.r7i.xlarge",
-											"ml.r7i.2xlarge",
-											"ml.r7i.4xlarge",
-											"ml.r7i.8xlarge",
-											"ml.r7i.12xlarge",
-											"ml.r7i.16xlarge",
-											"ml.r7i.24xlarge",
-											"ml.r7i.48xlarge",
-											"ml.m6id.large",
-											"ml.m6id.xlarge",
-											"ml.m6id.2xlarge",
-											"ml.m6id.4xlarge",
-											"ml.m6id.8xlarge",
-											"ml.m6id.12xlarge",
-											"ml.m6id.16xlarge",
-											"ml.m6id.24xlarge",
-											"ml.m6id.32xlarge",
-											"ml.c6id.large",
-											"ml.c6id.xlarge",
-											"ml.c6id.2xlarge",
-											"ml.c6id.4xlarge",
-											"ml.c6id.8xlarge",
-											"ml.c6id.12xlarge",
-											"ml.c6id.16xlarge",
-											"ml.c6id.24xlarge",
-											"ml.c6id.32xlarge",
-											"ml.r6id.large",
-											"ml.r6id.xlarge",
-											"ml.r6id.2xlarge",
-											"ml.r6id.4xlarge",
-											"ml.r6id.8xlarge",
-											"ml.r6id.12xlarge",
-											"ml.r6id.16xlarge",
-											"ml.r6id.24xlarge",
-											"ml.r6id.32xlarge",
-											"ml.p5.4xlarge",
-											"ml.p6-b200.48xlarge",
-											"ml.g7.2xlarge",
-											"ml.g7.4xlarge",
-											"ml.g7.8xlarge",
-											"ml.g7.12xlarge",
-											"ml.g7.24xlarge",
-											"ml.g7.48xlarge",
-											"ml.g7e.2xlarge",
-											"ml.g7e.4xlarge",
-											"ml.g7e.8xlarge",
-											"ml.g7e.12xlarge",
-											"ml.g7e.24xlarge",
-											"ml.g7e.48xlarge",
-										),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: LifecycleConfigArn
-								"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(256),
-										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$"), ""),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: SageMakerImageArn
-								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The ARN of the SageMaker image that the image version belongs to.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(256),
-										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$"), ""),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: SageMakerImageVersionArn
-								"sage_maker_image_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The ARN of the image version created on the instance.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(256),
-										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+|None)"), ""),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: TrainingPlanArn
-								"training_plan_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(0, 2048),
-										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$"), ""),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the JupyterLab app.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: EmrSettings
-						"emr_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: AssumableRoleArns
-								"assumable_role_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "An array of Amazon Resource Names (ARNs) of the IAM roles that the execution role of SageMaker can assume.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.List{ /*START VALIDATORS*/
-										listvalidator.SizeBetween(0, 5),
-										listvalidator.ValueStringsAre(
-											stringvalidator.LengthBetween(20, 2048),
-											stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
-										),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										listplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: ExecutionRoleArns
-								"execution_role_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "An array of ARNs of IAM roles used by EMR cluster instances or job execution environments.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.List{ /*START VALIDATORS*/
-										listvalidator.SizeBetween(0, 5),
-										listvalidator.ValueStringsAre(
-											stringvalidator.LengthBetween(20, 2048),
-											stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
-										),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										listplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The configuration parameters for EMR settings.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: LifecycleConfigArns
-						"lifecycle_config_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "A list of LifecycleConfigArns available for use with JupyterLab apps.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.List{ /*START VALIDATORS*/
-								listvalidator.SizeBetween(0, 30),
-								listvalidator.ValueStringsAre(
-									stringvalidator.LengthAtMost(256),
-									stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$"), ""),
-								),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The JupyterLab app settings.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: JupyterServerAppSettings
-				"jupyter_server_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: DefaultResourceSpec
-						"default_resource_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: InstanceType
-								"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The instance type that the image version runs on.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.OneOf(
-											"system",
-											"ml.t3.micro",
-											"ml.t3.small",
-											"ml.t3.medium",
-											"ml.t3.large",
-											"ml.t3.xlarge",
-											"ml.t3.2xlarge",
-											"ml.m5.large",
-											"ml.m5.xlarge",
-											"ml.m5.2xlarge",
-											"ml.m5.4xlarge",
-											"ml.m5.8xlarge",
-											"ml.m5.12xlarge",
-											"ml.m5.16xlarge",
-											"ml.m5.24xlarge",
-											"ml.m5d.large",
-											"ml.m5d.xlarge",
-											"ml.m5d.2xlarge",
-											"ml.m5d.4xlarge",
-											"ml.m5d.8xlarge",
-											"ml.m5d.12xlarge",
-											"ml.m5d.16xlarge",
-											"ml.m5d.24xlarge",
-											"ml.c5.large",
-											"ml.c5.xlarge",
-											"ml.c5.2xlarge",
-											"ml.c5.4xlarge",
-											"ml.c5.9xlarge",
-											"ml.c5.12xlarge",
-											"ml.c5.18xlarge",
-											"ml.c5.24xlarge",
-											"ml.p3.2xlarge",
-											"ml.p3.8xlarge",
-											"ml.p3.16xlarge",
-											"ml.p3dn.24xlarge",
-											"ml.g4dn.xlarge",
-											"ml.g4dn.2xlarge",
-											"ml.g4dn.4xlarge",
-											"ml.g4dn.8xlarge",
-											"ml.g4dn.12xlarge",
-											"ml.g4dn.16xlarge",
-											"ml.r5.large",
-											"ml.r5.xlarge",
-											"ml.r5.2xlarge",
-											"ml.r5.4xlarge",
-											"ml.r5.8xlarge",
-											"ml.r5.12xlarge",
-											"ml.r5.16xlarge",
-											"ml.r5.24xlarge",
-											"ml.g5.xlarge",
-											"ml.g5.2xlarge",
-											"ml.g5.4xlarge",
-											"ml.g5.8xlarge",
-											"ml.g5.12xlarge",
-											"ml.g5.16xlarge",
-											"ml.g5.24xlarge",
-											"ml.g5.48xlarge",
-											"ml.g6.xlarge",
-											"ml.g6.2xlarge",
-											"ml.g6.4xlarge",
-											"ml.g6.8xlarge",
-											"ml.g6.12xlarge",
-											"ml.g6.16xlarge",
-											"ml.g6.24xlarge",
-											"ml.g6.48xlarge",
-											"ml.g6e.xlarge",
-											"ml.g6e.2xlarge",
-											"ml.g6e.4xlarge",
-											"ml.g6e.8xlarge",
-											"ml.g6e.12xlarge",
-											"ml.g6e.16xlarge",
-											"ml.g6e.24xlarge",
-											"ml.g6e.48xlarge",
-											"ml.geospatial.interactive",
-											"ml.p4d.24xlarge",
-											"ml.p4de.24xlarge",
-											"ml.trn1.2xlarge",
-											"ml.trn1.32xlarge",
-											"ml.trn1n.32xlarge",
-											"ml.p5.48xlarge",
-											"ml.p5e.48xlarge",
-											"ml.p5en.48xlarge",
-											"ml.m6i.large",
-											"ml.m6i.xlarge",
-											"ml.m6i.2xlarge",
-											"ml.m6i.4xlarge",
-											"ml.m6i.8xlarge",
-											"ml.m6i.12xlarge",
-											"ml.m6i.16xlarge",
-											"ml.m6i.24xlarge",
-											"ml.m6i.32xlarge",
-											"ml.m7i.large",
-											"ml.m7i.xlarge",
-											"ml.m7i.2xlarge",
-											"ml.m7i.4xlarge",
-											"ml.m7i.8xlarge",
-											"ml.m7i.12xlarge",
-											"ml.m7i.16xlarge",
-											"ml.m7i.24xlarge",
-											"ml.m7i.48xlarge",
-											"ml.c6i.large",
-											"ml.c6i.xlarge",
-											"ml.c6i.2xlarge",
-											"ml.c6i.4xlarge",
-											"ml.c6i.8xlarge",
-											"ml.c6i.12xlarge",
-											"ml.c6i.16xlarge",
-											"ml.c6i.24xlarge",
-											"ml.c6i.32xlarge",
-											"ml.c7i.large",
-											"ml.c7i.xlarge",
-											"ml.c7i.2xlarge",
-											"ml.c7i.4xlarge",
-											"ml.c7i.8xlarge",
-											"ml.c7i.12xlarge",
-											"ml.c7i.16xlarge",
-											"ml.c7i.24xlarge",
-											"ml.c7i.48xlarge",
-											"ml.r6i.large",
-											"ml.r6i.xlarge",
-											"ml.r6i.2xlarge",
-											"ml.r6i.4xlarge",
-											"ml.r6i.8xlarge",
-											"ml.r6i.12xlarge",
-											"ml.r6i.16xlarge",
-											"ml.r6i.24xlarge",
-											"ml.r6i.32xlarge",
-											"ml.r7i.large",
-											"ml.r7i.xlarge",
-											"ml.r7i.2xlarge",
-											"ml.r7i.4xlarge",
-											"ml.r7i.8xlarge",
-											"ml.r7i.12xlarge",
-											"ml.r7i.16xlarge",
-											"ml.r7i.24xlarge",
-											"ml.r7i.48xlarge",
-											"ml.m6id.large",
-											"ml.m6id.xlarge",
-											"ml.m6id.2xlarge",
-											"ml.m6id.4xlarge",
-											"ml.m6id.8xlarge",
-											"ml.m6id.12xlarge",
-											"ml.m6id.16xlarge",
-											"ml.m6id.24xlarge",
-											"ml.m6id.32xlarge",
-											"ml.c6id.large",
-											"ml.c6id.xlarge",
-											"ml.c6id.2xlarge",
-											"ml.c6id.4xlarge",
-											"ml.c6id.8xlarge",
-											"ml.c6id.12xlarge",
-											"ml.c6id.16xlarge",
-											"ml.c6id.24xlarge",
-											"ml.c6id.32xlarge",
-											"ml.r6id.large",
-											"ml.r6id.xlarge",
-											"ml.r6id.2xlarge",
-											"ml.r6id.4xlarge",
-											"ml.r6id.8xlarge",
-											"ml.r6id.12xlarge",
-											"ml.r6id.16xlarge",
-											"ml.r6id.24xlarge",
-											"ml.r6id.32xlarge",
-											"ml.p5.4xlarge",
-											"ml.p6-b200.48xlarge",
-											"ml.g7.2xlarge",
-											"ml.g7.4xlarge",
-											"ml.g7.8xlarge",
-											"ml.g7.12xlarge",
-											"ml.g7.24xlarge",
-											"ml.g7.48xlarge",
-											"ml.g7e.2xlarge",
-											"ml.g7e.4xlarge",
-											"ml.g7e.8xlarge",
-											"ml.g7e.12xlarge",
-											"ml.g7e.24xlarge",
-											"ml.g7e.48xlarge",
-										),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: LifecycleConfigArn
-								"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(256),
-										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$"), ""),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: SageMakerImageArn
-								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The ARN of the SageMaker image that the image version belongs to.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(256),
-										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$"), ""),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: SageMakerImageVersionArn
-								"sage_maker_image_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The ARN of the image version created on the instance.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(256),
-										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+|None)"), ""),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: TrainingPlanArn
-								"training_plan_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(0, 2048),
-										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$"), ""),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Optional: true,
-							Computed: true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: LifecycleConfigArns
-						"lifecycle_config_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "A list of LifecycleConfigArns available for use with JupyterServer apps.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.List{ /*START VALIDATORS*/
-								listvalidator.SizeBetween(0, 30),
-								listvalidator.ValueStringsAre(
-									stringvalidator.LengthAtMost(256),
-									stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$"), ""),
-								),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The Jupyter server's app settings.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: KernelGatewayAppSettings
-				"kernel_gateway_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CustomImages
-						"custom_images": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: AppImageConfigName
-									"app_image_config_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The Name of the AppImageConfig.",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthAtMost(63),
-											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"), ""),
-											fwvalidators.NotNullString(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-									// Property: ImageName
-									"image_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The name of the CustomImage. Must be unique to your account.",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.LengthAtMost(63),
-											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]([-.]?[a-zA-Z0-9]){0,62}$"), ""),
-											fwvalidators.NotNullString(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-									// Property: ImageVersionNumber
-									"image_version_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "The version number of the CustomImage.",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.Int64{ /*START VALIDATORS*/
-											int64validator.AtLeast(0),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-											int64planmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.List{ /*START VALIDATORS*/
-								listvalidator.SizeBetween(0, 30),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: DefaultResourceSpec
-						"default_resource_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: InstanceType
-								"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The instance type that the image version runs on.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.OneOf(
-											"system",
-											"ml.t3.micro",
-											"ml.t3.small",
-											"ml.t3.medium",
-											"ml.t3.large",
-											"ml.t3.xlarge",
-											"ml.t3.2xlarge",
-											"ml.m5.large",
-											"ml.m5.xlarge",
-											"ml.m5.2xlarge",
-											"ml.m5.4xlarge",
-											"ml.m5.8xlarge",
-											"ml.m5.12xlarge",
-											"ml.m5.16xlarge",
-											"ml.m5.24xlarge",
-											"ml.m5d.large",
-											"ml.m5d.xlarge",
-											"ml.m5d.2xlarge",
-											"ml.m5d.4xlarge",
-											"ml.m5d.8xlarge",
-											"ml.m5d.12xlarge",
-											"ml.m5d.16xlarge",
-											"ml.m5d.24xlarge",
-											"ml.c5.large",
-											"ml.c5.xlarge",
-											"ml.c5.2xlarge",
-											"ml.c5.4xlarge",
-											"ml.c5.9xlarge",
-											"ml.c5.12xlarge",
-											"ml.c5.18xlarge",
-											"ml.c5.24xlarge",
-											"ml.p3.2xlarge",
-											"ml.p3.8xlarge",
-											"ml.p3.16xlarge",
-											"ml.p3dn.24xlarge",
-											"ml.g4dn.xlarge",
-											"ml.g4dn.2xlarge",
-											"ml.g4dn.4xlarge",
-											"ml.g4dn.8xlarge",
-											"ml.g4dn.12xlarge",
-											"ml.g4dn.16xlarge",
-											"ml.r5.large",
-											"ml.r5.xlarge",
-											"ml.r5.2xlarge",
-											"ml.r5.4xlarge",
-											"ml.r5.8xlarge",
-											"ml.r5.12xlarge",
-											"ml.r5.16xlarge",
-											"ml.r5.24xlarge",
-											"ml.g5.xlarge",
-											"ml.g5.2xlarge",
-											"ml.g5.4xlarge",
-											"ml.g5.8xlarge",
-											"ml.g5.12xlarge",
-											"ml.g5.16xlarge",
-											"ml.g5.24xlarge",
-											"ml.g5.48xlarge",
-											"ml.g6.xlarge",
-											"ml.g6.2xlarge",
-											"ml.g6.4xlarge",
-											"ml.g6.8xlarge",
-											"ml.g6.12xlarge",
-											"ml.g6.16xlarge",
-											"ml.g6.24xlarge",
-											"ml.g6.48xlarge",
-											"ml.g6e.xlarge",
-											"ml.g6e.2xlarge",
-											"ml.g6e.4xlarge",
-											"ml.g6e.8xlarge",
-											"ml.g6e.12xlarge",
-											"ml.g6e.16xlarge",
-											"ml.g6e.24xlarge",
-											"ml.g6e.48xlarge",
-											"ml.geospatial.interactive",
-											"ml.p4d.24xlarge",
-											"ml.p4de.24xlarge",
-											"ml.trn1.2xlarge",
-											"ml.trn1.32xlarge",
-											"ml.trn1n.32xlarge",
-											"ml.p5.48xlarge",
-											"ml.p5e.48xlarge",
-											"ml.p5en.48xlarge",
-											"ml.m6i.large",
-											"ml.m6i.xlarge",
-											"ml.m6i.2xlarge",
-											"ml.m6i.4xlarge",
-											"ml.m6i.8xlarge",
-											"ml.m6i.12xlarge",
-											"ml.m6i.16xlarge",
-											"ml.m6i.24xlarge",
-											"ml.m6i.32xlarge",
-											"ml.m7i.large",
-											"ml.m7i.xlarge",
-											"ml.m7i.2xlarge",
-											"ml.m7i.4xlarge",
-											"ml.m7i.8xlarge",
-											"ml.m7i.12xlarge",
-											"ml.m7i.16xlarge",
-											"ml.m7i.24xlarge",
-											"ml.m7i.48xlarge",
-											"ml.c6i.large",
-											"ml.c6i.xlarge",
-											"ml.c6i.2xlarge",
-											"ml.c6i.4xlarge",
-											"ml.c6i.8xlarge",
-											"ml.c6i.12xlarge",
-											"ml.c6i.16xlarge",
-											"ml.c6i.24xlarge",
-											"ml.c6i.32xlarge",
-											"ml.c7i.large",
-											"ml.c7i.xlarge",
-											"ml.c7i.2xlarge",
-											"ml.c7i.4xlarge",
-											"ml.c7i.8xlarge",
-											"ml.c7i.12xlarge",
-											"ml.c7i.16xlarge",
-											"ml.c7i.24xlarge",
-											"ml.c7i.48xlarge",
-											"ml.r6i.large",
-											"ml.r6i.xlarge",
-											"ml.r6i.2xlarge",
-											"ml.r6i.4xlarge",
-											"ml.r6i.8xlarge",
-											"ml.r6i.12xlarge",
-											"ml.r6i.16xlarge",
-											"ml.r6i.24xlarge",
-											"ml.r6i.32xlarge",
-											"ml.r7i.large",
-											"ml.r7i.xlarge",
-											"ml.r7i.2xlarge",
-											"ml.r7i.4xlarge",
-											"ml.r7i.8xlarge",
-											"ml.r7i.12xlarge",
-											"ml.r7i.16xlarge",
-											"ml.r7i.24xlarge",
-											"ml.r7i.48xlarge",
-											"ml.m6id.large",
-											"ml.m6id.xlarge",
-											"ml.m6id.2xlarge",
-											"ml.m6id.4xlarge",
-											"ml.m6id.8xlarge",
-											"ml.m6id.12xlarge",
-											"ml.m6id.16xlarge",
-											"ml.m6id.24xlarge",
-											"ml.m6id.32xlarge",
-											"ml.c6id.large",
-											"ml.c6id.xlarge",
-											"ml.c6id.2xlarge",
-											"ml.c6id.4xlarge",
-											"ml.c6id.8xlarge",
-											"ml.c6id.12xlarge",
-											"ml.c6id.16xlarge",
-											"ml.c6id.24xlarge",
-											"ml.c6id.32xlarge",
-											"ml.r6id.large",
-											"ml.r6id.xlarge",
-											"ml.r6id.2xlarge",
-											"ml.r6id.4xlarge",
-											"ml.r6id.8xlarge",
-											"ml.r6id.12xlarge",
-											"ml.r6id.16xlarge",
-											"ml.r6id.24xlarge",
-											"ml.r6id.32xlarge",
-											"ml.p5.4xlarge",
-											"ml.p6-b200.48xlarge",
-											"ml.g7.2xlarge",
-											"ml.g7.4xlarge",
-											"ml.g7.8xlarge",
-											"ml.g7.12xlarge",
-											"ml.g7.24xlarge",
-											"ml.g7.48xlarge",
-											"ml.g7e.2xlarge",
-											"ml.g7e.4xlarge",
-											"ml.g7e.8xlarge",
-											"ml.g7e.12xlarge",
-											"ml.g7e.24xlarge",
-											"ml.g7e.48xlarge",
-										),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: LifecycleConfigArn
-								"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(256),
-										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$"), ""),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: SageMakerImageArn
-								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The ARN of the SageMaker image that the image version belongs to.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(256),
-										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$"), ""),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: SageMakerImageVersionArn
-								"sage_maker_image_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The ARN of the image version created on the instance.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthAtMost(256),
-										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+|None)"), ""),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: TrainingPlanArn
-								"training_plan_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(0, 2048),
-										stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/.*|None)$"), ""),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-										stringplanmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the KernelGateway app.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: LifecycleConfigArns
-						"lifecycle_config_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "A list of LifecycleConfigArns available for use with KernelGateway apps.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.List{ /*START VALIDATORS*/
-								listvalidator.SizeBetween(0, 30),
-								listvalidator.ValueStringsAre(
-									stringvalidator.LengthAtMost(256),
-									stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$"), ""),
-								),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								listplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The kernel gateway app settings.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: RStudioServerProAppSettings
-				"r_studio_server_pro_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AccessStatus
-						"access_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Indicates whether the current user has access to the RStudioServerPro app.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.OneOf(
-									"ENABLED",
-									"DISABLED",
-								),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-								stringplanmodifier.RequiresReplaceIfConfigured(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: UserGroup
-						"user_group": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The level of permissions that the user has within the RStudioServerPro app. This value defaults to User. The Admin value allows the user access to the RStudio Administrative Dashboard.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.OneOf(
-									"R_STUDIO_ADMIN",
-									"R_STUDIO_USER",
-								),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-								stringplanmodifier.RequiresReplaceIfConfigured(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "A collection of settings that configure user interaction with the RStudioServerPro app.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: SecurityGroups
-				"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.SizeBetween(0, 5),
-						listvalidator.ValueStringsAre(
-							stringvalidator.LengthAtMost(32),
-							stringvalidator.RegexMatches(regexp.MustCompile("[-0-9a-zA-Z]+"), ""),
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: SharingSettings
-				"sharing_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: NotebookOutputOption
-						"notebook_output_option": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Whether to include the notebook cell output when sharing the notebook. The default is Disabled.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.OneOf(
-									"Allowed",
-									"Disabled",
-								),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: S3KmsKeyId
-						"s3_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "When NotebookOutputOption is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(2048),
-								stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: S3OutputPath
-						"s3_output_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "When NotebookOutputOption is Allowed, the Amazon S3 bucket used to store the shared notebook snapshots.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthAtMost(1024),
-								stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The sharing settings.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: SpaceStorageSettings
-				"space_storage_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: DefaultEbsStorageSettings
-						"default_ebs_storage_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: DefaultEbsVolumeSizeInGb
-								"default_ebs_volume_size_in_gb": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "Default size of the Amazon EBS volume in Gb",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.Int64{ /*START VALIDATORS*/
-										int64validator.Between(5, 16384),
-										fwvalidators.NotNullInt64(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-										int64planmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-								// Property: MaximumEbsVolumeSizeInGb
-								"maximum_ebs_volume_size_in_gb": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "Maximum size of the Amazon EBS volume in Gb. Must be greater than or equal to the DefaultEbsVolumeSizeInGb.",
-									Optional:    true,
-									Computed:    true,
-									Validators: []validator.Int64{ /*START VALIDATORS*/
-										int64validator.Between(5, 16384),
-										fwvalidators.NotNullInt64(),
-									}, /*END VALIDATORS*/
-									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-										int64planmodifier.UseStateForUnknown(),
-									}, /*END PLAN MODIFIERS*/
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Properties related to the Amazon Elastic Block Store volume.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-								objectplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Default storage settings for a space.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: StudioWebPortal
-				"studio_web_portal": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether the Studio experience is available to users. If not, users cannot access Studio.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"ENABLED",
-							"DISABLED",
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: StudioWebPortalSettings
-				"studio_web_portal_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: HiddenAppTypes
-						"hidden_app_types": schema.SetAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "Applications supported in Studio that are hidden from the Studio left navigation pane.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.Set{ /*START VALIDATORS*/
-								setvalidator.SizeAtLeast(0),
-								setvalidator.ValueStringsAre(
-									stringvalidator.OneOf(
-										"JupyterServer",
-										"TensorBoard",
-										"RStudioServerPro",
-										"JupyterLab",
-										"CodeEditor",
-										"DetailedProfiler",
-										"Canvas",
-									),
-								),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-								setplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: HiddenInstanceTypes
-						"hidden_instance_types": schema.SetAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "The instance types you are hiding from the Studio user interface.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.Set{ /*START VALIDATORS*/
-								setvalidator.SizeAtLeast(0),
-								setvalidator.ValueStringsAre(
-									stringvalidator.OneOf(
-										"system",
-										"ml.t3.micro",
-										"ml.t3.small",
-										"ml.t3.medium",
-										"ml.t3.large",
-										"ml.t3.xlarge",
-										"ml.t3.2xlarge",
-										"ml.m5.large",
-										"ml.m5.xlarge",
-										"ml.m5.2xlarge",
-										"ml.m5.4xlarge",
-										"ml.m5.8xlarge",
-										"ml.m5.12xlarge",
-										"ml.m5.16xlarge",
-										"ml.m5.24xlarge",
-										"ml.m5d.large",
-										"ml.m5d.xlarge",
-										"ml.m5d.2xlarge",
-										"ml.m5d.4xlarge",
-										"ml.m5d.8xlarge",
-										"ml.m5d.12xlarge",
-										"ml.m5d.16xlarge",
-										"ml.m5d.24xlarge",
-										"ml.c5.large",
-										"ml.c5.xlarge",
-										"ml.c5.2xlarge",
-										"ml.c5.4xlarge",
-										"ml.c5.9xlarge",
-										"ml.c5.12xlarge",
-										"ml.c5.18xlarge",
-										"ml.c5.24xlarge",
-										"ml.p3.2xlarge",
-										"ml.p3.8xlarge",
-										"ml.p3.16xlarge",
-										"ml.p3dn.24xlarge",
-										"ml.g4dn.xlarge",
-										"ml.g4dn.2xlarge",
-										"ml.g4dn.4xlarge",
-										"ml.g4dn.8xlarge",
-										"ml.g4dn.12xlarge",
-										"ml.g4dn.16xlarge",
-										"ml.r5.large",
-										"ml.r5.xlarge",
-										"ml.r5.2xlarge",
-										"ml.r5.4xlarge",
-										"ml.r5.8xlarge",
-										"ml.r5.12xlarge",
-										"ml.r5.16xlarge",
-										"ml.r5.24xlarge",
-										"ml.g5.xlarge",
-										"ml.g5.2xlarge",
-										"ml.g5.4xlarge",
-										"ml.g5.8xlarge",
-										"ml.g5.12xlarge",
-										"ml.g5.16xlarge",
-										"ml.g5.24xlarge",
-										"ml.g5.48xlarge",
-										"ml.g6.xlarge",
-										"ml.g6.2xlarge",
-										"ml.g6.4xlarge",
-										"ml.g6.8xlarge",
-										"ml.g6.12xlarge",
-										"ml.g6.16xlarge",
-										"ml.g6.24xlarge",
-										"ml.g6.48xlarge",
-										"ml.g6e.xlarge",
-										"ml.g6e.2xlarge",
-										"ml.g6e.4xlarge",
-										"ml.g6e.8xlarge",
-										"ml.g6e.12xlarge",
-										"ml.g6e.16xlarge",
-										"ml.g6e.24xlarge",
-										"ml.g6e.48xlarge",
-										"ml.geospatial.interactive",
-										"ml.p4d.24xlarge",
-										"ml.p4de.24xlarge",
-										"ml.trn1.2xlarge",
-										"ml.trn1.32xlarge",
-										"ml.trn1n.32xlarge",
-										"ml.p5.48xlarge",
-										"ml.p5e.48xlarge",
-										"ml.p5en.48xlarge",
-										"ml.m6i.large",
-										"ml.m6i.xlarge",
-										"ml.m6i.2xlarge",
-										"ml.m6i.4xlarge",
-										"ml.m6i.8xlarge",
-										"ml.m6i.12xlarge",
-										"ml.m6i.16xlarge",
-										"ml.m6i.24xlarge",
-										"ml.m6i.32xlarge",
-										"ml.m7i.large",
-										"ml.m7i.xlarge",
-										"ml.m7i.2xlarge",
-										"ml.m7i.4xlarge",
-										"ml.m7i.8xlarge",
-										"ml.m7i.12xlarge",
-										"ml.m7i.16xlarge",
-										"ml.m7i.24xlarge",
-										"ml.m7i.48xlarge",
-										"ml.c6i.large",
-										"ml.c6i.xlarge",
-										"ml.c6i.2xlarge",
-										"ml.c6i.4xlarge",
-										"ml.c6i.8xlarge",
-										"ml.c6i.12xlarge",
-										"ml.c6i.16xlarge",
-										"ml.c6i.24xlarge",
-										"ml.c6i.32xlarge",
-										"ml.c7i.large",
-										"ml.c7i.xlarge",
-										"ml.c7i.2xlarge",
-										"ml.c7i.4xlarge",
-										"ml.c7i.8xlarge",
-										"ml.c7i.12xlarge",
-										"ml.c7i.16xlarge",
-										"ml.c7i.24xlarge",
-										"ml.c7i.48xlarge",
-										"ml.r6i.large",
-										"ml.r6i.xlarge",
-										"ml.r6i.2xlarge",
-										"ml.r6i.4xlarge",
-										"ml.r6i.8xlarge",
-										"ml.r6i.12xlarge",
-										"ml.r6i.16xlarge",
-										"ml.r6i.24xlarge",
-										"ml.r6i.32xlarge",
-										"ml.r7i.large",
-										"ml.r7i.xlarge",
-										"ml.r7i.2xlarge",
-										"ml.r7i.4xlarge",
-										"ml.r7i.8xlarge",
-										"ml.r7i.12xlarge",
-										"ml.r7i.16xlarge",
-										"ml.r7i.24xlarge",
-										"ml.r7i.48xlarge",
-										"ml.m6id.large",
-										"ml.m6id.xlarge",
-										"ml.m6id.2xlarge",
-										"ml.m6id.4xlarge",
-										"ml.m6id.8xlarge",
-										"ml.m6id.12xlarge",
-										"ml.m6id.16xlarge",
-										"ml.m6id.24xlarge",
-										"ml.m6id.32xlarge",
-										"ml.c6id.large",
-										"ml.c6id.xlarge",
-										"ml.c6id.2xlarge",
-										"ml.c6id.4xlarge",
-										"ml.c6id.8xlarge",
-										"ml.c6id.12xlarge",
-										"ml.c6id.16xlarge",
-										"ml.c6id.24xlarge",
-										"ml.c6id.32xlarge",
-										"ml.r6id.large",
-										"ml.r6id.xlarge",
-										"ml.r6id.2xlarge",
-										"ml.r6id.4xlarge",
-										"ml.r6id.8xlarge",
-										"ml.r6id.12xlarge",
-										"ml.r6id.16xlarge",
-										"ml.r6id.24xlarge",
-										"ml.r6id.32xlarge",
-										"ml.p5.4xlarge",
-										"ml.p6-b200.48xlarge",
-										"ml.g7.2xlarge",
-										"ml.g7.4xlarge",
-										"ml.g7.8xlarge",
-										"ml.g7.12xlarge",
-										"ml.g7.24xlarge",
-										"ml.g7.48xlarge",
-										"ml.g7e.2xlarge",
-										"ml.g7e.4xlarge",
-										"ml.g7e.8xlarge",
-										"ml.g7e.12xlarge",
-										"ml.g7e.24xlarge",
-										"ml.g7e.48xlarge",
-									),
-								),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-								setplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: HiddenMlTools
-						"hidden_ml_tools": schema.SetAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "The machine learning tools that are hidden from the Studio left navigation pane.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.Set{ /*START VALIDATORS*/
-								setvalidator.SizeAtLeast(0),
-								setvalidator.ValueStringsAre(
-									stringvalidator.OneOf(
-										"DataWrangler",
-										"FeatureStore",
-										"EmrClusters",
-										"AutoMl",
-										"Experiments",
-										"Training",
-										"ModelEvaluation",
-										"Pipelines",
-										"Models",
-										"JumpStart",
-										"InferenceRecommender",
-										"Endpoints",
-										"Projects",
-										"InferenceOptimization",
-										"HyperPodClusters",
-										"Comet",
-										"DeepchecksLLMEvaluation",
-										"Fiddler",
-										"LakeraGuard",
-										"PerformanceEvaluation",
-									),
-								),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-								setplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: HiddenSageMakerImageVersionAliases
-						"hidden_sage_maker_image_version_aliases": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: SageMakerImageName
-									"sage_maker_image_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The SageMaker image name that you are hiding from the Studio user interface.",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											stringvalidator.OneOf(
-												"sagemaker_distribution",
-											),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-									// Property: VersionAliases
-									"version_aliases": schema.ListAttribute{ /*START ATTRIBUTE*/
-										ElementType: types.StringType,
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.List{ /*START VALIDATORS*/
-											listvalidator.SizeAtMost(20),
-											listvalidator.ValueStringsAre(
-												stringvalidator.LengthBetween(1, 128),
-												stringvalidator.RegexMatches(regexp.MustCompile("^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$"), ""),
-											),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-											generic.Multiset(),
-											listplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "The version aliases you are hiding from the Studio user interface.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.Set{ /*START VALIDATORS*/
-								setvalidator.SizeBetween(0, 5),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-								setplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Studio settings. If these settings are applied on a user level, they take priority over the settings applied on a domain level.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A collection of settings.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"user_settings": schemaAttribute826a6196646284eddfdf13a3(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

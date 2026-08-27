@@ -17,6 +17,22 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1d6ab7680f4cd9e7c849f55d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The IAM policy for the channel. IAM policies are used to control access to your channel.</p>",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6d22aa1160567cec2c5d74c4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Required: true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_mediatailor_channel_policy", channelPolicyResource)
 }
@@ -31,12 +47,7 @@ func channelPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"channel_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"channel_name": schemaAttribute6d22aa1160567cec2c5d74c4(),
 		// Property: Policy
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +55,7 @@ func channelPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "\u003cp\u003eThe IAM policy for the channel. IAM policies are used to control access to your channel.\u003c/p\u003e",
 		//	  "type": "string"
 		//	}
-		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>The IAM policy for the channel. IAM policies are used to control access to your channel.</p>",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"policy": schemaAttribute1d6ab7680f4cd9e7c849f55d(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

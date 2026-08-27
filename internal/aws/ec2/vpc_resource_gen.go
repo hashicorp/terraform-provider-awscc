@@ -25,6 +25,536 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute0fa0b78d7985acc9de940c3d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"enable",
+				"disable",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// VirtualPrivateGatewayExclusion is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute125d1615e35f292bcd230b92() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: State
+			"state": schemaAttribute82e5a92110ac58c61e66a8e5(),
+			// Property: StateMessage
+			"state_message": schemaAttribute1ef4538749cd848f1da34167(),
+		}, /*END SCHEMA*/
+		Description: "The exclusion configuration for Elastic File System traffic.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1762ccdd97cfcb7d6d00e358() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"enable",
+				"disable",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// VpcPeeringExclusion is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1e2d72bc7ad7b96fd8966a96() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the VPC Encryption Control configuration.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1ef4538749cd848f1da34167() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A message providing additional information about the exclusion state.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1ff5892bda4547938bd928a2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The current state of the VPC Encryption Control configuration.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute240f596b4db8103b8354cbcb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag key.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute254be04f124772ecbded2584() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EgressOnlyInternetGateway
+			"egress_only_internet_gateway": schemaAttribute45cf22dcbd04632c4f142d2a(),
+			// Property: ElasticFileSystem
+			"elastic_file_system": schemaAttribute125d1615e35f292bcd230b92(),
+			// Property: InternetGateway
+			"internet_gateway": schemaAttributeffde65d3989269e2a844df73(),
+			// Property: Lambda
+			"lambda": schemaAttributecf89f96f6420debaf2ef63b7(),
+			// Property: NatGateway
+			"nat_gateway": schemaAttributee7fc69f4292da435f670ce71(),
+			// Property: VirtualPrivateGateway
+			"virtual_private_gateway": schemaAttribute8250e987124857a56c31cdc3(),
+			// Property: VpcLattice
+			"vpc_lattice": schemaAttributee38c8aa95366f47c981eac04(),
+			// Property: VpcPeering
+			"vpc_peering": schemaAttributebac76462649c26d48f304982(),
+		}, /*END SCHEMA*/
+		Description: "Information about resource exclusions for the VPC Encryption Control configuration.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute385eafcb13ee04a8e4f3dd17() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"enable",
+				"disable",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// VpcLatticeExclusion is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute39685c6449600c64fdd8bd7f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The encryption mode for the VPC Encryption Control configuration.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"monitor",
+				"enforce",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute44157b2f3eb2b61f9bfc71fb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EgressOnlyInternetGatewayExclusion
+			"egress_only_internet_gateway_exclusion": schemaAttributeff9201349acc0b3a583600f5(),
+			// Property: ElasticFileSystemExclusion
+			"elastic_file_system_exclusion": schemaAttribute91a52c7d2d5f94c7feca728b(),
+			// Property: InternetGatewayExclusion
+			"internet_gateway_exclusion": schemaAttribute9e64675bfdd6e9edd6da0ee4(),
+			// Property: LambdaExclusion
+			"lambda_exclusion": schemaAttribute595fefe208f6da8f845261f6(),
+			// Property: Mode
+			"mode": schemaAttribute39685c6449600c64fdd8bd7f(),
+			// Property: NatGatewayExclusion
+			"nat_gateway_exclusion": schemaAttributed908ce4e4a1510fb819aca8d(),
+			// Property: ResourceExclusions
+			"resource_exclusions": schemaAttribute254be04f124772ecbded2584(),
+			// Property: State
+			"state": schemaAttribute1ff5892bda4547938bd928a2(),
+			// Property: StateMessage
+			"state_message": schemaAttributeb35f5b6bbb2d8a28ce6572d0(),
+			// Property: VirtualPrivateGatewayExclusion
+			"virtual_private_gateway_exclusion": schemaAttribute0fa0b78d7985acc9de940c3d(),
+			// Property: VpcEncryptionControlId
+			"vpc_encryption_control_id": schemaAttribute1e2d72bc7ad7b96fd8966a96(),
+			// Property: VpcId
+			"vpc_id": schemaAttributefe21ffad3320c96dc9d98c56(),
+			// Property: VpcLatticeExclusion
+			"vpc_lattice_exclusion": schemaAttribute385eafcb13ee04a8e4f3dd17(),
+			// Property: VpcPeeringExclusion
+			"vpc_peering_exclusion": schemaAttribute1762ccdd97cfcb7d6d00e358(),
+		}, /*END SCHEMA*/
+		Description: "Describes the configuration and state of VPC encryption controls.\n For more information, see [Enforce VPC encryption in transit](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html) in the *Amazon VPC User Guide*.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+			objectplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute45cf22dcbd04632c4f142d2a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: State
+			"state": schemaAttribute82e5a92110ac58c61e66a8e5(),
+			// Property: StateMessage
+			"state_message": schemaAttribute1ef4538749cd848f1da34167(),
+		}, /*END SCHEMA*/
+		Description: "The exclusion configuration for egress-only internet gateway traffic.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute595fefe208f6da8f845261f6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"enable",
+				"disable",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// LambdaExclusion is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5b4b11775064c8b66beb5fc8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5ea390fc4e554d20e7296b09() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The netmask length of the IPv4 CIDR you want to allocate to this VPC from an Amazon VPC IP Address Manager (IPAM) pool. For more information about IPAM, see [What is IPAM?](https://docs.aws.amazon.com//vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC IPAM User Guide*.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+			int64planmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// Ipv4NetmaskLength is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute690d4a1a9eddbeb21f40046f() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the DNS resolution is supported for the VPC. If enabled, queries to the Amazon provided DNS server at the 169.254.169.253 IP address, or the reserved IP address at the base of the VPC network range \"plus two\" succeed. If disabled, the Amazon provided DNS service in the VPC that resolves public DNS hostnames to IP addresses is not enabled. Enabled by default. For more information, see [DNS attributes in your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html#vpc-dns-support).",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute77724cfaf21001ed0432a130() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag value.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8250e987124857a56c31cdc3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: State
+			"state": schemaAttribute82e5a92110ac58c61e66a8e5(),
+			// Property: StateMessage
+			"state_message": schemaAttribute1ef4538749cd848f1da34167(),
+		}, /*END SCHEMA*/
+		Description: "The exclusion configuration for virtual private gateway traffic.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute82e5a92110ac58c61e66a8e5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The current state of the exclusion configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8ec79b64f271063c176bb117() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The allowed tenancy of instances launched into the VPC.\n  +  ``default``: An instance launched into the VPC runs on shared hardware by default, unless you explicitly specify a different tenancy during instance launch.\n  +  ``dedicated``: An instance launched into the VPC runs on dedicated hardware by default, unless you explicitly specify a tenancy of ``host`` during instance launch. You cannot specify a tenancy of ``default`` during instance launch.\n  \n Updating ``InstanceTenancy`` requires no replacement only if you are updating its value from ``dedicated`` to ``default``. Updating ``InstanceTenancy`` from ``default`` to ``dedicated`` requires replacement.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute91a52c7d2d5f94c7feca728b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"enable",
+				"disable",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// ElasticFileSystemExclusion is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9afbe6951d086b7089b4d632() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of an IPv4 IPAM pool you want to use for allocating this VPC's CIDR. For more information, see [What is IPAM?](https://docs.aws.amazon.com//vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC IPAM User Guide*.\n You must specify either``CidrBlock`` or ``Ipv4IpamPoolId``.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// Ipv4IpamPoolId is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9e64675bfdd6e9edd6da0ee4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"enable",
+				"disable",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// InternetGatewayExclusion is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb35f5b6bbb2d8a28ce6572d0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A message providing additional information about the encryption control state.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebac76462649c26d48f304982() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: State
+			"state": schemaAttribute82e5a92110ac58c61e66a8e5(),
+			// Property: StateMessage
+			"state_message": schemaAttribute1ef4538749cd848f1da34167(),
+		}, /*END SCHEMA*/
+		Description: "The exclusion configuration for VPC peering connection traffic.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebb760094df563649d784ce61() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute240f596b4db8103b8354cbcb(),
+				// Property: Value
+				"value": schemaAttribute77724cfaf21001ed0432a130(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags for the VPC.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecf89f96f6420debaf2ef63b7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: State
+			"state": schemaAttribute82e5a92110ac58c61e66a8e5(),
+			// Property: StateMessage
+			"state_message": schemaAttribute1ef4538749cd848f1da34167(),
+		}, /*END SCHEMA*/
+		Description: "The exclusion configuration for Lambda function traffic.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed60581e563cc352cc0cc3a3d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IPv4 network range for the VPC, in CIDR notation. For example, ``10.0.0.0/16``. We modify the specified CIDR block to its canonical form; for example, if you specify ``100.68.0.18/18``, we modify it to ``100.68.0.0/18``.\n You must specify either``CidrBlock`` or ``Ipv4IpamPoolId``.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed908ce4e4a1510fb819aca8d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"enable",
+				"disable",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// NatGatewayExclusion is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee38c8aa95366f47c981eac04() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: State
+			"state": schemaAttribute82e5a92110ac58c61e66a8e5(),
+			// Property: StateMessage
+			"state_message": schemaAttribute1ef4538749cd848f1da34167(),
+		}, /*END SCHEMA*/
+		Description: "The exclusion configuration for VPC Lattice traffic.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee5cf2429bb1b552b2baae972() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "",
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee7fc69f4292da435f670ce71() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: State
+			"state": schemaAttribute82e5a92110ac58c61e66a8e5(),
+			// Property: StateMessage
+			"state_message": schemaAttribute1ef4538749cd848f1da34167(),
+		}, /*END SCHEMA*/
+		Description: "The exclusion configuration for NAT gateway traffic.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef3e4b1e331db262febf85de2() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the instances launched in the VPC get DNS hostnames. If enabled, instances in the VPC get DNS hostnames; otherwise, they do not. Disabled by default for nondefault VPCs. For more information, see [DNS attributes in your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html#vpc-dns-support).\n You can only enable DNS hostnames if you've enabled DNS support.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefe21ffad3320c96dc9d98c56() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the VPC associated with the encryption control configuration.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeff9201349acc0b3a583600f5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"enable",
+				"disable",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// EgressOnlyInternetGatewayExclusion is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeffde65d3989269e2a844df73() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: State
+			"state": schemaAttribute82e5a92110ac58c61e66a8e5(),
+			// Property: StateMessage
+			"state_message": schemaAttribute1ef4538749cd848f1da34167(),
+		}, /*END SCHEMA*/
+		Description: "The exclusion configuration for internet gateway traffic.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_ec2_vpc", vPCResource)
 	registry.AddListResourceFactory("awscc_ec2_vpc", generic.NewListResource(vPCResource))
@@ -41,15 +571,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The IPv4 network range for the VPC, in CIDR notation. For example, ``10.0.0.0/16``. We modify the specified CIDR block to its canonical form; for example, if you specify ``100.68.0.18/18``, we modify it to ``100.68.0.0/18``.\n You must specify either``CidrBlock`` or ``Ipv4IpamPoolId``.",
 		//	  "type": "string"
 		//	}
-		"cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The IPv4 network range for the VPC, in CIDR notation. For example, ``10.0.0.0/16``. We modify the specified CIDR block to its canonical form; for example, if you specify ``100.68.0.18/18``, we modify it to ``100.68.0.0/18``.\n You must specify either``CidrBlock`` or ``Ipv4IpamPoolId``.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"cidr_block": schemaAttributed60581e563cc352cc0cc3a3d(),
 		// Property: CidrBlockAssociations
 		// CloudFormation resource type schema:
 		//
@@ -62,15 +584,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"cidr_block_associations": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "",
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"cidr_block_associations": schemaAttributee5cf2429bb1b552b2baae972(),
 		// Property: DefaultNetworkAcl
 		// CloudFormation resource type schema:
 		//
@@ -79,13 +593,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		//	  "insertionOrder": false,
 		//	  "type": "string"
 		//	}
-		"default_network_acl": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"default_network_acl": schemaAttribute5b4b11775064c8b66beb5fc8(),
 		// Property: DefaultSecurityGroup
 		// CloudFormation resource type schema:
 		//
@@ -94,13 +602,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		//	  "insertionOrder": false,
 		//	  "type": "string"
 		//	}
-		"default_security_group": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"default_security_group": schemaAttribute5b4b11775064c8b66beb5fc8(),
 		// Property: EnableDnsHostnames
 		// CloudFormation resource type schema:
 		//
@@ -108,14 +610,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Indicates whether the instances launched in the VPC get DNS hostnames. If enabled, instances in the VPC get DNS hostnames; otherwise, they do not. Disabled by default for nondefault VPCs. For more information, see [DNS attributes in your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html#vpc-dns-support).\n You can only enable DNS hostnames if you've enabled DNS support.",
 		//	  "type": "boolean"
 		//	}
-		"enable_dns_hostnames": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether the instances launched in the VPC get DNS hostnames. If enabled, instances in the VPC get DNS hostnames; otherwise, they do not. Disabled by default for nondefault VPCs. For more information, see [DNS attributes in your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html#vpc-dns-support).\n You can only enable DNS hostnames if you've enabled DNS support.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"enable_dns_hostnames": schemaAttributef3e4b1e331db262febf85de2(),
 		// Property: EnableDnsSupport
 		// CloudFormation resource type schema:
 		//
@@ -123,14 +618,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Indicates whether the DNS resolution is supported for the VPC. If enabled, queries to the Amazon provided DNS server at the 169.254.169.253 IP address, or the reserved IP address at the base of the VPC network range \"plus two\" succeed. If disabled, the Amazon provided DNS service in the VPC that resolves public DNS hostnames to IP addresses is not enabled. Enabled by default. For more information, see [DNS attributes in your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html#vpc-dns-support).",
 		//	  "type": "boolean"
 		//	}
-		"enable_dns_support": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether the DNS resolution is supported for the VPC. If enabled, queries to the Amazon provided DNS server at the 169.254.169.253 IP address, or the reserved IP address at the base of the VPC network range \"plus two\" succeed. If disabled, the Amazon provided DNS service in the VPC that resolves public DNS hostnames to IP addresses is not enabled. Enabled by default. For more information, see [DNS attributes in your VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html#vpc-dns-support).",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"enable_dns_support": schemaAttribute690d4a1a9eddbeb21f40046f(),
 		// Property: InstanceTenancy
 		// CloudFormation resource type schema:
 		//
@@ -138,14 +626,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The allowed tenancy of instances launched into the VPC.\n  +  ``default``: An instance launched into the VPC runs on shared hardware by default, unless you explicitly specify a different tenancy during instance launch.\n  +  ``dedicated``: An instance launched into the VPC runs on dedicated hardware by default, unless you explicitly specify a tenancy of ``host`` during instance launch. You cannot specify a tenancy of ``default`` during instance launch.\n  \n Updating ``InstanceTenancy`` requires no replacement only if you are updating its value from ``dedicated`` to ``default``. Updating ``InstanceTenancy`` from ``default`` to ``dedicated`` requires replacement.",
 		//	  "type": "string"
 		//	}
-		"instance_tenancy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The allowed tenancy of instances launched into the VPC.\n  +  ``default``: An instance launched into the VPC runs on shared hardware by default, unless you explicitly specify a different tenancy during instance launch.\n  +  ``dedicated``: An instance launched into the VPC runs on dedicated hardware by default, unless you explicitly specify a tenancy of ``host`` during instance launch. You cannot specify a tenancy of ``default`` during instance launch.\n  \n Updating ``InstanceTenancy`` requires no replacement only if you are updating its value from ``dedicated`` to ``default``. Updating ``InstanceTenancy`` from ``default`` to ``dedicated`` requires replacement.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"instance_tenancy": schemaAttribute8ec79b64f271063c176bb117(),
 		// Property: Ipv4IpamPoolId
 		// CloudFormation resource type schema:
 		//
@@ -153,16 +634,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of an IPv4 IPAM pool you want to use for allocating this VPC's CIDR. For more information, see [What is IPAM?](https://docs.aws.amazon.com//vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC IPAM User Guide*.\n You must specify either``CidrBlock`` or ``Ipv4IpamPoolId``.",
 		//	  "type": "string"
 		//	}
-		"ipv_4_ipam_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of an IPv4 IPAM pool you want to use for allocating this VPC's CIDR. For more information, see [What is IPAM?](https://docs.aws.amazon.com//vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC IPAM User Guide*.\n You must specify either``CidrBlock`` or ``Ipv4IpamPoolId``.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// Ipv4IpamPoolId is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"ipv_4_ipam_pool_id": schemaAttribute9afbe6951d086b7089b4d632(),
 		// Property: Ipv4NetmaskLength
 		// CloudFormation resource type schema:
 		//
@@ -170,16 +642,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The netmask length of the IPv4 CIDR you want to allocate to this VPC from an Amazon VPC IP Address Manager (IPAM) pool. For more information about IPAM, see [What is IPAM?](https://docs.aws.amazon.com//vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC IPAM User Guide*.",
 		//	  "type": "integer"
 		//	}
-		"ipv_4_netmask_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The netmask length of the IPv4 CIDR you want to allocate to this VPC from an Amazon VPC IP Address Manager (IPAM) pool. For more information about IPAM, see [What is IPAM?](https://docs.aws.amazon.com//vpc/latest/ipam/what-is-it-ipam.html) in the *Amazon VPC IPAM User Guide*.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-				int64planmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// Ipv4NetmaskLength is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"ipv_4_netmask_length": schemaAttribute5ea390fc4e554d20e7296b09(),
 		// Property: Ipv6CidrBlocks
 		// CloudFormation resource type schema:
 		//
@@ -192,15 +655,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"ipv_6_cidr_blocks": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "",
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"ipv_6_cidr_blocks": schemaAttributee5cf2429bb1b552b2baae972(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -229,43 +684,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag key.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag value.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags for the VPC.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributebb760094df563649d784ce61(),
 		// Property: VpcEncryptionControl
 		// CloudFormation resource type schema:
 		//
@@ -491,338 +910,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"vpc_encryption_control": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EgressOnlyInternetGatewayExclusion
-				"egress_only_internet_gateway_exclusion": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"enable",
-							"disable",
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-					// EgressOnlyInternetGatewayExclusion is a write-only property.
-				}, /*END ATTRIBUTE*/
-				// Property: ElasticFileSystemExclusion
-				"elastic_file_system_exclusion": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"enable",
-							"disable",
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-					// ElasticFileSystemExclusion is a write-only property.
-				}, /*END ATTRIBUTE*/
-				// Property: InternetGatewayExclusion
-				"internet_gateway_exclusion": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"enable",
-							"disable",
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-					// InternetGatewayExclusion is a write-only property.
-				}, /*END ATTRIBUTE*/
-				// Property: LambdaExclusion
-				"lambda_exclusion": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"enable",
-							"disable",
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-					// LambdaExclusion is a write-only property.
-				}, /*END ATTRIBUTE*/
-				// Property: Mode
-				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The encryption mode for the VPC Encryption Control configuration.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"monitor",
-							"enforce",
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: NatGatewayExclusion
-				"nat_gateway_exclusion": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"enable",
-							"disable",
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-					// NatGatewayExclusion is a write-only property.
-				}, /*END ATTRIBUTE*/
-				// Property: ResourceExclusions
-				"resource_exclusions": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: EgressOnlyInternetGateway
-						"egress_only_internet_gateway": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: State
-								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The current state of the exclusion configuration.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: StateMessage
-								"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "A message providing additional information about the exclusion state.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The exclusion configuration for egress-only internet gateway traffic.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ElasticFileSystem
-						"elastic_file_system": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: State
-								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The current state of the exclusion configuration.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: StateMessage
-								"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "A message providing additional information about the exclusion state.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The exclusion configuration for Elastic File System traffic.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: InternetGateway
-						"internet_gateway": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: State
-								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The current state of the exclusion configuration.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: StateMessage
-								"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "A message providing additional information about the exclusion state.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The exclusion configuration for internet gateway traffic.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Lambda
-						"lambda": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: State
-								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The current state of the exclusion configuration.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: StateMessage
-								"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "A message providing additional information about the exclusion state.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The exclusion configuration for Lambda function traffic.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: NatGateway
-						"nat_gateway": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: State
-								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The current state of the exclusion configuration.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: StateMessage
-								"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "A message providing additional information about the exclusion state.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The exclusion configuration for NAT gateway traffic.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: VirtualPrivateGateway
-						"virtual_private_gateway": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: State
-								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The current state of the exclusion configuration.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: StateMessage
-								"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "A message providing additional information about the exclusion state.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The exclusion configuration for virtual private gateway traffic.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: VpcLattice
-						"vpc_lattice": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: State
-								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The current state of the exclusion configuration.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: StateMessage
-								"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "A message providing additional information about the exclusion state.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The exclusion configuration for VPC Lattice traffic.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: VpcPeering
-						"vpc_peering": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: State
-								"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The current state of the exclusion configuration.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: StateMessage
-								"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "A message providing additional information about the exclusion state.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The exclusion configuration for VPC peering connection traffic.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Information about resource exclusions for the VPC Encryption Control configuration.",
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: State
-				"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The current state of the VPC Encryption Control configuration.",
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: StateMessage
-				"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A message providing additional information about the encryption control state.",
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: VirtualPrivateGatewayExclusion
-				"virtual_private_gateway_exclusion": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"enable",
-							"disable",
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-					// VirtualPrivateGatewayExclusion is a write-only property.
-				}, /*END ATTRIBUTE*/
-				// Property: VpcEncryptionControlId
-				"vpc_encryption_control_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ID of the VPC Encryption Control configuration.",
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: VpcId
-				"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ID of the VPC associated with the encryption control configuration.",
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: VpcLatticeExclusion
-				"vpc_lattice_exclusion": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"enable",
-							"disable",
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-					// VpcLatticeExclusion is a write-only property.
-				}, /*END ATTRIBUTE*/
-				// Property: VpcPeeringExclusion
-				"vpc_peering_exclusion": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"enable",
-							"disable",
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-					// VpcPeeringExclusion is a write-only property.
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Describes the configuration and state of VPC encryption controls.\n For more information, see [Enforce VPC encryption in transit](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html) in the *Amazon VPC User Guide*.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"vpc_encryption_control": schemaAttribute44157b2f3eb2b61f9bfc71fb(),
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -830,13 +918,7 @@ func vPCResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"vpc_id": schemaAttribute5b4b11775064c8b66beb5fc8(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

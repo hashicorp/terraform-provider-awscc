@@ -22,6 +22,305 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute0190b3dbbb05af231ed44f0c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The VPC encryption control mode, either monitor or enforce.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"monitor",
+				"enforce",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0d3e0bf51ac735a6a7ccb27f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Used to enable or disable VPC peering exclusion",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"enable",
+				"disable",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// VpcPeeringExclusionInput is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute118c48ced52ce6ff09c63345() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Used to enable or disable Lambda exclusion",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"enable",
+				"disable",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// LambdaExclusionInput is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute23d85e281cd36ec088e92c1c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EgressOnlyInternetGateway
+			"egress_only_internet_gateway": schemaAttributeacabd190c8c7cca0fac60eb9(),
+			// Property: ElasticFileSystem
+			"elastic_file_system": schemaAttributeacabd190c8c7cca0fac60eb9(),
+			// Property: InternetGateway
+			"internet_gateway": schemaAttributeacabd190c8c7cca0fac60eb9(),
+			// Property: Lambda
+			"lambda": schemaAttributeacabd190c8c7cca0fac60eb9(),
+			// Property: NatGateway
+			"nat_gateway": schemaAttributeacabd190c8c7cca0fac60eb9(),
+			// Property: VirtualPrivateGateway
+			"virtual_private_gateway": schemaAttributeacabd190c8c7cca0fac60eb9(),
+			// Property: VpcLattice
+			"vpc_lattice": schemaAttributeacabd190c8c7cca0fac60eb9(),
+			// Property: VpcPeering
+			"vpc_peering": schemaAttributeacabd190c8c7cca0fac60eb9(),
+		}, /*END SCHEMA*/
+		Description: "Enumerates the states of all the VPC encryption control resource exclusions",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute286c5bd8f5d7f325be121627() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The VPC on which this VPC encryption control is applied.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4f0252d9ff7e1a162e3eb4dd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Used to enable or disable IGW exclusion",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"enable",
+				"disable",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// InternetGatewayExclusionInput is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5eea2b6b3dd68032af9093a2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Used to enable or disable EFS exclusion",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"enable",
+				"disable",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// ElasticFileSystemExclusionInput is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute61a951797a7a29c468599a7a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The current state of the VPC encryption control.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute702391eb33995b3e5b737245() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The VPC encryption control resource id.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7e9c2454830a026853477e30() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Used to enable or disable VGW exclusion",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"enable",
+				"disable",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// VirtualPrivateGatewayExclusionInput is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute95af116d302aa9d4659fe4a5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Used to enable or disable EIGW exclusion",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"enable",
+				"disable",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// EgressOnlyInternetGatewayExclusionInput is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeacabd190c8c7cca0fac60eb9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: State
+			"state": schemaAttributeaf29c8efd6454e6a6c4270e1(),
+			// Property: StateMessage
+			"state_message": schemaAttributeaf29c8efd6454e6a6c4270e1(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaf29c8efd6454e6a6c4270e1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb09c56490e04e96704ce6861() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Provides additional context on the state of the VPC encryption control.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb3eec2fd96eef966fb57e657() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec2d602e1378fc44ad5ce81bd() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeb3eec2fd96eef966fb57e657(),
+				// Property: Value
+				"value": schemaAttributef2f91a0289ef977e08a0cdff(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags to assign to the VPC encryption control.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeacde12287dff2ed8d4376d2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Used to enable or disable Nat gateway exclusion",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"enable",
+				"disable",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// NatGatewayExclusionInput is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeec5cd589e77a7675e216a5c3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Used to enable or disable Vpc Lattice exclusion",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"enable",
+				"disable",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// VpcLatticeExclusionInput is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef2f91a0289ef977e08a0cdff() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 256),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_ec2_vpc_encryption_control", vPCEncryptionControlResource)
 	registry.AddListResourceFactory("awscc_ec2_vpc_encryption_control", generic.NewListResource(vPCEncryptionControlResource))
@@ -42,21 +341,7 @@ func vPCEncryptionControlResource(ctx context.Context) (resource.Resource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"egress_only_internet_gateway_exclusion_input": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Used to enable or disable EIGW exclusion",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"enable",
-					"disable",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// EgressOnlyInternetGatewayExclusionInput is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"egress_only_internet_gateway_exclusion_input": schemaAttribute95af116d302aa9d4659fe4a5(),
 		// Property: ElasticFileSystemExclusionInput
 		// CloudFormation resource type schema:
 		//
@@ -68,21 +353,7 @@ func vPCEncryptionControlResource(ctx context.Context) (resource.Resource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"elastic_file_system_exclusion_input": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Used to enable or disable EFS exclusion",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"enable",
-					"disable",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// ElasticFileSystemExclusionInput is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"elastic_file_system_exclusion_input": schemaAttribute5eea2b6b3dd68032af9093a2(),
 		// Property: InternetGatewayExclusionInput
 		// CloudFormation resource type schema:
 		//
@@ -94,21 +365,7 @@ func vPCEncryptionControlResource(ctx context.Context) (resource.Resource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"internet_gateway_exclusion_input": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Used to enable or disable IGW exclusion",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"enable",
-					"disable",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// InternetGatewayExclusionInput is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"internet_gateway_exclusion_input": schemaAttribute4f0252d9ff7e1a162e3eb4dd(),
 		// Property: LambdaExclusionInput
 		// CloudFormation resource type schema:
 		//
@@ -120,21 +377,7 @@ func vPCEncryptionControlResource(ctx context.Context) (resource.Resource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"lambda_exclusion_input": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Used to enable or disable Lambda exclusion",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"enable",
-					"disable",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// LambdaExclusionInput is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"lambda_exclusion_input": schemaAttribute118c48ced52ce6ff09c63345(),
 		// Property: Mode
 		// CloudFormation resource type schema:
 		//
@@ -146,20 +389,7 @@ func vPCEncryptionControlResource(ctx context.Context) (resource.Resource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The VPC encryption control mode, either monitor or enforce.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"monitor",
-					"enforce",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"mode": schemaAttribute0190b3dbbb05af231ed44f0c(),
 		// Property: NatGatewayExclusionInput
 		// CloudFormation resource type schema:
 		//
@@ -171,21 +401,7 @@ func vPCEncryptionControlResource(ctx context.Context) (resource.Resource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"nat_gateway_exclusion_input": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Used to enable or disable Nat gateway exclusion",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"enable",
-					"disable",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// NatGatewayExclusionInput is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"nat_gateway_exclusion_input": schemaAttributeeacde12287dff2ed8d4376d2(),
 		// Property: ResourceExclusions
 		// CloudFormation resource type schema:
 		//
@@ -292,127 +508,7 @@ func vPCEncryptionControlResource(ctx context.Context) (resource.Resource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"resource_exclusions": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EgressOnlyInternetGateway
-				"egress_only_internet_gateway": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: State
-						"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: StateMessage
-						"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ElasticFileSystem
-				"elastic_file_system": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: State
-						"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: StateMessage
-						"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: InternetGateway
-				"internet_gateway": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: State
-						"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: StateMessage
-						"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Lambda
-				"lambda": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: State
-						"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: StateMessage
-						"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: NatGateway
-				"nat_gateway": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: State
-						"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: StateMessage
-						"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: VirtualPrivateGateway
-				"virtual_private_gateway": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: State
-						"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: StateMessage
-						"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: VpcLattice
-				"vpc_lattice": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: State
-						"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: StateMessage
-						"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: VpcPeering
-				"vpc_peering": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: State
-						"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: StateMessage
-						"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Enumerates the states of all the VPC encryption control resource exclusions",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"resource_exclusions": schemaAttribute23d85e281cd36ec088e92c1c(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -431,13 +527,7 @@ func vPCEncryptionControlResource(ctx context.Context) (resource.Resource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The current state of the VPC encryption control.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttribute61a951797a7a29c468599a7a(),
 		// Property: StateMessage
 		// CloudFormation resource type schema:
 		//
@@ -445,13 +535,7 @@ func vPCEncryptionControlResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "Provides additional context on the state of the VPC encryption control.",
 		//	  "type": "string"
 		//	}
-		"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Provides additional context on the state of the VPC encryption control.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"state_message": schemaAttributeb09c56490e04e96704ce6861(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -484,45 +568,7 @@ func vPCEncryptionControlResource(ctx context.Context) (resource.Resource, error
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags to assign to the VPC encryption control.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributec2d602e1378fc44ad5ce81bd(),
 		// Property: VirtualPrivateGatewayExclusionInput
 		// CloudFormation resource type schema:
 		//
@@ -534,21 +580,7 @@ func vPCEncryptionControlResource(ctx context.Context) (resource.Resource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"virtual_private_gateway_exclusion_input": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Used to enable or disable VGW exclusion",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"enable",
-					"disable",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// VirtualPrivateGatewayExclusionInput is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"virtual_private_gateway_exclusion_input": schemaAttribute7e9c2454830a026853477e30(),
 		// Property: VpcEncryptionControlId
 		// CloudFormation resource type schema:
 		//
@@ -556,13 +588,7 @@ func vPCEncryptionControlResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The VPC encryption control resource id.",
 		//	  "type": "string"
 		//	}
-		"vpc_encryption_control_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The VPC encryption control resource id.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"vpc_encryption_control_id": schemaAttribute702391eb33995b3e5b737245(),
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -570,15 +596,7 @@ func vPCEncryptionControlResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The VPC on which this VPC encryption control is applied.",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The VPC on which this VPC encryption control is applied.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"vpc_id": schemaAttribute286c5bd8f5d7f325be121627(),
 		// Property: VpcLatticeExclusionInput
 		// CloudFormation resource type schema:
 		//
@@ -590,21 +608,7 @@ func vPCEncryptionControlResource(ctx context.Context) (resource.Resource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"vpc_lattice_exclusion_input": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Used to enable or disable Vpc Lattice exclusion",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"enable",
-					"disable",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// VpcLatticeExclusionInput is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"vpc_lattice_exclusion_input": schemaAttributeec5cd589e77a7675e216a5c3(),
 		// Property: VpcPeeringExclusionInput
 		// CloudFormation resource type schema:
 		//
@@ -616,21 +620,7 @@ func vPCEncryptionControlResource(ctx context.Context) (resource.Resource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"vpc_peering_exclusion_input": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Used to enable or disable VPC peering exclusion",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"enable",
-					"disable",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// VpcPeeringExclusionInput is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"vpc_peering_exclusion_input": schemaAttribute0d3e0bf51ac735a6a7ccb27f(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

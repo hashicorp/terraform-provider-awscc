@@ -32,6 +32,834 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute08a03b6a9b549d5ecb54e6b4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique name of the segment definition.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 64),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0ab110a3c9f9add485cec8a7() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(1, 50),
+			listvalidator.ValueStringsAre(
+				stringvalidator.LengthBetween(1, 255),
+			),
+			fwvalidators.NotNullList(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0b43e6fd3789884d37b8721b() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SegmentDefinitionName
+				"segment_definition_name": schemaAttributeae103608a81ab13523322cc7(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0ce32789b0355c5e9b815439() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(1, 50),
+			listvalidator.ValueStringsAre(
+				stringvalidator.LengthBetween(1, 255),
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute141ee950fa1ff399a4c3c88a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DimensionType
+			"dimension_type": schemaAttributefaa80cac6d36047e0d642502(),
+			// Property: Values
+			"values": schemaAttribute14b31e02463109f9c96ee913(),
+		}, /*END SCHEMA*/
+		Description: "Specifies date based criteria for a segment.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute14b31e02463109f9c96ee913() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(1, 50),
+			fwvalidators.NotNullList(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute16d46fcfc4a1285cf107683e() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DataType
+				"data_type": schemaAttributefccee54d70cae6aafdd4f000(),
+				// Property: Name
+				"name": schemaAttribute44cff025da5ccc008a1703b0(),
+				// Property: Order
+				"order": schemaAttributeb9c3b7da042b036084c049d5(),
+				// Property: Type
+				"type": schemaAttribute78e86b2f7e56a179f6c878bb(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of attributes used to sort the segments and their ordering preferences.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(1, 10),
+			fwvalidators.NotNullList(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1a2d34651acdfeb3693f0679() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Attributes
+			"attributes": schemaAttribute16d46fcfc4a1285cf107683e(),
+		}, /*END SCHEMA*/
+		Description: "The segment sort configuration for ordering segment results.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1a83775bee9aeb671d183adc() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ConditionOverrides
+				"condition_overrides": schemaAttribute3333b71eb31d7d3c62c7b5cf(),
+				// Property: DimensionType
+				"dimension_type": schemaAttribute300428e3b0960273dcac1965(),
+				// Property: Values
+				"values": schemaAttribute0ce32789b0355c5e9b815439(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "One or more calculated attributes to use as criteria for the segment.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+			mapplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute222e187906fd5c2325e251ce() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2afa910eda7e9542524d2be9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AccountNumber
+			"account_number": schemaAttribute5ca2f7cbe16117c56c813234(),
+			// Property: AdditionalInformation
+			"additional_information": schemaAttribute6deebfac4c73e29f3c6fe35d(),
+			// Property: Address
+			"address": schemaAttributec2def70781dda813a807f3bb(),
+			// Property: Attributes
+			"attributes": schemaAttribute45bc9172e4a65f9970577a48(),
+			// Property: BillingAddress
+			"billing_address": schemaAttributec2def70781dda813a807f3bb(),
+			// Property: BirthDate
+			"birth_date": schemaAttribute141ee950fa1ff399a4c3c88a(),
+			// Property: BusinessEmailAddress
+			"business_email_address": schemaAttribute5ca2f7cbe16117c56c813234(),
+			// Property: BusinessName
+			"business_name": schemaAttribute5ca2f7cbe16117c56c813234(),
+			// Property: BusinessPhoneNumber
+			"business_phone_number": schemaAttribute5ca2f7cbe16117c56c813234(),
+			// Property: EmailAddress
+			"email_address": schemaAttribute5ca2f7cbe16117c56c813234(),
+			// Property: FirstName
+			"first_name": schemaAttribute5ca2f7cbe16117c56c813234(),
+			// Property: GenderString
+			"gender_string": schemaAttribute5ca2f7cbe16117c56c813234(),
+			// Property: HomePhoneNumber
+			"home_phone_number": schemaAttribute5ca2f7cbe16117c56c813234(),
+			// Property: LastName
+			"last_name": schemaAttribute5ca2f7cbe16117c56c813234(),
+			// Property: MailingAddress
+			"mailing_address": schemaAttributec2def70781dda813a807f3bb(),
+			// Property: MiddleName
+			"middle_name": schemaAttribute5ca2f7cbe16117c56c813234(),
+			// Property: MobilePhoneNumber
+			"mobile_phone_number": schemaAttribute5ca2f7cbe16117c56c813234(),
+			// Property: PartyTypeString
+			"party_type_string": schemaAttribute5ca2f7cbe16117c56c813234(),
+			// Property: PersonalEmailAddress
+			"personal_email_address": schemaAttribute5ca2f7cbe16117c56c813234(),
+			// Property: PhoneNumber
+			"phone_number": schemaAttribute5ca2f7cbe16117c56c813234(),
+			// Property: ProfileType
+			"profile_type": schemaAttribute4b29b0dc6a235b81562354b4(),
+			// Property: ShippingAddress
+			"shipping_address": schemaAttributec2def70781dda813a807f3bb(),
+		}, /*END SCHEMA*/
+		Description: "Specifies the dimension settings within profile attributes for a segment.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute300428e3b0960273dcac1965() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of segment dimension to use.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"INCLUSIVE",
+				"EXCLUSIVE",
+				"CONTAINS",
+				"BEGINS_WITH",
+				"ENDS_WITH",
+				"BEFORE",
+				"AFTER",
+				"BETWEEN",
+				"NOT_BETWEEN",
+				"ON",
+				"GREATER_THAN",
+				"LESS_THAN",
+				"GREATER_THAN_OR_EQUAL",
+				"LESS_THAN_OR_EQUAL",
+				"EQUAL",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3333b71eb31d7d3c62c7b5cf() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Range
+			"range": schemaAttribute8d5a6d7c9cf2fa73c0d2e0fd(),
+		}, /*END SCHEMA*/
+		Description: "Overrides the condition block within the original calculated attribute definition.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute362b2f4e3b5e15b6ac29f7bf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 256),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3e9dc3a1a98bde0bec86a0a3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Groups
+			"groups": schemaAttributecdfe868c261c7e5dc879d3b3(),
+			// Property: Include
+			"include": schemaAttribute554246079bfb7825e6a506d4(),
+		}, /*END SCHEMA*/
+		Description: "An array that defines the set of segment criteria to evaluate when handling segment groups for the segment.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+			objectplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute44cff025da5ccc008a1703b0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the attribute to sort by.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 255),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute45bc9172e4a65f9970577a48() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DimensionType
+				"dimension_type": schemaAttribute300428e3b0960273dcac1965(),
+				// Property: Values
+				"values": schemaAttribute0ce32789b0355c5e9b815439(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "One or more custom attributes to use as criteria for the segment.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+			mapplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4b29b0dc6a235b81562354b4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DimensionType
+			"dimension_type": schemaAttributeb0a4a9fe8e7580375cea4359(),
+			// Property: Values
+			"values": schemaAttribute984f36d1f1f9cff68297d994(),
+		}, /*END SCHEMA*/
+		Description: "Specifies profile type based criteria for a segment.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4bce0902410b0b42fce57752() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The ending point for this overridden range. Positive numbers indicate how many days in the past data should be included, and negative numbers indicate how many days in the future.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.Between(-2147483648, 2147483647),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute554246079bfb7825e6a506d4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the operator on how to handle multiple groups within the same segment.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"ALL",
+				"ANY",
+				"NONE",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute574f6dff5e91158fbbb6e3d2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The display name of the segment definition.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 255),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5ca2f7cbe16117c56c813234() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DimensionType
+			"dimension_type": schemaAttribute7ea77f1634b7a3c7c0792e3d(),
+			// Property: Values
+			"values": schemaAttribute0ab110a3c9f9add485cec8a7(),
+		}, /*END SCHEMA*/
+		Description: "Specifies profile based criteria for a segment.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6770dfa5ca90897edf4ba4d8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The time of this segment definition got created.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute688343492c5354d47088989e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique name of the domain.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 64),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6deebfac4c73e29f3c6fe35d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DimensionType
+			"dimension_type": schemaAttribute7ea77f1634b7a3c7c0792e3d(),
+			// Property: Values
+			"values": schemaAttributea928fddbffc819be6bb60200(),
+		}, /*END SCHEMA*/
+		Description: "Specifies criteria for a segment using extended-length string values.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute78e86b2f7e56a179f6c878bb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of attribute (e.g., profile, calculated).",
+		Optional:    true,
+		Computed:    true,
+		Default:     stringdefault.StaticString("PROFILE"),
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"PROFILE",
+				"CALCULATED",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7ea77f1634b7a3c7c0792e3d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of segment dimension to use for a string dimension.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"INCLUSIVE",
+				"EXCLUSIVE",
+				"CONTAINS",
+				"BEGINS_WITH",
+				"ENDS_WITH",
+			),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7f288a625eff999a02466b3e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The SQL query that defines the segment criteria.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 50000),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8c6b7ec9f6d562dcc7935953() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The starting point for this overridden range. Positive numbers indicate how many days in the past data should be included, and negative numbers indicate how many days in the future.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.Between(-2147483648, 2147483647),
+			fwvalidators.NotNullInt64(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8d5a6d7c9cf2fa73c0d2e0fd() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: End
+			"end": schemaAttribute4bce0902410b0b42fce57752(),
+			// Property: Start
+			"start": schemaAttribute8c6b7ec9f6d562dcc7935953(),
+			// Property: Unit
+			"unit": schemaAttributea56ccd99b6b3ab521465719b(),
+		}, /*END SCHEMA*/
+		Description: "Defines the range to be applied to the calculated attribute definition.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute984f36d1f1f9cff68297d994() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(1, 1),
+			listvalidator.ValueStringsAre(
+				stringvalidator.OneOf(
+					"ACCOUNT_PROFILE",
+					"PROFILE",
+				),
+			),
+			fwvalidators.NotNullList(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea55dbea0fb134f3d7a5bed44() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the segment definition.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 4000),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea56ccd99b6b3ab521465719b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unit to be applied to the range.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"DAYS",
+			),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea928fddbffc819be6bb60200() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(1, 50),
+			listvalidator.ValueStringsAre(
+				stringvalidator.LengthBetween(1, 1000),
+			),
+			fwvalidators.NotNullList(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeae103608a81ab13523322cc7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 64),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb0a4a9fe8e7580375cea4359() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of segment dimension to use for a profile type dimension.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"INCLUSIVE",
+				"EXCLUSIVE",
+			),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb9c3b7da042b036084c049d5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The sort order for the attribute (ascending or descending).",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"ASC",
+				"DESC",
+			),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec2def70781dda813a807f3bb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: City
+			"city": schemaAttribute5ca2f7cbe16117c56c813234(),
+			// Property: Country
+			"country": schemaAttribute5ca2f7cbe16117c56c813234(),
+			// Property: County
+			"county": schemaAttribute5ca2f7cbe16117c56c813234(),
+			// Property: PostalCode
+			"postal_code": schemaAttribute5ca2f7cbe16117c56c813234(),
+			// Property: Province
+			"province": schemaAttribute5ca2f7cbe16117c56c813234(),
+			// Property: State
+			"state": schemaAttribute5ca2f7cbe16117c56c813234(),
+		}, /*END SCHEMA*/
+		Description: "The address based criteria for the segment.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecdfe868c261c7e5dc879d3b3() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Dimensions
+				"dimensions": schemaAttributedbbc8dfb384edddd0ebb1d1a(),
+				// Property: SourceSegments
+				"source_segments": schemaAttribute0b43e6fd3789884d37b8721b(),
+				// Property: SourceType
+				"source_type": schemaAttribute554246079bfb7825e6a506d4(),
+				// Property: Type
+				"type": schemaAttribute554246079bfb7825e6a506d4(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeda1eea78fdb11062323a5600() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute222e187906fd5c2325e251ce(),
+				// Property: Value
+				"value": schemaAttribute362b2f4e3b5e15b6ac29f7bf(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags used to organize, track, or control access for this resource.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Set{ /*START VALIDATORS*/
+			setvalidator.SizeBetween(0, 50),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedbbc8dfb384edddd0ebb1d1a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CalculatedAttributes
+				"calculated_attributes": schemaAttribute1a83775bee9aeb671d183adc(),
+				// Property: ProfileAttributes
+				"profile_attributes": schemaAttribute2afa910eda7e9542524d2be9(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedd8eb139dac1df26d46cd697() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The SQL query that defines the segment criteria.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeee392b1e4b67c8111701e575() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the segment definition.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefaa80cac6d36047e0d642502() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of segment dimension to use for a date dimension.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"BEFORE",
+				"AFTER",
+				"BETWEEN",
+				"NOT_BETWEEN",
+				"ON",
+			),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefccee54d70cae6aafdd4f000() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The data type of the sort attribute (e.g., string, number, date).",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"STRING",
+				"NUMBER",
+				"DATE",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_customerprofiles_segment_definition", segmentDefinitionResource)
 }
@@ -48,14 +876,7 @@ func segmentDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The time of this segment definition got created.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute6770dfa5ca90897edf4ba4d8(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -65,17 +886,7 @@ func segmentDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the segment definition.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 4000),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributea55dbea0fb134f3d7a5bed44(),
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -85,16 +896,7 @@ func segmentDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The display name of the segment definition.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"display_name": schemaAttribute574f6dff5e91158fbbb6e3d2(),
 		// Property: DomainName
 		// CloudFormation resource type schema:
 		//
@@ -105,17 +907,7 @@ func segmentDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique name of the domain.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"domain_name": schemaAttribute688343492c5354d47088989e(),
 		// Property: SegmentDefinitionArn
 		// CloudFormation resource type schema:
 		//
@@ -125,13 +917,7 @@ func segmentDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"segment_definition_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the segment definition.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"segment_definition_arn": schemaAttributeee392b1e4b67c8111701e575(),
 		// Property: SegmentDefinitionName
 		// CloudFormation resource type schema:
 		//
@@ -142,17 +928,7 @@ func segmentDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"segment_definition_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique name of the segment definition.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"segment_definition_name": schemaAttribute08a03b6a9b549d5ecb54e6b4(),
 		// Property: SegmentGroups
 		// CloudFormation resource type schema:
 		//
@@ -1748,2270 +2524,7 @@ func segmentDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"segment_groups": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Groups
-				"groups": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Dimensions
-							"dimensions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: CalculatedAttributes
-										"calculated_attributes":   // Pattern: ""
-										schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: ConditionOverrides
-													"condition_overrides": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: Range
-															"range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: End
-																	"end": schema.Int64Attribute{ /*START ATTRIBUTE*/
-																		Description: "The ending point for this overridden range. Positive numbers indicate how many days in the past data should be included, and negative numbers indicate how many days in the future.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.Int64{ /*START VALIDATORS*/
-																			int64validator.Between(-2147483648, 2147483647),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-																			int64planmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Start
-																	"start": schema.Int64Attribute{ /*START ATTRIBUTE*/
-																		Description: "The starting point for this overridden range. Positive numbers indicate how many days in the past data should be included, and negative numbers indicate how many days in the future.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.Int64{ /*START VALIDATORS*/
-																			int64validator.Between(-2147483648, 2147483647),
-																			fwvalidators.NotNullInt64(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-																			int64planmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																	// Property: Unit
-																	"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The unit to be applied to the range.",
-																		Optional:    true,
-																		Computed:    true,
-																		Validators: []validator.String{ /*START VALIDATORS*/
-																			stringvalidator.OneOf(
-																				"DAYS",
-																			),
-																			fwvalidators.NotNullString(),
-																		}, /*END VALIDATORS*/
-																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																			stringplanmodifier.UseStateForUnknown(),
-																		}, /*END PLAN MODIFIERS*/
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Defines the range to be applied to the calculated attribute definition.",
-																Optional:    true,
-																Computed:    true,
-																PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																	objectplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-														Description: "Overrides the condition block within the original calculated attribute definition.",
-														Optional:    true,
-														Computed:    true,
-														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-															objectplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-													// Property: DimensionType
-													"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "The type of segment dimension to use.",
-														Optional:    true,
-														Computed:    true,
-														Validators: []validator.String{ /*START VALIDATORS*/
-															stringvalidator.OneOf(
-																"INCLUSIVE",
-																"EXCLUSIVE",
-																"CONTAINS",
-																"BEGINS_WITH",
-																"ENDS_WITH",
-																"BEFORE",
-																"AFTER",
-																"BETWEEN",
-																"NOT_BETWEEN",
-																"ON",
-																"GREATER_THAN",
-																"LESS_THAN",
-																"GREATER_THAN_OR_EQUAL",
-																"LESS_THAN_OR_EQUAL",
-																"EQUAL",
-															),
-														}, /*END VALIDATORS*/
-														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-															stringplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-													// Property: Values
-													"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-														ElementType: types.StringType,
-														Optional:    true,
-														Computed:    true,
-														Validators: []validator.List{ /*START VALIDATORS*/
-															listvalidator.SizeBetween(1, 50),
-															listvalidator.ValueStringsAre(
-																stringvalidator.LengthBetween(1, 255),
-															),
-														}, /*END VALIDATORS*/
-														PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-															generic.Multiset(),
-															listplanmodifier.UseStateForUnknown(),
-														}, /*END PLAN MODIFIERS*/
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-											}, /*END NESTED OBJECT*/
-											Description: "One or more calculated attributes to use as criteria for the segment.",
-											Optional:    true,
-											Computed:    true,
-											PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-												mapplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-										// Property: ProfileAttributes
-										"profile_attributes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: AccountNumber
-												"account_number": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DimensionType
-														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of segment dimension to use for a string dimension.",
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.OneOf(
-																	"INCLUSIVE",
-																	"EXCLUSIVE",
-																	"CONTAINS",
-																	"BEGINS_WITH",
-																	"ENDS_WITH",
-																),
-																fwvalidators.NotNullString(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: Values
-														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.List{ /*START VALIDATORS*/
-																listvalidator.SizeBetween(1, 50),
-																listvalidator.ValueStringsAre(
-																	stringvalidator.LengthBetween(1, 255),
-																),
-																fwvalidators.NotNullList(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																generic.Multiset(),
-																listplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies profile based criteria for a segment.",
-													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-														objectplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: AdditionalInformation
-												"additional_information": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DimensionType
-														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of segment dimension to use for a string dimension.",
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.OneOf(
-																	"INCLUSIVE",
-																	"EXCLUSIVE",
-																	"CONTAINS",
-																	"BEGINS_WITH",
-																	"ENDS_WITH",
-																),
-																fwvalidators.NotNullString(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: Values
-														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.List{ /*START VALIDATORS*/
-																listvalidator.SizeBetween(1, 50),
-																listvalidator.ValueStringsAre(
-																	stringvalidator.LengthBetween(1, 1000),
-																),
-																fwvalidators.NotNullList(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																generic.Multiset(),
-																listplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies criteria for a segment using extended-length string values.",
-													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-														objectplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: Address
-												"address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: City
-														"city": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.String{ /*START VALIDATORS*/
-																		stringvalidator.OneOf(
-																			"INCLUSIVE",
-																			"EXCLUSIVE",
-																			"CONTAINS",
-																			"BEGINS_WITH",
-																			"ENDS_WITH",
-																		),
-																		fwvalidators.NotNullString(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																		stringplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.List{ /*START VALIDATORS*/
-																		listvalidator.SizeBetween(1, 50),
-																		listvalidator.ValueStringsAre(
-																			stringvalidator.LengthBetween(1, 255),
-																		),
-																		fwvalidators.NotNullList(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																		generic.Multiset(),
-																		listplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																objectplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: Country
-														"country": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.String{ /*START VALIDATORS*/
-																		stringvalidator.OneOf(
-																			"INCLUSIVE",
-																			"EXCLUSIVE",
-																			"CONTAINS",
-																			"BEGINS_WITH",
-																			"ENDS_WITH",
-																		),
-																		fwvalidators.NotNullString(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																		stringplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.List{ /*START VALIDATORS*/
-																		listvalidator.SizeBetween(1, 50),
-																		listvalidator.ValueStringsAre(
-																			stringvalidator.LengthBetween(1, 255),
-																		),
-																		fwvalidators.NotNullList(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																		generic.Multiset(),
-																		listplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																objectplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: County
-														"county": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.String{ /*START VALIDATORS*/
-																		stringvalidator.OneOf(
-																			"INCLUSIVE",
-																			"EXCLUSIVE",
-																			"CONTAINS",
-																			"BEGINS_WITH",
-																			"ENDS_WITH",
-																		),
-																		fwvalidators.NotNullString(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																		stringplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.List{ /*START VALIDATORS*/
-																		listvalidator.SizeBetween(1, 50),
-																		listvalidator.ValueStringsAre(
-																			stringvalidator.LengthBetween(1, 255),
-																		),
-																		fwvalidators.NotNullList(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																		generic.Multiset(),
-																		listplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																objectplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: PostalCode
-														"postal_code": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.String{ /*START VALIDATORS*/
-																		stringvalidator.OneOf(
-																			"INCLUSIVE",
-																			"EXCLUSIVE",
-																			"CONTAINS",
-																			"BEGINS_WITH",
-																			"ENDS_WITH",
-																		),
-																		fwvalidators.NotNullString(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																		stringplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.List{ /*START VALIDATORS*/
-																		listvalidator.SizeBetween(1, 50),
-																		listvalidator.ValueStringsAre(
-																			stringvalidator.LengthBetween(1, 255),
-																		),
-																		fwvalidators.NotNullList(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																		generic.Multiset(),
-																		listplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																objectplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: Province
-														"province": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.String{ /*START VALIDATORS*/
-																		stringvalidator.OneOf(
-																			"INCLUSIVE",
-																			"EXCLUSIVE",
-																			"CONTAINS",
-																			"BEGINS_WITH",
-																			"ENDS_WITH",
-																		),
-																		fwvalidators.NotNullString(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																		stringplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.List{ /*START VALIDATORS*/
-																		listvalidator.SizeBetween(1, 50),
-																		listvalidator.ValueStringsAre(
-																			stringvalidator.LengthBetween(1, 255),
-																		),
-																		fwvalidators.NotNullList(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																		generic.Multiset(),
-																		listplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																objectplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: State
-														"state": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.String{ /*START VALIDATORS*/
-																		stringvalidator.OneOf(
-																			"INCLUSIVE",
-																			"EXCLUSIVE",
-																			"CONTAINS",
-																			"BEGINS_WITH",
-																			"ENDS_WITH",
-																		),
-																		fwvalidators.NotNullString(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																		stringplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.List{ /*START VALIDATORS*/
-																		listvalidator.SizeBetween(1, 50),
-																		listvalidator.ValueStringsAre(
-																			stringvalidator.LengthBetween(1, 255),
-																		),
-																		fwvalidators.NotNullList(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																		generic.Multiset(),
-																		listplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																objectplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "The address based criteria for the segment.",
-													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-														objectplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: Attributes
-												"attributes":              // Pattern: ""
-												schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: DimensionType
-															"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The type of segment dimension to use.",
-																Optional:    true,
-																Computed:    true,
-																Validators: []validator.String{ /*START VALIDATORS*/
-																	stringvalidator.OneOf(
-																		"INCLUSIVE",
-																		"EXCLUSIVE",
-																		"CONTAINS",
-																		"BEGINS_WITH",
-																		"ENDS_WITH",
-																		"BEFORE",
-																		"AFTER",
-																		"BETWEEN",
-																		"NOT_BETWEEN",
-																		"ON",
-																		"GREATER_THAN",
-																		"LESS_THAN",
-																		"GREATER_THAN_OR_EQUAL",
-																		"LESS_THAN_OR_EQUAL",
-																		"EQUAL",
-																	),
-																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																	stringplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-															// Property: Values
-															"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																ElementType: types.StringType,
-																Optional:    true,
-																Computed:    true,
-																Validators: []validator.List{ /*START VALIDATORS*/
-																	listvalidator.SizeBetween(1, 50),
-																	listvalidator.ValueStringsAre(
-																		stringvalidator.LengthBetween(1, 255),
-																	),
-																}, /*END VALIDATORS*/
-																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																	generic.Multiset(),
-																	listplanmodifier.UseStateForUnknown(),
-																}, /*END PLAN MODIFIERS*/
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-													}, /*END NESTED OBJECT*/
-													Description: "One or more custom attributes to use as criteria for the segment.",
-													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-														mapplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: BillingAddress
-												"billing_address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: City
-														"city": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.String{ /*START VALIDATORS*/
-																		stringvalidator.OneOf(
-																			"INCLUSIVE",
-																			"EXCLUSIVE",
-																			"CONTAINS",
-																			"BEGINS_WITH",
-																			"ENDS_WITH",
-																		),
-																		fwvalidators.NotNullString(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																		stringplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.List{ /*START VALIDATORS*/
-																		listvalidator.SizeBetween(1, 50),
-																		listvalidator.ValueStringsAre(
-																			stringvalidator.LengthBetween(1, 255),
-																		),
-																		fwvalidators.NotNullList(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																		generic.Multiset(),
-																		listplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																objectplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: Country
-														"country": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.String{ /*START VALIDATORS*/
-																		stringvalidator.OneOf(
-																			"INCLUSIVE",
-																			"EXCLUSIVE",
-																			"CONTAINS",
-																			"BEGINS_WITH",
-																			"ENDS_WITH",
-																		),
-																		fwvalidators.NotNullString(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																		stringplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.List{ /*START VALIDATORS*/
-																		listvalidator.SizeBetween(1, 50),
-																		listvalidator.ValueStringsAre(
-																			stringvalidator.LengthBetween(1, 255),
-																		),
-																		fwvalidators.NotNullList(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																		generic.Multiset(),
-																		listplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																objectplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: County
-														"county": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.String{ /*START VALIDATORS*/
-																		stringvalidator.OneOf(
-																			"INCLUSIVE",
-																			"EXCLUSIVE",
-																			"CONTAINS",
-																			"BEGINS_WITH",
-																			"ENDS_WITH",
-																		),
-																		fwvalidators.NotNullString(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																		stringplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.List{ /*START VALIDATORS*/
-																		listvalidator.SizeBetween(1, 50),
-																		listvalidator.ValueStringsAre(
-																			stringvalidator.LengthBetween(1, 255),
-																		),
-																		fwvalidators.NotNullList(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																		generic.Multiset(),
-																		listplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																objectplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: PostalCode
-														"postal_code": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.String{ /*START VALIDATORS*/
-																		stringvalidator.OneOf(
-																			"INCLUSIVE",
-																			"EXCLUSIVE",
-																			"CONTAINS",
-																			"BEGINS_WITH",
-																			"ENDS_WITH",
-																		),
-																		fwvalidators.NotNullString(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																		stringplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.List{ /*START VALIDATORS*/
-																		listvalidator.SizeBetween(1, 50),
-																		listvalidator.ValueStringsAre(
-																			stringvalidator.LengthBetween(1, 255),
-																		),
-																		fwvalidators.NotNullList(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																		generic.Multiset(),
-																		listplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																objectplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: Province
-														"province": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.String{ /*START VALIDATORS*/
-																		stringvalidator.OneOf(
-																			"INCLUSIVE",
-																			"EXCLUSIVE",
-																			"CONTAINS",
-																			"BEGINS_WITH",
-																			"ENDS_WITH",
-																		),
-																		fwvalidators.NotNullString(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																		stringplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.List{ /*START VALIDATORS*/
-																		listvalidator.SizeBetween(1, 50),
-																		listvalidator.ValueStringsAre(
-																			stringvalidator.LengthBetween(1, 255),
-																		),
-																		fwvalidators.NotNullList(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																		generic.Multiset(),
-																		listplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																objectplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: State
-														"state": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.String{ /*START VALIDATORS*/
-																		stringvalidator.OneOf(
-																			"INCLUSIVE",
-																			"EXCLUSIVE",
-																			"CONTAINS",
-																			"BEGINS_WITH",
-																			"ENDS_WITH",
-																		),
-																		fwvalidators.NotNullString(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																		stringplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.List{ /*START VALIDATORS*/
-																		listvalidator.SizeBetween(1, 50),
-																		listvalidator.ValueStringsAre(
-																			stringvalidator.LengthBetween(1, 255),
-																		),
-																		fwvalidators.NotNullList(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																		generic.Multiset(),
-																		listplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																objectplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "The address based criteria for the segment.",
-													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-														objectplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: BirthDate
-												"birth_date": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DimensionType
-														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of segment dimension to use for a date dimension.",
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.OneOf(
-																	"BEFORE",
-																	"AFTER",
-																	"BETWEEN",
-																	"NOT_BETWEEN",
-																	"ON",
-																),
-																fwvalidators.NotNullString(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: Values
-														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.List{ /*START VALIDATORS*/
-																listvalidator.SizeBetween(1, 50),
-																fwvalidators.NotNullList(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																generic.Multiset(),
-																listplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies date based criteria for a segment.",
-													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-														objectplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: BusinessEmailAddress
-												"business_email_address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DimensionType
-														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of segment dimension to use for a string dimension.",
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.OneOf(
-																	"INCLUSIVE",
-																	"EXCLUSIVE",
-																	"CONTAINS",
-																	"BEGINS_WITH",
-																	"ENDS_WITH",
-																),
-																fwvalidators.NotNullString(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: Values
-														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.List{ /*START VALIDATORS*/
-																listvalidator.SizeBetween(1, 50),
-																listvalidator.ValueStringsAre(
-																	stringvalidator.LengthBetween(1, 255),
-																),
-																fwvalidators.NotNullList(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																generic.Multiset(),
-																listplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies profile based criteria for a segment.",
-													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-														objectplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: BusinessName
-												"business_name": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DimensionType
-														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of segment dimension to use for a string dimension.",
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.OneOf(
-																	"INCLUSIVE",
-																	"EXCLUSIVE",
-																	"CONTAINS",
-																	"BEGINS_WITH",
-																	"ENDS_WITH",
-																),
-																fwvalidators.NotNullString(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: Values
-														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.List{ /*START VALIDATORS*/
-																listvalidator.SizeBetween(1, 50),
-																listvalidator.ValueStringsAre(
-																	stringvalidator.LengthBetween(1, 255),
-																),
-																fwvalidators.NotNullList(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																generic.Multiset(),
-																listplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies profile based criteria for a segment.",
-													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-														objectplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: BusinessPhoneNumber
-												"business_phone_number": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DimensionType
-														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of segment dimension to use for a string dimension.",
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.OneOf(
-																	"INCLUSIVE",
-																	"EXCLUSIVE",
-																	"CONTAINS",
-																	"BEGINS_WITH",
-																	"ENDS_WITH",
-																),
-																fwvalidators.NotNullString(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: Values
-														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.List{ /*START VALIDATORS*/
-																listvalidator.SizeBetween(1, 50),
-																listvalidator.ValueStringsAre(
-																	stringvalidator.LengthBetween(1, 255),
-																),
-																fwvalidators.NotNullList(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																generic.Multiset(),
-																listplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies profile based criteria for a segment.",
-													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-														objectplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: EmailAddress
-												"email_address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DimensionType
-														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of segment dimension to use for a string dimension.",
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.OneOf(
-																	"INCLUSIVE",
-																	"EXCLUSIVE",
-																	"CONTAINS",
-																	"BEGINS_WITH",
-																	"ENDS_WITH",
-																),
-																fwvalidators.NotNullString(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: Values
-														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.List{ /*START VALIDATORS*/
-																listvalidator.SizeBetween(1, 50),
-																listvalidator.ValueStringsAre(
-																	stringvalidator.LengthBetween(1, 255),
-																),
-																fwvalidators.NotNullList(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																generic.Multiset(),
-																listplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies profile based criteria for a segment.",
-													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-														objectplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: FirstName
-												"first_name": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DimensionType
-														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of segment dimension to use for a string dimension.",
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.OneOf(
-																	"INCLUSIVE",
-																	"EXCLUSIVE",
-																	"CONTAINS",
-																	"BEGINS_WITH",
-																	"ENDS_WITH",
-																),
-																fwvalidators.NotNullString(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: Values
-														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.List{ /*START VALIDATORS*/
-																listvalidator.SizeBetween(1, 50),
-																listvalidator.ValueStringsAre(
-																	stringvalidator.LengthBetween(1, 255),
-																),
-																fwvalidators.NotNullList(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																generic.Multiset(),
-																listplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies profile based criteria for a segment.",
-													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-														objectplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: GenderString
-												"gender_string": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DimensionType
-														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of segment dimension to use for a string dimension.",
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.OneOf(
-																	"INCLUSIVE",
-																	"EXCLUSIVE",
-																	"CONTAINS",
-																	"BEGINS_WITH",
-																	"ENDS_WITH",
-																),
-																fwvalidators.NotNullString(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: Values
-														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.List{ /*START VALIDATORS*/
-																listvalidator.SizeBetween(1, 50),
-																listvalidator.ValueStringsAre(
-																	stringvalidator.LengthBetween(1, 255),
-																),
-																fwvalidators.NotNullList(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																generic.Multiset(),
-																listplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies profile based criteria for a segment.",
-													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-														objectplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: HomePhoneNumber
-												"home_phone_number": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DimensionType
-														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of segment dimension to use for a string dimension.",
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.OneOf(
-																	"INCLUSIVE",
-																	"EXCLUSIVE",
-																	"CONTAINS",
-																	"BEGINS_WITH",
-																	"ENDS_WITH",
-																),
-																fwvalidators.NotNullString(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: Values
-														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.List{ /*START VALIDATORS*/
-																listvalidator.SizeBetween(1, 50),
-																listvalidator.ValueStringsAre(
-																	stringvalidator.LengthBetween(1, 255),
-																),
-																fwvalidators.NotNullList(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																generic.Multiset(),
-																listplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies profile based criteria for a segment.",
-													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-														objectplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: LastName
-												"last_name": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DimensionType
-														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of segment dimension to use for a string dimension.",
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.OneOf(
-																	"INCLUSIVE",
-																	"EXCLUSIVE",
-																	"CONTAINS",
-																	"BEGINS_WITH",
-																	"ENDS_WITH",
-																),
-																fwvalidators.NotNullString(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: Values
-														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.List{ /*START VALIDATORS*/
-																listvalidator.SizeBetween(1, 50),
-																listvalidator.ValueStringsAre(
-																	stringvalidator.LengthBetween(1, 255),
-																),
-																fwvalidators.NotNullList(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																generic.Multiset(),
-																listplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies profile based criteria for a segment.",
-													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-														objectplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: MailingAddress
-												"mailing_address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: City
-														"city": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.String{ /*START VALIDATORS*/
-																		stringvalidator.OneOf(
-																			"INCLUSIVE",
-																			"EXCLUSIVE",
-																			"CONTAINS",
-																			"BEGINS_WITH",
-																			"ENDS_WITH",
-																		),
-																		fwvalidators.NotNullString(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																		stringplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.List{ /*START VALIDATORS*/
-																		listvalidator.SizeBetween(1, 50),
-																		listvalidator.ValueStringsAre(
-																			stringvalidator.LengthBetween(1, 255),
-																		),
-																		fwvalidators.NotNullList(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																		generic.Multiset(),
-																		listplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																objectplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: Country
-														"country": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.String{ /*START VALIDATORS*/
-																		stringvalidator.OneOf(
-																			"INCLUSIVE",
-																			"EXCLUSIVE",
-																			"CONTAINS",
-																			"BEGINS_WITH",
-																			"ENDS_WITH",
-																		),
-																		fwvalidators.NotNullString(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																		stringplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.List{ /*START VALIDATORS*/
-																		listvalidator.SizeBetween(1, 50),
-																		listvalidator.ValueStringsAre(
-																			stringvalidator.LengthBetween(1, 255),
-																		),
-																		fwvalidators.NotNullList(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																		generic.Multiset(),
-																		listplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																objectplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: County
-														"county": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.String{ /*START VALIDATORS*/
-																		stringvalidator.OneOf(
-																			"INCLUSIVE",
-																			"EXCLUSIVE",
-																			"CONTAINS",
-																			"BEGINS_WITH",
-																			"ENDS_WITH",
-																		),
-																		fwvalidators.NotNullString(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																		stringplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.List{ /*START VALIDATORS*/
-																		listvalidator.SizeBetween(1, 50),
-																		listvalidator.ValueStringsAre(
-																			stringvalidator.LengthBetween(1, 255),
-																		),
-																		fwvalidators.NotNullList(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																		generic.Multiset(),
-																		listplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																objectplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: PostalCode
-														"postal_code": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.String{ /*START VALIDATORS*/
-																		stringvalidator.OneOf(
-																			"INCLUSIVE",
-																			"EXCLUSIVE",
-																			"CONTAINS",
-																			"BEGINS_WITH",
-																			"ENDS_WITH",
-																		),
-																		fwvalidators.NotNullString(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																		stringplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.List{ /*START VALIDATORS*/
-																		listvalidator.SizeBetween(1, 50),
-																		listvalidator.ValueStringsAre(
-																			stringvalidator.LengthBetween(1, 255),
-																		),
-																		fwvalidators.NotNullList(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																		generic.Multiset(),
-																		listplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																objectplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: Province
-														"province": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.String{ /*START VALIDATORS*/
-																		stringvalidator.OneOf(
-																			"INCLUSIVE",
-																			"EXCLUSIVE",
-																			"CONTAINS",
-																			"BEGINS_WITH",
-																			"ENDS_WITH",
-																		),
-																		fwvalidators.NotNullString(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																		stringplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.List{ /*START VALIDATORS*/
-																		listvalidator.SizeBetween(1, 50),
-																		listvalidator.ValueStringsAre(
-																			stringvalidator.LengthBetween(1, 255),
-																		),
-																		fwvalidators.NotNullList(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																		generic.Multiset(),
-																		listplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																objectplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: State
-														"state": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.String{ /*START VALIDATORS*/
-																		stringvalidator.OneOf(
-																			"INCLUSIVE",
-																			"EXCLUSIVE",
-																			"CONTAINS",
-																			"BEGINS_WITH",
-																			"ENDS_WITH",
-																		),
-																		fwvalidators.NotNullString(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																		stringplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.List{ /*START VALIDATORS*/
-																		listvalidator.SizeBetween(1, 50),
-																		listvalidator.ValueStringsAre(
-																			stringvalidator.LengthBetween(1, 255),
-																		),
-																		fwvalidators.NotNullList(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																		generic.Multiset(),
-																		listplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																objectplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "The address based criteria for the segment.",
-													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-														objectplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: MiddleName
-												"middle_name": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DimensionType
-														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of segment dimension to use for a string dimension.",
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.OneOf(
-																	"INCLUSIVE",
-																	"EXCLUSIVE",
-																	"CONTAINS",
-																	"BEGINS_WITH",
-																	"ENDS_WITH",
-																),
-																fwvalidators.NotNullString(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: Values
-														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.List{ /*START VALIDATORS*/
-																listvalidator.SizeBetween(1, 50),
-																listvalidator.ValueStringsAre(
-																	stringvalidator.LengthBetween(1, 255),
-																),
-																fwvalidators.NotNullList(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																generic.Multiset(),
-																listplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies profile based criteria for a segment.",
-													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-														objectplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: MobilePhoneNumber
-												"mobile_phone_number": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DimensionType
-														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of segment dimension to use for a string dimension.",
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.OneOf(
-																	"INCLUSIVE",
-																	"EXCLUSIVE",
-																	"CONTAINS",
-																	"BEGINS_WITH",
-																	"ENDS_WITH",
-																),
-																fwvalidators.NotNullString(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: Values
-														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.List{ /*START VALIDATORS*/
-																listvalidator.SizeBetween(1, 50),
-																listvalidator.ValueStringsAre(
-																	stringvalidator.LengthBetween(1, 255),
-																),
-																fwvalidators.NotNullList(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																generic.Multiset(),
-																listplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies profile based criteria for a segment.",
-													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-														objectplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: PartyTypeString
-												"party_type_string": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DimensionType
-														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of segment dimension to use for a string dimension.",
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.OneOf(
-																	"INCLUSIVE",
-																	"EXCLUSIVE",
-																	"CONTAINS",
-																	"BEGINS_WITH",
-																	"ENDS_WITH",
-																),
-																fwvalidators.NotNullString(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: Values
-														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.List{ /*START VALIDATORS*/
-																listvalidator.SizeBetween(1, 50),
-																listvalidator.ValueStringsAre(
-																	stringvalidator.LengthBetween(1, 255),
-																),
-																fwvalidators.NotNullList(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																generic.Multiset(),
-																listplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies profile based criteria for a segment.",
-													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-														objectplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: PersonalEmailAddress
-												"personal_email_address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DimensionType
-														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of segment dimension to use for a string dimension.",
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.OneOf(
-																	"INCLUSIVE",
-																	"EXCLUSIVE",
-																	"CONTAINS",
-																	"BEGINS_WITH",
-																	"ENDS_WITH",
-																),
-																fwvalidators.NotNullString(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: Values
-														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.List{ /*START VALIDATORS*/
-																listvalidator.SizeBetween(1, 50),
-																listvalidator.ValueStringsAre(
-																	stringvalidator.LengthBetween(1, 255),
-																),
-																fwvalidators.NotNullList(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																generic.Multiset(),
-																listplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies profile based criteria for a segment.",
-													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-														objectplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: PhoneNumber
-												"phone_number": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DimensionType
-														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of segment dimension to use for a string dimension.",
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.OneOf(
-																	"INCLUSIVE",
-																	"EXCLUSIVE",
-																	"CONTAINS",
-																	"BEGINS_WITH",
-																	"ENDS_WITH",
-																),
-																fwvalidators.NotNullString(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: Values
-														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.List{ /*START VALIDATORS*/
-																listvalidator.SizeBetween(1, 50),
-																listvalidator.ValueStringsAre(
-																	stringvalidator.LengthBetween(1, 255),
-																),
-																fwvalidators.NotNullList(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																generic.Multiset(),
-																listplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies profile based criteria for a segment.",
-													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-														objectplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: ProfileType
-												"profile_type": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DimensionType
-														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of segment dimension to use for a profile type dimension.",
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.String{ /*START VALIDATORS*/
-																stringvalidator.OneOf(
-																	"INCLUSIVE",
-																	"EXCLUSIVE",
-																),
-																fwvalidators.NotNullString(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																stringplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: Values
-														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Optional:    true,
-															Computed:    true,
-															Validators: []validator.List{ /*START VALIDATORS*/
-																listvalidator.SizeBetween(1, 1),
-																listvalidator.ValueStringsAre(
-																	stringvalidator.OneOf(
-																		"ACCOUNT_PROFILE",
-																		"PROFILE",
-																	),
-																),
-																fwvalidators.NotNullList(),
-															}, /*END VALIDATORS*/
-															PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																generic.Multiset(),
-																listplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies profile type based criteria for a segment.",
-													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-														objectplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-												// Property: ShippingAddress
-												"shipping_address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: City
-														"city": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.String{ /*START VALIDATORS*/
-																		stringvalidator.OneOf(
-																			"INCLUSIVE",
-																			"EXCLUSIVE",
-																			"CONTAINS",
-																			"BEGINS_WITH",
-																			"ENDS_WITH",
-																		),
-																		fwvalidators.NotNullString(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																		stringplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.List{ /*START VALIDATORS*/
-																		listvalidator.SizeBetween(1, 50),
-																		listvalidator.ValueStringsAre(
-																			stringvalidator.LengthBetween(1, 255),
-																		),
-																		fwvalidators.NotNullList(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																		generic.Multiset(),
-																		listplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																objectplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: Country
-														"country": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.String{ /*START VALIDATORS*/
-																		stringvalidator.OneOf(
-																			"INCLUSIVE",
-																			"EXCLUSIVE",
-																			"CONTAINS",
-																			"BEGINS_WITH",
-																			"ENDS_WITH",
-																		),
-																		fwvalidators.NotNullString(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																		stringplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.List{ /*START VALIDATORS*/
-																		listvalidator.SizeBetween(1, 50),
-																		listvalidator.ValueStringsAre(
-																			stringvalidator.LengthBetween(1, 255),
-																		),
-																		fwvalidators.NotNullList(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																		generic.Multiset(),
-																		listplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																objectplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: County
-														"county": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.String{ /*START VALIDATORS*/
-																		stringvalidator.OneOf(
-																			"INCLUSIVE",
-																			"EXCLUSIVE",
-																			"CONTAINS",
-																			"BEGINS_WITH",
-																			"ENDS_WITH",
-																		),
-																		fwvalidators.NotNullString(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																		stringplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.List{ /*START VALIDATORS*/
-																		listvalidator.SizeBetween(1, 50),
-																		listvalidator.ValueStringsAre(
-																			stringvalidator.LengthBetween(1, 255),
-																		),
-																		fwvalidators.NotNullList(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																		generic.Multiset(),
-																		listplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																objectplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: PostalCode
-														"postal_code": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.String{ /*START VALIDATORS*/
-																		stringvalidator.OneOf(
-																			"INCLUSIVE",
-																			"EXCLUSIVE",
-																			"CONTAINS",
-																			"BEGINS_WITH",
-																			"ENDS_WITH",
-																		),
-																		fwvalidators.NotNullString(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																		stringplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.List{ /*START VALIDATORS*/
-																		listvalidator.SizeBetween(1, 50),
-																		listvalidator.ValueStringsAre(
-																			stringvalidator.LengthBetween(1, 255),
-																		),
-																		fwvalidators.NotNullList(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																		generic.Multiset(),
-																		listplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																objectplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: Province
-														"province": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.String{ /*START VALIDATORS*/
-																		stringvalidator.OneOf(
-																			"INCLUSIVE",
-																			"EXCLUSIVE",
-																			"CONTAINS",
-																			"BEGINS_WITH",
-																			"ENDS_WITH",
-																		),
-																		fwvalidators.NotNullString(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																		stringplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.List{ /*START VALIDATORS*/
-																		listvalidator.SizeBetween(1, 50),
-																		listvalidator.ValueStringsAre(
-																			stringvalidator.LengthBetween(1, 255),
-																		),
-																		fwvalidators.NotNullList(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																		generic.Multiset(),
-																		listplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																objectplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-														// Property: State
-														"state": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.String{ /*START VALIDATORS*/
-																		stringvalidator.OneOf(
-																			"INCLUSIVE",
-																			"EXCLUSIVE",
-																			"CONTAINS",
-																			"BEGINS_WITH",
-																			"ENDS_WITH",
-																		),
-																		fwvalidators.NotNullString(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-																		stringplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Optional:    true,
-																	Computed:    true,
-																	Validators: []validator.List{ /*START VALIDATORS*/
-																		listvalidator.SizeBetween(1, 50),
-																		listvalidator.ValueStringsAre(
-																			stringvalidator.LengthBetween(1, 255),
-																		),
-																		fwvalidators.NotNullList(),
-																	}, /*END VALIDATORS*/
-																	PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-																		generic.Multiset(),
-																		listplanmodifier.UseStateForUnknown(),
-																	}, /*END PLAN MODIFIERS*/
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-																objectplanmodifier.UseStateForUnknown(),
-															}, /*END PLAN MODIFIERS*/
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "The address based criteria for the segment.",
-													Optional:    true,
-													Computed:    true,
-													PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-														objectplanmodifier.UseStateForUnknown(),
-													}, /*END PLAN MODIFIERS*/
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Description: "Specifies the dimension settings within profile attributes for a segment.",
-											Optional:    true,
-											Computed:    true,
-											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-												objectplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Optional: true,
-								Computed: true,
-								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									listplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: SourceSegments
-							"source_segments": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: SegmentDefinitionName
-										"segment_definition_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Optional: true,
-											Computed: true,
-											Validators: []validator.String{ /*START VALIDATORS*/
-												stringvalidator.LengthBetween(1, 64),
-												stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_-]+$"), ""),
-											}, /*END VALIDATORS*/
-											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-												stringplanmodifier.UseStateForUnknown(),
-											}, /*END PLAN MODIFIERS*/
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Optional: true,
-								Computed: true,
-								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									listplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: SourceType
-							"source_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Specifies the operator on how to handle multiple groups within the same segment.",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.OneOf(
-										"ALL",
-										"ANY",
-										"NONE",
-									),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: Type
-							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Specifies the operator on how to handle multiple groups within the same segment.",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.OneOf(
-										"ALL",
-										"ANY",
-										"NONE",
-									),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Optional: true,
-					Computed: true,
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: Include
-				"include": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies the operator on how to handle multiple groups within the same segment.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"ALL",
-							"ANY",
-							"NONE",
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "An array that defines the set of segment criteria to evaluate when handling segment groups for the segment.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"segment_groups": schemaAttribute3e9dc3a1a98bde0bec86a0a3(),
 		// Property: SegmentSort
 		// CloudFormation resource type schema:
 		//
@@ -4074,94 +2587,7 @@ func segmentDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"segment_sort": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Attributes
-				"attributes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: DataType
-							"data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The data type of the sort attribute (e.g., string, number, date).",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.OneOf(
-										"STRING",
-										"NUMBER",
-										"DATE",
-									),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: Name
-							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The name of the attribute to sort by.",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 255),
-									fwvalidators.NotNullString(),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: Order
-							"order": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The sort order for the attribute (ascending or descending).",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.OneOf(
-										"ASC",
-										"DESC",
-									),
-									fwvalidators.NotNullString(),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: Type
-							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The type of attribute (e.g., profile, calculated).",
-								Optional:    true,
-								Computed:    true,
-								Default:     stringdefault.StaticString("PROFILE"),
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.OneOf(
-										"PROFILE",
-										"CALCULATED",
-									),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "A list of attributes used to sort the segments and their ordering preferences.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.SizeBetween(1, 10),
-						fwvalidators.NotNullList(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The segment sort configuration for ordering segment results.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"segment_sort": schemaAttribute1a2d34651acdfeb3693f0679(),
 		// Property: SegmentSqlQuery
 		// CloudFormation resource type schema:
 		//
@@ -4171,18 +2597,7 @@ func segmentDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"segment_sql_query": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The SQL query that defines the segment criteria.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 50000),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"segment_sql_query": schemaAttribute7f288a625eff999a02466b3e(),
 		// Property: SegmentType
 		// CloudFormation resource type schema:
 		//
@@ -4194,13 +2609,7 @@ func segmentDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"segment_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The SQL query that defines the segment criteria.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"segment_type": schemaAttributedd8eb139dac1df26d46cd697(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -4236,47 +2645,7 @@ func segmentDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags used to organize, track, or control access for this resource.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.Set{ /*START VALIDATORS*/
-				setvalidator.SizeBetween(0, 50),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeda1eea78fdb11062323a5600(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

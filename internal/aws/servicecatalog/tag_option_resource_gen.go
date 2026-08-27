@@ -18,6 +18,47 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute39af191db35f6531f35ffcfa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The TagOption key.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute72ec3219f02f66dda9a16618() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The TagOption value.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea1f5996a7138e5bebc0e98a7() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "The TagOption active state.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec7b79adcd7d53ba043e3a872() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The TagOption identifier.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_servicecatalog_tag_option", tagOptionResource)
 	registry.AddListResourceFactory("awscc_servicecatalog_tag_option", generic.NewListResource(tagOptionResource))
@@ -34,14 +75,7 @@ func tagOptionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The TagOption active state.",
 		//	  "type": "boolean"
 		//	}
-		"active": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "The TagOption active state.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"active": schemaAttributea1f5996a7138e5bebc0e98a7(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -49,13 +83,7 @@ func tagOptionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The TagOption identifier.",
 		//	  "type": "string"
 		//	}
-		"tag_option_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The TagOption identifier.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tag_option_id": schemaAttributec7b79adcd7d53ba043e3a872(),
 		// Property: Key
 		// CloudFormation resource type schema:
 		//
@@ -63,13 +91,7 @@ func tagOptionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The TagOption key.",
 		//	  "type": "string"
 		//	}
-		"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The TagOption key.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"key": schemaAttribute39af191db35f6531f35ffcfa(),
 		// Property: Value
 		// CloudFormation resource type schema:
 		//
@@ -77,13 +99,7 @@ func tagOptionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The TagOption value.",
 		//	  "type": "string"
 		//	}
-		"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The TagOption value.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"value": schemaAttribute72ec3219f02f66dda9a16618(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

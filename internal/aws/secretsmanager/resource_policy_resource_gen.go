@@ -20,6 +20,48 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute43d3800224e90cb6ac351030() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether to block resource-based policies that allow broad access to the secret.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// BlockPublicPolicy is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5a5d809946f24f072eacda0a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN or name of the secret to attach the resource-based policy.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 2048),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9e8ad6547dad007069105308() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Arn of the secret.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9fa611b6e310a49f3bd53650() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A JSON-formatted string for an AWS resource-based policy.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_secretsmanager_resource_policy", resourcePolicyResource)
 	registry.AddListResourceFactory("awscc_secretsmanager_resource_policy", generic.NewListResource(resourcePolicyResource))
@@ -36,15 +78,7 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Specifies whether to block resource-based policies that allow broad access to the secret.",
 		//	  "type": "boolean"
 		//	}
-		"block_public_policy": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether to block resource-based policies that allow broad access to the secret.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// BlockPublicPolicy is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"block_public_policy": schemaAttribute43d3800224e90cb6ac351030(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -52,13 +86,7 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Arn of the secret.",
 		//	  "type": "string"
 		//	}
-		"resource_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Arn of the secret.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"resource_policy_id": schemaAttribute9e8ad6547dad007069105308(),
 		// Property: ResourcePolicy
 		// CloudFormation resource type schema:
 		//
@@ -66,10 +94,7 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A JSON-formatted string for an AWS resource-based policy.",
 		//	  "type": "string"
 		//	}
-		"resource_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A JSON-formatted string for an AWS resource-based policy.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_policy": schemaAttribute9fa611b6e310a49f3bd53650(),
 		// Property: SecretId
 		// CloudFormation resource type schema:
 		//
@@ -79,16 +104,7 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN or name of the secret to attach the resource-based policy.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 2048),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"secret_id": schemaAttribute5a5d809946f24f072eacda0a(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

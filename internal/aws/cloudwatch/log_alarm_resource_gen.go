@@ -17,6 +17,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -27,6 +28,374 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
+
+func schemaAttribute0d58315b37e84f253bac5f91() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of log lines to include in alarm notifications. Valid values are 0 to 50.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.Between(0, 50),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute13ad3b50d39875485b6d6bd2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the log alarm.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1a23bd5a2fe3bebf25ab78fd() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeddbccfce0087ee22a1da4f30(),
+				// Property: Value
+				"value": schemaAttributef831302eb0c66ca857638aca(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of key-value pairs to associate with the log alarm.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Set{ /*START VALIDATORS*/
+			setvalidator.SizeAtMost(50),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c7a9569862c3e40737b188d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The aggregation expression for the scheduled query, e.g. count(*) or avg(latency) by host.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(2048),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3019381f9d450527499ef57f() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeddbccfce0087ee22a1da4f30(),
+				// Property: Value
+				"value": schemaAttributef831302eb0c66ca857638aca(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of key-value pairs to associate with the scheduled query that backs the log alarm.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Set{ /*START VALIDATORS*/
+			setvalidator.SizeAtMost(50),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3285fabb4efe33cf0cb19776() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of query results that must be breaching to trigger the alarm.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute417353b98d00a2af432b5921() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The actions to execute when this alarm transitions to the INSUFFICIENT_DATA state from any other state.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute434387980e41e04cf6d6d89e() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of actions to execute when this alarm transitions into an ALARM state from any other state.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute44399963bbff5c0e517fd313() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AggregationExpression
+			"aggregation_expression": schemaAttribute2c7a9569862c3e40737b188d(),
+			// Property: LogGroupIdentifiers
+			"log_group_identifiers": schemaAttribute699349f00cff27d60db5e7eb(),
+			// Property: QueryString
+			"query_string": schemaAttributec8bcf606772daa5b2e0b16b3(),
+			// Property: ScheduleConfiguration
+			"schedule_configuration": schemaAttributec5a11c0ac578fa34dd74444d(),
+			// Property: ScheduledQueryRoleARN
+			"scheduled_query_role_arn": schemaAttributef0075813f46b975cc10d3669(),
+			// Property: Tags
+			"tags": schemaAttribute3019381f9d450527499ef57f(),
+		}, /*END SCHEMA*/
+		Description: "The scheduled query configuration for the log alarm.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5fa9be5e1a43dfb56f02dab2() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether the alarm waits for the full warm-up period before it starts evaluating. If true, the alarm waits the entire WarmUpPeriodDurationInMinutes before it starts evaluating, even if metric data arrives earlier. If false, the alarm ends the warm-up period early and starts evaluating as soon as it has enough metric data to fill its evaluation window. This is the default behavior.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute63ae164c2c241838e4fb34a2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: OnlyStartEvaluatingAfterWarmUpPeriodEnds
+			"only_start_evaluating_after_warm_up_period_ends": schemaAttribute5fa9be5e1a43dfb56f02dab2(),
+			// Property: WarmUpPeriodDurationInMinutes
+			"warm_up_period_duration_in_minutes": schemaAttribute8a072d23cbb05f785269425e(),
+		}, /*END SCHEMA*/
+		Description: "The warm-up configuration for the alarm. During the warm-up period, the alarm stays in INSUFFICIENT_DATA and doesn't perform alarm actions. For more information, see Alarm warm-up periods in the Amazon CloudWatch User Guide.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute657633f9fdab2197b190a37a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the IAM role that grants CloudWatch permissions to fetch log lines for alarm notifications. Required when ActionLogLineCount is greater than 0.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute699349f00cff27d60db5e7eb() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The log groups to query.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7222b1852817103ddc7d31f9() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The value to compare against the results of the scheduled query evaluation.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute849dac382804aff52effe84c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the log alarm.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a072d23cbb05f785269425e() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The length of the warm-up period, in minutes. For this duration after you create or update the alarm, the alarm stays in INSUFFICIENT_DATA and doesn't perform alarm actions. Valid values range from 1 to 2,880 minutes (2 days). You can change this value while the alarm is still in its warm-up period. Changes have no effect after the warm-up period ends.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.Between(1, 2880),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute96019abe970d65cdac060e90() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The actions to execute when this alarm transitions to the OK state from any other state.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea60b933c20727de5c4c59d3f() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.",
+		Optional:    true,
+		Computed:    true,
+		Default:     booldefault.StaticBool(true),
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb22fd83190119c05c7a70a21() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The arithmetic operation to use when comparing the specified threshold and the query results. Valid values are GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, and LessThanOrEqualToThreshold.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb86bcfb8ae7762edf7810953() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Sets how this alarm is to handle missing data points. Valid values are breaching, notBreaching, ignore, and missing.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebf7b3d73b057d7c1c7d772de() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of seconds into the past to end the query window. Must be a non-negative value and cannot exceed 2592000 seconds (30 days).",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.Between(0, 2592000),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec5a11c0ac578fa34dd74444d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EndTimeOffset
+			"end_time_offset": schemaAttributebf7b3d73b057d7c1c7d772de(),
+			// Property: ScheduleExpression
+			"schedule_expression": schemaAttributef2ac2f1a2045e8e137ba6643(),
+			// Property: StartTimeOffset
+			"start_time_offset": schemaAttributefc6271e2d90cfc4200e3b919(),
+		}, /*END SCHEMA*/
+		Description: "The schedule configuration.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec8bcf606772daa5b2e0b16b3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The query string to execute against the specified log groups.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeddbccfce0087ee22a1da4f30() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique identifier for the tag. The combination of tag keys and values can help you organize and categorize your resources.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedfe46a3525a6d78c2faa5932() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of query results over which data is compared to the specified threshold.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef0075813f46b975cc10d3669() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the IAM role that grants permissions to execute the scheduled query.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef12e64f0f31b41ff425d5a0e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the log alarm.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 255),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef2ac2f1a2045e8e137ba6643() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The expression that defines when the scheduled query runs, e.g. rate(1 minute).",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef831302eb0c66ca857638aca() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the specified tag key.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 256),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefc6271e2d90cfc4200e3b919() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of seconds into the past to start the query window. Must be a positive value and cannot exceed 2592000 seconds (30 days).",
+		Required:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.Between(1, 2592000),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
 
 func init() {
 	registry.AddResourceFactory("awscc_cloudwatch_log_alarm", logAlarmResource)
@@ -46,17 +415,7 @@ func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"action_log_line_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of log lines to include in alarm notifications. Valid values are 0 to 50.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.Int64{ /*START VALIDATORS*/
-				int64validator.Between(0, 50),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"action_log_line_count": schemaAttribute0d58315b37e84f253bac5f91(),
 		// Property: ActionLogLineRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -64,14 +423,7 @@ func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ARN of the IAM role that grants CloudWatch permissions to fetch log lines for alarm notifications. Required when ActionLogLineCount is greater than 0.",
 		//	  "type": "string"
 		//	}
-		"action_log_line_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the IAM role that grants CloudWatch permissions to fetch log lines for alarm notifications. Required when ActionLogLineCount is greater than 0.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"action_log_line_role_arn": schemaAttribute657633f9fdab2197b190a37a(),
 		// Property: ActionsEnabled
 		// CloudFormation resource type schema:
 		//
@@ -80,15 +432,7 @@ func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.",
 		//	  "type": "boolean"
 		//	}
-		"actions_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.",
-			Optional:    true,
-			Computed:    true,
-			Default:     booldefault.StaticBool(true),
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"actions_enabled": schemaAttributea60b933c20727de5c4c59d3f(),
 		// Property: AlarmActions
 		// CloudFormation resource type schema:
 		//
@@ -100,15 +444,7 @@ func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"alarm_actions": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The list of actions to execute when this alarm transitions into an ALARM state from any other state.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"alarm_actions": schemaAttribute434387980e41e04cf6d6d89e(),
 		// Property: AlarmDescription
 		// CloudFormation resource type schema:
 		//
@@ -116,14 +452,7 @@ func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The description of the log alarm.",
 		//	  "type": "string"
 		//	}
-		"alarm_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the log alarm.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"alarm_description": schemaAttribute849dac382804aff52effe84c(),
 		// Property: AlarmName
 		// CloudFormation resource type schema:
 		//
@@ -133,18 +462,7 @@ func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"alarm_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the log alarm.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"alarm_name": schemaAttributef12e64f0f31b41ff425d5a0e(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -152,13 +470,7 @@ func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ARN of the log alarm.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the log alarm.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute13ad3b50d39875485b6d6bd2(),
 		// Property: ComparisonOperator
 		// CloudFormation resource type schema:
 		//
@@ -166,10 +478,7 @@ func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The arithmetic operation to use when comparing the specified threshold and the query results. Valid values are GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, and LessThanOrEqualToThreshold.",
 		//	  "type": "string"
 		//	}
-		"comparison_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The arithmetic operation to use when comparing the specified threshold and the query results. Valid values are GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, and LessThanOrEqualToThreshold.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"comparison_operator": schemaAttributeb22fd83190119c05c7a70a21(),
 		// Property: InsufficientDataActions
 		// CloudFormation resource type schema:
 		//
@@ -181,15 +490,7 @@ func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"insufficient_data_actions": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The actions to execute when this alarm transitions to the INSUFFICIENT_DATA state from any other state.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"insufficient_data_actions": schemaAttribute417353b98d00a2af432b5921(),
 		// Property: OKActions
 		// CloudFormation resource type schema:
 		//
@@ -201,15 +502,7 @@ func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"ok_actions": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The actions to execute when this alarm transitions to the OK state from any other state.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"ok_actions": schemaAttribute96019abe970d65cdac060e90(),
 		// Property: QueryResultsToAlarm
 		// CloudFormation resource type schema:
 		//
@@ -217,10 +510,7 @@ func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The number of query results that must be breaching to trigger the alarm.",
 		//	  "type": "integer"
 		//	}
-		"query_results_to_alarm": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of query results that must be breaching to trigger the alarm.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"query_results_to_alarm": schemaAttribute3285fabb4efe33cf0cb19776(),
 		// Property: QueryResultsToEvaluate
 		// CloudFormation resource type schema:
 		//
@@ -228,10 +518,7 @@ func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The number of query results over which data is compared to the specified threshold.",
 		//	  "type": "integer"
 		//	}
-		"query_results_to_evaluate": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of query results over which data is compared to the specified threshold.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"query_results_to_evaluate": schemaAttributedfe46a3525a6d78c2faa5932(),
 		// Property: ScheduledQueryConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -326,115 +613,7 @@ func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"scheduled_query_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AggregationExpression
-				"aggregation_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The aggregation expression for the scheduled query, e.g. count(*) or avg(latency) by host.",
-					Required:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(2048),
-					}, /*END VALIDATORS*/
-				}, /*END ATTRIBUTE*/
-				// Property: LogGroupIdentifiers
-				"log_group_identifiers": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The log groups to query.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: QueryString
-				"query_string": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The query string to execute against the specified log groups.",
-					Required:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ScheduleConfiguration
-				"schedule_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: EndTimeOffset
-						"end_time_offset": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The number of seconds into the past to end the query window. Must be a non-negative value and cannot exceed 2592000 seconds (30 days).",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.Int64{ /*START VALIDATORS*/
-								int64validator.Between(0, 2592000),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: ScheduleExpression
-						"schedule_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The expression that defines when the scheduled query runs, e.g. rate(1 minute).",
-							Required:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: StartTimeOffset
-						"start_time_offset": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The number of seconds into the past to start the query window. Must be a positive value and cannot exceed 2592000 seconds (30 days).",
-							Required:    true,
-							Validators: []validator.Int64{ /*START VALIDATORS*/
-								int64validator.Between(1, 2592000),
-							}, /*END VALIDATORS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The schedule configuration.",
-					Required:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ScheduledQueryRoleARN
-				"scheduled_query_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the IAM role that grants permissions to execute the scheduled query.",
-					Required:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Tags
-				"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Key
-							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A unique identifier for the tag. The combination of tag keys and values can help you organize and categorize your resources.",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 128),
-									fwvalidators.NotNullString(),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The value for the specified tag key.",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 256),
-									fwvalidators.NotNullString(),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "A list of key-value pairs to associate with the scheduled query that backs the log alarm.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.Set{ /*START VALIDATORS*/
-						setvalidator.SizeAtMost(50),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-						setplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The scheduled query configuration for the log alarm.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"scheduled_query_configuration": schemaAttribute44399963bbff5c0e517fd313(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -468,47 +647,7 @@ func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A unique identifier for the tag. The combination of tag keys and values can help you organize and categorize your resources.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the specified tag key.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 256),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of key-value pairs to associate with the log alarm.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.Set{ /*START VALIDATORS*/
-				setvalidator.SizeAtMost(50),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute1a23bd5a2fe3bebf25ab78fd(),
 		// Property: Threshold
 		// CloudFormation resource type schema:
 		//
@@ -516,10 +655,7 @@ func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The value to compare against the results of the scheduled query evaluation.",
 		//	  "type": "number"
 		//	}
-		"threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "The value to compare against the results of the scheduled query evaluation.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"threshold": schemaAttribute7222b1852817103ddc7d31f9(),
 		// Property: TreatMissingData
 		// CloudFormation resource type schema:
 		//
@@ -527,14 +663,28 @@ func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Sets how this alarm is to handle missing data points. Valid values are breaching, notBreaching, ignore, and missing.",
 		//	  "type": "string"
 		//	}
-		"treat_missing_data": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Sets how this alarm is to handle missing data points. Valid values are breaching, notBreaching, ignore, and missing.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"treat_missing_data": schemaAttributeb86bcfb8ae7762edf7810953(),
+		// Property: WarmUpConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The warm-up configuration for the alarm. During the warm-up period, the alarm stays in INSUFFICIENT_DATA and doesn't perform alarm actions. For more information, see Alarm warm-up periods in the Amazon CloudWatch User Guide.",
+		//	  "properties": {
+		//	    "OnlyStartEvaluatingAfterWarmUpPeriodEnds": {
+		//	      "description": "Specifies whether the alarm waits for the full warm-up period before it starts evaluating. If true, the alarm waits the entire WarmUpPeriodDurationInMinutes before it starts evaluating, even if metric data arrives earlier. If false, the alarm ends the warm-up period early and starts evaluating as soon as it has enough metric data to fill its evaluation window. This is the default behavior.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "WarmUpPeriodDurationInMinutes": {
+		//	      "description": "The length of the warm-up period, in minutes. For this duration after you create or update the alarm, the alarm stays in INSUFFICIENT_DATA and doesn't perform alarm actions. Valid values range from 1 to 2,880 minutes (2 days). You can change this value while the alarm is still in its warm-up period. Changes have no effect after the warm-up period ends.",
+		//	      "maximum": 2880,
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"warm_up_configuration": schemaAttribute63ae164c2c241838e4fb34a2(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
@@ -564,32 +714,35 @@ func logAlarmResource(ctx context.Context) (resource.Resource, error) {
 		})
 
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"action_log_line_count":         "ActionLogLineCount",
-		"action_log_line_role_arn":      "ActionLogLineRoleArn",
-		"actions_enabled":               "ActionsEnabled",
-		"aggregation_expression":        "AggregationExpression",
-		"alarm_actions":                 "AlarmActions",
-		"alarm_description":             "AlarmDescription",
-		"alarm_name":                    "AlarmName",
-		"arn":                           "Arn",
-		"comparison_operator":           "ComparisonOperator",
-		"end_time_offset":               "EndTimeOffset",
-		"insufficient_data_actions":     "InsufficientDataActions",
-		"key":                           "Key",
-		"log_group_identifiers":         "LogGroupIdentifiers",
-		"ok_actions":                    "OKActions",
-		"query_results_to_alarm":        "QueryResultsToAlarm",
-		"query_results_to_evaluate":     "QueryResultsToEvaluate",
-		"query_string":                  "QueryString",
-		"schedule_configuration":        "ScheduleConfiguration",
-		"schedule_expression":           "ScheduleExpression",
-		"scheduled_query_configuration": "ScheduledQueryConfiguration",
-		"scheduled_query_role_arn":      "ScheduledQueryRoleARN",
-		"start_time_offset":             "StartTimeOffset",
-		"tags":                          "Tags",
-		"threshold":                     "Threshold",
-		"treat_missing_data":            "TreatMissingData",
-		"value":                         "Value",
+		"action_log_line_count":     "ActionLogLineCount",
+		"action_log_line_role_arn":  "ActionLogLineRoleArn",
+		"actions_enabled":           "ActionsEnabled",
+		"aggregation_expression":    "AggregationExpression",
+		"alarm_actions":             "AlarmActions",
+		"alarm_description":         "AlarmDescription",
+		"alarm_name":                "AlarmName",
+		"arn":                       "Arn",
+		"comparison_operator":       "ComparisonOperator",
+		"end_time_offset":           "EndTimeOffset",
+		"insufficient_data_actions": "InsufficientDataActions",
+		"key":                       "Key",
+		"log_group_identifiers":     "LogGroupIdentifiers",
+		"ok_actions":                "OKActions",
+		"only_start_evaluating_after_warm_up_period_ends": "OnlyStartEvaluatingAfterWarmUpPeriodEnds",
+		"query_results_to_alarm":                          "QueryResultsToAlarm",
+		"query_results_to_evaluate":                       "QueryResultsToEvaluate",
+		"query_string":                                    "QueryString",
+		"schedule_configuration":                          "ScheduleConfiguration",
+		"schedule_expression":                             "ScheduleExpression",
+		"scheduled_query_configuration":                   "ScheduledQueryConfiguration",
+		"scheduled_query_role_arn":                        "ScheduledQueryRoleARN",
+		"start_time_offset":                               "StartTimeOffset",
+		"tags":                                            "Tags",
+		"threshold":                                       "Threshold",
+		"treat_missing_data":                              "TreatMissingData",
+		"value":                                           "Value",
+		"warm_up_configuration":                           "WarmUpConfiguration",
+		"warm_up_period_duration_in_minutes":              "WarmUpPeriodDurationInMinutes",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

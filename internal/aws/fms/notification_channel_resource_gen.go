@@ -20,6 +20,31 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute28d86d640c5cbb2d3166f5e0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A resource ARN.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 1024),
+			stringvalidator.RegexMatches(regexp.MustCompile("^([^\\s]+)$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute838f58c1451e03b6a8aa5e17() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A resource ARN.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 1024),
+			stringvalidator.RegexMatches(regexp.MustCompile("^([^\\s]+)$"), ""),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_fms_notification_channel", notificationChannelResource)
 	registry.AddListResourceFactory("awscc_fms_notification_channel", generic.NewListResource(notificationChannelResource))
@@ -39,14 +64,7 @@ func notificationChannelResource(ctx context.Context) (resource.Resource, error)
 		//	  "pattern": "^([^\\s]+)$",
 		//	  "type": "string"
 		//	}
-		"sns_role_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A resource ARN.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 1024),
-				stringvalidator.RegexMatches(regexp.MustCompile("^([^\\s]+)$"), ""),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"sns_role_name": schemaAttribute838f58c1451e03b6a8aa5e17(),
 		// Property: SnsTopicArn
 		// CloudFormation resource type schema:
 		//
@@ -57,17 +75,7 @@ func notificationChannelResource(ctx context.Context) (resource.Resource, error)
 		//	  "pattern": "^([^\\s]+)$",
 		//	  "type": "string"
 		//	}
-		"sns_topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A resource ARN.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 1024),
-				stringvalidator.RegexMatches(regexp.MustCompile("^([^\\s]+)$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"sns_topic_arn": schemaAttribute28d86d640c5cbb2d3166f5e0(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

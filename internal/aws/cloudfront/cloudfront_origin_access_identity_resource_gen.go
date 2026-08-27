@@ -17,6 +17,34 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute18a0d95ba25aec52c5cc2f21() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute283415b7cbffb3e7e6d00062() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Comment
+			"comment": schemaAttribute97f7d35f332e6c12445fcb12(),
+		}, /*END SCHEMA*/
+		Description: "The current configuration information for the identity.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute97f7d35f332e6c12445fcb12() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A comment to describe the origin access identity. The comment cannot be longer than 128 characters.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_cloudfront_cloudfront_origin_access_identity", cloudFrontOriginAccessIdentityResource)
 	registry.AddListResourceFactory("awscc_cloudfront_cloudfront_origin_access_identity", generic.NewListResource(cloudFrontOriginAccessIdentityResource))
@@ -43,17 +71,7 @@ func cloudFrontOriginAccessIdentityResource(ctx context.Context) (resource.Resou
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"cloudfront_origin_access_identity_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Comment
-				"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A comment to describe the origin access identity. The comment cannot be longer than 128 characters.",
-					Required:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The current configuration information for the identity.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"cloudfront_origin_access_identity_config": schemaAttribute283415b7cbffb3e7e6d00062(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -61,13 +79,7 @@ func cloudFrontOriginAccessIdentityResource(ctx context.Context) (resource.Resou
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"cloudfront_origin_access_identity_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"cloudfront_origin_access_identity_id": schemaAttribute18a0d95ba25aec52c5cc2f21(),
 		// Property: S3CanonicalUserId
 		// CloudFormation resource type schema:
 		//
@@ -75,13 +87,7 @@ func cloudFrontOriginAccessIdentityResource(ctx context.Context) (resource.Resou
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"s3_canonical_user_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"s3_canonical_user_id": schemaAttribute18a0d95ba25aec52c5cc2f21(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

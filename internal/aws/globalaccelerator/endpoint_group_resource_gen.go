@@ -30,6 +30,229 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute119a1f2bb237a441606afa4b() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "true if client ip should be preserved",
+		Optional:    true,
+		Computed:    true,
+		Default:     booldefault.StaticBool(true),
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1f4aa2ebc004c1028d5e51a4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Id of the endpoint. For Network/Application Load Balancer this value is the ARN.  For EIP, this value is the allocation ID.  For EC2 instances, this is the EC2 instance ID",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute296a2c5f65d9dfebbfc1df77() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the AWS Region where the endpoint group is located",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2b2289bd6c61179b17885175() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the listener",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5dd423cc9ff88327d7fef2ef() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The percentage of traffic to sent to an AWS Region",
+		Optional:    true,
+		Computed:    true,
+		Default:     float64default.StaticFloat64(100.000000),
+		Validators: []validator.Float64{ /*START VALIDATORS*/
+			float64validator.Between(0.000000, 100.000000),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+			float64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5f815a90617f67901f1f0db7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Optional:    true,
+		Computed:    true,
+		Default:     stringdefault.StaticString("/"),
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute66b0d557e0fbb5fce3c462ff() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EndpointPort
+				"endpoint_port": schemaAttributea17f601326d75606d463971a(),
+				// Property: ListenerPort
+				"listener_port": schemaAttributea17f601326d75606d463971a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6e37a7b77c888b90d4d4e52f() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The time in seconds between each health check for an endpoint. Must be a value of 10 or 30",
+		Optional:    true,
+		Computed:    true,
+		Default:     int64default.StaticInt64(30),
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6ecd05d23d609049fc549a15() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the endpoint group",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b4f884a8883b64c2a60171a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The protocol that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
+		Optional:    true,
+		Computed:    true,
+		Default:     stringdefault.StaticString("TCP"),
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"TCP",
+				"HTTP",
+				"HTTPS",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute83c75e1fe69ef4246e6a8d30() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AttachmentArn
+				"attachment_arn": schemaAttribute8ccf8988b29fb3d2f92d60bc(),
+				// Property: ClientIPPreservationEnabled
+				"client_ip_preservation_enabled": schemaAttribute119a1f2bb237a441606afa4b(),
+				// Property: EndpointId
+				"endpoint_id": schemaAttribute1f4aa2ebc004c1028d5e51a4(),
+				// Property: Weight
+				"weight": schemaAttributeb8111fc73b4207d27b3eebd0(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of endpoint objects.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute88ddb617e1081c8abc2d7907() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The port that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
+		Optional:    true,
+		Computed:    true,
+		Default:     int64default.StaticInt64(-1),
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.Between(-1, 65535),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8ccf8988b29fb3d2f92d60bc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Attachment ARN that provides access control to the cross account endpoint. Not required for resources hosted in the same account as the endpoint group.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea17f601326d75606d463971a() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "A network port number",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.Between(0, 65535),
+			fwvalidators.NotNullInt64(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb8111fc73b4207d27b3eebd0() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The weight for the endpoint.",
+		Optional:    true,
+		Computed:    true,
+		Default:     int64default.StaticInt64(100),
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			int64validator.Between(0, 255),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed96c37b31635242123668198() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of consecutive health checks required to set the state of the endpoint to unhealthy.",
+		Optional:    true,
+		Computed:    true,
+		Default:     int64default.StaticInt64(3),
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_globalaccelerator_endpoint_group", endpointGroupResource)
 	registry.AddListResourceFactory("awscc_globalaccelerator_endpoint_group", generic.NewListResource(endpointGroupResource))
@@ -76,62 +299,7 @@ func endpointGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"endpoint_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: AttachmentArn
-					"attachment_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Attachment ARN that provides access control to the cross account endpoint. Not required for resources hosted in the same account as the endpoint group.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: ClientIPPreservationEnabled
-					"client_ip_preservation_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "true if client ip should be preserved",
-						Optional:    true,
-						Computed:    true,
-						Default:     booldefault.StaticBool(true),
-						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-							boolplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: EndpointId
-					"endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Id of the endpoint. For Network/Application Load Balancer this value is the ARN.  For EIP, this value is the allocation ID.  For EC2 instances, this is the EC2 instance ID",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Weight
-					"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The weight for the endpoint.",
-						Optional:    true,
-						Computed:    true,
-						Default:     int64default.StaticInt64(100),
-						Validators: []validator.Int64{ /*START VALIDATORS*/
-							int64validator.Between(0, 255),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-							int64planmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The list of endpoint objects.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"endpoint_configurations": schemaAttribute83c75e1fe69ef4246e6a8d30(),
 		// Property: EndpointGroupArn
 		// CloudFormation resource type schema:
 		//
@@ -139,13 +307,7 @@ func endpointGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the endpoint group",
 		//	  "type": "string"
 		//	}
-		"endpoint_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the endpoint group",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"endpoint_group_arn": schemaAttribute6ecd05d23d609049fc549a15(),
 		// Property: EndpointGroupRegion
 		// CloudFormation resource type schema:
 		//
@@ -153,13 +315,7 @@ func endpointGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the AWS Region where the endpoint group is located",
 		//	  "type": "string"
 		//	}
-		"endpoint_group_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the AWS Region where the endpoint group is located",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"endpoint_group_region": schemaAttribute296a2c5f65d9dfebbfc1df77(),
 		// Property: HealthCheckIntervalSeconds
 		// CloudFormation resource type schema:
 		//
@@ -168,15 +324,7 @@ func endpointGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The time in seconds between each health check for an endpoint. Must be a value of 10 or 30",
 		//	  "type": "integer"
 		//	}
-		"health_check_interval_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The time in seconds between each health check for an endpoint. Must be a value of 10 or 30",
-			Optional:    true,
-			Computed:    true,
-			Default:     int64default.StaticInt64(30),
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"health_check_interval_seconds": schemaAttribute6e37a7b77c888b90d4d4e52f(),
 		// Property: HealthCheckPath
 		// CloudFormation resource type schema:
 		//
@@ -185,15 +333,7 @@ func endpointGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"health_check_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Optional:    true,
-			Computed:    true,
-			Default:     stringdefault.StaticString("/"),
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"health_check_path": schemaAttribute5f815a90617f67901f1f0db7(),
 		// Property: HealthCheckPort
 		// CloudFormation resource type schema:
 		//
@@ -204,18 +344,7 @@ func endpointGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minimum": -1,
 		//	  "type": "integer"
 		//	}
-		"health_check_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The port that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
-			Optional:    true,
-			Computed:    true,
-			Default:     int64default.StaticInt64(-1),
-			Validators: []validator.Int64{ /*START VALIDATORS*/
-				int64validator.Between(-1, 65535),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"health_check_port": schemaAttribute88ddb617e1081c8abc2d7907(),
 		// Property: HealthCheckProtocol
 		// CloudFormation resource type schema:
 		//
@@ -229,22 +358,7 @@ func endpointGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"health_check_protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The protocol that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
-			Optional:    true,
-			Computed:    true,
-			Default:     stringdefault.StaticString("TCP"),
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"TCP",
-					"HTTP",
-					"HTTPS",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"health_check_protocol": schemaAttribute7b4f884a8883b64c2a60171a(),
 		// Property: ListenerArn
 		// CloudFormation resource type schema:
 		//
@@ -252,13 +366,7 @@ func endpointGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the listener",
 		//	  "type": "string"
 		//	}
-		"listener_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the listener",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"listener_arn": schemaAttribute2b2289bd6c61179b17885175(),
 		// Property: PortOverrides
 		// CloudFormation resource type schema:
 		//
@@ -288,43 +396,7 @@ func endpointGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"port_overrides": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: EndpointPort
-					"endpoint_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "A network port number",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.Int64{ /*START VALIDATORS*/
-							int64validator.Between(0, 65535),
-							fwvalidators.NotNullInt64(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-							int64planmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: ListenerPort
-					"listener_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "A network port number",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.Int64{ /*START VALIDATORS*/
-							int64validator.Between(0, 65535),
-							fwvalidators.NotNullInt64(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-							int64planmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"port_overrides": schemaAttribute66b0d557e0fbb5fce3c462ff(),
 		// Property: ThresholdCount
 		// CloudFormation resource type schema:
 		//
@@ -333,15 +405,7 @@ func endpointGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The number of consecutive health checks required to set the state of the endpoint to unhealthy.",
 		//	  "type": "integer"
 		//	}
-		"threshold_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of consecutive health checks required to set the state of the endpoint to unhealthy.",
-			Optional:    true,
-			Computed:    true,
-			Default:     int64default.StaticInt64(3),
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"threshold_count": schemaAttributed96c37b31635242123668198(),
 		// Property: TrafficDialPercentage
 		// CloudFormation resource type schema:
 		//
@@ -352,18 +416,7 @@ func endpointGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minimum": 0,
 		//	  "type": "number"
 		//	}
-		"traffic_dial_percentage": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "The percentage of traffic to sent to an AWS Region",
-			Optional:    true,
-			Computed:    true,
-			Default:     float64default.StaticFloat64(100.000000),
-			Validators: []validator.Float64{ /*START VALIDATORS*/
-				float64validator.Between(0.000000, 100.000000),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-				float64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"traffic_dial_percentage": schemaAttribute5dd423cc9ff88327d7fef2ef(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

@@ -21,6 +21,60 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute18b82d6d230149616300560f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A flag that indicates whether additional CloudWatch metrics are enabled for a given CloudFront distribution.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"Enabled",
+				"Disabled",
+			),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute28784a25e718388881f77c59() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RealtimeMetricsSubscriptionConfig
+			"realtime_metrics_subscription_config": schemaAttributebffef7742fe0a7eb595c3de4(),
+		}, /*END SCHEMA*/
+		Description: "A subscription configuration for additional CloudWatch metrics.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a2c069f5618f420d7c8d1cc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the distribution that you are enabling metrics for.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebffef7742fe0a7eb595c3de4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RealtimeMetricsSubscriptionStatus
+			"realtime_metrics_subscription_status": schemaAttribute18b82d6d230149616300560f(),
+		}, /*END SCHEMA*/
+		Description: "A subscription configuration for additional CloudWatch metrics.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_cloudfront_monitoring_subscription", monitoringSubscriptionResource)
 }
@@ -36,13 +90,7 @@ func monitoringSubscriptionResource(ctx context.Context) (resource.Resource, err
 		//	  "description": "The ID of the distribution that you are enabling metrics for.",
 		//	  "type": "string"
 		//	}
-		"distribution_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the distribution that you are enabling metrics for.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"distribution_id": schemaAttribute8a2c069f5618f420d7c8d1cc(),
 		// Property: MonitoringSubscription
 		// CloudFormation resource type schema:
 		//
@@ -71,39 +119,7 @@ func monitoringSubscriptionResource(ctx context.Context) (resource.Resource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"monitoring_subscription": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: RealtimeMetricsSubscriptionConfig
-				"realtime_metrics_subscription_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: RealtimeMetricsSubscriptionStatus
-						"realtime_metrics_subscription_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "A flag that indicates whether additional CloudWatch metrics are enabled for a given CloudFront distribution.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.OneOf(
-									"Enabled",
-									"Disabled",
-								),
-								fwvalidators.NotNullString(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "A subscription configuration for additional CloudWatch metrics.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A subscription configuration for additional CloudWatch metrics.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"monitoring_subscription": schemaAttribute28784a25e718388881f77c59(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

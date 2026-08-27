@@ -22,6 +22,64 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute377cec387a430eea34463dbe() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The id from the association that is returned when creating the association",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3d280d81061cc50ca292bd99() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.ListType{ElemType: types.StringType},
+		Description: "Parameters to be passed to the Automation Document",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute40ae1de5f3294e8c0e7b560b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Automation document to execute",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 500),
+			stringvalidator.RegexMatches(regexp.MustCompile("^\\S+$"), ""),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute509875875648f589f3ad4576() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+			mapplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed97a789023a57adc848910e9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique identifier used for generating a unique logical ID for the custom resource",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 64),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-]+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_ssmquicksetup_lifecycle_automation", lifecycleAutomationResource)
 }
@@ -40,13 +98,7 @@ func lifecycleAutomationResource(ctx context.Context) (resource.Resource, error)
 		//	  "pattern": "^[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The id from the association that is returned when creating the association",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"association_id": schemaAttribute377cec387a430eea34463dbe(),
 		// Property: AutomationDocument
 		// CloudFormation resource type schema:
 		//
@@ -57,14 +109,7 @@ func lifecycleAutomationResource(ctx context.Context) (resource.Resource, error)
 		//	  "pattern": "^\\S+$",
 		//	  "type": "string"
 		//	}
-		"automation_document": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the Automation document to execute",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 500),
-				stringvalidator.RegexMatches(regexp.MustCompile("^\\S+$"), ""),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"automation_document": schemaAttribute40ae1de5f3294e8c0e7b560b(),
 		// Property: AutomationParameters
 		// CloudFormation resource type schema:
 		//
@@ -81,12 +126,7 @@ func lifecycleAutomationResource(ctx context.Context) (resource.Resource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"automation_parameters": // Pattern: ""
-		schema.MapAttribute{     /*START ATTRIBUTE*/
-			ElementType: types.ListType{ElemType: types.StringType},
-			Description: "Parameters to be passed to the Automation Document",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"automation_parameters": schemaAttribute3d280d81061cc50ca292bd99(),
 		// Property: ResourceKey
 		// CloudFormation resource type schema:
 		//
@@ -97,17 +137,7 @@ func lifecycleAutomationResource(ctx context.Context) (resource.Resource, error)
 		//	  "pattern": "^[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"resource_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A unique identifier used for generating a unique logical ID for the custom resource",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 64),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-]+$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"resource_key": schemaAttributed97a789023a57adc848910e9(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -123,15 +153,7 @@ func lifecycleAutomationResource(ctx context.Context) (resource.Resource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-				mapplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute509875875648f589f3ad4576(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

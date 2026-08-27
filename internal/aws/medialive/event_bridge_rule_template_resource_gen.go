@@ -25,6 +25,169 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute1ce3198fc78ed2e7d52d18a2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An eventbridge rule template's ARN (Amazon Resource Name)",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2f7166601bc4ee4b02286c87() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "Placeholder documentation for __timestampIso8601",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3342b1c56e989882c9bc559b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A resource's name. Names must be unique within the scope of a resource type in a specific region.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 255),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[^\\s]+$"), ""),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute55843c01a25ead8f26d16b08() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Represents the tags associated with a resource.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+			mapplanmodifier.UseStateForUnknown(),
+			mapplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute782959fdfcf04bab4b048fe0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An eventbridge rule template group's id. AWS provided template groups have ids that start with `aws-`",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute882d767b49dfc3c604650031() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An eventbridge rule template's id. AWS provided templates have ids that start with `aws-`",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea4a6ec90f3865169449102f3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of event to match with the rule.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"MEDIALIVE_MULTIPLEX_ALERT",
+				"MEDIALIVE_MULTIPLEX_STATE_CHANGE",
+				"MEDIALIVE_CHANNEL_ALERT",
+				"MEDIALIVE_CHANNEL_INPUT_CHANGE",
+				"MEDIALIVE_CHANNEL_STATE_CHANGE",
+				"MEDIAPACKAGE_INPUT_NOTIFICATION",
+				"MEDIAPACKAGE_KEY_PROVIDER_NOTIFICATION",
+				"MEDIAPACKAGE_HARVEST_JOB_NOTIFICATION",
+				"SIGNAL_MAP_ACTIVE_ALARM",
+				"MEDIACONNECT_ALERT",
+				"MEDIACONNECT_SOURCE_HEALTH",
+				"MEDIACONNECT_OUTPUT_HEALTH",
+				"MEDIACONNECT_FLOW_STATUS_CHANGE",
+			),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributead67026537c3eb0b45b1fdf8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Placeholder documentation for __string",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedf3714832481899daa824cba() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Arn
+				"arn": schemaAttributefde3faec1cafc667f49d8019(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Placeholder documentation for __listOfEventBridgeRuleTemplateTarget",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef083ea7b4bbcc127020f9cad() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An eventbridge rule template group's identifier. Can be either be its id or current name.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("^[^\\s]+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// GroupIdentifier is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefadfbc50892692925aa30a3b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A resource's optional description.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 1024),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefde3faec1cafc667f49d8019() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Target ARNs must be either an SNS topic or CloudWatch log group.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 2048),
+			stringvalidator.RegexMatches(regexp.MustCompile("^arn.+$"), ""),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_medialive_event_bridge_rule_template", eventBridgeRuleTemplateResource)
 	registry.AddListResourceFactory("awscc_medialive_event_bridge_rule_template", generic.NewListResource(eventBridgeRuleTemplateResource))
@@ -42,13 +205,7 @@ func eventBridgeRuleTemplateResource(ctx context.Context) (resource.Resource, er
 		//	  "pattern": "^arn:.+:medialive:.+:eventbridge-rule-template:.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "An eventbridge rule template's ARN (Amazon Resource Name)",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute1ce3198fc78ed2e7d52d18a2(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -57,14 +214,7 @@ func eventBridgeRuleTemplateResource(ctx context.Context) (resource.Resource, er
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "Placeholder documentation for __timestampIso8601",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute2f7166601bc4ee4b02286c87(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -74,17 +224,7 @@ func eventBridgeRuleTemplateResource(ctx context.Context) (resource.Resource, er
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A resource's optional description.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 1024),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributefadfbc50892692925aa30a3b(),
 		// Property: EventTargets
 		// CloudFormation resource type schema:
 		//
@@ -109,32 +249,7 @@ func eventBridgeRuleTemplateResource(ctx context.Context) (resource.Resource, er
 		//	  },
 		//	  "type": "array"
 		//	}
-		"event_targets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Arn
-					"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Target ARNs must be either an SNS topic or CloudWatch log group.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 2048),
-							stringvalidator.RegexMatches(regexp.MustCompile("^arn.+$"), ""),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Placeholder documentation for __listOfEventBridgeRuleTemplateTarget",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"event_targets": schemaAttributedf3714832481899daa824cba(),
 		// Property: EventType
 		// CloudFormation resource type schema:
 		//
@@ -157,27 +272,7 @@ func eventBridgeRuleTemplateResource(ctx context.Context) (resource.Resource, er
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"event_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of event to match with the rule.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"MEDIALIVE_MULTIPLEX_ALERT",
-					"MEDIALIVE_MULTIPLEX_STATE_CHANGE",
-					"MEDIALIVE_CHANNEL_ALERT",
-					"MEDIALIVE_CHANNEL_INPUT_CHANGE",
-					"MEDIALIVE_CHANNEL_STATE_CHANGE",
-					"MEDIAPACKAGE_INPUT_NOTIFICATION",
-					"MEDIAPACKAGE_KEY_PROVIDER_NOTIFICATION",
-					"MEDIAPACKAGE_HARVEST_JOB_NOTIFICATION",
-					"SIGNAL_MAP_ACTIVE_ALARM",
-					"MEDIACONNECT_ALERT",
-					"MEDIACONNECT_SOURCE_HEALTH",
-					"MEDIACONNECT_OUTPUT_HEALTH",
-					"MEDIACONNECT_FLOW_STATUS_CHANGE",
-				),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"event_type": schemaAttributea4a6ec90f3865169449102f3(),
 		// Property: GroupId
 		// CloudFormation resource type schema:
 		//
@@ -188,13 +283,7 @@ func eventBridgeRuleTemplateResource(ctx context.Context) (resource.Resource, er
 		//	  "pattern": "^(aws-)?[0-9]{7}$",
 		//	  "type": "string"
 		//	}
-		"group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "An eventbridge rule template group's id. AWS provided template groups have ids that start with `aws-`",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"group_id": schemaAttribute782959fdfcf04bab4b048fe0(),
 		// Property: GroupIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -203,18 +292,7 @@ func eventBridgeRuleTemplateResource(ctx context.Context) (resource.Resource, er
 		//	  "pattern": "^[^\\s]+$",
 		//	  "type": "string"
 		//	}
-		"group_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "An eventbridge rule template group's identifier. Can be either be its id or current name.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^[^\\s]+$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// GroupIdentifier is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"group_identifier": schemaAttributef083ea7b4bbcc127020f9cad(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -225,13 +303,7 @@ func eventBridgeRuleTemplateResource(ctx context.Context) (resource.Resource, er
 		//	  "pattern": "^(aws-)?[0-9]{7}$",
 		//	  "type": "string"
 		//	}
-		"event_bridge_rule_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "An eventbridge rule template's id. AWS provided templates have ids that start with `aws-`",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"event_bridge_rule_template_id": schemaAttribute882d767b49dfc3c604650031(),
 		// Property: Identifier
 		// CloudFormation resource type schema:
 		//
@@ -239,13 +311,7 @@ func eventBridgeRuleTemplateResource(ctx context.Context) (resource.Resource, er
 		//	  "description": "Placeholder documentation for __string",
 		//	  "type": "string"
 		//	}
-		"identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Placeholder documentation for __string",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"identifier": schemaAttributead67026537c3eb0b45b1fdf8(),
 		// Property: ModifiedAt
 		// CloudFormation resource type schema:
 		//
@@ -254,14 +320,7 @@ func eventBridgeRuleTemplateResource(ctx context.Context) (resource.Resource, er
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"modified_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "Placeholder documentation for __timestampIso8601",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"modified_at": schemaAttribute2f7166601bc4ee4b02286c87(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -272,14 +331,7 @@ func eventBridgeRuleTemplateResource(ctx context.Context) (resource.Resource, er
 		//	  "pattern": "^[^\\s]+$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A resource's name. Names must be unique within the scope of a resource type in a specific region.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[^\\s]+$"), ""),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute3342b1c56e989882c9bc559b(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -294,17 +346,7 @@ func eventBridgeRuleTemplateResource(ctx context.Context) (resource.Resource, er
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Represents the tags associated with a resource.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-				mapplanmodifier.UseStateForUnknown(),
-				mapplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute55843c01a25ead8f26d16b08(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

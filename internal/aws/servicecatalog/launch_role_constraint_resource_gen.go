@@ -20,6 +20,84 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute08af8d2b44a0e04b70781c5b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the IAM role used for the launch constraint.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws|aws-cn|aws-us-gov):iam::[0-9]*:(role)\\/.*"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2dcb1126643d14cff2bde1fd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the launch role constraint.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6c7eba6c0633faae0bc45161() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the portfolio to which this launch role constraint applies.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6cfa244b7131a897d03a5d1f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the product to which this launch role constraint applies.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute85a7e7cfd9c0542267dace32() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The language code for the constraint.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// AcceptLanguage is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebd107ba11f2befaf51757e79() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier for the launch role constraint.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec57d1160498053983a153526() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The local IAM role name to use in the launch constraint.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_servicecatalog_launch_role_constraint", launchRoleConstraintResource)
 }
@@ -35,15 +113,7 @@ func launchRoleConstraintResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The language code for the constraint.",
 		//	  "type": "string"
 		//	}
-		"accept_language": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The language code for the constraint.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// AcceptLanguage is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"accept_language": schemaAttribute85a7e7cfd9c0542267dace32(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -51,14 +121,7 @@ func launchRoleConstraintResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The description of the launch role constraint.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the launch role constraint.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute2dcb1126643d14cff2bde1fd(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -66,13 +129,7 @@ func launchRoleConstraintResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The unique identifier for the launch role constraint.",
 		//	  "type": "string"
 		//	}
-		"launch_role_constraint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier for the launch role constraint.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"launch_role_constraint_id": schemaAttributebd107ba11f2befaf51757e79(),
 		// Property: LocalRoleName
 		// CloudFormation resource type schema:
 		//
@@ -80,14 +137,7 @@ func launchRoleConstraintResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The local IAM role name to use in the launch constraint.",
 		//	  "type": "string"
 		//	}
-		"local_role_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The local IAM role name to use in the launch constraint.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"local_role_name": schemaAttributec57d1160498053983a153526(),
 		// Property: PortfolioId
 		// CloudFormation resource type schema:
 		//
@@ -95,13 +145,7 @@ func launchRoleConstraintResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The ID of the portfolio to which this launch role constraint applies.",
 		//	  "type": "string"
 		//	}
-		"portfolio_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the portfolio to which this launch role constraint applies.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"portfolio_id": schemaAttribute6c7eba6c0633faae0bc45161(),
 		// Property: ProductId
 		// CloudFormation resource type schema:
 		//
@@ -109,13 +153,7 @@ func launchRoleConstraintResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The ID of the product to which this launch role constraint applies.",
 		//	  "type": "string"
 		//	}
-		"product_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the product to which this launch role constraint applies.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"product_id": schemaAttribute6cfa244b7131a897d03a5d1f(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -124,17 +162,7 @@ func launchRoleConstraintResource(ctx context.Context) (resource.Resource, error
 		//	  "pattern": "arn:(aws|aws-cn|aws-us-gov):iam::[0-9]*:(role)\\/.*",
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the IAM role used for the launch constraint.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws|aws-cn|aws-us-gov):iam::[0-9]*:(role)\\/.*"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttribute08af8d2b44a0e04b70781c5b(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

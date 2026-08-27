@@ -17,6 +17,66 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute053a90ff1ae70c7a01d051d2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The product identifier",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute064e8351b2431b971790e0f7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Unique identifier for the constraint",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute214a982b61fdf637a9320835() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The portfolio identifier",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute486a2776266171ec6af2d153() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the constraint",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5b1b5b4220229abbcc3fbea9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The language code",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// AcceptLanguage is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee4f5a42b22c49bae90c91400() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ALLOWED or NOT_ALLOWED, to permit or prevent changes to the tags on provisioned instances of the specified portfolio / product combination",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_servicecatalog_resource_update_constraint", resourceUpdateConstraintResource)
 }
@@ -32,15 +92,7 @@ func resourceUpdateConstraintResource(ctx context.Context) (resource.Resource, e
 		//	  "description": "The language code",
 		//	  "type": "string"
 		//	}
-		"accept_language": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The language code",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// AcceptLanguage is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"accept_language": schemaAttribute5b1b5b4220229abbcc3fbea9(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -48,14 +100,7 @@ func resourceUpdateConstraintResource(ctx context.Context) (resource.Resource, e
 		//	  "description": "The description of the constraint",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the constraint",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute486a2776266171ec6af2d153(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -63,13 +108,7 @@ func resourceUpdateConstraintResource(ctx context.Context) (resource.Resource, e
 		//	  "description": "Unique identifier for the constraint",
 		//	  "type": "string"
 		//	}
-		"resource_update_constraint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Unique identifier for the constraint",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"resource_update_constraint_id": schemaAttribute064e8351b2431b971790e0f7(),
 		// Property: PortfolioId
 		// CloudFormation resource type schema:
 		//
@@ -77,13 +116,7 @@ func resourceUpdateConstraintResource(ctx context.Context) (resource.Resource, e
 		//	  "description": "The portfolio identifier",
 		//	  "type": "string"
 		//	}
-		"portfolio_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The portfolio identifier",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"portfolio_id": schemaAttribute214a982b61fdf637a9320835(),
 		// Property: ProductId
 		// CloudFormation resource type schema:
 		//
@@ -91,13 +124,7 @@ func resourceUpdateConstraintResource(ctx context.Context) (resource.Resource, e
 		//	  "description": "The product identifier",
 		//	  "type": "string"
 		//	}
-		"product_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The product identifier",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"product_id": schemaAttribute053a90ff1ae70c7a01d051d2(),
 		// Property: TagUpdateOnProvisionedProduct
 		// CloudFormation resource type schema:
 		//
@@ -105,10 +132,7 @@ func resourceUpdateConstraintResource(ctx context.Context) (resource.Resource, e
 		//	  "description": "ALLOWED or NOT_ALLOWED, to permit or prevent changes to the tags on provisioned instances of the specified portfolio / product combination",
 		//	  "type": "string"
 		//	}
-		"tag_update_on_provisioned_product": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ALLOWED or NOT_ALLOWED, to permit or prevent changes to the tags on provisioned instances of the specified portfolio / product combination",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"tag_update_on_provisioned_product": schemaAttributee4f5a42b22c49bae90c91400(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

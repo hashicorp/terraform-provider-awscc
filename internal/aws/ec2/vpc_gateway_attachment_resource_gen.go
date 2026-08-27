@@ -17,6 +17,48 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0651b54fced9d4ba32c48473() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the virtual private gateway. You must specify either InternetGatewayId or VpnGatewayId, but not both.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute10425fa126aed6d03eab5966() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Used to identify if this resource is an Internet Gateway or Vpn Gateway Attachment ",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedcee76ad8ba9fa77e8af6069() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the VPC.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee2a642365a9b34917accac85() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the internet gateway. You must specify either InternetGatewayId or VpnGatewayId, but not both.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_ec2_vpc_gateway_attachment", vPCGatewayAttachmentResource)
 	registry.AddListResourceFactory("awscc_ec2_vpc_gateway_attachment", generic.NewListResource(vPCGatewayAttachmentResource))
@@ -33,13 +75,7 @@ func vPCGatewayAttachmentResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "Used to identify if this resource is an Internet Gateway or Vpn Gateway Attachment ",
 		//	  "type": "string"
 		//	}
-		"attachment_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Used to identify if this resource is an Internet Gateway or Vpn Gateway Attachment ",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"attachment_type": schemaAttribute10425fa126aed6d03eab5966(),
 		// Property: InternetGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -47,14 +83,7 @@ func vPCGatewayAttachmentResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The ID of the internet gateway. You must specify either InternetGatewayId or VpnGatewayId, but not both.",
 		//	  "type": "string"
 		//	}
-		"internet_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the internet gateway. You must specify either InternetGatewayId or VpnGatewayId, but not both.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"internet_gateway_id": schemaAttributee2a642365a9b34917accac85(),
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -62,13 +91,7 @@ func vPCGatewayAttachmentResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The ID of the VPC.",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the VPC.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"vpc_id": schemaAttributedcee76ad8ba9fa77e8af6069(),
 		// Property: VpnGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -76,14 +99,7 @@ func vPCGatewayAttachmentResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The ID of the virtual private gateway. You must specify either InternetGatewayId or VpnGatewayId, but not both.",
 		//	  "type": "string"
 		//	}
-		"vpn_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the virtual private gateway. You must specify either InternetGatewayId or VpnGatewayId, but not both.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"vpn_gateway_id": schemaAttribute0651b54fced9d4ba32c48473(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

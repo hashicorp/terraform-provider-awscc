@@ -20,6 +20,29 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute2379af26fb9a266e21c3b3ba() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The generic ARN of the product being subscribed to",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("arn:aws\\S*:securityhub:\\S*"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed2f6af48b92c49acc01438fd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the product subscription for the account",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_securityhub_product_subscription", productSubscriptionResource)
 	registry.AddListResourceFactory("awscc_securityhub_product_subscription", generic.NewListResource(productSubscriptionResource))
@@ -37,16 +60,7 @@ func productSubscriptionResource(ctx context.Context) (resource.Resource, error)
 		//	  "pattern": "arn:aws\\S*:securityhub:\\S*",
 		//	  "type": "string"
 		//	}
-		"product_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The generic ARN of the product being subscribed to",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("arn:aws\\S*:securityhub:\\S*"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"product_arn": schemaAttribute2379af26fb9a266e21c3b3ba(),
 		// Property: ProductSubscriptionArn
 		// CloudFormation resource type schema:
 		//
@@ -55,13 +69,7 @@ func productSubscriptionResource(ctx context.Context) (resource.Resource, error)
 		//	  "pattern": "arn:aws\\S*:securityhub:\\S*",
 		//	  "type": "string"
 		//	}
-		"product_subscription_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the product subscription for the account",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"product_subscription_arn": schemaAttributed2f6af48b92c49acc01438fd(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

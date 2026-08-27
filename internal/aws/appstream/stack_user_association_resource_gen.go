@@ -18,6 +18,48 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute3e39a046d8a3ca57dac4bf03() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the user who is associated with the stack.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5649f457174a0142183da697() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether a welcome email is sent to a user after the user is created in the user pool.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+			boolplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute82aa3532572581db3329f1f6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The authentication type for the user who is associated with the stack. You must specify USERPOOL.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute85db0a27e504d16c0c2d5c0f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the stack that is associated with the user.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_appstream_stack_user_association", stackUserAssociationResource)
 }
@@ -33,13 +75,7 @@ func stackUserAssociationResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The authentication type for the user who is associated with the stack. You must specify USERPOOL.",
 		//	  "type": "string"
 		//	}
-		"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The authentication type for the user who is associated with the stack. You must specify USERPOOL.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"authentication_type": schemaAttribute82aa3532572581db3329f1f6(),
 		// Property: SendEmailNotification
 		// CloudFormation resource type schema:
 		//
@@ -47,15 +83,7 @@ func stackUserAssociationResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "Specifies whether a welcome email is sent to a user after the user is created in the user pool.",
 		//	  "type": "boolean"
 		//	}
-		"send_email_notification": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether a welcome email is sent to a user after the user is created in the user pool.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-				boolplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"send_email_notification": schemaAttribute5649f457174a0142183da697(),
 		// Property: StackName
 		// CloudFormation resource type schema:
 		//
@@ -63,13 +91,7 @@ func stackUserAssociationResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The name of the stack that is associated with the user.",
 		//	  "type": "string"
 		//	}
-		"stack_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the stack that is associated with the user.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"stack_name": schemaAttribute85db0a27e504d16c0c2d5c0f(),
 		// Property: UserName
 		// CloudFormation resource type schema:
 		//
@@ -77,13 +99,7 @@ func stackUserAssociationResource(ctx context.Context) (resource.Resource, error
 		//	  "description": "The name of the user who is associated with the stack.",
 		//	  "type": "string"
 		//	}
-		"user_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the user who is associated with the stack.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"user_name": schemaAttribute3e39a046d8a3ca57dac4bf03(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

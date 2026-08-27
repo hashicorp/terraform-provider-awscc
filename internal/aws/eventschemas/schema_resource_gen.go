@@ -20,6 +20,125 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute1965ad6dd0a36ece6f702a01() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version number of the schema.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute36adb811b2ce8a86507c5ced() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the schema.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4afb4e66c93c5fdf7f517ace() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the schema.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9aaca4efb3b7467cff11094d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the schema registry.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9e402f13cee14bdf26d0b57b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The date the schema version was created.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea8066042726dcb985cf11b7f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeaaf6ad1e205c88ab8666fbaf(),
+				// Property: Value
+				"value": schemaAttributeaaf6ad1e205c88ab8666fbaf(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags associated with the resource.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaaf6ad1e205c88ab8666fbaf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeabb55bbe136542e1655a3d67() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of schema. Valid types include OpenApi3 and JSONSchemaDraft4.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebb570b3598514837dab614f1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The last modified time of the schema.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed1f3275a751803b53cc1bee3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The source of the schema definition.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee4f9019116f806526b72a843() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description of the schema.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_eventschemas_schema", schemaResource)
 }
@@ -35,10 +154,7 @@ func schemaResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The source of the schema definition.",
 		//	  "type": "string"
 		//	}
-		"content": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The source of the schema definition.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"content": schemaAttributed1f3275a751803b53cc1bee3(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -46,14 +162,7 @@ func schemaResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A description of the schema.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description of the schema.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributee4f9019116f806526b72a843(),
 		// Property: LastModified
 		// CloudFormation resource type schema:
 		//
@@ -61,13 +170,7 @@ func schemaResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The last modified time of the schema.",
 		//	  "type": "string"
 		//	}
-		"last_modified": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The last modified time of the schema.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"last_modified": schemaAttributebb570b3598514837dab614f1(),
 		// Property: RegistryName
 		// CloudFormation resource type schema:
 		//
@@ -75,13 +178,7 @@ func schemaResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the schema registry.",
 		//	  "type": "string"
 		//	}
-		"registry_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the schema registry.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"registry_name": schemaAttribute9aaca4efb3b7467cff11094d(),
 		// Property: SchemaArn
 		// CloudFormation resource type schema:
 		//
@@ -89,13 +186,7 @@ func schemaResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ARN of the schema.",
 		//	  "type": "string"
 		//	}
-		"schema_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the schema.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"schema_arn": schemaAttribute4afb4e66c93c5fdf7f517ace(),
 		// Property: SchemaName
 		// CloudFormation resource type schema:
 		//
@@ -103,15 +194,7 @@ func schemaResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the schema.",
 		//	  "type": "string"
 		//	}
-		"schema_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the schema.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"schema_name": schemaAttribute36adb811b2ce8a86507c5ced(),
 		// Property: SchemaVersion
 		// CloudFormation resource type schema:
 		//
@@ -119,13 +202,7 @@ func schemaResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The version number of the schema.",
 		//	  "type": "string"
 		//	}
-		"schema_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version number of the schema.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"schema_version": schemaAttribute1965ad6dd0a36ece6f702a01(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -150,40 +227,7 @@ func schemaResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags associated with the resource.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributea8066042726dcb985cf11b7f(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -191,10 +235,7 @@ func schemaResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The type of schema. Valid types include OpenApi3 and JSONSchemaDraft4.",
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of schema. Valid types include OpenApi3 and JSONSchemaDraft4.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttributeabb55bbe136542e1655a3d67(),
 		// Property: VersionCreatedDate
 		// CloudFormation resource type schema:
 		//
@@ -202,13 +243,7 @@ func schemaResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The date the schema version was created.",
 		//	  "type": "string"
 		//	}
-		"version_created_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The date the schema version was created.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"version_created_date": schemaAttribute9e402f13cee14bdf26d0b57b(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

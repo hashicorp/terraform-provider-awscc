@@ -20,6 +20,92 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute08f3735432119ced5c08cf93() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute772273448e5774f2af848bf6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description for the dashboard.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7cb10b2898df73ffae5f9783() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the dashboard.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute96915e78f51e9881e69621a0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the project in which to create the dashboard.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9cf9f813712625a1ce5afdae() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The dashboard definition specified in a JSON literal.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb5dcc5abe1a502a877e90d10() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the dashboard.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeef17ea808f3186a9723a4c7() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute08f3735432119ced5c08cf93(),
+				// Property: Value
+				"value": schemaAttribute08f3735432119ced5c08cf93(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of key-value pairs that contain metadata for the dashboard.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef5ae9ad6538ee7f80c7e48ce() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A friendly name for the dashboard.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_iotsitewise_dashboard", dashboardResource)
 	registry.AddListResourceFactory("awscc_iotsitewise_dashboard", generic.NewListResource(dashboardResource))
@@ -36,13 +122,7 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ARN of the dashboard.",
 		//	  "type": "string"
 		//	}
-		"dashboard_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the dashboard.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"dashboard_arn": schemaAttributeb5dcc5abe1a502a877e90d10(),
 		// Property: DashboardDefinition
 		// CloudFormation resource type schema:
 		//
@@ -50,10 +130,7 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The dashboard definition specified in a JSON literal.",
 		//	  "type": "string"
 		//	}
-		"dashboard_definition": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The dashboard definition specified in a JSON literal.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"dashboard_definition": schemaAttribute9cf9f813712625a1ce5afdae(),
 		// Property: DashboardDescription
 		// CloudFormation resource type schema:
 		//
@@ -61,10 +138,7 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A description for the dashboard.",
 		//	  "type": "string"
 		//	}
-		"dashboard_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description for the dashboard.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"dashboard_description": schemaAttribute772273448e5774f2af848bf6(),
 		// Property: DashboardId
 		// CloudFormation resource type schema:
 		//
@@ -72,13 +146,7 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of the dashboard.",
 		//	  "type": "string"
 		//	}
-		"dashboard_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the dashboard.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"dashboard_id": schemaAttribute7cb10b2898df73ffae5f9783(),
 		// Property: DashboardName
 		// CloudFormation resource type schema:
 		//
@@ -86,10 +154,7 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A friendly name for the dashboard.",
 		//	  "type": "string"
 		//	}
-		"dashboard_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A friendly name for the dashboard.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"dashboard_name": schemaAttributef5ae9ad6538ee7f80c7e48ce(),
 		// Property: ProjectId
 		// CloudFormation resource type schema:
 		//
@@ -97,15 +162,7 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of the project in which to create the dashboard.",
 		//	  "type": "string"
 		//	}
-		"project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the project in which to create the dashboard.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"project_id": schemaAttribute96915e78f51e9881e69621a0(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -132,41 +189,7 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of key-value pairs that contain metadata for the dashboard.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeeef17ea808f3186a9723a4c7(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

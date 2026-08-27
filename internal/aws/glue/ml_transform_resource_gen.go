@@ -26,6 +26,372 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute04c183bd051697347f2f129b() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The value for accuracy and cost tradeoff. A value of 0.5 means balance.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+			float64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0cd61e390223328610af5969() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier for the transform.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1175a94a14ec5ed1a88c43a9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A database name in the AWS Glue Data Catalog.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1677a5a5196c149016921516() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum number of times to retry after an MLTaskRun fails.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1bfb6f19ebeab3b55140dc60() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The encryption mode applied to user data.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute24df9f7298ae45d65251646f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: KmsKeyId
+			"kms_key_id": schemaAttributea0e38d22c0df8adf2ebe6beb(),
+			// Property: MLUserDataEncryptionMode
+			"ml_user_data_encryption_mode": schemaAttribute1bfb6f19ebeab3b55140dc60(),
+		}, /*END SCHEMA*/
+		Description: "The encryption-at-rest settings of the transform that apply to accessing user data.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2fdcc9e7cd21e155f4a246d5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A user-defined, long-form description text for the machine learning transform.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3105f57dcfbc98ca1aad5f23() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version of AWS Glue this machine learning transform is compatible with.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4354f41322b2d5de0684a057() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the security configuration.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute47a83562783f34b5d232c9e6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MLUserDataEncryption
+			"ml_user_data_encryption": schemaAttribute24df9f7298ae45d65251646f(),
+			// Property: TaskRunSecurityConfigurationName
+			"task_run_security_configuration_name": schemaAttribute4354f41322b2d5de0684a057(),
+		}, /*END SCHEMA*/
+		Description: "The encryption-at-rest settings of the transform.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+			objectplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5f3e2c6ef0fbbca689da4b8c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the connection to the AWS Glue Data Catalog.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6103d08c4c4fc7e764625dc7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique identifier for the AWS Glue Data Catalog.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6763870d39c578a2fa73842b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of machine learning transform.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute68885cd55a34f5c12b95df00() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FindMatchesParameters
+			"find_matches_parameters": schemaAttribute7103519f0ae2311f355bda15(),
+			// Property: TransformType
+			"transform_type": schemaAttribute6763870d39c578a2fa73842b(),
+		}, /*END SCHEMA*/
+		Description: "The algorithm-specific parameters that are associated with the machine learning transform.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6d16f324606b9659aa597e28() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The tags to use with this machine learning transform.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+			mapplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6fadb0c28821cfdb6b5ef337() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of workers of a defined workerType that are allocated when a task runs.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7103519f0ae2311f355bda15() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AccuracyCostTradeoff
+			"accuracy_cost_tradeoff": schemaAttribute04c183bd051697347f2f129b(),
+			// Property: EnforceProvidedLabels
+			"enforce_provided_labels": schemaAttribute7b616318fe3251e6e0be8100(),
+			// Property: PrecisionRecallTradeoff
+			"precision_recall_tradeoff": schemaAttributea8f2f444e1ec74536ca10a50(),
+			// Property: PrimaryKeyColumnName
+			"primary_key_column_name": schemaAttributebb8add72f315d4b794e44f87(),
+		}, /*END SCHEMA*/
+		Description: "The parameters to configure the find matches transform.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b616318fe3251e6e0be8100() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "If true, forces the output to match the provided labels.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8c09755c02c2cd0fb3dceaea() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CatalogId
+				"catalog_id": schemaAttribute6103d08c4c4fc7e764625dc7(),
+				// Property: ConnectionName
+				"connection_name": schemaAttribute5f3e2c6ef0fbbca689da4b8c(),
+				// Property: DatabaseName
+				"database_name": schemaAttribute1175a94a14ec5ed1a88c43a9(),
+				// Property: TableName
+				"table_name": schemaAttributeb03b57d581d3fe1192b6f414(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The database and table in the AWS Glue Data Catalog that is used for input or output data.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8e29fc3ad22eb83a0c9ffdd3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: GlueTables
+			"glue_tables": schemaAttribute8c09755c02c2cd0fb3dceaea(),
+		}, /*END SCHEMA*/
+		Description: "A list of AWS Glue table definitions used by the transform.",
+		Required:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ae841a62aa85ec24ec3cc76() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of AWS Glue DPUs allocated to task runs for this transform.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+			float64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea0e38d22c0df8adf2ebe6beb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID for the customer-provided KMS key.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea8f2f444e1ec74536ca10a50() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The value for precision and recall tradeoff. A value of 0.5 means no preference.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+			float64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb03b57d581d3fe1192b6f414() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A table name in the AWS Glue Data Catalog.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb41601fa2f3647b0fb5c03eb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name or ARN of the IAM role with the required permissions.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebb8add72f315d4b794e44f87() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of a column that uniquely identifies rows in the source table.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6555a58be9f4e7a851a24cf() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The timeout in minutes of the machine learning transform.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecaba36e21cff292a3ba80700() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of predefined worker that is allocated when a task runs.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed04ae9311d054f74fdfdbae2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A user-defined name for the machine learning transform.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_glue_ml_transform", mLTransformResource)
 	registry.AddListResourceFactory("awscc_glue_ml_transform", generic.NewListResource(mLTransformResource))
@@ -42,14 +408,7 @@ func mLTransformResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A user-defined, long-form description text for the machine learning transform.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A user-defined, long-form description text for the machine learning transform.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute2fdcc9e7cd21e155f4a246d5(),
 		// Property: GlueVersion
 		// CloudFormation resource type schema:
 		//
@@ -57,14 +416,7 @@ func mLTransformResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The version of AWS Glue this machine learning transform is compatible with.",
 		//	  "type": "string"
 		//	}
-		"glue_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version of AWS Glue this machine learning transform is compatible with.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"glue_version": schemaAttribute3105f57dcfbc98ca1aad5f23(),
 		// Property: InputRecordTables
 		// CloudFormation resource type schema:
 		//
@@ -106,70 +458,7 @@ func mLTransformResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"input_record_tables": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: GlueTables
-				"glue_tables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: CatalogId
-							"catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A unique identifier for the AWS Glue Data Catalog.",
-								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: ConnectionName
-							"connection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The name of the connection to the AWS Glue Data Catalog.",
-								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: DatabaseName
-							"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A database name in the AWS Glue Data Catalog.",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									fwvalidators.NotNullString(),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: TableName
-							"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A table name in the AWS Glue Data Catalog.",
-								Optional:    true,
-								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									fwvalidators.NotNullString(),
-								}, /*END VALIDATORS*/
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The database and table in the AWS Glue Data Catalog that is used for input or output data.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A list of AWS Glue table definitions used by the transform.",
-			Required:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"input_record_tables": schemaAttribute8e29fc3ad22eb83a0c9ffdd3(),
 		// Property: MaxCapacity
 		// CloudFormation resource type schema:
 		//
@@ -177,14 +466,7 @@ func mLTransformResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The number of AWS Glue DPUs allocated to task runs for this transform.",
 		//	  "type": "number"
 		//	}
-		"max_capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of AWS Glue DPUs allocated to task runs for this transform.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-				float64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"max_capacity": schemaAttribute9ae841a62aa85ec24ec3cc76(),
 		// Property: MaxRetries
 		// CloudFormation resource type schema:
 		//
@@ -192,14 +474,7 @@ func mLTransformResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The maximum number of times to retry after an MLTaskRun fails.",
 		//	  "type": "integer"
 		//	}
-		"max_retries": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The maximum number of times to retry after an MLTaskRun fails.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"max_retries": schemaAttribute1677a5a5196c149016921516(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -207,14 +482,7 @@ func mLTransformResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A user-defined name for the machine learning transform.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A user-defined name for the machine learning transform.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributed04ae9311d054f74fdfdbae2(),
 		// Property: NumberOfWorkers
 		// CloudFormation resource type schema:
 		//
@@ -222,14 +490,7 @@ func mLTransformResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The number of workers of a defined workerType that are allocated when a task runs.",
 		//	  "type": "integer"
 		//	}
-		"number_of_workers": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of workers of a defined workerType that are allocated when a task runs.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"number_of_workers": schemaAttribute6fadb0c28821cfdb6b5ef337(),
 		// Property: Role
 		// CloudFormation resource type schema:
 		//
@@ -237,10 +498,7 @@ func mLTransformResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name or ARN of the IAM role with the required permissions.",
 		//	  "type": "string"
 		//	}
-		"role": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name or ARN of the IAM role with the required permissions.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"role": schemaAttributeb41601fa2f3647b0fb5c03eb(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -254,16 +512,7 @@ func mLTransformResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The tags to use with this machine learning transform.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-				mapplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute6d16f324606b9659aa597e28(),
 		// Property: Timeout
 		// CloudFormation resource type schema:
 		//
@@ -271,14 +520,7 @@ func mLTransformResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The timeout in minutes of the machine learning transform.",
 		//	  "type": "integer"
 		//	}
-		"timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The timeout in minutes of the machine learning transform.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"timeout": schemaAttributec6555a58be9f4e7a851a24cf(),
 		// Property: TransformEncryption
 		// CloudFormation resource type schema:
 		//
@@ -311,58 +553,7 @@ func mLTransformResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"transform_encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MLUserDataEncryption
-				"ml_user_data_encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: KmsKeyId
-						"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ID for the customer-provided KMS key.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: MLUserDataEncryptionMode
-						"ml_user_data_encryption_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The encryption mode applied to user data.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								fwvalidators.NotNullString(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The encryption-at-rest settings of the transform that apply to accessing user data.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: TaskRunSecurityConfigurationName
-				"task_run_security_configuration_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the security configuration.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The encryption-at-rest settings of the transform.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"transform_encryption": schemaAttribute47a83562783f34b5d232c9e6(),
 		// Property: TransformId
 		// CloudFormation resource type schema:
 		//
@@ -370,13 +561,7 @@ func mLTransformResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The unique identifier for the transform.",
 		//	  "type": "string"
 		//	}
-		"transform_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier for the transform.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"transform_id": schemaAttribute0cd61e390223328610af5969(),
 		// Property: TransformParameters
 		// CloudFormation resource type schema:
 		//
@@ -420,68 +605,7 @@ func mLTransformResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"transform_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FindMatchesParameters
-				"find_matches_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AccuracyCostTradeoff
-						"accuracy_cost_tradeoff": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Description: "The value for accuracy and cost tradeoff. A value of 0.5 means balance.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-								float64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: EnforceProvidedLabels
-						"enforce_provided_labels": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "If true, forces the output to match the provided labels.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								boolplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: PrecisionRecallTradeoff
-						"precision_recall_tradeoff": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Description: "The value for precision and recall tradeoff. A value of 0.5 means no preference.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-								float64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: PrimaryKeyColumnName
-						"primary_key_column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The name of a column that uniquely identifies rows in the source table.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.String{ /*START VALIDATORS*/
-								fwvalidators.NotNullString(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-								stringplanmodifier.RequiresReplaceIfConfigured(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The parameters to configure the find matches transform.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: TransformType
-				"transform_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The type of machine learning transform.",
-					Required:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The algorithm-specific parameters that are associated with the machine learning transform.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"transform_parameters": schemaAttribute68885cd55a34f5c12b95df00(),
 		// Property: WorkerType
 		// CloudFormation resource type schema:
 		//
@@ -489,14 +613,7 @@ func mLTransformResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The type of predefined worker that is allocated when a task runs.",
 		//	  "type": "string"
 		//	}
-		"worker_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of predefined worker that is allocated when a task runs.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"worker_type": schemaAttributecaba36e21cff292a3ba80700(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

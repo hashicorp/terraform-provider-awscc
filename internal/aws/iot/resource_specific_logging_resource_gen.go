@@ -20,6 +20,65 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute6e7f2e237dd893fed411ec5b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The target type. Value must be THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID, or EVENT_TYPE.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"THING_GROUP",
+				"CLIENT_ID",
+				"SOURCE_IP",
+				"PRINCIPAL_ID",
+				"EVENT_TYPE",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca1605a0cb9c2462fcadf48e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The log level for a specific target. Valid values are: ERROR, WARN, INFO, DEBUG, or DISABLED.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"ERROR",
+				"WARN",
+				"INFO",
+				"DEBUG",
+				"DISABLED",
+			),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeb1427ffafa4a91193b0bb3a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The target name.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9.:\\s_\\-]+"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeed045587cc62cd6c652ba5ac() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Unique Id for a Target (TargetType:TargetName), this will be internally built to serve as primary identifier for a log target.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_iot_resource_specific_logging", resourceSpecificLoggingResource)
 	registry.AddListResourceFactory("awscc_iot_resource_specific_logging", generic.NewListResource(resourceSpecificLoggingResource))
@@ -43,19 +102,7 @@ func resourceSpecificLoggingResource(ctx context.Context) (resource.Resource, er
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The log level for a specific target. Valid values are: ERROR, WARN, INFO, DEBUG, or DISABLED.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"ERROR",
-					"WARN",
-					"INFO",
-					"DEBUG",
-					"DISABLED",
-				),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"log_level": schemaAttributeca1605a0cb9c2462fcadf48e(),
 		// Property: TargetId
 		// CloudFormation resource type schema:
 		//
@@ -66,13 +113,7 @@ func resourceSpecificLoggingResource(ctx context.Context) (resource.Resource, er
 		//	  "pattern": "[a-zA-Z0-9.:\\s_\\-]+",
 		//	  "type": "string"
 		//	}
-		"target_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Unique Id for a Target (TargetType:TargetName), this will be internally built to serve as primary identifier for a log target.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"target_id": schemaAttributeed045587cc62cd6c652ba5ac(),
 		// Property: TargetName
 		// CloudFormation resource type schema:
 		//
@@ -83,17 +124,7 @@ func resourceSpecificLoggingResource(ctx context.Context) (resource.Resource, er
 		//	  "pattern": "[a-zA-Z0-9.:\\s_\\-]+",
 		//	  "type": "string"
 		//	}
-		"target_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The target name.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 128),
-				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9.:\\s_\\-]+"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"target_name": schemaAttributeeb1427ffafa4a91193b0bb3a(),
 		// Property: TargetType
 		// CloudFormation resource type schema:
 		//
@@ -108,22 +139,7 @@ func resourceSpecificLoggingResource(ctx context.Context) (resource.Resource, er
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"target_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The target type. Value must be THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID, or EVENT_TYPE.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"THING_GROUP",
-					"CLIENT_ID",
-					"SOURCE_IP",
-					"PRINCIPAL_ID",
-					"EVENT_TYPE",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"target_type": schemaAttribute6e7f2e237dd893fed411ec5b(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

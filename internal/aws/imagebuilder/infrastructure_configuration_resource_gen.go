@@ -25,6 +25,312 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0138a1ee40565bdb0f040f6b() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The tags attached to the resource created by Image Builder.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+			mapplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute039adad2c795b39d0dd47df6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether a signed token header is required for instance metadata retrieval requests. The values affect the response as follows: ",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"required",
+				"optional",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute16cd68e1caa83fd36b0c9334() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "HostResourceGroupArn",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute286ec7b3ad20b844a268b7b8() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Limit the number of hops that an instance metadata request can traverse to reach its destination.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute347b84825cb71e4e1bd7d659() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the infrastructure configuration.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3d76b467e39ea2f455e1fb4a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3BucketName
+			"s3_bucket_name": schemaAttributefcf7dfccb6952b3149d68fdc(),
+			// Property: S3KeyPrefix
+			"s3_key_prefix": schemaAttribute94a55ea4283078b065656d1f(),
+		}, /*END SCHEMA*/
+		Description: "The S3 path in which to store the logs.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute43ae4048e39aeb99977fe0b7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the infrastructure configuration.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5923caefc06c0672ebe30046() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the infrastructure configuration.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6264af0c4add36584ab9d24a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "HostId",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b076a19b951193990afe697() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The instance profile of the infrastructure configuration.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8361001fa6d173cec212aa32() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: HttpPutResponseHopLimit
+			"http_put_response_hop_limit": schemaAttribute286ec7b3ad20b844a268b7b8(),
+			// Property: HttpTokens
+			"http_tokens": schemaAttribute039adad2c795b39d0dd47df6(),
+		}, /*END SCHEMA*/
+		Description: "The instance metadata option settings for the infrastructure configuration.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a856f52a109e2db53526bef() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The security group IDs of the infrastructure configuration.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute94a55ea4283078b065656d1f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "S3KeyPrefix",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute960407699ce4d8779c20f4bf() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The tags associated with the component.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+			mapplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea0d13c9a6c63f8d82e2892b6() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The instance types of the infrastructure configuration.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea586335c4ba2b38fa69c743f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The EC2 key pair of the infrastructure configuration..",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeadb3f8a2f335a82ce985c2f6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3Logs
+			"s3_logs": schemaAttribute3d76b467e39ea2f455e1fb4a(),
+		}, /*END SCHEMA*/
+		Description: "The logging configuration of the infrastructure configuration.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec3d81d4a42486ffec16f331c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Tenancy",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"default",
+				"dedicated",
+				"host",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec61ad01fb331a8dce022be96() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AvailabilityZone
+			"availability_zone": schemaAttributede29c03e37a76c13c7b62b94(),
+			// Property: HostId
+			"host_id": schemaAttribute6264af0c4add36584ab9d24a(),
+			// Property: HostResourceGroupArn
+			"host_resource_group_arn": schemaAttribute16cd68e1caa83fd36b0c9334(),
+			// Property: Tenancy
+			"tenancy": schemaAttributec3d81d4a42486ffec16f331c(),
+		}, /*END SCHEMA*/
+		Description: "The placement option settings for the infrastructure configuration.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec64e0181446466bcbb4d31cd() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "The terminate instance on failure configuration of the infrastructure configuration.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecc63d19f510576619d727085() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The SNS Topic Amazon Resource Name (ARN) of the infrastructure configuration.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributede29c03e37a76c13c7b62b94() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "AvailabilityZone",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee9bdd4e62286efe9e2b6c3f2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The subnet ID of the infrastructure configuration.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefcf7dfccb6952b3149d68fdc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "S3BucketName",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_imagebuilder_infrastructure_configuration", infrastructureConfigurationResource)
 	registry.AddListResourceFactory("awscc_imagebuilder_infrastructure_configuration", generic.NewListResource(infrastructureConfigurationResource))
@@ -42,13 +348,7 @@ func infrastructureConfigurationResource(ctx context.Context) (resource.Resource
 		//	  "pattern": "^arn:[^:]+:imagebuilder:[^:]+:[^:]+:infrastructure-configuration/.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the infrastructure configuration.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute43ae4048e39aeb99977fe0b7(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -56,14 +356,7 @@ func infrastructureConfigurationResource(ctx context.Context) (resource.Resource
 		//	  "description": "The description of the infrastructure configuration.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the infrastructure configuration.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute347b84825cb71e4e1bd7d659(),
 		// Property: InstanceMetadataOptions
 		// CloudFormation resource type schema:
 		//
@@ -86,40 +379,7 @@ func infrastructureConfigurationResource(ctx context.Context) (resource.Resource
 		//	  },
 		//	  "type": "object"
 		//	}
-		"instance_metadata_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: HttpPutResponseHopLimit
-				"http_put_response_hop_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Limit the number of hops that an instance metadata request can traverse to reach its destination.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-						int64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: HttpTokens
-				"http_tokens": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether a signed token header is required for instance metadata retrieval requests. The values affect the response as follows: ",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"required",
-							"optional",
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The instance metadata option settings for the infrastructure configuration.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"instance_metadata_options": schemaAttribute8361001fa6d173cec212aa32(),
 		// Property: InstanceProfileName
 		// CloudFormation resource type schema:
 		//
@@ -127,10 +387,7 @@ func infrastructureConfigurationResource(ctx context.Context) (resource.Resource
 		//	  "description": "The instance profile of the infrastructure configuration.",
 		//	  "type": "string"
 		//	}
-		"instance_profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The instance profile of the infrastructure configuration.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_profile_name": schemaAttribute6b076a19b951193990afe697(),
 		// Property: InstanceTypes
 		// CloudFormation resource type schema:
 		//
@@ -142,15 +399,7 @@ func infrastructureConfigurationResource(ctx context.Context) (resource.Resource
 		//	  },
 		//	  "type": "array"
 		//	}
-		"instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The instance types of the infrastructure configuration.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"instance_types": schemaAttributea0d13c9a6c63f8d82e2892b6(),
 		// Property: KeyPair
 		// CloudFormation resource type schema:
 		//
@@ -158,14 +407,7 @@ func infrastructureConfigurationResource(ctx context.Context) (resource.Resource
 		//	  "description": "The EC2 key pair of the infrastructure configuration..",
 		//	  "type": "string"
 		//	}
-		"key_pair": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The EC2 key pair of the infrastructure configuration..",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"key_pair": schemaAttributea586335c4ba2b38fa69c743f(),
 		// Property: Logging
 		// CloudFormation resource type schema:
 		//
@@ -191,45 +433,7 @@ func infrastructureConfigurationResource(ctx context.Context) (resource.Resource
 		//	  },
 		//	  "type": "object"
 		//	}
-		"logging": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: S3Logs
-				"s3_logs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: S3BucketName
-						"s3_bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "S3BucketName",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: S3KeyPrefix
-						"s3_key_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "S3KeyPrefix",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The S3 path in which to store the logs.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The logging configuration of the infrastructure configuration.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"logging": schemaAttributeadb3f8a2f335a82ce985c2f6(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -237,13 +441,7 @@ func infrastructureConfigurationResource(ctx context.Context) (resource.Resource
 		//	  "description": "The name of the infrastructure configuration.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the infrastructure configuration.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute5923caefc06c0672ebe30046(),
 		// Property: Placement
 		// CloudFormation resource type schema:
 		//
@@ -275,59 +473,7 @@ func infrastructureConfigurationResource(ctx context.Context) (resource.Resource
 		//	  },
 		//	  "type": "object"
 		//	}
-		"placement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AvailabilityZone
-				"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "AvailabilityZone",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: HostId
-				"host_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "HostId",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: HostResourceGroupArn
-				"host_resource_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "HostResourceGroupArn",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: Tenancy
-				"tenancy": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Tenancy",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"default",
-							"dedicated",
-							"host",
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The placement option settings for the infrastructure configuration.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"placement": schemaAttributec61ad01fb331a8dce022be96(),
 		// Property: ResourceTags
 		// CloudFormation resource type schema:
 		//
@@ -341,16 +487,7 @@ func infrastructureConfigurationResource(ctx context.Context) (resource.Resource
 		//	  },
 		//	  "type": "object"
 		//	}
-		"resource_tags":     // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The tags attached to the resource created by Image Builder.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-				mapplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"resource_tags": schemaAttribute0138a1ee40565bdb0f040f6b(),
 		// Property: SecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -362,16 +499,7 @@ func infrastructureConfigurationResource(ctx context.Context) (resource.Resource
 		//	  },
 		//	  "type": "array"
 		//	}
-		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The security group IDs of the infrastructure configuration.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"security_group_ids": schemaAttribute8a856f52a109e2db53526bef(),
 		// Property: SnsTopicArn
 		// CloudFormation resource type schema:
 		//
@@ -379,14 +507,7 @@ func infrastructureConfigurationResource(ctx context.Context) (resource.Resource
 		//	  "description": "The SNS Topic Amazon Resource Name (ARN) of the infrastructure configuration.",
 		//	  "type": "string"
 		//	}
-		"sns_topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The SNS Topic Amazon Resource Name (ARN) of the infrastructure configuration.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"sns_topic_arn": schemaAttributecc63d19f510576619d727085(),
 		// Property: SubnetId
 		// CloudFormation resource type schema:
 		//
@@ -394,14 +515,7 @@ func infrastructureConfigurationResource(ctx context.Context) (resource.Resource
 		//	  "description": "The subnet ID of the infrastructure configuration.",
 		//	  "type": "string"
 		//	}
-		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The subnet ID of the infrastructure configuration.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"subnet_id": schemaAttributee9bdd4e62286efe9e2b6c3f2(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -415,16 +529,7 @@ func infrastructureConfigurationResource(ctx context.Context) (resource.Resource
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The tags associated with the component.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-				mapplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute960407699ce4d8779c20f4bf(),
 		// Property: TerminateInstanceOnFailure
 		// CloudFormation resource type schema:
 		//
@@ -432,14 +537,7 @@ func infrastructureConfigurationResource(ctx context.Context) (resource.Resource
 		//	  "description": "The terminate instance on failure configuration of the infrastructure configuration.",
 		//	  "type": "boolean"
 		//	}
-		"terminate_instance_on_failure": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "The terminate instance on failure configuration of the infrastructure configuration.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"terminate_instance_on_failure": schemaAttributec64e0181446466bcbb4d31cd(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

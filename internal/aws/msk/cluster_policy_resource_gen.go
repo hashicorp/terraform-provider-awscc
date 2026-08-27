@@ -18,6 +18,34 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute4a1d9138846eb2d32cb9e697() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The current version of the policy attached to the specified cluster",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute701296e6dea5c31cc591a996() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "A policy document containing permissions to add to the specified cluster.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed99592e70e3564e10cdc3595() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The arn of the cluster for the resource policy.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_msk_cluster_policy", clusterPolicyResource)
 }
@@ -34,13 +62,7 @@ func clusterPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The arn of the cluster for the resource policy.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"cluster_arn": schemaAttributed99592e70e3564e10cdc3595(),
 		// Property: CurrentVersion
 		// CloudFormation resource type schema:
 		//
@@ -49,13 +71,7 @@ func clusterPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"current_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The current version of the policy attached to the specified cluster",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"current_version": schemaAttribute4a1d9138846eb2d32cb9e697(),
 		// Property: Policy
 		// CloudFormation resource type schema:
 		//
@@ -63,11 +79,7 @@ func clusterPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A policy document containing permissions to add to the specified cluster.",
 		//	  "type": "object"
 		//	}
-		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "A policy document containing permissions to add to the specified cluster.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"policy": schemaAttribute701296e6dea5c31cc591a996(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

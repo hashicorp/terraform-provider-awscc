@@ -17,6 +17,35 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute238b72d798cc7aa20ccf2e91() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute92e4d9af048aa6716c1914ae() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the subnet",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb20e660fe9a6c056d39eb087() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the network ACL",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_ec2_subnet_network_acl_association", subnetNetworkAclAssociationResource)
 	registry.AddListResourceFactory("awscc_ec2_subnet_network_acl_association", generic.NewListResource(subnetNetworkAclAssociationResource))
@@ -32,12 +61,7 @@ func subnetNetworkAclAssociationResource(ctx context.Context) (resource.Resource
 		//	{
 		//	  "type": "string"
 		//	}
-		"association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"association_id": schemaAttribute238b72d798cc7aa20ccf2e91(),
 		// Property: NetworkAclId
 		// CloudFormation resource type schema:
 		//
@@ -45,13 +69,7 @@ func subnetNetworkAclAssociationResource(ctx context.Context) (resource.Resource
 		//	  "description": "The ID of the network ACL",
 		//	  "type": "string"
 		//	}
-		"network_acl_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the network ACL",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"network_acl_id": schemaAttributeb20e660fe9a6c056d39eb087(),
 		// Property: SubnetId
 		// CloudFormation resource type schema:
 		//
@@ -59,13 +77,7 @@ func subnetNetworkAclAssociationResource(ctx context.Context) (resource.Resource
 		//	  "description": "The ID of the subnet",
 		//	  "type": "string"
 		//	}
-		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the subnet",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"subnet_id": schemaAttribute92e4d9af048aa6716c1914ae(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

@@ -17,6 +17,117 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute51af696a0c385e7694067ed7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The rule number for the policy table entry.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute68d6c7a738b9f7de4b6a040e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the transit gateway policy table.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute86546aae4d019f55272a2cdf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The protocol for the transit gateway policy rule.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8b6b853aa0c8f22ae674d040() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The source port range for the transit gateway policy rule.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaa5f55bc915469bdd8ff3bb7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The destination port range for the transit gateway policy rule.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb8c3ee66ea9e95be381971c6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the target route table.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec1bf72d7adca7635af9375e8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The destination CIDR block for the transit gateway policy rule.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec5924459bcd8a6f30e385bdc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The source CIDR block for the transit gateway policy rule.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee92ef645b9753a4ddec97f4c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DestinationCidrBlock
+			"destination_cidr_block": schemaAttributec1bf72d7adca7635af9375e8(),
+			// Property: DestinationPortRange
+			"destination_port_range": schemaAttributeaa5f55bc915469bdd8ff3bb7(),
+			// Property: Protocol
+			"protocol": schemaAttribute86546aae4d019f55272a2cdf(),
+			// Property: SourceCidrBlock
+			"source_cidr_block": schemaAttributec5924459bcd8a6f30e385bdc(),
+			// Property: SourcePortRange
+			"source_port_range": schemaAttribute8b6b853aa0c8f22ae674d040(),
+		}, /*END SCHEMA*/
+		Description: "The policy rule associated with the entry.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef6e2b27cd3a418086d4d9d91() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The state of the policy table entry.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_ec2_transit_gateway_policy_table_entry", transitGatewayPolicyTableEntryResource)
 }
@@ -55,57 +166,7 @@ func transitGatewayPolicyTableEntryResource(ctx context.Context) (resource.Resou
 		//	  },
 		//	  "type": "object"
 		//	}
-		"policy_rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DestinationCidrBlock
-				"destination_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The destination CIDR block for the transit gateway policy rule.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: DestinationPortRange
-				"destination_port_range": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The destination port range for the transit gateway policy rule.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: Protocol
-				"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The protocol for the transit gateway policy rule.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: SourceCidrBlock
-				"source_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The source CIDR block for the transit gateway policy rule.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: SourcePortRange
-				"source_port_range": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The source port range for the transit gateway policy rule.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The policy rule associated with the entry.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"policy_rule": schemaAttributee92ef645b9753a4ddec97f4c(),
 		// Property: PolicyRuleNumber
 		// CloudFormation resource type schema:
 		//
@@ -113,13 +174,7 @@ func transitGatewayPolicyTableEntryResource(ctx context.Context) (resource.Resou
 		//	  "description": "The rule number for the policy table entry.",
 		//	  "type": "string"
 		//	}
-		"policy_rule_number": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The rule number for the policy table entry.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"policy_rule_number": schemaAttribute51af696a0c385e7694067ed7(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -127,13 +182,7 @@ func transitGatewayPolicyTableEntryResource(ctx context.Context) (resource.Resou
 		//	  "description": "The state of the policy table entry.",
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The state of the policy table entry.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttributef6e2b27cd3a418086d4d9d91(),
 		// Property: TargetRouteTableId
 		// CloudFormation resource type schema:
 		//
@@ -141,10 +190,7 @@ func transitGatewayPolicyTableEntryResource(ctx context.Context) (resource.Resou
 		//	  "description": "The ID of the target route table.",
 		//	  "type": "string"
 		//	}
-		"target_route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the target route table.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"target_route_table_id": schemaAttributeb8c3ee66ea9e95be381971c6(),
 		// Property: TransitGatewayPolicyTableId
 		// CloudFormation resource type schema:
 		//
@@ -152,13 +198,7 @@ func transitGatewayPolicyTableEntryResource(ctx context.Context) (resource.Resou
 		//	  "description": "The ID of the transit gateway policy table.",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_policy_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the transit gateway policy table.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"transit_gateway_policy_table_id": schemaAttribute68d6c7a738b9f7de4b6a040e(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

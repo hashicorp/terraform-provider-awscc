@@ -25,6 +25,481 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute02fcd30d8e24c70c718873bc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether the nodes in this Memcached cluster are created in a single Availability Zone or created across multiple Availability Zones in the cluster's region.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0c0232188c9fda8706d399c9() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "One or more VPC security groups associated with the cluster.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute10cf0f20939041fe40c852a1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LogGroup
+			"log_group": schemaAttribute34373aa8839c9dfb9b04a0bb(),
+		}, /*END SCHEMA*/
+		Description: "The configuration details of the CloudWatch Logs destination",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1298c3c360f1750ddb87c041() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Kinesis Data Firehose delivery stream",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1aa4aa4e8d7f200b1398875f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the weekly time range during which maintenance on the cluster is performed.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1c32e3b96bc789ab9a73b8e4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of a Redis snapshot from which to restore data into the new node group (shard).",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// SnapshotName is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1f8e692582f9822712e59d82() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Valid value is either slow-log, which refers to slow-log or engine-log",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2e379f08751f5f0c89225009() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A single-element string list containing an Amazon Resource Name (ARN) that uniquely identifies a Redis RDB snapshot file stored in Amazon S3.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+			setplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// SnapshotArns is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute34373aa8839c9dfb9b04a0bb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the CloudWatch Logs log group.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute344ba05c70ed0581e45d4ca8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DeliveryStream
+			"delivery_stream": schemaAttribute1298c3c360f1750ddb87c041(),
+		}, /*END SCHEMA*/
+		Description: "The configuration details of the Kinesis Data Firehose destination.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3a5945e3a9e9fd5d486851eb() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of security group names to associate with this cluster.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// CacheSecurityGroupNames is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute443a737ffc2b11da9e0d2e1f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The compute and memory capacity of the nodes in the node group (shard).",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute513ae469dd8adcb07ba5e82a() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A flag that enables in-transit encryption when set to true. You cannot modify the value of TransitEncryptionEnabled after the cluster is created",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6379986df58a1d55584f203e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A name for the cache cluster.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute65aacce86c67b12f61324016() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The network type parameter for cachecluster.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b352e143bb848b3392b4f65() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute818e9aa656c40d8c0ae3ccde(),
+				// Property: Value
+				"value": schemaAttribute818e9aa656c40d8c0ae3ccde(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of tags to be added to this resource.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6c1a226a79d318c3d51cb9fa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The daily time range (in UTC) during which ElastiCache begins taking a daily snapshot of your node group (shard).",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6f1415e18608977428c425df() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The EC2 Availability Zone in which the cluster is created.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// PreferredAvailabilityZone is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7f5c1efe683e6aea18dbab31() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the cache engine to be used for this cluster.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute818e9aa656c40d8c0ae3ccde() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8247d9411af16820179e1d32() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of days for which ElastiCache retains automatic snapshots before deleting them.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute889e055c759acb23b447801c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea13cab539a18047a4e711b42() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of the Availability Zones in which cache nodes are created. The order of the zones in the list is not important.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea8016a781a9ee51ab62ca4d6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Address
+			"address": schemaAttribute889e055c759acb23b447801c(),
+			// Property: Port
+			"port": schemaAttribute889e055c759acb23b447801c(),
+		}, /*END SCHEMA*/
+		Description: "Specifies the RedisEndPoint address and port",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeafba19e9b62ae177b703e0a9() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DestinationDetails
+				"destination_details": schemaAttributedbf5f7cc5306517f8470500b(),
+				// Property: DestinationType
+				"destination_type": schemaAttributeb0fa9aad3a232aabd9fab6a4(),
+				// Property: LogFormat
+				"log_format": schemaAttributed8a0117aae80df5861cf7744(),
+				// Property: LogType
+				"log_type": schemaAttribute1f8e692582f9822712e59d82(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Specifies the destination, format and type of the logs",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb0fa9aad3a232aabd9fab6a4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specify either CloudWatch Logs or Kinesis Data Firehose as the destination type. ",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb636226bde86529a95bb9fa0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version number of the cache engine to be used for this cluster",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb7ffafd2918118e0fe9187d4() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "If you are running Redis engine version 6.0 or later, set this parameter to yes if you want to opt-in to the next minor version upgrade campaign.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeba82ab3b285de00b69fa9f81() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The port number on which each of the cache nodes accepts connections.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+			int64planmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebf15b5ec9549b29e74e6a701() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of cache nodes that the cache cluster should have.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecede06beab0991bebf7aaaf2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the subnet group to be used for the cluster.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed8a0117aae80df5861cf7744() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Valid values are either json or text",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedbf5f7cc5306517f8470500b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CloudWatchLogsDetails
+			"cloudwatch_logs_details": schemaAttribute10cf0f20939041fe40c852a1(),
+			// Property: KinesisFirehoseDetails
+			"kinesis_firehose_details": schemaAttribute344ba05c70ed0581e45d4ca8(),
+		}, /*END SCHEMA*/
+		Description: "Configuration details of either a CloudWatch Logs destination or Kinesis Data Firehose destination.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Object{ /*START VALIDATORS*/
+			fwvalidators.NotNullObject(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee4163edda26bda7dd2eaa743() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Address
+			"address": schemaAttribute889e055c759acb23b447801c(),
+			// Property: Port
+			"port": schemaAttribute889e055c759acb23b447801c(),
+		}, /*END SCHEMA*/
+		Description: "Specifies the ConfigurationEndpoint address and port",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee7e5fcfab8a10812f4702866() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic to which notifications are sent.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef680aea7dcb4c46b61fb0cc1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the parameter group to associate with this cluster.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef99086f5da0fc7e7d4f6b4e0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Ip Discovery parameter for cachecluster.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_elasticache_cache_cluster", cacheClusterResource)
 	registry.AddListResourceFactory("awscc_elasticache_cache_cluster", generic.NewListResource(cacheClusterResource))
@@ -41,14 +516,7 @@ func cacheClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Specifies whether the nodes in this Memcached cluster are created in a single Availability Zone or created across multiple Availability Zones in the cluster's region.",
 		//	  "type": "string"
 		//	}
-		"az_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether the nodes in this Memcached cluster are created in a single Availability Zone or created across multiple Availability Zones in the cluster's region.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"az_mode": schemaAttribute02fcd30d8e24c70c718873bc(),
 		// Property: AutoMinorVersionUpgrade
 		// CloudFormation resource type schema:
 		//
@@ -56,14 +524,7 @@ func cacheClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "If you are running Redis engine version 6.0 or later, set this parameter to yes if you want to opt-in to the next minor version upgrade campaign.",
 		//	  "type": "boolean"
 		//	}
-		"auto_minor_version_upgrade": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "If you are running Redis engine version 6.0 or later, set this parameter to yes if you want to opt-in to the next minor version upgrade campaign.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"auto_minor_version_upgrade": schemaAttributeb7ffafd2918118e0fe9187d4(),
 		// Property: CacheNodeType
 		// CloudFormation resource type schema:
 		//
@@ -71,10 +532,7 @@ func cacheClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The compute and memory capacity of the nodes in the node group (shard).",
 		//	  "type": "string"
 		//	}
-		"cache_node_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The compute and memory capacity of the nodes in the node group (shard).",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"cache_node_type": schemaAttribute443a737ffc2b11da9e0d2e1f(),
 		// Property: CacheParameterGroupName
 		// CloudFormation resource type schema:
 		//
@@ -82,14 +540,7 @@ func cacheClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the parameter group to associate with this cluster.",
 		//	  "type": "string"
 		//	}
-		"cache_parameter_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the parameter group to associate with this cluster.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"cache_parameter_group_name": schemaAttributef680aea7dcb4c46b61fb0cc1(),
 		// Property: CacheSecurityGroupNames
 		// CloudFormation resource type schema:
 		//
@@ -102,16 +553,7 @@ func cacheClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"cache_security_group_names": schema.SetAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of security group names to associate with this cluster.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// CacheSecurityGroupNames is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"cache_security_group_names": schemaAttribute3a5945e3a9e9fd5d486851eb(),
 		// Property: CacheSubnetGroupName
 		// CloudFormation resource type schema:
 		//
@@ -119,15 +561,7 @@ func cacheClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the subnet group to be used for the cluster.",
 		//	  "type": "string"
 		//	}
-		"cache_subnet_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the subnet group to be used for the cluster.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"cache_subnet_group_name": schemaAttributecede06beab0991bebf7aaaf2(),
 		// Property: ClusterName
 		// CloudFormation resource type schema:
 		//
@@ -135,15 +569,7 @@ func cacheClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A name for the cache cluster.",
 		//	  "type": "string"
 		//	}
-		"cluster_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A name for the cache cluster.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"cluster_name": schemaAttribute6379986df58a1d55584f203e(),
 		// Property: ConfigurationEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -160,23 +586,7 @@ func cacheClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"configuration_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Address
-				"address": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Port
-				"port": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies the ConfigurationEndpoint address and port",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"configuration_endpoint": schemaAttributee4163edda26bda7dd2eaa743(),
 		// Property: Engine
 		// CloudFormation resource type schema:
 		//
@@ -184,13 +594,7 @@ func cacheClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the cache engine to be used for this cluster.",
 		//	  "type": "string"
 		//	}
-		"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the cache engine to be used for this cluster.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"engine": schemaAttribute7f5c1efe683e6aea18dbab31(),
 		// Property: EngineVersion
 		// CloudFormation resource type schema:
 		//
@@ -198,14 +602,7 @@ func cacheClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The version number of the cache engine to be used for this cluster",
 		//	  "type": "string"
 		//	}
-		"engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version number of the cache engine to be used for this cluster",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"engine_version": schemaAttributeb636226bde86529a95bb9fa0(),
 		// Property: IpDiscovery
 		// CloudFormation resource type schema:
 		//
@@ -213,14 +610,7 @@ func cacheClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Ip Discovery parameter for cachecluster.",
 		//	  "type": "string"
 		//	}
-		"ip_discovery": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Ip Discovery parameter for cachecluster.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"ip_discovery": schemaAttributef99086f5da0fc7e7d4f6b4e0(),
 		// Property: LogDeliveryConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -289,115 +679,7 @@ func cacheClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"log_delivery_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: DestinationDetails
-					"destination_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: CloudWatchLogsDetails
-							"cloudwatch_logs_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: LogGroup
-									"log_group": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The name of the CloudWatch Logs log group.",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											fwvalidators.NotNullString(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "The configuration details of the CloudWatch Logs destination",
-								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-									objectplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-							// Property: KinesisFirehoseDetails
-							"kinesis_firehose_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: DeliveryStream
-									"delivery_stream": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The name of the Kinesis Data Firehose delivery stream",
-										Optional:    true,
-										Computed:    true,
-										Validators: []validator.String{ /*START VALIDATORS*/
-											fwvalidators.NotNullString(),
-										}, /*END VALIDATORS*/
-										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											stringplanmodifier.UseStateForUnknown(),
-										}, /*END PLAN MODIFIERS*/
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "The configuration details of the Kinesis Data Firehose destination.",
-								Optional:    true,
-								Computed:    true,
-								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-									objectplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Configuration details of either a CloudWatch Logs destination or Kinesis Data Firehose destination.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.Object{ /*START VALIDATORS*/
-							fwvalidators.NotNullObject(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-							objectplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: DestinationType
-					"destination_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Specify either CloudWatch Logs or Kinesis Data Firehose as the destination type. ",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: LogFormat
-					"log_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Valid values are either json or text",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: LogType
-					"log_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Valid value is either slow-log, which refers to slow-log or engine-log",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Specifies the destination, format and type of the logs",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"log_delivery_configurations": schemaAttributeafba19e9b62ae177b703e0a9(),
 		// Property: NetworkType
 		// CloudFormation resource type schema:
 		//
@@ -405,15 +687,7 @@ func cacheClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The network type parameter for cachecluster.",
 		//	  "type": "string"
 		//	}
-		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The network type parameter for cachecluster.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"network_type": schemaAttribute65aacce86c67b12f61324016(),
 		// Property: NotificationTopicArn
 		// CloudFormation resource type schema:
 		//
@@ -421,14 +695,7 @@ func cacheClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic to which notifications are sent.",
 		//	  "type": "string"
 		//	}
-		"notification_topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic to which notifications are sent.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"notification_topic_arn": schemaAttributee7e5fcfab8a10812f4702866(),
 		// Property: NumCacheNodes
 		// CloudFormation resource type schema:
 		//
@@ -436,10 +703,7 @@ func cacheClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The number of cache nodes that the cache cluster should have.",
 		//	  "type": "integer"
 		//	}
-		"num_cache_nodes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of cache nodes that the cache cluster should have.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"num_cache_nodes": schemaAttributebf15b5ec9549b29e74e6a701(),
 		// Property: Port
 		// CloudFormation resource type schema:
 		//
@@ -447,15 +711,7 @@ func cacheClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The port number on which each of the cache nodes accepts connections.",
 		//	  "type": "integer"
 		//	}
-		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The port number on which each of the cache nodes accepts connections.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-				int64planmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"port": schemaAttributeba82ab3b285de00b69fa9f81(),
 		// Property: PreferredAvailabilityZone
 		// CloudFormation resource type schema:
 		//
@@ -463,15 +719,7 @@ func cacheClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The EC2 Availability Zone in which the cluster is created.",
 		//	  "type": "string"
 		//	}
-		"preferred_availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The EC2 Availability Zone in which the cluster is created.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// PreferredAvailabilityZone is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"preferred_availability_zone": schemaAttribute6f1415e18608977428c425df(),
 		// Property: PreferredAvailabilityZones
 		// CloudFormation resource type schema:
 		//
@@ -484,16 +732,7 @@ func cacheClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"preferred_availability_zones": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of the Availability Zones in which cache nodes are created. The order of the zones in the list is not important.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"preferred_availability_zones": schemaAttributea13cab539a18047a4e711b42(),
 		// Property: PreferredMaintenanceWindow
 		// CloudFormation resource type schema:
 		//
@@ -501,14 +740,7 @@ func cacheClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Specifies the weekly time range during which maintenance on the cluster is performed.",
 		//	  "type": "string"
 		//	}
-		"preferred_maintenance_window": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the weekly time range during which maintenance on the cluster is performed.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"preferred_maintenance_window": schemaAttribute1aa4aa4e8d7f200b1398875f(),
 		// Property: RedisEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -525,23 +757,7 @@ func cacheClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"redis_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Address
-				"address": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Port
-				"port": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies the RedisEndPoint address and port",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"redis_endpoint": schemaAttributea8016a781a9ee51ab62ca4d6(),
 		// Property: SnapshotArns
 		// CloudFormation resource type schema:
 		//
@@ -554,17 +770,7 @@ func cacheClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"snapshot_arns": schema.SetAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A single-element string list containing an Amazon Resource Name (ARN) that uniquely identifies a Redis RDB snapshot file stored in Amazon S3.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
-				setplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// SnapshotArns is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"snapshot_arns": schemaAttribute2e379f08751f5f0c89225009(),
 		// Property: SnapshotName
 		// CloudFormation resource type schema:
 		//
@@ -572,16 +778,7 @@ func cacheClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of a Redis snapshot from which to restore data into the new node group (shard).",
 		//	  "type": "string"
 		//	}
-		"snapshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of a Redis snapshot from which to restore data into the new node group (shard).",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// SnapshotName is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"snapshot_name": schemaAttribute1c32e3b96bc789ab9a73b8e4(),
 		// Property: SnapshotRetentionLimit
 		// CloudFormation resource type schema:
 		//
@@ -589,14 +786,7 @@ func cacheClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The number of days for which ElastiCache retains automatic snapshots before deleting them.",
 		//	  "type": "integer"
 		//	}
-		"snapshot_retention_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of days for which ElastiCache retains automatic snapshots before deleting them.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"snapshot_retention_limit": schemaAttribute8247d9411af16820179e1d32(),
 		// Property: SnapshotWindow
 		// CloudFormation resource type schema:
 		//
@@ -604,14 +794,7 @@ func cacheClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The daily time range (in UTC) during which ElastiCache begins taking a daily snapshot of your node group (shard).",
 		//	  "type": "string"
 		//	}
-		"snapshot_window": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The daily time range (in UTC) during which ElastiCache begins taking a daily snapshot of your node group (shard).",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"snapshot_window": schemaAttribute6c1a226a79d318c3d51cb9fa(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -637,41 +820,7 @@ func cacheClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
-						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of tags to be added to this resource.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute6b352e143bb848b3392b4f65(),
 		// Property: TransitEncryptionEnabled
 		// CloudFormation resource type schema:
 		//
@@ -679,14 +828,7 @@ func cacheClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A flag that enables in-transit encryption when set to true. You cannot modify the value of TransitEncryptionEnabled after the cluster is created",
 		//	  "type": "boolean"
 		//	}
-		"transit_encryption_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "A flag that enables in-transit encryption when set to true. You cannot modify the value of TransitEncryptionEnabled after the cluster is created",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"transit_encryption_enabled": schemaAttribute513ae469dd8adcb07ba5e82a(),
 		// Property: VpcSecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -699,16 +841,7 @@ func cacheClusterResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"vpc_security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "One or more VPC security groups associated with the cluster.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"vpc_security_group_ids": schemaAttribute0c0232188c9fda8706d399c9(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

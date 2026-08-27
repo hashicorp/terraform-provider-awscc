@@ -17,6 +17,46 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute2239a4c3cd512cb70cb06465() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The metric type to subscribe to.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute733c871807c655527b8ee98d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The statistic to subscribe to.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec2601798761b8ad673e602f4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The target Region or Availability Zone for the metric to subscribe to.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee6ad9fb3effabc40a9c61995() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The starting Region or Availability Zone for metric to subscribe to.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_ec2_network_performance_metric_subscription", networkPerformanceMetricSubscriptionResource)
 	registry.AddListResourceFactory("awscc_ec2_network_performance_metric_subscription", generic.NewListResource(networkPerformanceMetricSubscriptionResource))
@@ -33,13 +73,7 @@ func networkPerformanceMetricSubscriptionResource(ctx context.Context) (resource
 		//	  "description": "The target Region or Availability Zone for the metric to subscribe to.",
 		//	  "type": "string"
 		//	}
-		"destination": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The target Region or Availability Zone for the metric to subscribe to.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"destination": schemaAttributec2601798761b8ad673e602f4(),
 		// Property: Metric
 		// CloudFormation resource type schema:
 		//
@@ -47,13 +81,7 @@ func networkPerformanceMetricSubscriptionResource(ctx context.Context) (resource
 		//	  "description": "The metric type to subscribe to.",
 		//	  "type": "string"
 		//	}
-		"metric": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The metric type to subscribe to.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"metric": schemaAttribute2239a4c3cd512cb70cb06465(),
 		// Property: Source
 		// CloudFormation resource type schema:
 		//
@@ -61,13 +89,7 @@ func networkPerformanceMetricSubscriptionResource(ctx context.Context) (resource
 		//	  "description": "The starting Region or Availability Zone for metric to subscribe to.",
 		//	  "type": "string"
 		//	}
-		"source": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The starting Region or Availability Zone for metric to subscribe to.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"source": schemaAttributee6ad9fb3effabc40a9c61995(),
 		// Property: Statistic
 		// CloudFormation resource type schema:
 		//
@@ -75,13 +97,7 @@ func networkPerformanceMetricSubscriptionResource(ctx context.Context) (resource
 		//	  "description": "The statistic to subscribe to.",
 		//	  "type": "string"
 		//	}
-		"statistic": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The statistic to subscribe to.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"statistic": schemaAttribute733c871807c655527b8ee98d(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

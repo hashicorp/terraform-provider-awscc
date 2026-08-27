@@ -22,6 +22,119 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0c37f1f3baf103845556d869() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "If the version was marked latest, the new version to maker as latest.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 255),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9]+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// UpdatedLatestPatchVersion is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4b3685cbbe5b71f13c88cb56() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A patch version.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 255),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9]+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute52940a5386919f3b61aad206() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5c579599bf84e3a51582b1db() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A package version.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 255),
+			stringvalidator.RegexMatches(regexp.MustCompile("^([0-9]+)\\.([0-9]+)$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8f351963b5d32604466412a4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ce7afc3ef4a956169e4accb() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether to mark the new version as the latest version.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec56f357946b2dc5f61a32c1e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An owner account.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 12),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-z\\_]+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeccfafcd1fa5fecd8c6b9f570() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A package ID.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 255),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-\\_\\/]+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed3da748f93ac614f1213e52a() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_panorama_package_version", packageVersionResource)
 }
@@ -37,13 +150,7 @@ func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "",
 		//	  "type": "boolean"
 		//	}
-		"is_latest_patch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"is_latest_patch": schemaAttribute52940a5386919f3b61aad206(),
 		// Property: MarkLatest
 		// CloudFormation resource type schema:
 		//
@@ -51,14 +158,7 @@ func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Whether to mark the new version as the latest version.",
 		//	  "type": "boolean"
 		//	}
-		"mark_latest": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether to mark the new version as the latest version.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"mark_latest": schemaAttribute9ce7afc3ef4a956169e4accb(),
 		// Property: OwnerAccount
 		// CloudFormation resource type schema:
 		//
@@ -69,19 +169,7 @@ func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[0-9a-z\\_]+$",
 		//	  "type": "string"
 		//	}
-		"owner_account": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "An owner account.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 12),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-z\\_]+$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"owner_account": schemaAttributec56f357946b2dc5f61a32c1e(),
 		// Property: PackageArn
 		// CloudFormation resource type schema:
 		//
@@ -90,12 +178,7 @@ func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"package_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"package_arn": schemaAttribute8f351963b5d32604466412a4(),
 		// Property: PackageId
 		// CloudFormation resource type schema:
 		//
@@ -106,17 +189,7 @@ func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[a-zA-Z0-9\\-\\_\\/]+$",
 		//	  "type": "string"
 		//	}
-		"package_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A package ID.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-\\_\\/]+$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"package_id": schemaAttributeccfafcd1fa5fecd8c6b9f570(),
 		// Property: PackageName
 		// CloudFormation resource type schema:
 		//
@@ -126,12 +199,7 @@ func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
 		//	  "type": "string"
 		//	}
-		"package_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"package_name": schemaAttribute8f351963b5d32604466412a4(),
 		// Property: PackageVersion
 		// CloudFormation resource type schema:
 		//
@@ -142,17 +210,7 @@ func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^([0-9]+)\\.([0-9]+)$",
 		//	  "type": "string"
 		//	}
-		"package_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A package version.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
-				stringvalidator.RegexMatches(regexp.MustCompile("^([0-9]+)\\.([0-9]+)$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"package_version": schemaAttribute5c579599bf84e3a51582b1db(),
 		// Property: PatchVersion
 		// CloudFormation resource type schema:
 		//
@@ -163,29 +221,14 @@ func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[a-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"patch_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A patch version.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9]+$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"patch_version": schemaAttribute4b3685cbbe5b71f13c88cb56(),
 		// Property: RegisteredTime
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "integer"
 		//	}
-		"registered_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"registered_time": schemaAttributed3da748f93ac614f1213e52a(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -198,12 +241,7 @@ func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute8f351963b5d32604466412a4(),
 		// Property: StatusDescription
 		// CloudFormation resource type schema:
 		//
@@ -212,12 +250,7 @@ func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"status_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"status_description": schemaAttribute8f351963b5d32604466412a4(),
 		// Property: UpdatedLatestPatchVersion
 		// CloudFormation resource type schema:
 		//
@@ -228,19 +261,7 @@ func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[a-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"updated_latest_patch_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "If the version was marked latest, the new version to maker as latest.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9]+$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// UpdatedLatestPatchVersion is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"updated_latest_patch_version": schemaAttribute0c37f1f3baf103845556d869(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

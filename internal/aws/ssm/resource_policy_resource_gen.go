@@ -17,6 +17,43 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0e5639f997aaacffd413fd53() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An unique identifier within the policies of a resource. ",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute68560cef1bf8b9f2a933841e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A snapshot identifier for the policy over time.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb5095a895341f1b2741d9a99() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Actual policy statement.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec7eae793d1a83a341d44ad46() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Arn of OpsItemGroup etc.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_ssm_resource_policy", resourcePolicyResource)
 	registry.AddListResourceFactory("awscc_ssm_resource_policy", generic.NewListResource(resourcePolicyResource))
@@ -33,10 +70,7 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Actual policy statement.",
 		//	  "type": "string"
 		//	}
-		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Actual policy statement.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"policy": schemaAttributeb5095a895341f1b2741d9a99(),
 		// Property: PolicyHash
 		// CloudFormation resource type schema:
 		//
@@ -44,13 +78,7 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A snapshot identifier for the policy over time.",
 		//	  "type": "string"
 		//	}
-		"policy_hash": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A snapshot identifier for the policy over time.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"policy_hash": schemaAttribute68560cef1bf8b9f2a933841e(),
 		// Property: PolicyId
 		// CloudFormation resource type schema:
 		//
@@ -58,13 +86,7 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "An unique identifier within the policies of a resource. ",
 		//	  "type": "string"
 		//	}
-		"policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "An unique identifier within the policies of a resource. ",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"policy_id": schemaAttribute0e5639f997aaacffd413fd53(),
 		// Property: ResourceArn
 		// CloudFormation resource type schema:
 		//
@@ -72,13 +94,7 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Arn of OpsItemGroup etc.",
 		//	  "type": "string"
 		//	}
-		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Arn of OpsItemGroup etc.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"resource_arn": schemaAttributec7eae793d1a83a341d44ad46(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

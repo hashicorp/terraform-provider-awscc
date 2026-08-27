@@ -17,6 +17,33 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute400f46fa9ed0cc081285de27() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID or full Amazon Resource Name (ARN) of the task set.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5e65ad269cb69a3178e1124e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service to create the task set in.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed67bb5d449f091645e67b9f3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The short name or full Amazon Resource Name (ARN) of the service to create the task set in.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_ecs_primary_task_set", primaryTaskSetResource)
 }
@@ -32,13 +59,7 @@ func primaryTaskSetResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service to create the task set in.",
 		//	  "type": "string"
 		//	}
-		"cluster": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service to create the task set in.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"cluster": schemaAttribute5e65ad269cb69a3178e1124e(),
 		// Property: Service
 		// CloudFormation resource type schema:
 		//
@@ -46,13 +67,7 @@ func primaryTaskSetResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The short name or full Amazon Resource Name (ARN) of the service to create the task set in.",
 		//	  "type": "string"
 		//	}
-		"service": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The short name or full Amazon Resource Name (ARN) of the service to create the task set in.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"service": schemaAttributed67bb5d449f091645e67b9f3(),
 		// Property: TaskSetId
 		// CloudFormation resource type schema:
 		//
@@ -60,10 +75,7 @@ func primaryTaskSetResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID or full Amazon Resource Name (ARN) of the task set.",
 		//	  "type": "string"
 		//	}
-		"task_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID or full Amazon Resource Name (ARN) of the task set.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"task_set_id": schemaAttribute400f46fa9ed0cc081285de27(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

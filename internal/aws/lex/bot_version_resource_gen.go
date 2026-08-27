@@ -21,6 +21,95 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute003a654cbffc8bb3270e0a2b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SourceBotVersion
+			"source_bot_version": schemaAttributec374374caeed82a8854b2701(),
+		}, /*END SCHEMA*/
+		Description: "The version of a bot used for a bot locale.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute02e482c30be59c76c157aea3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description of the version. Use the description to help identify the version in lists.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(200),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute49db313540b3ad4e91bad242() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BotVersionLocaleDetails
+				"bot_version_locale_details": schemaAttribute003a654cbffc8bb3270e0a2b(),
+				// Property: LocaleId
+				"locale_id": schemaAttributeae1a37d71640ceaa7aef5f3b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Specifies the locales that Amazon Lex adds to this version. You can choose the Draft version or any other previously published version for each locale.",
+		Required:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeAtLeast(1),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+		}, /*END PLAN MODIFIERS*/
+		// BotVersionLocaleSpecification is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute916f95b5eb140b78c7c2a313() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Unique ID of resource",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(10, 10),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-zA-Z]+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeae1a37d71640ceaa7aef5f3b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the language and locale that the bot will be used in.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec374374caeed82a8854b2701() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version of a bot.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 5),
+			stringvalidator.RegexMatches(regexp.MustCompile("^(DRAFT|[0-9]+)$"), ""),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed7087b776f226c6032f73daf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version of a bot.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_lex_bot_version", botVersionResource)
 	registry.AddListResourceFactory("awscc_lex_bot_version", generic.NewListResource(botVersionResource))
@@ -40,17 +129,7 @@ func botVersionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[0-9a-zA-Z]+$",
 		//	  "type": "string"
 		//	}
-		"bot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Unique ID of resource",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(10, 10),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-zA-Z]+$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"bot_id": schemaAttribute916f95b5eb140b78c7c2a313(),
 		// Property: BotVersion
 		// CloudFormation resource type schema:
 		//
@@ -61,13 +140,7 @@ func botVersionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^(DRAFT|[0-9]+)$",
 		//	  "type": "string"
 		//	}
-		"bot_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version of a bot.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"bot_version": schemaAttributed7087b776f226c6032f73daf(),
 		// Property: BotVersionLocaleSpecification
 		// CloudFormation resource type schema:
 		//
@@ -108,42 +181,7 @@ func botVersionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"bot_version_locale_specification": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: BotVersionLocaleDetails
-					"bot_version_locale_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: SourceBotVersion
-							"source_bot_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The version of a bot.",
-								Required:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 5),
-									stringvalidator.RegexMatches(regexp.MustCompile("^(DRAFT|[0-9]+)$"), ""),
-								}, /*END VALIDATORS*/
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "The version of a bot used for a bot locale.",
-						Required:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: LocaleId
-					"locale_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The identifier of the language and locale that the bot will be used in.",
-						Required:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Specifies the locales that Amazon Lex adds to this version. You can choose the Draft version or any other previously published version for each locale.",
-			Required:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeAtLeast(1),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-			}, /*END PLAN MODIFIERS*/
-			// BotVersionLocaleSpecification is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"bot_version_locale_specification": schemaAttribute49db313540b3ad4e91bad242(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -152,17 +190,7 @@ func botVersionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "maxLength": 200,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description of the version. Use the description to help identify the version in lists.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(200),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute02e482c30be59c76c157aea3(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

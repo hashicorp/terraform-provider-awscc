@@ -19,6 +19,29 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute37623970586a249f4df44bec() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier for the specified AWS account.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef4ea4fe3ec2d33e21857ce7e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The state of EBS Snapshot Block Public Access.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"block-all-sharing",
+				"block-new-sharing",
+			),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_ec2_snapshot_block_public_access", snapshotBlockPublicAccessResource)
 	registry.AddListResourceFactory("awscc_ec2_snapshot_block_public_access", generic.NewListResource(snapshotBlockPublicAccessResource))
@@ -35,13 +58,7 @@ func snapshotBlockPublicAccessResource(ctx context.Context) (resource.Resource, 
 		//	  "description": "The identifier for the specified AWS account.",
 		//	  "type": "string"
 		//	}
-		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier for the specified AWS account.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"account_id": schemaAttribute37623970586a249f4df44bec(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -53,16 +70,7 @@ func snapshotBlockPublicAccessResource(ctx context.Context) (resource.Resource, 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The state of EBS Snapshot Block Public Access.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"block-all-sharing",
-					"block-new-sharing",
-				),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttributef4ea4fe3ec2d33e21857ce7e(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

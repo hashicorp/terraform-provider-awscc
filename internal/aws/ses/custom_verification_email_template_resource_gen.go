@@ -22,6 +22,107 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute17f5118957b4adcf457746f1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The email address that the custom verification email is sent from.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute224c486230cf77944b17636b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key of the key-value tag.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute24bcc6e6614bcb3af99ff505() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The content of the custom verification email. The total size of the email must be less than 10 MB. The message body may contain HTML, with some limitations.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6ed49e314428883d45b705e1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value of the key-value tag.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 256),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute87b2518f0322851f9f6d302c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The URL that the recipient of the verification email is sent to if his or her address is not successfully verified.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb459e6f789be4b093fbfa314() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The URL that the recipient of the verification email is sent to if his or her address is successfully verified.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedf6bcdde87f9b5431f611809() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the custom verification email template.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 64),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeed8e28b208b928fd7ca320cc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The subject line of the custom verification email.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef789f54e39bbec2db822ed32() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute224c486230cf77944b17636b(),
+				// Property: Value
+				"value": schemaAttribute6ed49e314428883d45b705e1(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags (keys and values) associated with the tenant.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.List{ /*START VALIDATORS*/
+			listvalidator.SizeBetween(0, 50),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_ses_custom_verification_email_template", customVerificationEmailTemplateResource)
 	registry.AddListResourceFactory("awscc_ses_custom_verification_email_template", generic.NewListResource(customVerificationEmailTemplateResource))
@@ -38,10 +139,7 @@ func customVerificationEmailTemplateResource(ctx context.Context) (resource.Reso
 		//	  "description": "The URL that the recipient of the verification email is sent to if his or her address is not successfully verified.",
 		//	  "type": "string"
 		//	}
-		"failure_redirection_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The URL that the recipient of the verification email is sent to if his or her address is not successfully verified.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"failure_redirection_url": schemaAttribute87b2518f0322851f9f6d302c(),
 		// Property: FromEmailAddress
 		// CloudFormation resource type schema:
 		//
@@ -49,10 +147,7 @@ func customVerificationEmailTemplateResource(ctx context.Context) (resource.Reso
 		//	  "description": "The email address that the custom verification email is sent from.",
 		//	  "type": "string"
 		//	}
-		"from_email_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The email address that the custom verification email is sent from.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"from_email_address": schemaAttribute17f5118957b4adcf457746f1(),
 		// Property: SuccessRedirectionURL
 		// CloudFormation resource type schema:
 		//
@@ -60,10 +155,7 @@ func customVerificationEmailTemplateResource(ctx context.Context) (resource.Reso
 		//	  "description": "The URL that the recipient of the verification email is sent to if his or her address is successfully verified.",
 		//	  "type": "string"
 		//	}
-		"success_redirection_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The URL that the recipient of the verification email is sent to if his or her address is successfully verified.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"success_redirection_url": schemaAttributeb459e6f789be4b093fbfa314(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -97,48 +189,7 @@ func customVerificationEmailTemplateResource(ctx context.Context) (resource.Reso
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key of the key-value tag.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value of the key-value tag.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags (keys and values) associated with the tenant.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.SizeBetween(0, 50),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributef789f54e39bbec2db822ed32(),
 		// Property: TemplateContent
 		// CloudFormation resource type schema:
 		//
@@ -146,10 +197,7 @@ func customVerificationEmailTemplateResource(ctx context.Context) (resource.Reso
 		//	  "description": "The content of the custom verification email. The total size of the email must be less than 10 MB. The message body may contain HTML, with some limitations.",
 		//	  "type": "string"
 		//	}
-		"template_content": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The content of the custom verification email. The total size of the email must be less than 10 MB. The message body may contain HTML, with some limitations.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"template_content": schemaAttribute24bcc6e6614bcb3af99ff505(),
 		// Property: TemplateName
 		// CloudFormation resource type schema:
 		//
@@ -159,16 +207,7 @@ func customVerificationEmailTemplateResource(ctx context.Context) (resource.Reso
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the custom verification email template.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 64),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"template_name": schemaAttributedf6bcdde87f9b5431f611809(),
 		// Property: TemplateSubject
 		// CloudFormation resource type schema:
 		//
@@ -176,10 +215,7 @@ func customVerificationEmailTemplateResource(ctx context.Context) (resource.Reso
 		//	  "description": "The subject line of the custom verification email.",
 		//	  "type": "string"
 		//	}
-		"template_subject": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The subject line of the custom verification email.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"template_subject": schemaAttributeed8e28b208b928fd7ca320cc(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

@@ -19,6 +19,86 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute14183e4b032409bcb6697b5c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ResolverQueryLogConfigAssociationErrorMessage",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c656e7264c6891202b25b37() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Id",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5a4b3be847e7fc4564940349() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ResolverQueryLogConfigAssociationStatus",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5ed4ef9b395591ee06edcaa8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Rfc3339TimeString",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef9d493c93445814a6020c684() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ResolverQueryLogConfigId",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 64),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefc8d7687880813b77596b8d9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ResolverQueryLogConfigAssociationError",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefdc3d1bcee4afb2675ee6081() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ResourceId",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 64),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_route53resolver_resolver_query_logging_config_association", resolverQueryLoggingConfigAssociationResource)
 	registry.AddListResourceFactory("awscc_route53resolver_resolver_query_logging_config_association", generic.NewListResource(resolverQueryLoggingConfigAssociationResource))
@@ -37,13 +117,7 @@ func resolverQueryLoggingConfigAssociationResource(ctx context.Context) (resourc
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Rfc3339TimeString",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"creation_time": schemaAttribute5ed4ef9b395591ee06edcaa8(),
 		// Property: Error
 		// CloudFormation resource type schema:
 		//
@@ -56,13 +130,7 @@ func resolverQueryLoggingConfigAssociationResource(ctx context.Context) (resourc
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"error": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ResolverQueryLogConfigAssociationError",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"error": schemaAttributefc8d7687880813b77596b8d9(),
 		// Property: ErrorMessage
 		// CloudFormation resource type schema:
 		//
@@ -70,13 +138,7 @@ func resolverQueryLoggingConfigAssociationResource(ctx context.Context) (resourc
 		//	  "description": "ResolverQueryLogConfigAssociationErrorMessage",
 		//	  "type": "string"
 		//	}
-		"error_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ResolverQueryLogConfigAssociationErrorMessage",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"error_message": schemaAttribute14183e4b032409bcb6697b5c(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -86,13 +148,7 @@ func resolverQueryLoggingConfigAssociationResource(ctx context.Context) (resourc
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"resolver_query_logging_config_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Id",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"resolver_query_logging_config_association_id": schemaAttribute2c656e7264c6891202b25b37(),
 		// Property: ResolverQueryLogConfigId
 		// CloudFormation resource type schema:
 		//
@@ -102,18 +158,7 @@ func resolverQueryLoggingConfigAssociationResource(ctx context.Context) (resourc
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"resolver_query_log_config_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ResolverQueryLogConfigId",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 64),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"resolver_query_log_config_id": schemaAttributef9d493c93445814a6020c684(),
 		// Property: ResourceId
 		// CloudFormation resource type schema:
 		//
@@ -123,18 +168,7 @@ func resolverQueryLoggingConfigAssociationResource(ctx context.Context) (resourc
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ResourceId",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 64),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"resource_id": schemaAttributefdc3d1bcee4afb2675ee6081(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -150,13 +184,7 @@ func resolverQueryLoggingConfigAssociationResource(ctx context.Context) (resourc
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ResolverQueryLogConfigAssociationStatus",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute5a4b3be847e7fc4564940349(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

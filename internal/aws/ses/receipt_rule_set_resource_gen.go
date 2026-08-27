@@ -17,6 +17,18 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute6bcc22ede36351bf5af89748() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the rule set.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_ses_receipt_rule_set", receiptRuleSetResource)
 	registry.AddListResourceFactory("awscc_ses_receipt_rule_set", generic.NewListResource(receiptRuleSetResource))
@@ -33,15 +45,7 @@ func receiptRuleSetResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The name of the rule set.",
 		//	  "type": "string"
 		//	}
-		"rule_set_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the rule set.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"rule_set_name": schemaAttribute6bcc22ede36351bf5af89748(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

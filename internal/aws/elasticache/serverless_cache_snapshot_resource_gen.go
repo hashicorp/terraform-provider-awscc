@@ -24,6 +24,188 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute0ff7f41f259512a2892a8e73() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key for the tag. May not be null.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1ffd2915076653e343418381() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The date and time that the source serverless cache's metadata and cache data set was obtained for the snapshot.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2f1b767b7486f0a7b812df47() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The engine that the serverless cache is configured with.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute376dd54e97cc4ef1dddc9cdc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of snapshot of the serverless cache.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute48b04952089103f544d6fee0() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute0ff7f41f259512a2892a8e73(),
+				// Property: Value
+				"value": schemaAttributeedcb565007537c3e35d72894(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of tags to be added to the serverless cache snapshot resource.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5b6941f2f9494347a741e0a5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the AWS KMS key used to encrypt the snapshot. Provide the key ARN: the resource returns the key ARN on read, so supplying a bare key ID or alias for this createOnly property may be reported as drift by CloudFormation.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(2048),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute65a611c085a2dd52f788e392() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The total size of the serverless cache snapshot, in bytes.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute87d361ae50579daeed096e01() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The engine version number that the serverless cache is configured with.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute894ee6d4be77af7e1a375d79() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the serverless cache snapshot. Must be unique for the customer account. This value is stored as a lowercase string.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 255),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-z][a-z0-9]*(-[a-z0-9]+)*$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a6e619368f65dfa378de5a6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Engine
+			"engine": schemaAttribute2f1b767b7486f0a7b812df47(),
+			// Property: MajorEngineVersion
+			"major_engine_version": schemaAttribute87d361ae50579daeed096e01(),
+			// Property: ServerlessCacheName
+			"serverless_cache_name": schemaAttributeb99eaa22b5b63d33310cf11f(),
+		}, /*END SCHEMA*/
+		Description: "The configuration of the serverless cache, at the time the snapshot was taken.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea3aede2a30f916c307f75a82() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The current status of the serverless cache snapshot.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb639c951afb3e3f36901ef1c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the serverless cache snapshot.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb99eaa22b5b63d33310cf11f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the serverless cache.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed573763b1bac52d22029063c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of an existing serverless cache. The snapshot is created from this cache.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 255),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[a-z][a-z0-9]*(-[a-z0-9]+)*$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeedcb565007537c3e35d72894() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag's value. May be null.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 256),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_elasticache_serverless_cache_snapshot", serverlessCacheSnapshotResource)
 	registry.AddListResourceFactory("awscc_elasticache_serverless_cache_snapshot", generic.NewListResource(serverlessCacheSnapshotResource))
@@ -41,13 +223,7 @@ func serverlessCacheSnapshotResource(ctx context.Context) (resource.Resource, er
 		//	  "pattern": "^arn:aws(-[a-z]+)*:elasticache:[a-z0-9-]+:[0-9]{12}:serverlesscachesnapshot:.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the serverless cache snapshot.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributeb639c951afb3e3f36901ef1c(),
 		// Property: BytesUsedForCache
 		// CloudFormation resource type schema:
 		//
@@ -55,13 +231,7 @@ func serverlessCacheSnapshotResource(ctx context.Context) (resource.Resource, er
 		//	  "description": "The total size of the serverless cache snapshot, in bytes.",
 		//	  "type": "string"
 		//	}
-		"bytes_used_for_cache": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The total size of the serverless cache snapshot, in bytes.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"bytes_used_for_cache": schemaAttribute65a611c085a2dd52f788e392(),
 		// Property: CreateTime
 		// CloudFormation resource type schema:
 		//
@@ -70,14 +240,7 @@ func serverlessCacheSnapshotResource(ctx context.Context) (resource.Resource, er
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The date and time that the source serverless cache's metadata and cache data set was obtained for the snapshot.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"create_time": schemaAttribute1ffd2915076653e343418381(),
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -86,18 +249,7 @@ func serverlessCacheSnapshotResource(ctx context.Context) (resource.Resource, er
 		//	  "maxLength": 2048,
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the AWS KMS key used to encrypt the snapshot. Provide the key ARN: the resource returns the key ARN on read, so supplying a bare key ID or alias for this createOnly property may be reported as drift by CloudFormation.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(2048),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"kms_key_id": schemaAttribute5b6941f2f9494347a741e0a5(),
 		// Property: ServerlessCacheConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -120,30 +272,7 @@ func serverlessCacheSnapshotResource(ctx context.Context) (resource.Resource, er
 		//	  },
 		//	  "type": "object"
 		//	}
-		"serverless_cache_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Engine
-				"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The engine that the serverless cache is configured with.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MajorEngineVersion
-				"major_engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The engine version number that the serverless cache is configured with.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ServerlessCacheName
-				"serverless_cache_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The identifier of the serverless cache.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The configuration of the serverless cache, at the time the snapshot was taken.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"serverless_cache_configuration": schemaAttribute8a6e619368f65dfa378de5a6(),
 		// Property: ServerlessCacheName
 		// CloudFormation resource type schema:
 		//
@@ -154,17 +283,7 @@ func serverlessCacheSnapshotResource(ctx context.Context) (resource.Resource, er
 		//	  "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$",
 		//	  "type": "string"
 		//	}
-		"serverless_cache_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of an existing serverless cache. The snapshot is created from this cache.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-z][a-z0-9]*(-[a-z0-9]+)*$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"serverless_cache_name": schemaAttributed573763b1bac52d22029063c(),
 		// Property: ServerlessCacheSnapshotName
 		// CloudFormation resource type schema:
 		//
@@ -175,17 +294,7 @@ func serverlessCacheSnapshotResource(ctx context.Context) (resource.Resource, er
 		//	  "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$",
 		//	  "type": "string"
 		//	}
-		"serverless_cache_snapshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the serverless cache snapshot. Must be unique for the customer account. This value is stored as a lowercase string.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-z][a-z0-9]*(-[a-z0-9]+)*$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"serverless_cache_snapshot_name": schemaAttribute894ee6d4be77af7e1a375d79(),
 		// Property: SnapshotType
 		// CloudFormation resource type schema:
 		//
@@ -193,13 +302,7 @@ func serverlessCacheSnapshotResource(ctx context.Context) (resource.Resource, er
 		//	  "description": "The type of snapshot of the serverless cache.",
 		//	  "type": "string"
 		//	}
-		"snapshot_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of snapshot of the serverless cache.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"snapshot_type": schemaAttribute376dd54e97cc4ef1dddc9cdc(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -207,13 +310,7 @@ func serverlessCacheSnapshotResource(ctx context.Context) (resource.Resource, er
 		//	  "description": "The current status of the serverless cache snapshot.",
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The current status of the serverless cache snapshot.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttributea3aede2a30f916c307f75a82(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -245,44 +342,7 @@ func serverlessCacheSnapshotResource(ctx context.Context) (resource.Resource, er
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key for the tag. May not be null.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag's value. May be null.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of tags to be added to the serverless cache snapshot resource.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute48b04952089103f544d6fee0(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

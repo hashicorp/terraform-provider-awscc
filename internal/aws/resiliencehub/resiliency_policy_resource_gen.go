@@ -25,6 +25,175 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute145a4cc32e4682f6789413a3() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "RPO in seconds.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute26b7694d204c56e08fcae21b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Resiliency Policy Tier.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"MissionCritical",
+				"Critical",
+				"Important",
+				"CoreServices",
+				"NonCritical",
+			),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute31ff1a474225dd33a9665d7e() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+			mapplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4037aac91eedfe9e9f472a69() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Description of Resiliency Policy.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthAtMost(500),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute43a1a7fa8a790e27175500c7() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "RPO in seconds.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			fwvalidators.NotNullInt64(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute549eeb6e17afe3ad832b1b2f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RpoInSecs
+			"rpo_in_secs": schemaAttribute43a1a7fa8a790e27175500c7(),
+			// Property: RtoInSecs
+			"rto_in_secs": schemaAttributec38eb89c0a76f849464d24ff(),
+		}, /*END SCHEMA*/
+		Description: "Failure Policy.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute79d36ccdb690ec8a3db5b39b() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "RTO in seconds.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute82e25d1c49cddca2d4e638eb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of Resiliency Policy.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$"), ""),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute84f4fa370c63b6f242976050() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Data Location Constraint of the Policy.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"AnyLocation",
+				"SameContinent",
+				"SameCountry",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea011e614fd2be6a6c2bcb2e5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AZ
+			"az": schemaAttributeae7b033a94969545753dd005(),
+			// Property: Hardware
+			"hardware": schemaAttributeae7b033a94969545753dd005(),
+			// Property: Region
+			"region": schemaAttribute549eeb6e17afe3ad832b1b2f(),
+			// Property: Software
+			"software": schemaAttributeae7b033a94969545753dd005(),
+		}, /*END SCHEMA*/
+		Required: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeae7b033a94969545753dd005() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RpoInSecs
+			"rpo_in_secs": schemaAttribute145a4cc32e4682f6789413a3(),
+			// Property: RtoInSecs
+			"rto_in_secs": schemaAttribute79d36ccdb690ec8a3db5b39b(),
+		}, /*END SCHEMA*/
+		Description: "Failure Policy.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb32397864545db2261e58667() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Amazon Resource Name (ARN) of the Resiliency Policy.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec38eb89c0a76f849464d24ff() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "RTO in seconds.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Int64{ /*START VALIDATORS*/
+			fwvalidators.NotNullInt64(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_resiliencehub_resiliency_policy", resiliencyPolicyResource)
 	registry.AddListResourceFactory("awscc_resiliencehub_resiliency_policy", generic.NewListResource(resiliencyPolicyResource))
@@ -46,21 +215,7 @@ func resiliencyPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"data_location_constraint": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Data Location Constraint of the Policy.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"AnyLocation",
-					"SameContinent",
-					"SameCountry",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"data_location_constraint": schemaAttribute84f4fa370c63b6f242976050(),
 		// Property: Policy
 		// CloudFormation resource type schema:
 		//
@@ -151,97 +306,7 @@ func resiliencyPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AZ
-				"az": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: RpoInSecs
-						"rpo_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "RPO in seconds.",
-							Required:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: RtoInSecs
-						"rto_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "RTO in seconds.",
-							Required:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Failure Policy.",
-					Required:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Hardware
-				"hardware": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: RpoInSecs
-						"rpo_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "RPO in seconds.",
-							Required:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: RtoInSecs
-						"rto_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "RTO in seconds.",
-							Required:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Failure Policy.",
-					Required:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Region
-				"region": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: RpoInSecs
-						"rpo_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "RPO in seconds.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.Int64{ /*START VALIDATORS*/
-								fwvalidators.NotNullInt64(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-						// Property: RtoInSecs
-						"rto_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "RTO in seconds.",
-							Optional:    true,
-							Computed:    true,
-							Validators: []validator.Int64{ /*START VALIDATORS*/
-								fwvalidators.NotNullInt64(),
-							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								int64planmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Failure Policy.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: Software
-				"software": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: RpoInSecs
-						"rpo_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "RPO in seconds.",
-							Required:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: RtoInSecs
-						"rto_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "RTO in seconds.",
-							Required:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Failure Policy.",
-					Required:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Required: true,
-		}, /*END ATTRIBUTE*/
+		"policy": schemaAttributea011e614fd2be6a6c2bcb2e5(),
 		// Property: PolicyArn
 		// CloudFormation resource type schema:
 		//
@@ -250,13 +315,7 @@ func resiliencyPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"policy_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Amazon Resource Name (ARN) of the Resiliency Policy.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"policy_arn": schemaAttributeb32397864545db2261e58667(),
 		// Property: PolicyDescription
 		// CloudFormation resource type schema:
 		//
@@ -265,17 +324,7 @@ func resiliencyPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "maxLength": 500,
 		//	  "type": "string"
 		//	}
-		"policy_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Description of Resiliency Policy.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthAtMost(500),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"policy_description": schemaAttribute4037aac91eedfe9e9f472a69(),
 		// Property: PolicyName
 		// CloudFormation resource type schema:
 		//
@@ -284,13 +333,7 @@ func resiliencyPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$",
 		//	  "type": "string"
 		//	}
-		"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Name of Resiliency Policy.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$"), ""),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"policy_name": schemaAttribute82e25d1c49cddca2d4e638eb(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -304,15 +347,7 @@ func resiliencyPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-				mapplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute31ff1a474225dd33a9665d7e(),
 		// Property: Tier
 		// CloudFormation resource type schema:
 		//
@@ -327,19 +362,7 @@ func resiliencyPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"tier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Resiliency Policy Tier.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"MissionCritical",
-					"Critical",
-					"Important",
-					"CoreServices",
-					"NonCritical",
-				),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"tier": schemaAttribute26b7694d204c56e08fcae21b(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

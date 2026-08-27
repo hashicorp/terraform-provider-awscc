@@ -22,6 +22,70 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute16c3f44d7bf47013333ad01a() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "When set to true, invitation emails are not sent to the member accounts. Member accounts must still accept the invitation before they are added to the behavior graph. Updating this field has no effect.",
+		Optional:    true,
+		Computed:    true,
+		Default:     booldefault.StaticBool(false),
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// DisableEmailNotification is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute68a3aac58c6506638a939048() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the graph to which the member account will be invited",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("arn:aws(-[\\w]+)*:detective:(([a-z]+-)+[0-9]+):[0-9]{12}:graph:[0-9a-f]{32}"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9802dc73dde5509e5212d73d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A message to be included in the email invitation sent to the invited account. Updating this field has no effect.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 1000),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// Message is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9947380710e568614fb474bc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS account ID to be invited to join the graph as a member",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("[0-9]{12}"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaff50b90cd399de32d2b024d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The root email address for the account to be invited, for validation. Updating this field has no effect.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile(".*@.*"), ""),
+		}, /*END VALIDATORS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_detective_member_invitation", memberInvitationResource)
 	registry.AddListResourceFactory("awscc_detective_member_invitation", generic.NewListResource(memberInvitationResource))
@@ -39,16 +103,7 @@ func memberInvitationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "When set to true, invitation emails are not sent to the member accounts. Member accounts must still accept the invitation before they are added to the behavior graph. Updating this field has no effect.",
 		//	  "type": "boolean"
 		//	}
-		"disable_email_notification": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "When set to true, invitation emails are not sent to the member accounts. Member accounts must still accept the invitation before they are added to the behavior graph. Updating this field has no effect.",
-			Optional:    true,
-			Computed:    true,
-			Default:     booldefault.StaticBool(false),
-			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-				boolplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// DisableEmailNotification is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"disable_email_notification": schemaAttribute16c3f44d7bf47013333ad01a(),
 		// Property: GraphArn
 		// CloudFormation resource type schema:
 		//
@@ -57,16 +112,7 @@ func memberInvitationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "arn:aws(-[\\w]+)*:detective:(([a-z]+-)+[0-9]+):[0-9]{12}:graph:[0-9a-f]{32}",
 		//	  "type": "string"
 		//	}
-		"graph_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the graph to which the member account will be invited",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("arn:aws(-[\\w]+)*:detective:(([a-z]+-)+[0-9]+):[0-9]{12}:graph:[0-9a-f]{32}"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"graph_arn": schemaAttribute68a3aac58c6506638a939048(),
 		// Property: MemberEmailAddress
 		// CloudFormation resource type schema:
 		//
@@ -75,13 +121,7 @@ func memberInvitationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": ".*@.*",
 		//	  "type": "string"
 		//	}
-		"member_email_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The root email address for the account to be invited, for validation. Updating this field has no effect.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile(".*@.*"), ""),
-			}, /*END VALIDATORS*/
-		}, /*END ATTRIBUTE*/
+		"member_email_address": schemaAttributeaff50b90cd399de32d2b024d(),
 		// Property: MemberId
 		// CloudFormation resource type schema:
 		//
@@ -90,16 +130,7 @@ func memberInvitationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "[0-9]{12}",
 		//	  "type": "string"
 		//	}
-		"member_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS account ID to be invited to join the graph as a member",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("[0-9]{12}"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"member_id": schemaAttribute9947380710e568614fb474bc(),
 		// Property: Message
 		// CloudFormation resource type schema:
 		//
@@ -109,18 +140,7 @@ func memberInvitationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"message": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A message to be included in the email invitation sent to the invited account. Updating this field has no effect.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 1000),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// Message is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"message": schemaAttribute9802dc73dde5509e5212d73d(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

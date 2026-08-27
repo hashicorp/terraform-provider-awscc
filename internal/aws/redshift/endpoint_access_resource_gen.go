@@ -24,6 +24,217 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0ecefcee44bc18b140ce0bf1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The connection endpoint ID for connecting an Amazon Redshift cluster through the proxy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0f5207f8a6cb6fe2a6e629bd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the VPC security group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute12ab1f3d320f9a12fa495bf4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the endpoint.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1c916bbc9e9a7040c1f834d8() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AvailabilityZone
+				"availability_zone": schemaAttribute340e786ca73c49304e9a6d67(),
+				// Property: NetworkInterfaceId
+				"network_interface_id": schemaAttribute8d9933f475fdf0611c546fe9(),
+				// Property: PrivateIpAddress
+				"private_ip_address": schemaAttribute5babe54199f39b5df4c1a8d8(),
+				// Property: SubnetId
+				"subnet_id": schemaAttributeb8ede704fa56669ae04ae71d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "One or more network interfaces of the endpoint. Also known as an interface endpoint.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute23b4717c4d081a2c60b500a9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS account ID of the owner of the cluster.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("^\\d{12}$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute340e786ca73c49304e9a6d67() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Availability Zone.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4512be1f1e7da1252821a52d() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The port number on which the cluster accepts incoming connections.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute59f1595a1262c843d9eb8bbd() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Status
+				"status": schemaAttribute81e9ef2bdb736f9714912d03(),
+				// Property: VpcSecurityGroupId
+				"vpc_security_group_id": schemaAttribute0f5207f8a6cb6fe2a6e629bd(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of Virtual Private Cloud (VPC) security groups to be associated with the endpoint.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5babe54199f39b5df4c1a8d8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IPv4 address of the network interface within the subnet.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute633669a5c99fd6633386fa4e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the endpoint.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6660588b9b74251dfbc08088() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: NetworkInterfaces
+			"network_interfaces": schemaAttribute1c916bbc9e9a7040c1f834d8(),
+			// Property: VpcEndpointId
+			"vpc_endpoint_id": schemaAttribute0ecefcee44bc18b140ce0bf1(),
+			// Property: VpcId
+			"vpc_id": schemaAttributeb4bf54cf6985aadf441d3384(),
+		}, /*END SCHEMA*/
+		Description: "The connection endpoint for connecting to an Amazon Redshift cluster through the proxy.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute81e9ef2bdb736f9714912d03() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the VPC security group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8d9933f475fdf0611c546fe9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The network interface identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb4bf54cf6985aadf441d3384() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The VPC identifier that the endpoint is associated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb8ede704fa56669ae04ae71d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The subnet identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec37623ecaceb52f3122af2f1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique identifier for the cluster. You use this identifier to refer to the cluster for any subsequent cluster operations such as deleting or modifying. All alphabetical characters must be lower case, no hypens at the end, no two consecutive hyphens. Cluster name should be unique for all clusters within an AWS account",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec58bed01aa6bbdfa948e99a2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The subnet group name where Amazon Redshift chooses to deploy the endpoint.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec7151adc9338948591a6eb07() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The DNS address of the endpoint.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef655339363531712a99fa6ce() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time (UTC) that the endpoint was created.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefde6e4cc12c0a4e5650e8d6d() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of vpc security group ids to apply to the created endpoint access.",
+		Required:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_redshift_endpoint_access", endpointAccessResource)
 	registry.AddListResourceFactory("awscc_redshift_endpoint_access", generic.NewListResource(endpointAccessResource))
@@ -40,13 +251,7 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The DNS address of the endpoint.",
 		//	  "type": "string"
 		//	}
-		"address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The DNS address of the endpoint.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"address": schemaAttributec7151adc9338948591a6eb07(),
 		// Property: ClusterIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -54,13 +259,7 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A unique identifier for the cluster. You use this identifier to refer to the cluster for any subsequent cluster operations such as deleting or modifying. All alphabetical characters must be lower case, no hypens at the end, no two consecutive hyphens. Cluster name should be unique for all clusters within an AWS account",
 		//	  "type": "string"
 		//	}
-		"cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A unique identifier for the cluster. You use this identifier to refer to the cluster for any subsequent cluster operations such as deleting or modifying. All alphabetical characters must be lower case, no hypens at the end, no two consecutive hyphens. Cluster name should be unique for all clusters within an AWS account",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"cluster_identifier": schemaAttributec37623ecaceb52f3122af2f1(),
 		// Property: EndpointCreateTime
 		// CloudFormation resource type schema:
 		//
@@ -68,13 +267,7 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The time (UTC) that the endpoint was created.",
 		//	  "type": "string"
 		//	}
-		"endpoint_create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time (UTC) that the endpoint was created.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"endpoint_create_time": schemaAttributef655339363531712a99fa6ce(),
 		// Property: EndpointName
 		// CloudFormation resource type schema:
 		//
@@ -83,13 +276,7 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"endpoint_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the endpoint.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"endpoint_name": schemaAttribute12ab1f3d320f9a12fa495bf4(),
 		// Property: EndpointStatus
 		// CloudFormation resource type schema:
 		//
@@ -97,13 +284,7 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The status of the endpoint.",
 		//	  "type": "string"
 		//	}
-		"endpoint_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the endpoint.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"endpoint_status": schemaAttribute633669a5c99fd6633386fa4e(),
 		// Property: Port
 		// CloudFormation resource type schema:
 		//
@@ -111,13 +292,7 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The port number on which the cluster accepts incoming connections.",
 		//	  "type": "integer"
 		//	}
-		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The port number on which the cluster accepts incoming connections.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"port": schemaAttribute4512be1f1e7da1252821a52d(),
 		// Property: ResourceOwner
 		// CloudFormation resource type schema:
 		//
@@ -126,18 +301,7 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^\\d{12}$",
 		//	  "type": "string"
 		//	}
-		"resource_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS account ID of the owner of the cluster.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^\\d{12}$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"resource_owner": schemaAttribute23b4717c4d081a2c60b500a9(),
 		// Property: SubnetGroupName
 		// CloudFormation resource type schema:
 		//
@@ -146,13 +310,7 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"subnet_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The subnet group name where Amazon Redshift chooses to deploy the endpoint.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"subnet_group_name": schemaAttributec58bed01aa6bbdfa948e99a2(),
 		// Property: VpcEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -207,57 +365,7 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"vpc_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: NetworkInterfaces
-				"network_interfaces": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AvailabilityZone
-							"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The Availability Zone.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: NetworkInterfaceId
-							"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The network interface identifier.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: PrivateIpAddress
-							"private_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The IPv4 address of the network interface within the subnet.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: SubnetId
-							"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The subnet identifier.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "One or more network interfaces of the endpoint. Also known as an interface endpoint.",
-					Computed:    true,
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: VpcEndpointId
-				"vpc_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The connection endpoint ID for connecting an Amazon Redshift cluster through the proxy.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: VpcId
-				"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The VPC identifier that the endpoint is associated.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The connection endpoint for connecting to an Amazon Redshift cluster through the proxy.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"vpc_endpoint": schemaAttribute6660588b9b74251dfbc08088(),
 		// Property: VpcSecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -269,14 +377,7 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"vpc_security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of vpc security group ids to apply to the created endpoint access.",
-			Required:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"vpc_security_group_ids": schemaAttributefde6e4cc12c0a4e5650e8d6d(),
 		// Property: VpcSecurityGroups
 		// CloudFormation resource type schema:
 		//
@@ -300,28 +401,7 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"vpc_security_groups": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Status
-					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The status of the VPC security group.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: VpcSecurityGroupId
-					"vpc_security_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The identifier of the VPC security group.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of Virtual Private Cloud (VPC) security groups to be associated with the endpoint.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"vpc_security_groups": schemaAttribute59f1595a1262c843d9eb8bbd(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

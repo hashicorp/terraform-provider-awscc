@@ -19,6 +19,27 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute897b5e2cea6c3fe62a71a887() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Required: true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8d8a733f2ccc6de6238aa3ae() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_ec2_vpc_endpoint_service_permissions", vPCEndpointServicePermissionsResource)
 	registry.AddListResourceFactory("awscc_ec2_vpc_endpoint_service_permissions", generic.NewListResource(vPCEndpointServicePermissionsResource))
@@ -32,32 +53,21 @@ func vPCEndpointServicePermissionsResource(ctx context.Context) (resource.Resour
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"allowed_principals": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"allowed_principals": schemaAttribute8d8a733f2ccc6de6238aa3ae(),
 		// Property: ServiceId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"service_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"service_id": schemaAttribute897b5e2cea6c3fe62a71a887(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

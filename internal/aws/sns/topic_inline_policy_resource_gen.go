@@ -18,6 +18,24 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute2a36203037b93df90f0a659a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the topic to which you want to add the policy.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed909e21d3de6e3650f259111() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "A policy document that contains permissions to add to the specified SNS topics.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_sns_topic_inline_policy", topicInlinePolicyResource)
 }
@@ -33,11 +51,7 @@ func topicInlinePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A policy document that contains permissions to add to the specified SNS topics.",
 		//	  "type": "object"
 		//	}
-		"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "A policy document that contains permissions to add to the specified SNS topics.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"policy_document": schemaAttributed909e21d3de6e3650f259111(),
 		// Property: TopicArn
 		// CloudFormation resource type schema:
 		//
@@ -45,13 +59,7 @@ func topicInlinePolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the topic to which you want to add the policy.",
 		//	  "type": "string"
 		//	}
-		"topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the topic to which you want to add the policy.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"topic_arn": schemaAttribute2a36203037b93df90f0a659a(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

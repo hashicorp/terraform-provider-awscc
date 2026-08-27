@@ -25,6 +25,352 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute01e1d3c5037428cb8806a14a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The GraphQL field on a type that invokes the resolver.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute051a06ce7351e46864303450() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ``version`` of the runtime to use. Currently, the only allowed version is ``1.0.0``.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0a0fcfea8544c4c7aac7ab33() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ``resolver`` code that contains the request and response functions. When code is used, the ``runtime`` is required. The runtime value must be ``APPSYNC_JS``.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0bc9c4c870d0283f092e916f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CachingKeys
+			"caching_keys": schemaAttributea478e750c01389420f91b391(),
+			// Property: Ttl
+			"ttl": schemaAttribute15b1003da3a91044dfde50f2(),
+		}, /*END SCHEMA*/
+		Description: "The caching configuration for the resolver.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0c5c0d2a25ebca05300acea5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The resolver data source name.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0d3b4f5149d2db393941165e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The request mapping template.\n Request mapping templates are optional when using a Lambda data source. For all other data sources, a request mapping template is required.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute15b1003da3a91044dfde50f2() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The TTL in seconds for a resolver that has caching activated.\n Valid values are 1?3,600 seconds.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.Float64{ /*START VALIDATORS*/
+			fwvalidators.NotNullFloat64(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+			float64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute187de36f50d183a7e6024e11() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) for the Lambda function to use as the Conflict Handler.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1c4fc5335185e681a76691a0() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of ``Function`` objects.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1e9cf400f528650a964c6036() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ConflictDetection
+			"conflict_detection": schemaAttribute58495dff5eda8c4cd2792b1a(),
+			// Property: ConflictHandler
+			"conflict_handler": schemaAttributef734291a3a2abbe946be5f3c(),
+			// Property: LambdaConflictHandlerConfig
+			"lambda_conflict_handler_config": schemaAttributea9d69975b83a015fcbda93a7(),
+		}, /*END SCHEMA*/
+		Description: "The ``SyncConfig`` for a resolver attached to a versioned data source.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute36d9316a8209757fc617d70f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ``name`` of the runtime to use. Currently, the only allowed value is ``APPSYNC_JS``.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3f8963334486b37b3d17e59f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The GraphQL type that invokes this resolver.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute58495dff5eda8c4cd2792b1a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Conflict Detection strategy to use.\n  +  *VERSION*: Detect conflicts based on object versions for this resolver.\n  +  *NONE*: Do not detect conflicts when invoking this resolver.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute76ba46dfec529c5c9e1e8c76() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Name
+			"name": schemaAttribute36d9316a8209757fc617d70f(),
+			// Property: RuntimeVersion
+			"runtime_version": schemaAttribute051a06ce7351e46864303450(),
+		}, /*END SCHEMA*/
+		Description: "Describes a runtime used by an APSYlong resolver or APSYlong function. Specifies the name and version of the runtime to use. Note that if a runtime is specified, code must also be specified.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8e366fb9f0ac6bffc47ab4de() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The location of a response mapping template in an S3 bucket. Use this if you want to provision with a template file in S3 rather than embedding it in your CFNshort template.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// ResponseMappingTemplateS3Location is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea3f664c9dfa20cdd2c78ae56() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Enables or disables enhanced resolver metrics for specified resolvers. Note that ``MetricsConfig`` won't be used unless the ``resolverLevelMetricsBehavior`` value is set to ``PER_RESOLVER_METRICS``. If the ``resolverLevelMetricsBehavior`` is set to ``FULL_REQUEST_RESOLVER_METRICS`` instead, ``MetricsConfig`` will be ignored. However, you can still set its value.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"ENABLED",
+				"DISABLED",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea478e750c01389420f91b391() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The caching keys for a resolver that has caching activated.\n Valid values are entries from the ``$context.arguments``, ``$context.source``, and ``$context.identity`` maps.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+			generic.Multiset(),
+			listplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea9d69975b83a015fcbda93a7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LambdaConflictHandlerArn
+			"lambda_conflict_handler_arn": schemaAttribute187de36f50d183a7e6024e11(),
+		}, /*END SCHEMA*/
+		Description: "The ``LambdaConflictHandlerConfig`` when configuring ``LAMBDA`` as the Conflict Handler.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb46033145076919a4b5a2ae6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The APSYlong GraphQL API to which you want to attach this resolver.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec4d92444f9bc8bf35d7f2638() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon S3 endpoint.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// CodeS3Location is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecde855a8de9785e64a8524b6() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum number of resolver request inputs that will be sent to a single LAMlong function in a ``BatchInvoke`` operation.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee2f1748c5868ecd838753dfc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The resolver type.\n  +  *UNIT*: A UNIT resolver type. A UNIT resolver is the default resolver type. You can use a UNIT resolver to run a GraphQL query against a single data source.\n  +  *PIPELINE*: A PIPELINE resolver type. You can use a PIPELINE resolver to invoke a series of ``Function`` objects in a serial manner. You can use a pipeline resolver to run a GraphQL query against multiple data sources.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee55ba53c8801a21dd5c8685c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee67013eb6fcfc5e31e95f224() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The response mapping template.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeda444343bfff7860f69739f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The location of a request mapping template in an S3 bucket. Use this if you want to provision with a template file in S3 rather than embedding it in your CFNshort template.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// RequestMappingTemplateS3Location is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeede1f17ea3b8cbf5829fea0b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Functions
+			"functions": schemaAttribute1c4fc5335185e681a76691a0(),
+		}, /*END SCHEMA*/
+		Description: "Functions linked with the pipeline resolver.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef734291a3a2abbe946be5f3c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Conflict Resolution strategy to perform in the event of a conflict.\n  +  *OPTIMISTIC_CONCURRENCY*: Resolve conflicts by rejecting mutations when versions don't match the latest version at the server.\n  +  *AUTOMERGE*: Resolve conflicts with the Automerge conflict resolution strategy.\n  +  *LAMBDA*: Resolve conflicts with an LAMlong function supplied in the ``LambdaConflictHandlerConfig``.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_appsync_resolver", resolverResource)
 }
@@ -40,13 +386,7 @@ func resolverResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The APSYlong GraphQL API to which you want to attach this resolver.",
 		//	  "type": "string"
 		//	}
-		"api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The APSYlong GraphQL API to which you want to attach this resolver.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"api_id": schemaAttributeb46033145076919a4b5a2ae6(),
 		// Property: CachingConfig
 		// CloudFormation resource type schema:
 		//
@@ -73,39 +413,7 @@ func resolverResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"caching_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CachingKeys
-				"caching_keys": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The caching keys for a resolver that has caching activated.\n Valid values are entries from the ``$context.arguments``, ``$context.source``, and ``$context.identity`` maps.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: Ttl
-				"ttl": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "The TTL in seconds for a resolver that has caching activated.\n Valid values are 1?3,600 seconds.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.Float64{ /*START VALIDATORS*/
-						fwvalidators.NotNullFloat64(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-						float64planmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The caching configuration for the resolver.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"caching_config": schemaAttribute0bc9c4c870d0283f092e916f(),
 		// Property: Code
 		// CloudFormation resource type schema:
 		//
@@ -113,14 +421,7 @@ func resolverResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ``resolver`` code that contains the request and response functions. When code is used, the ``runtime`` is required. The runtime value must be ``APPSYNC_JS``.",
 		//	  "type": "string"
 		//	}
-		"code": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ``resolver`` code that contains the request and response functions. When code is used, the ``runtime`` is required. The runtime value must be ``APPSYNC_JS``.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"code": schemaAttribute0a0fcfea8544c4c7aac7ab33(),
 		// Property: CodeS3Location
 		// CloudFormation resource type schema:
 		//
@@ -128,15 +429,7 @@ func resolverResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The Amazon S3 endpoint.",
 		//	  "type": "string"
 		//	}
-		"code_s3_location": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon S3 endpoint.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// CodeS3Location is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"code_s3_location": schemaAttributec4d92444f9bc8bf35d7f2638(),
 		// Property: DataSourceName
 		// CloudFormation resource type schema:
 		//
@@ -144,14 +437,7 @@ func resolverResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The resolver data source name.",
 		//	  "type": "string"
 		//	}
-		"data_source_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The resolver data source name.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"data_source_name": schemaAttribute0c5c0d2a25ebca05300acea5(),
 		// Property: FieldName
 		// CloudFormation resource type schema:
 		//
@@ -159,13 +445,7 @@ func resolverResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The GraphQL field on a type that invokes the resolver.",
 		//	  "type": "string"
 		//	}
-		"field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The GraphQL field on a type that invokes the resolver.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"field_name": schemaAttribute01e1d3c5037428cb8806a14a(),
 		// Property: Kind
 		// CloudFormation resource type schema:
 		//
@@ -173,14 +453,7 @@ func resolverResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The resolver type.\n  +  *UNIT*: A UNIT resolver type. A UNIT resolver is the default resolver type. You can use a UNIT resolver to run a GraphQL query against a single data source.\n  +  *PIPELINE*: A PIPELINE resolver type. You can use a PIPELINE resolver to invoke a series of ``Function`` objects in a serial manner. You can use a pipeline resolver to run a GraphQL query against multiple data sources.",
 		//	  "type": "string"
 		//	}
-		"kind": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The resolver type.\n  +  *UNIT*: A UNIT resolver type. A UNIT resolver is the default resolver type. You can use a UNIT resolver to run a GraphQL query against a single data source.\n  +  *PIPELINE*: A PIPELINE resolver type. You can use a PIPELINE resolver to invoke a series of ``Function`` objects in a serial manner. You can use a pipeline resolver to run a GraphQL query against multiple data sources.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"kind": schemaAttributee2f1748c5868ecd838753dfc(),
 		// Property: MaxBatchSize
 		// CloudFormation resource type schema:
 		//
@@ -188,14 +461,7 @@ func resolverResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The maximum number of resolver request inputs that will be sent to a single LAMlong function in a ``BatchInvoke`` operation.",
 		//	  "type": "integer"
 		//	}
-		"max_batch_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The maximum number of resolver request inputs that will be sent to a single LAMlong function in a ``BatchInvoke`` operation.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"max_batch_size": schemaAttributecde855a8de9785e64a8524b6(),
 		// Property: MetricsConfig
 		// CloudFormation resource type schema:
 		//
@@ -207,20 +473,7 @@ func resolverResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"metrics_config": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Enables or disables enhanced resolver metrics for specified resolvers. Note that ``MetricsConfig`` won't be used unless the ``resolverLevelMetricsBehavior`` value is set to ``PER_RESOLVER_METRICS``. If the ``resolverLevelMetricsBehavior`` is set to ``FULL_REQUEST_RESOLVER_METRICS`` instead, ``MetricsConfig`` will be ignored. However, you can still set its value.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"ENABLED",
-					"DISABLED",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"metrics_config": schemaAttributea3f664c9dfa20cdd2c78ae56(),
 		// Property: PipelineConfig
 		// CloudFormation resource type schema:
 		//
@@ -240,27 +493,7 @@ func resolverResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"pipeline_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Functions
-				"functions": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "A list of ``Function`` objects.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Functions linked with the pipeline resolver.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"pipeline_config": schemaAttributeede1f17ea3b8cbf5829fea0b(),
 		// Property: RequestMappingTemplate
 		// CloudFormation resource type schema:
 		//
@@ -268,14 +501,7 @@ func resolverResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The request mapping template.\n Request mapping templates are optional when using a Lambda data source. For all other data sources, a request mapping template is required.",
 		//	  "type": "string"
 		//	}
-		"request_mapping_template": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The request mapping template.\n Request mapping templates are optional when using a Lambda data source. For all other data sources, a request mapping template is required.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"request_mapping_template": schemaAttribute0d3b4f5149d2db393941165e(),
 		// Property: RequestMappingTemplateS3Location
 		// CloudFormation resource type schema:
 		//
@@ -283,15 +509,7 @@ func resolverResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The location of a request mapping template in an S3 bucket. Use this if you want to provision with a template file in S3 rather than embedding it in your CFNshort template.",
 		//	  "type": "string"
 		//	}
-		"request_mapping_template_s3_location": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The location of a request mapping template in an S3 bucket. Use this if you want to provision with a template file in S3 rather than embedding it in your CFNshort template.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// RequestMappingTemplateS3Location is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"request_mapping_template_s3_location": schemaAttributeeda444343bfff7860f69739f(),
 		// Property: ResolverArn
 		// CloudFormation resource type schema:
 		//
@@ -299,13 +517,7 @@ func resolverResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"resolver_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"resolver_arn": schemaAttributee55ba53c8801a21dd5c8685c(),
 		// Property: ResponseMappingTemplate
 		// CloudFormation resource type schema:
 		//
@@ -313,14 +525,7 @@ func resolverResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The response mapping template.",
 		//	  "type": "string"
 		//	}
-		"response_mapping_template": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The response mapping template.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"response_mapping_template": schemaAttributee67013eb6fcfc5e31e95f224(),
 		// Property: ResponseMappingTemplateS3Location
 		// CloudFormation resource type schema:
 		//
@@ -328,15 +533,7 @@ func resolverResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The location of a response mapping template in an S3 bucket. Use this if you want to provision with a template file in S3 rather than embedding it in your CFNshort template.",
 		//	  "type": "string"
 		//	}
-		"response_mapping_template_s3_location": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The location of a response mapping template in an S3 bucket. Use this if you want to provision with a template file in S3 rather than embedding it in your CFNshort template.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// ResponseMappingTemplateS3Location is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"response_mapping_template_s3_location": schemaAttribute8e366fb9f0ac6bffc47ab4de(),
 		// Property: Runtime
 		// CloudFormation resource type schema:
 		//
@@ -359,40 +556,7 @@ func resolverResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"runtime": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ``name`` of the runtime to use. Currently, the only allowed value is ``APPSYNC_JS``.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						fwvalidators.NotNullString(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: RuntimeVersion
-				"runtime_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ``version`` of the runtime to use. Currently, the only allowed version is ``1.0.0``.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						fwvalidators.NotNullString(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Describes a runtime used by an APSYlong resolver or APSYlong function. Specifies the name and version of the runtime to use. Note that if a runtime is specified, code must also be specified.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"runtime": schemaAttribute76ba46dfec529c5c9e1e8c76(),
 		// Property: SyncConfig
 		// CloudFormation resource type schema:
 		//
@@ -425,57 +589,7 @@ func resolverResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"sync_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ConflictDetection
-				"conflict_detection": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Conflict Detection strategy to use.\n  +  *VERSION*: Detect conflicts based on object versions for this resolver.\n  +  *NONE*: Do not detect conflicts when invoking this resolver.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						fwvalidators.NotNullString(),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: ConflictHandler
-				"conflict_handler": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Conflict Resolution strategy to perform in the event of a conflict.\n  +  *OPTIMISTIC_CONCURRENCY*: Resolve conflicts by rejecting mutations when versions don't match the latest version at the server.\n  +  *AUTOMERGE*: Resolve conflicts with the Automerge conflict resolution strategy.\n  +  *LAMBDA*: Resolve conflicts with an LAMlong function supplied in the ``LambdaConflictHandlerConfig``.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: LambdaConflictHandlerConfig
-				"lambda_conflict_handler_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: LambdaConflictHandlerArn
-						"lambda_conflict_handler_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Amazon Resource Name (ARN) for the Lambda function to use as the Conflict Handler.",
-							Optional:    true,
-							Computed:    true,
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.UseStateForUnknown(),
-							}, /*END PLAN MODIFIERS*/
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The ``LambdaConflictHandlerConfig`` when configuring ``LAMBDA`` as the Conflict Handler.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						objectplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The ``SyncConfig`` for a resolver attached to a versioned data source.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"sync_config": schemaAttribute1e9cf400f528650a964c6036(),
 		// Property: TypeName
 		// CloudFormation resource type schema:
 		//
@@ -483,13 +597,7 @@ func resolverResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The GraphQL type that invokes this resolver.",
 		//	  "type": "string"
 		//	}
-		"type_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The GraphQL type that invokes this resolver.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"type_name": schemaAttribute3f8963334486b37b3d17e59f(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

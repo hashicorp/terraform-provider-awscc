@@ -22,6 +22,113 @@ import (
 	fwvalidators "github.com/hashicorp/terraform-provider-awscc/internal/validators"
 )
 
+func schemaAttribute0e3245d40e2699030ac7a9e4() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether this Target automatically tracks the latest version of the Prefix List Resolver.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute39b9ba338e276e55147f9bed() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute8a91443b1d7147621f7f6431(),
+				// Property: Value
+				"value": schemaAttributeae5765a8fd0d83a53052506b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+			setplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute42a0e29e143e08536fd28845() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Id of the IPAM Prefix List Resolver Target.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a91443b1d7147621f7f6431() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(1, 128),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeac6495065d65ffcdd0ba2e43() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Id of the Managed Prefix List.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeae5765a8fd0d83a53052506b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 256),
+			fwvalidators.NotNullString(),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb5b5d495a8a808e649f66ed6() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The desired version of the Prefix List Resolver that this Target should synchronize with.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee7effc9fc5a0045a86fea84e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Id of the IPAM Prefix List Resolver associated with this Target.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee86b9fe0d29b8d632aba2a75() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The region that the Managed Prefix List is located in.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_ec2_ipam_prefix_list_resolver_target", iPAMPrefixListResolverTargetResource)
 	registry.AddListResourceFactory("awscc_ec2_ipam_prefix_list_resolver_target", generic.NewListResource(iPAMPrefixListResolverTargetResource))
@@ -39,14 +146,7 @@ func iPAMPrefixListResolverTargetResource(ctx context.Context) (resource.Resourc
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
-		"desired_version": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The desired version of the Prefix List Resolver that this Target should synchronize with.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"desired_version": schemaAttributeb5b5d495a8a808e649f66ed6(),
 		// Property: IpamPrefixListResolverId
 		// CloudFormation resource type schema:
 		//
@@ -54,13 +154,7 @@ func iPAMPrefixListResolverTargetResource(ctx context.Context) (resource.Resourc
 		//	  "description": "The Id of the IPAM Prefix List Resolver associated with this Target.",
 		//	  "type": "string"
 		//	}
-		"ipam_prefix_list_resolver_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Id of the IPAM Prefix List Resolver associated with this Target.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"ipam_prefix_list_resolver_id": schemaAttributee7effc9fc5a0045a86fea84e(),
 		// Property: IpamPrefixListResolverTargetArn
 		// CloudFormation resource type schema:
 		//
@@ -68,13 +162,7 @@ func iPAMPrefixListResolverTargetResource(ctx context.Context) (resource.Resourc
 		//	  "description": "Id of the IPAM Prefix List Resolver Target.",
 		//	  "type": "string"
 		//	}
-		"ipam_prefix_list_resolver_target_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Id of the IPAM Prefix List Resolver Target.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"ipam_prefix_list_resolver_target_arn": schemaAttribute42a0e29e143e08536fd28845(),
 		// Property: IpamPrefixListResolverTargetId
 		// CloudFormation resource type schema:
 		//
@@ -82,13 +170,7 @@ func iPAMPrefixListResolverTargetResource(ctx context.Context) (resource.Resourc
 		//	  "description": "Id of the IPAM Prefix List Resolver Target.",
 		//	  "type": "string"
 		//	}
-		"ipam_prefix_list_resolver_target_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Id of the IPAM Prefix List Resolver Target.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"ipam_prefix_list_resolver_target_id": schemaAttribute42a0e29e143e08536fd28845(),
 		// Property: PrefixListId
 		// CloudFormation resource type schema:
 		//
@@ -96,13 +178,7 @@ func iPAMPrefixListResolverTargetResource(ctx context.Context) (resource.Resourc
 		//	  "description": "The Id of the Managed Prefix List.",
 		//	  "type": "string"
 		//	}
-		"prefix_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Id of the Managed Prefix List.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"prefix_list_id": schemaAttributeac6495065d65ffcdd0ba2e43(),
 		// Property: PrefixListRegion
 		// CloudFormation resource type schema:
 		//
@@ -110,13 +186,7 @@ func iPAMPrefixListResolverTargetResource(ctx context.Context) (resource.Resourc
 		//	  "description": "The region that the Managed Prefix List is located in.",
 		//	  "type": "string"
 		//	}
-		"prefix_list_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The region that the Managed Prefix List is located in.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"prefix_list_region": schemaAttributee86b9fe0d29b8d632aba2a75(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -149,44 +219,7 @@ func iPAMPrefixListResolverTargetResource(ctx context.Context) (resource.Resourc
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 128),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Optional:    true,
-						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(0, 256),
-							fwvalidators.NotNullString(),
-						}, /*END VALIDATORS*/
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				setplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute39b9ba338e276e55147f9bed(),
 		// Property: TrackLatestVersion
 		// CloudFormation resource type schema:
 		//
@@ -194,10 +227,7 @@ func iPAMPrefixListResolverTargetResource(ctx context.Context) (resource.Resourc
 		//	  "description": "Indicates whether this Target automatically tracks the latest version of the Prefix List Resolver.",
 		//	  "type": "boolean"
 		//	}
-		"track_latest_version": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether this Target automatically tracks the latest version of the Prefix List Resolver.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"track_latest_version": schemaAttribute0e3245d40e2699030ac7a9e4(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

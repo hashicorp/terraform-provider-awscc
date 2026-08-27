@@ -18,6 +18,62 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0ba146df0ba2b53fddec35d5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Id of the IPAM Pool.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute10b1848a5a6c9773d11d0b44() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Represents an IPAM custom allocation of a single IPv4 or IPv6 CIDR",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute608b18e80a8101167151dc40() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Id of the allocation.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute78b34df5fc0df9a78d504394() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeeac90cf5c869929235e012f() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The desired netmask length of the allocation. If set, IPAM will choose a block of free space with this size and return the CIDR representing it.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+			int64planmodifier.UseStateForUnknown(),
+			int64planmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// NetmaskLength is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_ec2_ipam_allocation", iPAMAllocationResource)
 }
@@ -33,29 +89,14 @@ func iPAMAllocationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Represents an IPAM custom allocation of a single IPv4 or IPv6 CIDR",
 		//	  "type": "string"
 		//	}
-		"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Represents an IPAM custom allocation of a single IPv4 or IPv6 CIDR",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"cidr": schemaAttribute10b1848a5a6c9773d11d0b44(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute78b34df5fc0df9a78d504394(),
 		// Property: IpamPoolAllocationId
 		// CloudFormation resource type schema:
 		//
@@ -63,13 +104,7 @@ func iPAMAllocationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Id of the allocation.",
 		//	  "type": "string"
 		//	}
-		"ipam_pool_allocation_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Id of the allocation.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"ipam_pool_allocation_id": schemaAttribute608b18e80a8101167151dc40(),
 		// Property: IpamPoolId
 		// CloudFormation resource type schema:
 		//
@@ -77,13 +112,7 @@ func iPAMAllocationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Id of the IPAM Pool.",
 		//	  "type": "string"
 		//	}
-		"ipam_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Id of the IPAM Pool.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"ipam_pool_id": schemaAttribute0ba146df0ba2b53fddec35d5(),
 		// Property: NetmaskLength
 		// CloudFormation resource type schema:
 		//
@@ -91,16 +120,7 @@ func iPAMAllocationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The desired netmask length of the allocation. If set, IPAM will choose a block of free space with this size and return the CIDR representing it.",
 		//	  "type": "integer"
 		//	}
-		"netmask_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The desired netmask length of the allocation. If set, IPAM will choose a block of free space with this size and return the CIDR representing it.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				int64planmodifier.UseStateForUnknown(),
-				int64planmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// NetmaskLength is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"netmask_length": schemaAttributeeeac90cf5c869929235e012f(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

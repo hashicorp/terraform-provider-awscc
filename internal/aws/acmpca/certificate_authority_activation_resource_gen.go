@@ -17,6 +17,57 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute14d9cea8d4b9467b59b6399c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Certificate chain for the Certificate Authority certificate.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// CertificateChain is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute25a4fb3c810e82898f505d6c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Certificate Authority certificate that will be installed in the Certificate Authority.",
+		Required:    true,
+		// Certificate is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute284b958f302f9dc8e6b6676b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The complete certificate chain, including the Certificate Authority certificate.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute41fb9850e5f07491a0cbf549() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the Certificate Authority.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute878032481e366aa133531050() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Arn of the Certificate Authority.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_acmpca_certificate_authority_activation", certificateAuthorityActivationResource)
 }
@@ -32,11 +83,7 @@ func certificateAuthorityActivationResource(ctx context.Context) (resource.Resou
 		//	  "description": "Certificate Authority certificate that will be installed in the Certificate Authority.",
 		//	  "type": "string"
 		//	}
-		"certificate": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Certificate Authority certificate that will be installed in the Certificate Authority.",
-			Required:    true,
-			// Certificate is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"certificate": schemaAttribute25a4fb3c810e82898f505d6c(),
 		// Property: CertificateAuthorityArn
 		// CloudFormation resource type schema:
 		//
@@ -44,13 +91,7 @@ func certificateAuthorityActivationResource(ctx context.Context) (resource.Resou
 		//	  "description": "Arn of the Certificate Authority.",
 		//	  "type": "string"
 		//	}
-		"certificate_authority_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Arn of the Certificate Authority.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"certificate_authority_arn": schemaAttribute878032481e366aa133531050(),
 		// Property: CertificateChain
 		// CloudFormation resource type schema:
 		//
@@ -58,15 +99,7 @@ func certificateAuthorityActivationResource(ctx context.Context) (resource.Resou
 		//	  "description": "Certificate chain for the Certificate Authority certificate.",
 		//	  "type": "string"
 		//	}
-		"certificate_chain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Certificate chain for the Certificate Authority certificate.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// CertificateChain is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"certificate_chain": schemaAttribute14d9cea8d4b9467b59b6399c(),
 		// Property: CompleteCertificateChain
 		// CloudFormation resource type schema:
 		//
@@ -74,13 +107,7 @@ func certificateAuthorityActivationResource(ctx context.Context) (resource.Resou
 		//	  "description": "The complete certificate chain, including the Certificate Authority certificate.",
 		//	  "type": "string"
 		//	}
-		"complete_certificate_chain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The complete certificate chain, including the Certificate Authority certificate.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"complete_certificate_chain": schemaAttribute284b958f302f9dc8e6b6676b(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -88,14 +115,7 @@ func certificateAuthorityActivationResource(ctx context.Context) (resource.Resou
 		//	  "description": "The status of the Certificate Authority.",
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the Certificate Authority.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute41fb9850e5f07491a0cbf549(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

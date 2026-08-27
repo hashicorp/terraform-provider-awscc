@@ -20,6 +20,96 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute00f1b5f14fa84e4e0d2d6312() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The route response key.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute20a1e88b7ed273a403702dfb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "The response models for the route response.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute251fe1bebb9ee0ab77efb6f4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The model selection expression for the route response. Supported only for WebSocket APIs.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute49ff1b069267ebb1188ad1e6() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Required
+				"required": schemaAttributecd0ceaa64971dc344169edcb(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The route response parameters.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+			mapplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4ca7f73b5573293b393c9729() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4e7a73cc2d9f0913d2dec1aa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The route ID.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec5cfdb039110db315be4b1dd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The API identifier.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecd0ceaa64971dc344169edcb() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether the parameter is required.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+			boolplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_apigatewayv2_route_response", routeResponseResource)
 	registry.AddListResourceFactory("awscc_apigatewayv2_route_response", generic.NewListResource(routeResponseResource))
@@ -36,13 +126,7 @@ func routeResponseResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The API identifier.",
 		//	  "type": "string"
 		//	}
-		"api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The API identifier.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"api_id": schemaAttributec5cfdb039110db315be4b1dd(),
 		// Property: ModelSelectionExpression
 		// CloudFormation resource type schema:
 		//
@@ -50,14 +134,7 @@ func routeResponseResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The model selection expression for the route response. Supported only for WebSocket APIs.",
 		//	  "type": "string"
 		//	}
-		"model_selection_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The model selection expression for the route response. Supported only for WebSocket APIs.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"model_selection_expression": schemaAttribute251fe1bebb9ee0ab77efb6f4(),
 		// Property: ResponseModels
 		// CloudFormation resource type schema:
 		//
@@ -65,15 +142,7 @@ func routeResponseResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The response models for the route response.",
 		//	  "type": "object"
 		//	}
-		"response_models": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "The response models for the route response.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"response_models": schemaAttribute20a1e88b7ed273a403702dfb(),
 		// Property: ResponseParameters
 		// CloudFormation resource type schema:
 		//
@@ -97,28 +166,7 @@ func routeResponseResource(ctx context.Context) (resource.Resource, error) {
 		//	    }
 		//	  }
 		//	}
-		"response_parameters":     // Pattern: ""
-		schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Required
-					"required": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "Specifies whether the parameter is required.",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-							boolplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The route response parameters.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-				mapplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"response_parameters": schemaAttribute49ff1b069267ebb1188ad1e6(),
 		// Property: RouteId
 		// CloudFormation resource type schema:
 		//
@@ -126,13 +174,7 @@ func routeResponseResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The route ID.",
 		//	  "type": "string"
 		//	}
-		"route_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The route ID.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"route_id": schemaAttribute4e7a73cc2d9f0913d2dec1aa(),
 		// Property: RouteResponseId
 		// CloudFormation resource type schema:
 		//
@@ -140,13 +182,7 @@ func routeResponseResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"route_response_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"route_response_id": schemaAttribute4ca7f73b5573293b393c9729(),
 		// Property: RouteResponseKey
 		// CloudFormation resource type schema:
 		//
@@ -154,10 +190,7 @@ func routeResponseResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The route response key.",
 		//	  "type": "string"
 		//	}
-		"route_response_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The route response key.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"route_response_key": schemaAttribute00f1b5f14fa84e4e0d2d6312(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

@@ -17,6 +17,51 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute2b58ab454796ab83d0d66ee4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The API stage.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6245c8dbf5aca3cb81c31577() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The API identifier.",
+		Required:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7ec03d524f37bb929fd29fc5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The domain name.",
+		Required:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute837f40b9319fee65689c8281() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The API mapping key.",
+		Optional:    true,
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute85994d8372a6be668c2a891d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_apigatewayv2_api_mapping", apiMappingResource)
 	registry.AddListResourceFactory("awscc_apigatewayv2_api_mapping", generic.NewListResource(apiMappingResource))
@@ -33,10 +78,7 @@ func apiMappingResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The API identifier.",
 		//	  "type": "string"
 		//	}
-		"api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The API identifier.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"api_id": schemaAttribute6245c8dbf5aca3cb81c31577(),
 		// Property: ApiMappingId
 		// CloudFormation resource type schema:
 		//
@@ -44,13 +86,7 @@ func apiMappingResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"api_mapping_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"api_mapping_id": schemaAttribute85994d8372a6be668c2a891d(),
 		// Property: ApiMappingKey
 		// CloudFormation resource type schema:
 		//
@@ -58,14 +94,7 @@ func apiMappingResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The API mapping key.",
 		//	  "type": "string"
 		//	}
-		"api_mapping_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The API mapping key.",
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"api_mapping_key": schemaAttribute837f40b9319fee65689c8281(),
 		// Property: DomainName
 		// CloudFormation resource type schema:
 		//
@@ -73,13 +102,7 @@ func apiMappingResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The domain name.",
 		//	  "type": "string"
 		//	}
-		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The domain name.",
-			Required:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"domain_name": schemaAttribute7ec03d524f37bb929fd29fc5(),
 		// Property: Stage
 		// CloudFormation resource type schema:
 		//
@@ -87,10 +110,7 @@ func apiMappingResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The API stage.",
 		//	  "type": "string"
 		//	}
-		"stage": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The API stage.",
-			Required:    true,
-		}, /*END ATTRIBUTE*/
+		"stage": schemaAttribute2b58ab454796ab83d0d66ee4(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

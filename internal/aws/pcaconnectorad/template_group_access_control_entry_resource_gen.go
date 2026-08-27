@@ -20,6 +20,72 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1676cf93700f5af017a68737() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Required: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(7, 256),
+			stringvalidator.RegexMatches(regexp.MustCompile("^S-[0-9]-([0-9]+-){1,14}[0-9]+$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7fff212d3f4f3e3edba2cd68() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Optional: true,
+		Computed: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"ALLOW",
+				"DENY",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeacb7b7ab53565de7eaa9527d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AutoEnroll
+			"auto_enroll": schemaAttribute7fff212d3f4f3e3edba2cd68(),
+			// Property: Enroll
+			"enroll": schemaAttribute7fff212d3f4f3e3edba2cd68(),
+		}, /*END SCHEMA*/
+		Required: true,
+		// AccessRights is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec2d23f3a6e82baf76e7524a6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Required: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(0, 256),
+			stringvalidator.RegexMatches(regexp.MustCompile("^[\\x20-\\x7E]+$"), ""),
+		}, /*END VALIDATORS*/
+		// GroupDisplayName is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee5fc843b101dc9d68c44b0eb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Required: true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(5, 200),
+			stringvalidator.RegexMatches(regexp.MustCompile("^arn:[\\w-]+:pca-connector-ad:[\\w-]+:[0-9]+:connector(\\/[\\w-]+)\\/template(\\/[\\w-]+)$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_pcaconnectorad_template_group_access_control_entry", templateGroupAccessControlEntryResource)
 }
@@ -51,40 +117,7 @@ func templateGroupAccessControlEntryResource(ctx context.Context) (resource.Reso
 		//	  },
 		//	  "type": "object"
 		//	}
-		"access_rights": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AutoEnroll
-				"auto_enroll": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"ALLOW",
-							"DENY",
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-				// Property: Enroll
-				"enroll": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
-					Computed: true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"ALLOW",
-							"DENY",
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Required: true,
-			// AccessRights is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"access_rights": schemaAttributeacb7b7ab53565de7eaa9527d(),
 		// Property: GroupDisplayName
 		// CloudFormation resource type schema:
 		//
@@ -94,14 +127,7 @@ func templateGroupAccessControlEntryResource(ctx context.Context) (resource.Reso
 		//	  "pattern": "^[\\x20-\\x7E]+$",
 		//	  "type": "string"
 		//	}
-		"group_display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(0, 256),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[\\x20-\\x7E]+$"), ""),
-			}, /*END VALIDATORS*/
-			// GroupDisplayName is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"group_display_name": schemaAttributec2d23f3a6e82baf76e7524a6(),
 		// Property: GroupSecurityIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -111,16 +137,7 @@ func templateGroupAccessControlEntryResource(ctx context.Context) (resource.Reso
 		//	  "pattern": "^S-[0-9]-([0-9]+-){1,14}[0-9]+$",
 		//	  "type": "string"
 		//	}
-		"group_security_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(7, 256),
-				stringvalidator.RegexMatches(regexp.MustCompile("^S-[0-9]-([0-9]+-){1,14}[0-9]+$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"group_security_identifier": schemaAttribute1676cf93700f5af017a68737(),
 		// Property: TemplateArn
 		// CloudFormation resource type schema:
 		//
@@ -130,16 +147,7 @@ func templateGroupAccessControlEntryResource(ctx context.Context) (resource.Reso
 		//	  "pattern": "^arn:[\\w-]+:pca-connector-ad:[\\w-]+:[0-9]+:connector(\\/[\\w-]+)\\/template(\\/[\\w-]+)$",
 		//	  "type": "string"
 		//	}
-		"template_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(5, 200),
-				stringvalidator.RegexMatches(regexp.MustCompile("^arn:[\\w-]+:pca-connector-ad:[\\w-]+:[0-9]+:connector(\\/[\\w-]+)\\/template(\\/[\\w-]+)$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"template_arn": schemaAttributee5fc843b101dc9d68c44b0eb(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.

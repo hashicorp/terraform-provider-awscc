@@ -21,6 +21,206 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute045e8162a5fd8904e5188336() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The session name of the IAM User Profile.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute12a6b30ebc28a9efe841039c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Last Name of the IAM User Profile.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute392a126d33037f2e7edd315e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The username of the SSO User Profile.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3bd49499b417bcd5d40f7219() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the user.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("(^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$|^[a-zA-Z_0-9+=,.@-]+$|^arn:aws:iam::\\d{12}:.+$)"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+		// UserIdentifier is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3dc856e5830f218516abe503() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The First Name of the IAM User Profile.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4c338a7d0b0c0139db6d261e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The group profile ID of the IAM User Profile.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5528186b18dc23da87ddf518() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the user.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"IAM_USER",
+				"IAM_ROLE",
+				"SSO_USER",
+				"IAM_ROLE_SESSION",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+			stringplanmodifier.RequiresReplaceIfConfigured(),
+		}, /*END PLAN MODIFIERS*/
+		// UserType is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5d4769fa73d577c901ba04c7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Iam
+			"iam": schemaAttributeba6b9e661053239bc42fe4fc(),
+			// Property: Sso
+			"sso": schemaAttributefd7703e2f9f5d56e8eb13a06(),
+		}, /*END SCHEMA*/
+		Computed: true,
+		PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+			objectplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute716ae253757d01c1964a5396() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the Amazon DataZone domain in which the user profile is created.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea8066c17bd64279cc582ec09() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The session name of the user profile.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.LengthBetween(2, 64),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+		// SessionName is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb8b0ad7236c4acb46cffa7fc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the Amazon DataZone user profile.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeba6b9e661053239bc42fe4fc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Arn
+			"arn": schemaAttributef4a2245da208388f5c8a151a(),
+			// Property: GroupProfileId
+			"group_profile_id": schemaAttribute4c338a7d0b0c0139db6d261e(),
+			// Property: SessionName
+			"session_name": schemaAttribute045e8162a5fd8904e5188336(),
+		}, /*END SCHEMA*/
+		Description: "The details of the IAM User Profile.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedaaa73ff080e958a23c62072() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the Amazon DataZone domain in which the user profile would be created.",
+		Required:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.RegexMatches(regexp.MustCompile("^dzd[-_][a-zA-Z0-9_-]{1,36}$"), ""),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.RequiresReplace(),
+		}, /*END PLAN MODIFIERS*/
+		// DomainIdentifier is a write-only property.
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee46a9a83701ba1b1c6ea8896() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the user profile.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee8ecaa7a24292697ba9ede26() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the user profile.",
+		Optional:    true,
+		Computed:    true,
+		Validators: []validator.String{ /*START VALIDATORS*/
+			stringvalidator.OneOf(
+				"ASSIGNED",
+				"NOT_ASSIGNED",
+				"ACTIVATED",
+				"DEACTIVATED",
+			),
+		}, /*END VALIDATORS*/
+		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+			stringplanmodifier.UseStateForUnknown(),
+		}, /*END PLAN MODIFIERS*/
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef4a2245da208388f5c8a151a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the IAM User Profile.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefd7703e2f9f5d56e8eb13a06() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FirstName
+			"first_name": schemaAttribute3dc856e5830f218516abe503(),
+			// Property: LastName
+			"last_name": schemaAttribute12a6b30ebc28a9efe841039c(),
+			// Property: Username
+			"username": schemaAttribute392a126d33037f2e7edd315e(),
+		}, /*END SCHEMA*/
+		Description: "The details of the SSO User Profile.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddResourceFactory("awscc_datazone_user_profile", userProfileResource)
 }
@@ -78,58 +278,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Iam
-				"iam": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Arn
-						"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ARN of the IAM User Profile.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: GroupProfileId
-						"group_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The group profile ID of the IAM User Profile.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SessionName
-						"session_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The session name of the IAM User Profile.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The details of the IAM User Profile.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Sso
-				"sso": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: FirstName
-						"first_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The First Name of the IAM User Profile.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: LastName
-						"last_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Last Name of the IAM User Profile.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Username
-						"username": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The username of the SSO User Profile.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The details of the SSO User Profile.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"details": schemaAttribute5d4769fa73d577c901ba04c7(),
 		// Property: DomainId
 		// CloudFormation resource type schema:
 		//
@@ -138,13 +287,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the Amazon DataZone domain in which the user profile is created.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"domain_id": schemaAttribute716ae253757d01c1964a5396(),
 		// Property: DomainIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -153,17 +296,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"domain_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the Amazon DataZone domain in which the user profile would be created.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^dzd[-_][a-zA-Z0-9_-]{1,36}$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-			// DomainIdentifier is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"domain_identifier": schemaAttributedaaa73ff080e958a23c62072(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -171,13 +304,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The ID of the Amazon DataZone user profile.",
 		//	  "type": "string"
 		//	}
-		"user_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Amazon DataZone user profile.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"user_profile_id": schemaAttributeb8b0ad7236c4acb46cffa7fc(),
 		// Property: SessionName
 		// CloudFormation resource type schema:
 		//
@@ -187,18 +314,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	  "minLength": 2,
 		//	  "type": "string"
 		//	}
-		"session_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The session name of the user profile.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(2, 64),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// SessionName is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"session_name": schemaAttributea8066c17bd64279cc582ec09(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -212,22 +328,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the user profile.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"ASSIGNED",
-					"NOT_ASSIGNED",
-					"ACTIVATED",
-					"DEACTIVATED",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttributee8ecaa7a24292697ba9ede26(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -239,13 +340,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of the user profile.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttributee46a9a83701ba1b1c6ea8896(),
 		// Property: UserIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -254,17 +349,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	  "pattern": "(^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$|^[a-zA-Z_0-9+=,.@-]+$|^arn:aws:iam::\\d{12}:.+$)",
 		//	  "type": "string"
 		//	}
-		"user_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the user.",
-			Required:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("(^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$|^[a-zA-Z_0-9+=,.@-]+$|^arn:aws:iam::\\d{12}:.+$)"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-			// UserIdentifier is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"user_identifier": schemaAttribute3bd49499b417bcd5d40f7219(),
 		// Property: UserType
 		// CloudFormation resource type schema:
 		//
@@ -278,24 +363,7 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"user_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of the user.",
-			Optional:    true,
-			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"IAM_USER",
-					"IAM_ROLE",
-					"SSO_USER",
-					"IAM_ROLE_SESSION",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplaceIfConfigured(),
-			}, /*END PLAN MODIFIERS*/
-			// UserType is a write-only property.
-		}, /*END ATTRIBUTE*/
+		"user_type": schemaAttribute5528186b18dc23da87ddf518(),
 	} /*END SCHEMA*/
 
 	// Corresponds to CloudFormation primaryIdentifier.
