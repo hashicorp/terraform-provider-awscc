@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceFactory("awscc_translate_parallel_data", parallelDataDataSource)
+	registry.AddDataSourceFactory("awscc_translate_parallel_data_plural", parallelDataPluralDataSource)
 }
 
-// parallelDataDataSource returns the Terraform awscc_translate_parallel_data data source.
+// parallelDataPluralDataSource returns the Terraform awscc_translate_parallel_data_plural data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Translate::ParallelData resource.
-func parallelDataDataSource(ctx context.Context) (datasource.DataSource, error) {
+func parallelDataPluralDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{
 		"id": schema.StringAttribute{
 			Description: "Uniquely identifies the data source.",
@@ -41,7 +41,7 @@ func parallelDataDataSource(ctx context.Context) (datasource.DataSource, error) 
 
 	var opts generic.DataSourceOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::Translate::ParallelData").WithTerraformTypeName("awscc_translate_parallel_data")
+	opts = opts.WithCloudFormationTypeName("AWS::Translate::ParallelData").WithTerraformTypeName("awscc_translate_parallel_data_plural")
 	opts = opts.WithTerraformSchema(schema)
 
 	v, err := generic.NewPluralDataSource(ctx, opts...)
