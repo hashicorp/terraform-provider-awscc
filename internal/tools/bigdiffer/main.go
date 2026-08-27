@@ -1,26 +1,32 @@
 // Copyright IBM Corp. 2021, 2026
 // SPDX-License-Identifier: MPL-2.0
 
-// Command bigdiffer normalizes internal/provider/all_schemas.hcl against the
-// newest generated internal/provider/generators/allschemas/available_schemas.<date>.hcl.
+// Command bigdiffer updates internal/provider/all_schemas.hcl.
 //
-// Phase 1 semantics (see internal/tools/bigdiffer/README.md):
-//   - Join the curated overlay (all_schemas.hcl) with the generated base
-//     (available_schemas.<date>.hcl) on the CloudFormation type name.
-//   - Add rows present in the base but missing from the overlay (this recovers
-//     any silently-dropped backlog as well as genuinely new resources), copying
-//     the resource type name and suppress_plural flag verbatim from the base.
-//   - Preserve every existing overlay block byte-for-byte, including free-form
-//     "# Suppression Reason" comments and all manual suppression attributes.
-//   - Re-sort all blocks by CloudFormation type name (matching the generator's
-//     sort.Strings ordering), which normalizes accumulated hand-edit disorder.
+// The mandate is simple: keep all_schemas.hcl in sync with what AWS offers.
+//   - See where we are: parse the curated overlay (all_schemas.hcl).
+//   - See what's new: get the available base either by querying AWS live
+//     (-discover, us-east-1) or by reading a snapshot file (-available). bigdiffer
+//     owns discovery itself (ListTypes + DescribeType), so there is no need to
+//     generate and diff checked-in available_schemas.<date>.hcl snapshots.
+//   - Reconcile against the base on the CloudFormation type name:
+//   - Add rows present in the base but missing from the overlay (recovers
+//     backlog and genuinely new resources), copying the resource type name
+//     and suppress_plural flag from the base.
+//   - Preserve every existing overlay block byte-for-byte, including
+//     free-form "# Suppression Reason" comments and suppression attributes.
+//   - Re-sort all blocks by CloudFormation type name.
 //   - Update the header count to the number of available schemas.
+//   - Report anomalies. A retained row (in the overlay, gone from the base) is
+//     benign when explained by frozen_since or non_provisionable.
 //
-// The tool never rewrites an existing block and never mutates
-// suppressions_checkout.txt; it only reports cross-referenced anomalies.
+// bigdiffer is self-contained: it defines all_schemas.hcl's shape (model.go) and
+// its own discovery (discover.go) rather than importing the legacy generator or
+// update packages, which are slated for removal.
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"os"
@@ -34,7 +40,6 @@ import (
 	"github.com/hashicorp/hcl/v2/hclparse"
 	"github.com/hashicorp/hcl/v2/hclsimple"
 	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
-	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/allschemas"
 )
 
 const (
@@ -58,37 +63,51 @@ func main() {
 		availablePath  = flag.String("available", "", "path to the generated available_schemas.<date>.hcl base (default: newest in -allschemas-dir)")
 		allSchemasDir  = flag.String("allschemas-dir", defaultAllSchemasDir, "directory containing available_schemas.<date>.hcl files")
 		checkoutPath   = flag.String("checkout", defaultCheckout, "path to suppressions_checkout.txt (cross-referenced, never modified)")
+		discoverLive   = flag.Bool("discover", false, "query AWS live (us-east-1) for the available base instead of reading a snapshot file")
 		check          = flag.Bool("check", false, "verify all_schemas.hcl is already normalized; exit non-zero if not (writes nothing)")
 	)
 	flag.Parse()
 
-	if err := run(*allSchemasPath, *availablePath, *allSchemasDir, *checkoutPath, *check); err != nil {
+	if err := run(*allSchemasPath, *availablePath, *allSchemasDir, *checkoutPath, *discoverLive, *check); err != nil {
 		fmt.Fprintf(os.Stderr, "bigdiffer: %v\n", err)
 		os.Exit(1)
 	}
 }
 
-func run(allSchemasPath, availablePath, allSchemasDir, checkoutPath string, check bool) error {
-	// Resolve the base (newest available_schemas) and, if present, the previous
-	// one (for new-vs-backlog classification in the report).
-	if availablePath == "" {
-		newest, _, err := latestAvailable(allSchemasDir)
+func run(allSchemasPath, availablePath, allSchemasDir, checkoutPath string, discoverLive, check bool) error {
+	// Resolve the base: either query AWS live (bigdiffer owns discovery), or read
+	// a snapshot file. Live discovery has no "previous" snapshot, so every base
+	// row missing from the overlay is simply reported as newly added.
+	var (
+		base     []resourceRow
+		previous []resourceRow
+	)
+	if discoverLive {
+		rows, err := discover(context.Background())
 		if err != nil {
-			return err
+			return fmt.Errorf("live discovery: %w", err)
 		}
-		availablePath = newest
-	}
-	_, previousPath, _ := latestAvailable(allSchemasDir)
+		base = rows
+	} else {
+		if availablePath == "" {
+			newest, _, err := latestAvailable(allSchemasDir)
+			if err != nil {
+				return err
+			}
+			availablePath = newest
+		}
+		_, previousPath, _ := latestAvailable(allSchemasDir)
 
-	base, err := parseAvailable(availablePath)
-	if err != nil {
-		return fmt.Errorf("parsing base %s: %w", availablePath, err)
-	}
+		b, err := parseAvailable(availablePath)
+		if err != nil {
+			return fmt.Errorf("parsing base %s: %w", availablePath, err)
+		}
+		base = b
 
-	var previous []allschemas.ResourceSchema
-	if previousPath != "" && previousPath != availablePath {
-		if prev, err := parseAvailable(previousPath); err == nil {
-			previous = prev
+		if previousPath != "" && previousPath != availablePath {
+			if prev, err := parseAvailable(previousPath); err == nil {
+				previous = prev
+			}
 		}
 	}
 
@@ -161,7 +180,7 @@ type Report struct {
 	Total               int
 }
 
-func normalize(overlay string, base, previous []allschemas.ResourceSchema, checkout map[string]bool) (string, Report, error) {
+func normalize(overlay string, base, previous []resourceRow, checkout map[string]bool) (string, Report, error) {
 	loc := countLineRE.FindStringIndex(overlay)
 	if loc == nil {
 		return "", Report{}, fmt.Errorf("could not find the count header comment in all_schemas.hcl")
@@ -179,7 +198,7 @@ func normalize(overlay string, base, previous []allschemas.ResourceSchema, check
 	if err != nil {
 		return "", Report{}, err
 	}
-	overlayByCFN := make(map[string]allschemas.ResourceAllSchema, len(overlayResources))
+	overlayByCFN := make(map[string]resourceRow, len(overlayResources))
 	for _, r := range overlayResources {
 		overlayByCFN[r.CloudFormationTypeName] = r
 	}
@@ -194,7 +213,7 @@ func normalize(overlay string, base, previous []allschemas.ResourceSchema, check
 		}
 	}
 
-	baseByCFN := make(map[string]allschemas.ResourceSchema, len(base))
+	baseByCFN := make(map[string]resourceRow, len(base))
 	for _, r := range base {
 		baseByCFN[r.CloudFormationTypeName] = r
 	}
@@ -416,13 +435,13 @@ func expectedLabel(cfn string) (string, error) {
 // crossValidate decodes the overlay with a real HCL parser and asserts that the
 // set of live resource_schema blocks equals what the text scanner found. This
 // guards the verbatim, comment-preserving text path with a structural check.
-func crossValidate(overlay string, items []item) ([]allschemas.ResourceAllSchema, error) {
+func crossValidate(overlay string, items []item) ([]resourceRow, error) {
 	parser := hclparse.NewParser()
 	f, diag := parser.ParseHCL([]byte(overlay), "all_schemas.hcl")
 	if diag.HasErrors() {
 		return nil, fmt.Errorf("HCL parse: %s", diag.Error())
 	}
-	var decoded allschemas.AllSchemas
+	var decoded allSchemasFile
 	if diag := gohcl.DecodeBody(f.Body, nil, &decoded); diag.HasErrors() {
 		return nil, fmt.Errorf("HCL decode: %s", diag.Error())
 	}
@@ -454,8 +473,8 @@ func crossValidate(overlay string, items []item) ([]allschemas.ResourceAllSchema
 	return decoded.Resources, nil
 }
 
-func parseAvailable(path string) ([]allschemas.ResourceSchema, error) {
-	var s allschemas.AvailableSchemas
+func parseAvailable(path string) ([]resourceRow, error) {
+	var s availableFile
 	if err := hclsimple.DecodeFile(path, nil, &s); err != nil {
 		return nil, err
 	}

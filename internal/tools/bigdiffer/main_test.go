@@ -6,8 +6,6 @@ package main
 import (
 	"strings"
 	"testing"
-
-	"github.com/hashicorp/terraform-provider-awscc/internal/provider/generators/allschemas"
 )
 
 const testHead = `# Copyright IBM Corp. 2021, 2026
@@ -58,8 +56,8 @@ func testOverlay() string {
 		strings.Join(blocks, "\n\n") + "\n"
 }
 
-func testBase() []allschemas.ResourceSchema {
-	return []allschemas.ResourceSchema{
+func testBase() []resourceRow {
+	return []resourceRow{
 		{ResourceTypeName: "aws_ec2_alpha", CloudFormationTypeName: "AWS::EC2::Alpha"},
 		{ResourceTypeName: "aws_ec2_beta", CloudFormationTypeName: "AWS::EC2::Beta"},
 		{ResourceTypeName: "aws_ec2_complex", CloudFormationTypeName: "AWS::EC2::Complex", SuppressPluralDataSourceGeneration: true},
@@ -69,9 +67,9 @@ func testBase() []allschemas.ResourceSchema {
 	}
 }
 
-func testPrevious() []allschemas.ResourceSchema {
+func testPrevious() []resourceRow {
 	// Backlog was available last week; Newthing was not.
-	return []allschemas.ResourceSchema{
+	return []resourceRow{
 		{ResourceTypeName: "aws_ec2_alpha", CloudFormationTypeName: "AWS::EC2::Alpha"},
 		{ResourceTypeName: "aws_ec2_backlog", CloudFormationTypeName: "AWS::EC2::Backlog"},
 	}
@@ -221,7 +219,7 @@ resource_schema "aws_svc_kept" {
 		"# 1 CloudFormation resource types schemas are available for use with the Cloud Control API.\n\n" +
 		strings.Join([]string{leadCommentBlock, commentedOutBlock, alpha}, "\n\n") + "\n"
 
-	base := []allschemas.ResourceSchema{
+	base := []resourceRow{
 		{ResourceTypeName: "aws_svc_alpha", CloudFormationTypeName: "AWS::Svc::Alpha"},
 	}
 	checkout := map[string]bool{"AWS::Svc::Kept": true}
@@ -282,7 +280,7 @@ func TestDetectsDuplicateLiveBlocks(t *testing.T) {
 		"# 1 CloudFormation resource types schemas are available for use with the Cloud Control API.\n\n" +
 		strings.Join([]string{dup, dup}, "\n\n") + "\n"
 
-	base := []allschemas.ResourceSchema{
+	base := []resourceRow{
 		{ResourceTypeName: "aws_svc_thing", CloudFormationTypeName: "AWS::Svc::Thing"},
 	}
 
