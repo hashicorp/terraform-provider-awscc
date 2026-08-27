@@ -47,6 +47,127 @@ func patchDocument(old, new string) (string, error) {
 	return result, nil
 }
 
+// resolveEmptyReadArtifacts appends remove operations to the patch document for
+// properties that are empty in the current resource model but absent from both the
+// prior and the planned desired state. Cloud Control's GetResource can inject such
+// values into the resource model for properties the caller never set: AWS::WAFv2::WebACL
+// returns a CustomResponse created without ResponseHeaders with "ResponseHeaders": []
+// (whose schema requires minItems: 1) and a web ACL created without a description with
+// "Description": "" (whose schema pattern forbids the empty string). UpdateResource
+// validates the patched model as a whole, so the untouched artifacts fail every
+// subsequent update of the resource. A property that is empty in the model but null in
+// both prior state and configuration is a read artifact, not user intent, and is
+// removed explicitly.
+//
+// Only empty arrays and empty strings that are object property values are removed:
+// array elements are never removed (that would shift sibling indices), and empty
+// objects are left alone — an empty object's presence is often the setting itself
+// (e.g. DefaultAction.Allow). Removals are additionally gated on isMutable, which
+// receives the property path as unescaped JSON Pointer reference tokens and reports
+// whether the property is user-settable: read-only properties (and properties the
+// Terraform schema cannot represent) are returned by GetResource with values the
+// caller never set by definition, and must not be patched.
+func resolveEmptyReadArtifacts(patchDocument, oldState, newState, resourceModel string, isMutable func(tokens []string) bool) (string, error) {
+	var model, oldDoc, newDoc map[string]any
+	if err := json.Unmarshal([]byte(resourceModel), &model); err != nil {
+		return patchDocument, nil
+	}
+	if err := json.Unmarshal([]byte(oldState), &oldDoc); err != nil {
+		return patchDocument, nil
+	}
+	if err := json.Unmarshal([]byte(newState), &newDoc); err != nil {
+		return patchDocument, nil
+	}
+
+	isArtifact := func(tokens []string) bool {
+		return getValueAtTokens(oldDoc, tokens) == nil && getValueAtTokens(newDoc, tokens) == nil && isMutable(tokens)
+	}
+
+	var removals []jsonpatch.JsonPatchOperation
+	var walk func(node any, path string, tokens []string)
+	walk = func(node any, path string, tokens []string) {
+		switch v := node.(type) {
+		case map[string]any:
+			for key, val := range v {
+				childPath := path + "/" + escapeJSONPointerToken(key)
+				// Full slice expression so sibling appends cannot share a backing array.
+				childTokens := append(tokens[:len(tokens):len(tokens)], key)
+				switch cv := val.(type) {
+				case string:
+					if cv == "" && isArtifact(childTokens) {
+						removals = append(removals, jsonpatch.NewPatch("remove", childPath, nil))
+					}
+				case []any:
+					if len(cv) == 0 {
+						if isArtifact(childTokens) {
+							removals = append(removals, jsonpatch.NewPatch("remove", childPath, nil))
+						}
+						continue
+					}
+					walk(cv, childPath, childTokens)
+				case map[string]any:
+					walk(cv, childPath, childTokens)
+				}
+			}
+		case []any:
+			for idx, val := range v {
+				token := strconv.Itoa(idx)
+				walk(val, path+"/"+token, append(tokens[:len(tokens):len(tokens)], token))
+			}
+		}
+	}
+	walk(model, "", nil)
+
+	if len(removals) == 0 {
+		return patchDocument, nil
+	}
+
+	var patch []jsonpatch.JsonPatchOperation
+	if err := json.Unmarshal([]byte(patchDocument), &patch); err != nil {
+		return "", err
+	}
+	patch = append(patch, removals...)
+
+	// Re-sort so remove operations are still applied first, in reverse path order.
+	b, err := json.Marshal(sortPatchOperations(patch))
+	if err != nil {
+		return "", err
+	}
+
+	return string(b), nil
+}
+
+// escapeJSONPointerToken escapes a single JSON Pointer reference token (RFC 6901).
+func escapeJSONPointerToken(s string) string {
+	s = strings.ReplaceAll(s, "~", "~0")
+	return strings.ReplaceAll(s, "/", "~1")
+}
+
+// getValueAtTokens retrieves the value at the path given as unescaped JSON Pointer
+// reference tokens. Unlike getValueAtPath it is safe for keys containing '/' or '~'.
+func getValueAtTokens(doc map[string]any, tokens []string) any {
+	var current any = doc
+	for _, token := range tokens {
+		switch v := current.(type) {
+		case map[string]any:
+			var ok bool
+			current, ok = v[token]
+			if !ok {
+				return nil
+			}
+		case []any:
+			idx, err := strconv.Atoi(token)
+			if err != nil || idx < 0 || idx >= len(v) {
+				return nil
+			}
+			current = v[idx]
+		default:
+			return nil
+		}
+	}
+	return current
+}
+
 // replaceKeyValueArrayPatchesWithFullReplace replaces index-based patch operations targeting
 // key-value arrays with full array replacements. CloudFormation does not preserve array ordering
 // for key-value structures (objects with "Key"/"key" field), so positional patches target wrong elements.
