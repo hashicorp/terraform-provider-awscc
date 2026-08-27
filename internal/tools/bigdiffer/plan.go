@@ -4,8 +4,6 @@ package main
 
 import (
 	"fmt"
-
-	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
 )
 
 // artifactKind enumerates the generated code artifacts for a resource type.
@@ -44,14 +42,14 @@ type plan struct {
 // artifact selection follows the row's suppress_* flags, and a resource that has
 // a plural data source also gets a ListResource.
 func generationPlan(row resourceRow, prefix, cacheDir string) (plan, error) {
-	org, svc, res, err := naming.ParseTerraformTypeName(row.ResourceTypeName)
+	org, svc, res, err := parseTerraformTypeName(row.ResourceTypeName)
 	if err != nil {
 		return plan{}, fmt.Errorf("parsing Terraform type name %q: %w", row.ResourceTypeName, err)
 	}
 
 	tfType := row.ResourceTypeName
 	if prefix != "" {
-		tfType = naming.CreateTerraformTypeName(prefix, svc, res)
+		tfType = createTerraformTypeName(prefix, svc, res)
 	}
 
 	schemaFile := row.CloudFormationSchemaPath
@@ -86,7 +84,7 @@ func generationPlan(row resourceRow, prefix, cacheDir string) (plan, error) {
 	if !row.SuppressPluralDataSourceGeneration {
 		p.artifacts = append(p.artifacts, genArtifact{
 			kind:        artifactPluralDataSource,
-			tfType:      naming.Pluralize(tfType),
+			tfType:      pluralize(tfType),
 			packageName: svc,
 			pathSuffix:  pathSuffix,
 			codeFile:    res + "_plural_data_source_gen.go",
